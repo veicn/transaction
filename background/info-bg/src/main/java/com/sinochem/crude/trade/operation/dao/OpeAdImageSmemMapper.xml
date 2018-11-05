@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sinochem.crude.trade.operation.dao.OpeAdImageSmemMapper">
+	<resultMap
+		type="com.sinochem.crude.trade.operation.domain.OpeAdImageSmem" id="OpeAdImageSmem">
+		<result property="imageId" column="IMAGE_ID" />
+		<result property="typeCode" column="TYPE_CODE" />
+		<result property="sortCode" column="SORT_CODE" />
+		<result property="imageUrl" column="IMAGE_URL" />
+		<result property="gotoUrl" column="GOTO_URL" />
+		<result property="imageDes" column="IMAGE_DES" />
+		<result property="pageCode" column="PAGE_CODE" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="adSetId" column="AD_SET_ID" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+
+	<select id="queryByEntitys" resultMap="OpeAdImageSmem"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSmem">
+		select * from t_ope_ad_image
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+	</select>
+
+	<select id="findByPrimaryKey" resultMap="OpeAdImageSmem">
+		select
+		* from t_ope_ad_image
+		where
+		IMAGE_ID=#{imageId}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<update id="updateRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSmem">
+		update t_ope_ad_image
+		<set>
+			IMAGE_ID=#{imageId}
+			<if test="typeCode!=null">,TYPE_CODE = #{typeCode}</if>
+			<if test="sortCode!=null">,SORT_CODE = #{sortCode}</if>
+			<if test="imageUrl!=null">,IMAGE_URL = #{imageUrl}</if>
+			<if test="gotoUrl!=null">,GOTO_URL = #{gotoUrl}</if>
+			<if test="imageDes!=null">,IMAGE_DES = #{imageDes}</if>
+			<if test="pageCode!=null">,PAGE_CODE = #{pageCode}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="adSetId!=null">,AD_SET_ID = #{adSetId}</if>
+			<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where
+		IMAGE_ID=#{imageId}
+		and ALIVE_FLAG='1'
+	</update>
+
+	<insert id="insertRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSmem">
+		insert into t_ope_ad_image ( IMAGE_ID
+		,TYPE_CODE
+		,SORT_CODE
+		,IMAGE_URL
+		,GOTO_URL
+		,IMAGE_DES
+		,PAGE_CODE
+		,MARKET_ID
+		,LANG_VER
+		,ALIVE_FLAG
+		,CREATE_USER
+		,CREATE_DATE
+		,UPDATE_USER
+		,UPDATE_DATE
+		,AD_SET_ID
+		,STATUS
+		)
+		values( #{imageId}
+		,#{typeCode}
+		,#{sortCode}
+		,#{imageUrl}
+		,#{gotoUrl}
+		,#{imageDes}
+		,#{pageCode}
+		,#{marketId}
+		,#{langVer}
+		,#{aliveFlag}
+		,#{createUser}
+		,#{createDate}
+		,#{updateUser}
+		,#{updateDate}
+		,#{adSetId}
+		,#{status}
+		)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ope_ad_image
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+		</set>
+		where
+		IMAGE_ID=#{imageId}
+
+	</update>
+
+	<select id="queryRecords" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+		IMAGE_ID "imageId"
+		, TYPE_CODE "typeCode"
+		, SORT_CODE "sortCode"
+		, IMAGE_URL "imageUrl"
+		, GOTO_URL "gotoUrl"
+		, IMAGE_DES "imageDes"
+		, PAGE_CODE "pageCode"
+		, MARKET_ID "marketId"
+		, LANG_VER "langVer"
+		, ALIVE_FLAG "aliveFlag"
+		, CREATE_USER "createUser"
+		, CREATE_DATE "createDate"
+		, UPDATE_USER "updateUser"
+		, UPDATE_DATE "updateDate"
+		, AD_SET_ID "adSetId"
+		, STATUS "status"
+		from t_ope_ad_image
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES like '%' #{imageDes} '%'</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		and AD_SET_ID is null
+		<!-- order by createDate desc -->
+		order by IMAGE_DES, SORT_CODE
+	</select>
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ope_ad_image
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+
+	</select>
+
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ope_ad_image
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ope_ad_image
+		<set>
+			IMAGE_ID=#{imageId}
+			<if test="typeCode!=null">,TYPE_CODE = #{typeCode}</if>
+			<if test="sortCode!=null">,SORT_CODE = #{sortCode}</if>
+			<if test="imageUrl!=null">,IMAGE_URL = #{imageUrl}</if>
+			<if test="gotoUrl!=null">,GOTO_URL = #{gotoUrl}</if>
+			<if test="imageDes!=null">,IMAGE_DES = #{imageDes}</if>
+			<if test="pageCode!=null">,PAGE_CODE = #{pageCode}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="adSetId!=null">,AD_SET_ID = #{adSetId}</if>
+			<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+	</update>
+	<select id="queryImageDes" resultType="java.lang.String">
+		SELECT
+		DISTINCT(i.IMAGE_DES) FROM t_ope_ad_image i WHERE i.ALIVE_FLAG = '1'
+	</select>
+	<select id="queryTypeCode" resultType="java.lang.String">
+		SELECT
+		DISTINCT(i.TYPE_CODE) FROM t_ope_ad_image i WHERE i.ALIVE_FLAG = '1'
+	</select>
+	<select id="queryPageCode" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT
+		DISTINCT(i.PAGE_CODE) FROM t_ope_ad_image i WHERE i.ALIVE_FLAG = '1'
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE = #{typeCode}</if>
+	</select>
+
+	<select id="queryAdimageListByOpeAdImage" resultMap="OpeAdImageSmem"
+		parameterType="hashmap">
+		select
+		IMAGE_ID
+		, TYPE_CODE
+		, SORT_CODE
+		, IMAGE_URL
+		, GOTO_URL
+		, IMAGE_DES
+		, PAGE_CODE
+		, MARKET_ID
+		, LANG_VER
+		, ALIVE_FLAG
+		, CREATE_USER
+		, CREATE_DATE
+		, UPDATE_USER
+		, AD_SET_ID
+		, STATUS
+
+		from t_ope_ad_image
+		where
+		ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		order by cast(SORT_CODE as signed INTEGER)
+	</select>
+
+	<!-- adImagelList -->
+	<select id="adImagelList" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+		i.IMAGE_ID "imageId"
+		, i.TYPE_CODE "typeCode"
+		, i.SORT_CODE "sortCode"
+		, i.IMAGE_URL "imageUrl"
+		, i.GOTO_URL "gotoUrl"
+		, i.IMAGE_DES "imageDes"
+		, i.PAGE_CODE "pageCode"
+		, i.MARKET_ID "marketId"
+		, i.LANG_VER "langVer"
+		, i.ALIVE_FLAG "aliveFlag"
+		, i.CREATE_USER "createUser"
+		, i.CREATE_DATE "createDate"
+		, i.UPDATE_USER "updateUser"
+		, i.UPDATE_DATE "updateDate"
+		, i.AD_SET_ID "adSetId"
+		, i.STATUS "status"
+		, s.ad_page_set "adPageSet"
+		, s.ad_page_no "adPageNo"
+		from t_ope_ad_image i join t_ope_ad_image_set s
+		on i.AD_SET_ID = s.ad_set_id
+		where
+		i.ALIVE_FLAG='1'
+		<if test="imageId!=null and imageId!=''">and i.IMAGE_ID=#{imageId}</if>
+		<if test="typeCode!=null and typeCode!=''">and i.TYPE_CODE=#{typeCode}</if>
+		<if test="sortCode!=null and sortCode!=''">and i.SORT_CODE=#{sortCode}</if>
+		<if test="imageUrl!=null and imageUrl!=''">and i.IMAGE_URL=#{imageUrl}</if>
+		<if test="gotoUrl!=null and gotoUrl!=''">and i.GOTO_URL=#{gotoUrl}</if>
+		<if test="imageDes!=null and imageDes!=''">and i.IMAGE_DES=#{imageDes}</if>
+		<if test="pageCode!=null and pageCode!=''">and i.PAGE_CODE=#{pageCode}</if>
+		<if test="marketId!=null and marketId!=''">and i.MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and i.LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and i.ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and i.CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and i.CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and i.UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and i.UPDATE_DATE=#{updateDate}</if>
+		<if test="adSetId!=null and adSetId!=''">and i.AD_SET_ID=#{adSetId}</if>
+		<if test="status!=null and status!=''">and i.STATUS=#{status}</if>
+		<if test="keyWord!=null and keyWord!=''">and (i.TYPE_CODE like '%' #{keyWord} '%' or s.ad_page_set
+			like '%' #{keyWord} '%' or i.IMAGE_DES like '%' #{keyWord} '%' or
+			s.ad_page_no like '%' #{keyWord} '%')</if>
+		and i.AD_SET_ID is not null
+		order by i.CREATE_DATE,i.AD_SET_ID
+	</select>
+
+</mapper>

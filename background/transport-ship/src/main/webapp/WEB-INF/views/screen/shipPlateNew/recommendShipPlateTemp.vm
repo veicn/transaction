@@ -1,0 +1,169 @@
+  <div class="s-mod">
+  
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船盘推荐</h1></div>
+			<p class="s-order-jbx"></p>
+			<!-- <div class="s-order-status">
+				<ul class="clearfix">
+					<li class="curr">租船拼船<span><em>1</em></span></li>
+					<li class="on">选择订单<span><em>2</em></span></li>
+					<li>填写需求<span><em>3</em></span></li>
+					<li>推荐船盘<span><em>4</em></span></li>
+					<li>询盘/指定承运商<span><em>5</em></span></li>
+					<li>还盘/报盘<span><em>6</em></span></li>
+					<li>确认成交<span><em>7</em></span></li>
+				</ul>
+			</div> -->
+			#if($!{traderSel} == '0')
+			<p class="s-order-jbx"></p>
+			<div class="s-recom-zd" ><i class="s-icon s-ico-recom "></i><span class="em-shape-hand" id="appoint">指定DAY HARVEST为您的转租船东</span></div>
+			#end
+		</div>
+		#if($!{haveChoice} == '1')
+		<div class="s-mod-block">
+		<div class="s-mod-btit">已指定的船盘</div>
+			<div class="s-mod-block s-mod-block4">
+			<div class="s-mod-btit queryBtn" attr-data="$!choice.uuid" ><a href="javascript:void(0);" title="查看详情">$!choice.epMemberName</a></div>
+			<div class="s-mod-bcont">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">船名：</label>
+					  <div class="s-input-inline" title="$!choice.name">
+						  <p>$!choice.name</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船型：</label>
+					  <div class="s-input-inline" title="$!choice.type">
+						  <p>$!choice.type</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船龄：</label>
+					  <div class="s-input-inline" title="$!choice.shipAge">
+					  	  <p>$!choice.shipAge</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船位：</label>
+					  <div class="s-input-inline" title="$!choice.position">
+					  	 <p>$!choice.position</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Cabinda：</label>
+					  <div class="s-input-inline" title="$!choice.etaCabinda">
+						  <p>$!choice.etaCabinda</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Fujairah：</label>
+					  <div class="s-input-inline" title="$!choice.eta">
+						  <p>$!choice.eta</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船东：</label>
+					  <div class="s-input-inline s-input-inline2" title="$!choice.shipOwner">
+						<p>$!choice.shipOwner</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">经纪人：</label>
+					  <div class="s-input-inline s-input-inline2" title="$!choice.brokerName">
+						<p>$!choice.brokerName</p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			<div class="s-but-all clearfix">
+				<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+				<div class="s-but-ship clearfix"><a href="javascript:void(0);" attr-data="$!choice.uuid" class="s-btn queryBtn">查看详情</a><a href="javascript:void(0);" class="s-btn askBtn" attr-data="$!choice.uuid">询盘</a></div>
+				</div>
+			</div>
+			</div>
+		</div>
+		#end
+		<div class="s-mod-block">
+			<div class="s-mod-btit">可选船盘<a href="javascript:void(0);" class="more">查看更多</a></div>
+			#if($!{datas.size()} == 0)		
+				<div class="c-mod">
+					<div class="nodataDiv"><i class="cw-ico cw-nodata"></i><span class="nodata">暂无相关记录</span></div>
+				</div>
+			#else
+				#foreach($data in $datas)
+				<div class="s-mod-block s-mod-block4">
+				<div class="s-mod-btit queryBtn" attr-data="$!data.uuid"><a href="javascript:void(0);" title="查看详情">$!data.epMemberName</a></div>
+				<div class="s-mod-bcont">
+				<form class="s-form s-form-cont s-form-cont2" action="">
+				<ul>
+					<li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label" >船名：</label>
+						  <div class="s-input-inline" title="$!data.name">
+							  <p>$!data.name</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">船型：</label>
+						  <div class="s-input-inline" title="$!data.type">
+							  <p>$!data.type</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">船龄：</label>
+						  <div class="s-input-inline" title="$!data.shipAge">
+						  	  <p>$!data.shipAge</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">船位：</label>
+						  <div class="s-input-inline" title="$!data.position">
+						  	 <p>$!data.position</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">ETA Cabinda：</label>
+						  <div class="s-input-inline" title="$!data.etaCabinda">
+							  <p>$!data.etaCabinda</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">ETA Fujairah：</label>
+						  <div class="s-input-inline" title="$!data.eta">
+							  <p>$!data.eta</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">船东：</label>
+						  <div class="s-input-inline s-input-inline2" title="$!data.shipOwner">
+							<p>$!data.shipOwner</p>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">经纪人：</label>
+						  <div class="s-input-inline s-input-inline2" title="$!data.brokerName">
+							<p>$!data.brokerName</p>
+						  </div>
+						</div>
+					</li>
+				</ul>
+				</form>
+				<div class="s-but-all clearfix">
+					<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+					<div class="s-but-ship clearfix"><a href="javascript:void(0);" attr-data="$!data.uuid" class="s-btn queryBtn">查看详情</a><a href="javascript:void(0);" class="s-btn askBtn" attr-data="$!data.uuid" >询盘</a></div>
+					</div>
+				</div>
+				</div>
+			</div>
+			#end
+		#end
+		</div>
+		</div>
+	</div>
+ <script src="../transport/js/shipPlateNew/recommendShipPlate.js"></script>
+ 
+  

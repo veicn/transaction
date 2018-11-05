@@ -1,0 +1,12 @@
+###################################发布采购需求信息页#####################################
+#set($a = "发布原油采购需求_原油大厅_原油需求大厅_原油采购大厅_买原油网")
+
+<div class="caigou-content clearfix cg-list">
+    <div class="inner">
+        #if ($!{personal} != 1)
+            $contain.get("/crudeoilhallform/edit.htm")
+        #end
+        $contain.get("/crudeoilhallform/sheet.htm")
+    </div>
+</div>
+

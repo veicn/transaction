@@ -1,0 +1,100 @@
+	
+	<style>
+	.sh-zt-agr { width: 102px; line-height: 87px; }
+	.omit{width:90%; overflow: hidden; white-space:nowrap; text-overflow:ellipsis;}
+	</style>
+	<div class="c-mod">
+		<div class="c-mlb"></div>
+		<form action="cargoOwnerShipPactList.htm" method="get">		
+				<div class="c-form">
+				<ul class="c-ful c-filter">
+				<li class="c-fcos3"><span class="c-fn ">船合同编号：</span><input id="search" name="code" type="text" class="c-int " value="$!query.code"></li>
+				<li class="c-fcos3"><span class="c-fn c-fn2">状态：</span>
+						<select class="sele sele1" name="status" id="status">
+							<option value=''>请选择</option>
+							<option value='1'>未匹配</option>
+							<option value='2'>已匹配</option>
+							<option value='3'>航次开始</option>
+							<option value='4'>航次结束</option>
+							<option value='5'>已装港</option>
+							<option value='6'>航行中</option>
+							<option value='7'>已卸港</option>
+							<option value='8'>已结算</option>
+						</select>
+				</li>
+				<li class="c-libtn"><button type="submit">查询</button></li> 
+				</ul>
+		  	</div>
+		</form>
+		 <div class="c-mod">
+		 <h3><i class="cw-ico ico-h3"></i>船合同列表</h3>
+		<div class="c-mod mod-list ">
+				 #foreach($data in $datas)
+				
+					<div class="shipp-blo clearfix ship">
+					 #if($!{data.list.size()} > 0)
+						<p class="sh-inp"><a href="javascript:;"><i class="cw-ico ico-close-b jiajian"></i></a></p>
+				 	 #else
+						<p class="sh-inp"><a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>
+				 	 #end 
+						<ul class="sh-list sh-list-pq clearfix">
+							<li class="sh-imo" title="$!{data.pactCode}">船合同编号：$!{data.pactCode}</li>
+							<li title="$!{data.carrierName}"><div class="omit">租船人：$!{data.carrierName}</div></li>
+							<li title="$!{data.shipOwner}"><div class="omit">船东：$!{data.shipOwner}</div></li>
+							<li title="$!{data.shipName}"><div class="omit">船名：$!{data.shipName}</div></li>
+							<li title="$!{data.pactBeg}"><div class="omit">装期：$!{data.pactBeg}</div></li>
+							<li title="$!{data.minQuantity}" class="title3"><div class="omit">最小货量：<span class="num3">$!{data.minQuantity}</span> MT</div></li>
+							<li title="$!{data.brokerName}"><div class="omit">经纪人：$!{data.brokerName}</div></li>
+						</ul>
+						<p class="sh-zt sh-zt-agr">状态：
+							#if($!{data.status} == '1')<span>未匹配</span>#end
+						    #if($!{data.status} == '2')<span>已匹配</span>#end
+						 	#if($!{data.status} == '3')<span>航次开始</span>#end
+						 	#if($!{data.status} == '4')<span>航次结束</span>#end
+						 	#if($!{data.status} == '5')<span>已装港</span>#end
+						    #if($!{data.status} == '6')<span>航行中</span>#end
+						 	#if($!{data.status} == '7')<span>已卸港</span>#end
+						 	#if($!{data.status} == '8')<span>已结算</span>#end
+						</p>
+						<div class="sh-but sh-but-agr">
+							<a href="javascript:;" class="queryBtn" attr-data="$!data.uuid">查看</a>
+					     <span class="ship-pop">
+						  <i class="cw-ico ico-pop"></i>
+							<span class="order-blor order-blor1 clearfix gengduo">
+						  #if($!{data.status} == '1')
+					      	 	<a href="javascript:;" class="editBtn" attr-data="$!data.uuid"  attr-shipPlateUuid="$!data.shipPlateUuid">修改</a>
+					      #end
+					      #if( $!{data.status} == '2' || $!{data.status} == '3'|| $!{data.status} == '5'|| $!{data.status} == '6'|| $!{data.status} == '7'|| $!{data.status} == '8')
+					      	<a href="javascript:;" class="shipEditBtn" attr-data="$!data.uuid" >船务信息录入</a>
+					      #end
+					      #if($!{data.status} == '3')
+					      	 <a href="javascript:;" class="shipOverBtn" attr-data="$!data.uuid" >航次结束</a>
+					      #end
+					      #if($!{data.status} == '8')
+					      	<a href="javascript:;" class="queryBtn" attr-data="$!data.uuid">查看结算费用</a>
+					      #end
+						  #if(  $!{data.status} == '1' || $!{data.status} == '2')
+							<a href="javascript:;" class="sh-pop " attr-data="$!data.uuid"><i class="cw-ico ico-wzx-b"></i></a>
+					      #end
+					      #if($!{data.status} == '3'|| $!{data.status} == '5'|| $!{data.status} == '6'|| $!{data.status} == '7')
+							<a href="javascript:;" class="sh-pop track" attr-data="$!data.uuid"><i class="cw-ico ico-zxz-b"></i></a>
+					      #end
+					      #if($!{data.status} == '4'|| $!{data.status} == '8')
+							<a href="javascript:;" class="sh-pop track" attr-data="$!data.uuid"><i class="cw-ico ico-end-b"></i></a>
+					      #end 
+								<p class="ico-sj"></p>
+							</span>
+						</span>
+						</div>
+					</div>
+					
+					#end
+				</div>
+				$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipPact/cargoOwnerShipPactList.htm')")
+		</div>	
+	</div>
+</div>
+<script src="../transport/js/shipPact/cargoOwnerShipPactList.js"></script>
+<script>
+$('#status').val($!query.status)
+</script>

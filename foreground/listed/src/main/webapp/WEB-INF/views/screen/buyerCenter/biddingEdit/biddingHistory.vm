@@ -1,0 +1,60 @@
+#if($!biddingHistory && $!biddingHistory.size() > 0)
+
+<style>
+.history-span {
+	word-break: normal;
+	width: auto;
+	display: block;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+</style>
+
+<div class="c-mod">
+    <h3><em class="cw-ico ico-h3"></em>修改记录
+        <span class="cxtj-nr-an">
+        </span>
+    </h3>
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th width="10%">变更字段</th>
+                <th width="40%">变更前</th>
+                <th width="40%">变更后</th>
+                <th width="10%">变更时间</th>
+            </tr>
+            #foreach($history in $!biddingHistory)
+            	#set($index=$!velocityCount - 1)
+                <tr>
+                    <td width="10%">
+                    	<input type="hidden" name="biddingHistory[$!index].item" value="$!{history.item}" >
+                    	$!{history.item}
+                    </td>
+                    <td width="40%">
+                    	<input type="hidden" name="biddingHistory[$!index].valueOld" value="$!{history.valueOld}" >
+                    	#if($!{history.valueOld} != "")
+                    		<span class="history-span">$!{history.valueOld}</span>
+                    	#else
+                    		-
+                    	#end
+                    </td>
+                    <td width="40%">
+                    	<input type="hidden" name="biddingHistory[$!index].valueNew" value="$!{history.valueNew}" >
+                    	#if($!{history.valueNew} != "")
+                    		<span class="history-span">$!{history.valueNew}</span>
+                    	#else
+                    		-
+                    	#end
+                    </td>
+                    <td width="10%">
+                    	<input type="hidden" name="biddingHistory[$!index].updateTime" value="$!{history.updateTime}" >
+                    	$!{history.updateTime}
+                    </td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+#end
+

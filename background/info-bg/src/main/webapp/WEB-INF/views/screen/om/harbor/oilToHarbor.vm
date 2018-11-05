@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/harbor/oilToHarbor.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<script src="$imageServer.get('info/js/harbor/oilToHarbor.js')"></script>
+<script src="$imageServer.get('info/js/domesticPrice/plupload.full.min.js')"></script>
+	<div class="pp15" id="layerDemo">	
+		<!--搜索条件-->
+		<div class="ry-banner">
+              <form class="layui-form" id="selForm"  method="post">
+             		 <div class="layui-form">
+		            	<label class="layui-form-label">品号：</label>
+		                  <div class="layui-input-inline iw200">
+		                      <input type="text" id="productionNumberQuery"  value="$!{query.productionNumber}" class="layui-input">   
+		                  </div>
+		                  <div class="layui-input-inline">
+		                  <button type="button" class="layui-btn layui-btn-normal ml18 searchBtn">查询</button>
+		                  <button type="button" class="layui-btn layui-btn-normal addFn">新增</button>
+		                  </div>
+						<div class="layui-inline industry-name">
+							<label class="layui-form-label">附件：</label>
+							<button type="button" style="margin-right:5px; background:none;color:black; width:150px; border: 1px solid #cccccc;" class="layui-btn layui-btn-normal" id="importExcel">选择文件...</button>
+							<button type="button" class="layui-btn layui-btn-normal" id="ensure">导入</button>
+							<button type="button" id="download" class="layui-btn layui-btn-normal">
+								模板
+							</button>
+						</div>
+		            </div>
+               </form>
+		</div>
+		
+		<table class="layui-table table-style tb-top" id="crudeOil">
+		  <thead>
+		    <tr>
+		      <th class="table-style-th">排序</th>
+		      <th class="table-style-th">品号</th>
+			  <th class="table-style-th">数量</th>
+			  <th class="table-style-th">船名</th>
+              <th class="table-style-th">船运公司</th>
+		      <th class="table-style-th">来源</th>
+			  <th class="table-style-th">接货商</th>
+              <th class="table-style-th">贸易方式</th>
+              <th class="table-style-th">预抵/出时间</th>
+              <th class="table-style-th">操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody id="crudeOil">
+		  #foreach($harbor in $!datas)
+			    <tr>
+				  <td>$!{velocityCount}</td>
+	              <td>$!{harbor.productionNumber}</td>
+				  <td>$!{harbor.quantity}</td>
+				  <td>$!{harbor.shipName}</td>
+	              <td>$!{harbor.pierOrCompany}</td>
+			      <td>$!{harbor.source}</td>
+	              <td>$!{harbor.receiver}</td>
+	              <td>$!{harbor.tradingWay}</td>
+	              <td>$!{harbor.estimatedArrival}</td>
+			      <td class="acss-color">
+			      	<a href="javascript:;" class="btcol editFn" attr-data='{"id":"$!{harbor.id}","productionNumber":"$!{harbor.productionNumber}","quantity":"$!{harbor.quantity}","shipName":"$!{harbor.shipName}","pierOrCompany":"$!{harbor.pierOrCompany}","source":"$!{harbor.source}","receiver":"$!{harbor.receiver}","tradingWay":"$!{harbor.tradingWay}","estimatedArrival":"$!{harbor.estimatedArrival}"}'>
+			      		<i class="layui-icon">&#xe642;</i>
+						编辑
+			      	</a>
+			      	<a href="javascript:;" class="mr btcol delFn" attr-data='{"id":"$!{harbor.id}"}'>
+			      		<i class="layui-icon" style="color:red;">&#xe640;</i>
+			      		删除
+			      	</a>
+			      </td>
+			    </tr>
+			   #end 
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    	<!-- <div id="ry-page" class="ry-right"></div> -->
+	    	$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/harbor/oilToHarbor.htm?selProductName=$!{query.selProductName}").put('slider_path','/contain/formPagingPageSlider')
+	    </div>
+
+	 
+	 
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	    <!--底部-->
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>	
+    </div>

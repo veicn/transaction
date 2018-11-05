@@ -1,0 +1,42 @@
+<div class="order-num-box clearfix">
+    <div class="order-num-l">
+        <p>Deal NO.：$!{order.orderNo}</p>
+        <p><a href="">
+            #if(!$!{order.cancelFlag})
+                #if($!{order.doubleStatus} == '03')
+                    Cancelling
+                #else
+                    #if($status == 2)Completed
+                    #elseif($status==0)Confirmed
+                    #elseif($status==-1)Pending
+                    #{else}In process
+                    #end
+                #end
+            #else
+                Cancelled 
+            #end
+
+        </a></p>
+    </div>
+    <div class="order-num-r">
+        <p>#if($status == 2)The order has been completed. Thank you for using Sinochem crude oil trading platform. Welcome to evaluate this transaction and the purchased product.#end</p>
+        <ul class="order-list clearfix">
+            #foreach($item in $statusList )
+                <li class="#if($item.value != 0) cur #end">
+                    #if($item.value == 0)
+                        #if($velocityCount != $statusList.size())
+                            <span class="order-l2"></span>
+                        #end
+                    #else
+                        #if($velocityCount != $statusList.size())
+                            <span class="order-l"></span>
+                        #end
+                    #end
+                    <span class="order-s">${item.itemDesc} </span>
+                    <h5>$!{item.valueDesc}</h5>
+                    <p>$!dateUtil.getDate(${item.createDate})<br/>$!dateUtil.getTimeNow(${item.createDate})</p>
+                </li>
+            #end
+        </ul>
+    </div>
+</div>

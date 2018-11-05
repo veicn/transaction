@@ -1,0 +1,22 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Purchase Recap<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Tolerance：</span>+/-$!{contract.numFloat}%<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">Premium/Discount：</span>$!{contract.agioStr}</li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Basis：</span>$!{valuationBaseName}</li>
+
+            <li class="c-fcos2"><span class="c-fn">Pricing period type：</span>$!{valuationProidTypeName}<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+
+            <li class="c-fcos2"><span class="c-fn">Pricing period start time：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidStart})<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">End time of pricing period：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidEnd})<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Date：$!{payItemName}</span></li>
+
+            #*<li class="c-fcos2"><span class="c-fn">Payment Date：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.payTime})<i class="c-ico cxtj-nr-ico cg-data"></i></li>*#
+
+            <li class="c-fcos2"><span class="c-fn">Purchase type：$!{purchaseModeName}</span></li>
+
+            <li class="c-fcos1"><span class="c-fn">Price Fomula：$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos1"><span class="c-fn">Remark：$!{contract.remark}</span></li>
+    </div>
+</div>

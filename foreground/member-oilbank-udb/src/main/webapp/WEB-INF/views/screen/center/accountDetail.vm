@@ -1,0 +1,10 @@
+<div class="c-mr">
+    <div class="c-mod">
+        <p class="enter-tit clearfix"><span><i class="cw-ico ico-jbxx"></i>基本信息</span>#*<a href="#">编辑</a>*#</p>
+
+        $contain.get('/contain/personInfo.htm')
+
+
+        $contain.get('/contain/chooseAccounts.htm').setHost("$systemServer.get('')")
+    </div>
+</div>

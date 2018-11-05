@@ -1,0 +1,5 @@
+<div style="margin-top: 60px;">
+    $contain.get('/buyer/queryOrderListForm.htm')<br>
+    $contain.get('/buyer/queryOrderList.htm').put('contractListResult',$!{contractListResult}).put('user',$!{user})
+    $contain.get('/common/page.htm').put("pageInfo",$contractListResult)
+</div>

@@ -1,0 +1,118 @@
+#set($a = "个人中心-买原油网")
+$contain.get("/buyCenterContain/biddingStatus.htm").put('demand', $!{demand})
+#*油种信息*#
+$contain.get("/crudeoilhallform/oiltypeList.htm").setParam("demandId","$!{demand.id}").put('publishType',$!{demand.publishType})
+#*需求、报价对比信息*#
+$contain.get("/crudeoilhallform/pricedetail_compare.htm").setParam("demandId","$!{demand.id}")
+#*运输信息*#
+##$contain.get("/salerCenterContain/transportInfoInput.htm").setParam("demandId","$!{demand.id}").put("viewflag", "f")
+#*买方*#
+$contain.get("/crudeoilhallform/buyerlist.htm").setParam("demandId","$!{demand.id}")
+#*卖方*#
+$contain.get("/crudeoilhallform/supplierList.htm").setParam("demandId","$!{demand.id}")
+#*修改记录*#
+$contain.get("/buyerCenter/biddingEdit/biddingHistory.htm").put('biddingHistory', $!{biddingHistory})
+<form method="post" id="confirmBiddingForm" action="$appServer.get('/purchaseManager/buy/confirmBiddingAndRemind.htm')">
+    <div class="c-subdiv">
+        <input type="hidden" name="biddingDemandId" value="$!{demand.id}" />
+        <input type="hidden" name="biddingType" value="$!{demand.biddingType}" />
+        <a class="btn-bc btn-qx" type="button" href="javascript:void(0)" onclick="back()">返回</a>
+
+
+        #if($!{demand.status} == 10 && !$!{belongToCurrentUser})
+            #if($!{demand.biddingType} == 1)
+                <button type="submit" class="btn-bc btn-lj" >
+                    申请再次报价
+                </button>
+            #else
+                #if(!$!{overdue})
+                    #if($!{user.epMemberId} == $!{parentDemandCreater})
+                        <a class="btn-bc btn-lj" href="javascript:void(0)" onclick="createTradeChain()">添加中间商</a>
+                        <button type="button" onclick="confirmBidding()" class="btn-bc btn-lj" >
+                            确认中标
+                        </button>
+                        <input type="checkbox" name="remindFlag" />关闭其他报价并通知未中标企业
+                    #end
+                #else
+                    该投标已逾期
+                #end
+            #end
+        #elseif($!{demand.status} == 20 && $!{belongToCurrentUser} && $!{demand.biddingType} == 1) ##意向报价中标
+                #*demandAgain 是 再次报价 -页面回显功能 时添加
+                  2018年2月28日17:34:06
+               *#
+            <button type="button" class="btn-bc btn-lj" onclick="window.location.href='$appServer.get("/crudeoillobby/crudeOilBidding.htm?demandId=$!{demand.parentId}&demandAgain=$!{demand.id}")'">
+                再次报价
+            </button>
+        #end
+    </div>
+</form>
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<script>
+
+    // 友好提示
+    errorfunction();
+
+    function errorfunction() {
+        var msg = "$!{msg}";
+        if(msg != null && msg != ""){
+            layui.use(['layer'], function () {
+                layui.layer.alert("$!{msg}");
+            })
+        }
+    };
+
+    function confirmBidding() {
+        var tradeChainExistUrl = '$appServer.get("/tradeChainAlreadyExists.json?demandId=$!{demand.id}").toString()';
+        $.get(tradeChainExistUrl, function(result) {
+            var status = result.status;
+
+            if (status != '0') {
+                layer.alert("请求失败");
+                return;
+            }
+
+            var tradeChainAlreadyExists = result.datas;
+            console.log(result);
+            if (!tradeChainAlreadyExists) {
+                $('#confirmBiddingForm').submit();
+            } else {
+                layer.alert("存在贸易链，无法确认报价，需待贸易链结束后才可确认");
+            }
+        })
+    }
+
+    function createTradeChain() {
+
+        var tradeChainExistUrl = '$appServer.get("/tradeChainAlreadyExists.json?demandId=$!{demand.id}").toString()';
+        $.get(tradeChainExistUrl, function(result) {
+            var status = result.status;
+
+            if (status != '0') {
+                layer.alert("请求失败");
+                return;
+            }
+
+            var tradeChainAlreadyExists = result.datas;
+            console.log(result);
+            if (!tradeChainAlreadyExists) {
+                window.location.href = "$appServer.get("/tradeChain/toTradeChainInsert.htm?demandId=$!{demand.id}")"
+            } else {
+                layer.alert("贸易链已存在");
+            }
+        })
+    }
+
+	function back(){
+		window.history.go(-1);
+	}
+
+    #if($errorMessage && "$!{errorMessage}" != "")
+        layui.use("layer", function () {
+            layui.layer.alert("$!{errorMessage}");
+        });
+    #end
+
+</script>
+
+

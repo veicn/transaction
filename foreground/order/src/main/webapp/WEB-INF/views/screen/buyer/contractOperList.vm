@@ -1,0 +1,25 @@
+#if($!{contractLogs.size()} > 0)
+    <div class="c-mod" id="mjbwxx">
+        <h3><em class="cw-ico ico-h3"></em>操作记录<span class="cxtj-nr-an"></span></h3>
+        <div class="c-tabdiv">
+            <table>
+                <tr>
+                    <th>操作类型</th>
+                    <th>操作人</th>
+                    <th>操作时间</th>
+                    <th>原因</th>
+                </tr>
+
+                #foreach($item in $!{contractLogs})
+                    <tr class="c-tabcos1">
+                        <td>$!{item.operationType}</td>
+                        <td>$!{item.operName}</td>
+                        <td>$dateUtil.getDateTime("yyyy-MM-dd",$!{item.createTime})</td>
+                        <td>$!{item.describes}</td>
+                    </tr>
+                #end
+
+            </table>
+        </div>
+    </div>
+#end

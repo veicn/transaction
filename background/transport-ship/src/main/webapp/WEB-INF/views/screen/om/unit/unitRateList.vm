@@ -1,0 +1,72 @@
+<div class="layui-table" style="padding:15px" id="">
+	<!--搜索条件-->
+	<div class="ry-banner">
+		<div class="layui-inline">
+		    <div class="layui-input-inline iw300" >
+			<label class="layui-form-label">参考单位</label>
+			<div class="layui-input-inline">
+		      <input id="searchNameOne" type="text" name="searchNameOne" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!serchNameOne">
+		      </div>      
+		    </div>
+		    <div class="layui-input-inline iw300" >
+			<label class="layui-form-label">对比单位</label>
+			<div class="layui-input-inline">
+			  <input id="searchNameTwo" type="text" name="searchNameTwo" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!serchNameTwo">
+			  </div> 	    
+			</div>
+		    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button>
+		    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn2">重置</button>
+		    <button class="layui-btn layui-btn-normal layui-btn-small insertBtna">新增</button>
+		</div>
+	</div>
+	
+	<table id="unitRateList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+		<thead>
+			<tr>
+				<th class="table-style-th">序号</th>
+				<th class="table-style-th">类型</th>
+				<th class="table-style-th">参考单位</th>
+				<th class="table-style-th">对比单位</th>
+				<th class="table-style-th">底数</th>
+				<th class="table-style-th">指数</th>
+				<th class="table-style-th">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		#foreach($data in $datas)
+			<tr>
+				<td>${velocityCount}</td>				
+				<td>$!data.type</td>
+				<td>$!data.oneName</td>
+				<td>$!data.twoName</td>
+				<td>$!data.baseName</td>
+				<td>$!data.power</td>
+				<td>
+				<i class="layui-icon">&#xe642;</i>
+		      	<a href="javascript:;" class="dialog-link btcol editFn"  attr-data="$data.uuid">
+					修改
+		      	</a>
+		      	<i class="layui-icon" style="color:red;margin-left:5px;">&#xe640;</i>
+		      	<a href="javascript:;" class="dialog-link btcol delFn"  attr-data="$data.uuid">
+		      		删除
+		      	</a>
+		        </td>
+			</tr>
+		#end
+		</tbody>
+	</table>
+	
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar">
+	    	<div id="ry-page" class="ry-right" style="text-align:right; margin-right:20px;">
+	    		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/unit/unitRateList.htm").put('slider_path','/contain/formPagingPageSlider')
+	    	</div>
+	    </div>
+	     <div class="ry-footbar">
+		
+		</div>
+</div>
+	 
+	 
+<script src="/transport/js/om/unitRateList.js"></script>

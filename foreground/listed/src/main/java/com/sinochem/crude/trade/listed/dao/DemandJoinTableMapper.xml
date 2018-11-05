@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandJoinTableMapper">
+    <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.model.result.DemandJoinResult">
+
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="num" jdbcType="BIGINT" property="num" />
+        <result column="numFloat" jdbcType="VARCHAR" property="numfloat" />
+        <result column="trade_item" jdbcType="INTEGER" property="tradeItem" />
+        <result column="agio" jdbcType="BIGINT" property="agio" />
+        <result column="valuation_base" jdbcType="VARCHAR" property="valuationBase" />
+        <result column="valuation_proid_type" jdbcType="INTEGER" property="valuationProidType" />
+        <result column="pay_item" jdbcType="VARCHAR" property="payItem" />
+        <result column="pay_item_JSON" jdbcType="VARCHAR" property="payItemJSON" />
+        <result column="pay_time" jdbcType="VARCHAR" property="payTime" />
+        <result column="purchase_type" jdbcType="INTEGER" property="purchaseType" />
+        <result column="creater" jdbcType="BIGINT" property="creater" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="updater" jdbcType="BIGINT" property="updater" />
+        <result column="updater_time" jdbcType="TIMESTAMP" property="updaterTime" />
+        <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <result column="valuation_formula" jdbcType="VARCHAR" property="valuationFormula" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="deal_type" jdbcType="VARCHAR" property="dealType" />
+        <result column="biz_type" jdbcType="VARCHAR" property="bizType" />
+        <result column="product_oil_id" jdbcType="VARCHAR" property="productOilId" />
+        <result column="other_item" jdbcType="VARCHAR" property="otherItem" />
+        <result column="auth_item" jdbcType="INTEGER" property="authItem" />
+        <result column="business_check_org" jdbcType="VARCHAR" property="businessCheckOrg" />
+        <result column="export_conf_file" jdbcType="VARCHAR" property="exportConfFile" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="tender_out_time" jdbcType="TIMESTAMP" property="tenderOutTime" />
+        <result column="stop_bid_time" jdbcType="TIMESTAMP" property="stopBidTime" />
+        <result column="response_start_time" jdbcType="TIMESTAMP" property="responseStartTime" />
+        <result column="response_end_time" jdbcType="TIMESTAMP" property="responseEndTime" />
+        <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+        <result column="crude_oil_options" jdbcType="VARCHAR" property="crudeOilOptions" />
+        <result column="product_oil_classify" jdbcType="INTEGER" property="productOilClassify" />
+        <result column="product_oil_kind" jdbcType="INTEGER" property="productOilKind" />
+        <result column="product_oil_specs" jdbcType="INTEGER" property="productOilSpecs" />
+        <result column="region" jdbcType="INTEGER" property="region" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="is_agent" jdbcType="INTEGER" property="isAgent" />
+        <result column="agenter" jdbcType="BIGINT" property="agenter" />
+        <result column="export_type" jdbcType="INTEGER" property="exportType" />
+        <result column="qc_report" jdbcType="VARCHAR" property="qcReport" />
+        <result column="pricing_mode" jdbcType="INTEGER" property="pricingMode" />
+        <result column="pricing_measure_unit" jdbcType="INTEGER" property="pricingMeasureUnit" />
+        <result column="measure_mode" jdbcType="INTEGER" property="measureMode" />
+        <result column="price_declare" jdbcType="VARCHAR" property="priceDeclare" />
+        <result column="is_seal" jdbcType="INTEGER" property="isSeal" />
+        <result column="valuation_currency" jdbcType="INTEGER" property="valuationCurrency" />
+        <result column="valuation_proid_start" jdbcType="DATE" property="valuationProidStart" />
+        <result column="valuation_proid_end" jdbcType="DATE" property="valuationProidEnd" />
+        <result column="unit_price" jdbcType="INTEGER" property="unitPrice" />
+        <result column="purchase_mode" jdbcType="INTEGER" property="purchaseMode" />
+        <result column="pub_date" jdbcType="TIMESTAMP" property="pubDate" />
+		<result column="load_and_discharge_permitted_timespan" jdbcType="VARCHAR" property="loadAndDischargePermittedTimespan" />
+
+        <result column="b_e_member_id" property="beMemberId" jdbcType="BIGINT" />
+        <result column="b_contacter" property="bContacter" jdbcType="VARCHAR" />
+        <result column="b_enterprise_name" property="bEnterpriseName" jdbcType="VARCHAR" />
+        <result column="b_famil" property="bFamil" jdbcType="VARCHAR" />
+
+        <result column="t_e_member_id" property="teMemberId" jdbcType="BIGINT" />
+        <result column="t_contacter" property="tContacter" jdbcType="VARCHAR" />
+        <result column="t_enterprise_name" property="tEnterpriseName" jdbcType="VARCHAR" />
+        <result column="t_famil" property="tFamil" jdbcType="VARCHAR" />
+
+        <result column="p_e_member_id" property="peMemberId" jdbcType="BIGINT" />
+        <result column="p_contacter" property="pContacter" jdbcType="VARCHAR" />
+        <result column="p_enterprise_name" property="pEnterpriseName" jdbcType="VARCHAR" />
+        <result column="p_famil" property="pFamil" jdbcType="VARCHAR" />
+
+        <result column="discharge_port" property="dischargePort" jdbcType="VARCHAR" />
+        <result column="shipment_port" property="shipmentPort" jdbcType="VARCHAR" />
+        <result column="shipment_end_time" property="shipmentEndTime" jdbcType="TIMESTAMP" />
+        <result column="discharge_end_time" property="dischargeEndTime" jdbcType="TIMESTAMP" />
+        <result column="shipment_start_time" property="shipmentStartTime" jdbcType="TIMESTAMP" />
+        <result column="discharge_start_time" property="dischargeStartTime" jdbcType="TIMESTAMP" />
+
+        <result column="publish_type" jdbcType="INTEGER" property="publishType" />
+        <result column="bidding_type" jdbcType="INTEGER" property="biddingType" />
+        <result column="contract_kind" jdbcType="VARCHAR" property="contractKind" />
+
+        <result column="specified" jdbcType="INTEGER" property="specified" />
+        <result column="stop_bid" jdbcType="INTEGER" property="stopBid" />
+    </resultMap>
+
+    <select id="selectDemandByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultMap="BaseResultMap">
+
+        SELECT
+            d.*, ds.discharge_port,
+            ds.discharge_start_time,
+            ds.discharge_end_time,
+            ds.shipment_port,
+            ds.shipment_start_time,
+            ds.shipment_end_time,
+            ds.ship_type,
+            buyerVO.e_member_id as b_e_member_id, buyerVO.enterprise_name as b_enterprise_name, buyerVO.contacter as b_contacter, buyerVO.famil as b_famil,
+            providerVO.e_member_id as p_e_member_id, providerVO.enterprise_name as p_enterprise_name, providerVO.contacter as p_contacter, providerVO.famil as p_famil
+        FROM demand  d LEFT JOIN
+            demand_ship ds ON d.id=ds.demand_id LEFT JOIN
+            demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB' LEFT JOIN
+            demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        WHERE 1=1 and d.parent_id is null and d.status != 0
+        <if test="epMemberId != null">
+            and (
+            d.specified  = 0
+            or d.specified is null
+            or (d.specified  = 1 and exists (select * from demand_specify_enterprise se where se.ep_memberid = #{epMemberId} and se.demand_id = d.id))
+            )
+        </if>
+        <if test="demandId != null">
+            and d.id = #{demandId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and d.type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="dealType != null">
+            and d.deal_type = #{dealType,jdbcType=VARCHAR}
+        </if>
+        <if test="bizType != null">
+            and d.biz_type = #{bizType,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and d.parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+        <if test="goodsClassify != null  and goodsClassify != ''">
+            and d.product_oil_classify = #{goodsClassify,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsKind != null and goodsKind != ''">
+            and d.product_oil_kind = #{goodsKind,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">
+            and d.product_oil_specs = #{goodsSpecs,jdbcType=VARCHAR}
+        </if>
+        <if test="purchaseType != null and purchaseType != ''">
+            and d.purchase_type = #{purchaseType,jdbcType=VARCHAR}
+        </if>
+        <if test="region != null and region != ''">
+            and d.region = #{region,jdbcType=VARCHAR}
+        </if>
+        <if test="pubDateStart != null and pubDateStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') >=  DATE_FORMAT(#{pubDateStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="pubDateEnd != null and pubDateEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') <=  DATE_FORMAT(#{pubDateEnd}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeStart != null and createTimeStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') >=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') <=  DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')   ]]>
+        </if>
+
+        <if test="userId != null">
+            and d.creater = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="userEnterpriseId != null">
+            and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+        </if>
+        <if test="status != null and status != ''">
+            and d.status = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="tradeItem != null and tradeItem != ''">
+            and d.trade_item = #{tradeItem,jdbcType=VARCHAR}
+        </if>
+
+        <if test="demandCode != null and demandCode != ''">
+            and d.uuid = #{demandCode,jdbcType=VARCHAR}
+        </if>
+
+        <if test="numMin != null">
+            and d.num >= #{numMin,jdbcType=INTEGER}
+        </if>
+
+        <if test="numMax != null">
+            and #{numMax,jdbcType=INTEGER} >= d.num
+        </if>
+
+        <if test="payItem != null and payItem != ''">
+            and d.pay_item = #{payItem,jdbcType=VARCHAR}
+        </if>
+
+        <if test="stopBidTimeBefore != null">
+            and IF(ISNULL(d.stop_bid_time),
+              1 = 1,
+              d.stop_bid_time &gt;= #{stopBidTimeBefore,jdbcType=DATE})
+        </if>
+
+        <if test="sortStr != null">
+            order BY ${sortStr}
+        </if>
+        <if test="sortStr == null">
+            order BY id desc
+        </if>
+
+    </select>
+    
+    <select id="selectInvalidDemandByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultMap="BaseResultMap">
+
+        SELECT
+            d.*, ds.discharge_port,
+            ds.discharge_start_time,
+            ds.discharge_end_time,
+            ds.shipment_port,
+            ds.shipment_start_time,
+            ds.shipment_end_time,
+            ds.ship_type,
+            buyerVO.e_member_id as b_e_member_id, buyerVO.enterprise_name as b_enterprise_name, buyerVO.contacter as b_contacter, buyerVO.famil as b_famil,
+            providerVO.e_member_id as p_e_member_id, providerVO.enterprise_name as p_enterprise_name, providerVO.contacter as p_contacter, providerVO.famil as p_famil
+        FROM demand  d LEFT JOIN
+            demand_ship ds ON d.id=ds.demand_id LEFT JOIN
+            demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB' LEFT JOIN
+            demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        WHERE 1=1 and d.parent_id is null and d.status != 0
+        <if test="epMemberId != null">
+            and (
+            d.specified  = 0
+            or d.specified is null
+            or (d.specified  = 1 and exists (select * from demand_specify_enterprise se where se.ep_memberid = #{epMemberId} and se.demand_id = d.id))
+            )
+        </if>
+        <if test="userEnterpriseId == null ||  userEnterpriseId == ''">
+            and (d.specified  = 0 or d.specified is null )
+        </if>
+        <if test="demandId != null">
+            and d.id = #{demandId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and d.type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="dealType != null">
+            and d.deal_type = #{dealType,jdbcType=VARCHAR}
+        </if>
+        <if test="bizType != null">
+            and d.biz_type = #{bizType,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and d.parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+        <if test="goodsClassify != null  and goodsClassify != ''">
+            and d.product_oil_classify = #{goodsClassify,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsKind != null and goodsKind != ''">
+            and d.product_oil_kind = #{goodsKind,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">
+            and d.product_oil_specs = #{goodsSpecs,jdbcType=VARCHAR}
+        </if>
+        <if test="purchaseType != null and purchaseType != ''">
+            and d.purchase_type = #{purchaseType,jdbcType=VARCHAR}
+        </if>
+        <if test="region != null and region != ''">
+            and d.region = #{region,jdbcType=VARCHAR}
+        </if>
+        <if test="pubDateStart != null and pubDateStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') >=  DATE_FORMAT(#{pubDateStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="pubDateEnd != null and pubDateEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') <=  DATE_FORMAT(#{pubDateEnd}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeStart != null and createTimeStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') >=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') <=  DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')   ]]>
+        </if>
+
+        <if test="userId != null">
+            and d.creater = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="userEnterpriseId != null">
+            and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+        </if>
+        <if test="status != null and status != ''">
+            and d.status = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="tradeItem != null and tradeItem != ''">
+            and d.trade_item = #{tradeItem,jdbcType=VARCHAR}
+        </if>
+
+        <if test="demandCode != null and demandCode != ''">
+            and d.uuid = #{demandCode,jdbcType=VARCHAR}
+        </if>
+
+        <if test="numMin != null">
+            and d.num >= #{numMin,jdbcType=INTEGER}
+        </if>
+
+        <if test="numMax != null">
+            and #{numMax,jdbcType=INTEGER} >= d.num
+        </if>
+
+        <if test="payItem != null and payItem != ''">
+            and d.pay_item = #{payItem,jdbcType=VARCHAR}
+        </if>
+
+        <if test="stopBidTimeBefore != null">
+            and IF(ISNULL(d.stop_bid_time),
+              1 = 1,
+              d.stop_bid_time &lt;= #{stopBidTimeBefore,jdbcType=DATE})
+        </if>
+            order BY d.stop_bid_time desc
+    </select>
+
+    <select id="queryCrudeOilDemandByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.CrudeOilDemandQuery" resultMap="BaseResultMap">
+        SELECT
+        DISTINCT
+        d.num,
+        d.id,
+        d.purchase_type,
+        d.trade_item,
+        d.valuation_base,
+        d.valuation_proid_type,
+        d.valuation_proid_start,
+        d.valuation_proid_end,
+        d.pay_item,
+        d.pub_date,
+        d.tender_out_time,
+        d.stop_bid_time,
+        d.uuid,
+        d.creater,
+        d.specified,
+        d.publish_type,
+        d.crude_oil_options,
+        ds.shipment_port,
+        ds.shipment_start_time,
+        ds.shipment_end_time,
+        ds.discharge_start_time,
+        ds.discharge_end_time,
+        ds.discharge_port,
+        buyerVO.e_member_id as b_e_member_id, buyerVO.enterprise_name as b_enterprise_name, buyerVO.contacter as b_contacter, buyerVO.famil as b_famil,
+        providerVO.e_member_id as p_e_member_id, providerVO.enterprise_name as p_enterprise_name, providerVO.contacter as p_contacter, providerVO.famil as p_famil
+        FROM demand  AS d
+        LEFT JOIN demand_ship ds ON ds.demand_id = d.id
+        LEFT JOIN crude_oil_resource cor ON cor.demand_id = d.id
+        LEFT JOIN demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB'
+        LEFT JOIN demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        WHERE
+        d.status = 2
+        <if test="epMemberId != null">
+            and (
+            d.specified  = 0
+            or d.specified is null
+            or (d.specified  = 1 and exists (select * from demand_specify_enterprise se where se.ep_memberid = #{epMemberId} and se.demand_id = d.id))
+            )
+        </if>
+        AND d.biz_type = 'CrudeOil'
+        <!-- AND IF(ISNULL(d.stop_bid_time), 1 = 1, d.stop_bid_time >= CURDATE()) -->
+        <if test="purchaseType != null">
+            and purchase_type = #{purchaseType}
+        </if>
+        <if test="type != null">
+            and d.type = #{type}
+        </if>
+        <if test="dealType != null">
+            and d.deal_type = #{dealType}
+        </if>
+        <if test="crudePlace != null">
+            and cor.origin = #{crudePlace}
+        </if>
+        <if test="oilType != null">
+            and crude_oil_options LIKE concat('%',#{oilType},'%')
+        </if>
+        <if test="oilNumberMin != null and oilNumberMax != null">
+            <![CDATA[ and #{oilNumberMin} <= num and  num < #{oilNumberMax} ]]>
+        </if>
+        <if test="specified != null">
+            and d.specified = #{specified}
+        </if>
+        <if test="publishType != null">
+            and d.publish_type = #{publishType}
+        </if>
+        <if test="enterpriseId != null">
+            and d.creater = #{enterpriseId}
+        </if>
+        <if test="orderByKeys != null">
+            ORDER  BY  ${orderByKeys}
+        </if>
+    </select>
+
+    <select id="selectBiddingByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultMap="BaseResultMap">
+
+        SELECT
+        d.*, ds.discharge_port,
+        ds.discharge_start_time,
+        ds.discharge_end_time,
+        ds.shipment_port,
+        ds.shipment_start_time,
+        ds.shipment_end_time,
+        ds.ship_type,
+        buyerVO.e_member_id as b_e_member_id, buyerVO.enterprise_name as b_enterprise_name, buyerVO.contacter as b_contacter, buyerVO.famil as b_famil,
+        providerVO.e_member_id as p_e_member_id, providerVO.enterprise_name as p_enterprise_name, providerVO.contacter as p_contacter, providerVO.famil as p_famil,
+        (CASE WHEN d2.stop_bid_time &lt; date_sub(NOW(), interval 1 day) THEN 1 ELSE 0 END) AS stop_bid
+        FROM
+        demand d LEFT JOIN
+        demand_ship ds ON d.id=ds.demand_id LEFT JOIN
+        demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB' LEFT JOIN
+        demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        LEFT JOIN demand d2 ON d2.id = d.parent_id
+        WHERE 1=1 and d.parent_id is not null and d.status != 0
+        <if test="demandId != null">
+            and d.id = #{demandId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and d.type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="dealType != null">
+            and d.deal_type = #{dealType,jdbcType=VARCHAR}
+        </if>
+        <if test="bizType != null">
+            and d.biz_type = #{bizType,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and d.parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+        <if test="goodsClassify != null  and goodsClassify != ''">
+            and d.product_oil_classify = #{goodsClassify,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsKind != null and goodsKind != ''">
+            and d.product_oil_kind = #{goodsKind,jdbcType=VARCHAR}
+        </if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">
+            and d.product_oil_specs = #{goodsSpecs,jdbcType=VARCHAR}
+        </if>
+        <if test="purchaseType != null and purchaseType != ''">
+            and d.purchase_type = #{purchaseType,jdbcType=VARCHAR}
+        </if>
+        <if test="region != null and region != ''">
+            and d.region = #{region,jdbcType=VARCHAR}
+        </if>
+        <if test="pubDateStart != null and pubDateStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') >=  DATE_FORMAT(#{pubDateStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="pubDateEnd != null and pubDateEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.pub_date, '%Y-%m-%d') <=  DATE_FORMAT(#{pubDateEnd}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeStart != null and createTimeStart != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') >=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')   ]]>
+        </if>
+        <if test="createTimeEnd != null and createTimeEnd != ''">
+
+            <![CDATA[   and DATE_FORMAT(d.create_time, '%Y-%m-%d') <=  DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')   ]]>
+        </if>
+
+        <if test="userId != null">
+            and d.creater = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="userEnterpriseId != null">
+            and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+        </if>
+        <if test="providerEnterpriseId != null">
+            and providerVO.e_member_id = #{providerEnterpriseId,jdbcType=BIGINT}
+        </if>
+        <if test="status != null and status != ''">
+            and d.status = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="tradeItem != null and tradeItem != ''">
+            and d.trade_item = #{tradeItem,jdbcType=VARCHAR}
+        </if>
+
+        <if test="demandCode != null and demandCode != ''">
+            and d.uuid = #{demandCode,jdbcType=VARCHAR}
+        </if>
+        <if test="numMin != null">
+            and d.num >= #{numMin,jdbcType=INTEGER}
+        </if>
+        <if test="numMax != null">
+            and #{numMax,jdbcType=INTEGER} >= d.num
+        </if>
+
+        <if test="payItem != null and payItem != ''">
+            and d.pay_item = #{payItem,jdbcType=VARCHAR}
+        </if>
+        <if test="payItemJSON != null">
+            and d.pay_item_json = #{payItemJSON,jdbcType=VARCHAR}
+        </if>
+        <if test="specified == 0">
+            and d.specified = #{specified}
+        </if>
+
+        order BY
+        <if test="sortStr != null">
+            #{sortStr, jdbcType=VARCHAR}
+        </if>
+        <if test="sortStr == null">
+            id desc
+        </if>
+
+    </select>
+
+    <select id="selectBiddingFiveByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultMap="BaseResultMap">
+
+        SELECT
+        d.*, ds.discharge_port,
+        ds.discharge_start_time,
+        ds.discharge_end_time,
+        ds.shipment_port,
+        ds.shipment_start_time,
+        ds.shipment_end_time,
+        ds.ship_type,
+        buyerVO.e_member_id as b_e_member_id, buyerVO.enterprise_name as b_enterprise_name, buyerVO.contacter as b_contacter, buyerVO.famil as b_famil,
+        providerVO.e_member_id as p_e_member_id, providerVO.enterprise_name as p_enterprise_name, providerVO.contacter as p_contacter, providerVO.famil as p_famil
+        FROM
+        demand d LEFT JOIN
+        demand_ship ds ON d.id=ds.demand_id LEFT JOIN
+        demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB' LEFT JOIN
+        demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        WHERE 1=1 and d.parent_id is not null and d.status != 0
+        <if test="userId != null">
+            and d.creater = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="userEnterpriseId != null">
+            and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+        </if>
+        <if test="dealType != null">
+            and deal_type = #{dealType,jdbcType=VARCHAR}
+        </if>
+         limit 5
+    </select>
+
+    <select id="countDemandNumByCondition" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultType="java.lang.Long">
+
+        SELECT
+        count(1)
+        FROM
+        demand d LEFT JOIN
+        demand_ship ds ON d.id=ds.demand_id LEFT JOIN
+        demand_relevanter buyerVO ON d.id=buyerVO.demand_id and buyerVO.type='CBB' LEFT JOIN
+        demand_relevanter providerVO ON d.id=providerVO.demand_id and providerVO.type='P'
+        WHERE 1=1 and d.parent_id is null and d.status != 0
+        <if test="userEnterpriseId != null">
+            and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+        </if>
+        <if test="bizType != null">
+            and d.biz_type = #{bizType,jdbcType=VARCHAR}
+        </if>
+        <if test="specified != null">
+            and d.specified = #{specified}
+        </if>
+    </select>
+
+
+    <select id="countDemandByUserEpId" parameterType="com.sinochem.crude.trade.listed.model.query.ResourceQuery" resultType="java.lang.Long">
+
+        <if test="selectCountType == 1" >
+            SELECT c1.c1 /*+ c2.c2*/ FROM (
+            SELECT
+            COUNT(1) AS c1
+            FROM
+            demand d
+            LEFT JOIN demand_ship ds
+            ON d.id = ds.demand_id
+            LEFT JOIN demand_relevanter buyerVO
+            ON d.id = buyerVO.demand_id
+            AND buyerVO.type = 'CBB'
+            LEFT JOIN demand_relevanter providerVO
+            ON d.id = providerVO.demand_id
+            AND providerVO.type = 'P'
+            WHERE 1 = 1
+            AND d.parent_id IS NULL
+            AND d.status != 0
+            AND d.type = 'D'
+            AND d.deal_type = 'B'
+            AND d.biz_type = 'CrudeOil'
+            <if test="userEnterpriseId != null">
+                and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+            </if>
+            ) c1 <!--,(
+            SELECT
+            COUNT(1) c2
+            FROM
+            demand d
+            LEFT JOIN demand_ship ds
+            ON d.id = ds.demand_id
+            LEFT JOIN demand_relevanter buyerVO
+            ON d.id = buyerVO.demand_id
+            AND buyerVO.type = 'CBB'
+            LEFT JOIN demand_relevanter providerVO
+            ON d.id = providerVO.demand_id
+            AND providerVO.type = 'P'
+            LEFT JOIN demand d2
+            ON d2.id = d.parent_id
+            WHERE 1 = 1
+            AND d.parent_id IS NOT NULL
+            AND d.status != 0
+            AND d.type = 'B'
+            AND d.deal_type = 'B'
+            AND d.biz_type = 'CrudeOil'
+            <if test="userEnterpriseId != null">
+                and d.creater = #{userEnterpriseId,jdbcType=BIGINT}
+            </if>
+            ) c2-->
+        </if>
+        <if test="selectCountType == 2">
+            SELECT c1.c1 /*+ c2.c2*/ FROM (
+            SELECT
+            COUNT(1) AS c1
+            FROM
+            demand d
+            LEFT JOIN demand_ship ds
+            ON d.id = ds.demand_id
+            LEFT JOIN demand_relevanter buyerVO
+            ON d.id = buyerVO.demand_id
+            AND buyerVO.type = 'CBB'
+            LEFT JOIN demand_relevanter providerVO
+            ON d.id = providerVO.demand_id
+            AND providerVO.type = 'P'
+            WHERE 1 = 1
+            AND d.parent_id IS NULL
+            AND d.status != 0
+            AND d.type = 'D'
+            AND d.deal_type = 'S'
+            AND d.biz_type = 'CrudeOil'
+            <if test="userEnterpriseId != null">
+                and (buyerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT} or providerVO.e_member_id = #{userEnterpriseId,jdbcType=BIGINT})
+            </if>
+            ) c1<!--, (
+            SELECT
+            COUNT(1) c2
+            FROM
+            demand d
+            LEFT JOIN demand_ship ds
+            ON d.id = ds.demand_id
+            LEFT JOIN demand_relevanter buyerVO
+            ON d.id = buyerVO.demand_id
+            AND buyerVO.type = 'CBB'
+            LEFT JOIN demand_relevanter providerVO
+            ON d.id = providerVO.demand_id
+            AND providerVO.type = 'P'
+            LEFT JOIN demand d2
+            ON d2.id = d.parent_id
+            WHERE 1 = 1
+            AND d.parent_id IS NOT NULL
+            AND d.status != 0
+            AND d.type = 'B'
+            AND d.deal_type = 'S'
+            AND d.biz_type = 'CrudeOil'
+            <if test="userEnterpriseId != null">
+                and d.creater = #{userEnterpriseId,jdbcType=BIGINT}
+            </if>
+            ) c2-->
+        </if>
+    </select>
+
+    <select id="getCrudeOilCompareByIds" parameterType="java.util.List" resultMap="BaseResultMap" >
+
+        select
+        d.id,
+        d.uuid,
+        d.crude_oil_options,
+        d.num,
+        d.numFloat,
+        d.purchase_type,
+        d.trade_item,
+        d.valuation_base,
+        d.valuation_proid_type,
+        d.valuation_formula,
+        d.creater,
+        d.pay_item,
+        d.agio,
+        d.valuation_base,
+        d.valuation_proid_start,
+        d.valuation_proid_end,
+        d.auth_item,
+        d.contract_kind,
+        d.deal_type,
+        d.stop_bid_time,
+        d.measure_mode,
+        d.load_and_discharge_permitted_timespan,
+       	s.discharge_port,
+        s.shipment_port,
+        s.shipment_start_time,
+        s.shipment_end_time,
+        s.discharge_start_time,
+        s.discharge_end_time
+        from demand d left join demand_ship s on d.id=s.demand_id
+        where d.id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        order by field(d.id,
+            <foreach collection="list" index="index" item="item" separator="," >
+                #{item,jdbcType=BIGINT}
+            </foreach>
+        )
+    </select>
+</mapper>

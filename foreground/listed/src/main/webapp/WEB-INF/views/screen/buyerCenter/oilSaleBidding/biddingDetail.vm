@@ -1,0 +1,56 @@
+
+#set($a = "个人中心-买原油网")
+$contain.get("/buyCenterContain/biddingStatus.htm").put('demand', $!{demand})
+#*油种信息*#
+$contain.get("/crudeoilhallform/oiltypeList.htm").setParam("demandId","$!{demand.id}").put('publishType',$!{demand.publishType})
+#*需求、报价对比信息*#
+$contain.get("/oilSaleBidding/pricedetail_compare.htm").setParam("demandId","$!{demand.id}")
+#*运输信息*#
+##$contain.get("/salerCenterContain/transportInfoInput.htm").setParam("demandId","$!{demand.id}").put("viewflag", "f")
+#*买方*#
+$contain.get("/crudeoilhallform/buyerlist.htm").setParam("demandId","$!{demand.id}")
+#*卖方*#
+$contain.get("/crudeoilhallform/supplierList.htm").setParam("demandId","$!{demand.id}")
+#*修改记录*#
+$contain.get("/buyerCenter/biddingEdit/biddingHistory.htm").put('biddingHistory', $!{biddingHistory})
+<form method="post" action="$appServer.get('/purchaseManager/sales/confirmBiddingAndRemind.htm')">
+    <div class="c-subdiv">
+        <input type="hidden" name="biddingDemandId" value="$!{demand.id}" />
+        <input type="hidden" name="biddingType" value="$!{demand.biddingType}" />
+        <a class="btn-bc btn-qx" type="button" href="javascript:void(0)" onclick="back()">返回</a>
+        #if($!{demand.status} == 10 && !$!{belongToCurrentUser})
+            #if($!{demand.biddingType} == 1)
+                <button type="submit" class="btn-bc btn-lj" >
+                    申请再次报价
+                </button>
+            #else
+                #if(!$!{overdue})
+                    <button type="submit" class="btn-bc btn-lj" >
+                        确认中标
+                    </button>
+                    <input type="checkbox" name="remindFlag" />关闭其他报价并通知未中标企业
+                #else
+                    该投标已逾期
+                #end
+            #end
+        #elseif($!{demand.status} == 20 && $!{belongToCurrentUser}  && $!{demand.biddingType} == 1) ##意向报价中标
+            <button type="button" class="btn-bc btn-lj" onclick="window.location.href='$appServer.get("/oilSaleBidding/crudeOilBidding.htm?demandId=$!{demand.parentId}")'">
+                再次报价
+            </button>
+        #end
+    </div>
+</form>
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<script>
+	function back(){
+		window.history.go(-1);
+	}
+
+    #if($errorMessage && "$!{errorMessage}" != "")
+        layui.use("layer", function () {
+            layui.layer.alert("$!{errorMessage}");
+        });
+    #end
+</script>
+
+

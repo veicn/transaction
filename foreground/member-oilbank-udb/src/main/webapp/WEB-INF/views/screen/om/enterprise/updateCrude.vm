@@ -1,0 +1,1178 @@
+<script type="text/javascript"
+        src="$appServer.get('script/lib/jquery.validate.min.js')"></script>
+<script type="text/javascript"
+        src="$appServer.get('script/jquery[1].validate.cn.js')"></script>
+<style>
+    .error {
+        display: block;
+        color: red;
+        text-align: left;
+    }
+
+    .tip {
+        color: red;
+        font-size: 12px;
+    }
+
+    .layui-form-label {
+        width: 130px;
+    }
+
+    .layui-form-item {
+        height: 65px;
+    }
+
+    .img_box {
+        display: none;
+    }
+
+    .layui-inline {
+        vertical-align: top;
+    }
+
+    .required-point {
+        color: red;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div style="text-align: center; padding-top: 30px;">
+        <form id="saveForm" class="layui-form"
+              action="$appServer.get('om/enterprise/saveEnterprise.htm')"
+              method="post">
+
+            <fieldset class="layui-elem-field">
+                <legend style="margin-left: 559px;">企业基本信息</legend>
+                <div class="layui-field-box">
+					#springBind("agentRegister.id")
+                    <input id="id" type="hidden" name="id" value="$!{agentRegister.id}" />
+					#springBind("agentRegister.memberId")
+                    <input id="memberId" type="hidden" name="memberId" value="$!{agentRegister.memberId}"/>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.epType")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span class="required-point">*&nbsp;</span>注册地址</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" name="$!{status.expression}" value="0"
+                                       title="境内" lay-filter="$!{status.expression}"
+									#if($!{agentRegister.epType} != 1)
+                                       checked
+									#end
+									   #if($!{disable}==1)disabled#end
+                                >
+                                <input type="radio" name="$!{status.expression}" value="1"
+                                       title="境外" lay-filter="$!{status.expression}"
+									#if($!{agentRegister.epType} == 1)
+                                       checked
+									#end
+									   #if($!{disable}==1)disabled#end
+                                >
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label"></label>
+                            <div class="layui-input-inline">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.fullName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_1" class="required-point" style="
+								#if($!{agentRegister.epType} == 1)
+                                        display: none;
+								#end
+                                    ">*&nbsp;</span>中文全称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify=""
+                                       placeholder="" maxlength="50" autocomplete="off"
+                                       class="layui-input"> #if($status.isError())<span
+                                    class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+						#springBind("agentRegister.name")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_2" class="required-point" style="
+								#if($!{agentRegister.epType} == 1)
+                                        display: none;
+								#end
+                                    ">*&nbsp;</span>中文简称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify=""
+                                       placeholder="" maxlength="50" autocomplete="off"
+                                       class="layui-input"> #if($status.isError())<span
+                                    class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.englishName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_3" class="required-point" style="
+								#if($!{agentRegister.epType} != 1)
+                                        display: none;
+								#end
+                                    ">*&nbsp;</span>英文全称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify=""
+                                       placeholder="" maxlength="200" autocomplete="off"
+                                       class="layui-input"> #if($status.isError())<span
+                                    class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+						#springBind("agentRegister.abbEnglishName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_4" class="required-point" style="
+								#if($!{agentRegister.epType} != 1)
+                                        display: none;
+								#end
+                                    ">*&nbsp;</span>英文简称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify=""
+                                       placeholder="" maxlength="200" autocomplete="off"
+                                       class="layui-input"> #if($status.isError())<span
+                                    class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" style="height: 100px;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">企业/机构类型</label>
+                            <div class="layui-input-inline" style="width: 540px;">
+                                <div style="width: 600px;">
+									#foreach($cred in $credentials)
+##                                        <input  type="checkbox" name="types" value="$!cred.code" title="$!cred.name" #if($types.contains($!cred.code)) checked #else disabled="disabled" #end>
+                                        <div class="layui-unselect layui-form-checkbox  layui-disabled #if($types.contains($!cred.code)) layui-form-checked #else disabled="disabled" #end " lay-skin=""><span>$!cred.name</span><i class="layui-icon"></i></div>
+									#end
+                                </div>
+                                <label id="typesError" class="error"></label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="epType_0"
+						#if($!{agentRegister.epType} == 1)
+                         style="display: none;"
+						#end
+                    >
+                        <div class="layui-form-item">
+							#springBind("agentRegister.useSocialCreditCertInt")
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>是否三证合一</label>
+                                <div class="layui-input-inline">
+                                    <input type="radio" name="$!{status.expression}" value="1"
+										   #if($!{disable}==1)disabled#end
+                                           title="是" lay-filter="$!{status.expression}"
+										#if($!{agentRegister.useSocialCreditCertInt} != 0)
+                                           checked
+										#end
+                                    >
+                                    <input type="radio" name="$!{status.expression}" value="0"
+										   #if($!{disable}==1)disabled#end
+                                           title="否" lay-filter="$!{status.expression}"
+										#if($!{agentRegister.useSocialCreditCertInt} == 0)
+                                           checked
+										#end
+                                    >
+									#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label"></label>
+                                <div class="layui-input-inline">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="useSocialCreditCert_1"
+							#if($!{agentRegister.useSocialCreditCertInt} == 0)
+                             style="display: none;"
+							#end
+                        >
+                            <div class="layui-form-item">
+								#springBind("agentRegister.socialCreditCode")
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"><span class="required-point">*&nbsp;</span>统一社会信用代码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="$!{status.expression}"
+											   #if($!{disable}==1)disabled#end
+                                               value="$!{status.value}" lay-verify=""
+                                               placeholder="" maxlength="100" autocomplete="off"
+                                               class="layui-input"> #if($status.isError())<span
+                                            class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"></label>
+                                    <div class="layui-input-inline">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="useSocialCreditCert_0"
+							#if($!{agentRegister.useSocialCreditCertInt} != 0)
+                             style="display: none;"
+							#end
+                        >
+                            <div class="layui-form-item">
+								#springBind("agentRegister.organizationCode")
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"><span class="required-point">*&nbsp;</span>组织机构代码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="$!{status.expression}"
+											   #if($!{disable}==1)disabled#end
+                                               value="$!{status.value}" lay-verify=""
+                                               placeholder="" maxlength="20" autocomplete="off"
+                                               class="layui-input"> #if($status.isError())<span
+                                            class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                </div>
+
+								#springBind("agentRegister.orgCodeCert")
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"><span class="required-point">*&nbsp;</span>组织机构代码证</label>
+                                    <div class="layui-input-inline">
+                                        <div style="float: left;">
+                                            <a id="orgCodeCertBtn"
+                                               class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                            <a url="$!{uploadServer}/img/$!{agentRegister.orgCodeCert}.img"
+                                               class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+												#if($!{agentRegister.orgCodeCert} && $!{agentRegister.orgCodeCert} != "")
+                                                        visibility: visible;
+												#else
+                                                        visibility: hidden;
+												#end
+                                                    " >预览</a>
+                                            <span class="img_box"> #if($!{status.value} &&
+												$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.orgCodeCert}.img" />
+											#end
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{agentRegister.orgCodeCert}" />
+									#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+								#springBind("agentRegister.taxNo")
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"><span class="required-point">*&nbsp;</span>税务登记证号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="$!{status.expression}"
+											   #if($!{disable}==1)disabled#end
+                                               value="$!{status.value}" lay-verify=""
+                                               placeholder="" maxlength="20" autocomplete="off"
+                                               class="layui-input"> #if($status.isError())<span
+                                            class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                </div>
+
+								#springBind("agentRegister.taxRegCert")
+                                <div class="layui-inline">
+                                    <label class="layui-form-label"><span class="required-point">*&nbsp;</span>税务登记证</label>
+                                    <div class="layui-input-inline">
+                                        <div style="float: left;">
+                                            <a id="taxRegCertBtn"
+											   #if($!{disable}==1)disabled#end
+                                               class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                            <a url="$!{uploadServer}/img/$!{agentRegister.taxRegCert}.img"
+                                               class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+												#if($!{agentRegister.taxRegCert} && $!{agentRegister.taxRegCert} != "")
+                                                        visibility: visible;
+												#else
+                                                        visibility: hidden;
+												#end
+                                                    " >预览</a>
+                                            <span class="img_box"> #if($!{status.value} &&
+												$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.taxRegCert}.img" />
+											#end
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{agentRegister.taxRegCert}" />
+									#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item">
+							#springBind("agentRegister.licenseNo")
+                            <div class="layui-inline" id="useSocialCreditCert_0_0"
+                                 style="vertical-align: top;
+									 #if($!{agentRegister.useSocialCreditCertInt} != 0)
+                                             display: none;
+									 #end
+                                         "
+                            >
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>营业执照注册号</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="$!{status.expression}"
+										   #if($!{disable}==1)disabled#end
+                                           value="$!{status.value}" lay-verify=""
+                                           placeholder="" maxlength="20" autocomplete="off"
+                                           class="layui-input">
+									#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                </div>
+                            </div>
+
+							#springBind("agentRegister.businessLicenseCert")
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>营业执照</label>
+                                <div class="layui-input-inline">
+                                    <div style="float: left;">
+                                        <a id="businessLicenseCertBtn"
+										   #if($!{disable}==1)disabled#end
+                                           class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                        <a url="$!{uploadServer}/img/$!{agentRegister.businessLicenseCert}.img"
+                                           class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+											#if($!{agentRegister.businessLicenseCert} && $!{agentRegister.businessLicenseCert} != "")
+                                                    visibility: visible;
+											#else
+                                                    visibility: hidden;
+											#end
+                                                " >预览</a>
+                                        <span class="img_box"> #if($!{status.value} &&
+											$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.businessLicenseCert}.img" />
+										#end
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{agentRegister.businessLicenseCert}" />
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+
+                            <div class="layui-inline" id="useSocialCreditCert_1_1"
+                                 style="vertical-align: top;
+									 #if($!{agentRegister.useSocialCreditCertInt} == 0)
+                                             display: none;
+									 #end
+                                         "
+                            >
+                                <label class="layui-form-label"></label>
+                                <div class="layui-input-inline">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="epType_1"
+						#if($!{agentRegister.epType} != 1)
+                         style="display: none;"
+						#end
+                    >
+                        <div class="layui-form-item">
+							#springBind("agentRegister.country")
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>国家</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="$!{status.expression}"
+										   #if($!{disable}==1)disabled#end
+                                           value="$!{status.value}" lay-verify="" placeholder=""
+                                           maxlength="200" autocomplete="off" class="layui-input">
+									#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                </div>
+                            </div>
+
+							#springBind("agentRegister.registerCert")
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>注册证明/登记证</label>
+                                <div class="layui-input-inline">
+                                    <div style="float: left;">
+                                        <a id="registerCertBtn"
+										   #if($!{disable}==1)disabled#end
+                                           class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                        <a url="$!{uploadServer}/img/$!{agentRegister.registerCert}.img"
+                                           class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+											#if($!{agentRegister.registerCert} && $!{agentRegister.registerCert} != "")
+                                                    visibility: visible;
+											#else
+                                                    visibility: hidden;
+											#end
+                                                " >预览</a>
+                                        <span class="img_box"> #if($!{status.value} &&
+											$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.registerCert}.img" />
+										#end
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <input id="registerCert" type="hidden" name="registerCert" value="$!{agentRegister.registerCert}" />
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><span class="required-point">*&nbsp;</span>银行证明材料</label>
+
+                                <div class="layui-input-inline" style="width: 540px;">
+									#springBind("agentRegister.bankCertType")
+                                    <div style="float: left;">
+                                        <input type="radio" name="$!{status.expression}" value="0"
+											   #if($!{disable}==1)disabled#end
+                                               title="银行开户证明"
+											#if($!{agentRegister.bankCertType} != 1)
+                                               checked
+											#end
+                                        >
+                                        <input type="radio"
+                                               name="$!{status.expression}" value="1" title="银行资信证明"
+											   #if($!{disable}==1)disabled#end
+											#if($!{agentRegister.bankCertType} == 1)
+                                               checked
+											#end
+                                        >
+                                        <a id="bankCertBtn"
+										   #if($!{disable}==1)disabled#end
+                                           class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                        <a url="$!{uploadServer}/img/$!{agentRegister.bankCert}.img"
+                                           class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+											#if($!{agentRegister.bankCert} && $!{agentRegister.bankCert} != "")
+                                                    visibility: visible;
+											#else
+                                                    visibility: hidden;
+											#end
+                                                " >预览</a>
+                                        <span class="img_box"> #if($!{status.value} &&
+											$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.bankCert}.img" />
+										#end
+                                        </span>
+                                    </div>
+                                </div>
+
+								#springBind("agentRegister.bankCert")
+                                <input id="bankCert" type="hidden" name="bankCert" value="$!{agentRegister.bankCert}" />
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.epLogo")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span class="required-point">*&nbsp;</span>公司logo</label>
+                            <div class="layui-input-inline">
+                                <div style="float: left;">
+                                    <a id="epLogoBtn"
+									   #if($!{disable}==1)disabled#end
+                                       class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                    <a url="$!{uploadServer}/img/$!{agentRegister.epLogo}.img"
+                                       class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="1" style="
+										#if($!{agentRegister.epLogo} && $!{agentRegister.epLogo} != "")
+                                                visibility: visible;
+										#else
+                                                visibility: hidden;
+										#end
+                                            " >预览</a>
+                                    <span class="img_box"> #if($!{status.value} &&
+										$!{status.value} != "") <img src="$!{uploadServer}/img/$!{agentRegister.epLogo}.img" />
+									#end
+                                    </span>
+                                </div>
+                            </div>
+
+                            <input id="epLogo" type="hidden" name="epLogo" value="$!{agentRegister.epLogo}" />
+							#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label"></label>
+                            <div class="layui-input-inline">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.scope")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">经营范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="500" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+						#springBind("agentRegister.description")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司简介</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="255" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+					#springBind("agentRegister.defaultLanguage")
+                    <div class="layui-inline" style="vertical-align: top;">
+                        <label class="layui-form-label">默认语言</label>
+                        <div class="layui-input-inline">
+                            <select name="$!{status.expression}" lay-verify="" placeholder="" autocomplete="off" class="layui-input">
+                            <option value="zh" #if($!{status.value}=="zh") selected
+							#end>中文</option>
+                            <option value="en"#if($!{status.value}=="en") selected
+							#end>英文</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="vertical-align: top;">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-inline">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="layui-elem-field">
+                <legend style="margin-left: 559px;">企业联系人信息</legend>
+                <div class="layui-field-box">
+                    <div class="layui-form-item">
+						#springBind("agentRegister.contact.id")
+                        <input id="contact.id" type="hidden" name="contact.id" value="$!{agentRegister.contact.id}" />
+						#springBind("agentRegister.contact.gender")
+                        <input id="contact.gender" type="hidden" name="contact.gender" value="$!{agentRegister.contact.gender}" />
+						#springBind("agentRegister.contact.id")
+                        <input id="contact.enterpriseId" type="hidden" name="contact.enterpriseId" value="$!{agentRegister.contact.enterpriseId}" />
+						#springBind("agentRegister.contact.id")
+                        <input id="contact.memberId" type="hidden" name="contact.memberId" value="$!{agentRegister.contact.memberId}" />
+
+						#springBind("agentRegister.contact.name")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="255" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label"></label>
+                            <div class="layui-input-inline">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.contact.mobile")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_1" class="required-point">*&nbsp;</span>手机</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="40" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+						#springBind("agentRegister.contact.phone")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_1" class="required-point">*&nbsp;</span>办公电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="40" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.contact.mail")
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span id="epType_point_1" class="required-point">*&nbsp;</span>邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="255" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+
+						#springBind("agentRegister.contact.address")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">通讯地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}"
+									   #if($!{disable}==1)disabled#end
+                                       value="$!{status.value}" lay-verify="" placeholder=""
+                                       maxlength="255" autocomplete="off" class="layui-input">
+								#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+						#springBind("agentRegister.contact.accountCert")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册授权委托书</label>
+                            <div class="layui-input-inline">
+                                <div style="float: left;">
+                                    <a id="accountCertBtn"
+									   #if($!{disable}==1)disabled#end
+                                       class="layui-btn layui-btn-primary layui-btn-small">点击上传</a> <a
+                                        url="$!{uploadServer}/fs/$!{agentRegister.contact.accountCert}.img"
+                                        class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="2" style="
+									#if($!{agentRegister.contact.accountCert} && $!{agentRegister.contact.accountCert} != "")
+                                            visibility: visible;
+									#else
+                                            visibility: hidden;
+									#end
+                                        ">下载</a>
+                                </div>
+                            </div>
+
+                            <input id="accountCert" type="hidden" name="contact.accountCert" value="$!{agentRegister.contact.accountCert}" />
+							#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                        </div>
+
+						#springBind("agentRegister.contact.adminCert")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">平台联系人证明</label>
+                            <div class="layui-input-inline">
+                                <div style="float: left;">
+                                    <a id="adminCertBtn"
+									   #if($!{disable}==1)disabled#end
+                                       class="layui-btn layui-btn-primary layui-btn-small">点击上传</a> <a
+                                        url="$!{uploadServer}/fs/$!{agentRegister.contact.adminCert}.img"
+                                        class="previewBtn layui-btn layui-btn-primary layui-btn-small" doctype="2" style="
+									#if($!{agentRegister.contact.adminCert} && $!{agentRegister.contact.adminCert} != "")
+                                            visibility: visible;
+									#else
+                                            visibility: hidden;
+									#end
+                                        ">下载</a>
+                                </div>
+                            </div>
+
+                            <input id="adminCert" type="hidden" name="contact.adminCert" value="$!{agentRegister.contact.adminCert}" />
+							#if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="layui-field-box">
+                <div class="layui-form-item">
+					#if($!{disable}!=1)
+						#if(${check}!=1)<input type="submit" class="layui-btn" lay-submit=""
+                                               lay-filter="form" value="保存">#end
+                        <a href="$appServer.get('om/enterprise/crudeList.htm')" return:false
+                           class="layui-btn layui-btn-xs">取消</a>
+					#end
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+#set($ujs = $imageServer.get('js/upload.js')) #js($ujs)
+<script>
+    $(function(){
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //预览图片实现
+            $(".previewBtn").click(function () {
+                window.open($(this).attr("url"));
+            });
+
+            //组织机构代码证图片上传，通过设置参数获取上传情况
+            var loadIndex;
+
+            $("#orgCodeCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "ZZJGDMZ",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#orgCodeCert").val(result.id);
+                        $("#orgCodeCert-error").remove();
+
+                        var previewBtn = $("#orgCodeCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //税务登记证图片上传
+            $("#taxRegCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "SWDJZ",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#taxRegCert").val(result.id);
+                        $("#taxRegCert-error").remove();
+
+                        var previewBtn = $("#taxRegCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //营业执照图片上传
+            $("#businessLicenseCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "YYZZ",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#businessLicenseCert").val(result.id);
+                        $("#businessLicenseCert-error").remove();
+
+                        var previewBtn = $("#businessLicenseCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //注册证明/登记证图片上传
+            $("#registerCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "ZCZM",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#registerCert").val(result.id);
+                        $("#registerCert-error").remove();
+
+                        var previewBtn = $("#registerCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //银行证明材料图片上传
+            $("#bankCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "YXZMCL",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#bankCert").val(result.id);
+                        $("#bankCert-error").remove();
+                        var previewBtn = $("#bankCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+
+            //公司logo图片上传
+            $("#epLogoBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "GSLOGO",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#epLogo").val(result.id);
+                        $("#epLogo-error").remove();
+                        var previewBtn = $("#epLogoBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+
+            // 企业账户注册授权委托书
+            $("#accountCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 1,//0：图片 1：文档 2：视频 3：音频
+                docType: "QYZHZCSQWTS",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#accountCert").val(result.id);
+                        $("#accountCert-error").remove();
+                        var previewBtn = $("#accountCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/fs/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+
+            // 平台联系人证明
+            $("#adminCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 1,//0：图片 1：文档 2：视频 3：音频
+                docType: "PTGLYZM",//档案类型
+                objectId: "$!{agentRegister.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#adminCert").val(result.id);
+                        $("#adminCert-error").remove();
+                        var previewBtn = $("#adminCertBtn").parent().find(".previewBtn");
+                        previewBtn.css("visibility", "visible");
+                        previewBtn.attr("url", '$!{uploadServer}/fs/'+ result.id +'.img');
+
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+
+			#if($errorMessage && "" != "$!{errorMessage}")
+                layer.alert("$!{errorMessage}");
+			#end
+        });
+    });
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
+        //自定义验证规则
+        form.verify({
+            englishName: function (value) {
+                if(!/^[a-zA-Z0-9 \\\/]*$/.test(value)) {
+                    return '仅可以输入字母或数字';
+                }
+            },
+            charactor: function (value) {
+                if(!/^[a-zA-Z0-9\-\_]*$/.test(value)) {
+                    return '仅可以输入字母或数字';
+                }
+            }
+        });
+
+        form.on('radio(epType)', function(data){
+            validater.destroy();
+
+            if(data.value == 0) {
+                $("#epType_0").css("display", "block");
+                $("#epType_1").css("display", "none");
+
+                $("#epType_point_1").css("display", "inline-block");
+                $("#epType_point_2").css("display", "inline-block");
+                $("#epType_point_3").css("display", "none");
+                $("#epType_point_4").css("display", "none");
+
+                $ ("#saveForm").validate(in_one);
+            } else if(data.value == 1) {
+                $("#epType_0").css("display", "none");
+                $("#epType_1").css("display", "block");
+
+                $("#epType_point_1").css("display", "none");
+                $("#epType_point_2").css("display", "none");
+                $("#epType_point_3").css("display", "inline-block");
+                $("#epType_point_4").css("display", "inline-block");
+
+                $ ("#saveForm").validate(out);
+            }
+        });
+
+        form.on('radio(useSocialCreditCertInt)', function(data){
+            validater.destroy();
+
+            if(data.value == 1) {
+                $("#useSocialCreditCert_1").css("display", "block");
+                $("#useSocialCreditCert_1_1").css("display", "inline-block");
+                $("#useSocialCreditCert_0").css("display", "none");
+                $("#useSocialCreditCert_0_0").css("display", "none");
+
+                $ ("#saveForm").validate(in_one);
+            } else if(data.value == 0) {
+                $("#useSocialCreditCert_1").css("display", "none");
+                $("#useSocialCreditCert_1_1").css("display", "none");
+                $("#useSocialCreditCert_0").css("display", "block");
+                $("#useSocialCreditCert_0_0").css("display", "inline-block");
+
+                $ ("#saveForm").validate(in_not_one);
+            }
+        });
+
+        //监听提交
+        form.on('submit(form)', function(data){
+            url: "$appServer.get('om/enterprise/saveagentRegister.htm')"
+        });
+    });
+
+    var baseRule = {
+        ignore: ".ignore",
+        rules: {
+            fullName : "required",
+            name : "required",
+            englishName: {
+                required : true
+            },
+            abbEnglishName: {
+                required : true
+            },
+            organizationCode : "required",
+            taxNo : "required",
+            licenseNo : "required",
+            socialCreditCode : "required",
+            country : "required",
+            registerCert : "required",
+            bankCert : "required",
+
+            orgCodeCert : "required",
+            taxRegCert : "required",
+            businessLicenseCert : "required",
+            registerCert : "required",
+            bankCertType : "required",
+            epLogo : "required",
+            'contact.mobile' :{
+                required:true,
+                isMobileNum :true
+            },
+            'contact.phone' :{
+                required:true,
+                isPhoneNum :true
+            },
+            'contact.mail':{
+                required:true,
+                email:true
+            }
+        },
+        messages: {
+            fullName : "请输入完整公司名称",
+            name : "请输入公司简称",
+            englishName : {
+                required : "请输入公司英文名称"
+            },
+            abbEnglishName: {
+                required : "请输入公司英文名称"
+            },
+            socialCreditCode:{
+                required : "请输入统一社会信用代码"
+            },
+            country:{
+                required : "请输入国家"
+            },
+            registerCert:{
+                required : "请上传注册证明/登记证"
+            },
+            bankCert:{
+                required : "请上传银行证明材料"
+            },
+            organizationCode: {
+                required : "请输入组织机构代码",
+                charactor : "组织机构代码仅可以输入字母或数字",
+                maxlength : "组织机构代码最多12位"
+            },
+            taxNo: {
+                required : "请输入税务登记号",
+                charactor : "税务登记号仅可以输入字母或数字",
+                minlength : "税务登记号最少15位",
+                maxlength : "税务登记号最多20位"
+            },
+            licenseNo: {
+                required : "请输入营业执照注册号",
+                charactor : "营业执照注册号仅可以输入字母或数字",
+                minlength : "营业执照注册号最少15位",
+                maxlength : "营业执照注册号最多18位"
+            },
+
+            orgCodeCert : "请上传组织机构代码证",
+            taxRegCert : "请上传税务登记证",
+            businessLicenseCert : "请上传营业执照",
+            registerCert : "请上传注册证明/登记证",
+            bankCertType : "请上传银行证明材料",
+            epLogo : "请上传公司logo",
+            'contact.mobile' :{
+                required:"请输入手机号",
+                isMobileNum:"请输入正确的手机号"
+            },
+            'contact.phone' :{
+                required:"请输入电话号码",
+                isPhoneNum:"请输入正确的电话号码"
+            },
+            'contact.mail':{
+                required:"请输入邮箱",
+                email:"请输入正确的邮箱"
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.addClass("s-erro");
+            element.after(error);
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    };
+
+    //自定义手机号验证
+    jQuery.validator.addMethod("isMobileNum", function(value, element) {
+        var length = value.length;
+//        var mobile =/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
+//        return this.optional(element) || (length == 11 && mobile.test(value));
+        return true;
+    }, "请正确填写您的手机号码");
+
+
+    //自定义电话号码验证
+    jQuery.validator.addMethod("isPhoneNum", function(value, element) {
+//        var length = value.length;
+//        var phone = /^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$/;
+//        return this.optional(element) || (length == 11 && phone.test(value));
+        return true;
+    }, "请正确填写您的电话号码");
+
+    //境内三证合一
+    var in_one = $.extend(true,{},baseRule);
+    delete in_one.rules.organizationCode;
+    delete in_one.rules.taxNo;
+    delete in_one.rules.licenseNo;
+    delete in_one.rules.country;
+    delete in_one.rules.registerCert;
+    delete in_one.rules.bankCert;
+    delete in_one.rules.englishName;
+    delete in_one.rules.abbEnglishName;
+    delete in_one.rules.orgCodeCert;
+    delete in_one.rules.taxRegCert;
+    delete in_one.rules.registerCert;
+    delete in_one.rules.bankCertType;
+
+    //境内非三证合一
+    var in_not_one = $.extend(true,{},baseRule);
+    delete in_not_one.rules.socialCreditCode;
+    delete in_not_one.rules.country;
+    delete in_not_one.rules.registerCert;
+    delete in_not_one.rules.bankCert;
+    delete in_not_one.rules.englishName;
+    delete in_not_one.rules.abbEnglishName;
+    delete in_not_one.rules.registerCert;
+    delete in_not_one.rules.bankCertType;
+
+    //境外
+    var out = $.extend(true,{},baseRule);
+    delete out.rules.organizationCode;
+    delete out.rules.taxNo;
+    delete out.rules.licenseNo;
+    delete out.rules.socialCreditCode;
+    delete out.rules.adminCert;
+    delete out.rules.fullName;
+    delete out.rules.name;
+    delete out.rules.orgCodeCert;
+    delete out.rules.taxRegCert;
+    delete out.rules.businessLicenseCert;
+
+    //验证器
+		#if($!{agentRegister.epType} != 1)
+			#if($!{agentRegister.useSocialCreditCertInt} != 0)
+            var validater = $ ("#saveForm").validate(in_one);
+			#else
+            var validater = $ ("#saveForm").validate(in_not_one);
+			#end
+		#else
+        var validater = $ ("#saveForm").validate(out);
+		#end
+
+</script>
+
+<script>
+    $(function(){
+
+		#if($errorMessage && $errorMessage != "")
+            layui.use("layer",function() {
+                layui.layer.alert("$!{errorMessage}");
+            });
+		#end
+    });
+</script>

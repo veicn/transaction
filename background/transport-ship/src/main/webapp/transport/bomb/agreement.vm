@@ -1,0 +1,96 @@
+<script>
+layui.use(['laydate','upload'], function(){
+  var laydate = layui.laydate;
+  var upload = layui.upload;
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#signDate' //指定元素
+  });
+
+
+//执行实例
+  var uploadInst = upload.render({
+    elem: '#accessory' //绑定元素
+    ,url: '/upload/' //上传接口
+    ,accept: 'file'
+   	,multiple: true
+   	,auto: false
+    /* ,done: function(res){
+      //上传完毕回调
+      alert(1)
+    } */
+    ,bindAction:"#shangchuans"
+  	,choose:function(obj,index){
+  		var files = obj.pushFile();
+  		obj.preview(function(index, file, result){
+  			$('#accessory').val(file.name);
+  		delete files[index];
+  		})
+  	}
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+
+});
+</script>
+<!--图片上传-->
+	 
+	<link rel="stylesheet" type="text/css" href="$imageServer.get('lib/tagsinput/jquery.tagsinput.css')" />
+    <script src="$imageServer.get('lib/upload/plupload.full.min.js')"></script>
+    <script src="$imageServer.get('lib/jquery/extend.js')"></script>
+	<script src="$imageServer.get('lib/tagsinput/jquery.tagsinput.min.js')"></script>
+	
+<form class="layui-form layui-form-pane" style="margin-top:20px; margin-left:100px" onsubmit="return false">
+    <div class="layui-form-item">
+	    <div class="layui-inline">
+	      <label class="layui-form-label iw300"  style="width:125px">租约日</label>
+	      <div class="layui-input-inline iw300">
+	        <input type="text" name="signDate" id="signDate" autocomplete="off" class="layui-input" style="width:260px">
+	      </div>
+	    </div>
+  	</div>
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">甲方</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="firParty" type="text" name="firParty"  style="width:260px">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">乙方</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="secParty" type="text" name="secParty" style="width:260px">
+	    </div>
+    </div>
+    
+   <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">船名</label>
+	    <div class="layui-input-inline iw300 selectData" style="width:260px">
+			<select name="shipName" id="shipName" lay-verify="" >
+			</select>    
+	    </div>
+    </div>
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">数量（桶）</label>
+	    <div class="layui-input-inline iw300">
+	        <input type="text" class="layui-input" id="quantity" name="quantity"  style="width:260px">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <div class="layui-inline">
+	      <label class="layui-form-label" style="width:125px">附件</label>
+	      <div class="layui-input-inline" style="width:185px;">
+			<input type="text" class="layui-input " name="accessory" id="accessory"  placeholder="请选择附件" style="width:187px">
+	      </div>
+	      <div class="layui-inline" >
+	     	 <button class="layui-btn layui-btn-normal " id="shangchuans" >上传</button>
+	      </div>
+			    
+	    </div>
+	    
+  	</div>
+  
+  
+</form>

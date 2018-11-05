@@ -1,0 +1,61 @@
+<h1>内外贸价格转换</h1>
+<span></span><!--横线-->
+<ul class="cg-tradt-n">
+    <li class="clearfix">
+        <p>
+            <span>美元/桶</span>
+            <input type="text" placeholder="（手工输入）" id="dollar" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+        </p>
+        <p>
+            <span>吨桶比</span>
+            <input type="text" placeholder="（手工输入）" id="tons" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+        </p>
+    </li>
+    <li>
+        <a onclick="getPriceConvertion()" class="cg-gj-ann">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+    </li>
+    <li class="cg-tradt-tet">
+        <p id="result2">人民币/吨（含税价）：</p>
+        <em id="result3">计算过程：</em>
+    </li>
+</ul>
+
+<script>
+    layui.layer.closeAll();
+    var layer = layui.layer;
+    var smeiValue = 0.0;
+    $(function(){
+        //获取品类信息
+        var commodityUrl = '$infoServer.get("//front/indecPriceT.json")';
+        $ .get(commodityUrl, {}).always(function(res){
+            if(res.status == 0){
+
+                for(var i=0;i<res.datas.length;i++){
+                    if(res.datas[i].indexCode == "Dollar"){
+                        smeiValue = res.datas[i].smeiValue;
+                    }
+                }
+            }
+
+        });
+    });
+    function getPriceConvertion() {
+        var dollar = $('#dollar').val();
+        if (dollar == null || '' == dollar) {
+            layer.alert('请输入价格（美元/桶）');
+            return;
+        }
+
+        var tons = $('#tons').val();
+        if (tons == null || '' == tons) {
+            layer.alert('请输入吨桶比');
+            return;
+        }
+        var result3;
+        var res = ride(ride(ride(dollar,tons),smeiValue),1.17);//js浮点数丢失精度问题
+        res = Number(res).toFixed(2);
+        $('#result2').html("人民币/吨（含税价）：" + res);
+        $('#result3').html("计算过程：" + dollar + "（美元/桶）×" + tons +"（吨桶比）×"+ smeiValue +"（今日汇率）×1.17（税率）="+res+"（人民币/吨）");
+    }
+
+</script>

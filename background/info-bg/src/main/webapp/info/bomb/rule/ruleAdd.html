@@ -1,0 +1,39 @@
+<form class="layui-form" action="ruleSave" style="with:600px">
+    <div class="layui-form-item" style="margin-top:20px">
+    <label class="layui-form-label iw150">角色:</label>
+        <div class="layui-input-inline iw300">
+        <select id="role" name="role" lay-verify="required">
+        </select>
+    </div>
+    </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label iw150">频道:</label>
+        <div class="layui-input-inline iw300">
+        <select id="channel" name="channel" lay-verify="required">
+        </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label iw150">是否可发布:</label>
+    <div class="layui-input-inline">
+        <input id="fabu1" type="radio" name="fabu" value="1" title="是" checked>
+        <input id="fabu2" type="radio" name="fabu" value="0" title="否">
+    </div>
+    </div>
+    <div class="layui-form-item" >
+    <label class="layui-form-label iw150">当日可发布次数:</label>
+    <div class="layui-input-inline">
+        <input class="layui-input" id="count" type="text" name="count" autocomplete="off">
+        <input id="limit" type="checkbox" lay-skin="primary">
+        <span>不限</span>
+    </div>
+    </div>
+   <!--  <div class="layui-form-item"> -->
+    <label class="layui-form-label iw150">审核类型:</label>
+    <div class="layui-input-inline">
+        <input id="shenhe1" type="radio" name="shenhe" value="1" title="人工审核" checked>
+        <input id="shenhe2" type="radio" name="shenhe" value="2" title="自动审核">
+    <!-- </div> -->
+    </div>
+	<button class="layui-btn" id="addSubmit" lay-submit lay-filter="addfilter" style="display:none">提交</button>
+</form>

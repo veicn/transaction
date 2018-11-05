@@ -1,0 +1,150 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <artifactId>datafeed-bg</artifactId>
+    <packaging>war</packaging>
+    <name>|------|------B2B原油交易及成品油出口平台实时行情模块</name>
+    <parent>
+        <groupId>com.sinochem.crude.trade.background</groupId>
+        <artifactId>crude-trade-background</artifactId>
+        <version>1.0.5-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+                <excludes>
+                	<exclude>conf/dev/*</exclude>
+                	<exclude>conf/test/*</exclude>
+                	<exclude>conf/production/*</exclude>
+                	<exclude>conf/uat/*</exclude>
+                </excludes>
+            </resource>
+            <!-- <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+                <excludes>
+                	<exclude>conf/dev/*</exclude>
+                	<exclude>conf/test/*</exclude>
+                	<exclude>conf/production/*</exclude>
+                	<exclude>conf/docker/*</exclude>
+                </excludes>
+            </resource> -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/conf/${env}</directory>
+                <targetPath>conf</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <extensions>
+            <!-- Enabling the use of SSH -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+        </extensions>
+        <plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<fromFile>target/javawebdeploy.war</fromFile>
+					<!-- 上传到Tomcat的webapps目录下 -->
+					<url>scp://user:password@192.168.20.128/coder/tomcat/apache-tomcat-7.0.55/webapps</url>
+					<commands>
+						<!-- 重启Tomcat -->
+						<command>sh /coder/tomcat/apache-tomcat-7.0.55/bin/shutdown.sh</command>
+						<command>rm -rf /coder/tomcat/apache-tomcat-7.0.55/webapps/javawebdeploy</command>
+						<command>sh /coder/tomcat/apache-tomcat-7.0.55/bin/startup.sh</command>
+					</commands>
+					<displayCommandOutputs>true</displayCommandOutputs>
+				</configuration>
+			</plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+					<!-- 不需要打包的 -->
+					<warSourceExcludes></warSourceExcludes>
+					<!--<directory>src/main/webapp/WEB-INF</directory>-->
+					<!--<filtering>true</filtering>-->
+					<!--<targetPath>WEB-INF</targetPath>-->
+                    <attachClasses>true</attachClasses>
+                    <classesClassifier>class</classesClassifier>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+		<!-- <filters>
+            <filter>src/build/${env}/server.properties</filter>
+        </filters> -->
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.sinochem.crude.trade.background</groupId>
+            <artifactId>common-bg</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sinochem.crude.trade.share</groupId>
+            <artifactId>member-share</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- <dependency>
+		    <groupId>com.jhlabs</groupId>
+		    <artifactId>imaging</artifactId>
+		    <version>01012005</version>
+		</dependency> -->
+        <!-- <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency> -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <dependency>
+	      <groupId>org.apache.poi</groupId>
+	      <artifactId>poi</artifactId>
+	      <version>3.17</version>
+	    </dependency>
+        <dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>3.17</version>
+		</dependency>
+        <dependency>
+		    <groupId>com.xiaoleilu</groupId>
+		    <artifactId>hutool-all</artifactId>
+		    <version>3.2.3</version>
+		</dependency>
+    </dependencies>
+    <properties>
+        <test.skip>true</test.skip>
+        <mbg.package>com.sinochem.crude.trade.datafeed</mbg.package>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+</project>

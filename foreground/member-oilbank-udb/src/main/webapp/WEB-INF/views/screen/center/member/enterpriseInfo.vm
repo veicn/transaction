@@ -1,0 +1,113 @@
+
+#if(${enterprise.id})
+<input type="hidden" name="id" value="$!{enterprise.id}"/>
+#end
+<input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+<input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+<input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+<input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+<input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+<ul class="c-bczl">
+    #springBind("enterprise.fullName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">企业名称：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入企业名称" maxlength="50">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.name")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">公司简称：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司简称" maxlength="50">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.englishName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">公司英文名称：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文名称" maxlength="200">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.abbEnglishName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">公司英文简称：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文简称" maxlength="200">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+##<li class="c-b-ts">请认真填写，有提交时可以随时联系您！</li>
+#*<li class="c-bcz clearfix">
+    <span class="c-b-txt">机构类型：</span>
+    <select name="" class="form-inp sel">
+        <option>企业</option>
+    </select>
+</li>*#
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">上传组织机构代码证：</span>
+        <span class="c-up-box" id="orgCodeCertImgBox"><a id="orgCodeCertBtn" href="">
+            #if($!{enterprise.orgCodeCert} && $!{enterprise.orgCodeCert} != "")
+                          <img src="$!{uploadServer}/img/$!{enterprise.orgCodeCert}.img"/>
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.organizationCode")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">组织机构代码：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入组织机构代码" maxlength="20">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">组织机构代码号请与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码）</span></li>
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">上传税务登记证：</span>
+        <span class="c-up-box" id="taxRegCertImgBox"><a id="taxRegCertBtn" href="">
+            #if($!{enterprise.taxRegCert} && $!{enterprise.taxRegCert} != "")
+                                <img src="$!{uploadServer}/img/$!{enterprise.taxRegCert}.img"/>
+
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.taxNo")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">税务登记号：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入税务登记号" maxlength="20">
+
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">税务登记证号码与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码：税号如无更改请用原税号，并下载证明模板一同上传）</span></li>
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">上传营业执照：</span>
+        <span class="c-up-box" id="businessLicenseCertImgBox"><a id="businessLicenseCertBtn" href="">
+            #if($!{enterprise.businessLicenseCert} && $!{enterprise.businessLicenseCert} != "")
+                            <img src="$!{uploadServer}/img/$!{enterprise.businessLicenseCert}.img"/>
+
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.licenseNo")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">营业执照注册号：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入营业执照注册号" maxlength="20">
+        <div class="c-qy-tx">#if($status.isError())$!{status.errorMessage}#end</div>
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">营业执照注册号请与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码）</span></li>
+##<li class="c-bcz clearfix"><span class="c-b-txt">企业性质：</span><select class="form-inp sel"><option>请选择</option></select></li>
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">公司logo：</span>
+        <span class="c-bcz-p" id="epLogoImgBox">
+                        <a id="epLogoBtn" href="javascript:;">
+                            #if($!{enterprise.epLogo} && $!{enterprise.epLogo} != "")
+                                <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprise.epLogo}.img"/>
+                            #else
+                                <i class="cw-ico c-b-ico"></i></a>
+                            #end
+                    </span>
+    </li>
+</ul>
+

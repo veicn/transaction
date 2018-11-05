@@ -1,0 +1,205 @@
+#set($a = "个人中心-买原油网")
+<form  id="orderAddForm" action="$!appServer.get('/create/productOilCrude.htm')" method="post">
+    #*商品信息*#
+    $contain.get("/create/productOilGoodsInfo.htm").put("contract", $!{contract}).put("productOilSpecs",$!{productOilSpecs}).put("productOilKind",$!{productOilKind}).put("exportType",$!{exportType}).put("regionProductOil",$!{regionProductOil}).put("tradeItemMap",$!{tradeItemMap}).put("productOilKindAndSpecsMap",$!productOilKindAndSpecsMap)
+    #*船运信息*#
+    $contain.get("/create/shipInput.htm").put("contractShip", $!{contract.contractShip})
+    #*价格信息*#
+    $contain.get("/create/productPricelist.htm").put("payItemMap",$!{payItemMap}).put("valuationBaseMap",$!{valuationBaseMap}).put("valuationProidTypeMap",$!{valuationProidTypeMap})
+
+    #*泊位信息*#
+    $contain.get("/create/transportInfoInput.htm").put("berthlist", $!{contract.contractShipBerthList})
+    #*联系人信息*#
+    $contain.get("/longTermContractContain/longEditBuyerForValid.htm").put("buyerRelevanter", $!{contract.buyerRelevanter})
+    $contain.get("/longTermContractContain/longEditAgencyForValid.htm").put("traderRelevanter", $!{contract.traderRelevanter})
+    $contain.get("/longTermContractContain/longEditSupplyForValid.htm").put("supplierRelevanter", $!{contract.supplierRelevanter})
+    #*其他信息*#
+    $contain.get("/create/otherInfoInput.htm").put("creditItem",$!{creditItem}).put("businessCheckOrg",$!{businessCheckOrg})
+
+    <div class="c-subdiv">
+        <input type="hidden" name="crude.status" />
+        <button class="c-btnsub btn-lj" type="button" id="saveProductOilInfo">保存并生成订单</button>
+        <button class="c-btncas" type="button" id="productOilEditBack">返回</button>
+    </div>
+</form>
+
+<div class="cg-bwdk" id="addShipBerthWin" style="display: none;width: 100%;">
+    <form id="shipBerthForm" action="#" method="post">
+        <ul class="cg-bwdk-b clearfix">
+            <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位名称：</span>
+                <input type="text" name="berthName" class="bw-int"/>
+            </li>
+            <li class="cg-bwdk-bt2"><span class="bwdk-t">载重区间（万吨）：</span>
+                <input type="text" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                       onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                       name="carryingCapacityMin" class="bw-int2"/>
+                <em>-</em>
+                <input type="text" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                       onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                       name="carryingCapacityMax" class="bw-int2"/>
+            </li>
+            <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吨级（万吨）：</span>
+                <select class="bw-sele" name="berthGrade">
+                    <option value="10">10万吨</option>
+                    <option value="20">20万吨</option>
+                    <option value="30">30万吨</option>
+                    <option value="40">40万吨</option>
+                    <option value="50">50万吨</option>
+                </select>
+            </li>
+            <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吃水（米）：</span>
+                <input type="text" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"
+                       name="draftLimitation" class="bw-int"/>
+            </li>
+            <li class="cg-bwdk-bt2"><span class="bwdk-t">适合船型：</span>
+                <select class="bw-sele" name="shipType">
+                    #foreach($kv in $!dictUtils.getCacheMap('shipTypes').entrySet())
+                        <option value="$!{kv.key}">$!{kv.value}</option>
+                    #end
+                </select>
+            </li>
+            <li class="cg-bwdk-bt2">
+                <span class="bwdk-t">泊位说明：</span>
+                <input type="text" name="berthDesc" class="bw-int"/>
+            </li>
+        </ul>
+    </form>
+    <div class="butt-zh bw-zh"><button class="btn-bc btn-tj" type="button" id="confirm">确认</button></div>
+</div>
+
+#set($vjs = $imageServer.get('validate/jquery.validate.min.js'))
+#js($vjs)
+
+<script>
+    $(function(){
+
+        /*$("#selectAddShipBerth").click(function () {
+            berthLayerOpen();
+        });*/
+
+        $("#addShipBerth").click(function () {
+            berthAddLayerOpen();
+        });
+
+        $("a[name='deleteLine']").click(function () {
+            $(this).parent("td").parent("tr").remove();
+        });
+
+        $ ("#shipBerthForm").validate({
+            ignore: ".ignore",
+            rules: {
+                berthName: "required",
+//                carryingCapacityMin: "required",
+//                carryingCapacityMax: "required",
+                berthGrade: "required",
+                draftLimitation: "required",
+                shipType: "required"
+            },
+            messages: {
+                berthName: "请输入泊位名称",
+//                carryingCapacityMin: "请输入载重区间",
+//                carryingCapacityMax: "请输入载重区间",
+                berthGrade: "请输入泊位吨级",
+                draftLimitation: "请输入泊位吃水",
+                shipType: "请选择适合船型"
+            },
+            errorPlacement: function(error, element) {
+                //$ (".error").find("label").remove();
+                //element.after(error);
+//                layer.tips(error.html(), element, {
+//                    tips: [1, '#3595CC'],
+//                    time: 5000,
+//                    tipsMore: true
+//                });
+            }
+        });
+
+        $("#confirm").click(function () {
+            if ($ ("#shipBerthForm").valid()) {
+                getShipBerthToTable();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+
+        $(".bid-type").css("display", "none");
+
+        if ($("input[name='crude.isAgent']").is(":checked")) {
+            $("#agenterContractInfo").css("display", "");
+        } else {
+            $("#agenterContractInfo").css("display", "none");
+        }
+
+        // 是否代理商选中事件； 选中了：页面显示代理商输入信息；否则不显示
+        $("input[name='crude.isAgent']").click(function(){
+            if ($(this).is(":checked")) {
+                $("#agenterContractInfo").css("display", "");
+            } else {
+                $("#agenterContractInfo").css("display", "none");
+            }
+        });
+
+        // 保存
+        $("#saveProductOilInfo").on("click", function () {
+            // 设置差异变量  状态
+            $("input[name='crude.status']").val("1");
+            // 关联验证
+            var buyer = $("#company").val();
+            if(buyer == null || buyer == undefined || buyer == ''){
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('买家不能为空');
+                });
+                return
+            }
+            var agency = $("#companyAgeny").val();
+            var supply = $("#companySupply").val();
+            if(supply == null || supply == undefined || supply == ''){
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('卖家不能为空');
+                });
+                return
+            }
+            var userId = "$!{user.epMemberId}";
+            if(userId == null || userId == undefined){
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('信息有误，请刷新页面重试');
+                });
+                return;
+            }
+            if(userId != buyer && userId != agency && userId != supply){
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('买家或者卖家必须包含本企业');
+                });
+                return;
+            }else{
+                if(buyer == supply){
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('买家，卖家不能相同');
+                    });
+                    return;
+                }else {
+                    $("#orderAddForm").submit()
+                }
+            }
+        });
+
+
+        // 取消
+        $("#productOilEditBack").on("click", function () {
+            window.history.back();
+        });
+
+    })
+
+
+</script>
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})

@@ -1,0 +1,58 @@
+<style>
+.product-info-a {
+    float: left;
+    display: block;
+    width: 129px;
+}
+
+.product-info-dl {
+    float: left;
+    width: calc(98% - 147px);
+    padding-left: 3px;
+    position: relative;
+    margin-left: 15px;
+}
+
+.product-info-dt {
+	width: 100%;
+	font-size: 18px;
+}
+
+.product-info-dd {
+	width: 50%; 
+	float: left; 
+	line-height: 26px; 
+	color: #666; 
+	font-size: 12px;
+}
+
+.product-info-dd span {
+	font-weight: bold;
+}
+</style>
+
+<div class="c-mod">
+<h3><em class="cw-ico ico-h3"></em>Bid info</h3>
+	<div class="c-form">
+        <ul class="c-ful">
+			<li class="left-cont clearfix line-none">
+				<a href="cg_cgxqxq.html" class="product-info-a"><img src="$imageServer.get('/images/cg_pic1.jpg')"></a>
+				<dl class="product-info-dl">
+					<dt class="product-info-dt"><a href="$appServer.get('trademall/productOilDetail.htm')?demand=$!demand.id">$!{demand.productOilKindContent}</a><span>（$!{demand.productOilSpecsContent}）</span></dt>
+			        <dd class="product-info-dd"><span>Load Port：</span>$!ship.shipmentPort</dd>
+			        <dd class="product-info-dd"><span>Incoterm：</span>$!{demand.tradeItemContent}</dd>
+			        <dd class="product-info-dd"><span>Qty(BBL)：</span>$!{demand.numStr}</dd>
+			        <dd class="product-info-dd"><span>Payment Date：</span>$!{demand.payItemContent}</dd>
+			        <dd class="product-info-dd"><span>Laycan：</span>
+			        	$!dateUtil.convertDateToString('yyyy-MM-dd',$!ship.shipmentStartTime)-
+			            $!dateUtil.convertDateToString('yyyy-MM-dd',$!ship.shipmentEndTime)
+					</dd>
+				    #if("$!demand.purchaseType" != "2")
+				        <dd class="product-info-dd"><span>Expire Date：</span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!demand.stopBidTime) </dd>
+				        <dd class="product-info-dd"><span>Tender Opening Date：</span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!demand.tenderOutTime)</dd>
+				    #end
+				</dl>
+			</li>
+        </ul>
+	</div>
+</div>

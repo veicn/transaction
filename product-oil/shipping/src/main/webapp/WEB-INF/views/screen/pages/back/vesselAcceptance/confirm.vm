@@ -1,0 +1,157 @@
+$contain.get('/common/title.htm').put('title', 'Confirmation Confirm')
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/addAgreement.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/confirForm.css?css_version=03280827'))
+#js($appServer.get('script/pages/back/vesselAcceptance/index.js?js_version=03280827'))
+<div class="m-nav fl">
+    <div class="m-box m-sls cleafix">
+        <div class="tit">
+            Vessel Acceptance Confirm
+        </div>
+        <ul class="m-nav-info">
+            #if($!{confirmationSheetVO.charterPartyNumber})
+                <li>
+                    <span>Charter Party Number :</span>
+                    <span>$!{confirmationSheetVO.charterPartyNumber}</span>
+                </li>
+            #end
+            <li id="Shipp">
+                <span>Vessel’s name : </span>
+                <span>$!{confirmationSheetVO.vesselName}</span>
+                <input type="hidden" id="uuid" name="uuid" value="$!{confirmationSheetVO.uuid}"/>
+            </li>
+            <li>
+                <span>IMO :</span>
+                <span>$!{confirmationSheetVO.imo}</span>
+            </li>
+            <li>
+                <span>Product :</span>
+                <span>$!{confirmationSheetVO.product}</span>
+            </li>
+            <li>
+                <span>Quantity (Tons) :</span>
+                <span>$!{confirmationSheetVO.quantity}</span>
+            </li>
+            <li>
+                <span>Laycan :</span>
+                <span>$!{confirmationSheetVO.laycanStrat} / $!{confirmationSheetVO.laycanEnd}</span>
+            </li>
+            <li>
+                <span>Port Of Loading :</span>
+                <span>$!{confirmationSheetVO.portOfLoading}</span>
+            </li>
+            <li>
+                <span>Port Of Discharge :</span>
+                <span>$!{confirmationSheetVO.portOfDischarge}</span>
+            </li>
+            <span class="m-nav-line"></span>
+            <li>
+                <span>Confirm Online :</span>
+                <em class="check-b">
+                    <input id="confirmOnline" type="hidden" value="$!{confirmationSheetVO.confirmOnline}">
+                    <label><input type="radio" id="hideList" name="confirmOnline" value="1" disabled="disabled"><i></i>No</label>
+                    <label><input type="radio" id="showList" name="confirmOnline" value="0" disabled="disabled"><i></i>Yes</label>
+                </em>
+            </li>
+            <ul id="listMsg" class="m-nav-info">
+                <li>
+                    <span>DDR :</span>
+                    <span>$!{confirmationSheetVO.ddr}</span>
+                </li>
+                <li id="Shipp">
+                    <span>Pricing method : </span>
+                    <span>$!{confirmationSheetVO.pricingMethod}</span>
+                </li>
+                <li id="Shipp">
+                    <span>REVENUE TON（WS）: </span>
+                    <span>$!{confirmationSheetVO.revenueTon}</span>
+                </li>
+                <li>
+                    <span>Basic Freight Rate（WS）:</span>
+                    <span>$!{confirmationSheetVO.basicFreightRate}</span>
+                </li>
+                <li>
+                    <span>Demurrage Rates :</span>
+                    <span>$!{confirmationSheetVO.demurrageRates}</span>
+                </li>
+                <li>
+                    <span>Laytime (hours) :</span>
+                    <span>$!{confirmationSheetVO.laytimeHours}</span>
+                </li>
+                <li>
+                    <span>Charter Date :</span>
+                    <span>$!{confirmationSheetVO.charterDate}</span>
+                </li>
+                <li>
+                    <span>Other :</span>
+                    <span>$!{confirmationSheetVO.remark}</span>
+                </li>
+                <li class="input_Upload">
+                    <span>Q88 :</span>
+                    #if($!confirmationSheetVO.uploadQ88 && $!confirmationSheetVO.uploadQ88!="")
+                        <i id="Q88Download" class="down-load-file">
+                            <a href="$appServer.get(
+                                '/common/doc/download.htm')?path=$!{confirmationSheetVO.uploadQ88}&fileName=$!{confirmationSheetVO.uploadQ88FileNm}"
+                               class="upload_file" target="_blank">Download</a>
+                        </i>
+                        <i id="Q88Preview" class="lookFileDoc" id="look_$subData.fileCode"
+                           style="display: inline-block;"
+                           fileUrl="$appServer.get(
+                               '/common/doc/file.htm')?path=$!{confirmationSheetVO.uploadQ88}&fileName=$!{confirmationSheetVO.uploadQ88FileNm}"
+                           fileFormat="$!{confirmationSheetVO.uploadQ88FileNm}">Preview
+                        </i>
+                    #end
+                </li>
+            ##                    <li class="input_Upload">
+            ##                        <span>CP :</span>
+            ##                        <i id="CpDownload" class="down-load-file"
+            ##        					#if($!confirmationSheetVO.uploadCp)
+            ##
+            ##        					#else
+            ##        						style="display: none;"
+            ##        					#end
+            ##        					>
+            ##        					<a href="$appServer.get('/common/doc/download.htm')?path=$!{confirmationSheetVO.uploadCp}&fileName=$!{confirmationSheetVO.uploadCpFileNm}"
+            ##        					class="upload_file" target="_blank">Download</a>
+            ##        				</i>
+            ##        				#if($!confirmationSheetVO.uploadCp)
+            ##        					<i  id="CpPreview" class="lookFileDoc" id="look_$subData.fileCode" style="display: inline-block;"
+            ##        						fileUrl="$appServer.get('/common/doc/file.htm')?path=$!{confirmationSheetVO.uploadCp}&fileName=$!{confirmationSheetVO.uploadCpFileNm}"
+            ##        						fileFormat="$!{confirmationSheetVO.uploadCpFileNm}">Preview
+            ##        					</i>
+            ##        				#end
+            ##                    </li>
+            </ul>
+            <span class="m-nav-line"></span>
+            <li id="Shipp">
+                <span>Shipping Agent : </span>
+                #foreach($start in $!shippingAgent)
+                    #if($!start.memberId == $!{confirmationSheetVO.shippingAgentId})
+                        <span>$start.englishName</span>
+                    #end
+                #end
+            </li>
+            <li>
+                <span>Linkman :</span>
+                <span>$!{confirmationSheetVO.linkman}</span>
+            </li>
+            <li>
+                <span>Phone Number :</span>
+                <span>$!{confirmationSheetVO.phoneNumber}</span>
+            </li>
+
+            <span class="m-nav-line"></span>
+            <li>
+                <div class="m-nav-btn">
+                    <em class="fr button-b c-btn-w">
+                        <a class="br btn-c" id="affirmButton">Submit</a>
+                        <a class="br a-back" id="refuseButton">Refuse</a>
+                        <a class="br a-back" id="clickBack">Back</a>
+                    </em>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>

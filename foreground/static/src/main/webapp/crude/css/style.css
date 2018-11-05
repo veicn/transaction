@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+html{ font-size:20px;}
+img{ border:none; vertical-align:middle;}
+li{ list-style-type:none;}
+*{ padding:0; margin:0;}
+body{ width:100%; height:100%; background:url(../images/ind-bg.png) no-repeat center top; background-size:cover;}
+.clearfix:after{ content: "."; display: block; height: 0; clear: both; font-size:0; }
+*html .clearfix:after{ height: 1%; }/*IE hack*/
+.clearfix{ *zoom:1;}
+a{ text-decoration:none;}
+
+/*买原油*/
+.ind-box{ width:100%;}
+.logo{ width:9.25rem; margin:0 auto;}
+.logo img{ width:100%; height:100%; margin-top:2.5rem;}
+.ind-box p{ color:#fff; text-align:center;}
+.ind-p1{ font-size:1rem; line-height:1.4rem; margin-top:1.5rem;}
+.ind-p2{ font-size:0.8rem; line-height:0.9rem; margin-top:1rem;}
+.ind-p3{ font-size:0.6rem; line-height:0.9rem; margin-top:0.5rem; padding:0 1.8rem;}
+.ind-p4,.ind-p5,.ind-p6{ margin:0 auto; width:11rem; height:2.75rem; line-height:2.75rem; text-align:center; margin-top:2rem;}
+.ind-p4 a{ display:block; font-size:0.9rem; color:#fff; background:rgba(31,149,255,.8); border-radius:30px;}
+.icon-ios{ width:0.8rem; height:1rem; margin-right:0.5rem; display:inline-block;}
+.icon-ios img{ width:100%; height:100%; margin-top:-0.2rem;}
+.ind-p5 a{ display:block; font-size:0.9rem; color:#fff; background:rgba(11,164,58,.8); border-radius:30px;}
+.icon-and{ width:0.8rem; height:1rem; margin-right:0.5rem; vertical-align:middle;}
+.icon-and img{ width:100%; height:100%; margin-top:-0.2rem;}
+.ind-p6 a{ display:block; font-size:0.9rem; color:#fff; background:rgba(255,208,32,.8); border-radius:30px;}
+.icon-pc{ width:0.8rem; height:0.8rem; margin-right:0.5rem; vertical-align:middle;}
+.icon-pc img{ width:100%; height:100%;}
+/*弹框*/
+.ind-pop{ position:absolute; top:50%; width:15.3rem; left:50%; margin-left:-7.65rem; transform: translateY(-50%); background:#fff; border-radius:10px;}
+.pop-p1{ width:2rem; height:2rem; margin:1.15rem auto 0;}
+.pop-p1 img{ width:100%; height:100%;}
+.pop-p2{ color:#666; font-size:0.7rem; line-height:1.25rem; padding:1rem 0.85rem;}
+.pop-but{ height:2.25rem;}
+.pop-but li{ float:left; width:50%; height:2.25rem; line-height:2.25rem; text-align:center;}
+.pop-but li:first-child a{color:#333; font-size:0.75rem; background: #e9e9e9; border-radius:0 0 0 10px; display:block;}
+.pop-but li:last-child a{color:#fff; font-size:0.75rem; background: #0080CB; border-radius:0 0 10px 0; display:block;}

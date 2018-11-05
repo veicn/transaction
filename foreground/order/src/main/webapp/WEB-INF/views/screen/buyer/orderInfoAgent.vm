@@ -1,0 +1,13 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>代理商信息</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn">代理商信息：</span><span class="c-int qx-conte">$!{contractRelevanter.eMemberName}</span></li>
+            <li class="c-fcos1"><span class="c-fn">企业地址：</span><span class="c-int qx-conte">$!{contractRelevanter.address}</span></li>
+            <li class="c-fcos2"><span class="c-fn">联系人：</span><span class="c-int qx-conte">$!{contractRelevanter.contacter}</span></li>
+            <li class="c-fcos2"><span class="c-fn">邮箱：</span><span class="c-int qx-conte">$!{contractRelevanter.email}</span></li>
+            <li class="c-fcos2"><span class="c-fn">联系电话：</span><span class="c-int qx-conte">$!{contractRelevanter.phoneNo}</span></li>
+            <li class="c-fcos2"><span class="c-fn">传真：</span><span class="c-int qx-conte">$!{contractRelevanter.fax}</span></li>
+        </ul>
+    </div>
+</div>

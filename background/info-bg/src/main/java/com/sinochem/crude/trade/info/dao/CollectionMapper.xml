@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.CollectionMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.Collection" id="CollectionDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Collection">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.Collection" id="Collection">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="informationId" column="INFORMATION_ID" />
+		<result property="collectionUserId" column="COLLECTION_USER_ID" />
+		<result property="status" column="STATUS" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.Collection"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_cms_collection (				ID
+						,UUID
+						,INFORMATION_ID
+						,COLLECTION_USER_ID
+						,STATUS
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,ALIVE_FLAG
+						,EXTEND1
+						,EXTEND2
+						,EXTEND3
+						,EXTEND4
+						,EXTEND5
+						,EXTEND6
+						,EXTEND7
+						,EXTEND8
+						,EXTEND9
+						,EXTEND10
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{informationId}
+						,#{collectionUserId}
+						,#{status}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,'1'
+						,#{extend1}
+						,#{extend2}
+						,#{extend3}
+						,#{extend4}
+						,#{extend5}
+						,#{extend6}
+						,#{extend7}
+						,#{extend8}
+						,#{extend9}
+						,#{extend10}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_cms_collection
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.Collection">
+        DELETE FROM t_cms_collection
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="informationId!=null and informationId!=''">AND  INFORMATION_ID = #{informationId}</if>
+        <if test="collectionUserId!=null and collectionUserId!=''">AND  COLLECTION_USER_ID = #{collectionUserId}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="extend1!=null and extend1!=''">AND  EXTEND1 = #{extend1}</if>
+        <if test="extend2!=null and extend2!=''">AND  EXTEND2 = #{extend2}</if>
+        <if test="extend3!=null and extend3!=''">AND  EXTEND3 = #{extend3}</if>
+        <if test="extend4!=null and extend4!=''">AND  EXTEND4 = #{extend4}</if>
+        <if test="extend5!=null and extend5!=''">AND  EXTEND5 = #{extend5}</if>
+        <if test="extend6!=null and extend6!=''">AND  EXTEND6 = #{extend6}</if>
+        <if test="extend7!=null and extend7!=''">AND  EXTEND7 = #{extend7}</if>
+        <if test="extend8!=null and extend8!=''">AND  EXTEND8 = #{extend8}</if>
+        <if test="extend9!=null and extend9!=''">AND  EXTEND9 = #{extend9}</if>
+        <if test="extend10!=null and extend10!=''">AND  EXTEND10 = #{extend10}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.Collection">
+		update t_cms_collection
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="informationId!=null">,INFORMATION_ID = #{informationId}</if>
+		<if test="collectionUserId!=null">,COLLECTION_USER_ID = #{collectionUserId}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_cms_collection
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="informationId!=null">,INFORMATION_ID = #{informationId}</if>
+		<if test="collectionUserId!=null">,COLLECTION_USER_ID = #{collectionUserId}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="informationId!=null and informationId!=''">and  INFORMATION_ID=#{informationId}</if>
+		<if test="collectionUserId!=null and collectionUserId!=''">and  COLLECTION_USER_ID=#{collectionUserId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="Collection">
+			select
+			* from t_cms_collection
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="Collection">
+			select
+			* from t_cms_collection
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="Collection" parameterType="com.sinochem.crude.trade.info.domain.Collection">
+		select * from t_cms_collection
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="informationId!=null and informationId!=''">and  INFORMATION_ID=#{informationId}</if>
+		<if test="collectionUserId!=null and collectionUserId!=''">and  COLLECTION_USER_ID=#{collectionUserId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   INFORMATION_ID as "informationId" 
+						 ,   COLLECTION_USER_ID as "collectionUserId" 
+						 ,   STATUS as "status" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   EXTEND1 as "extend1" 
+						 ,   EXTEND2 as "extend2" 
+						 ,   EXTEND3 as "extend3" 
+						 ,   EXTEND4 as "extend4" 
+						 ,   EXTEND5 as "extend5" 
+						 ,   EXTEND6 as "extend6" 
+						 ,   EXTEND7 as "extend7" 
+						 ,   EXTEND8 as "extend8" 
+						 ,   EXTEND9 as "extend9" 
+						 ,   EXTEND10 as "extend10" 
+						from t_cms_collection
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="informationId!=null and informationId!=''">and  INFORMATION_ID=#{informationId}</if>
+			<if test="collectionUserId!=null and collectionUserId!=''">and  COLLECTION_USER_ID=#{collectionUserId}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_cms_collection 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="informationId!=null and informationId!=''">and  INFORMATION_ID=#{informationId}</if>
+			<if test="collectionUserId!=null and collectionUserId!=''">and  COLLECTION_USER_ID=#{collectionUserId}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<select id="queryByColl" resultMap="Collection" parameterType="com.sinochem.crude.trade.info.domain.Collection">
+		select * from t_cms_collection
+		where INFORMATION_ID = #{informationId} 
+		and COLLECTION_USER_ID = #{collectionUserId}
+	</select>
+	
+	<select id="findCollectionByInfoId" resultMap="Collection" parameterType="com.sinochem.crude.trade.info.domain.Collection">
+		select * from t_cms_collection
+		where INFORMATION_ID = #{informationId} 
+		and COLLECTION_USER_ID = #{collectionUserId} and ALIVE_FLAG='1'
+	</select>
+	
+	
+	<select id="queryCollectionInfo" resultType="java.util.HashMap" parameterType="hashmap">
+		select 
+			ci.UUID as "uuid",
+			ci.TITLE as "title",
+			ci.AUTHOR as "author",
+			ci.EXTEND1 as "extend1",
+			ci.BROWSE_COUNT as "browseCount",
+			ci.COLLECTION_COUNT as "collectionCount",
+			ci.FABULOUS_COUNT as "fabulousCount",
+			cic.TEX as "tex",
+			col.COLUMN_TITLE as "columnTitle",
+			col.ID as "columnId",
+			col.AUTHOR_NAME as "columnAuthor",
+			col.AUTHOR as "authorId",
+			col.COLUMN_COVER as "columnCover",
+			cc.CREATE_DATE as "createDate"
+		from t_cms_collection cc inner join t_cms_info ci
+			on cc.INFORMATION_ID = ci.ID inner join t_cms_info_content cic 
+			on ci.ID = cic.INFO_ID inner join t_col_column col on ci.BIZ_ID = col.ID
+			where 
+		 cc.ALIVE_FLAG='1'
+		<if test="collectionUserId!=null and collectionUserId!=''">and  cc.COLLECTION_USER_ID=#{collectionUserId}</if>
+		<if test="title!=null and title!=''">and  ci.TITLE LIKE "%"#{title}"%"</if>
+		order by cc.CREATE_DATE desc
+			</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

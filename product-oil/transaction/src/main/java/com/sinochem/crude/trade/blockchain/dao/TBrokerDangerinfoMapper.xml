@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerDangerinfoMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerDangerinfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="declarationuuid" jdbcType="VARCHAR" property="declarationuuid" />
+    <result column="uncode" jdbcType="VARCHAR" property="uncode" />
+    <result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
+    <result column="dangerouschemicals" jdbcType="VARCHAR" property="dangerouschemicals" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, declarationuuid, uncode, goodsname, dangerouschemicals
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_dangerinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_dangerinfo
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}  LIMIT 0,1
+  </select>
+
+    <delete id="deleteByUuid" parameterType="java.lang.String">
+        delete from `product-trade-blockchain`.t_broker_dangerinfo
+        where declarationuuid = #{uuid,jdbcType=VARCHAR}
+    </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_broker_dangerinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDangerinfo">
+    insert into `product-trade-blockchain`.t_broker_dangerinfo (declarationuuid, uncode,
+      goodsname, dangerouschemicals)
+    values (#{declarationuuid,jdbcType=VARCHAR}, #{uncode,jdbcType=VARCHAR},
+      #{goodsname,jdbcType=VARCHAR}, #{dangerouschemicals,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDangerinfo">
+    insert into `product-trade-blockchain`.t_broker_dangerinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="declarationuuid != null">
+        declarationuuid,
+      </if>
+      <if test="uncode != null">
+        uncode,
+      </if>
+      <if test="goodsname != null">
+        goodsname,
+      </if>
+      <if test="dangerouschemicals != null">
+        dangerouschemicals,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="declarationuuid != null">
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uncode != null">
+        #{uncode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerouschemicals != null">
+        #{dangerouschemicals,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDangerinfo">
+    update t_broker_dangerinfo
+    <set>
+      <if test="declarationuuid != null">
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uncode != null">
+        uncode = #{uncode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerouschemicals != null">
+        dangerouschemicals = #{dangerouschemicals,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDangerinfo">
+    update t_broker_dangerinfo
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      uncode = #{uncode,jdbcType=VARCHAR},
+      goodsname = #{goodsname,jdbcType=VARCHAR},
+      dangerouschemicals = #{dangerouschemicals,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

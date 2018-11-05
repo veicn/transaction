@@ -1,0 +1,313 @@
+ <script>
+  layui.use(['layer', 'laydate'], function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#CreateStartTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 3 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#NorTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 3 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#CreateEndTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 3 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#AnchorTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 3 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#startTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+               }
+        });
+        laydate.render({
+            elem: '#startTime1',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#FirstTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#startTime2',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#DateTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#IndTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#DaTime2',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#ShoreTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#startTime3',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#endTime3',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#tableTimes',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#tableTimee',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#comTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+。
+            }
+        });
+        laydate.render({
+            elem: '#ShoreArmTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#CargoTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#LtrTime',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+        laydate.render({
+            elem: '#DateTime4',
+            type: 'datetime',
+            lang: 'en',
+            value: '12 03 2018 18:56',
+            format: 'dd MM yyyy HH:mm',
+            theme: '#F36523',
+            done: function (value, date, endDate) {
+
+            }
+        });
+    });
+    
+    
+    
+ //    点击添加表格行
+    $(function () {
+        $('.startAdd').on('click',function(){
+
+            $('.table-bordered>tbody').append(`
+                            <tr>
+                                <td><input type="text" name="date" value=""></td>
+                                <td><input type="text" name="loadingPort" value=""></td>
+                                <td><input type="text" name="eta" value=""></td>
+                                <td><input type="text" name="etb" value=""></td>
+                                <td class="posntxt-td" style="width: 94px;">
+                                    <div class="posntxt"><input type="text" name="posn" value=""></div>
+                                </td>
+                                <td class="td-select">
+                                    <div class="my-select cpy-select h-select clearfix">
+                                        <div class="select s-b">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">Tender</div>
+                                                    <input type="text" name="sea" class="vname" readonly="readonly" value="Tender">
+                                                </div>
+                                            </div>
+                                            <ul class="select-options">
+                                                <li data-value="Tender" class="selected">Tender</li>
+                                                <li data-value="Html5">Html5</li>
+                                                <li data-value="c#">c#</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </td>
+                              
+                                <td><input type="text" name="aveSpd24h" value=""></td>
+                                <td class="delImg"><img src="../images/delete-icon.png"/></td>
+                            </tr>`);
+        })
+        // 装港前信息点击删除
+         $(document).on('click','.delImg>img',function() {
+		     this.closest('tr').remove()
+		  });
+     
+     	
+        $('#addButton').on('click', function(){
+			var html = ` <tr>
+                            <td class="time1">
+                                <input type="hidden" value="$!{progrevo.uuid}" name="uuid" id="startTime" class="br sr">
+                                <input type="text" value="$!{progrevo.datetime}" name="datetime" id="startTime" class="br sr">
+                            </td>
+                            <td   class="time4">
+                                <input type="text" value="$!{progrevo.cargoLoaded}" name="cargoLoaded" class="br">
+                            </td>
+                            <td>
+                                <input type="text" value="$!{progrevo.theCargoToBeLoaded}" name="theCargoToBeLoaded" class="br">
+                            </td>
+                            <td>
+                                <input type="text" value="$!{progrevo.loadingSpeed}" name="loadingSpeed" class="br">
+                            </td>
+                            <td  class="time3">
+                                <input type="text" value="$!{progrevo.etc}" name="etc" id="startTime" class="br sr">
+                            </td>
+                            <td class="time2">
+                                <a href="javascript:;">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </a>
+                            </td>
+                        </tr>`
+			$('#seiaBody').append(html);
+		})
+		
+	    $(document).on('click','.time2>a>i',function() {
+   		     $(this).closest('tr').remove()
+   		 });
+       ##commonCPY.select();
+    });
+	
+ </script>

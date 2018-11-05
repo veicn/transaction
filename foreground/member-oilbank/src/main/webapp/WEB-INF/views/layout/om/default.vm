@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/contain/htmlhead.htm").setHost("$omServer.get('')").put("layui","true")
+<body>
+
+<div class="layui-layout layui-layout-admin">
+
+    $contain.get("/contain/nav.htm").setHost("$omServer.get('')")
+    $contain.get("/contain/menu.htm")
+    <div class="layui-body">
+        $screen_content
+    </div>
+    $contain.get("/contain/htmlend.htm").setHost("$omServer.get('')")
+
+
+</div>
+
+</body>
+
+<script>
+    var appServer = "$appServer";
+</script>
+
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+    //    $(function(){
+    //        $("ul .layui-nav,.layui-nav-tree a").click(function(){
+    //            window.location.href = $(this).attr("href");
+    //        })
+    //    })
+</script>
+</html>

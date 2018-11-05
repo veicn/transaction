@@ -1,0 +1,75 @@
+
+<div class="c-mod">
+	  <h3><em class="cw-ico ico-h3"></em>Product Information</h3>
+	  <div class="c-form">
+        <ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">Commodity categories：</span>
+				$!{productOilInfoVO.productOilClassifyName}
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">Grade：</span>
+				$!{productOilInfoVO.productOilKindName}
+			</li>
+			
+            <li class="c-fcos2">
+            	<span class="c-fn">Specification：</span>
+				$!{productOilInfoVO.productOilSpecsName}
+            </li>
+			
+            #*<li class="c-fcos2">
+            	<span class="c-fn">Whether as agent：</span>#if(1==1) true #else false #end
+
+            </li>*#
+
+            #*<li class="c-fcos2">
+                <span class="c-fn">Region：</span>
+            </li>
+
+			<li class="c-fcos2">
+				<span class="c-fn">出口类型：</span>
+			</li>*#
+			
+			<li class="c-fcos2">
+				<span class="c-fn">Incoterm：</span>$!{tradeItemName}
+			</li>
+
+            <li class="c-fcos2">
+                <span class="c-fn">Qty(BBL)：</span>$!{contract.numStr}
+            </li>
+			
+			#*<li class="c-fcos1">
+				<span class="c-fn">Laycan：</span>
+				<input name="crudeShip.shipmentStartTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>——
+				<input name="crudeShip.shipmentEndTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>
+			</li>*#
+			
+
+           #* <li class="c-fcos2 bid-type">
+                <span class="c-fn">Tender Expire Date：</span>$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.stopBidTime})}
+            </li>
+			<li class="c-fcos2 bid-type">
+				<span class="c-fn">开标日期：</span>$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.tenderOutTime})}
+			</li>*#
+			
+			<li class="c-fcos1">
+				<span class="c-fn">质检报告：</span>
+				<a href="" class="re_up">+ upload</a>
+			</li>
+			<li class="c-fcos1">
+				<span class="c-fn">商品图片：</span>
+				<a href="" class="re_up">+ upload</a>
+                <div class="c-imglist c-imglist2">
+                    <ul>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li class="c-imgadd"><a href="">+</a></li>
+                    </ul>
+                </div>
+			</li>
+		</ul>
+	  </div>
+
+  </div>

@@ -1,0 +1,317 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>订单基本信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            #if($!{contract.id})
+                <input type="hidden" class="c-int" name="id" value="$!{contract.id}"/>
+            #end
+
+            #*<li class="c-fcos2">
+                <span class="c-fn">购买数量(美元/桶)：</span>
+                <input lay-verify="email" name="demand.num" type="text" class="c-int"/>
+                <span class="c-ero" style="">
+					<label id="demand.num-error" class="error" for="demand.num" style="display: none;"></label>
+				</span>
+            </li>*#
+
+            <li class="c-fcos2"><span class="c-fn">
+                <span class="notice-required">*&nbsp;
+                </span>数量(桶)：</span>
+                <input type="text"  class="c-int" name="numStr" id="num" onkeypress="return noNumbers(event)"  value="$!{contract.numStr}"/>
+                <span class="c-ero" style="">
+					<label id="num-error" class="error" for="num" style="display: none;"></label>
+				</span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>溢短装：+/-</span>
+                <input type="text" class="c-intt" name="numFloat" id="numfloat" onkeypress="return noNumbersZF(event)"  value="$!{contract.numFloat}" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>%
+                <span class="c-ero" style="">
+					<label id="numFloat-error" class="error" for="numFloat" style="display: none;"></label>
+				</span>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">
+                <span class="notice-required">*&nbsp;</span>贸易条款：</span>
+                <select class="sele" name="tradeItem" id="tradeItem">
+                    #foreach($obj in $!TradeItemMap.entrySet())
+                        <option value="$!obj.key" #if("$!{obj.key}" == "$!{contract.tradeItem}") selected #end>$!obj.value</option>
+                    #end
+                </select>
+                <span class="c-ero" style="">
+					<label class="error" for="tradeItem" style="display: none;"></label>
+				</span>
+            </li>
+
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>贴水：</span>
+                <input type="text"  onkeypress="return noNumbersZF(event)"  value="$!{contract.agioStr}" class="c-int" id="agio" name="agioStr" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                <span class="c-ero" style="">
+					<label class="error" for="agio" style="display: none;"></label>
+				</span>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">
+                <span class="notice-required">*&nbsp;</span>计价基准：</span>
+                <select class="sele" name="valuationBase" id="valuationBase">
+                    #foreach($item in $ValuationBase.entrySet())
+                        <option value="$!{item.key}" #if("$!{item.key}" == "$!{contract.valuationBase}") selected #end>$!{item.value}</option>
+                    #end
+                </select>
+                <span class="c-ero" style="">
+					<label class="error" for="valuationBase" style="display: none;"></label>
+				</span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>计价期：</span>
+                <select class="sele" name="valuationProidType" id="valuationProidType" onchange="proidTypeChange(this.value)">
+                    #foreach($item in $ValuationProidType.entrySet())
+                        <option value="$!{item.key}" #if("$!{item.key}" == "$!{contract.valuationProidType}") selected #end>$!{item.value}</option>
+                    #end
+                </select>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+                <span class="c-ero" style="">
+					<label class="error" for="valuationProidType" style="display: none;"></label>
+				</span>
+            </li>
+            <li class="c-fcos2 #if($!contract.valuationProidType != 4) hidden #end valuationProid">
+                <span>
+                    <span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>计价期区间：</span>
+                    <input type="text"  name="valuationProidStart" class="c-int qj-text qj-text1"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidStart})"/>
+                    <span class="c-ero" style="">
+                        <label  class="error" for="valuationProidStart" style="display: none;"></label>
+                    </span>
+                </span>
+                <em>—</em>
+                <span>
+                    <input name="valuationProidEnd" type="text"  class="c-int qj-text qj-text1" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidEnd})"/>
+                    <span class="c-ero" style="">
+                        <label class="error" for="valuationProidEnd" style="display: none;"></label>
+                    </span>
+                </span>
+            </li>
+
+
+
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>付款日期：</span>
+                <select class="sele" name="payItem" id="payItem" value="$!{contract.payItem}">
+                    #foreach($!item in $!PayItemMap.entrySet())
+                        <option value="$!item.key" #if("$!{item.key}" == "$!{contract.payItem}") selected #end>$!item.value</option>
+                    #end
+                </select>
+                <span class="c-ero">
+                    <label class="error" for="payItem" style="display: none;"></label>
+                </span>
+            </li>
+            #*<li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>付款日期：</span>
+                <input date="true" type="text" class="c-int" name="payTime" id="payTime" value="$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.payTime})"/><i class="c-ico cxtj-nr-ico cg-data"></i></li>*#
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>采购方式：</span>
+                <select class="sele" name="purchaseMode" id="purchaseMode">
+                    #foreach($item in $PurchaseModes.entrySet())
+                        <option value="$!{item.key}" #if("$!{item.key}" == "$!{contract.purchaseMode}") selected #end>$!{item.value}</option>
+                    #end
+                </select>
+                <span class="c-ero">
+                    <label class="error" for="purchaseMode" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos1">
+                <span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>计价公式：</span>
+                <input type="text" class="c-int c-br c-fl pricingEditor" jsonstruc="" jsId="valuationFormulaJson" pmId="pricingMode" name="valuationFormula" id="valuationFormula" value="$!{contract.valuationFormula}" readonly>
+                <!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+                <input type="hidden" name="valuationFormulaJson" id="valuationFormulaJson"  /><input type="hidden" name="pricingMode" id="pricingMode" />
+                <span class="c-ero">
+                    <label class="error" for="valuationFormula" style="display: none;"></label>
+                </span>
+            </li>
+            $contain.get("/pricingFormula/physicalPricingEditor.htm")
+            <li class="c-fcos1"><span class="c-fn">备注：</span><textarea class="c-teta" name="remark" id="remark" ></textarea></li>
+        </ul>
+    </div>
+</div>
+<div class="c-mod" id="ysxx">
+    <h3><em class="cw-ico ico-h3"></em>运输信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2">
+                <span class="c-fn">
+                    <span class="notice-required">*&nbsp;</span>
+                    装货港：
+                </span>
+                <input type="text" name="contractShip.shipmentPort" class="c-int" value="$!{contractShip.shipmentPort}"/>
+                <span class="c-ero" style="">
+					<label id="contractShip.shipmentPort-error" class="error" for="contractShip.shipmentPort" style="display: none;"></label>
+				</span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>卸货港：</span>
+                <input type="text" name="contractShip.dischargePort" class="c-int" value="$!{contractShip.dischargePort}"/>
+                <span class="c-ero" style="">
+					<label id="contractShip.dischargePort-error" class="error" for="contractShip.dischargePort" style="display: none;"></label>
+				</span>
+            </li>
+            #*<li class="c-fcos2"><span class="c-fn c-fl" >装货期：</span><input type="text"  name="contractShip.shipmentStartTime" class="c-int zq-text c-fl"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.shipmentStartTime})"/></li>
+            <li class="c-fcos2 c-fl" ><span class="c-fn c-fl c-textcenter">——————</span><input name="contractShip.shipmentEndTime" type="text"  class="c-int zq-text c-fl" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.shipmentEndTime})"/></li>*#
+            <li class="c-fcos2">
+                <span>
+                    <span class="c-fn c-fl" >装货期：</span>
+                    <input type="text"  name="contractShip.shipmentStartTime" class="c-int qj-text qj-text1"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.shipmentStartTime})"/>
+                    <span class="c-ero" style="">
+                        <label id="contractShip.shipmentStartTime-error" class="error" for="contractShip.shipmentStartTime" style="display: none;"></label>
+                    </span>
+                </span>
+                <em>—</em>
+                <span>
+                    <input name="contractShip.shipmentEndTime" type="text"  class="c-int qj-text qj-text1" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.shipmentEndTime})"/>
+                    <span class="c-ero" style="">
+                        <label id="contractShip.shipmentEndTime-error" class="error" for="contractShip.shipmentEndTime" style="display: none;"></label>
+                    </span>
+                </span>
+            </li>
+            #*<li class="c-fcos2"><span class="c-fn c-fl">到货期：</span><input type="text" name="contractShip.dischargeStartTime" class="c-int zq-text c-fl" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.dischargeStartTime})"/></li>
+            <li class="c-fcos2"><span class="c-fn  c-fl c-textcenter">——————</span><input name="contractShip.dischargeEndTime" type="text" class="c-int zq-text  c-fl" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.dischargeEndTime})"/></li>*#
+            <li class="c-fcos2">
+                <span>
+                    <span class="c-fn c-fl">到货期：</span>
+                    <input type="text" name="contractShip.dischargeStartTime" class="c-int qj-text qj-text1" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.dischargeStartTime})"/>
+                    <span class="c-ero" style="">
+                        <label id="contractShip.dischargeStartTime-error" class="error" for="contractShip.dischargeStartTime" style="display: none;"></label>
+                    </span>
+                </span>
+                <em>—</em>
+                <span>
+                    <input name="contractShip.dischargeEndTime" type="text" class="c-int qj-text qj-text1" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contractShip.dischargeEndTime})"/>
+                    <span class="c-ero" style="">
+                        <label id="contractShip.dischargeEndTime-error" class="error" for="contractShip.dischargeEndTime" style="display: none;"></label>
+                    </span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    var tradeItemVal= "$!{contract.tradeItem}";
+    document.getElementById("tradeItem").value=tradeItemVal;
+
+
+    var valuationBaseVal= "$!{contract.valuationBase}";
+    document.getElementById("valuationBase").value=valuationBaseVal;
+
+
+    var valuationProidTypeVal= "$!{contract.valuationProidType}";
+    document.getElementById("valuationProidType").value=valuationProidTypeVal;
+
+
+    var payItemVal= "$!{contract.payItem}";
+    document.getElementById("payItem").value=payItemVal;
+
+
+    var purchaseModeVal= "$!{contract.purchaseMode}";
+    document.getElementById("purchaseMode").value=purchaseModeVal;
+
+
+    var remarkObj= document.getElementById("remark");
+    remarkObj.innerHTML="$!{contract.remark}"
+
+    $(function(){
+
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        // 装货港
+        $("input[name='contractShip.shipmentPort']").click(function() {
+            var data = {"valueSetType": "5"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='contractShip.shipmentPort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.shipmentPort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+
+        // 卸货港
+        $("input[name='contractShip.dischargePort']").click(function() {
+            var data = {"valueSetType": "4"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='contractShip.dischargePort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.dischargePort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+
+
+    })
+    function proidTypeChange(value) {
+        if (value == 4) {
+            $(".valuationProid").show();
+        }else{
+            $(".valuationProid").hide();
+        }
+    }
+    /*    layui.use('laydate', function(){
+            var laydate1 = layui.laydate;
+            //执行一个laydate实例
+            laydate1.render({
+                elem: '#valuationProidStart' //指定元素
+            });
+        });*/
+</script>

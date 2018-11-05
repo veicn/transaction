@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>买原油网_全程可视、安全、高效，中国好油网</title>
+    
+    <link rel="stylesheet" href="$imageServer.get('/css/f_common.css')">
+	<link rel="stylesheet" href="$imageServer.get('/css/f_front.css')">
+    <script src="$imageServer.get('/js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('/js/jquery.fullPage.min.js')"></script>
+    <script src="$appServer.get('scripts/imageloaded.js')"></script>
+
+    <script>
+        $(function(){
+            $('#fullpage').fullpage({
+                loopBottom:true,
+                verticalCentered:false,
+                anchors:['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8', 'page9', 'page10', 'page11'],
+                navigation:true,
+                navigationTooltips:['首页', '交易', '优化', '金融', '执行', '租船', '期货', '资讯','壹化金融', '工具栏', '合作伙伴'],
+                menu:'#menu',
+                onLeave:function(index, nextIndex, direction){
+                    if(nextIndex!=1){
+                        $('#menu').removeClass('slideInUp').addClass('slideInDown'),
+                                $('.menu-list').removeClass('enlarge'),
+                                $('.menu-first').css('display','block'),
+                                $('.menu-item').css('width','9.09%')
+                    }else if(nextIndex == 1){
+                        $('#menu').removeClass('slideInDown').addClass('slideInUp'),
+                                $('.menu-list').addClass('enlarge'),
+                                $('.menu-first').css('display','none'),
+                                $('.menu-item').css('width','calc(100% / 10)')
+                    }
+                },
+            });
+
+            $(".big_image").each(function(){
+                var _this=$(this);
+                $(this).imagesLoaded(function(){
+                        $("[src='"+_this.attr("src").replace("bg","bg_mini") +"']").attr("src", _this.attr("src"));
+                })
+            })
+            
+        });
+
+        function switchEnglish()  {
+            document.cookie= "_l_=en|US;domain=.mycrudeoil.com;";
+            window.location.reload();
+        }
+    </script>
+</head>
+<body>
+
+<div class="index-menu" id="menu">
+    <div class="inner">
+        <ul class="menu-list enlarge clearfix">
+            <li data-menuanchor="page1" class="menu-item menu-first"><a href="#page1"><i class="h-ico menu-ico10"></i><em class="menu-txt">首页</em></a></li>
+            <li data-menuanchor="page2" class="menu-item"><a href="#page2"><i class="h-ico menu-ico3"></i><em class="menu-txt">交易</em></a></li>
+            <li data-menuanchor="page3" class="menu-item"><a href="#page3"><i class="h-ico menu-ico2"></i><em class="menu-txt">优化</em></a></li>
+            <li data-menuanchor="page4" class="menu-item"><a href="#page4"><i class="h-ico menu-ico1"></i><em class="menu-txt">金融</em></a></li>
+            <li data-menuanchor="page5" class="menu-item"><a href="#page5"><i class="h-ico menu-ico4"></i><em class="menu-txt">执行</em></a></li>
+            <li data-menuanchor="page6" class="menu-item"><a href="#page6"><i class="h-ico menu-ico5"></i><em class="menu-txt">租船</em></a></li>
+            <li data-menuanchor="page7" class="menu-item"><a href="#page7"><i class="h-ico menu-ico6"></i><em class="menu-txt">期货</em></a></li>
+            <li data-menuanchor="page8" class="menu-item"><a href="#page8"><i class="h-ico menu-ico7"></i><em class="menu-txt">资讯</em></a></li>
+            <li data-menuanchor="page9" class="menu-item"><a href="#page9"><i class="h-ico menu-ico11"></i><em class="menu-txt">壹化金融</em></a></li>
+            <li data-menuanchor="page10" class="menu-item"><a href="#page10"><i class="h-ico menu-ico8"></i><em class="menu-txt">工具栏</em></a></li>
+            <li data-menuanchor="page11" class="menu-item"><a href="#page11"><i class="h-ico menu-ico9"></i><em class="menu-txt">合作伙伴</em></a></li>
+        </ul>
+    </div>
+</div>
+<div id="fullpage">
+    <div class="section section1">
+        <div class="inner index-head clearfix">
+            <span class="index-logo"><em>买原油</em>客服电话：010-59568888</span>
+            <ul class="i-head-r clearfix">
+                <li><a href="$infoServer.get('/page/#/notice')"><i class="h-ico ico-gg"></i></a></li>
+				#if(!$user)
+				<li><a href="$systemServer.get('/login.htm')">登录</a></li>
+				#else
+                <li><a href="$memberServer.get('center/my.htm')">会员中心</a></li>
+                #end
+                <li><a href=""><i class="h-ico ico-phone1"></i>手机买原油
+					<span class="index-tc clearfix">
+						<span><i class="ios"></i><em>IOS</em></span>
+						    <span><i class="andriod"></i><em>Android</em></span>
+						<p class="ico-sj"></p>
+					</span></a></li>
+                <li><a href="" onclick="switchEnglish()" ><i class="h-ico ico-glb1"></i>global</a></li>
+            </ul>
+        </div>
+        <p class="sec1-txt1">让你的决策领先一步</p>
+        <p class="sec1-txt2">全程可视、安全、高效，中国好油网</p>
+        <p class="sec1-eng-txt"></p>
+        #if(!$user)
+        <a class="sec1-btn" href="$!systemServer.get('login.htm')">我要登录</a>
+        #else
+        <a class="sec1-btn" href="$memberServer.get('center/my.htm')">个人中心</a>
+        #end
+        <div class="star3">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+            <img src="$imageServer.get('/images/star3.png')" alt="">
+        </div>
+        <div class="bg"><img src="$imageServer.get('/images/mod1_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section2">
+        <div class="sec2-people"></div>
+        <p class="sec2-txt1">油品贸易</p>
+        <p class="sec2-txt2">让世界听到你</p>
+        <ul class="sec2-tag clearfix">
+            <li class="t1"><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')"><i class="h-ico ico-yydt"></i><em>原油大厅</em></a></li>
+        ##            <li class="t2"><a href="$listedServer.get('trademall/prolist.htm')"><i class="h-ico ico-cpysc"></i><em>成品油商城</em></a></li>
+            <li class="t3"><i class="h-ico ico-yycs"></i><em>原油超市</em></li>
+            <li class="t4"><i class="h-ico ico-qyzq"></i><em>企业专区</em></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod4_bg.jpg')"></div>
+    </div>
+
+    <div class="section section3">
+        <h2 class="mod-title">在线优化</h2>
+        <p class="sec3-txt">在线建立数字工厂经营模型，原油、产品可视化全流程优化。</p>
+        <ul class="sec3-tag clearfix">
+            <li class="t1"><a href="$memberServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" target="_blank"><i class="h-ico ico-px"></i><em>原油排序</em></a></li>
+            <li class="t2"><a href="$memberServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" target="_blank"><i class="h-ico ico-sc"></i><em>生产优化</em></a></li>
+            <li class="t3"><a href="$memberServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" target="_blank"><i class="h-ico ico-pf"></i><em>原油组合</em></a></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod3_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section4">
+        <div class="sec4-people"></div>
+        <p class="sec4-txt">供应融资，采购无忧</p>
+        <ul class="sec4-tag clearfix">
+            <li class="t1"><span>供应链<br>金融</span></li>
+            <li class="t2"><span>换汇</span></li>
+            <li class="t3"><span>区块链</span></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod2_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section5">
+        <h2 class="mod-title">执行</h2>
+        <p class="sec5-txt">省心，省力，省时的一站式执行服务。</p>
+        <ul class="sec5-tag clearfix sec5-tag2">
+            <li class="t3"><a href="$order-exectueServer.get('/sellerCenter/order/list.htm')"><i class="h-ico ico-mytg"></i><em>订单</em></a></li>
+            <!--<li class="t1"><a href="#"><i class="h-ico ico-htsf"></i><em>合同双方</em></a></li>
+            <li class="t2"><a href="#"><i class="h-ico ico-dzzx"></i><em>单证中心</em></a></li>-->
+            <li class="t4"><a href="$order-exectueServer.get('/sellerCenter/orderStatement/listPre.htm')"><i class="h-ico ico-jsgl"></i><em>结算</em></a></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod5_bg.jpg')"></div>
+    </div>
+    <div class="section section6">
+        <p class="sec6-txt1">贸易物流</p>
+        <p class="sec6-txt2">定制化的专业服务，全程可视的优质体验<br><a class="f-btn-link" href="$shipServer.get('page/#')">查看更多<i class="f-btn-arrow"></i></a></p>
+        <ul class="sec6-tag clearfix">
+            <li class="t1"><a href="$shipServer.get('/page/#/bootPage?palletType=1')"><i class="h-ico ico-pc"></i><em>租船拼船</em></a></li>
+            <li class="t2"><a href="$shipServer.get('/shipPlate/shipAgentEditShipPlate.htm')"><i class="h-ico ico-zc"></i><em>船盘发布</em></a></li>
+            <li class="t3"><a
+                #set($href ="$shipServer.get('/pallet/agreementList.htm')")
+                #foreach($role in $user.roles)
+                    #if($role == "trade_executor" || $role == "sales_trader" || $role == "buy_trader" || $role == "charterer")
+                            #set($href ="$shipServer.get('/pallet/agreementList.htm')")
+                            #break
+                    #end
+                    #if($role == "ship_executor" || $role == "ship_trader")
+                        #set($href ="$shipServer.get('/shipPactNew/shipPactListNew.htm')")
+                    #end
+                    #if($role == "ship_owner" || $role == "ship_broker")
+                        #set($href ="$shipServer.get('/shipPactNew/shipPactListNewOwner.htm')")
+                    #end
+                    #if($role == "depa_port" || $role == "arriv_port")
+                        #set($href ="$shipServer.get('/shipPactNew/shipPactListAgency.htm')")
+                    #end
+                #end
+                    href="$!{href}"
+            ><i class="h-ico ico-chgz"></i><em>船货跟踪</em></a></li>
+            
+            
+            
+            <li class="t4"><a href="$shipServer.get('/page/#/routemap')"><i class="h-ico ico-hcgh"></i><em>航线航速</em></a></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod6_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section7">
+        <h2 class="mod-title">点价交易</h2>
+        <p class="sec8-txt sec7-txt"><a class="f-btn-link" href="$appServer.get('/futures/index.htm?order=7')">查看更多<i class="f-btn-arrow"></i></a></p>
+        <ul class="sec7-tag clearfix">
+            <li class="t1"><a href="$appServer.get('/futures/index.htm?order=7')"><i class="h-ico ico-shjy"></i><em>点价预测</em></a></li>
+            <li class="t2"><a href="$appServer.get('/futures/index.htm?order=7')"><i class="h-ico ico-tmdj"></i><em>期现比价</em></a></li>
+##            <li class="t3"><i class="h-ico ico-lhfk"></i><em>权益可见联合风控</em></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod7_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section8">
+        <h2 class="mod-title">资讯</h2>
+        <p class="sec8-txt">纵观行情晴暖，走势一览无遗。为您提供更为前瞻、实用、专业、高效的原油资讯综合服务。<br><a class="f-btn-link" href="$infoServer.get('page/#')">查看更多<i class="f-btn-arrow"></i></a></p>
+        <ul class="sec8-tag clearfix">
+            <li class="t1"><a href="$infoServer.get('page/#')"><i class="h-ico ico-ssbj"></i><em>实时报价</em> </a></li>
+            <li class="t2"><a href="$infoServer.get('page/#')"><i class="h-ico ico-zsfx"></i><em>走势分析</em> </a></li>
+            <li class="t3"><a href="$infoServer.get('page/#')"><i class="h-ico ico-yykx"></i><em>原油快讯</em> </a></li>
+            <li class="t4"><a href="$infoServer.get('page/#/encyclopedia')"><i class="h-ico ico-sybk"></i><em>石油百科</em> </a></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod8_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section9">
+        <h2 class="mod-title">壹化金融</h2>
+        <p class="sec9-txt">多元化金融服务，融资、保险、理财、风控服务四大金融产品线<br><a class="f-btn-link" href="$!{oauthCallbackUrl}">查看更多<i class="f-btn-arrow"></i></a></p>
+        <ul class="sec9-tag clearfix">
+            <li class="t1"><a href="$!{oauthCallbackUrl}"><i class="h-ico ico-rz"></i><em>融资</em><span>针对企业提供多样化<br>的融资服务</span></a></li>
+            <li class="t2"><a href="$!{oauthCallbackUrl}"><i class="h-ico ico-bx"></i><em>保险</em><span>满足企业生产经营过程<br>中、风险管理的需要</span></a></li>
+            <li class="t3"><a href="$!{oauthCallbackUrl}"><i class="h-ico ico-lc"></i><em>理财</em><span>为企业提供具有竞争<br>力的理财产品</span></a></li>
+            <li class="t4"><a href="$!{oauthCallbackUrl}"><i class="h-ico ico-zx"></i><em>风控服务</em><span>构建产业诚信体系，服务于<br>产业链上的贸易和金融服务</span></a></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('images/mod13_bg.jpg')"></div>
+    </div>
+    <div class="section section10">
+        <h2 class="mod-title">工具箱</h2>
+        <ul class="sec9-tag clearfix">
+            <li class="t1"><a href="$infoServer.get('/priceForecast/chart2.htm')"><i class="h-ico ico-jgyc"></i><em>价格预测</em></a></li>
+            <li class="t2"><i class="h-ico ico-qz"></i><em>圈子</em></li>
+            <li class="t3"><i class="h-ico ico-hl"></i><em>汇率</em></li>
+            <li class="t4"><i class="h-ico ico-fy"></i><em>翻译</em></li>
+        </ul>
+        <div class="bg"><img src="$imageServer.get('/images/mod9_bg_mini.jpg')"></div>
+    </div>
+    <div class="section section11">
+        <div class="coop-con clearfix">
+            <ul class="coop-list cl1">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_01.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_02.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_03.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl2">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_04.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_05.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl3">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_06.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_10.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl4">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_08.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_13.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl5">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_07.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_11.gif')"></a></li>
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_12.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl6">
+                <li class="coop-item"><a href=""><img src="$imageServer.get('/images/coop_img_09.gif')"></a></li>
+            </ul>
+            <ul class="coop-list cl7">
+                <li class="coop-item"><span class="coop-txt"><a href="$memberServer.get('/tradeHall/partner/index_partner.htm')">更多 &gt;&gt;</a></span></li>
+            </ul>
+        </div>
+        $contain.get('contain/foot.htm')
+        <div class="bg"><img src="$imageServer.get('/images/mod10_bg_mini.jpg')"></div>
+    </div>
+</div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod1_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod3_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod4_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod5_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod6_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod7_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod8_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod9_bg.jpg')">  </div>
+<div style="display: none;"> <img class="big_image" src="$imageServer.get('/images/mod10_bg.jpg')">  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+#set($a = "个人中心-买原油网")
+<form  id="orderUpdateForm" action="$!appServer.get('/update/crudeOrder.htm')" method="post">
+
+    $contain.get("/create/oiltypedetail.htm").setParam("contractId","$!{contractId}")
+
+    $contain.get("/create/pricelist.htm").setParam("contractId","$!{contractId}").put("TradeItemMap",$!{TradeItemMap}).put("ValuationProidType",$!{ValuationProidType}).put("PayItemMap",$!{PayItemMap}).put("PurchaseModes",$!{PurchaseModes}).put("ValuationBase",$!{ValuationBase})
+
+    $contain.get("/create/transportInfoInput.htm").setParam("contractId","$!{contractId}")
+
+    $contain.get("/longTermContractContain/longEditBuyerForValid.htm").setParam("contractId","$!{contractId}").setParam("type","B")
+
+    $contain.get("/longTermContractContain/longEditAgencyForValid.htm").setParam("contractId","$!{contractId}").setParam("type","T")
+
+    $contain.get("/longTermContractContain/longEditSupplyForValid.htm").setParam("contractId","$!{contractId}").setParam("type","S")
+
+
+    <!--保存-->
+            <div class="c-subdiv">
+                <button id="updatebtn" class="c-btnsub">更新</button>
+                <script>
+                    $(function(){
+                        $("#updatebtn").click(function(){
+                            if ($('#orderUpdateForm').validate().form()) {
+                                $('#orderUpdateForm')[0].submit();
+                            }
+                        });
+                    });
+                </script>
+                <button id="checkbtn1" type="button" class="c-btncas">取消</button>
+                <script>
+                    $("#checkbtn1").click(function(){
+                        window.history.go(-1);
+                    });
+                </script>
+            </div>
+
+
+
+</form>

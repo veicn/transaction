@@ -1,0 +1,131 @@
+<!--批量上传弹框-->
+<div class="s-pop-box s-pop-up s-pop-oeder" >
+	<a class="s-close1" href="javascript:void(0);"></a>
+	<!-- <h1>批量上传</h1> -->
+    <div class="xyxx-cont" >
+		<form class="s-form layui-form" action="">
+			<ul>	
+			  <li class="s-form-item" pane="">
+				<label class="s-form-label"><span style="color:red;">*</span>选择类型：</label>
+				<div class="s-input-block">
+				<!-- 选中加s-form-checked  不选中去掉-->
+				#foreach($subDataC in $subDataCheck)
+					 <input type="checkbox" title="$!subDataC.fileName" >
+					 <div class="s-uncheckbox s-form-checkbox fielDocCheck" lay-skin="primary">
+						 <i class="fs-checkbox"></i>
+						 <span class="checkFileName" fileCode="$!subDataC.fileCode">$!subDataC.fileName</span>
+					 </div> 
+				#end
+				</div>
+			  </li>
+			  <li class="s-form-item">
+				<label class="s-form-label">选择文件：</label>
+				<div class="s-input-block">
+					<input type="text" disabled="disable" placeholder="" id="fileName" class="s-input s-input1">
+					<a href="javascript:void(0);" class="s-btn s-btn-up">上传文件<input class="s-upload-file fileDocUpload2" disabled="disable" type="file" id="file" ></a>
+				</div>
+			  </li>
+			</ul>   
+		</form>
+	</div>
+	<!-- <p class="s-docu-but"><a href="" class="s-btn s-reg-btn">上&nbsp;&nbsp;传</a></p> -->
+</div>
+<script>
+ layui.use("ossUpload", function(){  
+	
+	var $ = layui.jquery,upload = layui.ossUpload;
+	
+	var list2 = [];
+	//复选框的选中和未选中 s-form-checked
+	$('.fielDocCheck').on("click",function(){
+		var info2 = {};
+		if(!$(this).hasClass('s-form-checked')){
+			$(this).addClass("s-form-checked");
+			info2.fileName = $(this).find('.checkFileName').text();
+			info2.fileCode = $(this).find('.checkFileName').attr('fileCode');
+			list2.push(info2);
+			if(list2.length == 1){
+				$('.fileDocUpload2').removeAttr('disabled');
+			}
+	    }else{
+	    	$(this).removeClass("s-form-checked");
+	    	info2.fileName = $(this).find('.checkFileName').text();
+	    	info2.fileCode = $(this).find('.checkFileName').attr('fileCode');
+	    	list2.pop(info2);
+	    	if(list2.length == 0){
+				$('.fileDocUpload2').attr('disabled','disabled');
+			}
+	    }
+		
+	});
+	
+	upload.render({
+		    elem: '.fileDocUpload2',//绑定元素 id或class
+		    exts: 'png,gif,jpg,jpeg,bmp,pdf,xls,xlsx,doc,docx', //允许上传的文件后缀
+		    before: function(obj){ 
+		    	layer.load(); //上传loading
+		    	this.data = {
+					uuid: $("#uuid").val(),
+					fileCode: fileCode
+		    	};
+		    },
+		    done: function(res, index,upload){
+		    	if(res.status === 0){
+		    		var params ={}
+		    		params.uuid = $("#uuid").val();
+			    	params.orderDocumentId = $("#orderDocumentId").val();
+			    	params.documentType = $("#documentType").val();
+			    	params.tradeCategory = $("#tradeCategory").val();
+			    	
+			    	params.orderNo = $("#orderNo").val();
+			    	params.contractNo = $("#contractNo").val();
+			    	params.shipName = $("#shipName").val().trim();
+		    		var fileInfoList = [];
+		    		
+		    		for(var key in list2){
+		    			var info ={};
+		    			info.fileName = list2[key].fileName;
+		    			info.fileCode = list2[key].fileCode;
+			    		info.originalName = res.datas.originalName;
+			    		info.filePath = res.datas.path;
+				    	info.fileFormat = res.datas.originalName.split(".")[1];
+				    	if(info.fileName != ''){
+					    	fileInfoList.push(info);
+				    	}
+		    		}
+		    		params.fileInfoList = fileInfoList;
+		    		
+			    	//console.log(params);
+			    	//保存单证
+	    			$.ajax({
+	    	    		type: "POST",
+	    	    		url: orderServer+"/buyerCenter/orderDocument/saveDocument.json",
+	    	    		data: JSON.stringify(params),
+	    	    		async: false,
+	    				contentType:"application/json",
+	    				beforeSend: function (request) {
+	    					index = layer.load();	
+	    				},
+	    	    		success: function(data) {
+	    					layer.close(index);
+	    					if(data.status == 0){
+	    						layer.alert('上传成功!', function(index){
+	    							location.reload();
+	    						});
+	    					}else{
+	    						layer.alert("error:" + $.i18n(data.code,data.params));
+	    					}
+	    				},
+	    				error: function(data) {
+	    					layer.close(index);
+	    					layer.alert("error");
+	    		        }
+	    	    	});  
+	
+		    	} else {
+		    		layer.tips($.i18n(res.code,res.params), index, {tips: 1});
+		    	}
+		    }
+		});
+})
+</script>

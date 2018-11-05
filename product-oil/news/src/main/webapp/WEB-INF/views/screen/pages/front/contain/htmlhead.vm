@@ -1,0 +1,14 @@
+<head>
+    <title>$!{a}</title>
+
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    #css("/css/common/reset.css?css_version=03280827")
+    #css("/css/common/public.css?css_version=03280827")
+    #css("/js/common/layui/css/layui.css?css_version=03280827")
+    <script src="$newsServer.get('/js/common/edition.js?js_version=03280827')"></script>
+</head>

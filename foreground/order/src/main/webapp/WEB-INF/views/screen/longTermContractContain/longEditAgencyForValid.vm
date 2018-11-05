@@ -1,0 +1,107 @@
+<div class="c-mod" id="mjxx">
+    <h3><em class="cw-ico ico-h3"></em>代理商信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1">
+                <span class="c-fn">企业名称：</span>
+                <input type="hidden"  name="traderRelevanter.eMemberId" id="companyAgeny" value="$!{traderRelevanter.eMemberId}" >
+                <input type="text"  class="c-int" name="traderRelevanter.eMemberName" id="companyAgeny-name" value="$!{traderRelevanter.eMemberName}"/>
+                <div class="ac_results">
+                    <ul></ul>
+                </div>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos1">
+                <span class="c-fn">企业地址：</span>
+                <input type="text"  class="c-int" name="traderRelevanter.address" id="" value="$!{traderRelevanter.address}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn">联系人：</span>
+                <input type="text" class="c-int" name="traderRelevanter.contacter" id="contacter" value="$!{traderRelevanter.contacter}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn">邮箱：</span>
+                <input type="text"  class="c-int" name="traderRelevanter.email" id="famil" value= "$!{traderRelevanter.email}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn">联系电话：</span>
+                <input type="text"  onkeyup="return clearPhono(this)"
+                       class="c-int" name="traderRelevanter.phoneNo" id="" value="$!{traderRelevanter.phoneNo}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn">传真：</span>
+                <input type="text" onkeyup="return clearPhono(this)"
+                       class="c-int" name="traderRelevanter.fax" id="fax" value="$!{traderRelevanter.fax}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li><input type="hidden" value="T" name="traderRelevanter.type"></li>
+            <li><input type="hidden" value="$!{traderRelevanter.id}" name="traderRelevanter.id"></li>
+        </ul>
+    </div>
+
+</div>
+<script src="$appServer.get('script/lib/jquery.autocomplete.min.js')"></script>
+<script>
+
+    $(function () {
+//            $("#checkboxId").onclick(function () {
+//                if($("table input[type='radio']:checked")){
+//                    $("#checkboxId").val(true);
+//                }
+//            })
+        $(document).ready(function () {
+        ## var dataUrl="$memberServer.get('/centercontain/enterpriseList.json')";
+            var datas = $contain.get('/centercontain/enterpriseList.json').setHost("$memberServer.get('')")
+            // jQuery.get(dataUrl, {param1: ''}, function(data, textStatus, xhr) {
+            //     if (!data || data.status != 0 && data.status != 200) {
+            //         console.log(data);
+            //layer.alert(data.message || "请求异常");
+            // return;
+            // }
+            // var datas=data.datas
+            var companyInput = $ ("#companyAgeny-name");
+            companyInput.autocomplete(
+                    datas.datas,
+                    {
+                        width: companyInput.outerWidth(),
+                        minChars: 0,
+                        matchContains: true,
+                        scroll: true,
+                        mustMatch: false,
+                        scrollHeight: 122,
+                        formatItem: function (row, i, max) {
+                            return  row.name ;
+                        },
+                        formatMatch: function (row, i, max) {
+                            return row.name;
+                        },
+                        formatResult: function (row) {
+                            return row.name;
+                        }
+                    }).result(function (event, row, formatted) {
+                $('#companyAgeny').val(row.memberId)
+            })
+        })
+
+    });
+
+
+
+
+</script>

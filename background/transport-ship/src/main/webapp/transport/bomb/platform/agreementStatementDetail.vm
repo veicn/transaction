@@ -1,0 +1,151 @@
+<script>
+layui.use(['laydate','upload'], function(){
+	var laydate = layui.laydate;
+	var $ = layui.jquery
+	,upload = layui.upload;
+});
+</script>
+<style>
+body .backbtn-class .layui-layer-btn a{
+	height: 28px;
+    line-height: 28px;
+    margin: 5px 5px 0;
+    padding: 0 15px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    color: #333;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+}
+</style>
+<form class="layui-form layui-form-pane" style="margin-top:50px; margin-left:90px" action="ruleSave">
+<input class="layui-input layui-hide" id="uuid" name="uuid" type="text">
+
+   <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">发票号码：</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="receiptCode1" type="text" name="receiptCode" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">租船协议编号：</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="agreementCode1" type="text" name="agreementCode" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">收款方：</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="payee" type="text" name="payee" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">付款方：</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="payer" type="text" name="payer" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">C/P Freight Quantily：</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="freightQuantily" type="text" name="freightQuantily" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">Freight overage Quantily：</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="freightOverageQuantily" type="text" name="freightOverageQuantily" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">Flatrate：</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="freightFlatrate" type="text" name="freightFlatrate" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">Rate（WS)：</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="freightRate" type="text" name="freightRate" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">Freight overage Pct：</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="freightOveragePct" type="text" name="freightOveragePct" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">Address Commission Pct：</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="addressCommissionPct" type="text" name="addressCommissionPct" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">Freight Total</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="freightTotal" type="text" name="freightTotal" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">Freight overage Total</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="freightOverageTotal" type="text" name="freightOverageTotal" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">Address Commission Total</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="addressCommissionTotal" type="text" name="addressCommissionTotal" readonly="true" autocomplete="off">
+		    </div>
+		    <!-- <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">Total Amount</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input" id="hull" type="text" name="hull" readonly="true" autocomplete="off">
+			    </div>
+	    	</div> -->
+	    </div>
+    </div>
+    
+	<div class="layui-upload" style="margin-top:30px">
+	  <div class="layui-upload-list">
+	    <table class="layui-table" style="width:570px;">
+	      <thead id="file" hidden="hidden">
+	        <tr>
+		        <th style="font-size:12px; width:90px; text-align:center">序号</th>
+		        <th style="font-size:12px; width:380px; text-align:center">文件名</th>
+		        <th style="font-size:12px; width:100px; text-align:center">下载</th>
+	      </tr>
+	        <tr>
+	        	<td style="font-size:12px; width:90px; text-align:center">1</td>
+		        <td style="font-size:12px; width:380px; text-align:center" class="fileName"></td>
+		        <td style="font-size:12px; width:100px; text-align:center"><button type="button" class="layui-btn layui-btn-normal file xiazai" style="margin-top: 0.5px; font-size: 12px;" id="btn">下载</button></td>
+	        </tr>
+	      </thead>
+	      <tbody id="downloadList"></tbody>
+	    </table>
+	  </div>
+	</div>
+
+</form>

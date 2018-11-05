@@ -1,0 +1,27 @@
+$contain.get('common/title.htm').put('title', '企业账户激活成功返回页面')
+#css($appServer.get('/product/css/work/emailSendSuccess.css'))
+
+<div class="w1180 indReg-con clearfix">
+    <div class="rps-box">
+        <div class="rps-l">
+            <img src="images/suc_bg.png" alt="" class="enterpriseAccoutImg">
+        </div>
+        <div class="rps-r">
+            <h2>Password reset and account<br/>
+                activated successfully !</h2>
+            <!-- <h2>Your account number is: <span>123</span></h2>
+            <p class="arrd">
+              Please kindly complete all the required information before you start.<br/>
+              Return to former page in
+              <span>&nbsp3&nbsp</span>seconds.
+            </p> -->
+            <div class="com-btn-b clearfix">
+                <a href="javascript:;" class=" fl br btn-c com-btn com-btn-sign enterprise-act">Complete company information</a>
+                <a href="javascript:;" class="fl com-btn-not enterprise-return">Not now and return to Homepage</a>
+            </div>
+            <div class="com-btn-reminder">
+                <a href="javascript:;" class="">REMINDER: START after finish registration!</a>
+            </div>
+        </div>
+    </div>
+</div>

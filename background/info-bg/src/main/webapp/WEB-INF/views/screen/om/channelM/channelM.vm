@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<script src="$imageServer.get('info/js/channelM/channelM.js')"></script>
+<div class="pp15">
+		
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">频道类型</label>
+				    <div class="layui-input-inline iw300" >
+				    	<select name="channelMDesc" id="channelMDesc" >
+							<option value="">请选择</option>
+							#foreach($item in $channelTypes)
+								#if($!query.channelMDesc == $!item.itemCode)
+									<option value="$!{item.itemCode}" selected >$!{item.itemName}</option>
+								#else
+									<option value="$!{item.itemCode}">$!{item.itemName}</option>
+								#end
+							#end
+						</select>
+				    </div>
+				
+					<label class="layui-form-label">频道名</label>
+				    <div class="layui-input-inline iw300" >
+				      <input type="text" id="channelMNameKey" value="$!{query.channelMName}" required lay-verify="required" placeholder="请输入频道名" autocomplete="off" class="layui-input">   
+				    </div>
+				</div>
+				<div class="layui-form-item" style="float: right;margin-right: 50px; margin-top: -20px;">
+					<button type="button" class="layui-btn layui-btn-normal btw search">查询</button>
+		   			 <button  type="button" class="layui-btn layui-btn-normal addFn">新增</button>
+				</div>
+			</form>
+			
+		       <!--  <button class="layui-btn layui-btn-primary resetFn">重置</button> -->
+		</div>
+		
+		<!--列表-->
+		<table class="layui-table" lay-skin="nob">
+		  <thead>
+		    <tr>
+		      <th>序号</th>
+		      <th>频道类型</th>
+		      <th>频道名称</th>
+		      <th>频道代码</th>
+		      <th>操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody id="channelms">
+		  	        #foreach($channelM in $channelMs)
+						<tr>
+							<td>$!{velocityCount}</td>
+							<td>
+								#foreach($item in $channelTypes)
+									#if($!item.itemCode == $channelM.channelMDesc)
+										$!{item.itemName}
+									#end
+								#end
+							</td>
+							<td>${channelM.channelMName}</td>
+							<td>${channelM.channelMCode}</td>
+							<td  class="acss-color">
+								<a href = "javascript:;" class="dialog-link editFn color-a" attr-data='{"uuid":"${channelM.uuid}","channelMName":"${channelM.channelMName}","channelMCode":"${channelM.channelMCode}","channelMDesc":"${channelM.channelMDesc}","channelMOrder":"${channelM.channelMOrder}"}' > <i class="layui-icon">&#xe642;</i> 修改</a>
+								<a href = "javascript:;" class="dialog-del delFn color-a" attr-data='{"uuid":"${channelM.uuid}"}' ><i class="layui-icon" style="color:red;">&#xe640;</i> 删除</a>
+							</td>
+						</tr>
+					#end
+		  </tbody>
+		</table>
+
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    	<!-- <div id="ry-page" class="ry-right"></div> -->
+	    	$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/channelM/channelM.htm").put('slider_path','/contain/formPagingPageSlider')		
+	    </div>
+</div>
+
+
+
+	

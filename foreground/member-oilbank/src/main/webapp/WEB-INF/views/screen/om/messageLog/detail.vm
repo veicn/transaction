@@ -1,0 +1,99 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+        <div>
+            <label>
+                推送类型：
+                #foreach($t in $!types)
+                    #if($!messageLog.type == $!t.code)
+                        $!t.desc
+                    #end
+                #end
+            </label>
+        </div>
+        <br/>
+
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th width="10%">接收账号</th>
+                <th width="40%">结果</th>
+                <th width="10%">是否成功</th>
+                <th width="10%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach($!item in $!messageLog.messageLogMembers)
+                <tr>
+                    <td>$!{item.memberName}</td>
+                    <td>$!{item.response}</td>
+                    <td>
+                        #if("$!{item.success}" != "")
+                            #if($!{item.success} == true)
+                                成功
+                            #else
+                                失败
+                            #end
+                        #end
+                    </td>
+                    <td>
+                        #if("$!{item.success}" != "")
+                            #if($!{item.success} == false)
+                                <a data-id="${item.id}" onclick="reSend(this)" class="layui-btn layui-btn-xs detail">重发</a>
+                            #end
+                        #end
+                    </td>
+                </tr>
+
+                #end
+            </tbody>
+        </table>
+        <div>
+            <label>
+                推送内容：<div style="border:thin dotted ; padding: 5 5 5 5">$!{messageLog.content}</div>
+            </label>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+    });
+
+    function reSend(obj){
+        var id = $(obj).data('id');
+        var loadIndex = layer.load();
+        $.ajax({
+            url:'$!appServer.get("/om/messageLog/resend.json")',
+            data:{messageLogMemberId:id},
+            type:'POST',
+            success:function(d){
+                layer.close(loadIndex);
+                layer.alert(d.message,function () {
+                    window.location.reload();
+                });
+            },
+            error:function(){
+                layer.close(loadIndex);
+                layer.alert('系统内部错误');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.PalletMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.Pallet" id="PalletDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Pallet">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.Pallet" id="Pallet">
+		<result property="palletId" column="PALLET_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="agreementCode" column="AGREEMENT_CODE" />
+		<result property="unitName" column="UNIT_NAME" />
+		<result property="oilName" column="OIL_NAME" />
+		<result property="palletCode" column="PALLET_CODE" />
+		<result property="palletType" column="PALLET_TYPE" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="orderCode" column="ORDER_CODE" />
+		<result property="orderPact" column="ORDER_PACT" />
+		<result property="status" column="STATUS" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="laycanBeg" column="LAYCAN_BEG" />
+		<result property="laycanEnd" column="LAYCAN_END" />
+		<result property="shipType" column="SHIP_TYPE" />
+		<result property="shipAge" column="SHIP_AGE" />
+		<result property="remark" column="REMARK" />
+		<result property="traderName" column="TRADER_NAME" />
+		<result property="traderId" column="TRADER_ID" />
+		<result property="companyId" column="COMPANY_ID" />
+		<result property="companyName" column="COMPANY_NAME" />
+		<result property="tel" column="TEL" />
+		<result property="email" column="EMAIL" />
+		<result property="contacts" column="CONTACTS" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="plateSel" column="PLATE_SEL"/>
+		<result property="traderSel" column="TRADER_SEL"/>
+		<result property="shipPlateId" column="SHIP_PLATE_ID"/>
+		<result property="shipPlateUuid" column="SHIP_PLATE_UUID"/>
+		<result property="shipAgeEnd" column="SHIP_AGE_END"/>
+		<result property="shipAgeBeg" column="SHIP_AGE_BEG" />
+		<result property="FLoadPort" column="LOAD_PORT" />
+		<result property="agreementFlag" column="AGREEMENT_FLAG" />
+		<result property="epMemberNameEn" column="EP_MEMBER_NAME_EN" />
+		<result property="traderNameEn" column="TRADER_NAME_EN" />
+		<result property="companyNameEn" column="COMPANY_NAME_EN" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="Pallet" parameterType="com.sinochem.crude.trade.transport.domain.Pallet">
+	select * from t_ship_pallet
+	where
+		 ALIVE_FLAG='1'
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+		<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+		<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+		<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+		<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+		<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+		<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+		<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+		<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+		<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{FLoadPort}</if>
+		<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+		<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+	</select>
+	
+	<select id="findByPrimaryKey" resultMap="Pallet">
+			select
+			* from t_ship_pallet
+			where
+		    PALLET_ID=#{palletId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="Pallet">
+			select
+			* from t_ship_pallet
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.Pallet">
+		update t_ship_pallet
+		<set>
+         PALLET_ID=#{palletId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="unitName!=null">,UNIT_NAME = #{unitName}</if>
+		<if test="oilName!=null">,OIL_NAME = #{oilName}</if>
+		<if test="palletCode!=null">,PALLET_CODE = #{palletCode}</if>
+		<if test="palletType!=null">,PALLET_TYPE = #{palletType}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="orderCode!=null">,ORDER_CODE = #{orderCode}</if>
+		<if test="orderPact!=null">,ORDER_PACT = #{orderPact}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="laycanBeg!=null">,LAYCAN_BEG = #{laycanBeg}</if>
+		<if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+		<if test="shipType!=null">,SHIP_TYPE = #{shipType}</if>
+		<if test="shipAge!=null">,SHIP_AGE = #{shipAge}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="traderName!=null">,TRADER_NAME = #{traderName}</if>
+		<if test="traderId!=null">,TRADER_ID = #{traderId}</if>
+		<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+		<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="plateSel!=null">,PLATE_SEL = #{plateSel}</if>
+		<if test="traderSel!=null">,TRADER_SEL = #{traderSel}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="shipAgeEnd!=null">,SHIP_AGE_END = #{shipAgeEnd}</if>
+		<if test="shipAgeBeg!=null">,SHIP_AGE_BEG = #{shipAgeBeg}</if>
+		<if test="FLoadPort!=null">,LOAD_PORT = #{FLoadPort}</if>
+		<if test="agreementFlag!=null">,AGREEMENT_FLAG =#{agreementFlag}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="traderNameEn!=null">,TRADER_NAME_EN=#{traderNameEn}</if>
+		<if test="companyNameEn!=null">,COMPANY_NAME_EN=#{companyNameEn}</if>
+		</set>
+		where
+       	 PALLET_ID=#{palletId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.Pallet"  useGeneratedKeys="true" keyProperty="palletId" >
+		insert  into t_ship_pallet (				PALLET_ID
+						,UUID
+						,EP_MEMBER_ID
+						,EP_MEMBER_NAME
+						,AGREEMENT_CODE
+						,UNIT_NAME
+						,OIL_NAME
+						,PALLET_CODE
+						,PALLET_TYPE
+						,ORDER_NO
+						,ORDER_CODE
+						,ORDER_PACT
+						,STATUS
+						,QUANTITY
+						,LAYCAN_BEG
+						,LAYCAN_END
+						,SHIP_TYPE
+						,SHIP_AGE
+						,REMARK
+						,TRADER_NAME
+						,TRADER_ID
+						,COMPANY_ID
+						,COMPANY_NAME
+						,TEL
+						,EMAIL
+						,CONTACTS
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,PLATE_SEL
+						,TRADER_SEL
+						,SHIP_PLATE_ID
+						,SHIP_PLATE_UUID
+						,SHIP_AGE_END
+						,SHIP_AGE_BEG
+						,LOAD_PORT
+						,AGREEMENT_FLAG
+						,EP_MEMBER_NAME_EN
+						,TRADER_NAME_EN
+						,COMPANY_NAME_EN
+						)
+		values(		#{palletId}
+						,#{uuid}
+						,#{epMemberId}
+						,#{epMemberName}
+						,#{agreementCode}
+						,#{unitName}
+						,#{oilName}
+						,#{palletCode}
+						,#{palletType}
+						,#{orderNo}
+						,#{orderCode}
+						,#{orderPact}
+						,#{status}
+						,#{quantity}
+						,#{laycanBeg}
+						,#{laycanEnd}
+						,#{shipType}
+						,#{shipAge}
+						,#{remark}
+						,#{traderName}
+						,#{traderId}
+						,#{companyId}
+						,#{companyName}
+						,#{tel}
+						,#{email}
+						,#{contacts}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{plateSel}
+						,#{traderSel}
+						,#{shipPlateId}
+						,#{shipPlateUuid}
+						,#{shipAgeEnd}
+						,#{shipAgeBeg}
+						,#{FLoadPort}
+						,#{agreementFlag}
+						,#{epMemberNameEn}
+						,#{traderNameEn}
+						,#{companyNameEn}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_pallet
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			PALLET_ID=#{palletId} 
+																																																																																																																																																																																
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName" 
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid"
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,   AGREEMENT_FLAG as "agreementFlag"
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+						from t_ship_pallet
+		where
+			ALIVE_FLAG='1'
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+			<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+			<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+			<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+			<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+			<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+			<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+			<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+			<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+			<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+			<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+			order by  CREATE_DATE desc
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_pallet 
+		where
+		 ALIVE_FLAG='1'
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+			<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+			<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+			<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+			<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+			<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+			<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+			<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+			<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+			<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{FLoadPort}</if>
+			<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+			<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_pallet
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+		<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+		<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+		<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+		<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+		<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+		<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+		<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+		<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+		<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{FLoadPort}</if>
+		<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+		<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_pallet
+		<set>
+         PALLET_ID=#{palletId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="unitName!=null">,UNIT_NAME = #{unitName}</if>
+		<if test="oilName!=null">,OIL_NAME = #{oilName}</if>
+		<if test="palletCode!=null">,PALLET_CODE = #{palletCode}</if>
+		<if test="palletType!=null">,PALLET_TYPE = #{palletType}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="orderCode!=null">,ORDER_CODE = #{orderCode}</if>
+		<if test="orderPact!=null">,ORDER_PACT = #{orderPact}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="laycanBeg!=null">,LAYCAN_BEG = #{laycanBeg}</if>
+		<if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+		<if test="shipType!=null">,SHIP_TYPE = #{shipType}</if>
+		<if test="shipAge!=null">,SHIP_AGE = #{shipAge}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="traderName!=null">,TRADER_NAME = #{traderName}</if>
+		<if test="traderId!=null">,TRADER_ID = #{traderId}</if>
+		<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+		<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="plateSel!=null">,PLATE_SEL = #{plateSel}</if>
+		<if test="traderSel!=null">,TRADER_SEL = #{traderSel}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="shipAgeEnd!=null">,SHIP_AGE_END = #{shipAgeEnd}</if>
+		<if test="shipAgeBeg!=null">,SHIP_AGE_BEG = #{shipAgeBeg}</if>
+		<if test="FLoadPort!=null">,LOAD_PORT = #{FLoadPort}</if>
+		<if test="agreementFlag!=null">,AGREEMENT_FLAG=#{agreementFlag}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="traderNameEn!=null">,TRADER_NAME_EN=#{traderNameEn}</if>
+		<if test="companyNameEn!=null">,COMPANY_NAME_EN=#{companyNameEn}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+		<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+		<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+		<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+		<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+		<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+		<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+		<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+		<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+		<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{FLoadPort}</if>
+		<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+		<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	<select id="countRecords2" resultType="int" parameterType="hashmap">
+		select count(*) FROM t_ship_pallet where 
+		ALIVE_FLAG = '1' 
+		and ORDER_NO = '0' 
+		and UUID IN
+		(select PALLET_UUID from
+			(select a.PALLET_UUID,a.LOAD_PORT,a.LOAD_REGION,b.UNLOAD_PORT,b.UNLOAD_REGION from 
+			(select t.PALLET_UUID,t.LOAD_PORT,t.LOAD_REGION from t_ship_pallet_port t where t.UNLOAD_PORT is  null and t.UNLOAD_REGION is null) a,
+	 		(select t.PALLET_UUID,t.UNLOAD_PORT,t.UNLOAD_REGION from t_ship_pallet_port t where t.LOAD_PORT is  null and t.LOAD_REGION is null) b
+			where a.PALLET_UUID = b.PALLET_UUID) c 
+			where 1=1
+				<if test="loadPort!=null and loadPort!=''">and (c.LOAD_PORT like CONCAT('%',#{loadPort},'%') or c.LOAD_REGION like CONCAT('%',#{loadPort},'%')) </if>
+				<if test="unloadPort!=null and unloadPort!=''">and (c.UNLOAD_PORT like CONCAT('%',#{unloadPort},'%') or c.UNLOAD_REGION like CONCAT('%',#{unloadPort},'%'))</if>
+		)
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</select>
+
+
+	<!-- 无订单列表 -->
+	<select id="queryPallet"  resultType="java.util.HashMap" parameterType="hashmap">
+		
+		SELECT
+			PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName"
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid" 
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,	 AGREEMENT_FLAG as "agreementFlag"	
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+		FROM t_ship_pallet where ALIVE_FLAG = '1' 
+		and ORDER_NO = '0' 
+		and UUID IN
+		(select PALLET_UUID from
+			(select a.PALLET_UUID,a.LOAD_PORT,a.LOAD_REGION,a.LOAD_PORT_EN,b.UNLOAD_PORT,b.UNLOAD_REGION,b.UNLOAD_PORT_EN from 
+			(select t.PALLET_UUID,t.LOAD_PORT,t.LOAD_REGION,t.LOAD_PORT_EN from t_ship_pallet_port t where t.ALIVE_FLAG = '1' and t.UNLOAD_PORT is  null and t.UNLOAD_REGION is null) a,
+	 		(select t.PALLET_UUID,t.UNLOAD_PORT,t.UNLOAD_REGION,t.UNLOAD_PORT_EN from t_ship_pallet_port t where t.ALIVE_FLAG = '1' and t.LOAD_PORT is  null and t.LOAD_REGION is null) b
+			where a.PALLET_UUID = b.PALLET_UUID) c 
+			where 1=1
+				<if test="loadPort!=null and loadPort!=''">and (c.LOAD_PORT like CONCAT('%',#{loadPort},'%') or c.LOAD_REGION like CONCAT('%',#{loadPort},'%')  
+				or c.LOAD_PORT_EN like CONCAT('%',#{loadPort},'%')) </if>
+				<if test="unloadPort!=null and unloadPort!=''">and (c.UNLOAD_PORT like CONCAT('%',#{unloadPort},'%') or c.UNLOAD_REGION like CONCAT('%',#{unloadPort},'%')
+				or c.UNLOAD_PORT_EN like CONCAT('%',#{unloadPort},'%'))</if>
+		)
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		
+		<!-- t_ship_pallet as p
+		WHERE
+		p.ALIVE_FLAG = '1'
+		and p.ORDER_NO = '0'
+			and (p.UUID IN (
+				
+				<if test="loadPort!=null and loadPort!='' and (unloadPort==null or unloadPort=='')">
+				SELECT
+					u.PALLET_UUID
+				FROM
+					t_ship_pallet_port as u
+				WHERE
+				u.ALIVE_FLAG = '1'
+				 	and (u.LOAD_PORT LIKE '%${loadPort}%' or  u.LOAD_REGION LIKE '%${loadPort}%')
+				</if>
+				<if test="unloadPort!=null and unloadPort!='' and  (loadPort==null or loadPort=='')">
+				SELECT
+					u.PALLET_UUID
+				FROM
+					t_ship_pallet_port as u
+				WHERE
+				u.ALIVE_FLAG = '1'
+					and (u.UNLOAD_PORT LIKE '%${unloadPort}%' or  u.UNLOAD_REGION LIKE '%${unloadPort}%')
+				</if>
+				<if test="unloadPort!=null and unloadPort!='' and  loadPort!=null and loadPort!=''">
+				
+					select * from ((
+						SELECT PALLET_UUID FROM t_ship_pallet_port WHERE ALIVE_FLAG = '1'
+						and (LOAD_PORT LIKE '%${loadPort}%' or LOAD_REGION LIKE '%${loadPort}%') 
+					)
+					union
+					(
+						SELECT PALLET_UUID FROM t_ship_pallet_port WHERE ALIVE_FLAG = '1'
+						and (UNLOAD_PORT LIKE '%${unloadPort}%' or UNLOAD_REGION LIKE '%${unloadPort}%')
+					)) as searchPort
+				</if> -->
+				<!--
+				or
+				(p.UUID IN (
+				SELECT
+					u.PALLET_UUID
+				FROM
+					t_ship_pallet_port as u
+				WHERE
+				u.ALIVE_FLAG = '1' 
+				and (u.LOAD_REGION LIKE '%${loadPort}%' or u.UNLOAD_REGION LIKE '%${unloadPort}%')
+				</if> ))-->
+			order by STATUS ='1' DESC,STATUS ='2' DESC,STATUS ='3' DESC,STATUS ='4' DESC,STATUS ='6' DESC,STATUS ='5'  DESC,CREATE_DATE DESC
+	</select>
+	
+	
+	<select id="countRecords3" resultType="int" parameterType="hashmap">
+	select count(*) from t_ship_pallet
+		where
+			ALIVE_FLAG='1' and ORDER_NO ='1'
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="oilName!=null and oilName!=''">and  OIL_NAME like CONCAT('%', #{oilName}, '%')</if>
+			<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT like CONCAT('%', #{orderPact}, '%')</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+			<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+	</select>
+	<!-- 有订单列表 -->
+	<select id="findPallet" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+						  PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId"
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName" 
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid"
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,	 AGREEMENT_FLAG as "agreementFlag"	
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+						from t_ship_pallet
+		where
+			ALIVE_FLAG='1' and ORDER_NO ='1' and
+			UUID IN (
+			select
+						distinct(PALLET_UUID)
+				from
+						t_ship_pallet_port a
+				JOIN 
+						t_ship_pallet b
+				ON
+					a.PALLET_UUID = b.UUID 
+				where 1=1
+					<if test="oilName!=null and oilName!=''">and (a.OIL_TYPE like CONCAT('%', #{oilName}, '%') or a.OIL_TYPE_EN like CONCAT('%', #{oilName}, '%'))</if>
+			)
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<!-- <if test="orderPact!=null and orderPact!=''">and  ORDER_PACT like CONCAT('%', #{orderPact}, '%')</if> -->
+			<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+			<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			order by STATUS ='1' DESC,STATUS ='2' DESC,STATUS ='3' DESC,STATUS ='4' DESC,STATUS ='6' DESC,STATUS ='5'  DESC,CREATE_DATE DESC
+	</select>
+
+	<update id="updatePallet" parameterType="com.sinochem.crude.trade.transport.domain.Pallet" >
+		update t_ship_pallet as p 
+		<set>
+			p.UPDATE_DATE=SYSDATE()
+			<if test="quantity!=null">,p.QUANTITY = #{quantity}</if>
+			<if test="laycanBeg!=null">,p.LAYCAN_BEG = #{laycanBeg}</if>
+			<if test="laycanEnd!=null">,p.LAYCAN_END = #{laycanEnd}</if>
+			<if test="shipType!=null">,p.SHIP_TYPE = #{shipType}</if>
+			<if test="shipAge!=null">,p.SHIP_AGE = #{shipAge}</if>
+			<if test="remark!=null">,p.REMARK = #{remark}</if>
+			<if test="traderName!=null">,p.TRADER_NAME = #{traderName}</if>
+			<if test="traderId!=null">,p.TRADER_ID = #{traderId}</if>
+			<if test="companyId!=null">,p.COMPANY_ID = #{companyId}</if>
+			<if test="companyName!=null">,p.COMPANY_NAME = #{companyName}</if>
+			<if test="tel!=null">,p.TEL = #{tel}</if>
+			<if test="email!=null">,p.EMAIL = #{email}</if>
+			<if test="contacts!=null">,p.CONTACTS = #{contacts}</if>
+			<if test="plateSel!=null">p.PLATE_SEL=#{plateSel}</if>
+			<if test="traderSel!=null">p.TRADER_SEL=#{traderSel}</if>
+			<if test="shipPlateId!=null">p.SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null">p.SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipAgeEnd!=null">p.SHIP_AGE_END=#{shipAgeEnd}</if>
+			<if test="shipAgeBeg!=null">p.SHIP_AGE_BEG=#{shipAgeBeg}</if>
+			<if test="FLoadPort!=null">p.LOAD_PORT=#{FLoadPort}</if>
+			<if test="agreementFlag!=null">p.AGREEMENT_FLAG=#{agreementFlag}</if>
+			<if test="epMemberNameEn!=null">p.EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="traderNameEn!=null">p.TRADER_NAME_EN=#{traderNameEn}</if>
+			<if test="companyNameEn!=null">p.COMPANY_NAME_EN=#{companyNameEn}</if>
+		</set>
+	where
+       	p.UUID=#{uuid}
+</update>
+<!-- 有订单租船未产生代理协议任务数量 -->
+<select id="getTaskNum" resultType="int" parameterType="hashmap">
+	select count(*) from t_ship_pallet
+		where ALIVE_FLAG='1'
+		and ORDER_NO = '1'
+		and STATUS = '1'
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+</select>
+<!-- 无订单租船未产生代理协议任务数量 -->
+<select id="getUntaskNum" resultType="int" parameterType="hashmap">
+	select count(*) from t_ship_pallet
+		where ALIVE_FLAG='1'
+		and ORDER_NO = '0'
+		and STATUS = '1'
+		<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+</select>
+<select id="findMapByUuid" resultType="java.util.HashMap">
+		select
+						  PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName" 
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid"
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,	 AGREEMENT_FLAG as "agreementFlag"
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+						from t_ship_pallet
+		where
+			ALIVE_FLAG='1' and 
+			UUID=#{uuid}
+		</select>
+		
+		
+	<select id="findPalletList" resultMap="Pallet" parameterType="com.sinochem.crude.trade.transport.domain.Pallet">
+	select * from t_ship_pallet
+	where
+		 ALIVE_FLAG='1'
+		and  STATUS IN ('2','3','4')
+		ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="findMorePalletList" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName" 
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid"
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,	 AGREEMENT_FLAG as "agreementFlag"
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+						from t_ship_pallet
+		where
+			ALIVE_FLAG='1'
+			and  STATUS IN ('2','3','4')
+			and UUID IN
+			(select PALLET_UUID from
+				(select a.PALLET_UUID,a.LOAD_PORT,a.LOAD_REGION,b.UNLOAD_PORT,b.UNLOAD_REGION from 
+				(select t.PALLET_UUID,t.LOAD_PORT,t.LOAD_REGION from t_ship_pallet_port t where t.UNLOAD_PORT is  null and t.UNLOAD_REGION is null) a,
+		 		(select t.PALLET_UUID,t.UNLOAD_PORT,t.UNLOAD_REGION from t_ship_pallet_port t where t.LOAD_PORT is  null and t.LOAD_REGION is null) b
+				where a.PALLET_UUID = b.PALLET_UUID) c 
+				where 1=1
+<!-- 					<if test="loadPort!=null and loadPort!=''">and (c.LOAD_PORT like CONCAT('%',#{loadPort},'%') or c.LOAD_REGION like CONCAT('%',#{loadPort},'%')) </if>
+					<if test="unloadPort!=null and unloadPort!=''">and (c.UNLOAD_PORT like CONCAT('%',#{unloadPort},'%') or c.UNLOAD_REGION like CONCAT('%',#{unloadPort},'%'))</if>
+					<if test="portName!=null and portName!=''">and (c.LOAD_PORT like CONCAT('%',#{portName},'%') or c.LOAD_REGION like CONCAT('%',#{portName},'%') or c.UNLOAD_PORT like CONCAT('%',#{portName},'%') or c.UNLOAD_REGION like CONCAT('%',#{portName},'%'))</if> -->
+				
+					<if test="portName!=null and portName!=''">and ( c.LOAD_PORT IN (SELECT PORT_NAME FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1'  AND LANG_VER = #{lang})or
+						c.LOAD_REGION IN (SELECT PORT_NAME FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1'  AND LANG_VER = #{lang}) or
+						c.UNLOAD_PORT IN (SELECT PORT_NAME FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1'  AND LANG_VER = #{lang}) or
+						c.UNLOAD_REGION IN (SELECT PORT_NAME FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1'  AND LANG_VER = #{lang}) or 
+						 c.LOAD_PORT IN (SELECT EXT3 FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1' AND LANG_VER = #{lang}) or 
+						 c.LOAD_REGION IN (SELECT EXT3 FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1' AND LANG_VER = #{lang}) or
+						 c.UNLOAD_PORT IN (SELECT EXT3 FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1' AND LANG_VER = #{lang}) or
+						 c.UNLOAD_REGION IN (SELECT EXT3 FROM t_ship_port_region WHERE REGION like  CONCAT('%',#{portName},'%') AND ALIVE_FLAG = '1' AND LANG_VER = #{lang}))</if>
+			)
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="unitName!=null and unitName!=''">and  UNIT_NAME=#{unitName}</if>
+			<if test="oilName!=null and oilName!=''">and  OIL_NAME=#{oilName}</if>
+			<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE=#{palletCode}</if>
+			<if test="palletType!=null and palletType!=''">and  PALLET_TYPE=#{palletType}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="orderCode!=null and orderCode!=''">and  ORDER_CODE=#{orderCode}</if>
+			<if test="orderPact!=null and orderPact!=''">and  ORDER_PACT=#{orderPact}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="laycanBeg!=null and laycanBeg!=''">and  LAYCAN_BEG=#{laycanBeg}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+			<if test="shipType!=null and shipType!=''">and  SHIP_TYPE=#{shipType}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="traderName!=null and traderName!=''">and  TRADER_NAME=#{traderName}</if>
+			<if test="traderId!=null and traderId!=''">and  TRADER_ID=#{traderId}</if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="plateSel!=null and plateSel!=''">and  PLATE_SEL=#{plateSel}</if>
+			<if test="traderSel!=null and traderSel!=''">and  TRADER_SEL=#{traderSel}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END=#{shipAgeEnd}</if>
+			<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG=#{shipAgeBeg}</if>
+			<if test="FLoadPort!=null and FLoadPort!=''">and  LOAD_PORT=#{FLoadPort}</if>
+			<if test="agreementFlag!=null and agreementFlag!=''">and  AGREEMENT_FLAG=#{agreementFlag}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="traderNameEn!=null and traderNameEn!=''">and  TRADER_NAME_EN=#{traderNameEn}</if>
+			<if test="companyNameEn!=null and companyNameEn!=''">and  COMPANY_NAME_EN=#{companyNameEn}</if>
+			order by  CREATE_DATE desc
+		</select>
+	<!-- om列表 -->
+	<select id="queryPalletOm" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  PALLET_ID as "palletId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId"
+						 ,   EP_MEMBER_NAME as "epMemberName"
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   UNIT_NAME as "unitName" 
+						 ,   OIL_NAME as "oilName" 
+						 ,   PALLET_CODE as "palletCode" 
+						 ,   PALLET_TYPE as "palletType" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   ORDER_PACT as "orderPact" 
+						 ,   STATUS as "status" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_BEG as "laycanBeg" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 ,   SHIP_TYPE as "shipType" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,   REMARK as "remark" 
+						 ,   TRADER_NAME as "traderName" 
+						 ,   TRADER_ID as "traderId" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,	 PLATE_SEL as "plateSel" 
+						 ,	 TRADER_SEL as	"traderSel" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as	"shipPlateUuid"
+						 ,	 SHIP_AGE_END as "shipAgeEnd"
+						 , 	 SHIP_AGE_BEG as "shipAgeBeg"
+						 ,	 LOAD_PORT as "FLoadPort"
+						 ,	 AGREEMENT_FLAG as "agreementFlag"	
+						 ,	 SHIP_TYPE as "shipType"	
+						 ,	 EP_MEMBER_NAME_EN as "epMemberNameEn"
+						 ,	 TRADER_NAME_EN as "traderNameEn"
+						 ,	 COMPANY_NAME_EN as "companyNameEn"
+						from t_ship_pallet
+		where
+			ALIVE_FLAG='1' and
+			UUID IN (
+			select
+						distinct(PALLET_UUID)
+				from
+						t_ship_pallet_port a
+				JOIN 
+						t_ship_pallet b
+				ON
+					a.PALLET_UUID = b.UUID 
+				where 1=1
+					<if test="oilName!=null and oilName!=''">and  a.OIL_TYPE like CONCAT('%', #{oilName}, '%')</if>
+					<if test="loadPort!=null and loadPort!=''">and (a.LOAD_PORT like CONCAT('%',#{loadPort},'%') or a.LOAD_REGION like CONCAT('%',#{loadPort},'%')) </if>
+					<if test="unloadPort!=null and unloadPort!=''">and (a.UNLOAD_PORT like CONCAT('%',#{unloadPort},'%') or a.UNLOAD_REGION like CONCAT('%',#{unloadPort},'%'))</if>
+					
+			)
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME like CONCAT('%', #{epMemberName}, '%')</if>
+			<if test="shipType!=null and shipType!=''">and  SHIP_TYPE like CONCAT('%', #{shipType}, '%')</if>
+			<if test="shipAgeBeg!=null and shipAgeBeg!=''">and  SHIP_AGE_BEG &gt;= #{shipAgeBeg}</if>
+			<if test="shipAgeEnd!=null and shipAgeEnd!=''">and  SHIP_AGE_END &lt;= #{shipAgeEnd}</if>
+			<if test="publishTimeBeg!=null and publishTimeBeg!=''">and  CREATE_DATE &gt;= #{publishTimeBeg}</if>
+			<if test="publishTimeEnd!=null and publishTimeEnd!=''">and  CREATE_DATE &lt;= #{publishTimeEnd}</if>
+			<if test="layCanBeg!=null and layCanBeg!=''">and  LAYCAN_BEG &gt;= #{layCanBeg}</if>
+			<if test="layCanEnd!=null and layCanEnd!=''">and  LAYCAN_END &lt;=#{layCanEnd}</if>
+			<if test="palletCode!=null and palletCode!=''">and  PALLET_CODE like CONCAT('%', #{palletCode}, '%')</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO =#{orderNo}</if>
+			order by LAYCAN_END desc
+	</select>
+</mapper>

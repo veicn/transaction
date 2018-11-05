@@ -1,0 +1,48 @@
+$contain.get('/common/title.htm').put('title', '生成邀请码')
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+<div class="f1 manage-con newCode">
+    <h3>New invitation code</h3>
+    <span class="m-btn br btn1 btnr">+ Generate An Invitation Code</span>
+    <table class="account-mag">
+        <tr class="tr-fir">
+            <td>Invitation Code</td>
+            <td>Status</td>
+            <td>Setting</td>
+        </tr>
+        <tr>
+            <td>wdnrxm</td>
+            <td>Inactive</td>
+            <td><img src="$appServer.get('/product/images/delete-icon.png')"></td>
+        </tr>
+    </table>
+    <div class="c-page">
+        <span class="c-page-txt">&lt;</span>
+        <a class="c-page-num" href="">1</a>
+        <a class="c-page-num c-cur" href="">2</a>
+        <a class="c-page-num" href="">3</a>
+        <a class="c-page-num" href="">4</a>
+        <span class="c-page-point">...</span>
+        <a class="c-page-num" href="">8</a>
+        <a class="c-page-txt" href="">&gt;</a>
+    </div>
+</div>
+
+<!-- 带遮罩层的弹窗 star-->
+<div class="pop-win"></div>
+<div class="pop-center suc-center addCod">
+    <h3>INVITING CODE</h3>
+    <p class="cen1">Invite new members to join us via following code</p>
+    <span class="sp1">Verification Code :</span><span class="sp2">666666</span>
+    <!-- <p class="cen2">Are you sure to remove this account?</p> -->
+    <a href="" class="con btnr">Copy code</a>
+    <!-- <a href="" class="unbindCan btnr">Cancel</a> -->
+    <img src="$appServer.get('/product/images/del_x.png')" class="closed">
+</div>
+#css($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+#css($appServer.get('/product/js/common/common.js'))
+<script>
+    commonCPY.select();
+</script>

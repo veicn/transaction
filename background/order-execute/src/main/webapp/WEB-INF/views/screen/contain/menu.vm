@@ -1,0 +1,27 @@
+
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+    	#if($authUtils.checkRole("admin"))
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+            	 <a class="" href="javascript:;">订单执行管理</a>
+                  <dl class="layui-nav-child">
+                    <dd><a href="$orderExecuteServer.get('om/trade/tradeSubject.htm')">贸易费用管理</a></dd>
+              		<dd><a href="$orderExecuteServer.get('om/order/documentList.htm')">单证清单管理</a></dd>
+                </dl>
+             </li>
+             <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">订单接口管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$orderExecuteServer.get('om/interface/interfaceList.htm')">接口清单管理</a></dd>
+                    <dd><a href="$orderExecuteServer.get('om/interface/interfaceSystem.htm')">外部系统管理</a></dd>
+                	<dd><a href="$orderExecuteServer.get('om/interfaceContrast/interfaceContrast.htm')">代码Mapping管理</a></dd>
+                    <dd><a href="$orderExecuteServer.get('om/interface/interfaceOutput.htm')">外部系统输出日志</a></dd>
+              		<dd><a href="$orderExecuteServer.get('om/interface/interfaceInput.htm')">外部系统输入日志</a></dd>
+                </dl>
+            </li>
+        </ul>
+        #end
+    </div>
+</div>

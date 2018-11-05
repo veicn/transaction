@@ -1,0 +1,140 @@
+<div class="caigou-content-left clearfix">
+
+    <ul class="left-bq">
+        #if($!{crudeOilDemandQuery.orderByKeys} ==1)
+            <li><a class="left-bq-cor" href="javascript:void(0)" onclick="orderByKeys(1)">综合排序<i #if($!{crudeOilDemandQuery.sort} ==1) class="c-ico c-icos" #else class="c-ico c-icox" #end ></i></a></li>
+        #else
+            <li><a  href="javascript:void(0)" onclick="orderByKeys(1)">综合排序<i class="c-ico c-icox"></i></a></li>
+        #end
+        #if($!{crudeOilDemandQuery.orderByKeys} ==2)
+            <li><a class="left-bq-cor" href="javascript:void(0)" onclick="orderByKeys(2)">数量<i #if($!{crudeOilDemandQuery.sort} ==1) class="c-ico c-icos" #else class="c-ico c-icox" #end></i></a></li>
+        #else
+            <li><a href="javascript:void(0)" onclick="orderByKeys(2)">数量<i class="c-ico c-icox"></i></a></li>
+        #end
+        #if($!{crudeOilDemandQuery.orderByKeys} ==3)
+            <li><a class="left-bq-cor" href="javascript:void(0)" onclick="orderByKeys(3)">发布日期<i #if($!{crudeOilDemandQuery.sort} ==1) class="c-ico c-icos" #else class="c-ico c-icox" #end></i></a></li>
+        #else
+            <li><a href="javascript:void(0)" onclick="orderByKeys(3)">发布日期<i class="c-ico c-icox"></i></a></li>
+        #end
+        #if($!{crudeOilDemandQuery.orderByKeys} ==5)
+            <li class="left-bg-line"><a class="left-bq-cor" href="javascript:void(0)" onclick="orderByKeys(5)">到货期<i #if($!{crudeOilDemandQuery.sort} ==1) class="c-ico c-icos" #else class="c-ico c-icox" #end></i></a></li>
+        #else
+            <li class="left-bg-line"><a href="javascript:void(0)" onclick="orderByKeys(5)">到货期<i class="c-ico c-icox"></i></a></li>
+        #end
+        #if($!{crudeOilDemandQuery.orderByKeys} ==6)
+            <li class="left-bg-line"><a class="left-bq-cor" href="javascript:void(0)" onclick="orderByKeys(6)">截止日期<i #if($!{crudeOilDemandQuery.sort} ==1) class="c-ico c-icos" #else class="c-ico c-icox" #end></i></a></li>
+        #else
+            <li class="left-bg-line"><a href="javascript:void(0)" onclick="orderByKeys(6)">截止日期<i class="c-ico c-icox"></i></a></li>
+        #end
+
+        <span><em>每页显示</em>
+            <button class="btn-more btn-tiao" type="button" onclick="setPageSize(20)">&nbsp;20条&nbsp;</button>
+            <button class="btn-more btn-tiao" type="button" onclick="setPageSize(40)">&nbsp;40条&nbsp;</button>
+            <a class="right-fbxq" href="$appServer.get('crudeoillobby/purchasingDemand.htm')"  >发布需求</a>
+        </span>
+    </ul>
+    <ul class="left-lb clearfix">
+        #foreach($!d in $!pageInfoResult.list)
+            <li class="left-cont clearfix" style="cursor:pointer" onclick="window.location.href = '$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{d.id}'">
+                <span class="left-cont-dxk hidden"><input class="cpy-contrast-inp compareC"  id="compareC_$!{d.id}_$!{d.id}" type="checkbox" sn="$!{d.id}" dealType="B" img="$imageServer.get('/images/cg_pic1.jpg')" name="name" value="$!{d.id}" class="cpy-contrast-inp" type="checkbox" name="" value=""/></span>
+                <a onclick="return false" disabled class="left-cont-pic">
+                    <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{d.creater}.img"
+                         onerror="this.src='$imageServer.get('images/cg_pic1.jpg')'"> #if($!{d.specified} == 1) <em><i class="c-ico cg-dxfb1"></i></em> #end
+                </a>
+                <dl class="left-cont-txtt">
+                    <dt class="left-cont-txtt-p"><a onclick="return false" disabled>#if($!{d.publishType} == 2) 性质: #else 油种: #end $!{d.crudeOilOptions}</a><span>&nbsp;&nbsp;&nbsp;($!{d.bEnterpriseName})</span></dt>
+                    <dd class="left-cont-txtt-n">发布日期：$!{d.pubDate}</dd>
+                    <dd class="left-cont-txtt-n">截止日期：$!{d.stopBidTime}</dd>
+                    <dd class="left-cont-txtt-n">数量(万桶)：$!{d.num}</dd>
+                    <dd class="left-cont-txtt-n">贸易条款：$!{d.tradeItem}</dd>
+                    #if($!{d.tradeItem} == 'FOB')
+                        <dd class="left-cont-txtt-n">装货港：$!{d.shipmentPort}</dd>
+                        <dd class="left-cont-txtt-n">装货期： $!{d.shipmentStartTime}至$!{d.shipmentEndTime} </dd>
+                    #else
+                        <dd class="left-cont-txtt-n">卸货港：$!{d.dischargePort}</dd>
+                        <dd class="left-cont-txtt-n">到货期： $!{d.dischargeStartTime}至$!{d.dischargeEndTime} </dd>
+                    #end
+                    <dd class="left-cont-txtt-n">计价基准：$!{d.valuationBase}</dd>
+                    <dd class="left-cont-txtt-n">付款日期：$!{d.payItem} </dd>
+##                    <dd class="left-cont-txtt-n">计价期：
+##                        $!{d.valuationPeriodType}
+##                        #if($!{d.valuationProidType} == 'Period')
+##                            （$!{d.valuationProidStart}至$!{d.valuationProidEnd}）
+##                        #end
+##                    </dd>
+##                    #if($d.purchaseType=='招标')
+##                        <dd class="left-cont-txtt-n">公布中标日期：$!{d.tenderOutTime}</dd>
+##                    #end
+                    <span class="dwzx-an">
+                            	#if($!{d.purchaseType}=='招标')
+                                    <a href="javascript:void(0)" demandId="$!{d.id}" creater="$!{d.creater}" overdue="$!{d.overdue}" msg="投标" class="detail-bxj epclick lbyba"><i class="c-ico c-ico-tb1"></i>投标</a>
+                                #else
+                                    <a href="javascript:void(0)" demandId="$!{d.id}" creater="$!{d.creater}" overdue="$!{d.overdue}" msg="报价" class="detail-bxj epclick"><i class="c-ico c-ico-bj"></i>报价</a>
+                                #end
+                        <a href="javascript:void(0)" id="compareC_$!{d.id}_$!{d.id}" sn="$!{d.id}" dealType="B" img="$imageServer.get('/images/cg_pic1.jpg')" name="$!{d.crudeOilOptions}" value="$!{d.id}" class="detail-bsc cg-jrdb compareC"><i class="c-ico c-ico-db"></i>对比</a></span>
+                </dl>
+                #if($!{d.overdue})
+                    #if($!{d.purchaseType}=='招标')
+                        <em><i class="c-ico epclick cg-xxygq"  demandId="$!{d.id}" creater="$!{d.creater}" overdue="$!{d.overdue}" msg="投标" ></i></em>
+                    #else
+                        <em><i class="c-ico epclick cg-xxygq"  demandId="$!{d.id}" creater="$!{d.creater}" overdue="$!{d.overdue}" msg="报价" ></i></em>
+                    #end
+                #end
+            </li>
+        #end
+    </ul>
+    $contain.get('/common/page.htm').put("pageInfo",$!pageInfoResult)
+
+</div>
+
+<script>
+    jQuery(" .epclick").click(function(event){
+        var epclick = jQuery(this);
+        var demandId = epclick.attr("demandId");
+        var creater = epclick.attr("creater");
+        var overdue = epclick.attr("overdue");
+        var msg = epclick.attr("msg");
+        if (overdue == "true"){
+            layui.use(['layer'], function () {
+                layui.layer.alert('该需求已逾期，不能发起'+msg);
+            })
+            event.stopPropagation();
+            return false;
+        }
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('需求发起者不能参与'+msg);
+            })
+            event.stopPropagation();
+            return false;
+        }else{
+            event.stopPropagation();
+            window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + demandId;
+        }
+    });
+    function orderByKeys(key) {
+        var sort = $("#sort").val();
+        var bykey = $("#orderByKeys").val();
+        if(sort != "" && sort != undefined){
+            if(bykey == key){
+                if(sort == 1){
+                    $("#sort").val(0);
+                }else{
+                    $("#sort").val(1);
+                }
+            }else{
+                $("#orderByKeys").val(key)
+                $("#sort").val(0);
+            }
+        }else{
+            $("#orderByKeys").val(key)
+            $("#sort").val(0);
+        }
+
+        $("#crudeOilSearchSubmit").click();
+    }
+    function setPageSize(num) {
+        $("#pageSize").val(num)
+        $("#crudeOilSearchSubmit").click();
+    }
+</script>

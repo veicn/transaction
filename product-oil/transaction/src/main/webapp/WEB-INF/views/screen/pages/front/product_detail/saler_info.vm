@@ -1,0 +1,13 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Seller<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Company:</span><span class="c-int qx-conte"> $!{salerInfoVO.enterpriseName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Address:</span><span class="c-int qx-conte"> $!{salerInfoVO.address}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Trader Name:</span><span class="c-int qx-conte"> $!{salerInfoVO.traderName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Email Address:</span><span class="c-int qx-conte"> $!{salerInfoVO.email}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Tel:</span><span class="c-int qx-conte"> $!{salerInfoVO.telephone}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Fax:</span><span class="c-int qx-conte"> $!{salerInfoVO.fax}</span></li>
+        </ul>
+    </div>
+</div>

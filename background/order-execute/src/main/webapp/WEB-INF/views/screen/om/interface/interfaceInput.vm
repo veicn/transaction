@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="$imageServer.get('orderexecute/css/interface/interface.css')" ></link>
+<script src="$imageServer.get('orderexecute/js/interface/interfaceInput.js')"></script>
+<form class="layui-form">
+	<div class="pp15" id="layerDemo">
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<div class="layui-form-item layui-container">
+				<div class="layui-inline">
+					<label class="layui-form-label">入参</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="inputPara" id="inputPara" placeholder=""/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">出参</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="outputPara" id="outputPara" placeholder=""/>
+					</div>
+				</div>
+				<button type="button" style="margin-top:-12px" class="layui-btn layui-btn-normal" data-type="reload" id="btn">搜索</button>
+			</div>
+		</div>
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+			<thead>
+				<tr>
+					<th lay-data="{field:'sysName', width:120}">系统别名</th>
+					<th lay-data="{field:'interfaceCode', width:120}">接口代码</th>
+					<th lay-data="{field:'status', templet: '#editableTpl', width:120}">调用状态</th>
+					<th lay-data="{field:'inputTime', width:120}">接收时间</th>
+					<th lay-data="{field:'inputPara'}">入参</th>
+					<th lay-data="{field:'outputPara',width:120}">出参</th>
+					<th lay-data="{field:'inputUrl', width:200}">接收地址</th>
+
+				</tr>
+			</thead>
+		</table>
+	</div>
+</form>
+
+<script id="editableTpl" type="text/html">
+	{{#  if(d.status === '1'){ }}
+	{{ '成功' }}
+	{{#  } else if (d.status === '0') { }}
+	{{ '失败' }}
+	{{#  } else if (d.status === '2') { }}
+	{{ '处理中'}}
+	{{#  } }}
+</script>
+
+

@@ -1,0 +1,215 @@
+
+#set($productOilResource = $contract.productOilResource)
+
+<div style="display:none">
+	<select  class="sele" id="gasolineKind">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('gasolineKindMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	<select  class="sele" id="dieselKind">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('dieselKindMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	<select  class="sele" id="keroseneKind">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('keroseneKindMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	<select  class="sele" id="gasolineSpecs">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('gasolineSpecsMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	<select  class="sele" id="dieselSpecs">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('dieselSpecsMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	<select  class="sele" id="keroseneSpecs">
+		#foreach($obj in $!productOilKindAndSpecsMap.get('keroseneSpecsMap').entrySet())
+                     <option value="$!obj.key">$!obj.value</option>
+		#end
+	</select>
+	
+</div>
+<div class="c-mod">
+	  <h3><em class="cw-ico ico-h3"></em>Product Information</h3>
+	  <div class="c-form">
+        <ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">Commodity categories：</span>
+				<span class="c-txt release_inp"><input name="productOilResource.productOilClassify" type="radio" class="re_radio" value="1" #if($!{productOilResource.productOilClassify}=="1" || $!{contract.productOilClassify}=='') checked #end>汽油</span>
+				<span class="c-txt release_inp"><input name="productOilResource.productOilClassify" type="radio" class="re_radio" value="2" #if($!{productOilResource.productOilClassify}=="2") checked #end>柴油</span>
+			##	<span class="c-txt release_inp"><input name="productOilResource.productOilClassify" type="radio" class="re_radio" value="3" #if($!{productOilResource.productOilClassify}=="3") checked #end>煤油</span>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">Grade：</span>
+				<select name="productOilResource.productOilKind" class="sele" value="$!{productOilResource.productOilKind}">
+						
+				</select>
+			</li>
+			
+            <li class="c-fcos2">
+            	<span class="c-fn">Specification：</span>
+            	<select  name="productOilResource.productOilSpecs" class="sele" value="$!{productOilResource.productOilSpecs}">
+						
+				</select>
+            </li>
+
+            <li class="c-fcos2">
+                <span class="c-fn">Region：</span>
+                <select name="productOilResource.region" class="sele" value="$!{productOilResource.region}">
+						#foreach($item in $regionProductOil.entrySet())
+                            <option value="$!{item.key}" >$!{item.value}</option>
+						#end
+                    #*</select>*#
+
+				</select>
+            </li>
+			
+			#*<li class="c-fcos2">
+				<span class="c-fn">出口类型：</span>
+				<select name="exportType" class="sele" value="">
+
+					<option value="1">一般贸易出口</option><option value="2">来料加工出口</option>
+
+                    <select class="sele" name="valuationProidType" id="valuationProidType">
+						#foreach($item in $ValuationProidType.entrySet())
+                            <option value="$!{item.key}" >$!{item.value}</option>
+						#end
+                    </select>
+				</select>
+			</li>*#
+			
+			<li class="c-fcos2">
+				<span class="c-fn">Incoterm：</span>
+				<select name="tradeItem" class="sele" value="$!{contract.tradeItem}">
+						#foreach($item in $tradeItemMap.entrySet())
+                            <option value="$!{item.key}" >$!{item.value}</option>
+						#end
+				</select>
+			</li>
+
+            <li class="c-fcos2">
+                <span class="c-fn">Qty(BBL)：</span>
+                <input  name="numStr" type="text"  class="c-int" onkeypress="return noNumbers(event)"  value="$!{contract.numStr}" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+            </li>
+			
+			#*<li class="c-fcos1">
+				<span class="c-fn">Laycan：</span>
+				<input name="crudeShip.shipmentStartTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>——
+				<input name="crudeShip.shipmentEndTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>
+			</li>*#
+            #*<li class="c-fcos2 bid-type">
+                <span class="c-fn">Tender Expire Date：</span><input name="stopBiddingTime" type="text" class="c-int" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.stopBidTime})}"/>
+            </li>
+			<li class="c-fcos2 bid-type">
+				<span class="c-fn">开标日期：</span>
+				<input name="tenderOutTime" type="text" class="c-int" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.tenderOutTime})}"/>
+			</li>*#
+			
+			<li class="c-fcos1">
+				<span class="c-fn">质检报告：</span>
+				<a href="" class="re_up">+ upload</a>
+			</li>
+			<li class="c-fcos1">
+				<span class="c-fn">商品图片：</span>
+				<a href="" class="re_up">+ upload</a>
+                <div class="c-imglist c-imglist2">
+                    <ul>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li class="c-imgadd"><a href="#">+</a></li>
+                    </ul>
+                </div>
+			</li>
+		</ul>
+	  </div>
+
+  </div>
+
+<script>
+	$(function(){
+
+        // 初始化日期
+        //initDateInput($("input[date='true']"));
+
+	    // Commodity categories 选中事件， 刷新品种、Specification
+	    $("input[name='productOilResource.productOilClassify']").click(function () {
+	        if ($(this).is(":checked")) {
+                var radioVal = $(this).val();
+                $("select[name='productOilResource.productOilKind']").empty();
+                $("select[name='productOilResource.productOilSpecs']").empty();
+  				if (radioVal == "1") {
+		            $("#gasolineKind").find("option").each(function () {
+		                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		            $("#gasolineSpecs").find("option").each(function () {
+		                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		        } else if (radioVal == "2") {
+		            $("#dieselKind").find("option").each(function () {
+		                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		            $("#dieselSpecs").find("option").each(function () {
+		                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		
+		        } else if (radioVal == "3") {
+		
+		            $("#keroseneKind").find("option").each(function () {
+		                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		            $("#keroseneSpecs").find("option").each(function () {
+		                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+		            });
+		        }
+			}
+
+        });
+
+	    // 交易类型选中事件
+		$("input[name='purchaseType']").click(function () {
+			if ($(this).val() == "1") {
+                $(".bid-type").css("display", "");
+			} else {
+			    $(".bid-type").css("display", "none");
+			    $("input[name='stopBiddingTime']").val('');
+                $("input[name='tenderOutTime']").val('');
+			}
+        });
+        #if($!{productOilResource.productOilClassify})
+	        var radioVal = $!{productOilResource.productOilClassify};
+	        if (radioVal == "1") {
+	            $("#gasolineKind").find("option").each(function () {
+	                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	            $("#gasolineSpecs").find("option").each(function () {
+	                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	        } else if (radioVal == "2") {
+	            $("#dieselKind").find("option").each(function () {
+	                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	            $("#dieselSpecs").find("option").each(function () {
+	                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	
+	        } else if (radioVal == "3") {
+	
+	            $("#keroseneKind").find("option").each(function () {
+	                $("select[name='productOilResource.productOilKind']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	            $("#keroseneSpecs").find("option").each(function () {
+	                $("select[name='productOilResource.productOilSpecs']").append("<option value='" + $(this).val() + "' selected='selected'>" + $(this).html() + "</option>");
+	            });
+	        }
+        #end
+
+
+	})
+</script>

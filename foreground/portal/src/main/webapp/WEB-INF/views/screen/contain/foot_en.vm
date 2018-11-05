@@ -1,0 +1,47 @@
+
+<div class="footer">
+    <div class="ft-tag-wrap" style="display: none">
+        <ul class="ft-tag clearfix">
+            <li class="ft-tag-item">
+                <i class="h-ico ico-zysc"></i>
+                <h3>交易商城</h3>
+                <em>资源丰富阳光交易</em>
+            </li>
+            <li class="ft-tag-item">
+                <i class="h-ico ico-zfbz"></i>
+                <h3>支付保障</h3>
+                <em>专业安全快速便利</em>
+            </li>
+            <li class="ft-tag-item">
+                <i class="h-ico ico-xpbj"></i>
+                <h3>询盘报价</h3>
+                <em>高效真实免费准确</em>
+            </li>
+            <li class="ft-tag-item">
+                <i class="h-ico ico-gylfw"></i>
+                <h3>供应链服务</h3>
+                <em>灵活便捷高额低息</em>
+            </li>
+        </ul>
+    </div>
+    <div class="inner">
+        <ul class="ft-list ft-listfi clearfix">
+            <li>
+                <h3><a href="">关于我们</a></h3>
+            </li>
+            <li>
+                <h3><a href="$appServer.get('/recruit.htm')">人才招聘</a></h3>
+            </li>
+            <li>
+                <h3><a href="$infoServer.get('/page/#/helpCenter')">帮助中心</a></h3>
+            </li>
+            <li>
+                <h3><a href="$infoServer.get('/page/#/ptStatement')">注册与服务协议</a></h3>
+            </li>
+            <li>
+                <h3><a href="$infoServer.get('/page/#/ptStatement')">法律声明</a></h3>
+            </li>
+        </ul>
+        <p>Copyright © Sinochem Corporation All Right Reserved ICP Beijing 13009914号-6</p>
+    </div>
+</div>

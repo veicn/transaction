@@ -1,0 +1,24 @@
+﻿#css($imageServer.get('css/f_partner_en.css'))
+
+<div class="inner">
+    <div class="crumb">
+        The current position：<a href="$portalServer.get('')">Home</a><em>&gt;</em><span>Partner</span>
+    </div>
+</div>
+<div class="inner clearfix">
+    <ul class="par-menu clearfix">
+        <li style="margin-top: 10px;"><a href="$appServer.get('tradeHall/partner/index_partner.htm')" #if(!$!{partner.type}) class="cur" #end>ALL</a></li>
+        #foreach($c in $!credentials)
+            <li style="margin-top: 10px;"><a #if($!{partner.type} == $!{c.code}) class="cur" #end href="$appServer.get('tradeHall/partner/index_partner.htm')?type=$!{c.code}">$!{c.nameEn}</a></li>
+        #end
+    </ul>
+    <ul class="par-cont clearfix">
+        #foreach($item in $!page.list)
+            <li>
+                <span><a class="partners" target="_blank"  href="$!{item.url}"><img src="$!{uploadServer}/img/$!{item.logo}.img_240_110.img" alt=""></a></span>
+                <em><a class="partners" target="_blank"  href="$!{item.url}">$!item.nameEn</a></em>
+            </li>
+        #end
+    </ul>
+    $contain.get('/page/page.htm').put('pageInfo',$!{page})
+</div>

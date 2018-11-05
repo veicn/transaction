@@ -1,0 +1,25 @@
+<!--采购商品信息-->
+<div class="c-mod" id="mjbwxx">
+    <h3><em class="cw-ico ico-h3"></em>采购计划<span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th class="tabl-line">序号</th>
+                <th>年月</th>
+                <th>油种</th>
+                <th>数量(桶)</th>
+                <th>计价公式</th>
+                
+            </tr>
+        #foreach($item in $planList)
+            <tr class="c-tabcos1">
+                <td class="tabl-line">$velocityCount</td>
+                <td>$!{item.dateStr} / $!{item.dateStr2}</td>
+                <td>$!{item.crudeOilResource.name}</td>
+                <td>$!{item.num}</td>
+                <td>$!{item.valuationFormula}</td>
+            </tr>
+        #end
+        </table>
+    </div>
+</div>

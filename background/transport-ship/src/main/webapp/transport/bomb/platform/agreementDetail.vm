@@ -1,0 +1,170 @@
+<script>
+layui.use(['laydate','upload'], function(){
+	var laydate = layui.laydate;
+	var $ = layui.jquery
+	,upload = layui.upload;
+});
+</script>
+<style>
+body .backbtn-class .layui-layer-btn a{
+	height: 28px;
+    line-height: 28px;
+    margin: 5px 5px 0;
+    padding: 0 15px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    color: #333;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+}
+</style>
+<form class="layui-form layui-form-pane" style="margin-top:50px; margin-left:90px" action="ruleSave">
+<input class="layui-input layui-hide" id="uuid" name="uuid" type="text">
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">协议编号</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input agreementCode" id="agreementCode" type="text" name="agreementCode" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">租船人</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input carrierName" id="carrierName" type="text" name="carrierName" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">租船协议日</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input signDate" id="signDate" type="text" name="signDate" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">船东</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input shipOwner" id="shipOwner" type="text" name="shipOwner" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">船名</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input shipName" id="shipName" type="text" name="shipName" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">数量</label>
+		    	<div class="layui-input-inline iw300">
+		        <input class="layui-input quantity" id="quantity" type="text" name="quantity" readonly="true" autocomplete="off">
+		    	</div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">油种</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input oilType" type="text" id="oilType" name="oilType" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">装港</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input loadPort" id="loadPort" type="text" name="loadPort" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">卸港</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input unloadPort" id="unloadPort" type="text" name="unloadPort" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">装期</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input laycan" id="laycan" type="text" name="laycan" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+		<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">最小货量</label>
+		    <div class="layui-input-inline iw300">
+		        <input type="text" class="layui-input minQuantity" id="minQuantity" name="minQuantity" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">WS点</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input ws" id="ws" type="text" name="ws" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>  
+    </div>
+    
+	<div class="layui-form-item" style="height:25px">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width:125px">WS参考点</label>
+	      	<div class="layui-input-inline iw300">
+				<input type="text" class="layui-input wsRes" name="wsRes" id="wsRes" readonly="true" autocomplete="off">
+	      	</div>
+			<div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">滞期费率</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input demurrage" id="demurrage" type="text" name="demurrage" readonly="true" autocomplete="off">
+			    </div>
+			</div>
+	    </div>
+  	</div>
+  	
+  	<div class="layui-form-item" style="height:25px;">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px;">允许装卸时间</label>
+		    <div class="layui-input-inline iw300;">
+		        <input class="layui-input dockTime" id="dockTime" type="text" name="dockTime" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">合同航速</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input pactSpeed" id="pactSpeed" type="text" name="pactSpeed" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+  	<div class="layui-form-item" style="height:25px;">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px;">经纪人</label>
+		    <div class="layui-input-inline iw300;">
+		        <input class="layui-input brokerName" id="brokerName" type="text" name="brokerName" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">备注</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input remark" id="remark" type="text" name="remark" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+  	<div class="layui-form-item" style="height:25px;">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px;">协议</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input accessory" id="accessory" type="text" name="accessory" readonly="true" autocomplete="off">
+		    </div>
+		       <button type="button" class="layui-btn layui-btn-normal file xiazai" style="margin-top:0.5px;font-size:12px;display: none;" id="btn">下载</button>
+		    
+		</div>
+    </div>
+
+
+</form>

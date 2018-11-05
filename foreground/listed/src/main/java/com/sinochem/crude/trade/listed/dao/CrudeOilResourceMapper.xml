@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.CrudeOilResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.CrudeOil" >
+
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area" property="area" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cn_name" property="cnName" jdbcType="VARCHAR" />
+    <result column="origin" property="origin" jdbcType="BIGINT" />
+    <result column="property_id" property="propertyId" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="TIMESTAMP" />
+    <result column="order_index" property="orderIndex" jdbcType="INTEGER" />
+    <result column="indicator1_min" property="indicator1Min" jdbcType="BIGINT" />
+    <result column="indicator1_max" property="indicator1Max" jdbcType="BIGINT" />
+    <result column="indicator2_min" property="indicator2Min" jdbcType="BIGINT" />
+    <result column="indicator2_max" property="indicator2Max" jdbcType="BIGINT" />
+    <result column="indicator3_min" property="indicator3Min" jdbcType="BIGINT" />
+    <result column="indicator3_max" property="indicator3Max" jdbcType="BIGINT" />
+    <result column="indicator4_min" property="indicator4Min" jdbcType="BIGINT" />
+    <result column="indicator4_max" property="indicator4Max" jdbcType="BIGINT" />
+    <result column="indicator5_min" property="indicator5Min" jdbcType="BIGINT" />
+    <result column="indicator5_max" property="indicator5Max" jdbcType="BIGINT" />
+    <result column="indicator6_min" property="indicator6Min" jdbcType="BIGINT" />
+    <result column="indicator6_max" property="indicator6Max" jdbcType="BIGINT" />
+    <result column="indicator7_min" property="indicator7Min" jdbcType="BIGINT" />
+    <result column="indicator7_max" property="indicator7Max" jdbcType="BIGINT" />
+    <result column="indicator8_min" property="indicator8Min" jdbcType="BIGINT" />
+    <result column="indicator8_max" property="indicator8Max" jdbcType="BIGINT" />
+    <result column="indicator9_min" property="indicator9Min" jdbcType="BIGINT" />
+    <result column="indicator9_max" property="indicator9Max" jdbcType="BIGINT" />
+    <result column="indicator10_min" property="indicator10Min" jdbcType="BIGINT" />
+    <result column="indicator10_max" property="indicator10Max" jdbcType="BIGINT" />
+    <result column="indicator11_min" property="indicator11Min" jdbcType="BIGINT" />
+    <result column="indicator11_max" property="indicator11Max" jdbcType="BIGINT" />
+    <result column="indicator12_min" property="indicator12Min" jdbcType="BIGINT" />
+    <result column="indicator12_max" property="indicator12Max" jdbcType="BIGINT" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, area, demand_id, name, cn_name, origin, property_id, version, order_index, indicator1_min, indicator1_max,
+    indicator2_min, indicator2_max, indicator3_min, indicator3_max, indicator4_min, indicator4_max, 
+    indicator5_min, indicator5_max, indicator6_min, indicator6_max, indicator7_min, indicator7_max, 
+    indicator8_min, indicator8_max, indicator9_min, indicator9_max, indicator10_min, 
+    indicator10_max, indicator11_min, indicator11_max, indicator12_min, indicator12_max,`desc`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from crude_oil_resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    delete from crude_oil_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByDemandId" parameterType="java.lang.Long" >
+
+    delete from crude_oil_resource
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.listed.domain.CrudeOil" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_oil_resource ( area, name, demand_id,
+      cn_name, origin, property_id, 
+      version, order_index, indicator1_min,
+      indicator1_max, indicator2_min, indicator2_max, 
+      indicator3_min, indicator3_max, indicator4_min, 
+      indicator4_max, indicator5_min, indicator5_max, 
+      indicator6_min, indicator6_max, indicator7_min, 
+      indicator7_max, indicator8_min, indicator8_max, 
+      indicator9_min, indicator9_max, indicator10_min, 
+      indicator10_max, indicator11_min, indicator11_max, 
+      indicator12_min, indicator12_max,`desc`)
+    values ( #{area,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},#{demandId,jdbcType=BIGINT},
+    #{cnName,jdbcType=VARCHAR}, #{origin,jdbcType=BIGINT}, #{propertyId,jdbcType=BIGINT},
+      #{version,jdbcType=TIMESTAMP}, #{orderIndex,jdbcType=INTEGER}, #{indicator1Min,jdbcType=BIGINT},
+      #{indicator1Max,jdbcType=BIGINT}, #{indicator2Min,jdbcType=BIGINT}, #{indicator2Max,jdbcType=BIGINT}, 
+      #{indicator3Min,jdbcType=BIGINT}, #{indicator3Max,jdbcType=BIGINT}, #{indicator4Min,jdbcType=BIGINT}, 
+      #{indicator4Max,jdbcType=BIGINT}, #{indicator5Min,jdbcType=BIGINT}, #{indicator5Max,jdbcType=BIGINT}, 
+      #{indicator6Min,jdbcType=BIGINT}, #{indicator6Max,jdbcType=BIGINT}, #{indicator7Min,jdbcType=BIGINT}, 
+      #{indicator7Max,jdbcType=BIGINT}, #{indicator8Min,jdbcType=BIGINT}, #{indicator8Max,jdbcType=BIGINT}, 
+      #{indicator9Min,jdbcType=BIGINT}, #{indicator9Max,jdbcType=BIGINT}, #{indicator10Min,jdbcType=BIGINT}, 
+      #{indicator10Max,jdbcType=BIGINT}, #{indicator11Min,jdbcType=BIGINT}, #{indicator11Max,jdbcType=BIGINT}, 
+      #{indicator12Min,jdbcType=BIGINT}, #{indicator12Max,jdbcType=BIGINT},#{desc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.listed.domain.CrudeOil" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_oil_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cnName != null" >
+        cn_name,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="propertyId != null" >
+        property_id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="orderIndex != null" >
+        order_index,
+      </if>
+      <if test="indicator1Min != null" >
+        indicator1_min,
+      </if>
+      <if test="indicator1Max != null" >
+        indicator1_max,
+      </if>
+      <if test="indicator2Min != null" >
+        indicator2_min,
+      </if>
+      <if test="indicator2Max != null" >
+        indicator2_max,
+      </if>
+      <if test="indicator3Min != null" >
+        indicator3_min,
+      </if>
+      <if test="indicator3Max != null" >
+        indicator3_max,
+      </if>
+      <if test="indicator4Min != null" >
+        indicator4_min,
+      </if>
+      <if test="indicator4Max != null" >
+        indicator4_max,
+      </if>
+      <if test="indicator5Min != null" >
+        indicator5_min,
+      </if>
+      <if test="indicator5Max != null" >
+        indicator5_max,
+      </if>
+      <if test="indicator6Min != null" >
+        indicator6_min,
+      </if>
+      <if test="indicator6Max != null" >
+        indicator6_max,
+      </if>
+      <if test="indicator7Min != null" >
+        indicator7_min,
+      </if>
+      <if test="indicator7Max != null" >
+        indicator7_max,
+      </if>
+      <if test="indicator8Min != null" >
+        indicator8_min,
+      </if>
+      <if test="indicator8Max != null" >
+        indicator8_max,
+      </if>
+      <if test="indicator9Min != null" >
+        indicator9_min,
+      </if>
+      <if test="indicator9Max != null" >
+        indicator9_max,
+      </if>
+      <if test="indicator10Min != null" >
+        indicator10_min,
+      </if>
+      <if test="indicator10Max != null" >
+        indicator10_max,
+      </if>
+      <if test="indicator11Min != null" >
+        indicator11_min,
+      </if>
+      <if test="indicator11Max != null" >
+        indicator11_max,
+      </if>
+      <if test="indicator12Min != null" >
+        indicator12_min,
+      </if>
+      <if test="indicator12Max != null" >
+        indicator12_max,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="desc != null">
+        `desc`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="area != null" >
+        #{area,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=BIGINT},
+      </if>
+      <if test="propertyId != null" >
+        #{propertyId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderIndex != null" >
+        #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="indicator1Min != null" >
+        #{indicator1Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator1Max != null" >
+        #{indicator1Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator2Min != null" >
+        #{indicator2Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator2Max != null" >
+        #{indicator2Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator3Min != null" >
+        #{indicator3Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator3Max != null" >
+        #{indicator3Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator4Min != null" >
+        #{indicator4Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator4Max != null" >
+        #{indicator4Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator5Min != null" >
+        #{indicator5Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator5Max != null" >
+        #{indicator5Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator6Min != null" >
+        #{indicator6Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator6Max != null" >
+        #{indicator6Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator7Min != null" >
+        #{indicator7Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator7Max != null" >
+        #{indicator7Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator8Min != null" >
+        #{indicator8Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator8Max != null" >
+        #{indicator8Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator9Min != null" >
+        #{indicator9Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator9Max != null" >
+        #{indicator9Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator10Min != null" >
+        #{indicator10Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator10Max != null" >
+        #{indicator10Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator11Min != null" >
+        #{indicator11Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator11Max != null" >
+        #{indicator11Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator12Min != null" >
+        #{indicator12Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator12Max != null" >
+        #{indicator12Max,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.listed.domain.CrudeOil" >
+
+    update crude_oil_resource
+    <set >
+      <if test="area != null" >
+        area = #{area,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null" >
+        cn_name = #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=BIGINT},
+      </if>
+      <if test="propertyId != null" >
+        property_id = #{propertyId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderIndex != null" >
+        order_index = #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="indicator1Min != null" >
+        indicator1_min = #{indicator1Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator1Max != null" >
+        indicator1_max = #{indicator1Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator2Min != null" >
+        indicator2_min = #{indicator2Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator2Max != null" >
+        indicator2_max = #{indicator2Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator3Min != null" >
+        indicator3_min = #{indicator3Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator3Max != null" >
+        indicator3_max = #{indicator3Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator4Min != null" >
+        indicator4_min = #{indicator4Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator4Max != null" >
+        indicator4_max = #{indicator4Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator5Min != null" >
+        indicator5_min = #{indicator5Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator5Max != null" >
+        indicator5_max = #{indicator5Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator6Min != null" >
+        indicator6_min = #{indicator6Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator6Max != null" >
+        indicator6_max = #{indicator6Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator7Min != null" >
+        indicator7_min = #{indicator7Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator7Max != null" >
+        indicator7_max = #{indicator7Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator8Min != null" >
+        indicator8_min = #{indicator8Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator8Max != null" >
+        indicator8_max = #{indicator8Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator9Min != null" >
+        indicator9_min = #{indicator9Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator9Max != null" >
+        indicator9_max = #{indicator9Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator10Min != null" >
+        indicator10_min = #{indicator10Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator10Max != null" >
+        indicator10_max = #{indicator10Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator11Min != null" >
+        indicator11_min = #{indicator11Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator11Max != null" >
+        indicator11_max = #{indicator11Max,jdbcType=BIGINT},
+      </if>
+      <if test="indicator12Min != null" >
+        indicator12_min = #{indicator12Min,jdbcType=BIGINT},
+      </if>
+      <if test="indicator12Max != null" >
+        indicator12_max = #{indicator12Max,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="desc != null">
+        `desc` = #{desc,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.listed.domain.CrudeOil" >
+
+    update crude_oil_resource
+    set area = #{area,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=BIGINT},
+      property_id = #{propertyId,jdbcType=BIGINT},
+      version = #{version,jdbcType=TIMESTAMP},
+      order_index = #{orderIndex,jdbcType=INTEGER},
+      indicator1_min = #{indicator1Min,jdbcType=BIGINT},
+      indicator1_max = #{indicator1Max,jdbcType=BIGINT},
+      indicator2_min = #{indicator2Min,jdbcType=BIGINT},
+      indicator2_max = #{indicator2Max,jdbcType=BIGINT},
+      indicator3_min = #{indicator3Min,jdbcType=BIGINT},
+      indicator3_max = #{indicator3Max,jdbcType=BIGINT},
+      indicator4_min = #{indicator4Min,jdbcType=BIGINT},
+      indicator4_max = #{indicator4Max,jdbcType=BIGINT},
+      indicator5_min = #{indicator5Min,jdbcType=BIGINT},
+      indicator5_max = #{indicator5Max,jdbcType=BIGINT},
+      indicator6_min = #{indicator6Min,jdbcType=BIGINT},
+      indicator6_max = #{indicator6Max,jdbcType=BIGINT},
+      indicator7_min = #{indicator7Min,jdbcType=BIGINT},
+      indicator7_max = #{indicator7Max,jdbcType=BIGINT},
+      indicator8_min = #{indicator8Min,jdbcType=BIGINT},
+      indicator8_max = #{indicator8Max,jdbcType=BIGINT},
+      indicator9_min = #{indicator9Min,jdbcType=BIGINT},
+      indicator9_max = #{indicator9Max,jdbcType=BIGINT},
+      indicator10_min = #{indicator10Min,jdbcType=BIGINT},
+      indicator10_max = #{indicator10Max,jdbcType=BIGINT},
+      indicator11_min = #{indicator11Min,jdbcType=BIGINT},
+      indicator11_max = #{indicator11Max,jdbcType=BIGINT},
+      indicator12_min = #{indicator12Min,jdbcType=BIGINT},
+      indicator12_max = #{indicator12Max,jdbcType=BIGINT},
+      demand_id = #{demandId,jdbcType=BIGINT}
+      `desc` = #{desc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--根据demandId查询油种列表-->
+  <select id="getCrudeOilListByDemandId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+        cor.id,
+        cor.demand_id,
+        cor.area,
+        cor.`name`,
+        cor.cn_name,
+        cor.origin,
+        cor.property_id,
+        cor.version,
+        cor.order_index,
+        cor.indicator1_min,
+        cor.indicator1_max,
+        cor.indicator2_min,
+        cor.indicator2_max,
+        cor.indicator3_min,
+        cor.indicator3_max,
+        cor.indicator4_min,
+        cor.indicator4_max,
+        cor.indicator5_min,
+        cor.indicator5_max,
+        cor.indicator6_min,
+        cor.indicator6_max,
+        cor.indicator7_min,
+        cor.indicator7_max,
+        cor.indicator8_min,
+        cor.indicator8_max,
+        cor.indicator9_min,
+        cor.indicator9_max,
+        cor.indicator10_min,
+        cor.indicator10_max,
+        cor.indicator11_min,
+        cor.indicator11_max,
+        cor.indicator12_min,
+        cor.indicator12_max,
+        cor.desc
+        FROM
+        crude_oil_resource AS cor
+        WHERE
+        cor.demand_id = #{demandId,jdbcType=BIGINT}
+  </select>
+</mapper>

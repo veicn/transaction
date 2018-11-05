@@ -1,0 +1,94 @@
+	
+		 <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>结算单管理</h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline5">
+					  <label class="s-form-label">发票号码</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="receiptCode" value="$!query.receiptCode" id="receiptCode" placeholder="发票号码" class="s-input">
+					  </div>
+					</div>
+					<div class="s-inline s-inline5">
+					  <label class="s-form-label">船合同编号</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="pactCode" value="$!query.pactCode" id="pactCode" placeholder="船合同编号" class="s-input">
+					  </div>
+					</div>
+					<div class="chaxun"><a><i class="s-icon s-sear-ico"></i></a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+			
+		</div>
+		#foreach($data in $datas)	
+		<div class="s-mod-block">
+			<div class="s-mod-btit">发票号码：$!{data.receiptCode}</div>
+			<div class="s-mod-bcont">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">船合同号：</label>
+					  <div class="s-input-inline">
+						  <p>$!{data.pactCode}</p>
+						  <input type="hidden" name="uuid" id="uuid" value="$!{data.uuid}"/>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">收款方：</label>
+					  <div class="s-input-inline">
+					  	  <p>$!{data.payee}</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">付款方：</label>
+					  <div class="s-input-inline">
+					  	 <p>$!{data.payer}</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Flat Rate：</label>
+					  <div class="s-input-inline">
+						  <p>$!{data.freightFlatrate}</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Rate(WS)：</label>
+					  <div class="s-input-inline">
+						  <p>$!{data.freightRate}</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">C/P Quantity：</label>
+					  <div class="s-input-inline s-input-inline2">
+						<p>$!{data.freightQuantily}</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Total Amount：</label>
+					  <div class="s-input-inline s-input-inline2">
+						<p>$!{data.freightAmount}</p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			<div class="s-but-all clearfix">
+				<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+				<div class="s-but-ship clearfix"><a href="javascript:;" class="s-btn check">查看详情</a></div>
+				</div>
+			</div>
+			</div>
+			 #end
+			 $contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/statements/pactList.htm')")
+	 	 </div>
+	  </div>
+	</div>
+<script src="../transport/js/statements/pactList.js"></script>

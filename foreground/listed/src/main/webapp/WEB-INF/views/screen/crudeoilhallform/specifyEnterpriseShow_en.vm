@@ -1,0 +1,23 @@
+
+<div class="c-mod c-mod-dd" >
+    <h3>
+        <em class="cw-ico ico-h3"></em>Range
+    </h3>
+    <div class="c-form c-fbfw">
+        <input type="radio"  class="radi ra-fb"  value="0" disabled><em>Public</em>
+        <input type="radio"  class="radi ra-fb" checked="checked"  value="1" disabled><em>Target</em>
+    </div>
+
+    <div class="c-fbfw-n">
+        <table id="specifyEnterpriseList">
+            <tr><th class="tabl-line">No.</th><th>Company Name</th></tr>
+            #foreach($specify in $!{specifyEnterpriseList})
+                <tr class="c-tabcos2">
+                    <td class="tabl-line">$velocityCount</td>
+                    <td>$!{specify.enterpriseName}</td>
+                </tr>
+            #end
+        </table>
+    </div>
+
+</div>

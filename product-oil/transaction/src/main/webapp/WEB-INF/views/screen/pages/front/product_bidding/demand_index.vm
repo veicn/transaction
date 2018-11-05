@@ -1,0 +1,933 @@
+
+#set($tradeTerms = $!{tradeTerms})
+#set($paymentTerm = $!{paymentTerm})
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/work/BuyerPurchaseQuotation.css?css_version=03280828'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280828'))
+#*#css("$appServer.get('/css/work/addAgreement.css?css_version=03280827')")
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/confirForm.css?css_version=03280827'))
+*##*##*css($appServer.get('/css/work/resDetails.css?css_version=03280827'))*##*
+#css($appServer.get('/css/common/pikaday.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))*#
+<script>
+    var productInfoVOa = '$!{biddingSheetCombineVO.productInfoVO.tradeTermVO.code}';
+    var shipPortCode2 = '';
+    var shipPortCode3 = '';
+/*    var shipPortCode = '$!{saleSheetCombineVO.transportInfoVO.loadingPortVO.code}';
+    var demurrageRateCode = '$!{saleSheetCombineVO.transportInfoVO.demurrageRateVO.code}';
+    var isSingapore = $!{isSingapore}*/
+</script>
+
+<style>
+
+    .g-box li .field-title {
+        width: 185px;
+        display: inline-block;
+        text-align: right;
+    }
+</style>
+<!--main-->
+<main id="main">
+    <form class="basic-info" id="productBidding" method="post" action="$appServer.get('pages/front/product_bidding/quote.htm')">
+        <input type="hidden"  name="biddingSheetVO.demandSheetId" value="$!{saleSheetCombineVO.demandSheetVO.id}"/>
+        <input type="hidden"  name="biddingSheetVO.biddingSheetStatusVO.code" value="1"/>
+        <input type="hidden"  name="transportInfoVO.demurrageRateVO.code" />
+
+        <div class="main-title">
+            <h3>$!{saleSheetCombineVO.productInfoVO.productCategoryVO.enName} ($!{saleSheetCombineVO.productInfoVO.productSpecificationVO.enName}) Details</h3>
+        </div>
+        <div class="main-con-one clearfix">
+            <div class="fl pur-text">
+                <h3>Resource</h3>
+                <ul>
+                    <li>
+                        <span>Quantity :</span>
+                        <span>
+                    $!{saleSheetCombineVO.productInfoVO.quantityAsString} $!{saleSheetCombineVO.productInfoVO.quantityUnitVO.enName}
+                    </span>
+                    </li>
+                    <li>
+                        <span>Incoterms :</span>
+                        <span>$!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Tolerance :</span>
+                        <span>+/- $!{saleSheetCombineVO.productInfoVO.tolerance}% at OT</span>
+                    </li>
+
+                    <li>
+                        <span>Quality Standard : </span>
+                        <span id="qualityStandardName"  class = "qualityStandardName file-active" style="width:70%; text-decoration: underline;cursor: pointer;left:266px;"> $!{saleSheetCombineVO.productInfoVO.qualityStandardName}</span>
+
+                        <span class="file-name qualityStandard" style="display:none" id="qualityStandard"> $!{saleSheetCombineVO.productInfoVO.qualityStandard}</span>
+
+                    </li>
+                    <li>
+                        <span>Expired Time :</span>
+                        <span>$!{saleSheetCombineVO.productInfoVO.deadlineAsString}</span>
+                    </li>
+                    <li>
+                        <span>Benchmark :</span>
+                        <span>Mean of $!{saleSheetCombineVO.pricingInfoVO.priceSourceVO.enName} Quations</span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span>for $!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.enName} </span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span>under $!{saleSheetCombineVO.pricingInfoVO.priceRegionVO.enName}</span>
+                    </li>
+
+
+
+
+                    <div class="addmark2" #if(!$!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2} && !$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2} )  style="display: none" #end>
+
+                    <li>
+                            <span>Benchmark2 :</span>
+                            <span>Mean of $!{saleSheetCombineVO.pricingInfoVO.priceSourceVO2.enName} Quations</span>
+                        </li>
+                        <li>
+                            <span></span>
+                            <span>for $!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.enName} </span>
+                        </li>
+                        <li>
+                            <span></span>
+                            <span>under $!{saleSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</span>
+                        </li>
+                    </div>
+
+
+
+
+
+                    <li>
+                        <span>Premium :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.premiumsAndDiscountsAsString} $!{saleSheetCombineVO.pricingInfoVO.currencyVO.enName}/$!{saleSheetCombineVO.pricingInfoVO.pricingUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Pricing Formula :</span>
+                        <span class="formulspan wordwrap" >
+                            #if($!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                                <td class="active ">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                            #else
+                                <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                            #end
+                    </span>
+                    </li>
+                    <li>
+                        <span>Pricing Period :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.pricingPeriod}</span>
+                    </li>
+                    <li>
+                        <span>Payment Terms :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.paymentTerm}</span>
+                    </li>
+                    <li>
+                        <span>Quantity Determination :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.settlementQuantity}</span>
+                    </li>
+                    <li>
+                        <span>Inspection :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.inspectionVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Law :</span>
+                        <span>$!{saleSheetCombineVO.pricingInfoVO.law}</span>
+                    </li>
+                    <li>
+                        <span>Other Terms :</span>
+                        <span  class="Termstext">$!{saleSheetCombineVO.otherInfoVO.otherTerm}</span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="fl pur-line"></div>
+            <div class="fl pur-ent clearfix">
+                <h3>Bid</h3>
+                <ul>
+                    <li>
+                        <span><i class="span-req">*</i>Quantity :</span>
+                        <input  data-rules="required"   type="text" class="quantity-input abs-class" name="productInfoVO.quantityAsString"  value="$!{biddingSheetCombineVO.productInfoVO.quantityAsString}"
+                                data-rules="required"
+                                data-regexp="^[0-9]+([.]{1}[0-9]+){0,1}$"
+                                data-regexp-message="Please enter the positive number"
+                        >
+                        <div class="cpy-select clearfix  quantity-select">
+                            <div class="select s-b select_search">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text"> $!{biddingSheetCombineVO.productInfoVO.quantityUnitVO.enName} </div>
+                                        <input class="vcode"  data-rules="required"   name="productInfoVO.quantityUnitVO.code" type="text" readonly="readonly" value="$!{biddingSheetCombineVO.productInfoVO.quantityUnitVO.code}">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($!quantityUnit in $!quantityUnitList)
+                                        <li class="select-option " data-value="$!{quantityUnit.code}">$!{quantityUnit.enName}</li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <span> <i class="span-req">*</i>Incoterms :</span>
+                        <div class="cpy-select clearfix ">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">$!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName}</div>
+                                        <input data-rules="required" class="vcode" type="text"   name="productInfoVO.tradeTermVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.productInfoVO.tradeTermVO.code}">
+                                    </div>
+                                </div>
+                                <ul name="productInfoVO.tradeTermVO.code" class=" select-options " data-class="tradeTermCode">
+                                    #foreach($!tradeTerm in $!tradeTermList)
+                                        <li class="select-option tradeTermCode" data-value="$!{tradeTerm.code}">$!{tradeTerm.enName}</li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span><i class="span-req">*</i>Tolerance :</span>
+                        <span>
+                                        <i>+/-</i>
+                                        <input type="text" data-rules="required"   name="productInfoVO.tolerance" value="$!{biddingSheetCombineVO.productInfoVO.tolerance}" class="tolerance-input abs-class"
+                                               data-rules="required"
+                                               data-regexp="^[0-9]+([.]{1}[0-9]+){0,1}$"
+                                               data-regexp-message="Please enter the positive number"
+                                        >
+                                        <i>% at OT</i>
+                                    </span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span></span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span></span>
+                    </li>
+                    <li>
+
+                        <span style="line-height: 28px;"><i class="Benchmark-add addmarkicon" onclick="addBench()">+</i><i class="span-req">*</i>Benchmark :</span>
+                        <span class="Benchmark-title">
+
+                        <i class="Benchmark-title_i">Mean of</i>
+                        <div class="cpy-select clearfix benchmark-select ">
+                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.priceSourceVO.enName}</div>
+                                                        <input data-rules="required" type="text" class="vcode" name="pricingInfoVO.priceSourceVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.priceSourceVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceSourceVO.code" class="select-options">
+                                                    #foreach($priceSource in $priceSourceList)
+                                                        <li class="select-option" data-value="$!{priceSource.code}">$!{priceSource.enName}</li>
+                                                    #end
+                                                </ul>
+                             </div>
+                         </div>
+                        <i class="Benchmark-last">Quotations</i>
+                    </span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span class="Benchmark-title">
+                         <i class="Benchmark-title_i">for</i>
+                    <div class="cpy-select clearfix benchmark-select ">
+                       <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.enName}</div>
+                                                        <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.pricingBenchmarkVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.pricingBenchmarkVO.code" class="select-options">
+                                                    #foreach($pricingBenchmark in $pricingBenchmarkList)
+                                                        <li class="select-option" data-value="$!{pricingBenchmark.code}">$!{pricingBenchmark.enName}</li>
+                                                    #end
+                                                </ul>
+                        </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span class="Benchmark-title">
+                         <i class="Benchmark-title_i">Under</i>
+                    <div class="cpy-select clearfix benchmark-select ">
+                        <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO.enName}</div>
+                                                        <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.priceRegionVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceRegionVO.code" class="select-options">
+                                                    #foreach($priceRegion in $priceRegionList)
+                                                        <li class="select-option" data-value="$!{priceRegion.code}">$!{priceRegion.enName}</li>
+                                                    #end
+                                                </ul>
+                        </div>
+                    </div>
+                    </span>
+                    </li>
+
+                 <div class="addmark2" #if(!$!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2} && !$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2} ) style="display: none" #end >
+                    <li >
+                    <span style="line-height: 35px;"><i class="Benchmark-del delBench2 delBenchicon" style="vertical-align: bottom;" onclick="delBench()">-</i><i
+                            class="span-req">*</i>Benchmark2 :</span>
+                        <span class="Benchmark-title">
+
+                        <i class="Benchmark-title_i">Mean of</i>
+                        <div class="cpy-select clearfix benchmark-select ">
+                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="priceSourceVO">$!{biddingSheetCombineVO.pricingInfoVO.priceSourceVO2.enName}</div>
+                                                        <input data-rules="required" id="priceSourceVO2" type="text" class="vcode" name="pricingInfoVO.priceSourceVO2.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.priceSourceVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceSourceVO2.code" class="select-options">
+                                                    #foreach($priceSource in $priceSourceList)
+                                                        <li class="select-option" data-value="$!{priceSource.code}">$!{priceSource.enName}</li>
+                                                    #end
+                                                </ul>
+                             </div>
+                        </div>
+                        <i class="Benchmark-last">Quotations</i>
+                    </span>
+                    </li>
+
+
+                    <li >
+                        <span></span>
+                        <span class="Benchmark-title">
+                         <i class="Benchmark-title_i">for</i>
+                    <div class="cpy-select clearfix benchmark-select ">
+                        <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="pricingBenchmarkVO">$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.enName}</div>
+                                                        <input  data-rules="required" id="pricingBenchmarkVO2" class="vcode" type="text" name="pricingInfoVO.pricingBenchmarkVO2.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.pricingBenchmarkVO2.code" class="select-options">
+                                                    #foreach($pricingBenchmark in $pricingBenchmarkList)
+                                                        <li class="select-option" data-value="$!{pricingBenchmark.code}">$!{pricingBenchmark.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li >
+                        <span></span>
+                        <span class="Benchmark-title">
+                         <i class="Benchmark-title_i">Under</i>
+                    <div class="cpy-select clearfix benchmark-select ">
+                       <div class="select s-b" >
+                             <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="priceRegionVO">$!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</div>
+                                                        <input  data-rules="required" id="priceRegionVO2" class="vcode" type="text" name="pricingInfoVO.priceRegionVO2.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceRegionVO2.code" class="select-options">
+                                                    #foreach($priceRegion in $priceRegionList)
+                                                        <li class="select-option" data-value="$!{priceRegion.code}">$!{priceRegion.enName}</li>
+                                                    #end
+                                                </ul>
+                            </div>
+                    </div>
+                    </span>
+                    </li>
+
+                 </div>
+
+
+
+
+                    <li>
+                        <span><i class="span-req">*</i>Premium :</span>
+                        <span>
+                        <input type="text" data-rules="required;string;decimal" :decAfter="2"  :decabove="8"  class="premium-input abs-class" value="$!{biddingSheetCombineVO.pricingInfoVO.premiumsAndDiscountsAsString}" name="pricingInfoVO.premiumsAndDiscountsAsString">
+                              
+                        <div class="cpy-select clearfix premium-select ">
+                        <div class="select s-b">
+										<div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.currencyVO.enName}</div>
+                                                <input data-rules="required" class="vcode" type="text" name="pricingInfoVO.currencyVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.currencyVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.currencyVO.code" class="select-options">
+                                            #foreach($currency in $currencyList)
+                                                <li class="select-option" data-value="$!{currency.code}">$!{currency.enName}</li>
+                                            #end
+                                        </ul>
+									</div>
+                    </div>
+                        <i>/</i>
+                        <div class="cpy-select clearfix premium-select ">
+                            <div class="select s-b">
+										<div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.pricingUnitVO.enName}</div>
+                                                <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.pricingUnitVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.pricingUnitVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.pricingUnitVO.code" class="select-options">
+                                            #foreach($pricingUnit in $pricingUnitList)
+                                                <li class="select-option" data-value="$!{pricingUnit.code}">$!{pricingUnit.enName}</li>
+                                            #end
+                                        </ul>
+							</div>
+                    </div>
+                    </span>
+                    </li>
+                    <li class="per-field" style="width: 710px;">
+                        <span class=" pricFormula">Pricing Formula :</span>
+                    #*<span class="isBenchmark fl" style="width: 640px">Benchmark+ Premium/Discount Currency/Unit</span>
+                    <span class="isBenchmark2 fl" style="width: 640px;display: none">（Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</span>*#
+                        <span class=" formulspan wordwrap pricforSpan isBenchmark" >Benchmark+ Premium/Discount Currency/Unit</span>
+                        <span class=" formulspan wordwrap pricforSpan isBenchmark" style="display: none">（Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</span>
+                    ##  <span class=" formulspan wordwrap pricforSpan" >（Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</span>
+
+                    </li>
+                    <li>
+                        <span><i class="span-req">*</i>Pricing Period :</span>
+                        <span>
+                        <div class="cpy-select clearfix Inspec-select selectReg" style="margin-left: 10px">
+                          <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index:999;">$!{biddingSheetCombineVO.pricingInfoVO.pricingPeriod}</div>
+                                                    <input data-rules="required" class="vname" type="text" name="pricingInfoVO.pricingPeriod" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.pricingPeriod}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.pricingPeriodVO.code" class="select-options">
+                                                #foreach($pricingPeriod in $pricingPeriodList)
+                                                    <li class="select-option" data-value="$!{pricingPeriod.code}">$!{pricingPeriod.enName}</li>
+                                                #end
+                                            </ul>
+                          </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li>
+                        <span><i class="span-req">*</i>Payment Terms :</span>
+                        <span>
+                        <div class="cpy-select clearfix Inspec-select selectReg " style="margin-left: 10px">
+                            <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true"  style="z-index:999;">$!{biddingSheetCombineVO.pricingInfoVO.paymentTerm}</div>
+                                                    <input  data-rules="required" class="vname" type="text" name="pricingInfoVO.paymentTerm" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.paymentTerm}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.paymentTermVO.code" class="select-options">
+                                                #foreach($paymentTerm in $paymentTermList)
+                                                    <li class="select-option" data-value="$!{paymentTerm.code}">$!{paymentTerm.enName}</li>
+                                                #end
+                                            </ul>
+                            </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li>
+                        <span><i class="span-req">*</i>Quantity Determination :</span>
+                        <span>
+                          <div class="cpy-select clearfix Inspec-select selectReg select_search" style="margin-left: 10px">
+                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index:999;">$!{biddingSheetCombineVO.pricingInfoVO.settlementQuantity}</div>
+                                                    <input data-rules="required" class="vname" type="text" name="pricingInfoVO.settlementQuantity" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.settlementQuantity}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.settlementQuantityVO.code"  class="select-options">
+                                                #foreach($settlementQuantity in $settlementQuantityList)
+                                                    <li class="select-option" data-value="$settlementQuantity.code">$!{settlementQuantity.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li>
+                        <span>Inspection :</span>
+                        <span>
+                      <div class="cpy-select clearfix Inspec-select" style="margin-left: 10px">
+                        <div class="select s-b">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{biddingSheetCombineVO.pricingInfoVO.inspectionVO.enName}</div>
+                                                    <input class="vcode" type="text" name="pricingInfoVO.inspectionVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.pricingInfoVO.inspectionVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.settlementQuantityVO.code"  class="select-options">
+                                                #foreach($inspection in $inspectionList)
+                                                    <li class="select-option" data-value="$inspection.code">$!{inspection.enName}</li>
+                                                #end
+                                            </ul>
+                         </div>
+                    </div>
+                    </span>
+                    </li>
+                    <li>
+                        <span>Law :</span>
+                        <span>
+                        <input type="text" class="precing-input" value="$!{biddingSheetCombineVO.pricingInfoVO.law}" name="pricingInfoVO.law">
+                    </span>
+                    </li>
+                    <li>
+                        <span>Other Terms :</span>
+                        <span>
+
+                        <textarea name="otherInfoVO.otherTerm"  data-rules="string" :length="2000" type="text" class="OtherTerms"  style="width: 307px;" >$!{biddingSheetCombineVO.otherInfoVO.otherTerm}</textarea>
+
+                    </span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-con-one clearfix">
+            <div class="fl pur-text">
+                <h3>Transportation</h3>
+                <ul>
+                    <li>
+                        <span>Transport Mode :</span>
+                        <span>$!{saleSheetCombineVO.transportInfoVO.transportModeVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Laycan :</span>
+                        <span>$!{saleSheetCombineVO.transportInfoVO.laycanStartDateAsString} - $!{saleSheetCombineVO.transportInfoVO.laycanEndDateAsString}</span>
+
+                    </li>
+                    <li>
+                        <span>Laytime :</span>
+                        <span>$!{saleSheetCombineVO.transportInfoVO.laytimeAsString} H+6</span>
+                    </li>
+                    <li>
+                        <span>Demurrage Rate :</span>
+                        <span> #if($!saleSheetCombineVO.transportInfoVO.demurrageRateVO.code=='1')  $!saleSheetCombineVO.transportInfoVO.demurrageRateNumAsString $!saleSheetCombineVO.transportInfoVO.demurrageRateVO.enName #end
+                           #if($!saleSheetCombineVO.transportInfoVO.demurrageRateVO.code=='2')  $!saleSheetCombineVO.transportInfoVO.demurrageRateVO.enName  #end
+
+                    </span>
+                    </li>
+                    #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.code} == '1')
+                        <li>
+                            <span>Load Port :</span>
+                            <span> $!{saleSheetCombineVO.transportInfoVO.loadingCountry} , $!{saleSheetCombineVO.transportInfoVO.loadingPort}</span>
+                        </li>
+                    #end
+                    #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.code} == '2' || $!{productInfoVO.tradeTermVO.code} == '3')
+                        <li>
+                            <span>Discharge Port :</span>
+                            <span>#if( $!{saleSheetCombineVO.transportInfoVO.dischargeCountry})  $!{saleSheetCombineVO.transportInfoVO.dischargeCountry} , $!{saleSheetCombineVO.transportInfoVO.dischargePort}
+                            #end</span>
+                        </li>
+                    #end
+                </ul>
+            </div>
+            <div class="fl tran-line"></div>
+            <div class="fl pur-ent clearfix">
+                <h3>Transportation</h3>
+                <ul>
+                    <li>
+                        <span><i class="span-req">*</i>Transport Mode :</span>
+                        <span style="margin-left: 10px;">
+                        <div class="cpy-select clearfix">
+                        <div class="select s-b">
+                            <div class="select-box">
+                                <div class="select-content">
+                                    <div class="select-show-text">$!{biddingSheetCombineVO.transportInfoVO.transportModeVO.enName}</div>
+                                    <input data-rules="required" class="vcode" type="text" name="transportInfoVO.transportModeVO.code" readonly="readonly" value="$!{biddingSheetCombineVO.transportInfoVO.transportModeVO.code}">
+                                </div>
+                            </div>
+                            <ul name="transportInfoVO.transportModeVO.code" class="select-options">
+                                #foreach($transportMode in $transportModeList)
+                                    <li class="select-option" data-value="$!{transportMode.code}">$!{transportMode.enName}</li>
+                                #end
+                            </ul>
+                        </div>
+                    </div>
+                        </span>
+                    </li>
+                    <li>
+                        <span> <i class="span-req">*</i>Laycan :</span>
+                        <span class="laycan-box dateparent">
+                         <div class="datetime-wrap dateParent laycanTime">
+                                        <input  data-rules="required" name="transportInfoVO.laycanStartDateAsString"  value="$!{biddingSheetCombineVO.transportInfoVO.laycanStartDateAsString}"
+                                                class="DeadlineMonth laytime_class datetime validateTime1  CreateStartTime" type="text" style="width: 140px;">
+                                        <div class="datetime-view" style="width: 140px;">$!{biddingSheetCombineVO.transportInfoVO.laycanStartDateAsString}</div>
+                          </div>
+                        <i>-</i>
+                         <div class="datetime-wrap sales-wrap br dateParent laycanTime">
+                                        <input  data-rules="required" name="transportInfoVO.laycanEndDateAsString"  value="$!{biddingSheetCombineVO.transportInfoVO.laycanEndDateAsString}"
+                                                class="DeadlineMonth laytime_class datetime validateTime2 " type="text" style="width: 140px;">
+                                        <div class="datetime-view" style="width: 140px;">$!{biddingSheetCombineVO.transportInfoVO.laycanEndDateAsString}</div>
+                          </div>
+                    </span>
+
+                    </li>
+                    <li>
+                        <span><i class="span-req">*</i>Laytime :</span>
+                        <span class="laytime-box ">
+                        <input type="text"  data-rules="required;digits" :digitsMax="8" ;
+                               data-rules="required"
+                               data-regexp="^\d+(\.\d+)?$"
+                               data-regexp-message="Please enter the positive number"
+                               class="abs-class " name="transportInfoVO.laytimeAsString" value="$!{biddingSheetCombineVO.transportInfoVO.laytimeAsString}">
+                        <i>H+6</i>
+                    </span>
+                    </li>
+                    <li>
+                        <span>Demurrage Rate :</span>
+                        <span class="demurrage-box check-b">
+                                <input type="text"  class="precing-input dem_input abs-class"  name="transportInfoVO.demurrageRateNumAsString" value="$!{biddingSheetCombineVO.transportInfoVO.demurrageRateNumAsString}"
+                                       data-regexp="^[1-9]\d*$"
+                                       data-regexp-message="Please enter the positive integer"
+                                #if($!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.code}=='2')"  disabled="disabled" #end>
+                                <i>USD PDPR</i>
+                                <i onclick="disablefn(this)" class="radio demurrage-radio">
+                                    <input id="demurrageRadio" type="radio"  #if($!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.code}=='2') checked="checked" #end />
+
+                                    <i  #if($!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.code}=='2') checked="checked" style="background-image: url('../../../images/tick_L.png'); color: rgb(243, 101, 35); border-color: rgb(243, 101, 35);" #end ></i>
+                                    <span>As per C/P</span>
+                                </i>
+                            </span>
+                    </li>
+                    <li id="loadPortShowOrHide">
+                        <span><i class="span-req">*</i>Load Port :</span>
+                        <span class="port-box ">
+                        <div class="cpy-select clearfix Inspec-select  port-select selectReg" style="margin-left: 10px">
+                        <div class="select s-b select_search" style="width: 130px;">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text "  style="z-index:999;" contentEditable="true" id="LoadPortid">$!{biddingSheetCombineVO.transportInfoVO.loadingCountry}</div>
+                                                    <input data-rules="" class="vname" type="text" name="transportInfoVO.loadingCountry" id="LoadPortidCode" readonly="readonly" value="$!{biddingSheetCombineVO.transportInfoVO.loadingCountry}">
+                                                </div>
+                                                #foreach($loadingPortCountry in $loadingPortCountryList)
+                                                    #if($!{loadingPortCountry.enName} == $!{biddingSheetCombineVO.transportInfoVO.loadingCountry})
+                                                        <script>
+                                                            var shipPortCode2 = '$!{loadingPortCountry.code}';
+                                                        </script>
+                                                    #end
+                                                #end
+                                            </div>
+                                            <ul class="select-options" data-class="loadli" >
+                                                #foreach($loadingPortCountry in $loadingPortCountryList)
+                                                    <li class="select-option loadli" data-value="$!{loadingPortCountry.code}">$!{loadingPortCountry.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                    </div>
+                        <div class="cpy-select clearfix Inspec-select  port-select selectReg" style="margin-left: 10px">
+                            <div class="select load-select-two s-b select_search">
+                                <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true"  style="z-index:999;" id="LoadPortTwo">$!{biddingSheetCombineVO.transportInfoVO.loadingPort}</div>
+                                                    <input data-rules="" class="vname" id="LoadPortTwoCode" type="text" name="transportInfoVO.loadingPort" readonly="readonly" value="$!{biddingSheetCombineVO.transportInfoVO.loadingPort}">
+                                                </div>
+                                            </div>
+                                            <ul name="transportInfoVO.loadingPort" id="loadingPortList" class="select-options">
+
+                                            </ul>
+                            </div>
+                    </div>
+                            <!--120  170-->
+                    </span>
+                    </li>
+                    <li id="dischargeShowOrHide">
+                        <span><i class="span-req">*</i>Discharge Port :</span>
+                        <span class="port-box">
+                        <div class="cpy-select clearfix Inspec-select port-select selectReg" style="margin-left: 10px">
+                        <div class="select load-select-one s-b select_search">
+                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index: 999;">$!{biddingSheetCombineVO.transportInfoVO.dischargeCountry}</div>
+                                                    <input  data-rules="" type="text" id="DischargeOne" class="vname" name="transportInfoVO.dischargeCountry" readonly="readonly" value="$!{biddingSheetCombineVO.transportInfoVO.dischargeCountry}">
+                                                </div>
+                                                #foreach($dischargePortCountry in $dischargePortCountryList)
+                                                    #if($!{dischargePortCountry.enName} == $!{biddingSheetCombineVO.transportInfoVO.dischargeCountry})
+                                                        <script>
+                                                            var shipPortCode3 = '$!{dischargePortCountry.code}';
+                                                        </script>
+                                                    #end
+                                                #end
+                                            </div>
+                                            <ul class="select-options" data-class="dischargeli">
+                                                #foreach($dischargePortCountry in $dischargePortCountryList)
+                                                    <li class="select-option dischargeli" data-value="$!{dischargePortCountry.code}">$!{dischargePortCountry.enName}</li>
+                                                #end
+                                            </ul>
+                        </div>
+                    </div>
+                        <div class="cpy-select clearfix Inspec-select  port-select selectReg" style="margin-left: 10px">
+                        <div class="select load-select-two s-b select_search">
+                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index: 999;" id="DischargeTwo">$!{biddingSheetCombineVO.transportInfoVO.dischargePort}</div>
+                                                    <input  data-rules="" class="vname" type="text" id="DischargeTwoCode" name="transportInfoVO.dischargePort" readonly="readonly" value="$!{biddingSheetCombineVO.transportInfoVO.dischargePort}">
+                                                </div>
+                                            </div>
+                                            <ul name="transportInfoVO.dischargePort" id="dischargePortList" class="select-options">
+
+                                            </ul>
+                        </div>
+                    </div>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-con-one clearfix">
+            <h3 class="buyer-title">Buyer</h3>
+            <div class="form-box-content clearfix">
+
+                <div class="per-field">
+                    <div class="per-field-box">
+                        <label class="field-title">Company :</label>
+                        <span>$!{buyerCompanyVO.englishName} </span>
+                    </div>
+                </div>
+                <div class="per-field">
+                    <div class="per-field-box">
+                        <label class="field-title" for="Address">Address :</label>
+                        <span style="width: 74.2%">$!{saleSheetCombineVO.buyerInfoVO.address}</span>
+                    </div>
+                </div>
+                <ul class="form-left fl">
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="TraderName"><span > </span> Contact Person
+                                :</label>
+                            <span>$!{saleSheetCombineVO.buyerInfoVO.traderName}</span>
+                        </div>
+                    </li>
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="Tel"><span> </span>Tel :</label>
+                            <span>$!{saleSheetCombineVO.buyerInfoVO.telephone}</span>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="form-right fl clearfix">
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for=" mailAddress"><span> </span>Email :</label>
+                            <span>$!{saleSheetCombineVO.buyerInfoVO.email}</span>
+                        </div>
+                    </li>
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="Fax">Fax :</label>
+                            <span>$!{saleSheetCombineVO.buyerInfoVO.fax}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-con-one clearfix">
+            <h3 class="buyer-title">Seller</h3>
+            <div class="form-box-content clearfix">
+                <div class="per-field">
+                    <div class="per-field-box">
+                        <label class="field-title">Company :</label>
+                        <span class="">Trafigura Singapore Ltd</span>
+                    </div>
+                </div>
+                <div class="per-field">
+                    <div class="per-field-box">
+                        <label class="field-title" for="Address">Address :</label>
+                        <input name="salerInfoVO.address"  value="$!{biddingSheetCombineVO.salerInfoVO.address}" type="text" style="width: 76%" >
+                    </div>
+                </div>
+                <ul class="form-left fl">
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="TraderName"><span class="must">* </span> Contact Person
+                                :</label>
+                            <input data-rules="required" name="salerInfoVO.traderName"  value="$!{biddingSheetCombineVO.salerInfoVO.traderName}" type="text">
+                        </div>
+                    </li>
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="Tel"><span class="must">* </span>Tel :</label>
+                            <input data-rules="required" name="salerInfoVO.telephone"  value="$!{biddingSheetCombineVO.salerInfoVO.telephone}" type="text">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="form-right fl clearfix">
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for=" mailAddress"><span class="must">* </span>Email :</label>
+                            <input data-rules="required;email" name="salerInfoVO.email"  value="$!{biddingSheetCombineVO.salerInfoVO.email}" type="text">
+                        </div>
+                    </li>
+                    <li class="per-field">
+                        <div class="per-field-box">
+                            <label class="field-title" for="Fax">Fax :</label>
+                            <input name="salerInfoVO.fax"  value="$!{biddingSheetCombineVO.salerInfoVO.fax}" type="text">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="submit-box">
+            #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                <input type="button" class="button fl save" value="Submit" onclick="submitProductBidding()" >
+            #end
+            <input type="button" class="button fl save" value="Back">
+        </div>
+    </form>
+</main>
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/work/L_checked.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/js/work/jquery.validate.js'))
+#js($appServer.get('/script/pages/front/product_bidding/index.js?js_version=04261116'))
+
+<script>
+    $(function () {
+        $('.Termstext').attr('title',function () {
+            return $(this).text()
+        })
+
+        //界面判空点击和失去焦点事件
+        $('.per-field input').focus(function () {
+            $(this).css("background-color", "#FFFFCC");
+        });
+        $('.per-field-box input').focus(function () {
+            $(this).css("background-color", "#FFFFCC");
+        });
+        $(".per-field input").blur(function () {
+            $(this).css("background-color", "#FFF");
+        });
+        $(".per-field-box input").blur(function () {
+            $(this).css("background-color", "#FFF");
+        });
+    });
+
+    /*$("#submitForm").on("click", function () {
+/!*
+        $("li").each(function (index) {
+            if ($.trim($(this).find('.must').text()) == '*'){
+                if($.trim($(this).find('input:text').val()) == '' || $.trim($(this).find('input:text').val()) == null || $.trim($(this).find('input:text').val()) == undefined ){
+                    alert('Please input' + $.trim($(this).find('label').text()) );
+                    return false;
+                }
+            }
+        });*!/
+        //检验所以input
+        var flag = true;
+        layui.use('layer', function() {
+            var layer = layui.layer;
+
+
+            $('#productBidding').find('input[type="text"]:visible').not('.notcheckes').each(function(i,el){
+                if($(el).val() == ''){
+
+                        layer.alert("content cann't be empty", {title: 'Info', btn: ['OK']});
+                        flag = false;
+                        return false;
+                }
+            })
+            if(flag){
+                document.getElementById("productBidding").submit();
+            }
+
+        })
+    });*/
+
+    var flg = false;
+    function submitProductBidding(){
+        if($("#demurrageRadio").attr('checked')!="undefined" && $("#demurrageRadio").attr('checked')== "checked"){
+
+            $("input[name='transportInfoVO.demurrageRateVO.code']").val("2");
+        }else{
+            $("input[name='transportInfoVO.demurrageRateVO.code']").val("1");
+        }
+
+        var arr=$('#productBidding')  //把你要验证的form表单数组赋值给arr
+        //var buttonClass='submit'  //提交按钮类名
+        var flag = commonCPX.FormValidation(arr) //
+
+        if(!flag){
+            bidding();
+            /*$(a).css('pointer-events','none');
+            $(a).siblings('.submit').css('pointer-events','none')
+            setTimeout(function () {
+                $(a).attr('disabled',false)
+                $(a).siblings('.submit').css('pointer-events','')
+            },10000)
+
+            document.getElementById("productBidding").submit();*/
+
+        }else{
+            layui.use(['layer'], function(){
+                var layer = layui.layer;
+                layer.alert("Data errors. Please fix the data you input.",  {title:'Error', btn:['OK']});
+            })
+        }
+    }
+    function bidding() {
+        layui.use(['layer', 'form', 'jquery','laypage', 'table', 'laydate'], function() {
+            var layer = layui.layer,
+                    form = layui.form,  // 载入form表单
+                    table = layui.table;
+            window.$ = layui.jquery;
+            var laydate = layui.laydate;
+            if (flg) {
+                return;
+            } else {
+                flg = true;
+            }
+            $.ajax({
+                type: "POST",
+                url: "$appServer/pages/front/product_bidding/demand_quote.json",
+                data: $('#productBidding').serialize(),
+                success: function (msg) {
+                    flg = false;
+                   /* layer.alert(msg.message, {title: 'Info', btn: ['OK']}, function () {
+                        window.location.href = "appServer/pages/back/my_demand_bidding_list/index.htm?biddingFlag=2";
+                    });*/
+                    layer.open({
+                        title:'Info',
+                        content: msg.message
+                        ,btn: ['Ok']
+                        ,yes: function(index, layero){
+                            window.location.href = "$appServer/pages/back/my_demand_bidding_list/index.htm?biddingFlag=2";
+                        }
+                        ,cancel: function(){
+                            window.location.href = "$appServer/pages/back/my_demand_bidding_list/index.htm?biddingFlag=2";
+                        }
+                    });
+                },
+                error: function (msg) {
+                    flg = false;
+                    layer.alert("error:" + msg.message, {title: 'Error', btn: ['OK']});
+                }
+            });
+
+        })
+    }
+
+</script>
+
+
+

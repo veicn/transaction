@@ -1,0 +1,54 @@
+##所需参数
+## biddingSheetVO
+
+#set($biddingSheetStatusCode = $!{biddingSheetVO.biddingSheetStatusVO.code})
+
+<ul class="stowage-steps clearfix">
+    #if($!{biddingSheetStatusCode} == 1)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released</span><br>
+                <em>$!{biddingSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+    #elseif($!{biddingSheetStatusCode} == 2)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released</span><br>
+                <em>$!{biddingSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Cancelled</span><br>
+                <em>$!{biddingSheetVO.cancelledDateAsString}</em>
+            </div>
+        </li>
+    #elseif($!{biddingSheetStatusCode} == 3)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released</span><br>
+                <em>$!{biddingSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Won</span><br>
+                <em>$!{biddingSheetVO.wonDateAsString}</em>
+            </div>
+        </li>
+    #elseif($!{biddingSheetStatusCode} == 4)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released</span><br>
+                <em>$!{biddingSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Lost</span><br>
+                <em>$!{biddingSheetVO.lostDateAsString}</em>
+            </div>
+        </li>
+    #end
+</ul>

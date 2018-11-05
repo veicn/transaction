@@ -1,0 +1,44 @@
+#if($sliderTotal != 0)
+
+<div class="c-page">
+	<form name="page_slider_$!{sliderRandom}" action="$!{sliderTarget}" method="$!{sliderMethod}">
+	##--------------------- page参数 ---------------------
+		#foreach($queryParam in $sliderQuery.parameters.entrySet())
+		<input type="hidden" name="$!{queryParam.key}" value="$!{queryParam.value}"/>
+		#end
+		<input type="hidden" name="$!{sliderPage}" value="$sliderQuery.currentPage"/>
+	
+	##--------------------- 分页按钮 ---------------------
+	#if($sliderCurrent == '1')
+	<span class="c-page-txt"> &laquo; </span>
+	#else
+	<a href="#" onclick="goto$!{sliderRandom}('1')">First page</a>
+	<a href="#" onclick="goto$!{sliderRandom}('${sliderPrev}')" class="c-page-txt">&laquo;</a>
+	#end
+	
+	#foreach($grid in $grids)
+		#if($grid == 0)
+		<span class="c-page-point">...</span>
+		#elseif($grid == $sliderCurrent)
+		<span class="c-page-num c-cur">${grid}</span>
+		#else
+		<a href="#" onclick="goto$!{sliderRandom}('${grid}')">${grid}</a>
+		#end
+	#end
+	
+	#if($sliderCurrent == $sliderTotal )
+		<span class="c-page-txt"> &raquo; </span>
+	#else
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderNext}')" class="c-page-txt">&raquo;</a>
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')">Last page</a>
+	#end
+	
+	</form>
+</div>
+<script>
+	function goto$!{sliderRandom}(pg){
+		document.page_slider_$!{sliderRandom}.$!{sliderPage}.value=pg;
+		document.page_slider_$!{sliderRandom}.submit();
+	}
+</script>
+#end

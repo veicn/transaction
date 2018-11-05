@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="$shipServer.get('transport/css/common.css')">
+<link rel="stylesheet" href="$shipServer.get('transport/css/f_center.css')">
+<link rel="stylesheet" href="$shipServer.get('transport/css/index.css')" >
+<div class="layui-table" style="padding:15px" id="">
+		<!--搜索条件-->
+		<div  class="ry-banner">
+			<div class=" mb0">
+			<div class="layui-inline">
+				<label class="layui-form-label">地区</label>
+				<div class="layui-input-inline selectData">
+					<input id="regionName" type="text" name="regionName" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!region" style="width:200px; height:35px;" >
+				</div>
+				<div class="layui-input-inline iw300" style="width:10px;"></div>
+			    <button style="margin-top:-0px" class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button>
+			    <button style="margin-top:-0px" class="layui-btn layui-btn-normal layui-btn-small searchBtn2">重置</button>
+			    <button style="margin-top:-0px" class="layui-btn layui-btn-normal layui-btn-small insertBtn">新增</button>
+	     	</div>
+		  </div>
+		</div>
+	
+	
+		<!--列表-->
+		<table id="dealPointsList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+		<thead>
+			<tr>
+				<th class="table-style-th">序号</th>
+				<th class="table-style-th">地区</th>
+				<th class="table-style-th">船型</th>
+				<th class="table-style-th">WS点</th>
+				<th class="table-style-th">名称</th>
+				<th class="table-style-th">预估单桶运费</th>
+				<th class="table-style-th">参考路线</th>
+				<th class="table-style-th">日期</th>
+				<th class="table-style-th">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		#foreach($data in $datas)
+			<tr>
+				<td>${velocityCount}</td>				
+				<td>$!{data.region}</td>
+				<td>$!{data.type}</td>
+				<td>$!{data.price}</td>
+				<td>$!{data.name}</td>
+				<td>$!{data.singleFare}</td>
+				<td>$!{data.refRoute}</td>
+				<td>$!{data.date}</td>
+				<td>
+				<i class="layui-icon">&#xe642;</i>
+		      	<a href="javascript:;" class="dialog-link btcol editFn"  attr-data="$data.uuid">
+					修改
+		      	</a>
+		      	<i class="layui-icon" style="color:red;margin-left:5px;">&#xe640;</i>
+		      	<a  href="javascript:;" class="dialog-link btcol delFn"  attr-data="$data.uuid">
+		      		删除
+		      	</a>
+		        </td>
+			</tr>
+		#end
+		</tbody>
+	</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar" >
+	    	<div id="ry-page" class="ry-right" style="text-align:right; margin-right:20px">
+	    		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/dealPoints/dealPointsList.htm").put('slider_path','/contain/formPagingPageSlider')
+	    	</div>
+	    </div>
+</div>	
+
+<script src="/transport/js/om/dealPointsList.js"></script>

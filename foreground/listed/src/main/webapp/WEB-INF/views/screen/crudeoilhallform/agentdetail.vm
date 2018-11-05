@@ -1,0 +1,107 @@
+<div class="c-mod" id="dlsxx">
+    <h3><em class="cw-ico ico-h3"></em>代理商信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn"><span class="notice-required">&nbsp;</span>企业名称：</span><input type="hidden"  name="agentRelevanter.eMemberId" id="agentDetailId" value="$!{demandRelevanter1.eMemberId}"><input type="text"  class="c-int" name="agentRelevanter.enterpriseName" id="agent-name" value="$!{demandRelevanter2.enterpriseName}" onclick="$(this).click();" maxlength="100"/>
+                <div class="ac_results">
+                    <ul>
+
+                    </ul>
+                </div>
+                <input type="hidden" class="c-int" name="" id=""/></li>
+            <li class="c-fcos1"><span class="c-fn"><span class="notice-required">&nbsp;</span>企业地址：</span><input type="text"  class="c-int" name="agentRelevanter.enterpriseAddress" id="" value="$!{demandRelevanter2.enterpriseAddress}" maxlength="200"/></li>
+##            <li class="c-fcos2"><span class="c-fn">联系人：</span><input type="text" class="c-int" name="contacter" id="contacter" value="$!{demandRelevanter2.contacter}"/></li>
+##            <li class="c-fcos2"><span class="c-fn">邮箱：</span><input type="text" class="c-int" name="famil" id="famil" value= "$!{demandRelevanter2.famil}"/></li>
+##            <li class="c-fcos2"><span class="c-fn">联系电话：</span><input type="text" class="c-int" name="phoneNo" id="phoneNo" value="$!{demandRelevanter2.phoneNo}"/></li>
+##            <li class="c-fcos2"><span class="c-fn">传真：</span><input type="text" class="c-int" name="fax" id="fax" value="$!{demandRelevanter2.fax}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">&nbsp;</span>联系人：</span><input type="text"     class="c-int" name="agentRelevanter.contacter" id="contacter" value="$!{demandRelevanter2.contacter}" maxlength="100"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">&nbsp;</span>邮箱：</span><input type="text" class="c-int" name="agentRelevanter.famil" value= "$!{demandRelevanter2.famil}" maxlength="100"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">&nbsp;</span>联系电话：</span><input type="text" onkeyup="return clearPhono(this)"  class="c-int" name="agentRelevanter.phoneNo" value="$!{demandRelevanter2.phoneNo}" maxlength="100"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">&nbsp;</span>传真：</span><input type="text" onkeyup="return clearPhono(this)" class="c-int" name="agentRelevanter.fax" id="fax" value="$!{demandRelevanter2.fax}" maxlength="20"/></li>
+            <li><input type="hidden" value="CBT" name="agentRelevanter.type"></li>
+            <li><input type="hidden" value="$!{demandRelevanter2.id}" name="agentRelevanter.id"></li>
+        </ul>
+    </div>
+</div>
+<script src="$appServer.get('script/lib/jquery.js')"></script>
+<script src="$appServer.get('script/lib/jquery.autocomplete.min.js')"></script>
+<script>
+       $(function () {
+##          $("#chckboxShare").onclick(function () {
+##              if($("table input[type='radio']:checked")){
+##                  $("#chckboxShare").val(true);
+##              }
+##          })
+           $(document).ready(function () {
+               ## var dataUrl="$memberServer.get('/centercontain/enterpriseList.json')";
+               var datas = $contain.get('/centercontain/enterpriseList.json').setHost("$memberServer.get('')")
+               // jQuery.get(dataUrl, {param1: ''}, function(data, textStatus, xhr) {
+               //     if (!data || data.status != 0 && data.status != 200) {
+               //         console.log(data);
+                       //layer.alert(data.message || "请求异常");
+                       // return;
+                   // }
+                   // var datas=data.datas
+
+                   var companyInput = $ ("#company-name");
+                   var agentInput = $ ("#agent-name");
+                   agentInput.autocomplete(
+                           datas.datas,
+                           {
+                               width: agentInput.outerWidth(),
+                               minChars: 0,
+                               matchContains: true,
+                               scroll: true,
+                               mustMatch: false,
+                               scrollHeight: 122,
+                               formatItem: function (row, i, max) {
+                                   return  row.name ;
+                               },
+                               formatMatch: function (row, i, max) {
+                                   return row.name;
+                               },
+                               formatResult: function (row) {
+                                   return row.name;
+                               }
+                           }).result(function (event, row, formatted) {
+                       $('#agentDetailId').val(row.memberId)
+                   })
+               // })
+
+           })
+
+       })
+//       function emailVerification() {
+//           var temp4 =  document.getElementById("familId");
+//
+//           var reg4 = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+//           if(!reg4.test(temp4.value)) {
+//               alert('提示:请输入有效的E_mail！');
+//
+//               return false;
+//           }
+//       }
+//       function phoneYz() {
+//        var temp3 =   document.getElementById("phoneNo")
+//
+//           var reg3 = new RegExp("1(3[0-9]|47|5((?!4)[0-9])|7(0|1|[6-8])|8[0-9])\\d{8,8}");
+//           if(!reg3.test(temp3.value)){
+//            alert("请填写正确的手机号!")
+//               return false;
+//           }
+//
+//       }
+
+
+
+</script>
+
+

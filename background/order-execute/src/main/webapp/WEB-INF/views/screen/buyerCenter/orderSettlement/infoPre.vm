@@ -1,0 +1,162 @@
+<script src="../../orderexecute/js/OrderSettlement/orderSettlementInfoFin.js"></script>
+<!-- <div class="c-mr"> -->
+	<form class="editorForm0" id="settlementPreForm"
+		enctype="multipart/form-data" method="post" onsubmit="return false;">
+		<div class="c-mod c-mod2">
+			<h1>
+				买家信息<span>&nbsp;&nbsp;&nbsp;&nbsp;预估结算单详情</span>
+			</h1>
+			<div class="c-form clearfix">
+			<h3>
+				<em class="cw-ico ico-h3 cw-ico2"></em>订单信息
+			</h3>
+			##---- 订单详情begin ----##
+			$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!stateData.orderId")
+			##---- 订单详情end ----##
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<em class="cw-ico ico-h3"></em>结算单信息
+			</h3>
+			<div class="c-form">
+				<input type="text" class="c-int"  value="$!stateData.orderId"
+					name="orderId" id="orderId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementId"
+					name="orderStatementId" id="orderStatementId" hidden="hidden" /> 
+				<input type="text"
+					value="$!isEdit" id="isEdit" name="isEdit" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderFeeId" id="orderFeeId" name="orderFeeId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.statementType" id="statementType" name="statementType" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderNo" id="orderNo" name="orderNo" hidden="hidden" />
+				
+				<input type="text"
+					value="$!stateData.sellerCustomerId" id="sellerCustomerId" name="sellerCustomerId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.buyerCustomerId" id="buyerCustomerId" name="buyerCustomerId" hidden="hidden" />
+				<ul class="c-ful"> 
+					#if($isSettlementInfo == '1')										
+					<li class="c-fcos2"><span class="c-fn">对账单编号：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.orderStatementNo"
+						name="orderStatementNo" id="orderStatementNo" /></li>
+					#else
+					<li class="c-fcos2"><span class="c-fn">结算单编号：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.orderSettlementNo"
+						name="orderSettlementNo" id="orderSettlementNo" /></li>
+					#end	
+					<li class="c-fcos2"><span class="c-fn">联系电话：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.tel" name="tel"
+						id="tel" /></li>
+					<li class="c-fcos2"><span class="c-fn">结算方名称：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.customerName"
+						name="customerName" id="customerName" /></li>
+					<li class="c-fcos2"><span class="c-fn">邮箱：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.email" name="email"
+						id="email" /></li>
+					<li class="c-fcos2"><span class="c-fn">联系人：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.contactName"
+						name="contactName" id="contactName" /></li>
+					<li class="c-fcos2"><span class="c-fn">结算时间：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!stateData.checkTime)"
+						name="checkTimeDesc" id="checkTime" /></li>
+					<li class="c-fcos2"><span class="c-fn">提单量（吨）：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#######',$!stateData.billWeightT)"
+						name="billWeightT" id="billWeightT" /></li>
+					<li class="c-fcos2"><span class="c-fn">代理协议：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.agentContract"
+						name="agentContract" id="agentContract" /></li>
+					<li class="c-fcos2"><span class="c-fn">提单量（桶）：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#######',$!stateData.billWeightBbl)"
+						name="billWeightBbl" id="billWeightBbl" /></li>
+					<li class="c-fcos2"><span class="c-fn">油品：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.oil" name="oil"
+						id="oil" /></li>
+					<li class="c-fcos2"><span class="c-fn">结算量（桶）：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.settlementQuantityBbl" name="settlementQuantityBbl"
+						id="settlementQuantityBbl" /></li>
+					<li class="c-fcos2"><span class="c-fn">价格公式：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.priceFormula"
+						name="priceFormula" id="priceFormula" /></li>
+					<li class="c-fcos2"><span class="c-fn">船名：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.shipName"
+						name="shipName" id="shipName" /></li>
+					<li class="c-fcos2"><span class="c-fn">合同量：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#######',$!stateData.contractQuantity)"
+						name="contractQuantity" id="contractQuantity" /></li>
+					<li class="c-fcos2"><span class="c-fn">贸易条款：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.tradeTerm"
+						name="tradeTerm" id="tradeTerm" /></li>
+					<li class="c-fcos2"><span class="c-fn">结算价格：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#########',$!stateData.settlementPrice)"
+						name="settlementPrice" id="settlementPrice" /></li>
+					<li class="c-fcos2"><span class="c-fn">货款金额：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#########',$!stateData.goodsAmount)"
+						name="goodsAmount" id="goodsAmount" /></li>
+					<li class="c-fcos2"><span class="c-fn">提单日：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.billDate)" 
+						name="billDateDesc" id="billDate" /></li>
+					<li class="c-fcos2"><span class="c-fn">费用合计：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#########',$!stateData.totalFee)" name="totalFee" 
+						id="totalFee" /></li>
+					<li class="c-fcos2"><span class="c-fn">收款日：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.paymentDate)"
+						name="paymentDateDesc" id="paymentDate" /></li>
+					
+					<li class="c-fcos2"><span class="c-fn">结算金额合计：</span><input readonly="readonly"
+						type="text" class="c-int"
+						value="$!NumberTool.format('#.#########',$!stateData.totalAmount)"
+						name="totalAmount" id="totalAmount" /></li>	 
+					#if($stateData.status !='')
+					<li class="c-fcos2"><span class="c-fn">结算单状态：</span> <span
+						class="c-int qx-conte"> #if($stateData.status == '01') 初始
+							#elseif($stateData.status == '05') 待确认 #elseif($stateData.status
+							== '10') 已确认 #elseif($stateData.status == '20') 已驳回
+							#elseif($stateData.status == '30') 已结算 #end </span></li> 
+					 #end
+				</ul>
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<i class="cw-ico ico-h3"></i>费用清单
+			</h3>
+			<div class="c-tabdiv">
+				<table>
+					<tr>
+						<th>费用科目</th>
+						<th>计价方式</th>
+						<th>数量</th>
+						<th>单价</th>
+						<th>小计</th>
+						<th>是否计入结算</th>
+					</tr>
+					#if($feeData.size() > 0) #foreach($item in $feeData) #set($class =
+					$velocityCount%2+1) #set($count = $velocityCount - 1)
+					<tr class="ct-tabcos$class">
+						<td>$!item.subjectName</td>
+						<td>#if($!item.valuationModel == '1') 按桶计价 #else 按订单计价 #end</td>
+						<td>$!NumberTool.format('#.#########',$!item.quantity)</td>
+						<td>$!NumberTool.format('#.#########',$!item.feePrice)</td>
+						<td>$!NumberTool.format('#.#########',$!item.totalFee)</td>
+						<td>#if($!item.isAgent == '1') 是 #else 否 #end</td>
+					</tr>
+					#end #end
+				</table>
+			</div>
+		</div>
+		<div class="c-mod">
+			<div class="c-subdiv">		
+				<button class="c-btncas" onClick="javascript:history.back(-1);">返回</button>
+			</div>
+		</div>
+	</form>
+<!-- </div> -->

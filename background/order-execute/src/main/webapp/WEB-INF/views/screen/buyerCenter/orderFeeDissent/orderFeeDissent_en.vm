@@ -1,0 +1,18 @@
+
+	<div class="c-mod">
+		<h3><em class="cw-ico ico-h3"></em>Confirm</h3>
+		<div id="replyDiv">
+			<div class="c-subdiv">
+				<input id="orderId" type="hidden" value="$!query.orderId">
+				<input id="dissentType" type="hidden" value="$!query.dissentType">
+				<input id="orderStatementId" type="hidden" value="$!query.orderStatementId">
+				<button class="c-btnsub saveContent" isPass="1">Confirm</button>
+				<button class="c-btncas editContent" isPass="0">Reject</button>
+				<button class="c-btncas" onClick="javascript:history.back(-1);">back </button>
+				<!-- <button class="c-btncas backPageDissent">back </button> -->
+			</div>
+		</div>
+	</div>
+
+	<script src="../../orderexecute/js/orderFeeDissent/orderFeeDissent.js"></script>
+	

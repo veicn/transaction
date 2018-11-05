@@ -1,0 +1,8 @@
+<ul class="c-state">
+##    <li #if($menu=="enterpriseCrudeInfo")class="c-cur"#end ><a href="$appServer.get('center/enterpriseCrude.htm')">additional information</a></li>
+    <li #if($menu=="potrerillosInfo")class="c-cur"#end ><a href="$appServer.get('center/potrerillosInfo.htm')">open refinery qualification</a></li>
+    <li #if($menu=="tradingCompanyInfo")class="c-cur"#end><a  href="$appServer.get('center/tradingCompanyInfo.htm')">oepn  qualifications as  trading company</a></li>
+    <li #if($menu=="providerInfo")class="c-cur"#end ><a  href="$appServer.get('center/providerInfo.htm')">open  qualification as  foreign suppliers</a></li>
+    <li #if($menu=="customerInfo")class="c-cur"#end ><a href="$appServer.get('center/customerInfo.htm')">open foreign customer qualifications</a></li>
+    <li #if($menu=="shipAgencyInfo")class="c-cur"#end ><a href="$appServer.get('center/shipAgencyInfo.htm')">open Service provider (shipping) qualification</a></li>
+</ul>

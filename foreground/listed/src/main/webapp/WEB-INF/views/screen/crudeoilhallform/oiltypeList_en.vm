@@ -1,0 +1,114 @@
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Grade<span class="cxtj-nr-an"></span></h3>
+    
+    #if($!publishType == 2)
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th>API</th>
+                <th>SG@60°F</th>
+                <th>Sulphur/ m%</th>
+                <th>Acid/ (mgKOH/g)</th>
+                <th>Carbon<br>Residue/%</th>
+                <th>Van+Ni/ ppm</th>
+                <th>>350°C mass<br>yield/%</th>
+                <th class="tabl-line1">Remark</th>
+            </tr>
+            <!--宏定义 原油基本信息 回显  -->
+            #macro(crudeOilMinMax $min $max)
+    			#if(($min != 0 && $max != 0))
+                	<td>$min<em>-</em>$max</td>
+                #elseif($min != 0)
+                	<td>>$min</td>
+              	#elseif($max != 0)
+               		<td><$max</td>
+               	#elseif($min == 0 && $max == 0)
+					<td>N/A</td>
+				#else
+					<td>N/A</td>
+               	#end
+			#end
+			
+            #foreach($cor in $crudeOilList)
+            
+                #set($Min1 = $!{cor.indicator1Min}/100.00)
+                #set($Min2 = $!{cor.indicator2Min}/100.00)
+                #set($Min3 = $!{cor.indicator3Min}/100.00)
+                #set($Min4 = $!{cor.indicator4Min}/100.00)
+                #set($Min5 = $!{cor.indicator5Min}/100.00)
+                #set($Min7 = $!{cor.indicator7Min}/100.00)
+                #set($Min8 = $!{cor.indicator8Min}/10000.00)
+                
+                #set($Max1 = $!{cor.indicator1Max}/100.00)
+                #set($Max2 = $!{cor.indicator2Max}/100.00)
+                #set($Max3 = $!{cor.indicator3Max}/100.00)
+                #set($Max4 = $!{cor.indicator4Max}/100.00)
+                #set($Max5 = $!{cor.indicator5Max}/100.00)
+                #set($Max7 = $!{cor.indicator7Max}/100.00)
+                #set($Max8 = $!{cor.indicator8Max}/10000.00)
+
+                #set($index =$!velocityCount - 1)
+
+                <tr class="c-tabcos1">
+                
+                	#crudeOilMinMax($Min1,$Max1)
+                 	#crudeOilMinMax($Min8,$Max8)
+                	#crudeOilMinMax($Min2,$Max2)
+                	#crudeOilMinMax($Min3,$Max3)
+                	#crudeOilMinMax($Min4,$Max4)
+                	#crudeOilMinMax($Min5,$Max5)
+                	#crudeOilMinMax($Min7,$Max7)
+                 	
+                    <td>$!{cor.desc}</td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+    
+    #else
+    
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th class="tabl-line">Origin</th>
+                <th>Grade</th>
+                <th>API</th>
+                <th>Sulphur/ m%</th>
+                <th>Acid/ (mgKOH/g)</th>
+                <th>Carbon<br>Residue/%</th>
+                <th>Ni/ ppm</th>
+                <th>Van/ ppm</th>
+                <th>>350°C mass<br>yield/%</th>
+                <th class="tabl-line1">Remark</th>
+            </tr>
+            #foreach($cor in $crudeOilList)
+                #set($Min1 = $!{cor.indicator1Min}/100.00)
+                #set($Min2 = $!{cor.indicator2Min}/100.00)
+                #set($Min3 = $!{cor.indicator3Min}/100.00)
+                #set($Min4 = $!{cor.indicator4Min}/100.00)
+                #set($Min5 = $!{cor.indicator5Min}/100.00)
+                #set($Min6 = $!{cor.indicator6Min}/100.00)
+                #set($Min7 = $!{cor.indicator7Min}/100.00)
+
+                #set($index=$!velocityCount - 1)
+
+                <tr class="c-tabcos1">
+                    <td><input type="hidden" name="crudeOilFormList[$!index].area" value="" id="area">$!{cor.areaString}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].name" value="" id="name">$!{cor.name}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator1Min" value="" id="indicator1Min"><input type="hidden" name="crudeOilFormList[$!index].indicator1Max" value="indicator1Max">$!Min1</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator2Min" value="$!{cor.indicator2Min}/100" id="indicator2Min"><input type="hidden" name="crudeOilFormList[$!index].indicator2Max" value="indicator2Max">$!{Min2}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator3Min" value="$!{cor.indicator3Min}" id="indicator3Min"><input type="hidden" name="crudeOilFormList[$!index].indicator3Max" value="indicator3Max">$!{Min3}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator4Min" value="$!{cor.indicator4Min}" id="indicator4Min"><input type="hidden" name="crudeOilFormList[$!index].indicator4Max" value="indicator4Max">$!{Min4}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator5Min" value="$!{cor.indicator5Min}" id="indicator5Min"><input type="hidden" name="crudeOilFormList[$!index].indicator5Max" value="indicator5Max">$!{Min5}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator6Min" value="$!{cor.indicator6Min}" id="indicator6Min"><input type="hidden" name="crudeOilFormList[$!index].indicator6Max" value="indicator6Max">$!{Min6}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].indicator7Min" value="$!{cor.indicator7Min}" id="indicator7Min"><input type="hidden" name="crudeOilFormList[$!index].indicator7Max" value="indicator7Max">$!{Min7}</td>
+                    <td><input type="hidden" name="crudeOilFormList[$!index].desc" value="$!{cor.desc}" id="desc"><input type="hidden" name="crudeOilFormList[$index].desc" value="desc">$!{cor.desc}</td>
+                </tr>
+            #end
+        </table>
+    </div>
+    <span class="cg-zy">*reference only</span>
+</div>
+
+#end

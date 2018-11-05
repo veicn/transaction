@@ -1,0 +1,44 @@
+<style>
+ table tr td{
+   border:0 !important;
+ }
+
+</style>
+<form class=" pp15" action="">
+    <div class="layui-form-item" style="padding:15px !important;border:1px solid #DDDFE1;margin:10px">
+        <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100%; font-size:30px;margin-top:20px;text-align:left">$data.title</label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:200px;text-align:left">作者 :  $!data.author</label>
+            <label class="layui-form-label" style="width:250px;text-align:left">发布时间 : $!data.releaseDate</label>
+            <label class="layui-form-label" style="width:180px;text-align:left">频道 : $!data.channelMName</label>
+            <label class="layui-form-label" style="width:180px;text-align:left">分类 : $!data.channelSubName</label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100%;text-align:left;text-indent:2em">$!data.texHtml</label>
+        </div>
+        
+         <div class="layui-form-item">
+         	#if($!{data.isShowCopyright} == '1')
+            <label class="layui-form-label" style="width:100%;text-align:left">版权声明：如需转载，请注明来自“买原油”</label>
+            #end
+            #if($!{data.isShowDisclaimer} == '1')
+            <label class="layui-form-label" style="width:100%;text-align:left">免责声明：本文非买原油原创，以上仅代表作者个人观点。</label>
+        	#end
+        </div>
+    </div>   
+</form>
+
+#if($type == 'audit')
+<div class="auditBtn" style="display:block;">
+#else
+<div class="auditBtn" style="display:none;">
+#end
+	##<button class="layui-btn layui-btn-normal auditYesBtn" attr-data="$data.uuid">审核通过</button>
+	##<button class="layui-btn layui-btn-normal auditNoBtn" attr-data='{"uuid":"$data.uuid"}'>审核驳回</button>
+</div>
+<button class="layui-btn layui-btn-small layui-btn-normal closeBtn" style="width:100px;margin:0 auto;display:block;">关闭</button>
+
+<script src="../../info/js/audit/auditYN.js"></script>
+

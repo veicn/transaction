@@ -1,0 +1,200 @@
+ <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>录入船务信息</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li  class="hiddens"  hidden="hidden"><a  href="javascript:;" id="start">船航次开始信息</a></li>
+				<li><a  href="javascript:;" id="load">船装港信息</a></li>
+				<li  class="hiddens"  hidden="hidden"><a  href="javascript:;" id="transit">船在途信息</a></li>
+				<li class="curr"><a  href="javascript:;" id="unload">船卸港信息</a></li>
+			</ul>
+		</div>
+	<div class="all">
+		<div class="s-mod-block">
+			<div class="s-mod-btit">卸港信息<span><a href="javascript:;" class="exportData">导出数据</a></span></div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx form" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label"><em>*</em> 卸港：</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="unloadPort" placeholder="" class="s-input unloadPort">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label"><em>*</em> 油种：</label>
+					  <div class="s-input-inline">
+					  	  <select class="s-select oilType" name="oilType">
+							<option value="">请选择</option>
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA：</label>
+					  <div class="s-input-inline">
+					  	 <input type="text" name="eta" placeholder="" class="s-input eta  time dates">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">预计靠泊时间：</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="exBerth" placeholder="" class="s-input exBerth time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">NOR递交时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="norDate" placeholder="" class="s-input norDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">引水上船时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="waterDate" placeholder="" class="s-input waterDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">起锚时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="atripDate" placeholder="" class="s-input atripDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">靠泊完成时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="berthDate" placeholder="" class="s-input berthDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">实际开始卸货时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acStart" placeholder="" class="s-input acStart time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">实际卸货完成时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acFinish" placeholder="" class="s-input acFinish time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">拆管时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="remTubeDate" placeholder="" class="s-input remTubeDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">预计离港时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="exLeave" placeholder="" class="s-input exLeave time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">实际离港时间：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acLeave" placeholder="" class="s-input acLeave time datess">
+					  </div>
+					</div>
+					<div class="s-inline agreementCode">
+					  <label class="s-form-label"><em>*</em>租船协议编号：</label>
+					</div>
+					<!-- <div class="s-inline100">
+					  <label class="s-form-label">备注：</label>
+					  <div class="s-input-inline">
+						 <textarea placeholder="请输入内容" class="s-textarea"></textarea>
+					  </div>
+					</div> -->
+					<div class="s-inline s-inline100">
+					  <label class="s-form-label">上传图片或视频：</label>
+					  <div class="s-input-inline">
+						 <ul class="clearfix imgsAll">
+							<li><a href="javascript:;" id="img1" class="imgClass"><img src="$shipServer.get('transport/mycrudeoil/images/s_zgplus.jpg')"></a></li>
+						 </ul>
+					  </div>
+					</div>
+					<div class = "zhidin">
+					
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">附件：</label>
+					  <div class="s-input-inline">
+						 <p>
+						 	<input type="text" readonly="readonly" class="accessory1 s-input" id="file1" >
+							 <a href="javascript:;" id="btn1">上传</a>
+							 <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>	
+					<div class="s-but-all">
+						<div class="s-all-jt"><p><i class="s-icon btnIcon s-icon-plus" title="添加"></i></p></div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		</div>
+	<!--<div class="daili" hidden="true" >
+		 <input type="hidden" class="agreementDiv">
+		<div class="s-inline selDiv">
+		  <label class="s-form-label">租船协议编号：</label>
+		   <div class="s-input-inline s-input-check">
+			 <input type="checkbox" title="" checked="">
+			 <div class="s-uncheckbox s-form-checkbox" lay-skin="primary">
+				 <span class="agreementCodeDiv"></span>
+			 </div>
+			</div>
+		</div>
+		<div class="s-inline">
+		  <label class="s-form-label"></label>
+		  <div class="s-input-inline s-input-check">
+			 <div class="" lay-skin="primary"><span></span></div>
+			</div>
+		</div>
+		<div class="s-inline selDiv">
+		  <label class="s-form-label">卸港商检：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input inspection">
+		  </div>
+		</div>
+		<div class="s-inline">
+		  <label class="s-form-label">联系方式：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input inspectionTel unloadPortInp">
+		  </div>
+		</div>
+		<div class="s-inline selDiv">
+		  <label class="s-form-label">卸港船代：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input agency" readonly="readonly">
+		  </div>
+		</div>
+		<div class="s-inline">
+		  <label class="s-form-label">联系方式：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input agencyTel unloadPortInp">
+		  </div>
+		</div>
+		<div class="s-inline selDiv">
+		  <label class="s-form-label">卸港监卸：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input monitor">
+		  </div>
+		</div>
+		<div class="s-inline">
+		  <label class="s-form-label">联系方式：</label>
+		  <div class="s-input-inline">
+			 <input type="text" name="" placeholder="" class="s-input monitorTel unloadPortInp">
+		  </div>
+		</div>
+	</div> -->
+	 <div class="accDivs">
+		 <div id="accessory1"  style="display:none;"></div>	
+		 <div id="imgDiv1"  style="display:none;"></div>	
+	 </div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue" id="save">提&nbsp;&nbsp;交</button><button class="s-btn s-btn-primary returnFn">返&nbsp;&nbsp;回</button></div>
+	</div>
+	
+	<script src="../transport/js/shipPactNew/shipUnload.js"></script>

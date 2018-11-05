@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sinochem.crude.trade.info.dao.ColColumnMapper">
+	<resultMap
+		type="com.sinochem.crude.trade.info.domain.ColColumn" id="ColColumnDO"
+		extends="com.sinochem.crude.trade.info.dao.immt.ColColumnImmtMapper.ColColumn">
+
+	</resultMap>
+
+	<select id="queryRecords" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   COLUMN_TITLE as "columnTitle" 
+						 ,   COLUMN_BRIEF as "columnBrief" 
+						 ,   COLUMN_BRIEF_HTML as "columnBriefHtml" 
+						 ,   COLUMN_COVER as "columnCover" 
+						 ,   COLUMN_CLASSIFY as "columnClassify" 
+						 ,   COLUMN_CLASSIFY_NAME as "columnClassifyName" 
+						 ,   CURRENCY as "currency" 
+						 ,   COLUMN_PRICE as "columnPrice" 
+						 ,   AUTHOR as "author" 
+						 ,   AUTHOR_NAME as "authorName" 
+						 ,   STATUS as "status" 
+						 ,   COLUMN_CYC as "columnCyc" 
+						 ,   COLUMN_CYC_VALUE as "columnCycValue" 
+						 ,   FREQUENCY as "frequency" 
+						 ,   FREQUENCY_VALUE as "frequencyValue" 
+						 ,   UPDATE_QUANTITY as "updateQuantity" 
+						 ,   START_EFFECTIVE_DATE as "startEffectiveDate" 
+						 ,   END_EFFECTIVE_DATE as "endEffectiveDate" 
+						 ,   SETTLE_TYPE as "settleType" 
+						 ,   LATEST_DATE as "latestDate" 
+						 ,   SUBSCRIBE_COUNT as "subscribeCount" 
+						 ,   ARTICLE_COUNT as "articleCount" 
+						 ,   EXAMINE_USER as "examineUser" 
+						 ,   EXAMINE_DATE as "examineDate" 
+						 ,   EXAMINE_NO_DESC as "examineNoDesc" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   MARKET_ID as "marketId" 
+						 ,   LANG_VER as "langVer" 
+						 ,   EXT1 as "ext1" 
+						 ,   EXT2 as "ext2" 
+						 ,   EXT3 as "ext3" 
+						 ,   EXT4 as "ext4" 
+						 ,   EXT5 as "ext5" 
+						 ,   EXT6 as "ext6" 
+						 ,   EXT7 as "ext7" 
+						 ,   EXT8 as "ext8" 
+						 ,   EXT9 as "ext9" 
+						 ,   EXT10 as "ext10" 
+						from t_col_column
+		where
+			ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="columnTitle!=null and columnTitle!=''">and  COLUMN_TITLE=#{columnTitle}</if>
+															<if test="columnBrief!=null and columnBrief!=''">and  COLUMN_BRIEF=#{columnBrief}</if>
+															<if test="columnBriefHtml!=null and columnBriefHtml!=''">and  COLUMN_BRIEF_HTML=#{columnBriefHtml}</if>
+															<if test="columnCover!=null and columnCover!=''">and  COLUMN_COVER=#{columnCover}</if>
+															<if test="columnClassify!=null and columnClassify!=''">and  COLUMN_CLASSIFY=#{columnClassify}</if>
+															<if test="columnClassifyName!=null and columnClassifyName!=''">and  COLUMN_CLASSIFY_NAME=#{columnClassifyName}</if>
+															<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+															<if test="columnPrice!=null">and  COLUMN_PRICE=#{columnPrice}</if>
+															<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+															<if test="authorName!=null and authorName!=''">and  AUTHOR_NAME=#{authorName}</if>
+															<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+															<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+															<if test="columnCycValue!=null and columnCycValue!=''">and  COLUMN_CYC_VALUE=#{columnCycValue}</if>
+															<if test="frequency!=null and frequency!=''">and  FREQUENCY=#{frequency}</if>
+															<if test="frequencyValue!=null and frequencyValue!=''">and  FREQUENCY_VALUE=#{frequencyValue}</if>
+															<if test="updateQuantity!=null">and  UPDATE_QUANTITY=#{updateQuantity}</if>
+															<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+															<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+															<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+															<if test="latestDate!=null">and  LATEST_DATE=#{latestDate}</if>
+															<if test="subscribeCount!=null">and  SUBSCRIBE_COUNT=#{subscribeCount}</if>
+															<if test="articleCount!=null">and  ARTICLE_COUNT=#{articleCount}</if>
+															<if test="examineUser!=null and examineUser!=''">and  EXAMINE_USER=#{examineUser}</if>
+															<if test="examineDate!=null">and  EXAMINE_DATE=#{examineDate}</if>
+															<if test="examineNoDesc!=null and examineNoDesc!=''">and  EXAMINE_NO_DESC=#{examineNoDesc}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+								</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_col_column 
+		where
+		 ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="columnTitle!=null and columnTitle!=''">and  COLUMN_TITLE=#{columnTitle}</if>
+															<if test="columnBrief!=null and columnBrief!=''">and  COLUMN_BRIEF=#{columnBrief}</if>
+															<if test="columnBriefHtml!=null and columnBriefHtml!=''">and  COLUMN_BRIEF_HTML=#{columnBriefHtml}</if>
+															<if test="columnCover!=null and columnCover!=''">and  COLUMN_COVER=#{columnCover}</if>
+															<if test="columnClassify!=null and columnClassify!=''">and  COLUMN_CLASSIFY=#{columnClassify}</if>
+															<if test="columnClassifyName!=null and columnClassifyName!=''">and  COLUMN_CLASSIFY_NAME=#{columnClassifyName}</if>
+															<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+															<if test="columnPrice!=null">and  COLUMN_PRICE=#{columnPrice}</if>
+															<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+															<if test="authorName!=null and authorName!=''">and  AUTHOR_NAME=#{authorName}</if>
+															<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+															<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+															<if test="columnCycValue!=null and columnCycValue!=''">and  COLUMN_CYC_VALUE=#{columnCycValue}</if>
+															<if test="frequency!=null and frequency!=''">and  FREQUENCY=#{frequency}</if>
+															<if test="frequencyValue!=null and frequencyValue!=''">and  FREQUENCY_VALUE=#{frequencyValue}</if>
+															<if test="updateQuantity!=null">and  UPDATE_QUANTITY=#{updateQuantity}</if>
+															<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+															<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+															<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+															<if test="latestDate!=null">and  LATEST_DATE=#{latestDate}</if>
+															<if test="subscribeCount!=null">and  SUBSCRIBE_COUNT=#{subscribeCount}</if>
+															<if test="articleCount!=null">and  ARTICLE_COUNT=#{articleCount}</if>
+															<if test="examineUser!=null and examineUser!=''">and  EXAMINE_USER=#{examineUser}</if>
+															<if test="examineDate!=null">and  EXAMINE_DATE=#{examineDate}</if>
+															<if test="examineNoDesc!=null and examineNoDesc!=''">and  EXAMINE_NO_DESC=#{examineNoDesc}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+									 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_col_column
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+				ALIVE_FLAG='1'
+														<if test="id!=null and id!=''">and  ID=#{id}</if>
+																			<if test="columnTitle!=null and columnTitle!=''">and  COLUMN_TITLE=#{columnTitle}</if>
+																			<if test="columnBrief!=null and columnBrief!=''">and  COLUMN_BRIEF=#{columnBrief}</if>
+																			<if test="columnBriefHtml!=null and columnBriefHtml!=''">and  COLUMN_BRIEF_HTML=#{columnBriefHtml}</if>
+																			<if test="columnCover!=null and columnCover!=''">and  COLUMN_COVER=#{columnCover}</if>
+																			<if test="columnClassify!=null and columnClassify!=''">and  COLUMN_CLASSIFY=#{columnClassify}</if>
+																			<if test="columnClassifyName!=null and columnClassifyName!=''">and  COLUMN_CLASSIFY_NAME=#{columnClassifyName}</if>
+																			<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+																			<if test="columnPrice!=null">and  COLUMN_PRICE=#{columnPrice}</if>
+																			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+																			<if test="authorName!=null and authorName!=''">and  AUTHOR_NAME=#{authorName}</if>
+																			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+																			<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+																			<if test="columnCycValue!=null and columnCycValue!=''">and  COLUMN_CYC_VALUE=#{columnCycValue}</if>
+																			<if test="frequency!=null and frequency!=''">and  FREQUENCY=#{frequency}</if>
+																			<if test="frequencyValue!=null and frequencyValue!=''">and  FREQUENCY_VALUE=#{frequencyValue}</if>
+																			<if test="updateQuantity!=null">and  UPDATE_QUANTITY=#{updateQuantity}</if>
+																			<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+																			<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+																			<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+																			<if test="latestDate!=null">and  LATEST_DATE=#{latestDate}</if>
+																			<if test="subscribeCount!=null">and  SUBSCRIBE_COUNT=#{subscribeCount}</if>
+																			<if test="articleCount!=null">and  ARTICLE_COUNT=#{articleCount}</if>
+																			<if test="examineUser!=null and examineUser!=''">and  EXAMINE_USER=#{examineUser}</if>
+																			<if test="examineDate!=null">and  EXAMINE_DATE=#{examineDate}</if>
+																			<if test="examineNoDesc!=null and examineNoDesc!=''">and  EXAMINE_NO_DESC=#{examineNoDesc}</if>
+																			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+																			<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+																			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+																			<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+																			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+																			<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+																			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+																			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+																			<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+																			<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+																			<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+																			<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+																			<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+																			<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+																			<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+																			<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+																			<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+										</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_col_column
+		<set>
+         ID=#{id}
+		<if test="columnTitle!=null">,COLUMN_TITLE = #{columnTitle}</if>
+		<if test="columnBrief!=null">,COLUMN_BRIEF = #{columnBrief}</if>
+		<if test="columnBriefHtml!=null">,COLUMN_BRIEF_HTML = #{columnBriefHtml}</if>
+		<if test="columnCover!=null">,COLUMN_COVER = #{columnCover}</if>
+		<if test="columnClassify!=null">,COLUMN_CLASSIFY = #{columnClassify}</if>
+		<if test="columnClassifyName!=null">,COLUMN_CLASSIFY_NAME = #{columnClassifyName}</if>
+		<if test="currency!=null">,CURRENCY = #{currency}</if>
+		<if test="columnPrice!=null">,COLUMN_PRICE = #{columnPrice}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="authorName!=null">,AUTHOR_NAME = #{authorName}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="columnCyc!=null">,COLUMN_CYC = #{columnCyc}</if>
+		<if test="columnCycValue!=null">,COLUMN_CYC_VALUE = #{columnCycValue}</if>
+		<if test="frequency!=null">,FREQUENCY = #{frequency}</if>
+		<if test="frequencyValue!=null">,FREQUENCY_VALUE = #{frequencyValue}</if>
+		<if test="updateQuantity!=null">,UPDATE_QUANTITY = #{updateQuantity}</if>
+		<if test="startEffectiveDate!=null">,START_EFFECTIVE_DATE = #{startEffectiveDate}</if>
+		<if test="endEffectiveDate!=null">,END_EFFECTIVE_DATE = #{endEffectiveDate}</if>
+		<if test="settleType!=null">,SETTLE_TYPE = #{settleType}</if>
+		<if test="latestDate!=null">,LATEST_DATE = #{latestDate}</if>
+		<if test="subscribeCount!=null">,SUBSCRIBE_COUNT = #{subscribeCount}</if>
+		<if test="articleCount!=null">,ARTICLE_COUNT = #{articleCount}</if>
+		<if test="examineUser!=null">,EXAMINE_USER = #{examineUser}</if>
+		<if test="examineDate!=null">,EXAMINE_DATE = #{examineDate}</if>
+		<if test="examineNoDesc!=null">,EXAMINE_NO_DESC = #{examineNoDesc}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="ext2!=null">,EXT2 = #{ext2}</if>
+		<if test="ext3!=null">,EXT3 = #{ext3}</if>
+		<if test="ext4!=null">,EXT4 = #{ext4}</if>
+		<if test="ext5!=null">,EXT5 = #{ext5}</if>
+		<if test="ext6!=null">,EXT6 = #{ext6}</if>
+		<if test="ext7!=null">,EXT7 = #{ext7}</if>
+		<if test="ext8!=null">,EXT8 = #{ext8}</if>
+		<if test="ext9!=null">,EXT9 = #{ext9}</if>
+		<if test="ext10!=null">,EXT10 = #{ext10}</if>
+		</set>
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="columnTitle!=null and columnTitle!=''">and  COLUMN_TITLE=#{columnTitle}</if>
+			<if test="columnBrief!=null and columnBrief!=''">and  COLUMN_BRIEF=#{columnBrief}</if>
+			<if test="columnBriefHtml!=null and columnBriefHtml!=''">and  COLUMN_BRIEF_HTML=#{columnBriefHtml}</if>
+			<if test="columnCover!=null and columnCover!=''">and  COLUMN_COVER=#{columnCover}</if>
+			<if test="columnClassify!=null and columnClassify!=''">and  COLUMN_CLASSIFY=#{columnClassify}</if>
+			<if test="columnClassifyName!=null and columnClassifyName!=''">and  COLUMN_CLASSIFY_NAME=#{columnClassifyName}</if>
+			<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+			<if test="columnPrice!=null">and  COLUMN_PRICE=#{columnPrice}</if>
+			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+			<if test="authorName!=null and authorName!=''">and  AUTHOR_NAME=#{authorName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+			<if test="columnCycValue!=null and columnCycValue!=''">and  COLUMN_CYC_VALUE=#{columnCycValue}</if>
+			<if test="frequency!=null and frequency!=''">and  FREQUENCY=#{frequency}</if>
+			<if test="frequencyValue!=null and frequencyValue!=''">and  FREQUENCY_VALUE=#{frequencyValue}</if>
+			<if test="updateQuantity!=null">and  UPDATE_QUANTITY=#{updateQuantity}</if>
+			<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+			<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+			<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+			<if test="latestDate!=null">and  LATEST_DATE=#{latestDate}</if>
+			<if test="subscribeCount!=null">and  SUBSCRIBE_COUNT=#{subscribeCount}</if>
+			<if test="articleCount!=null">and  ARTICLE_COUNT=#{articleCount}</if>
+			<if test="examineUser!=null and examineUser!=''">and  EXAMINE_USER=#{examineUser}</if>
+			<if test="examineDate!=null">and  EXAMINE_DATE=#{examineDate}</if>
+			<if test="examineNoDesc!=null and examineNoDesc!=''">and  EXAMINE_NO_DESC=#{examineNoDesc}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+			<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+			<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+			<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+			<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+			<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+			<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+			<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+			<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+	</update>
+	<select id="queryColumnList" resultType="java.util.HashMap">
+		SELECT 
+		   col.ID AS id,
+		   col.COLUMN_TITLE AS columnTitle,
+		   col.COLUMN_BRIEF AS columnBrief,
+		   col.COLUMN_BRIEF_HTML AS columnBriefHtml,
+		   col.COLUMN_COVER AS columnCover,
+		   col.AUTHOR_NAME AS authorName,
+		   col.SUBSCRIBE_COUNT AS subscribeCount,
+		   col.ARTICLE_COUNT AS articleCount
+		  ,(
+		    CASE
+		      WHEN 
+		      (SELECT 
+		        COUNT(*) 
+		      FROM
+		        t_col_subscribe sub 
+		      WHERE sub.COLUMN_ID = col.ID 
+		        AND sub.SUBSCRIBE_USER = #{ext1}
+		        AND sub.ALIVE_FLAG = '1' ) >0 
+		      THEN '1' 
+		      ELSE '0' 
+		    END
+		  ) AS subStatus
+		FROM
+		  t_col_column  col
+		WHERE col.ALIVE_FLAG = '1'
+		<if test="status != null and status !=''">
+			AND col.STATUS = #{status}
+		</if>
+		ORDER BY col.SUBSCRIBE_COUNT DESC,col.ARTICLE_COUNT DESC
+		
+	</select>
+	<select id="findById" resultType="com.sinochem.crude.trade.info.model.ColumnDetailVO" parameterType="hashmap">
+		select
+			c.COLUMN_TITLE AS columnTitle,
+			c.COLUMN_BRIEF_HTML AS columnBriefHtml,
+			c.COLUMN_BRIEF AS columnBrief,
+			c.COLUMN_COVER AS columnCover,
+			c.AUTHOR_NAME AS authorName,
+			c.SUBSCRIBE_COUNT AS subscribeCount,
+			c.ARTICLE_COUNT AS articleCount,
+			c.STATUS AS colStatus,
+			c.ID AS id,
+			(SELECT 
+				SUM(i.FABULOUS_COUNT)
+			FROM t_cms_info i
+			WHERE i.ALIVE_FLAG='1' AND i.BIZ_ID = c.ID AND i.STATUS = '30' AND i.ARTICLE_TYPE = '10') AS fabulousCount,
+			(SELECT 
+				SUM(i.BROWSE_COUNT)
+			FROM t_cms_info i
+			WHERE i.ALIVE_FLAG='1' AND i.BIZ_ID = c.ID AND i.STATUS = '30' AND i.ARTICLE_TYPE = '10') AS browseCount
+			<if test="id !=null and id !=''">
+			  ,(
+			    CASE
+			      WHEN 
+			      (SELECT 
+			        COUNT(*) 
+			      FROM
+			        t_col_subscribe sub 
+			      WHERE sub.COLUMN_ID = c.ID 
+			        AND sub.SUBSCRIBE_USER = #{userId}
+			        AND sub.ALIVE_FLAG = '1' ) >0 
+			      THEN '1' 
+			      ELSE '0' 
+			    END
+			  ) AS subStatus
+			</if>
+		from t_col_column c
+		where 
+		c.ALIVE_FLAG='1' 
+		<if test="id !=null and id !=''">
+			AND  c.ID=#{id}
+		</if>
+		<if test="author !=null and author!=''">
+			AND c.AUTHOR = #{author}
+		</if>
+		
+	</select>
+	<update id="updateColumnSubscribeCount" parameterType="hashmap">
+		update t_col_column
+			set SUBSCRIBE_COUNT = #{subscribeCount}
+		where
+			ALIVE_FLAG='1'
+			and  ID=#{id}
+	</update>
+	
+	<select id="findColumnByInfoId" resultMap="ColColumnDO">
+		select cc.* from t_col_column cc inner join t_cms_info ci 
+			on cc.ID = ci.BIZ_ID
+		 where 
+	    ci.ID = #{id} and ci.ALIVE_FLAG = '1'
+	</select>
+	
+</mapper>

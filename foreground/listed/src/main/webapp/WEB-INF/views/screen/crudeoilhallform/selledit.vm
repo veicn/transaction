@@ -1,0 +1,30 @@
+<ul class="fabucaigou-con-left">
+    <li class="con-left-content gou" >
+        <i class="c-ico icon-jbxx"></i>
+        <span class="con-left-tex"><a href="#cgjbxx">资源信息</a></span>
+    </li>
+    <li class="con-left-content">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#specifyEnterpriseInfo">发布范围</a></span>
+    </li>
+    <li class="con-left-content">
+        <i class="c-ico icon-cgqk"></i>
+        <span class="con-left-tex"><a href="#cgqk">销售详情</a></span
+    </li>
+    <li class="con-left-content cha">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#ysxx">运输信息</a></span>
+    </li>
+    #*<li class="con-left-content cha">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#mjbwxx">买家泊位信息</a></span>
+    </li>*#
+    <li class="con-left-content">
+        <i class="c-ico icon-mjxx"></i>
+        <span class="con-left-tex"><a href="#mjxx">卖家信息</a></span>
+    </li>
+    #*<li class="con-left-content">
+        <i class="c-ico icon-dlsxx"></i>
+        <span class="con-left-tex"><a href="#dlsxx">代理商信息</a></span>
+    </li>*#
+</ul>

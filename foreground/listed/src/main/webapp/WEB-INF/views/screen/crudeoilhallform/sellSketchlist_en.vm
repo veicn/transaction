@@ -1,0 +1,104 @@
+########################################################################
+#if($!demand.crudeOilOptions.length() && $!demand.crudeOilOptions.length() > 0)
+    #if(($!demand.crudeOilOptions.lastIndexOf(',') + 1)==$!demand.crudeOilOptions.length())
+        #set($subTo = $!demand.crudeOilOptions.length() - 1)
+        #set($crudeOilOptions = $!demand.crudeOilOptions.substring(0,$subTo))
+    #else
+        #set($crudeOilOptions = $!demand.crudeOilOptions)
+    #end
+#end
+
+<div class="cg-xqxq clearfix">
+    <dl class="cg-xqxq-tit clearfix">
+        <dt class="cg-x-t-titt"><i class="c-ico c-ico-yy"></i>$!{crudeOilOptions}</dt>
+        <dd class="cg-x-t-cont clearfix">
+            <div class="t-c-titt">Qty(BBL)：<span>$!{demand.numStr}</span></div>
+
+            <div class="t-c-txt"><span class="tctxt-t">
+##                $!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})to$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})
+                    #if($!{demand.valuationProidType} == 4)
+                        <em>
+                            $!{dictUtils.getValue("valuationProidTypeMap", "$!demand.valuationProidType")}<br/>
+                        </em>
+                        <em>
+                           （$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demand.valuationProidStart})to$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demand.valuationProidEnd})）
+                        </em>
+                    #elseif($!{demand.valuationProidType} == 5)
+                        $!{dictUtils.getValue("valuationProidTypeMap", "$!demand.valuationProidType")}
+                        ($!{demand.contractKind})
+                    #else
+                        <span class="tctxt-t scater">
+                               $!{dictUtils.getValue("valuationProidTypeMap", "$!demand.valuationProidType")}
+                        </span>
+                    #end
+                </span><span class="tctxt-n">Pricing Period</span>
+            </div>
+        </dd>
+
+        <dd class="cg-x-t-cont cgt-ln clearfix">
+
+
+                <div class="t-c-titt">Incoterm：<span>$!{tradeItemMap.get($!{demand.tradeItem})}</span></div>
+
+##            <div class="t-c-titt">Incoterm：<span>CFR</span></div>
+
+                <div class="t-c-txt">
+                    <span class="tctxt-t scater">
+                        $!{demand.payItem}
+                    </span>
+                    <span class="tctxt-n">Payment Date</span>
+                </div>
+
+        </dd>
+        <dd class="cg-x-t-cont clearfix">
+            <div class="t-c-titt">Pricing Basis：<span>$!valuationBaseMap.get($!{demand.valuationBase})&nbsp;</span></div>
+            <div class="t-c-txt"><span class="tctxt-t scater">+/- $!{demand.numfloat} %</span><span class="tctxt-n">Tolerance</span></div>
+        </dd>
+
+        <div class="detail-ibut">
+            #if($!{demand.purchaseType}==1)
+##                bidding
+                <a href="javascript:void(0)" onclick="epclick('$!{demand.id}','$!{demand.creater}','Bid', '$!{demand.dealType}')"  class="detail-btb epclick"><i class="c-ico c-ico-tb"></i>Bid</a>
+            #elseif($!{demand.purchaseType}==2)
+##                Quotation
+                <a href="javascript:void(0)" onclick="epclick('$!{demand.id}','$!{demand.creater}','Quote', '$!{demand.dealType}')" class="detail-bxj epclick"><i class="c-ico c-ico-bj"></i>Quote</a>
+            #end
+##            <a href="javascript:void(0);" class="detail-bsc"><i class="c-ico c-ico-sc"></i>收藏</a>
+##            <a href="javascript:void(0);" class="detail-bsc duib" sn="$!{demand.id}" id="compareC_$!{demand.id}_$!{demand.id}" name="name" value="$!{demand.id}"><i class="c-ico c-ico-db"></i>Add to Compare</a>
+##            <input class="cpy-contrast-inp compareC"  id="compareC_$!{d.id}_$!{d.id}" type="checkbox"  sn="$!{d.id}" img="$imageServer.get('/images/cg_pic1.jpg')" name="name" value="$!{d.id}" class="cpy-contrast-inp" type="checkbox" name="" value=""/>
+        </div>
+    </dl>
+    <div class="dr-blo">
+        <i class="c-ico c-ico-mj1" ></i> <!--这里换买家、Seller、代理商的头部图标-->
+        <div class="dr-cont">
+            <div class="dr-pic"><img src="$docServer.get('/img/GSLOGO/')$!{ev.memberId}.img" onerror="this.src='$imageServer.get('images/coop_img_01.gif')'" alt=""></div>
+            <div class="dr-imo">Company： $!ev.englishName
+                ##<br>经营范围： 汽油 92#、柴油<br>公司地址：中国泉州</div>
+                ##<a class="ico-gz-mj"><span><i class="c-ico c-ico-gz"></i></span>关注商家</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function epclick(id, creater, msg, dealType) {
+        if ("$!{demand.overdue}" == "true"){
+            layui.use(['layer'], function () {
+                layui.layer.alert('This requirement has been overdue, and '+ msg + ' cannot be initiated', {title:"Notice", btn: "OK"});
+            })
+            return false;
+        }
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('The requirement originator cannot participate in the ' + msg, {title:"Notice", btn: "OK"});
+            })
+            return false;
+        }else{
+        	if(dealType == "B") {
+				window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + id;
+        	} else {
+				window.location.href="$appServer.get('/oilSaleBidding/crudeOilBidding.htm?demandId=')" + id;
+        	}
+        }
+    }
+</script>

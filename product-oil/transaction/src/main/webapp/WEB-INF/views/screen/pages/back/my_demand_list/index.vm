@@ -1,0 +1,622 @@
+#set($demandType = $!{demandType})
+#set($category = $!{category})
+#set($demandSheetStatus = $!{demandSheetStatus})
+
+$contain.get('/common/title.htm').put('title', 'My Demands')
+
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+#css($appServer.get('/css/common/pikaday.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+<style>
+    .w168{white-space: nowrap;}
+    .w94 {
+        width: 150px;
+    }
+</style>
+
+<div class="m-nav fl">
+    <div class="m-box m-sls cleafix">
+        <div class="tit">
+            <span  class="buyman-btn myProductListForm">My Demands</span>
+            <span id="myBids" class="buyman-btn">My Bids</span>
+        </div>
+        <form id="myProductBiddingList" method="post" action="$appServer.get('/pages/back/my_bidding_list/index.htm')">
+            <input type="hidden" name="biddingFlag"  value="1">
+        </form>
+        <form  id="myDemandList" method="post" action="$appServer.get('/pages/back/my_demand_list/index.htm')">
+            <div class="xz">
+                <ul>
+                    <li>
+                        <span class="m-f-span xz1">Range :</span>
+                        <div class="cpy-select clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">
+                                            #foreach($demandType in $demandType)
+                                                #if($demandType.code == $!{demandSheetQueryVO.demandTypeCode})
+                                                $demandType.enName
+                                            #end
+                                            #end
+                                        </div>
+                                        <input type="text" class="vcode" name="demandTypeCode" readonly="readonly" value="$!{saleSheetQueryVO.demandTypeCode}">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($demandType in $demandType)
+                                        <li class="select-option" data-value="$!{demandType.code}">$!{demandType.enName}</li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="m-f-span xz1">Category :</span>
+                        <div class="cpy-select clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">
+                                            #foreach($category in $category)
+                                                #if($category.code == $!{demandSheetQueryVO.productCategoryCode})
+                                                $!{category.enName}
+                                            #end
+                                            #end
+                                        </div>
+                                        <input type="text" class="vcode" name="productCategoryCode" readonly="readonly" value="$!{demandSheetQueryVO.productCategoryCode}">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($category in $category)
+                                        <li class="select-option" data-value="$!{category.code}">$!{category.enName}</li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="m-f-span xz1 ">Status :</span>
+                        <div class="cpy-select clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">
+                                            #foreach($demandSheetStatus in $demandSheetStatus)
+                                                #if($demandSheetStatus.code == $!{demandSheetQueryVO.demandSheetStatusCode})
+                                                    $!{demandSheetStatus.enName}
+                                                #end
+                                            #end
+                                        </div>
+                                        <input type="text" class="vcode" name="demandSheetStatusCode" readonly="readonly" value="$!{demandSheetQueryVO.demandSheetStatusCode}">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($demandSheetStatus in $demandSheetStatus)
+                                        <li class="select-option" data-value="$!{demandSheetStatus.code}">$!{demandSheetStatus.enName}</li>
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="m-f-span xz1">Demand No :</span>
+                        <input type="text" name="serialNumber" class="input36" value="$!{demandSheetQueryVO.serialNumber}"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="time m-time-n l-Post-time">
+                <ul>
+                    <li>
+                        <span class="time-l">Posting Date</span>
+                        <div class="datetime-wrap">
+                            <input name="releasedDateStartAsString" id="LaycanS" value="$!{demandSheetQueryVO.releasedDateStartAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view">$!{demandSheetQueryVO.releasedDateStartAsString}</div>
+                        </div>
+                        <div  class="datetime-line">-</div>
+                        <div class="datetime-wrap">
+                            <input name="releasedDateEndAsString" id="LaycanD" value="$!{saleSheetQueryVO.releasedDateEndAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view">$!{demandSheetQueryVO.releasedDateEndAsString}</div>
+                        </div>
+                        <!-- <input type="text"  value="5/5/2018"> -->
+                    </li>
+                    <li>
+                        <span>Create Date</span>
+                        <div class="datetime-wrap">
+                            <input name="gmtCreatedStartAsString" id="CreateA" value="$!{demandSheetQueryVO.gmtCreatedStartAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view">$!{demandSheetQueryVO.gmtCreatedStartAsString}</div>
+                        </div>
+                        <div  class="datetime-line">-</div>
+                        <div class="datetime-wrap">
+                            <input name="gmtCreatedEndAsString" id="CreateB" value="$!{demandSheetQueryVO.gmtCreatedEndAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view">$!{demandSheetQueryVO.gmtCreatedEndAsString}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="search ">
+                <span  class="m-btn myProductListForm">Search</span>
+                #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                    <span id="postResource" style=" width:150px" class="m-btn">Post New Demand</span>
+                #end
+            </div>
+        </form>
+    </div>
+    <!-- li -->
+    #foreach( $res in $!{pageInfoList.list})
+        <div class="m-box">
+            <div class="m-tit">
+                <ul>
+                    <li>
+                        <span>Create Time :</span>
+                        <span class="m-tit-word">$!{res.demandSheetVO.gmtCreated}</span>
+                    </li>
+                    <li>
+                        <span>Demand No :</span>
+                        <span class="m-tit-word">$!{res.demandSheetVO.serialNumber}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="m-text clearfix">
+                <div class="m-img fl">
+                    <img src='$appServer.get("/product_images/$!{res.productInfoVO.productCategoryVO.code}/vertical.jpg")' />
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '1')
+                        <div class="mr-save"></div>
+                    #elseif($!{res.demandSheetVO.demandSheetStatusVO.code} == '2')
+                        <div class="mr-release"></div>
+                    #elseif($!{res.demandSheetVO.demandSheetStatusVO.code} == '3')
+                        <div class="mr-cancell"></div>
+                    #elseif($!{res.demandSheetVO.demandSheetStatusVO.code} == '4')
+                        <div class="mr-complet"></div>
+                    #elseif($!{res.demandSheetVO.demandSheetStatusVO.code} == '5')
+                        <div class="mr-expired"></div>
+                    #end
+                </div>
+                <div class="fl m-t-tab w220">
+                    <ol>
+
+                        <li>
+                            <span class="m-f-span w94">
+                                Range :
+                            </span>
+                            <span class="m-r-span">
+                                $!{res.demandSheetVO.demandTypeVO.enName}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">
+                                Specification :
+                            </span>
+                            <span class="m-r-span w94">
+                                $!{res.productInfoVO.productSpecificationVO.enName}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">
+                                Incoterms :
+                            </span>
+                            <span class="m-r-span w94">
+                                $!{res.productInfoVO.tradeTermVO.enName}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">
+                                Payment Terms :
+                            </span>
+                            <span class="m-r-span w94" style="width: 200px">
+                                $!{res.pricingInfoVO.paymentTerm}
+                            </span>
+                        </li>
+                        #if($!{res.productInfoVO.tradeTermVO.enName} == 'FOB')
+                            <li>
+                                <span class="m-f-span w94">
+                                    Load Port :
+                                </span>
+                                <span class="m-r-span w94">
+                                $!{res.transportInfoVO.loadingPort}, $!{res.transportInfoVO.loadingCountry}
+                                </span>
+                            </li>
+                        #end
+
+                        <li>
+                            <span class="m-f-span w94">
+                                Expired Time :
+                            </span>
+                            <span class="m-r-span w94">
+                                $!{res.productInfoVO.deadlineAsString}
+                            </span>
+                        </li>
+                    </ol>
+
+                </div>
+                <div class="fl m-t-tab w286">
+                    <ol>
+                        <li>
+                            <span class="m-f-span w115">
+                                Category :
+                            </span>
+                            <span class="m-r-span w168">
+                                $!{res.productInfoVO.productCategoryVO.enName}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w115">
+                                Quantity :
+                            </span>
+                            <span class="m-r-span w168">
+                                $!{res.productInfoVO.quantityAsString} $!{res.productInfoVO.quantityUnitVO.enName}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w115">
+                                Pricing Period :
+                            </span>
+                            <span class="m-r-span w168">
+                                $!{res.pricingInfoVO.pricingPeriod}
+                            </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w115">
+                                Laycan :
+                            </span>
+                            #if($!{res.transportInfoVO.laycanStartDateAsString} != "" || $!{res.transportInfoVO.laycanEndDateAsString} != "")
+                                <span class="m-r-span w168">
+                                    $!{res.transportInfoVO.laycanStartDateAsString} - $!{res.transportInfoVO.laycanEndDateAsString}
+                                </span>
+                            #end
+                        </li>
+                        #if($!{res.productInfoVO.tradeTermVO.enName} == 'CFR' || $!{res.productInfoVO.tradeTermVO.enName} == 'CIF')
+                            <li>
+                            <span class="m-f-span w115">
+                                Discharge Port :
+                            </span>
+                                <span class="m-r-span w168">
+                            $!{res.transportInfoVO.dischargePort}, $!{res.transportInfoVO.dischargeCountry}
+                            </span>
+                            </li>
+                        #end
+                    #*<li>
+                        <span class="m-f-span w115">
+                            Laytime :
+                        </span>
+                        <span class="m-r-span w168">
+                            $!{res.transportInfoVO.laytimeAsString} H+6
+                        </span>
+                    </li>*#
+                        #if($!{res.demandSheetVO.demandSheetStatusVO.code} != '1')
+                            <li>
+                            <span class="m-f-span w115">
+                                Posting Date :
+                            </span>
+                                <span class="m-r-span w168">
+                                    $!{res.demandSheetVO.releasedDateAsString}
+                            </span>
+                            </li>
+                        #end
+
+                    </ol>
+
+                </div>
+                <!-- button -->
+                <div class="clearfix" style="display :block;width: 100%;height: auto;">
+                        <ul class="fr m-t-btn mpl-button-box">
+                            <li class="fl m-btn btn-s ">
+                        <a class="br" href="$appServer.get('/pages/back/my_demand_detail/index.htm').put('uuid',$!{res.demandSheetVO.uuid})">
+                            Details
+                        </a>
+                    </li>
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '1')
+                        #if($!{res.demandSheetVO.userCreated} == $!{user.memberId})
+                            <li class="fl m-btn btn-s " style="color: ">
+                                <a class="br" href="$appServer.get('/pages/front/edit_demand_sheet/index.htm').put('uuid',$!{res.demandSheetVO.uuid})">
+                                    Edit
+                                </a>
+                            </li>
+                        #end
+                    #end
+                    #if($!{res.demandSheetVO.userCreated} == $!{user.memberId})
+                        <li class="fl m-btn btn-s ">
+                            <a class="br" href="$appServer.get('/pages/front/publish_demand/index.htm').put('uuid',$!{res.demandSheetVO.uuid})">
+                                Copy
+                            </a>
+                        </li>
+                    #end
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '1')
+                        #if($!{res.demandSheetVO.userCreated} == $!{user.memberId})
+                            <li class="fl m-btn btn-s ">
+                                <a class="br" onclick="del('$!{res.demandSheetVO.uuid}')" >
+                                    Delete
+                                </a>
+                            </li>
+                        #end
+                    #end
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '1')
+                        #if($!{res.demandSheetVO.userCreated} == $!{user.memberId})
+                            <li class="fl m-btn btn-s ">
+                                <a class="br" onclick="post('$!{res.demandSheetVO.uuid}','2')">
+                                    Post
+                                </a>
+                            </li>
+                        #end
+                    #end
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '2' || $!{res.demandSheetVO.demandSheetStatusVO.code} == '4'  || $!{res.demandSheetVO.demandSheetStatusVO.code} == '5')
+                        <li class="fl m-btn btn-s ">
+                            <a class="br" href="$appServer.get('/pages/back/my_demand_list/demand_bidding_inventory.htm').put('demandUuid',$!{res.demandSheetVO.uuid})">
+                                View Offers
+                            </a>
+                        </li>
+                    #end
+                    #if($!{res.demandSheetVO.demandSheetStatusVO.code} == '2')
+                        #if($!{res.demandSheetVO.userCreated} == $!{user.memberId})
+                            <li class="fl m-btn btn-s ">
+                                <a class="br" onclick="withdraw('$!{res.demandSheetVO.uuid}','1')">
+                                    Withdraw
+                                </a>
+                            </li>
+                        #end
+                    #end
+                </ul>
+                </div>
+            </div>
+        </div>
+    #end
+
+    $contain.get('/common/page.htm').put("pageInfo", $!{pageInfoList})
+</div>
+
+
+
+<script>
+    var flg = false;
+    (function () {
+        window.commonCPY.datePicker(['LaycanS','LaycanD','CreateA','CreateB'],function(value, date, endDate){
+        });
+        commonCPY.select()
+    })();
+    function del(uuid){
+        layui.use(['layer'], function(){
+            layer.confirm('Are you sure to delete it?', {
+                title:'Info',
+                area: ['535px'],
+                type: 1,
+                icon: 2,
+                //anim: 6, //默认动画风格
+                skin: 'demo-class',
+                closeBtn: 3,
+                shadeClose: false,
+                shade: [0.5, '#000000'],
+                btnAlign: 'c',
+                btn: ['Yes','No'] //按钮
+            }, function(){
+                if (flg) {
+                    return;
+                } else {
+                    flg = true;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "$appServer/pages/back/my_demand_list/delete.json",
+                    data: {
+                        'uuid': uuid
+                    },
+                    success: function (msg) {
+                        flg = false;
+                        layer.closeAll();
+                        layer.open({
+                            title:'Info',
+                            area: ['535px'],
+                            type: 1,
+                            icon: 2,
+                            //anim: 6, //默认动画风格
+                            skin: 'demo-class',
+                            closeBtn: 3,
+                            shadeClose: false,
+                            shade: [0.5, '#000000'],
+                            btnAlign: 'c',
+                            content: msg.message
+                            ,btn: ['Ok']
+                            ,yes: function(index, layero){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                            ,cancel: function(){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                        });
+                        /*layer.alert(msg.message, {title: 'Info', btn: ['OK']}, function () {
+                            window.location.href = "appServer/pages/back/my_demand_list/index.htm";
+                        });*/
+                    },
+                    error: function (msg) {
+                        flg = false;
+                        layer.alert("error:" + msg.message, {title: 'Error', btn: ['OK']});
+                    }
+                });
+            }, function(){
+
+            });
+        });
+    }
+
+    function post(uuid,code){
+    ## href="$appServer.get('/pages/back/my_product_list/shelfOrOffShelf.htm').put('uuid',$!{res.saleSheetVO.uuid}).put('code','2')"
+        layui.use(['layer'], function(){
+            layer.confirm('Are you sure to post it?', {
+                title:'Info',
+                area: ['535px'],
+                type: 1,
+                icon: 2,
+                //anim: 6, //默认动画风格
+                skin: 'demo-class',
+                closeBtn: 3,
+                shadeClose: false,
+                shade: [0.5, '#000000'],
+                btnAlign: 'c',
+                btn: ['Yes','No'] //按钮
+            }, function(){
+                if (flg) {
+                    return;
+                } else {
+                    flg = true;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "$appServer/pages/back/my_demand_list/shelfOrOffShelf.json",
+                    data: {
+                        'uuid': uuid,
+                        "code": code
+                    },
+                    success: function (msg) {
+                        flg = false;
+                        layer.closeAll();
+                        layer.open({
+                            title:'Info',
+                            area: ['535px'],
+                            type: 1,
+                            icon: 2,
+                            //anim: 6, //默认动画风格
+                            skin: 'demo-class',
+                            closeBtn: 3,
+                            shadeClose: false,
+                            shade: [0.5, '#000000'],
+                            btnAlign: 'c',
+                            content: msg.message
+                            ,btn: ['Ok']
+                            ,yes: function(index, layero){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                            ,cancel: function(){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                        });
+                        /*layer.alert(msg.message, {title: 'Info', btn: ['OK']}, function () {
+                            window.location.href = "appServer/pages/back/my_demand_list/index.htm";
+                        });*/
+                    },
+                    error: function (msg) {
+                        flg = false;
+                        layer.confirm(msg.message, {
+                            title:'Info',
+                            area: ['535px'],
+                            type: 1,
+                            icon: 2,
+                            ////anim: 6, //默认动画风格
+                            skin: 'demo-class',
+                            closeBtn: 3,
+                            shadeClose: false,
+                            shade: [0.5, '#000000'],
+                            btnAlign: 'c',
+                            btn: ['OK'] //按钮
+                        }, function(){
+
+                        })
+                        //layer.alert("error:" + msg.message, {title: 'Error', btn: ['OK']});
+                    }
+                });
+            }, function(){
+
+            });
+        });
+    }
+
+    function withdraw(uuid,code){
+    ## href="$appServer.get('/pages/back/my_product_list/shelfOrOffShelf.htm').put('uuid',$!{res.saleSheetVO.uuid}).put('code','1')"
+        layui.use(['layer'], function(){
+            layer.confirm('Are you sure to withdraw it?', {
+                title:'Info',
+                area: ['535px'],
+                type: 1,
+                icon: 2,
+                //anim: 6, //默认动画风格
+                skin: 'demo-class',
+                closeBtn: 3,
+                shadeClose: false,
+                shade: [0.5, '#000000'],
+                btnAlign: 'c',
+                btn: ['Yes','No'] //按钮
+            }, function(){
+                if (flg) {
+                    return;
+                } else {
+                    flg = true;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "$appServer/pages/back/my_demand_list/shelfOrOffShelf.json",
+                    data: {
+                        'uuid': uuid,
+                        "code": code
+                    },
+                    success: function (msg) {
+                        flg = false;
+                        layer.closeAll();
+                        layer.open({
+                            title:'Info',
+                            area: ['535px'],
+                            type: 1,
+                            icon: 2,
+                            //anim: 6, //默认动画风格
+                            skin: 'demo-class',
+                            closeBtn: 3,
+                            shadeClose: false,
+                            shade: [0.5, '#000000'],
+                            btnAlign: 'c',
+                            content: msg.message
+                            ,btn: ['Ok']
+                            ,yes: function(index, layero){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                            ,cancel: function(){
+                                window.location.href = "$appServer/pages/back/my_demand_list/index.htm";
+                            }
+                        });
+                    },
+                    error: function (msg) {
+                        flg = false;
+                        layer.confirm(msg.message, {
+                            title:'Info',
+                            area: ['535px'],
+                            type: 1,
+                            icon: 2,
+                            ////anim: 6, //默认动画风格
+                            skin: 'demo-class',
+                            closeBtn: 3,
+                            shadeClose: false,
+                            shade: [0.5, '#000000'],
+                            btnAlign: 'c',
+                            btn: ['OK'] //按钮
+                        }, function(){
+
+                        })
+                        //layer.alert("error:" + msg.message, {title: 'Error', btn: ['OK']});
+                    }
+                });
+            }, function(){
+
+            });
+        });
+    }
+    $(".myProductListForm").on("click", function () {
+
+        document.getElementById("myDemandList").submit();
+
+    });
+
+    $("#myBids").on("click", function () {
+
+        document.getElementById("myProductBiddingList").submit();
+
+    });
+    $("#postResource").on("click", function () {
+        window.location.href="$appServer.get('pages/front/publish_demand/index.htm')"
+    });
+
+</script>

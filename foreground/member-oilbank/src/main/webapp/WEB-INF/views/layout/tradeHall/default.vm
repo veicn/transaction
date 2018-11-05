@@ -1,0 +1,20 @@
+    $contain.get("/tradeHall/html_head.htm")
+
+    <script src="$imageServer.get('/layui/layui.all.js')"></script>
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+    <script src="$!imageServer.get('/lib/plupload-2.1.2/plupload.full.min.js')" type="application/javascript"></script>
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css')">
+
+    </head>
+    <body>
+    <div class="header">
+        $contain.get('/commonContain/headline.htm').setHost("$portalServer.get('')")
+    </div>
+    $screen_content
+    $contain.get('/commonContain/foot.htm').setHost("$portalServer.get('')")
+
+    $contain.get("/contain/html_end.htm")
+
+    <script>
+        var appServer = "$appServer";
+    </script>

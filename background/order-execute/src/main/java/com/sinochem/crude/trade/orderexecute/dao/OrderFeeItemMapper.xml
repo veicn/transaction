@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderFeeItemMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderFeeItem"
+		id="OrderFeeItem">
+		<result property="feeItemId" column="FEE_ITEM_ID" />
+		<result property="relatId" column="RELAT_ID" />
+		<result property="subjectName" column="SUBJECT_NAME" />
+		<result property="subjectCode" column="SUBJECT_CODE" />
+		<result property="valuationModel" column="VALUATION_MODEL" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="feePrice" column="FEE_PRICE" />
+		<result property="totalFee" column="TOTAL_FEE" />
+		<result property="isAgent" column="IS_AGENT" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+		<result property="relatType" column="RELAT_TYPE" />
+	</resultMap>
+
+	<insert id="insertRecord"
+		parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeItem"
+		useGeneratedKeys="true" keyProperty="feeItemId">
+		insert into
+		t_order_fee_item ( FEE_ITEM_ID
+		,RELAT_ID
+		,SUBJECT_NAME
+		,SUBJECT_CODE
+		,VALUATION_MODEL
+		,QUANTITY
+		,FEE_PRICE
+		,TOTAL_FEE
+		,IS_AGENT
+		,LANG_VER
+		,ALIVE_FLAG
+		,CREATE_USER
+		,CREATE_DATE
+		,UPDATE_USER
+		,UPDATE_DATE
+		,VERSION
+		,RELAT_TYPE
+		)
+		values( #{feeItemId}
+		,#{relatId}
+		,#{subjectName}
+		,#{subjectCode}
+		,#{valuationModel}
+		,#{quantity}
+		,#{feePrice}
+		,#{totalFee}
+		,#{isAgent}
+		,#{langVer}
+		,#{aliveFlag}
+		,#{createUser}
+		,#{createDate}
+		,#{updateUser}
+		,#{updateDate}
+		,#{version}
+		,#{relatType}
+		)
+	</insert>
+
+	<delete id="deleteById">
+		DELETE FROM t_order_fee_item
+		WHERE 1=1
+		AND FEE_ITEM_ID = #{feeItemId}
+	</delete>
+
+	<delete id="deleteRecords"
+		parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeItem">
+		DELETE FROM t_order_fee_item
+		WHERE 1=1
+		<if test="feeItemId!=null and feeItemId!=''">AND FEE_ITEM_ID = #{feeItemId}</if>
+		<if test="relatId!=null and relatId!=''">AND RELAT_ID = #{relatId}</if>
+		<if test="subjectName!=null and subjectName!=''">AND SUBJECT_NAME = #{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">AND SUBJECT_CODE = #{subjectCode}</if>
+		<if test="valuationModel!=null and valuationModel!=''">AND VALUATION_MODEL = #{valuationModel}</if>
+		<if test="quantity!=null and quantity!=''">AND QUANTITY = #{quantity}</if>
+		<if test="feePrice!=null and feePrice!=''">AND FEE_PRICE = #{feePrice}</if>
+		<if test="totalFee!=null and totalFee!=''">AND TOTAL_FEE = #{totalFee}</if>
+		<if test="isAgent!=null and isAgent!=''">AND IS_AGENT = #{isAgent}</if>
+		<if test="langVer!=null and langVer!=''">AND LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">AND ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">AND CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null and createDate!=''">AND CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">AND UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">AND UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null and version!=''">AND VERSION = #{version}</if>
+		<if test="relatType!=null and relatType!=''">AND RELAT_TYPE = #{relatType}</if>
+	</delete>
+
+
+
+	<update id="updateRecordById"
+		parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeItem">
+		update t_order_fee_item
+		<set>
+			FEE_ITEM_ID=#{feeItemId}
+			<if test="relatId!=null">,RELAT_ID = #{relatId}</if>
+			<if test="subjectName!=null">,SUBJECT_NAME = #{subjectName}</if>
+			<if test="subjectCode!=null">,SUBJECT_CODE = #{subjectCode}</if>
+			<if test="valuationModel!=null">,VALUATION_MODEL = #{valuationModel}</if>
+			<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+			<if test="feePrice!=null">,FEE_PRICE = #{feePrice}</if>
+			<if test="totalFee!=null">,TOTAL_FEE = #{totalFee}</if>
+			<if test="isAgent!=null">,IS_AGENT = #{isAgent}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="version!=null">,VERSION = #{version}</if>
+			<if test="relatType!=null">,RELAT_TYPE = #{relatType}</if>
+		</set>
+		where
+		FEE_ITEM_ID=#{feeItemId}
+		and ALIVE_FLAG='1'
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_fee_item
+		<set>
+			FEE_ITEM_ID=#{feeItemId}
+			<if test="relatId!=null">,RELAT_ID = #{relatId}</if>
+			<if test="subjectName!=null">,SUBJECT_NAME = #{subjectName}</if>
+			<if test="subjectCode!=null">,SUBJECT_CODE = #{subjectCode}</if>
+			<if test="valuationModel!=null">,VALUATION_MODEL = #{valuationModel}</if>
+			<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+			<if test="feePrice!=null">,FEE_PRICE = #{feePrice}</if>
+			<if test="totalFee!=null">,TOTAL_FEE = #{totalFee}</if>
+			<if test="isAgent!=null">,IS_AGENT = #{isAgent}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="version!=null">,VERSION = #{version}</if>
+			<if test="relatType!=null">,RELAT_TYPE = #{relatType}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="feeItemId!=null and feeItemId!=''">and FEE_ITEM_ID=#{feeItemId}</if>
+		<if test="relatId!=null and relatId!=''">and RELAT_ID=#{relatId}</if>
+		<if test="subjectName!=null and subjectName!=''">and SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and SUBJECT_CODE=#{subjectCode}</if>
+		<if test="valuationModel!=null and valuationModel!=''">and VALUATION_MODEL=#{valuationModel}</if>
+		<if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+		<if test="feePrice!=null and feePrice!=''">and FEE_PRICE=#{feePrice}</if>
+		<if test="totalFee!=null and totalFee!=''">and TOTAL_FEE=#{totalFee}</if>
+		<if test="isAgent!=null and isAgent!=''">and IS_AGENT=#{isAgent}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and VERSION=#{version}</if>
+		<if test="relatType!=null and relatType!=''">and RELAT_TYPE=#{relatType}</if>
+	</update>
+
+
+	<select id="findByPrimaryKey" resultMap="OrderFeeItem">
+		select
+		* from t_order_fee_item
+		where
+		FEE_ITEM_ID=#{feeItemId}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<select id="findByUuid" resultMap="OrderFeeItem">
+		select
+		* from t_order_fee_item
+		where UUID=#{uuid}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderFeeItem"
+		parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeItem">
+		select * from t_order_fee_item
+		where
+		ALIVE_FLAG='1'
+		<if test="feeItemId!=null and feeItemId!=''">and FEE_ITEM_ID=#{feeItemId}</if>
+		<if test="relatId!=null and relatId!=''">and RELAT_ID=#{relatId}</if>
+		<if test="subjectName!=null and subjectName!=''">and SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and SUBJECT_CODE=#{subjectCode}</if>
+		<if test="valuationModel!=null and valuationModel!=''">and VALUATION_MODEL=#{valuationModel}</if>
+		<if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+		<if test="feePrice!=null and feePrice!=''">and FEE_PRICE=#{feePrice}</if>
+		<if test="totalFee!=null and totalFee!=''">and TOTAL_FEE=#{totalFee}</if>
+		<if test="isAgent!=null and isAgent!=''">and IS_AGENT=#{isAgent}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and VERSION=#{version}</if>
+		<if test="relatType!=null and relatType!=''">and RELAT_TYPE=#{relatType}</if>
+	</select>
+
+	<select id="queryRecords" resultMap="OrderFeeItem" parameterType="hashmap">
+		select
+		FEE_ITEM_ID as "feeItemId"
+		, RELAT_ID as "relatId"
+		, SUBJECT_NAME as "subjectName"
+		, SUBJECT_CODE as "subjectCode"
+		, VALUATION_MODEL as "valuationModel"
+		, QUANTITY as "quantity"
+		, FEE_PRICE as "feePrice"
+		, TOTAL_FEE as "totalFee"
+		, IS_AGENT as "isAgent"
+		, LANG_VER as "langVer"
+		, ALIVE_FLAG as "aliveFlag"
+		, CREATE_USER as "createUser"
+		, CREATE_DATE as "createDate"
+		, UPDATE_USER as "updateUser"
+		, UPDATE_DATE as "updateDate"
+		, VERSION as "version"
+		, RELAT_TYPE as "relatType"
+		from t_order_fee_item
+		where
+		ALIVE_FLAG='1'
+		<if test="feeItemId!=null and feeItemId!=''">and FEE_ITEM_ID=#{feeItemId}</if>
+		<if test="relatId!=null and relatId!=''">and RELAT_ID=#{relatId}</if>
+		<if test="subjectName!=null and subjectName!=''">and SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and SUBJECT_CODE=#{subjectCode}</if>
+		<if test="valuationModel!=null and valuationModel!=''">and VALUATION_MODEL=#{valuationModel}</if>
+		<if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+		<if test="feePrice!=null and feePrice!=''">and FEE_PRICE=#{feePrice}</if>
+		<if test="totalFee!=null and totalFee!=''">and TOTAL_FEE=#{totalFee}</if>
+		<if test="isAgent!=null and isAgent!=''">and IS_AGENT=#{isAgent}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and VERSION=#{version}</if>
+		<if test="relatType!=null and relatType!=''">and RELAT_TYPE=#{relatType}</if>
+		<if test="statFee!=null and statFee!=''">and (TOTAL_FEE is not null and TOTAL_FEE !=0)</if>
+	</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_fee_item
+		where
+		ALIVE_FLAG='1'
+		<if test="feeItemId!=null and feeItemId!=''">and FEE_ITEM_ID=#{feeItemId}</if>
+		<if test="relatId!=null and relatId!=''">and RELAT_ID=#{relatId}</if>
+		<if test="subjectName!=null and subjectName!=''">and SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and SUBJECT_CODE=#{subjectCode}</if>
+		<if test="valuationModel!=null and valuationModel!=''">and VALUATION_MODEL=#{valuationModel}</if>
+		<if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+		<if test="feePrice!=null and feePrice!=''">and FEE_PRICE=#{feePrice}</if>
+		<if test="totalFee!=null and totalFee!=''">and TOTAL_FEE=#{totalFee}</if>
+		<if test="isAgent!=null and isAgent!=''">and IS_AGENT=#{isAgent}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and VERSION=#{version}</if>
+		<if test="relatType!=null and relatType!=''">and RELAT_TYPE=#{relatType}</if>
+
+	</select>
+
+
+
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+
+	<select id="selectOrder" resultType="int">
+		SELECT
+		ID AS id
+		FROM t_order
+		WHERE ID = #{orderId}
+		AND ALIVE_FLAG = '1'
+	</select>
+
+	<select id="selectOrderFee" resultType="int">
+		SELECT
+		ORDER_ID AS orderId
+		FROM t_order_fee
+		WHERE ORDER_ID = #{id}
+		AND ALIVE_FLAG = '1'
+	</select>
+	
+	<select id="selectOrderFeeItemRelat" resultType="int">
+		SELECT
+		RELAT_ID AS relatId
+		FROM t_order_fee
+		WHERE FEE_ITEM_ID = #{t_order_fee}
+		AND ALIVE_FLAG = '1'
+	</select>
+
+	<update id="updateFileAlive">
+		UPDATE
+		t_order_fee_item
+		SET
+		ALIVE_FLAG = '0'
+		WHERE
+		RELAT_ID=#{relatId}
+		AND RELAT_TYPE = '0'
+	</update>
+
+	<select id="selectOrderFeeItem" resultMap="OrderFeeItem">
+		SELECT
+			item.*
+		FROM 
+			t_order_fee_item item,t_order_fee fee
+		WHERE
+			item.RELAT_ID =fee.ORDER_FEE_ID
+			AND item.ALIVE_FLAG = '1'
+			AND fee.ALIVE_FLAG = '1'
+			AND fee.FEE_TYPE = '0'
+			AND fee.ORDER_ID =#{orderId}
+	        AND item.TOTAL_FEE is not null AND item.TOTAL_FEE !=0
+	</select>
+
+</mapper>

@@ -1,0 +1,81 @@
+<div>
+	<div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>任务信息维护</h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2 queryInspForm" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline8">
+					  <label class="s-form-label">港口</label>
+					  <div class="s-input-inline" width="200">
+						<select id="query_port" name="port"  class="s-select">
+							##<option value="">请选择</option>
+							##	#if($!query.port != '')
+							##	<option value="$!query.port" >$!query.port</option>
+							##	#end
+							<option value="" >请选择</option>
+							#foreach($unloading in $unloadingSet) 
+								#if($unloading.code==$!query.port)
+								<option value="$unloading.code" selected>$unloading.value</option>
+								#else
+								<option value="$unloading.code">$unloading.value</option>
+								#end 
+							#end
+						</select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline8">
+					  <label class="s-form-label">联系人</label>
+					  <div class="s-input-inline">
+						  <input type="text" id="query_contactName" name="contactName" value="$!query.contactName" placeholder="请输入" class="s-input">
+					  </div>
+					</div>			
+					<div class="s-inline s-inline0"><a href="javascript:void(0);" class="queryInsp"><i class="s-icon s-sear-ico"></i></a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		
+	<div class="s-mod-block">
+			<div class="s-mod-btit ">信息</a> <a href="javascript:void(0)" class="more saveFn">新增</a></div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap">
+					<table class="s-table s-table3">
+					<tr>
+						<th>港口</th>
+						<th>联系人</th>
+						<th>联系电话</th>
+						<th>邮箱</th>
+						<th>操作</th>
+					</tr>
+
+				#foreach($data in $datas) #set($class = $velocityCount%2+1)
+					
+					<tr class="s-tabcos$class">
+						<td>$!data.portName</td>
+						<td>$!data.contactName</td>
+						<td>$!data.tel</td>
+						<td>$!data.email</td>
+						<td>
+							<a href="javascript:void(0)" class="updateFn" data="{id:'$!{data.id}',port:'$!{data.port}',contactName:'$!{data.contactName}',tel:'$!{data.tel}',email:'$!{data.email}'}">修改</a>
+							<a href="javascript:void(0)" class="delFn" data="{id:'$!{data.id}'}" >删除</a>	
+						</td>
+					</tr>
+					#end
+				</table>
+			</div>
+		</div>
+	</div>
+ </div>
+			<div class="order-bot">
+				$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('inspection/staff/list_en.htm')")
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../orderexecute/js/inspection/staff/list.js"></script>
+

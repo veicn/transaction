@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>首页-成品油</title>
+    <link rel="stylesheet" href="$imageServer.get('css/f_common.css')">
+    <link rel="stylesheet" href="$imageServer.get('css/s_center.css')">
+</head>
+<body>
+    $contain.get('/centercontain/center_head.htm')
+
+$contain.get('/centercontain/center_left.htm')

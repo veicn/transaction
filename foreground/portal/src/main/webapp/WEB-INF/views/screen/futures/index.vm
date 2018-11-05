@@ -1,0 +1,17 @@
+﻿<form id="spotPriceForm" method="post" action="$appServer.get('/futures/index.htm').toString()">
+    $contain.get('/futures/pricing_estimation.htm')
+    $contain.get('/futures/futures_spot_comparison.htm').put("spotEstimationVO", $!{spotEstimationVO}).put("estimationTipVO", $!{estimationTipVO}).put("currencyList", $!{currencyList}).put("oilTypeList", $!{oilTypeList}).put("availableArrivalMonthList", $!{availableArrivalMonthList}).put('availableDischargePortList', $!{availableDischargePortList}).put("ineSymbolList", $!{ineSymbolList})
+</form>
+
+<div class="inner">
+    <div class="qh-bc qh-mzsm clearfix">
+        <h1><em></em>免责声明</h1>
+        <div class="qh-mzsm-cont">
+            【买原油】电子商务平台（以下简称“本平台/平台”）的数据源信息均来源于本平台认为可靠的、已公开的信息编制，本平台对这些信息的准确性和完整性不做任何保证，也不保证所包含的信息和建议不会发生任何变更。我们已力求网站内容的客观、公正，但所有信息中的观点、结论和建议仅供参考，网站中的信息或意见并不构成所述证券或期货的买卖出价或征价的依据，投资者据此作出的任何投资决策均与本平台无关。本平台展示的观点、建议并未考虑到个别投资者的具体投资目的、财务状况以及特定需求，在任何时候均不构成对投资者的私人投资建议。投资者应当充分考虑自身特定状况，并完整理解和使用本平台展示的内容，不应将本平台报告视为做出投资决策的唯一因素。对依据或者使用本平台报告所造成的一切后果，本公司及该报告的作者均不承担任何法律责任。本平台报告版权仅为本平台所有，未经书面许可，任何机构和个人不得以任何形式翻版、复制发布。如引用、刊发，须注明出处为【买原油】电子商务平台，且不得对本平台报告进行有悖原意的引用、删节和修改。
+        </div>
+
+    </div>
+</div>
+
+#css("$imageServer.get('/css/f_common.css')")
+#css("$imageServer.get('/css/f_qh.css')")

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.MapPortMapper">
+
+	<resultMap type="com.sinochem.crude.trade.transport.domain.MapPort" id="MapPortResult">
+		<result property="portName" column="PORT_NAME" />
+		<result property="portNameEn" column="PORT_NAME_EN" />
+	</resultMap> 
+	<resultMap type="com.sinochem.crude.trade.transport.domain.MapPort" id="MapPortZoneResult">
+		<result property="portName" column="PORT_NAME" />
+		<result property="portNameEn" column="PORT_NAME_EN" />
+		<result property="timeZone" column="TIME_ZONE" />
+	</resultMap>
+	
+	<select id="findMapPorts" resultMap="MapPortResult" parameterType="hashmap">
+		select PORT_NAME,PORT_NAME_EN from t_ship_map_port ORDER BY PORT_NAME_EN
+	</select>
+	
+	<select id="findMapForeignPorts" resultMap="MapPortZoneResult" parameterType="hashmap">
+		select PORT_NAME,PORT_NAME_EN,TIME_ZONE from t_ship_map_foreignport
+	 <if test="keyword!=null and keyword!=''">  where PORT_NAME_EN like CONCAT('%',#{keyword},'%')</if>
+		 ORDER BY PORT_NAME_EN
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

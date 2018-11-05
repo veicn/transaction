@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.CrudeShipAgencyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.CrudeShipAgencyInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="ship_num" property="shipNum" jdbcType="INTEGER" />
+    <result column="ship_tonnage" property="shipTonnage" jdbcType="DECIMAL" />
+    <result column="volume_of_freight" property="volumeOfFreight" jdbcType="DECIMAL" />
+    <result column="container_num" property="containerNum" jdbcType="INTEGER" />
+    <result column="total_revenue" property="totalRevenue" jdbcType="DECIMAL" />
+    <result column="ship_agency_revenue" property="shipAgencyRevenue" jdbcType="DECIMAL" />
+    <result column="credential_id" property="credentialId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, ship_num, ship_tonnage, volume_of_freight, container_num, total_revenue, 
+    ship_agency_revenue, credential_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crude_ship_agency_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crude_ship_agency_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.CrudeShipAgencyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_ship_agency_info (member_id, ship_num, ship_tonnage, 
+      volume_of_freight, container_num, total_revenue, 
+      ship_agency_revenue, credential_id)
+    values (#{memberId,jdbcType=BIGINT}, #{shipNum,jdbcType=INTEGER}, #{shipTonnage,jdbcType=DECIMAL}, 
+      #{volumeOfFreight,jdbcType=DECIMAL}, #{containerNum,jdbcType=INTEGER}, #{totalRevenue,jdbcType=DECIMAL}, 
+      #{shipAgencyRevenue,jdbcType=DECIMAL}, #{credentialId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeShipAgencyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_ship_agency_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="shipNum != null" >
+        ship_num,
+      </if>
+      <if test="shipTonnage != null" >
+        ship_tonnage,
+      </if>
+      <if test="volumeOfFreight != null" >
+        volume_of_freight,
+      </if>
+      <if test="containerNum != null" >
+        container_num,
+      </if>
+      <if test="totalRevenue != null" >
+        total_revenue,
+      </if>
+      <if test="shipAgencyRevenue != null" >
+        ship_agency_revenue,
+      </if>
+      <if test="credentialId != null" >
+        credential_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="shipNum != null" >
+        #{shipNum,jdbcType=INTEGER},
+      </if>
+      <if test="shipTonnage != null" >
+        #{shipTonnage,jdbcType=DECIMAL},
+      </if>
+      <if test="volumeOfFreight != null" >
+        #{volumeOfFreight,jdbcType=DECIMAL},
+      </if>
+      <if test="containerNum != null" >
+        #{containerNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalRevenue != null" >
+        #{totalRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="shipAgencyRevenue != null" >
+        #{shipAgencyRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="credentialId != null" >
+        #{credentialId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeShipAgencyInfo" >
+    update crude_ship_agency_info
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="shipNum != null" >
+        ship_num = #{shipNum,jdbcType=INTEGER},
+      </if>
+      <if test="shipTonnage != null" >
+        ship_tonnage = #{shipTonnage,jdbcType=DECIMAL},
+      </if>
+      <if test="volumeOfFreight != null" >
+        volume_of_freight = #{volumeOfFreight,jdbcType=DECIMAL},
+      </if>
+      <if test="containerNum != null" >
+        container_num = #{containerNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalRevenue != null" >
+        total_revenue = #{totalRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="shipAgencyRevenue != null" >
+        ship_agency_revenue = #{shipAgencyRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="credentialId != null" >
+        credential_id = #{credentialId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.CrudeShipAgencyInfo" >
+    update crude_ship_agency_info
+    set member_id = #{memberId,jdbcType=BIGINT},
+      ship_num = #{shipNum,jdbcType=INTEGER},
+      ship_tonnage = #{shipTonnage,jdbcType=DECIMAL},
+      volume_of_freight = #{volumeOfFreight,jdbcType=DECIMAL},
+      container_num = #{containerNum,jdbcType=INTEGER},
+      total_revenue = #{totalRevenue,jdbcType=DECIMAL},
+      ship_agency_revenue = #{shipAgencyRevenue,jdbcType=DECIMAL},
+      credential_id = #{credentialId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from crude_ship_agency_info
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+</mapper>

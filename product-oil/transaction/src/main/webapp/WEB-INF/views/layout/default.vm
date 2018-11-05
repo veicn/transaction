@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/common/server.htm")
+    $contain.get("/pages/portal/contain/htmlhead.htm")
+    $contain.get("/pages/portal/contain/nav.htm").put("active",1)
+    ##$contain.get("/pages/components/righttool.htm") //这个等前端做好了再补上
+    $screen_content
+    $contain.get("/pages/portal/contain/htmlend.htm")
+</html>

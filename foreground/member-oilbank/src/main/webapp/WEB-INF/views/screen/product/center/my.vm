@@ -1,0 +1,60 @@
+$contain.get('/common/title.htm').put('title', '个人中心')
+#css($imageServer.get('/product/css/work/sales-resources.css'))
+#css($imageServer.get('/product/css/work/shipping.css'))
+#css($imageServer.get('/product/css/work/welcome.css'))
+#js($imageServer.get('/product/layui/layui.js'))
+
+<div class="m-nav g-nav fl center-my-lj" style="width:835px;">
+    <div class="wel-box-top fl cleafix">
+        <div class="wel-box">
+            <h3>Welcome</h3>
+            #*<div class="wel-sel-box">
+                <div class="cpy-select clearfix">
+                    <div class="select s-b">
+                        <div class="select-box">
+                            <div class="select-content">
+                                <div class="select-show-text">Cal B/L Month</div>
+                                <input type="text" readonly="readonly" value="1" name="PricingPeriod" aria-invalid="false" class="valid">
+                            </div>
+                        </div>
+                        <ul class="select-options">
+                            <li class="select-option selected" data-value="1">Cal B/L Month</li>
+                            <li class="select-option" data-value="2">Cal B/L Month2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="br txt-a">Agency</div>
+            </div>*#
+        </div>
+        $contain.get('/contain/enterpriseInfo.htm')
+
+        $contain.get('/center/sualificationList.htm')
+
+        <div class="wel-box enterprise-box">
+            <div class="databox clearfix">
+                <h3 class="fl">Historical Data</h3>
+                <div class="fr yearbox">
+                    <lable>Years :</lable>
+                    <div class="yearbox-select">
+                        <div class="cpy-select clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">2016</div>
+                                        <input type="text" readonly="readonly" value="1" name="PricingPeriod" aria-invalid="false" class="valid">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    <li class="select-option selected" data-value="1">2017</li>
+                                    <li class="select-option" data-value="2">2018</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wel-chart"><img src="$imageServer.get('/product/images/banner4.png')"/></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderDocumentListMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentList" id="OrderDocumentList">
+		<result property="documentId" column="DOCUMENT_ID" />
+		<result property="tradeCategory" column="TRADE_CATEGORY" />
+		<result property="documentTypeDesc" column="DOCUMENT_TYPE_DESC" />
+		<result property="documentType" column="DOCUMENT_TYPE" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileCode" column="FILE_CODE" />
+		<result property="fromUser" column="FROM_USER" />
+		<result property="toUser" column="TO_USER" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentList"  useGeneratedKeys="true" keyProperty="documentId" >
+		insert  into t_order_document_list (				DOCUMENT_ID
+						,TRADE_CATEGORY
+						,DOCUMENT_TYPE_DESC
+						,DOCUMENT_TYPE
+						,FILE_NAME
+						,FILE_CODE
+						,FROM_USER
+						,TO_USER
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						)
+		values(		#{documentId}
+						,#{tradeCategory}
+						,#{documentTypeDesc}
+						,#{documentType}
+						,#{fileName}
+						,#{fileCode}
+						,#{fromUser}
+						,#{toUser}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_document_list
+              WHERE 1=1 
+                AND DOCUMENT_ID = #{documentId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentList">
+        DELETE FROM t_order_document_list
+              WHERE 1=1 
+        <if test="documentId!=null and documentId!=''">AND  DOCUMENT_ID = #{documentId}</if>
+        <if test="tradeCategory!=null and tradeCategory!=''">AND  TRADE_CATEGORY = #{tradeCategory}</if>
+        <if test="documentTypeDesc!=null and documentTypeDesc!=''">AND  DOCUMENT_TYPE_DESC = #{documentTypeDesc}</if>
+        <if test="documentType!=null and documentType!=''">AND  DOCUMENT_TYPE = #{documentType}</if>
+        <if test="fileName!=null and fileName!=''">AND  FILE_NAME = #{fileName}</if>
+        <if test="fileCode!=null and fileCode!=''">AND  FILE_CODE = #{fileCode}</if>
+        <if test="fromUser!=null and fromUser!=''">AND  FROM_USER = #{fromUser}</if>
+        <if test="toUser!=null and toUser!=''">AND  TO_USER = #{toUser}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentList">
+		update t_order_document_list
+		<set>
+         DOCUMENT_ID=#{documentId}
+		<if test="tradeCategory!=null">,TRADE_CATEGORY = #{tradeCategory}</if>
+		<if test="documentTypeDesc!=null">,DOCUMENT_TYPE_DESC = #{documentTypeDesc}</if>
+		<if test="documentType!=null">,DOCUMENT_TYPE = #{documentType}</if>
+		<if test="fileName!=null">,FILE_NAME = #{fileName}</if>
+		<if test="fileCode!=null">,FILE_CODE = #{fileCode}</if>
+		<if test="fromUser!=null">,FROM_USER = #{fromUser}</if>
+		<if test="toUser!=null">,TO_USER = #{toUser}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 DOCUMENT_ID=#{documentId}
+		and ALIVE_FLAG='1'
+	</update>
+	<!-- 逻辑删除把 ALIVE_FLAG 改为0-->
+	<update id="updateDeleteRecords" parameterType="hashmap">
+		update t_order_document_list
+		<set>
+		ALIVE_FLAG='0'
+		</set>
+        <if test="documentId!=null">TRADE_CATEGORY = #{documentId}</if>
+		<if test="tradeCategory!=null">,TRADE_CATEGORY = #{tradeCategory}</if>
+		<if test="documentTypeDesc!=null">,DOCUMENT_TYPE_DESC = #{documentTypeDesc}</if>
+		<if test="documentType!=null">,DOCUMENT_TYPE = #{documentType}</if>
+		<if test="fileName!=null">,FILE_NAME = #{fileName}</if>
+		<if test="fileCode!=null">,FILE_CODE = #{fileCode}</if>
+		<if test="fromUser!=null">,FROM_USER = #{fromUser}</if>
+		<if test="toUser!=null">,TO_USER = #{toUser}</if>
+		<if test="aliveFlag!=null">ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		
+		where
+		ALIVE_FLAG='1'
+		<if test="documentId!=null and documentId!=''">and  DOCUMENT_ID=#{documentId}</if>
+		<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+		<if test="documentTypeDesc!=null and documentTypeDesc!=''">and  DOCUMENT_TYPE_DESC=#{documentTypeDesc}</if>
+		<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+		<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+		<if test="fileCode!=null and fileCode!=''">and  FILE_CODE=#{fileCode}</if>
+		<if test="fromUser!=null and fromUser!=''">and  FROM_USER=#{fromUser}</if>
+		<if test="toUser!=null and toUser!=''">and  TO_USER=#{toUser}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderDocumentList">
+			select
+			* from t_order_document_list
+			where
+		    DOCUMENT_ID=#{documentId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderDocumentList">
+			select
+			* from t_order_document_list
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderDocumentList" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentList">
+		select * from t_order_document_list
+			where
+		 ALIVE_FLAG='1'
+		<if test="documentId!=null and documentId!=''">and  DOCUMENT_ID=#{documentId}</if>
+		<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+		<if test="documentTypeDesc!=null and documentTypeDesc!=''">and  DOCUMENT_TYPE_DESC=#{documentTypeDesc}</if>
+		<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+		<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+		<if test="fileCode!=null and fileCode!=''">and  FILE_CODE=#{fileCode}</if>
+		<if test="fromUser!=null and fromUser!=''">and  FROM_USER=#{fromUser}</if>
+		<if test="toUser!=null and toUser!=''">and  TO_USER=#{toUser}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		
+			
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  DOCUMENT_ID as "documentId" 
+						 ,   TRADE_CATEGORY as "tradeCategory" 
+						 ,   DOCUMENT_TYPE_DESC as "documentTypeDesc" 
+						 ,   DOCUMENT_TYPE as "documentType" 
+						 ,   FILE_NAME as "fileName" 
+						 ,   FILE_CODE as "fileCode" 
+						 ,   FROM_USER as "fromUser" 
+						 ,   TO_USER as "toUser" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_order_document_list
+		where
+			ALIVE_FLAG='1'
+			<if test="documentId!=null and documentId!=''">and  DOCUMENT_ID=#{documentId}</if>
+			<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+			<if test="documentTypeDesc!=null and documentTypeDesc!=''">and  DOCUMENT_TYPE_DESC=#{documentTypeDesc}</if>
+			<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+			<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+			<if test="fileCode!=null and fileCode!=''">and  FILE_CODE=#{fileCode}</if>
+			<if test="fromUser!=null and fromUser!=''">and  FROM_USER=#{fromUser}</if>
+			<if test="toUser!=null and toUser!=''">and  TO_USER=#{toUser}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				group by TRADE_CATEGORY, DOCUMENT_TYPE_DESC, DOCUMENT_TYPE order by MAX(CREATE_DATE) desc
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_document_list 
+		where
+		 ALIVE_FLAG='1'
+			<if test="documentId!=null and documentId!=''">and  DOCUMENT_ID=#{documentId}</if>
+			<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+			<if test="documentTypeDesc!=null and documentTypeDesc!=''">and  DOCUMENT_TYPE_DESC=#{documentTypeDesc}</if>
+			<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+			<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+			<if test="fileCode!=null and fileCode!=''">and  FILE_CODE=#{fileCode}</if>
+			<if test="fromUser!=null and fromUser!=''">and  FROM_USER=#{fromUser}</if>
+			<if test="toUser!=null and toUser!=''">and  TO_USER=#{toUser}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update 
+		t_order_document_list
+		set TRADE_CATEGORY = #{tradeCategory},DOCUMENT_TYPE_DESC= #{documentTypeDesc},DOCUMENT_TYPE= #{documentType} 
+		where
+		ALIVE_FLAG='1' and TRADE_CATEGORY = #{oldTradeCategory} and DOCUMENT_TYPE_DESC= #{oldDocumentTypeDesc} and DOCUMENT_TYPE= #{oldDocumentType}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

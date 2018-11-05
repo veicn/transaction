@@ -1,0 +1,45 @@
+
+<div class="cg-title cg-title2">Buyer Info</div>
+<ul class="or-line clearfix"><li class="or-line2"></li><li class="or-line1"></li></ul>
+<div class="c-form">
+    <ul class="c-ful c-ful-supplier c-verc">
+
+        <li class="c-fcos2">
+            <span class="c-fn"><span class="notice-required">*&nbsp;</span>Company Name：</span>
+            <input type="text" name="demandRelevanter.enterpriseName" class="c-int required true" value="$contain.get("enterprise/name.json").setHost("$memberServer.get('')").setParam("epMemberId","$!{user.epMemberId}")" readonly/>
+            <input type="hidden" name="demandRelevanter.eMemberId" value="$!{user.epMemberId}"></li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>Tel：</span>
+            <input type="text" name="demandRelevanter.phoneNo" value="$!{demandRelevanter.phoneNo}" onkeyup="return clearPhono(this)" class="c-int required true" placeholder=""  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn">Address：</span>
+            <input type="text" name="demandRelevanter.enterpriseAddress"  value="$!{demandRelevanter.enterpriseAddress}" class="c-int true" placeholder="" maxlength="200"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>E-mail：</span>
+            <input type="text" name="demandRelevanter.famil" value="$!{demandRelevanter.famil}" class="c-int required email" placeholder="Input email address"  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>PIC：</span>
+            <input type="text" name="demandRelevanter.contacter" value="$!{demandRelevanter.contacter}" class="c-int required true" placeholder=""  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn">Fax：</span>
+            <input type="text" name="demandRelevanter.fax" value="$!{demandRelevanter.fax}" onkeyup="return clearPhono(this)" class="c-int true" placeholder="" maxlength="20"/>
+        </li>
+        <li><input type="hidden" value="CBB" name="demandRelevanter.type"></li>
+        <li><input type="hidden" name="demandRelevanter.id" value="$!{demandRelevanter.id}"/></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+    $('form').validate({
+        onfocusout: function(element){
+            $(element).valid();
+        }
+    });
+
+    function formValiate() {
+        if($(".required").valid()){
+            return $(".email").valid();
+        }
+        return false;
+    }
+</script>

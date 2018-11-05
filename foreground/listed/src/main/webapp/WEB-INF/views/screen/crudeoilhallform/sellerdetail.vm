@@ -1,0 +1,52 @@
+
+<div class="c-mod" id="mjxx">
+    <h3><em class="cw-ico ico-h3"></em>卖家信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1">
+				#if($!{demandRelevanter1.enterpriseName})
+                   	<span class="c-fn"><span class="notice-required">*&nbsp;</span>企业名称：</span>
+                   	<input type="hidden"  name="buyerRelevanter.eMemberId" id="company" value="$!{demandRelevanter1.eMemberId}" >
+                    <input type="text" class="c-int" name="buyerRelevanter.enterpriseName" id="company-name" value="$!{demandRelevanter1.enterpriseName}"  maxlength="100" readonly/>
+                    <label for="company-name" id="company-error" class="error my-error"></label>
+				#else
+                    <span class="c-fn"><span class="notice-required">*&nbsp;</span>企业名称：</span>
+                    	<input type="hidden"  name="buyerRelevanter.eMemberId" id="company" value="$!{user.epMemberId}" >
+                        <input type="text" class="c-int" name="buyerRelevanter.enterpriseName" id="company-name" value="$!{enterprise.fullName}"
+                    			maxlength="100" readonly/>
+                    <label for="company-name" id="company-error" class="error my-error"></label>
+                #end
+            </li>
+            <li class="c-fcos1">
+            	#if($!{demandRelevanter1.enterpriseName})
+	            	<span class="c-fn">企业地址：</span>
+	                <input type="text" class="c-int" name="buyerRelevanter.enterpriseAddress" id="enterpriseAddress" value="$!{demandRelevanter1.enterpriseAddress}" maxlength="200"/>
+	                <label for="enterpriseAddress" id="enterpriseAddress-error" class="error my-error"></label>
+            	#else
+	            	<span class="c-fn">企业地址：</span>
+	                <input type="text" class="c-int" name="buyerRelevanter.enterpriseAddress" id="enterpriseAddress" value="$!{enterprise.addressDetail}" maxlength="200"/>
+	                <label for="enterpriseAddress" id="enterpriseAddress-error" class="error my-error"></label>
+            	#end
+            </li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>联系人：</span>
+                <input type="text"  class="c-int true" name="buyerRelevanter.contacter" id="contacter" value="$!{demandRelevanter1.contacter}" maxlength="100"/>
+                <label for="contacter" id="contacter-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>邮箱：</span>
+                <input type="text" class="c-int" name="buyerRelevanter.famil" id="famil" value= "$!{demandRelevanter1.famil}" maxlength="100"/>
+                <label for="famil" id="famil-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>联系电话：</span>
+                <input type="text" onkeyup="return clearPhono(this)"  class="c-int phone" name="buyerRelevanter.phoneNo" id="phoneNoId" value="$!{demandRelevanter1.phoneNo}" maxlength="100"/>
+                <label for="phoneNoId" id="phoneNoId-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">传真：</span>
+                <input type="text"   onkeyup="return clearPhono(this)"  class="c-int" name="buyerRelevanter.fax" id="fax" value="$!{demandRelevanter1.fax}" maxlength="20"/>
+                <label for="fax" id="fax-error" class="error my-error"></label>
+            </li>
+            <li><input type="hidden" value="P" name="buyerRelevanter.type"></li>
+            <li><input type="hidden" value="$!{demandRelevanter1.id}" name="buyerRelevanter.id"></li>
+        </ul>
+    </div>
+
+</div>

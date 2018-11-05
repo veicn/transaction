@@ -1,0 +1,39 @@
+<style>
+.qw-width-style{width:40%;}
+.qw-width-style-45{width:45%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+.qw-width-style-41{width:41%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+.qw-width-style-40{width:40%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+</style>
+<form class="shipForm layui-form" id="shipForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
+		    	  		
+				  		<div class="form-row charter-row ">
+							<label class="control-label qw-width-style"><span style="color:red;">*</span>Vessel Name：</label>
+							<div class="control-label" style="width:40%;">
+								<select name="name" id="name" lay-verify="required" lay-search="" >
+						        	<option id="optionName" value="">请选择</option>
+						      </select>
+							</div>
+						</div>
+						<div class="form-row charter-row">
+							<label class="control-label qw-width-style">VEF：</label>
+							<div class="controls qw-width-style">
+								<input type="text" class="form-inp api" name="vef" id="vef" value="" onkeyup="clearNoNumFive(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,5,1);">
+							</div>
+						</div>
+						<div class="form-row charter-row">
+							<label class="control-label qw-width-style">OBQ：</label>
+							<div class="controls qw-width-style">
+								<input type="text" class="form-inp api" name="obq" id="obq" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+							</div>
+						</div>
+						
+		            </from>

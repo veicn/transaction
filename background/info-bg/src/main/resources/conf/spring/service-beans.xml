@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	default-autowire="byName">
+	
+	<bean class="com.eyeieye.melody.web.url.ServletContextInitHelper">
+		<property name="brokers">
+			<list>
+				<ref bean="systemServer" />
+				<ref bean="infoServer" />
+				<ref bean="omServer" />
+				<ref bean="memberServer" />
+				<ref bean="portalServer" />
+				<ref bean="priceServer" />
+			</list>
+		</property>
+	</bean>
+	<!-- URLBrokers -->
+	<bean id="infoServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${info.server.host}"></property>
+				<property name="path" value="${info.server.path}"></property>
+				<property name="port" value="${app.server.port}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="omServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${om.server.host}"></property>
+				<property name="path" value="${om.server.path}"></property>
+				<property name="port" value="${app.server.port}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="memberServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${member.server.host}"></property>
+				<property name="path" value="${member.server.path}"></property>
+				<property name="port" value="${app.server.port}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="systemServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+		<bean class="com.eyeieye.melody.web.url.URLConfig">
+			<property name="host" value="${system.server.host}"></property>
+			<property name="path" value="${system.server.path}"></property>
+			<property name="port" value="${app.server.port}"></property>
+			<property name="followContextPath" value="false"></property>
+		</bean>
+		</property>
+	</bean>
+	
+	<bean id="dBUtil"  class="com.sinochem.crude.trade.info.util.DBUtil" >
+		<property name="className" value="${crudeoil.sinochemoil.className}"></property>
+		<property name="url" value="${crudeoil.sinochemoil.url}"></property>
+		<property name="user" value="${crudeoil.sinochemoil.user}"></property>
+		<property name="password" value="${crudeoil.sinochemoil.password}"></property>
+	</bean>
+	<bean id="portalServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${portal.server.host}"></property>
+				<property name="path" value="${portal.server.path}"></property>
+				<property name="port" value="${portal.server.port}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="priceServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${price.server.host}"></property>
+				<property name="path" value="${price.server.path}"></property>
+				<property name="port" value="${price.server.port}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+	<context:component-scan base-package="com.sinochem.crude.trade.member,com.sinochem.it.b2b,com.sinochem.crude.trade.*.service,com.sinochem.crude.trade.info.job" />
+	<context:component-scan base-package="com.sinochem.crude.trade.common.utils" />
+	<context:component-scan base-package="com.sinochem.crude.trade.*.remote" />
+	<context:component-scan base-package="com.sinochem.crude.trade.values" />
+	<context:component-scan base-package="com.sinochem.crude.trade.values.impl" />
+	<context:component-scan base-package="com.sinochem.crude.trade.init" />
+	<context:component-scan base-package="com.sinochem.crude.trade.common.result" />
+</beans>

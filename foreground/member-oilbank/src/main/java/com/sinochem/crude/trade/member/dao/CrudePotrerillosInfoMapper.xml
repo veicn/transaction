@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.CrudePotrerillosInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.CrudePotrerillosInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="total_investment" property="totalInvestment" jdbcType="DECIMAL" />
+    <result column="fixed_assets" property="fixedAssets" jdbcType="DECIMAL" />
+    <result column="main_products" property="mainProducts" jdbcType="VARCHAR" />
+    <result column="device_description" property="deviceDescription" jdbcType="VARCHAR" />
+    <result column="can_trading" property="canTrading" jdbcType="BIT" />
+    <result column="main_import_product" property="mainImportProduct" jdbcType="VARCHAR" />
+    <result column="main_export_product" property="mainExportProduct" jdbcType="VARCHAR" />
+    <result column="credential_id" property="credentialId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, total_investment, fixed_assets, main_products, device_description, 
+    can_trading, main_import_product, main_export_product, credential_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crude_potrerillos_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crude_potrerillos_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.CrudePotrerillosInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_potrerillos_info (member_id, total_investment, fixed_assets, 
+      main_products, device_description, can_trading, 
+      main_import_product, main_export_product, credential_id
+      )
+    values (#{memberId,jdbcType=BIGINT}, #{totalInvestment,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL}, 
+      #{mainProducts,jdbcType=VARCHAR}, #{deviceDescription,jdbcType=VARCHAR}, #{canTrading,jdbcType=BIT}, 
+      #{mainImportProduct,jdbcType=VARCHAR}, #{mainExportProduct,jdbcType=VARCHAR}, #{credentialId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.CrudePotrerillosInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_potrerillos_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="totalInvestment != null" >
+        total_investment,
+      </if>
+      <if test="fixedAssets != null" >
+        fixed_assets,
+      </if>
+      <if test="mainProducts != null" >
+        main_products,
+      </if>
+      <if test="deviceDescription != null" >
+        device_description,
+      </if>
+      <if test="canTrading != null" >
+        can_trading,
+      </if>
+      <if test="mainImportProduct != null" >
+        main_import_product,
+      </if>
+      <if test="mainExportProduct != null" >
+        main_export_product,
+      </if>
+      <if test="credentialId != null" >
+        credential_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="totalInvestment != null" >
+        #{totalInvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="fixedAssets != null" >
+        #{fixedAssets,jdbcType=DECIMAL},
+      </if>
+      <if test="mainProducts != null" >
+        #{mainProducts,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceDescription != null" >
+        #{deviceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="canTrading != null" >
+        #{canTrading,jdbcType=BIT},
+      </if>
+      <if test="mainImportProduct != null" >
+        #{mainImportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="mainExportProduct != null" >
+        #{mainExportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialId != null" >
+        #{credentialId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.CrudePotrerillosInfo" >
+    update crude_potrerillos_info
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="totalInvestment != null" >
+        total_investment = #{totalInvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="fixedAssets != null" >
+        fixed_assets = #{fixedAssets,jdbcType=DECIMAL},
+      </if>
+      <if test="mainProducts != null" >
+        main_products = #{mainProducts,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceDescription != null" >
+        device_description = #{deviceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="canTrading != null" >
+        can_trading = #{canTrading,jdbcType=BIT},
+      </if>
+      <if test="mainImportProduct != null" >
+        main_import_product = #{mainImportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="mainExportProduct != null" >
+        main_export_product = #{mainExportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialId != null" >
+        credential_id = #{credentialId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.CrudePotrerillosInfo" >
+    update crude_potrerillos_info
+    set member_id = #{memberId,jdbcType=BIGINT},
+      total_investment = #{totalInvestment,jdbcType=DECIMAL},
+      fixed_assets = #{fixedAssets,jdbcType=DECIMAL},
+      main_products = #{mainProducts,jdbcType=VARCHAR},
+      device_description = #{deviceDescription,jdbcType=VARCHAR},
+      can_trading = #{canTrading,jdbcType=BIT},
+      main_import_product = #{mainImportProduct,jdbcType=VARCHAR},
+      main_export_product = #{mainExportProduct,jdbcType=VARCHAR},
+      credential_id = #{credentialId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from crude_potrerillos_info
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+</mapper>

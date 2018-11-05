@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.operation.dao.EnuMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.operation.dao.Enu" id="EnuDO" extends="com.sinochem.crude.trade.operation.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Enu">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.operation.domain.Enu" id="Enu">
+		<result property="menuId" column="MENU_ID" />
+		<result property="sort" column="SORT" />
+		<result property="menuType" column="MENU_TYPE" />
+		<result property="menuDes" column="MENU_DES" />
+		<result property="menuIcon" column="MENU_ICON" />
+		<result property="menuUrl" column="MENU_URL" />
+		<result property="menuArgu" column="MENU_ARGU" />
+		<result property="tradeId" column="TRADE_ID" />
+		<result property="tradeParentId" column="TRADE_PARENT_ID" />
+		<result property="tradeLevel" column="TRADE_LEVEL" />
+		<result property="isPersonal" column="IS_PERSONAL" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.operation.domain.Enu" >
+		insert  into t_tp_menu (				MENU_ID
+						,SORT
+						,MENU_TYPE
+						,MENU_DES
+						,MENU_ICON
+						,MENU_URL
+						,MENU_ARGU
+						,TRADE_ID
+						,TRADE_PARENT_ID
+						,TRADE_LEVEL
+						,IS_PERSONAL
+						,MARKET_ID
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{menuId}
+						,#{sort}
+						,#{menuType}
+						,#{menuDes}
+						,#{menuIcon}
+						,#{menuUrl}
+						,#{menuArgu}
+						,#{tradeId}
+						,#{tradeParentId}
+						,#{tradeLevel}
+						,#{isPersonal}
+						,#{marketId}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_tp_menu
+              WHERE 1=1 
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.operation.domain.Enu">
+        DELETE FROM t_tp_menu
+              WHERE 1=1 
+        <if test="menuId!=null and menuId!=''">AND  MENU_ID = #{menuId}</if>
+        <if test="sort!=null and sort!=''">AND  SORT = #{sort}</if>
+        <if test="menuType!=null and menuType!=''">AND  MENU_TYPE = #{menuType}</if>
+        <if test="menuDes!=null and menuDes!=''">AND  MENU_DES = #{menuDes}</if>
+        <if test="menuIcon!=null and menuIcon!=''">AND  MENU_ICON = #{menuIcon}</if>
+        <if test="menuUrl!=null and menuUrl!=''">AND  MENU_URL = #{menuUrl}</if>
+        <if test="menuArgu!=null and menuArgu!=''">AND  MENU_ARGU = #{menuArgu}</if>
+        <if test="tradeId!=null and tradeId!=''">AND  TRADE_ID = #{tradeId}</if>
+        <if test="tradeParentId!=null and tradeParentId!=''">AND  TRADE_PARENT_ID = #{tradeParentId}</if>
+        <if test="tradeLevel!=null and tradeLevel!=''">AND  TRADE_LEVEL = #{tradeLevel}</if>
+        <if test="isPersonal!=null and isPersonal!=''">AND  IS_PERSONAL = #{isPersonal}</if>
+        <if test="marketId!=null and marketId!=''">AND  MARKET_ID = #{marketId}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.operation.domain.Enu">
+		update t_tp_menu
+		<set>
+		<if test="menuId!=null">,MENU_ID = #{menuId}</if>
+		<if test="sort!=null">,SORT = #{sort}</if>
+		<if test="menuType!=null">,MENU_TYPE = #{menuType}</if>
+		<if test="menuDes!=null">,MENU_DES = #{menuDes}</if>
+		<if test="menuIcon!=null">,MENU_ICON = #{menuIcon}</if>
+		<if test="menuUrl!=null">,MENU_URL = #{menuUrl}</if>
+		<if test="menuArgu!=null">,MENU_ARGU = #{menuArgu}</if>
+		<if test="tradeId!=null">,TRADE_ID = #{tradeId}</if>
+		<if test="tradeParentId!=null">,TRADE_PARENT_ID = #{tradeParentId}</if>
+		<if test="tradeLevel!=null">,TRADE_LEVEL = #{tradeLevel}</if>
+		<if test="isPersonal!=null">,IS_PERSONAL = #{isPersonal}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByMenuId" parameterType="com.sinochem.crude.trade.operation.domain.Enu">
+		update t_tp_menu
+		<set>
+		MENU_ID = #{menuId}
+		,TRADE_LEVEL = #{tradeLevel}
+		<if test="sort!=null">,SORT = #{sort}</if>
+		<if test="menuType!=null">,MENU_TYPE = #{menuType}</if>
+		<if test="menuDes!=null">,MENU_DES = #{menuDes}</if>
+		<if test="menuIcon!=null">,MENU_ICON = #{menuIcon}</if>
+		<if test="menuUrl!=null">,MENU_URL = #{menuUrl}</if>
+		<if test="menuArgu!=null">,MENU_ARGU = #{menuArgu}</if>
+		<if test="tradeId!=null">,TRADE_ID = #{tradeId}</if>
+		<if test="tradeParentId!=null">,TRADE_PARENT_ID = #{tradeParentId}</if>
+		<if test="isPersonal!=null">,IS_PERSONAL = #{isPersonal}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where  MENU_ID = #{menuId} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_tp_menu
+		<set>
+		<if test="menuId!=null">,MENU_ID = #{menuId}</if>
+		<if test="sort!=null">,SORT = #{sort}</if>
+		<if test="menuType!=null">,MENU_TYPE = #{menuType}</if>
+		<if test="menuDes!=null">,MENU_DES = #{menuDes}</if>
+		<if test="menuIcon!=null">,MENU_ICON = #{menuIcon}</if>
+		<if test="menuUrl!=null">,MENU_URL = #{menuUrl}</if>
+		<if test="menuArgu!=null">,MENU_ARGU = #{menuArgu}</if>
+		<if test="tradeId!=null">,TRADE_ID = #{tradeId}</if>
+		<if test="tradeParentId!=null">,TRADE_PARENT_ID = #{tradeParentId}</if>
+		<if test="tradeLevel!=null">,TRADE_LEVEL = #{tradeLevel}</if>
+		<if test="isPersonal!=null">,IS_PERSONAL = #{isPersonal}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="menuId!=null and menuId!=''">and  MENU_ID=#{menuId}</if>
+		<if test="sort!=null and sort!=''">and  SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and  MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and  MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and  MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and  MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and  MENU_ARGU=#{menuArgu}</if>
+		<if test="tradeId!=null and tradeId!=''">and  TRADE_ID=#{tradeId}</if>
+		<if test="tradeParentId!=null and tradeParentId!=''">and  TRADE_PARENT_ID=#{tradeParentId}</if>
+		<if test="tradeLevel!=null and tradeLevel!=''">and  TRADE_LEVEL=#{tradeLevel}</if>
+		<if test="isPersonal!=null and isPersonal!=''">and  IS_PERSONAL=#{isPersonal}</if>
+		<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="Enu">
+			select
+			* from t_tp_menu
+			where
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByMenuId" resultMap="Enu">
+			select
+			* from t_tp_menu
+			where MENU_ID=#{menuId} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="Enu" parameterType="com.sinochem.crude.trade.operation.domain.Enu">
+		select * from t_tp_menu
+			where
+		 ALIVE_FLAG='1'
+		<if test="menuId!=null and menuId!=''">and  MENU_ID=#{menuId}</if>
+		<if test="sort!=null and sort!=''">and  SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and  MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and  MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and  MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and  MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and  MENU_ARGU=#{menuArgu}</if>
+		<if test="tradeId!=null and tradeId!=''">and  TRADE_ID=#{tradeId}</if>
+		<if test="tradeParentId!=null and tradeParentId!=''">and  TRADE_PARENT_ID=#{tradeParentId}</if>
+		<if test="tradeLevel!=null and tradeLevel!=''">and  TRADE_LEVEL=#{tradeLevel}</if>
+		<if test="isPersonal!=null and isPersonal!=''">and  IS_PERSONAL=#{isPersonal}</if>
+		<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  MENU_ID as "menuId" 
+						 ,   SORT as "sort" 
+						 ,   MENU_TYPE as "menuType" 
+						 ,   MENU_DES as "menuDes" 
+						 ,   MENU_ICON as "menuIcon" 
+						 ,   MENU_URL as "menuUrl" 
+						 ,   MENU_ARGU as "menuArgu" 
+						 ,   TRADE_ID as "tradeId" 
+						 ,   TRADE_PARENT_ID as "tradeParentId" 
+						 ,   TRADE_LEVEL as "tradeLevel" 
+						 ,   IS_PERSONAL as "isPersonal" 
+						 ,   MARKET_ID as "marketId" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						from t_tp_menu
+		where
+			ALIVE_FLAG='1'
+			<if test="menuId!=null and menuId!=''">and  MENU_ID=#{menuId}</if>
+			<if test="sort!=null and sort!=''">and  SORT=#{sort}</if>
+			<if test="menuType!=null and menuType!=''">and  MENU_TYPE=#{menuType}</if>
+			<if test="menuDes!=null and menuDes!=''">and  MENU_DES  like concat('%', trim(#{menuDes}), '%')</if>
+			<if test="menuIcon!=null and menuIcon!=''">and  MENU_ICON=#{menuIcon}</if>
+			<if test="menuUrl!=null and menuUrl!=''">and  MENU_URL  like concat('%', trim(#{menuUrl}), '%')</if>
+			<if test="menuArgu!=null and menuArgu!=''">and  MENU_ARGU=#{menuArgu}</if>
+			<if test="tradeId!=null and tradeId!=''">and  TRADE_ID=#{tradeId}</if>
+			<if test="tradeParentId!=null and tradeParentId!=''">and  TRADE_PARENT_ID=#{tradeParentId}</if>
+			<if test="tradeLevel!=null and tradeLevel!=''">and  TRADE_LEVEL=#{tradeLevel}</if>
+			<if test="isPersonal!=null and isPersonal!=''">and  IS_PERSONAL=#{isPersonal}</if>
+			<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_tp_menu 
+		where
+		 ALIVE_FLAG='1'
+			<if test="menuId!=null and menuId!=''">and  MENU_ID=#{menuId}</if>
+			<if test="sort!=null and sort!=''">and  SORT=#{sort}</if>
+			<if test="menuType!=null and menuType!=''">and  MENU_TYPE=#{menuType}</if>
+			<if test="menuDes!=null and menuDes!=''">and  MENU_DES=#{menuDes}</if>
+			<if test="menuIcon!=null and menuIcon!=''">and  MENU_ICON=#{menuIcon}</if>
+			<if test="menuUrl!=null and menuUrl!=''">and  MENU_URL=#{menuUrl}</if>
+			<if test="menuArgu!=null and menuArgu!=''">and  MENU_ARGU=#{menuArgu}</if>
+			<if test="tradeId!=null and tradeId!=''">and  TRADE_ID=#{tradeId}</if>
+			<if test="tradeParentId!=null and tradeParentId!=''">and  TRADE_PARENT_ID=#{tradeParentId}</if>
+			<if test="tradeLevel!=null and tradeLevel!=''">and  TRADE_LEVEL=#{tradeLevel}</if>
+			<if test="isPersonal!=null and isPersonal!=''">and  IS_PERSONAL=#{isPersonal}</if>
+			<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	<update id="tpMenuDelete" parameterType="String">
+		update t_tp_menu
+		set ALIVE_FLAG = '0'
+		where MENU_ID = #{menuId}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

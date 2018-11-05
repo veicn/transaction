@@ -1,0 +1,281 @@
+<!--采购信息-->
+
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>长协采购信息</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn">采购方式：</span><span class="c-int qx-conte">长协采购</span></li>
+            
+            <li class="c-fcos2">
+            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>油种：</span>
+                <input type="hidden" class="c-int" name="crudeOilResource.id" value="$!contract.crudeOilResource.id"/>
+            	<input type="hidden" class="c-int cg_propertyId" name="crudeOilResource.propertyId" value="$!contract.crudeOilResource.propertyId"/>
+            	<input  type="text"  class="c-int cg_name" style="width:41%;" id="v_oilName" name="crudeOilResource.name" value="$!contract.crudeOilResource.name" readonly/>
+                <!-- <span class="c-ero">
+                     <label class="error" style="display: none;color: red"></label>
+                </span>  -->
+                <a class="btn-more orderOilLayer setlid"  style="display:inline;" appServer="$appServer.get('')" retFun="retFunction3" lid=0>+ 选择油种</a> 
+            </li>
+            
+            <li class="c-fcos2">
+            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>数量：</span>
+            	<input  type="text" class="c-int" id="v_num" required name="numStr" maxlength="14" value="$!{contract.numStr}" />
+            </li>
+            
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>贸易条款：</span>
+                <select class="sele tradeItemVal" name="tradeItem" value="${contract.tradeItem}">
+                    #foreach($tim in $!tradeItemMap.entrySet())
+                        #if($!tim.key==$!contract.tradeItem)
+                            <option value="$!tim.key" selected>$!tim.value</option>
+                        #else
+                            <option value="$!tim.key">$!tim.value</option>
+                        #end
+                    #end
+                </select>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+            </li>
+
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>信用条款：</span>
+                <select class="sele authItem" name="authItem" value="${contract.authItem}">
+                    #foreach($tim in $!creditItemMap.entrySet())
+                        #if($!tim.key==$!contract.authItem)
+                            <option value="$!tim.key" selected>$!tim.value</option>
+                        #else
+                            <option value="$!tim.key">$!tim.value</option>
+                        #end
+                    #end
+                </select>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+            </li>
+            
+            <li class="c-fcos2" >
+                <span class="c-fn">
+                    <span class="notice-required">*&nbsp;</span>付款日期：
+                </span>
+                <select class="c-fcsel" id="typeEvent" class="sele" >
+                    #foreach($!typeEvent in $payItemMap.entrySet())
+                        <option value="$!typeEvent.value" >$!typeEvent.value</option>
+                    #end
+                </select>
+
+                <input id="otherDate"  class="c-fcinpu qj-text1" required  placeholder="输入日期" style="display: none" type="text" date="true" />
+                <select class="c-fcsel" id="eventInclusion" >
+                    <option value="after">After</option>
+                    <option value="from">From</option>
+                </select>
+                <em id="typeEvent2" class="c-fcem" >B/L</em>
+                <input id="eventDays" class="c-fcinpu"  type="text" required placeholder="输入天数" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                <em id="eventDays2" class="c-fcem">Days</em>
+                <input id="payItem" name="payItem" style="display: none" value="$!{contract.payItem}" />
+                <input id="payItemJSON" name="payItemJSON" style="display: none" value='$!{contract.payItemJSON}' />
+                <!-- <label for="eventDays" id="eventDays-error" class="error my-error"></label> -->
+            </li>
+
+			<li class="c-fcos2"><span class="c-fn">商检分摊费：</span>
+                <select class="sele" name="inspectionFeeSharingType" value="${contract.inspectionFeeSharingType}">
+                    #foreach($tim in $!inspectionFeeSharingTypeMap.entrySet())
+                        #if($!tim.key==$!contract.inspectionFeeSharingType)
+                            <option value="$!tim.key" selected>$!tim.value</option>
+                        #else
+                            <option value="$!tim.key">$!tim.value</option>
+                        #end
+                    #end
+                </select>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+            </li>
+			
+            <li class="c-fcos2 shipmentPort_change" ><span class="c-fn">装货港：</span><input type="text"  class="sele c-ero" name="contractShip.shipmentPort" value="$!{contract.contractShip.shipmentPort}" /></li>
+           ## #if($!{contract.contractShip.dischargePort} != 'FOB')
+            <li class="c-fcos2 dischargePort_change" style="display: none"><span class="c-fn">卸货港：</span><input type="text"  class="sele" id="dischargePort" name="contractShip.dischargePort" value="$!{contract.contractShip.dischargePort}" /><i class="c-ico cxtj-nr-ico cg-data"></i></li>			
+		   ##	#end
+            <li class="c-fcos1"><span class="c-fn">备注：</span><textarea class="c-teta" name="remark">$!{contract.remark}</textarea></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+	function retFunction3(data){
+		//alert(data);
+	    $('.cg_name').val(data[0][2]);
+	    $('.cg_propertyId').val(data[0][0]);
+	    $('.plan_name').val(data[0][2]);
+    	$('.plan_propertyId').val(data[0][0]);
+	}
+
+    $(function () {
+    	if($('#dischargePort').val() != '' && $('#dischargePort').val() != 'FOB'){
+    		$('.dischargePort_change').show();
+    	}
+    	//根据贸易条款显示装卸港
+    	$('.tradeItemVal').change(function(){
+			//console.log($('.tradeItemVal').val());
+    		if($('.tradeItemVal').val() == 1){
+    			$('.shipmentPort_change').show();
+    			$('.dischargePort_change').hide();
+    			$('.dischargePort_change').val("");
+    		}else if($('.tradeItemVal').val() == 2 ||$('.tradeItemVal').val() == 3  ){
+    			$('.shipmentPort_change').show();
+    			$('.dischargePort_change').show();
+    		}else{
+    			$('.shipmentPort_change').hide();
+    			$('.shipmentPort_change').val("");
+    			$('.dischargePort_change').show();
+    		}
+    	})
+    	
+        // 卸货港
+            var data = {"valueSetType": "4"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+					//console.log(res);
+                    $ ("input[name='contractShip.dischargePort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.dischargePort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+
+        // 装货港
+            var data = {"valueSetType": "5"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='contractShip.shipmentPort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.shipmentPort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+    });
+
+
+    $(function () {
+//      付款日期赋值
+        getValue();
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+    })
+
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+
+//        alert($("#payItem").val());
+//        alert($("#payItemJSON").val());
+    }
+
+
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+
+    }
+
+
+</script>

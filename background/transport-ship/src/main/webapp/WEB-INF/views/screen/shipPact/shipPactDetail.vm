@@ -1,0 +1,205 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>租船合同管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">租船信息</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx form" action="">
+				<ul>
+					<li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>租约日：</label>
+						  <div class="s-input-inline">
+							  <input type="text" id="signDate" name="signDates" placeholder="请选择日期" class="s-input" readonly="readonly"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>租船人：</label>
+						  <div class="s-input-inline">
+						  	  <input type="text" id="carrierName" name="carrierName"  maxlength="100" class="s-input"/>
+						  </div>
+						</div>
+	                </li>
+	                
+	                <!-- 可选多项 -->
+	                <div class="all">
+						<li class="s-form-item wsUl">
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>WS点：</label>
+							  <div class="s-input-inline">
+							  	 <input type="text" name="" placeholder="" class="s-input ws" onkeyup="clearNoNumTwo(this)" maxlength="15"
+										onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);"/>
+							  </div>
+							</div>
+							
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>请选择：</label>
+							  <div class="s-input-inline">
+		                      	  <select class="s-select wsRes">
+									<option value="WS 2017 RATES AND TERMS TO APPLY">WS 2017 RATES AND TERMS TO APPLY</option>
+									<option value="WS 2018 RATES AND TERMS TO APPLY">WS 2018 RATES AND TERMS TO APPLY</option>
+									<option value="WS 2019 RATES AND TERMS TO APPLY">WS 2019 RATES AND TERMS TO APPLY</option>
+								  </select>		
+							  </div>
+							</div>
+							
+							<div class="s-inline">
+							  <label class="s-form-label">BASIS：</label>
+							  <div class="s-input-inline">
+								 <input type="text" placeholder="请选择日期" class="s-input width_40 time time1" style="width: 29.3%;" readonly="readonly"/>
+								 <em class="s-fo-em">-</em>
+								 <input type="text" placeholder="请选择日期" class="s-input width_40 time2" style="width: 29.3%;" readonly="readonly"/>
+							  </div>
+							</div>
+							
+		                    <div class="s-but-all s-but-all2 clearfix">
+								 <div class="s-all-jt"><p><i class="s-icon addMinusIcon s-icon-plus"></i></p></div>
+							</div>
+		                 </li>
+	                 </div>
+	                 <!-- 可选多项 -->
+	                 
+	                 
+	                 <li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>装期：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="pactBeg" name="pactBegs" placeholder="请选择时间" class="s-input width_40" readonly="readonly"/>
+	                         <em class="s-fo-em">-</em>
+	                         <input type="text" id="pactEnd" name="pactEnds" placeholder="请选择时间" style="width: 25%;" class="s-input width_40" readonly="readonly"/>
+	                         <span class="s-zq-ts" title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT "><i class="shipping-ico w-ico-sl"></i></span>
+						  </div>
+						</div>
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>最小货量：</label>
+						  <div class="s-input-inline">
+							  <input type="text" id="minQuantity" name="minQuantity" onkeyup="clearNoNumThree(this)" onblur="this.value=formatNumber(this.value,2,1);" maxlength="15" class="s-input"/>
+	                          <span class="note">MT</span>
+						  </div>
+						</div>
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>船名：</label>
+						  <div class="s-input-inline">
+							  <input type="text" id="shipName" name="shipName" maxlength="100" class="s-input shipName"/>
+						  </div>
+						</div>
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>滞期费率：</label>
+						  <div class="s-input-inline">
+						  	  <input type="text" id="demurrage" name="demurrage" onkeyup="clearNoNumTwo(this)" onblur="this.value=formatNumber(this.value,2,1);" maxlength="15" class="s-input"/>
+	                          <span class="note">USD/PDPR</span>
+						  </div>
+						</div>	
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>船东：</label>
+						  <div class="s-input-inline">
+							  <input type="text" id="shipOwner" name="shipOwner" maxlength="100" class="s-input shipOwner"/>
+						  </div>
+						</div>
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>合同航速：</label>
+						  <div class="s-input-inline">
+							 <input type="text" class="s-input pactSpeed" id="pactSpeed" name="pactSpeed" maxlength="100"/>
+	                         <span class="note">KNOTS</span>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline">
+						  <label class="s-form-label"><em>*</em>经纪人：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="brokerName" name="brokerName" maxlength="100" class="s-input brokerName"/>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline">
+						  <label class="s-form-label"><em>*</em>允许装卸时间：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="dockTime" name="dockTime" onkeyup="clearNoNumTwo(this)" onblur="this.value=formatNumber(this.value,2,1);" maxlength="15" class="s-input"/>
+	                         <span class="note">HOURS</span>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline">
+						  <label class="s-form-label">装货区域：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="loadingArea" name="loadingArea" maxlength="100" class="s-input loadingArea"/>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline">
+						  <label class="s-form-label"><em>*</em>卸货区域：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="unloadingArea" name="unloadingArea" class="s-input unloadingArea" maxlength="100"/>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline s-inline100">
+						  <label class="s-form-label">备注：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="remark" name="remark" maxlength="100" class="s-input"/>
+						  </div>
+						</div>
+						
+	                    <div class="s-inline s-inline100">
+						  <label class="s-form-label">合同上传：</label>
+						  <div class="s-input-inline">
+	                         <p class="s-trade-p s-trade-p2">
+	                         	<input type="text" id="cunImg" name="accessory" placeholder="请上传合同" class="s-input" readonly="readonly"/>
+	                         	<span>
+	                         		<i class="s-icon fs-close"></i>				<!-- 清空文件按钮 -->
+	                         		<i class="s-icon s-icon-up" id="btn"></i>	<!-- 上传文件按钮 -->
+	                         	</span>
+	                         </p>
+	                         <span class="s-erro">*pdf，Excel，Word，TXT，JPG</span>
+						  </div>
+						</div>
+						
+					</li>
+				</ul>
+			</form>
+			<div id="accessory" class="accessoryAll"  style="display:none;"></div>
+			</div>
+		</div>
+		
+		<div class="s-btn-box"><button class="s-btn s-btn-blue" id="submits">提&nbsp;&nbsp;交</button><button class="s-btn s-btn-primary back">返&nbsp;&nbsp;回</button></div>
+	</div>
+	
+	<script src="../transport/js/shipPact/shipPactDetail.js"></script>	
+	
+	<script>
+			//数量数字正则校验
+			function clearNoNumThree(obj)    
+			{    
+			    //先把非数字的都替换掉，除了数字和.    
+			    obj.value = obj.value.replace(/[^\d.]/g,"");    
+			    //保证只有出现一个.而没有多个.    
+			    obj.value = obj.value.replace(/\.{2,}/g,".");    
+			    //必须保证第一个为数字而不是.    
+			    obj.value = obj.value.replace(/^\./g,"");    
+			    //保证.只出现一次，而不能出现两次以上    
+			    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+			    //只能输入两个小数  
+			    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+			}  
+			//单价数字正则校验
+			function clearNoNumTwo(obj)    
+			{    
+			    //先把非数字的都替换掉，除了数字和.    
+			    obj.value = obj.value.replace(/[^\d.]/g,"");    
+			    //保证只有出现一个.而没有多个.    
+			    obj.value = obj.value.replace(/\.{2,}/g,".");    
+			    //必须保证第一个为数字而不是.    
+			    obj.value = obj.value.replace(/^\./g,"");    
+			    //保证.只出现一次，而不能出现两次以上    
+			    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+			    //只能输入两个小数  
+			    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+			}  
+	</script>

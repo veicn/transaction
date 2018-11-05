@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<toolbox>
+  <xhtml>true</xhtml>
+   <tool>
+     <key>stringUtils</key>
+     <scope>application</scope>
+     <class>org.apache.commons.lang.StringUtils</class>    
+   </tool>
+   <tool>
+     <key>dateUtil</key>
+     <scope>application</scope>
+     <class>com.eyeieye.melody.util.DateUtil</class>    
+   </tool>
+   <tool>
+     <key>vlocale</key>
+     <scope>application</scope>
+     <class>com.eyeieye.melody.web.locale.VisitorLocale</class>    
+   </tool>
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+    <tool>
+        <key>authUtils</key>
+        <scope>request</scope>
+        <class>com.sinochem.it.b2b.member.access.AuthUtils</class>
+    </tool>
+</toolbox>

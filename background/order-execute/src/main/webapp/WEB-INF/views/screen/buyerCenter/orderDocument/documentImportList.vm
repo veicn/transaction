@@ -1,0 +1,99 @@
+			<div class="c-mod c-mod2">
+				<h3><em class="cw-ico ico-h3"></em>单证管理</h3>
+			 	<div class="follow-con fol-dzztbox clearfix">
+					<span class="progress-bar"></span>
+					<div class="begin
+						done
+					 	lp-item sel"
+					 	onmouseover="divMouseover(this, 'ok')"
+						onmouseout="divMouseout(this, 'ok')"
+					 	>
+						<span class="bar-blue"><i class="ico-tran ico-location"></i></span>
+						<h4>订单已成交</h4>
+						<span class="begin-ico"
+							style="cursor: pointer;"
+							onclick="divOnclick2('$!query.uuid')"
+						><i class="ico-tran ico-folone"></i></span>
+						<div class="lp-item-con lp-item-con1">
+							<dl>
+								#foreach($cf in $contractFileList)
+									#if($!cf.isUpload == 1)
+										<dd><i class="ico-tran ico-p2"></i><em>$!cf.contractFileName</em><span></span></dd>
+									#else
+										<dd><i class="ico-tran ico-p2-gray"></i><em>$!cf.contractFileName</em><span></span></dd>
+									#end
+								#end
+							</dl>
+						</div>
+					</div>
+					
+					#foreach($dt in $documentType)
+						<div class="
+							#if($dt.documentType == 'T11')
+								loading-port 
+							#elseif($dt.documentType == 'T12')
+								in-transit 
+							#elseif($dt.documentType == 'T13')
+								unloading-port 
+							#elseif($dt.documentType == 'T14')
+								end
+							#end
+							
+							#if($!maxDocumentType.compareTo($!dt.documentType) > 0)
+								done
+							#end
+							
+							done
+	
+							sel
+							lp-item" 
+							onmouseover="divMouseover(this, '$!dt.orderDocumentId')"
+							onmouseout="divMouseout(this, '$!dt.orderDocumentId')"
+							>
+							<span class="bar-blue" 
+								#if($dt.documentType == 'T14')
+									style=""
+								#else
+									style="right: 0;"
+								#end
+							><i class="ico-tran ico-location"></i></span>
+							<h4>$dt.documentTypeDesc</h4>
+							<span class="begin-ico"><i class="ico-tran 
+								#if($dt.documentType == 'T11')
+									ico-folthree
+								#elseif($dt.documentType == 'T12')
+									ico-foltwo
+								#elseif($dt.documentType == 'T13')
+									ico-folfour
+								#elseif($dt.documentType == 'T14')
+									ico-folfive
+								#end
+							" 
+							
+							style="cursor: pointer;"
+							onclick="divOnclick('$!query.uuid' ,'$!dt.orderDocumentId', '$!dt.documentType', '$!query.tradeCategory')"
+							></i></span>
+							<div class="lp-item-con
+								#if($dt.documentType == 'T14')
+									lp-item-con2
+								#end
+								">
+								<dl>
+									#foreach($dfl in $documentFileList)
+										#if($dt.documentType == $dfl.documentType)
+											#if($!dfl.documentFileId)
+												<dd><i class="ico-tran ico-p2"></i><em>$!dfl.fileName</em><span></span></dd>
+											#else
+												<dd><i class="ico-tran ico-p2-gray"></i><em>$!dfl.fileName</em><span></span></dd>
+											#end
+										#end
+									#end
+								</dl>
+							</div>
+						</div>
+					#end
+				</div>
+			</div>
+<script src="../../orderexecute/js/orderDocument/documentList.js"></script>
+
+			

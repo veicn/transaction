@@ -1,0 +1,17 @@
+<div class="c-mod" id="cgxx">
+    <h1>报价单管理<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;详情</span></h1>
+    <div class="order-num-box clearfix">
+        <div class="order-num-l">
+            <p>$!{demand.bEnterpriseName}</p>
+            <p>NO.：$!{demand.uuid}</p>
+            <p><span>发布时间：</span><span>$!{demand.pubDateAsString}</span></p>
+        </div>
+        <div class="order-num-r">
+            <p class="ord-ntit">报价单执行情况：</p>
+            $contain.get("/buyCenterContain/biddingStatusState.htm").put("biddingType", "$!{demand.biddingType}").put("biddingStatus", "$!{demand.status}")
+        </div>
+    </div>
+    <ul class="order-num-list clearfix">
+
+    </ul>
+</div>

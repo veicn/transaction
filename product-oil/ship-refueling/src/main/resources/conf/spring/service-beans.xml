@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	default-autowire="byName">
+	
+	<bean class="com.eyeieye.melody.web.url.ServletContextInitHelper">
+		<property name="brokers">
+			<list>
+				<ref bean="transactionServer" />
+				<ref bean="wechatServer" />
+				<ref bean="shippingServer" />
+				<ref bean="newsServer" />
+
+				<ref bean="omServer" />
+				<ref bean="memberServer" />
+				<ref bean="infoServer" />
+				<ref bean="systemServer" />
+				<ref bean="docServer" />
+				<ref bean="messageServer" />
+				<ref bean="portalServer" />
+				<ref bean="shipServer" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="transactionServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${transaction.server.host}"></property>
+				<property name="path" value="${transaction.server.path}"></property>
+				<property name="port" value="${transaction.server.port}"></property>
+                <property name="protocol" value="${transaction.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="shippingServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${shipping.server.host}"></property>
+				<property name="path" value="${shipping.server.path}"></property>
+				<property name="port" value="${shipping.server.port}"></property>
+                <property name="protocol" value="${shipping.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<!--原油的server-->
+	<bean id="shipServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${ship.server.host}"></property>
+				<property name="port" value="${ship.server.port}"></property>
+                <property name="protocol" value="${ship.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="newsServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${news.server.host}"></property>
+				<property name="path" value="${news.server.path}"></property>
+				<property name="port" value="${news.server.port}"></property>
+                <property name="protocol" value="${news.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="wechatServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${wechat.server.host}"></property>
+				<property name="path" value="${wechat.server.path}"></property>
+				<property name="port" value="${wechat.server.port}"></property>
+                <property name="protocol" value="${wechat.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="omServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${om.server.host}"></property>
+				<property name="path" value="${om.server.path}"></property>
+				<property name="port" value="${om.server.port}"></property>
+                <property name="protocol" value="${om.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="memberServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${member.server.host}"></property>
+				<property name="path" value="${member.server.path}"></property>
+				<property name="port" value="${member.server.port}"></property>
+                <property name="protocol" value="${member.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="infoServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${info.server.host}"></property>
+				<property name="path" value="${info.server.path}"></property>
+				<property name="port" value="${info.server.port}"></property>
+                <property name="protocol" value="${info.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="systemServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${system.server.host}"></property>
+				<property name="path" value="${system.server.path}"></property>
+				<property name="port" value="${system.server.port}"></property>
+                <property name="protocol" value="${system.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="docServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${doc.server.host}"></property>
+				<property name="path" value="${doc.server.path}"></property>
+				<property name="port" value="${doc.server.port}"></property>
+                <property name="protocol" value="${doc.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="messageServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${message.server.host}"></property>
+				<property name="path" value="${message.server.path}"></property>
+				<property name="port" value="${message.server.port}"></property>
+                <property name="protocol" value="${message.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="portalServer" class="com.eyeieye.melody.web.url.URLBroker">
+		<property name="encoding" value="${web.encoding}"></property>
+		<property name="config">
+			<bean class="com.eyeieye.melody.web.url.URLConfig">
+				<property name="host" value="${portal.server.host}"></property>
+				<property name="path" value="${portal.server.path}"></property>
+				<property name="port" value="${portal.server.port}"></property>
+                <property name="protocol" value="${portal.server.protocol}"></property>
+				<property name="followContextPath" value="false"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="webBindingInitializer" class="com.sinochem.it.b2b.common.convertor.ConverterInitBinder"> </bean>
+
+	<context:component-scan
+			base-package="com.sinochem.crude.trade.*.*.impl,com.sinochem.crude.trade.common,com.sinochem.crude.trade.shiprefueling.helper,
+			com.sinochem.crude.trade.member.user,com.sinochem.it.b2b,com.sinochem.crude.trade.shiprefueling.job
+			,com.sinochem.crude.trade.shiprefueling.utils" />
+</beans>

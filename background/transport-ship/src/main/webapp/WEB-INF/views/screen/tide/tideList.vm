@@ -1,0 +1,98 @@
+<script>
+layui.use(['layer','upload'], function(){
+	var layer = layui.layer;
+	var window.$ = layui.jquery
+	,upload = layui.upload;
+	var stateSearch = $!stateSearch;
+	var countrySearch = $!countrySearch;
+	var provinceSearch = $!provinceSearch;
+	var portSearch = $!portSearch;
+	var dateSearch = $!dateSearch;
+	$("#searchDate").val(dateSearch);
+});
+</script>
+<div class="layui-table" style="padding:15px" id="layerDemo">
+	<!--搜索条件-->
+	<div class="ry-banner">
+		<div class="layui-inline">
+			<label class="layui-form-label">查询港口</label>
+		    <div class="layui-input-inline" >
+		    	<select class="layui-input" id="state" name="state" style="width:150px;height:35px" lay-search="" lay-filter="">
+					<option value="">请选择</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline">
+		    	<select class="layui-input" id="country" name="country" style="width:150px;height:35px" lay-search="" lay-filter="">
+					<option value="">请选择</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline">
+		    	<select class="layui-input" id="province" name="province" style="width:150px;height:35px" lay-search="" lay-filter="provinceFilter">
+					<option value="">请选择</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline">
+		    	<select class="layui-input" id="port" name="port" style="width:150px;height:35px" lay-search="" lay-filter="portFilter">
+					<option value="">请选择</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline">
+		    	<input class="layui-input" type="text" name="searchDate" id="searchDate" style="width:150px;height:35px" placeholder="请选日期" autocomplete="off" value="$!dateSearch">
+		    </div>
+		    
+		    <div class="layui-input-inline iw300" style="width:10px;"></div>
+			<input id="stateSearch" type="text" name="stateSearch" class="layui-input layui-hide" value="$!stateSearch">
+			<input id="countrySearch" type="text" name="countrySearch" class="layui-input layui-hide" value="$!countrySearch">
+			<input id="provinceSearch" type="text" name="provinceSearch" class="layui-input layui-hide" value="$!provinceSearch">
+			<input id="portSearch" type="text" name="portSearch" class="layui-input layui-hide" value="$!portSearch">
+			<input id="dateSearch" type="text" name="dateSearch" class="layui-input layui-hide" value="$!dateSearch">
+		    <button class="layui-btn layui-btn-normal layui-btn-small layui-input-inline searchBtn">查询</button>
+		    <button class="layui-btn layui-btn-normal layui-btn-small resetBtn">重置</button>
+		    <button class="layui-btn layui-btn-normal layui-btn-small layui-input-inline insertBtn">新增</button>
+		</div>
+	</div>
+	
+	<!--列表-->
+	<table id="tideList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+	  <thead>
+	    <tr>
+	      <th class="table-style-th">序号</th>
+		  <th class="table-style-th">港口名称</th>
+		  <th class="table-style-th">时(hh)</th>
+		  <th class="table-style-th">分(mm)</th>
+		  <th class="table-style-th">潮高 (cm)</th>
+		  <th class="table-style-th">日期</th>
+	      <th class="table-style-th">备注</th>
+	      <th class="table-style-th">操作</th>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	  #foreach($data in $datas)
+	    <tr>
+		  <td>${velocityCount}</td>
+		  <td>$!data.portName</td>
+		  <td>$!data.hour</td>
+		  <td>$!data.minute</td>
+		  <td>$!data.height</td>
+		  <td>$!data.date</td>
+		  <td>$!data.remark</td>
+	      <td>
+	      	<i class="layui-icon">&#xe605;</i>
+	      	<a href="javascript:;" class="dialog-link btcol lookBtn" attr-data="$data.uuid">查看</a>
+	      	<i class="layui-icon" style="margin-left:5px;">&#xe642;</i>
+	      	<a href="javascript:;" class="dialog-link btcol editBtn" attr-data="$data.uuid">修改</a>
+	      	<i class="layui-icon" style="color:red;margin-left:5px;">&#xe640;</i>
+	      	<a href="javascript:;" class="dialog-link btcol delBtn" attr-data="$data.uuid">删除</a>
+	      </td>
+	    </tr>
+	  #end
+	  </tbody>
+	</table>
+	
+    <!--底部分页-->
+    <div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/tide/tideList.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+
+	<script src="../transport/js/tide/tideList.js"></script>
+</div>

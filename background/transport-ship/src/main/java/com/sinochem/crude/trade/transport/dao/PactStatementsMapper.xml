@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.PactStatementsMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.PactStatements" id="PactStatementsDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.PactStatements">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.PactStatements" id="PactStatements">
+		<result property="statementsId" column="STATEMENTS_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="receiptCode" column="RECEIPT_CODE" />
+		<result property="shipPactId" column="SHIP_PACT_ID" />
+		<result property="shipPactUuid" column="SHIP_PACT_UUID" />
+		<result property="pactCode" column="PACT_CODE" />
+		<result property="payee" column="PAYEE" />
+		<result property="payer" column="PAYER" />
+		<result property="freightQuantily" column="FREIGHT_QUANTILY" />
+		<result property="freightFlatrate" column="FREIGHT_FLATRATE" />
+		<result property="freightRate" column="FREIGHT_RATE" />
+		<result property="freightOverageQuantily" column="FREIGHT_OVERAGE_QUANTILY" />
+		<result property="freightOverageFlatrate" column="FREIGHT_OVERAGE_FLATRATE" />
+		<result property="freightOverageRate" column="FREIGHT_OVERAGE_RATE" />
+		<result property="freightOveragePct" column="FREIGHT_OVERAGE_PCT" />
+		<result property="addressCommissionQuantily" column="ADDRESS_COMMISSION_QUANTILY" />
+		<result property="addressCommissionPct" column="ADDRESS_COMMISSION_PCT" />
+		<result property="freightTotal" column="FREIGHT_TOTAL" />
+		<result property="freightOverageTotal" column="FREIGHT_OVERAGE_TOTAL" />
+		<result property="addressCommissionTotal" column="ADDRESS_COMMISSION_TOTAL" />
+		<result property="freightAmount" column="FREIGHT_AMOUNT" />
+		<result property="freightOverageAmount" column="FREIGHT_OVERAGE_AMOUNT" />
+		<result property="addressCommissionAmount" column="ADDRESS_COMMISSION_AMOUNT" />
+		<result property="balance" column="BALANCE" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="agentepMemberId" column="AGENTEP_MEMBER_ID" />
+		<result property="receiptAccessory" column="RECEIPT_ACCESSORY" />
+		<result property="receiptAccessoryPath" column="RECEIPT_ACCESSORY_PATH" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="PactStatements" parameterType="com.sinochem.crude.trade.transport.domain.PactStatements">
+	select * from t_ship_pact_statements
+	where
+		 ALIVE_FLAG='1'
+		<if test="statementsId!=null and statementsId!=''">and  STATEMENTS_ID=#{statementsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="receiptCode!=null and receiptCode!=''">and  RECEIPT_CODE=#{receiptCode}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="payer!=null and payer!=''">and  PAYER=#{payer}</if>
+		<if test="freightQuantily!=null and freightQuantily!=''">and  FREIGHT_QUANTILY=#{freightQuantily}</if>
+		<if test="freightFlatrate!=null and freightFlatrate!=''">and  FREIGHT_FLATRATE=#{freightFlatrate}</if>
+		<if test="freightRate!=null and freightRate!=''">and  FREIGHT_RATE=#{freightRate}</if>
+		<if test="freightOverageQuantily!=null and freightOverageQuantily!=''">and  FREIGHT_OVERAGE_QUANTILY=#{freightOverageQuantily}</if>
+		<if test="freightOverageFlatrate!=null and freightOverageFlatrate!=''">and  FREIGHT_OVERAGE_FLATRATE=#{freightOverageFlatrate}</if>
+		<if test="freightOverageRate!=null and freightOverageRate!=''">and  FREIGHT_OVERAGE_RATE=#{freightOverageRate}</if>
+		<if test="freightOveragePct!=null and freightOveragePct!=''">and  FREIGHT_OVERAGE_PCT=#{freightOveragePct}</if>
+		<if test="addressCommissionQuantily!=null and addressCommissionQuantily!=''">and  ADDRESS_COMMISSION_QUANTILY=#{addressCommissionQuantily}</if>
+		<if test="addressCommissionPct!=null and addressCommissionPct!=''">and  ADDRESS_COMMISSION_PCT=#{addressCommissionPct}</if>
+		<if test="freightTotal!=null and freightTotal!=''">and  FREIGHT_TOTAL=#{freightTotal}</if>
+		<if test="freightOverageTotal!=null and freightOverageTotal!=''">and  FREIGHT_OVERAGE_TOTAL=#{freightOverageTotal}</if>
+		<if test="addressCommissionTotal!=null and addressCommissionTotal!=''">and  ADDRESS_COMMISSION_TOTAL=#{addressCommissionTotal}</if>
+		<if test="freightAmount!=null and freightAmount!=''">and  FREIGHT_AMOUNT=#{freightAmount}</if>
+		<if test="freightOverageAmount!=null and freightOverageAmount!=''">and  FREIGHT_OVERAGE_AMOUNT=#{freightOverageAmount}</if>
+		<if test="addressCommissionAmount!=null and addressCommissionAmount!=''">and  ADDRESS_COMMISSION_AMOUNT=#{addressCommissionAmount}</if>
+		<if test="balance!=null and balance!=''">and  BALANCE=#{balance}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+		<if test="receiptAccessory!=null and receiptAccessory!=''">and  RECEIPT_ACCESSORY=#{receiptAccessory}</if>
+		<if test="receiptAccessoryPath!=null and receiptAccessoryPath!=''">and  RECEIPT_ACCESSORY_PATH=#{receiptAccessoryPath}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="PactStatements">
+			select
+			* from t_ship_pact_statements
+			where
+		    STATEMENTS_ID=#{statementsId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" parameterType="String" resultMap="PactStatements">
+			select
+			* from t_ship_pact_statements
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.PactStatements">
+		update t_ship_pact_statements
+		<set>
+         STATEMENTS_ID=#{statementsId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="receiptCode!=null">,RECEIPT_CODE = #{receiptCode}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="pactCode!=null">,PACT_CODE = #{pactCode}</if>
+		<if test="payee!=null">,PAYEE = #{payee}</if>
+		<if test="payer!=null">,PAYER = #{payer}</if>
+		<if test="freightQuantily!=null">,FREIGHT_QUANTILY = #{freightQuantily}</if>
+		<if test="freightFlatrate!=null">,FREIGHT_FLATRATE = #{freightFlatrate}</if>
+		<if test="freightRate!=null">,FREIGHT_RATE = #{freightRate}</if>
+		<if test="freightOverageQuantily!=null">,FREIGHT_OVERAGE_QUANTILY = #{freightOverageQuantily}</if>
+		<if test="freightOverageFlatrate!=null">,FREIGHT_OVERAGE_FLATRATE = #{freightOverageFlatrate}</if>
+		<if test="freightOverageRate!=null">,FREIGHT_OVERAGE_RATE = #{freightOverageRate}</if>
+		<if test="freightOveragePct!=null">,FREIGHT_OVERAGE_PCT = #{freightOveragePct}</if>
+		<if test="addressCommissionQuantily!=null">,ADDRESS_COMMISSION_QUANTILY = #{addressCommissionQuantily}</if>
+		<if test="addressCommissionPct!=null">,ADDRESS_COMMISSION_PCT = #{addressCommissionPct}</if>
+		<if test="freightTotal!=null">,FREIGHT_TOTAL = #{freightTotal}</if>
+		<if test="freightOverageTotal!=null">,FREIGHT_OVERAGE_TOTAL = #{freightOverageTotal}</if>
+		<if test="addressCommissionTotal!=null">,ADDRESS_COMMISSION_TOTAL = #{addressCommissionTotal}</if>
+		<if test="freightAmount!=null">,FREIGHT_AMOUNT = #{freightAmount}</if>
+		<if test="freightOverageAmount!=null">,FREIGHT_OVERAGE_AMOUNT = #{freightOverageAmount}</if>
+		<if test="addressCommissionAmount!=null">,ADDRESS_COMMISSION_AMOUNT = #{addressCommissionAmount}</if>
+		<if test="balance!=null">,BALANCE = #{balance}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="agentepMemberId!=null">,AGENTEP_MEMBER_ID = #{agentepMemberId}</if>
+		<if test="receiptAccessory!=null">,RECEIPT_ACCESSORY = #{receiptAccessory}</if>
+		<if test="receiptAccessoryPath!=null">,RECEIPT_ACCESSORY_PATH = #{receiptAccessoryPath}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+       	 STATEMENTS_ID=#{statementsId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.PactStatements"  useGeneratedKeys="true" keyProperty="statementsId" >
+		insert  into t_ship_pact_statements (				STATEMENTS_ID
+						,UUID
+						,RECEIPT_CODE
+						,SHIP_PACT_ID
+						,SHIP_PACT_UUID
+						,PACT_CODE
+						,PAYEE
+						,PAYER
+						,FREIGHT_QUANTILY
+						,FREIGHT_FLATRATE
+						,FREIGHT_RATE
+						,FREIGHT_OVERAGE_QUANTILY
+						,FREIGHT_OVERAGE_FLATRATE
+						,FREIGHT_OVERAGE_RATE
+						,FREIGHT_OVERAGE_PCT
+						,ADDRESS_COMMISSION_QUANTILY
+						,ADDRESS_COMMISSION_PCT
+						,FREIGHT_TOTAL
+						,FREIGHT_OVERAGE_TOTAL
+						,ADDRESS_COMMISSION_TOTAL
+						,FREIGHT_AMOUNT
+						,FREIGHT_OVERAGE_AMOUNT
+						,ADDRESS_COMMISSION_AMOUNT
+						,BALANCE
+						,EP_MEMBER_ID
+						,AGENTEP_MEMBER_ID
+						,RECEIPT_ACCESSORY
+						,RECEIPT_ACCESSORY_PATH
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,ALIVE_FLAG
+						)
+		values(		#{statementsId}
+						,#{uuid}
+						,#{receiptCode}
+						,#{shipPactId}
+						,#{shipPactUuid}
+						,#{pactCode}
+						,#{payee}
+						,#{payer}
+						,#{freightQuantily}
+						,#{freightFlatrate}
+						,#{freightRate}
+						,#{freightOverageQuantily}
+						,#{freightOverageFlatrate}
+						,#{freightOverageRate}
+						,#{freightOveragePct}
+						,#{addressCommissionQuantily}
+						,#{addressCommissionPct}
+						,#{freightTotal}
+						,#{freightOverageTotal}
+						,#{addressCommissionTotal}
+						,#{freightAmount}
+						,#{freightOverageAmount}
+						,#{addressCommissionAmount}
+						,#{balance}
+						,#{epMemberId}
+						,#{agentepMemberId}
+						,#{receiptAccessory}
+						,#{receiptAccessoryPath}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{aliveFlag}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_pact_statements
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 STATEMENTS_ID=#{statementsId} 
+																																																																																																																																																																																
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  STATEMENTS_ID as "statementsId" 
+						 ,   UUID as "uuid" 
+						 ,   RECEIPT_CODE as "receiptCode" 
+						 ,   SHIP_PACT_ID as "shipPactId" 
+						 ,   SHIP_PACT_UUID as "shipPactUuid" 
+						 ,   PACT_CODE as "pactCode" 
+						 ,   PAYEE as "payee" 
+						 ,   PAYER as "payer" 
+						 ,   FREIGHT_QUANTILY as "freightQuantily" 
+						 ,   FREIGHT_FLATRATE as "freightFlatrate" 
+						 ,   FREIGHT_RATE as "freightRate" 
+						 ,   FREIGHT_OVERAGE_QUANTILY as "freightOverageQuantily" 
+						 ,   FREIGHT_OVERAGE_FLATRATE as "freightOverageFlatrate" 
+						 ,   FREIGHT_OVERAGE_RATE as "freightOverageRate" 
+						 ,   FREIGHT_OVERAGE_PCT as "freightOveragePct" 
+						 ,   ADDRESS_COMMISSION_QUANTILY as "addressCommissionQuantily" 
+						 ,   ADDRESS_COMMISSION_PCT as "addressCommissionPct" 
+						 ,   FREIGHT_TOTAL as "freightTotal" 
+						 ,   FREIGHT_OVERAGE_TOTAL as "freightOverageTotal" 
+						 ,   ADDRESS_COMMISSION_TOTAL as "addressCommissionTotal" 
+						 ,   FREIGHT_AMOUNT as "freightAmount" 
+						 ,   FREIGHT_OVERAGE_AMOUNT as "freightOverageAmount" 
+						 ,   ADDRESS_COMMISSION_AMOUNT as "addressCommissionAmount" 
+						 ,   BALANCE as "balance" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   AGENTEP_MEMBER_ID as "agentepMemberId" 
+						 ,   RECEIPT_ACCESSORY as "receiptAccessory" 
+						 ,   RECEIPT_ACCESSORY_PATH as "receiptAccessoryPath" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						from t_ship_pact_statements
+		where
+			ALIVE_FLAG='1'
+			<if test="statementsId!=null and statementsId!=''">and  STATEMENTS_ID=#{statementsId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="receiptCode!=null and receiptCode!=''">and  RECEIPT_CODE=#{receiptCode}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="payer!=null and payer!=''">and  PAYER=#{payer}</if>
+			<if test="freightQuantily!=null and freightQuantily!=''">and  FREIGHT_QUANTILY=#{freightQuantily}</if>
+			<if test="freightFlatrate!=null and freightFlatrate!=''">and  FREIGHT_FLATRATE=#{freightFlatrate}</if>
+			<if test="freightRate!=null and freightRate!=''">and  FREIGHT_RATE=#{freightRate}</if>
+			<if test="freightOverageQuantily!=null and freightOverageQuantily!=''">and  FREIGHT_OVERAGE_QUANTILY=#{freightOverageQuantily}</if>
+			<if test="freightOverageFlatrate!=null and freightOverageFlatrate!=''">and  FREIGHT_OVERAGE_FLATRATE=#{freightOverageFlatrate}</if>
+			<if test="freightOverageRate!=null and freightOverageRate!=''">and  FREIGHT_OVERAGE_RATE=#{freightOverageRate}</if>
+			<if test="freightOveragePct!=null and freightOveragePct!=''">and  FREIGHT_OVERAGE_PCT=#{freightOveragePct}</if>
+			<if test="addressCommissionQuantily!=null and addressCommissionQuantily!=''">and  ADDRESS_COMMISSION_QUANTILY=#{addressCommissionQuantily}</if>
+			<if test="addressCommissionPct!=null and addressCommissionPct!=''">and  ADDRESS_COMMISSION_PCT=#{addressCommissionPct}</if>
+			<if test="freightTotal!=null and freightTotal!=''">and  FREIGHT_TOTAL=#{freightTotal}</if>
+			<if test="freightOverageTotal!=null and freightOverageTotal!=''">and  FREIGHT_OVERAGE_TOTAL=#{freightOverageTotal}</if>
+			<if test="addressCommissionTotal!=null and addressCommissionTotal!=''">and  ADDRESS_COMMISSION_TOTAL=#{addressCommissionTotal}</if>
+			<if test="freightAmount!=null and freightAmount!=''">and  FREIGHT_AMOUNT=#{freightAmount}</if>
+			<if test="freightOverageAmount!=null and freightOverageAmount!=''">and  FREIGHT_OVERAGE_AMOUNT=#{freightOverageAmount}</if>
+			<if test="addressCommissionAmount!=null and addressCommissionAmount!=''">and  ADDRESS_COMMISSION_AMOUNT=#{addressCommissionAmount}</if>
+			<if test="balance!=null and balance!=''">and  BALANCE=#{balance}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+			<if test="receiptAccessory!=null and receiptAccessory!=''">and  RECEIPT_ACCESSORY=#{receiptAccessory}</if>
+			<if test="receiptAccessoryPath!=null and receiptAccessoryPath!=''">and  RECEIPT_ACCESSORY_PATH=#{receiptAccessoryPath}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			ORDER BY CREATE_DATE DESC
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_pact_statements 
+		where
+		 ALIVE_FLAG='1'
+			<if test="statementsId!=null and statementsId!=''">and  STATEMENTS_ID=#{statementsId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="receiptCode!=null and receiptCode!=''">and  RECEIPT_CODE=#{receiptCode}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="payer!=null and payer!=''">and  PAYER=#{payer}</if>
+			<if test="freightQuantily!=null and freightQuantily!=''">and  FREIGHT_QUANTILY=#{freightQuantily}</if>
+			<if test="freightFlatrate!=null and freightFlatrate!=''">and  FREIGHT_FLATRATE=#{freightFlatrate}</if>
+			<if test="freightRate!=null and freightRate!=''">and  FREIGHT_RATE=#{freightRate}</if>
+			<if test="freightOverageQuantily!=null and freightOverageQuantily!=''">and  FREIGHT_OVERAGE_QUANTILY=#{freightOverageQuantily}</if>
+			<if test="freightOverageFlatrate!=null and freightOverageFlatrate!=''">and  FREIGHT_OVERAGE_FLATRATE=#{freightOverageFlatrate}</if>
+			<if test="freightOverageRate!=null and freightOverageRate!=''">and  FREIGHT_OVERAGE_RATE=#{freightOverageRate}</if>
+			<if test="freightOveragePct!=null and freightOveragePct!=''">and  FREIGHT_OVERAGE_PCT=#{freightOveragePct}</if>
+			<if test="addressCommissionQuantily!=null and addressCommissionQuantily!=''">and  ADDRESS_COMMISSION_QUANTILY=#{addressCommissionQuantily}</if>
+			<if test="addressCommissionPct!=null and addressCommissionPct!=''">and  ADDRESS_COMMISSION_PCT=#{addressCommissionPct}</if>
+			<if test="freightTotal!=null and freightTotal!=''">and  FREIGHT_TOTAL=#{freightTotal}</if>
+			<if test="freightOverageTotal!=null and freightOverageTotal!=''">and  FREIGHT_OVERAGE_TOTAL=#{freightOverageTotal}</if>
+			<if test="addressCommissionTotal!=null and addressCommissionTotal!=''">and  ADDRESS_COMMISSION_TOTAL=#{addressCommissionTotal}</if>
+			<if test="freightAmount!=null and freightAmount!=''">and  FREIGHT_AMOUNT=#{freightAmount}</if>
+			<if test="freightOverageAmount!=null and freightOverageAmount!=''">and  FREIGHT_OVERAGE_AMOUNT=#{freightOverageAmount}</if>
+			<if test="addressCommissionAmount!=null and addressCommissionAmount!=''">and  ADDRESS_COMMISSION_AMOUNT=#{addressCommissionAmount}</if>
+			<if test="balance!=null and balance!=''">and  BALANCE=#{balance}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+			<if test="receiptAccessory!=null and receiptAccessory!=''">and  RECEIPT_ACCESSORY=#{receiptAccessory}</if>
+			<if test="receiptAccessoryPath!=null and receiptAccessoryPath!=''">and  RECEIPT_ACCESSORY_PATH=#{receiptAccessoryPath}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_pact_statements
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="statementsId!=null and statementsId!=''">and  STATEMENTS_ID=#{statementsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="receiptCode!=null and receiptCode!=''">and  RECEIPT_CODE=#{receiptCode}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="payer!=null and payer!=''">and  PAYER=#{payer}</if>
+		<if test="freightQuantily!=null and freightQuantily!=''">and  FREIGHT_QUANTILY=#{freightQuantily}</if>
+		<if test="freightFlatrate!=null and freightFlatrate!=''">and  FREIGHT_FLATRATE=#{freightFlatrate}</if>
+		<if test="freightRate!=null and freightRate!=''">and  FREIGHT_RATE=#{freightRate}</if>
+		<if test="freightOverageQuantily!=null and freightOverageQuantily!=''">and  FREIGHT_OVERAGE_QUANTILY=#{freightOverageQuantily}</if>
+		<if test="freightOverageFlatrate!=null and freightOverageFlatrate!=''">and  FREIGHT_OVERAGE_FLATRATE=#{freightOverageFlatrate}</if>
+		<if test="freightOverageRate!=null and freightOverageRate!=''">and  FREIGHT_OVERAGE_RATE=#{freightOverageRate}</if>
+		<if test="freightOveragePct!=null and freightOveragePct!=''">and  FREIGHT_OVERAGE_PCT=#{freightOveragePct}</if>
+		<if test="addressCommissionQuantily!=null and addressCommissionQuantily!=''">and  ADDRESS_COMMISSION_QUANTILY=#{addressCommissionQuantily}</if>
+		<if test="addressCommissionPct!=null and addressCommissionPct!=''">and  ADDRESS_COMMISSION_PCT=#{addressCommissionPct}</if>
+		<if test="freightTotal!=null and freightTotal!=''">and  FREIGHT_TOTAL=#{freightTotal}</if>
+		<if test="freightOverageTotal!=null and freightOverageTotal!=''">and  FREIGHT_OVERAGE_TOTAL=#{freightOverageTotal}</if>
+		<if test="addressCommissionTotal!=null and addressCommissionTotal!=''">and  ADDRESS_COMMISSION_TOTAL=#{addressCommissionTotal}</if>
+		<if test="freightAmount!=null and freightAmount!=''">and  FREIGHT_AMOUNT=#{freightAmount}</if>
+		<if test="freightOverageAmount!=null and freightOverageAmount!=''">and  FREIGHT_OVERAGE_AMOUNT=#{freightOverageAmount}</if>
+		<if test="addressCommissionAmount!=null and addressCommissionAmount!=''">and  ADDRESS_COMMISSION_AMOUNT=#{addressCommissionAmount}</if>
+		<if test="balance!=null and balance!=''">and  BALANCE=#{balance}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+		<if test="receiptAccessory!=null and receiptAccessory!=''">and  RECEIPT_ACCESSORY=#{receiptAccessory}</if>
+		<if test="receiptAccessoryPath!=null and receiptAccessoryPath!=''">and  RECEIPT_ACCESSORY_PATH=#{receiptAccessoryPath}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_pact_statements
+		<set>
+         STATEMENTS_ID=#{statementsId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="receiptCode!=null">,RECEIPT_CODE = #{receiptCode}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="pactCode!=null">,PACT_CODE = #{pactCode}</if>
+		<if test="payee!=null">,PAYEE = #{payee}</if>
+		<if test="payer!=null">,PAYER = #{payer}</if>
+		<if test="freightQuantily!=null">,FREIGHT_QUANTILY = #{freightQuantily}</if>
+		<if test="freightFlatrate!=null">,FREIGHT_FLATRATE = #{freightFlatrate}</if>
+		<if test="freightRate!=null">,FREIGHT_RATE = #{freightRate}</if>
+		<if test="freightOverageQuantily!=null">,FREIGHT_OVERAGE_QUANTILY = #{freightOverageQuantily}</if>
+		<if test="freightOverageFlatrate!=null">,FREIGHT_OVERAGE_FLATRATE = #{freightOverageFlatrate}</if>
+		<if test="freightOverageRate!=null">,FREIGHT_OVERAGE_RATE = #{freightOverageRate}</if>
+		<if test="freightOveragePct!=null">,FREIGHT_OVERAGE_PCT = #{freightOveragePct}</if>
+		<if test="addressCommissionQuantily!=null">,ADDRESS_COMMISSION_QUANTILY = #{addressCommissionQuantily}</if>
+		<if test="addressCommissionPct!=null">,ADDRESS_COMMISSION_PCT = #{addressCommissionPct}</if>
+		<if test="freightTotal!=null">,FREIGHT_TOTAL = #{freightTotal}</if>
+		<if test="freightOverageTotal!=null">,FREIGHT_OVERAGE_TOTAL = #{freightOverageTotal}</if>
+		<if test="addressCommissionTotal!=null">,ADDRESS_COMMISSION_TOTAL = #{addressCommissionTotal}</if>
+		<if test="freightAmount!=null">,FREIGHT_AMOUNT = #{freightAmount}</if>
+		<if test="freightOverageAmount!=null">,FREIGHT_OVERAGE_AMOUNT = #{freightOverageAmount}</if>
+		<if test="addressCommissionAmount!=null">,ADDRESS_COMMISSION_AMOUNT = #{addressCommissionAmount}</if>
+		<if test="balance!=null">,BALANCE = #{balance}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="agentepMemberId!=null">,AGENTEP_MEMBER_ID = #{agentepMemberId}</if>
+		<if test="receiptAccessory!=null">,RECEIPT_ACCESSORY = #{receiptAccessory}</if>
+		<if test="receiptAccessoryPath!=null">,RECEIPT_ACCESSORY_PATH = #{receiptAccessoryPath}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="statementsId!=null and statementsId!=''">and  STATEMENTS_ID=#{statementsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="receiptCode!=null and receiptCode!=''">and  RECEIPT_CODE=#{receiptCode}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="payer!=null and payer!=''">and  PAYER=#{payer}</if>
+		<if test="freightQuantily!=null and freightQuantily!=''">and  FREIGHT_QUANTILY=#{freightQuantily}</if>
+		<if test="freightFlatrate!=null and freightFlatrate!=''">and  FREIGHT_FLATRATE=#{freightFlatrate}</if>
+		<if test="freightRate!=null and freightRate!=''">and  FREIGHT_RATE=#{freightRate}</if>
+		<if test="freightOverageQuantily!=null and freightOverageQuantily!=''">and  FREIGHT_OVERAGE_QUANTILY=#{freightOverageQuantily}</if>
+		<if test="freightOverageFlatrate!=null and freightOverageFlatrate!=''">and  FREIGHT_OVERAGE_FLATRATE=#{freightOverageFlatrate}</if>
+		<if test="freightOverageRate!=null and freightOverageRate!=''">and  FREIGHT_OVERAGE_RATE=#{freightOverageRate}</if>
+		<if test="freightOveragePct!=null and freightOveragePct!=''">and  FREIGHT_OVERAGE_PCT=#{freightOveragePct}</if>
+		<if test="addressCommissionQuantily!=null and addressCommissionQuantily!=''">and  ADDRESS_COMMISSION_QUANTILY=#{addressCommissionQuantily}</if>
+		<if test="addressCommissionPct!=null and addressCommissionPct!=''">and  ADDRESS_COMMISSION_PCT=#{addressCommissionPct}</if>
+		<if test="freightTotal!=null and freightTotal!=''">and  FREIGHT_TOTAL=#{freightTotal}</if>
+		<if test="freightOverageTotal!=null and freightOverageTotal!=''">and  FREIGHT_OVERAGE_TOTAL=#{freightOverageTotal}</if>
+		<if test="addressCommissionTotal!=null and addressCommissionTotal!=''">and  ADDRESS_COMMISSION_TOTAL=#{addressCommissionTotal}</if>
+		<if test="freightAmount!=null and freightAmount!=''">and  FREIGHT_AMOUNT=#{freightAmount}</if>
+		<if test="freightOverageAmount!=null and freightOverageAmount!=''">and  FREIGHT_OVERAGE_AMOUNT=#{freightOverageAmount}</if>
+		<if test="addressCommissionAmount!=null and addressCommissionAmount!=''">and  ADDRESS_COMMISSION_AMOUNT=#{addressCommissionAmount}</if>
+		<if test="balance!=null and balance!=''">and  BALANCE=#{balance}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+		<if test="receiptAccessory!=null and receiptAccessory!=''">and  RECEIPT_ACCESSORY=#{receiptAccessory}</if>
+		<if test="receiptAccessoryPath!=null and receiptAccessoryPath!=''">and  RECEIPT_ACCESSORY_PATH=#{receiptAccessoryPath}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<!-- 根据油合同查找数据 -->
+	<select id="findByPactCode" parameterType="hashmap" resultMap="PactStatements">
+		select * from t_ship_pact_statements
+		where 
+			ALIVE_FLAG = '1'
+			<if test="pactCode!=null and pactCode!=''">and PACT_CODE = #{pactCode}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		    <if test="agentepMemberId!=null and agentepMemberId!=''">and  AGENTEP_MEMBER_ID=#{agentepMemberId}</if>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

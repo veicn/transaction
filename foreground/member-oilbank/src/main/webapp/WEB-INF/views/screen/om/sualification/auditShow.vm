@@ -1,0 +1,517 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css')"  media="all">
+    <script src="$imageServer.get('js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+</head>
+    <input type="hidden" id="id" value="${id}">
+    <table class="layui-table" style="width: 490px">
+    #if(${type}==1)
+        <tr>
+            <td>总投资：</td>
+            <td>$!{enterprises.totalInvestment}</td>
+        </tr>
+        <tr>
+            <td>固定资产：</td>
+            <td>$!{enterprises.fixedAssets}</td>
+        </tr>
+        <tr>
+            <td>主要产品：</td>
+            <td>$!{enterprises.mainProducts}</td>
+        </tr>
+        <tr>
+            <td>装置说明：</td>
+            <td>$!{enterprises.deviceDescription}</td>
+        </tr>
+        <tr>
+            <td>是否有进出口权：</td>
+            <td>
+                #if($!{enterprises.canTrading})
+                    是
+                #else
+                    否
+                #end
+                </td>
+        </tr>
+        <tr>
+            <td>主要进口产品：</td>
+            <td>$!{enterprises.mainImportProduct}</td>
+        </tr>
+        <tr>
+            <td>主要出口产品：</td>
+            <td>$!{enterprises.mainExportProduct} </td>
+        </tr>
+    #elseif(${type}==2)
+    <tr>
+            <td>是否有进出口权：</td>
+                <td>
+                    #if($!{enterprises.canTrading})
+                        是
+                    #else
+                        否
+                    #end
+                </td>
+        </tr>
+        <tr>
+            <td>进出口企业代码：</td>
+                <td>$!{enterprises.tradingComplayCode}</td>
+        </tr>
+        <tr>
+            <td>主要进口产品：</td>
+                <td>$!{enterprises.mainImportProduct}</td>
+        </tr>
+        <tr>
+            <td>主要出口产品：</td>
+                <td>$!{enterprises.mainExportProduct}</td>
+        </tr>
+        <tr>
+            <td>上一年营业收入：</td>
+            <td>$!{enterprises.lastYearOperationRevenue}</td>
+        </tr>
+        <tr>
+            <td>上一年贸易额：</td>
+            <td>$!{enterprises.lastYearTradeVolume}</td>
+        </tr>
+    </ul>
+    #elseif($!{type}==3)
+    <tr>
+        <tr>
+            <td>船舶艘次：</td>
+            <td>$!{enterprises.shipNum}</td>
+        </tr>
+        <tr>
+            <td>船舶净吨：</td>
+            <td>$!{enterprises.shipTonnage}</td>
+        </tr>
+        <tr>
+            <td>货运量：</td>
+            <td>$!{enterprises.volumeOfFreight}</td>
+        </tr>
+        <tr>
+            <td>集装箱：</td>
+            <td>$!{enterprises.containerNum}</td>
+        </tr>
+        <tr>
+            <td>公司总收入：</td>
+            <td>$!{enterprises.totalRevenue}</td>
+        </tr>
+        <tr>
+            <td>船代收入：</td>
+            <td>$!{enterprises.shipAgencyRevenue}</td>
+        </tr>
+    </ul>
+    #elseif($!{type}==4)
+    <tr>
+        <tr>
+            <td>
+            上一年营业收入：</td>
+            <td>$!{status.lastYearOperationRevenue}</td>
+        </tr>
+        <tr>
+            <td>上一年贸易额：</td>
+            <td>$!{status.lastYearTradeVolume}</td>
+        </tr>
+            <td>所属母公司：</td>
+            <td>$!{status.masterCompany}</td>
+        </tr>
+    </ul>
+    #elseif($!{type}==5)
+    <tr>
+        <tr>
+            <td>船舶艘次：</td>
+            <td>$!{enterprises.shipNum}</td>
+        </tr>
+        <tr>
+            <td>船舶净吨：</td>
+            <td>$!{enterprises.shipTonnage}</td>
+        </tr>
+        <tr>
+            <td>货运量：</td>
+            <td>$!{enterprises.volumeOfFreight}</td>
+        </tr>
+        <tr>
+            <td>集装箱：</td>
+            <td>$!{enterprises.containerNum}</td>
+        </tr>
+        <tr>
+            <td>公司总收入：</td>
+            <td>$!{enterprises.totalRevenue}</td>
+        </tr>
+
+        <tr>
+            <td>船代收入：</td>
+            <td>$!{enterprises.shipAgencyRevenue}</td>
+        </tr>
+    #elseif($!{type}==6)
+        <tr>
+            <td>企业名称：</td>
+            <td>$!{enterprises.fullName}</td>
+        </tr><tr>
+            <td>企业简称：</td>
+            <td>$!{enterprises.name}</td>
+        </tr>
+        <tr>
+            <td>企业名称：</td>
+            <td>$!{enterprises.englishName}</td>
+        </tr>
+        <tr>
+            <td>英文简称：</td>
+            <td>$!{enterprises.abbEnglishName}</td>
+        </tr>
+        <tr>
+            <td>组织机构代码：</td>
+            <td>$!{enterprises.organizationCode}</td>
+        </tr>        <tr>
+            <td>税务登记号：</td>
+            <td>$!{enterprises.taxNo}</td>
+        </tr>
+        <tr>
+            <td>营业执照号：</td>
+            <td>$!{enterprises.licenseNo}</td>
+        </tr>
+    #elseif($!{type}==99) #* 新增 - 企业资质 2018年3月21日15:05:51 *#
+        #if($!{enterprises.epType} == 0)
+            <tr>
+                <td>注册地址：</td>
+                <td>
+                    境内
+                </td>
+            </tr>
+            <tr>
+                <td>公司名称：</td>
+                <td>$!{enterprises.fullName}</td>
+            </tr>
+            <tr>
+                <td>公司简称：</td>
+                <td>$!{enterprises.name}</td>
+            </tr>
+            <tr>
+                <td>公司英文名称：</td>
+                <td>$!{enterprises.englishName}</td>
+            </tr>
+            <tr>
+                <td>公司英文简称：</td>
+                <td>$!{enterprises.abbEnglishName}</td>
+            </tr>
+            <tr>
+                <td>企业/机构类型：</td>
+                <td>企业资质</td>
+            </tr>
+            <tr>
+                <td>是否三证合一：</td>
+                <td>
+                    #if($!{enterprises.useSocialCreditCert})
+                        是
+                    #else
+                        否
+                    #end
+                </td>
+            </tr>
+            #if($!{enterprises.useSocialCreditCert})
+                <tr>
+                    <td>统一社会信用代码：</td>
+                    <td>$!{enterprises.socialCreditCode}</td>
+                </tr>
+                <tr>
+                    <td>营业执照：</td>
+                    <td>
+                        #if($!{enterprises.businessLicenseCert} && $!{enterprises.businessLicenseCert} != "")
+                            <a href="$!{uploadServer}/img/$!{enterprises.businessLicenseCert}.img" target="_blank" class="" title="营业执照">
+                                点击查看
+                            </a>
+                        #end
+                    </td>
+                </tr>
+            #else
+                <tr>
+                    <td>组织机构代码：</td>
+                    <td>$!{enterprises.organizationCode}</td>
+                </tr>
+                <tr>
+                    <td>组织机构代码证：</td>
+                    <td>
+                        #if($!{enterprises.orgCodeCert} && $!{enterprises.orgCodeCert} != "")
+                            <a href="$!{uploadServer}/fs/$!{enterprises.orgCodeCert}.img" target="_blank" class="" title="组织机构代码证">
+                                点击下载
+                            </a>
+                        #end
+                    </td>
+                </tr>
+                <tr>
+                    <td>税务登记证号：</td>
+                    <td>$!{enterprises.taxNo}</td>
+                </tr>
+                <tr>
+                    <td>税务登记证：</td>
+                    <td>
+                        #if($!{enterprises.taxRegCert} && $!{enterprises.taxRegCert} != "")
+                            <a href="$!{uploadServer}/fs/$!{enterprises.taxRegCert}.img" target="_blank" class="" title="税务登记证">
+                                点击下载
+                            </a>
+                        #end
+                    </td>
+                </tr>
+                <tr>
+                    <td>营业执照注册号：</td>
+                    <td>$!{enterprises.licenseNo}</td>
+                </tr>
+                <tr>
+                    <td>营业执照：</td>
+                    <td>
+                        #if($!{enterprises.businessLicenseCert} && $!{enterprises.businessLicenseCert} != "")
+                            <a href="$!{uploadServer}/fs/$!{enterprises.businessLicenseCert}.img" target="_blank" class="" title="营业执照">
+                                点击下载
+                            </a>
+                        #end
+                    </td>
+                </tr>
+            #end
+
+            <tr>
+                <td>公司logo：</td>
+                <td>
+                ## #if($!{enterprises.epLogo} && $!{enterprises.epLogo} != "")
+                ##     <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprises.epLogo}.img"/>
+                ## #end
+                    #if($!{enterprises.epLogo} && $!{enterprises.epLogo} != "")
+                        <a href="$!{uploadServer}/img/$!{enterprises.epLogo}.img" target="_blank" class="" title="公司logo">
+                            点击查看
+                        </a>
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>经营范围：</td>
+                <td>$!{enterprises.scope}</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">企业联系人信息</td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td>$!{enterprises.contact.name}</td>
+            </tr>
+            <tr>
+                <td>手机：</td>
+                <td>$!{enterprises.contact.mobile}</td>
+            </tr>
+            <tr>
+                <td>办公电话：</td>
+                <td>$!{enterprises.contact.phone}</td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td>$!{enterprises.contact.mail}</td>
+            </tr>
+            <tr>
+                <td>企业账户注册授权委托书：</td>
+                <td>
+                    #if($!{enterprises.contact.accountCert} && $!{enterprises.contact.accountCert} != "")
+                        <a href="$!{uploadServer}/fs/$!{enterprises.contact.accountCert}.img"  class="" title="授权委托书下载">
+                            下载查看
+                        </a>
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>平台联系人证明：</td>
+                <td>
+                    #if($!{enterprises.contact.accountCert} && $!{enterprises.contact.accountCert} != "")
+                        <a href="$!{uploadServer}/fs/$!{enterprises.contact.accountCert}.img"  class="" title="授权委托书下载">
+                            下载查看
+                        </a>
+                    #end
+                </td>
+            </tr>
+        #else
+            <tr>
+                <td>注册地址：</td>
+                <td>
+                    境外
+                </td>
+            </tr>
+            <tr>
+                <td>公司名称：</td>
+                <td>$!{enterprises.fullName}</td>
+            </tr>
+            <tr>
+                <td>公司简称：</td>
+                <td>$!{enterprises.name}</td>
+            </tr>
+            <tr>
+                <td>公司英文名称：</td>
+                <td>$!{enterprises.englishName}</td>
+            </tr>
+            <tr>
+                <td>公司英文简称：</td>
+                <td>$!{enterprises.abbEnglishName}</td>
+            </tr>
+            <tr>
+                <td>企业/机构类型：</td>
+                <td>企业资质</td>
+            </tr>
+            <tr>
+                <td>国家：</td>
+                <td>$!{enterprises.country}</td>
+            </tr>
+            <tr>
+                <td>注册证明/登记证：</td>
+                <td>
+                    #if($!{enterprises.registerCert} && $!{enterprises.registerCert} != "")
+                        <a href="$!{uploadServer}/fs/$!{enterprises.registerCert}.img" target="_blank" class="" title="注册证明/登记证">
+                            点击下载
+                        </a>
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>银行证明材料：</td>
+                <td>
+                    #if($!{enterprises.bankCertType} == 0)
+                        #if($!{enterprises.bankCert} && $!{enterprises.bankCert} != "")
+                            <a href="$!{uploadServer}/fs/$!{enterprises.bankCert}.img" target="_blank" class="" title="银行开户证明">
+                                点击下载
+                            </a>
+                        #end
+                    #elseif($!{enterprises.bankCertType} == 1)
+                        #if($!{enterprises.bankCert} && $!{enterprises.bankCert} != "")
+                            <a href="$!{uploadServer}/fs/$!{enterprises.bankCert}.img" target="_blank" class="" title="注册证明材料">
+                                点击下载
+                            </a>
+                        #end
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>公司logo：</td>
+                <td>
+                    #if($!{enterprises.epLogo} && $!{enterprises.epLogo} != "")
+                        <a href="$!{uploadServer}/img/$!{enterprises.epLogo}.img" target="_blank" class="" title="公司logo">
+                            点击查看
+                        </a>
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td>经营范围：</td>
+                <td>$!{enterprises.scope}</td>
+            </tr>
+            <tr>
+                <td>公司简介：</td>
+                <td>$!{enterprises.description}</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">企业联系人信息</td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td>$!{enterprises.contact.name}</td>
+            </tr>
+            <tr>
+                <td>手机：</td>
+                <td>$!{enterprises.contact.mobile}</td>
+            </tr>
+            <tr>
+                <td>办公电话：</td>
+                <td>$!{enterprises.contact.phone}</td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td>$!{enterprises.contact.mail}</td>
+            </tr>
+            <tr>
+                <td>通讯地址：</td>
+                <td>$!{enterprises.contact.address}</td>
+            </tr>
+            <tr>
+                <td>企业账户注册授权委托书：</td>
+                <td>
+                    #if($!{enterprises.contact.accountCert} && $!{enterprises.contact.accountCert} != "")
+                        <a href="$!{uploadServer}/fs/$!{enterprises.contact.accountCert}.img"  class="" title="企业账户注册授权委托书">
+                            下载查看
+                        </a>
+                    #end
+                </td>
+            </tr>
+
+        #end
+
+    #end
+    </table>
+    <a id="close" data-method="setTop" data-id="${id}" class="layui-btn layui-btn-xs" style="float: right;margin-right: 10px">关闭</a>
+    #if($memberCredentials.audit==0)
+    <a id="audit" data-method="setTop" data-id="${id}" class="layui-btn layui-btn-xs" style="float: right;margin-right: 10px">审批</a>
+    <a id="reject" data-method="setTop" data-id="${id}" class="layui-btn layui-btn-xs" style="float: right;margin-right: 10px">驳回</a>
+    #end
+
+</body>
+</html>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    $(function(){
+        $("[id=close]").click(function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+        });
+
+        $("[id=audit]").click(function () {
+            var id = $("#id").val();
+            layer.alert('确认要审核吗？',function(){
+                var loadIndex = layer.load(0);
+                $.post("$appServer.get('om/sualification/audit.htm')", {id: id}, function (data) {
+                    layer.close(loadIndex);
+                    if(data=='success'){
+                        layer.alert('审核成功',function(){
+                            window.parent.location.href = '$appServer.get('om/sualification/list.htm')';
+                        })
+                    }else if(data=="error"){
+                        layer.alert('请确保企业资质通过审核！',function(){
+                            window.parent.location.href = '$appServer.get('om/sualification/list.htm')';
+                        })
+                    } else{
+                        layer.alert('审核失败，请重试',function(){
+                            window.parent.location.href = '$appServer.get('om/sualification/list.htm')';
+                        })
+                    }
+                })
+            })
+        })
+
+
+        $("[id=reject]").click(function () {
+            var id = $("#id").val();
+            layer.prompt({
+                formType: 0,
+                title: '请输入驳回理由',
+                area: ['800px', '350px'] //自定义文本域宽高
+            }, function(value, index, elem){
+//                alert(value); //得到value
+                var loadIndex = layer.load(0);
+                $.post("$appServer.get('om/sualification/audit/rejected.htm')", {id: id,reason:value}, function (data) {
+                    layer.close(loadIndex);
+                    if(data=='success'){
+                        layer.alert('驳回成功',function(){
+                            window.parent.location.href = '$appServer.get('om/sualification/list.htm')';
+                        })
+                    }else{
+                        layer.alert('驳回失败，请重试',function(){
+                            window.parent.location.href = '$appServer.get('om/sualification/list.htm')';
+                        })
+                    }
+                })
+                layer.close(index);
+            });
+        });
+    });
+</script>

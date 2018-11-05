@@ -1,0 +1,506 @@
+##贸易条款
+#set($tradeItemMap=${dictMap.get('tradeItemMap')})
+##计价基准
+#set($valuationBaseMap=${dictMap.get('valuationBaseMap')})
+##计价期
+#set($valuationProidTypeMap=${dictMap.get('valuationProidTypeMap')})
+##合约种类
+#set($contractKindMap=${dictMap.get('contractKindMap')})
+##付款日期
+#set($payItemMap=${dictMap.get('payItemMap')})
+##信用条款
+#set($creditItemMap=${dictMap.get('creditItemMap')})
+##结算量标准
+#set($measureModeMap=${dictMap.get('measureModeMap')})
+##合约种类
+#set($contractKindMap=${dictMap.get('contractKindMap')})
+##商检费分摊
+#set($inspectionFeeSharingTypeMap=${dictMap.get('inspectionFeeSharingTypeMap')})
+
+<style>
+.physical-pricing{}
+.physical-pricing li{margin: 0;}
+</style>
+
+	<div class="c-mod">
+	<h3><em class="cw-ico ico-h3"></em>报价信息</h3>
+		<div class="c-form">
+	        <ul class="c-ful">
+				<input type="hidden" value="$!{demand.id}" name="demand.id" />
+				<input type="hidden" value="$!{demand.bizType}" name="demand.bizType" />
+				
+	            <li class="c-fcos2">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>数量（桶）：</span>
+	                <input name="demand.numStr" type="text" class="c-int" required="true" value="$!{demand.numStr}" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled" maxlength="12"/>
+	                <label for="demand.numStr" class="error my-error"></label>
+	            </li>	
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>溢短装：</span>
+					<table cellpadding="0" cellspacing="0" style="width: 71%;">
+						<tr>
+							<td width="15px">+/-&nbsp;</td>
+							<td><input name="demand.numfloat" class="c-int" type="text" value="$!{demand.numfloat}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled; width: 100%;" maxlength="12"></td>
+							<td width="15px">&nbsp;%</td>
+						</tr>
+					</table>
+					<label for="demand.numfloat" class="error my-error"></label>
+				</li>
+				
+	            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>贸易条款：</span>
+	               	<select class="sele" name="demand.tradeItem" id="tradeItem" value="$!{demand.tradeItem}">
+		                #foreach($!obj in $!tradeItemMap.entrySet())
+		                	<option value="$!obj.key" #if($!{demand.tradeItem} == $!{obj.key}) selected #end>
+		                		$!obj.value
+		                	</option>
+		                #end
+	                </select>
+				</li>
+				
+	            <li class="c-fcos2">
+	            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>升贴水：</span>
+	            	<input name="demand.agioStr" type="text" class="c-int" value="$!{demand.agioStr}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled" placeholder="请输入贴水" maxlength="12"/>
+					<label for="demand.agioStr" class="error my-error"></label>
+	            </li>
+	            
+	            <li class="c-fcos2">
+	            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>计价基准：</span>
+	                <select name="demand.valuationBase" class="sele" value="$!{demand.valuationBase}" >
+	                    #foreach($obj in $!valuationBaseMap.entrySet())
+	                        <option value="$!{obj.key}" #if($!{demand.valuationBase} == $!{obj.key}) selected #end>
+	                        	$!{obj.value}
+	                        </option>
+	                    #end
+	                </select> 
+	            </li>
+	            
+	            <li class="c-fcos2">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>计价期：</span>
+	                <select name="demand.valuationProidType" id="valuationProidType" onchange="periodTypeChange(this.value)" class="sele" value="$!{demand.valuationProidType}">
+	                    #foreach($!obj in $!valuationProidTypeMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.valuationProidType} == $!{obj.key}) selected #end>
+	                            $!obj.value
+	                        </option>
+	                    #end
+	                </select>
+	            </li>
+	            
+	            <li class="c-fcos2" #if($!{demand.valuationProidType} != 4) hidden #end id="valuationPeriod">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>计价期区间：</span>
+	            	<input name="demand.valuationProidStart" id="valuationProidStart" type="text" class="c-int qj-text qj-text1" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})"/>
+	            	<em>—</em><input name="demand.valuationProidEnd" id="valuationProidEnd" type="text" class="c-int qj-text qj-text1" data-msg-afterDate='计价结束日期不能早于计价开始日期' afterDate="valuationProidStart" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})"/>
+	            	<label for="valuationProidEnd" class="error my-error"></label>
+	            </li>
+	            
+	            <li class="c-fcos2" #if($!demand.valuationProidType != 5) hidden #end id="contractKind">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>合约种类：</span>
+	        		<select name="demand.contractKind" class="sele" value="$!{demand.contractKind}" id="contractKindContent">
+						#foreach($!obj in $!contractKindMap.entrySet())
+							<option value="$!obj.key" #if($!{demand.contractKind} == $!{obj.key}) selected #end>
+								$!obj.value
+							</option>
+						#end
+	        		</select>
+	     		</li>
+	     		
+	            <li class="c-fcos2">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>计价公式：</span>
+	               	<textarea class="purctex pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson" name="demand.valuationFormula" id="valuationFormula" readonly style="width: 71%; padding: 0 6px;">$!{demand.valuationFormula}</textarea>
+	               	<!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+	               	<input type="hidden" name="demand.valuationFormulaJson" id="valuationFormulaJson" /><input type="hidden" name="demand.pricingMode" id="pricingMode" />
+				</li>
+				
+##				<li class="physical-pricing">
+##				$contain.get("/pricingFormula/physicalPricingEditor.htm")
+##				</li>
+
+
+
+                <li class="c-fcos2" >
+					<span class="c-fn">
+						<span class="notice-required">*&nbsp;</span>付款日期：
+					</span>
+
+                    <select class="c-fcsel" name="demand.typeEvent" id="typeEvent"  class="sele" >
+						#foreach($!typeEvent in $payItemMap.entrySet())
+                            <option value="$!typeEvent.value" >$!typeEvent.value</option>
+						#end
+					</select>
+                    <input id="otherDate" name="demand.otherDate" class="c-fcinpu c-fcinpu1" required  placeholder="输入日期" style="display: none" type="text"  date="true" />
+                    <label for="otherDate" id="otherDate-error" class="error my-error"></label>
+                    <select class="c-fcsel" name="demand.eventInclusion" id="eventInclusion" >
+                        <option value="after">After</option>
+                        <option value="from">From</option>
+                    </select>
+                    <em id="typeEvent2" class="c-fcem" >B/L</em>
+                    <input id="eventDays" name="demand.eventDays" class="c-fcinpu"  type="text" required placeholder="输入天数" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                    <label for="eventDays" id="eventDays-error" class="error my-error"></label>
+                    <em id="eventDays2" class="c-fcem">Days</em>
+                    <input id="payItem" name="demand.payItem" style="display: none" value="$!{demand.payItem}" />
+                    <input id="payItemJSON" name="demand.payItemJSON" style="display: none" value='$!{demand.payItemJSON}' />
+                </li>
+
+
+
+
+
+
+	            <li class="c-fcos2">
+	            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>信用条款：</span>
+	           		<select class="sele" name="demand.authItem">
+	           			#foreach($!obj in $!creditItemMap.entrySet())
+	           				<option value="$!obj.key" #if($!{demand.authItem} == $!{obj.key}) selected #end>
+	           					$!obj.value
+	           				</option>
+	           			#end
+	           		</select>
+	            </li>
+	            
+	            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>结算量标准：</span>
+	           		<select name="demand.measureMode" id="measureMode" class="sele" value="$!{demand.measureMode}">
+	           			#foreach($!obj in $!measureModeMap.entrySet())
+	           				<option value="$!obj.key" #if($!{demand.measureMode} == $!{obj.key}) selected #end>
+	           					$!obj.value
+	           				</option>
+	           			#end
+	           		</select>
+	            </li>
+	            
+	            <li class="c-fcos2">
+	            	<span class="c-fn"><span class="notice-required">*&nbsp;</span>报价有效期：</span>
+					<input name="demand.stopBidTime" type="text" class="c-int" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.stopBidTime})"/>
+	            	<label for="demand.stopBidTime" class="error my-error"></label>
+	            </li>
+	            
+	            <li class="c-fcos2">
+	            	<span class="c-fn">装卸允许时间：</span>
+	                <input name="demand.loadAndDischargePermittedTimespan" type="text" class="c-int" value="$!{demand.loadAndDischargePermittedTimespan}" maxlength="255"/>
+	            	<label for="demand.loadAndDischargePermittedTimespan" class="error my-error"></label>
+	            </li>
+	            
+	            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>商检费分摊：</span>
+	           		<select name="demand.inspectionFeeSharingType" class="sele" value="$!{demand.inspectionFeeSharingType}">
+	           			#foreach($!obj in $!inspectionFeeSharingTypeMap.entrySet())
+	           				<option value="$!obj.key" #if($!{demand.inspectionFeeSharingType} == $!{obj.key}) selected #end>
+	           					$!obj.value
+	           				</option>
+	           			#end
+	           		</select>
+	            </li>
+
+                <li class="c-fcos2">
+                    <span class="c-fn">法律：</span>
+                    <span class="">
+				        <input name="demand.law" type="text" class="c-int"  value="$!{demand.law}" maxlength="100">
+					</span>
+                </li>
+
+                <li class="c-fcos2">
+                    <span class="c-fn">GTC：</span>
+                    <span class="">
+				        <input name="demand.gtc" type="text" class="c-int" value="$!{demand.gtc}" maxlength="100">
+					</span>
+                </li>
+	            
+	            #*<li class="c-fcos2">
+	            	<span class="c-fn">价格类型：</span>
+					<span class="">
+				        <input name="demand.priceType" type="radio" class="radi" style="width: auto; height: auto; vertical-align:middle;" #if($!{demand.priceType} == 1) checked="checked" #end value="1"><span style="vertical-align:middle;">直接成交价格</span>
+				        <input name="demand.priceType" type="radio" class="radi" style="width: auto; height: auto; vertical-align:middle;" #if($!{demand.priceType} == 2) checked="checked" #end value="2"><span style="vertical-align:middle;">贸易链价格</span>
+					</span>
+	            </li>*#
+	            
+				<li class="c-fcos2">
+					<span class="c-fn">备注：</span>
+					<textarea name="demand.remark" rows="3" cols="20" maxlength="2000" style="width: 71%; padding: 0 6px;">$!{demand.remark}</textarea>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="c-mod" id="ysxx">
+	    <h3><em class="cw-ico ico-h3"></em>运输信息<span class="cxtj-nr-an"></span></h3>
+	    <div class="c-form">
+	        <ul class="c-ful">
+	        	<input type="hidden" name="ship.id" value="$!{ship.id}"/>
+	        
+	            <li id="u1" class="c-fcos2"><span class="c-fn">装货港：</span>
+	            	<input type="text" id="shipmentPort" name="ship.shipmentPort" class="c-int" value="$!{ship.shipmentPort}" maxlength="100"/>
+	            	<label for="shipmentPort" class="error my-error"></label>
+	            </li>
+	            <li id="u2" class="c-fcos2"><span class="c-fn">卸货港：</span>
+	                <input type="text" name="ship.dischargePort" id="dischargePort" class="c-int" value="$!{ship.dischargePort}" maxlength="100"/>
+	                <label for="dischargePort" class="error my-error"></label>
+	            </li>
+	            <li id="u3" class="c-fcos2"><span class="c-fn c-fl" >装货期：</span>
+	            	<input type="text" id="shipmentStartTime" name="ship.shipmentStartTime" class="c-int qj-text qj-text1"  date="true"
+	                       value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.shipmentStartTime})"/>
+	                <em>—</em>
+	                <input name="ship.shipmentEndTime" id="shipmentEndTime" type="text" data-msg-afterDate='装货期结束不能早于装货期开始' afterDate="shipmentStartTime" class="c-int qj-text qj-text1" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.shipmentEndTime})"/>
+	            	<label for="shipmentEndTime" class="error my-error"></label>
+	            </li>
+	            <li id="u4" class="c-fcos2"><span class="c-fn c-fl">到货期：</span>
+	            	<input type="text" id="dischargeStartTime" name="ship.dischargeStartTime" class="c-int qj-text qj-text1" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.dischargeStartTime})"/>
+	                <em>—</em>
+	                <input name="ship.dischargeEndTime" id="dischargeEndTime" type="text" data-msg-afterDate='到货期结束不能早于到货期开始' afterDate="dischargeStartTime" class="c-int qj-text qj-text1" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.dischargeEndTime})"/>
+	            	<label for="dischargeEndTime" class="error my-error"></label>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+
+<script>
+	$(function(){
+        //const tradeItem = $("[name='demand.tradeItem']");
+        //change();
+        ////change
+        //$("[name='demand.tradeItem']").on("change",function(){
+        //    change();
+        //});
+		
+     // 贸易条款
+        function change(){
+            if(tradeItem.val() == '1'){
+                $("#u2").hide();//卸货港
+                $("#u4").hide();//到货期
+                $("#u1").show();//装货港
+                $("#u3").show();//装货期
+            }else if(tradeItem.val() == '4' || tradeItem.val() == '5'
+                    || tradeItem.val() == '6' || tradeItem.val() == '7'){
+                $("#u1").hide();
+                $("#u3").hide();
+                $("#u2").show();
+                $("#u4").show();
+            }else if(tradeItem.val() == '2' || tradeItem.val() == '3'){
+                $("#u2").show();
+                $("#u4").show();
+                $("#u1").show();
+                $("#u3").show();
+            }
+            
+            // 初始化装货港、装货期、卸货港、到货期
+            initPort();
+        }
+        
+        // 初始化装货港、装货期、卸货港、到货期
+        function initPort(){
+            if(tradeItem.val() == '1'){
+                // 卸货港
+                $("#dischargePort").val('');
+                // 到货期
+                $("#dischargeStartTime").val('');
+                $("#dischargeEndTime").val('');
+            }else if(tradeItem.val() == '4' || tradeItem.val() == '5'
+                    || tradeItem.val() == '6' || tradeItem.val() == '7'){
+                // 装货港
+                $("shipmentPort").val('');
+                // 装货期
+                $("#shipmentStartTime").val('');
+                $("#shipmentEndTime").val('');
+            }else if(tradeItem.val() == '2' || tradeItem.val() == '3'){
+            }
+        }
+        
+		// 初始化日期
+        initDateInput($("input[date='true']"));
+
+	    // 交易类型选中事件
+		$("input[name='demand.purchaseType']").click(function () {
+			if ($(this).val() == "1") {
+                $(".bid-type").css("display", "");
+			} else {
+			    $(".bid-type").css("display", "none");
+			    $("input[name='demand.stopBiddingTime']").val('');
+                $("input[name='demand.tenderOutTime']").val('');
+			}
+        });
+	    
+    	// 卸货港
+        var data = {"valueSetType": "4"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='ship.dischargePort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='ship.dischargePort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+    })
+
+    	// 装货港
+        var data = {"valueSetType": "5"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='ship.shipmentPort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='ship.shipmentPort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+	});
+
+    function ValuationPeriodType() {
+        this.show = function() {
+            $('#valuationPeriod').show();
+        };
+
+        this.hide = function() {
+            $('#valuationPeriod').hide();
+        };
+    }
+
+    function ContractKindType() {
+        this.show = function() {
+            $('#contractKind').show();
+        };
+
+        this.hide = function() {
+            $('#contractKind').hide();
+        };
+    }
+	
+    const periodTypes = new Object();
+    periodTypes[4] = new ValuationPeriodType();
+    periodTypes[5] = new ContractKindType();
+
+    function periodTypeChange(value) {
+        for (var item in periodTypes) {
+            if (value == item) {
+                periodTypes[item].show();
+            } else {
+                periodTypes[item].hide();
+            }
+        }
+    }
+
+
+    $(function () {
+//      付款日期赋值
+        getValue();
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+    })
+
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+    }
+
+
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+
+    }
+
+
+
+
+</script>

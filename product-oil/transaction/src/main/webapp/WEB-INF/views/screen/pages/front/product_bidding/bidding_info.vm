@@ -1,0 +1,258 @@
+##价格方式
+#set($pricingModeMap=${dictMap.get('pricingModeMap')})
+##定价计量单位
+#set($pricingMeasureUnitMap=${dictMap.get('pricingMeasureUnitMap')})
+##计价货币
+#set($valuationCurrencyMap=${dictMap.get('valuationCurrencyMap')})
+##计量方式
+#set($measureModeMap=${dictMap.get('measureModeMap')})
+##计价期类别
+#set($valuationProidTypeMap=${dictMap.get('valuationProidTypeMap')})
+##付款日期
+#set($payItemMap=${dictMap.get('payItemMap')})
+##定价计量单位
+#set($pricingMeasureUnitMap=${dictMap.get('pricingMeasureUnitMap')})
+##贸易条款
+#set($tradeItemMap=${dictMap.get('tradeItemMap')})
+
+<div class="c-mod">
+	<input type="hidden" name="parentId" value="$!demand.id"/>
+	<input type="hidden" name="shipBerthIds" id="shipBerthIds"/>
+	<h3><em class="cw-ico ico-h3"></em>报价信息</h3>
+		<ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">计价货币:</span>
+				<select name="demand.valuationCurrency" class="sele s1ll">
+					#foreach($obj in $!valuationCurrencyMap.entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">定价计量单位：</span>
+				<select name="demand.pricingMeasureUnit"  class="sele s1ll">
+					#foreach($obj in $!pricingMeasureUnitMap.entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">计价基准：</span>
+				<select  name="demand.valuationBase" class="sele s1ll">
+					#foreach($obj in $!dictUtils.getProductOilValuationBaseMap().entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn"><span class="notice-required">*&nbsp;</span>计价期：</span>
+				<select name="demand.valuationProidType" class="sele s1ll" onchange="proidTypeChange(this.value)">
+					#foreach($obj in $!valuationProidTypeMap.entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+			</li>
+			
+			<li class="c-fcos2 valuationProid #if($!demand.valuationProidType != 4) hidden #end">
+				<span class="c-fn"><span class="notice-required">*&nbsp;</span>计价区间：</span>
+				<input date='true' type="text" id="valuationProidStart" name="demand.valuationProidStart" class="c-int zq-text1"/><em> —</em>
+				<span class="c-ero" style="">
+					<label id="demand.valuationProidStart-error" class="error" for="demand.valuationProidStart" style="display: none;"></label>
+				</span>
+				<input date='true' name="demand.valuationProidEnd" afterDate="valuationProidStart" type="text" class="c-int zq-text1"/>
+				<span class="c-ero" style="">
+					<label id="demand.valuationProidEnd-error" class="error" for="demand.valuationProidEnd" style="display: none;"></label>
+				</span>
+			</li>
+			
+			<li class="c-fcos2 contractKind #if($!demand.valuationProidType != 5) hidden #end">
+				<span class="c-fn"><span class="notice-required">*&nbsp;</span>合约种类：</span>
+				<select name="demand.contractKind" class="sele" value="$!{demand.contractKind}" >
+					#foreach($obj in $!contractKindMap.entrySet())
+                        <option #if($!{demand.contractKind} == $!{obj.key}) selected #end value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+				<span class="c-ero" style="">
+					<label id="demand.contractKind-error" class="error" for="demand.contractKind" style="display: none;"></label>
+				</span>
+			</li>
+			
+			
+			
+			<li class="c-fcos2">
+				<span class="c-fn">贴水：</span>
+				<input name="demand.agioStr" type="text"  maxlength="12"  class="c-int" onkeypress="return noNumbersZF(event)" />
+				<span class="c-ero" style="">
+					<label id="demand.agio-error" class="error" for="demand.agioStr" style="display: none;"></label>
+				</span>
+			</li>
+
+			<li class="c-fcos2">
+				<span class="c-fn">贸易条款：</span>
+				<select name="demand.tradeTermVO.enName" class="sele s1ll">
+					#foreach($obj in $!tradeItemMap.entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+			</li>
+
+			<li class="c-fcos1 c-fco1">
+				<span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>计价公式：</span>
+				<input type="text" class="c-int c-br c-fl pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson" name="demand.valuationFormula" id="valuationFormula" value="$!{demand.valuationFormula}" readonly>
+				<input type="hidden" name="demand.valuationFormulaJson" id="valuationFormulaJson" value="$!{demand.valuationFormulaJson}" />
+				<input type="hidden" name="pricingMode" id="pricingMode" />
+				<span class="c-ero" style="">
+					<label id="demand.valuationFormula-error" class="error" for="valuationFormula" style="display: none;"></label>
+				</span>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">付款日期：</span>
+				<select  name="demand.gmtCreated" class="sele s1ll" >
+					#foreach($obj in $!payItemMap.entrySet())
+                        <option value="$!obj.key">$!obj.value</option>
+					#end
+				</select>
+				<span class="c-ero" style="">
+					<label id="demand.payItem-error" class="error" for="demand.payItem" style="display: none;"></label>
+				</span>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn"><em class="notice-required">*&nbsp;</em>购买数量（桶）：</span>
+				<input lay-verify="email"  name="demand.quantityAsString" maxlength="12" onkeypress="return checkNum(event,3,false,false)" type="text" class="c-int"/>
+				<span class="c-ero" style="">
+					<label id="demand.num-error" id="numStr" class="error" for="demand.numStr" style="display: none;"></label>
+				</span>
+			</li>
+	        
+			<li class="c-fcos2">
+				<span class="c-fn">溢短装：</span>
+				+/-&nbsp;<input lay-verify="required" maxlength="100" name="demand.tolerance" type="text" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled" class="c-intt"/>&nbsp;%
+			</li>
+
+			<li class="c-fcos1">
+				<span class="c-fn">备注：</span><textarea name="demand.remark" class="c-teta c-tetaa"></textarea>
+				<span class="c-ero" >
+					<label id="demand.priceDeclare-error"  maxlength="255" class="error" for="demand.remark" style="display: none;"></label>
+				</span>
+			</li>
+		</ul>
+		
+</div>
+
+<script>
+
+	$(function(){
+		initDateInput($("input[date='true']"))
+	});
+    function proidTypeChange(value) {
+    	if (value == 4) {
+            $(".valuationProid").show();
+            $(".contractKind").hide();
+        }else if(value == 5){
+            $(".valuationProid").hide();
+            $(".contractKind").show();
+        }else{
+            $(".valuationProid").hide();
+            $(".contractKind").hide();
+		}
+    }
+	//初始化时间空间
+	function initDateInput(elems){
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+
+
+		  elems.each(function(){
+				laydate.render({
+				elem: this //指定元素
+		  });
+		});
+	});
+		
+	}
+</script>
+
+<script type="text/javascript">
+
+   jQuery.validator.addMethod("isFloatEqZero", function(value, element) { 
+	    value=parseFloat(value);      
+	    return this.optional(element) || value>0;       
+	}, "浮点数必须大于0");
+	
+  $('form').validate({
+  	onfocusout: function(element){
+        $(element).valid();
+    },
+	
+    rules: {
+            //数量 
+            "demand.num":
+            	{ "required":true,
+            		digits:true
+            	}, 
+            //升贴水 
+            "demand.agioStr":
+            	{
+            		range:[-10000000,10000000],
+            		number:true
+            	},
+            //付款日期
+            "demand.payItem":
+            	{
+            		maxlength:500
+            	},
+            //价格说明
+            "demand.priceDeclare":
+            	{
+            		maxlength:500
+            	},
+			"demand.valuationFormula" : {
+                required : true
+			},"buyer.famil":{
+				required : true
+			},"buyer.fax":{
+				required : true
+			},"demand.numStr":{
+				required:true,
+				max: $!{demand.num},
+				isFloatEqZero:true
+			}
+             
+        },
+        messages: {
+            "demand.num": {
+            		"required":"必填项",
+            		digits:"请输入整数"
+            },
+            "demand.agio":
+            	{	
+            		range:"有效范围[0,10000000]",
+            		number:"请输入有效数字"
+            },
+            "demand.valuationProidStart":{
+            	date:"请输入有效的日期"
+            },
+            "demand.valuationProidEnd":{
+            	date:"请输入有效的日期"
+            },
+            "ship.dischargeStartTime":{
+            	date:"请输入有效的日期"
+            },
+            "ship.dischargeEndTime":{
+            	date:"请输入有效的日期"
+            }  
+            ,"demand.numStr":{
+				required:"请输入有效数字",
+				max: "请输入大于0 小于 $!{demand.num} 有效数字",
+				isFloatEqZero:"请输入大于0的数字"
+			}
+        }  
+  });
+
+  </script>
+$contain.get("/pricingFormula/physicalPricingEditor.htm")

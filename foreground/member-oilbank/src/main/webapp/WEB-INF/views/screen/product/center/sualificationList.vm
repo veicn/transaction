@@ -1,0 +1,118 @@
+                <script>
+                        #if($sualification.audited("99") ==1) window.enterpriseAudited()  #end
+                </script>
+
+                <div class="wel-box enterprise-box">
+                    <h3>Enterprise Qualification</h3>
+
+                    <ul class="enterprise-ul clearfix">
+
+
+
+
+                    <ul class="enterprise-ul clearfix">
+                #foreach($cred in $credentials)
+
+                        #set($audited = $sualification.audited($cred.code))
+                        <li #if( $audited ==1) title="pending for approval" #end >
+                           <a href="javascript:;"  #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.nameEn')"#end>
+                               #if($cred.code)
+                                   #if($cred.code==2)
+                                       <img
+                                           #if( $audited ==1)
+                                                   src="$imageServer.get('/product/images/tradinghouse.png')"
+                                              #elseif( $audited ==0)
+                                                   src="$imageServer.get('/product/images/tradinghouse.png')"
+                                           #elseif( $audited ==2)
+                                                   src="$imageServer.get('/product/images/tradinghouse-sel.png')"
+
+                                           #end
+                                       />
+
+                                   #end
+
+                                   #if($cred.code==7)
+                                       <img
+                                           #if( $audited ==1)
+                                                   src="$imageServer.get('/product/images/disponentowner.png')"
+
+                                           #elseif( $audited ==0)
+                                                   src="$imageServer.get('/product/images/disponentowner.png')"
+
+                                           #elseif( $audited ==2)
+                                           src="$imageServer.get('/product/images/disponentowner-sel.png')"
+                                           #end
+                                   />
+
+                                   #end
+
+                                   #if($cred.code==6)
+                                       <img
+                                           #if( $audited ==1)
+                                                   src="$imageServer.get('/product/images/shippongagent.png')"
+                                           #elseif( $audited ==0)
+                                                   src="$imageServer.get('/product/images/shippongagent.png')"
+                                           #elseif( $audited ==2)
+                                                   src="$imageServer.get('/product/images/shippongagent-sel.png')"
+                                           #end
+                                       />
+
+                                   #end
+                                   #if($cred.code==1)
+                                       <img
+                                           #if( $audited ==1)
+                                                   src="$imageServer.get('/product/images/refinery.png')"
+                                           #elseif( $audited ==0)
+                                                   src="$imageServer.get('/product/images/refinery.png')"
+                                           #elseif( $audited ==2)
+                                                   src="$imageServer.get('/product/images/refinery-sel.png')"
+                                           #end
+                                       />
+
+                                   #end
+                               #end
+
+                           </a>
+                            <p>
+                                <a href="javascript:;" #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.nameEn')"#end>
+                                    #if($cred.code==1)
+                                    $cred.nameEn
+                                    #end
+                                       #if($cred.code==2)
+                                        $cred.nameEn
+                                    #end
+                                       #if($cred.code==6)
+                                        $cred.nameEn
+                                    #end
+                                       #if($cred.code==7)
+                                        $cred.nameEn
+                                    #end
+
+
+                                </a>
+                            </p>
+                        </li>
+
+
+                #end
+                    </ul>
+                </div>
+
+                <script>
+
+                    layui.use("layer");
+                    function requestSualification(code,name){
+                        layer.confirm("Confirm to apply for "+ name + " Qualifications?",{title:"Notice",btn:['Confirm','Cancel']},function(){
+                            $.post("$appServer.get("center/request_sualification.json")",{code:code},function (data) {
+                                if(data.status == 9999){
+                                    layer.alert(data.message,{title:"Notice",btn:"OK"});
+                                }else{
+                                    layer.alert("Qualification application has been submitted, <br/>please wait for approval ",{title:"Notice",btn:"OK"},function(){
+
+                                        window.location.reload();
+                                    })
+                                }
+                            });
+                        });
+                    }
+                </script>

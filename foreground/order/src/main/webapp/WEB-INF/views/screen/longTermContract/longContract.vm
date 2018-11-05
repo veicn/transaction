@@ -1,0 +1,16 @@
+###################################changxie列表#############################################
+<html >
+<head>
+    $contain.get("/contain/htmlhead.htm")
+</head>
+<body>
+    $contain.get("/longTermContract/queryForm.htm")
+
+
+    $contain.get("/longTermContract/longContractList.htm")
+
+
+
+    $contain.get("/contain/htmlend.htm")
+</body>
+</html>

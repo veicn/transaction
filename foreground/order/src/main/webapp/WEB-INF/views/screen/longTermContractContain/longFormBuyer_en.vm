@@ -1,0 +1,76 @@
+<div class="c-mod" id="mjxx">
+    <h3><em class="cw-ico ico-h3"></em>Buyer Info<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Company Name：</span><input type="hidden"  name="contractRelevanters[0].eMemberId" id="company" value="$!{demandRelevanter1.eMemberId}" ><input type="text" required class="c-int" name="contractRelevanters[0].eMemberName" id="company-name" value="$!{demandRelevanter1.enterpriseName}"/>
+                <div class="ac_results">
+                    <ul>
+
+                    </ul>
+                </div>
+                <input type="hidden" class="c-int" name="" id=""/>
+            </li>
+            <li class="c-fcos1"><span class="c-fn">Address：</span><input type="text" required class="c-int" name="contractRelevanters[0].address" id="" value="$!{demandRelevanter1.enterpriseAddress}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>PIC：</span><input type="text"   required class="c-int" name="contractRelevanters[0].contacter" id="contacter" value="$!{demandRelevanter1.contacter}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>E-mail：</span><input type="text" required class="c-int" name="contractRelevanters[0].email" id="famil" value= "$!{demandRelevanter1.famil}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>Tel：</span><input type="text"  onkeyup="return clearPhono(this)"  required class="c-int" name="contractRelevanters[0].phoneNo" id="" value="$!{demandRelevanter1.phoneNo}"/></li>
+            <li class="c-fcos2"><span class="c-fn">Fax：</span><input type="text"   onkeyup="return clearPhono(this)"  required class="c-int" name="contractRelevanters[0].fax" id="fax" value="$!{demandRelevanter1.fax}"/></li>
+            <li><input type="hidden" value="B" name="contractRelevanters[0].type"></li>
+            <li><input type="hidden" value="$!{demandRelevanter1.id}" name="demandRelevanter1Id"></li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="$appServer.get('script/lib/jquery.js')"></script>
+<script src="$appServer.get('script/lib/jquery.autocomplete.min.js')"></script>
+
+<script>
+
+    $(function () {
+//            $("#checkboxId").onclick(function () {
+//                if($("table input[type='radio']:checked")){
+//                    $("#checkboxId").val(true);
+//                }
+//            })
+        $(document).ready(function () {
+            var dataUrl="$memberServer.get('/centercontain/enterpriseList.json')";
+            jQuery.get(dataUrl, {param1: ''}, function(data, textStatus, xhr) {
+                if (!data || data.status != 0 && data.status != 200) {
+                    console.log(data);
+                    //layer.alert(data.message || "请求异常");
+                    return;
+                }
+                var datas=data.datas
+                var companyInput = $ ("#company-name");
+                companyInput.autocomplete(
+                        datas,
+                        {
+                            width: companyInput.outerWidth(),
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.name ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.name;
+                            },
+                            formatResult: function (row) {
+                                return row.name;
+                            }
+                        }).result(function (event, row, formatted) {
+                    $('#company').val(row.memberId)
+                    console.log(row.memberId)
+                })
+            })
+
+        })
+    });
+
+
+
+</script>

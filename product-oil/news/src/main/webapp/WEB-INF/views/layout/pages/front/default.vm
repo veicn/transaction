@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/pages/front/contain/htmlhead.htm")
+    #*$contain.get("/pages/front/contain/nav.htm")*#
+    $contain.get('/pages/front/contain/nav.htm').put("active",4)
+    #*$contain.get("/pages/portal/contain/nav.htm").setHost("$transactionServer.get('')").put('active', '4')*#
+    $screen_content
+    $contain.get("/pages/front/contain/htmlend.htm")
+</html>

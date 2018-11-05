@@ -1,0 +1,17 @@
+﻿<form id="spotPriceForm" method="post" action="$appServer.get('/futures/index.htm').toString()">
+    $contain.get('/futures/pricing_estimation.htm')
+    $contain.get('/futures/futures_spot_comparison.htm').put("spotEstimationVO", $!{spotEstimationVO}).put("estimationTipVO", $!{estimationTipVO}).put("currencyList", $!{currencyList}).put("oilTypeList", $!{oilTypeList}).put("availableArrivalMonthList", $!{availableArrivalMonthList}).put('availableDischargePortList', $!{availableDischargePortList}).put("ineSymbolList", $!{ineSymbolList})
+</form>
+
+<div class="inner">
+    <div class="qh-bc qh-mzsm clearfix">
+        <h1><em></em>Disclaimer</h1>
+        <div class="qh-mzsm-cont" style="word-wrap: break-word;">
+            As a petrochemical e-commerce platform, 【Mycrudeoil】 e-commerce platform (hereinafter referred to as “This Platform/Platform”) is providing this Notice to clients setting out special terms and disclosures that apply to transactions that you may execute in futures contracts or physicals. All data or information resource are considered as reliable and taken from public available platform, however, we do not responsible for the accuracy and completeness of data or information. We will keep the content published on platform are fairness and objectiveness after using reasonable endeavors. However, any view expressed or information provided by the platform, whether or not solicited, shall not constitute an offer to enter into a transaction or investment advice, and the platform shall be under no liability whatsoever in respect of such view or information, and the client should independently and without reliance on the platform make its own judgments. This Disclaimer is an integral part of the Platform Rules. Unless the laws and regulations of the People's Republic of China have definite provisions on specific issues, the Platform shall have the exclusive and final interpretation right on this disclaimer. As the service provider and Platform manager, the Platform shall be entitled to modify this Disclaimer from time to time in view of the changes in the laws provisions, the need of Platform development, the suggestions of registered enterprise and other reasons, and will make notices or public announcements regarding such modification according to law.
+        </div>
+
+    </div>
+</div>
+
+#css("$imageServer.get('/css/f_common_en.css')")
+#css("$imageServer.get('/css/f_qh_en.css')")

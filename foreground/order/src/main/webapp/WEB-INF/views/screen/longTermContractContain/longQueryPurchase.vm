@@ -1,0 +1,25 @@
+<!--采购基本信息-->
+
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>长协采购信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn">采购方式：</span><span class="c-int qx-conte">长协采购</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">油种：</span><span class="c-int qx-conte">$!{oil}</span></li>
+            <li class="c-fcos2"><span class="c-fn">数量：</span><span class="c-int qx-conte">$!{contract.numStr}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">贸易条款：</span><span class="c-int qx-conte">$!{tradeItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">信用条款：</span><span class="c-int qx-conte">$!{authItemName}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">付款日期：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">商检费分摊：</span><span class="c-int qx-conte">$!{inspectionFeeSharingTypeName}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">装货港：</span><span class="c-int qx-conte">$!{contractShip.shipmentPort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">卸货港：</span><span class="c-int qx-conte">$!{contractShip.dischargePort}</span></li>
+            
+##            <li class="c-fcos1"><span class="c-fn">计价公式：</span><span class="c-int qx-conte">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos1"><span class="c-fn">备注：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

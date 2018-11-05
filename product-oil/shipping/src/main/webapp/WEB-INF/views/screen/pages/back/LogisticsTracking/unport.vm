@@ -1,0 +1,45 @@
+<div class="con_one_4 con_one">
+    <div class="loading-port">
+        <h3>PORT OF DISCHARGE</h3>
+        <div class="m-t-tab stowage-steps-info clearfix">
+            <ol class="fl lt_tab_4_ol">
+                <li>
+                    <span class="m-f-span w106"> Discharging Port :</span>
+                    <span class="m-r-span">$!{unloadPortVo.dischargingPort}</span>
+                </li>
+                <li>
+                    <span class="m-f-span w106">Anchor Aweigh :</span>
+                    <span class="m-r-span">$!{unloadPortVo.anchorAweigh}</span>
+                </li>
+                <li>
+                    <span class="m-f-span w106">Pob :</span>
+                    <span class="m-r-span">$!{unloadPortVo.pob}</span>
+                </li>
+                <li>
+                    <span class="m-f-span w106">All Fast :</span>
+                    <span class="m-r-span">$!{unloadPortVo.allFast}</span>
+                </li>
+            </ol>
+            <ul class="fl lt_tab_4_ul">
+                <li>
+                    <span class="m-f-span w120">Shore Arm Disconnecting :</span>
+                    <span class="m-r-span">$!{unloadPortVo.shoreArmDisconnecting}</span>
+                </li>
+                <li>
+                    <span class="m-f-span w120">Completed Discharged :</span>
+                    <span class="m-r-span">$!{unloadPortVo.completedDischarged}</span>
+                </li>
+
+                <li>
+                    <span class="m-f-span w120">All Lines Cast Off And Vessel Sailed :</span>
+                    <span class="m-r-span">$!{unloadPortVo.allLinesCastOffAndVesselSailed}</span>
+                </li>
+                <li>
+                    <span class="m-f-span w120">  Planed Quantity (MT) :</span>
+                    <span class="m-r-span">$!{unloadPortVo.metricTons}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

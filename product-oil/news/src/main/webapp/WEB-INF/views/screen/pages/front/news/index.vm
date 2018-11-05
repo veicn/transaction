@@ -1,0 +1,10 @@
+
+#css($appServer.get('/static/css/app.855bb0d231924b6b9661d67e8d50d108.css'))
+
+<div id=app>
+
+</div>
+
+#js($appServer.get('/static/js/manifest.9849bf7b00c537389bce.js'))
+#js($appServer.get('/static/js/vendor.127798a3e75bb813814f.js'))
+#js($appServer.get('/static/js/app.4b8bacf35dfd138045a5.js'))

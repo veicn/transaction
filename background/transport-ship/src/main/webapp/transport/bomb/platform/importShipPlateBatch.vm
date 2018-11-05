@@ -1,0 +1,56 @@
+<link rel="stylesheet" href='../transport/css/common.css'>
+<link rel="stylesheet" href='../transport/css/f_center.css'>
+<link rel="stylesheet" href='../transport/css/index.css' >
+<script src='../layui/unitMod/index.js'></script>
+<script src='../lib/upload/plupload.full.min.js'></script>
+<script src='../lib/jquery/extend.js'></script>
+<script src="../transport/js/sysShip/sysShipList.js"></script>
+
+<script>
+layui.use(['form','laydate','upload'], function(){
+	var form = layui.form;
+	var laydate = layui.laydate;
+	var $ = layui.jquery
+	,upload = layui.upload;
+	
+
+});
+</script>
+
+
+<form class="layui-form layui-form-pane" style="margin-top:20px; margin-left:90px" action="ruleSave">	
+
+
+	 <br/>
+	 <div class="layui-form-item" style="height:25px">
+		    <label class="layui-form-label" style="border:none;width:125px;background-color:white;">模板下载：</label>
+		    <!-- <label class="layui-form-label" style="width:125px;">模板下载</label> -->
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input name" id="exportTemplateBtn" type="text" style="border:none;color:blue;cursor:pointer;" name="name" value="客户船盘导入模板.xls" readonly="true" autocomplete="off">
+		    </div>
+	 </div>
+	 <br/><br/>
+
+    
+	 
+     <div class="layui-form-item" style="height:25px">
+	    <label class="layui-form-label iw300" style="border:none;width:125px;background-color:white;">客户：</label>
+	    <div class="layui-input-inline iw300">
+	    	<select id="selectedArr" name="selectedArr" lay-search="" lay-filter="companyFilter"  style="position: absolute;z-index: 1;margin-left: 40px;"  class="choose"
+        onmousedown="if(this.options.length>2){this.size=3}" onblur="this.size=0" onchange="this.size=0">
+				<option value="">请选择</option>
+        	</select>
+	    </div>
+	    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+	    
+	    <div class="layui-inline">
+	    	<label class="layui-form-label iw300" style="border:none;width:125px;background-color:white;">船盘导入：</label>
+		    <div class="layui-input-inline iw300">
+				<button type="button" class="layui-btn" id="importsBtn" style="margin-top:0.5px;font-size:12px;">选择上传文件</button>
+		    </div>
+    	</div>
+    	
+    </div>
+
+</form>
+<script src="../transport/js/sysShip/shipUtil.js"></script>

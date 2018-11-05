@@ -1,0 +1,75 @@
+##所需参数
+## saleSheetVO
+
+#set($saleSheetVO = $!{saleSheetVO})
+
+<ul class="stowage-steps clearfix">
+    #if($saleSheetVO.saleSheetStatusVO.code == 1)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Saved</span><br>
+                <em>$!{saleSheetVO.savedDateAsString}</em>
+            </div>
+        </li>
+        #*<li class="steps completed fl">
+            <div class="steps-infor">
+                <span>Released </span><br>
+            </div>
+        </li>
+        <li class="steps completed fl">
+            <div class="steps-infor">
+                <span>Completed</span>
+            </div>
+        </li>*#
+    #elseif($saleSheetVO.saleSheetStatusVO.code == 2)
+        #*<li class="steps done fl">
+            <div class="steps-infor">
+                <span>Saved</span><br>
+                <em>$!{saleSheetVO.savedDateAsString}</em>
+            </div>
+        </li>*#
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released </span><br>
+                <em>$!{saleSheetVO.releasedDateAsString}</em>
+            </div>
+        #*</li>
+        <li class="steps completed fl">
+            <div class="steps-infor">
+                <span>Completed</span>
+            </div>
+        </li>*#
+    #elseif($saleSheetVO.saleSheetStatusVO.code == 3)
+        #*<li class="steps done fl">
+            <div class="steps-infor">
+                <span>Saved</span><br>
+                <em>$!{saleSheetVO.savedDateAsString}</em>
+            </div>
+        </li>*#
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released </span><br>
+                <em>$!{saleSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Cancelled</span><br>
+                <em>$!{saleSheetVO.cancelledDateAsString}</em>
+            </div>
+        </li>
+    #elseif($saleSheetVO.saleSheetStatusVO.code == 4)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Released </span><br>
+                <em>$!{saleSheetVO.releasedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Completed</span><br>
+                <em>$!{saleSheetVO.completedDateAsString}</em>
+            </div>
+        </li>
+    #end
+</ul>

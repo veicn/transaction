@@ -1,0 +1,128 @@
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<script src="$!imageServer.get('/lib/plupload-2.1.2/plupload.full.min.js')" type="application/javascript"></script>
+
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+
+    </div>
+    <button data-method="setTop" class="layui-btn" id="add">添加</button>
+    <table class="layui-table"  lay-filter="demo">
+        <thead>
+        <tr>
+        ##  数据库主键Id(隐藏)、版本号、版本名、更新内容、创建时间、操作列表(编辑、删除、下载)
+            <th lay-data="{field:'id'}" class="layui-hide">数据库Id</th>
+            <th lay-data="{field:'versionCode', width:80, sort: true}">版本号</th>
+            <th lay-data="{field:'versionName', width:80}">版本名</th>
+            <th lay-data="{field:'versionLanguage', width:80}">版本语言</th>
+            <th lay-data="{field:'isForcedUpdate', width:80}">是否强制更新</th>
+            <th lay-data="{field:'content', width:200, sort: true}">更新内容</th>
+            <th lay-data="{field:'createTime', width:80}">创建时间</th>
+            <th lay-data="{field:'wealth', width:135, sort: true}">操作列表</th>
+        </tr>
+        </thead>
+        #foreach($item in $list)
+            <tr>
+                <td class="layui-hide">$!item.id</td>
+                <td>$!item.versionCode</td>
+
+                <td>$!item.versionName</td>
+                #if( $!item.versionLanguage == "zh")
+                    <td>中文</td>
+                #elseif ( $!item.versionLanguage == "en")
+                    <td>English</td>
+                #else
+                    <td></td>
+                #end
+                #if( $!item.isForcedUpdate == 1)
+                    <td>强制</td>
+                #else
+                    <td>不强制</td>
+                #end
+                <td>$!item.content</td>
+                <td>$!dateUtil.convertDateToString('yyyy-MM-dd',$!item.createTime)</td>
+                <td>
+                    <a class="layui-btn layui-btn-mini" data-method="setTop" id="edit" data-id="$!item.id">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-mini" id="del" data-id="$!item.id">删除</a>
+                    <a href="$appServer.get('/common/doc/download.htm')?path=$!item.url&fileName=$!item.fileName" class="layui-btn layui-btn-mini" id="fileDownload" >下载</a>
+##                    <a name="$!item.fileName" class="layui-btn layui-btn-mini" id="fileDownload" >下载</a>
+                </td>
+            </tr>
+        #end
+    </table>
+
+
+</div>
+
+<script>
+
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    $(function() {
+        var title;
+        var type;
+        var url;
+        var active = {
+            setTop: function () {
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: title
+                    , area: ['750px', '500px']
+                    , shade: 0
+                    , maxmin: true
+                    , id: 1
+                    , content: url
+                    , zIndex: layer.zIndex //重点1
+                    , success: function (layero) {
+                        layer.setTop(layero); //重点2
+                    }
+                });
+            }
+        }
+        //给下载按钮赋值
+
+        $("#add").click(function () {
+            title = '新增';
+            type = 'add';
+            url = "$appServer.get('om/app/add.htm')";
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        })
+        $("[id=edit]").click(function () {
+            title = '编辑';
+            type = 'edit';
+            var id = $(this).attr('data-id');
+            url = "$appServer.get('om/app/edit.htm')?id=" + id;
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        })
+
+        $("[id=del]").click(function () {
+            var id = $(this).attr('data-id');
+            layer.alert('请确认删除.', function () {
+                $.ajax({
+                    url: '$appServer.get("om/app/delete.json")',
+                    method: 'POST',
+                    data: {'id': id},
+                    success: function (data) {
+                        layer.alert(data.message, function () {
+                            if (data && data.status == 0) {
+                                parent.layer.closeAll();
+                                parent.location.reload();
+                            } else {
+                                layer.alert(data.message)
+                            }
+                        });
+                    }, error: function (r, d) {
+                        layer.alert('删除失败')
+                    }
+                });
+            })
+        })
+    })
+ </script>

@@ -1,0 +1,49 @@
+<div class="wel-box infor-box">
+    <dl class="infor-box-dl clearfix">
+        <dd><a href="javascript:void(0)">
+
+            #if($enterprise.epLogo && $enterprise.epLogo != "" )
+                <img src="$!{uploadServer}/img/$!{enterprise.epLogo}.img_165_134.img"/>
+            #else
+                <img src="$imageServer.get('/product/images/det_img.png')"/>
+            #end
+        </a>
+
+
+        </dd>
+    <dt class="infor-dt">
+    ##  <h1><a href=""><i class="cw-ico ico-gsm"></i></a><span id="enterpriseInfo" style="display: none;">pending for approval</span> </h1>
+        #if($enterprise)
+            <h4>$!enterprise.englishName</h4>
+
+            <p>Company Abbreviation :<span>$!enterprise.englishName</span></p>
+        #end
+        </dt>
+    </dl>
+</div>
+#*
+<div class="c-indl-tr">
+    <h1>$!enterprise.fullName<a href=""><i class="cw-ico ico-gsm"></i></a><span id="enterpriseInfo" style="display: none;">审核中</span> </h1>
+    #if($enterprise)
+        <ul class="enter-qy clearfix">
+            <li>公司简称：$!enterprise.name</li>
+            <li>英文名称：$!enterprise.englishName</li>
+            #if($enterprise.epType == 1)
+                <li>国家：$!enterprise.country</li>
+            #else
+                #if( $enterprise.useSocialCreditCert )
+                    <li>社会信用证代码：$!enterprise.socialCreditCode</li>
+                #else
+                    <li>组织机构代码：$!enterprise.organizationCode</li>
+                    <li>营业执照：$!enterprise.licenseNo</li>
+                    <li>税务登记号：$!enterprise.taxNo</li>
+                #end
+            #end
+        </ul>
+    #end
+</div>*#
+<script>
+    function enterpriseAudited(){
+        $("#enterpriseInfo").show();
+    }
+</script>

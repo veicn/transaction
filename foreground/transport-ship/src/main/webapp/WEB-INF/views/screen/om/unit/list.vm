@@ -1,0 +1,98 @@
+<div class="pp15">
+		
+		<!--搜索条件-->
+		<div  class="ry-banner">
+			<form class="layui-form"  >
+				<div class="layui-form-item mb0">
+					
+					<div class="layui-inline">
+					  <label class="layui-form-label">单位类型</label>
+				      <div class="layui-input-inline">
+				        <select name="length">
+				        	<option value="">请选择</option>
+				            <option value="1">长度</option>
+				          	<option value="2">体积</option>
+				          	<option value="3">温度</option>
+				        </select>
+				      </div>
+			     	</div>
+
+				    <div class="layui-inline">
+				      <label class="layui-form-label">参考单位</label>
+				      <div class="layui-input-inline">
+				        <input type="tel" name="unit"  class="layui-input">
+				      </div>
+				    </div>
+				    <div class="layui-inline">
+				      <label class="layui-form-label">转换单位</label>
+				      <div class="layui-input-inline">
+				        <input type="text" name="email" class="layui-input">
+				      </div>
+				    </div>
+				    
+				    <button class="layui-btn" lay-submit lay-filter="formId" >查询</button>
+				    <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+		    		<button class="layui-btn layui-btn-normal" id="addList">新增</button>
+				  </div>
+			</form>
+		</div>
+	
+		
+		<!--列表-->
+		<table class="layui-table" lay-skin="nob">
+		  <thead>
+		    <tr>
+		      <th>单位类型</th>
+		      <th>参考单位</th>
+		      <th>转换单位</th>
+		      <th>转换底数</th>
+		      <th>转换指数</th>
+		      <th>操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>贤心</td>
+		      <td>2016-11-29</td>
+		      <td>人生就像是一场修行</td>
+		      <td>10</td>
+		      <td>-1</td>
+		      <td>
+		      	<button class="layui-btn layui-btn-normal layui-btn-small editFn" attr-data="id1">
+		      		<i class="layui-icon">&#xe642;</i>
+					修改
+		      	</button>
+		      	<button class="layui-btn layui-btn-danger layui-btn-small delFn" attr-data="id1">
+		      		<i class="layui-icon">&#xe640;</i>
+		      		删除
+		      	</button>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>许闲心</td>
+		      <td>2016-11-28</td>
+		      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+		      <td>10</td>
+		      <td>-1</td>
+		      <td>
+		      	<button class="layui-btn layui-btn-normal layui-btn-small editFn"  attr-data="id2">
+		      		<i class="layui-icon">&#xe642;</i>
+					修改
+		      	</button>
+		      	<button class="layui-btn layui-btn-danger layui-btn-small delFn" attr-data="id2">
+		      		<i class="layui-icon">&#xe640;</i>
+		      		删除
+		      	</button>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar">
+	    	<div id="ry-page" class="ry-right"></div>
+	    </div>
+
+	 
+	 
+		<script src="../js/list.js"></script>

@@ -1,0 +1,185 @@
+#set($a = "Crude Oil-Deal Details")
+<div>
+    $contain.get("/longTermContractContain/longQueryPurchase.htm").setParam("contractId","$!{contract.id}")
+
+    $contain.get("/longTermContractContain/longQueryPlan.htm").setParam("contractId","$!{contract.id}")
+
+    $contain.get("/longTermContractContain/longQueryBuyer.htm").setParam("contractId","$!{contract.id}").setParam("type","B")
+
+##    $contain.get("/longTermContractContain/longQueryAgency.htm").setParam("contractId","$!{contract.id}").setParam("type","T")
+
+    $contain.get("/longTermContractContain/longQuerySupply.htm").setParam("contractId","$!{contract.id}").setParam("type","S")
+</div>
+
+$contain.get('/buyer/contractOperList.htm').setParam("contractId","$!{contract.id}")
+
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Upload Attachment</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2">
+                <span class="c-fn">Attachment：</span>
+                <input type="hidden" name="filePath" id="file_path" value="$!{contract.filePath}"/>
+                <input id="file_name" type="text" style="width:41%;" name="originalName" value="$!{contract.originalName}" readonly/>
+                <a class="fileUpload btn-more " id="fileDownload" #if($!contract.filePath) style="display: inline;" #else style="display: none;"  #end
+                   href="$appServer.get('/common/doc/download.htm')?path=$!{contract.filePath}&fileName=$!{contract.originalName}">Download</a>
+            </li>
+        </ul>
+    </div>
+</div>
+#if("$!{contract.doubleStatus}" == "01" && "$!{contract.seller}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "10")##确认取消
+<div class="s-btn-box">
+    <button class="s-btn s-btn-blue" onclick="confirmLongTermContract()" >Confirm</button>
+    <button class="s-btn s-btn-blue" onclick="rejectLongTermContract()" >Reject</button>
+</div>
+
+#elseif("$!{contract.doubleStatus}" == "01" && "$!{contract.buyer}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "01")##确认取消
+<div class="s-btn-box">
+    <button class="s-btn s-btn-blue" onclick="confirmLongTermContract()" >Confirm</button>
+    <button class="s-btn s-btn-blue" onclick="rejectLongTermContract()" >Reject</button>
+</div>
+
+#else
+<div class="c-subdiv">
+    <button id="checkbtn5" class="c-btncas" onclick="show_confirm3()" >Back</button>
+</div>
+#end
+
+<script>
+	if($('#file_name').val() == ''){
+		$('#fileDownload').hide();
+	}
+    function confirmLongTermContract() {
+
+        var uuid = '$!{contract.uuid}';
+        var url = "$appServer.get('/confirm_contract_new.json').toString()";
+
+        $.post(url, {
+            uuid: uuid
+        }, function(result) {
+            var status = result.status;
+
+            if (status == '0') {
+                window.location.href = "$appServer.get('/queryCurdeOilList.htm').toString()";
+            } else {
+                alert('Fail to confirm long term contract');
+            }
+        });
+    }
+
+    function rejectLongTermContract() {
+        var uuid = "$!{contract.uuid}";
+
+        var confirmUrl = "$appServer.get('/rejected_contract_new.json').toString()";
+        var contentHtml = "<div class='c-form'>" +
+                "    <ul class='c-ful c-full'>" +
+                "        <li class='c-fcos1'>" +
+                "             <span class='c-fn'>Reason：</span>" +
+                "             <textarea class='c-teta' id='remark' maxlength='255'></textarea>" +
+                "        </li>" +
+                "    </ul>" +
+                "</div>";
+        layui.use('layer', function() {
+            layer.open({
+                title : 'Reject Reason',
+                content: $(contentHtml).html(),
+                area : ['450px','250px'],
+                shade: false,
+                btn: ['Submit', 'Cancel'],
+                yes: function (index, layer) {
+                    var layer = layui.layer;
+                    var remark = $("#remark").val();
+                    $ .post(confirmUrl, {uuid : uuid, remark: remark}).always(function(res){
+                        if(res.status == 0){//成功
+                            layer.alert("Success！");
+                            window.location.reload();
+                        }else{//失败
+                            layer.alert(res.message);
+                        }
+                    });
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+
+    function show_confirm1() {
+        if (layui.layer.confirm("Cancel deal or not?",{title:"Notice",btn:["Confirm","Cancel"]}))
+        {
+            window.location.href="$appServer.get('cancel/contacrt.htm').put('orderId',$!{contract.id}).put("bizType","$!{contract.bizType}")"
+        }
+    }
+
+    function show_confirm2() {
+        if (layui.layer.confirm("Close deal or not?",{title:"Notice",btn:["Confirm","Cancel"]}))
+        {
+            window.location.href="$appServer.get('close/contacrt.htm').put('orderId',$!{contract.id}).put("bizType","$!{contract.bizType}")"
+        }
+    }
+
+    function show_confirm3()
+    {
+        window.history.go(-1);
+    }
+
+    function confirm_contract(orderId, token, bizType){
+        var confirmUrl = "$appServer.get('/confirm_contacrt.json')";
+        $.post(confirmUrl, {
+            orderId: orderId,
+            token: token,
+            bizType: bizType
+        }).always(function(res) {
+            if (res.status == 0) {//成功
+                layui.use('layer', function () {
+                    layer.alert("Successfully processed",{title:"Notice",btn:"OK"});
+                });
+
+                if (res.message != null && res.message != "") {
+                    window.location.href = '$appServer.get("")' + res.message;
+                }
+            } else {//失败
+                layui.use('layer', function () {
+                    layui.layer.alert(res.message,{title:"Notice",btn:"OK"});
+                });
+            }
+        });
+    }
+
+    $(function () {
+        var c1=$("#checkbtn1");//Confirmation passed
+        if($!{contract.buySign} == true&&("$!{contract.buyer}") == ("$!{user.epMemberId}")){
+            c1.hide()
+        }
+        if($!{contract.sellerSign} == true&&("$!{contract.seller}") == ("$!{user.epMemberId}")){
+            c1.hide()
+        }
+        if(("$!{contract.trader}") == ("$!{user.epMemberId}")){
+            c1.hide()
+        }
+        var c2=$("#checkbtn2");//修改订单
+        if("$!{contract.doubleSign}" == "110"){
+            c2.hide()
+        }
+        var c3=$("#checkbtn3");//cancel
+        if("$!{contract.doubleSign}" != "110"){
+            c3.hide();
+        }else{
+            if("$!{contract.cancelFlag}" == "true"){
+                c3.hide()
+            }
+        }
+        var c4=$("#checkbtn4");//Order closed
+        if("$!{contract.doubleSign}" == "110"){
+            c4.hide();
+        }else{
+            if($!{contract.cancelFlag} == true){
+                c1.hide();
+                c4.hide();
+            }
+        }
+    })
+
+</script>

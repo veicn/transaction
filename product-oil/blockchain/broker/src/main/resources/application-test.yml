@@ -1,0 +1,16 @@
+
+#feignUrl: http://www.sinochem.com:8080/transaction
+feignUrl: http://transaction.test.myoilbank.com
+hystrix.command.default.execution.timeout.enabled: false
+parter: broker
+apikey: e3c9c373c82d6d5bd4a4aa6a8269bbe6
+udbUrl: http://test.udb.sinochem.tech/basic/api/v1/internal/basicsDatas/info
+userDomin: http://user.test.myoilbank.com
+#log
+logging:
+config: classpath:logback.xml
+
+#aes 加解密
+aeskey: "sinochemOILBANK1"
+useaes: "true1"
+

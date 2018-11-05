@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/common/server.htm")
+    $contain.get("/pages/front/contain/htmlhead.htm")
+    $contain.get("/pages/portal/contain/nav.htm").put("active",2)
+    $screen_content
+    $contain.get("/pages/front/contain/htmlend.htm")
+</html>

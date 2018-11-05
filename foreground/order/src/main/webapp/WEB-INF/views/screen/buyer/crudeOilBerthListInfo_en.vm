@@ -1,0 +1,31 @@
+<div class="c-mod" id="mjbwxx">
+    <h3><em class="cw-ico ico-h3"></em>泊位信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table id="berthTable">
+            <tr>
+##                <th class="tabl-line">序号</th>
+                <th>泊位名称</th>
+                <th>泊位等级</th>
+                <th>吃水限制</th>
+                <th>船型</th>
+##                <th class="tabl-line1">载重吨位区</th>
+                <th>泊位说明</th>
+            </tr>
+
+            #foreach($item in $!{berthlist})
+                <tr class="c-tabcos1">
+##                    <td class="tabl-line">$velocityCount</td>
+                    <td>$!{item.berthName}</td>
+                    <td>$!{item.berthGrade}万吨</td>
+                    <td>$!{item.draftLimitation}m</td>
+                    <td>$!dictUtils.getValue("shipTypes","$!{item.shipType}")</td>
+##                    <td class="tabl-line1">
+##                        $!{item.carryingCapacityMin}万吨--$!{item.carryingCapacityMax}万吨
+##                    </td>
+                    <td>$!{item.berthDesc}</td>
+                </tr>
+            #end
+
+        </table>
+    </div>
+</div>

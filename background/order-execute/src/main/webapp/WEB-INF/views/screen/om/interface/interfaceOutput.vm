@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="$imageServer.get('orderexecute/css/interface/interface.css')" ></link>
+<script src="$imageServer.get('orderexecute/js/interface/interfaceOutput.js')"></script>
+<form class="layui-form">
+	<div class="pp15" id="layerDemo">
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<div class="layui-form-item layui-container">
+				<div class="layui-inline">
+					<label class="layui-form-label">外部系统别名</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="sysName" id="sysName" />
+					</div>
+				 </div>
+				<div class="layui-inline">
+					<label class="layui-form-label">入参</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="inputInfo" id="inputInfo" />
+					</div>
+				 </div>
+				<div class="layui-inline">
+					<label class="layui-form-label">调用状态</label>
+					<div class="layui-inline">
+						<select name="status" lay-verify="" id="status">
+							<option value=""></option>
+  							<option value="1">成功</option>
+  							<option value="0">失败</option>
+  							<option value="2">处理中</option>
+						</select>
+					</div>
+				</div>
+				<button style="margin-top:-12px"  class="layui-btn layui-btn-normal" data-type="reload" id="btn" type="button">搜索</button>
+			</div>
+		</div>
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+			<thead>
+				<tr>
+					<th lay-data="{field:'sysName',width:140}">系统别名</th>
+					<th lay-data="{field:'sysDec',width:150}">系统描述</th>
+					<th lay-data="{field:'interfaceDec',width:150}">接口说明</th>
+					<th lay-data="{field:'status', templet: '#editableTpl', width:100}">调用状态</th>
+					<th lay-data="{field:'startTime',width:150}">调用开始时间</th>
+					<th lay-data="{field:'endTime',width:150}">调用结束时间</th>
+					<th lay-data="{field:'inputInfo'}">入参</th>
+					<th lay-data="{field:'outputInfo'}">出参</th>
+					<th lay-data="{field:'url',width:300}">调用地址</th>
+					<th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#barDemo'}">操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</form>
+<script id="editableTpl" type="text/html">
+	{{#  if(d.status === '1'){ }}
+	{{ '成功' }}
+	{{#  } else if (d.status === '0') { }}
+	{{ '失败' }}
+	{{#  } else if (d.status === '2') { }}
+	{{ '处理中'}}
+	{{#  } }}
+</script>
+<script type="text/html" id="barDemo">
+	{{#  if(d.status === '0'){ }}
+		<i class="layui-icon">&#xe642;</i>
+		<a class="dialog-link" lay-event="edit" style="color:#0A529C">重发</a>
+	{{#  } }}
+</script>

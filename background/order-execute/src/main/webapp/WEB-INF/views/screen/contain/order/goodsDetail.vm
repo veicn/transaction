@@ -1,0 +1,28 @@
+
+	<ul class="c-ful pro-d-l">
+		<li class="c-fcos1"><h1>$!{order.goodsInfo.zhName}<span class="qx-conte qx-nub">#if("$!{order.goodsInfo.spec}"!="")（$!{order.goodsInfo.spec}）#end</span></h1></li>
+		<li class="c-fcos2"><span class="c-fn">数量（桶）：</span><span class="c-int qx-conte">$!NumberTool.format($!{order.goodsInfo.quantity})</span></li>
+		<li class="c-fcos2"><span class="c-fn">溢短装：</span><span class="c-int qx-conte">+/-$!NumberTool.format('#.######',$!{order.goodsInfo.moreLess})%</span></li>
+		<li class="c-fcos2"><span class="c-fn">升贴水：</span><span class="c-int qx-conte">$!NumberTool.format('#.######',$!{order.priceInfo.agio}) $!{order.priceInfo.currency}/$!{order.goodsInfo.quantityUnit}</span></li>
+		<li class="c-fcos2"><span class="c-fn">贸易条款：</span><span class="c-int qx-conte">$!{order.priceInfo.tradeTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">计价期：</span><span class="c-int qx-conte">$!{order.priceInfo.pricingDesc}</span></li>
+		<li class="c-fcos2"><span class="c-fn">计价基准：</span><span class="c-int qx-conte">$!{order.priceInfo.basePrice}</span></li>
+		<li class="c-fcos1"><span class="c-fn">计价公式：</span><span class="c-int qx-conte">$!{order.priceInfo.priceFormula}</span></li>
+		#if($!{order.priceInfo.priceType} == 'Trigger')
+		<li class="c-fcos2"><span class="c-fn">点价最小量：</span><span class="c-int qx-conte">$!{order.priceInfo.lockQuantityMin}桶</span></li>
+		<li class="c-fcos2"><span class="c-fn">点价转月次数：</span><span class="c-int qx-conte">$!{order.priceInfo.transferCount}</span></li>
+		#end
+		<li class="c-fcos2"><span class="c-fn">信用条款：</span><span class="c-int qx-conte">$!{order.creditTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">付款日期：</span><span class="c-int qx-conte">$!{order.priceInfo.paymentTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">卸货港：</span><span class="c-int qx-conte">$!{order.transportInfo.uploadingPort}</span></li>
+		<li class="c-fcos2"><span class="c-fn">装货港：</span><span class="c-int qx-conte">$!{order.transportInfo.loadingPort}</span></li>
+		<li class="c-fcos2"><span class="c-fn">到货期：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateEnd})</span></li>
+		<li class="c-fcos2"><span class="c-fn">装期：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateEnd})</span></li>
+		
+		<li class="c-fcos2"><span class="c-fn">结算量标准：</span><span class="c-int qx-conte">$!{order.settlStandard} </span></li>
+		<li class="c-fcos2"><span class="c-fn">装卸允许时间：</span><span class="c-int qx-conte">$!{order.loadAndDischargeTime}</span></li>
+		<li class="c-fcos2"><span class="c-fn">商检费分摊：</span><span class="c-int qx-conte">$!{order.inspectionFeeSharingType}</span></li>
+		<li class="c-fcos2"><span class="c-fn">法律：</span><span class="c-int qx-conte">$!{order.law}</span></li>
+		<li class="c-fcos2"><span class="c-fn">GTC：</span><span class="c-int qx-conte">$!{order.gtc}</span></li>
+		<li class="c-fcos1"><span class="c-fn">备注：</span><span class="c-int qx-conte">$!{order.remark}</span></li>
+	</ul>

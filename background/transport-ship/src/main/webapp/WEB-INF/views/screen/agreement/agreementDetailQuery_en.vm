@@ -1,0 +1,137 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Agreement Available</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Agreement Details</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Charter Party No：</label>
+					  <div class="s-input-inline">
+						  <p class="agreementCode"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Charterer：</label>
+					  <div class="s-input-inline">
+					  	  <p class="carrierName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">CP Dated：</label>
+					  <div class="s-input-inline">
+					  	 <p class="signDate"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Ship Owner：</label>
+					  <div class="s-input-inline">
+						  <p class="shipOwner"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Vessel Name：</label>
+					  <div class="s-input-inline">
+						 <p class="shipName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Quantity：</label>
+					  <div class="s-input-inline">
+						 <p class="quantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Grade：</label>
+					  <div class="s-input-inline">
+						 <p class="oilType"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Loading Port：</label>
+					  <div class="s-input-inline">
+						 <p class="loadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Discharging Port：</label>
+					  <div class="s-input-inline">
+						 <p class="unloadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Laycan：</label>
+					  <div class="s-input-inline">
+						 <p class="laycan"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Minimum Cargo Quantity(MT)：</label>
+					  <div class="s-input-inline">
+						 <p class="minQuantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">WS：</label>
+					  <div class="s-input-inline">
+						 <p class="ws"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">WS Rate：</label>
+					  <div class="s-input-inline">
+						 <p class="wsRes"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Demurrage：</label>
+					  <div class="s-input-inline">
+						 <p class="demurrage"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Laytime：</label>
+					  <div class="s-input-inline">
+						 <p class="dockTime"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Broker：</label>
+					  <div class="s-input-inline">
+						 <p class="brokerName"></p>
+					  </div>
+					</div>
+					<div class="s-inline100">
+					  <label class="s-form-label">Rate：</label>
+					  <div class="s-input-inline">
+						 <p class="pactSpeed"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Remarks：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Contact：</label>
+					  <div class="s-input-inline">
+						 <span hidden="true" >&nbsp;&nbsp;
+						 	<p class="s-input-inline accessory"></p>
+							<p>&nbsp;&nbsp;<a href="javascript:;" class="file1 downloadFn" id="btn">Download</a></p>
+						 </span>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary cancel">Back</button></div>
+	</div>
+	
+	<script src="../transport/js/agreement/agreementDetailQuery.js"></script>	

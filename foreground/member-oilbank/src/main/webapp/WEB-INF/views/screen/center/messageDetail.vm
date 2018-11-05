@@ -1,0 +1,1 @@
+$contain.get('/message/detail.htm').setHost($messageServer.get('')).setParam("assignMessageId","$!{assignMessageId}").setParam("messageId","$!{messageId}")

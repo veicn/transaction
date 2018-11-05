@@ -1,0 +1,12 @@
+<footer id="footer">
+    <div class="ftCon-Wrapper">
+        <ul class="clearfix">
+            <li onclick="location.href='javascript:;'">About us</li>
+            <li onclick="location.href='javascript:;'">Help</li>
+            <li onclick="location.href='javascript:;'">Legal Statement</li>
+            <li onclick="location.href='javascript:;'">Registration Agreements</li>
+            <li onclick="location.href='javascript:;'">Careers</li>
+        </ul>
+    </div>
+    <div class="cp">Copyright © 2017-2018 www.myoilbank.com All Right Reserved. 鲁ICP备18015375号-7</div>
+</footer>

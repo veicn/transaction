@@ -1,0 +1,15 @@
+/*‘≠”Õ∆∑÷÷*/
+/*.lay-tabdiv{padding: 20px 0;}*/
+.lay-tabdiv table{width:100%;}
+.lay-tabdiv table th{background: #69f; color: #fff; padding: 10px; border-right:1px #fff solid;line-height: 20px;white-space:nowrap;}
+.lay-tabdiv table th.list-ic,.lay-tabdiv table td.list-ic{ text-align:center; margin:0;}
+.lay-tabdiv table td{ padding:0 10px; line-height:40px; height:40px;}
+.lay-tabcos2{background: #f9f9f9;}
+.lay-tabcos1{background: #fff;}
+.lay-tabdiv table tr:hover{background: #ffffd9;}
+.lay-tabdiv td a{color: #69f; margin: 0 10px 0 0;}
+.lay-tabdiv td a:hover{color: #f30;}
+.lay-tabdiv td a.c-tablink{color: #069;}
+.lay-tctab{text-align:center;}
+.lay-tctab tr th{text-align:center;white-space:nowrap;}
+.lay-tctab tr td{color:#333;white-space:nowrap;}

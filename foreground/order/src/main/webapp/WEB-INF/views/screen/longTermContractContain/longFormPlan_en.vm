@@ -1,0 +1,189 @@
+<!--采购计划-->
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Long-term Procurement Plan<span class="cxtj-nr-an"><a class="btn-more"  id="butten1">Add +</a></span></h3>
+    <div class="c-tabdiv">
+        <input type="hidden" id="currLid">
+        <table id="_table">
+            <tr>
+                <th class="tabl-line">Operate</th>
+                <th>Purchase Period</th>
+                <th>Grade</th>
+                <th>Qty</th>
+                <th>Price Fomula</th>
+            </tr>
+            #if(!$contract.plans)
+                <tr class="c-tabcos1">
+                    <td class="tabl-line"><a name="deleteLine" onclick="">Delete Line</a></td>
+                    <td><input type="text" style="width:18%;" class="c-int dataStr" name="plans[0].dateStr" date="true"/>-
+                    	<input type="text" style="width:18%;" class="c-int dataStr2" name="plans[0].dateStr2" date="true"/>
+                    </td>
+                    <td><input type="hidden" class="c-int plan_propertyId" name="plans[0].crudeOilResource.propertyId"/>
+                    <input  type="text" class="c-int plan_name" name="plans[0].crudeOilResource.name" readonly/>
+                    <input type="hidden" name="plans[0].propertyId">
+                    <td>
+                        <input type="text" class="c-int v_number" maxlength="14" name="plans[0].num" min="0" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'').replace(/[-]/g,'')" onpaste="return false" ondragenter="return false"/>
+                    </td>
+                    
+                    <td>
+                   		##<input  type="text" style="width:100%;" class="c-int plan_valuationFormula pricingEditor"  name="plans[0].valuationFormula" readonly/>
+                   		<textarea class="c-teta" style="width:100%;" name="plans[0].valuationFormula">$!plans[0].valuationFormula</textarea>
+                    </td>
+                </tr>
+            #end
+
+            #foreach($item in $!contract.plans)
+                #set($index = $velocityCount - 1)
+                <tr class="c-tabcos1">
+                    <td class="tabl-line"><a name="deleteLine" onclick="">Delete line</a></td>
+                    <td><input type="text" style="width:18%;" class="c-int" name="plans[$index].dateStr" date="true" value="$!item.dateStr"/>-
+                    	<input type="text" style="width:18%;" class="c-int" name="plans[$index].dateStr2" date="true" value="$!item.dateStr2"/>
+                        <!-- <span class="c-ero">
+                             <label class="error" style="display: none;color: red"></label>
+                        </span> -->
+                    </td>
+                    <td><input type="hidden" class="c-int" name="plans[$index].crudeOilResource.id" value="$!item.crudeOilResource.id"/>
+                        <input type="hidden" class="c-int plan_propertyId" name="plans[$index].crudeOilResource.propertyId" value="$!item.crudeOilResource.propertyId"/>
+                    	<input  type="text" class="c-int plan_name" name="plans[$index].crudeOilResource.name" value="$!item.crudeOilResource.name" readonly/>
+                        <!-- <span class="c-ero">
+                             <label class="error" style="display: none;color: red"></label>
+                        </span> -->
+                        <!-- <a class="btn-more orderOilLayer setlid" appServer="$appServer.get('')" retFun="retFunction2" lid=0>+ 选择油种</a> --> </td>
+                    <td>
+                        <input type="text" class="c-int" name="plans[$index].num" maxlength="14" value="$!item.num" min="0" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'').replace(/[-]/g,'')" onpaste="return false" ondragenter="return false"/>
+                        <!-- <span class="c-ero">
+                             <label class="error" style="display: none;color: red"></label>
+                        </span> -->
+                    </td>
+                     <td>
+                   		##<input  type="text" style="width:100%;" class="c-int plan_valuationFormula pricingEditor"  name="plans[$index].valuationFormula" value="$!item.valuationFormula" readonly/>
+                   		<textarea class="c-teta" style="width:100%;" name="plans[$index].valuationFormula">$!item.valuationFormula</textarea>
+                    </td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+
+<script>
+
+    function retFunction2(data){
+        $('input[name="plans[' + $('#currLid').val() + '].crudeOilResource.name"]').val(data[0][2]);
+        $('input[name="plans[' + $('#currLid').val() + '].crudeOilResource.propertyId"]').val(data[0][0]);
+    }
+    
+    $(function(){
+        initDateInput($('input[date="true"]'))
+    });
+    //初始化时间空间
+    function initDateInput(elems){
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            elems.each(function(){
+                if(this.id == "otherDate"){
+                    laydate.render({
+                    	lang: 'en',
+                        elem: this //指定元素
+                    });
+
+                }else{
+                    laydate.render({
+                        elem: this, //指定元素2
+                        type: 'month',
+                        lang: 'en',
+                        format: 'yyyy-MM'
+                    });
+                }
+            });
+        });
+    }
+    
+    
+    $("#butten1").click(function(){
+        console.log('date==true');
+        var oil =$("#_table tr:last").children("td:eq(2)").find("input").val();
+        var number =$("#_table tr:last").children("td:eq(3)").find("input").val();
+        //console.log($(document).find('input[date=true]').parent().parent().children('td').children('input[i]'));
+        //给油种赋值
+	    $('.plan_propertyId').val($('.cg_propertyId').val());
+	    $('.plan_name').val($('.cg_name').val());
+	    
+        var t01=$("#_table tr").length;
+        var date2 =$("#_table tr:last").children("td:eq(1)").find("input").eq(0).val();
+        var date =$("#_table tr:last").children("td:eq(1)").find("input").eq(1).val();
+        if(date2 == "" || date == "") {
+        	layer.alert('Please enter the correct year and month',{title:"Notice",btn:"OK"});
+			return;
+		}
+        if(oil == "") {
+			layer.alert('Oil seeds can not be empty. Please select oil species on purchase information. ',{title:"Notice",btn:"OK"});
+			return;
+		}
+   	   if(number == "") {
+			layer.alert('Please enter the number',{title:"Notice",btn:"OK"});
+			return;
+		}
+        $("#_table tr:last").children("td:eq(1)").find("input").valueOf(date);
+        //var re =new RegExp("^(([1-9]\\d{3})|(0\\d{2}[1-9]))(0[1-9]|1[0-2])$");
+        //var tf = re.test(date)
+       /*  tf = true;
+        if(tf){ */
+            if(t01<21&&date!=""){
+                var num=(t01-1)*12
+                //var sss = parseInt(date)
+                var sss = date;
+                var mouth = parseInt(date.substr(5,6));
+                var year = parseInt(date.substr(0,4));
+                if(mouth > 11){
+                    var nextYear = (year+1);
+                    //sss=nextYear*100
+                    sss = nextYear + "-01";
+                }else if(mouth < 9 && mouth > 0){
+                	mouth = mouth + 1;
+                	sss = year + '-0' + mouth; 
+                }else{
+                	mouth = mouth + 1;
+                	sss = year + '-' + mouth;
+                }
+                $("#_table").append('<tr class="c-tabcos1">\n' +
+                        '                <td class="tabl-line"><a name="deleteLine" onclick="deleteline(this)">Delete line</a></td>\n' +
+                        '                <td><input type="text" style="width:18%;" class="c-int" name="plans['+(t01-1)+'].dateStr" value="'+sss+'" date="true"/>-<input type="text" style="width:18%;" class="c-int" name="plans['+(t01-1)+'].dateStr2" value="" date="true"/></td>\n' +
+                        '                <td><input type="hidden" class="c-int plan_propertyId" name="plans['+(t01-1)+'].crudeOilResource.propertyId"/><input type="text" class="c-int plan_name" name="plans['+(t01-1)+'].crudeOilResource.name" readonly/></td>\n' +
+                        '\n' +
+                        '                <td>\n' +
+                        '                    <input type="text" class="c-int" name="plans['+(t01-1)+'].num" min="0" maxlength="14" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,\'\')" onpaste="return false" ondragenter="return false"/>\n' +
+                        '                </td>\n' +
+                        '<td><textarea class="c-teta" style="width:100%;" name="plans['+(t01-1)+'].valuationFormula"></textarea></td>\n'
+
+                )
+                //动态添加赋值油种
+                $('.plan_propertyId').val($('.cg_propertyId').val());
+	    		$('.plan_name').val($('.cg_name').val());
+	    		
+                initDateInput($('input[date="true"]'))
+                orderOilLayerBindClick();
+            }
+        /* }else {
+            layer.alert('请输入正确的年月');
+        } */
+
+    });
+    function deleteline(obj) {
+        var tr = $(obj).parent("td").parent("tr");
+
+        tr.nextAll('tr').each(function (i,v) {
+            var next = $(v);
+            var inputHtml = next.find('td:eq(2)').html();
+            var index = inputHtml.substr(inputHtml.indexOf('[')+1,1)-1;
+            next.find('input').each(function (i,v) {
+                var nameVal = $(v).attr('name');
+                if(nameVal != undefined && nameVal != ''){
+                    nameVal = 'plans['+index+'].'+nameVal.substr(nameVal.indexOf('.')+1);
+                    $(v).attr('name',nameVal);
+                }
+            })
+        })
+
+        tr.remove();
+    }
+
+</script>

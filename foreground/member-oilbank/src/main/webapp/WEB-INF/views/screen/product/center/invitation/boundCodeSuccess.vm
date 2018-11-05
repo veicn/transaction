@@ -1,0 +1,32 @@
+$contain.get('/common/title.htm').put('title', '绑定邀请码成功')
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+
+<div class="rps-box resetSuccess">
+    <div class="rps-l">
+        <img src="$appServer.get('/product/images/suc_bg.png')" alt="">
+    </div>
+    <div class="rps-r">
+        <h2>Congratulations, your account is linked </h2>
+        <h2>with enterprise account successfully.</h2>
+        <p class="arrd">Skip to return to previous pageafter<span>&nbsp<span class="count-seconds">5</span>&nbsp</span>seconds</p>
+        <div class="com-btn-b">
+            <a href="javascript:;" class="br btn-c com-btn">Return to previous page</a>
+        </div>
+    </div>
+</div>
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+<script>
+    // 倒计时
+    var num = $('.count-seconds').text();
+    var int=self.setInterval("clock(num)",1000)
+    function clock(){
+        num--;
+        if(num<=0){
+            alert('下一步跳转操作');
+            clearInterval(int);
+        }
+        $('.count-seconds').text(num);
+    }
+</script>

@@ -1,0 +1,264 @@
+
+<div >
+	<form class="editorForm0 layui-form" id="statementFinForm"
+		enctype="multipart/form-data" method="post" onsubmit="return false;">
+		<div class="c-mod c-mod2">
+			<h1>
+				订单管理<span>&nbsp;&nbsp;&nbsp;&nbsp;最终结算单</span>
+			</h1>
+			<div class="c-form clearfix">
+			<h3>
+				<em class="cw-ico ico-h3 cw-ico2"></em>订单信息
+			</h3>
+			##---- 订单详情begin ----##
+			$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!stateData.orderId")
+			##---- 订单详情end ----##
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<em class="cw-ico ico-h3"></em>最终结算单信息
+			</h3>
+			<div class="c-form">
+				<input type="text" class="c-int" value="$!stateData.orderId"
+					name="orderId" id="orderId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.uuid"
+					name="uuid" id="uuid" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementId"
+					name="orderStatementId" id="orderStatementId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementUuid"
+					name="orderStatementUuid" id="orderStatementUuid" hidden="hidden" /> 
+				<input type="text"
+					value="$!isEdit" id="isEdit" name="isEdit" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderFeeId" id="orderFeeId" name="orderFeeId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.statementType" id="statementType" name="statementType" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderNo" id="orderNo" name="orderNo" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.sellerCustomerId" id="sellerCustomerId" name="sellerCustomerId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.buyerCustomerId" id="buyerCustomerId" name="buyerCustomerId" hidden="hidden" />
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">对账单编号：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.orderStatementNo"
+						name="orderStatementNo" id="orderStatementNo" /></li>
+					<li class="c-fcos2"><span class="c-fn">联系电话：</span><input
+						type="text" class="c-int" value="$!stateData.tel" name="tel"
+						id="tel" /></li>
+					<li class="c-fcos2"><span class="c-fn">对账方名称：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.customerName"
+						name="customerName" id="customerName" /></li>
+					<li class="c-fcos2"><span class="c-fn">邮箱：</span><input lay-verify="email"
+						type="text" class="c-int" value="$!stateData.email" name="email"
+						id="email" lay-verify="email"/></li>
+					<li class="c-fcos2"><span class="c-fn">联系人：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.contactName"
+						name="contactName" id="contactName" /></li>
+					<li class="c-fcos2"><span class="c-fn">对账时间：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!stateData.checkTime)"
+						name="checkTimeDesc" id="checkTime" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;"></span>提单量（吨）：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightT)"
+						name="billWeightT" id="billWeightT" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">代理协议：</span><input
+						type="text" class="c-int" value="$!stateData.agentContract"
+						name="agentContract" id="agentContract" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>提单量（桶）：</span><input lay-verify="required"
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightBbl)"
+						name="billWeightBbl" id="billWeightBbl" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">油品：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.oil" name="oil"
+						id="oil" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>结算量（桶）：</span><input lay-verify="required" 
+						type="text" class="c-int" 
+						value="$!NumberTool.format($!stateData.settlementQuantityBbl)"
+						name="settlementQuantityBbl" id="settlementQuantityBbl" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">价格公式：</span><input
+						type="text" class="c-int" value="$!stateData.priceFormula"
+						name="priceFormula" id="priceFormula" /></li>
+					<li class="c-fcos2"><span class="c-fn">船名：</span><input
+						type="text" class="c-int" value="$!stateData.shipName"
+						name="shipName" id="shipName" /></li>
+					<li class="c-fcos2"><span class="c-fn">合同量：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.contractQuantity)"
+						name="contractQuantity" id="contractQuantity" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">贸易条款：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.tradeTerm"
+						name="tradeTerm" id="tradeTerm" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>结算价格：</span><input lay-verify="required"
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.settlementPrice)"
+						name="settlementPrice" id="settlementPrice" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">货款金额：</span><input lay-verify="required"
+						type="text" class="c-int" readonly="readonly"
+						value="$!NumberTool.format($!stateData.goodsAmount)"
+						name="goodsAmount" id="goodsAmount" /></li>
+					<li class="c-fcos2"><span class="c-fn">提单日：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.billDate)"
+						name="billDateDesc" id="billDate" /></li>
+					<li class="c-fcos2"><span class="c-fn">费用合计：</span><input
+						type="text" class="c-int" readonly="readonly"
+						value="$!NumberTool.format($!stateData.totalFee)" name="totalFee"
+						id="totalFee" /></li>
+					<li class="c-fcos2"><span class="c-fn">收款日：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.paymentDate)"
+						name="paymentDateDesc" id="paymentDate" /></li>
+						 
+					<li class="c-fcos2"><span class="c-fn">已结算金额：</span><input lay-verify="required"
+						type="text" class="c-int" readonly="readonly"
+						value="$!NumberTool.format($!stateData.settledAmount)"
+						name="settledAmount" id="settledAmount" /></li>
+						<li class="c-fcos2"><span class="c-fn">本次结算金额：</span><input lay-verify="required"
+						type="text" class="c-int" readonly="readonly"
+						value="$!NumberTool.format($!stateData.totalAmount)"
+						name="totalAmount" id="totalAmount" /></li> 
+						#if($stateData.status != '')
+					<li class="c-fcos2"><span class="c-fn">对账单状态：</span> <span
+						class="c-int qx-conte"> #if($stateData.status == '01') 初始
+							#elseif($stateData.status == '05') 待确认 #elseif($stateData.status
+							== '10') 已确认 #elseif($stateData.status == '20') 已驳回
+							#elseif($stateData.status == '30') 已结算 #end </span></li> #end
+					
+				</ul>
+			</div>
+		</div>
+		<!-- 拆单信息 -->
+		$contain.get("/contain/order/triggerResultDetail.htm").put('orderId',$!stateData.orderId)
+		<div class="c-mod">
+			<h3>
+				<i class="cw-ico ico-h3"></i>费用清单
+			</h3>
+			<div class="c-tabdiv">
+				<table>
+					<tr>
+						<th>费用科目</th>
+						<th>计价方式</th>
+						<th>数量</th>
+						<th>单价(USD)</th>
+						<th>小计(USD)</th>
+					</tr>
+					#if($feeData.size() > 0) #foreach($item in $feeData) #set($class =
+					$velocityCount%2+1) #set($count = $velocityCount - 1)
+					<tr class="ct-tabcos$class">
+						<td>$!item.subjectName</td>
+						<td>#if($!item.valuationModel == '1') 桶 #elseif($!item.valuationModel == '2') 笔  #else 吨#end</td>
+						<td>$!NumberTool.format($!item.quantity)</td>
+						<td>$!NumberTool.format($!item.feePrice)</td>
+						<td>$!NumberTool.format($!item.totalFee)</td>
+					</tr>
+					#end #end
+				</table>
+			</div>
+		</div>
+		
+		<div class="c-mod">
+			<div class="c-subdiv">
+				#if($isEdit == '3')
+					<button class="c-btnsub saveFn" lay-filter="saveFn" lay-submit="">保存</button>
+				#elseif($isEdit == '2')
+					<button class="c-btnsub btn-lj againFn">重开对账单</button>
+				#elseif($isEdit == '1')
+					<button class="c-btnsub btn-lj updateFn">修改对账单</button>
+					<button class="c-btnsub btn-lj comfirmFn">提交对账单确认</button>
+				#elseif($stateData.status == '05')
+					<button class="c-btnsub btn-lj repeal" >撤销</button>
+				#end
+				<button class="c-btncas" onClick="javascript:history.back(-1);">返回</button>
+			</div>
+		</div>
+	</form>
+	
+			<div class="order-bot">
+			$contain.get("/sellerCenter/orderFeeDissent/orderFeeDissentReply.htm").put('orderId',$!stateData.orderId).put('canReply','1').put('dissentType','2')
+			</div>
+</div>
+<script src="../../orderexecute/js/orderStatement/orderStatementInfoFin.js"></script>
+<script>
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');  
+	    
+	    tool();
+	}  
+	//$(function(){
+		function tool(){
+		//结算量
+		if($('#settlementQuantityBbl').val()==''){
+			return false
+		}
+		//结算价
+		if($('#settlementPrice').val()==''){
+			return false
+		}	
+		
+		if($('#totalFee').val()==''){
+			$('#totalFee').val('0');
+		}
+		
+		if($('#settledAmount').val()==''){
+			$('#settledAmount').val('0');
+		}
+		//都有值
+		var settlementQuantityBbl = delNumFormat($('#settlementQuantityBbl').val());
+		var settlementPrice = delNumFormat($('#settlementPrice').val());
+		var goodsAmount = $.ride(settlementQuantityBbl, settlementPrice);
+		var totalFee = delNumFormat($('#totalFee').val());
+		var settledAmount = delNumFormat($('#settledAmount').val());
+		var totalAmount = $.subduction($.add(totalFee, goodsAmount), settledAmount);
+		$('#goodsAmount').val(this.formatNumber(goodsAmount,3,1));
+		$('#totalAmount').val(this.formatNumber(totalAmount,3,1));
+		$('#totalFee').val(this.formatNumber(totalFee,3,1));
+	}	
+		$(this).find('#settlementPrice').on('input propertychange',function(){
+			if(isNaN($(this).val())){
+				alert('请输入数字');
+			}else{
+				//tool();
+			}					
+		})		
+		$(this).find('#settlementQuantityBbl').on('input propertychange',function(){
+			if(isNaN($(this).val())){
+				alert('请输入数字');
+			}else{
+				//tool();
+			}					
+		})	
+		tool();	
+	//})
+</script>
+

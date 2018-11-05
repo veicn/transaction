@@ -1,0 +1,293 @@
+<div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>订单管理</h1>
+				<div class="s-order-mm">
+					<ul>
+					<a href="$orderExecuteServer.get('buyerCenter/order/list.htm')"  class="ry-a-menu2">
+						<span >买</span>
+						<div class="s-form-switch s-form-offswitch" lay-skin="_switch" id="switchDiv">
+						<i style="margin-left:26px;"  class="ry-a-menu3"></i>
+						</div>
+						<span class="curr">卖</span></a>
+					</ul>
+				</div>
+			</div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix s-order-cla">
+				<li #if($index==0)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(0)">全部<span>($!{countResult.get('total')})</span></a></li>
+				<li #if($index==1)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(1)">已成交<span>($!{countResult.get('05')})</span></a></li>
+				<li #if($index==2)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(2)">已租船<span>($!{countResult.get('10')})</span></a></li>
+				<li #if($index==3)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(3)">已装船<span>($!{countResult.get('15')})</span></a></li>
+				<li #if($index==4)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(4)">已到港<span>($!{countResult.get('20')})</span></a></li>
+			    <li #if($index==5)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(5)">已卸货<span>($!{countResult.get('25')})</span></a></li>
+			    <li #if($index==6)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(6)">已对账<span>($!{countResult.get('30')})</span></a></li>
+			    <li #if($index==7)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(7)">已收款<span>($!{countResult.get('35')})</span></a></li>
+			    <li #if($index==8)class="curr"#end><a href="javascript:void(0);" onclick="changeIndex(8)">已取消<span>($!{countResult.get('00')})</span></a></li>
+			</ul>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2 queryOrderForm" method="post">
+			<input type="hidden" name="index" id="index" value="$!{param.index}">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline1">
+					  <label class="s-form-label">销售方式</label>
+					  <div class="s-input-inline">
+						  <select name="tradeType" id="tradeType" class="s-select">
+							<option value="">请选择</option>
+							<option value="1" #if($!{param.tradeType} == "1")selected="selected"#end>招标</option>
+							<option value="2" #if($!{param.tradeType} == "2")selected="selected"#end>询价</option>
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline2">
+					  <div class="s-input-inline s-input-inline3">
+						  <input type="text" name="keyword" id="keyword" placeholder="商品名称/订单编号" class="s-input" value="$!{param.keyword}">
+					  </div>
+					  <label class="s-form-label">订单时间</label>
+						  <div class="s-input-inline s-input-inline2">
+							<input type="text" name="createDateBetween" id="createDateBetween" style="width:207px;"
+								placeholder="" value="$!{param.createDateBetween}" class="s-input" ><i class="c-ico xg-data" style="margin-left:180px;"></i>
+						  </div>
+					</div>
+					<div class="s-inline s-inline3"></div>
+					<div class="s-inline s-inline0"><a href="javascript:void(0);" class="queryOrder"><i class="s-icon s-sear-ico"></i></a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		#foreach($order in $dataList)	
+		<div class="s-mod-block">
+			<div class="s-mod-btit">
+				<a href="$orderExecuteServer.get('sellerCenter/order/detail.htm')?uid=$!{order.uuid}" title="查看详情">
+				订单编号：$!{order.orderNo} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;订单时间：$!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss', $!{order.createDate}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 交易方：$!{order.buyerCustomerName}
+				</a>
+				<span>$!{order.statusDesc}</span>
+			</div>
+			<div class="s-mod-bcont">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item" >
+					<div class="s-inline" title="$!{order.goodsInfo.zhName}">
+					  <label class="s-form-label">品种：</label>
+					  <div class="s-input-inline">
+						  <p>$!{order.goodsInfo.zhName}</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!{order.priceInfo.tradeTerm}">
+					  <label class="s-form-label">贸易条款：</label>
+					  <div class="s-input-inline">
+					  	  <p>$!{order.priceInfo.tradeTerm}</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!NumberTool.format($!{order.goodsInfo.quantity})+/-$!NumberTool.format('#.######',$!{order.goodsInfo.moreLess})%">
+					  <label class="s-form-label">数量(桶)：</label>
+					  <div class="s-input-inline">
+					  	 <p style="width:200px;">$!NumberTool.format($!{order.goodsInfo.quantity})+/-$!NumberTool.format('#.######',$!{order.goodsInfo.moreLess})%</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!{order.creditTerm}">
+					  <label class="s-form-label">信用条款：</label>
+					  <div class="s-input-inline">
+						  <p  style="width:200px;">$!{order.creditTerm}</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!{order.shipInfo.name}">
+					  <label class="s-form-label">船名：</label>
+					  <div class="s-input-inline">
+						  <p>$!{order.shipInfo.name}</p>
+					  </div>
+					</div>
+					#if($!{order.priceInfo.tradeTerm} == 'FOB')
+					<div class="s-inline" title="$!{order.transportInfo.loadingPort}">
+					  <label class="s-form-label">装港：</label>
+					  <div class="s-input-inline">
+						  <p>$!{order.transportInfo.loadingPort}</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateEnd})">
+					  <label class="s-form-label">装期：</label>
+					  <div class="s-input-inline">
+						  <p  style="width:200px;">$!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateEnd})</p>
+					  </div>
+					</div>
+					#else
+					<div class="s-inline" title="$!{order.transportInfo.uploadingPort}">
+					  <label class="s-form-label">卸货港：</label>
+					  <div class="s-input-inline">
+						  <p>$!{order.transportInfo.uploadingPort}</p>
+					  </div>
+					</div>
+					<div class="s-inline" title="$!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateEnd})">
+					  <label class="s-form-label">到货期：</label>
+					  <div class="s-input-inline">
+						  <p  style="width:200px;">$!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateStart}) 至 $!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateEnd})</p>
+					  </div>
+					</div>
+					#end
+					<div class="s-inline" title="$!{order.priceInfo.pricingDesc}">
+					  <label class="s-form-label">计价期：</label>
+					  <div class="s-input-inline">
+						  <p  style="width:200px;">$!{order.priceInfo.pricingDesc}</p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			<div class="s-but-all clearfix">
+				#if($order && $order.status !='00')
+				<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+					<div class="s-but-blo clearfix">
+						#if($order && $order.status =='05')
+						<a class="s-btn orderShipBtn" href="javascript:;" attr-checkurl="$shipServer.get('/agreement/checkAgreement.json')" 
+							attr-url="$shipServer.get('pallet/palletEdit.htm')" attr-data="$!{order.orderNo}" 
+							attr-quantity="$!{order.goodsInfo.quantity}" 
+							attr-unitName="$!{order.goodsInfo.quantityUnit}"
+							attr-loadPort="$!codeConvert.getValueByCode('LOAD_PORT',$!{order.transportInfo.loadingPort})" 
+							attr-unloadPort="$!codeConvert.getValueByCode('UN_LOAD_PORT',$!{order.transportInfo.uploadingPort})" 
+							attr-oilType="$!{order.goodsInfo.zhName}"
+							attr-loadPortCode="$!{order.transportInfo.loadingPort}" 
+							attr-unloadPortCode="$!{order.transportInfo.uploadingPort}" 
+							attr-oilTypeCode="$!{order.goodsInfo.zhName}"
+							attr-beg="$!dateUtil.convertDateToString('yyyy-MM-dd', $!{order.transportInfo.deliveryDateStart})" 
+							attr-end="$!dateUtil.convertDateToString('yyyy-MM-dd', $!{order.transportInfo.deliveryDateEnd})" 
+							class="confirm">我要租船</a>
+						#end
+						
+						#if($order && $order.buttonList && $order.buttonList.size() > 0)
+							#if($order.buttonList.contains("wlgz"))
+								<a target="view_window" href="$shipServer.get('/page/#/transport')?agreementUuid=$!{order.shipInfo.agentUuid}" class="s-btn">物流跟踪</a>
+							#end
+							#if($order.buttonList.contains("hxcx"))
+								<a class="s-btn hxcx" href="javascript:void(0);" attr-shipName="$!{order.shipInfo.name}">航线查询</a>
+							#end
+							#if($order.buttonList.contains("dzgl"))
+							<a href="$orderExecuteServer.get('buyerCenter/orderDocument/documentEditNew.htm')?uuid=$!{order.uuid}" class="s-btn">单证管理</a>
+							#end
+							#if($order.buttonList.contains("fylr"))
+							<a href="$orderExecuteServer.get('sellerCenter/orderFee/orderFeeInfo.htm')?uuid=$!{order.uuid}" class="s-btn" >录入费用</a>
+							#end
+							#if($order.buttonList.contains("ygdzd"))
+							<a href="$orderExecuteServer.get('sellerCenter/orderStatement/infoPre.htm')?uuid=$!{order.uuid}" class="s-btn">临时结算单</a>
+							#end
+							#if($order.buttonList.contains("zsdzd"))
+							<a href="$orderExecuteServer.get('sellerCenter/orderStatement/infoFin.htm')?uuid=$!{order.uuid}" class="s-btn">最终结算单</a>
+							#end
+							#if($order.buttonList.contains("qrsk"))
+							<a href="$orderExecuteServer.get('sellerCenter/order/orderPayConfirm.htm')?uuid=$!{order.uuid}&formPage=LIST" class="s-btn">确认收款</a>
+							#end
+							#if($order.buttonList.contains("sytx"))
+							<a href="$orderExecuteServer.get('common/order/incomeStatement.htm')?orderNo=$!{order.orderNo}" class="s-btn">损益分析</a>
+							#end			
+						#end
+					</div>
+				</div>
+				#end
+			</div>
+		</div>
+	</div>
+	#end		
+	<div class="s-page">
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('sellerCenter/order/list.htm')")
+	</div>
+</div>
+
+<script>
+function changeIndex(index){
+	$("#index").val(index);
+	$('.queryOrderForm').submit();
+}
+
+layui.use(['laydate','layer'], function(){
+  var laydate = layui.laydate,
+  layer = layui.layer;
+  //日期范围
+  laydate.render({
+    elem: '#createDateBetween'
+    ,range: true
+  });
+  $('.queryOrder').on('click',function(){
+		$('.queryOrderForm').submit();
+	  });
+  
+  $('.orderShipBtn').on('click',function(){
+		var orderNo = encodeURIComponent($(this).attr("attr-data"));
+		var oilType = encodeURIComponent($(this).attr("attr-oilType"));
+		var quantity = encodeURIComponent($(this).attr("attr-quantity"));
+		var loadPort = encodeURIComponent($(this).attr("attr-loadPort"));
+		var unloadPort = encodeURIComponent($(this).attr("attr-unloadPort"));
+		var oilTypeCode = encodeURIComponent($(this).attr("attr-oilTypeCode"));
+		var loadPortCode = encodeURIComponent($(this).attr("attr-loadPortCode"));
+		var unloadPortCode = encodeURIComponent($(this).attr("attr-unloadPortCode"));
+		var quantityUnitName = encodeURIComponent($(this).attr("attr-unitName"));
+		var beg = encodeURIComponent($(this).attr("attr-beg"));
+		var end = encodeURIComponent($(this).attr("attr-end"));
+		var url = $(this).attr("attr-url");
+		
+		var obj = {};
+		obj.orderCode = orderNo;
+		$.ajax({
+			type: "POST",
+			url: $(this).attr("attr-checkurl"),
+			data: JSON.stringify(obj),
+			dataType: "json",
+			contentType:"application/json",
+			 xhrFields: {
+                      withCredentials: true
+              },
+            crossDomain: true,
+			success: function(data) {
+				if(data.status == 0){
+					window.location.href=url+"?type=true&orderCode="+orderNo+"&palletType=1&quantity="+quantity
+							+"&loadPort="+loadPort+"&unloadPort="+unloadPort
+							+"&beg="+beg+"&end="+end+"&unitName="+quantityUnitName+"&oilType="+oilType
+							+"&loadPortCode="+loadPortCode+"&unloadPortCode="+unloadPortCode+"&oilTypeCode="+oilTypeCode;
+				} else {
+				  layer.alert($.i18n(data.code,data.params), function(index) {
+						layer.close(index);
+					 });
+				}},
+		   error:function(){
+			   layer.alert('系统异常', function(index) {
+				layer.close(index);
+			   	});
+			   }
+		});
+	});
+})
+	$('.mysteve').each(function(){
+		$(this).hover(function(){
+			$(this).find('.showButton').show();
+			 $('.ico-pop').addClass('arrow-up');
+		},function(){
+			$(this).find('.showButton').hide();
+			$('.ico-pop').removeClass('arrow-up')
+		})
+	})
+	
+	$('.hxcx').on('click',function(){
+	 	var orderExecuteServer = "$orderExecuteServer";
+	 	var shipServer = "$shipServer";
+	 	var shipName = $(this).attr("attr-shipName");
+	  	$.ajax({
+			type: "GET",
+			url: orderExecuteServer + '/common/order/findImoByShipName.json?ShipName='+shipName,			
+	        crossDomain: true,
+			success: function(data) {
+				console.log(data);
+				if(data.datas == null || data.datas == ""){
+					window.open(shipServer + "/page/#/routemap");
+				} else {
+				  	window.open(shipServer + "/page/#/routemap?imo="+ data.datas);
+				}},
+		   	error:function(){
+			   	layer.alert('system error', function(index) {
+					layer.close(index);
+			   	});
+			}
+		});
+  	});
+	
+
+</script>

@@ -1,0 +1,47 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Requirement<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Qty(BBL)：</span><span class="c-int qx-conte">$!{demand.numStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Tolerance：</span><span class="c-int qx-conte">+/- $!{demand.numfloat} %</span></li>
+            <li class="c-fcos2"><span class="c-fn">Incoterm：</span><span class="c-int qx-conte">$!{tradeItemMap.get($!{demand.tradeItem})}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Basis：</span><span class="c-int qx-conte">$!valuationBaseMap.get($!{demand.valuationBase})</span></li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Period：</span><span class="c-int qx-conte">
+                $!{dictUtils.getValue("valuationProidTypeMap", "$!demand.valuationProidType")}
+                #if($!{demand.valuationProidType} == 4)
+                    （$!dateUtil.convertDateToString('yyyy/MM/dd',$!demand.valuationProidStart) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!demand.valuationProidEnd)）
+                #end
+                #if($!{demand.valuationProidType} == 5)
+                    （$!demand.contractKind）
+                #end</span></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Date：</span><span class="c-int qx-conte">$!{demand.payItem}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Qty Determination：</span><span class="c-int qx-conte">$!{measureModeMap.get($!{demand.measureMode})}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Laytime：</span><span class="c-int qx-conte">$!{demand.loadAndDischargePermittedTimespan}</span></li>
+            
+            #if($!{tradeItemMap.get($!{demand.tradeItem})}=="FOB")
+				<li class="c-fcos2"><span class="c-fn">Laycan：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentEndTime})</span></li>
+				<li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte">$!{demandShips.shipmentPort}</span></li>
+			#elseif($!{tradeItemMap.get($!{demand.tradeItem})}=="DES")
+				<li class="c-fcos2"><span class="c-fn">DDR：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeEndTime})</span></li>
+				<li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte">$!{demandShips.dischargePort}</span></li>
+			#elseif($!{tradeItemMap.get($!{demand.tradeItem})}=="CFR" || $!{tradeItemMap.get($!{demand.tradeItem})}=="CIF")
+				<li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte">$!{demandShips.shipmentPort}</span></li>
+	            <li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte">$!{demandShips.dischargePort}</span></li>
+	            <li class="c-fcos2"><span class="c-fn">Laycan：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentEndTime})</span></li>
+	            <li class="c-fcos2"><span class="c-fn">DDR：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeEndTime})</span></li>
+			#elseif($!{tradeItemMap.get($!{demand.tradeItem})}=="FCA" || $!{tradeItemMap.get($!{demand.tradeItem})}=="DDU" || $!{tradeItemMap.get($!{demand.tradeItem})}=="ITT")
+	            <li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte">$!{demandShips.dischargePort}</span></li>
+	            <li class="c-fcos2"><span class="c-fn">DDR：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeEndTime})</span></li>
+			#end
+            #*
+            <li class="c-fcos2"><span class="c-fn">Purchase type：</span><span class="c-int qx-conte">$!{purchaseModeMap.get($!{demand.purchaseMode})}</span></li>
+            *#
+            #*
+            <li class="c-fcos2"><span class="c-fn">Inspection：</span><span class="c-int qx-conte">$!{demand.inspectionFeeSharingTypeContent}</span></li>
+            *#
+            <li class="c-fcos1"><span class="c-fn cfn-qttk">Remark：</span>
+                <span class="c-int qx-conte cfn-qtnr">$!{demand.remark}</span>
+            </li>
+        </ul>
+    </div>
+</div>

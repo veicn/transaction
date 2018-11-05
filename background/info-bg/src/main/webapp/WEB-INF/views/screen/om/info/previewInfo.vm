@@ -1,0 +1,32 @@
+
+<link rel="stylesheet" href="$imageServer.get('info/css/info/index.css')" >
+<form class="layui-form bombPp" action="">
+    <div class="layui-form-item" style="padding:15px !important;border:1px solid #DDDFE1;margin:10px">
+        <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100%; font-size:40px;margin-top:20px;text-align:left" id="title">$!{info.title}</label>
+        </div>
+        <br></br>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:200px;text-align:left">作者：$!{info.channelName}</label>
+            <label class="layui-form-label" style="width:250px;text-align:left" id="releaseId">发布时间：$!{info.releaseDate}</label>
+            #* <label class="layui-form-label" style="width:180px;text-align:left" id="releaseDate">频道：$!{info.releaseId}</label>
+            <label class="layui-form-label" style="width:180px;text-align:left" id="releaseDate">分类：$!{info.releaseId}</label> *#
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100%;text-align:left;text-indent:2em" id="contentWithHtml">$!{info.contentWithHtml}</label>
+        </div>
+        
+         <div class="layui-form-item">
+         	#if($!{info.isShowCopyright} == '1')
+            <label class="layui-form-label" style="width:100%;text-align:left">版权声明：如需转载，请注明来自“买原油网”</label>
+            #end
+            #if($!{info.isShowDisclaimer} == '1')
+            <label class="layui-form-label" style="width:100%;text-align:left">免责声明：本文非买原油网原创，以上仅代表作者个人观点。</label>
+        	#end
+        </div>
+    </div>   
+</form>
+<script src="$imageServer.get('info/js/info/previewInfo.js')"></script>
+<div style="width:100%;text-align:center">
+<button class="layui-btn layui-btn-small layui-btn-normal closeBtn">关闭</button>
+</div>

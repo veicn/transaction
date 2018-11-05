@@ -1,0 +1,38 @@
+#*<div class="layui-header">
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav " style="width: 100%;">
+        <li class="layui-nav-item"><a href="$appServer.get('/buyer/welcome.htm')">个人中心</a></li>
+        <li class="layui-nav-item"><a href="$appServer.get('/buyer/queryContractList.htm')">买家中心</a></li>
+        <li class="layui-nav-item"><a href="$appServer.get('/buyer/queryContractList.htm')">卖家中心</a></li>
+        <li class="layui-nav-item"><a href="$appServer.get('om/welcome.htm')">船务中心</a></li>
+        <li class="layui-nav-item"><a href="$appServer.get('/longTermContract/longContract.htm')">长协采购需求</a></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+            <a href="javascript:;">
+                <img src="" class="layui-nav-img">
+            </a>
+        </li>
+        <li class="layui-nav-item"><a href="$memberServer.get('logout.htm')">退出</a></li>
+    </ul>
+</div>*#
+#*<div class="c-header">
+    <span class="c-logo"></span>
+    <ul class="c-nav">
+        <li><a href="#"><i class="cw-ico ico-buyer"></i>个人中心</a></li>
+        <li class="c-nav-cur"><a href="#"><i class="cw-ico ico-buyer"></i>卖家中心</a></li>
+        <li><a href="#"><i class="cw-ico ico-saler"></i>买家中心</a></li>
+        <li><a href="#"><i class="cw-ico ico-cener"></i>船务中心</a></li>
+    </ul>
+    <a href="#" class="c-ext"><i class="cw-ico ico-ext"></i></a>
+</div>*#
+#*
+<div class="c-header clearfix">
+    <span class="c-logo"></span>
+    <div class="c-nav">
+        <ul class="c-nav-top clearfix">
+            <li class="li-search"><i class="cw-ico ico-search-n"></i><input type="text" placeholder="搜索订单号"></li>
+            <li class="li-features"><a href="#"><i class="cw-ico ico-email-n"></i></a><a href="#"><i class="cw-ico ico-remind-n"><span>2</span></i></a><a href="#"><i class="cw-ico ico-set-n"></i></a><a href="#"><i class="cw-ico ico-exit-n"></i></a></li>
+        </ul>
+    </div>
+</div>*#

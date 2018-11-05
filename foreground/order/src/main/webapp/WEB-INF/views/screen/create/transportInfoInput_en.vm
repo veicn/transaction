@@ -1,0 +1,259 @@
+
+
+<div class="c-mod" id="mjbwxx">
+  <h3><em class="cw-ico ico-h3"></em>泊位信息
+  <span class="cxtj-nr-an">
+      #if(!$!{viewflag})
+          <a class="btn-more" id="addShipBerth">+维护泊位信息</a>
+      #end
+  </span>
+      #*<span class="cxtj-nr-an"><a class="btn-more" id="selectAddShipBerth">+选择泊位</a></span>*#
+  </h3>
+  <div class="c-tabdiv">
+	<table> 
+		<tr>
+            <th>泊位名称</th>
+##            <th>载重区间</th>
+            <th>泊位吨级</th>
+            <th>泊位吃水</th>
+            <th>适合船型</th>
+            <th>泊位说明</th>
+            <th class="tabl-line">Action</th>
+        </tr>
+
+		#foreach($record in $!berthlist)
+            #set($index = $velocityCount - 1)
+            <tr class="c-tabcos1">
+                <td>$!{record.berthName}<input type="hidden" name="contractShipBerthList[$index].berthName" value="$!{record.berthName}" /><input type="hidden" name="contractShipBerthList[$index].id" value="$!{record.id}" /></td>
+##                <td>
+##                    $!{record.carryingCapacityMin}<input type="hidden" name="contractShipBerthList[$index].carryingCapacityMin" value="$!{record.carryingCapacityMin}" />
+##                    -
+##                    $!{record.carryingCapacityMax}万吨<input type="hidden" name="contractShipBerthList[$index].carryingCapacityMax" value="$!{record.carryingCapacityMax}" />
+##                </td>
+                <td>$!{record.berthGrade}万吨<input type="hidden" name="contractShipBerthList[$index].berthGrade" value="$!{record.berthGrade}" /></td>
+                <td>$!{record.draftLimitation}m<input type="hidden" name="contractShipBerthList[$index].draftLimitation" value="$!{record.draftLimitation}" /></td>
+                <td>$!dictUtils.getValue("shipTypes","$!{record.shipType}")<input type="hidden" name="contractShipBerthList[$index].shipType" value="$!{record.shipType} /></td>
+
+                <td>$!{record.berthDesc}<input type="hidden" name="contractShipBerthList[$index].berthDesc" value="$!{record.berthDesc}" /></td>
+                <td><a name="deleteLine" onclick="deleteline(this)">Delete</a></td>
+
+            </tr>
+		#end
+	</table>
+  </div>
+</div>
+#*<div id="popBerthWin" style="display: none">
+$contain.get('/salerCenterContain/popBerth.htm')
+</div>*#
+<script>
+
+    $(function () {
+        $("#addShipBerth").click(function () {
+            berthAddLayerOpen();
+        });
+
+        $("a[name='deleteLine']").click(function () {
+            $(this).parent("td").parent("tr").remove();
+        });
+
+
+        $("#confirm").click(function () {
+            getShipBerthToTable();
+        })
+    });
+
+    function deleteline(obj) {
+        $(obj).parent("td").parent("tr").remove();
+    }
+
+    /*function berthLayerOpen() {
+        var curIndex = layui.use('layer', function(){
+
+            var berthsNum = $("#mjbwxx table tr").length -1 ;
+
+            layer.open({
+                title: "泊位选择",
+                shade : false,
+                area : '800px',
+                content: $("#popBerthWin"),
+                yes: function(index, layero){
+
+                    $("#selectedShipBerth tr").each(function () {
+                        if ($(this).find("input:checkbox").is(":checked")) {
+                            var obj = new Object();
+                            var tdArr = $(this).find("td");
+                            obj.berthName = tdArr[1].innerHTML;
+                            obj.berthGrade = tdArr[3].innerHTML;
+                            obj.draftLimitation = tdArr[4].innerHTML;
+                            obj.shipType = tdArr[5].innerHTML;
+
+                            var td5Str = tdArr[2].innerHTML;;
+                            if (td5Str.indexOf("-") < 0) {
+                                obj.carryingCapacityMin = td5Str;
+                            } else if (td5Str.indexOf("-") == 0) {
+                                obj.carryingCapacityMax = td5Str;
+                            } else {
+                                obj.carryingCapacityMin = td5Str.split("-")[0];
+                                obj.carryingCapacityMax = td5Str.split("-")[1];
+                            }
+
+                            var subIndex = berthsNum;
+                            $("#mjbwxx table").append("<tr class='c-tabcos1'><td class='tabl-line'>"
+                                    +(++berthsNum)+"<input type='hidden' name='shipBerths["+(subIndex)+"].id' /></td><td>"
+                                    +obj.berthName+"<input type='hidden' name='shipBerths["+(subIndex)+"].berthName' value='"+obj.berthName+"'/></td><td>"
+                                    +obj.carryingCapacityMin+"<input type='hidden' name='shipBerths["+(subIndex)+"].carryingCapacityMin' value='"+obj.carryingCapacityMin+"'/>-"
+                                    +obj.carryingCapacityMax+"<input type='hidden' name='shipBerths["+(subIndex)+"].carryingCapacityMax' value='"+obj.carryingCapacityMax+"'/></td><td>"
+                                    +obj.berthGrade+"<input type='hidden' name='shipBerths["+(subIndex)+"].berthGrade' value='"+obj.berthGrade+"'/></td><td>"
+                                    +obj.draftLimitation+"<input type='hidden' name='shipBerths["+(subIndex)+"].draftLimitation' value='"+obj.draftLimitation+"'/></td><td>"
+                                    +obj.shipType+"<input type='hidden' name='shipBerths["+(subIndex)+"].shipType' value='"+obj.shipType+"'/></td><td>&nbsp;</td><td><a name='deleteLine' onclick='deleteline(this)'>删除行</a></td></tr>");
+                        }
+
+                    })
+
+                    //如果设定了yes回调，需进行手工关闭
+                    layer.close(index);
+                }
+            });
+
+        });
+
+        //移除click
+        $('#selectAddShipBerth').unbind("click");
+        //重新注册点击事件
+        $("#selectAddShipBerth").click(function(){
+            layer.close(curIndex);
+            berthLayerOpen();
+        });
+    }*/
+
+    function berthAddLayerOpen() {
+        $("#addShipBerthWin").find("input[name='berthName']").val('');
+        $("#addShipBerthWin").find("select[name='berthGrade']").val('');
+        $("#addShipBerthWin").find("input[name='draftLimitation']").val('');
+        $("#addShipBerthWin").find("select[name='shipType']").val('');
+        $("#addShipBerthWin").find("select[name='shipType']").val('');
+        $("#addShipBerthWin").find("input[name='berthDesc']").val('');
+        var curIndex = layui.use('layer', function(){
+
+            layer.open({
+                title: "berth information maintenance",
+                shade : false,
+                area : '1000px',
+                type : '1',
+                content: $("#addShipBerthWin")
+            });
+
+        });
+    }
+
+    function getShipBerthToTable() {
+        var obj = new Object();
+        obj.berthName = $("#addShipBerthWin").find("input[name='berthName']").val();
+        if(obj.berthName == null || obj.berthName == ''){
+            layer.alert("Please enter the berth name！",{title:"Notice",btn:"OK"});
+            return false;
+        }
+        if(obj.berthName.length >100){
+            layui.use("layer",function() {
+                layer.alert("The berth name length cannot exceed 100.",{title:"Notice",btn:"OK"});
+            });
+            return false;
+        }
+        obj.berthGrade = $("#addShipBerthWin").find("select[name='berthGrade']").val();
+        obj.draftLimitation = $("#addShipBerthWin").find("input[name='draftLimitation']").val();
+        if(obj.draftLimitation == null || obj.draftLimitation == ''){
+            layer.alert("Please enter the berth draft！",{title:"Notice",btn:"OK"});
+            return false;
+        }
+        obj.shipType = $("#addShipBerthWin").find("select[name='shipType']").val();
+        var shipType = $("#addShipBerthWin").find("select[name='shipType']").find("option:selected").html();
+        obj.berthDesc = $("#addShipBerthWin").find("input[name='berthDesc']").val();
+        if(obj.berthDesc.length >255){
+            layui.use("layer",function() {
+                layer.alert("The berth description length cannot exceed 100.",{title:"Notice",btn:"OK"});
+            });
+            return false;
+        }
+
+        var berthsNum = $("#mjbwxx table tr").length -1;
+        var subIndex =  berthsNum;
+        $("#mjbwxx table").append("<tr class='c-tabcos1'>" +
+                "<td><input type='hidden' name='contractShipBerthList["+(subIndex)+"].id' />"
+                +obj.berthName+"<input type='hidden' name='contractShipBerthList["+(subIndex)+"].berthName' value='"+obj.berthName+"'/></td><td>"
+                +obj.berthGrade+"万吨<input type='hidden' name='contractShipBerthList["+(subIndex)+"].berthGrade' value='"+obj.berthGrade+"'/></td><td>"
+                +obj.draftLimitation+"m<input type='hidden' name='contractShipBerthList["+(subIndex)+"].draftLimitation' value='"+obj.draftLimitation+"'/></td><td>"
+                +shipType+"<input type='hidden' name='contractShipBerthList["+(subIndex)+"].shipType' value='"+obj.shipType+"'/><td>"
+                +obj.berthDesc+"<input type='hidden' name='contractShipBerthList["+(subIndex)+"].berthDesc' value='"+obj.berthDesc+"'/></td><td><a name='deleteLine' onclick='deleteline(this)'>删除</a></td></tr>");
+        layer.closeAll();
+        $("#addShipBerthWin").hide();
+    }
+
+//    <input type="button" value="删除" class="btn-more">
+	/*$("#ensure").click(function () {
+	    var shipBerthArr = new Array();
+
+
+    });*/
+</script>
+<div class="cg-bwdk" id="addShipBerthWin" style="display: none;width: 100%;">
+    <ul class="cg-bwdk-b clearfix">
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位名称：</span><input type="text" name="berthName" class="bw-int"/></li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吨级（万吨）：</span><select class="bw-sele" name="berthGrade"><option value="10">10万吨</option><option value="20">20万吨</option><option value="30">30万吨</option><option value="40">40万吨</option><option value="50">50万吨</option></select></li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吃水（m）：</span><input type="text"   onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" name="draftLimitation" class="bw-int"/></li>
+        <li class="cg-bwdk-bt2">
+            <span class="bwdk-t">适合船型：</span>
+            <select class="bw-sele" name="shipType">
+                #foreach($kv in $!dictUtils.getCacheMap('shipTypes').entrySet())
+                    <option value="$!{kv.key}">$!{kv.value}</option>
+                #end
+            </select>
+        </li>
+    ##        <li class="cg-bwdk-bt2"><span class="bwdk-t">载重区间（万吨）：</span><input type="text"   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" name="carryingCapacityMin" class="bw-int2"/><em>-</em><input type="text"   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" name="carryingCapacityMax" class="bw-int2"/></li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位说明：</span><input type="text" name="berthDesc" class="bw-int"/></li>
+    </ul>
+    <div class="butt-zh bw-zh"><button class="btn-bc btn-tj" type="button" id="confirm">Confirm</button></div>
+</div>
+
+#*泊位信息维护*#
+#*<div id="addShipBerthWin" style="display: none">
+    <div class="c-mod">
+        *##*<h3><em class="cw-ico ico-h3"></em>泊位信息维护</h3>*##*
+        <div class="c-form">
+            <ul class="c-ful">
+
+                <li class="c-fcos2">
+                    <span class="c-fn">泊位：</span>
+                    <input type="text" class="c-int" name="berthName"/>
+                </li>
+
+                <li class="c-fcos2">
+                    <span class="c-fn">泊位吨级(万吨)：</span>
+                    <select class="sele" name="berthGrade"><option value="10">10</option><option value="20">20</option><option value="30">30</option><option value="50">50</option></select>
+                </li>
+
+                <li class="c-fcos2">
+                    <span class="c-fn">泊位吃水(m)：</span>
+                    <input type="text" class="c-int" name="draftLimitation"/>
+                </li>
+
+                <li class="c-fcos2">
+                    <span class="c-fn">适合船型：</span>
+                    <select class="sele" name="shipType"><option value="1">VLCC</option><option value="2">ULCC</option><option value="3">SUEZ-MAX</option></select>
+                </li>
+
+                <li class="c-fcos1">
+                    <span class="c-fn">载重区间(万吨)：</span>
+                    <input type="text" class="c-int zq-text" name="carryingCapacityMin" style="width:35%"/>——<input type="text" class="c-int zq-text" name="carryingCapacityMax" style="width:35%"/>
+                </li>
+
+                <li class="c-fcos1">
+                    <span class="c-fn">泊位说明：</span>
+                    <textarea class="c-teta re-teta" placeholder="靠外轮、口岸开放"></textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="c-subdiv">
+            <a class="c-btnsub" id="confirm">Confirm</a>
+        </div>
+    </div>
+</div>*#

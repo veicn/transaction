@@ -1,0 +1,157 @@
+li{
+    display: block;
+}
+/* select选框 */
+
+.my-select {
+    display: inline-block;
+    width: 409px;
+    height: 36px;
+    background: #FFFFFF;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #C1C1C1;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+
+.my-select p {
+    width: 66%;
+    line-height: 32px;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0 0 0px;
+}
+
+.my-select i {
+    display: inline-block;
+    height: 100%;
+    border: .5px solid #DFDFDF;
+    position: absolute;
+    right: 32px;
+    top: 0px;
+}
+
+.my-select ul {
+    width: 417px;
+    display: block;
+    font-size: 14px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .3s ease-in;
+    z-index: 99;
+}
+
+.my-select ul li {
+    width: 408px;
+    height: 30px;
+    box-sizing: border-box;
+    line-height: 30px;
+    padding: 0px 15px;
+    list-style: none;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 !important;
+}
+
+.my-select ul li.Selected {
+    background: #F36523;
+    color: #FFFFFF;
+}
+
+.my-select ul li:hover {
+    background: #D0D0D0;
+}
+
+@-webkit-keyframes slide-down {
+    0% {
+        transform: scale(1, 0);
+    }
+    25% {
+        transform: scale(1, 1.2);
+    }
+    50% {
+        transform: scale(1, 0.85);
+    }
+    75% {
+        transform: scale(1, 1.05);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.my-select.open ul {
+    max-height: 600px;
+    transform-origin: 50% 0;
+    -webkit-animation: slide-down .5s ease-in;
+    transition: max-height .2s ease-in;
+}
+
+.my-select.open::after {
+    transform: rotate(134deg);
+    transition: all .3s ease-in;
+    top: 12px;
+}
+
+
+.m-nav{
+    padding-bottom: 45px;
+
+}
+.button-b a {
+    display: inline-block;
+    width: 143px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    color: #FFFFFF;
+    font-size:20px;
+    cursor: pointer; text-decoration: none;
+}
+.button-b a:hover{
+    background: #FF9D32;
+}
+.button-b1 a{
+    display: inline-block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    color: #FFFFFF;
+    font-size:14px;
+    cursor: pointer;
+}
+.button-b1 a:hover{
+    background: #FF9D32;
+}
+.check-b .btn-sub {
+    background: #F36523;
+    margin-right: 30px;
+}
+
+.button-b1 .a-back1{
+    background: #F36523;
+
+}
+.check-b2{
+    float: right;
+}
+.cpy-select .select{
+    border: 0;width: 402px;
+}
+#Shipp>.my-select>.select>.select-box>.select-content {
+    width: 366px;
+    height: 35px;
+    border-right: 1px solid #C1C1C1;
+}

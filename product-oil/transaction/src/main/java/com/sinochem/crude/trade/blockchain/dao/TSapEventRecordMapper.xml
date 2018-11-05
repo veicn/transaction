@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TSapEventRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TSapEventRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="purchase_contract_no" property="purchaseContractNo" jdbcType="VARCHAR" />
+    <result column="post_data" property="postData" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="blockchain_id" property="blockchainId" jdbcType="VARCHAR" />
+    <result column="blockchain_txid" property="blockchainTxid" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USER" property="createUser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, purchase_contract_no, post_data, description, blockchain_id, blockchain_txid, 
+    CREATE_DATE, CREATE_USER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_sap_event_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `product-trade-blockchain`.t_sap_event_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TSapEventRecord" >
+    insert into `product-trade-blockchain`.t_sap_event_record (id, purchase_contract_no, post_data,
+      description, blockchain_id, blockchain_txid, 
+      CREATE_DATE, CREATE_USER)
+    values (#{id,jdbcType=BIGINT}, #{purchaseContractNo,jdbcType=VARCHAR}, #{postData,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{blockchainId,jdbcType=VARCHAR}, #{blockchainTxid,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TSapEventRecord" >
+    insert into `product-trade-blockchain`.t_sap_event_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="purchaseContractNo != null" >
+        purchase_contract_no,
+      </if>
+      <if test="postData != null" >
+        post_data,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="blockchainId != null" >
+        blockchain_id,
+      </if>
+      <if test="blockchainTxid != null" >
+        blockchain_txid,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseContractNo != null" >
+        #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="postData != null" >
+        #{postData,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainId != null" >
+        #{blockchainId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainTxid != null" >
+        #{blockchainTxid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TSapEventRecord" >
+    update `product-trade-blockchain`.t_sap_event_record
+    <set >
+      <if test="purchaseContractNo != null" >
+        purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="postData != null" >
+        post_data = #{postData,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainId != null" >
+        blockchain_id = #{blockchainId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainTxid != null" >
+        blockchain_txid = #{blockchainTxid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TSapEventRecord" >
+    update `product-trade-blockchain`.t_sap_event_record
+    set purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      post_data = #{postData,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      blockchain_id = #{blockchainId,jdbcType=VARCHAR},
+      blockchain_txid = #{blockchainTxid,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <resultMap type="com.sinochem.crude.trade.blockchain.domain.SapSettlement" id="SapSettlement">
+        <result property="ID" column="ID" />
+        <result property="BSTKD" column="BSTKD" />
+        <result property="VBTYP" column="VBTYP" />
+        <result property="VBELN" column="VBELN" />
+        <result property="KUNNR" column="KUNNR" />
+        <result property="NAME1" column="NAME1" />
+        <result property="MYTK" column="MYTK" />
+        <result property="ZTERM" column="ZTERM" />
+        <result property="ZSHIP" column="ZSHIP" />
+        <result property="KEYDT" column="KEYDT" />
+        <result property="TEXT5" column="TEXT5" />
+        <result property="TEXT4" column="TEXT4" />
+        <result property="AUFEX" column="AUFEX" />
+        <result property="WAERK" column="WAERK" />
+        <result property="NETWR" column="NETWR" />
+        <result property="DANJIA" column="DANJIA" />
+        <result property="POSNR" column="POSNR" />
+        <result property="MATNR" column="MATNR" />
+        <result property="MAKTX" column="MAKTX" />
+        <result property="KWMENG" column="KWMENG" />
+        <result property="EDZ" column="EDZ" />
+        <result property="NETPR" column="NETPR" />
+        <result property="TEXT1" column="TEXT1" />
+        <result property="TEXT2" column="TEXT2" />
+        <result property="TEXT3" column="TEXT3" />
+        <result property="NEWEST" column="NEWEST" />
+        <result property="VALTG" column="VALTG" />
+        <result property="MCONT" column="MCONT" />
+        <result property="aliveFlag" column="ALIVE_FLAG" />
+        <result property="createUser" column="CREATE_USER" />
+        <result property="createDate" column="CREATE_DATE" />
+        <result property="updateUser" column="UPDATE_USER" />
+        <result property="updateDate" column="UPDATE_DATE" />
+    </resultMap>
+
+    <select id="selectByPurchaseContractNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM `product-trade-blockchain`.t_sap_event_record
+        WHERE purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectSapByBSTKD" resultMap="SapSettlement" parameterType="java.lang.String">
+        SELECT * FROM `crude-trade-order-execute`.t_sap_settlement
+        WHERE BSTKD = #{purchaseContractNo,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPurchaseContractNo" parameterType="java.lang.String">
+        DELETE FROM `product-trade-blockchain`.t_sap_event_record
+        WHERE purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

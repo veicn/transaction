@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.PrizeCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.PrizeCollection" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="enclosure_url" property="enclosureUrl" jdbcType="VARCHAR" />
+    <result column="enclosure_name" property="enclosureName" jdbcType="VARCHAR" />
+    <result column="contact_user" property="contactUser" jdbcType="VARCHAR" />
+    <result column="contact_telephone" property="contactTelephone" jdbcType="VARCHAR" />
+    <result column="contact_email" property="contactEmail" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, content, enclosure_url, enclosure_name, contact_user, contact_telephone, contact_email, 
+    create_user, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_prize_collection
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_prize_collection
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.PrizeCollection" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_prize_collection (content, enclosure_url, enclosure_name, 
+      contact_user, contact_telephone, contact_email, 
+      create_user, create_time)
+    values (#{content,jdbcType=VARCHAR}, #{enclosureUrl,jdbcType=VARCHAR}, #{enclosureName,jdbcType=VARCHAR}, 
+      #{contactUser,jdbcType=VARCHAR}, #{contactTelephone,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.PrizeCollection" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_prize_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="enclosureUrl != null" >
+        enclosure_url,
+      </if>
+      <if test="enclosureName != null" >
+        enclosure_name,
+      </if>
+      <if test="contactUser != null" >
+        contact_user,
+      </if>
+      <if test="contactTelephone != null" >
+        contact_telephone,
+      </if>
+      <if test="contactEmail != null" >
+        contact_email,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureUrl != null" >
+        #{enclosureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureName != null" >
+        #{enclosureName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactUser != null" >
+        #{contactUser,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTelephone != null" >
+        #{contactTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.PrizeCollection" >
+    update t_prize_collection
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureUrl != null" >
+        enclosure_url = #{enclosureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosureName != null" >
+        enclosure_name = #{enclosureName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactUser != null" >
+        contact_user = #{contactUser,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTelephone != null" >
+        contact_telephone = #{contactTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        contact_email = #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.PrizeCollection" >
+    update t_prize_collection
+    set content = #{content,jdbcType=VARCHAR},
+      enclosure_url = #{enclosureUrl,jdbcType=VARCHAR},
+      enclosure_name = #{enclosureName,jdbcType=VARCHAR},
+      contact_user = #{contactUser,jdbcType=VARCHAR},
+      contact_telephone = #{contactTelephone,jdbcType=VARCHAR},
+      contact_email = #{contactEmail,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_prize_collection
+  </select>
+
+  <select id="selectByContactUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from t_prize_collection
+    WHERE contact_user LIKE concat('%',#{contactUser,jdbcType=BIGINT},'%')
+  </select>
+
+</mapper>

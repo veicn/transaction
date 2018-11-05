@@ -1,0 +1,27 @@
+
+    <div class="c-mr">
+        <div class="c-mod clearfix">
+            <h1>personal information</h1>
+            <form action="$appServer.get('/person/edit.htm')" method="post">
+            #springBind("item.id")
+            <input type="hidden"  name="$!{status.expression}" value="$!{status.value}">
+            <ul class="c-bczl">
+##                #springBind("item.id")
+                <li class="c-bcz clearfix"><span class="c-b-txt">Head portrait：</span><span class="c-complogo c-gr-tx"><a href="#"><img src="../images/coop_img_01.gif"></a></span></li>
+
+                #springBind("item.name")
+                <li class="c-bcz clearfix"><span class="c-b-txt">name：</span><input type="text" required="true" class="form-inp" name="name" ></li>
+
+                #springBind("item.cardType")
+                <li class="c-bcz clearfix"><span class="c-b-txt">Document type：</span><select  class="form-inp sel"  name="cardType" ><option value="1">ID</option><option value="2">passport</option> </select></li>
+
+                #springBind("item.cardNo")
+                <li class="c-bcz clearfix"><span class="c-b-txt">ID  Number：</span><input type="text" required="true" class="form-inp" name="cardNo" ><div class="c-bcz-fj"><a href=" " class="file">Uploading documents<input type="file" name="" id=""></a></div></li>
+
+##                #springBind("item.email")
+##                <li class="c-bcz clearfix"><span class="c-b-txt">email：</span><input type="text" required="true" class="form-inp" name="email" ></li>
+            </ul>
+                <div class="c-subdiv"><button type=submit class="c-btnsub">submit</button> <a href="javascript:history.back()"> <button type="button" class="c-btncas">Back</button></a></div></div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,48 @@
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#date1' //指定元素
+  });
+});
+</script>
+<form class="layui-form layui-form-pane" style="margin-top:60px; margin-left:80px">
+
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:150px"><span style="color:red;padding-right:5px">*</span>单位名称（CH）</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="chName" type="text" name="chName" required  lay-verify="required" placeholder="请输入中文名称（必填）" autocomplete="off">
+		    </div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px">单位名称（EN）</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="usName" type="text" name="usName" required  lay-verify="required" placeholder="请输入英文名称" autocomplete="off">
+	    </div>
+    </div>
+    
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>类型</label>
+	    <div class="layui-input-inline iw300">
+	        <select id="atype" name="atype">
+	            <option value="">请选择类型（必选）</option>
+        	</select>
+	    </div>
+    </div>
+    
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px">是否为参考类型</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" type="radio" name="isDefaultUnit" value="1" title="是"/>
+	        <input class="layui-input" type="radio" name="isDefaultUnit" value="0" title="否" checked="checked"/>
+	    </div>
+    </div>
+    
+</form>

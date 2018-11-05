@@ -1,0 +1,124 @@
+
+<div class="c-mod" id="ysxx">
+	<h3><i class="cw-ico ico-h3"></i>Transfer Info</h3>
+	<div class="c-form">
+		<ul class="c-ful">
+			<input type="hidden" name="ship.id" value="$!{ship.id}"/>
+			
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Type of Shipping：</span>
+				<select class="sele" name="ship.transportModes" value="$!{ship.transportModes}" v="$!{ship.transportModes}">
+					<option #if($!{demand.payItem} == "1") selected #end value="1">Voyage</option>
+				</select>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Load Port：</span>
+                <input type="text" class="c-int" placeholder="Load Port" name="ship.shipmentPort" value="$!{ship.shipmentPort}" maxlength="100"/>
+            	<label for="ship.shipmentPort" class="error my-error"></label>
+            </li>
+
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Laycan：</span>
+                <input name="ship.shipmentStartTime" id="shipmentStartTime" type="text" class="c-int qj-text"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.shipmentStartTime})"/>
+                <em>—</em><input name="ship.shipmentEndTime" type="text" class="c-int qj-text" data-msg-afterDate='装货结束日期不能早于装货开始日期' afterDate="shipmentStartTime" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.shipmentEndTime})"/>
+            	<label for="shipmentStartTime" class="error my-error"></label>
+            	<label for="ship.shipmentEndTime" class="error my-error"></label>
+            </li>
+
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Discharge Port：</span>
+                <input type="text" class="c-int" placeholder="Discharge port" name="ship.dischargePort" value="$!{ship.dischargePort}" maxlength="100"/>
+            	<label for="ship.dischargePort" class="error my-error"></label>
+            </li>
+
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Discharge Period：</span>
+                <input name="ship.dischargeStartTime" id="dischargeStartTime" type="text" class="c-int qj-text"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.dischargeStartTime})"/>
+                <em>—</em><input name="ship.dischargeEndTime" type="text" class="c-int qj-text" data-msg-afterDate='The end of delivery period cannot be earlier than the beginning thereof!' afterDate="shipmentStartTime" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{ship.dischargeEndTime})"/>
+            	<label for="dischargeStartTime" class="error my-error"></label>
+            	<label for="ship.dischargeEndTime" class="error my-error"></label>
+            </li>
+		</ul>
+	</div>
+</div>
+
+<script>
+    $(function () {
+        	// Discharge Port
+            var data = {"valueSetType": "4"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='ship.dischargePort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $ ("input[name='ship.dischargePort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+        })
+
+        // Load Port
+            var data = {"valueSetType": "5"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='ship.shipmentPort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $ ("input[name='ship.shipmentPort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+
+    })
+
+
+</script>

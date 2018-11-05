@@ -1,0 +1,49 @@
+
+
+
+<div class="m-tab fl">
+    <!--左侧 star-->
+    <div class="fl shipping-b-l">
+        <div class="s-info">
+            <dl class="clearfix">
+                <dd>
+                    <a href="javascript:;">
+                        <img src="$appServer.get('/product/images/headportrait.png')"/>
+                    </a>
+                </dd>
+                <dt>
+                <h3>   #if($!session.getAttribute("_user"))
+                        $_user.name
+                    #end </h3>
+                <!--<p>
+                    <a href="javascript:;">Message</a>
+                    <em class="tip">2</em>
+                </p>
+                <p>
+                    <a href="javascript:;">Notification </a>
+                </p>-->
+              #*  <p>
+                    <a href="$appServer.get('product/logout.htm')">Sign Out</a>
+                </p>*#
+                </dt>
+            </dl>
+        </div>
+        <div class="s-tab">
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">MY SETTINGS</h2>
+                <ul class="trading-ul">
+                    <li>
+                        <a href="$appServer.get('/center/role/safety.htm')" >Security</a>
+                    </li>
+                    <li class="active">
+                        <a href="$appServer.get('/center/invitation/inviteCodeBound.htm')">Sub Account</a>
+                    </li>
+                    <li>
+                        <a href="$appServer.get('/center/role/safety.htm')">Message</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

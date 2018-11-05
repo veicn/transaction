@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandShipMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.DemandShip" >
+
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="transport_modes" property="transportModes" jdbcType="INTEGER" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="discharge_port" property="dischargePort" jdbcType="VARCHAR" />
+    <result column="shipment_port" property="shipmentPort" jdbcType="VARCHAR" />
+    <result column="shipment_end_time" property="shipmentEndTime" jdbcType="TIMESTAMP" />
+    <result column="discharge_end_time" property="dischargeEndTime" jdbcType="TIMESTAMP" />
+    <result column="shipment_start_time" property="shipmentStartTime" jdbcType="TIMESTAMP" />
+    <result column="discharge_start_time" property="dischargeStartTime" jdbcType="TIMESTAMP" />
+    <result column="ship_type" property="shipType" jdbcType="INTEGER" />
+    <result column="creater" property="creater" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, transport_modes, demand_id, discharge_port, shipment_port, shipment_end_time, 
+    discharge_end_time, shipment_start_time, discharge_start_time, ship_type, creater, 
+    create_time, updater, update_time,transport_modes
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from demand_ship
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByDemandId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select
+    <include refid="Base_Column_List" />
+    from demand_ship
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    delete from demand_ship
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByDemandId" parameterType="java.lang.Long" >
+
+    delete from demand_ship
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.listed.domain.DemandShip" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_ship ( transport_modes, demand_id,
+      discharge_port, shipment_port, shipment_end_time, 
+      discharge_end_time, shipment_start_time, 
+      discharge_start_time, ship_type, creater, 
+       updater
+      )
+    values ( #{transportModes,jdbcType=INTEGER}, #{demandId,jdbcType=BIGINT},
+      #{dischargePort,jdbcType=VARCHAR}, #{shipmentPort,jdbcType=VARCHAR}, #{shipmentEndTime,jdbcType=TIMESTAMP}, 
+      #{dischargeEndTime,jdbcType=TIMESTAMP}, #{shipmentStartTime,jdbcType=TIMESTAMP}, 
+      #{dischargeStartTime,jdbcType=TIMESTAMP}, #{shipType,jdbcType=INTEGER}, #{creater,jdbcType=BIGINT}, 
+       #{updater,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandShip" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_ship
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="transportModes != null" >
+        transport_modes,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="dischargePort != null" >
+        discharge_port,
+      </if>
+      <if test="shipmentPort != null" >
+        shipment_port,
+      </if>
+      <if test="shipmentEndTime != null" >
+        shipment_end_time,
+      </if>
+      <if test="dischargeEndTime != null" >
+        discharge_end_time,
+      </if>
+      <if test="shipmentStartTime != null" >
+        shipment_start_time,
+      </if>
+      <if test="dischargeStartTime != null" >
+        discharge_start_time,
+      </if>
+      <if test="shipType != null" >
+        ship_type,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+
+      <if test="updater != null" >
+        updater,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="transportModes != null" >
+        #{transportModes,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="dischargePort != null" >
+        #{dischargePort,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentPort != null" >
+        #{shipmentPort,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentEndTime != null" >
+        #{shipmentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeEndTime != null" >
+        #{dischargeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentStartTime != null" >
+        #{shipmentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeStartTime != null" >
+        #{dischargeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipType != null" >
+        #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=BIGINT},
+      </if>
+
+      <if test="updater != null" >
+        #{updater,jdbcType=BIGINT},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandShip" >
+
+    update demand_ship
+    <set >
+      <if test="transportModes != null" >
+        transport_modes = #{transportModes,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="dischargePort != null" >
+        discharge_port = #{dischargePort,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentPort != null" >
+        shipment_port = #{shipmentPort,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentEndTime != null" >
+        shipment_end_time = #{shipmentEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeEndTime != null" >
+        discharge_end_time = #{dischargeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentStartTime != null" >
+        shipment_start_time = #{shipmentStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeStartTime != null" >
+        discharge_start_time = #{dischargeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipType != null" >
+        ship_type = #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
+
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.listed.domain.DemandShip" >
+
+    update demand_ship
+    set transport_modes = #{transportModes,jdbcType=INTEGER},
+      demand_id = #{demandId,jdbcType=BIGINT},
+      discharge_port = #{dischargePort,jdbcType=VARCHAR},
+      shipment_port = #{shipmentPort,jdbcType=VARCHAR},
+      shipment_end_time = #{shipmentEndTime,jdbcType=TIMESTAMP},
+      discharge_end_time = #{dischargeEndTime,jdbcType=TIMESTAMP},
+      shipment_start_time = #{shipmentStartTime,jdbcType=TIMESTAMP},
+      discharge_start_time = #{dischargeStartTime,jdbcType=TIMESTAMP},
+      ship_type = #{shipType,jdbcType=INTEGER},
+      creater = #{creater,jdbcType=BIGINT},
+      updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateBiddingDemandShip" parameterType="com.sinochem.crude.trade.listed.domain.DemandShip" >
+    update demand_ship
+    set
+        shipment_port = #{shipmentPort,jdbcType=VARCHAR},
+        discharge_port = #{dischargePort,jdbcType=VARCHAR},
+        shipment_start_time = #{shipmentStartTime,jdbcType=TIMESTAMP},
+        shipment_end_time = #{shipmentEndTime,jdbcType=TIMESTAMP},
+        discharge_start_time = #{dischargeStartTime,jdbcType=TIMESTAMP},
+        discharge_end_time = #{dischargeEndTime,jdbcType=TIMESTAMP},
+        updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

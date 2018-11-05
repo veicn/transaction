@@ -1,0 +1,1156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.ShipPactMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.ShipPact" id="ShipPactDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.ShipPact">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.ShipPact" id="ShipPact">
+		<result property="shipPactId" column="SHIP_PACT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="pactCode" column="PACT_CODE" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="status" column="STATUS" />
+		<result property="loadPort" column="LOAD_PORT" />
+		<result property="detailStatus" column="DETAIL_STATUS" />
+		<result property="shipPlateId" column="SHIP_PLATE_ID" />
+		<result property="shipPlateUuid" column="SHIP_PLATE_UUID" />
+		<result property="signDate" column="SIGN_DATE" />
+		<result property="carrierId" column="CARRIER_ID" />
+		<result property="carrierName" column="CARRIER_NAME" />
+		<result property="shipOwnerId" column="SHIP_OWNER_ID" />
+		<result property="shipOwner" column="SHIP_OWNER" />
+		<result property="shipName" column="SHIP_NAME" />
+		<result property="pactBeg" column="PACT_BEG" />
+		<result property="pactEnd" column="PACT_END" />
+		<result property="pactText" column="PACT_TEXT" />
+		<result property="minQuantity" column="MIN_QUANTITY" />
+		<result property="ws" column="WS" />
+		<result property="wsRes" column="WS_RES" />
+		<result property="pactSpeed" column="PACT_SPEED" />
+		<result property="demurrage" column="DEMURRAGE" />
+		<result property="brokerId" column="BROKER_ID" />
+		<result property="brokerName" column="BROKER_NAME" />
+		<result property="dockTime" column="DOCK_TIME" />
+		<result property="accessory" column="ACCESSORY" />
+		<result property="accessoryPath" column="ACCESSORY_PATH" />
+		<result property="mmsi" column="MMSI" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="shipIntentionId" column="SHIP_INTENTION_ID" />
+		<result property="shipIntentionUuid" column="SHIP_INTENTION_UUID" />
+		<result property="loadingArea" column="LOADING_AREA" />
+		<result property="unloadingArea" column="UNLOADING_AREA" />
+		<result property="epMemberNameEn" column="EP_MEMBER_NAME_EN" />
+		<result property="shipOwnerEn" column="SHIP_OWNER_EN" />
+		<result property="carrierNameEn" column="CARRIER_NAME_EN" />
+		<result property="brokerNameEn" column="BROKER_NAME_EN" />
+		<result property="sysShipUuid" column="SYS_SHIP_UUID" />
+	</resultMap>
+	 
+	<resultMap type="com.sinochem.crude.trade.transport.domain.ShipPact" id="ShipPactCollection">
+		<result property="shipPactId" column="SHIP_PACT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="pactCode" column="PACT_CODE" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="status" column="STATUS" />
+		<result property="loadPort" column="LOAD_PORT" />
+		<result property="detailStatus" column="DETAIL_STATUS" />
+		<result property="shipPlateId" column="SHIP_PLATE_ID" />
+		<result property="shipPlateUuid" column="SHIP_PLATE_UUID" />
+		<result property="signDate" column="SIGN_DATE" />
+		<result property="carrierId" column="CARRIER_ID" />
+		<result property="carrierName" column="CARRIER_NAME" />
+		<result property="shipOwner" column="SHIP_OWNER" />
+		<result property="shipName" column="SHIP_NAME" />
+		<result property="pactBeg" column="PACT_BEG" />
+		<result property="pactEnd" column="PACT_END" />
+		<result property="pactText" column="PACT_TEXT" />
+		<result property="minQuantity" column="MIN_QUANTITY" />
+		<result property="ws" column="WS" />
+		<result property="wsRes" column="WS_RES" />
+		<result property="pactSpeed" column="PACT_SPEED" />
+		<result property="demurrage" column="DEMURRAGE" />
+		<result property="brokerId" column="BROKER_ID" />
+		<result property="brokerName" column="BROKER_NAME" />
+		<result property="dockTime" column="DOCK_TIME" />
+		<result property="accessory" column="ACCESSORY" />
+		<result property="accessoryPath" column="ACCESSORY_PATH" />
+		<result property="mmsi" column="MMSI" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="shipIntentionId" column="SHIP_INTENTION_ID" />
+		<result property="shipIntentionUuid" column="SHIP_INTENTION_UUID" />
+		<result property="loadingArea" column="LOADING_AREA" />
+		<result property="unloadingArea" column="UNLOADING_AREA" />
+		<result property="epMemberNameEn" column="EP_MEMBER_NAME_EN" />
+		<result property="shipOwnerEn" column="SHIP_OWNER_EN" />
+		<result property="carrierNameEn" column="CARRIER_NAME_EN" />
+		<result property="brokerNameEn" column="BROKER_NAME_EN" />
+		<!-- 一对多 -->
+		<collection property="agreements" ofType="com.sinochem.crude.trade.transport.domain.Agreement">
+			<id  property="agreementId" column="AGREEMENT_ID"/>
+			<result property="uuid" column="AGREEMENT_UUID" />
+			<result property="agreementCode" column="AGREEMENT_CODE" />
+			<result property="carrierName" column="AGREEMENT_CARRIER_NAME" />
+			<result property="shipOwner" column="AGREEMENT_SHIP_OWNER" />
+			<result property="shipName" column="AGREEMENT_SHIP_NAME" />
+			<result property="loadPort" column="AGREEMENT_LOAD_PORT" />
+			<result property="unloadPort" column="AGREEMENT_UNLOAD_PORT" />
+		</collection>
+	</resultMap>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PACT_ID as "shipPactId" 
+						 ,   UUID as "uuid" 
+						 ,   PACT_CODE as "pactCode" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   STATUS as "status" 
+						 ,   LOAD_PORT as "loadPort" 
+						 ,   DETAIL_STATUS as "detailStatus" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   SIGN_DATE as "signDate" 
+						 ,   CARRIER_ID as "carrierId" 
+						 ,   CARRIER_NAME as "carrierName" 
+						 ,   SHIP_OWNER as "shipOwner" 
+						 ,   SHIP_NAME as "shipName" 
+						 ,   PACT_BEG as "pactBeg" 
+						 ,   PACT_END as "pactEnd" 
+						 ,   PACT_TEXT as "pactText" 
+						 ,   MIN_QUANTITY as "minQuantity" 
+						 ,   WS as "ws" 
+						 ,   WS_RES as "wsRes" 
+						 ,   PACT_SPEED as "pactSpeed" 
+						 ,   DEMURRAGE as "demurrage" 
+						 ,   BROKER_ID as "brokerId" 
+						 ,   BROKER_NAME as "brokerName" 
+						 ,   DOCK_TIME as "dockTime" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   ACCESSORY_PATH as "accessoryPath" 
+						 ,   MMSI as "mmsi" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   SHIP_INTENTION_ID as "shipIntentionId" 
+						 ,   SHIP_INTENTION_UUID as "shipIntentionUuid" 
+						 ,   LOADING_AREA as "loadingArea" 
+						 ,   UNLOADING_AREA as "unloadingArea" 
+						 ,   UNLOADING_AREA as "unloadingArea" 
+						 ,   SHIP_OWNER_ID as "shipOwnerId" 
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   CARRIER_NAME_EN as "carrierNameEn" 
+						 ,   BROKER_NAME_EN as "brokerNameEn" 
+						 ,   SYS_SHIP_UUID as "sysShipUuid" 
+						from t_ship_ship_pact
+		where
+			ALIVE_FLAG='1'
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+			<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+			<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+			<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+			<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+			<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+			<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+			<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+			<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+			<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+			<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="loadingArea!=null and loadingArea!=''">and  LOADING_AREA=#{loadingArea}</if>
+			<if test="unloadingArea!=null and unloadingArea!=''">and  UNLOADING_AREA=#{unloadingArea}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			ORDER BY CREATE_DATE DESC
+				</select>
+	
+	
+	<select id="selectPactByAgreementCode" parameterType="hashmap" resultMap="ShipPactCollection">
+		SELECT
+			p.*, 
+			a.UUID AS AGREEMENT_UUID,
+			a.AGREEMENT_CODE,
+			a.CARRIER_NAME AS AGREEMENT_CARRIER_NAME,
+			a.SHIP_OWNER AS AGREEMENT_SHIP_OWNER,
+			a.SHIP_NAME AS AGREEMENT_SHIP_NAME,
+			a.LAYCAN AS AGREEMENT_laycan,
+			a.LOAD_PORT AS AGREEMENT_LOAD_PORT,
+			a.UNLOAD_PORT AS AGREEMENT_UNLOAD_PORT
+		FROM
+			t_ship_ship_pact p,
+			t_ship_agreement a
+		WHERE
+			p.ALIVE_FLAG = '1'
+		AND p.uuid = a.ship_pact_uuid
+		AND p.EP_MEMBER_ID= #{epMemberId}
+		<if test="agreementCode!=null and agreementCode!=''"> and a.agreement_code = #{agreementCode}</if>
+		limit #{fromIndex},#{pageSize}
+	</select>
+	<select id="selectPactByAgreementCodeCount" resultType="int" parameterType="hashmap">
+		select
+		count(*) 
+		from t_ship_ship_pact p,t_ship_agreement a where p.ALIVE_FLAG='1' and p.uuid  = a.ship_pact_uuid
+		AND p.EP_MEMBER_ID= #{epMemberId}
+		<if test="agreementCode!=null and agreementCode!=''"> and a.agreement_code = #{agreementCode}</if>
+	</select>
+
+	<select id="queryByEntitys" resultMap="ShipPact" parameterType="com.sinochem.crude.trade.transport.domain.ShipPact">
+	select * from t_ship_ship_pact
+	where
+		 ALIVE_FLAG='1'
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+		<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+		<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+		<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+		<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+		<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+		<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+		<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			</select>
+	<select id="findByEntitys" resultMap="ShipPact" parameterType="com.sinochem.crude.trade.transport.domain.ShipPact">
+	select * from t_ship_ship_pact
+	where
+		 ALIVE_FLAG='1'
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+		<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+		<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+		<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+		<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+		<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+		<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+		<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="ShipPact">
+			select
+			* from t_ship_ship_pact
+			where
+		    SHIP_PACT_ID=#{shipPactId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="ShipPact">
+			select
+			* from t_ship_ship_pact
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.ShipPact">
+		update t_ship_ship_pact
+		<set>
+         SHIP_PACT_ID=#{shipPactId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="pactCode!=null">,PACT_CODE = #{pactCode}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="detailStatus!=null">,DETAIL_STATUS = #{detailStatus}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="signDate!=null">,SIGN_DATE = #{signDate}</if>
+		<if test="carrierId!=null">,CARRIER_ID = #{carrierId}</if>
+		<if test="carrierName!=null">,CARRIER_NAME = #{carrierName}</if>
+		<if test="shipOwner!=null">,SHIP_OWNER = #{shipOwner}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="pactBeg!=null">,PACT_BEG = #{pactBeg}</if>
+		<if test="pactEnd!=null">,PACT_END = #{pactEnd}</if>
+		<if test="pactText!=null">,PACT_TEXT = #{pactText}</if>
+		<if test="minQuantity!=null">,MIN_QUANTITY = #{minQuantity}</if>
+		<if test="ws!=null">,WS = #{ws}</if>
+		<if test="wsRes!=null">,WS_RES = #{wsRes}</if>
+		<if test="pactSpeed!=null">,PACT_SPEED = #{pactSpeed}</if>
+		<if test="demurrage!=null">,DEMURRAGE = #{demurrage}</if>
+		<if test="brokerId!=null">,BROKER_ID = #{brokerId}</if>
+		<if test="brokerName!=null">,BROKER_NAME = #{brokerName}</if>
+		<if test="dockTime!=null">,DOCK_TIME = #{dockTime}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="accessoryPath!=null">,ACCESSORY_PATH = #{accessoryPath}</if>
+		<if test="mmsi!=null">,MMSI = #{mmsi}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="shipIntentionId!=null">,SHIP_INTENTION_ID = #{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null">,SHIP_INTENTION_UUID = #{shipIntentionUuid}</if>
+		<if test="loadingArea!=null">,LOADING_AREA = #{loadingArea}</if>
+		<if test="unloadingArea!=null">,UNLOADING_AREA = #{unloadingArea}</if>
+		<if test="shipOwnerId!=null">,SHIP_OWNER_ID = #{shipOwnerId}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null">,SHIP_OWNER_EN = #{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null">,CARRIER_NAME_EN = #{carrierNameEn}</if>
+		<if test="brokerNameEn!=null">,BROKER_NAME_EN = #{brokerNameEn}</if>
+		<if test="sysShipUuid!=null">,SYS_SHIP_UUID = #{sysShipUuid}</if>
+		</set>
+		where
+       	 SHIP_PACT_ID=#{shipPactId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.ShipPact"  useGeneratedKeys="true" keyProperty="shipPactId" >
+		insert  into t_ship_ship_pact (				SHIP_PACT_ID
+						,UUID
+						,PACT_CODE
+						,EP_MEMBER_ID
+						,STATUS
+						,LOAD_PORT
+						,DETAIL_STATUS
+						,SHIP_PLATE_ID
+						,SHIP_PLATE_UUID
+						,SIGN_DATE
+						,CARRIER_ID
+						,CARRIER_NAME
+						,SHIP_OWNER
+						,SHIP_NAME
+						,PACT_BEG
+						,PACT_END
+						,PACT_TEXT
+						,MIN_QUANTITY
+						,WS
+						,WS_RES
+						,PACT_SPEED
+						,DEMURRAGE
+						,BROKER_ID
+						,BROKER_NAME
+						,DOCK_TIME
+						,ACCESSORY
+						,ACCESSORY_PATH
+						,MMSI
+						,REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,SHIP_INTENTION_ID
+						,SHIP_INTENTION_UUID
+						,LOADING_AREA
+						,UNLOADING_AREA
+						,SHIP_OWNER_ID
+						,EP_MEMBER_NAME_EN
+						,SHIP_OWNER_EN
+						,CARRIER_NAME_EN
+						,BROKER_NAME_EN
+						,SYS_SHIP_UUID
+						)
+		values(		#{shipPactId}
+						,#{uuid}
+						,#{pactCode}
+						,#{epMemberId}
+						,#{status}
+						,#{loadPort}
+						,#{detailStatus}
+						,#{shipPlateId}
+						,#{shipPlateUuid}
+						,#{signDate}
+						,#{carrierId}
+						,#{carrierName}
+						,#{shipOwner}
+						,#{shipName}
+						,#{pactBeg}
+						,#{pactEnd}
+						,#{pactText}
+						,#{minQuantity}
+						,#{ws}
+						,#{wsRes}
+						,#{pactSpeed}
+						,#{demurrage}
+						,#{brokerId}
+						,#{brokerName}
+						,#{dockTime}
+						,#{accessory}
+						,#{accessoryPath}
+						,#{mmsi}
+						,#{remark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{shipIntentionId}
+						,#{shipIntentionUuid}
+						,#{loadingArea}
+						,#{unloadingArea}
+						,#{shipOwnerId}
+						,#{epMemberNameEn}
+						,#{shipOwnerEn}
+						,#{carrierNameEn}
+						,#{brokerNameEn}
+						,#{sysShipUuid}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_ship_pact
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 SHIP_PACT_ID=#{shipPactId} 
+																																																																																																																																																																																															
+	</update>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*)  FROM t_ship_agency AS agency 
+				inner JOIN t_ship_ship_pact AS pact 
+				ON agency.SHIP_PACT_UUID = pact.UUID AND agency.EP_MEMBER_ID = pact.EP_MEMBER_ID
+		where
+			pact.ALIVE_FLAG='1'
+			<if test="shipPactId!=null and shipPactId!=''">and  pact.SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="uuid!=null and uuid!=''">and  pact.UUID=#{uuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and pact.PACT_CODE like '%${pactCode}%'</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  pact.EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="status!=null and status!=''">and  pact.STATUS=#{status}</if>
+			<if test="loadPort!=null and loadPort!=''">and  pact.LOAD_PORT=#{loadPort}</if>
+			<if test="detailStatus!=null and detailStatus!=''">and  pact.DETAIL_STATUS=#{detailStatus}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  pact.SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  pact.SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="signDate!=null and signDate!=''">and  pact.SIGN_DATE=#{signDate}</if>
+			<if test="carrierId!=null and carrierId!=''">and  pact.CARRIER_ID=#{carrierId}</if>
+			<if test="carrierName!=null and carrierName!=''">and  pact.CARRIER_NAME=#{carrierName}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  pact.SHIP_OWNER=#{shipOwner}</if>
+			<if test="shipName!=null and shipName!=''">and  pact.SHIP_NAME like CONCAT(CONCAT('%',#{shipName}),'%')</if>
+			<if test="pactBeg!=null and pactBeg!=''">and  pact.PACT_BEG=#{pactBeg}</if>
+			<if test="pactEnd!=null and pactEnd!=''">and  pact.PACT_END=#{pactEnd}</if>
+			<if test="pactText!=null and pactText!=''">and  pact.PACT_TEXT=#{pactText}</if>
+			<if test="minQuantity!=null and minQuantity!=''">and  pact.MIN_QUANTITY=#{minQuantity}</if>
+			<if test="ws!=null and ws!=''">and  pact.WS=#{ws}</if>
+			<if test="wsRes!=null and wsRes!=''">and  pact.WS_RES=#{wsRes}</if>
+			<if test="pactSpeed!=null and pactSpeed!=''">and  pact.PACT_SPEED=#{pactSpeed}</if>
+			<if test="demurrage!=null and demurrage!=''">and  pact.DEMURRAGE=#{demurrage}</if>
+			<if test="brokerId!=null and brokerId!=''">and  pact.BROKER_ID=#{brokerId}</if>
+			<if test="brokerName!=null and brokerName!=''">and  pact.BROKER_NAME=#{brokerName}</if>
+			<if test="dockTime!=null and dockTime!=''">and  pact.DOCK_TIME=#{dockTime}</if>
+			<if test="accessory!=null and accessory!=''">and  pact.ACCESSORY=#{accessory}</if>
+			<if test="accessoryPath!=null and accessoryPath!=''">and  pact.ACCESSORY_PATH=#{accessoryPath}</if>
+			<if test="mmsi!=null and mmsi!=''">and  pact.MMSI=#{mmsi}</if>
+			<if test="remark!=null and remark!=''">and  pact.REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  pact.ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  pact.VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  pact.LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  pact.CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  pact.UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  pact.CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  pact.UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  pact.EXT1=#{ext1}</if>
+			<if test="shipIntentionId!=null and shipIntentionId!=''">and  pact.SHIP_INTENTION_ID=#{shipIntentionId}</if>
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  pact.SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			ORDER BY PACT_END DESC
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_ship_pact
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+		<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+		<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+		<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+		<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+		<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+		<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+		<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_ship_pact
+		<set>
+         SHIP_PACT_ID=#{shipPactId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="pactCode!=null">,PACT_CODE = #{pactCode}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="detailStatus!=null">,DETAIL_STATUS = #{detailStatus}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="signDate!=null">,SIGN_DATE = #{signDate}</if>
+		<if test="carrierId!=null">,CARRIER_ID = #{carrierId}</if>
+		<if test="carrierName!=null">,CARRIER_NAME = #{carrierName}</if>
+		<if test="shipOwner!=null">,SHIP_OWNER = #{shipOwner}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="pactBeg!=null">,PACT_BEG = #{pactBeg}</if>
+		<if test="pactEnd!=null">,PACT_END = #{pactEnd}</if>
+		<if test="pactText!=null">,PACT_TEXT = #{pactText}</if>
+		<if test="minQuantity!=null">,MIN_QUANTITY = #{minQuantity}</if>
+		<if test="ws!=null">,WS = #{ws}</if>
+		<if test="wsRes!=null">,WS_RES = #{wsRes}</if>
+		<if test="pactSpeed!=null">,PACT_SPEED = #{pactSpeed}</if>
+		<if test="demurrage!=null">,DEMURRAGE = #{demurrage}</if>
+		<if test="brokerId!=null">,BROKER_ID = #{brokerId}</if>
+		<if test="brokerName!=null">,BROKER_NAME = #{brokerName}</if>
+		<if test="dockTime!=null">,DOCK_TIME = #{dockTime}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="accessoryPath!=null">,ACCESSORY_PATH = #{accessoryPath}</if>
+		<if test="mmsi!=null">,MMSI = #{mmsi}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="shipIntentionId!=null">,SHIP_INTENTION_ID = #{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null">,SHIP_INTENTION_UUID = #{shipIntentionUuid}</if>
+		<if test="shipOwnerId!=null">,SHIP_OWNER_ID = #{shipOwnerId}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null">,SHIP_OWNER_EN = #{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null">,CARRIER_NAME_EN = #{carrierNameEn}</if>
+		<if test="brokerNameEn!=null">,BROKER_NAME_EN = #{brokerNameEn}</if>
+		<if test="sysShipUuid!=null">,SYS_SHIP_UUID = #{sysShipUuid}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="pactCode!=null and pactCode!=''">and  PACT_CODE=#{pactCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+		<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+		<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+		<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+		<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+		<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+		<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+		<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+		<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	<!-- 船东/经纪人查询合同列表 -->
+		<select id="queryShipOwnerShipPact" resultType="java.util.HashMap" parameterType="hashmap">
+					select
+						  SHIP_PACT_ID as "shipPactId" 
+						 ,   UUID as "uuid" 
+						 ,   PACT_CODE as "pactCode" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   STATUS as "status" 
+						 ,   LOAD_PORT as "loadPort" 
+						 ,   DETAIL_STATUS as "detailStatus" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   SIGN_DATE as "signDate" 
+						 ,   CARRIER_ID as "carrierId" 
+						 ,   CARRIER_NAME as "carrierName" 
+						 ,   SHIP_OWNER as "shipOwner" 
+						 ,   SHIP_NAME as "shipName" 
+						 ,   PACT_BEG as "pactBeg" 
+						 ,   PACT_END as "pactEnd" 
+						 ,   PACT_TEXT as "pactText" 
+						 ,   MIN_QUANTITY as "minQuantity" 
+						 ,   WS as "ws" 
+						 ,   WS_RES as "wsRes" 
+						 ,   PACT_SPEED as "pactSpeed" 
+						 ,   DEMURRAGE as "demurrage" 
+						 ,   BROKER_ID as "brokerId" 
+						 ,   BROKER_NAME as "brokerName" 
+						 ,   DOCK_TIME as "dockTime" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   ACCESSORY_PATH as "accessoryPath" 
+						 ,   MMSI as "mmsi" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1"
+						 ,   SHIP_INTENTION_ID as "shipIntentionId" 
+						 ,   SHIP_INTENTION_UUID as "shipIntentionUuid" 
+						 ,   LOADING_AREA as "loadingArea" 
+						 ,   UNLOADING_AREA as "unloadingArea" 
+						 ,   SHIP_OWNER_ID as "shipOwnerId" 
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   CARRIER_NAME_EN as "carrierNameEn" 
+						 ,   BROKER_NAME_EN as "brokerNameEn" 
+						 ,   SYS_SHIP_UUID as "sysShipUuid" 
+						from t_ship_ship_pact
+		where
+			ALIVE_FLAG='1'
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and PACT_CODE like '%${pactCode}%'</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="detailStatus!=null and detailStatus!=''">and  DETAIL_STATUS=#{detailStatus}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+			<if test="carrierId!=null and carrierId!=''">and  CARRIER_ID=#{carrierId}</if>
+			<if test="carrierName!=null and carrierName!=''">and  CARRIER_NAME=#{carrierName}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME like CONCAT(CONCAT('%',#{shipName}),'%')</if>
+			<if test="pactBeg!=null and pactBeg!=''">and  PACT_BEG=#{pactBeg}</if>
+			<if test="pactEnd!=null and pactEnd!=''">and  PACT_END=#{pactEnd}</if>
+			<if test="pactText!=null and pactText!=''">and  PACT_TEXT=#{pactText}</if>
+			<if test="minQuantity!=null and minQuantity!=''">and  MIN_QUANTITY=#{minQuantity}</if>
+			<if test="ws!=null and ws!=''">and  WS=#{ws}</if>
+			<if test="wsRes!=null and wsRes!=''">and  WS_RES=#{wsRes}</if>
+			<if test="pactSpeed!=null and pactSpeed!=''">and  PACT_SPEED=#{pactSpeed}</if>
+			<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="dockTime!=null and dockTime!=''">and  DOCK_TIME=#{dockTime}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="accessoryPath!=null and accessoryPath!=''">and  ACCESSORY_PATH=#{accessoryPath}</if>
+			<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="shipIntentionId!=null and shipIntentionId!=''">and  SHIP_INTENTION_ID=#{shipIntentionId}</if>
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="carrierNameEn!=null and carrierNameEn!=''">and  CARRIER_NAME_EN=#{carrierNameEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			
+			<if test="member!=null and member!=''">and ship_plate_uuid IN (
+				SELECT
+					p.UUID
+				FROM
+					t_ship_ship_plate p
+				WHERE
+					p.ALIVE_FLAG = "1"
+				AND p.EP_MEMBER_ID =#{member}
+				)
+			</if>
+				
+			ORDER BY PACT_END DESC
+	</select>
+	
+	<select id="findPactByIntentionOrPlateUuid" resultMap="ShipPact" parameterType="hashmap">
+			select
+			* from t_ship_ship_pact
+			where
+			ALIVE_FLAG='1'
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+	</select>
+	
+	<update id="updateShipPactStatus" parameterType="hashmap">
+		update t_ship_ship_pact
+			<set>
+			STATUS= #{status}
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			 UUID=#{uuid} 
+	</update>
+	
+
+	<select id="queryRecordsFn" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT 
+						DISTINCT
+						pact.SHIP_PACT_ID as "shipPactId" 
+						 ,   pact.UUID as "uuid" 
+						 ,   pact.PACT_CODE as "pactCode" 
+						 ,   pact.EP_MEMBER_ID as "epMemberId" 
+						 ,   pact.STATUS as "status" 
+						 ,   pact.LOAD_PORT as "loadPort" 
+						 ,   pact.DETAIL_STATUS as "detailStatus" 
+						 ,   pact.SHIP_PLATE_ID as "shipPlateId" 
+						 ,   pact.SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   pact.SIGN_DATE as "signDate" 
+						 ,   pact.CARRIER_ID as "carrierId" 
+						 ,	 pact.CARRIER_NAME as "carrierName" 
+						 ,   pact.SHIP_OWNER as "shipOwner" 
+						 ,   pact.SHIP_NAME as "shipName" 
+						 ,   pact.PACT_BEG as "pactBeg" 
+						 ,   pact.PACT_END as "pactEnd" 
+						 ,   pact.PACT_TEXT as "pactText" 
+						 ,   pact.MIN_QUANTITY as "minQuantity" 
+						 ,   pact.WS as "ws" 
+						 ,   pact.WS_RES as "wsRes" 
+						 ,   pact.PACT_SPEED as "pactSpeed" 
+						 ,   pact.DEMURRAGE as "demurrage" 
+						 ,   pact.BROKER_ID as "brokerId" 
+						 ,   pact.BROKER_NAME as "brokerName" 
+						 ,   pact.DOCK_TIME as "dockTime" 
+						 ,   pact.ACCESSORY as "accessory" 
+						 ,   pact.ACCESSORY_PATH as "accessoryPath" 
+						 ,   pact.MMSI as "mmsi" 
+						 ,   pact.REMARK as "remark" 
+						 ,   pact.ALIVE_FLAG as "aliveFlag" 
+						 ,   pact.VERSION as "version" 
+						 ,   pact.LANG_VER as "langVer" 
+						 ,   pact.CREATE_DATE as "createDate" 
+						 ,   pact.UPDATE_DATE as "updateDate" 
+						 ,   pact.CREATE_USER as "createUser" 
+						 ,   pact.UPDATE_USER as "updateUser" 
+						 ,   pact.EXT1 as "ext1"
+						 ,   pact.SHIP_INTENTION_ID as "shipIntentionId" 
+						 ,   pact.SHIP_INTENTION_UUID as "shipIntentionUuid" 
+ 						 ,   pact.LOADING_AREA as "loadingArea" 
+						 ,   pact.UNLOADING_AREA as "unloadingArea" 
+						 ,   pact.SHIP_OWNER_ID as "shipOwnerId" 
+						 ,   pact.EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   pact.SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   pact.CARRIER_NAME_EN as "carrierNameEn" 
+						 ,   pact.BROKER_NAME_EN as "brokerNameEn" 
+						 ,   pact.SYS_SHIP_UUID as "sysShipUuid" 
+						 FROM t_ship_agency AS agency 
+						,t_ship_ship_pact AS pact 
+		where
+			pact.ALIVE_FLAG='1'
+			AND agency.SHIP_PACT_UUID = pact.UUID 
+			AND agency.EP_MEMBER_ID =#{epMemberId}
+			and  pact.STATUS IN ('3','4','5','6','7','8')
+			<if test="shipPactId!=null and shipPactId!=''">and  pact.SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="uuid!=null and uuid!=''">and  pact.UUID=#{uuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and pact.PACT_CODE like '%${pactCode}%'</if>
+			<if test="loadPort!=null and loadPort!=''">and  pact.LOAD_PORT=#{loadPort}</if>
+			<if test="detailStatus!=null and detailStatus!=''">and  pact.DETAIL_STATUS=#{detailStatus}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  pact.SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  pact.SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="signDate!=null and signDate!=''">and  pact.SIGN_DATE=#{signDate}</if>
+			<if test="carrierId!=null and carrierId!=''">and  pact.CARRIER_ID=#{carrierId}</if>
+			<if test="carrierName!=null and carrierName!=''">and  pact.CARRIER_NAME=#{carrierName}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  pact.SHIP_OWNER=#{shipOwner}</if>
+			<if test="shipName!=null and shipName!=''">and  pact.SHIP_NAME like CONCAT(CONCAT('%',#{shipName}),'%')</if>
+			<if test="pactBeg!=null and pactBeg!=''">and  pact.PACT_BEG=#{pactBeg}</if>
+			<if test="pactEnd!=null and pactEnd!=''">and  pact.PACT_END=#{pactEnd}</if>
+			<if test="pactText!=null and pactText!=''">and  pact.PACT_TEXT=#{pactText}</if>
+			<if test="minQuantity!=null and minQuantity!=''">and  pact.MIN_QUANTITY=#{minQuantity}</if>
+			<if test="ws!=null and ws!=''">and  pact.WS=#{ws}</if>
+			<if test="wsRes!=null and wsRes!=''">and  pact.WS_RES=#{wsRes}</if>
+			<if test="pactSpeed!=null and pactSpeed!=''">and  pact.PACT_SPEED=#{pactSpeed}</if>
+			<if test="demurrage!=null and demurrage!=''">and  pact.DEMURRAGE=#{demurrage}</if>
+			<if test="brokerId!=null and brokerId!=''">and  pact.BROKER_ID=#{brokerId}</if>
+			<if test="brokerName!=null and brokerName!=''">and  pact.BROKER_NAME=#{brokerName}</if>
+			<if test="dockTime!=null and dockTime!=''">and  pact.DOCK_TIME=#{dockTime}</if>
+			<if test="accessory!=null and accessory!=''">and  pact.ACCESSORY=#{accessory}</if>
+			<if test="accessoryPath!=null and accessoryPath!=''">and  pact.ACCESSORY_PATH=#{accessoryPath}</if>
+			<if test="mmsi!=null and mmsi!=''">and  pact.MMSI=#{mmsi}</if>
+			<if test="remark!=null and remark!=''">and  pact.REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  pact.ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  pact.VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  pact.LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  pact.CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  pact.UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  pact.CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  pact.UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  pact.EXT1=#{ext1}</if>
+			<if test="shipIntentionId!=null and shipIntentionId!=''">and  pact.SHIP_INTENTION_ID=#{shipIntentionId}</if>
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  pact.SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  pact.SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  pact.SYS_SHIP_UUID=#{sysShipUuid}</if>
+			ORDER BY PACT_END DESC
+	</select>
+	
+		<!-- 查询船合同列表 -->
+	<select id="queryRecordsByPer" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  pact.SHIP_PACT_ID as "shipPactId" 
+						 ,   pact.UUID as "uuid" 
+						 ,   pact.PACT_CODE as "pactCode" 
+						 ,   pact.EP_MEMBER_ID as "epMemberId" 
+						 ,   pact.STATUS as "status" 
+						 ,   pact.LOAD_PORT as "loadPort" 
+						 ,   pact.DETAIL_STATUS as "detailStatus" 
+						 ,   pact.SHIP_PLATE_ID as "shipPlateId" 
+						 ,   pact.SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   pact.SIGN_DATE as "signDate" 
+						 ,   pact.CARRIER_ID as "carrierId" 
+						 ,	 pact.CARRIER_NAME as "carrierName" 
+						 ,   pact.SHIP_OWNER as "shipOwner" 
+						 ,   pact.SHIP_NAME as "shipName" 
+						 ,   pact.PACT_BEG as "pactBeg" 
+						 ,   pact.PACT_END as "pactEnd" 
+						 ,   pact.PACT_TEXT as "pactText" 
+						 ,   pact.MIN_QUANTITY as "minQuantity" 
+						 ,   pact.WS as "ws" 
+						 ,   pact.WS_RES as "wsRes" 
+						 ,   pact.PACT_SPEED as "pactSpeed" 
+						 ,   pact.DEMURRAGE as "demurrage" 
+						 ,   pact.BROKER_ID as "brokerId" 
+						 ,   pact.BROKER_NAME as "brokerName" 
+						 ,   pact.DOCK_TIME as "dockTime" 
+						 ,   pact.ACCESSORY as "accessory" 
+						 ,   pact.ACCESSORY_PATH as "accessoryPath" 
+						 ,   pact.MMSI as "mmsi" 
+						 ,   pact.REMARK as "remark" 
+						 ,   pact.ALIVE_FLAG as "aliveFlag" 
+						 ,   pact.VERSION as "version" 
+						 ,   pact.LANG_VER as "langVer" 
+						 ,   pact.CREATE_DATE as "createDate" 
+						 ,   pact.UPDATE_DATE as "updateDate" 
+						 ,   pact.CREATE_USER as "createUser" 
+						 ,   pact.UPDATE_USER as "updateUser" 
+						 ,   pact.EXT1 as "ext1"
+						 ,   pact.SHIP_INTENTION_ID as "shipIntentionId" 
+						 ,   pact.SHIP_INTENTION_UUID as "shipIntentionUuid" 
+						 ,   pact.LOADING_AREA as "loadingArea" 
+						 ,   pact.UNLOADING_AREA as "unloadingArea" 
+						 ,   pact.SHIP_OWNER_ID as "shipOwnerId" 
+						 ,   pact.EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   pact.SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   pact.CARRIER_NAME_EN as "carrierNameEn" 
+						 ,   pact.BROKER_NAME_EN as "brokerNameEn" 
+						 ,   pact.SYS_SHIP_UUID as "sysShipUuid" 
+						from t_ship_ship_pact pact,
+							 t_ship_ship_plate t
+		where
+			pact.ALIVE_FLAG='1'
+			and pact.SHIP_PLATE_UUID = t.UUID
+			<if test="type!=null and type=='1'.toString()">and  t.REL_TYPE= '1'</if>
+			<if test="type!=null and type=='2'.toString()">and ( t.REL_TYPE= '2' or t.REL_TYPE is null)</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  pact.SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="uuid!=null and uuid!=''">and  pact.UUID=#{uuid}</if>
+			<if test="pactCode!=null and pactCode!=''">and  pact.PACT_CODE=#{pactCode}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  pact.EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="status!=null and status!=''">and  pact.STATUS=#{status}</if>
+			<if test="loadPort!=null and loadPort!=''">and  pact.LOAD_PORT=#{loadPort}</if>
+			<if test="detailStatus!=null and detailStatus!=''">and  pact.DETAIL_STATUS=#{detailStatus}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  pact.SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  pact.SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="signDate!=null and signDate!=''">and  pact.SIGN_DATE=#{signDate}</if>
+			<if test="carrierId!=null and carrierId!=''">and  pact.CARRIER_ID=#{carrierId}</if>
+			<if test="carrierName!=null and carrierName!=''">and  pact.CARRIER_NAME=#{carrierName}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  pact.SHIP_OWNER=#{shipOwner}</if>
+			<if test="shipName!=null and shipName!=''">and  pact.SHIP_NAME=#{shipName}</if>
+			<if test="pactBeg!=null and pactBeg!=''">and  pact.PACT_BEG=#{pactBeg}</if>
+			<if test="pactEnd!=null and pactEnd!=''">and  pact.PACT_END=#{pactEnd}</if>
+			<if test="pactText!=null and pactText!=''">and  pact.PACT_TEXT=#{pactText}</if>
+			<if test="minQuantity!=null and minQuantity!=''">and  pact.MIN_QUANTITY=#{minQuantity}</if>
+			<if test="ws!=null and ws!=''">and  pact.WS=#{ws}</if>
+			<if test="wsRes!=null and wsRes!=''">and  pact.WS_RES=#{wsRes}</if>
+			<if test="pactSpeed!=null and pactSpeed!=''">and  pact.PACT_SPEED=#{pactSpeed}</if>
+			<if test="demurrage!=null and demurrage!=''">and  pact.DEMURRAGE=#{demurrage}</if>
+			<if test="brokerId!=null and brokerId!=''">and  pact.BROKER_ID=#{brokerId}</if>
+			<if test="brokerName!=null and brokerName!=''">and  pact.BROKER_NAME=#{brokerName}</if>
+			<if test="dockTime!=null and dockTime!=''">and  pact.DOCK_TIME=#{dockTime}</if>
+			<if test="accessory!=null and accessory!=''">and  pact.ACCESSORY=#{accessory}</if>
+			<if test="accessoryPath!=null and accessoryPath!=''">and  pact.ACCESSORY_PATH=#{accessoryPath}</if>
+			<if test="mmsi!=null and mmsi!=''">and  pact.MMSI=#{mmsi}</if>
+			<if test="remark!=null and remark!=''">and  pact.REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  pact.ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  pact.VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  pact.LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  pact.CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  pact.UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  pact.CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  pact.UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  pact.EXT1=#{ext1}</if>
+			<if test="shipIntentionId!=null and shipIntentionId!=''">and  pact.SHIP_INTENTION_ID=#{shipIntentionId}</if>
+			<if test="shipIntentionUuid!=null and shipIntentionUuid!=''">and  pact.SHIP_INTENTION_UUID=#{shipIntentionUuid}</if>
+			<if test="loadingArea!=null and loadingArea!=''">and  pact.LOADING_AREA=#{loadingArea}</if>
+			<if test="unloadingArea!=null and unloadingArea!=''">and  pact.UNLOADING_AREA=#{unloadingArea}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  pact.SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  pact.SYS_SHIP_UUID=#{sysShipUuid}</if>
+			ORDER BY  pact.STATUS ASC , pact.CREATE_DATE DESC
+				</select>
+	
+	<select id="queryShipPactPlatform" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PACT_ID as "shipPactId" 
+						 ,   UUID as "uuid" 
+						 ,   PACT_CODE as "pactCode" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   STATUS as "status" 
+						 ,   LOAD_PORT as "loadPort" 
+						 ,   DETAIL_STATUS as "detailStatus" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   SIGN_DATE as "signDate" 
+						 ,   CARRIER_ID as "carrierId" 
+						 ,   CARRIER_NAME as "carrierName" 
+						 ,   SHIP_OWNER as "shipOwner" 
+						 ,   SHIP_NAME as "shipName" 
+						 ,   PACT_BEG as "pactBeg" 
+						 ,   PACT_END as "pactEnd" 
+						 ,   PACT_TEXT as "pactText" 
+						 ,   MIN_QUANTITY as "minQuantity" 
+						 ,   WS as "ws" 
+						 ,   WS_RES as "wsRes" 
+						 ,   PACT_SPEED as "pactSpeed" 
+						 ,   DEMURRAGE as "demurrage" 
+						 ,   BROKER_ID as "brokerId" 
+						 ,   BROKER_NAME as "brokerName" 
+						 ,   DOCK_TIME as "dockTime" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   ACCESSORY_PATH as "accessoryPath" 
+						 ,   MMSI as "mmsi" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   SHIP_INTENTION_ID as "shipIntentionId" 
+						 ,   SHIP_INTENTION_UUID as "shipIntentionUuid" 
+						 ,   LOADING_AREA as "loadingArea" 
+						 ,   UNLOADING_AREA as "unloadingArea" 
+						 ,   UNLOADING_AREA as "unloadingArea" 
+						 ,   SHIP_OWNER_ID as "shipOwnerId" 
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   CARRIER_NAME_EN as "carrierNameEn" 
+						 ,   BROKER_NAME_EN as "brokerNameEn" 
+						 ,   SYS_SHIP_UUID as "sysShipUuid" 
+						from t_ship_ship_pact
+		where
+			ALIVE_FLAG='1'
+			<if test="pactCode!=null and pactCode!=''">and  PACT_CODE like  CONCAT('%',#{pactCode},'%')</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME like CONCAT('%',#{shipName},'%')</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and AGREEMENT_CODE like CONCAT('%',#{agreementCode},'%'))</if>
+			<if test="publishName!=null and publishName!=''">and  SHIP_PLATE_UUID in (select UUID from t_ship_ship_plate where ALIVE_FLAG='1' and ( EP_MEMBER_NAME like CONCAT('%',#{publishName},'%') or  EP_MEMBER_NAME_EN like CONCAT('%',#{publishName},'%')))</if>
+			<if test="carrierName!=null and carrierName!=''">and (CARRIER_NAME like CONCAT('%',#{carrierName},'%') or CARRIER_NAME_EN like CONCAT('%',#{carrierName},'%') )</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  (SHIP_OWNER like CONCAT('%',#{shipOwner},'%') or SHIP_OWNER_EN like CONCAT('%',#{shipOwner},'%'))</if>
+			<if test="createBeg!=null and createBeg!=''">and  DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') &gt;= #{createBeg}</if>
+			<if test="createEnd!=null and createEnd!=''">and  DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') &lt;= #{createEnd}</if>
+			<if test="laycanBeg!=null and laycanBeg!=''">and  DATE_FORMAT(PACT_BEG, '%Y-%m-%d') &gt;= #{laycanBeg}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  DATE_FORMAT(PACT_END, '%Y-%m-%d') &lt;= #{laycanEnd}</if>
+			<if test="laycanBeg!=null and laycanBeg!=''">and  UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and DATE_FORMAT(PACT_BEG, '%Y-%m-%d') &gt;=#{laycanBeg})</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and DATE_FORMAT(PACT_END, '%Y-%m-%d') &lt;=#{laycanEnd}) </if>
+			<if test="oilType!=null and oilType!=''">and UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and OII_TYPE like CONCAT('%',#{oilType},'%'))</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOADING_AREA like CONCAT('%',#{loadPort},'%')</if>
+			<if test="unloadPort!=null and unloadPort!=''">and  UNLOADING_AREA like CONCAT('%',#{unloadPort},'%')</if>
+			<if test="loadPort!=null and loadPort!=''">and UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and LOAD_PORT like CONCAT('%',#{loadPort},'%'))</if>
+			<if test="unloadPort!=null and unloadPort!=''">and UUID in (select SHIP_PACT_UUID from t_ship_waybill where  ALIVE_FLAG='1' and UNLOAD_PORT like CONCAT('%',#{unloadPort},'%'))</if>
+			
+			ORDER BY CREATE_DATE DESC
+				</select>
+				
+				
+				
+				
+				
+				
+				
+				
+	
+</mapper>

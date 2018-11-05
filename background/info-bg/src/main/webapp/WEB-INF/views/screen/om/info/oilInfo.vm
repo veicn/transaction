@@ -1,0 +1,244 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/info/index.css')" >
+<!--特殊js 当前页面-->
+	<style>
+		.layui-form-checkbox span{ height: auto;}
+		div.tagsinput input{ margin-bottom: 0 !important;}
+		div.tagsinput span.tag{ margin-bottom:0 !important ;}
+		div.tagsinput{ overflow:none;}
+		.checkoutActive{ position:relative;}
+		.checkoutActive .layui-form-checkbox{ float: left;position:absolute; left: 15px; z-index: 1;}
+	</style>
+	<link rel="stylesheet" type="text/css" href="$imageServer.get('lib/tagsinput/jquery.tagsinput.css')" />
+	
+	
+	<!--图片上传-->
+	 
+    <script src="$imageServer.get('lib/upload/plupload.full.min.js')"></script>
+    <script src="$imageServer.get('lib/jquery/extend.js')"></script>
+	
+	<script src="$imageServer.get('lib/tagsinput/jquery.tagsinput.min.js')"></script>
+	
+	<!--百度编辑器-->
+	<link href="$imageServer.get('lib/ueditor/themes/default/css/umeditor.css')" rel="stylesheet">
+	<script type="text/javascript" src="$imageServer.get('lib/ueditor/third-party/template.min.js')"></script>
+	<script type="text/javascript" src="$imageServer.get('lib/ueditor/umeditor.config.js')"></script>
+    <!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="$imageServer.get('lib/ueditor/umeditor.min.js')"></script>
+    <script src="$imageServer.get('info/js/info/comm-info.js')"></script>
+    <script src="$imageServer.get('info/js/info/oilInfo.js')"></script>
+    
+<div class="pp15">
+
+		<form class="layui-form" action="" >
+			<input type="hidden" id="uuid" name = "uuid">
+			<h2 class="titleH2">栏目选择</h2>
+			<div class="formItem">
+				<div class="layui-form-item">
+				    <label class="layui-form-label"><span class="ry-red pr5">*</span>栏目</label>
+				    <div class="layui-input-inline"  >
+				      <select id="channelM"  lay-verify="channelM" lay-filter="selectChannelM">
+				      </select>
+				    </div>
+				    <div class="layui-input-inline">
+				      <select id="channel" name="channelUUId" lay-verify="required">
+				      </select>
+				    </div>
+				</div>
+			</div>
+			
+			<h2 class="titleH2">资讯内容</h2>
+			<div class="formItem">
+
+				<div class="layui-form-item mb">
+				    <label class="layui-form-label"><span class="ry-red pr5">*</span>标题</label>
+				    <div class="layui-input-block iw800">
+				      <input type="text" name="title" lay-verify="required"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+				    </div>
+				</div>
+				
+				<div class="layui-form-item checkoutActive">
+					<input type="checkbox" name="isShowGeneral" value="1" lay-skin="primary" title="" >
+					<label class="layui-form-label">显示导语</label>
+				    <div class="layui-input-inline  ">
+				      <input type="text" name="general" placeholder="请输入导语" class="layui-input iw800 ry-hui-bg">
+				    </div>
+				</div>
+				
+				<div class="layui-form-item checkoutActive">
+					<input type="checkbox" name="isShowOrigin" value="1" lay-skin="primary" title="" >
+				    <label class="layui-form-label">显示来源</label>
+				    <div class="layui-input-inline ">
+				      <input type="text" name="origin"   placeholder="请输入来源" class="layui-input iw800 ry-hui-bg">
+				    </div>
+				</div>
+				
+				<div class="layui-form-item">
+				    <label class="layui-form-label"><span class="ry-red pr5">*</span>内容</label>
+				    <div class="layui-input-block iw800" style="z-index:1">
+				        <!-- 加载编辑器的容器 -->
+					    <script id="container" name="content" style="height:400px;width:800px;" type="text/plain"></script>
+				    </div>
+				</div>
+				
+				<div class="layui-form-item">
+				    <label class="layui-form-label">封面</label>
+				    <div class="layui-input-block">
+				        <input type="radio" name="displayMode" value="0" title="自动" checked lay-filter="radio1" class="radio1" />
+				        <input type="radio" name="displayMode" value="1" title="单图" lay-filter="radio1" class="radio1"/>
+				        <input type="radio" name="displayMode" value="2" title="三图" lay-filter="radio1"  class="radio1"/>
+				        <input type="radio" name="displayMode" value="3" title="广告" lay-filter="radio1" class="radio1"/>
+				    </div>
+				</div>
+				
+				
+				<div class="ry-upImg">
+					<ul class="ry-upImgList">
+						<li>
+							<a href="javascript:;" id="imgOne">+</a>
+							<div id="demoOne" class="ry-imgCun"></div>
+						</li>
+					</ul>
+					<p>注：请上传一张封面图，尺寸160px*100px</p>
+				</div>
+				
+				<div class="ry-upImg">
+					<ul class="ry-upImgList">
+						<li>
+							<a href="javascript:;" id="imgTwo1">+</a>
+							
+							<div id="demoTwo1"  class="ry-imgCun"></div>
+						</li>
+						<li>
+							<a href="javascript:;" id="imgTwo2">+</a>
+							<div id="demoTwo2"  class="ry-imgCun"></div>
+						</li>
+						<li>
+							<a href="javascript:;" id="imgTwo3">+</a>
+							<div id="demoTwo3"  class="ry-imgCun"></div>
+						</li>
+					</ul>
+					<p>注：请上传一张封面图，尺寸160px*100px</p>
+				</div>
+				
+				<div class="ry-upImg">
+					<ul class="ry-upImgList">
+						<li class="active">
+							<a href="javascript:;" id="imgThree">+</a>
+							<div id="demoThree"  class="ry-imgCun"></div>
+						</li>
+					</ul>
+					<p>注：请上传一张广告大图，尺寸300px*120px</p>
+				</div>
+
+			</div>
+			
+			
+			
+			<h2 class="titleH2">标签</h2>
+			<div class="formItem ry-overflow mb20">
+				<span class="ry-left pr5 ry-tag">标签</span>
+				<input name="tagList" id="tagList"  value="" class="ry-left ry-tagInput" />
+			</div>
+			
+			
+			<h2 class="titleH2">文章设置</h2>
+			<div class="formItem">
+				<!--现阶段不用 请勿删-->
+				<!-- 
+				 <div class="mb15">
+					<div class="layui-inline iw400 checkBoxClass">
+					  <input type="checkbox" name="stick"  value="1" lay-skin="primary" title="置顶" >
+				      <div class="layui-input-inline">
+				        <input type="text" name="stickEdntime" id="time1" placeholder="yyyy-MM-dd" disabled autocomplete="off" class="layui-input ry-hui-bg">
+				      </div>
+				    </div>
+			     <div class="layui-inline iw400 checkBoxClass">
+					  <input type="checkbox" name="like1" lay-skin="primary" title="设置精选" >
+				      <div class="layui-input-inline">
+				        <input type="text" name="phone"  id="time2" placeholder="yyyy-MM-dd" disabled autocomplete="off" class="layui-input ry-hui-bg">
+				      </div>
+				    </div>
+				</div> -->
+				<div class="mb15">
+					<div class="layui-inline iw400 twoSelect">
+					  <input type="checkbox" name="isShowCopyright"  value="1" lay-skin="primary" title="显示版权声明" >
+				    </div> 
+				    <div class="layui-inline iw400 twoSelect">
+					  <input type="checkbox" name="isShowDisclaimer" value="1" lay-skin="primary" title="显示免责声明" >
+				    </div>
+				</div>
+				<!--现阶段不用 请勿删-->
+				<!--
+				<div class="mb15">
+					<div class="layui-inline iw400 checkBoxClass">
+					  <input type="checkbox" name="like1" lay-skin="primary" title="推送" >
+				      <div class="layui-input-inline">
+				        <input type="text" name="phone" id="time3" placeholder="yyyy-MM-dd HH:mm:ss" disabled  autocomplete="off" class="layui-input ry-hui-bg">
+				      </div>
+				    </div>
+				    <div class="layui-inline iw400 checkBoxClass">
+					  <input type="checkbox" name="like1" lay-skin="primary" title="定时发布" >
+				      <div class="layui-input-inline">
+				        <input type="text" name="phone" id="time4" placeholder="yyyy-MM-dd HH:mm:ss" disabled  autocomplete="off" class="layui-input ry-hui-bg">
+				      </div>
+				    </div>
+				</div>
+				<div class="mb15">
+					<div class="layui-inline iw400">
+					  <input type="checkbox" name="like1[write]" lay-skin="primary" title="是否同步到RSS" >
+				    </div>
+				</div>
+				-->
+				
+				<!--现阶段不用 请勿删-->
+				<!--<div class="layui-form-item">
+				    <label class="layui-form-label">偏好</label>
+				     <div class="layui-input-inline">
+					      <select name="city" lay-verify="required">
+					        <option value=""></option>
+					        <option value="0">北京</option>
+					        <option value="1">上海</option>
+					        <option value="2">广州</option>
+					        <option value="3">深圳</option>
+					        <option value="4">杭州</option>
+					      </select>
+					    </div>
+					    <div class="layui-input-inline">
+					      <select name="city" lay-verify="required">
+					        <option value=""></option>
+					        <option value="0">北京</option>
+					        <option value="1">上海</option>
+					        <option value="2">广州</option>
+					        <option value="3">深圳</option>
+					        <option value="4">杭州</option>
+					      </select>
+					    </div>
+					    <div class="layui-input-inline">
+					      <select name="city" lay-verify="required">
+					        <option value=""></option>
+					        <option value="0">北京</option>
+					        <option value="1">上海</option>
+					        <option value="2">广州</option>
+					        <option value="3">深圳</option>
+					        <option value="4">杭州</option>
+					      </select>
+					    </div>
+				</div>-->
+			</div>
+
+			
+			
+			
+			<div class="aniuRy">
+				<button id="saveInfo" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveInfo">保存</button>
+				<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="previewInfo">预览</button>
+				<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="releaseInfo">发布</button>
+				<button class="layui-btn layui-btn-primary" type="button" id="returnInfo" >返回</button>
+			</div>
+			
+			
+			
+		</form>
+		
+	</div>
+	

@@ -1,0 +1,42 @@
+/*合作伙伴*/
+.crumb{color:#999;font-size:14px;margin-top:20px;}
+.crumb a{color:#999;}
+.crumb a:hover{color:#08e;}
+.crumb em{margin:0 10px;}
+.crumb span{color:#666;}
+
+.par-menu{width:100%;margin:20px 0;}
+.par-menu li{float:left;height:40px;width:calc(90% / 5);margin:5px 2% 12px 0;}
+.par-menu li a{ border-radius:4px;background:#e9e9e9;font-size:13px;color:#333;margin-right:10px;display:block;width:100%;height:40px;line-height:40px;text-align:center;}
+/*.par-menu li .par-menu-li{line-height:13px;height:40px;font-size:12px;}*/
+.par-menu li a:hover{background:#ff9400;color:#fff;}
+.par-menu li .cur{background:#ff9400;color:#fff;}
+.par-cont{width:100%;}
+.par-cont li{float:left;width:23%;margin:20px 2% 0 0%;}
+.par-cont li span{width:100%;display:block; border-radius:4px;}
+.par-cont li span img{border:1px solid #ececec;width:100%;height:100%;transition:all 0.5s;-webkit-transition:all 0.5s;-ms-transform:all 0.5s; -moz-transform:all 0.5s;-o-transform:all 0.5s;}
+.par-cont li em{width:100%;display:block;text-align:center;margin:10px 0;}
+.par-cont li em a{font-size:14px;color:#333;}
+.par-cont li em a:hover{color:#f5a623;}
+/*page*/
+.c-page{padding: 20px; text-align: center; font-size: 14px;margin:20px 0;}
+.c-page a{padding: 5px 10px; line-height:30px; height: 30px; border: 1px #ececec solid;}
+.c-page span{padding: 5px 10px; line-height:30px; height: 30px;}
+.c-page-txt{border: 1px #ececec solid;}
+.c-page span.c-page-txt{background: #f9f9f9; color: #999;}
+.c-page a.c-cur{border-color: #f5a623; color:#f5a623;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

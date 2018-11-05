@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order_config>
+	<order_status_config>
+		<order_status_item code="DR" describe="合同" describe_en="Contract"
+			start_no="0" end_no="9">
+			<entity value="0" describe="未提交" describe_en = "Unsubmitted"/>
+			<entity value="1" describe="已提交" describe_en="Submitted"/>
+			<entity value="9" describe="已签订" describe_en="Signed"/>
+		</order_status_item>
+		<order_status_item code="bond" describe="保证金" describe_en=""
+			start_no="0" end_no="9">
+			<entity value="0" describe="保证金未缴纳" describe_en=""/>
+			<entity value="1" describe="保证金部分缴纳" describe_en=""/>
+			<entity value="9" describe="保证金全部缴纳" describe_en=""/>
+		</order_status_item>
+		<order_status_item code="delivery" describe="物流" describe_en="Shipping"
+			start_no="0" end_no="9">
+			<entity value="0" describe="未租船" describe_en="Uncharted"/>
+			<entity value="1" describe="已租船" describe_en="Chartered"/>
+			<entity value="2" describe="已装船" describe_en="Loaded"/>
+			<entity value="3" describe="已到港" describe_en="Arrived"/>
+			<entity value="9" describe="已卸港" describe_en="Discharged"/>
+		</order_status_item>
+		<order_status_item code="LC" describe="信用证" describe_en=""
+			start_no="0" end_no="9">
+			<entity value="0" describe="未开立" describe_en=""/>
+			<entity value="9" describe="已开立" describe_en=""/>
+		</order_status_item>
+		<order_status_item code="BL" describe="提单" describe_en=""
+			start_no="0" end_no="9">
+			<entity value="0" describe="未签发" describe_en=""/>
+			<entity value="9" describe="已签发" describe_en=""/>
+		</order_status_item>
+		<order_status_item code="invoices" describe="发票" describe_en=""
+			start_no="0" end_no="9">
+			<entity value="0" describe="未开据" describe_en=""/>
+			<entity value="9" describe="已开据" describe_en=""/>
+		</order_status_item>
+		<order_status_item code="statement" describe="对账" describe_en="Calculation"
+						   start_no="0" end_no="9">
+			<entity value="0" describe="未提交" describe_en="Unsubmitted"/>
+			<entity value="1" describe="待确认" describe_en="Pending"/>
+			<entity value="2" describe="已确认" describe_en="Confirmed"/>
+			<entity value="3" describe="已驳回" describe_en="Rejected"/>
+			<entity value="9" describe="已结算" describe_en="Confirmed"/>
+		</order_status_item>
+		<order_status_item code="fund" describe="货款" describe_en="Money"
+			start_no="0" end_no="9">
+			<entity value="0" describe="未支付" describe_en="Unpaid"/>
+			<entity value="1" describe="部分支付" describe_en="Paritial"/>
+			<entity value="9" describe="全部支付" describe_en="Paid off"/>
+		</order_status_item>
+	</order_status_config>
+	<order_biz_type_config>
+		<entity code="crude_oil_import_12_31" describe="原油进口业务" describe_en="">
+			<item code="DR" fallback="false" skip="true"/>
+			<item code="delivery" fallback="false" skip="true"/>
+			<item code="statement" fallback="false" skip="true"/>
+			<item code="fund" fallback="true" skip="true"/>
+		</entity>
+		<entity code="product_oil_export_12_31" describe="成品油出口业务" describe_en="">
+			<item code="DR" fallback="false" skip="true"/>
+			<item code="delivery" fallback="false" skip="true"/>
+			<item code="statement" fallback="false" skip="true"/>
+			<item code="fund" fallback="true" skip="true"/>
+		</entity>
+	</order_biz_type_config>
+</order_config>

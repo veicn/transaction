@@ -1,0 +1,36 @@
+##如果为原油大厅/crudeoilsupmlist.htm和index.htm这两个页面，则需要加上<!DOCTYPE html>，因为会对商品对比功能的layer.msg方法造成影响
+<!DOCTYPE html>
+<html>
+<head>
+    $contain.get("/forecontain/htmlhead.htm").put("a",$a)
+</head>
+
+<body>
+<style>#cnzz_stat_icon_1272857056{display:none}</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='"
+        + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    $contain.get("/commonContain/headline.htm").setParam('order','2').setHost("$portalServer.get('')")
+    $screen_content
+	$contain.get("/commonContain/foot.htm").setHost("$portalServer.get('')")
+<div class="toolbar" style="right: -280px;width: 316px;">
+    $contain.get("/forecontain/righttool.htm")
+</div>
+    <!--飘窗-->
+    $contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+</body>
+<script>
+    $(function(){
+        var form = $("#purchasingDemandForm");
+        var input = "<input type='hidden' name='pageType' value='mall'/>";
+        form.prepend(input);
+    });
+    
+    //定义商品比较的回调函数，主要是定义URL地址
+    function compare(idArr, dealType){
+        var url = "$appServer.get('crudeoillobby/contrast.htm')";
+        window.open(url + "?demands="+idArr.toString() + "&dealType=" + dealType);
+    }
+</script>
+</html>

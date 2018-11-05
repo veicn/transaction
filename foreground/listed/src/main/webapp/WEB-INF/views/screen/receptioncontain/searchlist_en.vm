@@ -1,0 +1,222 @@
+<div class="cg-sxtj">
+    <div class="inner">
+        <div class="cgdt-info">
+            <a class="cgdt-intxt">全部结果 &gt;</a>
+            <a class="cgdt-pro" title="" href="#">中东
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+            <a class="cgdt-pro" title="" href="#">50万桶以下
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+            <a class="cgdt-pro" title="" href="#">25以下
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+            <span class="cgdt-num">共有12340条相关信息</span>
+        </div>
+
+        <div class="cgdt-cxtj">
+            <ul>
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Trade Type：</div>
+                    <div class="cxtj-nr-text jyfs">
+                        <a href="">投标<i class="c-ico cg-tb"></i></a>
+                        <a href="" class="xj-txt">询价<i class="c-ico cg-xj"></i></a>
+                    </div>
+                </li>
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Origin：</div>
+                    <div class="cxtj-nr-text">
+                        <a href=""><input type="checkbox" class="c-check">欧洲</a>
+                        <a href=""><input type="checkbox" class="c-check">中亚</a>
+                        <a href=""><input type="checkbox" class="c-check">中东</a>
+                        <a href=""><input type="checkbox" class="c-check">南美</a>
+                        <a href=""><input type="checkbox" class="c-check">北美</a>
+                        <a href=""><input type="checkbox" class="c-check">东南亚</a>
+                        <a href=""><input type="checkbox" class="c-check">非洲</a>
+                        <a href=""><input type="checkbox" class="c-check">亚洲</a>
+                        <a href=""><input type="checkbox" class="c-check">欧洲</a>
+                        <a href=""><input type="checkbox" class="c-check">中亚</a>
+                        <a href=""><input type="checkbox" class="c-check">中东</a>
+                        <a href=""><input type="checkbox" class="c-check">南美</a>
+                        <a href=""><input type="checkbox" class="c-check">北美</a>
+                        <a href=""><input type="checkbox" class="c-check">东南亚</a>
+                        <a href=""><input type="checkbox" class="c-check">非洲</a>
+                        <a href=""><input type="checkbox" class="c-check">亚洲</a>
+                        <a href=""><input type="checkbox" class="c-check">欧洲</a>
+                        <a href=""><input type="checkbox" class="c-check">中亚</a>
+                        <a href=""><input type="checkbox" class="c-check">中东</a>
+                        <a href=""><input type="checkbox" class="c-check">南美</a>
+                        <a href=""><input type="checkbox" class="c-check">北美</a>
+                        <a href=""><input type="checkbox" class="c-check">东南亚</a>
+                        <a href=""><input type="checkbox" class="c-check">非洲</a>
+                        <a href=""><input type="checkbox" class="c-check">亚洲</a>
+                    </div>
+                    <div class="cxtj-nr-an">
+                        <a class="btn-more">收缩 ∧</a>
+                    </div>
+                    <div class="cxtj-btns">
+                        <span class="submit">提交</span>
+                        <span class="cancel">取消</span>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Grade：</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">Widuri</a>
+                        <a href="">Kaji</a>
+                        <a href="">Walio</a>
+                        <a href="">Lalang</a>
+                        <a href="">Banyu Urip</a>
+                        <a href="">Dai Hung</a>
+                    </div>
+                    <div class="cxtj-nr-an">
+                        <a class="btn-more">多选 +</a>
+                        <a class="btn-more">unfold ∨</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">数量：</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">50万桶以下</a>
+                        <a href="">50万桶以下</a>
+                        <a href="">100-200万桶</a>
+                        <a href="">200万桶以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Laycan：</div>
+                    <div class="cxtj-nr-text">
+                        <div class="cxtj-nr-blo">
+                            <a href="">2017-11-09</a>
+                            <i class="c-ico cxtj-nr-ico"></i>
+                        </div>
+                        <span>—</span>
+                        <div class="cxtj-nr-blo">
+                            <a href="">2017-11-09</a>
+                            <i class="c-ico cxtj-nr-ico"></i>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">DDR：</div>
+                    <div class="cxtj-nr-text">
+                        <div class="cxtj-nr-blo">
+                            <a href="">2017-11-09</a>
+                            <i class="c-ico cxtj-nr-ico"></i>
+                        </div>
+                        <span>—</span>
+                        <div class="cxtj-nr-blo">
+                            <a href="">2017-11-09</a>
+                            <i class="c-ico cxtj-nr-ico"></i>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Incoterm：</div>
+                    <div class="cxtj-nr-text">
+                        <select class="cxtj-nr-op">
+                            <option>CFR</option>
+                            <option>FOB</option>
+                            <option>CIF</option>
+                            <option>CIP</option>
+                            <option>DES</option>
+                        </select>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">装港：</div>
+                    <div class="cxtj-nr-text">
+                        <input type="text" class="zxhg"/>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Discharge Port</div>
+                    <div class="cxtj-nr-text">
+                        <input type="text" class="zxhg"/>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Sulphur/ m%：</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">0.5%以下</a>
+                        <a href="">0.5%-1.0%</a>
+                        <a href="">1.0%-2.0%</a>
+                        <a href="">2%以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">API</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">25以下</a>
+                        <a href="">25-30</a>
+                        <a href="">35-40</a>
+                        <a href="">40以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Acid/ (mgKOH/g)</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">0.1以下</a>
+                        <a href="">0.1-0.5</a>
+                        <a href="">0.5-1</a>
+                        <a href="">1以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Carbon<br>Residue/%</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">1.0以下</a>
+                        <a href="">1-2</a>
+                        <a href="">2-3</a>
+                        <a href="">3-4</a>
+                        <a href="">4以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Ni/ ppm</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">1.0以下</a>
+                        <a href="">1-10</a>
+                        <a href="">10-20</a>
+                        <a href="">20-30</a>
+                        <a href="">30以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix">
+                    <div class="cxtj-nr-bt">Van/ ppm</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">0.5以下</a>
+                        <a href="">0.5-1.0</a>
+                        <a href="">1.0-10</a>
+                        <a href="">10-30</a>
+                        <a href="">30以上</a>
+                    </div>
+                </li>
+
+                <li class="cxtj-nr clearfix qcxx">
+                    <div class="cxtj-nr-bt">recovery, mass %</div>
+                    <div class="cxtj-nr-text">
+                        <a href="">40以下</a>
+                        <a href="">40-50</a>
+                        <a href="">50-60</a>
+                        <a href="">60-70</a>
+                        <a href="">70以上</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

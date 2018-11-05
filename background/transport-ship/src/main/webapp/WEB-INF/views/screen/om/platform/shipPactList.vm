@@ -1,0 +1,277 @@
+<script>
+layui.use(['layer','jquery','upload'], function(){
+	var layer = layui.layer;
+	var $ = layui.jquery
+	,upload = layui.upload;
+// 提示信息
+$(function () {
+	$("td").on("mouseenter",function() {
+	    if (this.offsetWidth < this.scrollWidth) {
+	        var that = this;
+	        var text = $(this).text();
+	        
+	        if(text.indexOf(";")>-1) {
+			　　text = text.split(';')[1];
+			}
+			
+	        layer.tips("<span style='color:black'>"+text+"</span>", that,{
+	            tips: [3,"#fff"],
+	            time: 2000
+	        });
+	    }
+	});
+})
+});
+
+
+</script>
+<style>
+.contain {
+	width:100%;
+}
+
+table { 
+	width:100%; 
+	text-align: left;
+	border:1px solid #e3e6e8; 
+	border-collapse: collapse; 
+	table-layout: fixed; 
+	display: table;
+}
+
+th,td {
+	overflow: hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+}
+
+.layui-layer { 
+	word-wrap: break-word; 
+	word-break: break-all;
+}
+
+
+
+
+
+/* yangshi */
+#sysShipList tbody .table-style-th {
+	width:8% !important;
+}
+#sysShipList tbody .table-style-th:nth-child(1) {
+	width:20%;
+}
+</style>
+
+<div class="layui-table" style="padding:15px" id="layerDemo">
+	<!--搜索条件-->
+ <form action="shipPactList.htm" method="get">
+	<div class="ry-banner">
+		<div class="layui-inline">
+				<div class="layui-input-inline iw100" >
+					<label class="layui-form-label">租船合同编号</label>
+					<div class="layui-input-inline">
+					    <input id="pactCode" type="text" name="pactCode" style="width:140px;height:33px" placeholder="" autocomplete="off" class="layui-input rest" value="$!query.pactCode">
+				    </div>      
+			    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">租船协议编号</label>
+				<div class="layui-input-inline">
+				    <input id=""agreementCode"" type="text" name="agreementCode" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest"  value="$!query.agreementCode">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">油品名称</label>
+				<div class="layui-input-inline">
+				    <input id="oilType" type="text" name="oilType" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest"  value="$!query.oilType">
+			    </div>      
+		    </div>
+		      <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">状态</label>
+				<select class="layui-input rest" id="status" name="status" style="width:140px;height:33px" lay-search="" lay-filter="">
+					<option value="">请选择</option>
+					<option value="1">已生成租船协议</option>
+					<option value="2">确认执行</option>
+					<option value="3">航次开始</option>
+					<option value="4">已装港</option>
+					<option value="5">航行中</option>
+					<option value="6">已卸港</option>
+					<option value="7">航次结束</option>
+					<option value="8">已结算</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">承租人</label>
+				<div class="layui-input-inline">
+				    <input id="publishName" type="text" name="publishName" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest" value="$!query.publishName">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">租船人</label>
+				<div class="layui-input-inline">
+				    <input id="carrierName" type="text" name="carrierName" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest" value="$!query.carrierName">
+			    </div>      
+		    </div>
+		  
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">船名</label>
+				<div class="layui-input-inline">
+				    <input id="shipName" type="text" name="shipName" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest"  value="$!query.shipName">
+			    </div>      
+		    </div>
+		     <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">装期</label>
+				<div class="layui-input-inline">
+				    <input  class="time1 rest layui-input" id="laycanBeg" type="text" name="laycanBeg" style="width:140px;height:33px"  placeholder="请选择日期" readonly="readonly" maxlength="15" autocomplete="off" value="$!query.laycanBeg">
+			    </div>      
+				<span>---<span>
+				<div class="layui-input-inline">
+				    <input class="time2 rest layui-input" id="laycanEnd" type="text" name="laycanEnd" style="width:140px;height:33px"  placeholder="请选择日期" readonly="readonly"  maxlength="15"  autocomplete="off" value="$!query.laycanEnd">
+			    </div>      
+		    </div>
+		    <br/>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">船东</label>
+				<div class="layui-input-inline">
+				    <input id="shipOwner" type="text" name="shipOwner" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest" value="$!query.shipOwner">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">装港/装货区域</label>
+				<div class="layui-input-inline">
+				    <input id="loadPort" type="text" name="loadPort" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest" value="$!query.loadPort">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">卸港/卸货区域</label>
+				<div class="layui-input-inline">
+				    <input id="unloadPort" type="text" name="unloadPort" style="width:140px;height:33px"  placeholder="" autocomplete="off" class="layui-input rest" value="$!query.unloadPort">
+			    </div>      
+		    </div>
+		   <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">生成时间</label>
+				<div class="layui-input-inline">
+				    <input id="createBeg" type="text" name="createBeg" style="width:140px;height:33px"  placeholder="请选择日期" readonly="readonly" autocomplete="off" class="layui-input rest time3" value="$!query.createBeg">
+			    </div>      
+				<span>---<span>
+				<div class="layui-input-inline">
+				    <input id="createEnd" type="text" name="createEnd" style="width:140px;height:33px"  placeholder="请选择日期" readonly="readonly" autocomplete="off" class="layui-input rest time4" value="$!query.createEnd">
+			    </div>      
+		    </div>
+		    <br/>
+		    
+		    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		    
+		    <div class="layui-input-inline iw100" >
+				<div class="layui-input-inline iw300" style="width:10px;"></div>
+			    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn" type="submit">查询</button>
+			    <button class="layui-btn layui-btn-normal layui-btn-small resetBtn" type="button">重置</button>
+		    </div>
+		</div>
+	</div>
+	</form>
+	<!--列表-->
+	<div class="contain">
+	<table id="sysShipList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+	  <thead>
+	    <tr> <!-- style="text-align:center;" -->
+	      <td class="table-style-th" width="10px"></td>
+	      <td class="table-style-th" >租船船合同编号</td>
+	      <td class="table-style-th" >油品名称</td>
+		  <td class="table-style-th" >数量</td>
+		  <td class="table-style-th" >装货区域</td>
+		  <td class="table-style-th" >卸货区域</td>
+		  <td class="table-style-th" >装期</td>
+		  <td class="table-style-th" >船名</td>
+		  <td class="table-style-th" >承租人</td>
+		  <td class="table-style-th" >船东</td>
+		  <td class="table-style-th" >状态</td>
+	      <td class="table-style-th" >操作</td>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	  #foreach($data in $datas)
+	  <tr></tr>
+	  <thead class="all">
+	    <tr class='table-head-th'>
+	      <td>
+		   #if($!{data.list.size()} > 0)
+		  	<p class="sh-inp"><a href="javascript:;"><i class="cw-ico ico-close-b jiajian"></i></a></p>
+		   #else &nbsp;&nbsp;&nbsp;
+		   #end
+	      </td>
+		  <td>$!{data.pactCode}</td>
+		  <td>$!{data.oilTypes}</td>
+		  <td>$!{data.quantitys}</td>
+		  <td>$!{data.loadingArea}</td>
+		  <td>$!{data.unloadingArea}</td>
+		  <td>$!{data.pactBeg}</td>
+		  <td>$!{data.shipName}</td>
+		  <td>$!{data.epMemberNameEn}</td>
+		  <td>$!{data.shipOwner}</td>
+		  <td>#if($!{data.status} == '1')已生成租船协议#end
+			    #if($!{data.status} == '2')确认执行#end
+			 	#if($!{data.status} == '3')航次开始#end
+			 	#if($!{data.status} == '4')已装港#end
+			    #if($!{data.status} == '5')航行中#end
+			 	#if($!{data.status} == '6')已卸港#end
+			 	#if($!{data.status} == '7')航次结束#end
+			 	#if($!{data.status} == '8')已结算#end
+		  </td>
+	      <td>
+	      	<i class="layui-icon">&#xe605;</i>
+	      	<a href="javascript:;" class="dialog-link btcol shipPactDetail" attr-data="$data.uuid">查看</a>
+	      </td>
+	    </tr>
+	    </thead>
+    	<thead  class="agree" style="display: none;">
+	    	#if($!{data.list.size()} > 0)
+	    	<tr>
+	    	<th></th>
+		      <th colspan="2" class="table-style-th" style="width:150px;text-align: center;">&nbsp;&nbsp;&nbsp;租船协议编号</th>
+			  <th class="table-style-th">油品名称</th>
+			  <th class="table-style-th">数量</th>
+			  <th class="table-style-th">装港</th>
+			  <th class="table-style-th">卸港</th>
+			  <th class="table-style-th">装期</th>
+			  <th class="table-style-th">最小货量</th>
+			  <th class="table-style-th">租船人</th>
+		      <th colspan="2" class="table-style-th">操作</th>
+		    </tr> 
+	    	
+	    	#foreach($dataList in $!{data.list})
+		     <tr >
+		     <td></td>
+			  <td  colspan="2" style="text-align: center;">$!{dataList.agreementCode}</td>
+			  <td>$!{dataList.oiiType}</td>
+			  <td>$!{dataList.quantity}</td>
+			  <td>$!{dataList.loadPort}</td>
+			  <td>$!{dataList.unloadPort}</td>
+			  <td>$!{dataList.laycan}</td>
+			  <td>$!{dataList.minQuantity} &nbsp;MT</td>
+			  <td>$!{dataList.carrierName}</td>
+		      <td colspan="2">
+		      	<i class="layui-icon">&#xe605;</i>
+		      	<a href="javascript:;" class="dialog-link btcol detail" attr-data="$dataList.agreementUuid">查看</a>
+		      </td>
+		    </tr>
+	     #end
+	     #end
+     </thead>
+	  #end
+	  
+	  </tbody>
+	</table>
+	</div>
+    <!--底部分页-->
+    <div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/platform/shipPactList.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+</div>
+<script src="$shipServer.get('transport/js/om/platform/shipPactList.js')"></script>
+<script>
+
+$('#status').val($!{query.status});
+
+</script>

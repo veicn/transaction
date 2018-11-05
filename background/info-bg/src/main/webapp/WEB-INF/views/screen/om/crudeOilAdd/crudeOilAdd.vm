@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/crudeOilAdd/crudeOilAdd.css')" >
+<script src="$imageServer.get('info/js/crudeOilAdd/crudeOilAdd.js')"></script>        
+        <div class="pp15">
+           <div class="layui-form-item layui-container">     
+           <form class="layui-form" action=infoServer+"/om/crudeOilAdd/crudeOilAdd.htm" method="post">
+	           <label class="layui-form-label iw100">原油英文名称：</label>
+	            <div class="layui-input-inline iw200">
+	                <input type="text" id="oilName" name="crudeNameE" value="$!{query.crudeNameE}" class="layui-input test1">   
+	            </div>
+	            <label class="layui-form-label iw100">原油中文名称：</label>
+	            <div class="layui-input-inline iw200">
+	                <input type="text" id="oilPlace" name="crudeNameC" value="$!{query.crudeNameC}" class="layui-input test2">   
+	            </div>
+	            <button type="submit" class="layui-btn layui-btn-normal" >查询</button>
+            </form>
+            </div>
+            <table class="layui-table table-style tb-top" id="crudeOil">
+            	<thead>
+                    <tr>
+                        <th class="table-style-th">原油英文名</th>
+                        <th class="table-style-th">原油中文名</th>
+                        <th class="table-style-th">操作</th>
+                    </tr> 
+                </thead>
+                <tbody id="crudeOilAdd">
+            	#foreach($crudeAdd in $crudeAdds)
+                    <tr>
+                        <td>${crudeAdd.crudeNameE}</td>
+                        <td>${crudeAdd.crudeNameC}</td>
+                        <td>
+                            <button class="layui-btn layui-btn-normal layui-btn-small selFn" attr-data='{"id":"${crudeAdd.id}","crudeNameE":"${crudeAdd.crudeNameE}","crudeNameC":"${crudeAdd.crudeNameC}"}'>
+                                <i class="layui-icon">&#xe642;</i>
+                                                                       选择
+                            </button>
+                        </td>
+                    </tr>
+                #end
+                </tbody>
+			</table>
+			
+			<div class="layui-layer-btn layui-layer-btn-c">
+                <button class="layui-btn layui-btn-small layui-btn-normal retutnFn">返回</button>
+            </div>
+            <!-- </form> -->
+            <!--底部分页-->
+            <div class="ry-footbar ry-right">
+              <!-- <div id="ry-page" class="ry-right"></div> -->
+                $contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/crudeOilAdd/crudeOilAdd.htm").put('slider_path','/contain/formPagingPageSlider')
+            </div>
+    
+        </div>

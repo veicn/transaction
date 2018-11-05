@@ -1,0 +1,15 @@
+#header .header-line{height: 0;}
+.shipping-w{ width: 100%;
+    height: 1100px;
+    background: url(../../images/shipping_bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+#header .header-line {height: 0px;}
+.voyage-btn-box{ width: 430px; padding: 456px 0 250px 0; margin: 0 auto;}
+.voyage-btn-box a{ width: 200px; height: 60px; line-height: 60px;}
+.voyage-btn-box .vessel-btn{margin-right: 25px;}
+.shipping-icn-box{width: 1100px; margin: 0 auto;}
+.shipping-box-ul li{ float: left;width: 246px; margin-right: 38px;}
+.shipping-box-ul li:last-child{margin-right: 0px;}
+.shipping-box-ul li a{ display: block;text-align: center;}
+.shipping-box-ul li a p{font-size: 16px;text-align: center;margin-top: 20px;color: #FFFFFF;}

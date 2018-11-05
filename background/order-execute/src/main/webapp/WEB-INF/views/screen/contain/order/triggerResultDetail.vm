@@ -1,0 +1,35 @@
+#if($isTrigger == "1") 
+	<div class="c-mod">
+		<h3>
+			<i class="cw-ico ico-h3"></i>拆单信息
+		</h3>
+		<div class="c-tabdiv">
+			<table>
+				<tr>
+					<th>拆单时间</th>
+					<th>拆单数量（桶）</th>
+					<th>锁价价格</th>
+					<th>升贴水</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>月差</th>
+				</tr>
+				#if($triggerResultList.size() > 0) 
+					#foreach($item in $triggerResultList) 
+						#set($class = $velocityCount%2+1) 
+						#set($count = $velocityCount - 1)
+						<tr class="ct-tabcos$class">
+							<td>$!date.format('yyyy-MM-dd',$!item.lockTime)</td>
+							<td id="lockQuantity">$!NumberTool.format($!item.lockQuantity)</td>
+							<td>$!NumberTool.format($!item.lockPrice)</td>
+							<td>$!NumberTool.format($!item.agio)</td>
+							<td>$!NumberTool.format($!item.unitPrice)</td>
+							<td id="totalAmount">$!NumberTool.format($!item.totalAmount)</td>
+							<td>$!NumberTool.format($!item.differDesc)</td>
+						</tr>
+					#end 
+				#end
+			</table>
+		</div>
+	</div>
+#end 

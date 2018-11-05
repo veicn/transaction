@@ -1,0 +1,45 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Business background </title>
+	<link rel="stylesheet" href="$imageServer.get('css/s_common_en.css')">
+	<link rel="stylesheet" href="$imageServer.get('css/s_center_en.css')">
+		<script type="text/javascript" src="$appServer.get('script/lib/jquery.validate.min.js')"></script>
+	
+</head>
+<body>
+		<div class="c-mr">
+			<div class="c-mod" id="cgxx">
+			  <h3><em class="cw-ico ico-h3"></em>Personal information</h3>
+			  <form action="$appServer.get('center/personToadd.htm')" method="post">
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">User name：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="name" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">Document type：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="cardType" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">Identification Number：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="cardNo" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">Founder：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="createUser" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">Remarks：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="memo" ></span></li>
+				</ul>
+				
+			  </div>
+			  
+			<div class="c-subdiv">
+				<button type= "submit" class="c-btncas" >Submit</button>
+			</div>
+			  </form>
+		    </div>
+		    
+			
+		</div>	
+	</div>
+	
+</body>
+<script >
+   $(function(){
+        $("#form1").validate();
+     });
+ </script>  
+</html>

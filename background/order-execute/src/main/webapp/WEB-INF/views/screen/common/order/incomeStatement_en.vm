@@ -1,0 +1,259 @@
+<style>
+.ic_table {
+	margin-top:30px;
+}
+
+.ic_table th,td {
+	width:33%
+}
+</style>
+
+<div class="c-mod">
+	<h3><em class="cw-ico ico-h3"></em>Voyage Analysis</h3>
+	<div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">Load Port：</span>
+				<span class="c-int qx-conte">$!{data.loading}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">Discharge port：</span>
+				<span class="c-int qx-conte">$!{data.unloading}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">Vessel Name：</span>
+				<span class="c-int qx-conte">$!{data.shipName}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">Grade：</span>
+				<span class="c-int qx-conte">$!{data.goodsName}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">Density：</span>
+				<span class="c-int qx-conte">$!{data.density}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">VEF：</span>
+				<span class="c-int qx-conte">$!{data.vef}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">B/L Date：</span>
+				<span class="c-int qx-conte">$!{data.billDate}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">Discharge Date：</span>
+				<span class="c-int qx-conte">$!{data.unloadDate}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="c-tabdiv th-tabdiv">
+	<h3></h3>
+	<div class="charter-cont charter-cont2">
+		<div style="width:70%;margin: auto;" class=" charter-add charter-add2">
+			<table class="">                                                                                                  
+				<tr>
+					<th></th>
+					<th>Barrel (Gross)</th>
+					<th>MT (Gross)</th>
+				</tr>
+				<tr>
+					<td>B/L Quantity </td>
+					<td>$!{count1[0][0]}</td>
+					<td>$!{count1[0][1]}</td>
+				</tr>
+				<tr>
+					<td>OBQ</td>
+					<td>$!{count1[1][0]}</td>
+					<td>$!{count1[1][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship figure after loading</td>
+					<td>$!{count1[2][0]}</td>
+					<td>$!{count1[2][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship received volume (deduct OBQ)</td>
+					<td>$!{count1[3][0]}</td>
+					<td>$!{count1[3][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship Received (deduct OBQ)/BL Difference</td>
+					<td>$!{count1[4][0]}</td>
+					<td>$!{count1[4][1]}</td>
+				</tr>
+				<tr>
+					<td>Intransit loss (Pct)</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count1[5][0]},10)) >= 5)
+					<td class="c-warning">$!{count1[5][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count1[5][0]},10)) >= 3)
+					<td class="c-remind">$!{count1[5][0]}</td>
+					#else
+					<td>$!{count1[5][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count1[5][1]},10)) >= 5)
+					<td class="c-warning">$!{count1[5][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count1[5][1]},10)) >= 3)
+					<td class="c-remind">$!{count1[5][1]}</td>
+					#else
+					<td>$!{count1[5][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>Ship's figure after loading (deduct OBQ)</td>
+					<td>$!{count2[0][0]}</td>
+					<td>$!{count2[0][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship's figure on arrival</td>
+					<td>$!{count2[1][0]}</td>
+					<td>$!{count2[1][1]}</td>
+				</tr>
+				<tr>
+					<td>arrival/ after loading (deduct OBQ) difference</td>
+					<td>$!{count2[2][0]}</td>
+					<td>$!{count2[2][1]}</td>
+				</tr>
+				<tr>
+					<td>Intransit loss (Pct)</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count2[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count2[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count2[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count2[3][0]}</td>
+					#else
+					<td>$!{count2[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count2[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count2[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count2[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count2[3][1]}</td>
+					#else
+					<td>$!{count2[3][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>B/L Quantity</td>
+					<td>$!{count3[0][0]}</td>
+					<td>$!{count3[0][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship's figure on arrival</td>
+					<td>$!{count3[1][0]}</td>
+					<td>$!{count3[1][1]}</td>
+				</tr>
+				<tr>
+					<td>arrival/B/L difference</td>
+					<td>$!{count3[2][0]}</td>
+					<td>$!{count3[2][1]}</td>
+				</tr>
+				<tr>
+					<td>Intransit loss (Pct)</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count3[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count3[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count3[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count3[3][0]}</td>
+					#else
+					<td>$!{count3[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count3[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count3[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count3[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count3[3][1]}</td>
+					#else
+					<td>$!{count3[3][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>Ship figure on arrival</td>
+					<td>$!{count4[0][0]}</td>
+					<td>$!{count4[0][1]}</td>
+				</tr>
+				<tr>
+					<td>Ship figure on arrival (VEF applied)</td>
+					<td>$!{count4[1][0]}</td>
+					<td>$!{count4[1][1]}</td>
+				</tr>
+				<tr>
+					<td>Shore received figure</td>
+					<td>$!{count4[2][0]}</td>
+					<td>$!{count4[2][1]}</td>
+				</tr>
+				<tr>
+					<td>Shore received/arrival*VEF difference</td>
+					<td>$!{count4[3][0]}</td>
+					<td>$!{count4[3][1]}</td>
+				</tr>
+				<tr>
+					<td>Intransit loss (Pct)</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count4[4][0]},10)) >= 5)
+					<td class="c-warning">$!{count4[4][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count4[4][0]},10)) >= 3)
+					<td class="c-remind">$!{count4[4][0]}</td>
+					#else
+					<td>$!{count4[4][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count4[4][1]},10)) >= 5)
+					<td class="c-warning">$!{count4[4][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count4[4][1]},10)) >= 3)
+					<td class="c-remind">$!{count4[4][1]}</td>
+					#else
+					<td>$!{count4[4][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>B/L Quantity</td>
+					<td>$!{count5[0][0]}</td>
+					<td>$!{count5[0][1]}</td>
+				</tr>
+				<tr>
+					<td>Shore received figure</td>
+					<td>$!{count5[1][0]}</td>
+					<td>$!{count5[1][1]}</td>
+				</tr>
+				<tr>
+					<td>Shore received/B/L difference</td>
+					<td>$!{count5[2][0]}</td>
+					<td>$!{count5[2][1]}</td>
+				</tr>
+				<tr>
+					<td>Intransit loss (Pct)</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count5[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count5[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count5[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count5[3][0]}</td>
+					#else
+					<td>$!{count5[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count5[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count5[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count5[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count5[3][1]}</td>
+					#else
+					<td>$!{count5[3][1]}</td>
+					#end
+				</tr>
+			</table>
+		</div>
+		</div>
+	</div>
+</div>

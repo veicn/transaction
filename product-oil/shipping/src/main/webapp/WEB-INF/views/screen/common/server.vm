@@ -1,0 +1,10 @@
+<script>
+
+    //定义公共的Server变量
+    var appServer = "$appServer.get('').toString()";
+    var transactionServer = "$transactionServer.get('').toString()";
+    var wechatServer = "$wechatServer.get('').toString()";
+    var memberServer = "$memberServer.get('').toString()";
+    var shippingServer = "$appServer";
+    var shipServer = "$shipServer";
+</script>

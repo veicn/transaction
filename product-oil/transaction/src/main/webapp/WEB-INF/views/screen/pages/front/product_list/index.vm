@@ -1,0 +1,43 @@
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280906'))
+#css($appServer.get('/css/work/mallHome.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js("$appServer.get('js/work/L_checked.js?js_version=03280827')")
+#js("$appServer.get('js/common/idangerous.swiper2.7.6.js?js_version=03280827')")
+#js("$appServer.get('/js/common/validate.js?js_version=03280827')")
+#js("$appServer.get('/js/common/pikaday.js?js_version=03280827')")
+#js("$appServer.get('/js/common/common.js?js_version=03280827')")
+#js($appServer.get('/script/pages/front/product_list/index.js?js_version=03280827'))
+
+<form id="saleSheetQueryForm" method="post" action="$appServer.get('/pages/front/product_list/index.htm')">
+    <!-- 用于查询的隐藏表单域 -->
+    <input id="sheetFlag" name="sheetFlag" type="hidden" value="$!{sheetFlag}"/>
+    <input id="saleTypeCode" name="saleTypeCode" type="hidden" value="$!{saleSheetQueryVO.saleTypeCode}"/>
+    <input id="productCategoryCode" name="productCategoryCode" type="hidden" value="$!{saleSheetQueryVO.productCategoryCode}"/>
+    <input id="productSpecificationCode" name="productSpecificationCode" type="hidden" value="$!{saleSheetQueryVO.productSpecificationCode}"/>
+    <input id="orderByColumn" name="orderByColumn" type="hidden" value="$!{saleSheetQueryVO.orderByColumn}"/>
+    <input id="orderType" name="orderType" type="hidden" value="$!{saleSheetQueryVO.orderType}"/>
+
+    #*引入右边对比栏*#
+    $contain.get("/pages/components/compare_widget.htm")
+
+    <div class="classification-w">
+        $contain.get("/pages/front/product_list/sale_query.htm").put("saleSheetQueryVO", $!{saleSheetQueryVO}).put("sheetFlag",$!{sheetFlag})
+    </div>
+
+    <div class="mall-inner">
+        $contain.get('/pages/front/product_list/sale_query_order.htm').put("saleSheetQueryVO", $!{saleSheetQueryVO})
+        $contain.get('/pages/front/product_list/sale_sheet_list.htm').put('idquanzhou',$!idquanzhou).put('idSingapore',$!idSingapore).put("saleSheetCombineVOList", $!{pageInfoResult.list}).put('userId',$!userId).put("sheetFlag",$!{sheetFlag})
+    </div>
+</form>
+
+$contain.get('/common/page.htm').put("pageInfo", $pageInfoResult)
+
+
+
+
+
+
+

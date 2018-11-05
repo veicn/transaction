@@ -1,0 +1,47 @@
+
+<div class="cg-cont clearfix">
+    <div class="cg-zbbj"></div>
+    <h1 class="cg-zb">Tender</h1>
+
+    <div class="swiper-container" id="swiper1">
+        <div class="swiper-wrapper">
+            #foreach($dd in $bidding.list)
+                <div class="swiper-slide">
+                    <div class="cg-zbnr clearfix">
+                        <dl class="cg-zbnr-t clearfix">
+                            #if($!{dd.specified} == 1) <em><i class="c-ico cg-dxfb"></i></em> #end
+                            #if($!{dd.overdue}) <em><i class="c-ico cg-xxygq1"></i></em> #end
+                            <dt class="cg-zt-title">$!{dd.bEnterpriseName}</dt>
+                            <dd class="cg-zt-contt">#if($!{dd.publishType} == 2) Specification Require： #else Grade： #end$!{dd.crudeOilOptions}</dd>
+                            <dd class="cg-zt-cont">Post Date：$!{dd.pubDate}</dd>
+                            <dd class="cg-zt-cont">Expire Date：$!{dd.stopBidTime}</dd>
+                            <dd class="cg-zt-cont">Qty(BBL)：$!{dd.numBBL}</dd>
+                            <dd class="cg-zt-cont">Incoterm：$!{dd.tradeItem}</dd>
+                            #if($!{dd.tradeItem} == 'FOB')
+                                <dd class="cg-zt-cont">Load Port：$!{dd.shipmentPort}</dd>
+                                <dd class="cg-zt-cont">Laycan：$!{dd.shipmentStartTime} to $!{dd.shipmentEndTime}</dd>
+                            #else
+                                <dd class="cg-zt-cont">Discharge Port：$!{dd.dischargePort}</dd>
+                                <dd class="cg-zt-cont">DDR：$!{dd.dischargeStartTime} to $!{dd.dischargeEndTime}</dd>
+                            #end
+                            <dd class="cg-zt-cont">Pricing Basis：$!{dd.valuationBase}</dd>
+                            <dd class="cg-zt-cont">Payment Date：$!{dd.payItem}</dd>
+                            <div class="cg-zb-an">
+                                #if($!{dd.overdue})
+                                    <a href="javascript:void(0)" class="cg-an-tb-h"><i class="c-ico cg-ictb"></i>Bid</a>
+                                #else
+                                    <a href="javascript:void(0)" onclick="epclick('$!{dd.id}','$!{dd.creater}',false,$!{dd.overdue})" class="cg-an-tb"><i class="c-ico cg-ictb"></i>Bid</a>
+                                #end
+                                <a href="javascript:void(0)" class="cg-an-tb dbi compareC" id="compareC_$!{dd.id}_$!{dd.id}" sn="$!{dd.id}" dealType="B" img="$imageServer.get('/images/cg_pic51.jpg')" name="$!{dd.crudeOilOptions}" value="$!{dd.id}" ><i class="c-ico cg-icdb"></i>Compare</a>
+                                <a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{dd.id}" class="cg-an-tb chkxq">Details</a>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            #end
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+

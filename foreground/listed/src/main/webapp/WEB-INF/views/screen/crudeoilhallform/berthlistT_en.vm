@@ -1,0 +1,96 @@
+<div class="cg-title cg-title1">买家泊位信息</div>
+<ul class="or-line clearfix"><li></li><li class="or-line1"></li></ul>
+<ul class="cg-ysxx">
+    <li><em>Load Port：</em>$!{demandShips.shipmentPort} </li>
+    <li><em>Discharge Port：</em>$!{demandShips.dischargePort}</li>
+    <li>
+        <em>Laycan：</em>
+        $!dateTool.format("yyyy-MM-dd", $!{demandShips.shipmentStartTime})
+        to$!dateTool.format("yyyy-MM-dd", $!{demandShips.shipmentEndTime})
+    </li>
+    <li>
+        <em>DDR：</em>
+        $!dateTool.format("yyyy-MM-dd", $!{demandShips.dischargeStartTime})
+        to$!dateTool.format("yyyy-MM-dd", $!{demandShips.dischargeEndTime})
+    </li>
+</ul>
+<div class="sup-tabdiv sup-tabdiv2">
+    <table class="c-table2">
+        <tr>
+            <th></th>
+            <th>泊位名称</th>
+            <th>泊位等级（万吨）</th>
+            <th>泊位吃水（m）</th>
+            <th>适合船型</th>
+##            <th>载重吨位区间最小（万吨）</th>
+##            <th>载重吨位区间最大（万吨）</th>
+            <th>泊位说明</th>
+        </tr>
+        #foreach($ship in $!demandShipBerthList)
+            <tr class="xf-tabcos1"><td><input name="xiaofei" type="radio"  checId="$velocityCount"></td>
+                <td><input type="text" style="border: 0px"  value="$!{ship.berthName}" name="" id="berthName$velocityCount"></td>
+                <td><input type="text" style="border: 0px"  value="$!{ship.berthGrade}" name="" id="berthGrade$velocityCount"></td>
+                <td><input type="text" style="border: 0px"  value="$!{ship.draftLimitation}" name="" id="draftLimitation$velocityCount"></td>
+                <td><input type="hidden" style="border: 0px" value="$!{ship.shipType}" name="" id="shipType$velocityCount" value=""/>$!shipTypeMap.get($!{ship.shipType})</td>
+##                <td><input type="text"  style="border: 0px" value="$!{ship.carryingCapacityMin}" name="" id="carryingCapacityMin$velocityCount" /></td>
+##                <td><input type="text" style="border: 0px" value="$!{ship.carryingCapacityMax}" name="" id="carryingCapacityMax$velocityCount" /></td>
+                <td><input type="text" style="border: 0px" value="$!{ship.berthDesc}" name="" id="berthDesc$velocityCount"></td>
+            </tr>
+        #end
+    </table>
+</div>
+<script>
+
+    $(function () {
+
+        $(".c-table2 input[type='radio']").eq(0).attr('checked','checked')
+        $(".c-table2").find('input').attr('readonly','readonly')
+        $(".c-table2 .xf-tabcos1").eq(0).find('input').removeAttr('readonly')
+        var obj = $(".c-table2 input[type='radio']").eq(0);
+        var checId = obj.attr("checId");
+
+        $("#berthName"+checId).attr("name","demandShipBerth.berthName");
+
+        $("#berthGrade"+checId).attr("name","demandShipBerth.berthGrade");
+        $("#draftLimitation"+checId).attr("name","demandShipBerth.draftLimitation");
+        $("#shipType"+checId).attr("name","demandShipBerth.shipType");
+        $("#carryingCapacityMin"+checId).attr("name","demandShipBerth.carryingCapacityMin");
+        $("#carryingCapacityMax"+checId).attr("name","demandShipBerth.carryingCapacityMax");
+        $("#berthDesc"+checId).attr("name","demandShipBerth.berthDesc");
+
+
+        $(".c-table2 input[type='radio']").click(function () {
+            $(".c-table2").find('input').attr('readonly','readonly')
+            var index=$(this).attr('checId')-1
+            $(".c-table2 .xf-tabcos1").eq(index).find('input').removeAttr('readonly')
+
+            var quanbu = $(".c-table2 tr").size();
+
+            for (var i=0;i<quanbu;i++){
+                if(i!=index){
+                    $(".c-table2 .xf-tabcos1").eq(i).find('input').attr("name","");
+                    $(".xf-tabcos1 input[type='radio']").attr("name","xiaofei");
+                }
+            }
+
+            if($(".c-table2 input[type='radio']:checked")){
+
+                var obj = $(".c-table2 input[type='radio']:checked");
+
+                var checId = obj.attr("checId");
+
+                $("#berthName"+checId).attr("name","demandShipBerth.berthName");
+
+
+                $("#berthGrade"+checId).attr("name","demandShipBerth.berthGrade");
+                $("#draftLimitation"+checId).attr("name","demandShipBerth.draftLimitation");
+                $("#shipType"+checId).attr("name","demandShipBerth.shipType");
+                $("#carryingCapacityMin"+checId).attr("name","demandShipBerth.carryingCapacityMin");
+                $("#carryingCapacityMax"+checId).attr("name","demandShipBerth.carryingCapacityMax");
+                $("#berthDesc"+checId).attr("name","demandShipBerth.berthDesc");
+            }
+
+        })
+    })
+
+</script>

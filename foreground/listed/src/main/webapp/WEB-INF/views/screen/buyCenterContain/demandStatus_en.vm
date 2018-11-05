@@ -1,0 +1,33 @@
+<div class="c-mod" id="cgxx">
+	#if($!{demand.dealType} == "B")
+		<h1>Demands Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Details</span></h1>
+	#else
+	    <h1>Resources Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Details</span></h1>
+	#end
+
+    <div class="order-num-box clearfix">
+        <div class="order-num-l">
+            <p>$!{demand.bEnterpriseName}</p>
+            <p>NO.：#if($!{demand.uuid})$!{demand.uuid} #else MOCK0000001 #end</p>
+            <p><span>Create Date：</span><span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.createTime})</span></p>
+            <p><span>Expire Date：</span><span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.stopBidTime})</span></p>
+        </div>
+        <div class="order-num-r">
+        	#if($!{demand.dealType} == "B")
+            <p class="ord-ntit">Purchase Execution：</p>
+            #else
+            <p class="ord-ntit">Status：</p>
+            #end
+            $contain.get("/buyCenterContain/demandStatusState.htm").put("demandStatus", $!{demand.status})
+        </div>
+    </div>
+    <ul class="order-num-list clearfix">
+        #if($demandType)
+        	#if($!{demand.dealType} == "B")
+        		<a href="$appServer.get('/purchaseManager/demandBiddingList.htm').put('demandId', $!{demand.id})">Quotations</a>
+        	#else
+        		<a href="$appServer.get('/oilSaleBidding/demandBiddingDetail.htm').put('demandId', $!{demand.id})">Quotations</a>
+        	#end
+        #end
+    </ul>
+</div>

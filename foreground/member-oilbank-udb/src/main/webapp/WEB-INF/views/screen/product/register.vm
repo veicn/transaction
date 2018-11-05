@@ -1,0 +1,42 @@
+$contain.get('common/title.htm').put('title', 'login')
+<body>
+<main>
+    <div class="login-h">
+        <h3>Sign In</h3>
+        <p>Welcome to 1Petrolic</p>
+    </div>
+    <form action="">
+        <div class="form-group">
+            <input type="text" class="form-control" id=" " placeholder="Email or Username">
+            <i class="username"></i>
+            <span>Please enter one user name</span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id=" " placeholder="Password">
+            <i class="password"></i>
+            <span>Please enter one user name</span>
+        </div>
+        <div class="form-group form-vcode clearfix">
+            <input type="text" class="form-control" id="" placeholder="Verification Code">
+            <div class="vcode-img">
+                <img src="$appServer.get('/product/images/Group6.png')" alt="">
+            </div>
+            <em class="vcode-Refresh"></em>
+            <i class="vcode"></i>
+            <span>Please enter one user name</span>
+            <a  href="javascript:;">Forgot your password?</a>
+            <em class=" button-check">
+                <a href="javascript:;" class="br">Sign in</a>
+            </em>
+        </div>
+    </form>
+    <div class="footer">
+        <p>New to 1Petrolic?</p>
+        <div>
+            <a href="javascript:;">Create Your Account ></a>
+        </div>
+    </div>
+
+</main>
+</body>
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))

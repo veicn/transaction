@@ -1,0 +1,12 @@
+###################################changxie列表#############################################
+#set($a = "个人中心-买原油网")
+<div>
+
+    $contain.get("/longTermContract/addContractForm.htm").put("creditItemMap",$creditItemMap).put("inspectionFeeSharingTypeMap",$inspectionFeeSharingTypeMap).put("tradeItemMap",$tradeItemMap).put("payItemMap",$payItemMap).put("contract", $!{contract})
+
+</div>
+
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+
+

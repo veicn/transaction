@@ -1,0 +1,19 @@
+$contain.get('/common/title.htm').put('title', '待办信息3')
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+
+<div class="f1 content-rgh">
+    <h3 class="con-tit1 h3-hg">Message</h3>
+    <p>You are invited to link to XXXX company.</p>
+    <p>某某企业管理员AA邀请你加入XXXX企业,是否同意？</p>
+    <div class="submit-box info3">
+        <input type="button" class="button cancel fr btnr" value="Back">
+
+    </div>
+</div>
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+#js($appServer.get('/product/js/common/common.js'))
+<script>
+    commonCPY.select();
+</script>

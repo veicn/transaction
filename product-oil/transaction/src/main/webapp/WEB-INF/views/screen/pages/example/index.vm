@@ -1,0 +1,9 @@
+<div>
+    $contain.get('/pages/example/example1.htm')
+</div>
+<div>
+    $contain.get('/pages/example/example2.htm')
+</div>
+<div>
+    $contain.get("/pages/example/example3.htm")
+</div>

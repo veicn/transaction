@@ -1,0 +1,33 @@
+<div class="c-mod" id="cgxx">
+	#if($!{demand.dealType} == "B")
+		<h1>采购需求管理<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;详情</span></h1>
+	#else
+	    <h1>销售资源管理<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;详情</span></h1>
+	#end
+
+    <div class="order-num-box clearfix">
+        <div class="order-num-l">
+            <p>$!{demand.bEnterpriseName}</p>
+            <p>NO.：#if($!{demand.uuid})$!{demand.uuid} #else MOCK0000001 #end</p>
+            <p><span>创建时间：</span><span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.createTime})</span></p>
+            <p><span>截止时间：</span><span>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.stopBidTime})</span></p>
+        </div>
+        <div class="order-num-r">
+        	#if($!{demand.dealType} == "B")
+            <p class="ord-ntit">需求单执行情况：</p>
+            #else
+            <p class="ord-ntit">资源状态：</p>
+            #end
+            $contain.get("/buyCenterContain/demandStatusState.htm").put("demandStatus", $!{demand.status})
+        </div>
+    </div>
+    <ul class="order-num-list clearfix">
+        #if($demandType)
+        	#if($!{demand.dealType} == "B")
+        		<a href="$appServer.get('/purchaseManager/demandBiddingList.htm').put('demandId', $!{demand.id})">查看供应商报价</a>
+        	#else
+        		<a href="$appServer.get('/oilSaleBidding/demandBiddingDetail.htm').put('demandId', $!{demand.id})">查看买家报价</a>
+        	#end
+        #end
+    </ul>
+</div>

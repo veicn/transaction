@@ -1,0 +1,255 @@
+
+<div >
+	<form class="editorForm0 layui-form" id="statementPreForm"
+		enctype="multipart/form-data" method="post" onsubmit="return false;">
+		<div class="c-mod c-mod2">
+			<h1>
+				Deal Management<span>&nbsp;&nbsp;&nbsp;&nbsp;Provisional Price</span>
+			</h1>
+			<div class="c-form clearfix">
+			<h3>
+				<em class="cw-ico ico-h3 cw-ico2"></em>Deal Recap
+			</h3>
+			##---- Deal detailsbegin ----##
+			$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!stateData.orderId")
+			##---- Deal detailsend ----##
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<em class="cw-ico ico-h3"></em>Provisional Price
+			</h3>
+			<div class="c-form">
+				<input type="text" class="c-int" value="$!stateData.orderId"
+					name="orderId" id="orderId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.uuid"
+					name="uuid" id="uuid" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementId"
+					name="orderStatementId" id="orderStatementId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementUuid"
+					name="orderStatementUuid" id="orderStatementUuid" hidden="hidden" /> 
+				<input type="text"
+					value="$!isEdit" id="isEdit" name="isEdit" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderFeeId" id="orderFeeId" name="orderFeeId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.statementType" id="statementType" name="statementType" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderNo" id="orderNo" name="orderNo" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.sellerCustomerId" id="sellerCustomerId" name="sellerCustomerId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.buyerCustomerId" id="buyerCustomerId" name="buyerCustomerId" hidden="hidden" />
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">No.：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.orderStatementNo"
+						name="orderStatementNo" id="orderStatementNo" /></li>
+					<li class="c-fcos2"><span class="c-fn">Tel：</span><input
+						type="text" class="c-int" value="$!stateData.tel" name="tel"
+						id="tel" /></li>
+					<li class="c-fcos2"><span class="c-fn">Counterparty：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.customerName"
+						name="customerName" id="customerName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Email：</span><input lay-verify="email"
+						type="text" class="c-int" value="$!stateData.email" name="email"
+						id="email" lay-verify="email"/></li>
+					<li class="c-fcos2"><span class="c-fn">PIC：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.contactName"
+						name="contactName" id="contactName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Time：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!stateData.checkTime)"
+						name="checkTimeDesc" id="checkTime" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;"></span>B/L Qty (MT)：</span><input  
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightT)"
+						name="billWeightT" id="billWeightT" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">Agreement No.：</span><input
+						type="text" class="c-int" value="$!stateData.agentContract"
+						name="agentContract" id="agentContract" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>B/L Qty (BBL)：</span><input lay-verify="required"
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightBbl)"
+						name="billWeightBbl" id="billWeightBbl" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">Grade：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.oil" name="oil"
+						id="oil" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>Invoice Quantity (BBL)：</span><input lay-verify="required" 
+						type="text" class="c-int " 
+						value="$!NumberTool.format($!stateData.settlementQuantityBbl)"
+						name="settlementQuantityBbl" id="settlementQuantityBbl" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">Price Fomula：</span><input
+						type="text" class="c-int" value="$!stateData.priceFormula"
+						name="priceFormula" id="priceFormula" /></li>
+					<li class="c-fcos2"><span class="c-fn">Vessel Name：</span><input
+						type="text" class="c-int" value="$!stateData.shipName"
+						name="shipName" id="shipName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Contract Qty：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.contractQuantity)"
+						name="contractQuantity" id="contractQuantity" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">Incoterm：</span><input readonly="readonly"
+						type="text" class="c-int" value="$!stateData.tradeTerm"
+						name="tradeTerm" id="tradeTerm" /></li>
+					<li class="c-fcos2"><span class="c-fn"><span style="color:red;">*</span>Settlement (Unit) Price：</span><input lay-verify="required"
+						type="text" class="c-int "
+						value="$!NumberTool.format($!stateData.settlementPrice)"
+						name="settlementPrice" id="settlementPrice" 
+						onkeyup="clearNoNumThree(this)" 
+						maxlength="14"
+						onfocus="this.value=delNumFormat(this.value);" 
+						onblur="this.value=formatNumber(this.value,3,1);"/></li>
+					<li class="c-fcos2"><span class="c-fn">Cargo Value：</span><input lay-verify="required"
+						type="text" class="c-int "  readonly="readonly" id="goodsAmount" 
+						name="goodsAmount" value="$!NumberTool.format($!stateData.goodsAmount)"
+						/></li>
+					<li class="c-fcos2"><span class="c-fn">B/L Date：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.billDate)"
+						name="billDateDesc" id="billDate" /></li>
+					<li class="c-fcos2"><span class="c-fn">Costs in total：</span><input readonly="readonly"
+						type="text" class="c-int "
+						value="$!NumberTool.format($!stateData.totalFee)" name="totalFee"
+						id="totalFee" 
+						/></li>
+					<li class="c-fcos2"><span class="c-fn">Payment Due Date：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.paymentDate)"
+						name="paymentDateDesc" id="paymentDate" /></li>
+					<li class="c-fcos2"><span class="c-fn">Total Amount：</span><input lay-verify="required"
+						type="text" class="c-int"  readonly="readonly" id="totalAmount" 
+						value="$!NumberTool.format($!stateData.totalAmount)"
+						name="totalAmount" id="totalAmount" 
+						/></li> #if($stateData.status !=
+					'')
+					<li class="c-fcos2"><span class="c-fn">Status：</span> <span
+						class="c-int qx-conte"> #if($stateData.status == '01') Initial
+							#elseif($stateData.status == '05') to be confirm #elseif($stateData.status
+							== '10') Confirmed #elseif($stateData.status == '20') Rejected
+							#elseif($stateData.status == '30') Settled #end </span></li> #end
+				</ul>
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<i class="cw-ico ico-h3"></i>Cost breakdown
+			</h3>
+			<div class="c-tabdiv">
+				<table>
+					<tr>
+						<th>Expense Item</th>
+						<th>Unit</th>
+						<th>Quantity</th>
+						<th>Unit Price(USD)</th>
+						<th>Sub Total(USD)</th>
+						
+					</tr>
+					#if($feeData.size() > 0) #foreach($item in $feeData) #set($class =
+					$velocityCount%2+1) #set($count = $velocityCount - 1)
+					<tr class="ct-tabcos$class">
+						<td>$!item.subjectName</td>
+						<td>#if($!item.valuationModel == '1') Barrel #elseif($!item.valuationModel == '2') Deal  #else MT #end</td> 
+						<td>$!NumberTool.format($!item.quantity)</td>
+						<td>$!NumberTool.format($!item.feePrice)</td>
+						<td>$!NumberTool.format($!item.totalFee)</td>
+						
+					</tr>
+					#end #end
+				</table>
+			</div>
+		</div>
+		
+		<div class="c-mod">
+			<div class="c-subdiv">
+				#if($isEdit == '3')
+				<button class="c-btnsub saveFn" lay-filter="saveFn" lay-submit="">Save</button>
+				#elseif($isEdit == '2')
+				<button class="c-btnsub btn-lj againFn">Re-issue</button>
+				#elseif($isEdit == '1')
+				<button class="c-btnsub btn-lj updateFn" >Edit</button>
+				<button class="c-btnsub btn-lj comfirmFn">Submit</button>
+				#end
+				<button class="c-btncas" onClick="javascript:history.back(-1);">back</button>
+			</div>
+		</div>
+	</form>
+	
+			<div class="order-bot">
+			$contain.get("/sellerCenter/orderFeeDissent/orderFeeDissentReply.htm").put('orderId',$!stateData.orderId).put('canReply','1').put('dissentType','1')
+			</div>
+</div>	
+		
+<script src="../../orderexecute/js/orderStatement/orderStatementInfoPre.js"></script>			
+			
+<script>
+
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3'); 
+	    
+	    tool();	
+	}  
+	
+		function tool(){
+			//结算量
+			if($('#settlementQuantityBbl').val()==''){
+				return false
+			}
+			//结算价
+			if($('#settlementPrice').val()==''){
+				return false
+			}
+			
+			if($('#totalFee').val()==''){
+				$('#totalFee').val('0');
+			}	
+			//都有值
+			var settlementQuantityBbl = delNumFormat($('#settlementQuantityBbl').val());
+			var settlementPrice=delNumFormat($('#settlementPrice').val());
+			var goodsAmount = (settlementQuantityBbl*settlementPrice).toFixed(3);
+			var totalFee=delNumFormat($('#totalFee').val());
+			$('#totalFee').val(this.formatNumber(totalFee,3,1))
+			$('#goodsAmount').val(this.formatNumber(goodsAmount,3,1));
+			$('#totalAmount').val(this.formatNumber(parseFloat(totalFee)+parseFloat(goodsAmount),3,1));
+		}	
+		$(this).find('#settlementPrice').on('input propertychange',function(){
+			if(isNaN($(this).val())){
+				alert('Please entry number');
+			}else{
+				//tool();
+			}					
+		})		
+		$(this).find('#settlementQuantityBbl').on('input propertychange',function(){
+			if(isNaN($(this).val())){
+				alert('Please entry number');
+			}else{
+				//tool();
+			}					
+		})		
+		tool();	
+	</script>
+	
+

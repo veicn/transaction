@@ -1,0 +1,10 @@
+<h1><i class="cw-ico ico-h3"></i>Deal Management</h1>
+<ul class="c-state">
+    <li class="c-cur"><a href="">All<span>$!{orderStatusCountResult.total}</span></a></li>
+    <li><a href="javascript:void(0))">To be paid<span>$!{orderStatusCountResult.unpaid}</span></a></li>
+    <li><a href="javascript:void(0)">To be delivered<span class="c-gray">$!{orderStatusCountResult.unshipments}</span></a></li>
+    <li><a href="javascript:void(0)">To be received<span>$!{orderStatusCountResult.unreceiving}</span></a></li>
+    <li><a href="javascript:void(0)">To be settled<span>$!{orderStatusCountResult.unclosing}</span></a></li>
+    <li><a href="javascript:void(0)">Successful transaction<span>$!{orderStatusCountResult.successCount}</span></a></li>
+    <li><a href="javascript:void(0)">Transaction closed<span>$!{orderStatusCountResult.closeCount}</span></a></li>
+</ul>

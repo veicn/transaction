@@ -1,0 +1,408 @@
+<div class="cg-title cg-title1">
+#if($!oilSaleFlag == 1)
+	Resource Information
+#else
+	Demand Information
+#end
+</div>
+<ul class="or-line clearfix"><li></li><li class="or-line1"></li></ul>
+
+#if($!publishType ==  2)
+<div class="sup-tabdiv">
+	<input type="hidden" name="$!{bidding.publishType}" value="$!publishType"/>
+    <table id="tableId">
+        <tr>
+            <th>API</th>
+            <th>Sulphur/ m%</th>
+            <th>Acid/(mgKOH/g)</th>
+            <th>Carbon<br>Residue/%</th>
+            <th>Van+Ni/ppm</th>
+            <th>>350°C mass<br>yield/%</th>
+            <th>Remark</th>
+        </tr>
+        
+         <!--宏定义 原油基本信息 回显  -->
+            #macro(crudeOilMinMax $min $max)
+    			#if(($min != 0 && $max != 0))
+                	<td>$min<em>-</em>$max</td>
+                #elseif($min != 0)
+                	<td>>$min</td>
+              	#elseif($max != 0)
+               		<td><$max</td>
+               	#elseif($min == 0 && $max == 0)
+					<td>N/A</td>
+				#else
+					<td>N/A</td>
+               	#end
+			#end
+        
+        #foreach($cor in $crudeOilResourceList)
+            #set($Min1 = $!{cor.indicator1Min}/100.00)
+            #set($Min2 = $!{cor.indicator2Min}/100.00)
+            #set($Min3 = $!{cor.indicator3Min}/100.00)
+            #set($Min4 = $!{cor.indicator4Min}/100.00)
+            #set($Min5 = $!{cor.indicator5Min}/100.00)
+            #set($Min7 = $!{cor.indicator7Min}/100.00)
+            
+            #set($Max1 = $!{cor.indicator1Max}/100.00)
+            #set($Max2 = $!{cor.indicator2Max}/100.00)
+            #set($Max3 = $!{cor.indicator3Max}/100.00)
+            #set($Max4 = $!{cor.indicator4Max}/100.00)
+            #set($Max5 = $!{cor.indicator5Max}/100.00)
+            #set($Max7 = $!{cor.indicator7Max}/100.00)
+            
+            <tr class="c-tabcos1 c-table-input">
+                #crudeOilMinMax($Min1,$Max1)
+                #crudeOilMinMax($Min2,$Max2)
+                #crudeOilMinMax($Min3,$Max3)
+                #crudeOilMinMax($Min4,$Max4)
+                #crudeOilMinMax($Min5,$Max5)
+                #crudeOilMinMax($Min7,$Max7)
+                <td>$!{cor.desc}</td>
+            </tr>
+        #end
+    </table>
+    
+    <table id="crudeDataArray" class="c-table1">
+        <tr class="cruhead">
+        	<th></th>
+			<th style="padding:0 16px;">Action</th>
+            <th class="tabl-line">Origin</th>
+            <th>Grade</th>
+            <th>API</th>
+            <th>Sulphur/ m%</th>
+            <th>Acid/ (mgKOH/g)</th>
+            <th>Carbon<br>Residue/%</th>
+            <th>Ni/ ppm</th>
+            <th>Van/ ppm</th>
+            <th>>350°C mass<br>yield/%</th>
+            <th class="tabl-line1">Remark</th>
+        </tr>
+            
+       #if($!crudeOilResourceList && $!crudeOilResourceList.size >=0)
+            #foreach($cor in $crudeOilResourceList)
+            #set($Min1 = $!{cor.indicator1Min}/100.00)
+            #set($Min2 = $!{cor.indicator2Min}/100.00)
+            #set($Min3 = $!{cor.indicator3Min}/100.00)
+            #set($Min4 = $!{cor.indicator4Min}/100.00)
+            #set($Min5 = $!{cor.indicator5Min}/100.00)
+            #set($Min6 = $!{cor.indicator6Min}/100.00)
+            #set($Min7 = $!{cor.indicator7Min}/100.00)
+            #set($Min8 = $!{cor.indicator8Min}/10000.00)
+            #set($Min9 = $!{cor.indicator9Min}/100.00)
+            #set($Min10 = $!{cor.indicator10Min}/100.00)
+            #set($Min11= $!{cor.indicator11Min}/100.00)
+            #set($Min12= $!{cor.indicator12Min}/100.00)
+            
+            <tr class="c-tabcos1 c-table-input">
+            	 <td class="tabl-line"><input name="Fruit" type="radio" checkId="$velocityCount" value="$!{cor.name}"/></td>
+            	 <td>
+                        <a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="1">Choose</a>
+                    	<input type="hidden" id="propertyId$velocityCount" name="" value="$!{cor.propertyId}"/>
+                    	<input type="hidden" id="origin$velocityCount" name="" value="$!{cor.origin}"/>
+                    	<input type="hidden" id="originName$velocityCount" name="" value="$!{cor.originName}"/>
+                    	<input type="hidden" id="area$velocityCount" name="" value="$!{cor.area}"/>
+                    	<input type="hidden" id="cnName$velocityCount" name="" value="$!{cor.cnName}"/>
+                    
+                        <span class="c-ero">
+                           <label class="error" style="display: none;"></label>
+                        </span>
+				 </td>
+                <td>
+                    <input type="text" name="" value="$!{cor.areaString}"  readonly>
+                    <input type="hidden" name="" id="area$velocityCount" value="$!{cor.origin}">
+                </td>
+                <td><input type="text" name="" value="$!{cor.name}" id="name$velocityCount"></td>
+                <td><input type="text" name="" value="$!{Min1}" id="indicator1Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min2" id="indicator2Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min3" id="indicator3Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min4" id="indicator4Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min5" id="indicator5Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min6" id="indicator6Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!Min7" id="indicator7Min$velocityCount"><input type="hidden" name=""></td>
+                <td><input type="text" name="" value="$!{cor.desc}" id="desc$velocityCount" maxlength="255"><input type="hidden" name=""></td>
+            </tr>
+        
+        	#end
+        #else
+        	 <tr class="c-tabcos1 c-table-input">
+            	 <td class="tabl-line"><input name="Fruit" type="radio" checkId="1" checked/></td>
+            	 <td>
+                        <a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="1">Choose</a>
+                        <span class="c-ero">
+                           <label class="error" style="display: none;" /></label>
+                        </span>
+				 </td>
+                 <td>
+                    <span class="origin_name">$!{crudeOil.originNameE}</span>
+                    #if($!{cor.propertyId} == $!{crudeOil.propertyId})
+                    	<input type="hidden" id="propertyId1" name="crudeOil.propertyId" value="$!{crudeOil.propertyId}"/>
+                    #else
+                    	<input type="hidden" id="propertyId1" name=""/>
+                    #end
+                    <input type="hidden" id="origin1" name=""/>
+                    <input type="hidden" id="originName1" name=""/>
+                    <input type="hidden" id="area1" name=""/>
+                    <input type="hidden" id="cnName1" name=""/>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="name1">
+                	<span class="name">$!{crudeOil.name}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator1Min1"><input type="hidden" name="" />
+                	<span class="indicator1Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator1Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator2Min1"><input type="hidden" name="" />
+                	<span class="indicator2Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator2Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator3Min1"><input type="hidden" name="" />
+                	<span class="indicator3Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator3Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator4Min1"><input type="hidden" name="" />
+                	<span class="indicator4Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator4Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator5Min1"><input type="hidden" name="" />
+                	<span class="indicator5Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator5Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator6Min1"><input type="hidden" name="" />
+                	<span class="indicator6Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator6Min})}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" id="indicator7Min1"><input type="hidden" name="" />
+                	<span class="indicator7Min">$!{numberTool.format("#0.0",$!{crudeOil.indicator7Min})}</span>
+                </td>
+                <td>
+                    #if($!{cor.propertyId} == $!{crudeOil.propertyId})
+                    	<input type="text" name="crudeOil.desc" id="desc1" value="$!{crudeOil.desc}" maxlength="255">
+                    #else
+                    	<input type="text" name="" id="desc1" value="" maxlength="255">
+                    #end
+                	<input type="hidden" name="" />
+                </td>
+            </tr>
+        #end
+      </table>
+</div>
+<span class="cg-zy">*reference only</span>
+#else
+<div class="sup-tabdiv">
+    <table id="tableId" class="c-table1">
+        <tr>
+            <th></th>
+            <th>Origin</th>
+            <th>Grade</th>
+            <th>API</th>
+            <th>Sulphur/ m%</th>
+            <th>Acid/(mgKOH/g)</th>
+            <th>Carbon<br>Residue/%</th>
+            <th>Ni/ppm</th>
+            <th>Van/ppm</th>
+            <th>>350°C mass<br>yield/%</th>
+            <th>Remark</th>
+        </tr>
+        #foreach($cor in $crudeOilResourceList)
+            #set($Min1 = $!{cor.indicator1Min}/100.00)
+            #set($Min2 = $!{cor.indicator2Min}/100.00)
+            #set($Min3 = $!{cor.indicator3Min}/100.00)
+            #set($Min4 = $!{cor.indicator4Min}/100.00)
+            #set($Min5 = $!{cor.indicator5Min}/100.00)
+            #set($Min6 = $!{cor.indicator6Min}/100.00)
+            #set($Min7 = $!{cor.indicator7Min}/100.00)
+            #set($Min8 = $!{cor.indicator8Min}/10000.00)
+            #set($Min9 = $!{cor.indicator9Min}/100.00)
+            #set($Min10 = $!{cor.indicator10Min}/100.00)
+            #set($Min11= $!{cor.indicator11Min}/100.00)
+            #set($Min12= $!{cor.indicator12Min}/100.00)
+
+            <tr class="c-tabcos1 c-table-input">
+                <td class="tabl-line">
+                	<input name="Fruit" type="radio" checkId="$velocityCount" value="$!{cor.name}"
+                		#if($!{cor.propertyId} == $!{crudeOil.propertyId})
+                			checked
+                		#end
+                	/>
+                </td>
+                <td>
+                    <input type="hidden" name="" value="$!{cor.areaString}"  readonly>
+                    #if($!{cor.propertyId} == $!{crudeOil.propertyId})
+                    	<input type="hidden" id="propertyId$velocityCount" name="crudeOil.propertyId" value="$!{cor.propertyId}"/>
+                    #else
+                    	<input type="hidden" id="propertyId$velocityCount" name="" value="$!{cor.propertyId}"/>
+                    #end
+                    <input type="hidden" id="origin$velocityCount" name="" value="$!{cor.origin}"/>
+                    <input type="hidden" id="originName$velocityCount" name="" value="$!{cor.originName}"/>
+                    <input type="hidden" id="area$velocityCount" name="" value="$!{cor.area}"/>
+                    <input type="hidden" id="cnName$velocityCount" name="" value="$!{cor.cnName}"/>
+                    <span class="areaString">$!{cor.areaString}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" value="$!{cor.name}" id="name$velocityCount">
+                	<span class="name">$!{cor.name}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" value="$!{Min1}" id="indicator1Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min1}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" value="$!Min2" id="indicator2Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min2}</span>
+                </td>
+                <td>
+                	<input type="hidden" name="" value="$!Min3" id="indicator3Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min3}</span>
+                </td>
+                <td><input type="hidden" name="" value="$!Min4" id="indicator4Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min4}</span>
+                </td>
+                <td><input type="hidden" name="" value="$!Min5" id="indicator5Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min5}</span>
+                </td>
+                <td><input type="hidden" name="" value="$!Min6" id="indicator6Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min6}</span>
+                </td>
+                <td><input type="hidden" name="" value="$!Min7" id="indicator7Min$velocityCount"><input type="hidden" name="">
+                	<span class="name">$!{Min7}</span>
+                </td>
+                <td>
+					#if($!{cor.propertyId} == $!{crudeOil.propertyId})
+               			<input type="text" name="crudeOil.desc" value="$!{crudeOil.desc}" id="desc$velocityCount" maxlength="255">
+               		#else
+               			<input type="text" name="" value="$!{cor.desc}" readonly id="desc$velocityCount" maxlength="255">
+               		#end
+               		<input type="hidden" name="">
+                </td>
+            </tr>
+        #end
+    </table>
+</div>
+<span class="cg-zy">*reference only</span>
+#end
+
+<script>
+
+	//TODO 需求模式为1（油种）时 执行的 js
+	function retFunction(data, index){
+		var dd = $("#crudeDataArray tr").eq(index);
+        
+        // 原油产地
+        dd.find(".origin_name").html(data.originNameE);
+        dd.find(".name").html(data.crudeNameE);
+        dd.find(".indicator1Min").html(data.api);
+        dd.find(".indicator2Min").html(data.sulphur);
+        dd.find(".indicator3Min").html(data.acidity);
+        dd.find(".indicator4Min").html(data.carbonResidue);
+        dd.find(".indicator5Min").html(data.nickel);
+        dd.find(".indicator6Min").html(data.vanadium);
+        dd.find(".indicator7Min").html(data.yield);
+        
+        // 隐藏项
+        dd.find("input[name$='propertyId']").val(data.id);
+        dd.find("input[name$='origin']").val(data.originId);
+        dd.find("input[name$='originName']").val(data.originNameC);
+        dd.find("input[name$='area']").val(data.originAreaId);
+        dd.find("input[name$='cnName']").val(data.crudeNameC);
+        
+        // 油种
+        dd.find("input[name$='name']").val(data.crudeNameE);
+        dd.find("input[name$='indicator1Min']").val(data.api);
+        dd.find("input[name$='indicator2Min']").val(data.sulphur);
+        dd.find("input[name$='indicator3Min']").val(data.acidity);
+        dd.find("input[name$='indicator4Min']").val(data.carbonResidue);
+        dd.find("input[name$='indicator5Min']").val(data.nickel);
+        dd.find("input[name$='indicator6Min']").val(data.vanadium);
+        dd.find("input[name$='indicator7Min']").val(data.yield);
+    }
+	
+		
+	 $(function () {
+
+        //$(".c-table1 input[type='radio']").eq(0).attr('checked','checked')
+        //$(".c-table1").find('input').attr('readonly','readonly')
+        //$(".c-table1 .c-tabcos1").eq(0).find('input').removeAttr('readonly')
+
+        //var obj = $(".c-table1 input[type='radio']").eq(0);
+        //var checkId = obj.attr("checkId");
+        //$("#name"+checkId).attr("name","crudeOil.name");
+        ////$("#area"+checkId).attr("name","crudeOil.crudeOilId");
+        
+        //// 隐藏项
+        //$("#propertyId"+checkId).attr("name","crudeOil.propertyId");
+        //$("#origin"+checkId).attr("name","crudeOil.origin");
+        //$("#originName"+checkId).attr("name","crudeOil.originName");
+        //$("#area"+checkId).attr("name","crudeOil.area");
+        //$("#cnName"+checkId).attr("name","crudeOil.cnName");
+        
+        //$("#indicator1Min"+checkId).attr("name","crudeOil.indicator1Min");
+        //$("#indicator2Min"+checkId).attr("name","crudeOil.indicator2Min");
+        //$("#indicator3Min"+checkId).attr("name","crudeOil.indicator3Min");
+        //$("#indicator4Min"+checkId).attr("name","crudeOil.indicator4Min");
+        //$("#indicator5Min"+checkId).attr("name","crudeOil.indicator5Min");
+        //$("#indicator6Min"+checkId).attr("name","crudeOil.indicator6Min");
+        //$("#indicator7Min"+checkId).attr("name","crudeOil.indicator7Min");
+        //$("#desc"+checkId).attr("name","crudeOil.desc");
+
+        //$("input[name='crudeOilOptions']").val($(this).val());
+
+
+        $(".c-table1 input[type='radio']").click(function () {
+            $(".c-table1").find('input').attr('readonly','readonly')
+            var index=$(this).attr('checkId')-1
+            $(".c-table1 .c-tabcos1").eq(index).find('input').removeAttr('readonly')
+
+            var zonghang = $(".c-table1 tr").size();
+
+            for (var i=0;i<zonghang;i++){
+                if(i!=index){
+                    $(".c-table1 .c-tabcos1").eq(i).find('input').attr("name","");
+                    $(".c-table1 input[type='radio']").attr("name","Fruit");
+                }
+            }
+
+            if($(".c-table1 input[type='radio']:checked")){
+                var obj = $(".c-table1 input[type='radio']:checked");
+                var checkId = obj.attr("checkId");
+                $("#name"+checkId).attr("name","crudeOil.name");
+                //$("#area"+checkId).attr("name","crudeOil.crudeOilId");
+                
+                // 隐藏项
+		        $("#propertyId"+checkId).attr("name","crudeOil.propertyId");
+		        $("#origin"+checkId).attr("name","crudeOil.origin");
+		        $("#originName"+checkId).attr("name","crudeOil.originName");
+		        $("#area"+checkId).attr("name","crudeOil.area");
+		        $("#cnName"+checkId).attr("name","crudeOil.cnName");
+                
+                $("#indicator1Min"+checkId).attr("name","crudeOil.indicator1Min");
+                $("#indicator2Min"+checkId).attr("name","crudeOil.indicator2Min");
+                $("#indicator3Min"+checkId).attr("name","crudeOil.indicator3Min");
+                $("#indicator4Min"+checkId).attr("name","crudeOil.indicator4Min");
+                $("#indicator5Min"+checkId).attr("name","crudeOil.indicator5Min");
+                $("#indicator6Min"+checkId).attr("name","crudeOil.indicator6Min");
+                $("#indicator7Min"+checkId).attr("name","crudeOil.indicator7Min");
+                $("#desc"+checkId).attr("name","crudeOil.desc");
+                //$("#indicator12Min"+checkId).removeAttr("readonly");
+                //$("input[name='crudeOilOptions']").val($(this).val());
+
+            }
+
+        })
+	
+		//自定义发布的场合、清空需求模式1下的油种信息        
+        #if($!publishType ==  2)
+        	//clearOilNature();
+        #end
+        
+    })
+    
+    function clearOilNature(){
+    	$('#crudeDataArray tr td').each(function(){
+    		$(this).find('input').attr('value','');
+    	});
+    }
+	
+</script>

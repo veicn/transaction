@@ -1,0 +1,73 @@
+<div class="c-ms">
+    <div class="c-mr">
+        <div class="c-mod">
+            <div class="c-mod">
+                <h3><i class="cw-ico ico-h3"></i>长协采购单列表<span class="cxtj-nr-an"><a href="$appServer.get('/longTermContract/longContractAdd.htm')" class="btn-more">+ 新建长协采购单</a></span></h3>
+                <div class="c-tabdiv">
+                    <table>
+                        <tr>
+                            <th>订单编号</th>
+                            <th>油种</th>
+                            <th>创建日期</th>
+
+                            <th>数量(万桶)</th>
+                            <th>贸易条款</th>
+
+
+
+                            <th>计价期</th>
+
+
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+
+                        #foreach($item in $crudeOilLongTermContracts.list)
+                            <tr class="c-tabcos1">
+                                <td><a href="#" class="c-tablink">$!{item.orderNo}</a></td>
+                                <td>$!{item.name} </td>
+                                <td>$dateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",$!{item.createTime})</td>
+
+                                <td>$!{item.sumStr}</td>
+                                #if($!{item.tradeItem}=="1")
+                                    <td>FOB</td>
+                                #elseif($!{item.tradeItem}=="2")
+                                    <td>CFR</td>
+                                #elseif($!{item.tradeItem}=="3")
+                                    <td>CIF</td>
+                                #elseif($!{item.tradeItem}=="4")
+                                    <td>CIP</td>
+                                #elseif($!{item.tradeItem}=="5")
+                                    <td>DES</td>
+                                #end
+
+
+
+                                <td>$!{item.payTime}</td>
+
+
+
+                                #if($!{item.doubleSign}=="00")
+                                    <td id="sign">未确认</td>
+                                #elseif($!{item.doubleSign}=="10")
+                                    <td id="sign">通过未确认</td>
+                                #elseif($!{item.doubleSign}=="01")
+                                    <td id="sign">确认未通过</td>
+                                #elseif($!{item.doubleSign}=="11")
+                                    <td id="sign">确认通过</td>
+                                #end
+                                <td><a href="$appServer.get('/longTermContract/longContractDetail.htm').put("id",$!{item.uuid})">查看订单</a></td></tr>
+                        #end
+
+                        $!{item.createTime}
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+$contain.get('/common/page.htm').put("pageInfo",$crudeOilLongTermContracts);
+
+

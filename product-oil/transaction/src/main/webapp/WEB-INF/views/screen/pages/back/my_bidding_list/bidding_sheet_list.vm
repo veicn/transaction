@@ -1,0 +1,42 @@
+#if($!{pageInfoList.list.total} == 0)
+        $contain.get('/contain/nodata.htm')
+    #else
+        #foreach($record in $!{pageInfoList.list})
+##            #if("$!{user.epMemberId}" == "$!{record.beMenberId}")
+##                #set($b = $!{record.pEnterpriseName})
+##            #elseif("$!{user.epMemberId}" == "$!{record.peMemberId}")
+##                #set($b = $!{record.bEnterpriseName})
+##            #elseif("$!{user.epMemberId}" == "$!{record.teMemberId}")
+##                #set($b = $!{record.pEnterpriseName})
+##            #end
+            <div class="zzyy-box">
+                <div class="zzyy-title clearfix">
+                    <div class="yy-ddh">#*<input type="checkbox" name="ckbox" value="$!{record.id}">*#$!{record.createTime}<span>单号：<em>$!{record.uuid}</em></span><span class="yy-gs">销售方：$!{record.pEnterpriseName}</span></div>
+                </div>
+                <div class="orderl-cont clearfix">
+                    <div class="order-blol clearfix">
+                        <div class="orde-pic">
+                            <a href="$appServer.get('/resourceManager/biddingDetail.htm').put('demandId', $!{record.id})">
+                                <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{record.peMemberId}.img"
+                                     onerror="this.src='$imageServer.get('images/cg_pic1.jpg')'">
+                            </a>
+                        </div>
+                        <dl class="orderl-txt">
+                            <dd>品种：$!{record.productVarietyVO.enName}</dd>
+                            <dd>规格：$!{record.productSpecificationVO.enName}</dd>
+                            <dd>数量：$!record.quantityAsString</dd>
+                            <dd>贸易条款：$!{record.tradeTermVO.enName}</dd>
+                            <dd>装期：$!{record.laycanStartDateAsString}至$!{record.laycanEndDateAsString}</dd>
+                            <dd>付款日期：$!{record.payTerm}</dd>
+                            <dd class="orderl-txtd">计价期：$!record.pricingPeriodVO.enName</dd>
+                        </dl>
+                    </div>
+                    <div class="order-blor clearfix">
+                        <a href="$appServer.get('/resourceManager/biddingDetail.htm').put('demandId', $!{record.id}).put('bidding', 'b')" class="view">查看</a>
+                    </div>
+                </div>
+                <div class="seal-blo"></div>
+            </div>
+        #end
+             $contain.get('/common/page.htm').put("pageInfo",$!{pageInfoList})
+    #end

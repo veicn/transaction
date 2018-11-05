@@ -1,0 +1,10 @@
+<span class="c-logo" onclick="window.location.href='$orderExecuteServer.get('index.htm')'" style="background-size: 100%; width: 250px;"></span>
+<div class="c-nav">
+	<ul class="c-nav-top clearfix">
+		<li class="li-search" style="position: relative; left: 0px;"><i class="cw-ico ico-search-n"></i><input type="text" placeholder="搜索订单号"></li>
+		<li class="li-features">
+			<a href="#"><i class="cw-ico ico-qhzh-n"></i></a><a href="#"><i class="cw-ico ico-email-n"></i></a><a href="#"><i class="cw-ico ico-remind-n"><span>2</span></i></a><a href="#"><i class="cw-ico ico-set-n"></i></a><a href="#"><i class="cw-ico ico-exit-n"></i></a>
+		</li>
+	</ul>
+</div>
+

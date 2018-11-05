@@ -1,0 +1,91 @@
+#set($a = "有奖征集_成品油网")
+<div class="f-pri-banner"></div>
+
+<div class="f-rc clearfix">
+    <div class="inner clearfix">
+        <div class="f-rc-pril"><img src="$imageServer.get('/images/rc4.png')" alt=""></div>
+        <div class="f-rc-prir">
+            任何提供有效使用反馈的用户都可以获得成品油定制<em>充电宝</em>一个。<br/>
+            提供更多高质量有效反馈的用户即有机会获得吐槽王大奖，奖励<em>ipad</em>一个。
+        </div>
+    </div>
+        <div class="inner clearfix f-prize">
+            <div class="f-rc-yjcon">
+                <span class="f-rc-yjfk"><img src="$imageServer.get('/images/rc5.png')" alt=""></span>
+                <span><img src="$imageServer.get('/images/rc6.jpg')" alt=""></span>
+                <textarea placeholder="我使用遇到问题了，我来个吐槽。 我有想法，我有建议。" name="content" id="content" maxlength="500">$!{prizeCollection.content}</textarea>
+            </div>
+            <input type="hidden" name="enclosureUrl" id="enclosureUrl" value="$!{prizeCollection.enclosureUrl}"/>
+            <input type="hidden" name="enclosureName" id="enclosureName" value="$!{prizeCollection.enclosureName}"/>
+            <div class="f-rc-yjsc">
+                <span id="name">$!{prizeCollection.enclosureName}</span>
+                <a class="fileUpload" name="fileUpload" id="fileUpload">上传附件</a>
+            </div>
+            <div class="f-rc-yjbott">
+                <button type="submit" id="submit">提交</button>
+            </div>
+        </div>
+</div>
+
+<script>
+
+
+    #if($errorMessage && $errorMessage != "")
+        layui.use("layer",function() {
+            layer.alert("$!{errorMessage}");
+        });
+    #end
+
+    layui.use("ossUpload", function(){
+        var $ = layui.jquery,upload = layui.ossUpload;
+        upload.render({
+            elem: "fileUpload",
+            done: function(res, index){
+                if(res.status == 0){
+                    $("#enclosureUrl").val(res.datas.path);
+                    $("#enclosureName").val(res.datas.originalName);
+                    $("#name").html(res.datas.originalName);
+                }else{
+                    layer.tips(res.message, this.item, {tips: 1});
+                }
+            }
+        })
+    })
+
+    $("#submit").click(function () {
+
+        var content = $("#content").val();
+        var enclosureUrl = $("#enclosureUrl").val();
+        var enclosureName = $("#enclosureName").val();
+        if(content == ''){
+            layer.alert("内容不能为空！");
+            return false;
+        }
+        var obj = {
+            "content" : content,
+            "enclosureUrl" : enclosureUrl,
+            "enclosureName" : enclosureName
+        }
+        $.ajax({
+            url:"$appServer.get('/prize/save.json')",
+            type:'POST',
+            data: JSON.stringify(obj),
+            dataType: 'JSON',
+            success:function(data){
+                layer.alert(data.message,function(){
+                    parent.layer.closeAll();
+                    if(data && data.status == 0){
+                        parent.location.reload();
+                    }
+                });
+            },
+            error:function(data){
+                layer.alert('保存失败');
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+    });
+
+</script>

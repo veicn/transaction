@@ -1,0 +1,132 @@
+.St-line{
+    display: inline-block;
+    width: 100%;
+    height:2px;
+    background: #818287;
+}
+.time ul li input{
+    width: 137px;
+}
+.m-nav-info>li{
+    width: 100%;
+    margin-top:20px;
+}
+.m-nav-btn{
+    width: 100%;
+    height: 48px;
+    margin: 10px 0 0px 0;
+}
+.m-nav-btn>div{
+    width: 143px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    float: right;
+    color: #FFFFFF;
+    margin-left: 30px;
+    border-radius: 2px;
+    cursor:pointer;
+}
+.m-nav-info>li>span:first-child{
+    display: inline-block;
+    vertical-align: middle;
+    width: 175px;
+    color: #666666;
+    font-size: 14px;
+    text-align: right;
+    margin-right: 13px;
+}
+.m-nav-info>li>span:nth-child(2){
+    display: inline-block;
+    width: 400px;
+    color: #333333;
+    font-size: 14px;
+    text-align: left;vertical-align: middle;
+}
+.m-nav-info>li>input{
+    width: 410px;
+    height: 35px;
+    padding: 0 2px 0 5px;
+}
+.m-nav-info>li>span input.range-input{height: 35px;padding-left: 10px;}
+
+
+
+.m-nav-line{
+    display: inline-block;
+    width: 880px;
+    height: 1px;
+    background: #ECECEC;
+    margin: 30px 0 8px 0;
+}
+.input_Upload>input:nth-of-type(1){
+    width: 305px;
+}
+
+.input_Upload>i{
+    display: inline-block;
+    width: 100px;
+    height: 36px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;
+    color: #FFFFFF;
+    margin-left: 6px;
+    cursor:pointer;font-size: 14px;
+}
+.input_Upload>i>a{
+    color: #fff;text-decoration: none;
+}
+.input_Upload>i:hover{
+    background: #FF9D32 ;
+
+}
+.check-b1{
+    float:right ;
+}
+.time ul li .icon span{
+    font-size: 16px;
+    position: absolute;
+    margin: 0;
+    display: inline-block;
+    top:0;
+    left: -10px;
+}
+.time ul li input{
+    margin-right: 10px;
+}
+.check-b1>.br:hover{
+    background: #FF9D32;color: #fff;
+}
+#footer{
+    margin-top: 30px;
+}
+.m-nav>.m-box {
+    border-bottom: 0;
+}
+
+/*船舶确认单详情查看*/
+.par-content .m-tab{ margin: 30px 20px 0 0;}
+.par-content .m-nav{ margin: 30px 0px 0 0;}
+.par-box .tit{font-size: 20px;color: #F36523;}
+/*船舶代理协议确认*/
+.c-btn-w a{ margin-left: 26px;}
+.c-btn-w .btn-c{ background: #F36523;}
+/*新增船舶更改*/
+.Vessel-sele{
+    padding: 0;
+    width: 408px;
+    height: 36px;
+    border: 1px solid #C1C1C1;
+}
+.Vessel-sele .select {
+    width: 398px;
+    border: 0;
+}
+.Vessel-sele .select-content {
+    width: 372px;
+}
+.select-content>.Vessel-sele-text{
+    padding-left: 5px;
+}

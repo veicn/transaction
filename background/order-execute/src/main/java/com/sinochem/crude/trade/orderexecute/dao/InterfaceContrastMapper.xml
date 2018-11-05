@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.InterfaceContrastMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast" id="InterfaceContrast">
+		<result property="contrastId" column="CONTRAST_ID" />
+		<result property="sysName" column="SYS_NAME" />
+		<result property="paraType" column="PARA_TYPE" />
+		<result property="paraCode" column="PARA_CODE" />
+		<result property="paraDesc" column="PARA_DESC" />
+		<result property="otherCode" column="OTHER_CODE" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast"  useGeneratedKeys="true" keyProperty="contrastId" >
+		insert  into t_interface_contrast (				CONTRAST_ID
+						,SYS_NAME
+						,PARA_TYPE
+						,PARA_CODE
+						,PARA_DESC
+						,OTHER_CODE
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						)
+		values(		#{contrastId}
+						,#{sysName}
+						,#{paraType}
+						,#{paraCode}
+						,#{paraDesc}
+						,#{otherCode}
+						,#{langVer}
+						,'1'
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_interface_contrast
+              WHERE 1=1 
+                AND CONTRAST_ID = #{contrastId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast">
+        DELETE FROM t_interface_contrast
+              WHERE 1=1 
+        <if test="contrastId!=null and contrastId!=''">AND  CONTRAST_ID = #{contrastId}</if>
+        <if test="sysName!=null and sysName!=''">AND  SYS_NAME = #{sysName}</if>
+        <if test="paraType!=null and paraType!=''">AND  PARA_TYPE = #{paraType}</if>
+        <if test="paraCode!=null and paraCode!=''">AND  PARA_CODE = #{paraCode}</if>
+        <if test="paraDesc!=null and paraDesc!=''">AND  PARA_DESC = #{paraDesc}</if>
+        <if test="otherCode!=null and otherCode!=''">AND  OTHER_CODE = #{otherCode}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast">
+		update t_interface_contrast
+		<set>
+         CONTRAST_ID=#{contrastId}
+		<if test="sysName!=null">,SYS_NAME = #{sysName}</if>
+		<if test="paraType!=null">,PARA_TYPE = #{paraType}</if>
+		<if test="paraCode!=null">,PARA_CODE = #{paraCode}</if>
+		<if test="paraDesc!=null">,PARA_DESC = #{paraDesc}</if>
+		<if test="otherCode!=null">,OTHER_CODE = #{otherCode}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 CONTRAST_ID=#{contrastId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast">
+		update t_interface_contrast
+		<set>
+		<if test="sysName!=null">SYS_NAME = #{sysName}</if>
+		<if test="paraType!=null">,PARA_TYPE = #{paraType}</if>
+		<if test="paraCode!=null">,PARA_CODE = #{paraCode}</if>
+		<if test="paraDesc!=null">,PARA_DESC = #{paraDesc}</if>
+		<if test="otherCode!=null">,OTHER_CODE = #{otherCode}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="contrastId!=null and contrastId!=''">and  CONTRAST_ID=#{contrastId}</if>
+		<!-- <if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+		<if test="paraType!=null and paraType!=''">and  PARA_TYPE=#{paraType}</if>
+		<if test="paraCode!=null and paraCode!=''">and  PARA_CODE=#{paraCode}</if>
+		<if test="paraDesc!=null and paraDesc!=''">and  PARA_DESC=#{paraDesc}</if>
+		<if test="otherCode!=null and otherCode!=''">and  OTHER_CODE=#{otherCode}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if> -->
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="InterfaceContrast">
+			select
+			* from t_interface_contrast
+			where
+		    CONTRAST_ID=#{contrastId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="InterfaceContrast">
+			select
+			* from t_interface_contrast
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="InterfaceContrast" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceContrast">
+		select * from t_interface_contrast
+			where
+		 ALIVE_FLAG='1'
+		<if test="contrastId!=null and contrastId!=''">and  CONTRAST_ID=#{contrastId}</if>
+		<if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+		<if test="paraType!=null and paraType!=''">and  PARA_TYPE=#{paraType}</if>
+		<if test="paraCode!=null and paraCode!=''">and  PARA_CODE=#{paraCode}</if>
+		<if test="paraDesc!=null and paraDesc!=''">and  PARA_DESC=#{paraDesc}</if>
+		<if test="otherCode!=null and otherCode!=''">and  OTHER_CODE=#{otherCode}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  CONTRAST_ID as "contrastId" 
+						 ,   SYS_NAME as "sysName" 
+						 ,   PARA_TYPE as "paraType" 
+						 ,   PARA_CODE as "paraCode" 
+						 ,   PARA_DESC as "paraDesc" 
+						 ,   OTHER_CODE as "otherCode" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_interface_contrast
+		where
+			ALIVE_FLAG='1'
+			<if test="contrastId!=null and contrastId!=''">and  CONTRAST_ID=#{contrastId}</if>
+			<if test="sysName!=null and sysName!=''">and  SYS_NAME like '%' #{sysName} '%'</if>
+			<if test="paraType!=null and paraType!=''">and  PARA_TYPE=#{paraType}</if>
+			<if test="paraCode!=null and paraCode!=''">and  PARA_CODE like '%' #{paraCode} '%'</if>
+			<if test="paraDesc!=null and paraDesc!=''">and  PARA_DESC=#{paraDesc}</if>
+			<if test="otherCode!=null and otherCode!=''">and  OTHER_CODE like '%' #{otherCode} '%'</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_interface_contrast 
+		where
+		 ALIVE_FLAG='1'
+			<if test="contrastId!=null and contrastId!=''">and  CONTRAST_ID=#{contrastId}</if>
+			<if test="sysName!=null and sysName!=''">and  SYS_NAME like '%' #{sysName} '%'</if>
+			<if test="paraType!=null and paraType!=''">and  PARA_TYPE=#{paraType}</if>
+			<if test="paraCode!=null and paraCode!=''">and  PARA_CODE like '%' #{paraCode} '%'</if>
+			<if test="paraDesc!=null and paraDesc!=''">and  PARA_DESC=#{paraDesc}</if>
+			<if test="otherCode!=null and otherCode!=''">and  OTHER_CODE like '%' #{otherCode} '%'</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<update id="deleteRecordsByid">
+		update t_interface_contrast
+		<set>
+		ALIVE_FLAG='0'
+		</set>
+		where
+		CONTRAST_ID=#{contrastId}
+		<!-- <if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+		<if test="paraType!=null and paraType!=''">and  PARA_TYPE=#{paraType}</if>
+		<if test="paraCode!=null and paraCode!=''">and  PARA_CODE=#{paraCode}</if>
+		<if test="paraDesc!=null and paraDesc!=''">and  PARA_DESC=#{paraDesc}</if>
+		<if test="otherCode!=null and otherCode!=''">and  OTHER_CODE=#{otherCode}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if> -->
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <!-- consumer application name -->
+    <dubbo:application name="sinochem-goods-consumer" />
+    <dubbo:registry address="${dubbo.registry.url}" />
+    <dubbo:consumer timeout="${dubbo.consumer.timeout}" />
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="${dubbo.port}" />
+    <!-- registry address, used for consumer to discover services -->
+     <dubbo:reference check="${dubbo.check}"  group="${dubbo.group}" version="${dubbo.version}" id="BatchService" interface="com.sinochem.crude.trade.info.remote.InfoService"/>
+</beans>

@@ -1,0 +1,1317 @@
+#js("$appServer.get('script/lib/jquery.autocomplete.min.js')")
+
+#set($mark = $!{mark}) ##mark=0为新增，mark=1为修改
+
+<div class="s-mod-bcont2">
+    <div class="cg-ord-box s-myl-cont">
+        <div class="cg-ord-blo s-myl-box">
+            <div class="cg-ord-cont clearfix">
+                <div class="s-purchase s-pur-curr caoyue1">
+                    <div class="quote-tit">意向草约1</div>
+                    <ul>
+                        <input type="hidden" name="biddingId" value="$!{demand.id}">
+                        <input type="hidden" name="biddingList[0].ordersequence" value="1">
+                        <input type="hidden" name="status" value="">
+
+                        <input type="hidden" name="biddingList[0].bidding.id" value="$!{demandId1}">
+
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>数量（桶）</span><span class="purc-span2"><input type="text" class="c-int required true biddingNeeded" name="biddingList[0].bidding.numStr" value="$!{demand.numStr}" placeholder="请输入"></span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>溢短装</span><span class="purc-span2"><em class="s-myl-em1">+/-</em><input type="text" class="c-int required true biddingNeeded" name="biddingList[0].bidding.numfloat" value="$!{demand.numfloat}" placeholder="请输入"><em class="s-myl-em2">%</em></span></li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl"><em>*</em>贸易条款</span>
+                            <span class="purc-span2">
+                                <select class="sele" class="sele c-int required true biddingNeeded" name="biddingList[0].bidding.tradeItem" id="tradeItem" value="$!{demand.tradeItem}">
+                                    #foreach($tim in $!tradeItemMap.entrySet())
+                                        <option value="$!tim.key" #if($!{demand.tradeItem} == $!{tim.key}) selected #end>$!tim.value</option>
+                                    #end
+                                </select>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>升贴水</span><span class="purc-span2">
+                                    <input type="text" class="c-int required true biddingNeeded" placeholder="请输入" name="biddingList[0].bidding.agioStr" value="$!{demand.agioStr}"></span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">计价基准</span>
+                            <span class="purc-span2">
+                                <select class="sele" name="biddingList[0].bidding.valuationBase" value="$!{demand.valuationBase}">
+                                    #foreach($item in $valuationBase.entrySet())
+                                        <option value="$!item.key" #if($!{demand.valuationBase} == $!{item.key}) selected #end>$!item.value</option>
+                                    #end
+                                </select>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价期</span>
+                            <span class="purc-span2">
+                                         <select class="sele" name="biddingList[0].bidding.valuationProidType" id="valuationProidType" value="$!{demand.valuationProidType}" onchange="proidTypeChange1(this.value)">
+                                             #foreach($!vpt in $!{valuationProidTypeMap.entrySet()})
+                                                 <option value="$!vpt.key" #if($!{demand.valuationProidType} == $!{vpt.key}) selected #end>$!vpt.value</option>
+                                             #end
+                                         </select>
+                                    </span>
+                        </li>
+                    #*======================计价器选择  4 或 5  显示========================================================*#
+                        <li class="purc-blo clearfix valuationProid1" #if($!demand.valuationProidType != 4) hidden #end>
+                            <span class="purc-spanl">计价区间</span>
+                            <span class="purc-span2">
+                                <input type="text" class="width_30" name="biddingList[0].bidding.valuationProidStart" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})"/>
+                                <em class="s-myl-em4">&nbsp;—&nbsp;</em>
+                                <input name="biddingList[0].bidding.valuationProidEnd" class="width_30" type="text" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})"/>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix contractKind1" #if($!demand.valuationProidType != 5) hidden #end>
+                            <span class="purc-spanl">合约种类</span>
+                            <span class="purc-span2">
+                                <select class="sele c-int" name="biddingList[0].bidding.contractKind" value="$!{demand.contractKind}">
+                                    #foreach($!pm in $!contractKindMap.entrySet())
+                                        <option value="$!pm.key" #if($!{demand.contractKind} == $!{pm.key}) selected #end>$!pm.value</option>
+                                    #end
+                                </select>
+                            </span>
+                        </li>
+                    #*==============================================================================*#
+                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>计价公式</span>
+                            <span class="purc-span2 purc-span21">
+                                      <textarea class="biddingNeeded purctex pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson1" name="biddingList[0].bidding.valuationFormula" id="valuationFormula" readonly>$!{demand.valuationFormula}</textarea>
+                                <!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+                                     <input type="hidden" class=" c-int required true biddingNeeded" name="biddingList[0].bidding.valuationFormulaJson" id="valuationFormulaJson1" value='$!{demand.valuationFormulaJson}' /><input type="hidden" name="bidding.pricingMode" id="pricingMode" value='$!{demand.valuationFormula}' /> </span>
+                        </li>
+##                        $contain.get("/pricingFormula/physicalPricingEditor.htm")
+                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl"><em>*</em>付款日期</span>
+                            <span class="purc-span2">
+                                        <span class="s-purc-span2">
+                                        <select  id="typeEvent" name="biddingList[0].bidding.typeEvent" class="width_25">
+                                            #foreach($!typeEvent in $!payItemMap.entrySet())
+                                                <option value="$!typeEvent.value">$!typeEvent.value</option>
+                                            #end
+                                        </select>
+                                        <input id="otherDate" name="biddingList[0].bidding.otherDate" class="tim-inpu"  placeholder="输入日期" style="display: none" type="text"  date="true" />
+                                         <select  id="eventInclusion" name="bidding.eventInclusion"  class="width_25" >
+                                            <option value="after" >After</option>
+                                            <option value="from" >From</option>
+                                        </select>
+                                            <input id="eventDays"  name="biddingList[0].bidding.eventDays" class="width_30 c-int required true biddingNeeded" class="c-fcinpu" value="" type="text" required placeholder="输入天数" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                                             <label for="eventDays" id="eventDays-error" class="error my-error"></label>
+                                        </span>
+                                        <em class="s-myl-em3">Days
+                                              <input id="payItem" name="biddingList[0].bidding.payItem" style="display: none" value="$!{demand.payItem}" />
+                                            <input id="payItemJSON" name="biddingList[0].bidding.payItemJSON" style="display: none" value='$!{demand.payItemJSON}' />
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>信用条款</span>
+                             <span class="purc-span2">
+                                        <select class="sele c-int required true biddingNeeded" name="biddingList[0].bidding.authItem" value="$!{demand.authItem}">
+                                            #foreach($!ct in $!creditItem.entrySet())
+                                                <option value="$!ct.key" #if($!{demand.authItem} == $!{ct.key}) selected #end>$!ct.value</option>
+                                            #end
+                                        </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">装货港</span>
+                            <span class="purc-span2">
+                                         <input type="text" name="biddingList[0].demandShip.shipmentPort" value="$!{demandShip.shipmentPort}" placeholder="请输入" maxlength="100"/></span>
+                            </span>
+                        </li>
+                        <li  class="purc-blo clearfix"><span class="purc-spanl">卸货港</span>
+                            <span class="purc-span2">
+                                         <input type="text" name="biddingList[0].demandShip.dischargePort" placeholder="请输入" value="$!{demandShip.dischargePort}" class="" maxlength="100"/></span>
+                            </span>
+                        </li>
+
+                        <input type="hidden" name="biddingList[0].demandShip.id" value="$!{demandShipId1}" />
+                        <li id="u3" class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">装期</span>
+                            <span class="purc-span2">
+                                <span class="s-purc-span2">
+                                     <input type="text" class="width_30"  date="true" name="biddingList[0].demandShip.shipmentStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentStartTime})" />
+                                            <em class="s-myl-em4">&nbsp;-&nbsp;</em>
+                                     <input type="text" class="width_30"  date="true" name="biddingList[0].demandShip.shipmentEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentEndTime})" />
+                               </span>
+                           </span>
+                        </li>
+                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">到货期</span>
+                            <span class="purc-span2">
+                                <span class="s-purc-span2">
+                                    <input type="text" class="width_30"  date="true" name="biddingList[0].demandShip.dischargeStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeStartTime})" data="true" />
+                                    <em class="s-myl-em4">&nbsp;-&nbsp;</em>
+                                    <input type="text" class="width_30"  date="true" name="biddingList[0].demandShip.dischargeEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeEndTime})" />
+                                </span>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">结算量标准</span>
+                            <span class="purc-span2">
+                                        <select class="sele" name="biddingList[0].bidding.measureMode" id="measureMode" value="$!{demand.measureMode}">
+                                            #foreach($!pim in $!measureModeMap.entrySet())
+                                                <option value="$!pim.key" #if($!{demand.measureMode} == $!{pim.key}) selected #end>$!pim.value</option>
+                                            #end
+                                        </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">装卸允许时间</span>
+                            <span class="purc-span2">
+                                      <input type="text" placeholder="请输入" name="biddingList[0].bidding.loadAndDischargePermittedTimespan" value="$!{demand.loadAndDischargePermittedTimespan}" maxlength="255" />
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">商检费分摊</span>
+                            <span class="purc-span2">
+                                        <select class="sele" id="inspectionFeeSharingType" name="biddingList[0].bidding.inspectionFeeSharingType" value="$!{demand.inspectionFeeSharingType}">
+                                            #foreach($!item in $!inspectionFeeSharingTypeMap.entrySet())
+                                                <option value="$!{item.key}" #if($!{demand.inspectionFeeSharingType} == $!{item.key}) selected #end >$!{item.value}</option>
+                                            #end
+                                         </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">法律</span>
+                            <span class="purc-span2">
+                                         <input type="text" class="" name="biddingList[0].bidding.law" value="$!{demand.law}" placeholder="请输入" maxlength="100"/>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">GTC</span>
+                            <span class="purc-span2">
+                                        <input type="text" class="" name="biddingList[0].bidding.gtc" value="$!{demand.gtc}" placeholder="请输入" maxlength="100"/>
+                                    </span>
+                        </li>
+                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">备注</span>
+                            <span class="purc-span2 purc-span21">
+                                        <textarea name="biddingList[0].bidding.remark" maxlength="500">$!{demand.remark}</textarea>
+                                    </span>
+                        </li>
+                        <li class="purc-blo s-purc-h1">购买商信息</li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>企业名称</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required true biddingNeeded" readonly name="biddingList[0].buyerRelevanter.enterpriseName" value="$!{traderVO1.enterpriseName}" maxlength="100" placeholder="请选择贸易商">
+                                        <input type="hidden" name="biddingList[0].buyerRelevanter.eMemberId" value="$!{traderVO1.eMemberId}"/>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">企业地址</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required" name="biddingList[0].buyerRelevanter.enterpriseAddress" value="$!{traderVO1.enterpriseAddress}" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系人</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required true biddingNeeded" name="biddingList[0].buyerRelevanter.contacter" value="$!{traderVO1.contacter}" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系电话</span>
+                            <span class="purc-span2">
+                                       <input type="text" value="$!{traderVO1.phoneNo}" class="c-int required true biddingNeeded" name="biddingList[0].buyerRelevanter.phoneNo" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>邮箱</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{traderVO1.famil}" class=" c-int required true biddingNeeded" name="biddingList[0].buyerRelevanter.famil" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">传真</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{traderVO1.fax}" name="biddingList[0].buyerRelevanter.fax" maxlength="100">
+                                    </span>
+                        </li>
+
+                        <li class="purc-blo s-purc-h1">供应商信息</li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>企业名称</span>
+                            <span class="purc-span2">
+                                        <input type="text" name="biddingList[0].supplierRelevanter.enterpriseName" readonly class="c-int required true biddingNeeded" value="$!{demandRelevanter3.enterpriseName}" maxlength="100">
+                                        <input type="hidden" name="biddingList[0].supplierRelevanter.eMemberId" class="" value="$!{demandRelevanter3.eMemberId}">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">企业地址</span>
+                            <span class="purc-span2">
+                                        <input type="text" name="biddingList[0].supplierRelevanter.enterpriseAddress" class="c-int required" value="$!{demandRelevanter3.enterpriseAddress}" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系人</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter3.contacter}" class="c-int required true biddingNeeded" name="biddingList[0].supplierRelevanter.contacter" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系电话</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter3.phoneNo}" class="c-int required true biddingNeeded" name="biddingList[0].supplierRelevanter.phoneNo" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>邮箱</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter3.famil}" class="c-int required email biddingNeeded" name="biddingList[0].supplierRelevanter.famil" maxlength="100">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">传真</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter3.fax}"  name="biddingList[0].supplierRelevanter.fax" maxlength="100">
+                                    </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="s-purchase caoyue2">
+                    <div class="quote-tit">意向草约2</div>
+
+                    <input type="hidden" name="biddingList[1].bidding.id" value="$!{demandId2}">
+
+                    <ul>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>数量（桶）</span><span class="purc-span2"><input type="text" class="c-int required true biddingNeeded" name="biddingList[1].bidding.numStr" value="$!{demand.numStr}" placeholder="请输入"></span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>溢短装</span><span class="purc-span2"><em class="s-myl-em1">+/-</em><input type="text" class="c-int required true biddingNeeded" name="biddingList[1].bidding.numfloat" value="$!{demand.numfloat}" placeholder="请输入"><em class="s-myl-em2">%</em></span></li>
+                        <input type="hidden" name="biddingList[1].ordersequence" value="2">
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl"><em>*</em>贸易条款</span>
+                            <span class="purc-span2">
+
+                                    <select class="sele" class="sele c-int required true biddingNeeded" name="biddingList[1].bidding.tradeItem" id="tradeItem" value="$!{demand.tradeItem}">
+                                        #foreach($tim in $!tradeItemMap.entrySet())
+                                            <option value="$!tim.key" #if($!{demand.tradeItem} == $!{tim.key}) selected #end>$!tim.value</option>
+                                        #end
+                                    </select>
+                                </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>升贴水</span><span class="purc-span2">
+                                    <input type="text" class="c-int required true biddingNeeded" placeholder="请输入" name="biddingList[1].bidding.agioStr" value="$!{demand.agioStr}"></span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">计价基准</span>
+                            <span class="purc-span2">
+                                        <select class="sele" name="biddingList[1].bidding.valuationBase" value="$!{demand.valuationBase}">
+                                            #foreach($item in $valuationBase.entrySet())
+                                                <option value="$!item.key" #if($!{demand.valuationBase} == $!{item.key}) selected #end>$!item.value</option>
+                                            #end
+                                        </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">计价期</span>
+                            <span class="purc-span2">
+                                         <select class="sele" name="biddingList[1].bidding.valuationProidType" id="valuationProidType" value="$!{demand.valuationProidType}" onchange="proidTypeChange(this.value)">
+                                             #foreach($!vpt in $!{valuationProidTypeMap.entrySet()})
+                                                 <option value="$!vpt.key" #if($!{demand.valuationProidType} == $!{vpt.key}) selected #end>$!vpt.value</option>
+                                             #end
+                                         </select>
+                                    </span>
+                        </li>
+                    #*======================计价器选择  4 或 5  显示========================================================*#
+                        <li class="purc-blo clearfix valuationProid" #if($!demand.valuationProidType != 4) hidden #end><span class="c-fn c-fl" >
+                            <span class="notice-required purc-spanl">计价区间：</span>
+                            <span class="purc-span2">
+                                <input type="text" class="width_30" name="biddingList[1].bidding.valuationProidStart" date="true" value="$!{dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})}"/>
+                                <em class="s-myl-em4">&nbsp;—&nbsp;</em>
+                                <input name="biddingList[1].bidding.valuationProidEnd" class="width_30" type="text" date="true" value="$!{dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})}"/>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix contractKind" #if($!demand.valuationProidType != 5) hidden #end><span class="c-fn c-fl" >
+                            <span class="notice-required purc-spanl">合约种类：</span>
+                            <span class="purc-span2">
+                                <select class="sele" name="biddingList[1].bidding.contractKind" value="$!{demand.contractKind}">
+                                    #foreach($!pm in $!contractKindMap.entrySet())
+                                        <option value="$!pm.key" #if($!{demand.contractKind} == $!{pm.key}) selected #end>$!pm.value</option>
+                                    #end
+                                </select>
+                            </span>
+                        </li>
+                    #*==============================================================================*#
+                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>计价公式</span>
+                            <span class="purc-span2 purc-span21">
+                                      <textarea class="biddingNeeded purctex pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson2" name="biddingList[1].bidding.valuationFormula" id="valuationFormula" readonly>$!{demand.valuationFormula}</textarea>
+                                <!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+                                     <input type="hidden" class=" c-int required true biddingNeeded" name="biddingList[1].bidding.valuationFormulaJson" id="valuationFormulaJson2" value='$!{demand.valuationFormulaJson}' /><input type="hidden" name="bidding.pricingMode" id="pricingMode" value='$!{demand.valuationFormula}' /> </span>
+                        </li>
+##                        $contain.get("/pricingFormula/physicalPricingEditor.htm")
+                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl"><em>*</em>付款日期</span>
+                            <span class="purc-span2">
+                                        <span class="s-purc-span2">
+                                        <select  id="typeEvent1" name="biddingList[1].bidding.typeEvent" class="width_25">
+                                            #foreach($!typeEvent in $!payItemMap.entrySet())
+                                                <option value="$!typeEvent.value">$!typeEvent.value</option>
+                                            #end
+                                        </select>
+                                        <input id="otherDate1" name="biddingList[1].bidding.otherDate" class="tim-inpu"  placeholder="输入日期" style="display: none" type="text"  date="true" />
+                                         <select  id="eventInclusion" name="bidding.eventInclusion"  class="width_25" >
+                                            <option value="after" >After</option>
+                                            <option value="from" >From</option>
+                                        </select>
+                                            <input id="eventDays1"  name="biddingList[1].bidding.eventDays" class="width_30 c-int" class="c-fcinpu" value="" type="text" required placeholder="输入天数" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                                             <label for="eventDays1" id="eventDays-error" class="error my-error"></label>
+                                        </span>
+                                        <em class="s-myl-em3">Days
+                                              <input id="payItem1" name="biddingList[1].bidding.payItem" style="display: none" value="$!{demand.payItem}" />
+                                            <input id="payItemJSON1" name="biddingList[1].bidding.payItemJSON" style="display: none" value='$!{demand.payItemJSON}' />
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>信用条款</span>
+                            <span class="purc-span2">
+                                        <select class="sele c-int required true biddingNeeded" name="biddingList[1].bidding.authItem" value="$!{demand.authItem}">
+                                            #foreach($!ct in $!creditItem.entrySet())
+                                                <option value="$!ct.key" #if($!{demand.authItem} == $!{ct.key}) selected #end>$!ct.value</option>
+                                            #end
+                                        </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">装货港</span>
+                            <span class="purc-span2">
+                                         <input type="text" name="biddingList[1].demandShip.shipmentPort" value="$!{demandShip.shipmentPort}" class="c-int" placeholder="请输入" maxlength="100"/></span>
+                            </span>
+                        </li>
+                        <li  class="purc-blo clearfix"><span class="purc-spanl">卸货港</span>
+                            <span class="purc-span2">
+                                         <input type="text" name="biddingList[1].demandShip.dischargePort" placeholder="请输入" value="$!{demandShip.dischargePort}" class="" maxlength="100"/></span>
+                            </span>
+                        </li>
+
+                        <input type="hidden" name="biddingList[1].demandShip.id" value="$!{demandShipId2}" />
+                        <li id="u3" class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">装期</span>
+                            <span class="purc-span2">
+                                <span class="s-purc-span2">
+                                         <input type="text" class="width_30"  date="true" name="biddingList[1].demandShip.shipmentStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentStartTime})" />
+                                        <em class="s-myl-em4">&nbsp;-&nbsp;</em>
+                                         <input type="text" class="width_30" date="true" name="biddingList[1].demandShip.shipmentEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentEndTime})" />
+                                   </span>
+                            </span>
+                        </li>
+                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">到货期</span>
+                            <span class="purc-span2">
+                                <span class="s-purc-span2">
+                                    <input type="text" class="width_30"  date="true" name="biddingList[1].demandShip.dischargeStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeStartTime})" data="true" />
+                                    <em  class="s-myl-em4">&nbsp;-&nbsp;</em>
+                                    <input type="text" class="width_30" date="true" name="biddingList[1].demandShip.dischargeEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeEndTime})" />
+                                </span>
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">结算量标准</span>
+                            <span class="purc-span2">
+                                        <select class="sele" name="biddingList[1].bidding.measureMode" id="measureMode" value="$!{demand.measureMode}">
+                                            #foreach($!pim in $!measureModeMap.entrySet())
+                                                <option value="$!pim.key" #if($!{demand.measureMode} == $!{pim.key}) selected #end>$!pim.value</option>
+                                            #end
+                                        </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">装卸允许时间</span>
+                            <span class="purc-span2">
+                                      <input type="text"  placeholder="请输入" name="biddingList[1].bidding.loadAndDischargePermittedTimespan" value="$!{demand.loadAndDischargePermittedTimespan}" maxlength="255" />
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">商检费分摊</span>
+                            <span class="purc-span2">
+                                        <select class="sele c-int" id="inspectionFeeSharingType" name="biddingList[1].bidding.inspectionFeeSharingType" value="$!{demand.inspectionFeeSharingType}">
+                                            #foreach($!item in $!inspectionFeeSharingTypeMap.entrySet())
+                                                <option value="$!{item.key}" #if($!{demand.inspectionFeeSharingType} == $!{item.key}) selected #end >$!{item.value}</option>
+                                            #end
+                                         </select>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">法律</span>
+                            <span class="purc-span2">
+                                         <input type="text" class="" name="biddingList[1].bidding.law" value="$!{demand.law}" placeholder="请输入" maxlength="100"/>
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">GTC</span>
+                            <span class="purc-span2">
+                                        <input type="text" class="" name="biddingList[1].bidding.gtc" value="$!{demand.gtc}" placeholder="请输入" maxlength="100"/>
+                                    </span>
+                        </li>
+                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">备注</span>
+                            <span class="purc-span2 purc-span21">
+                                        <textarea name="biddingList[1].bidding.remark" maxlength="500">$!{demand.remark}</textarea>
+                                    </span>
+                        </li>
+
+                        <li class="purc-blo s-purc-h1">购买商信息</li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>企业名称</span>
+                            <span class="purc-span2">
+                                        <input type="text" readonly class=" c-int required true biddingNeeded" name="biddingList[1].buyerRelevanter.enterpriseName" value="$!{demandRelevanter1.enterpriseName}">
+                                        <input type="hidden" name="biddingList[1].buyerRelevanter.eMemberId" class="" value="$!{demandRelevanter1.eMemberId}">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">企业地址</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required" name="biddingList[1].buyerRelevanter.enterpriseAddress" value="$!{demandRelevanter1.enterpriseAddress}">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系人</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter1.contacter}" class=" c-int required true biddingNeeded" name="biddingList[1].buyerRelevanter.contacter">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系电话</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter1.phoneNo}" class=" c-int required true biddingNeeded" name="biddingList[1].buyerRelevanter.phoneNo">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>邮箱</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required true biddingNeeded" value="$!{demandRelevanter1.famil}" name="biddingList[1].buyerRelevanter.famil">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">传真</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{demandRelevanter1.fax}" name="biddingList[1].buyerRelevanter.fax">
+                                    </span>
+                        </li>
+
+                        <li class="purc-blo s-purc-h1">供应商信息</li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>企业名称</span>
+                            <span class="purc-span2">
+                                    <input type="text" readonly name="biddingList[1].supplierRelevanter.enterpriseName" class=" c-int required true biddingNeeded" value="$!{traderVO2.enterpriseName}" placeholder="请选择贸易商">
+                                    <input type="hidden" name="biddingList[1].supplierRelevanter.eMemberId" value="$!{traderVO2.eMemberId}" />
+                                </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">企业地址</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required" name="biddingList[1].supplierRelevanter.enterpriseAddress" value="$!{traderVO2.enterpriseAddress}">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系人</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required true biddingNeeded" value="$!{traderVO2.contacter}" name="biddingList[1].supplierRelevanter.contacter">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>联系电话</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{traderVO2.phoneNo}" class=" c-int required true biddingNeeded" name="biddingList[1].supplierRelevanter.phoneNo">                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>邮箱</span>
+                            <span class="purc-span2">
+                                        <input type="text" class=" c-int required true biddingNeeded" value="$!{traderVO2.famil}" name="biddingList[1].supplierRelevanter.famil">
+                                    </span>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">传真</span>
+                            <span class="purc-span2">
+                                        <input type="text" value="$!{traderVO2.fax}" name="biddingList[1].supplierRelevanter.fax">
+                                    </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .purc-span3t .bidding-required-error {
+        border:1px solid red;
+    }
+    .purc-span3 .bidding-required-error {
+        border:1px solid red;
+    }
+</style>
+
+
+<script>
+    layui.use(['layer'], function () {
+        // layui.layer.alert('红色边框的数据项超长， 整数不超过12位，小数不超过13位！!');
+    })
+
+    /**
+     * 必填项验证
+     */
+    function requiredChk() {
+        var requiredChkCount = 0;
+        $(".biddingNeeded").each(function () {
+            var objValue = $(this).val();
+            if (objValue == null || objValue == "") {
+                requiredChkCount += 1;
+                $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+            } else {
+                $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+            }
+        })
+        if (0 < requiredChkCount) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('红色星号为必填项');
+            })
+            return;
+        }
+        if($("#typeEvent option:selected").val() != "DATE"){
+            if($("#eventDays").val()==null || $("#eventDays").val() == ""){
+                layui.use(['layer'], function () {
+                    layui.layer.alert('付款日期天数输入框不能为空!');
+                })
+                return false;
+            }
+        }else{
+            if($("#otherDate").val() == null || $("#otherDate").val() == ""){
+                layui.use(['layer'], function () {
+                    layui.layer.alert('付款日期日期输入框不能为空!');
+                })
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 数据项长度验证
+     */
+    function lengthChk() {
+        var lengthChkCount = 0;
+        $(".biddingNumChk").each(function () {
+            var objValue = $(this).val();
+            var length = objValue.length;
+            if (0 < objValue.indexOf(".")) {
+                if (13 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            } else {
+                if (12 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            }
+
+        })
+
+        if (0 < lengthChkCount) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('红色边框的数据项超长， 整数不超过12位，小数不超过13位！!');
+            })
+            return;
+        }
+        return true;
+    }
+
+
+    /**
+     * 比较两个日期，第一个小，第二个大返回TRUE；否则，返回FALSE
+     */
+    function compareTwoDate(date, targetDate) {
+        var date = new Date(date.replace("-","/").replace("-","/"));
+        var targetDate =new Date(targetDate.replace("-","/").replace("-","/"));
+
+        if(date < targetDate)
+            return true;
+        return false;
+    }
+
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: "input[name='biddingList[1].demandShip.shipmentStartTime']",
+            done: function(value, date){
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[1].demandShip.shipmentStartTime']");
+                    // 取得装货期结束时间
+                    var shipmentEndTime  = $("input[name='biddingList[1].demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, shipmentEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货开始时间
+                    var dischargeStartTime  = $("input[name='biddingList[1].demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在卸货开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[1].demandShip.shipmentEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[1].demandShip.shipmentEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime  = $("input[name='biddingList[1].demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(compareTwoDate(thisDate, shipmentStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime  = $("input[name='biddingList[1].demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期结束时间应在卸货开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[1].demandShip.dischargeStartTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[1].demandShip.dischargeStartTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime = $("input[name='biddingList[1].demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在到货期开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime = $("input[name='biddingList[1].demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (!compareTwoDate(thisDate, dischargeEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('到货期开始时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[1].demandShip.dischargeEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[1].demandShip.dischargeEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentEndTime = $("input[name='biddingList[1].demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期结束时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeStartTime = $("input[name='biddingList[1].demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, dischargeStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('到货期开始时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+    });
+
+
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: "input[name='biddingList[0].demandShip.shipmentStartTime']",
+            done: function(value, date){
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[0].demandShip.shipmentStartTime']");
+                    // 取得装货期结束时间
+                    var shipmentEndTime  = $("input[name='biddingList[0].demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, shipmentEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货开始时间
+                    var dischargeStartTime  = $("input[name='biddingList[0].demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在卸货开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[0].demandShip.shipmentEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[0].demandShip.shipmentEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime  = $("input[name='biddingList[0].demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(compareTwoDate(thisDate, shipmentStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime  = $("input[name='biddingList[0].demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期结束时间应在卸货开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[0].demandShip.dischargeStartTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[0].demandShip.dischargeStartTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime = $("input[name='biddingList[0].demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期开始时间应在到货期开始时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime = $("input[name='biddingList[0].demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (!compareTwoDate(thisDate, dischargeEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('到货期开始时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+
+        laydate.render({
+            elem: "input[name='biddingList[0].demandShip.dischargeEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='biddingList[0].demandShip.dischargeEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentEndTime = $("input[name='biddingList[0].demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('装货期结束时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeStartTime = $("input[name='biddingList[0].demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, dischargeStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('到货期开始时间应在到货期结束时间前！');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        });
+    });
+
+
+    /**
+     * 数据项长度验证
+     */
+    function lengthChk() {
+        var lengthChkCount = 0;
+        $(".biddingNumChk").each(function () {
+            var objValue = $(this).val();
+            var length = objValue.length;
+            if (0 < objValue.indexOf(".")) {
+                if (13 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            } else {
+                if (12 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            }
+
+        })
+
+        if (0 < lengthChkCount) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('红色边框的数据项超长， 整数不超过12位，小数不超过13位！!');
+            })
+            return false;
+        }
+        return true;
+    }
+
+    $(function(){
+
+        const tradeItem=$("[name='demand.tradeItem']");
+        change();
+        //change
+        $("[name='demand.tradeItem']").on("change",function(){
+            change();
+        });
+
+        // 贸易条款
+        function change(){
+            if(tradeItem.val() == '1'){
+                $("#u2").hide();//卸货港
+                $("#u4").hide();//到货期
+                $("#u1").show();//装货港
+                $("#u3").show();//装货期
+            }else if(tradeItem.val() == '4' || tradeItem.val() == '5'
+                    || tradeItem.val() == '6' || tradeItem.val() == '7'){
+                $("#u1").hide();
+                $("#u3").hide();
+                $("#u2").show();
+                $("#u4").show();
+            }else if(tradeItem.val() == '2' || tradeItem.val() == '3'){
+                $("#u2").show();
+                $("#u4").show();
+                $("#u1").show();
+                $("#u3").show();
+            }
+
+            // 初始化装货港、装货期、卸货港、到货期
+            initPort();
+        }
+
+        // 初始化装货港、装货期、卸货港、到货期
+        function initPort(){
+            if(tradeItem.val() == '1'){
+                // 卸货港
+                $("#dischargePort").val('');
+                // 到货期
+                $("#dischargeStartTime").val('');
+                $("#dischargeEndTime").val('');
+            }else if(tradeItem.val() == '4' || tradeItem.val() == '5'
+                    || tradeItem.val() == '6' || tradeItem.val() == '7'){
+                // 装货港
+                $("shipmentPort").val('');
+                // 装货期
+                $("#shipmentStartTime").val('');
+                $("#shipmentEndTime").val('');
+            }else if(tradeItem.val() == '2' || tradeItem.val() == '3'){
+            }
+        }
+
+        function initDateInput(elems) {
+
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+
+                elems.each(function () {
+                    laydate.render({
+                        elem: this //指定元素
+                    });
+                });
+
+            });
+        }
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        // 卸货港
+        var data = {"valueSetType": "4"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $("input[name='biddingList[1].demandShip.dischargePort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='biddingList[1].demandShip.dischargePort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });// 卸货港
+        var data = {"valueSetType": "4"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $("input[name='biddingList[0].demandShip.dischargePort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='biddingList[0].demandShip.dischargePort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        // 装货港
+        var data = {"valueSetType": "5"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='biddingList[1].demandShip.shipmentPort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='biddingList[1].demandShip.shipmentPort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });// 装货港
+        var data = {"valueSetType": "5"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='biddingList[0].demandShip.shipmentPort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='biddingList[0].demandShip.shipmentPort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+    })
+
+    function proidTypeChange1(value) {
+        if (value == 4) {
+            $(".valuationProid1").show();
+            $(".contractKind1").hide();
+        }else if(value == 5){
+            $(".contractKind1").show();
+            $(".valuationProid1").hide();
+        }else{
+            $(".valuationProid1").hide();
+            $(".contractKind1").hide();
+        }
+    }
+
+    function proidTypeChange(value) {
+        if (value == 4) {
+            $(".valuationProid").show();
+            $(".contractKind").hide();
+        }else if(value == 5){
+            $(".contractKind").show();
+            $(".valuationProid").hide();
+        }else{
+            $(".valuationProid").hide();
+            $(".contractKind").hide();
+        }
+    }
+
+    $(function () {
+//      付款日期赋值
+        getValue();
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+
+        $("#typeEvent1").on("change",function () {
+            if($("#typeEvent1 option:selected").val() == "DATE"){
+                $("#otherDate1").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays1").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent1 option:selected").val() != "DATE"){
+                $("#otherDate1").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays1").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent1 option:selected").val());
+            }
+        })
+    })
+    // 提交表单前给payItem1 和 payItemJSO1赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent1 option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate1").val()+")";
+            pay_item_json.typeEvent1="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays1="";
+            pay_item_json.date=$("#otherDate1").val();
+        }else{
+            pay_item_json.typeEvent1= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays1=$("#eventDays1").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent1 option:selected").val()+" "+$("#eventDays1").val()+" Days,"+$("#typeEvent1 option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent1 option:selected").val()+" "+$("#eventDays1").val()+" Days,"+$("#typeEvent1 option:selected").val()+"=1";
+            }
+        }
+        $("#payItem1").val(pay_item);
+        $("#payItemJSON1").val(JSON.stringify(pay_item_json));
+
+    }
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+
+    }
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+    }
+    getValues();
+    function getValues(){
+        if($("#payItemJSON1").val() != null && $("#payItemJSON1").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON1").val());
+            $("#typeEvent1 option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent1){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent1=="DATE"){
+                $("#otherDate1").val(pay_item_json.date);
+                $("#otherDate1").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays1").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays1").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+    }
+</script>

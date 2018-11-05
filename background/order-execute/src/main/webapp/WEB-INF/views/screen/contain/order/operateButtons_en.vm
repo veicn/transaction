@@ -1,0 +1,73 @@
+<ul class="order-num-list clearfix">
+	#if($buttonList && $buttonList.size() > 0)
+		##<a href="javascript:void(0);" attr-uuid="$!{uuid}" class="contractNoFn">ContractNo</a>
+		#if("${isSeller}" == "true") ##卖家
+			#if($buttonList.contains("htgl"))
+				<!-- <a href="$orderExecuteServer.get('common/contract/edit.htm')?ouid=$!{uuid}&redirect=sellerCenter/order/detail.htm?uid=$!{uuid}">合同管理</a> -->
+			#end
+			
+			#if($buttonList.contains("wlgz"))
+				<a target="view_window"  href="$shipServer.get('/page/#/transport')?agreementUuid=$!{agentUuid}">Tracking</a>
+			#end
+			
+			#if($buttonList.contains("dzgl"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderDocument/documentEditNew.htm')?uuid=$!{uuid}">Attachments</a>
+			#end
+			
+			#if($buttonList.contains("fylr"))
+				<a href="$orderExecuteServer.get('sellerCenter/orderFee/orderFeeInfo.htm')?uuid=$!{uuid}">Cost Entry</a>
+			#end
+			
+			#if($buttonList.contains("ygdzd"))
+				<a href="$orderExecuteServer.get('sellerCenter/orderStatement/infoPre.htm')?uuid=$!{uuid}">Provisional Settlement</a>
+			#end
+			
+			<!-- #if($buttonList.contains("ygjsd"))
+				<a href="$orderExecuteServer.get('sellerCenter/orderSettlement/infoPre.htm')?uuid=$!{uuid}">预估结算单</a>
+			#end -->
+			
+			#if($buttonList.contains("zsdzd"))
+				<a href="$orderExecuteServer.get('sellerCenter/orderStatement/infoFin.htm')?uuid=$!{uuid}">Final Settlement</a>
+			#end
+			
+			<!-- #if($buttonList.contains("zsjsd"))
+				<a href="$orderExecuteServer.get('sellerCenter/orderSettlement/infoFin.htm')?uuid=$!{uuid}">正式结算单</a>
+			#end -->
+			
+			#if($buttonList.contains("qrsk"))
+				<a href="$orderExecuteServer.get('sellerCenter/order/orderPayConfirm.htm')?uuid=$!{uuid}&formPage=DETAIL">Funds-in confirm</a>
+			#end
+		
+		#else  ##买家
+		
+			#if($buttonList.contains("htgl"))
+				<!-- <a href="$orderExecuteServer.get('common/contract/edit.htm')?ouid=$!{uuid}&redirect=sellerCenter/order/detail.htm?uid=$!{uuid}">合同管理</a> -->
+			#end
+			
+			#if($buttonList.contains("wlgz"))
+				<a target="view_window" href="$shipServer.get('/page/#/transport')?agreementUuid=$!{agentUuid}">Tracking</a>
+			#end
+			
+			#if($buttonList.contains("dzgl"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderDocument/documentEditNew.htm')?uuid=$!{uuid}">Attachments</a>
+			#end
+			
+			#if($buttonList.contains("ygdzd"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderStatement/infoPre.htm')?uuid=$!{uuid}">Provisional Settlement</a>
+			#end
+			
+			<!-- #if($buttonList.contains("ygjsd"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderSettlement/infoPre.htm')?uuid=$!{uuid}">预估结算单</a>
+			#end -->
+			
+			#if($buttonList.contains("zsdzd"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderStatement/infoFin.htm')?uuid=$!{uuid}">Final Settlement</a>
+			#end
+			
+			<!-- #if($buttonList.contains("zsjsd"))
+				<a href="$orderExecuteServer.get('buyerCenter/orderSettlement/infoFin.htm')?uuid=$!{uuid}">正式结算单</a>
+			#end -->
+		#end
+	#end
+</ul>
+<script src="../../orderexecute/js/order/contractNo.js"></script>

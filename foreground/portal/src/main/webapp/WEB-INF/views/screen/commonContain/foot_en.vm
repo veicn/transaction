@@ -1,0 +1,48 @@
+<div class="footer">
+    <div class="inner">
+        <ul class="ft-list clearfix">
+            <li>
+                <h3><a href="">About us</a></h3>
+            #*<a href="javascript:void(0)">About Mycrudeoil</a>
+            <a href="javascript:void(0)">Contact us</a>
+            <a href="$appServer.get('/recruit.htm')">Careers</a>*#
+            </li>
+            <li>
+                <h3><a href="$infoServer.get('/page/#/helpCenter')">Help</a></h3>
+            #*<a href="javascript:;" onclick="getHelp('账号问题')">Account</a>
+            <a href="javascript:;" onclick="getHelp('原油交易流程')">Crude Oil Trade</a>
+            <a href="javascript:;" onclick="getHelp('订单执行')">Operation</a>
+            <a href="javascript:;" onclick="getHelp('租船交易流程')">Chartering</a>
+            <a href="javascript:;" onclick="getHelp('炼厂采购优化')">Smart Factory</a>*#
+            </li>
+            <li>
+                <h3><a href="$infoServer.get('/page/#/ptStatement')">Registration Agreements</a></h3>
+            #*<a href="javascript:;" onclick="getStatement('入驻协议')">Enterprise Entry Agreemen</a>
+            <a href="javascript:;" onclick="getStatement('注册协议')">Individual Registration Agreement</a>
+            <a href="javascript:;" onclick="getStatement('权限说明')">User Permission Statement</a>
+            <a href="javascript:;" onclick="getStatement('平台服务')">Crude Oil Trading Rules</a>
+            <a href="javascript:;" onclick="getStatement('租船服务')">Charting Service Agreement</a>*#
+        </li>
+        <li>
+            <h3><a href="$infoServer.get('/page/#/ptStatement')">Legal Statement</a></h3>
+            #*<a href="javascript:;" onclick="getStatement('法律声明')">Legal Disclaimer</a>
+            <a href="javascript:;" onclick="getStatement('风险告知书')">Risk Statement</a>
+            <a href="javascript:;" onclick="getStatement('防范声明')">Prevention & Suppression of Prohibited Information Statement</a>
+            <a href="javascript:;" onclick="getStatement('知识产权声明')">Intellectual Property Statement</a>*#
+            </li>
+        </ul>
+        <p>Copyright © Sinochem Corporation All Right Reserved ICP Beijing 13009914号-6</p>
+    </div>
+</div>
+<script>
+    function getHelp(para){
+
+        var name = encodeURIComponent(para);
+        window.open( "$infoServer.get('/page/#/helpCenter?id=')" + name,"_blank");
+    }
+    function getStatement(para){
+
+        var name = encodeURIComponent(para);
+        window.open("$infoServer.get('/page/#/ptStatement?id=')" + name,"_blank");
+    }
+</script>

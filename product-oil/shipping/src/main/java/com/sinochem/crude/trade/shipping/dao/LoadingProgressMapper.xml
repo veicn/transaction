@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shipping.dao.LoadingProgressMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.LoadingProgress" id="LoadingProgressDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.LoadingProgress">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.shipping.domain.LoadingProgress" id="LoadingProgress">
+		<result property="shipLoadingProgressId" column="SHIP_LOADING_PROGRESS_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="shipConfirmationSheetId" column="SHIP_CONFIRMATION_SHEET_ID" />
+		<result property="shipLoadPortId" column="SHIP_LOAD_PORT_ID" />
+		<result property="shipLoadPort" column="SHIP_LOAD_PORT" />
+		<result property="datetime" column="DATETIME" />
+		<result property="cargoLoaded" column="CARGO_LOADED" />
+		<result property="theCargoToBeLoaded" column="THE_CARGO_TO_BE_LOADED" />
+		<result property="loadingSpeed" column="LOADING_SPEED" />
+		<result property="etc" column="ETC" />
+		<result property="ext1" column="EXT1" />
+		<result property="version" column="VERSION" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+			</resultMap>
+
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shipping.domain.LoadingProgress"  useGeneratedKeys="true" keyProperty="shipLoadingProgressId" >
+		insert  into t_ship_loading_progress (			
+						UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						,SHIP_LOAD_PORT_ID
+						,SHIP_LOAD_PORT
+						,DATETIME
+						,CARGO_LOADED
+						,THE_CARGO_TO_BE_LOADED
+						,LOADING_SPEED
+						,ETC
+						,EXT1
+						,VERSION
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		
+						#{uuid}
+						,#{shipConfirmationSheetId}
+						,#{shipLoadPortId}
+						,#{shipLoadPort}
+						,#{datetime}
+						,#{cargoLoaded}
+						,#{theCargoToBeLoaded}
+						,#{loadingSpeed}
+						,#{etc}
+						,#{ext1}
+						,#{version}
+						,#{aliveFlag}
+						,#{createDate}
+						,#{createUser}
+						,#{updateDate}
+						,#{updateUser}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_ship_loading_progress
+              WHERE 1=1 
+                AND SHIP_LOADING_PROGRESS_ID = #{shipLoadingProgressId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shipping.domain.LoadingProgress">
+        DELETE FROM t_ship_loading_progress
+              WHERE 1=1 
+        <if test="shipLoadingProgressId!=null and shipLoadingProgressId!=''">AND  SHIP_LOADING_PROGRESS_ID = #{shipLoadingProgressId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">AND  SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+        <if test="shipLoadPortId!=null and shipLoadPortId!=''">AND  SHIP_LOAD_PORT_ID = #{shipLoadPortId}</if>
+        <if test="shipLoadPort!=null and shipLoadPort!=''">AND  SHIP_LOAD_PORT = #{shipLoadPort}</if>
+        <if test="datetime!=null and datetime!=''">AND  DATETIME = #{datetime}</if>
+        <if test="cargoLoaded!=null and cargoLoaded!=''">AND  CARGO_LOADED = #{cargoLoaded}</if>
+        <if test="theCargoToBeLoaded!=null and theCargoToBeLoaded!=''">AND  THE_CARGO_TO_BE_LOADED = #{theCargoToBeLoaded}</if>
+        <if test="loadingSpeed!=null and loadingSpeed!=''">AND  LOADING_SPEED = #{loadingSpeed}</if>
+        <if test="etc!=null and etc!=''">AND  ETC = #{etc}</if>
+        <if test="ext1!=null and ext1!=''">AND  EXT1 = #{ext1}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shipping.domain.LoadingProgress">
+		update t_ship_loading_progress
+		<set>
+         SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null">,SHIP_LOAD_PORT_ID = #{shipLoadPortId}</if>
+		<if test="shipLoadPort!=null">,SHIP_LOAD_PORT = #{shipLoadPort}</if>
+		<if test="datetime!=null">,DATETIME = #{datetime}</if>
+		<if test="cargoLoaded!=null">,CARGO_LOADED = #{cargoLoaded}</if>
+		<if test="theCargoToBeLoaded!=null">,THE_CARGO_TO_BE_LOADED = #{theCargoToBeLoaded}</if>
+		<if test="loadingSpeed!=null">,LOADING_SPEED = #{loadingSpeed}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+       	 SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shipping.domain.LoadingProgress">
+		update t_ship_loading_progress
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null">,SHIP_LOAD_PORT_ID = #{shipLoadPortId}</if>
+		<if test="shipLoadPort!=null">,SHIP_LOAD_PORT = #{shipLoadPort}</if>
+		<if test="datetime!=null">,DATETIME = #{datetime}</if>
+		<if test="cargoLoaded!=null">,CARGO_LOADED = #{cargoLoaded}</if>
+		<if test="theCargoToBeLoaded!=null">,THE_CARGO_TO_BE_LOADED = #{theCargoToBeLoaded}</if>
+		<if test="loadingSpeed!=null">,LOADING_SPEED = #{loadingSpeed}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_loading_progress
+		<set>
+         SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null">,SHIP_LOAD_PORT_ID = #{shipLoadPortId}</if>
+		<if test="shipLoadPort!=null">,SHIP_LOAD_PORT = #{shipLoadPort}</if>
+		<if test="datetime!=null">,DATETIME = #{datetime}</if>
+		<if test="cargoLoaded!=null">,CARGO_LOADED = #{cargoLoaded}</if>
+		<if test="theCargoToBeLoaded!=null">,THE_CARGO_TO_BE_LOADED = #{theCargoToBeLoaded}</if>
+		<if test="loadingSpeed!=null">,LOADING_SPEED = #{loadingSpeed}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="shipLoadingProgressId!=null and shipLoadingProgressId!=''">and  SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+		<if test="shipLoadPort!=null and shipLoadPort!=''">and  SHIP_LOAD_PORT=#{shipLoadPort}</if>
+		<if test="datetime!=null and datetime!=''">and  DATETIME=#{datetime}</if>
+		<if test="cargoLoaded!=null and cargoLoaded!=''">and  CARGO_LOADED=#{cargoLoaded}</if>
+		<if test="theCargoToBeLoaded!=null and theCargoToBeLoaded!=''">and  THE_CARGO_TO_BE_LOADED=#{theCargoToBeLoaded}</if>
+		<if test="loadingSpeed!=null and loadingSpeed!=''">and  LOADING_SPEED=#{loadingSpeed}</if>
+		<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="LoadingProgress">
+			select
+			* from t_ship_loading_progress
+			where
+		    SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="LoadingProgress">
+			select
+			* from t_ship_loading_progress
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="LoadingProgress" parameterType="com.sinochem.crude.trade.shipping.domain.LoadingProgress">
+		select * from t_ship_loading_progress
+			where
+		 ALIVE_FLAG='1'
+		<if test="shipLoadingProgressId!=null and shipLoadingProgressId!=''">and  SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+		<if test="shipLoadPort!=null and shipLoadPort!=''">and  SHIP_LOAD_PORT=#{shipLoadPort}</if>
+		<if test="datetime!=null and datetime!=''">and  DATETIME=#{datetime}</if>
+		<if test="cargoLoaded!=null and cargoLoaded!=''">and  CARGO_LOADED=#{cargoLoaded}</if>
+		<if test="theCargoToBeLoaded!=null and theCargoToBeLoaded!=''">and  THE_CARGO_TO_BE_LOADED=#{theCargoToBeLoaded}</if>
+		<if test="loadingSpeed!=null and loadingSpeed!=''">and  LOADING_SPEED=#{loadingSpeed}</if>
+		<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_LOADING_PROGRESS_ID as "shipLoadingProgressId" 
+						 ,   UUID as "uuid" 
+						 ,   SHIP_CONFIRMATION_SHEET_ID as "shipConfirmationSheetId" 
+						 ,   SHIP_LOAD_PORT_ID as "shipLoadPortId" 
+						 ,   SHIP_LOAD_PORT as "shipLoadPort" 
+						 ,   DATETIME as "datetime" 
+						 ,   CARGO_LOADED as "cargoLoaded" 
+						 ,   THE_CARGO_TO_BE_LOADED as "theCargoToBeLoaded" 
+						 ,   LOADING_SPEED as "loadingSpeed" 
+						 ,   ETC as "etc" 
+						 ,   EXT1 as "ext1" 
+						 ,   VERSION as "version" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						from t_ship_loading_progress
+		where
+			ALIVE_FLAG='1'
+			<if test="shipLoadingProgressId!=null and shipLoadingProgressId!=''">and  SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+			<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+			<if test="shipLoadPort!=null and shipLoadPort!=''">and  SHIP_LOAD_PORT=#{shipLoadPort}</if>
+			<if test="datetime!=null and datetime!=''">and  DATETIME=#{datetime}</if>
+			<if test="cargoLoaded!=null and cargoLoaded!=''">and  CARGO_LOADED=#{cargoLoaded}</if>
+			<if test="theCargoToBeLoaded!=null and theCargoToBeLoaded!=''">and  THE_CARGO_TO_BE_LOADED=#{theCargoToBeLoaded}</if>
+			<if test="loadingSpeed!=null and loadingSpeed!=''">and  LOADING_SPEED=#{loadingSpeed}</if>
+			<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_loading_progress 
+		where
+		 ALIVE_FLAG='1'
+			<if test="shipLoadingProgressId!=null and shipLoadingProgressId!=''">and  SHIP_LOADING_PROGRESS_ID=#{shipLoadingProgressId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+			<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+			<if test="shipLoadPort!=null and shipLoadPort!=''">and  SHIP_LOAD_PORT=#{shipLoadPort}</if>
+			<if test="datetime!=null and datetime!=''">and  DATETIME=#{datetime}</if>
+			<if test="cargoLoaded!=null and cargoLoaded!=''">and  CARGO_LOADED=#{cargoLoaded}</if>
+			<if test="theCargoToBeLoaded!=null and theCargoToBeLoaded!=''">and  THE_CARGO_TO_BE_LOADED=#{theCargoToBeLoaded}</if>
+			<if test="loadingSpeed!=null and loadingSpeed!=''">and  LOADING_SPEED=#{loadingSpeed}</if>
+			<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<select id="queryByEntitysList" parameterType="com.sinochem.crude.trade.shipping.model.query.LoadingProgressQuery" resultMap="LoadingProgress">
+	
+		select
+			* from t_ship_loading_progress
+			where
+			 ALIVE_FLAG='1'
+		<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+		<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		ORDER BY  DATETIME desc
+	</select>
+	
+	<delete id="deleteLoadPortId" parameterType="java.lang.Long" >
+	 DELETE FROM t_ship_loading_progress
+                WHERE SHIP_LOAD_PORT_ID = #{shipLoadPortId}  
+	
+	</delete>
+
+
+	
+	<!-- 船舶装港进度 findByConfirmationSheetId -->
+	<select id="findByConfirmationSheetId" resultMap="LoadingProgress" parameterType="java.lang.Long">
+	select
+			* from t_ship_loading_progress
+		where
+		    SHIP_CONFIRMATION_SHEET_ID=#{confirmationSheetId} 
+		and 
+		ALIVE_FLAG='1'
+	</select>
+	
+	<!-- 船舶装港进度 findByConfirmationSheetId -->
+	<select id="findListByConfirmationSheetId" resultType="arrayList" resultMap="LoadingProgress" parameterType="java.lang.Long">
+	select
+			* from t_ship_loading_progress
+		where
+		    SHIP_CONFIRMATION_SHEET_ID=#{confirmationSheetId} 
+		and 
+		ALIVE_FLAG='1'
+	</select>
+    <select id="findCountByShipLoadportId" resultType="java.lang.Integer">
+		select count(*) from t_ship_loading_progress where SHIP_LOAD_PORT_ID = #{shipLoadPortId}
+	</select>
+
+
+</mapper>

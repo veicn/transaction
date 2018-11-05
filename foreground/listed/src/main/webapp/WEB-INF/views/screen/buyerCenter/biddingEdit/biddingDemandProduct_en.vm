@@ -1,0 +1,204 @@
+##计价货币
+#set($valuationCurrencyMap=${dictMap.get('valuationCurrencyMap')})
+##定价计量单位
+#set($pricingMeasureUnitMap=${dictMap.get('pricingMeasureUnitMap')})
+##计价期
+#set($valuationProidTypeMap=${dictMap.get('valuationProidTypeMap')})
+##合约种类
+#set($contractKindMap=${dictMap.get('contractKindMap')})
+##贸易条款
+#set($tradeItemMap=${dictMap.get('tradeItemMap')})
+##付款日期
+#set($payItemMap=${dictMap.get('payItemMap')})
+##合约种类
+#set($contractKindMap=${dictMap.get('contractKindMap')})
+
+<style>
+.physical-pricing{}
+.physical-pricing li{margin: 0;}
+</style>
+
+	<div class="c-mod">
+	<h3><em class="cw-ico ico-h3"></em>Quotation</h3>
+		<div class="c-form">
+	        <ul class="c-ful">
+				<input type="hidden" value="$!{demand.id}" name="demand.id" />
+				<input type="hidden" value="$!{demand.bizType}" name="demand.bizType" />
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Currency:</span>
+					<select name="demand.valuationCurrency" class="sele" value="$!{demand.valuationCurrency}">
+						#foreach($obj in $!valuationCurrencyMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.valuationCurrency} == $!{obj.key}) selected #end>
+	                        	$!obj.value
+	                        </option>
+						#end
+					</select>
+				</li>
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Pricing Unit：</span>
+					<select name="demand.pricingMeasureUnit" class="sele" value="$!{demand.pricingMeasureUnit}">
+						#foreach($!obj in $!pricingMeasureUnitMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.pricingMeasureUnit} == $!{obj.key}) selected #end>
+	                        	$!obj.value
+	                        </option>
+						#end
+					</select>
+				</li>
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Pricing Basis：</span>
+					<select  name="demand.valuationBase" class="sele" value="$!{demand.valuationBase}">
+						#foreach($!obj in $!dictUtils.getProductOilValuationBaseMap().entrySet())
+	                        <option value="$!obj.key" #if($!{demand.valuationBase} == $!{obj.key}) selected #end>
+	                        	$!obj.value
+	                        </option>
+						#end
+					</select>
+				</li>
+
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Premium/Discount：</span>
+					<input name="demand.agioStr" type="text" class="c-int" value="$!{demand.agioStr}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled" placeholder="" />
+					<label for="demand.agioStr" class="error my-error"></label>
+				</li>
+	
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Incoterm：</span>
+					<select name="demand.tradeItem" class="sele" value="$!{demand.tradeItem}">
+						#foreach($!obj in $!tradeItemMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.tradeItem} == $!{obj.key}) selected #end>
+	                        	$!obj.value
+	                        </option>
+						#end
+					</select>
+				</li>
+	
+	            <li class="c-fcos2">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Pricing Period：</span>
+	                <select name="demand.valuationProidType" id="valuationProidType" onchange="periodTypeChange(this.value)" class="sele" value="$!{demand.valuationProidType}">
+	                    #foreach($!obj in $!valuationProidTypeMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.valuationProidType} == $!{obj.key}) selected #end>
+	                            $!obj.value
+	                        </option>
+	                    #end
+	                </select>
+	            </li>
+	            
+	            <li class="c-fcos2" #if($!{demand.valuationProidType} != 4) hidden #end id="valuationPeriod">
+	                <span class="c-fn"><span class="notice-required">*</span>Date</span>
+	            	<input name="demand.valuationProidStart" id="valuationPeriodStart" type="text" placeholder="from" class="c-int qj-text" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})"/>
+	            	<em>—</em><input name="demand.valuationProidEnd" id="valuationProidEnd" type="text" placeholder="to" class="c-int qj-text" data-msg-afterDate='The beginning of pricing period cannot be larger than the end thereof' afterDate="valuationPeriodStart" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})"/>
+	            	<label for="valuationProidEnd" class="error my-error"></label>
+	            </li>
+	            
+	            <li class="c-fcos2" #if($!demand.valuationProidType != 5) hidden #end id="contractKind">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Contract Type：</span>
+	        		<select name="demand.contractKind" class="sele" value="$!{demand.contractKind}" id="contractKindContent">
+						#foreach($!obj in $!contractKindMap.entrySet())
+							<option value="$!obj.key" #if($!{demand.contractKind} == $!{obj.key}) selected #end>
+								$!obj.value
+							</option>
+						#end
+	        		</select>
+	     		</li>
+				
+	            <li class="c-fcos2">
+	                <span class="c-fn"><span class="notice-required">*&nbsp;</span>Price Fomula：</span>
+	               	<textarea class="purctex pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson" name="demand.valuationFormula" id="valuationFormula" readonly style="width: 71%; padding: 0 6px;">$!{demand.valuationFormula}</textarea>
+	               	<!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+	               	<input type="hidden" name="demand.valuationFormulaJson" id="valuationFormulaJson" /><input type="hidden" name="demand.pricingMode" id="pricingMode" />
+				</li>
+				
+				<li class="physical-pricing">
+				$contain.get("/pricingFormula/physicalPricingEditor.htm")
+				</li>
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Payment Date：</span>
+					<select  name="demand.payItem" class="sele" value="$!{demand.payItem}">
+						#foreach($!obj in $!payItemMap.entrySet())
+	                        <option value="$!obj.key" #if($!{demand.payItem} == $!{obj.key}) selected #end>
+	                        	$!obj.value
+	                        </option>
+						#end
+					</select>
+				</li>
+				
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Qty(BBL)：</span>
+					<input name="demand.numStr" value="$!{demand.numStr}" maxlength="12" onkeypress="return checkNum(event,3,false,false)" type="text" class="c-int"/>
+					<label for="demand.numStr" class="error my-error"></label>
+				</li>
+		        
+				<li class="c-fcos2">
+					<span class="c-fn"><span class="notice-required">*&nbsp;</span>Tolerance：</span>
+					<table cellpadding="0" cellspacing="0" style="width: 71%;">
+						<tr>
+							<td width="15px">+/-&nbsp;</td>
+							<td><input name="demand.numfloat" class="c-int" type="text" value="$!{demand.numfloat}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false" style="ime-mode:disabled; width: 100%;"></td>
+							<td width="15px">&nbsp;%</td>
+						</tr>
+					</table>
+					<label for="demand.numfloat" class="error my-error"></label>
+				</li>
+	
+				<li class="c-fcos2"><span class="c-fn">Remark：</span>
+					<textarea name="demand.remark" rows="3" cols="20" maxlength="2000" style="width: 71%; padding: 0 6px;">$!{demand.remark}</textarea>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<script>
+	$(function(){
+		// 初始化日期
+        initDateInput($("input[date='true']"));
+
+	    // 交易类型选中事件
+		$("input[name='demand.purchaseType']").click(function () {
+			if ($(this).val() == "1") {
+                $(".bid-type").css("display", "");
+			} else {
+			    $(".bid-type").css("display", "none");
+			    $("input[name='demand.stopBiddingTime']").val('');
+                $("input[name='demand.tenderOutTime']").val('');
+			}
+        });
+	});
+
+    function ValuationPeriodType() {
+        this.show = function() {
+            $('#valuationPeriod').show();
+        };
+
+        this.hide = function() {
+            $('#valuationPeriod').hide();
+        };
+    }
+
+    function ContractKindType() {
+        this.show = function() {
+            $('#contractKind').show();
+        };
+
+        this.hide = function() {
+            $('#contractKind').hide();
+        };
+    }
+	
+    const periodTypes = new Object();
+    periodTypes[4] = new ValuationPeriodType();
+    periodTypes[5] = new ContractKindType();
+
+    function periodTypeChange(value) {
+        for (var item in periodTypes) {
+            if (value == item) {
+                periodTypes[item].show();
+            } else {
+                periodTypes[item].hide();
+            }
+        }
+    }
+</script>

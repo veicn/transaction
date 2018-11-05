@@ -1,0 +1,154 @@
+$contain.get('/common/title.htm').put('title', 'Demands Detail')
+
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+<div class="fl shipping-w-r">
+		<h2>Chartering Enquiry</h2>
+		<div class="enquiry-b">
+			<ul class="enquiry-ul">
+			<input type="hidden" name="uuid" value="$!{demandsVO.uuid}">
+				<li>
+					<span>Chartering Requirement:</span>
+					<em>$!{demandsVO.orderNumber}</em>
+					<input type="hidden" name="orderNumber" value="$!{demandsVO.orderNumber}">
+				</li>
+				<li>
+					<span>Product :</span>
+					<em>$!{demandsVO.prodoctNm}</em>
+					<input type="hidden" name="prodoctNm" value="$!{demandsVO.prodoctNm}">
+				</li>
+				<li>
+					<span>Quantity (barrel) :</span>
+					#if($!demandsVO.quantity)
+						#if($!demandsVO.rangeOfError && $demandsVO.rangeOfError != "")
+							<em>$!{demandsVO.quantity} ± $!{demandsVO.rangeOfError}%</em>
+						#else
+							<em>$!{demandsVO.quantity} ± 0% </em>
+						#end 
+
+					#end 					
+					<input type="hidden" name="quantity" value="$!{demandsVO.quantity}">
+					<input type="hidden" name="rangeOfError" value="$!{demandsVO.rangeOfError}">
+				</li>
+				<li>
+					<span>Port Of Loading :</span>
+					<em>$!{demandsVO.portOfLoading}</em>
+					<input type="hidden" name="portOfLoading" value="$!{demandsVO.portOfLoading}">
+				</li>
+				<li>
+					<span>Port Of Discharge :</span>
+					<em>$!{demandsVO.portOfDischarge}</em>
+					<input type="hidden" name="portOfDischarge" value="$!{demandsVO.portOfDischarge}">
+				</li>
+				<li>
+					<span>Laycan :</span>
+					<em><i>$!{demandsVO.laycanStart}</i>---<i>$!{demandsVO.laycanEnd}</i></em>
+					<input type="hidden" name="laycanStart" value="$!{demandsVO.laycanStart}">
+					<input type="hidden" name="laycanEnd" value="$!{demandsVO.laycanEnd}">
+				</li>
+			</ul>
+		</div>
+		<div class="enquiry-b">
+			<ul class="enquiry-ul enter-ul">
+				<li>
+					<span>Date Built :</span>
+					<em class="check-b">
+						<label><input type="radio" name="builtDate" 
+						#if(!$demandsVO.builtDate || $demandsVO.builtDate == 1)						
+							checked="checked"
+						#end 
+						value = "1"><i></i>0-20years	</label>
+						<label><input type="radio" name="builtDate" value = "2"
+						#if($demandsVO.builtDate == 2)						
+							checked="checked" 
+						#end 
+						><i></i>0-15years</label>
+						<label><input type="radio" name="builtDate" value = "3"
+						#if($demandsVO.builtDate == 3)						
+							checked="checked" 
+						#end 
+						><i></i>0-10years</label>
+						<label><input type="radio" name="builtDate" value = "4"
+						#if($demandsVO.builtDate == 4)						
+							checked="checked" 
+						#end 
+						><i></i>non</label>
+						<label><input type="radio" name="builtDate" value = "5"
+						#if($demandsVO.builtDate == 5)						
+							checked="checked" 
+						#end 
+							><i></i>other</label>
+						<label><input type="text" name="remark" value="$!{demandsVO.remark}" 
+						#if($demandsVO.builtDate != 5)						
+							disabled="disabled" 
+						#end ></label>
+					</em>			
+				</li>
+				<li>
+					<span>Remark :</span>
+					<em class="check-b">
+						<textarea class="br c-teta" style="resize:none" name="other">$!{demandsVO.other}</textarea>
+					</em>
+				</li>
+				<li>
+					<span>Chartering Agency :</span>
+					<div class="cpy-select clearfix shipping-select">
+						<div class="select s-b">
+							<div class="select-box">
+								<div class="select-content">
+								<div class="select-show-text">
+								#foreach($start in $!agreemntList)
+									#if($start.memberId == $!{demandsVO.charteringAgentId})
+										$start.englishName
+									#end
+								#end
+								</div>
+									<input type="text" readonly="readonly" class = "vcode" name="charteringAgentId" value="$!{demandsVO.charteringAgentId}">
+								</div>
+							</div>
+							<ul class="select-options">
+								#foreach($start in $!agreemntList)
+									<li data-value="$start.memberId"  class="select-option ">$start.englishName</li>
+								#end
+							</ul>
+						</div>
+					</div>
+
+				</li>
+
+			</ul>
+		</div>
+		<div class="enquiry-b">
+			<ul class="enquiry-ul enter-ul">
+				<li>
+					<span>Corporation :</span>
+					<em class="check-b">
+						<input type="text" class="br input310 input-name" name = "corporationNm" value = "$!{demandsVO.corporationNm}" />
+					</em>
+				</li>
+				<li>
+					<span>Linkman :</span>
+					<em class="check-b">
+						<input type="text" class="br input310 input-name" name = "linkNm"  value = "$!{demandsVO.linkNm}"/>
+					</em>
+				</li>
+				<li>
+					<span>E-mal :</span>
+					<em class="check-b">
+						<input type="text" class="br input310 input-name" name = "eMial"  value = "$!{demandsVO.eMial}"/>
+					</em>
+				</li>
+				<li>
+					<span>Phone Number :</span>
+					<em class="check-b">
+						<input type="text" class="br input310 input-name" name = "phoneNum"  value = "$!{demandsVO.phoneNum}"/>
+					</em>
+				</li>
+				<li>
+					<span></span>
+					<em class="check-b button-b">
+						<a href="javascript:history.go(-1)" class="br a-back">Back</a>
+					</em>
+				</li>
+			</ul>
+		</div>
+</div>

@@ -1,0 +1,60 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+    <script src="$!imageServer.get('/layui/layui.js')"></script>
+    <script src="$!imageServer.get('/js/jquery-1.8.3.min.js')"></script>
+</head>
+<body style="background-color: white;">
+<div class="layui-fluid">
+    <div style="padding-top: 25px;"></div>
+    #*<center>
+        <form action="$appServer.get('om/account/list.htm')" method="post">
+            <input name="sUserName" value="$!{account.sUserName}" placeholder="用户名">
+            <input name="sMobile" value="$!{account.sMobile}" placeholder="手机号">
+            <input name="sEmail" value="$!{account.sEmail}" placeholder="邮箱">
+            <button type="submit">查询</button>
+        </form>
+    </center>
+    <a id="bind" data-method="setTop" class="layui-btn layui-btn-xs">增加用户</a>*#
+    <table class="layui-table"  lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{field:'sUserName', width:80, sort: true}">账号</th>
+            <th lay-data="{field:'sEmail', width:80, sort: true}">企业名称</th>
+            <th lay-data="{field:'sMobile', width:80, sort: true}">企业全名</th>
+            <th lay-data="{field:'roleDescription', width:135, sort: true}">英文名称</th>
+            #*<th lay-data="{field:'mUserName', width:80, sort: true}">主账号用户名称</th>
+            <tlay-data="{field:'mEmail', width:80, sort: true}">主账号邮箱</th>
+            <th lay-data="{field:'mMobile', width:80, sort: true}">主账号手机号</th>*#
+            <th lay-data="{field:'createTime', width:135, sort: true}">创建时间</th>
+            <th lay-data="{field:'id', width:135, sort: true}">操作</th>
+        </tr>
+        </thead>
+        #foreach($item in $!list)
+            <tr>
+                <td>$!item.userName</td>
+                <td>$!item.enterpriseName</td>
+                <td>$!item.fullName</td>
+                <td>$!item.englishName</td>
+                #*<td>$!item.mUserName</td>
+                <td>$!item.mEmail</td>
+                <td>$!item.mMobile</td>*#
+                <td>
+                    $dateUtil.getDateTime("yyyy-MM-dd",$!{item.createTime})
+                </td>
+                <td>
+                    <a class="checkBtn layui-btn layui-btn-primary layui-btn-mini" target="_blank" href="$appServer.get('om/enterprise/updateCrude.htm?disable=1&&memberId=')$!item.fid">查看</a>
+                </td>
+            </tr>
+        #end
+    </table>
+</div>
+
+</body>
+</html>

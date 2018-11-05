@@ -1,0 +1,71 @@
+#css("$appServer.get('/css/common/reset.css?css_version=03280827')")
+#css("$appServer.get('/css/common/public.css?css_version=03280827')")
+#css("$appServer.get('/css/common/bootstrap.min.css?css_version=03280827')")
+#css("$appServer.get('/css/work/addAgreement.css?css_version=03280827')")
+#css("$appServer.get('/css/work/shipping.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myResouces.css?css_version=03280827')")
+#css("$appServer.get('/css/work/resDetails.css?css_version=03280827')")
+
+<!--<右侧>-->
+<div class="m-nav fl">
+    <div class="m-box m-sls cleafix">
+        <div class="r-tit">
+            <a href="javascript:;">Trading ></a>
+            <a href="javascript:;">Resource ></a>
+            <a href="javascript:;">Quotation List ></a>
+            <span>Quotation Comparison</span>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Quotation Comparison</span>
+            <table class="table table-bordered table-p">
+                <tr>
+                    <td class="active">Quotation No.</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.biddingSheetVO.serialNumber}</td>
+                    #end
+                </tr>
+                <tr>
+                    <td>Quantity(MT)</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.productInfoVO.quantityAsString}</td>
+                    #end
+                </tr>
+                <tr>
+                    <td class="active">Discharge Port</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.transportInfoVO.dischargePortVO.enName}</td>
+                    #end
+                </tr>
+                <tr>
+                    <td>Premium/Discount</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.pricingInfoVO.premiumsAndDiscountsAsString}</td>
+                    #end
+                </tr>
+                <tr>
+                    <td class="active">Incoterms</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName}</td>
+                    #end
+                </tr>
+                <tr>
+                    <td>Payment Terms</td>
+                    #foreach($biddingSheetCombineVO in $!{biddingSheetCombineVOList})
+                        <td class="active">$!{biddingSheetCombineVO.pricingInfoVO.paymentTermVO.enName}</td>
+                    #end
+                </tr>
+            </table>
+            <div class="comfirm-box-g">
+                <div class="comfirm-box">
+                    <a href="javascript:;" class="br btn-b comfirm-btn">Comfirm</a>
+                    <a href="javascript:;" class="br btn-b comfirm-btn">Comfirm</a>
+                    <a href="javascript:;" class="br btn-b comfirm-btn">Comfirm</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+

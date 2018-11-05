@@ -1,0 +1,136 @@
+ <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Update Shipping Information</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li  class="hiddens" hidden="hidden"><a  href="javascript:;" id="start">Voyage Start</a></li>
+				<li class="curr"><a  href="javascript:;">Loading port</a></li>
+				<li  class="hiddens"  hidden="hidden"><a  href="javascript:;" id="transit">In transit</a></li>
+				<li><a  href="javascript:;" id="unload">discharging port</a></li>
+			</ul>
+		</div>
+		<div class="all">
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Loading port<span><a href="javascript:;" class="exportData">Export</a></span></div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx form" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label"><em>*</em> Loading Port：</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="loadPort" placeholder="" class="s-input loadPort">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label"><em>*</em> Grade：</label>
+					   <div class="s-input-inline">
+					  	  <select class="s-select oilType" name="oilType">
+							<option value="">Please Choose</option>
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA：</label>
+					  <div class="s-input-inline">
+					  	 <input type="text" name="eta" placeholder="" class="s-input eta time dates">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Berthing：</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="exBerth" placeholder="" class="s-input exBerth time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">NOR Tendered：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="norDate" placeholder="" class="s-input  norDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Pilot on Board：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="waterDate" placeholder="" class="s-input waterDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Anchor Up：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="atripDate" placeholder="" class="s-input atripDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Mooring Complete：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="berthDate" placeholder="" class="s-input berthDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Commenced Loading：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acStart" placeholder="" class="s-input acStart time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Completed Loading：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acFinish" placeholder="" class="s-input acFinish time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Cargo Hoses Disconnected：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="remTubeDate" placeholder="" class="s-input remTubeDate time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Estimated Departure Time：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="exLeave" placeholder="" class="s-input exLeave time datess">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Departure Time：</label>
+					  <div class="s-input-inline">
+						 <input type="text" name="acLeave" placeholder="" class="s-input acLeave time datess">
+					  </div>
+					</div>
+					<div class="s-inline agreementCode">
+					  <label class="s-form-label"><em>*</em>Charter Party No：</label>
+					</div>
+					<div class="s-inline s-inline100">
+					  <label class="s-form-label">Upload Pics or Videos：</label>
+					  <div class="s-input-inline">
+						 <ul class="clearfix imgsAll">
+							<li><a href="javascript:;" id="img1" class="imgClass"><img src="$shipServer.get('transport/mycrudeoil/images/s_zgplus_en.jpg')"></a></li>
+						 </ul>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Attachment：</label>
+					  <div class="s-input-inline">
+						 <p>
+						  <input type="text" readonly="readonly" class="accessory1 s-input" id="file1" >
+							 <a href="javascript:;" id="btn1">Upload</a>
+							 <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>	
+					<div class="s-but-all">
+						<div class="s-all-jt"><p><i class="s-icon s-icon-plus btnIcon" title="ADD"></i></p></div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue"  id="save">Upload</button><button class="s-btn s-btn-primary returnFn">Back</button></div>
+	</div>
+	 <div class="accDivs">
+		 <div id="accessory1"  style="display:none;"></div>	
+		 <div id="imgDiv1"  style="display:none;"></div>	
+	 </div>
+		<script src="../transport/js/shipPactNew/shipLoad.js"></script>

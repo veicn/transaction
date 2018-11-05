@@ -1,0 +1,66 @@
+<div class="layui-fluid">
+
+   <div style=" text-align:center; padding-top: 30px;">
+   
+    
+	 <form class="layui-form" action="$appServer.get('om/person/toadd.htm')" method="post">
+		<div class="layui-inline">
+		<label class="layui-form-label">用户名称</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		       
+		<div class="layui-inline">
+		<label class="layui-form-label">证件类型</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="cardType" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		
+		 <div class="layui-inline">
+		  <label class="layui-form-label">证件号码</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="cardNo" lay-verify="number" autocomplete="off" class="layui-input">
+		      </div>
+		  </div><br/><br/>
+		
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">创建人</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="createUser" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		 
+		
+		 <div class="layui-inline">
+		<label class="layui-form-label">备注</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="memo" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+         <input type= "submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交">
+         <a href="$appServer.get('om/person/list.htm')" return:false class="layui-btn layui-btn-xs">取消</a>
+	</form>
+		
+</div>
+<script>
+   layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+  });
+  //监听提交
+  form.on('submit(demo1)', function(data){
+      url:"$appServer.get('om/enterprise/toadd.htm')"
+  });
+</script>

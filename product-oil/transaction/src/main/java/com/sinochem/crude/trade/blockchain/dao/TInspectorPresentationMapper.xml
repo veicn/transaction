@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TInspectorPresentationMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TInspectorPresentation">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="bill_lading_ton" jdbcType="DECIMAL" property="billLadingTon" />
+    <result column="bill_lading_bucket" jdbcType="DECIMAL" property="billLadingBucket" />
+    <result column="ship_inspection_ton" jdbcType="DECIMAL" property="shipInspectionTon" />
+    <result column="ship_inspection_bucket" jdbcType="DECIMAL" property="shipInspectionBucket" />
+    <result column="bill_lading_date" jdbcType="TIMESTAMP" property="billLadingDate" />
+    <result column="gasoline_density" jdbcType="DECIMAL" property="gasolineDensity" />
+    <result column="gasoline_boiling_point" jdbcType="DECIMAL" property="gasolineBoilingPoint" />
+    <result column="gasoline_vapor_tension" jdbcType="DECIMAL" property="gasolineVaporTension" />
+    <result column="gasoline_induction_period" jdbcType="DECIMAL" property="gasolineInductionPeriod" />
+    <result column="gasoline_sulfur_content" jdbcType="DECIMAL" property="gasolineSulfurContent" />
+    <result column="gasoline_oxygen_content" jdbcType="DECIMAL" property="gasolineOxygenContent" />
+    <result column="gasoline_gum" jdbcType="DECIMAL" property="gasolineGum" />
+    <result column="gasoline_distillation" jdbcType="DECIMAL" property="gasolineDistillation" />
+    <result column="gasoline_oxidation_stability" jdbcType="DECIMAL" property="gasolineOxidationStability" />
+    <result column="gasoline_acid_alkali" jdbcType="DECIMAL" property="gasolineAcidAlkali" />
+    <result column="gasoline_copper_corrosion" jdbcType="VARCHAR" property="gasolineCopperCorrosion" />
+    <result column="gasoline_octane_number" jdbcType="DECIMAL" property="gasolineOctaneNumber" />
+    <result column="dieseloil_density" jdbcType="DECIMAL" property="dieseloilDensity" />
+    <result column="dieseloil_cetane_value" jdbcType="DECIMAL" property="dieseloilCetaneValue" />
+    <result column="dieseloil_flash_point" jdbcType="DECIMAL" property="dieseloilFlashPoint" />
+    <result column="dieseloil_ash" jdbcType="DECIMAL" property="dieseloilAsh" />
+    <result column="dieseloil_copper_corrosion" jdbcType="VARCHAR" property="dieseloilCopperCorrosion" />
+    <result column="dieseloil_closing_flash" jdbcType="DECIMAL" property="dieseloilClosingFlash" />
+    <result column="dieseloil_acidity" jdbcType="DECIMAL" property="dieseloilAcidity" />
+    <result column="dieseloil_condensation_point" jdbcType="DECIMAL" property="dieseloilCondensationPoint" />
+    <result column="dieseloil_water_content" jdbcType="DECIMAL" property="dieseloilWaterContent" />
+    <result column="dieseloil_viscosity" jdbcType="DECIMAL" property="dieseloilViscosity" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="deal_no" jdbcType="VARCHAR" property="dealNo" />
+    <result column="inspector_id" jdbcType="VARCHAR" property="inspectorId" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="billno" jdbcType="VARCHAR" property="billno" />
+    <result column="insp_app_id" jdbcType="BIGINT" property="inspAppId" />
+    <result column="dieseloil_sulfur_content" jdbcType="DECIMAL" property="dieseloilSulfurContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, uuid, bill_lading_ton, bill_lading_bucket, ship_inspection_ton, ship_inspection_bucket, 
+    bill_lading_date, gasoline_density, gasoline_boiling_point, gasoline_vapor_tension, 
+    gasoline_induction_period, gasoline_sulfur_content, gasoline_oxygen_content, gasoline_gum, 
+    gasoline_distillation, gasoline_oxidation_stability, gasoline_acid_alkali, gasoline_copper_corrosion, 
+    gasoline_octane_number, dieseloil_density, dieseloil_cetane_value, dieseloil_flash_point, 
+    dieseloil_ash, dieseloil_copper_corrosion, dieseloil_closing_flash, dieseloil_acidity, 
+    dieseloil_condensation_point, dieseloil_water_content, dieseloil_viscosity, linkman, 
+    contact_number, remark, state, deal_no, inspector_id, alive_flag, create_date, update_date, 
+    create_user, update_user, billno, insp_app_id, dieseloil_sulfur_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_inspector_presentation
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_inspector_presentation
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorPresentation"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into `product-trade-blockchain`.t_inspector_presentation (ID, uuid, bill_lading_ton,
+      bill_lading_bucket, ship_inspection_ton, ship_inspection_bucket, 
+      bill_lading_date, gasoline_density, gasoline_boiling_point, 
+      gasoline_vapor_tension, gasoline_induction_period, 
+      gasoline_sulfur_content, gasoline_oxygen_content, 
+      gasoline_gum, gasoline_distillation, gasoline_oxidation_stability, 
+      gasoline_acid_alkali, gasoline_copper_corrosion, 
+      gasoline_octane_number, dieseloil_density, 
+      dieseloil_cetane_value, dieseloil_flash_point, 
+      dieseloil_ash, dieseloil_copper_corrosion, 
+      dieseloil_closing_flash, dieseloil_acidity, 
+      dieseloil_condensation_point, dieseloil_water_content, 
+      dieseloil_viscosity, linkman, contact_number, 
+      remark, state, deal_no, 
+      inspector_id, alive_flag, create_date, 
+      update_date, create_user, update_user,billno,insp_app_id,dieseloil_sulfur_content
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{billLadingTon,jdbcType=DECIMAL},
+      #{billLadingBucket,jdbcType=DECIMAL}, #{shipInspectionTon,jdbcType=DECIMAL}, #{shipInspectionBucket,jdbcType=DECIMAL}, 
+      #{billLadingDate,jdbcType=TIMESTAMP}, #{gasolineDensity,jdbcType=DECIMAL}, #{gasolineBoilingPoint,jdbcType=DECIMAL}, 
+      #{gasolineVaporTension,jdbcType=DECIMAL}, #{gasolineInductionPeriod,jdbcType=DECIMAL}, 
+      #{gasolineSulfurContent,jdbcType=DECIMAL}, #{gasolineOxygenContent,jdbcType=DECIMAL}, 
+      #{gasolineGum,jdbcType=DECIMAL}, #{gasolineDistillation,jdbcType=DECIMAL}, #{gasolineOxidationStability,jdbcType=DECIMAL}, 
+      #{gasolineAcidAlkali,jdbcType=DECIMAL}, #{gasolineCopperCorrosion,jdbcType=VARCHAR}, 
+      #{gasolineOctaneNumber,jdbcType=DECIMAL}, #{dieseloilDensity,jdbcType=DECIMAL}, 
+      #{dieseloilCetaneValue,jdbcType=DECIMAL}, #{dieseloilFlashPoint,jdbcType=DECIMAL}, 
+      #{dieseloilAsh,jdbcType=DECIMAL}, #{dieseloilCopperCorrosion,jdbcType=VARCHAR}, 
+      #{dieseloilClosingFlash,jdbcType=DECIMAL}, #{dieseloilAcidity,jdbcType=DECIMAL}, 
+      #{dieseloilCondensationPoint,jdbcType=DECIMAL}, #{dieseloilWaterContent,jdbcType=DECIMAL}, 
+      #{dieseloilViscosity,jdbcType=DECIMAL}, #{linkman,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{dealNo,jdbcType=VARCHAR}, 
+      #{inspectorId,jdbcType=VARCHAR}, #{aliveFlag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT},
+      #{billno,jdbcType=VARCHAR}, #{inspAppId,jdbcType=VARCHAR}, #{dieseloilSulfurContent,jdbcType=DECIMAL}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorPresentation">
+    insert into `product-trade-blockchain`.t_inspector_presentation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="billLadingTon != null">
+        bill_lading_ton,
+      </if>
+      <if test="billLadingBucket != null">
+        bill_lading_bucket,
+      </if>
+      <if test="shipInspectionTon != null">
+        ship_inspection_ton,
+      </if>
+      <if test="shipInspectionBucket != null">
+        ship_inspection_bucket,
+      </if>
+      <if test="billLadingDate != null">
+        bill_lading_date,
+      </if>
+      <if test="gasolineDensity != null">
+        gasoline_density,
+      </if>
+      <if test="gasolineBoilingPoint != null">
+        gasoline_boiling_point,
+      </if>
+      <if test="gasolineVaporTension != null">
+        gasoline_vapor_tension,
+      </if>
+      <if test="gasolineInductionPeriod != null">
+        gasoline_induction_period,
+      </if>
+      <if test="gasolineSulfurContent != null">
+        gasoline_sulfur_content,
+      </if>
+      <if test="gasolineOxygenContent != null">
+        gasoline_oxygen_content,
+      </if>
+      <if test="gasolineGum != null">
+        gasoline_gum,
+      </if>
+      <if test="gasolineDistillation != null">
+        gasoline_distillation,
+      </if>
+      <if test="gasolineOxidationStability != null">
+        gasoline_oxidation_stability,
+      </if>
+      <if test="gasolineAcidAlkali != null">
+        gasoline_acid_alkali,
+      </if>
+      <if test="gasolineCopperCorrosion != null">
+        gasoline_copper_corrosion,
+      </if>
+      <if test="gasolineOctaneNumber != null">
+        gasoline_octane_number,
+      </if>
+      <if test="dieseloilDensity != null">
+        dieseloil_density,
+      </if>
+      <if test="dieseloilCetaneValue != null">
+        dieseloil_cetane_value,
+      </if>
+      <if test="dieseloilFlashPoint != null">
+        dieseloil_flash_point,
+      </if>
+      <if test="dieseloilAsh != null">
+        dieseloil_ash,
+      </if>
+      <if test="dieseloilCopperCorrosion != null">
+        dieseloil_copper_corrosion,
+      </if>
+      <if test="dieseloilClosingFlash != null">
+        dieseloil_closing_flash,
+      </if>
+      <if test="dieseloilAcidity != null">
+        dieseloil_acidity,
+      </if>
+      <if test="dieseloilCondensationPoint != null">
+        dieseloil_condensation_point,
+      </if>
+      <if test="dieseloilWaterContent != null">
+        dieseloil_water_content,
+      </if>
+      <if test="dieseloilViscosity != null">
+        dieseloil_viscosity,
+      </if>
+      <if test="linkman != null">
+        linkman,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="dealNo != null">
+        deal_no,
+      </if>
+      <if test="inspectorId != null">
+        inspector_id,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="billno != null">
+        billno,
+      </if>
+      <if test="inspAppId != null">
+        insp_app_id,
+      </if>
+      <if test="dieseloilSulfurContent != null">
+        dieseloil_sulfur_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="billLadingTon != null">
+        #{billLadingTon,jdbcType=DECIMAL},
+      </if>
+      <if test="billLadingBucket != null">
+        #{billLadingBucket,jdbcType=DECIMAL},
+      </if>
+      <if test="shipInspectionTon != null">
+        #{shipInspectionTon,jdbcType=DECIMAL},
+      </if>
+      <if test="shipInspectionBucket != null">
+        #{shipInspectionBucket,jdbcType=DECIMAL},
+      </if>
+      <if test="billLadingDate != null">
+        #{billLadingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gasolineDensity != null">
+        #{gasolineDensity,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineBoilingPoint != null">
+        #{gasolineBoilingPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineVaporTension != null">
+        #{gasolineVaporTension,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineInductionPeriod != null">
+        #{gasolineInductionPeriod,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineSulfurContent != null">
+        #{gasolineSulfurContent,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineOxygenContent != null">
+        #{gasolineOxygenContent,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineGum != null">
+        #{gasolineGum,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineDistillation != null">
+        #{gasolineDistillation,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineOxidationStability != null">
+        #{gasolineOxidationStability,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineAcidAlkali != null">
+        #{gasolineAcidAlkali,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineCopperCorrosion != null">
+        #{gasolineCopperCorrosion,jdbcType=VARCHAR},
+      </if>
+      <if test="gasolineOctaneNumber != null">
+        #{gasolineOctaneNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilDensity != null">
+        #{dieseloilDensity,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCetaneValue != null">
+        #{dieseloilCetaneValue,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilFlashPoint != null">
+        #{dieseloilFlashPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilAsh != null">
+        #{dieseloilAsh,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCopperCorrosion != null">
+        #{dieseloilCopperCorrosion,jdbcType=VARCHAR},
+      </if>
+      <if test="dieseloilClosingFlash != null">
+        #{dieseloilClosingFlash,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilAcidity != null">
+        #{dieseloilAcidity,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCondensationPoint != null">
+        #{dieseloilCondensationPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilWaterContent != null">
+        #{dieseloilWaterContent,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilViscosity != null">
+        #{dieseloilViscosity,jdbcType=DECIMAL},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="dealNo != null">
+        #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null">
+        #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="billno != null">
+        #{billno,jdbcType=VARCHAR},
+      </if>
+      <if test="inspAppId != null">
+        #{inspAppId,jdbcType=BIGINT},
+      </if>
+      <if test="dieseloilSulfurContent != null">
+        #{dieseloilSulfurContent,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorPresentation">
+    update `product-trade-blockchain`.t_inspector_presentation
+    <set>
+      <!--<if test="uuid != null">-->
+        <!--uuid = #{uuid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <if test="billLadingTon != null">
+        bill_lading_ton = #{billLadingTon,jdbcType=DECIMAL},
+      </if>
+      <if test="billLadingBucket != null">
+        bill_lading_bucket = #{billLadingBucket,jdbcType=DECIMAL},
+      </if>
+      <if test="shipInspectionTon != null">
+        ship_inspection_ton = #{shipInspectionTon,jdbcType=DECIMAL},
+      </if>
+      <if test="shipInspectionBucket != null">
+        ship_inspection_bucket = #{shipInspectionBucket,jdbcType=DECIMAL},
+      </if>
+      <if test="billLadingDate != null">
+        bill_lading_date = #{billLadingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gasolineDensity != null">
+        gasoline_density = #{gasolineDensity,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineBoilingPoint != null">
+        gasoline_boiling_point = #{gasolineBoilingPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineVaporTension != null">
+        gasoline_vapor_tension = #{gasolineVaporTension,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineInductionPeriod != null">
+        gasoline_induction_period = #{gasolineInductionPeriod,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineSulfurContent != null">
+        gasoline_sulfur_content = #{gasolineSulfurContent,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineOxygenContent != null">
+        gasoline_oxygen_content = #{gasolineOxygenContent,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineGum != null">
+        gasoline_gum = #{gasolineGum,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineDistillation != null">
+        gasoline_distillation = #{gasolineDistillation,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineOxidationStability != null">
+        gasoline_oxidation_stability = #{gasolineOxidationStability,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineAcidAlkali != null">
+        gasoline_acid_alkali = #{gasolineAcidAlkali,jdbcType=DECIMAL},
+      </if>
+      <if test="gasolineCopperCorrosion != null">
+        gasoline_copper_corrosion = #{gasolineCopperCorrosion,jdbcType=VARCHAR},
+      </if>
+      <if test="gasolineOctaneNumber != null">
+        gasoline_octane_number = #{gasolineOctaneNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilDensity != null">
+        dieseloil_density = #{dieseloilDensity,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCetaneValue != null">
+        dieseloil_cetane_value = #{dieseloilCetaneValue,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilFlashPoint != null">
+        dieseloil_flash_point = #{dieseloilFlashPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilAsh != null">
+        dieseloil_ash = #{dieseloilAsh,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCopperCorrosion != null">
+        dieseloil_copper_corrosion = #{dieseloilCopperCorrosion,jdbcType=VARCHAR},
+      </if>
+      <if test="dieseloilClosingFlash != null">
+        dieseloil_closing_flash = #{dieseloilClosingFlash,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilAcidity != null">
+        dieseloil_acidity = #{dieseloilAcidity,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilCondensationPoint != null">
+        dieseloil_condensation_point = #{dieseloilCondensationPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilWaterContent != null">
+        dieseloil_water_content = #{dieseloilWaterContent,jdbcType=DECIMAL},
+      </if>
+      <if test="dieseloilViscosity != null">
+        dieseloil_viscosity = #{dieseloilViscosity,jdbcType=DECIMAL},
+      </if>
+      <if test="linkman != null">
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="dealNo != null">
+        deal_no = #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectorId != null">
+        inspector_id = #{inspectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="billno != null">
+        billno = #{billno,jdbcType=VARCHAR},
+      </if>
+      <if test="inspAppId != null">
+        insp_app_id = #{inspAppId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorPresentation">
+    update `product-trade-blockchain`.t_inspector_presentation
+    set
+      bill_lading_ton = #{billLadingTon,jdbcType=DECIMAL},
+      bill_lading_bucket = #{billLadingBucket,jdbcType=DECIMAL},
+      ship_inspection_ton = #{shipInspectionTon,jdbcType=DECIMAL},
+      ship_inspection_bucket = #{shipInspectionBucket,jdbcType=DECIMAL},
+      bill_lading_date = #{billLadingDate,jdbcType=TIMESTAMP},
+      gasoline_density = #{gasolineDensity,jdbcType=DECIMAL},
+      gasoline_boiling_point = #{gasolineBoilingPoint,jdbcType=DECIMAL},
+      gasoline_vapor_tension = #{gasolineVaporTension,jdbcType=DECIMAL},
+      gasoline_induction_period = #{gasolineInductionPeriod,jdbcType=DECIMAL},
+      gasoline_sulfur_content = #{gasolineSulfurContent,jdbcType=DECIMAL},
+      gasoline_oxygen_content = #{gasolineOxygenContent,jdbcType=DECIMAL},
+      gasoline_gum = #{gasolineGum,jdbcType=DECIMAL},
+      gasoline_distillation = #{gasolineDistillation,jdbcType=DECIMAL},
+      gasoline_oxidation_stability = #{gasolineOxidationStability,jdbcType=DECIMAL},
+      gasoline_acid_alkali = #{gasolineAcidAlkali,jdbcType=DECIMAL},
+      gasoline_copper_corrosion = #{gasolineCopperCorrosion,jdbcType=VARCHAR},
+      gasoline_octane_number = #{gasolineOctaneNumber,jdbcType=DECIMAL},
+      dieseloil_density = #{dieseloilDensity,jdbcType=DECIMAL},
+      dieseloil_cetane_value = #{dieseloilCetaneValue,jdbcType=DECIMAL},
+      dieseloil_flash_point = #{dieseloilFlashPoint,jdbcType=DECIMAL},
+      dieseloil_ash = #{dieseloilAsh,jdbcType=DECIMAL},
+      dieseloil_copper_corrosion = #{dieseloilCopperCorrosion,jdbcType=VARCHAR},
+      dieseloil_closing_flash = #{dieseloilClosingFlash,jdbcType=DECIMAL},
+      dieseloil_acidity = #{dieseloilAcidity,jdbcType=DECIMAL},
+      dieseloil_condensation_point = #{dieseloilCondensationPoint,jdbcType=DECIMAL},
+      dieseloil_water_content = #{dieseloilWaterContent,jdbcType=DECIMAL},
+      dieseloil_viscosity = #{dieseloilViscosity,jdbcType=DECIMAL},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      deal_no = #{dealNo,jdbcType=VARCHAR},
+      inspector_id = #{inspectorId,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      dieseloil_sulfur_content = #{dieseloilSulfurContent,jdbcType=DECIMAL},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      billno = #{billno,jdbcType=VARCHAR}
+    where ID = #{id}
+  </update>
+
+
+
+  <!-- //**************************以下方法为开发者补充*********************************/ -->
+
+  <select id="queryReportInfoList" resultType="java.util.HashMap" parameterType="hashmap">
+    select * from (select
+    tip.ID, tip.uuid, tip.bill_lading_ton, tip.bill_lading_bucket, tip.ship_inspection_ton, tip.ship_inspection_bucket,
+    tip.bill_lading_date, tip.gasoline_density, tip.gasoline_boiling_point, tip.gasoline_vapor_tension,
+    tip.gasoline_induction_period, tip.gasoline_sulfur_content, tip.gasoline_oxygen_content, tip.gasoline_gum,
+    tip.gasoline_distillation, tip.gasoline_oxidation_stability, tip.gasoline_acid_alkali,
+    tip.gasoline_copper_corrosion,
+    tip.gasoline_octane_number, tip.dieseloil_density, tip.dieseloil_cetane_value, tip.dieseloil_flash_point,
+    tip.dieseloil_ash, tip.dieseloil_copper_corrosion, tip.dieseloil_closing_flash, tip.dieseloil_acidity,
+    tip.dieseloil_condensation_point, tip.dieseloil_water_content, tip.dieseloil_viscosity, tip.linkman,
+    tip.contact_number, tip.remark, tip.state, tip.deal_no, tip.inspector_id, tip.alive_flag, tip.create_date,
+    tip.update_date,
+    tip.create_user, tip.update_user, tip.billno, tip.insp_app_id,tip.dieseloil_sulfur_content, tia.deal_uuid deal_uuid,
+    CASE
+    WHEN tip.UPDATE_DATE IS NULL THEN
+    tip.CREATE_DATE
+    ELSE
+    tip.UPDATE_DATE
+    END AS date
+    from `product-trade-blockchain`.t_inspector_presentation tip
+    inner join `product-trade-blockchain`.t_inspector_appoint tia
+    on tip.insp_app_id = tia.id
+    and tia.ALIVE_FLAG = '1'
+    where
+    tip.ALIVE_FLAG='1'
+    <if test="id!=null and id!=''">and tip.ID=#{id}</if>
+    <if test="uuid!=null and uuid!=''">and tip.UUID=#{uuid}</if>
+    <if test="bill_lading_ton!=null and bill_lading_ton!=''">and tip.BILL_LADING_TON=#{bill_lading_ton}</if>
+    <if test="bill_lading_bucket!=null and bill_lading_bucket!=''">and tip.BILL_LADING_BUCKET=#{bill_lading_bucket}</if>
+    <if test="ship_inspection_ton!=null and ship_inspection_ton!=''">and
+      tip.SHIP_INSPECTION_TON=#{ship_inspection_ton}</if>
+    <if test="ship_inspection_bucket!=null and ship_inspection_bucket!=''">and
+      tip.SHIP_INSPECTION_BUCKET=#{ship_inspection_bucket}</if>
+    <if test="bill_lading_date!=null and bill_lading_date!=''">and tip.BILL_LADING_DATE=#{bill_lading_date}</if>
+    <if test="gasoline_density!=null and gasoline_density!=''">and tip.GASOLINE_DENSITY=#{gasoline_density}</if>
+    <if test="gasoline_boiling_point!=null and gasoline_boiling_point!=''">and tip.GASOLINE_BOILING_POINT =
+      #{gasoline_boiling_point}</if>
+    <if test="gasoline_vapor_tension!=null and gasoline_vapor_tension!=''">and tip.GASOLINE_VAPORT_TENSION =
+      #{gasoline_vapor_tension}</if>
+    <if test="gasoline_induction_period!=null and gasoline_induction_period !=''">AND tip.GASOLINE_INDUCTION_PERIOD =
+      #{gasoline_induction_period}</if>
+    <if test="gasoline_sulfur_content!=null and gasoline_sulfur_content!=''">AND tip.GASOLINE_SULFUR_CONTENT =
+      #{gasoline_sulfur_content}</if>
+    <if test="gasoline_oxygen_content!=null and gasoline_oxygen_content!=''">and
+      tip.GASOLINE_OXYGEN_CONTENT=#{gasoline_oxygen_content}</if>
+    <if test="gasoline_gum!=null and gasoline_gum!=''">and tip.GASOLINE_GUM=#{gasoline_gum}
+    </if>
+    <if test="gasoline_distillation!=null and gasoline_distillation!=''">and
+      tip.GASOLINE_DISTILLATION=#{gasoline_distillation}</if>
+    <if test="gasoline_oxidation_stability!=null and gasoline_oxidation_stability!=''">and
+      tip.GASOLINE_OXIDATION_STABILITY=#{gasoline_oxidation_stability}</if>
+    <if test="gasoline_acid_alkali!=null and gasoline_acid_alkali!=''">and
+      tip.GASOLINE_ACID_ALKALI=#{gasoline_acid_alkali}</if>
+    <if test="gasoline_copper_corrosion!=null and gasoline_copper_corrosion!=''">and
+      tip.GASOLINE_COPPER_CORROSION=#{gasoline_copper_corrosion}</if>
+    <if test="gasoline_octane_number!=null and gasoline_octane_number!=''">and
+      tip.GASOLINE_OCTANE_NUMBER=#{gasoline_octane_number}</if>
+    <if test="dieseloil_density!=null and dieseloil_density!=''">and tip.DIESELOIL_DENSITY=#{dieseloil_density}</if>
+    <if test="dieseloil_cetane_value!=null and dieseloil_cetane_value!=''">and
+      tip.DIESELOIL_CETANE_VALUE=#{dieseloil_cetane_value}</if>
+    <if test="dieseloil_flash_point!=null and dieseloil_flash_point!=''">and
+      tip.DIESELOIL_FLASH_POINT=#{dieseloil_flash_point}</if>
+    <if test="dieseloil_ash!=null and dieseloil_ash!=''">and tip.DIESELOIL_ASH=#{dieseloil_ash}</if>
+    <if test="dieseloil_copper_corrosion!=null and dieseloil_copper_corrosion!=''">and
+      tip.DIESELOIL_COPPER_CORROSION=#{dieseloil_copper_corrosion}</if>
+    <if test="dieseloil_copper_corrosion!=null and dieseloil_copper_corrosion!=''">and
+      tip.DIESELOIL_COPPER_CORROSION=#{dieseloil_copper_corrosion}</if>
+    <if test="dieseloil_closing_flash!=null and dieseloil_closing_flash!=''">and
+      tip.DIESELOIL_CLOSING_FLASH=#{dieseloil_closing_flash}</if>
+    <if test="dieseloil_acidity!=null and dieseloil_acidity!=''">and tip.DIESELOIL_ACIDITY=#{dieseloil_acidity}</if>
+    <if test="dieseloil_condensation_point!=null and dieseloil_condensation_point!=''">and
+      tip.DIESELOIL_CONDENSATION_POINT=#{dieseloil_condensation_point}</if>
+    <if test="dieseloil_water_content!=null and dieseloil_water_content!=''">and
+      tip.DIESELOIL_WATER_CONTENT=#{dieseloil_water_content}</if>
+    <if test="dieseloil_viscosity!=null and dieseloil_viscosity!=''">and
+      tip.DIESELOIL_VISCOSITY=#{dieseloil_viscosity}</if>
+    <if test="linkman!=null and linkman!=''">and tip.UPDATE_DATE=#{linkman}</if>
+    <if test="contact_number!=null and contact_number!=''">and tip.contact_number=#{contact_number}</if>
+    <if test="remark!=null and remark!=''">and tip.REMARK=#{remark}</if>
+    <if test="state!=null and state!=''">and tip.STATE=#{state}</if>
+    <if test="deal_no!=null and deal_no!=''">and tip.DEAL_NO=#{deal_no}</if>
+    <if test="inspector_id!=null and inspector_id!=''">and tip.INSPECTOR_ID=#{inspector_id}</if>
+    <if test="alive_flag!=null and alive_flag!=''">and tip.ALIVE_FLAG=#{alive_flag}</if>
+    <if test="createDate!=null and createDate!=''">and tip.CREATE_DATE=#{createDate}</if>
+    <if test="updateDate!=null and updateDate!=''">and tip.UPDATE_DATE=#{updateDate}</if>
+    <if test="createUser!=null and createUser!=''">and tip.CREATE_USER=#{createUser}</if>
+    <if test="updateUser!=null and updateUser!=''">and tip.UPDATE_USER=#{updateUser}</if>
+    <if test="billno!=null and billno!=''">and tip.BILLNO like CONCAT('%',#{billno},'%')</if>
+    <if test="insp_app_id!=null and insp_app_id!=''">and tip.insp_app_id=#{insp_app_id}</if>
+    <if test="dieseloil_sulfur_content!=null and dieseloil_sulfur_content!=''">and
+      tip.dieseloil_sulfur_content=#{dieseloil_sulfur_content}</if>
+    ) t
+  </select>
+
+  <select id="queryTransactionInfoInfoList" resultType="java.util.HashMap" parameterType="java.lang.String">
+    SELECT
+	tcs.uuid,
+	tcs.id tcsid,
+	tss.id tssid,
+	tss.enterprise_id,
+	e.name enterprise_name,
+    tia.appoint_enterprise_id,
+    tia.appoint_enterprise_name,
+	tpi.product_category_code,
+	CASE
+WHEN tpi.product_category_code = 1 THEN
+	'汽油'
+WHEN tpi.product_category_code = 2 THEN
+	'柴油'
+END specification,
+tpi.quantity,
+tpi.product_specification_code,
+ CASE
+WHEN tpi.product_specification_code = 1 THEN
+	'92#'
+WHEN tpi.product_specification_code = 2 THEN
+	'95#'
+WHEN tpi.product_specification_code = 3 THEN
+	'98#'
+WHEN tpi.product_specification_code = 4 THEN
+	'88#'
+WHEN tpi.product_specification_code = 5 THEN
+	'10ppm'
+WHEN tpi.product_specification_code = 6 THEN
+	'50ppm'
+WHEN tpi.product_specification_code = 7 THEN
+	'500ppm'
+WHEN tpi.product_specification_code = 8 THEN
+	'Others'
+WHEN tpi.product_specification_code = 9 THEN
+	'Jet A-1'
+WHEN tpi.product_specification_code = 10 THEN
+	'Light Naphtha'
+WHEN tpi.product_specification_code = 11 THEN
+	'Heavy Naphtha'
+WHEN tpi.product_specification_code = 12 THEN
+	'Naphtha'
+END specification,
+tti.laycan_start_date,
+tti.laycan_end_date,
+tpi.quantity_unit_code,
+buyer.name buyername,
+saler.name salername,
+tti.loading_port,
+tti.loading_country,
+tti.discharge_port,
+tti.discharge_country
+FROM
+	`product-trade-transaction`.t_contract_sheet tcs
+INNER JOIN `product-trade-transaction`.t_product_info tpi ON tpi.id = tcs.product_info_id
+AND tpi.alive_flag = 1
+LEFT JOIN `product-trade-transaction`.t_transport_info tti ON tcs.transport_info_id = tti.id
+AND tti.alive_flag = 1
+LEFT JOIN `product-trade-transaction`.t_sale_sheet tss ON tss.id = tcs.sale_sheet_id
+AND tss.alive_flag = 1
+LEFT JOIN `crude-trade-member`.enterprises e ON e.member_id = tss.enterprise_id
+LEFT JOIN `product-trade-blockchain`.t_inspector_appoint tia ON tia.deal_uuid = tcs.uuid
+AND tia.alive_flag = 1
+LEFT JOIN `crude-trade-member`.enterprises saler ON saler.member_id = tcs.saler_id
+LEFT JOIN `crude-trade-member`.enterprises buyer ON buyer.member_id = tcs.buyer_id
+WHERE
+	tcs.ALIVE_FLAG = '1'
+AND tcs.uuid = #{uuid}
+
+  </select>
+
+    <select id="selectBillNo" resultType="java.lang.String" parameterType="hashmap">
+        select
+        t.billno
+        from `product-trade-blockchain`.t_inspector_presentation t
+        where t.alive_flag = 1
+        <if test="billno!=null and billno!=''">and t.BILLNO like CONCAT('%',#{billno},'%')</if>
+        <if test="create_user!=null and create_user!=''">and t.create_user=#{create_user}</if>
+    </select>
+</mapper>

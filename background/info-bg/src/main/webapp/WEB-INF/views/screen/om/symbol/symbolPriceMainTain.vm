@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')">
+<link rel="stylesheet" href="$imageServer.get('info/css/price/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="demo">
+		<ul class="layui-tab-title">
+			<li>合约维护</li>
+			<li class="layui-this">合约价格维护</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+
+				<div class="inquire">
+					<h3>查询条件</h3>
+				</div>
+				<div class="form-box">
+					<div class="layui-form">
+						<div class="layui-inline industry-name">
+							<label class="layui-form-label ">合约名称</label>
+							<div class="layui-input-inline wd">
+								<input type="tel" id="symbolName" name="symbolName" value="$!{query.symbolName}" lay-verify="required|phone" autocomplete="off"
+									class="layui-input">
+							</div>
+						</div>
+
+						<div class="layui-inline industry-name">
+							<label class="layui-form-label">日期</label>
+							<div class="layui-input-inline wd">
+								<input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+									autocomplete="off" class="layui-input" value="$!{query.tradeDate}" >
+							</div>
+							<button class="layui-btn layui-btn-normal ml18 selectFn">
+								查询
+							</button>
+							<button id="reset" class="layui-btn layui-btn-normal">
+								重置
+							</button>
+						</div>
+					</div>
+					<div class="layui-form">
+						<div class="layui-inline industry-name">
+							<label class="layui-form-label">附件：</label>
+							<button type="button" style="margin-right:5px; background:none;color:black; width:150px; border: 1px solid #cccccc;" class="layui-btn layui-btn-normal" id="importExcel">选择文件...</button>
+							<button type="button" class="layui-btn layui-btn-normal" id="ensure">导入</button>
+							<button id="export" class="layui-btn layui-btn-normal">
+								导出
+							</button>
+						</div>
+					</div>
+
+					<div class="inquire1">
+						<h3>查询结果</h3>
+					</div>
+					<form class="layui-form add" action="" >
+					<div style="overflow-x:auto">
+						<table class="layui-table two lay-even="" lay-skin="nob">
+							<thead style="text-align: center;">
+								<tr>
+									<th> 
+										<input class="checkAll" type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+									</th>
+									<th>序号</th>
+									<th>合约名称</th>
+									<th>合约代码</th>
+									<!-- <th>暂时预留</th> -->
+									<th>开盘价</th>
+									<th>最高价</th>
+									<th>最低价</th>
+									<th>收盘价</th>
+									<th>平均价</th>
+									<th>持仓量</th>
+									<th>成交量</th>
+									<th>结算价</th>
+									<!-- <th>备注</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($item in $symbolPrice)
+								<tr class="trOwn">
+									<td>
+										<input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+										<input name="uuid" value="$!{item.uuid}" type="hidden" class="w1 uuid" />
+									</td>
+									<input name="symbol" value="$!{item.symbol}" type="hidden" class="w1 symbol" />
+									<input name="symbolName" value="$!{item.symbolName}" type="hidden" class="w1 symbolName" />
+									<td style="padding-top: 20px;padding-bottom: 20px;">$!{velocityCount}</td>
+									<!-- <td>$!{item.uuid}</td> -->
+									<td>$!{item.symbolName}</td>
+									<td>$!{item.symbol}</td>
+									<!-- <td>
+										<input name="strip" onkeypress="return myNumberic(event)" value="$!{item.strip}"
+											type="text" class="w1 strip" />
+									</td> -->
+									<td>
+										<input name="openPrice" onkeypress="return myNumberic(event,4)" value="$!{item.openPrice}"
+											type="text" class="w1 openPrice" />
+									</td>
+									<td>
+										<input name="highPrice"  value="$!{item.highPrice}" onkeypress="return myNumberic(event,4)" type="text"
+											class="w1 result highPrice" />
+									</td>
+									<td>
+										<input name="lowPrice" value="$!{item.lowPrice}" onkeypress="return myNumberic(event,4)" type="text" class="w lowPrice" />
+									</td>
+									<td>
+										<input name="closePrice" value="$!{item.closePrice}" onkeypress="return myNumberic(event,4)" type="text" class="w closePrice" />
+									</td>
+									<td>
+										<input name="avgPrice" value="$!{item.avgPrice}" onkeypress="return myNumberic(event,4)" type="text" class="w avgPrice" />
+									</td>
+									<td>
+										<input name="openInterest" value="$!{item.openInterest}" onkeypress="return myNumberic(event,4)" type="text" class="w openInterest" />
+									</td>
+									<td>
+										<input name="volume" value="$!{item.volume}" type="text" onkeypress="return myNumberic(event,4)" class="w volume" />
+									</td>
+									<td>
+										<input name="settlementPrice" value="$!{item.settlementPrice}" onkeypress="return myNumberic(event,4)" type="text" class="w settlementPrice" />
+									</td>
+									<!-- <td>
+										<textarea name="remark" value="$!{item.remark}" class="remark t-m" rows="3" cols="10"></textarea>
+									</td> -->
+								</tr>
+								#end
+							</tbody>
+
+						</table>
+	
+						<div class="foot">
+							<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveOrUpdateSymbolPrice">保存</button>
+							<button id="tableReset" type="button" class="layui-btn layui-btn-normal">重置</button>
+						</div>
+					</div>
+					</form>
+					<!--底部分页-->
+					<div class="ry-footbar ry-right">
+						$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/symbol/symbolPriceMainTain.htm").put('slider_path','/contain/formPagingPageSlider')	
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<script src="$imageServer.get('info/js/symbol/symbolPriceMainTain.js')"></script>

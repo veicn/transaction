@@ -1,0 +1,17 @@
+#set($a = "个人中心-买原油网")
+
+<div class="toolbar" style="right: -280px;width: 316px;margin-top: 76px;">
+    $contain.get("/forecontain/righttool.htm")
+</div>
+$contain.get("/buyCenterContain/demandStatus.htm").setParam("demandId", "$!{demandId}")
+$contain.get("/buyCenterContain/biddingDemandList.htm").setParam("demandId", "$!{demandId}")
+<script>
+    //商品对比名称，主要用来区分原油大厅和成品油商城中两个对比，此处为原油对比
+    window.CompareGoodsName="CRUDEOILCOMPAREGOODS_BACK_$!{demandId}";
+
+    //定义商品比较的回调函数，主要是定义URL地址
+    function compare(idArr){
+        var url = "$appServer.get('purchaseManager/demandCompare.htm')";
+        window.open(url + "?demands="+idArr.toString() + "&bizType=CrudeOil");
+    }
+</script>

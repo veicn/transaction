@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.MemberTagsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.MemberTags" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, description, `owner`, member_id
+  </sql>
+
+  <select id="isRegisterToYihuaByMemberId" resultType="int" parameterType="java.lang.Long" >
+    SELECT COUNT(id) FROM MEMBER_TAGS WHERE member_id = #{memberId,jdbcType=BIGINT} AND owner = 'rego'
+  </select>
+
+  <select id="checkEnterprise" resultType="int" parameterType="java.lang.Long" >
+    SELECT COUNT(id) FROM MEMBER_TAGS WHERE member_id = #{memberId,jdbcType=BIGINT} AND owner = 'reg' AND code = 1
+  </select>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.MemberTags" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into member_tags (code, description, owner,
+    member_id)
+    values (#{code,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR},
+    #{memberId,jdbcType=BIGINT})
+  </insert>
+
+</mapper>

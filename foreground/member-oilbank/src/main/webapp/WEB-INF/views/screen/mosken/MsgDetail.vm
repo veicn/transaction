@@ -1,0 +1,15 @@
+<div class="s-right">
+
+    <div class="det-pg">
+        <div class="det-con">
+            <h1></h1>
+            <p class="det-time">Time:$!{msgObject.createTime}</p>
+            <div class="det-con">
+                $!{msgObject.content}
+            </div>
+            <p class="c-xx-but">
+                <button onclick="history.go(-1)">Cancel</button>
+            </p >
+        </div>
+    </div>
+</div>

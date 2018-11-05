@@ -1,0 +1,119 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+        <button data-method="setTop" class="layui-btn" type="button" id="add">新增</button>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th width="5%">类型</th>
+                <th width="40%">标题</th>
+                <th width="15%">发送规则</th>
+                <th width="5%">已发送</th>
+                <th width="15%">操作</th>
+            </tr>
+            </thead>
+            #foreach($item in $!page.list)
+                <tr>
+                    <td>
+                        #foreach($t in $!types)
+                            #if($!item.type == $!t.code)
+                            $!t.desc
+                        #end
+                        #end
+                    </td>
+                    <td>$!item.title</td>
+                    <td>$!item.cronDesc</td>
+                    <td>
+                        #if($!item.isSend)
+                            是
+                        #else
+                            否
+                        #end
+                    </td>
+                    <td>
+                        <a data-method="setTop" data-id="${item.id}" class="layui-btn layui-btn-xs detail">详情</a>
+##                        #if(!$!{item.isSend} && $!{item.method} != "1")
+##                            <a data-id="${item.id}" class="layui-btn layui-btn-xs addJob">启动任务</a>
+##                        #end
+                    </td>
+
+                </tr>
+            #end
+        </table>
+        $contain.get('/page/page.htm').put('pageInfo',$!{page})
+    </div>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+        });
+
+        $(function () {
+            var title;
+            var type;
+            var url;
+            var active = {
+                setTop: function () {
+                    var that = this;
+                    //多窗口模式，层叠置顶
+                    layer.open({
+                        type: 2 //此处以iframe举例
+                        , title: title
+                        , area: ['1000px', '510px']
+                        , shade: 0.1
+                        , maxmin: true
+                        , id: 1
+                        , content: url
+                        , zIndex: layer.zIndex //重点1
+                        , success: function (layero) {
+                            layer.setTop(layero); //重点2
+                        }
+                    });
+                }
+            }
+
+            $("#add").click(function () {
+                title = '新增';
+                type = 'add';
+                url = "$appServer.get('om/messageLog/add.htm')";
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            })
+
+            $('.detail').click(function () {
+                title = '详情';
+                type = 'add';
+                var id = $(this).data('id');
+                url = "$appServer.get('om/messageLog/detail.htm?id=')" + id;
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+
+            $('.addJob').click(function () {
+                var id = $(this).data("id");
+                layer.confirm('确定要启动定时任务么？', {
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    $.ajax({
+                        url: '$appServer.get('/om/messageLog/start_job.json')',
+                        type:'POST',
+                        data: {messageLogId: id},
+                        success: function (o) {
+                            if (o.status == 0) {
+                                layer.alert('启动成功');
+                            } else {
+                                layer.alert(o.message);
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log(XMLHttpRequest.status);
+                            console.log(XMLHttpRequest.readyState);
+                            console.log(textStatus);
+                            layer.alert('网络异常');
+                        }
+
+                    });
+                }, function () {
+                    layer.closeAll();
+                });
+            });
+        });
+    </script>

@@ -1,0 +1,413 @@
+$contain.get('/common/title.htm').put('title', 'My Orders')
+
+
+#css("$appServer.get('/css/common/reset.css?css_version=03280827')")
+#css("$appServer.get('/css/common/public.css?css_version=03280827')")
+#css("$appServer.get('/css/work/shipping.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myResouces.css?css_version=03280827')")
+#css("$appServer.get('/css/work/resDetails.css?css_version=03280827')")
+#css("$appServer.get('/js/common/layui/css/layui.css')")
+
+#css("$appServer.get('/css/common/pikaday.css?css_version=03280827')")
+#css("$appServer.get('/css/fonts/iconfont.css?css_version=03280827')")
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_contract_list/index.js?js_version=03280827'))
+
+
+<style type="text/css">
+    .tab-item li{
+        list-style: none;
+        font-size: 14px;
+        width:840px;
+    }
+    .tab-item li span{
+        color: #666666;
+    }
+    .tab-item li em{
+        color: #333333;
+    }
+    .tab-item p{
+        display: inline-block;
+    }
+    .tab-item,.tab-item li,.tab-item p,.tab-item span,.tab-item em{
+        margin: 0;
+        padding: 0;
+    }
+    .m-tit .tab-item{
+        width: 880px;
+        border: 1px solid rgba(223,223,223,1);
+    }
+    .m-tit .tab-item li{
+        text-align: left;
+    }
+    .tab-item em{
+        margin-left: 10px;
+    }
+    .tab-item li{
+        padding-left:20px;
+        padding-right: 20px;
+        height: 44px;
+        line-height: 44px;
+    }
+    .tab-item li:first-of-type{
+        background:rgba(54,54,56,0.1);
+        border-bottom: 1px solid rgba(223,223,223,1);
+    }
+    .tab-item li:nth-of-type(2){
+        background:#F4F4F4;
+        border-bottom: 1px solid rgba(223,223,223,1);
+    }
+    .tab-item em{
+        font-style: normal;
+    }
+    .qulist-con .s-tit .tab-item li:first-of-type>span:last-of-type{
+        float: right;
+        color: #F36523;
+        height:44px;
+        line-height:44px;
+    }
+    .tab-item li>p:first-of-type{
+        width: 272px;
+    }
+    .tab-item li>p:nth-of-type(2){
+        width: 293px;
+    }
+</style>
+
+#*<style>
+    .orderlist-con .s-t-tab > ol > li > span {
+        font-size: 14px;
+        white-space: inherit;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>*#
+<div class="s-nav fl qu-con-box">
+    <div class="m-box m-sls cleafix s-box qu-t-box">
+        <h2>Your appointments</h2>
+        <form id="myContractList" method="post" action="$appServer.get('pages/back/my_contract_list/appoint_list.htm')">
+            <div class="xz s-selected">
+                <ul>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Deal No. :</span>
+                        <input type="text" name="serialNumber" value="$!{contractSheetQueryVO.serialNumber}"
+                               class="br input-name"/>
+                    </li>
+                    #*<li class="s-selected-w ">
+                        <span class="m-f-span xz1">Customs Broker Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($status in $!{status})
+                                                #if($status.code == $!{contractSheetQueryVO.contractSheetStatusCode})
+                                                    $status.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" name="brokerAppointStatus"
+                                                   value="$!{contractSheetQueryVO.contractSheetStatusCode}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($status in $!{status})
+                                            <li class="select-option" data-value="$status.code">$status.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Shipping Agent Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($status in $!{status})
+                                                #if($status.code == $!{contractSheetQueryVO.contractSheetStatusCode})
+                                                    $status.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" name="shipagentAppointStatus"
+                                                   value="$!{contractSheetQueryVO.contractSheetStatusCode}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($status in $!{status})
+                                            <li class="select-option" data-value="$status.code">$status.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="s-selected-w " style="margin-top:10px">
+                        <span class="m-f-span xz1">Inspector Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($status in $!{status})
+                                                #if($status.code == $!{contractSheetQueryVO.contractSheetStatusCode})
+                                                    $status.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" name="inspectorAppointStatus"
+                                                   value="$!{contractSheetQueryVO.contractSheetStatusCode}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($status in $!{status})
+                                            <li class="select-option" data-value="$status.code">$status.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>*#
+
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #if($!{contractSheetQueryVO.brokerAppointStatus}=='1')
+                                                    Not Appoint
+                                                #end
+                                            </div>
+                                            <input type="text" class="vcode" name="brokerAppointStatus"
+                                                   value="$!{contractSheetQueryVO.brokerAppointStatus}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        <li class="select-option" data-value=""></li>
+                                        <li class="select-option " data-value="1">Not Appoint</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="search qu-search">
+                <span id="myContractForm" class="m-btn br">Search</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- li -->
+    #foreach($contract in $!{pageInfoList.list})
+        #*<div class="m-box qulist-con orderlist-con cleafix">
+            <div class="m-tit s-tit">
+                <ul>
+                    <li>
+                        <span>Create Time :</span>
+                        <span class="m-tit-word">$!{contract.contractSheetVO.gmtCreated}</span>
+                    </li>
+                    <li>
+                        <span>Deal No :</span>
+                        <span class="m-tit-word">$!{contract.contractSheetVO.serialNumber}</span>
+                    </li>
+                    #if($!{contract.contractSheetVO.buyerId} ==  $!{userId})
+                        <li>
+                            <span>Seller :</span>
+                            <span class="m-tit-word">$!{contract.salerInfoVO.enterpriseName}</span>
+                        </li>
+                    #elseif($!{contract.contractSheetVO.salerId} ==  $!{userId})
+                        <li>
+                            <span>Buyer :</span>
+                            <span class="m-tit-word">$!{contract.buyerInfoVO.enterpriseName}</span>
+                        </li>
+                    #end
+##                    <a  class="br btn-s deBtn mrbtn">
+##                        $!{contract.contractSheetVO.contractSheetStatusVO.enName}
+##                    </a>
+                </ul>
+            </div>
+            <div class="m-text clearfix">
+
+                <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box">
+                    <ol class="qucon-top pro-con-l">
+                    ##                    <li>
+                    ##                        <span class="m-f-span w94">Range :</span>
+                    ##                        <span class="m-r-span w94">$!{contract.saleSheetVO.saleTypeVO.enName}</span>
+                    ##                    </li>
+                        <li>
+                            <span class="m-f-span w94">Category :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.productCategoryVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Specification :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.productSpecificationVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Quantity :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.quantityAsString} $!{contract.productInfoVO.quantityUnitVO.enName}</span>
+                        </li>
+                    ##                    <li>
+                    ##                        <span class="m-f-span w94">Laytime :</span>
+                    ##                        <span class="m-r-span w94">$!{contract.transportInfoVO.laytimeAsString} H+6</span>
+                    ##                    </li>
+                        <li>
+                            <span class="m-f-span w94">Incoterms :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.tradeTermVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Premium :</span>
+                            <span class="m-r-span">
+                            $!{contract.pricingInfoVO.premiumsAndDiscountsAsString} $!{contract.pricingInfoVO.currencyVO.enName}/$!{contract.pricingInfoVO.pricingUnitVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Pricing Period :</span>
+                            <span class="m-r-span w94">$!{contract.pricingInfoVO.pricingPeriod}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Payment Terms :</span>
+                            <span class="m-r-span">$!{contract.pricingInfoVO.paymentTerm}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Laycan :</span>
+                            <span class="m-r-span">$!{contract.transportInfoVO.laycanStartDateAsString}-$!{contract.transportInfoVO.laycanEndDateAsString}</span>
+                        </li>
+                        #if($!{contract.productInfoVO.tradeTermVO.enName} == 'FOB')
+                            <li>
+                                <span class="m-f-span w94">Load Port :</span>
+                                <span class="m-r-span">$!{contract.transportInfoVO.loadingPort}, $!{contract.transportInfoVO.loadingCountry}  </span>
+                            </li>
+                        #else
+                            <li>
+                                <span class="m-f-span w94">Discharge Port :</span>
+                                <span class="m-r-span">$!{contract.transportInfoVO.dischargePort}, $!{contract.transportInfoVO.dischargeCountry}  </span>
+                            </li>
+                        #end
+                    </ol>
+                </div>
+
+                <!-- button -->
+                    <ul class="fr m-t-btn qubtn-box mbl-box">
+
+                        <a href="$appServer.get('pages/back/my_contract_detail/index.htm').put(
+                            'uuid',$!{contract.contractSheetVO.uuid})" class="br fr btn-s">
+                            More
+                        </a>
+
+##                    <a href="$shippingServer.get('/pages/back/TransitUnloading/index.htm').put(
+##                        'uuid',$!{contract.contractSheetVO.uuid})" class="br btn-s btn-chart w12">
+##                        Go to chartering
+##                    </a>
+##                    <a href="$shippingServer.get('/pages/back/TransitUnloading/index.htm').put(
+##                        'uuid',$!{contract.contractSheetVO.uuid})" class="br btn-s btn-chart w12">
+##                        Voyage Tracking
+##                    </a>
+                </ul>
+            </div>
+        </div>*#
+    <div class="m-box qulist-con orderlist-con cleafix" style="margin-bottom: 6px;">
+        <div class="m-tit s-tit">
+            <ul class="tab-item">
+                <li>
+                    <p><span>Deal No :</span><em>$!{contract.contractSheetVO.serialNumber}</em></p>
+                    <span onclick="confirmBtn('$appServer.get('/pages/back/my_contract_detail/index.htm').put('uuid',$!{contract.contractSheetVO.uuid})')" style="cursor: pointer;">More</span>
+                </li>
+                <li>
+                    <p><span>Customs Broke Status:</span><em>
+                        #if($!{contract.tBrokerAppoint.status}=='1')
+                            Not Appoint
+                        #elseif($!{contract.tBrokerAppoint.status}=='2')
+                            Comfirmed
+                        #elseif($!{contract.tBrokerAppoint.status}=='3')
+                            Completed
+                        #end
+
+                    </em></p>
+                    <p><span>Shipping Agent Status :</span><em>
+                        #if($!{contract.tShipagentAppoint.status}=='1')
+                            Not Appoint
+                        #elseif($!{contract.tShipagentAppoint.status}=='2')
+                            Comfirmed
+                        #elseif($!{contract.tShipagentAppoint.status}=='3')
+                            Completed
+                        #end
+                    </em></p>
+                    <p><span>Inspector Status :</span><em>
+                        #if($!{contract.tInspectorAppoint.status}=='1')
+                            Not Appoint
+                        #elseif($!{contract.tInspectorAppoint.status}=='2')
+                            Comfirmed
+                        #elseif($!{contract.tInspectorAppoint.status}=='3')
+                            Completed
+                        #end </em></p>
+                </li>
+                <li style="height: 30px;line-height: 30px;padding-top: 8px;">
+                    <p><span>Category :</span><em>$!{contract.productInfoVO.productCategoryVO.enName}</em></p>
+                    <p><span>Specification :</span><em>$!{contract.productInfoVO.productSpecificationVO.enName}</em></p>
+                    <p><span>Quantity :</span><em>$!{contract.productInfoVO.quantityAsString} $!{contract.productInfoVO.quantityUnitVO.enName}</em></p>
+                </li>
+                <li style="height: 30px;line-height: 30px;padding-bottom: 10px;">
+                    <p><span>Laycan :</span><em>$!{contract.transportInfoVO.laycanStartDateAsString}-$!{contract.transportInfoVO.laycanEndDateAsString}</em></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    #end
+
+    $contain.get('/common/page.htm').put("pageInfo", $!{pageInfoList})
+</div>
+
+<script>
+    // 时间组件综合调用
+    (function () {
+        window.commonCPY.datePicker(['LaycanS', 'LaycanD'], function (value, date, endDate) {
+            var value = value[0].split(' ').join('/')
+            console.log(value)
+        });
+        commonCPY.select()
+    })();
+
+    $("#myContractForm").on("click", function () {
+
+        document.getElementById("myContractList").submit();
+
+    });
+
+
+
+    function confirmBtn(url){
+        window.location=url;
+
+
+    }
+
+</script>
+
+
+
+
+

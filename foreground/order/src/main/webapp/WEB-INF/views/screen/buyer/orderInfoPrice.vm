@@ -1,0 +1,12 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>价格信息</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn cfn-qttk">价格公式：</span><span class="c-int qx-conte cfn-qtnr">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos2"><span class="c-fn">计价基准：</span><span class="c-int qx-conte">$!{valuationBaseName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">付款日期：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">贴水：</span><span class="c-int qx-conte">$!{contract.agioStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">备注：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

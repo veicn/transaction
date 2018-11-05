@@ -1,0 +1,161 @@
+
+<div >
+	<div class="c-mod">
+	
+		<form method="post">
+		<ul class="c-state">
+		<span class="c-mmxz-mm">
+			<a href="$orderExecuteServer.get('buyerCenter/orderStatement/listPre.htm')" class="c-mmxz-mm2 ry-a-menu">
+				<i class="c-mmxz-m"></i>Sell</a>
+		</span>
+		</ul>
+		<ul class="c-ful c-filter c-fulen">
+			<li class="c-fcos3"><span class="c-fn c-fn2">No.：</span><input
+				type="text" name="orderStatementNo" value="$!query.orderStatementNo" class="c-int  c-int2" /></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2 c-fnen">Reconciliation Date：</span><input
+				type="text" class="c-int c-int2 c-inten" id="checkTimeDesc" name="checkTimeDesc" value="$!query.checkTimeDesc" />
+				<i class="c-ico xg-data"></i>
+				</li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">Deal No.：</span><input
+				type="text" class="c-int c-int2"  name="orderNo" value="$!query.orderNo"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">PIC：</span><input
+				type="text" class="c-int c-int2"  name="contactName" value="$!query.contactName"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">Counterparty：</span><input
+				type="text" class="c-int c-int2"  name="customerName" value="$!query.customerName"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">Status：</span>
+			<select id="query.status" name="status"  style="height: 30px;margin-left:-4px;"
+							class="c-int c-int2" >
+							<option value="">please choose</option>
+								<option value="01" #if($!{query.status} ==
+									'01') selected="selected" #end>Initial</option>
+								<option value="05" #if($!{query.status} ==
+									'05') selected="selected" #end>to be confirm</option>
+								<option value="10" #if($!{query.status} ==
+									'10') selected="selected" #end>Confirmed</option>
+								<option value="20" #if($!{query.status} ==
+									'20') selected="selected" #end>Rejected</option>
+								<option value="30" #if($!{query.status} ==
+									'30') selected="selected" #end>Settled</option>
+								
+						</select>
+			</li>
+			<li class="c-libtn"><button type="submit">Find</button></li>
+		</ul>
+		</form>
+		<h3>
+			<i class="cw-ico ico-h3"></i>Provisional Settlement<a href="#" class="c-rebo"></a>
+		</h3>
+		<div class="c-tabdiv">
+			<table>
+				<tr>
+					<th>No.</th>
+					<th>Counterparty</th>
+					<th>PIC</th>
+					<th>Tel</th>
+					<th>Settlement Quantity (BBL)</th>
+					<th>Total Amount (USD)</th>
+					<th>Reconciliation Date</th>
+					<!--<th>对账人</th>-->
+					<th>Status</th>
+					<th>Option</th>
+				</tr>
+
+				#foreach($data in $datas) #set($class = $velocityCount%2+1)
+				<tr class="c-tabcos$class">
+					<input type="hidden"  name="contractFileList[0].contractFileName" value="Name of appendix">
+					<input type="hidden" id="file0_path" name="contractFileList[0].filePath" value="$!{contractFile.filePath}">
+					<input type="hidden" id="file0_url" name="contractFileList[0].originalName" class="c-int" readonly="readonly" value="$!{contractFile.originalName}">
+					<td><a href="javascript:void(0)" class="showFn" orderId="$!data.orderId" orderStatementUuid="$!data.orderStatementUuid">$!data.orderStatementNo</a></td>
+					<td>$!data.customerName</a></td>
+					<td>$!data.contactName</td>
+					<td>$!data.tel</td>
+					<td>$!NumberTool.format($!data.settlementQuantityBbl)</td>
+					<td>$!NumberTool.format($!data.totalAmount)</td>
+					<td>$!dateUtil.convertDateToString($!data.checkTime)</td>
+					<!--<td>$!data.confirmPerson</td>-->
+					<td>#if($data.status == '01') Initial #elseif($data.status == '05')
+						to be confirm #elseif($data.status == '10') Confirmed
+						 #elseif($data.status ==
+						'20') Rejected #elseif($data.status == '30') Settled 
+						#end </span>
+					</li>
+					</td>
+					<td>
+						
+						<a href="javascript:void(0)" class="showFn" orderId="$!data.orderId" orderStatementUuid="$!data.orderStatementUuid">view</a>
+					#if($data.status == '20')
+						<a href="javascript:void(0)"  class="showFn" orderId="$!data.orderId" orderStatementUuid="$!data.orderStatementUuid">Feedback</a>
+					#end
+					#if($data.status == '30')
+						#if("$!data.fileUrl" != "")
+					<a href="$orderExecuteServer.get('/common/doc/download.htm')?path=$!{data.fileUrl}&fileName=$!{data.fileName}" class="downLoad">download</a>	
+						#end
+					#end
+				</td>
+				</tr>
+				#end
+			</table>
+				
+		</div>
+		<div class="order-bot">
+			$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('sellerCenter/orderStatement/listPre.htm')")
+		</div>
+	</div>
+</div>
+<script
+	src="../../orderexecute/js/orderStatement/sellerStatementListPre.js"></script>
+
+<script>
+	layui.use("upload", function(){
+		var $ = layui.jquery,upload = layui.upload;
+		
+		upload.render({
+		    elem: ".fileUpload",
+		    url: "$orderExecuteServer.get('/common/doc/upload.json')",
+		    accept: "file",
+		    //size: 60 //限制文件大小，单位 KB
+		     exts: 'jpg|png|gif|bmp|jpeg|doc|docx|xls|xlsx|pdf', //允许上传的文件后缀
+		    //before: function(){
+		    //  layer.tips("接口地址："+ this.url, this.item, {tips: 1});
+		    //},
+		    done: function(res, index, upload){
+		     var item = this.item;
+		   	 var fileName = res.datas.originalName
+		   	 var fileUrl = res.datas.path
+		     var orderStatementId = item.attr("data_id");
+			    if(res.status === 0){
+			    	 $.ajax({
+						url: orderServer+"/orderStatement/statementEditStatus.json",
+						data:{"orderStatementId":orderStatementId,
+							  "fileName":fileName,
+							  "fileUrl":fileUrl
+						},
+								
+						type: "POST",
+						success: function(data) {
+							location.reload()
+						},
+						error: function(data) {
+							alert("request error");
+					 }
+				})
+		      		
+		  }else{
+			  layer.tips($.i18n(res.code,res.params), this.item, {tips: 1});
+			  }
+			   
+ 	 }   
+	})
+})
+</script>
+	
+<script>
+	$(function(){
+		// 查看函数
+		$('.showFn').on('click',function(){
+			var orderStatementUuid = $(this).attr("orderStatementUuid");
+			window.location.href = orderServer+"/sellerCenter/orderStatement/infoPre.htm"
+			+ "?orderStatementUuid=" + orderStatementUuid;
+		});
+	});
+</script>

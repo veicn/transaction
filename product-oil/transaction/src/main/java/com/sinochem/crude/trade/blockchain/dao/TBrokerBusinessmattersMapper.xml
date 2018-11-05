@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerBusinessmattersMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerBusinessmatters">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="declarationuuid" jdbcType="VARCHAR" property="declarationuuid" />
+    <result column="businesscode" jdbcType="VARCHAR" property="businesscode" />
+    <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, declarationuuid, businesscode, businessname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_businessmatters
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_businessmatters
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_businessmatters
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_broker_businessmatters
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+     insert into `product-trade-blockchain`.t_broker_businessmatters (declarationuuid, businesscode,
+      businessname)
+    values
+    <foreach collection="list" item="business" separator=",">
+      (#{business.declarationuuid,jdbcType=VARCHAR}, #{business.businesscode,jdbcType=VARCHAR},
+      #{business.businessname,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerBusinessmatters">
+    insert into t_broker_businessmatters (id, declarationuuid, businesscode, 
+      businessname)
+    values (#{id,jdbcType=BIGINT}, #{declarationuuid,jdbcType=VARCHAR}, #{businesscode,jdbcType=VARCHAR}, 
+      #{businessname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerBusinessmatters">
+    insert into t_broker_businessmatters
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="declarationuuid != null">
+        declarationuuid,
+      </if>
+      <if test="businesscode != null">
+        businesscode,
+      </if>
+      <if test="businessname != null">
+        businessname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null">
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="businesscode != null">
+        #{businesscode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessname != null">
+        #{businessname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerBusinessmatters">
+    update t_broker_businessmatters
+    <set>
+      <if test="declarationuuid != null">
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="businesscode != null">
+        businesscode = #{businesscode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessname != null">
+        businessname = #{businessname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerBusinessmatters">
+    update t_broker_businessmatters
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      businesscode = #{businesscode,jdbcType=VARCHAR},
+      businessname = #{businessname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

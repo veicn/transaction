@@ -1,0 +1,75 @@
+
+<div class="c-mod">
+	  <h3><em class="cw-ico ico-h3"></em>商品信息</h3>
+	  <div class="c-form">
+        <ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">商品分类：</span>
+				$!{productOilInfoVO.productOilClassifyName}
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">品种：</span>
+				$!{productOilInfoVO.productOilKindName}
+			</li>
+			
+            <li class="c-fcos2">
+            	<span class="c-fn">规格：</span>
+				$!{productOilInfoVO.productOilSpecsName}
+            </li>
+			
+            #*<li class="c-fcos2">
+            	<span class="c-fn">是否代理：</span>#if(1==1) true #else false #end
+
+            </li>*#
+
+            #*<li class="c-fcos2">
+                <span class="c-fn">地区：</span>
+            </li>
+
+			<li class="c-fcos2">
+				<span class="c-fn">出口类型：</span>
+			</li>*#
+			
+			<li class="c-fcos2">
+				<span class="c-fn">贸易条款：</span>$!{tradeItemName}
+			</li>
+
+            <li class="c-fcos2">
+                <span class="c-fn">数量(桶)：</span>$!{contract.numStr}
+            </li>
+			
+			#*<li class="c-fcos1">
+				<span class="c-fn">装期：</span>
+				<input name="crudeShip.shipmentStartTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>——
+				<input name="crudeShip.shipmentEndTime" type="text" class="c-int zq-text" style="width:39%" date="true"/>
+			</li>*#
+			
+
+           #* <li class="c-fcos2 bid-type">
+                <span class="c-fn">投标截止日：</span>$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.stopBidTime})}
+            </li>
+			<li class="c-fcos2 bid-type">
+				<span class="c-fn">开标日期：</span>$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contract.tenderOutTime})}
+			</li>*#
+			
+			<li class="c-fcos1">
+				<span class="c-fn">质检报告：</span>
+				<a href="" class="re_up">+ 上传商品质检报告</a>
+			</li>
+			<li class="c-fcos1">
+				<span class="c-fn">商品图片：</span>
+				<a href="" class="re_up">+ 上传产品图片</a>
+                <div class="c-imglist c-imglist2">
+                    <ul>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li><img src="../images/coop_img_01.gif"></li>
+                        <li class="c-imgadd"><a href="">+</a></li>
+                    </ul>
+                </div>
+			</li>
+		</ul>
+	  </div>
+
+  </div>

@@ -1,0 +1,99 @@
+.share-w14{
+    width:14em;
+}
+.share-center{
+    text-align: center;
+}
+.share-wall{
+    box-sizing:border-box;
+    width:100%;
+}
+.share-ptb8{
+    padding-top: 3em;
+    padding-bottom: 3em;
+    background-color: #fff;
+}
+.share-bb{
+    border-bottom: 1px solid #EFEFF4;
+}
+.share-bw{
+    background-color: #fff;
+}
+.share-w20{
+    width:20em;
+}
+.share-w18{
+    width:18em;
+}
+.share-fl{
+    float: left;
+}
+.share-fr{
+    float: right;
+}
+.share-l4{
+    line-height: 4em;
+}
+.share-l2{
+    line-height: 2em;
+}
+.share-h{
+    height: 2.4em;
+    border:0;
+    background-color: #12b7f5;
+    color:white;
+    font-size:1em
+}
+.share-pr{
+    position: relative;
+}
+.share-pl{
+    position:absolute;
+    left:0;
+}
+.share-pr{
+    position: absolute;
+    right: 0;
+}
+
+.img-shar-cen{
+    width: 17em;
+    height: 5em;
+    background-image: url("img/app_logo.png");
+    background-size: 17em 5em;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.bc-bg {
+  background-color: #FFFFFF;
+}
+.ui{
+    font-family: "ƻ��";
+}
+.ui-center{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

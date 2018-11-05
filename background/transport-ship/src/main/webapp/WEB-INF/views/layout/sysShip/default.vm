@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    $contain.get("/contain/htmlhead.htm")
+<body>
+
+<div class="layui-layout layui-layout-admin">
+
+$contain.get("/contain/nav.htm").setHost("$omServer.get('')")
+$contain.get("/contain/menu.htm")
+<div class="layui-body">
+    $screen_content
+</div>
+$contain.get("/contain/htmlend.htm")
+
+
+</div>
+<style>#cnzz_stat_icon_1272857056{display:none}</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+    $(function(){
+ 		var parentMenu=window.localStorage.getItem('parentMenu');
+ 		var childenMenu=window.localStorage.getItem('childenMenu');
+ 		if(parentMenu){
+ 			$('.layui-nav-tree .layui-nav-child').find('dd').removeClass('layui-this');
+ 			$('.layui-nav-tree .layui-nav-child').eq(parentMenu).show().find('dd:eq('+childenMenu+')').addClass('layui-this');
+ 		}
+    	$('.layui-nav-tree .layui-nav-child').each(function(){
+    		var This=this;
+    		$(this).find('dd').on('click',function(){
+    			window.localStorage.setItem('parentMenu',$('.layui-nav-tree .layui-nav-child').index(This));
+    			window.localStorage.setItem('childenMenu',$(this).parent().find('dd').index(this));
+    			$('.layui-nav-tree .layui-nav-child').find('dd').removeClass('layui-this');
+    			$(this).addClass('layui-this');
+    		});
+    	})
+    });
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?469b0210be7581c5a68ba34d43e1b3bc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Charter Party</h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			</div>
+		</div>
+		#foreach($data in $datas)
+				<div class="s-mod-block">
+		<div class="s-mod-btit queryBtn" attr-data="$!data.uuid"><a href="javascript:;" title="">$!{data.pactCode}</a>
+		<span>
+			 	#if($!{data.status} == '1')<span>Charter Party Updated</span>#end
+			    #if($!{data.status} == '2')<span>Allocation completed, Go proceed</span>#end
+			 	#if($!{data.status} == '3')<span>Voyage Start</span>#end
+			 	#if($!{data.status} == '4')<span>Loaded</span>#end
+			    #if($!{data.status} == '5')<span>On The Way</span>#end
+			 	#if($!{data.status} == '6')<span>Discharged</span>#end
+			 	#if($!{data.status} == '7')<span>Voyage Closed</span>#end
+			 	#if($!{data.status} == '8')<span>Settled</span>#end
+			</span>
+		</span>
+		
+		</div>
+		<div class="s-mod-bcont">
+		<form class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item">
+				<div class="s-inline" title="$!{data.carrierName}">
+				  <label class="s-form-label">Charterer：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.carrierName}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.shipOwner}">
+				  <label class="s-form-label">Ship Owner：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.shipOwner}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.shipName}">
+				  <label class="s-form-label">Vessel Name：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.shipName}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.pactBeg}">
+				  <label class="s-form-label">LAYCAN：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.pactBeg}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.minQuantity} MT">
+				  <label class="s-form-label">Min Cargo Quantity：</label>
+				  <div class="s-input-inline">
+					 <p>$!{data.minQuantity} MT</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.loadPort}">
+				  <label class="s-form-label">Loading Port：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.loadPort}</p>
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</form>
+		<div class="s-but-all clearfix">
+			<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+			<div class="s-but-ship clearfix">
+			#if($!{data.status} == '6' || $!{data.status} == '3' || $!{data.status} == '4' || $!{data.status} == '5')
+			<a href="javascript:;" class="s-btn edit" attr-data="$!data.uuid">Update Shipping Information</a>
+		    #end
+		    #if($!{data.status} != '1' && $!{data.status} != '2')
+				 <a href="javascript:;" class="s-btn track" attr-data="$!data.uuid">Tracking</a>
+			#end
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	#end
+	$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipPactNew/shipPactListAgency.htm')")
+		
+	</div>
+<script src="../transport/js/shipPactNew/shipPactListAgency.js"></script>
+  

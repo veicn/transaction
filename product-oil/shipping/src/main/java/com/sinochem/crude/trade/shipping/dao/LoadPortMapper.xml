@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shipping.dao.LoadPortMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.LoadPort" id="LoadPortDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.LoadPort">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.shipping.domain.LoadPort" id="LoadPort">
+			<result property="shipLoadPortId" column="SHIP_LOAD_PORT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="shipConfirmationSheetId" column="SHIP_CONFIRMATION_SHEET_ID" />
+		<result property="vesselName" column="VESSEL_NAME" />
+		<result property="portOfLoading" column="PORT_OF_LOADING" />
+		<result property="imo" column="IMO" />
+		<result property="product" column="PRODUCT" />
+		<result property="quantityTons" column="QUANTITY_TONS" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="laycanStart" column="LAYCAN_START" />
+		<result property="laycanEnd" column="LAYCAN_END" />
+		<result property="norTendered" column="NOR_TENDERED" />
+		<result property="anchorAweigh" column="ANCHOR_AWEIGH" />
+		<result property="pobDatetimeOne" column="POB_DATETIME_ONE" />
+		<result property="pobBerth" column="POB_BERTH" />
+		<result property="firstLineDatetime" column="FIRST_LINE_DATETIME" />
+		<result property="firstLineEtb" column="FIRST_LINE_ETB" />
+		<result property="firstLineBerth" column="FIRST_LINE_BERTH" />
+		<result property="allFast" column="ALL_FAST" />
+		<result property="tanksInspectionDatetime" column="TANKS_INSPECTION_DATETIME" />
+		<result property="tanksInspectionRemarks" column="TANKS_INSPECTION_REMARKS" />
+		<result property="independentInspection" column="INDEPENDENT_INSPECTION" />
+		<result property="independentInspectionDatetime" column="INDEPENDENT_INSPECTION_DATETIME" />
+		<result property="independentInspectionRemarks" column="INDEPENDENT_INSPECTION_REMARKS" />
+		<result property="independentInspectionObq" column="INDEPENDENT_INSPECTION_OBQ" />
+		<result property="shoreArmsConnecting" column="SHORE_ARMS_CONNECTING" />
+		<result property="commencedLoadingDatetime" column="COMMENCED_LOADING_DATETIME" />
+		<result property="etc" column="ETC" />
+		<result property="completedLoadingDatetime" column="COMPLETED_LOADING_DATETIME" />
+		<result property="shoreArmDisconnecting" column="SHORE_ARM_DISCONNECTING" />
+		<result property="cargoSurvey" column="CARGO_SURVEY" />
+		<result property="blMetricTons" column="BL_METRIC_TONS" />
+		<result property="blLongTons" column="BL_LONG_TONS" />
+		<result property="ltr" column="LTR" />
+		<result property="bbls" column="BBLS" />
+		<result property="leaveDatetime" column="LEAVE_DATETIME" />
+		<result property="nextPortId" column="NEXT_PORT_ID" />
+		<result property="nextPort" column="NEXT_PORT" />
+		<result property="step" column="STEP" />
+		<result property="ext1" column="EXT1" />
+		<result property="version" column="VERSION" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+			</resultMap> 
+	
+	
+	
+
+	
+	
+	
+	
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort"  useGeneratedKeys="true" keyProperty="shipLoadPortId" >
+		insert  into t_ship_load_port (				SHIP_LOAD_PORT_ID
+						,UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						,VESSEL_NAME
+						,PORT_OF_LOADING
+						,IMO
+						,PRODUCT
+						,QUANTITY_TONS
+						,QUANTITY
+						,LAYCAN_START
+						,LAYCAN_END
+						,NOR_TENDERED
+						,ANCHOR_AWEIGH
+						,POB_DATETIME_ONE
+						,POB_BERTH
+						,FIRST_LINE_DATETIME
+						,FIRST_LINE_ETB
+						,FIRST_LINE_BERTH
+						,ALL_FAST
+						,TANKS_INSPECTION_DATETIME
+						,TANKS_INSPECTION_REMARKS
+						,INDEPENDENT_INSPECTION
+						,INDEPENDENT_INSPECTION_DATETIME
+						,INDEPENDENT_INSPECTION_REMARKS
+						,INDEPENDENT_INSPECTION_OBQ
+						,SHORE_ARMS_CONNECTING
+						,COMMENCED_LOADING_DATETIME
+						,ETC
+						,COMPLETED_LOADING_DATETIME
+						,SHORE_ARM_DISCONNECTING
+						,CARGO_SURVEY
+						,BL_METRIC_TONS
+						,BL_LONG_TONS
+						,LTR
+						,BBLS
+						,LEAVE_DATETIME
+						,NEXT_PORT_ID
+						,NEXT_PORT
+						,STEP
+						,EXT1
+						,VERSION
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{shipLoadPortId}
+						,#{uuid}
+						,#{shipConfirmationSheetId}
+						,#{vesselName}
+						,#{portOfLoading}
+						,#{imo}
+						,#{product}
+						,#{quantityTons}
+						,#{quantity}
+						,#{laycanStart}
+						,#{laycanEnd}
+						,#{norTendered}
+						,#{anchorAweigh}
+						,#{pobDatetimeOne}
+						,#{pobBerth}
+						,#{firstLineDatetime}
+						,#{firstLineEtb}
+						,#{firstLineBerth}
+						,#{allFast}
+						,#{tanksInspectionDatetime}
+						,#{tanksInspectionRemarks}
+						,#{independentInspection}
+						,#{independentInspectionDatetime}
+						,#{independentInspectionRemarks}
+						,#{independentInspectionObq}
+						,#{shoreArmsConnecting}
+						,#{commencedLoadingDatetime}
+						,#{etc}
+						,#{completedLoadingDatetime}
+						,#{shoreArmDisconnecting}
+						,#{cargoSurvey}
+						,#{blMetricTons}
+						,#{blLongTons}
+						,#{ltr}
+						,#{bbls}
+						,#{leaveDatetime}
+						,#{nextPortId}
+						,#{nextPort}
+						,#{step}
+						,#{ext1}
+						,#{version}
+						,#{aliveFlag}
+						,#{createDate}
+						,#{createUser}
+						,#{updateDate}
+						,#{updateUser}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_ship_load_port
+              WHERE 1=1 
+                AND SHIP_LOAD_PORT_ID = #{shipLoadPortId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+        DELETE FROM t_ship_load_port
+              WHERE 1=1 
+        <if test="shipLoadPortId!=null and shipLoadPortId!=''">AND  SHIP_LOAD_PORT_ID = #{shipLoadPortId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">AND  SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+        <if test="vesselName!=null and vesselName!=''">AND  VESSEL_NAME = #{vesselName}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">AND  PORT_OF_LOADING = #{portOfLoading}</if>
+        <if test="imo!=null and imo!=''">AND  IMO = #{imo}</if>
+        <if test="product!=null and product!=''">AND  PRODUCT = #{product}</if>
+        <if test="quantityTons!=null and quantityTons!=''">AND  QUANTITY_TONS = #{quantityTons}</if>
+        <if test="quantity!=null and quantity!=''">AND  QUANTITY = #{quantity}</if>
+        <if test="laycanStart!=null and laycanStart!=''">AND  LAYCAN_START = #{laycanStart}</if>
+        <if test="laycanEnd!=null and laycanEnd!=''">AND  LAYCAN_END = #{laycanEnd}</if>
+        <if test="norTendered!=null and norTendered!=''">AND  NOR_TENDERED = #{norTendered}</if>
+        <if test="anchorAweigh!=null and anchorAweigh!=''">AND  ANCHOR_AWEIGH = #{anchorAweigh}</if>
+        <if test="pobDatetimeOne!=null and pobDatetimeOne!=''">AND  POB_DATETIME_ONE = #{pobDatetimeOne}</if>
+        <if test="pobBerth!=null and pobBerth!=''">AND  POB_BERTH = #{pobBerth}</if>
+        <if test="firstLineDatetime!=null and firstLineDatetime!=''">AND  FIRST_LINE_DATETIME = #{firstLineDatetime}</if>
+        <if test="firstLineEtb!=null and firstLineEtb!=''">AND  FIRST_LINE_ETB = #{firstLineEtb}</if>
+        <if test="firstLineBerth!=null and firstLineBerth!=''">AND  FIRST_LINE_BERTH = #{firstLineBerth}</if>
+        <if test="allFast!=null and allFast!=''">AND  ALL_FAST = #{allFast}</if>
+        <if test="tanksInspectionDatetime!=null and tanksInspectionDatetime!=''">AND  TANKS_INSPECTION_DATETIME = #{tanksInspectionDatetime}</if>
+        <if test="tanksInspectionRemarks!=null and tanksInspectionRemarks!=''">AND  TANKS_INSPECTION_REMARKS = #{tanksInspectionRemarks}</if>
+        <if test="independentInspection!=null and independentInspection!=''">AND  INDEPENDENT_INSPECTION = #{independentInspection}</if>
+        <if test="independentInspectionDatetime!=null and independentInspectionDatetime!=''">AND  INDEPENDENT_INSPECTION_DATETIME = #{independentInspectionDatetime}</if>
+        <if test="independentInspectionRemarks!=null and independentInspectionRemarks!=''">AND  INDEPENDENT_INSPECTION_REMARKS = #{independentInspectionRemarks}</if>
+        <if test="independentInspectionObq!=null and independentInspectionObq!=''">AND  INDEPENDENT_INSPECTION_OBQ = #{independentInspectionObq}</if>
+        <if test="shoreArmsConnecting!=null and shoreArmsConnecting!=''">AND  SHORE_ARMS_CONNECTING = #{shoreArmsConnecting}</if>
+        <if test="commencedLoadingDatetime!=null and commencedLoadingDatetime!=''">AND  COMMENCED_LOADING_DATETIME = #{commencedLoadingDatetime}</if>
+        <if test="etc!=null and etc!=''">AND  ETC = #{etc}</if>
+        <if test="completedLoadingDatetime!=null and completedLoadingDatetime!=''">AND  COMPLETED_LOADING_DATETIME = #{completedLoadingDatetime}</if>
+        <if test="shoreArmDisconnecting!=null and shoreArmDisconnecting!=''">AND  SHORE_ARM_DISCONNECTING = #{shoreArmDisconnecting}</if>
+        <if test="cargoSurvey!=null and cargoSurvey!=''">AND  CARGO_SURVEY = #{cargoSurvey}</if>
+        <if test="blMetricTons!=null and blMetricTons!=''">AND  BL_METRIC_TONS = #{blMetricTons}</if>
+        <if test="blLongTons!=null and blLongTons!=''">AND  BL_LONG_TONS = #{blLongTons}</if>
+        <if test="ltr!=null and ltr!=''">AND  LTR = #{ltr}</if>
+        <if test="bbls!=null and bbls!=''">AND  BBLS = #{bbls}</if>
+        <if test="leaveDatetime!=null and leaveDatetime!=''">AND  LEAVE_DATETIME = #{leaveDatetime}</if>
+        <if test="nextPortId!=null and nextPortId!=''">AND  NEXT_PORT_ID = #{nextPortId}</if>
+        <if test="nextPort!=null and nextPort!=''">AND  NEXT_PORT = #{nextPort}</if>
+        <if test="step!=null and step!=''">AND  STEP = #{step}</if>
+        <if test="ext1!=null and ext1!=''">AND  EXT1 = #{ext1}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+		update t_ship_load_port
+		<set>
+         SHIP_LOAD_PORT_ID=#{shipLoadPortId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="product!=null">,PRODUCT = #{product}</if>
+		<if test="quantityTons!=null">,QUANTITY_TONS = #{quantityTons}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="laycanStart!=null">,LAYCAN_START = #{laycanStart}</if>
+		<if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+		<if test="norTendered!=null">,NOR_TENDERED = #{norTendered}</if>
+		<if test="anchorAweigh!=null">,ANCHOR_AWEIGH = #{anchorAweigh}</if>
+		<if test="pobDatetimeOne!=null">,POB_DATETIME_ONE = #{pobDatetimeOne}</if>
+		<if test="pobBerth!=null">,POB_BERTH = #{pobBerth}</if>
+		<if test="firstLineDatetime!=null">,FIRST_LINE_DATETIME = #{firstLineDatetime}</if>
+		<if test="firstLineEtb!=null">,FIRST_LINE_ETB = #{firstLineEtb}</if>
+		<if test="firstLineBerth!=null">,FIRST_LINE_BERTH = #{firstLineBerth}</if>
+		<if test="allFast!=null">,ALL_FAST = #{allFast}</if>
+		<if test="tanksInspectionDatetime!=null">,TANKS_INSPECTION_DATETIME = #{tanksInspectionDatetime}</if>
+		<if test="tanksInspectionRemarks!=null">,TANKS_INSPECTION_REMARKS = #{tanksInspectionRemarks}</if>
+		<if test="independentInspection!=null">,INDEPENDENT_INSPECTION = #{independentInspection}</if>
+		<if test="independentInspectionDatetime!=null">,INDEPENDENT_INSPECTION_DATETIME = #{independentInspectionDatetime}</if>
+		<if test="independentInspectionRemarks!=null">,INDEPENDENT_INSPECTION_REMARKS = #{independentInspectionRemarks}</if>
+		<if test="independentInspectionObq!=null">,INDEPENDENT_INSPECTION_OBQ = #{independentInspectionObq}</if>
+		<if test="shoreArmsConnecting!=null">,SHORE_ARMS_CONNECTING = #{shoreArmsConnecting}</if>
+		<if test="commencedLoadingDatetime!=null">,COMMENCED_LOADING_DATETIME = #{commencedLoadingDatetime}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="completedLoadingDatetime!=null">,COMPLETED_LOADING_DATETIME = #{completedLoadingDatetime}</if>
+		<if test="shoreArmDisconnecting!=null">,SHORE_ARM_DISCONNECTING = #{shoreArmDisconnecting}</if>
+		<if test="cargoSurvey!=null">,CARGO_SURVEY = #{cargoSurvey}</if>
+		<if test="blMetricTons!=null">,BL_METRIC_TONS = #{blMetricTons}</if>
+		<if test="blLongTons!=null">,BL_LONG_TONS = #{blLongTons}</if>
+		<if test="ltr!=null">,LTR = #{ltr}</if>
+		<if test="bbls!=null">,BBLS = #{bbls}</if>
+		<if test="leaveDatetime!=null">,LEAVE_DATETIME = #{leaveDatetime}</if>
+		<if test="nextPortId!=null">,NEXT_PORT_ID = #{nextPortId}</if>
+		<if test="nextPort!=null">,NEXT_PORT = #{nextPort}</if>
+		<if test="step!=null">,STEP = #{step}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+       	 SHIP_LOAD_PORT_ID=#{shipLoadPortId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+		update t_ship_load_port
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="product!=null">,PRODUCT = #{product}</if>
+		<if test="quantityTons!=null">,QUANTITY_TONS = #{quantityTons}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="laycanStart!=null">,LAYCAN_START = #{laycanStart}</if>
+		<if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+		<if test="norTendered!=null">,NOR_TENDERED = #{norTendered}</if>
+		<if test="anchorAweigh!=null">,ANCHOR_AWEIGH = #{anchorAweigh}</if>
+		<if test="pobDatetimeOne!=null">,POB_DATETIME_ONE = #{pobDatetimeOne}</if>
+		<if test="pobBerth!=null">,POB_BERTH = #{pobBerth}</if>
+		<if test="firstLineDatetime!=null">,FIRST_LINE_DATETIME = #{firstLineDatetime}</if>
+		<if test="firstLineEtb!=null">,FIRST_LINE_ETB = #{firstLineEtb}</if>
+		<if test="firstLineBerth!=null">,FIRST_LINE_BERTH = #{firstLineBerth}</if>
+		<if test="allFast!=null">,ALL_FAST = #{allFast}</if>
+		<if test="tanksInspectionDatetime!=null">,TANKS_INSPECTION_DATETIME = #{tanksInspectionDatetime}</if>
+		<if test="tanksInspectionRemarks!=null">,TANKS_INSPECTION_REMARKS = #{tanksInspectionRemarks}</if>
+		<if test="independentInspection!=null">,INDEPENDENT_INSPECTION = #{independentInspection}</if>
+		<if test="independentInspectionDatetime!=null">,INDEPENDENT_INSPECTION_DATETIME = #{independentInspectionDatetime}</if>
+		<if test="independentInspectionRemarks!=null">,INDEPENDENT_INSPECTION_REMARKS = #{independentInspectionRemarks}</if>
+		<if test="independentInspectionObq!=null">,INDEPENDENT_INSPECTION_OBQ = #{independentInspectionObq}</if>
+		<if test="shoreArmsConnecting!=null">,SHORE_ARMS_CONNECTING = #{shoreArmsConnecting}</if>
+		<if test="commencedLoadingDatetime!=null">,COMMENCED_LOADING_DATETIME = #{commencedLoadingDatetime}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="completedLoadingDatetime!=null">,COMPLETED_LOADING_DATETIME = #{completedLoadingDatetime}</if>
+		<if test="shoreArmDisconnecting!=null">,SHORE_ARM_DISCONNECTING = #{shoreArmDisconnecting}</if>
+		<if test="cargoSurvey!=null">,CARGO_SURVEY = #{cargoSurvey}</if>
+		<if test="blMetricTons!=null">,BL_METRIC_TONS = #{blMetricTons}</if>
+		<if test="blLongTons!=null">,BL_LONG_TONS = #{blLongTons}</if>
+		<if test="ltr!=null">,LTR = #{ltr}</if>
+		<if test="bbls!=null">,BBLS = #{bbls}</if>
+		<if test="leaveDatetime!=null">,LEAVE_DATETIME = #{leaveDatetime}</if>
+		<if test="nextPortId!=null">,NEXT_PORT_ID = #{nextPortId}</if>
+		<if test="nextPort!=null">,NEXT_PORT = #{nextPort}</if>
+		<if test="step!=null">,STEP = #{step}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_load_port
+		<set>
+         SHIP_LOAD_PORT_ID=#{shipLoadPortId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipConfirmationSheetId!=null">,SHIP_CONFIRMATION_SHEET_ID = #{shipConfirmationSheetId}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="product!=null">,PRODUCT = #{product}</if>
+		<if test="quantityTons!=null">,QUANTITY_TONS = #{quantityTons}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="laycanStart!=null">,LAYCAN_START = #{laycanStart}</if>
+		<if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+		<if test="norTendered!=null">,NOR_TENDERED = #{norTendered}</if>
+		<if test="anchorAweigh!=null">,ANCHOR_AWEIGH = #{anchorAweigh}</if>
+		<if test="pobDatetimeOne!=null">,POB_DATETIME_ONE = #{pobDatetimeOne}</if>
+		<if test="pobBerth!=null">,POB_BERTH = #{pobBerth}</if>
+		<if test="firstLineDatetime!=null">,FIRST_LINE_DATETIME = #{firstLineDatetime}</if>
+		<if test="firstLineEtb!=null">,FIRST_LINE_ETB = #{firstLineEtb}</if>
+		<if test="firstLineBerth!=null">,FIRST_LINE_BERTH = #{firstLineBerth}</if>
+		<if test="allFast!=null">,ALL_FAST = #{allFast}</if>
+		<if test="tanksInspectionDatetime!=null">,TANKS_INSPECTION_DATETIME = #{tanksInspectionDatetime}</if>
+		<if test="tanksInspectionRemarks!=null">,TANKS_INSPECTION_REMARKS = #{tanksInspectionRemarks}</if>
+		<if test="independentInspection!=null">,INDEPENDENT_INSPECTION = #{independentInspection}</if>
+		<if test="independentInspectionDatetime!=null">,INDEPENDENT_INSPECTION_DATETIME = #{independentInspectionDatetime}</if>
+		<if test="independentInspectionRemarks!=null">,INDEPENDENT_INSPECTION_REMARKS = #{independentInspectionRemarks}</if>
+		<if test="independentInspectionObq!=null">,INDEPENDENT_INSPECTION_OBQ = #{independentInspectionObq}</if>
+		<if test="shoreArmsConnecting!=null">,SHORE_ARMS_CONNECTING = #{shoreArmsConnecting}</if>
+		<if test="commencedLoadingDatetime!=null">,COMMENCED_LOADING_DATETIME = #{commencedLoadingDatetime}</if>
+		<if test="etc!=null">,ETC = #{etc}</if>
+		<if test="completedLoadingDatetime!=null">,COMPLETED_LOADING_DATETIME = #{completedLoadingDatetime}</if>
+		<if test="shoreArmDisconnecting!=null">,SHORE_ARM_DISCONNECTING = #{shoreArmDisconnecting}</if>
+		<if test="cargoSurvey!=null">,CARGO_SURVEY = #{cargoSurvey}</if>
+		<if test="blMetricTons!=null">,BL_METRIC_TONS = #{blMetricTons}</if>
+		<if test="blLongTons!=null">,BL_LONG_TONS = #{blLongTons}</if>
+		<if test="ltr!=null">,LTR = #{ltr}</if>
+		<if test="bbls!=null">,BBLS = #{bbls}</if>
+		<if test="leaveDatetime!=null">,LEAVE_DATETIME = #{leaveDatetime}</if>
+		<if test="nextPortId!=null">,NEXT_PORT_ID = #{nextPortId}</if>
+		<if test="nextPort!=null">,NEXT_PORT = #{nextPort}</if>
+		<if test="step!=null">,STEP = #{step}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+		<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+		<if test="portOfLoading!=null and portOfLoading!=''">and  PORT_OF_LOADING=#{portOfLoading}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="product!=null and product!=''">and  PRODUCT=#{product}</if>
+		<if test="quantityTons!=null and quantityTons!=''">and  QUANTITY_TONS=#{quantityTons}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="laycanStart!=null and laycanStart!=''">and  LAYCAN_START=#{laycanStart}</if>
+		<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+		<if test="norTendered!=null and norTendered!=''">and  NOR_TENDERED=#{norTendered}</if>
+		<if test="anchorAweigh!=null and anchorAweigh!=''">and  ANCHOR_AWEIGH=#{anchorAweigh}</if>
+		<if test="pobDatetimeOne!=null and pobDatetimeOne!=''">and  POB_DATETIME_ONE=#{pobDatetimeOne}</if>
+		<if test="pobBerth!=null and pobBerth!=''">and  POB_BERTH=#{pobBerth}</if>
+		<if test="firstLineDatetime!=null and firstLineDatetime!=''">and  FIRST_LINE_DATETIME=#{firstLineDatetime}</if>
+		<if test="firstLineEtb!=null and firstLineEtb!=''">and  FIRST_LINE_ETB=#{firstLineEtb}</if>
+		<if test="firstLineBerth!=null and firstLineBerth!=''">and  FIRST_LINE_BERTH=#{firstLineBerth}</if>
+		<if test="allFast!=null and allFast!=''">and  ALL_FAST=#{allFast}</if>
+		<if test="tanksInspectionDatetime!=null and tanksInspectionDatetime!=''">and  TANKS_INSPECTION_DATETIME=#{tanksInspectionDatetime}</if>
+		<if test="tanksInspectionRemarks!=null and tanksInspectionRemarks!=''">and  TANKS_INSPECTION_REMARKS=#{tanksInspectionRemarks}</if>
+		<if test="independentInspection!=null and independentInspection!=''">and  INDEPENDENT_INSPECTION=#{independentInspection}</if>
+		<if test="independentInspectionDatetime!=null and independentInspectionDatetime!=''">and  INDEPENDENT_INSPECTION_DATETIME=#{independentInspectionDatetime}</if>
+		<if test="independentInspectionRemarks!=null and independentInspectionRemarks!=''">and  INDEPENDENT_INSPECTION_REMARKS=#{independentInspectionRemarks}</if>
+		<if test="independentInspectionObq!=null and independentInspectionObq!=''">and  INDEPENDENT_INSPECTION_OBQ=#{independentInspectionObq}</if>
+		<if test="shoreArmsConnecting!=null and shoreArmsConnecting!=''">and  SHORE_ARMS_CONNECTING=#{shoreArmsConnecting}</if>
+		<if test="commencedLoadingDatetime!=null and commencedLoadingDatetime!=''">and  COMMENCED_LOADING_DATETIME=#{commencedLoadingDatetime}</if>
+		<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+		<if test="completedLoadingDatetime!=null and completedLoadingDatetime!=''">and  COMPLETED_LOADING_DATETIME=#{completedLoadingDatetime}</if>
+		<if test="shoreArmDisconnecting!=null and shoreArmDisconnecting!=''">and  SHORE_ARM_DISCONNECTING=#{shoreArmDisconnecting}</if>
+		<if test="cargoSurvey!=null and cargoSurvey!=''">and  CARGO_SURVEY=#{cargoSurvey}</if>
+		<if test="blMetricTons!=null and blMetricTons!=''">and  BL_METRIC_TONS=#{blMetricTons}</if>
+		<if test="blLongTons!=null and blLongTons!=''">and  BL_LONG_TONS=#{blLongTons}</if>
+		<if test="ltr!=null and ltr!=''">and  LTR=#{ltr}</if>
+		<if test="bbls!=null and bbls!=''">and  BBLS=#{bbls}</if>
+		<if test="leaveDatetime!=null and leaveDatetime!=''">and  LEAVE_DATETIME=#{leaveDatetime}</if>
+		<if test="nextPortId!=null and nextPortId!=''">and  NEXT_PORT_ID=#{nextPortId}</if>
+		<if test="nextPort!=null and nextPort!=''">and  NEXT_PORT=#{nextPort}</if>
+		<if test="step!=null and step!=''">and  STEP=#{step}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where
+		    SHIP_LOAD_PORT_ID=#{shipLoadPortId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="confirmationfindbyuuid" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where uuid=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="findByUuid" resultMap="LoadPort">
+				select
+				* from t_ship_load_port
+				where SHIP_CONFIRMATION_SHEET_ID=#{uuid} 
+				and ALIVE_FLAG='1'
+		</select>
+	<select id="queryByEntitys" resultMap="LoadPort" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+		select * from t_ship_load_port
+			where
+		 ALIVE_FLAG='1'
+		<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+		<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+		<if test="portOfLoading!=null and portOfLoading!=''">and  PORT_OF_LOADING=#{portOfLoading}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="product!=null and product!=''">and  PRODUCT=#{product}</if>
+		<if test="quantityTons!=null and quantityTons!=''">and  QUANTITY_TONS=#{quantityTons}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="laycanStart!=null and laycanStart!=''">and  LAYCAN_START=#{laycanStart}</if>
+		<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+		<if test="norTendered!=null and norTendered!=''">and  NOR_TENDERED=#{norTendered}</if>
+		<if test="anchorAweigh!=null and anchorAweigh!=''">and  ANCHOR_AWEIGH=#{anchorAweigh}</if>
+		<if test="pobDatetimeOne!=null and pobDatetimeOne!=''">and  POB_DATETIME_ONE=#{pobDatetimeOne}</if>
+		<if test="pobBerth!=null and pobBerth!=''">and  POB_BERTH=#{pobBerth}</if>
+		<if test="firstLineDatetime!=null and firstLineDatetime!=''">and  FIRST_LINE_DATETIME=#{firstLineDatetime}</if>
+		<if test="firstLineEtb!=null and firstLineEtb!=''">and  FIRST_LINE_ETB=#{firstLineEtb}</if>
+		<if test="firstLineBerth!=null and firstLineBerth!=''">and  FIRST_LINE_BERTH=#{firstLineBerth}</if>
+		<if test="allFast!=null and allFast!=''">and  ALL_FAST=#{allFast}</if>
+		<if test="tanksInspectionDatetime!=null and tanksInspectionDatetime!=''">and  TANKS_INSPECTION_DATETIME=#{tanksInspectionDatetime}</if>
+		<if test="tanksInspectionRemarks!=null and tanksInspectionRemarks!=''">and  TANKS_INSPECTION_REMARKS=#{tanksInspectionRemarks}</if>
+		<if test="independentInspection!=null and independentInspection!=''">and  INDEPENDENT_INSPECTION=#{independentInspection}</if>
+		<if test="independentInspectionDatetime!=null and independentInspectionDatetime!=''">and  INDEPENDENT_INSPECTION_DATETIME=#{independentInspectionDatetime}</if>
+		<if test="independentInspectionRemarks!=null and independentInspectionRemarks!=''">and  INDEPENDENT_INSPECTION_REMARKS=#{independentInspectionRemarks}</if>
+		<if test="independentInspectionObq!=null and independentInspectionObq!=''">and  INDEPENDENT_INSPECTION_OBQ=#{independentInspectionObq}</if>
+		<if test="shoreArmsConnecting!=null and shoreArmsConnecting!=''">and  SHORE_ARMS_CONNECTING=#{shoreArmsConnecting}</if>
+		<if test="commencedLoadingDatetime!=null and commencedLoadingDatetime!=''">and  COMMENCED_LOADING_DATETIME=#{commencedLoadingDatetime}</if>
+		<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+		<if test="completedLoadingDatetime!=null and completedLoadingDatetime!=''">and  COMPLETED_LOADING_DATETIME=#{completedLoadingDatetime}</if>
+		<if test="shoreArmDisconnecting!=null and shoreArmDisconnecting!=''">and  SHORE_ARM_DISCONNECTING=#{shoreArmDisconnecting}</if>
+		<if test="cargoSurvey!=null and cargoSurvey!=''">and  CARGO_SURVEY=#{cargoSurvey}</if>
+		<if test="blMetricTons!=null and blMetricTons!=''">and  BL_METRIC_TONS=#{blMetricTons}</if>
+		<if test="blLongTons!=null and blLongTons!=''">and  BL_LONG_TONS=#{blLongTons}</if>
+		<if test="ltr!=null and ltr!=''">and  LTR=#{ltr}</if>
+		<if test="bbls!=null and bbls!=''">and  BBLS=#{bbls}</if>
+		<if test="leaveDatetime!=null and leaveDatetime!=''">and  LEAVE_DATETIME=#{leaveDatetime}</if>
+		<if test="nextPortId!=null and nextPortId!=''">and  NEXT_PORT_ID=#{nextPortId}</if>
+		<if test="nextPort!=null and nextPort!=''">and  NEXT_PORT=#{nextPort}</if>
+		<if test="step!=null and step!=''">and  STEP=#{step}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_LOAD_PORT_ID as "shipLoadPortId" 
+						 ,   UUID as "uuid" 
+						 ,   SHIP_CONFIRMATION_SHEET_ID as "shipConfirmationSheetId" 
+						 ,   VESSEL_NAME as "vesselName" 
+						 ,   PORT_OF_LOADING as "portOfLoading" 
+						 ,   IMO as "imo" 
+						 ,   PRODUCT as "product" 
+						 ,   QUANTITY_TONS as "quantityTons" 
+						 ,   QUANTITY as "quantity" 
+						 ,   LAYCAN_START as "laycanStart" 
+						 ,   LAYCAN_END as "laycanEnd" 
+						 
+						 ,   NOR_TENDERED as "norTendered" 
+						 ,   ANCHOR_AWEIGH as "anchorAweigh" 
+						 ,   POB_DATETIME_ONE as "pobDatetimeOne" 
+						 ,   POB_BERTH as "pobBerth" 
+						 ,   FIRST_LINE_DATETIME as "firstLineDatetime" 
+						 ,   FIRST_LINE_ETB as "firstLineEtb" 
+						 ,   FIRST_LINE_BERTH as "firstLineBerth" 
+						 ,   ALL_FAST as "allFast" 
+						 
+						 ,   TANKS_INSPECTION_DATETIME as "tanksInspectionDatetime" 
+						 ,   TANKS_INSPECTION_REMARKS as "tanksInspectionRemarks" 
+						 ,   INDEPENDENT_INSPECTION as "independentInspection" 
+						 ,   INDEPENDENT_INSPECTION_DATETIME as "independentInspectionDatetime" 
+						 ,   INDEPENDENT_INSPECTION_REMARKS as "independentInspectionRemarks" 
+						 ,   INDEPENDENT_INSPECTION_OBQ as "independentInspectionObq" 
+						 ,   SHORE_ARMS_CONNECTING as "shoreArmsConnecting" 
+						 ,   COMMENCED_LOADING_DATETIME as "commencedLoadingDatetime" 
+						 ,   ETC as "etc" 
+						 ,   COMPLETED_LOADING_DATETIME as "completedLoadingDatetime" 
+						 ,   SHORE_ARM_DISCONNECTING as "shoreArmDisconnecting" 
+						 ,   CARGO_SURVEY as "cargoSurvey" 
+						 ,   BL_METRIC_TONS as "blMetricTons" 
+						 ,   BL_LONG_TONS as "blLongTons" 
+						 ,   LTR as "ltr" 
+						 ,   BBLS as "bbls" 
+						 ,   LEAVE_DATETIME as "leaveDatetime" 
+						 ,   NEXT_PORT_ID as "nextPortId" 
+						 ,   NEXT_PORT as "nextPort" 
+						 ,   STEP as "step" 
+						 ,   EXT1 as "ext1" 
+						 ,   VERSION as "version" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						from t_ship_load_port
+		where
+			ALIVE_FLAG='1'
+			<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+			<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+			<if test="portOfLoading!=null and portOfLoading!=''">and  PORT_OF_LOADING=#{portOfLoading}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="product!=null and product!=''">and  PRODUCT=#{product}</if>
+			<if test="quantityTons!=null and quantityTons!=''">and  QUANTITY_TONS=#{quantityTons}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="laycanStart!=null and laycanStart!=''">and  LAYCAN_START=#{laycanStart}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+			<if test="norTendered!=null and norTendered!=''">and  NOR_TENDERED=#{norTendered}</if>
+			<if test="anchorAweigh!=null and anchorAweigh!=''">and  ANCHOR_AWEIGH=#{anchorAweigh}</if>
+			<if test="pobDatetimeOne!=null and pobDatetimeOne!=''">and  POB_DATETIME_ONE=#{pobDatetimeOne}</if>
+			<if test="pobBerth!=null and pobBerth!=''">and  POB_BERTH=#{pobBerth}</if>
+			<if test="firstLineDatetime!=null and firstLineDatetime!=''">and  FIRST_LINE_DATETIME=#{firstLineDatetime}</if>
+			<if test="firstLineEtb!=null and firstLineEtb!=''">and  FIRST_LINE_ETB=#{firstLineEtb}</if>
+			<if test="firstLineBerth!=null and firstLineBerth!=''">and  FIRST_LINE_BERTH=#{firstLineBerth}</if>
+			<if test="allFast!=null and allFast!=''">and  ALL_FAST=#{allFast}</if>
+			<if test="tanksInspectionDatetime!=null and tanksInspectionDatetime!=''">and  TANKS_INSPECTION_DATETIME=#{tanksInspectionDatetime}</if>
+			<if test="tanksInspectionRemarks!=null and tanksInspectionRemarks!=''">and  TANKS_INSPECTION_REMARKS=#{tanksInspectionRemarks}</if>
+			<if test="independentInspection!=null and independentInspection!=''">and  INDEPENDENT_INSPECTION=#{independentInspection}</if>
+			<if test="independentInspectionDatetime!=null and independentInspectionDatetime!=''">and  INDEPENDENT_INSPECTION_DATETIME=#{independentInspectionDatetime}</if>
+			<if test="independentInspectionRemarks!=null and independentInspectionRemarks!=''">and  INDEPENDENT_INSPECTION_REMARKS=#{independentInspectionRemarks}</if>
+			<if test="independentInspectionObq!=null and independentInspectionObq!=''">and  INDEPENDENT_INSPECTION_OBQ=#{independentInspectionObq}</if>
+			<if test="shoreArmsConnecting!=null and shoreArmsConnecting!=''">and  SHORE_ARMS_CONNECTING=#{shoreArmsConnecting}</if>
+			<if test="commencedLoadingDatetime!=null and commencedLoadingDatetime!=''">and  COMMENCED_LOADING_DATETIME=#{commencedLoadingDatetime}</if>
+			<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+			<if test="completedLoadingDatetime!=null and completedLoadingDatetime!=''">and  COMPLETED_LOADING_DATETIME=#{completedLoadingDatetime}</if>
+			<if test="shoreArmDisconnecting!=null and shoreArmDisconnecting!=''">and  SHORE_ARM_DISCONNECTING=#{shoreArmDisconnecting}</if>
+			<if test="cargoSurvey!=null and cargoSurvey!=''">and  CARGO_SURVEY=#{cargoSurvey}</if>
+			<if test="blMetricTons!=null and blMetricTons!=''">and  BL_METRIC_TONS=#{blMetricTons}</if>
+			<if test="blLongTons!=null and blLongTons!=''">and  BL_LONG_TONS=#{blLongTons}</if>
+			<if test="ltr!=null and ltr!=''">and  LTR=#{ltr}</if>
+			<if test="bbls!=null and bbls!=''">and  BBLS=#{bbls}</if>
+			<if test="leaveDatetime!=null and leaveDatetime!=''">and  LEAVE_DATETIME=#{leaveDatetime}</if>
+			<if test="nextPortId!=null and nextPortId!=''">and  NEXT_PORT_ID=#{nextPortId}</if>
+			<if test="nextPort!=null and nextPort!=''">and  NEXT_PORT=#{nextPort}</if>
+			<if test="step!=null and step!=''">and  STEP=#{step}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_load_port 
+		where
+		 ALIVE_FLAG='1'
+			<if test="shipLoadPortId!=null and shipLoadPortId!=''">and  SHIP_LOAD_PORT_ID=#{shipLoadPortId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipConfirmationSheetId!=null and shipConfirmationSheetId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId}</if>
+			<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+			<if test="portOfLoading!=null and portOfLoading!=''">and  PORT_OF_LOADING=#{portOfLoading}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="product!=null and product!=''">and  PRODUCT=#{product}</if>
+			<if test="quantityTons!=null and quantityTons!=''">and  QUANTITY_TONS=#{quantityTons}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="laycanStart!=null and laycanStart!=''">and  LAYCAN_START=#{laycanStart}</if>
+			<if test="laycanEnd!=null and laycanEnd!=''">and  LAYCAN_END=#{laycanEnd}</if>
+			<if test="norTendered!=null and norTendered!=''">and  NOR_TENDERED=#{norTendered}</if>
+			<if test="anchorAweigh!=null and anchorAweigh!=''">and  ANCHOR_AWEIGH=#{anchorAweigh}</if>
+			<if test="pobDatetimeOne!=null and pobDatetimeOne!=''">and  POB_DATETIME_ONE=#{pobDatetimeOne}</if>
+			<if test="pobBerth!=null and pobBerth!=''">and  POB_BERTH=#{pobBerth}</if>
+			<if test="firstLineDatetime!=null and firstLineDatetime!=''">and  FIRST_LINE_DATETIME=#{firstLineDatetime}</if>
+			<if test="firstLineEtb!=null and firstLineEtb!=''">and  FIRST_LINE_ETB=#{firstLineEtb}</if>
+			<if test="firstLineBerth!=null and firstLineBerth!=''">and  FIRST_LINE_BERTH=#{firstLineBerth}</if>
+			<if test="allFast!=null and allFast!=''">and  ALL_FAST=#{allFast}</if>
+			<if test="tanksInspectionDatetime!=null and tanksInspectionDatetime!=''">and  TANKS_INSPECTION_DATETIME=#{tanksInspectionDatetime}</if>
+			<if test="tanksInspectionRemarks!=null and tanksInspectionRemarks!=''">and  TANKS_INSPECTION_REMARKS=#{tanksInspectionRemarks}</if>
+			<if test="independentInspection!=null and independentInspection!=''">and  INDEPENDENT_INSPECTION=#{independentInspection}</if>
+			<if test="independentInspectionDatetime!=null and independentInspectionDatetime!=''">and  INDEPENDENT_INSPECTION_DATETIME=#{independentInspectionDatetime}</if>
+			<if test="independentInspectionRemarks!=null and independentInspectionRemarks!=''">and  INDEPENDENT_INSPECTION_REMARKS=#{independentInspectionRemarks}</if>
+			<if test="independentInspectionObq!=null and independentInspectionObq!=''">and  INDEPENDENT_INSPECTION_OBQ=#{independentInspectionObq}</if>
+			<if test="shoreArmsConnecting!=null and shoreArmsConnecting!=''">and  SHORE_ARMS_CONNECTING=#{shoreArmsConnecting}</if>
+			<if test="commencedLoadingDatetime!=null and commencedLoadingDatetime!=''">and  COMMENCED_LOADING_DATETIME=#{commencedLoadingDatetime}</if>
+			<if test="etc!=null and etc!=''">and  ETC=#{etc}</if>
+			<if test="completedLoadingDatetime!=null and completedLoadingDatetime!=''">and  COMPLETED_LOADING_DATETIME=#{completedLoadingDatetime}</if>
+			<if test="shoreArmDisconnecting!=null and shoreArmDisconnecting!=''">and  SHORE_ARM_DISCONNECTING=#{shoreArmDisconnecting}</if>
+			<if test="cargoSurvey!=null and cargoSurvey!=''">and  CARGO_SURVEY=#{cargoSurvey}</if>
+			<if test="blMetricTons!=null and blMetricTons!=''">and  BL_METRIC_TONS=#{blMetricTons}</if>
+			<if test="blLongTons!=null and blLongTons!=''">and  BL_LONG_TONS=#{blLongTons}</if>
+			<if test="ltr!=null and ltr!=''">and  LTR=#{ltr}</if>
+			<if test="bbls!=null and bbls!=''">and  BBLS=#{bbls}</if>
+			<if test="leaveDatetime!=null and leaveDatetime!=''">and  LEAVE_DATETIME=#{leaveDatetime}</if>
+			<if test="nextPortId!=null and nextPortId!=''">and  NEXT_PORT_ID=#{nextPortId}</if>
+			<if test="nextPort!=null and nextPort!=''">and  NEXT_PORT=#{nextPort}</if>
+			<if test="step!=null and step!=''">and  STEP=#{step}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<insert id="firstStepSave" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+	 insert  into t_ship_load_port (				SHIP_LOAD_PORT_ID
+						,UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						,VESSEL_NAME
+						,PORT_OF_LOADING
+						,IMO
+						,PRODUCT
+						,QUANTITY_TONS
+						,QUANTITY
+						,LAYCAN_START
+						,LAYCAN_END
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{shipLoadPortId}
+						,#{uuid}
+						,#{shipConfirmationSheetId}
+						,#{vesselName}
+						,#{portOfLoading}
+						,#{imo}
+						,#{product}
+						,#{quantityTons}
+						,#{quantity}
+						,#{laycanStart}
+						,#{laycanEnd}
+						,#{aliveFlag}
+						,SYSDATE()
+						,#{createUser}
+						,SYSDATE()
+						,#{updateUser}
+				)
+				ON DUPLICATE KEY UPDATE 
+						LAYCAN_START=values(LAYCAN_START)
+						,LAYCAN_END=values(LAYCAN_END)
+						,UPDATE_DATE=values(UPDATE_DATE)
+						,UPDATE_USER=values(UPDATE_USER); 
+	</insert>
+	
+	 <insert id="theSecondStepSave" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort">
+		insert  into t_ship_load_port (				
+		SHIP_LOAD_PORT_ID
+						,UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						
+						,VESSEL_NAME
+						,PORT_OF_LOADING
+						,IMO
+						,PRODUCT
+						,QUANTITY_TONS
+						,QUANTITY 
+						
+						
+						
+						
+						
+						
+						
+						
+						 ,NOR_TENDERED
+						,ANCHOR_AWEIGH
+						,POB_DATETIME_ONE
+						,POB_BERTH
+						,FIRST_LINE_DATETIME
+						,FIRST_LINE_ETB
+						,FIRST_LINE_BERTH
+						,ALL_FAST
+						
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{shipLoadPortId}
+						,#{uuid}
+						,#{shipConfirmationSheetId}
+						
+						
+						,#{vesselName}
+						,#{portOfLoading}
+						,#{imo}
+						,#{product}
+						,#{quantityTons}
+						,#{quantity}
+						
+						
+						,#{norTendered}
+						,#{anchorAweigh}
+						,#{pobDatetimeOne}
+						,#{pobBerth}
+						,#{firstLineDatetime}
+						,#{firstLineEtb}
+						,#{firstLineBerth}
+						,#{allFast}
+						
+						,#{aliveFlag}
+						,SYSDATE()
+						,#{createUser}
+						,SYSDATE()
+						,#{updateUser}
+				)
+				ON DUPLICATE KEY UPDATE 
+						NOR_TENDERED=values(NOR_TENDERED)
+						,ANCHOR_AWEIGH=values(ANCHOR_AWEIGH)
+						,POB_DATETIME_ONE=values(POB_DATETIME_ONE)
+						,POB_BERTH=values(POB_BERTH)
+						,FIRST_LINE_DATETIME=values(FIRST_LINE_DATETIME)
+						,FIRST_LINE_ETB=values(FIRST_LINE_ETB)
+						,FIRST_LINE_BERTH=values(FIRST_LINE_BERTH)
+						,ALL_FAST = values(ALL_FAST)
+						,UPDATE_DATE=values(UPDATE_DATE)
+						,UPDATE_USER=values(UPDATE_USER); 
+	
+	</insert> 
+	
+	<insert id="stepFourSave" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort" useGeneratedKeys="true" keyProperty="shipLoadPortId" >
+	
+	
+	insert  into t_ship_load_port (				SHIP_LOAD_PORT_ID
+						,UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						
+						,VESSEL_NAME
+						,PORT_OF_LOADING
+						,IMO
+						,PRODUCT
+						,QUANTITY_TONS
+						,QUANTITY 
+						
+						
+						
+						
+						
+						,TANKS_INSPECTION_DATETIME
+						,TANKS_INSPECTION_REMARKS
+						,INDEPENDENT_INSPECTION
+						,INDEPENDENT_INSPECTION_DATETIME
+						,INDEPENDENT_INSPECTION_REMARKS
+						,INDEPENDENT_INSPECTION_OBQ
+						,SHORE_ARMS_CONNECTING
+						,COMMENCED_LOADING_DATETIME
+						,ETC
+						,COMPLETED_LOADING_DATETIME
+						
+						
+						
+						
+						
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{shipLoadPortId}
+						,#{uuid}
+						,#{shipConfirmationSheetId}
+						
+						,#{vesselName}
+						,#{portOfLoading}
+						,#{imo}
+						,#{product}
+						,#{quantityTons}
+						,#{quantity}
+						
+						
+						
+						
+						,#{tanksInspectionDatetime}
+						,#{tanksInspectionRemarks}
+						,#{independentInspection}
+						,#{independentInspectionDatetime}
+						,#{independentInspectionRemarks}
+						,#{independentInspectionObq}
+						,#{shoreArmsConnecting}
+						,#{commencedLoadingDatetime}
+						,#{etc}
+						,#{completedLoadingDatetime}
+						
+						,#{aliveFlag}
+						,SYSDATE()
+						,#{createUser}
+						,SYSDATE()
+						,#{updateUser}
+				)
+	ON DUPLICATE KEY UPDATE 
+						TANKS_INSPECTION_DATETIME=values(TANKS_INSPECTION_DATETIME)
+						,TANKS_INSPECTION_REMARKS=values(TANKS_INSPECTION_REMARKS)
+						,INDEPENDENT_INSPECTION=values(INDEPENDENT_INSPECTION)
+						,INDEPENDENT_INSPECTION_DATETIME=values(INDEPENDENT_INSPECTION_DATETIME)
+						,INDEPENDENT_INSPECTION_REMARKS=values(INDEPENDENT_INSPECTION_REMARKS)
+						,INDEPENDENT_INSPECTION_OBQ=values(INDEPENDENT_INSPECTION_OBQ)
+						,SHORE_ARMS_CONNECTING=values(SHORE_ARMS_CONNECTING)
+						,COMMENCED_LOADING_DATETIME=values(COMMENCED_LOADING_DATETIME)
+						,ETC=values(ETC)
+						,COMPLETED_LOADING_DATETIME=values(COMPLETED_LOADING_DATETIME)
+						,UPDATE_DATE=values(UPDATE_DATE)
+						,UPDATE_USER=values(UPDATE_USER); 
+	
+	</insert>
+	
+	
+	
+	<insert id="theThirdStepSave" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort"  useGeneratedKeys="true" keyProperty="shipLoadPortId">
+	
+	
+	
+	insert  into t_ship_load_port (				SHIP_LOAD_PORT_ID
+						,UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						
+						,VESSEL_NAME
+						,PORT_OF_LOADING
+						,IMO
+						,PRODUCT
+						,QUANTITY_TONS
+						,QUANTITY 
+						
+						
+						
+						
+						,SHORE_ARM_DISCONNECTING
+						,CARGO_SURVEY
+						,BL_METRIC_TONS
+						,BL_LONG_TONS
+						,LTR
+						,BBLS
+						,LEAVE_DATETIME
+						,NEXT_PORT_ID
+						,NEXT_PORT
+						
+						
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{shipLoadPortId}
+						,#{uuid}
+						,#{shipConfirmationSheetId}
+						
+							
+						,#{vesselName}
+						,#{portOfLoading}
+						,#{imo}
+						,#{product}
+						,#{quantityTons}
+						,#{quantity}
+						
+						
+						
+						,#{shoreArmDisconnecting}
+						,#{cargoSurvey}
+						,#{blMetricTons}
+						,#{blLongTons}
+						,#{ltr}
+						,#{bbls}
+						,#{leaveDatetime}
+						,#{nextPortId}
+						,#{nextPort}
+						
+						,#{aliveFlag}
+						,SYSDATE()
+						,#{createUser}
+						,SYSDATE()
+						,#{updateUser}
+				)
+	ON DUPLICATE KEY UPDATE 
+		
+		SHORE_ARM_DISCONNECTING=values(SHORE_ARM_DISCONNECTING)
+		,CARGO_SURVEY=values(CARGO_SURVEY)
+		,BL_METRIC_TONS=values(BL_METRIC_TONS)
+		,BL_LONG_TONS=values(BL_LONG_TONS)
+		,LTR=values(LTR)
+		,BBLS=values(BBLS)
+		,LEAVE_DATETIME=values(LEAVE_DATETIME)
+		,NEXT_PORT_ID=values(NEXT_PORT_ID)
+		,NEXT_PORT=values(NEXT_PORT)
+		
+		,UPDATE_DATE=values(UPDATE_DATE)
+		,UPDATE_USER=values(UPDATE_USER); 
+		
+	</insert>
+	
+	<select id="queryConfirmationSheetId" resultMap="LoadPort" parameterType="hashmap">
+	select * from t_ship_load_port
+			where
+		 ALIVE_FLAG='1'
+	<if test="confId!=null and confId!=''">and  SHIP_CONFIRMATION_SHEET_ID=#{confId}</if>
+	
+	</select>
+	<insert id="insertRecordObject" parameterType="com.sinochem.crude.trade.shipping.domain.LoadPort" useGeneratedKeys="true" keyProperty="shipLoadPortId" >
+	
+	insert  into t_ship_load_port (				
+						UUID
+						,SHIP_CONFIRMATION_SHEET_ID
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		
+						#{uuid}
+						,#{shipConfirmationSheetId}
+						,#{aliveFlag}
+						,SYSDATE()
+						,#{createUser}
+						,SYSDATE()
+						,#{updateUser}
+				)
+	
+	</insert>
+	
+	<select id="findLoadUuid" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="ConsellerIdqueryLoadPost" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where SHIP_LOAD_PORT_ID=#{conSellerId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	
+	
+	
+	<select id="findByShipConfirmationSheetId" resultMap="LoadPort"  parameterType="java.lang.Long">
+	select * from t_ship_load_port
+		where 
+			SHIP_CONFIRMATION_SHEET_ID=#{shipConfirmationSheetId} 
+		and  
+			ALIVE_FLAG='1'
+	
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandRelevanterMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.DemandRelevanter" >
+
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="e_member_id" property="eMemberId" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="contacter" property="contacter" jdbcType="VARCHAR" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="famil" property="famil" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="share" property="share" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="enterprise_address" property="enterpriseAddress" jdbcType="VARCHAR" />
+    <result column="dealer_id" property="dealerId" jdbcType="BIGINT" />
+    <result column="dealer_name" property="dealerName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, e_member_id, demand_id, contacter, phone_no, famil, fax, share, type, enterprise_name, enterprise_address, dealer_id, dealer_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from demand_relevanter
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getDemandRelevantersByDemandId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from demand_relevanter
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    delete from demand_relevanter
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByDemandId" parameterType="java.lang.Long" >
+
+    delete from demand_relevanter
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.listed.domain.DemandRelevanter" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_relevanter ( e_member_id, demand_id,
+      contacter, phone_no, famil, 
+      fax, share, type,enterprise_name, enterprise_address, dealer_id, dealer_name)
+    values (#{eMemberId,jdbcType=BIGINT}, #{demandId,jdbcType=BIGINT},
+      #{contacter,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, #{famil,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{share,jdbcType=TINYINT}, #{type,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR},
+    #{dealerId, jdbcType=BIGINT}, #{dealerName, jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandRelevanter" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_relevanter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="eMemberId != null" >
+        e_member_id,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="contacter != null" >
+        contacter,
+      </if>
+      <if test="phoneNo != null" >
+        phone_no,
+      </if>
+      <if test="famil != null" >
+        famil,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="share != null" >
+        share,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address,
+      </if>
+      <if test="dealerId != null" >
+        dealer_id,
+      </if>
+      <if test="dealerName != null" >
+        dealer_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="eMemberId != null" >
+        #{eMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="contacter != null" >
+        #{contacter,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="famil != null" >
+        #{famil,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="share != null" >
+        #{share,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null" >
+        #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="dealerName != null" >
+        #{dealerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandRelevanter" >
+
+    update demand_relevanter
+    <set >
+      <if test="eMemberId != null" >
+        e_member_id = #{eMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="contacter != null" >
+        contacter = #{contacter,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="famil != null" >
+        famil = #{famil,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="share != null" >
+        share = #{share,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null" >
+        dealer_id = #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="dealerName != null" >
+        dealer_name = #{dealerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.listed.domain.DemandRelevanter" >
+
+    update demand_relevanter
+    set e_member_id = #{eMemberId,jdbcType=BIGINT},
+      demand_id = #{demandId,jdbcType=BIGINT},
+      contacter = #{contacter,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      famil = #{famil,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      share = #{share,jdbcType=TINYINT},
+      type = #{type,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName, jdbcType=VARCHAR},
+      enterprise_address = #{enterprise_address, jdbcType=VARCHAR},
+      dealer_id = #{dealerId, jdbcType=BIGINT},
+      dealer_name = #{dealerName, jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getDemandRelevanterByDemandIdAndTypeOne" resultMap="BaseResultMap">
+      SELECT
+        dr.id,
+        dr.e_member_id,
+        dr.demand_id,
+        dr.contacter,
+        dr.phone_no,
+        dr.famil,
+        dr.fax,
+        dr.`share`,
+        dr.type,
+        dr.enterprise_name,
+        dr.enterprise_address,
+        dr.dealer_id,
+        dr.dealer_name
+      FROM
+        demand_relevanter AS dr
+      WHERE
+        dr.demand_id = #{0,jdbcType=BIGINT} AND
+        dr.type = #{1,jdbcType=VARCHAR}
+
+  </select>
+  <select id="getDemandRelevanterByDemandIdAndTypeTwo" resultMap="BaseResultMap">
+    SELECT
+        dr.id,
+        dr.e_member_id,
+        dr.demand_id,
+        dr.contacter,
+        dr.phone_no,
+        dr.famil,
+        dr.fax,
+        dr.`share`,
+        dr.type,
+        dr.enterprise_name,
+        dr.enterprise_address,
+        dr.dealer_id,
+        dr.dealer_name
+    FROM
+    demand_relevanter AS dr
+    WHERE
+    dr.demand_id = #{0,jdbcType=BIGINT} AND
+    dr.type = #{1,jdbcType=VARCHAR}
+
+  </select>
+
+  <select id="getDemandRelevantersByDemandIdAndType" resultMap="BaseResultMap" >
+
+    select
+    <include refid="Base_Column_List" />
+    from demand_relevanter
+    where demand_id = #{0,jdbcType=BIGINT} and type = #{1,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

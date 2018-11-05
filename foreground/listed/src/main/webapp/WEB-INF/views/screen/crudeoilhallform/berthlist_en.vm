@@ -1,0 +1,89 @@
+<div class="c-mod" id="mjbwxx">
+    <h3><em class="cw-ico ico-h3"></em>买家泊位信息<span class="cxtj-nr-an"><a class="btn-more" id="addShipBerth">+选择泊位</a></span></h3>
+    <div class="c-tabdiv">
+        <table id="berthDataArray">
+            <tr><th class="tabl-line"></th><th>泊位名称</th><th>泊位等级</th><th>吃水限制</th><th>船型</th><th class="tabl-line1">载重吨位区</th></tr>
+
+        </table>
+    </div>
+</div>
+
+<div id="popBerthWin" style="display: none">
+
+    <div id="selectedShipBerth" >
+        <div class="c-tabdiv">
+            <table>
+                <tr><th class="tabl-line">序号</th><th>泊位名称</th><th>载重区间</th><th>泊位等级</th><th>泊位吃水</th><th>适合船型</th><th>泊位说明</th></tr>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+
+        layui.use('layer', function(){
+            $("#addShipBerth").click(function () {
+                var berthsNum = $("#mjbwxx table tr").length -1 ;
+
+                layer.open({
+                    title: "Select Berth",
+                    btn: ['Confirm'],
+                    shade : false,
+                    area : '800px',
+                    content: $("#popBerthWin"),
+                    yes: function(index, layero){
+
+                        $("#selectedShipBerth tr").each(function () {
+                            if ($(this).find("input:checkbox").is(":checked")) {
+                                var obj = new Object();
+                                var tdArr = $(this).find("td");
+                                obj.berthName = tdArr[1].innerHTML;
+                                obj.berthGrade = tdArr[3].innerHTML;
+                                obj.draftLimitation = tdArr[4].innerHTML;
+                                obj.shipType = tdArr[5].innerHTML;
+
+                                var td5Str = tdArr[2].innerHTML;;
+                                if (td5Str.indexOf("-") < 0) {
+                                    obj.carryingCapacityMin = td5Str;
+                                } else if (td5Str.indexOf("-") == 0) {
+                                    obj.carryingCapacityMax = td5Str;
+                                } else {
+                                    obj.carryingCapacityMin = td5Str.split("-")[0];
+                                    obj.carryingCapacityMax = td5Str.split("-")[1];
+                                }
+
+                                var subIndex = berthsNum;
+                                $("#mjbwxx table").append("<tr class='c-tabcos1'><td class='tabl-line'>"
+                                        +(++berthsNum)+"<input type='hidden' name='shipBerths["+(subIndex)+"].id' /></td><td>"
+                                        +obj.berthName+"<input type='hidden' name='shipBerths["+(subIndex)+"].berthName' value='"+obj.berthName+"'/></td><td>"
+                                        +obj.carryingCapacityMin+"<input type='hidden' name='shipBerths["+(subIndex)+"].carryingCapacityMin' value='"+obj.carryingCapacityMin+"'/>-"
+                                        +obj.carryingCapacityMax+"<input type='hidden' name='shipBerths["+(subIndex)+"].carryingCapacityMax' value='"+obj.carryingCapacityMax+"'/></td><td>"
+                                        +obj.berthGrade+"<input type='hidden' name='shipBerths["+(subIndex)+"].berthGrade' value='"+obj.berthGrade+"'/></td><td>"
+                                        +obj.draftLimitation+"<input type='hidden' name='shipBerths["+(subIndex)+"].draftLimitation' value='"+obj.draftLimitation+"'/></td><td>"
+                                        +obj.shipType+"<input type='hidden' name='shipBerths["+(subIndex)+"].shipType' value='"+obj.shipType+"'/></td></tr>");
+                            }
+
+                        })
+
+                        //如果设定了yes回调，需进行手工关闭
+                        layer.close(index);
+                    }
+                });
+            });
+
+
+        });
+    })
+
+
+    /*$("#ensure").click(function () {
+        var shipBerthArr = new Array();
+
+
+    });*/
+</script>
+
+

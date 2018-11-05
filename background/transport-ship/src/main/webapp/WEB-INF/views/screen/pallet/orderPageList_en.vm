@@ -1,0 +1,89 @@
+<!-- 	
+	<style>
+		.text-overflow{width:90%; overflow: hidden; white-space:nowrap; text-overflow:ellipsis;}
+		.contain {
+			width:100%;
+		}
+		
+		table { 
+			width:100%; 
+			text-align: left;
+			border:1px solid #e3e6e8; 
+			border-collapse: collapse; 
+			table-layout: fixed; 
+			display: table;
+		}
+	</style>
+	<div class="c-mod">
+		
+		  <style>
+		  .zy tr:nth-of-type(2n+1){ background-color:#f9f9f9;}
+		  </style>
+		  <div class="c-mod">
+			<h3><i class="cw-ico ico-h3"></i>Order List<span class="cxtj-nr-an"><a href="" class="btn-more">+ 新建长协采购单</a></span></h3>
+			<div class="c-tabdiv contain">
+			  <table class="zy">                                                                            
+				<tr>
+				   <th>Deal No</th>
+				   <th>CP No</th>
+				   <th>Grade</th>
+				   <th>Quantity</th>
+				   <th>Loading Port</th>
+				   <th>Discharging Port</th>
+				   <th>Laycan</th>
+				   <th style="width:80px;">Operation</th> 
+				</tr>
+				  #foreach($data in $datas)
+				<tr class="tbStyle">
+					  <td title="$!{data.orderNo}"><div class="text-overflow">$!data.orderNo</div></td>
+					  <td title="$!{data.contractNo}"><div class="text-overflow">$!data.contractNo</div></td>
+					  <td title="$!{data.name}"><div class="text-overflow">$!data.name</div></td>
+					  <td title="$!{data.quantity}" class="title3"><div class="text-overflow"><script type="text/javascript">document.write(formatNumber($!data.quantity,3,1));</script></div></td>
+					  <td title="$!{data.loadPort}"><div class="text-overflow">$!data.loadPort</div></td>
+					  <td title="$!{data.unport}"><div class="text-overflow">$!data.unport</div></td>
+					  <td title="$!{data.deliveryDate}"><div class="text-overflow">$!data.deliveryDate</div></td>
+				      <td>
+				      		<a href="javascript:;" class="orderShipBtn" attr-data="$!data.orderNo" attr-quantity="$!data.quantity" attr-oilType="$!data.name" attr-unitName="$!data.quantityUnitName" attr-loadPort="$!data.loadPort" attr-unloadPort="$!data.unport" attr-beg="$!data.deliveryDateStart" attr-end="$!data.deliveryDateEnd">Chartering</a>
+				      </td>
+				</tr>
+				#end
+			</table>
+			</div>
+			$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/pallet/orderPageList.htm')")
+			
+		</div>
+	</div>
+	<script src="../transport/js/pallet/orderList.js"></script>
+	 -->
+	
+	
+	 <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Chartering</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit"><h1>Order List</h1></div>
+			<div class="s-mod-bcont s-mod-bcont1">
+			<div class="s-table-wrap">
+				<table class="s-table s-table3">
+				  <tr><th>Deal No</th><th>CP No</th><th>Grade</th><th>Quantity</th><th>Loading Port</th><th>Discharging Port</th><th>Laycan</th><th>Operation</th></tr>
+				   #foreach($data in $datas)
+				  <tr>
+					  <td title="$!{data.orderNo}"><div class="text-overflow">$!data.orderNo</div></td>
+					  <td title="$!{data.contractNo}"><div class="text-overflow">$!data.contractNo</div></td>
+					  <td title="$!{data.name}"><div class="text-overflow">$!data.name</div></td>
+					  <td title="formatNumber($!data.quantity,3,1)"><div class="text-overflow"><script type="text/javascript">document.write(formatNumber($!data.quantity,3,1));</script></div></td>
+					  <td title="$!{data.loadPort}"><div class="text-overflow s-text100">$!data.loadPort</div></td>
+					  <td title="$!{data.unport}"><div class="text-overflow">$!data.unport</div></td>
+					  <td title="$!{data.deliveryDate}"><div class="text-overflow">$!data.deliveryDate</div></td>
+					  <td title="Chartering"><a href="javascript:;" class="orderShipBtn" attr-data="$!data.orderNo" attr-quantity="$!data.quantity" attr-oilType="$!data.nameOil" attr-unitName="$!data.quantityUnitName" attr-loadPort="$!data.loadPortName" attr-unloadPort="$!data.unportName" attr-beg="$!data.deliveryDateStart" attr-end="$!data.deliveryDateEnd"  attr-loadPortCode="$!data.loadPort" attr-unloadPortCode="$!data.unport"  attr-oilTypeCode="$!data.name">Chartering</a></td>
+				  </tr>
+				  #end
+				</table>
+			</div>
+		</div>
+		</div>
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/pallet/orderPageList.htm')")
+	</div>
+	<script src="../transport/js/pallet/orderList.js"></script>
+	

@@ -1,0 +1,3 @@
+	<div style="padding: 20px;">
+		<textarea id="replyContent" name="replyContent" placeholder="回复：" class="layui-textarea" style="width: 100%; height: 200px;"></textarea>
+	</div>

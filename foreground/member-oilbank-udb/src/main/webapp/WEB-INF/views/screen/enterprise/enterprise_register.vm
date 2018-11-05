@@ -1,0 +1,231 @@
+<div class="layui-body">
+
+    <div id="mainDiv" class="blogin-wrap">
+        <div class="blogin">
+            <form id="loginForm" method="post" action="$appServer.get('login.htm')">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业名称:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入账号" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业全名:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="fullName" lay-verify="title" autocomplete="off" placeholder="请输入账号" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">英文名称:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="englishName" name="englishName" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业logo:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="logo" name="logo" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">法人姓名:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="legalName" name="legalName" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">法人证件类型:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="legalName" name="legalName" value="" />
+                    </div>
+                </div> <div class="layui-form-item">
+                <label class="layui-form-label">法人证件号码:</label>
+                <div class="layui-input-block">
+
+                    <input type="text" id="legalName" name="legalName" value="" />
+                </div>
+            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电话:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="tel" name="tel" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">传真:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="fax" name="fax" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">email:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="email" name="email" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">网址:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="website" name="website" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">组织机构代码:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="organizationCode" name="organizationCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工商执照号码:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="businessLicenseCode" name="businessLicenseCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">税务登记号码:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="taxCode" name="taxCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业信用号:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="creditCode" name="creditCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">组织机构证件:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="organizationFile" name="organizationFile" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工商执照证件:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="businessLicenseFile" name="businessLicenseFile" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">税务登记证件:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="taxFile" name="taxFile" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业信用证件:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="creditFile" name="creditFile" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企业注册时间:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="registerTime" name="registerTime" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">注册资本:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="registerFund" name="registerFund" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主营产品:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="mainProducts" name="mainProducts" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主营产品:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="mainProducts" name="mainProducts" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所在省市:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="provinceCode" name="provinceCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所在市:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="cityCode" name="cityCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所在地区编码:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="areaCode" name="areaCode" value="" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细地址:</label>
+                    <div class="layui-input-block">
+
+                        <input type="text" id="addressDetail" name="addressDetail" value="" />
+                    </div>
+                </div>
+
+                <div class="blogin-row"><span class="blogin-txt"></span>
+                    <button  id="button_id"  class="s-btn layui-btn" type="button">注册</button>
+
+                </div>
+
+                <input type="hidden" name="returnUrl" value="$appServer.get('welcome.htm')">
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function (){
+        jQuery("#checkcode").blur(function(){
+            var ajaxanswerValue = "$appServer.get('/checkcode/check.json?token=')" + jQuery("#checkcode").val();
+            alert(ajaxanswerValue);
+            jQuery.getJSON(ajaxanswerValue,
+                    function(data){
+                        alert(data);
+                    });
+        });
+
+    })
+    //点击提交
+    $(".layui-btn").click(function(){
+
+        var url = "$!appServer.get('/enterprise/fast_register.json')";
+        var data = $("form").serializeArray();
+        $ .post(url, data).always(function(res){
+            layer.close(loading);
+            if(res.status == "OK" && res.data == 1){
+                layer.alert("注册成功", {closeBtn: 0}, function(){
+                    location.href = "$!appServer.get('/member/center.htm')";
+                });
+            }else{
+                layer.alert("提交失败");
+            }
+        });
+    });
+</script>

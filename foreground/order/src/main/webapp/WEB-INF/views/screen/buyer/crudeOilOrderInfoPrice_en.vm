@@ -1,0 +1,38 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Deal Recap</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Qty(BBL)：</span><span class="c-int qx-conte">#set($num=$!{contract.enNum} / 1000.0) $!{numberTool.format("#0",$!{num})}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Tolerance：</span><span class="c-int qx-conte">+/- $!{contract.numFloat} %</span></li>
+            <li class="c-fcos2"><span class="c-fn">Premium/Discount：</span><span class="c-int qx-conte">$!{contract.agioStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Incoterm：</span><span class="c-int qx-conte">$!{tradeItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Period：</span>
+                <span class="c-int qx-conte">
+                    ${dictUtils.getValue("valuationProidTypeMap", "$!contract.valuationProidType")}
+                    #if($!{contract.valuationProidType} == 4)
+                        （$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidStart})to$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidEnd})）
+                    #end
+                    #if($!{contract.valuationProidType} == 5)
+                        （$!{contract.contractKind}）
+                    #end
+                </span>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Basis：</span><span class="c-int qx-conte">$!{valuationBaseName}</span></li>
+            <li class="c-fcos1"><span class="c-fn">Price Fomula：</span><span class="c-int qx-conte">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Credit term：</span><span class="c-int qx-conte">$!{dictUtils.getValue("creditItem", "$!contract.authItem")}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Date：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Qty Determination：</span><span class="c-int qx-conte">$!{measureModeMap.get($!{contract.measureMode})}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Laytime：</span><span class="c-int qx-conte">$!{contract.loadAndDischargePermittedTimespan}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte">$!{contractShip.dischargePort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte">$!{contractShip.shipmentPort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">DDR：</span><span class="c-int qx-conte">$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeStartTime})to$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeEndTime})</span></li>
+            <li class="c-fcos2"><span class="c-fn">Laycan：</span><span class="c-int qx-conte">$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentStartTime})to$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentEndTime})</span></li>
+            <li class="c-fcos2"><span class="c-fn">Law：</span><span class="c-int qx-conte">$!{contract.law}</span></li>
+            <li class="c-fcos2"><span class="c-fn">GTC：</span><span class="c-int qx-conte">$!{contract.gtc}</span></li>
+            #if($!{contract.contractType}!="L")
+            <li class="c-fcos2"><span class="c-fn">Inspection：</span><span class="c-int qx-conte">$!{contract.inspectionFeeSharingTypeContent}</span></li>
+             #end
+            <li class="c-fcos1"><span class="c-fn">Remark：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

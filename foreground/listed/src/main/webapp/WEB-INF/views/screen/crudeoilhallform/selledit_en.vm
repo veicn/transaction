@@ -1,0 +1,30 @@
+<ul class="fabucaigou-con-left">
+    <li class="con-left-content gou" >
+        <i class="c-ico icon-jbxx"></i>
+        <span class="con-left-tex"><a href="#cgjbxx">Resource Information</a></span>
+    </li>
+    <li class="con-left-content">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#specifyEnterpriseInfo">Range</a></span>
+    </li>
+    <li class="con-left-content">
+        <i class="c-ico icon-cgqk"></i>
+        <span class="con-left-tex"><a href="#cgqk">Sales Details</a></span
+    </li>
+    <li class="con-left-content cha">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#ysxx">Transfer Info</a></span>
+    </li>
+    #*<li class="con-left-content cha">
+        <i class="c-ico icon-bwxx"></i>
+        <span class="con-left-tex"><a href="#mjbwxx">买家泊位信息</a></span>
+    </li>*#
+    <li class="con-left-content">
+        <i class="c-ico icon-mjxx"></i>
+        <span class="con-left-tex"><a href="#mjxx">Seller Info</a></span>
+    </li>
+    #*<li class="con-left-content">
+        <i class="c-ico icon-dlsxx"></i>
+        <span class="con-left-tex"><a href="#dlsxx">Agent Info</a></span>
+    </li>*#
+</ul>

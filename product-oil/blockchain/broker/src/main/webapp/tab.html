@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录页</title>
+</head>
+<style type="text/css">
+    .main{
+        margin-left: 60%;
+        margin-top: 200px;
+    }
+    .main p{
+        width: 200px;
+    }
+    .main p:first-of-type{
+        font-size: 24px;
+    }
+    .main p:nth-of-type(2){
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .main p:nth-of-type(3){
+        font-size: 14px;
+    }
+    .main p:nth-of-type(4){
+        width: 160px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border:1px solid #ccc;
+        border-radius: 40px;
+    }
+</style>
+<body>
+<div class="img-logo"><img src=""></div>
+<div class="main">
+    <p>欢迎来到</p>
+    <p class="tit"></p>
+    <p class="con"></p>
+    <p>点击进入</p>
+</div>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+   /* $.ajax({
+        url: 'http://transaction.test.myoilbank.com/getLoginData.json',
+        type: 'GET',
+        data: { url: "http://test.inspector.myoilbank.com" },
+        dataType: 'jsonp',
+        jsonpCallback: "success",
+        success: function (data) {
+            //       alert(data.status);
+            // alert(data.tDataPartner.loginLogo);
+            // alert(data.tDataPartner.loginBg);
+            // alert(data.tDataPartner.loginDesc);
+            // alert(data.tDataPartner.systemTitle);
+            $(".tit").text(data.tDataPartner.systemTitle);
+            $(".con").text(data.tDataPartner.loginDesc);
+            $("body").css("background",data.tDataPartner.loginBg);
+            $(".img-logo img").attr("src",data.tDataPartner.loginLogo);
+        }
+    });*/
+
+      $.ajax({
+           url: 'http://transaction.test.myoilbank.com/getLoginUser.json',
+          //url: 'http://www.sinochem.com/transaction/getLoginUser.json',
+           type: 'GET',
+           data: { url: "http://test.inspector.myoilbank.com" },
+           dataType: 'jsonp',
+           jsonpCallback: "success",
+           success: function (data) { alert(data);
+               alert(data.status);
+               alert(data.user.name);
+
+           }
+       });
+</script>
+</body>
+
+</html>

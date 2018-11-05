@@ -1,0 +1,318 @@
+$contain.get('/common/title.htm').put('title', 'My Orders')
+
+
+#css("$appServer.get('/css/common/reset.css?css_version=03280827')")
+#css("$appServer.get('/css/common/public.css?css_version=03280827')")
+#css("$appServer.get('/css/work/shipping.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myResouces.css?css_version=03280827')")
+#css("$appServer.get('/css/work/resDetails.css?css_version=03280827')")
+#css("$appServer.get('/js/common/layui/css/layui.css')")
+
+#css("$appServer.get('/css/common/pikaday.css?css_version=03280827')")
+#css("$appServer.get('/css/fonts/iconfont.css?css_version=03280827')")
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_contract_list/index.js?js_version=03280827'))
+
+
+#*<style>
+    .orderlist-con .s-t-tab > ol > li > span {
+        font-size: 14px;
+        white-space: inherit;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>*#
+<div class="s-nav fl qu-con-box">
+    <div class="m-box m-sls cleafix s-box qu-t-box">
+        <h2>My Deals</h2>
+        <form id="myContractList" method="post" action="$appServer.get('pages/back/my_contract_list/index.htm')">
+            <div class="xz s-selected">
+                <ul>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Category : </span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($category in $!{category})
+                                                #if($category.code == $!{contractSheetQueryVO.productCategoryCode})
+                                                    $category.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" name="productCategoryCode"
+                                                   value="$!{contractSheetQueryVO.productCategoryCode}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($category in $!{category})
+                                            <li class="select-option" data-value="$category.code">$category.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($status in $!{status})
+                                                #if($status.code == $!{contractSheetQueryVO.contractSheetStatusCode})
+                                                    $status.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" name="contractSheetStatusCode"
+                                                   value="$!{contractSheetQueryVO.contractSheetStatusCode}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($status in $!{status})
+                                            <li class="select-option" data-value="$status.code">$status.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Deal No. :</span>
+                        <input type="text" name="serialNumber" value="$!{contractSheetQueryVO.serialNumber}"
+                               class="br input-name"/>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Incoterms :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+
+                                            <div class="select-show-text">
+                                                #foreach($tradeTerms in $!{tradeTerms})
+                                                #if($tradeTerms.code == $!{contractSheetQueryVO.tradeTermCode})
+                                                    $tradeTerms.enName
+                                                #end
+                                            #end
+                                            </div>
+                                            <input type="text" class="vcode" readonly="readonly"
+                                                   value="$!{contractSheetQueryVO.tradeTermCode}" name="tradeTermCode">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($tradeTerms in $!{tradeTerms})
+                                            <li class="select-option"
+                                                data-value="$tradeTerms.code">$tradeTerms.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="time qu-date poL-time-l">
+                <ul>
+                    <li>
+                        <span class="time-l">Create Time :</span>
+                        <div class="datetime-wrap">
+                            <input id="LaycanS" name="gmtCreatedStartAsString"
+                                   value="$!{contractSheetQueryVO.gmtCreatedStartAsString}"
+                                   class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view ">$!{contractSheetQueryVO.gmtCreatedStartAsString}</div>
+                        </div>
+                        <div class="pol-time-line">-</div>
+                        <div class="datetime-wrap">
+                            <input id="LaycanD" name="gmtCreatedEndAsString"
+                                   value="$!{contractSheetQueryVO.gmtCreatedEndAsString}" class="DeadlineMonth datetime"
+                                   type="text">
+                            <div class="datetime-view ">$!{contractSheetQueryVO.gmtCreatedEndAsString}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="search qu-search">
+                <span id="myContractForm" class="m-btn br">Search</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- li -->
+    #foreach($contract in $!{pageInfoList.list})
+        <div class="m-box qulist-con orderlist-con cleafix">
+            <div class="m-tit s-tit">
+                <ul>
+                    <li>
+                        <span>Create Time :</span>
+                        <span class="m-tit-word">$!{contract.contractSheetVO.gmtCreated}</span>
+                    </li>
+                    <li>
+                        <span>Deal No :</span>
+                        <span class="m-tit-word">$!{contract.contractSheetVO.serialNumber}</span>
+                    </li>
+                    #if($!{contract.contractSheetVO.buyerId} ==  $!{userId})
+                        <li>
+                            <span>Seller :</span>
+                            <span class="m-tit-word">$!{contract.salerInfoVO.enterpriseName}</span>
+                        </li>
+                    #elseif($!{contract.contractSheetVO.salerId} ==  $!{userId})
+                        <li>
+                            <span>Buyer :</span>
+                            <span class="m-tit-word">$!{contract.buyerInfoVO.enterpriseName}</span>
+                        </li>
+                    #end
+##                    <a  class="br btn-s deBtn mrbtn">
+##                        $!{contract.contractSheetVO.contractSheetStatusVO.enName}
+##                    </a>
+                </ul>
+            </div>
+            <div class="m-text clearfix">
+                <div class="qu-img fl">
+                    <img src='$appServer.get(
+                        "/product_images/$!{contract.productInfoVO.productCategoryVO.code}/vertical.jpg")'/>
+                    #if($!{contract.contractSheetVO.contractSheetStatusVO.code} == '1')
+                        <div class="pro-state"></div>
+                    #elseif($!{contract.contractSheetVO.contractSheetStatusVO.code} == '2')
+                        <div class="pro-lost"></div>
+                    #elseif($!{contract.contractSheetVO.contractSheetStatusVO.code} == '3')
+                        <div class="pro-complet"></div>
+                    #end
+                </div>
+                <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box">
+                    <ol class="qucon-top pro-con-l">
+                    ##                    <li>
+                    ##                        <span class="m-f-span w94">Range :</span>
+                    ##                        <span class="m-r-span w94">$!{contract.saleSheetVO.saleTypeVO.enName}</span>
+                    ##                    </li>
+                        <li>
+                            <span class="m-f-span w94">Category :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.productCategoryVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Specification :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.productSpecificationVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Quantity :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.quantityAsString} $!{contract.productInfoVO.quantityUnitVO.enName}</span>
+                        </li>
+                    ##                    <li>
+                    ##                        <span class="m-f-span w94">Laytime :</span>
+                    ##                        <span class="m-r-span w94">$!{contract.transportInfoVO.laytimeAsString} H+6</span>
+                    ##                    </li>
+                        <li>
+                            <span class="m-f-span w94">Incoterms :</span>
+                            <span class="m-r-span">$!{contract.productInfoVO.tradeTermVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Premium :</span>
+                            <span class="m-r-span">
+                            $!{contract.pricingInfoVO.premiumsAndDiscountsAsString} $!{contract.pricingInfoVO.currencyVO.enName}/$!{contract.pricingInfoVO.pricingUnitVO.enName}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Pricing Period :</span>
+                            <span class="m-r-span w94">$!{contract.pricingInfoVO.pricingPeriod}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Payment Terms :</span>
+                            <span class="m-r-span">$!{contract.pricingInfoVO.paymentTerm}</span>
+                        </li>
+                        <li>
+                            <span class="m-f-span w94">Laycan :</span>
+                            <span class="m-r-span">$!{contract.transportInfoVO.laycanStartDateAsString}-$!{contract.transportInfoVO.laycanEndDateAsString}</span>
+                        </li>
+                        #if($!{contract.productInfoVO.tradeTermVO.enName} == 'FOB')
+                            <li>
+                                <span class="m-f-span w94">Load Port :</span>
+                                <span class="m-r-span">$!{contract.transportInfoVO.loadingPort}, $!{contract.transportInfoVO.loadingCountry}  </span>
+                            </li>
+                        #else
+                            <li>
+                                <span class="m-f-span w94">Discharge Port :</span>
+                                <span class="m-r-span">$!{contract.transportInfoVO.dischargePort}, $!{contract.transportInfoVO.dischargeCountry}  </span>
+                            </li>
+                        #end
+                    </ol>
+                </div>
+                <!-- button -->
+                    <ul class="fr m-t-btn qubtn-box mbl-box">
+                    <a href="$appServer.get('pages/back/my_contract_detail/index.htm').put(
+                        'uuid',$!{contract.contractSheetVO.uuid})" class="br fr btn-s">
+                        Details
+                    </a>
+                    #if($!{contract.productInfoVO.tradeTermVO.enName} ==
+                        'CFR' && $!{contract.salerInfoVO.enterpriseId} == $!{userId} )
+                        <a href="javascript:;" class="br fr btn-s"
+                           onclick="checkContract('$!{contract.contractSheetVO.uuid}','$!{contract.contractSheetVO.id}')">
+                            Chartering
+                        </a>
+                    #end
+
+                    #if($!{contract.productInfoVO.tradeTermVO.enName} == 'FOB')
+                        <a href="javascript:;" class="br fr btn-s"
+                           onclick="checkVesselConfirmation('$!{contract.contractSheetVO.uuid}','$!{contract.contractSheetVO.id}')">
+                            Vessel Acceptance
+                        </a>
+                    #elseif($!{contract.salerInfoVO.enterpriseId} == $!{userId}  && $!{contract.productInfoVO.tradeTermVO.enName} ==
+                        'CFR')
+                        <a href="javascript:;" class="br fr btn-s"
+                           onclick="checkVesselConfirmation('$!{contract.contractSheetVO.uuid}','$!{contract.contractSheetVO.id}')">
+                            Vessel Acceptance
+                        </a>
+                    #end
+                    <a href="$appServer.get('/pages/back/billCoreUpload/index.htm').put(
+                        'uuid',$!{contract.contractSheetVO.uuid})" class="br fr btn-s">
+                        Upload Doc
+                    </a>
+
+##                    <a href="$shippingServer.get('/pages/back/TransitUnloading/index.htm').put(
+##                        'uuid',$!{contract.contractSheetVO.uuid})" class="br btn-s btn-chart w12">
+##                        Go to chartering
+##                    </a>
+##                    <a href="$shippingServer.get('/pages/back/TransitUnloading/index.htm').put(
+##                        'uuid',$!{contract.contractSheetVO.uuid})" class="br btn-s btn-chart w12">
+##                        Voyage Tracking
+##                    </a>
+                </ul>
+            </div>
+        </div>
+    #end
+
+    $contain.get('/common/page.htm').put("pageInfo", $!{pageInfoList})
+</div>
+
+<script>
+    // 时间组件综合调用
+    (function () {
+        window.commonCPY.datePicker(['LaycanS', 'LaycanD'], function (value, date, endDate) {
+            var value = value[0].split(' ').join('/')
+            console.log(value)
+        });
+        commonCPY.select()
+    })();
+
+    $("#myContractForm").on("click", function () {
+
+        document.getElementById("myContractList").submit();
+
+    });
+
+</script>
+
+
+
+
+

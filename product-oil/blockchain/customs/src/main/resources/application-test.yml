@@ -1,0 +1,13 @@
+#api
+feignUrl: http://transaction.test.myoilbank.com
+parter: customs
+apikey: ad846cd10b74d0d11443fcf0be2de2eb
+hystrix.command.default.execution.timeout.enabled: false
+userDomin: http://user.test.myoilbank.com
+#log
+logging:
+config: classpath:logback.xml
+
+#aes 加解密
+aeskey: "sinochemOILBANK1"
+useaes: "true1"

@@ -1,0 +1,873 @@
+$contain.get('/common/title.htm').put('title', 'Charter Party List')
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))      
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))      
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))  
+
+<div class="s-nav fl qu-con-box">
+            <div class="m-box m-sls cleafix s-box qu-t-box">
+            <form id="argFromByMerchant" method="post" action="$!appServer.get('pages/back/agreement/charterPartyManagementByMerchant.htm')">
+                <div class="xz s-selected">
+                    <ul>
+                        <li class="s-selected-w ">
+                            <span class="m-f-span xz1">Charter Party Number :</span>
+                            <input type="text"  value="$!{selectVo.agreementCd}"  id="" name="agreementCd" class="br" >
+                        </li>
+                        <li class="s-selected-w ">
+                            <span class="m-f-span xz1">Product :</span>
+                            <input type="text"  value="$!{selectVo.productNm}"  id="" name="productNm" class="br" >
+                        </li>
+                        <li class="s-selected-w ">
+                            <span class="m-f-span xz1">Status :</span>
+                            <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1" >
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                        	<div class="select-show-text">
+                                        		#foreach($start in $!agreementStart)
+		                                       		#if($!start.code == $!{selectVo.status})
+		                                       		 	$start.enName
+		                                       		#end
+		                         		 	 	#end
+		                         		 	 </div>
+                                            <input type="text" readonly="readonly" name="status" class="vname" value="$!{selectVo.status}">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($start in $agreementStart)
+                                           
+                                            #if($!start.code == $!{selectVo.status})
+                                       		
+	                                        <li data-value="$start.code" class="selected" class="select-option ">$start.enName</li>
+	                                    	#else
+	                                        <li data-value="$start.code"  class="select-option ">$start.enName</li>
+	                                     
+                                       		#end
+                                        #end
+                                    </ul>
+                                </div>
+							</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="time qu-date">
+                    <ul>
+                        <li class="datetime-Char">
+                            <span class="time-l">Charter Party Date :</span>
+							<div class="datetime-wrap">
+								<input id="LaycanS" value="$!{selectVo.queryStart}" name="queryStart" class="DeadlineMonth datetime" type="text">
+								<div class="datetime-view ">$!{selectVo.queryStart}</div>
+							</div>
+							<div class="datetime-line">-</div>
+							<div class="datetime-wrap">
+								<input id="LaycanD" value="$!{selectVo.queryEnd}"  name="queryEnd" class="DeadlineMonth datetime" type="text">
+								<div class="datetime-view ">$!{selectVo.queryEnd}</div>
+							</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search qu-search">
+                    <span class="m-btn br" id="submitFormByMerchant">Inquire</span>
+                    <span class="m-btn br" id="empty">Empty</span>
+                </div>
+                </form>
+            </div>
+            <!-- li -->
+            
+            #foreach($vo in $!{agreement})
+           	#if($!{vo.status} == "10")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                           			 
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  $!{vo.quantity} ± $!{vo.rangeOfError}%
+                            #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel's Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span" title="${vo.consignor}">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                    	<a  href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br deBtn btn-s ">Details</a>
+							#if($!{vo.quanzhouFlag} != "1")
+                                <a  href="$!appServer.get('pages/back/agreement/confirm_index.htm')?uuid=$!{vo.uuid}" class="br btn-s ">Countersign</a>
+							#end
+
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+
+
+				#if($!{vo.status} == "20" || $!{vo.status} == "21" || $!{vo.status} == "22")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel's Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span" title=" $!{vo.consignor}">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                        <li>
+	                        	#if($!{vo.quanzhouFlag} != "1")
+	                        		<a href="$!appServer.get('pages/back/vesselAcceptance/create.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s deBtn  ">Vessel Acceptance</a>
+	                        	#end
+	                        </li>
+	                        <li>
+	                        	<a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s ">Details</a>
+	                    	</li>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+	            
+	              #if($!{vo.status} == "30")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                           			 
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel’s Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                    	<a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s deBtn ">Details</a>
+	                        <a href="$!appServer.get('pages/back/LogisticsTracking/index.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s ">Logistics Tracking</a>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+	            
+	              #if($!{vo.status} == "40")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                           			 
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel’s Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                        <a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s deBtn ">Details</a>
+	                        <a href="$!appServer.get('pages/back/LogisticsTracking/index.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s ">Logistics Tracking</a>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+	            
+	            #if($!{vo.status} == "50")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                           			 
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel’s Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                        <a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s deBtn ">Details</a>
+	                        <a href="$!appServer.get('pages/back/LogisticsTracking/index.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s  ">Logistics Tracking</a>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+	            
+	            #if($!{vo.status} == "60")
+            <div class="qulist-wrap qulist-wrap-lj">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul>
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel’s Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                        <a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s deBtn">Details</a>
+	                        <a href="$!appServer.get('pages/back/LogisticsTracking/index.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s ">Logistics Tracking</a>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+	            
+	            #if($!{vo.status} == "70")
+            <div class="qulist-wrap">
+	            <div class="m-box qulist-con cleafix">
+	                <div class="ch-confirmed">
+	                    <ul> 
+	                    	<li>
+	                            <span>Current State :</span>
+	                            #foreach($start in $!agreementStart)
+	                            <span class="m-tit-word">
+	                            	#if($!start.code == $!vo.status)
+                            			$start.enName
+                           			 
+                          			#end
+	                            </span>
+	                            #end
+	                       </li>
+	                    </ul>
+	                </div>
+	                <div class="m-text clearfix">
+	                    <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box">
+	                        <ol class="qucon-top pro-con-l">
+	                            <li>
+	                                <span class="m-f-span w47">Charter Party Number :</span>
+	                                <span class="m-r-span w47">
+	                                        $!{vo.agreementCd}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Quantity :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    #if(${vo.quantity}!=""&&${vo.rangeOfError}!="")
+                                  			$!{vo.quantity} ± $!{vo.rangeOfError}%
+                           				 #end
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Charter Party Date : 
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.charterPartyDate}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Vessel’s Name :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.vesselName}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                        Consignor :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.consignor}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                    Port Of Loading :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                      $!{vo.portOfLoading}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                <span class="m-f-span w94">Disponent Owner :</span>
+	                                <span class="m-r-span w94">
+	                                       $!{vo.charteringAgentNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                       Port Of Discharge :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                    $!{vo.portOfDischarge}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                     Product :
+	                                    </span>
+	                                <span class="m-r-span">
+	                                   $!{vo.productNm}
+	                                    </span>
+	                            </li>
+	                            <li>
+	                                    <span class="m-f-span w94">
+	                                   Laycan :
+	                                    </span>
+	                                <span class="m-r-span w57">
+	                                     $!{vo.laycanStrat} / $!{vo.laycanEnd}
+	                                    </span>
+	                            </li>
+	                        </ol>
+	                    </div>
+	                    <!-- button -->
+	                    <ul class="fr m-t-btn qubtn-box prolist-box">
+	                        <a href="$!appServer.get('pages/back/agreement/detail_index.htm')?uuid=$!{vo.uuid}" class="br btn-s deBtn ">Details</a>
+	                        <a href="$!appServer.get('pages/back/LogisticsTracking/index.htm')?agreementUuid=$!{vo.uuid}" class="br btn-s ">Logistics Tracking</a>
+	                    </ul>
+	                </div>
+	            </div>
+	            #end
+            	#end
+            	<!--分页-->
+            	$contain.get('/common/page.htm').put("pageInfo", $!{agreementPage})
+            </div>
+        </div>
+<script>
+    // 时间组件综合调用
+    (function () {
+        window.commonCPY.datePicker(['LaycanS','LaycanD'],function(value, date, endDate){
+            var value=value[0].split(' ').join('/')
+            console.log(value)
+        });
+        window.commonCPY.select()
+    })();
+</script>
+#js($appServer.get('/script/pages/back/agreement/charterPartyManagement.js?js_version=03280827'))
+     

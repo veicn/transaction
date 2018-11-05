@@ -1,0 +1,28 @@
+    $contain.get("/common/htmlhead.htm").put("a",$a)
+
+
+    </head>
+
+    <body class="s-layout-body s-body-bg">
+    <div class="s-layout s-layout-admin">
+        <div class="s-header">
+            $contain.get('/mosken/center/head.htm').setHost("$memberServer.get('')")
+        </div>
+    ## 消息推送处理页面
+        $contain.get("/message/messagePop.htm").setHost("$messageServer")
+        <div class="s-side">
+            <div class="s-side-scroll">
+                $contain.get('/mosken/center/menus.htm').setHost("$memberServer.get('')")
+            </div>
+        </div>
+
+        <div class="s-body">
+            $screen_content
+        </div>
+    </div>
+    <!--飘窗-->
+    $contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+
+    $contain.get("/contain/html_end.htm").setHost("$memberServer.get('')")
+    <!--计价公式-->
+    $contain.get("/pricingFormula/physicalPricingEditor.htm")

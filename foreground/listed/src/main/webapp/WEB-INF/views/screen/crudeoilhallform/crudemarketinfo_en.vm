@@ -1,0 +1,590 @@
+#js("$appServer.get('script/lib/echarts.js')")
+<div class="cg-title">Market</div>
+<ul class="cg-line clearfix"><li></li><li class="cg-line1"></li></ul>
+<ul class="cg-scxx-cont">
+    <li class="clearfix">
+        <div class="cg-sc-shts">Premium/Discount</div>
+        <div class="cg-sc-zst" id="actualsTrend" style="width: 550px;height: 300px">#*<img src="../images/zoushitu.jpg" alt=""/>*#</div>
+        <ul class="cg-sc-xz clearfix" id="actualOils">
+
+        </ul>
+        <div class="cg-sc-xzrq" id="agioYm">
+            <a href="javascript:void(0)" onclick="addSubtractMonth(-12, this)"><i class="c-ico cg-nfz"></i></a>
+            <a href="javascript:void(0)" onclick="addSubtractMonth(-1, this)"><i class="c-ico cg-yfz"></i></a>
+            <em>$!dateUtil.convertDateToString('yyyy/MM', $!{today})</em>
+            <a href="javascript:void(0)" onclick="addSubtractMonth(1, this)"><i class="c-ico cg-yfh"></i></a>
+            <a href="javascript:void(0)" onclick="addSubtractMonth(12, this)"><i class="c-ico cg-nfh"></i></a>
+        </div>
+    </li>
+    <li class="cg-tszs clearfix">
+        <div class="cg-sc-shts">OSP Curve</div>
+        <div class="cg-sc-zst" id="officialTrend" style="width: 550px;height: 300px"></div>
+        <ul class="cg-sc-xz clearfix" id="officialOils">
+
+        </ul>
+        <div class="cg-sc-xzrq" id="officialYear">
+            <a href="javascript:void(0)" onclick="addSubtractMonth(-12, this)"><i class="c-ico cg-nfz"></i></a>
+            <em>$!dateUtil.convertDateToString('yyyy', $!{today})</em>
+            <a href="javascript:void(0)" onclick="addSubtractMonth(12, this)"><i class="c-ico cg-nfh"></i></a>
+        </div>
+    </li>
+</ul>
+
+<script>
+
+    var actualsTrendChart = echarts.init(document.getElementById("actualsTrend"));
+    var officialTrendChart = echarts.init(document.getElementById("officialTrend"));
+
+
+
+    $(function () {
+
+        getActuralOils();
+        getOfficialOils();
+
+        $("#agioYm").children("em").bind("DOMNodeInserted", function () {
+            var pricingDate = $("#agioYm").children("em").text().replace('/', '-');
+            var crudeNameArray = new Array();
+            $("#actualOils").find("input:checked").each(function () {
+                crudeNameArray.push($(this).val())
+            })
+            dynamisSetActuralChart(pricingDate, crudeNameArray);
+        })
+
+        $("#officialYear").children("em").bind("DOMNodeInserted", function () {
+            var pricingDate = $("#officialYear").children("em").text();
+            var crudeNameArray = new Array();
+            $("#officialOils").find("input:checked").each(function () {
+                crudeNameArray.push($(this).val())
+            })
+            dynamisSetOfficialChart(pricingDate, crudeNameArray);
+        })
+
+
+    })
+
+    // 现货油种选中事件
+    function acturalCrudeCheck(elem) {
+        var chkNums = $("#actualOils").find("input:checked").length;
+        if (3 < chkNums) {
+            $(elem).prop("checked", false);
+            layer.alert("At most 3 oil types can be selected!", {title:"Notice", btn: "OK"});
+        } else if (chkNums == 0) {
+            $(elem).prop("checked", true);
+            layer.alert("At least 1 oil type shall be selected!", {title:"Notice", btn: "OK"});
+        } else {
+            var pricingDate = $("#agioYm").children("em").text().replace('/', '-');
+            var crudeNameArray = new Array();
+            $("#actualOils").find("input:checked").each(function () {
+                crudeNameArray.push($(this).val())
+            })
+            dynamisSetActuralChart(pricingDate, crudeNameArray);
+        }
+
+    }
+
+    // 官方油种选中事件
+    function officialCrudeCheck(elem) {
+        var chkNums = $("#officialOils").find("input:checked").length;
+        if (3 < chkNums) {
+            $(elem).prop("checked", false);
+            layer.alert("At most 3 oil types can be selected!", {title:"Notice", btn: "OK"});
+        } else if (chkNums == 0) {
+            $(elem).prop("checked", true);
+            layer.alert("At least 1 oil type shall be selected!", {title:"Notice", btn: "OK"});
+        } else {
+            var pricingDate = $("#officialYear").children("em").text();
+            var crudeNameArray = new Array();
+            $("#officialOils").find("input:checked").each(function () {
+                crudeNameArray.push($(this).val())
+            })
+            dynamisSetOfficialChart(pricingDate, crudeNameArray);
+        }
+
+    }
+
+    /**
+     * 加减月
+     * @param mos
+     */
+    function addSubtractMonth(mos, elem) {
+        var current = $(elem).parent(".cg-sc-xzrq").children("em").text();
+        current = current.replace('/', '');
+        var cYear = current.substring(0, 4);
+        var cMonth = 0;
+        if (4 < current.length) {
+            cMonth = current.substring(4, current.length);
+        }
+        if (mos == 12) {
+            cYear = Number(cYear) + Number(1);
+        } else if (mos == -12) {
+            cYear = Number(cYear) - Number(1);
+        } else if (mos == 1) {
+            if (cMonth == 12) {
+                cYear = Number(cYear) + Number(1);
+                cMonth = 1;
+            } else {
+                cMonth = Number(cMonth) + Number(1);
+            }
+        } else if (mos == -1) {
+            if (cMonth == 1) {
+                cYear = Number(cYear) - Number(1);
+                cMonth = 12;
+            } else {
+                cMonth = Number(cMonth) - Number(1);
+            }
+        }
+
+        var elemDom = $(elem).parent(".cg-sc-xzrq").children("em");
+        if (cMonth == 0) {
+            $(elemDom).text(cYear);
+        } else {
+            if (cMonth < 10) {
+                cMonth = Number(cMonth);
+                $(elemDom).text(cYear+'/0'+cMonth);
+            } else
+                $(elemDom).text(cYear+'/'+cMonth);
+        }
+
+    }
+
+    function getActuralOils() {
+        var pricingDate = $("#agioYm").children("em").text().replace('/', '-');
+
+        var url = "$infoServer.get('/front/queryOilList.json')";
+//        url = "http://info8.1chemic.com/front/queryOilList.json";
+        var param = {pricingDate:pricingDate};
+        $.ajax({
+            url : url,
+            type : 'post',
+            dataType : 'json',
+            contentType: 'application/json;charset=utf-8',
+            data : JSON.stringify(param),
+            success : function (result) {
+                if (result.status == 0) {
+                    refreshActualOils(result.datas, 1);
+
+                    var crudeNameArray = new Array();
+                    $("#actualOils").find("input:checked").each(function () {
+                        crudeNameArray.push($(this).val())
+                    })
+                    dynamisSetActuralChart(pricingDate, crudeNameArray);
+                }
+            }
+        });
+    }
+
+    function refreshActualOils(oilsList, chkNum) {
+        $("#actualOils").html("");
+        var actualOilsHtml = "";
+
+        for (var i=0; i<oilsList.length; i++) {
+            if (i < 8) {
+                if (i < chkNum)
+                    actualOilsHtml += "<li><input type='checkbox' class='c-check' onclick='acturalCrudeCheck(this)' value='"+oilsList[i]+"' checked>"+oilsList[i]+"</li>";
+                else
+                    actualOilsHtml += "<li><input type='checkbox' class='c-check' onclick='acturalCrudeCheck(this)' value='"+oilsList[i]+"'>"+oilsList[i]+"</li>";
+
+            } else {
+                actualOilsHtml += "<span><a href='javascript:void(0)' onclick='popupActualOils("+JSON.stringify(oilsList)+")'>MORE &gt;&gt;</a></span>";
+            }
+        }
+        $("#actualOils").html(actualOilsHtml);
+    }
+
+    function getOfficialOils() {
+        var pricingDate = $("#officialYear").children("em").text();
+
+        var url = "$infoServer.get('/front/queryOfficalOilList.json')";
+//        url = "http://info8.1chemic.com/front/queryOfficalOilList.json";
+        var param = {pricingDate:pricingDate};
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            data: JSON.stringify(param),
+            success: function (result) {
+                if (result.status == 0) {
+                    refreshOfficialOils(result.datas, 1);
+
+                    var crudeNameArray = new Array();
+                    $("#officialOils").find("input:checked").each(function () {
+                        crudeNameArray.push($(this).val())
+                    })
+                    dynamisSetOfficialChart(pricingDate, crudeNameArray);
+                }
+            }
+        });
+    }
+
+    function refreshOfficialOils(oilsList, chkNum) {
+        $("#officialOils").html("");
+        var officialOilsHtml = "";
+
+        for (var i=0; i<oilsList.length; i++) {
+            if (i < 8) {
+                if (i < chkNum)
+                    officialOilsHtml += "<li><input type='checkbox' class='c-check' onclick='officialCrudeCheck(this)' value='"+oilsList[i]+"' checked>"+oilsList[i]+"</li>";
+                else
+                    officialOilsHtml += "<li><input type='checkbox' class='c-check' onclick='officialCrudeCheck(this)' value='"+oilsList[i]+"'>"+oilsList[i]+"</li>";
+            } else {
+                officialOilsHtml += "<span><a href='javascript:void(0)' onclick='popupOfficialOils("+JSON.stringify(oilsList)+")'>MORE &gt;&gt;</a></span>"
+            }
+        }
+        $("#officialOils").html(officialOilsHtml);
+    }
+
+    /**
+     * 现货油种弹出层
+     * @param oilsList
+     * @param pricingDate
+     */
+    function popupActualOils(oilsList) {
+
+        var pricingDate = $("#agioYm").children("em").text().replace('/', '-');
+        var content = getPopupContent($("#actualOils"), oilsList);
+
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            var curIndex = layer.open({
+                title: 'Choose',
+                shade: false,
+                area: ['800px', '510px'],
+                content: $(content).html(),
+                btn: ["Confirm"],
+                yes: function (index, layero) {
+
+                    var crudeNameArray = new Array();
+                    var oils = new Array();
+                    $(".cg-xzyz-l").find("input:checked").each(function () {
+                        crudeNameArray.push($(this).val());
+                        oils.push($(this).val());
+                    });
+                    layer.close(index);
+                    /*刷新图表数据*/
+                    dynamisSetActuralChart(pricingDate, crudeNameArray);
+                    /*刷新油种显示*/
+                    $(".cg-xzyz-l").find("input:not(:checked)").each(function () {
+                        oils.push($(this).val());
+                    });
+                    refreshActualOils(oils, crudeNameArray.length);
+                }
+            });
+        });
+    }
+
+    /**
+     * 官价油种弹出层
+     * @param oilsList
+     * @param pricingDate
+     */
+    function popupOfficialOils(oilsList) {
+        var pricingDate = $("#officialYear").children("em").text();
+        var content = getPopupContent($("#officialOils"), oilsList);
+
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            var curIndex = layer.open({
+                title: 'Choose',
+                shade: false,
+                area: ['800px', '510px'],
+                content: $(content).html(),
+                btn: ["Confirm"],
+                yes: function (index, layero) {
+
+                    var crudeNameArray = new Array();
+                    var oils = new Array();
+                    $(".cg-xzyz-l").find("input:checked").each(function () {
+                        crudeNameArray.push($(this).val());
+                        oils.push($(this).val());
+                    });
+                    layer.close(index);
+                    /*刷新图表数据*/
+                    dynamisSetOfficialChart(pricingDate, crudeNameArray);
+                    /*刷新油种显示*/
+                    $(".cg-xzyz-l").find("input:not(:checked)").each(function () {
+                        oils.push($(this).val());
+                    });
+                    refreshOfficialOils(oils, crudeNameArray.length);
+                }
+            });
+        });
+    }
+
+
+    function getPopupContent(elem, oilsList) {
+        var homePageChk = [];
+        $(elem).find("input:checked").each(function () {
+            homePageChk.push($(this).val());
+        });
+
+        var content = "<div class='cg-bwdk'><ul class='cg-sc-xz cg-xzyz-l clearfix' >";
+        for (var i=0; i<oilsList.length; i++) {
+
+            if (-1 < $.inArray(oilsList[i], homePageChk))
+                content += "<li><input type='checkbox' class='c-check' onclick='selectedNumChk(this)' checked value='"+oilsList[i]+"'>"+oilsList[i]+"</li>";
+            else
+                content += "<li><input type='checkbox' class='c-check' onclick='selectedNumChk(this)' value='"+oilsList[i]+"'>"+oilsList[i]+"</li>";
+
+
+        }
+        content += "</ul></div>";
+
+        return content;
+    }
+
+    /**
+     * 弹出层油种选择数量验证
+     * @param elem
+     * @returns {boolean}
+     */
+    function selectedNumChk(elem) {
+        var chkedNums = $(elem).parent("li").parent("ul").find("input:checked").length;
+        if (3 < chkedNums) {
+            $(elem).prop("checked", false);
+            //alert("At most 3 oil types can be selected!");
+            layer.alert("At most 3 oil types can be selected!", {title:"Notice", btn: "OK"});
+        } else if (chkedNums == 0) {
+            $(elem).prop("checked", true);
+            //alert("At least 1 oil type shall be selected!");
+            layer.alert("At least 1 oil type shall be selected!", {title:"Notice", btn: "OK"});
+        }
+        return false;
+
+    }
+
+    function dynamisSetActuralChart(pricingDate, crudeNameArray) {
+
+        var url = "$infoServer.get('/front/agioPoint.json')";
+//        url = "http://info8.1chemic.com/front/agioPoint.json";
+        var param = {pricingDate:pricingDate, crudeNameArray:crudeNameArray};
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            data: JSON.stringify(param),
+            success: function (result) {
+                actualsTrendChart.hideLoading();
+                if (result.status == 0) {
+                    refreshCharts(result.datas, actualsTrendChart);
+                }
+            }
+        });
+
+    }
+
+    function dynamisSetOfficialChart(pricingDate, crudeNameArray) {
+
+        var url = "$infoServer.get('/front/officalPoint.json')";
+//        url = "http://info8.1chemic.com/front/officalPoint.json";
+        var param = {pricingDate:pricingDate, crudeNameArray:crudeNameArray};
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            data: JSON.stringify(param),
+            success: function (result) {
+                officialTrendChart.hideLoading();
+                if (result.status == 0) {
+                    refreshCharts(result.datas, officialTrendChart);
+                }
+            }
+        })
+    }
+    
+    
+    function refreshCharts(list, chart) {
+        var legendArr = [];
+        var xArray = [];
+        var seriesArr = [];
+
+        if (list && 0 < list.length) {
+            for (var i=0; i<list.length; i++) {
+                legendArr.push(list[i].crudeNameE);
+                var dataList = list[i].dataList;
+                var dArr = [];
+                if(dataList != null){
+                    for (var j=0; j<dataList.length; j++) {
+                        dArr.push(dataList[j].pricing);
+                        if($.inArray(dataList[j].pricingDate, xArray) == -1) {
+                            xArray.push(dataList[j].pricingDate);
+                        }
+
+                    }
+                }
+                seriesArr.push(dArr);
+            }
+        }
+
+        if (3 == seriesArr.length) {
+            chart.setOption({
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitArea : {show : true}
+                },
+                series : [{
+                    name : legendArr[0],
+                    data : seriesArr[0],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: 'red',
+                            color: 'red'
+                        }
+                    }
+                },{
+                    name : legendArr[1],
+                    data : seriesArr[1],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: 'blue',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: 'blue',
+                            color: 'blue'
+                        }
+                    }
+                },{
+                    name : legendArr[2],
+                    data : seriesArr[2],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: '#EFB15A',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: '#EFB15A',
+                            color: '#EFB15A'
+                        }
+                    }
+                }]
+            }, true);
+        } else if (2 == seriesArr.length) {
+            chart.setOption({
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitArea : {show : true}
+                },
+                series : [{
+                    name : legendArr[0],
+                    data : seriesArr[0],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: 'red',
+                            color: 'red'
+                        }
+                    }
+                },{
+                    name : legendArr[1],
+                    data : seriesArr[1],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: 'blue',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: 'blue',
+                            color: 'blue'
+                        }
+                    }
+                }]
+            }, true);
+        } else {
+            chart.setOption({
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitArea : {show : true}
+                },
+                series: [{
+                    name: legendArr[0],
+                    data: seriesArr[0],
+                    type: 'line',
+                    smooth: true,
+                    symbolSize: 6,
+                    lineStyle: {
+                        normal: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 1,
+                            borderColor: 'red',
+                            color: 'red'
+                        }
+                    }
+                }]
+            }, true);
+        }
+    }
+    
+</script>

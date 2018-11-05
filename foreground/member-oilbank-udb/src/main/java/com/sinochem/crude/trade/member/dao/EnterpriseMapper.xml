@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.EnterpriseMapper">
+    <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.Enterprise">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="full_name" property="fullName" jdbcType="VARCHAR"/>
+        <result column="english_name" property="englishName" jdbcType="VARCHAR"/>
+        <result column="abb_english_name" property="abbEnglishName" jdbcType="VARCHAR"/>
+        <result column="organization_code" property="organizationCode" jdbcType="VARCHAR"/>
+        <result column="license_no" property="licenseNo" jdbcType="VARCHAR"/>
+        <result column="tax_code" property="taxCode" jdbcType="VARCHAR"/>
+        <result column="del_flg" property="delFlg" jdbcType="CHAR"/>
+        <result column="org_code_cert" property="orgCodeCert" jdbcType="VARCHAR"/>
+        <result column="tax_reg_cert" property="taxRegCert" jdbcType="VARCHAR"/>
+        <result column="business_license_cert" property="businessLicenseCert" jdbcType="VARCHAR"/>
+        <result column="social_credit_cert" property="socialCreditCert" jdbcType="VARCHAR"/>
+        <result column="ep_logo" property="epLogo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="tax_no" property="taxNo" jdbcType="VARCHAR"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="description" property="description" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberId" jdbcType="BIGINT"/>
+
+        <result column="ep_type" property="epType" jdbcType="INTEGER"/>
+        <result column="scope" property="scope" jdbcType="VARCHAR"/>
+        <result column="use_social_credit_cert" property="useSocialCreditCert" jdbcType="BIT"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="register_cert" property="registerCert" jdbcType="VARCHAR"/>
+        <result column="bank_cert" property="bankCert" jdbcType="VARCHAR"/>
+        <result column="bank_cert_type" property="bankCertType" jdbcType="INTEGER"/>
+        <result column="social_credit_code" property="socialCreditCode" jdbcType="VARCHAR"/>
+        <result column="default_language" property="defaultLanguage" jdbcType="VARCHAR"/>
+        <result column="udb_uuid" property="udbUuid" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.sinochem.crude.trade.member.domain.Enterprise" extends="BaseResultMap">
+        <result column="description" property="description" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, code, name, full_name, english_name,abb_english_name, logo, legal_name, legal_certificate_type,
+    legal_certificate_code, tel, fax, email, website, organization_code, business_license_code, 
+    tax_code, credit_code, organization_file, business_license_file, tax_file, credit_file, 
+    register_time, register_fund, main_products, country_code, province_code, city_code, 
+    area_code, address_detail, post_code, register_resource, is_can_buy, is_can_sell, 
+    frozzen_status, contact_name, contact_mobile, tax_man_type, tax_man_file, billing_bank_name, 
+    billing_bank_account, is_active, del_flg, org_code_cert, tax_reg_cert, business_license_cert,
+    social_credit_cert, ep_logo, create_time, create_user, update_time,
+    update_user,      ep_type, scope, use_social_credit_cert, country, country_code, register_cert, bank_cert, bank_cert_type, social_credit_code,default_language
+
+  </sql>
+
+
+
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+     select id,code,name,full_name, english_name,abb_english_name, organization_code,license_no,tax_code,del_flg,
+     org_code_cert, tax_reg_cert, business_license_cert, social_credit_cert, ep_logo, create_time,create_user,      ep_type, scope, use_social_credit_cert, country, country_code, register_cert, bank_cert, bank_cert_type, social_credit_code,
+
+       tax_no,update_user,description,udb_uuid from  enterprises
+    where  id = #{id,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from enterprises
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into enterprises (code,
+        name,
+        full_name,
+        english_name,
+        abb_english_name,
+        organization_code,
+        license_No,
+        tax_Code,
+        create_user,
+        tax_No,
+        update_user,
+        del_flg,
+        org_code_cert,
+        tax_reg_cert,
+        business_license_cert,
+        social_credit_cert,
+        default_language,
+        ep_logo,
+        description,
+        create_time,
+        update_time,
+        register_time,
+        member_id,
+        ep_type, scope,
+        use_social_credit_cert,
+        country,
+        country_code,
+        register_cert,
+        bank_cert,
+        bank_cert_type,
+        social_credit_code,
+        udb_uuid
+        )
+        values (#{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{fullName,jdbcType=VARCHAR},
+        #{englishName,jdbcType=VARCHAR},
+        #{abbEnglishName,jdbcType=VARCHAR},
+        #{organizationCode,jdbcType=CHAR},
+        #{licenseNo,jdbcType=CHAR},
+        #{taxCode,jdbcType=CHAR},
+        #{createUser,jdbcType=VARCHAR},
+        #{taxNo,jdbcType=BIGINT},
+        #{updateUser,jdbcType=VARCHAR},
+        #{delFlg,jdbcType=CHAR},
+        #{orgCodeCert,jdbcType=VARCHAR},
+        #{taxRegCert,jdbcType=VARCHAR},
+        #{businessLicenseCert,jdbcType=VARCHAR},
+        #{socialCreditCert,jdbcType=VARCHAR},
+        #{defaultLanguage,jdbcType=VARCHAR},
+        #{epLogo,jdbcType=VARCHAR},
+        #{description,jdbcType=LONGVARCHAR},
+        now(),
+        now(),
+        now(),
+        #{memberId,jdbcType=BIGINT},
+        #{epType,jdbcType=INTEGER},
+        #{scope,jdbcType=VARCHAR},
+        #{useSocialCreditCert,jdbcType=BIT},
+        #{country,jdbcType=VARCHAR},
+        #{countryCode,jdbcType=VARCHAR},
+        #{registerCert,jdbcType=VARCHAR},
+        #{bankCert,jdbcType=VARCHAR},
+        #{bankCertType,jdbcType=INTEGER},
+        #{socialCreditCode,jdbcType=VARCHAR},
+        #{udbUuid,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into enterprises
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="fullName != null">
+                full_name,
+            </if>
+            <if test="englishName != null">
+                english_name,
+            </if>
+            <if test="abbEnglishName != null">
+                abb_english_name,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="legalName != null">
+                legal_name,
+            </if>
+            <if test="legalCertificateType != null">
+                legal_certificate_type,
+            </if>
+            <if test="legalCertificateCode != null">
+                legal_certificate_code,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="website != null">
+                website,
+            </if>
+            <if test="organizationCode != null">
+                organization_code,
+            </if>
+            <if test="businessLicenseCode != null">
+                business_license_code,
+            </if>
+            <if test="taxCode != null">
+                tax_code,
+            </if>
+            <if test="creditCode != null">
+                credit_code,
+            </if>
+            <if test="organizationFile != null">
+                organization_file,
+            </if>
+            <if test="businessLicenseFile != null">
+                business_license_file,
+            </if>
+            <if test="taxFile != null">
+                tax_file,
+            </if>
+            <if test="creditFile != null">
+                credit_file,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="registerFund != null">
+                register_fund,
+            </if>
+            <if test="mainProducts != null">
+                main_products,
+            </if>
+            <if test="countryCode != null">
+                country_code,
+            </if>
+            <if test="provinceCode != null">
+                province_code,
+            </if>
+            <if test="cityCode != null">
+                city_code,
+            </if>
+            <if test="areaCode != null">
+                area_code,
+            </if>
+            <if test="addressDetail != null">
+                address_detail,
+            </if>
+            <if test="postCode != null">
+                post_code,
+            </if>
+            <if test="registerResource != null">
+                register_resource,
+            </if>
+            <if test="isCanBuy != null">
+                is_can_buy,
+            </if>
+            <if test="isCanSell != null">
+                is_can_sell,
+            </if>
+            <if test="frozzenStatus != null">
+                frozzen_status,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile,
+            </if>
+            <if test="taxManType != null">
+                tax_man_type,
+            </if>
+            <if test="taxManFile != null">
+                tax_man_file,
+            </if>
+            <if test="billingBankName != null">
+                billing_bank_name,
+            </if>
+            <if test="billingBankAccount != null">
+                billing_bank_account,
+            </if>
+            <if test="isActive != null">
+                is_active,
+            </if>
+            <if test="delFlg != null">
+                del_flg,
+            </if>
+            <if test="orgCodeCert != null">
+                org_code_cert,
+            </if>
+            <if test="taxRegCert != null">
+                tax_reg_cert,
+            </if>
+            <if test="businessLicenseCert != null">
+                business_license_cert,
+            </if>
+            <if test="socialCreditCert != null">
+                social_credit_cert,
+            </if>
+            <if test="epLogo != null">
+                ep_logo,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="defaultLanguage != null">
+                default_language,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="englishName != null">
+                #{englishName,jdbcType=VARCHAR},
+            </if>
+            <if test="abbEnglishName != null">
+                #{abbEnglishName,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null">
+                #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalCertificateType != null">
+                #{legalCertificateType,jdbcType=CHAR},
+            </if>
+            <if test="legalCertificateCode != null">
+                #{legalCertificateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="website != null">
+                #{website,jdbcType=VARCHAR},
+            </if>
+            <if test="organizationCode != null">
+                #{organizationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseCode != null">
+                #{businessLicenseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="taxCode != null">
+                #{taxCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creditCode != null">
+                #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="organizationFile != null">
+                #{organizationFile,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseFile != null">
+                #{businessLicenseFile,jdbcType=VARCHAR},
+            </if>
+            <if test="taxFile != null">
+                #{taxFile,jdbcType=VARCHAR},
+            </if>
+            <if test="creditFile != null">
+                #{creditFile,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerFund != null">
+                #{registerFund,jdbcType=DECIMAL},
+            </if>
+            <if test="mainProducts != null">
+                #{mainProducts,jdbcType=VARCHAR},
+            </if>
+            <if test="countryCode != null">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceCode != null">
+                #{provinceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cityCode != null">
+                #{cityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="addressDetail != null">
+                #{addressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="postCode != null">
+                #{postCode,jdbcType=VARCHAR},
+            </if>
+            <if test="registerResource != null">
+                #{registerResource,jdbcType=CHAR},
+            </if>
+            <if test="isCanBuy != null">
+                #{isCanBuy,jdbcType=CHAR},
+            </if>
+            <if test="isCanSell != null">
+                #{isCanSell,jdbcType=CHAR},
+            </if>
+            <if test="frozzenStatus != null">
+                #{frozzenStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="taxManType != null">
+                #{taxManType,jdbcType=CHAR},
+            </if>
+            <if test="taxManFile != null">
+                #{taxManFile,jdbcType=VARCHAR},
+            </if>
+            <if test="billingBankName != null">
+                #{billingBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="billingBankAccount != null">
+                #{billingBankAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                #{isActive,jdbcType=CHAR},
+            </if>
+            <if test="delFlg != null">
+                #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="orgCodeCert != null">
+                #{orgCodeCert,jdbcType=VARCHAR},
+            </if>
+            <if test="taxRegCert != null">
+                #{taxRegCert,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseCert != null">
+                #{businessLicenseCert,jdbcType=VARCHAR},
+            </if>
+            <if test="socialCreditCert != null">
+                #{socialCreditCert,jdbcType=VARCHAR},
+            </if>
+            <if test="epLogo != null">
+                #{epLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="defaultLanguage != null">
+                #{defaultLanguage}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+        update enterprises
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                full_name = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="englishName != null">
+                english_name = #{englishName,jdbcType=VARCHAR},
+            </if>
+            <if test="abbEnglishName != null">
+                abb_english_name = #{abbEnglishName,jdbcType=VARCHAR},
+            </if>
+            <if test="organizationCode != null">
+                organization_code = #{organizationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="licenseNo != null">
+                license_no = #{licenseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="taxCode != null">
+                tax_code = #{taxCode,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlg != null">
+                del_flg = #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="taxNo != null">
+                tax_no = #{taxNo,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="orgCodeCert != null">
+                org_code_cert = #{orgCodeCert,jdbcType=VARCHAR},
+            </if>
+            <if test="taxRegCert != null">
+                tax_reg_cert = #{taxRegCert,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseCert != null">
+                business_license_cert = #{businessLicenseCert,jdbcType=VARCHAR},
+            </if>
+            <if test="socialCreditCert != null">
+                social_credit_cert = #{socialCreditCert,jdbcType=VARCHAR},
+            </if>
+            <if test="epLogo != null">
+                ep_logo = #{epLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="epType != null">
+                ep_type = #{epType,jdbcType=INTEGER},
+            </if>
+            <if test="scope != null">
+                scope = #{scope,jdbcType=VARCHAR},
+            </if>
+            <if test="useSocialCreditCert != null">
+                use_social_credit_cert = #{useSocialCreditCert,jdbcType=BIT},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="countryCode != null">
+                country_code = #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="registerCert != null">
+                register_cert = #{registerCert,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCert != null">
+                bank_cert = #{bankCert,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCertType != null">
+                bank_cert_type = #{bankCertType,jdbcType=INTEGER},
+            </if>
+            <if test="socialCreditCode != null">
+                social_credit_code = #{socialCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="defaultLanguage != null">
+                default_language = #{defaultLanguage}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+    update enterprises
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      abb_english_name = #{abbEnglishName,jdbcType=VARCHAR},
+      legal_name = #{legalName,jdbcType=VARCHAR},
+      legal_certificate_type = #{legalCertificateType,jdbcType=CHAR},
+      legal_certificate_code = #{legalCertificateCode,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      organization_code = #{organizationCode,jdbcType=VARCHAR},
+      business_license_code = #{businessLicenseCode,jdbcType=VARCHAR},
+      tax_code = #{taxCode,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      organization_file = #{organizationFile,jdbcType=VARCHAR},
+      business_license_file = #{businessLicenseFile,jdbcType=VARCHAR},
+      tax_file = #{taxFile,jdbcType=VARCHAR},
+      credit_file = #{creditFile,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      register_fund = #{registerFund,jdbcType=DECIMAL},
+      main_products = #{mainProducts,jdbcType=VARCHAR},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      register_resource = #{registerResource,jdbcType=CHAR},
+      is_can_buy = #{isCanBuy,jdbcType=CHAR},
+      is_can_sell = #{isCanSell,jdbcType=CHAR},
+      frozzen_status = #{frozzenStatus,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+      tax_man_type = #{taxManType,jdbcType=CHAR},
+      tax_man_file = #{taxManFile,jdbcType=VARCHAR},
+      billing_bank_name = #{billingBankName,jdbcType=VARCHAR},
+      billing_bank_account = #{billingBankAccount,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      org_code_cert = #{orgCodeCert,jdbcType=VARCHAR},
+      tax_reg_cert = #{taxRegCert,jdbcType=VARCHAR},
+      business_license_cert = #{businessLicenseCert,jdbcType=VARCHAR},
+      social_credit_cert = #{socialCreditCert,jdbcType=VARCHAR},
+      ep_logo = #{epLogo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+    update enterprises
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      abb_english_name = #{abbEnglishName,jdbcType=VARCHAR},
+    organization_code = #{organizationCode,jdbcType=VARCHAR},
+    license_no = #{licenseNo,jdbcType=VARCHAR},
+    tax_code = #{taxCode,jdbcType=VARCHAR},
+    create_user = #{createUser,jdbcType=VARCHAR},
+    scope = #{scope,jdbcType=VARCHAR},
+    social_credit_code = #{socialCreditCode,jdbcType=VARCHAR},
+    tax_no = #{taxNo,jdbcType=VARCHAR},
+     del_flg = #{delFlg,jdbcType=VARCHAR},
+     org_code_cert = #{orgCodeCert,jdbcType=VARCHAR},
+      tax_reg_cert = #{taxRegCert,jdbcType=VARCHAR},
+      business_license_cert = #{businessLicenseCert,jdbcType=VARCHAR},
+      social_credit_cert = #{socialCreditCert,jdbcType=VARCHAR},
+      ep_logo = #{epLogo,jdbcType=VARCHAR},
+      ep_type = #{epType,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+      register_cert = #{registerCert,jdbcType=LONGVARCHAR},
+      bank_cert = #{bankCert,jdbcType=VARCHAR},
+      use_social_credit_cert = #{useSocialCreditCert,jdbcType=BIT},
+      default_language = #{defaultLanguage,jdbcType=VARCHAR},
+       create_time=now(),
+     update_time=now()
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--后台企业列表查询  -->
+    <select id="selectEnter" resultMap="BaseResultMap"
+            parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+	SELECT
+		id,
+		CODE,
+		NAME,
+		full_name, english_name,abb_english_name,
+		organization_code,
+		license_no,
+		tax_code,
+		del_flg,
+		org_code_cert,
+        tax_reg_cert,
+        business_license_cert,
+        social_credit_cert,
+        ep_logo,
+		create_time,
+		create_user,
+		tax_no,
+		update_user,
+		description
+	FROM
+		enterprises
+	</select>   <!--后台企业列表查询  -->
+    <select id="selectByMemberId" resultMap="BaseResultMap">
+	SELECT
+		id,
+		CODE,
+		NAME,
+		full_name, english_name,abb_english_name,
+		organization_code,
+		license_no,
+		tax_code,
+		del_flg,
+		org_code_cert,
+        tax_reg_cert,
+        business_license_cert,
+        social_credit_cert,
+        ep_logo,
+		create_time,
+		create_user,
+		tax_no,
+		update_user,
+		description
+	FROM
+		enterprises
+	</select>
+
+    <!--前台企业列表接口 -->
+    <select id="selectByNameLike" resultMap="BaseResultMap">
+	SELECT
+		id,
+		CODE,
+		NAME,
+		full_name, english_name,abb_english_name,
+		organization_code,
+		license_no,
+		tax_code,
+		del_flg,
+		org_code_cert,
+        tax_reg_cert,
+        business_license_cert,
+        social_credit_cert,
+        ep_logo,
+		create_time,
+		create_user,
+		tax_no,
+		update_user,
+		description,
+		member_id
+	FROM
+		enterprises
+	WHERE
+		NAME LIKE #{name} 
+		
+	</select>
+
+    <!--前台企业详情查询 -->
+    <select id="enterpersiceDetail" resultMap="BaseResultMap"
+            parameterType="com.sinochem.crude.trade.member.domain.Enterprise">
+	SELECT
+		 id,
+      code,
+      name,
+      full_name,
+      english_name,
+      abb_english_name,
+      organization_code,
+      license_no,
+      tax_code,
+      del_flg,
+      create_time,
+      create_user,
+      tax_no,
+      register_time,
+      update_time,
+      update_user,
+      description,
+      member_id,
+      org_code_cert,
+      tax_reg_cert,
+      business_license_cert,
+      social_credit_cert,
+      ep_logo,
+      ep_type,
+      scope,
+      use_social_credit_cert,
+      country,
+      country_code,
+      register_cert,
+      bank_cert,
+      bank_cert_type,
+      social_credit_code,
+      default_language
+	FROM
+		enterprises
+	WHERE
+		member_id = #{memberId,jdbcType=BIGINT} 
+		ORDER BY create_time DESC limit 0, 1
+	</select>
+    <!--//根据前台id回显所需数据  -->
+    <select id="enterpriseById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select 
+			 id
+			 ,code
+			 ,name
+			 ,full_name
+			 ,english_name
+			 ,abb_english_name
+			 ,organization_code
+			 ,license_no
+			 ,tax_code
+			 ,del_flg
+			 ,create_time
+			 ,create_user
+			 ,tax_no
+			 ,register_time
+			 ,update_time
+			 ,update_user
+			 ,description
+			 ,member_id
+			 ,org_code_cert
+			 ,tax_reg_cert
+			 ,business_license_cert
+			 ,social_credit_cert
+			 ,ep_logo
+			 ,ep_type
+			 ,scope
+			 ,use_social_credit_cert
+			 ,country
+			 ,country_code
+			 ,register_cert
+			 ,bank_cert
+			 ,bank_cert_type
+			 ,social_credit_code
+			 ,default_language
+		from
+			enterprises
+		where 
+			id = #{id,jdbcType=BIGINT}
+  </select>
+    <!--//根据前台id回显所需数据  -->
+    <select id="getByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id,code,name,full_name, english_name,abb_english_name,organization_code,license_no,tax_code,del_flg,
+      org_code_cert, tax_reg_cert, business_license_cert, social_credit_cert, ep_logo,
+      social_credit_code,bank_cert_type,bank_cert,register_cert,country_code,country,use_social_credit_cert,scope,ep_type,
+      create_time,create_user,tax_no,update_user,description ,default_language,udb_uuid from  enterprises
+    where member_id = #{memberId,jdbcType=BIGINT} ORDER BY create_time DESC limit 0, 1
+  </select>
+
+
+    <resultMap id="EnterpriseDetailMap" extends="BaseResultMap"
+               type="com.sinochem.crude.trade.member.model.EnterpriseDetail">
+
+        <collection property="credentialsList" resultMap="MemberCredentialsMap">
+
+
+        </collection>
+    </resultMap>
+    <resultMap id="MemberCredentialsMap" type="com.sinochem.crude.trade.member.domain.MemberCredentials">
+        <result column="credentials_code" property="credentialsCode" jdbcType="VARCHAR"/>
+        <result column="credentials_id" property="id" jdbcType="BIGINT"/>
+    </resultMap>
+    <select id="selectAllDetail" resultMap="EnterpriseDetailMap" parameterType="java.lang.Long">
+ SELECT
+	e.id,
+	e. NAME,
+	e.full_name, english_name,abb_english_name,
+	e.organization_code,
+	e.license_no,
+	e.tax_code,
+	e.del_flg,
+	e.create_time,
+	e.create_user,
+	e.tax_no,
+	e.update_user,
+	e.description,
+	e.member_id
+FROM
+	enterprises e
+left join members b on e.member_id=b.id and b.disable = '0' and b.del_flg='0'
+  </select>
+    <select id="selectByCredentials" resultMap="EnterpriseDetailMap" parameterType="java.lang.String">
+    SELECT
+    e.id,
+    e. NAME,
+    e.full_name, english_name,abb_english_name,
+    e.organization_code,
+    e.license_no,
+    e.tax_code,
+    e.del_flg,
+    e.create_time,
+    e.create_user,
+    e.tax_no,
+    e.update_user,
+    e.description,
+    e.member_id,
+    mc.id AS credentials_id,
+    mc.credentials_code
+    FROM
+    enterprises e ,member_credentials mc
+    WHERE e.member_id = mc.member_id AND mc.credentials_code=#{code,jdbcType=VARCHAR} AND mc.audit= '1'
+  </select>
+
+
+    <resultMap id="enterpriseCurdeResultMap" extends="BaseResultMap"
+               type="com.sinochem.crude.trade.member.domain.Enterprise">
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <association property="crude" resultMap="crudeResult"
+                     javaType="com.sinochem.crude.trade.member.domain.EnterpriseCrude"/>
+        <association property="contact" resultMap="contactResult"
+                     javaType="com.sinochem.crude.trade.member.domain.EnterpriseContact"/>
+    </resultMap>
+    <resultMap id="contactResult" type="com.sinochem.crude.trade.member.domain.EnterpriseContact">
+        <result column="mail" property="mail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="crudeResult" type="com.sinochem.crude.trade.member.domain.EnterpriseCrude">
+        <id column="c_id" property="id" jdbcType="BIGINT"/>
+        <result column="c_enterprise_id" property="enterpriseId" jdbcType="BIGINT"/>
+        <result column="c_member_id" property="memberId" jdbcType="BIGINT"/>
+        <result column="c_legal_name" property="legalName" jdbcType="VARCHAR"/>
+        <result column="c_legal_certificate_type" property="legalCertificateType" jdbcType="CHAR"/>
+        <result column="c_legal_certificate_code" property="legalCertificateCode" jdbcType="VARCHAR"/>
+        <result column="c_tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="c_fax" property="fax" jdbcType="VARCHAR"/>
+        <result column="c_email" property="email" jdbcType="VARCHAR"/>
+        <result column="c_website" property="website" jdbcType="VARCHAR"/>
+        <result column="c_register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="c_register_fund" property="registerFund" jdbcType="DECIMAL"/>
+        <result column="c_main_products" property="mainProducts" jdbcType="VARCHAR"/>
+        <result column="c_country_code" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="c_province_code" property="provinceCode" jdbcType="VARCHAR"/>
+        <result column="c_city_code" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="c_area_code" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="c_address_detail" property="addressDetail" jdbcType="VARCHAR"/>
+        <result column="c_post_code" property="postCode" jdbcType="VARCHAR"/>
+        <result column="c_register_resource" property="registerResource" jdbcType="CHAR"/>
+        <result column="c_contact_name" property="contactName" jdbcType="VARCHAR"/>
+        <result column="c_contact_mobile" property="contactMobile" jdbcType="VARCHAR"/>
+        <result column="c_tax_man_type" property="taxManType" jdbcType="CHAR"/>
+        <result column="c_tax_man_file" property="taxManFile" jdbcType="VARCHAR"/>
+        <result column="c_billing_bank_name" property="billingBankName" jdbcType="VARCHAR"/>
+        <result column="c_billing_bank_account" property="billingBankAccount" jdbcType="VARCHAR"/>
+        <result column="c_del_flg" property="delFlg" jdbcType="CHAR"/>
+        <result column="c_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="c_create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="c_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="c_update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="c_description" property="description" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Enterprise_Column_List">
+    A.id, A.CODE, A.NAME, A.full_name, A.english_name, A.abb_english_name, A.organization_code, A.license_no,
+    A.tax_code, A.del_flg, A.create_time, A.create_user, A.tax_no, A.update_user, A.description, A.register_time,A.ep_type
+  </sql>
+    <sql id="Crude_Column_List">
+    B.id c_id, B.enterprise_id c_enterprise_id, B.member_id c_member_id, B.legal_name c_legal_name,
+    B.legal_certificate_type c_legal_certificate_type, B.legal_certificate_code c_legal_certificate_code,
+    B.tel c_tel, B.fax c_fax, B.email, B.website c_website, B.register_time c_register_time,
+    B.register_fund c_register_fund, B.main_products c_main_products, B.country_code c_country_code,
+    B.province_code c_province_code, B.city_code c_city_code, B.area_code c_area_code, B.address_detail c_address_detail,
+    B.post_code c_post_code, B.register_resource c_register_resource, B.contact_name c_contact_name,
+    B.contact_mobile c_contact_mobile, B.tax_man_type c_tax_man_type, B.tax_man_file c_tax_man_file,
+    B.billing_bank_name c_billing_bank_name, B.billing_bank_account c_billing_bank_account, B.description c_description
+  </sql>
+
+    <select id="selectWithCrude" resultMap="enterpriseCurdeResultMap">
+        SELECT<include refid="Enterprise_Column_List"/>,C.id as member_id, C.email,C.user_name
+        FROM members C
+        LEFT JOIN enterprises A ON C.id = A.member_id
+        <if test="credentialsCode != '' and credentialsCode != null">
+            LEFT JOIN member_credentials D on a.member_id = D.member_id AND D.audit = '1'
+        </if>
+        <include refid="dynamicWhere"/>
+        <if test="email != '' and email != null">
+            and C.email like concat('%',#{email}, '%')
+        </if>
+        <if test="credentialsCode != '' and credentialsCode != null">
+            and D.credentials_code = #{credentialsCode}
+        </if>
+        and EXISTS (SELECT * FROM `member_tags` t WHERE C.id = t.`member_id` AND t.`owner` = 'reg' AND t.`code` = 1)
+        ORDER BY C.create_time DESC
+    </select>
+
+    <select id="selectAllDetailByName" resultMap="EnterpriseDetailMap" parameterType="java.lang.String">
+        SELECT
+        e.id,
+        e.NAME,
+        e.full_name, english_name,abb_english_name,
+        e.organization_code,
+        e.license_no,
+        e.tax_code,
+        e.del_flg,
+        e.create_time,
+        e.create_user,
+        e.tax_no,
+        e.update_user,
+        e.description,
+        e.member_id,
+        mc.id AS credentials_id,
+        mc.credentials_code
+        FROM
+        enterprises e
+        LEFT JOIN member_credentials mc ON e.member_id = mc.member_id
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                e.full_name like CONCAT(CONCAT('%',#{epname}),'%')
+            </if>
+        </where>
+    </select>
+
+    <sql id="dynamicWhere">
+        <where>
+            1=1
+            <if test="id != null">
+                and A.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="idNot != null">
+                and A.id != #{idNot,jdbcType=BIGINT}
+            </if>
+            <if test="memberId != null">
+                and A.member_id = #{memberId,jdbcType=BIGINT}
+            </if>
+            <if test="code != null">
+                and A.code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and A.`name` = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="nameNotNull != null">
+                and A.`name` is not null
+            </if>
+            <if test="nameLike!=null and nameLike != ''">
+                AND (
+                A.`name` like concat('%', #{nameLike}, '%') OR A.full_name like concat('%', #{nameLike}, '%')
+                OR A.english_name like concat('%', #{nameLike}, '%') OR A.abb_english_name like concat('%', #{nameLike},
+                '%')
+                )
+            </if>
+            <if test="fullName != null">
+                and A.full_name = #{fullName,jdbcType=VARCHAR}
+            </if>
+            <if test="englishName != null">
+                and A.english_name = #{englishName,jdbcType=VARCHAR}
+            </if>
+            <if test="abbEnglishName != null">
+                and A.abb_english_name = #{abbEnglishName,jdbcType=VARCHAR}
+            </if>
+            <if test="organizationCode != null">
+                and A.organization_code = #{organizationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="licenseNo != null">
+                and A.license_no = #{licenseNo,jdbcType=VARCHAR}
+            </if>
+            <if test="taxCode != null">
+                and A.tax_code = #{taxCode,jdbcType=VARCHAR}
+            </if>
+            <if test="taxNo != null">
+                and A.tax_no = #{taxNo,jdbcType=VARCHAR}
+            </if>
+            <if test="delFlg != null">
+                and A.del_flg = #{delFlg,jdbcType=CHAR}
+            </if>
+            <if test="orgCodeCert != null">
+                and A.org_code_cert = #{orgCodeCert,jdbcType=VARCHAR}
+            </if>
+            <if test="taxRegCert != null">
+                and A.tax_reg_cert = #{taxRegCert,jdbcType=VARCHAR}
+            </if>
+            <if test="businessLicenseCert != null">
+                and A.business_license_cert = #{businessLicenseCert,jdbcType=VARCHAR}
+            </if>
+            <if test="socialCreditCert != null">
+                and A.social_credit_cert = #{socialCreditCert,jdbcType=VARCHAR}
+            </if>
+            <if test="epLogo != null">
+                and A.ep_logo = #{epLogo,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and A.create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createUser != null">
+                and A.create_user = #{createUser,jdbcType=BIGINT}
+            </if>
+            <if test="updateTime != null">
+                and A.update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateUser != null">
+                and A.update_user = #{updateUser,jdbcType=BIGINT}
+            </if>
+            <if test="description != null">
+                and A.description = #{description,jdbcType=LONGVARCHAR}
+            </if>
+            <if test="registerTime != null">
+                and A.register_time = #{registerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="socialCreditCode != null">
+                and social_credit_code = #{socialCreditCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" resultType="int" parameterType="com.sinochem.crude.trade.member.domain.query.EnterpriseQuery">
+        select count(A.id) from enterprises A
+        <include refid="dynamicWhere"></include>
+    </select>
+
+    <resultMap id="enterpriseQueryResultMap" extends="BaseResultMap"
+               type="com.sinochem.crude.trade.member.domain.query.EnterpriseQuery">
+        <result column="m_mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="m_email" property="email" jdbcType="VARCHAR"/>
+        <result column="address_detail" property="addressDetail" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectWithInfoByMemberId" resultMap="enterpriseQueryResultMap" parameterType="java.lang.Long">
+    select A.*,
+        B.mobile m_mobile, B.email m_email,C.address_detail
+      from enterprises A
+    left join members B on A.member_id=B.id
+    left join enterprises_crude C on C.enterprise_id=A.id
+    where A.member_id = #{memberId,jdbcType=BIGINT}
+    order by A.register_time desc,A.create_time desc
+    limit 1
+  </select>
+
+    <!--根据公司名称集合查询公司信息列表  去重-->
+    <select id="queryEnterpriseVoList" resultMap="BaseResultMap">
+        SELECT
+        DISTINCT(e.id),
+        e.name,
+        e.full_name, english_name,abb_english_name,
+        e.organization_code,
+        e.license_no,
+        e.tax_code,
+        e.del_flg,
+        e.create_time,
+        e.create_user,
+        e.tax_no,
+        e.update_user,
+        e.description,
+        e.member_id
+        from enterprises e where e.`name` IN
+        <foreach collection="list" item="enterpriseName" separator="," open="(" close=")">
+            #{enterpriseName}
+        </foreach>
+    </select>
+
+
+</mapper>

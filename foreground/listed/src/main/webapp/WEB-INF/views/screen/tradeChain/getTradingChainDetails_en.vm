@@ -1,0 +1,461 @@
+#set($a = "个人中心-买原油网")
+
+    <!-- 内容区域 -->
+
+        <div class="s-mod">
+            <div class="s-order-box">
+                <div class="clearfix s-order-tit"><h1>Trade Chain Management</h1><span>NO.：$!{tradingChainDetailVO.tradingChain.serialNumber}</span><span>Post Time：$!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss',$!{tradingChainDetailVO.tradingChain.startTime})</span></div>
+                <p class="s-order-jbx"></p>
+                <div class="s-myl-ztblo">
+                    <ul class="clearfix">
+                        <li><span class="s-myl-zt1"><i class="s-myl-ywc"></i></span><span class="s-myl-zt2">Published</span></li>
+                        <li><span class="s-myl-zt1"><i class="s-myl-ywc"></i></span><span class="s-myl-zt2">Pending</span></li>
+                        <li><span class="s-myl-zt1"><i class="s-myl-ywc"></i></span><span class="s-myl-zt2">Completed</span></li>
+                    </ul>
+                    <p class="s-myl-line2"><i class="s-icon s-myl-ico6"></i><i class="s-icon s-myl-ico7"></i></p>
+                </div>
+            </div>
+            <div class="s-mod-block">
+                #*详情状态*#
+                <input type="hidden" name="statusNo" value="$!{listVo.aliveFlag}">
+                <div class="s-mod-btit">Participants</div>
+                <div class="s-mod-bcont s-mod-bcont1">
+                    <div class="clearfix">
+                        <div class="s-myl-blol">
+                            <ul class="clearfix">
+                                <li><i class="s-icon s-myl-ico1"></i><p><span class="s-myl-span1">$!{listVo.seller}</span><span class="s-myl-span2">Seller</span></p></li>
+                                <li><i class="s-icon s-myl-ico2"></i><p><span class="s-myl-span4">$!{listVo.maoyi}</span><span class="s-myl-span2">Trading Agent</span></p></li>
+                                <li><i class="s-icon s-myl-ico3"></i><p><span class="s-myl-span3">$!{listVo.buyer}</span><span class="s-myl-span2">Buyer</span></p></li>
+                            </ul>
+                            <p class="s-myl-line"><i class="s-icon s-myl-ico4"></i><i class="s-icon s-myl-ico5"></i></p>
+                        </div>
+                        <div class="s-myl-blor">Trade Chain Valid Time：$!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss',$!{tradingChainDetailVO.tradingChain.deadline})</div>
+                    </div>
+                </div>
+            </div>
+        #*原油信息*#
+            $contain.get("/crudeoilhallform/oiltypeList.htm").setParam("demandId","$!{tradingChainDetailVO.tradingChain.demandId}").put('publishType',$!{demand.publishType})
+            <div class="s-mod-block">
+                <div class="s-mod-btit">
+                    #if($!{tradingChainDetailVO.tradingChain.status} == '5')
+                        Deal
+                    #else
+                        Intention Draft
+                    #end
+                    <span><a href="$appServer.get("purchaseManager/biddingDetail.htm?demandId=$!{tradingChainDetailVO.tradingChain.demandId}")">View Original Quotation</a></span></div>
+                <div class="s-mod-bcont2">
+                    <div class="cg-ord-box s-myl-cont">
+                        <div class="cg-ord-blo s-myl-box">
+                            <div class="cg-ord-cont clearfix">
+                                <div class="s-purchase s-pur-curr">
+                                    #if($!{tradingChainDetailVO.tradingChain.status} == '5')
+                                        <div class="quote-tit quote-tit1"><span>Deal #1</span><span>Deal No：$!{tradingChainDetailVO.tradingChainDemandList[0].orderNo}</span></div>
+                                    #else
+                                        <div class="quote-tit">Intention Draft #1</div>
+                                    #end
+                                    <ul>
+                                        <input type="hidden" name="uuid" value="$!{tradingChainDetailVO.tradingChain.uuid}"/>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Qty (BBL)</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[0].numStr}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Tolerance</span><span class="purc-span2"><p>+/- $!{tradingChainDetailVO.demandList[0].numfloat}%</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Incoterm</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{tradeItemMap.get($!{tradingChainDetailVO.demandList[0].tradeItem})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Premium/Discount</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[0].agioStr}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Basis</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                     $!{valuationBase.get($!{tradingChainDetailVO.demandList[0].valuationBase})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Period</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                     $!{valuationProidTypeMap.get($!{tradingChainDetailVO.demandList[0].valuationProidType})}
+                                                    #if($!{tradingChainDetailVO.demandList[0].valuationProidType} == 4)
+                                                        ($!{dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandList[0].valuationProidStart})} - $!{dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandList[0].valuationProidEnd})})
+                                                    #elseif($!{tradingChainDetailVO.demandList[0].valuationProidType} == 5)
+                                                        ($!{tradingChainDetailVO.demandList[0].contractKind})
+                                                    #end
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">Price Formula</span><span class="purc-span2 purc-span21"><p>$!{tradingChainDetailVO.demandList[0].valuationFormula}</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">Payment Date</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[0].payItem}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Credit Term</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                     $!{creditItem.get($!{tradingChainDetailVO.demandList[0].authItem})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Load Port</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandShipList[0].shipmentPort}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Discharge Port</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandShipList[0].dischargePort}</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">Laycan</span><span class="purc-span2"><p>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].shipmentStartTime})&nbsp;-&nbsp;$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].shipmentEndTime})</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">DDR</span><span class="purc-span2"><p>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].dischargeStartTime})&nbsp;-&nbsp;$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].dischargeEndTime})</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Qty Determination</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{measureModeMap.get($!{tradingChainDetailVO.demandList[0].measureMode})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Laytime</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[0].loadAndDischargePermittedTimespan}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Inspection</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                     $!{inspectionFeeSharingTypeMap.get($!{tradingChainDetailVO.demandList[0].inspectionFeeSharingType})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Law</span><span class="purc-span2">$!{tradingChainDetailVO.demandList[0].law}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">GTC</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[0].gtc}</p></span></li>
+                                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">Remarks</span><span class="purc-span2 purc-span21"><p>$!{tradingChainDetailVO.demandList[0].remark}</p></span></li>
+                                        <li class="purc-blo s-purc-h1">Buyer Info</li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Company</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].enterpriseName}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Address</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].enterpriseAddress}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">PIC</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].contacter}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Telephone</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].phoneNo}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Email</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].famil}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Fax</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[0].fax}</p></span></li>
+                                        <li class="purc-blo s-purc-h1">Supplier Info</li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Company</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].enterpriseName}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Address</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].enterpriseAddress}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">PIC</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].contacter}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Telephone</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].phoneNo}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Email</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].famil}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Fax</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList1[1].fax}</p></span></li>
+                                    </ul>
+                                </div>
+                                <div class="s-purchase">
+                                    #if($!{tradingChainDetailVO.tradingChain.status} == '5')
+                                        <div class="quote-tit quote-tit1"><span>Deal #2</span><span>Deal No：$!{tradingChainDetailVO.tradingChainDemandList[1].orderNo}</span></div>
+                                    #else
+                                        <div class="quote-tit">Intention Draft #2</div>
+                                    #end
+                                    <ul>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Qty (BBL)</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[1].numStr}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Tolerance</span><span class="purc-span2"><p>+/- $!{tradingChainDetailVO.demandList[1].numfloat}%</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Incoterm</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{tradeItemMap.get($!{tradingChainDetailVO.demandList[1].tradeItem})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>Premium/Discount</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[1].agioStr}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Basis</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{valuationBase.get($!{tradingChainDetailVO.demandList[1].valuationBase})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Period</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{valuationProidTypeMap.get($!{tradingChainDetailVO.demandList[1].valuationProidType})}
+                                                    #if($!{tradingChainDetailVO.demandList[1].valuationProidType} == 4)
+                                                        ($!{dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandList[1].valuationProidStart})} - $!{dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandList[1].valuationProidEnd})})
+                                                    #elseif($!{tradingChainDetailVO.demandList[1].valuationProidType} == 5)
+                                                        ($!{tradingChainDetailVO.demandList[1].contractKind})
+                                                    #end
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">Pricing Formula</span><span class="purc-span2 purc-span21"><p>$!{tradingChainDetailVO.demandList[1].valuationFormula}</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">Payment Date</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[1].payItem}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Credit Term</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{creditItem.get($!{tradingChainDetailVO.demandList[1].authItem})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Load Port</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandShipList[1].shipmentPort}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Discharge Port</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandShipList[1].dischargePort}</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">Laycan</span><span class="purc-span2"><p>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[1].shipmentStartTime})&nbsp;-&nbsp;$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].shipmentEndTime})</p></span></li>
+                                        <li class="purc-blo purc-blo2 clearfix"><span class="purc-spanl">DDR</span><span class="purc-span2"><p>$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[1].dischargeStartTime})&nbsp;-&nbsp;$!dateUtil.convertDateToString('yyyy-MM-dd',$!{tradingChainDetailVO.demandShipList[0].dischargeEndTime})</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Qty Standard</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                    $!{measureModeMap.get($!{tradingChainDetailVO.demandList[1].measureMode})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Laytime</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[1].loadAndDischargePermittedTimespan}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Inspection</span>
+                                            <span class="purc-span2">
+                                                <p>
+                                                     $!{inspectionFeeSharingTypeMap.get($!{tradingChainDetailVO.demandList[1].inspectionFeeSharingType})}
+                                                </p>
+                                            </span>
+                                        </li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">Law</span><span class="purc-span2">$!{tradingChainDetailVO.demandList[1].law}</p></span></li>
+                                        <li class="purc-blo clearfix"><span class="purc-spanl">GTC</span><span class="purc-span2"><p>$!{tradingChainDetailVO.demandList[1].gtc}</p></span></li>
+                                        <li class="purc-blo s-purc-blo clearfix"><span class="purc-spanl purc-span11">Remarks</span><span class="purc-span2 purc-span21"><p>$!{tradingChainDetailVO.demandList[1].remark}</p></span></li>
+                                        <li class="purc-blo s-purc-h1">Buyer Info</li>
+
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Company</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].enterpriseName}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Address</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].enterpriseAddress}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">PIC</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].contacter}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Telephone</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].phoneNo}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Email</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].famil}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Fax</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[0].fax}</p></span></li>
+
+                                        <li class="purc-blo s-purc-h1">Supplier Info</li>
+
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Company</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].enterpriseName}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Address</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].enterpriseAddress}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">PIC</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].contacter}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Telephone</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].phoneNo}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Email</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].famil}</p></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Fax</span><span class="purc-span2"><p class="s-myl-pxx">$!{tradingChainDetailVO.demandRelevanterList2[1].fax}</p></span></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-mod-block">
+                <div class="s-mod-btit">Operation Record</div>
+                <div class="s-mod-bcont s-mod-bcont1 s-mod-sj">
+                    <div class="s-table-wrap">
+                        <table class="s-table s-table3">
+                            <tbody>
+                            <tr>
+                                <th width="15%">Operation Status</th>
+                                <th width="20%">Operator</th>
+                                <th width="20%">Time</th>
+                                <th width="45%">Cause</th>
+                            </tr>
+                                #foreach($record in $!{tradingChainDetailVO.tradingChainMemberList})
+                                   #if($!{record.operationStatus})
+                                       <tr>
+                                           <td>
+                                               #if($!{record.operationStatus} == "10")
+                                                   Withdraw
+                                               #elseif($!{record.operationStatus} == "20")
+                                                   Confirm
+                                               #elseif($!{record.operationStatus} == "30")
+                                                   Reject
+                                               #end
+                                           </td>
+                                           <td>
+                                               #if($!{record.memberId} == $!{tradingChainDetailVO.demandRelevanterList1[0].eMemberId})
+                                                     $!{tradingChainDetailVO.demandRelevanterList1[0].enterpriseName}
+                                                #elseif($!{record.memberId} == $!{tradingChainDetailVO.demandRelevanterList1[1].eMemberId})
+                                                   $!{tradingChainDetailVO.demandRelevanterList1[1].enterpriseName}
+                                               #elseif($!{record.memberId} == $!{tradingChainDetailVO.demandRelevanterList2[0].eMemberId})
+                                                   $!{tradingChainDetailVO.demandRelevanterList2[0].enterpriseName}
+                                               #elseif($!{record.memberId} == $!{tradingChainDetailVO.demandRelevanterList2[1].eMemberId})
+                                                   $!{tradingChainDetailVO.demandRelevanterList2[1].enterpriseName}
+                                               #end
+                                           </td>
+                                           <td>
+                                               #if($!{record.operationStatus} == "10")
+                                                    $!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss',$!{record.rejectTime})
+                                                #elseif($!{record.operationStatus} == "20")
+                                                   $!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss',$!{record.acceptTime})
+                                               #elseif($!{record.operationStatus} == "30")
+                                                   $!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss',$!{record.rejectTime})
+                                               #end
+                                           </td>
+                                           <td> $!{record.remark}</td>
+                                       </tr>
+                                   #end
+                                #end
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="s-btn-box">
+            #*贸易商*#
+                #if($!{listVo.aliveFlag} == "4" || $!{listVo.aliveFlag} == "5")
+
+                #elseif($!{listVo.aliveFlag} != "5" || $!{listVo.aliveFlag} != "4")
+                    #if($!{tradingChainDetailVO.demandRelevanterList1[0].eMemberId} == $!{listVo.merberId})
+                        #if($!{listVo.aliveFlag} <= 2)
+                            <button class="s-btn s-btn-primary" onclick="maoyiconfirm()">confirm</a></button>
+                            <button class="s-btn s-btn-primary" onclick="maoyireject()">reject</button>
+                        #end
+                    #*供应商*#
+                    #elseif($!{tradingChainDetailVO.demandRelevanterList1[1].eMemberId} == $!{listVo.merberId})
+                        #if($!{listVo.aliveFlag} <= 3)
+                            <button class="s-btn s-btn-primary" onclick="confirm()">confirm</a></button>
+                            <button class="s-btn s-btn-primary" onclick="reject()">reject</button>
+                        #end
+                    #*贸易商*#
+                    #elseif($!{tradingChainDetailVO.demandRelevanterList2[1].eMemberId} == $!{listVo.merberId})
+                        #if($!{listVo.aliveFlag} == 2)
+                            <button class="s-btn s-btn-primary" onclick="maoyiconfirm()">confirm</a></button>
+                            <button class="s-btn s-btn-primary" onclick="maoyireject()">reject</button>
+                        #end
+                    #end
+                #end
+
+                <button class="s-btn s-btn-primary" onclick="back()">Back</button>
+            </div>
+        </div>
+
+<div class="s-footer">
+
+</div>
+
+<script>
+function back () {
+    window.location.href='$appServer.get("/tradeChain/tradeChainList.htm")';
+};
+
+// 友好提示
+errorfunction();
+
+function errorfunction() {
+
+    var msg = "$!{msg}";
+    if(msg != null && msg != ""){
+        layui.use(['layer'], function () {
+            layui.layer.alert("$!{msg}", {title:"Notice", btn: "OK"});
+        })
+    }
+};
+
+
+//贸易商确认
+function maoyiconfirm() {
+
+    var status =  parseFloat($('input[name=statusNo]').val());
+    if(status == 2){
+        var url = '$appServer.get("/tradeChain/confirmTradeChain.htm?uuid=$!{tradingChainDetailVO.tradingChain.uuid}")';
+        window.location.href=url;
+    }else if (status < 2){
+        layui.use(['layer'], function () {
+            layui.layer.alert('Operation is available only after confirmation from buyer！', {title:"Notice", btn: "OK"});
+        })
+    }
+}
+
+
+//贸易商驳回
+function maoyireject() {
+
+    var status =  parseFloat($('input[name=statusNo]').val());
+    if(status == 2){
+
+        layer.prompt({
+            formType: 2,
+            title: 'Please input reject reason',
+            area: ['200px', '80px'], //自定义文本域宽高
+            btn: ['OK', 'Cancel']
+        }, function(value, index, elem){
+            var url = '$appServer.get("/tradeChain/rejectTradingChain.json")';
+            $.post(url, {uuid:"$!{tradingChainDetailVO.tradingChain.uuid}", reason:value},function(data){
+                layer.close(index);
+                if(data.status==0 || data.status==200){
+                    layer.alert("Reject successfully!", {title:"Notice", btn: "OK", closeBtn: 0},function(){
+                        top.location.reload();
+                    });
+                } else {
+                    layer.alert(data.message || "Failed to reject trade chain！", {title:"Notice", btn: "OK"});
+                }
+            });
+
+            layer.close(index);
+        });
+        return ;
+    }else if (status < 2){
+        layui.use(['layer'], function () {
+            layui.layer.alert('Operation is available only after confirmation from buyer！', {title:"Notice", btn: "OK"});
+        })
+        return;
+    }
+}
+
+
+
+//供应商确认
+function confirm() {
+
+    var status =  parseFloat($('input[name=statusNo]').val());
+    if(status == 3){
+        var url = '$appServer.get("/tradeChain/confirmTradeChain.htm?uuid=$!{tradingChainDetailVO.tradingChain.uuid}")';
+        window.location.href=url;
+    }else if (status < 3){
+        layui.use(['layer'], function () {
+            layui.layer.alert('Operation is available only after confirmation from buyer！', {title:"Notice", btn: "OK"});
+        })
+        return;
+    }
+}
+
+
+//供应商驳回
+function reject() {
+
+    var status =  parseFloat($('input[name=statusNo]').val());
+    if(status == 3){
+        layer.prompt({
+            formType: 2,
+            title: 'Please input reject reason',
+            area: ['200px', '80px'], //自定义文本域宽高
+            btn: ['OK', 'Cancel']
+        }, function(value, index, elem){
+            var url = '$appServer.get("/tradeChain/rejectTradingChain.json")';
+            $.post(url, {uuid:"$!{tradingChainDetailVO.tradingChain.uuid}", reason:value},function(data){
+                layer.close(index);
+                if(data.status==0 || data.status==200){
+                    layer.alert("Reject successfully!", {title:"Notice", btn: "OK", closeBtn: 0},function(){
+                        top.location.reload();
+                    });
+                } else {
+                    layer.alert(data.message || "Failed to reject trade chain！", {title:"Notice", btn: "OK"});
+                }
+            });
+            layer.close(index);
+        });
+        return ;
+    }else if (status < 3){
+        layui.use(['layer'], function () {
+            layui.layer.alert('Operation is available only after confirmation from buyer！', {title:"Notice", btn: "OK"});
+        })
+        return;
+    }else if (status > 2){
+        layui.use(['layer'], function () {
+            layui.layer.alert('Confirmation received. Repeated operation is not allowed！', {title:"Notice", btn: "OK"});
+        })
+        return;
+    }
+}
+
+function statusNo(){
+    var statusNo = parseFloat($('input[name=statusNo]').val());
+    var li = $('.s-myl-ztblo li');
+    if(statusNo>1){
+        for(var i = 1;i<statusNo;i++){
+            if(i==(statusNo-1)){
+                if(i==3){
+                    li.eq(2).find('span i').removeClass('s-myl-yfb s-myl-ywc').addClass('s-myl-qrz');
+                    li.eq(2).find('.s-myl-zt2').text('Cancelled')
+                }else{
+                    if(i>2){
+                        li.eq(2).find('span i').removeClass('s-myl-yfb s-myl-ywc').addClass('s-myl-qrz');
+                    }else{
+                        li.eq(i-1).find('span i').removeClass('s-myl-yfb s-myl-ywc').addClass('s-myl-qrz');
+                    }
+                }
+            }else{
+                li.eq(i-1).find('span i').removeClass('s-myl-qrz s-myl-ywc').addClass('s-myl-yfb');
+            }
+        }
+    }
+}
+statusNo();
+
+</script>

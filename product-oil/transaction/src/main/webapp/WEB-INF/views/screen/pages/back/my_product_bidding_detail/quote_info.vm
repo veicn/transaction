@@ -1,0 +1,14 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Quote Info<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Quantity:</span><span class="c-int qx-conte"> $!{buyerInfoVO.enterpriseName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Trade Terms:</span><span class="c-int qx-conte"> $!{buyerInfoVO.address}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Discharge Port:</span><span class="c-int qx-conte"> $!{buyerInfoVO.traderName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Premium/Discounts:</span><span class="c-int qx-conte"> $!{buyerInfoVO.email}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Terms:</span><span class="c-int qx-conte"> $!{buyerInfoVO.telephone}</span></li>
+        </ul>
+    </div>
+</div>
+
+

@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/notice/addlist.css')">
+<!--百度编辑器-->
+<link href="$imageServer.get('lib/ueditor/themes/default/css/umeditor.css')" rel="stylesheet">
+<script type="text/javascript" src="$imageServer.get('lib/ueditor/third-party/template.min.js')"></script>
+<script type="text/javascript" src="$imageServer.get('lib/ueditor/umeditor.config.js')"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="$imageServer.get('lib/ueditor/umeditor.min.js')"></script>
+<script src="$imageServer.get('info/js/notice/edit.js')"></script>
+        
+            <form class="layui-form" action="">
+            	<input type="hidden" name="uuid" value="$!{notice.uuid}">
+                <div class="layui-row">
+                    <div class="layui-col-md1 layui-col-md-offset5">
+                        <label class="layui-form-label iz-center">公告</label>
+                    </div>  
+                </div>
+            
+                <div class="layui-form-item layui-inline">
+                    <label class="layui-form-label"><span class="ry-red pr5">*</span>标题：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" value="$!{notice.title}" placeholder="请输入标题" class="layui-input" style="width:800px" lay-verify="required">
+                    </div>
+                </div>
+            <br></br>
+            
+                <label class="layui-form-label"><span class="ry-red pr5">*</span>内容：</label>
+                <!-- 加载编辑器的容器 -->
+                <div class="layui-input-block" lay-verify="content">
+                    <!-- 加载编辑器的容器 -->
+                    <script id="container" name="content" style="height:400px;width:800px" type="text/plain">$!{notice.contentWithHtml}</script>
+                </div>
+                <div class="layui-layer-btn layui-layer-btn-c" style="margin-top:20px">
+                    <button class="layui-btn layui-btn-small layui-btn-normal fabuFn" lay-filter="demo1" lay-submit="">发布</button>
+                </div>
+            </form>
+
+            
+ 
+

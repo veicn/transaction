@@ -1,0 +1,81 @@
+$contain.get('/common/title.htm').put('title', 'SysShip List')
+    <link rel="stylesheet" href="$appServer.get('/css/work/shipping.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/myResouces.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/resDetails.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/viewShipInfor.css?css_version=03280827')">
+
+<div class="s-nav fl">
+    <div class="main-search-wrap">
+        <span class="q-tit">Ship Information Maintenance</span>
+        <div class="main-search-box">
+        	<label>The name of the ship  :</label>
+        <form id="argFromByAgent" method="post" action="/shipping/pages/back/sysShip/index.htm">
+        	<input type="text" id="shipNm" name="shipNm" class="br input-name search-input"/>
+        	<a href="javascript:;" id="search" class="br btn" >Search</a>
+        	<a href="/shipping/pages/back/sysShip/saveSysShip.htm" id="addbtn" class="br btn">New Ship</a>
+        </form>	
+        </div>
+    </div>
+    <div class="m-box q-box2 m-info-box">
+            <table class="layui-table mcf-table">
+                <colgroup>
+                    <!--<col width="150">-->
+                    <!--<col width="200">-->
+                    <!--<col>-->
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="w100">Vessel Name</th>
+                    <th>Imo</th>
+                    <th>Built</th>
+                    <th>Vessel Type</th>
+                    <th>Vessel Size</th>
+                    <th>Cubic(m³)</th>
+                    <th>Sdwt(mt)</th>
+                    <th>Loa(m)</th>
+                    <th>Beam(m)</th>
+                    <th>Draft(m)</th>
+                    <th>Hull Type</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                 #foreach($data in $datas.list)  
+                <tr>
+                    <td><span class="oh name" title="$!{data.vesselName}">$!{data.vesselName}</span></td>
+                    <td><span class="oh imo" title="$!{data.imo}">$!{data.imo}</span></td>
+                    <td><span class="oh built" title="$!{data.built}">$!{data.built}</span></td>
+                    <td><span class="oh type" title="$!{data.vesselType}">$!{data.vesselType}</span></td>
+                    <td><span class="oh size" title="$!{data.vesselSize}">$!{data.vesselSize}</span></td>
+                    <td><span class="oh cubic" title="$!{data.cubic}">$!{data.cubic}</span></td>
+                    <td><span class="oh sdwt" title="$!{data.sdwt}">$!{data.sdwt}</span></td>
+                    <td><span class="oh loa" title="$!{data.loa}">$!{data.loa}</span></td>
+                    <td><span class="oh beam" title="$!{data.beam}">$!{data.beam}</span></td>
+                    <td><span class="oh draft" title="$!{data.draft}">$!{data.draft}</span></td>
+                    <td><span class="oh hull" title="$!{data.hullType}">$!{data.hullType}</span></td>
+                    <td class="table-active">
+                    	<div class="main-icon">
+                    	 <input name="" id="datauuid" type="hidden"  value="$!{data.uuid}" >
+                        	<a href="/shipping/pages/back/sysShip/findSysShipDetail.htm?uuid=$!{data.uuid}" title="search"  class="search"></a>
+                    <!--	<a href="javascript:;" title="editor" id="editor" class="editor"></a>  -->
+                        	<a href="/shipping/pages/back/sysShip/editSysShip.htm?uuid=$!{data.uuid}" title="editor" id="editor" class="editor"></a>
+                        	<a href="javascript:;" title="del"  id="del" attr-data="$!{data.uuid}" class="del"></a>
+                   			<!--  class="dialog-link btcol delBtn" attr-data="$data.uuid"  -->
+                        </div>
+                    </td>
+                </tr>
+                #end   
+          
+          
+                </tbody>
+            </table>
+		    <!--底部分页-->
+		    
+		    <div class="c-page sc-page">
+		        $contain.get('/common/page.htm').put("pageInfo", $!{datas})
+		    </div>
+  
+      
+    </div>
+</div>
+#js($appServer.get('/script/pages/back/sysShip/index.js?js_version=03280827'))

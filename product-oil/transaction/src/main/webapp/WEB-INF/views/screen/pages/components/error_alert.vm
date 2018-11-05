@@ -1,0 +1,7 @@
+<script>
+    #if($!{error})
+        var errorMessage = $!{error};
+        console.log(errorMessage);
+        alert(errorMessage.enName);
+    #end
+</script>

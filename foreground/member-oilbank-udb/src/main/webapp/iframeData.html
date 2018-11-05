@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+	  <div style="display��none;">��˵�����</div>
+	  <script>
+	  
+		//���� ��ʼ��
+		var menu = window.localStorage.getItem('menu') ||-1;
+		var menuChild = window.localStorage.getItem('menuChild') || -1;
+		if(menu != -1){
+			// ������Ϣ�� -> ��
+			var objData = {"menu":menu,"menuChild":menuChild};
+			objData = JSON.stringify(objData);
+			window.parent.postMessage(objData,'*');
+        }
+		// ����   �Ӽ�  ����Ϣ   ��������
+		window.addEventListener('message',function(e){
+			var newData = JSON.parse(e.data);
+			window.localStorage.setItem('menu',newData.menu);
+			window.localStorage.setItem('menuChild',newData.menuChild);
+			
+		})
+	  </script>
+</body>
+</html>

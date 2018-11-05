@@ -1,0 +1,46 @@
+<a href="#" class="s-navblink" title="Message">
+    #if($!{total})
+        <span style="
+       background: #F36523;
+    /* display: block; */
+    padding: 4px;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 50%;
+    position: relative;
+    top: -13px;
+    left: 48px;
+">$!{total}</span>
+    #end
+
+    <i class="fs fs-message-square"></i>
+    <em>Message<i class="fs fs-chevron-down"></i></em></a>
+<ul class="s-subnavul">
+    #foreach($msge in $!{msgList})
+
+
+        <li class="s-subnavli">
+            <a href="$appServer.get('/product/mosken/MsgDetail.htm').put('msgId',$msge.id)" class="s-subnavlink fl">
+                <div class="fa fa-user-circle-o" style="height:30px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">$!msge.content</div>
+            </a>
+            <span class="s-subnavsp fl">
+                <a class="s-subnavigno"  style="display:block;height: 30px;"href="$appServer.get('/product/mosken/MsgDetail.htm').put('msgId',$msge.id)">View</a>
+            </span>
+            #if($velocityCount ==6)
+                #break
+            #stop
+           #end
+
+    </li>
+    #end
+    <li class="s-subnavmore"><a href="$appServer.get('/product/mosken/msgList.htm')"
+                                display: inline-block;
+                                width: 67px;
+                                background: #F36523;
+                                color: #ffffff;
+                                border-radius: 2px;
+                                height: 30px;
+                                text-align: center;
+                                line-height: 31px;
+    >View</a></li>
+</ul>

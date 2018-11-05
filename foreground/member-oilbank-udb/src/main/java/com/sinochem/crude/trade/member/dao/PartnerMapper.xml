@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.PartnerMapper">
+    <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.Partner">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="name_en" property="nameEn" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="logo" property="logo" jdbcType="VARCHAR"/>
+        <result column="del_flg" property="delFlg" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="creater" property="creater" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="updater" property="updater" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, name_en, type, url, logo, del_flg, create_time, creater, update_time, updater
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from partners
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from partners
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.Partner">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into partners (name, name_en,type, url,logo,
+        del_flg, create_time, creater,
+        update_time, updater)
+        values (#{name,jdbcType=VARCHAR}, #{nameEn,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},
+        #{delFlg,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=BIGINT},
+        #{updateTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.Partner">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into partners
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="nameEn != null">
+                name_en,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="delFlg != null">
+                del_flg,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updater != null">
+                updater,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null">
+                #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlg != null">
+                #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                #{updater,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.Partner">
+        update partners
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null">
+                name_en = #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlg != null">
+                del_flg = #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                updater = #{updater,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.Partner">
+    update partners
+    set name = #{name,jdbcType=VARCHAR},
+      name_en = #{nameEn,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="dynamicWhere">
+        <if test="name != null and name != ''">
+            AND `name` like concat('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="nameEn != null and nameEn != ''">
+            AND name_en like concat('%',#{nameEn,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="type != null and type != ''">
+            AND `type` = #{type,jdbcType=VARCHAR}
+        </if>
+        AND del_flg = #{delFlg,jdbcType=CHAR}
+    </sql>
+    <select id="selectByPrimary" parameterType="com.sinochem.crude.trade.member.domain.Partner" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM partners
+        WHERE 1=1
+        <include refid="dynamicWhere"/>
+    </select>
+</mapper>

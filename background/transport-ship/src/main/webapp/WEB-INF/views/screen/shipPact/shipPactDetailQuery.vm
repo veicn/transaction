@@ -1,0 +1,117 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船合同管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船合同详情</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">船信息编号：</label>
+					  <div class="s-input-inline">
+						  <p class="shipPactCode"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">租约日：</label>
+					  <div class="s-input-inline">
+					  	  <p class="signDate"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">租船人：</label>
+					  <div class="s-input-inline">
+					  	 <p class="carrierName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船东：</label>
+					  <div class="s-input-inline">
+						  <p class="shipOwner"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船名：</label>
+					  <div class="s-input-inline">
+						 <p class="shipName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label"><i title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT" class="shipping-ico w-ico-sl"></i>LAYCAN：</label>
+					  <div class="s-input-inline">
+						 <p class="pactBeg"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">装货区域：</label>
+					  <div class="s-input-inline">
+						 <p class="loadingArea"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">卸货区域：</label>
+					  <div class="s-input-inline">
+						 <p class="unloadingArea"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">航速：</label>
+					  <div class="s-input-inline">
+						 <p class="pactSpeed"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">WS点：</label>
+					  <div class="s-input-inline">
+						 <p class="wsRes"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">滞期费率：</label>
+					  <div class="s-input-inline">
+						 <p class="demurrage"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">允许装卸时间：</label>
+					  <div class="s-input-inline">
+						 <p class="dockTime"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">最小货量：</label>
+					  <div class="s-input-inline">
+						 <p class="minQuantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">经纪人：</label>
+					  <div class="s-input-inline">
+						 <p class="brokerName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">备注：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">合同：</label>
+					  <div class="s-input-inline">
+						  <p class="s-input-inline accessory" id="accessory" name="accessory"></p>
+						  <p hidden="true" id="btn">&nbsp;&nbsp;<a href="javascript:;" class="file1 downloadFn">下载</a></p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary back">返&nbsp;&nbsp;回</button></div>
+	</div>
+	
+	<script src="../transport/js/shipPact/shipPactDetailQuery.js"></script>

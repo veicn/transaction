@@ -1,0 +1,184 @@
+
+<div class="layui-table pp15">
+	<!--搜索条件-->
+	<div class="ry-banner">
+		<table class="tableBorder">
+			<body>
+		<div class="connet">
+			<h2 class="h2Title">订单信息</h2>
+			<div class="pp20">
+				<table>
+					<tbody>
+						<tr>
+							<td width="20%">订单编号：</td>
+							<td width="30%" >$!inforData.orderId</td>
+							<td width="20%">品种：</td>
+							<td width="30%">$!inforData.zhName</td>
+						</tr>
+						<tr>
+							<td width="20%">数量：</td>
+							<td width="30%">$!inforData.quantity</td>
+							<td width="20%">规格：</td>
+							<td width="30%">$!inforData.spec</td>
+						</tr>
+						<tr>
+							<td width="20%">贸易条款：</td>
+							<td width="30%">$!inforData.tradeTerm</td>
+							<td width="20%">计价基准：</td>
+							<td width="30%">$inforData.basePrice</td>
+						</tr>
+						<tr>
+							<td width="20%">价格公式：</td>
+							<td width="30%">$!inforData.priceFormula</td>
+							<td width="20%">升贴水：</td>
+							<td width="30%">$!inforData.agio</td>
+						</tr>
+						<tr>
+							<td width="20%">计价期：</td>
+							<td width="30%">$!inforData.pricingDesc</td>
+							<td width="20%">付款条款：</td>
+							<td width="30%">$!inforData.paymentTerm</td>
+						</tr>
+						<tr>
+							<td width="20%">装货港：</td>
+							<td width="30%">$!inforData.loadingPort</td>
+							<td width="20%">卸货港：</td>
+							<td width="30%">$!inforData.uploadingPort</td>
+						</tr>
+						<tr>
+							<td width="20%">发港时间：</td>
+							<td width="30%">$!inforData.deliveryDateStart-$!inforData.deliveryDateEnd</td>
+							<td width="20%">卸货时间：</td>
+							<td width="30%">$!inforData.dischargeDateStart-$!inforData.dischargeDateEnd</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<h2 class="h2Title">对账单信息</h2>
+			<div class="pp20">
+			<form class="layui-form">
+				<table>
+					<tbody>
+						<tr>
+							<td width="20%">对账单编号：</td>
+							<td width="30%"><input type="text" value="$!stateData.orderStatement"  name="orderStatement" /></td>
+							<td width="20%">联系电话：</td>
+							<td width="30%"><input type="text" value="$!stateData.tel"  name="tel" /></td>
+						</tr>
+						<tr>
+							<td width="20%">对账方名称：</td>
+							<td width="30%"><input type="text" value="$!stateData.customerName"  name="customerName" /></td>
+							<td width="20%">邮箱：</td>
+							<td width="30%"><input type="text" value="$!stateData.email"  name="email" /></td>
+						</tr>
+						<tr>
+							<td width="20%">联系人：</td>
+							<td width="30%"><input type="text" value="$!stateData.contactName"  name="contactName" /></td>
+							<td width="20%">对账时间：</td>
+							<td width="30%"><input type="text" value="$!stateData.checkTime"  name="checkTime" /></td>
+						</tr>
+						<tr>
+							<td width="20%">外贸合同：</td>
+							<td width="30%"><input type="text" value="$!stateData.contractNo"  name="contractNo" /></td>
+							<td width="20%">提单量（吨）：</td>
+							<td width="30%"><input type="text" value="$!stateData.billWetghtT"  name="billWetghtT" /></td>
+						</tr>
+						<tr>
+							<td width="20%">代理协议：</td>
+							<td width="30%"><input type="text" value="$!stateData.agentContract"  name="agentContract" /></td>
+							<td width="20%">提单量（吨）桶：</td>
+							<td width="30%"><input type="text" value="$!stateData.billWetghtBbl"  name="billWetghtBbl" /></td>
+						</tr>
+						<tr>
+							<td width="20%">油品：</td>
+							<td width="30%"><input type="text" value="$!stateData.oil"  name="oil" /></td>
+							<td width="20%">价格公式：</td>
+							<td width="30%"><input type="text" value="$!stateData.priceFormula"  name="priceFormula" /></td>
+						</tr>
+						<tr>
+							<td width="20%">船名：</td>
+							<td width="30%"><input type="text" value="$!stateData.shipName"  name="shipName" /></td>
+							<td width="20%">基准价格：</td>
+							<td width="30%"><input type="text" value="$!stateData.basePrice"  name="basePrice" /></td>
+						</tr>
+						<tr>
+							<td width="20%">合同量：</td>
+							<td width="30%"><input type="text" value="$!stateData.contractQuantity"  name="contractQuantity" /></td>
+							<td width="20%">升贴水：</td>
+							<td width="30%"><input type="text" value="$!stateData.agio"  name="agio" /></td>
+						</tr>
+						<tr>
+							<td width="20%">贸易条款：</td>
+							<td width="30%"><input type="text" value="$!stateData.tradeTerm"  name="tradeTerm" /></td>
+							<td width="20%">结算价格：</td>
+							<td width="30%"><input type="text" value="$!stateData.settlementPrice"  name="settlementPrice" /></td>
+						</tr>
+						<tr>
+							<td width="20%">贸易金额：</td>
+							<td width="30%"><input type="text" value="$!stateData.goodsAmount"  name="goodsAmount" /></td>
+							<td width="20%">提单日：</td>
+							<td width="30%"><input type="text" value="$!stateData.billDate"  name="billDate" /></td>
+						</tr>
+						<tr>
+							<td width="20%">费用合计：</td>
+							<td width="30%"><input type="text" value="$!inforData.totalFee"  name="totalFee" /></td>
+							<td width="20%">收款日：</td>
+							<td width="30%"><input type="text" value="$!stateData.paymentDate"  name="paymentDate" /></td>
+						</tr>
+						<tr>
+							<td width="20%">结算金额合计：</td>
+							<td width="30%"><input type="text" value="$!stateData.totalAmount"  name="totalAmount" /></td>
+							<td width="20%"></td>
+							<td width="30%"></td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="layui-btn" id="submitBtn" lay-submit lay-filter="formId" style="display:none">提交</button>
+				</form>
+			</div>
+			
+			<h2 class="h2Title">费用清单</h2>
+			<div class="pp20">
+				<table class="tableBorder">
+					<thead>
+						<tr>
+							<th>费用科目</th>
+							<th>计价方式</th>
+							<th>数量</th>
+							<th>单价</th>
+							<th>小计</th>
+							<th>是否计入结算</th>
+						</tr>
+					</thead>
+					<tbody>
+					#foreach( $data in $feeData)
+						<tr>
+							<td>$!expenseData.subjectName</td>
+							<td>$!data.valuation</td>
+							<td>$!data.quantity</td>
+							<td>$!data.feePrice</td>
+							<td>$!data.totalFee</td>
+							#if($!data.isAgent == 1)
+							<td>是</td>
+							#else
+							<td>否</td>
+							#end
+						</tr>
+						#end
+					</tbody>
+				</table>
+			</div>
+			
+			<div style="margin: 30px 0 ;">
+				<button class="layui-btn saveFn">保存</button>
+				<button>返回</button>
+			</div>
+			
+		</div>
+		
+	</body>
+
+	</table>
+	
+</div>	
+<script src="../script/js/orderStatementOfficial/orderStatementOfficial.js"></script>

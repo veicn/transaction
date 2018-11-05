@@ -1,0 +1,277 @@
+
+<!--main-->
+<main id="main">
+    <div class="g-content center clearfix">
+        <div class="g-content clearfix" style="padding-bottom: 30px">
+            <span class="r-cont-tit">Commodity Contrast</span>
+            <div class="r-content">
+                <table class="table table-bordered" style="margin-bottom: 40px">
+                    <thead>
+                    <tr>
+                        <th class="active">Resource No.</th>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <th class="active">$!{saleSheetCombineVO.saleSheetVO.serialNumber}</th>
+                        #end
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>Range</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.saleSheetVO.saleTypeVO.enName}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Expired Time</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.deadlineAsString}</td>
+                        #end
+                    <tr>
+                        <td>Category</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.productCategoryVO.enName}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Specification</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.productSpecificationVO.enName}</td>
+                        #end
+                    </tr>
+                    #*<tr>
+                        <td>Export Type</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.exportTypeVO.enName}</td>
+                        #end
+                    </tr>*#
+                    <tr>
+                        <td>Incoterms</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Quantity(MT)</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.quantityAsString}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Tolerance</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.productInfoVO.tolerance}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Quality Standard</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            ##<td class="active">View Quality Standard</td>
+                            <td class="active">
+                                <span class="file-name" style="display:none"  id="qualityStandard">$!{saleSheetCombineVO.productInfoVO.qualityStandard}</span>
+                                <span id="qualityStandardName" onclick="download(this)" style="text-decoration: underline;cursor: pointer;left:266px;">$!{saleSheetCombineVO.productInfoVO.qualityStandardName}</span>
+                            </td>
+
+
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Benchmark</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">
+                                Mean of $!{saleSheetCombineVO.pricingInfoVO.priceSourceVO.enName} Quotations for $!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.enName} under $!{saleSheetCombineVO.pricingInfoVO.priceRegionVO.enName}
+                            </td>
+                        #end
+                    </tr>
+
+                    <tr>
+                        <td>Benchmark2</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            #if($!{saleSheetCombineVO.pricingInfoVO.priceSourceVO2.enName})
+                                <td class="active">
+                                    Mean of $!{saleSheetCombineVO.pricingInfoVO.priceSourceVO2.enName} Quotations for $!{saleSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.enName} under $!{saleSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}
+                                </td>
+                            #else
+                                <td></td>
+                            #end
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.pricingInfoVO.currencyVO.enName}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Unit</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.pricingInfoVO.pricingUnitVO.enName}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Pricing Period</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.pricingInfoVO.pricingPeriod}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Payment Terms</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.pricingInfoVO.paymentTerm}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Quantity DTER</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.pricingInfoVO.settlementQuantity}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Pricing Formula</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            #if($!{saleSheetCombineVO.pricingInfoVO.priceSourceVO2})
+                                <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                            #else
+                                <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                            #end
+                        #end
+
+                    </tr>
+
+                    <tr>
+                        <td>Laycan</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.transportInfoVO.laycanStartDateAsString} - $!{saleSheetCombineVO.transportInfoVO.laycanEndDateAsString}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Laytime</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="active">$!{saleSheetCombineVO.transportInfoVO.laytimeAsString}</td>
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Load Port</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} =="FOB")
+                                <td class="active">$!{saleSheetCombineVO.transportInfoVO.loadingPort} , $!{saleSheetCombineVO.transportInfoVO.loadingCountry}</td>
+                            #else
+                                <td></td>
+                            #end
+                            #*#if($!{saleSheetCombineVO.transportInfoVO.loadingPortVO.enName} && $!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} =="FOB")
+                                <td class="active">$!{saleSheetCombineVO.transportInfoVO.loadingPortVO.enName}, $!{saleSheetCombineVO.transportInfoVO.loadingPortVO.countryVO.enName}</td>
+                            #else
+                                <td></td>
+                            #end*#
+                        #end
+                    </tr>
+                    <tr>
+                        <td>Discharge Port</td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} =="CFR" || $!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} =="CIF")
+                                <td class="active">$!{saleSheetCombineVO.transportInfoVO.dischargePort} , $!{saleSheetCombineVO.transportInfoVO.dischargeCountry}</td>
+                            #else
+                                <td></td>
+                            #end
+                        #* #if($!{saleSheetCombineVO.transportInfoVO.dischargePortVO.enName} && $!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} =="CFR")
+                             <td class="active">$!{saleSheetCombineVO.transportInfoVO.dischargePortVO.enName}, $!{saleSheetCombineVO.transportInfoVO.dischargePortVO.countryVO.enName}</td>
+                             #else
+                                 <td></td>
+                         #end*#
+                        #end
+
+                    </tr>
+
+                    <tr>
+                        <td class="nobg"></td>
+                        #foreach($saleSheetCombineVO in $!{saleSheetCombineVOList})
+                            <td class="nobg">
+                            #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                                #if($!{saleSheetCombineVO.saleSheetVO.saleSheetStatusVO.code} == '2' && $!{saleSheetCombineVO.saleSheetVO.enterpriseId} != $!{userId})
+                                    #if($!{saleSheetCombineVO.productInfoVO.overdue} == false)
+                                        <a href="$appServer.get('pages/front/product_bidding/index.htm').put('uuid',$!{saleSheetCombineVO.saleSheetVO.uuid})" class="br btn-c">
+                                            #if($!{saleSheetCombineVO.saleSheetVO.saleTypeVO.code} == '1')
+                                                Bid
+                                            #elseif($!{saleSheetCombineVO.saleSheetVO.saleTypeVO.code} == '2')
+                                                Quote
+                                            #end
+                                        </a>
+                                    #end
+                                #end
+                            #end
+
+                            </td>
+                        #end
+                    </tr>
+
+                </table>
+                <!--<div class="c-page">-->
+                <!--<a class="c-page-txt">&lt;</a>-->
+                <!--<a class="c-page-num c-cur" href="">1</a>-->
+                <!--<a class="c-page-num" href="">2</a>-->
+                <!--<a class="c-page-num" href="">3</a>-->
+                <!--<a class="c-page-num" href="">4</a>-->
+                <!--<a class="c-page-point">...</a>-->
+                <!--<a class="c-page-num" href="">8</a>-->
+                <!--<a class="c-page-txt" href="">&gt;</a>-->
+                <!--</div>-->
+            </div>
+            #*<div class="g-btn clearfix">
+                <em class=" button-b1">
+                    <a href="javascript:;" class="br">Bid</a>
+                    <a href="javascript:;" class="br">Quote</a>
+                    <a href="javascript:;" class="br">Compare</a>
+                </em>
+            </div>*#
+        </div>
+    </div>
+</main>
+<!--brand-->
+<div class="brand-box clearfix">
+    <ul class="brand">
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation1.jpg')" alt=""></a></li>
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation2.jpg')" alt=""></a></li>
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation3.jpg')" alt=""></a></li>
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation4.jpg')" alt=""></a></li>
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation5.jpg')" alt=""></a></li>
+        <li><a href="javascript:void(0);"><img src="$imageServer.get('images/cooperation6.jpg')" alt=""></a></li>
+    </ul>
+</div>
+
+#css("$appServer.get('/css/common/reset.css?css_version=03280827')")
+#css("$appServer.get('/css/common/public.css?css_version=03280827')")
+#css("$appServer.get('/css/work/goodsContrast.css?css_version=03280827')")
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+##js($appServer.get('/script/pages/front/product_detail/index.js?js_version=03280827'))
+<script>
+    ##绑定删除按钮事件
+    $(".cg-close").click(function(){
+        var index = $(this).attr("closeIndex");
+        $("td[tdIndex='"+index+"']").remove();
+    });
+
+    function epclick(id,creater) {
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('需求发起者不能参与投标');
+            })
+            return false;
+        }else{
+            window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + id;
+        }
+    }
+
+    /*$(function(){
+        var path=$("#qualityStandard").html();
+        var name= $("#qualityStandardName").html();
+        $("#qualityStandardName").on("click",function(){
+            window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+name;
+        });
+    })*/
+
+    function download(self){
+        var name = $(self).html();
+        var path = $(self).prev().html();
+        window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+name;
+    }
+
+</script>

@@ -1,0 +1,140 @@
+$contain.get('/common/title.htm').put('title', 'SysShip Edit')
+    
+<link rel="stylesheet" href="$appServer.get('/css/work/shipping.css?css_version=03280827')">
+<link rel="stylesheet" href="$appServer.get('/css/work/myResouces.css?css_version=03280827')">
+<link rel="stylesheet" href="$appServer.get('/css/work/resDetails.css?css_version=03280827')">
+<link rel="stylesheet" href="$appServer.get('/css/work/viewShipInfor.css?css_version=03280827')">
+
+<div class="m-nav g-nav fl">
+<form id="editSysShipForm" method="post"   enctype="multipart/form-data">
+            <div class="m-box m-sls view-box cleafix">
+                <div class="r-content g-content">
+                    <span class="r-cont-tit">Edit Ship</span>
+                    <div>
+                        <ul class="g-box g-box1 view-box-ul">
+                            <li class="per-field-box">
+                                <label class="field-title" for="Address"><span class="must">* </span>Imo :</label>
+                                <input id="imo" type="text" name="imo" value="$!{shipVO.imo}" placeholder="10,000" class="br input-name" data-rules="required;string;" length="20" >
+                                <input id="uuid" type="hidden" name="uuid" value="$!{shipVO.uuid}" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field-box">
+                                <label class="field-title" for="TraderName">Mmsi :</label>
+                                <div class="my-select cpy-select view-select clearfix br">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">T/T after B/L 30 Days,B/L=0</div>
+                                                <input type="text"  type="text" id="mmsi" name="mmsi" readonly="readonly" value="Tender">
+                                            </div>
+                                        </div>
+                                        <ul class="select-options">
+                                            <li data-value="Tender" class="selected">Tender</li>
+                                            <li data-value="Html">Html</li>
+                                            <li data-value="Html5">Html5</li>
+                                            <li data-value="JavaScript">JavaScript</li>
+                                            <li data-value="Jquery">Jquery</li>
+                                            <li data-value="Java">Java</li>
+                                            <li data-value="c#">c#</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName"><span class="must">* </span>Vessel :</label>
+                                <input  id="vesselName" type="text" name="vesselName" value="$!{shipVO.vesselName}" class="br input-name" data-rules="required;string;" length="50" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Vessel Type :</label>
+                                <input id="vesselType" type="text" name="vesselType"  value="$!{shipVO.vesselType}" class="br input-name" data-rules="string;" length="100" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field-box">
+                                <label class="field-title" for="TraderName">Vessel Size :</label>
+                                <div class="my-select cpy-select view-select clearfix br">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                               #if($code > 0)
+                                               	 <div id="vesselSizeDiv" class="select-show-text">$name</div>
+                                                 <input autocomplete="off" type="hidden" name="vesselSize" value="$shipVO.vesselSize" >
+                                                 #end
+                                            </div>
+                                        </div>
+                                        <ul class="select-options">
+                                         <li data-value="$vsl2.code"  value="$vs2.code" class="select-option"></li>
+                                           #foreach($vsl2 in $!vesselSizeList)
+                                                #if($!{shipVO.vesselSize} ==  $!{vsl2.code})
+                                                    <li data-value="${vsl2.code}"
+                                                        class="selected">$!{vsl2.enName}</li>
+                                                #else
+                                                    <li data-value="${vsl2.code}"
+                                                        class="">$!{vsl2.enName}</li>
+                                                #end
+                                           #end
+                                        </ul>
+                                    </div>
+                                </div>
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+							<li class="per-field-box">
+                                <label class="field-title" for="Address"><span class="must">* </span> Built :</label>
+                                <input name="built" id="built" type="text" placeholder="10,000" value="$!{shipVO.built}" class="br input-name"data-rules="required;string;" length="10" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Hull Type :</label>
+                                <input id="hullType" type="text" name="hullType" value="$!{shipVO.hullType}" class="br input-name"data-rules="string;" length="20" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Sdwt(mt) :</label>
+                                <input  id="sdwt" type="text" name="sdwt" value="$!{shipVO.sdwt}" class="br input-name"data-rules="decimal;" decAbove="18" decAfter="6" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Loa(m) :</label>
+                                <input name="loa" id="loa" type="text"  value="$!{shipVO.loa}" class="br input-name"data-rules="decimal;" decAbove="18" decAfter="6" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Beam(m) :</label>
+                                <input name="beam"  id="beam" type="text" value="$!{shipVO.beam}" class="br input-name"data-rules="decimal;" decAbove="18" decAfter="6" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Draft(m) :</label>
+                                <input name="draft" id="draft" type="text" value="$!{shipVO.draft}" class="br input-name"data-rules="decimal;" decAbove="18" decAfter="6" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Cubic(m³) :</label>
+                                <input name="cubic" id="cubic" type="text"  value="$!{shipVO.cubic}" class="br input-name"data-rules="decimal;" decAbove="18" decAfter="6" >
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Enclosure :</label>
+                                <input name="accessoryFileNm" id="accessoryFileNm" type="text" path = ""  value="$!{shipVO.accessoryFileNm}" class="br input-name n-en-input">
+                                <input name="accessory" id="accessory" type="hidden"  path = "" >
+                                <a href="javascript:;" id="br btn-b vs-down" type="button" class="br btn-b vs-down">Upload</a>
+                            <!--    <a href="javascript:;" class="br btn-b Reset">Reset</a>   -->
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="vs-backbox">
+                	<!-- <a href="javascript:;" class="br btn-c btn-sub">Submit</a> -->
+                 <!--	<input name="" id="" type="submit" value="Submit"  class="br btn-c btn-sub"> -->
+                <!--    <a href="javascript:;" class="br btn-h">Back</a> -->
+                    
+                     <a class="br btn-c btn-sub" id="editSysShipForm2">Submit</a>
+                    <a href="javascript:history.go(-1)" class="br btn-h">Back</a>
+                    
+                </div>
+            </div>
+     </form>
+        </div>
+#js($appServer.get('/script/pages/back/sysShip/editSysShip.js?js_version=03280827'))

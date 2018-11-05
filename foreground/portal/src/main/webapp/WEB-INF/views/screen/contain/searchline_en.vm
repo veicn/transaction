@@ -1,0 +1,16 @@
+<div class="head-con clearfix">
+    <div class="inner">
+        <div class="head-l">
+            <a href="front_index.html" class="logo"></a>
+        </div>
+        <div class="head-search clearfix">
+            <div class="h-srh-select">
+                <a href="" class="srh-select-cur">采购需求<i class="c-ico ico-arw01"></i></a>
+                <ul class="srh-select-ul">
+                    <li>商品1</li>
+                    <li>商品2</li>
+                </ul>
+            </div><div class="h-srh-con"><input class="h-srh-inp" type="text" placeholder="请输入要搜索的关键字" /><button class="h-srh-btn">搜索</button></div>
+        </div>
+    </div>
+</div>

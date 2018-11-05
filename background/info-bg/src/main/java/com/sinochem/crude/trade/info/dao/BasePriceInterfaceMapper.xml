@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.BasePriceInterfaceMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.BasePriceInterface" id="BasePriceInterfaceDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.BasePriceInterface">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.BasePriceInterface" id="BasePriceInterface">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="crudeNameE" column="CRUDE_NAME_E" />
+		<result property="crudeNameC" column="CRUDE_NAME_C" />
+		<result property="pricing" column="PRICING" />
+		<result property="pricingDate" column="PRICING_DATE" />
+		<result property="note" column="NOTE" />
+		<result property="remark" column="REMARK" />
+		<result property="externalSystem" column="EXTERNAL_SYSTEM" />
+		<result property="interfaceDate" column="INTERFACE_DATE" />
+		<result property="processPerson" column="PROCESS_PERSON" />
+		<result property="processDate" column="PROCESS_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.BasePriceInterface"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_crude_base_price_interface (				ID
+						,UUID
+						,CRUDE_NAME_E
+						,CRUDE_NAME_C
+						,PRICING
+						,PRICING_DATE
+						,NOTE
+						,REMARK
+						,EXTERNAL_SYSTEM
+						,INTERFACE_DATE
+						,PROCESS_PERSON
+						,PROCESS_DATE
+						,STATUS
+						,ALIVE_FLAG
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{crudeNameE}
+						,#{crudeNameC}
+						,#{pricing}
+						,#{pricingDate}
+						,#{note}
+						,#{remark}
+						,#{externalSystem}
+						,#{interfaceDate}
+						,#{processPerson}
+						,#{processDate}
+						,#{status}
+						,'1'
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_crude_base_price_interface
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.BasePriceInterface">
+        DELETE FROM t_crude_base_price_interface
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="crudeNameE!=null and crudeNameE!=''">AND  CRUDE_NAME_E = #{crudeNameE}</if>
+        <if test="crudeNameC!=null and crudeNameC!=''">AND  CRUDE_NAME_C = #{crudeNameC}</if>
+        <if test="pricing!=null and pricing!=''">AND  PRICING = #{pricing}</if>
+        <if test="pricingDate!=null and pricingDate!=''">AND  PRICING_DATE = #{pricingDate}</if>
+        <if test="note!=null and note!=''">AND  NOTE = #{note}</if>
+        <if test="remark!=null and remark!=''">AND  REMARK = #{remark}</if>
+        <if test="externalSystem!=null and externalSystem!=''">AND  EXTERNAL_SYSTEM = #{externalSystem}</if>
+        <if test="interfaceDate!=null and interfaceDate!=''">AND  INTERFACE_DATE = #{interfaceDate}</if>
+        <if test="processPerson!=null and processPerson!=''">AND  PROCESS_PERSON = #{processPerson}</if>
+        <if test="processDate!=null and processDate!=''">AND  PROCESS_DATE = #{processDate}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.BasePriceInterface">
+		update t_crude_base_price_interface
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="crudeNameE!=null">,CRUDE_NAME_E = #{crudeNameE}</if>
+		<if test="crudeNameC!=null">,CRUDE_NAME_C = #{crudeNameC}</if>
+		<if test="pricing!=null">,PRICING = #{pricing}</if>
+		<if test="pricingDate!=null">,PRICING_DATE = #{pricingDate}</if>
+		<if test="note!=null">,NOTE = #{note}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="externalSystem!=null">,EXTERNAL_SYSTEM = #{externalSystem}</if>
+		<if test="interfaceDate!=null">,INTERFACE_DATE = #{interfaceDate}</if>
+		<if test="processPerson!=null">,PROCESS_PERSON = #{processPerson}</if>
+		<if test="processDate!=null">,PROCESS_DATE = #{processDate}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_crude_base_price_interface
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="crudeNameE!=null">,CRUDE_NAME_E = #{crudeNameE}</if>
+		<if test="crudeNameC!=null">,CRUDE_NAME_C = #{crudeNameC}</if>
+		<if test="pricing!=null">,PRICING = #{pricing}</if>
+		<if test="pricingDate!=null">,PRICING_DATE = #{pricingDate}</if>
+		<if test="note!=null">,NOTE = #{note}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="externalSystem!=null">,EXTERNAL_SYSTEM = #{externalSystem}</if>
+		<if test="interfaceDate!=null">,INTERFACE_DATE = #{interfaceDate}</if>
+		<if test="processPerson!=null">,PROCESS_PERSON = #{processPerson}</if>
+		<if test="processDate!=null">,PROCESS_DATE = #{processDate}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+		<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+		<if test="pricing!=null and pricing!=''">and  PRICING=#{pricing}</if>
+		<if test="pricingDate!=null and pricingDate!=''">and  PRICING_DATE=#{pricingDate}</if>
+		<if test="note!=null and note!=''">and  NOTE=#{note}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+		<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+		<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+		<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="BasePriceInterface">
+			select
+			* from t_crude_base_price_interface
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="BasePriceInterface">
+			select
+			* from t_crude_base_price_interface
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="BasePriceInterface" parameterType="com.sinochem.crude.trade.info.domain.BasePriceInterface">
+		select * from t_crude_base_price_interface
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+		<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+		<if test="pricing!=null and pricing!=''">and  PRICING=#{pricing}</if>
+		<if test="pricingDate!=null">and  PRICING_DATE=#{pricingDate}</if>
+		<if test="note!=null and note!=''">and  NOTE=#{note}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+		<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+		<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+		<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   CRUDE_NAME_E as "crudeNameE" 
+						 ,   CRUDE_NAME_C as "crudeNameC" 
+						 ,   PRICING as "pricing" 
+						 ,   PRICING_DATE as "pricingDate" 
+						 ,   NOTE as "note" 
+						 ,   REMARK as "remark" 
+						 ,   EXTERNAL_SYSTEM as "externalSystem" 
+						 ,   INTERFACE_DATE as "interfaceDate" 
+						 ,   PROCESS_PERSON as "processPerson" 
+						 ,   PROCESS_DATE as "processDate" 
+						 ,   STATUS as "status" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						from t_crude_base_price_interface
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+			<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+			<if test="pricing!=null and pricing!=''">and  PRICING=#{pricing}</if>
+			<if test="pricingDate!=null and pricingDate!=''">and  PRICING_DATE=#{pricingDate}</if>
+			<if test="note!=null and note!=''">and  NOTE=#{note}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+			<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+			<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+			<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_crude_base_price_interface 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+			<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+			<if test="pricing!=null and pricing!=''">and  PRICING=#{pricing}</if>
+			<if test="pricingDate!=null and pricingDate!=''">and  PRICING_DATE=#{pricingDate}</if>
+			<if test="note!=null and note!=''">and  NOTE=#{note}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+			<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+			<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+			<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

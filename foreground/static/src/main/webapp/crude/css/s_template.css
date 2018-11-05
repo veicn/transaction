@@ -1,0 +1,33 @@
+/** 模版 **/
+.template{}
+.template .title{padding: 20px 0;text-align: center;line-height: 20px;font-size: 24px;letter-spacing: 20px;}
+.template .num{}
+.template .name{font-size: 16px;}
+.template .s-input{height: 30px;line-height: 30px;}
+.template .content{text-indent: 2em; font-size: 16px;line-height: 30px;}
+.template .content .space{display: inline-block;width: 100px;}
+.template .content .space2{display: inline-block;width: 200px;}
+.template .content .strong{font-weight: bold;}
+
+.template .list{}
+.template .list .item{font-size: 16px;padding: 5px 40px;}
+.template .list .item .checkbox{width: 18px;height: 18px;}
+.template .list .item .num{padding-right: 10px;}
+.template .statement{padding: 20px 0;text-align: center;line-height: 20px;font-size: 20px;}
+.template .statement_details{padding: 0 50px;line-height: 30px;font-size: 16px;}
+
+.template .table_left{float: left;width: 45%;}
+.template .table_right{float: right;width: 45%;}
+.template .bottom_message .item{display: inline-block;}
+
+.gap_bottom_5{margin-bottom: 5px;}
+
+/*表格*/
+.tabelContainer{width: 100%;border: 1px solid #b6b6b6;margin: 10px;}
+.tabelContainer tr td{padding: 5px;line-height: 32px;}
+.tabelContainer tr td:nth-child(odd){text-align: center;}
+.tabelContainer tr td .name{display: inline-block;min-width: 100px;text-align: right;}
+.tabelContainer tr td .strong{font-weight: 900;}
+.tabelContainer .checkbox{width: 18px;height: 18px;}
+
+

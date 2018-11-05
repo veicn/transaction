@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.order.dao.ContractShipBerthMapper">
+    <!-- ContractShipBerth的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_ContractShipBerth_Map" type="com.sinochem.crude.trade.order.domain.ContractShipBerth">
+        <id column="id" property="id" />
+        <result column="carrying_capacity_min" property="carryingCapacityMin" />
+        <result column="carrying_capacity_max" property="carryingCapacityMax" />
+        <result column="contract_id" property="contractId" />
+        <result column="berth_grade" property="berthGrade" />
+        <result column="berth_name" property="berthName" />
+        <result column="draft_limitation" property="draftLimitation" />
+        <result column="ship_type" property="shipType" jdbcType="INTEGER" />
+        <result column="berth_desc" property="berthDesc" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, contract_id, berth_name, berth_grade, draft_limitation, carrying_capacity_min,
+        carrying_capacity_max, ship_type, berth_desc
+    </sql>
+
+    <select id="selectByContractId" parameterType="java.lang.Long" resultMap="result_ContractShipBerth_Map">
+        select
+        <include refid="Base_Column_List" />
+        from contract_ship_berth
+        where contract_id = #{contractId,jdbcType=BIGINT}
+    </select>
+    <insert id="insertSelective" parameterType="com.sinochem.crude.trade.order.domain.ContractShipBerth">
+        insert into contract_ship_berth
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="contractId != null" >
+                contract_id,
+            </if>
+            <if test="berthName != null" >
+                berth_name,
+            </if>
+            <if test="shipType != null" >
+                ship_type,
+            </if>
+            <if test="berthGrade != null" >
+                berth_grade,
+            </if>
+            <if test="draftLimitation != null" >
+                draft_limitation,
+            </if>
+            <if test="carryingCapacityMin != null" >
+                carrying_capacity_min,
+            </if>
+            <if test="carryingCapacityMax != null" >
+                carrying_capacity_max,
+            </if>
+            <if test="berthDesc != null" >
+                berth_desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="contractId != null" >
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="berthName != null" >
+                #{berthName,jdbcType=VARCHAR},
+            </if>
+            <if test="shipType != null" >
+                #{shipType,jdbcType=INTEGER},
+            </if>
+            <if test="berthGrade != null" >
+                #{berthGrade,jdbcType=INTEGER},
+            </if>
+            <if test="draftLimitation != null" >
+                #{draftLimitation,jdbcType=INTEGER},
+            </if>
+            <if test="carryingCapacityMin != null" >
+                #{carryingCapacityMin,jdbcType=INTEGER},
+            </if>
+            <if test="carryingCapacityMax != null" >
+                #{carryingCapacityMax,jdbcType=INTEGER},
+            </if>
+            <if test="berthDesc != null" >
+                #{berthDesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="batchSave" parameterType="java.util.List">
+        insert into contract_ship_berth (contract_id,berth_name,berth_grade,draft_limitation,carrying_capacity_min,carrying_capacity_max,ship_type,berth_desc)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.contractId},#{item.berthName},#{item.berthGrade},#{item.draftLimitation},#{item.carryingCapacityMin},#{item.carryingCapacityMax},#{item.shipType},#{item.berthDesc})
+        </foreach>
+    </insert>
+    <update id="updateContractShipBerth">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update contract_ship_berth
+            <set>
+                <if test="item.berthName != null ">
+                    berth_name = #{item.berthName},
+                </if>
+                <if test="item.berthGrade != null">
+                    berth_grade=#{item.berthGrade},
+                </if>
+                <if test="item.draftLimitation != null">
+                    draft_limitation = #{item.draftLimitation},
+                </if>
+                <if test="item.carryingCapacityMin != null">
+                    carrying_capacity_min = #{item.carryingCapacityMin},
+                </if>
+                <if test="item.carryingCapacityMax != null">
+                    carrying_capacity_max = #{item.carryingCapacityMax}
+                </if>
+                <if test="item.shipType != null">
+                    ship_type = #{item.shipType}
+                </if>
+                <if test="item.berthDesc != null">
+                    berth_desc = #{item.berthDesc}
+                </if>
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="removeAllByContractId">
+        delete from contract_ship_berth WHERE contract_id = #{contractId,jdbcType=BIGINT}
+    </delete>
+</mapper>

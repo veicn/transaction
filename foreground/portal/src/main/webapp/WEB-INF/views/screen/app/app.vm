@@ -1,0 +1,62 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <title>买原油</title>
+    <link rel="stylesheet" type="text/css" href="$imageServer.get('css/style.css')" media="all" />
+    <script src="$imageServer.get('js/jquery-1.8.3.min.js')"></script>
+</head>
+<body>
+<!--领金币-->
+<div class="ind-box">
+    <div class="logo"><img src="$imageServer.get('images/logo-app.png')" /></div>
+    <p class="ind-p1">全程可视、安全、高效、中国好油网</p>
+    <p class="ind-p2">Always Be Steps Ahead Of The Game</p>
+    <p class="ind-p3">The greatest combination of tools, services and data to
+        support your crude oil trading business needs</p>
+    <p class="ind-p4"><a onclick="downloadAppIOS()"><span class="icon-ios"><img src="$imageServer.get('images/ios.png')"></span>安装 IOS 版</a></p>
+    <p class="ind-p5"><a onclick="downloadAppAndroid()"><img src="$imageServer.get('images/Android.png')" class="icon-and">安装 Android 版</a></p>
+    <p class="ind-p6"><a onclick="openPC(0)"><img src="$imageServer.get('images/pc.png')" class="icon-pc">访问 PC 版</a></p>
+</div>
+<div class="ind-pop" id="openPC" style="display:none;">
+    <p class="pop-p1"><img src="$imageServer.get('images/alert.png')"></p>
+    <p class="pop-p2">为了保证较好的浏览效果，建议您下载app或者在电脑端访问浏览网站，移动设备访问pc版可能会出现某些不兼容的页面显示问题，您确认要继续访问吗？</p>
+    <ul class="clearfix pop-but">
+        <li><a onclick="openPC(1)">继续访问</a></li>
+        <li><a onclick="openPC(2)">关闭弹窗</a></li>
+    </ul>
+</div>
+<script src="$imageServer.get('js/clienWidth.js')"></script>
+<script type="text/javascript">
+    function downloadAppIOS(){
+        window.location.href = "https://itunes.apple.com/cn/app/id1336024284";
+    }
+    function downloadAppAndroid(){
+        var sUserAgent= navigator.userAgent.toLowerCase();
+		if(sUserAgent.match(/MicroMessenger/i) == 'micromessenger'||sUserAgent.indexOf("alipay")!=-1){//判断是否微信
+			alert("请点击右上角在浏览器中打开!");
+		}else{
+			var ret = $contain.get("/om/app/getNewVersion.json").setParam("versionLanguage","en").setHost("$memberServer.get('')");
+			if(ret.status == '0' && ret.datas.ossPath != null && ret.datas.ossPath != ""){
+				//成功做的事情
+				window.location.href = ret.datas.ossPath;
+			}else{
+				alert(ret.message);
+			}
+		}
+    }
+
+    function openPC(type){
+        if(type == 0){
+            $('#openPC').show();
+		}else if(type == 1){
+            window.location.href = "$appServer.get('/index.htm')";
+		}else{
+            $('#openPC').hide();
+        }
+	}
+</script>
+</body>
+</html>

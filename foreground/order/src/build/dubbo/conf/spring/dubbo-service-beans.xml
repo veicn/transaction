@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <!-- consumer application name -->
+    <dubbo:application name="sinochem-goods-consumer" />
+    <dubbo:registry id="frontRegistry" address="${dubbo.registry.url}" />
+    <!--<dubbo:registry id="backRegistry" address="zookeeper://10.26.3.151:2181" />-->
+
+    <dubbo:consumer timeout="${dubbo.consumer.timeout}" />
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="${dubbo.port}" />
+
+    <!-- registry address, used for consumer to discover services -->
+     <dubbo:reference registry="frontRegistry" check="${dubbo.check}"  group="${dubbo.group}" id="enterpriseService" version="${dubbo.version}" interface="com.sinochem.crude.trade.member.remote.service.EnterpriseService"/>
+    <!--获取原油信息-->
+    <dubbo:reference registry="frontRegistry" check="${dubbo.check}"  group="${dubbo.group}" id="crudeOilInfoService" version="${dubbo.version}" interface="com.sinochem.crude.trade.goods.remote.CrudeOilInfoService"/>
+
+    <dubbo:reference registry="frontRegistry" check="false"  group="${dubbo.group}" id="orderInfoService" version="${dubbo.version}" interface="com.sinochem.crude.trade.order.remote.OrderInfoService"/>
+
+</beans>

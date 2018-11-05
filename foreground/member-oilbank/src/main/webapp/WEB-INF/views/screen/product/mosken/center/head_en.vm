@@ -1,0 +1,112 @@
+<header id="header">
+    <div class="header-wrap clearfix">
+        <div class="fl logo">
+            <img src="$imageServer.get('/product/images/logo.png')" class="">
+        </div>
+        <nav class="fr clearfix">
+            <div class="fl clearfix">
+           ## #if($authUtils.checkRole("enter_admin","enter_master"))
+                <a href="$transactionServer.get('/pages/portal/home/index.htm')" #if($!{active} == 1) class="fl active" #end>HOME</a>
+                <a href="$transactionServer.get('/pages/front/product_list/index.htm')" #if($!{active} == 2) class="f2 active" #end>TRADING SERVICE</a>
+                <a href="$shippingServer.get('/pages/front/shipingHome/index.htm')" #if($!{active} == 3) class="f3 active" #end>SHIPPING</a>
+                <a href="$newsServer.get('/pages/front/news/index.htm')" #if($!{active} == '4') class="f4 active" #end>INFORMATION</a>
+            #*#else
+                <a href="javascript:void(0)" #if($!{active} == 1) class="fl active" #end onClick="quanx()">HOME</a>
+                <a href="javascript:void(0)" #if($!{active} == 2) class="f2 active" #end>TRADING</a>
+                <a href="javascript:void(0)" #if($!{active} == 3) class="f3 active" #end>SHIPPING</a>
+                <a href="javascript:void(0)" #if($!{active} == '4') class="f4 active" #end>INFORMATION</a>
+            #end*#
+
+
+            </div>
+            <div class="fr clearfix">
+                #if(!$!session.getAttribute("_user"))
+
+
+                    <div class="fr clearfix">
+                        <a href="$appServer.get('/product/center/tologinVm.htm')?returnUrl=$transactionServer.get('/pages/portal/home/index.htm')" class="language fl">Sign In</a>
+                        <i class="icon-search"></i>
+                    </div>
+                #else
+
+                    <div class="fr clearfix">
+                        <a href="$systemServer.get('/login.htm')">Sign Out</a>
+                        <i class="icon-search"></i>
+                    </div>
+
+
+
+                    #*<div class="fr clearfix">
+
+                        $contain.get("/product/mosken/msgProduct.htm")
+                        <i class="icon-search"></i>
+                    </div>
+*#              <div class="fr clearfix">
+                    <a href="$memberServer.get('/product/center/productToMember.htm')" class="language fl">$_user.name</a>
+                    <i class="icon-search"></i>
+                </div>
+
+                #end
+
+            </div>
+        </nav>
+    </div>
+    <div class="header-line fl"></div>
+</header>
+
+
+#*
+
+
+<div class="s-logo" onclick="window.location.href='$!indexUrl'">成品油</div>
+    <!-- 头部区域（可配合whui已有的水平导航） -->
+    <div class="s-layout-left">
+##        <div class="s-search"><span class="s-searchspan"><input type="text" placeholder="搜索订单号" class="s-searchinput"><a href="" class="s-searchlink"><i class="fs fs-search"></i></a></span></div>
+        <ul class="s-nav-left">
+            <li class="s-nav-item"><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')" class="s-navblink" title="原油大厅" ><i class="s-icon s-nav-yydt"></i><em>原油大厅<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$shipServer.get('/page/#/')" class="s-navblink" title="贸易物流" target="_blank"><i class="s-icon s-nav-mywl"></i><em>贸易物流<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$infoServer.get('page/#/')" class="s-navblink" title="信息资讯" target="_blank"><i class="s-icon s-nav-xxzx"></i><em>信息资讯<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$appServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" class="s-navblink" title="经营优化" target="_blank"><i class="s-icon s-nav-jyyh"></i><em>经营优化<i class="fs fs-chevron-down"></i></em></a></li>
+        </ul>
+    </div>
+    <ul class="s-nav s-layout-right">
+        <li class="s-nav-item">
+            $contain.get("contain/accounts.htm").setHost("$systemServer.get('')")
+        </li>
+        <li class="s-nav-item">
+            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')").setParam("isPrivate","true")
+        </li>
+##        <li class="s-nav-item">
+##            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')")
+##        </li>
+        <li class="s-nav-item"><a href="$systemServer.get('logout.htm')" class="s-navblink" class="s-navblink" title="退出"><i class="fs fs-log-out"></i><em>退出</em></a></li>
+
+    </ul>*#
+
+
+#*
+<div class="s-logo" onclick="window.location.href='$!indexUrl'">Mycrudeoil</div>
+    <!-- 头部区域（可配合whui已有的水平导航） -->
+    <div class="s-layout-left">
+##        <div class="s-search"><span class="s-searchspan"><input type="text" placeholder="搜索订单号" class="s-searchinput"><a href="" class="s-searchlink"><i class="fs fs-search"></i></a></span></div>
+        <ul class="s-nav-left">
+            <li class="s-nav-item"><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')" class="s-navblink" title="Crude Oil" ><i class="s-icon s-nav-yydt"></i><em>Crude Oil<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$shipServer.get('/page/#/')" class="s-navblink" title="Shipping" target="_blank"><i class="s-icon s-nav-mywl"></i><em>Shipping<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$infoServer.get('page/#/')" class="s-navblink" title="News&Reports" target="_blank"><i class="s-icon s-nav-xxzx"></i><em>News&Reports<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$appServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" class="s-navblink" title="Smart Factory" target="_blank"><i class="s-icon s-nav-jyyh"></i><em>Smart Factory<i class="fs fs-chevron-down"></i></em></a></li>
+        </ul>
+    </div>
+    <ul class="s-nav s-layout-right">
+        <li class="s-nav-item">
+            $contain.get("contain/accounts.htm").setHost("$systemServer.get('')")
+        </li>
+        <li class="s-nav-item">
+            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')").setParam("isPrivate","true")
+        </li>
+##        <li class="s-nav-item">
+##            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')")
+##        </li>
+        <li class="s-nav-item"><a href="$systemServer.get('logout.htm')" class="s-navblink" class="s-navblink" title="Exit"><i class="fs fs-log-out"></i><em>Exit</em></a></li>
+
+    </ul>
+*#

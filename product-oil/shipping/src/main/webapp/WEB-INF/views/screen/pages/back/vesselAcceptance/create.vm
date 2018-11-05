@@ -1,0 +1,345 @@
+$contain.get('/common/title.htm').put('title', 'Confirmation Insert')
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/addAgreement.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/confirForm.css?css_version=03280827'))
+#js($appServer.get('script/pages/back/vesselAcceptance/index.js?js_version=03280827'))
+
+<div class="m-nav fl">
+    <div class="m-box m-sls cleafix">
+        <div class="tit">
+            Create Vessel Acceptance
+        </div>
+        <form id="creatVesselAcceptanceForm">
+            <input type="hidden" name="charterPartyNumber" value="$!{vo.charterPartyNumber}">
+            <input type="hidden" name="sellerId" value="$!{vo.sellerId}">
+            <input type="hidden" name="buyerId" value="$!{vo.buyerId}">
+            <input type="hidden" name="agreementUuid" value="$!{vo.agreementUuid}">
+            <input type="hidden" name="orderId" value="$!{vo.orderId}">
+            <input type="hidden" name="orderNumber" value="$!{vo.orderNumber}">
+            <input type="hidden" name="tradeTerms" value="$!{vo.tradeTerms}">
+            <input type="hidden" name="shipAgreementId" value="$!{vo.shipAgreementId}">
+            <input type="hidden" name="demandsUuid" value="$!{vo.demandsUuid}">
+            <input type="hidden" name="charterPartyDate" value="$!{vo.charterPartyDate}">
+            <input type="hidden" name="consignor" value="$!{vo.consignor}">
+            <input type="hidden" name="charterParty" value="$!{vo.charterParty}">
+            <input type="hidden" name="productSourceCode" value="$!{vo.productSourceCode}">
+            <ul class="m-nav-info">
+                #if($!{vo.agreementUuid})
+                    <li>
+                        <span>Charter Party Number :</span>
+                        <span>$!{vo.charterPartyNumber}</span>
+                    </li>
+                #end
+                <li id="Shipp">
+                    <span>Vessel’s name : </span>
+                    #if($!{vo.agreementUuid})
+                        <span>$!{vo.vesselName} </span>
+                        <input type="hidden" name="vesselName" value="$!{vo.vesselName}">
+                    #else
+                        <div class="my-select cpy-select clearfix br">
+                            <div class="select s-b select_search select-ajax">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">
+                                            #foreach($start in $!sysShipList)
+                                                       	 #if($!start.vesselName == $!{vo.vesselName})
+                                                $!{vo.vesselName}
+                                            #end
+    												  #end
+                                        </div>
+                                        <input autocomplete="off" name="vesselName" class="vname" type="text"
+                                               value="$!{vo.vesselName}" data-rules="required">
+                                        <input autocomplete="off" name="sysShipId" class="vcode" type="hidden"
+                                               fun="findImoByShipId" value="$!{vo.sysShipId}" data-rules="required">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($start in $!sysShipList)
+                                        #if($!start.vesselName)
+                                            <li data-value="$!start.sysShipId"
+                                                class="select-option ">$!start.vesselName</li>
+                                        #end
+                                    #end
+                                </ul>
+                            </div>
+                        </div>
+                    #end
+                </li>
+                <li>
+                    <span>IMO :</span>
+                    #if($!{vo.agreementUuid})
+                        <span>$!{vo.imo}</span>
+                        <input type="hidden" name="imo" value="$!{vo.imo}" class="br input310 input-name">
+                    #else
+                        <input autocomplete="off" readonly type="text" name="imo" value="$!{vo.imo}"
+                               data-rules="required" class="br input310 input-name">
+                    #end
+                </li>
+                <li>
+                    <span>Product :</span>
+                    <span>$!{vo.product}</span>
+                    <input type="hidden" name="product" value="$!{vo.product}">
+                </li>
+                <li>
+                    <span>Quantity (Tons) :</span>
+                    <input type="hidden" name="quantity" value="$!{vo.quantity}">
+                    <span>$!{vo.quantity}±
+                                <input autocomplete="off" type="text" name="rangeOfError" value="$!{vo.rangeOfError}"
+                                       class="range-input">%
+							</span>
+                </li>
+                <li>
+                    <span>Laycan :</span>
+                    <span>$!{vo.laycanStrat}/$!{vo.laycanEnd}</span>
+                    <input type="hidden" name="laycanStrat" value="$!{vo.laycanStrat}">
+                    <input type="hidden" name="laycanEnd" value="$!{vo.laycanEnd}">
+                </li>
+                <li>
+                    <span>Port of Loading :</span>
+                    <span>$!{vo.portOfLoading}</span>
+                    <input type="hidden" name="portOfLoading" value="$!{vo.portOfLoading}">
+                </li>
+
+                <li>
+                    <span>Port of Discharge :</span>
+                    <div class="my-select cpy-select h-select vo-select clearfix Vessel-sele w400 br">
+                        <div class="select s-b">
+                            <div class="select-box">
+                                <div class="select-content w360">
+                                    <div class="select-show-text Vessel-sele-text">
+                                        <div class="select-show-text">
+                                            #foreach($start in $!portOfDisStart)
+                                                   	 #if($!{start.port} == $!{vo.dischargingPort})
+                                                $!{vo.dischargingPort}
+                                            #end
+    											#end
+                                        </div>
+                                    </div>
+                                    <input autocomplete="off" class="vname" type="text" readonly="readonly"
+                                           name="portOfDischarge" value="$!{start.zhName}">
+                                </div>
+                            </div>
+                            <ul class="select-options">
+                                #foreach($start in $!portOfDisStart)
+                                    <li data-value="$!{start.zhName}" class="select-option ">$!{start.zhName}</li>
+                                #end
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </li>
+
+                <span class="m-nav-line"></span>
+                #if($!{vo.quanzhouFlag} == 1 && $!{vo.tradeTerms} == "CFR")
+
+                    <li>
+                        <span>Confirm Online :</span>
+                        <input type="hidden" name="confirmOnlineDefult" value="$!{confirmOnlineDefult}">
+                        <em class="check-b">
+                            #foreach($co in $!confirmOnline)
+                                #if($co.code == $!{confirmOnlineDefult})
+                                    <label><input id="hideList" type="radio" name="confirmOnline" value="$co.code"
+                                                  checked="checked"><i></i>$co.enName</label>
+                                #else
+                                    <label><input id="showList" type="radio" name="confirmOnline"
+                                                  value="$co.code"><i></i>$co.enName</label>
+                                #end
+                            #end
+                        </em>
+                    </li>
+
+                    <ul id="listMsg" class="m-nav-info">
+                        <li>
+                            <span>DDR :</span>
+                            <div class="datetime-wrap">
+                                <input autocomplete="off" name="ddr" id="ddr" class="DeadlineMonth datetime" type="text"
+                                       style="width: 400px;">
+                                <div class="datetime-view" style="width: 400px;"></div>
+                            </div>
+                        </li>
+                        <li id="Shipp">
+                            <span>Pricing method : </span>
+                            <div class="my-select cpy-select clearfix br">
+                                <div class="select  s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text"></div>
+                                            <input autocomplete="off" type="text" readonly="readonly" class="vname"
+                                                   name="pricingMethod">
+                                            <input autocomplete="off" type="hidden" readonly="readonly" class="vcode"
+                                                   name="pricingCd">
+
+
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($start in $!pricingMethod)
+                                            <li data-value="$start.code" class="select-option ">$start.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li id="Shipp">
+                            <span>REVENUE TON（WS）: </span>
+                            <div class="my-select cpy-select clearfix br">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text"></div>
+                                            <input autocomplete="off" type="text" class="vname" name="revenueTon"
+                                                   readonly="readonly">
+                                            <input autocomplete="off" type="hidden" class="vcode" name="revenueTonCd"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($start in $!revenueTon)
+                                            <li data-value="$start.code" class="select-option ">$start.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <span>Basic Freight Rate（WS）:</span>
+                            <input autocomplete="off" type="text" name="basicFreightRate" class="br input310 input-name"
+                                   data-rules="required;decimal;" decAbove="15" decAfter="4">
+                        </li>
+                        <li>
+                            <span>Demurrage Rates :</span>
+                            <input autocomplete="off" type="text" name="demurrageRates" class="br input310 input-name"
+                                   data-rules="required;decimal;" decAbove="15" decAfter="4">
+                        </li>
+                        <li>
+                            <span>Laytime (hours) :</span>
+                            <input autocomplete="off" type="text" name="laytimeHours" class="br input310 input-name"
+                                   data-rules="required;decimal;" decAbove="4" decAfter="0">
+                        </li>
+                        <li>
+                            <span>Charter Date :</span>
+                            <div class="datetime-wrap dateParent">
+                                <input autocomplete="off" name="charterDate" id="charterDate"
+                                       class="DeadlineMonth datetime " type="text" style="width: 400px;"
+                                       data-rules="required">
+                                <div class="datetime-view" style="width: 400px;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Other :</span>
+                            <input autocomplete="off" type="text" name="remark" class="br input310 input-name"
+                                   placeholder="Non mandatory" data-rules="string;" length="100">
+                        </li>
+                    </ul>
+                    <span class="m-nav-line"></span>
+                #end
+
+                <li class="input_Upload">
+                    <span>Q88 :</span>
+
+                    #if($!vo.uploadQ88 && $!{vo.uploadQ88}!="")
+                        <input autocomplete="off" type="hidden" name="uploadQ88" value="$!{vo.uploadQ88}"/>
+                        <input autocomplete="off" type="hidden" name="uploadQ88FileNm" value="$!{vo.uploadQ88FileNm}"/>
+                        <i id="Q88Download" class="down-load-file">
+                            <a href="$appServer.get(
+                                '/common/doc/download.htm')?path=$!{vo.uploadQ88}&fileName=$!{vo.uploadQ88FileNm}"
+                               class="upload_file" target="_blank">Download</a>
+                        </i>
+
+                        <i id="Q88Preview" class="lookFileDoc" id="look_$subData.fileCode_88"
+                           style="display: inline-block;"
+                           fileUrl="$appServer.get(
+                               '/common/doc/file.htm')?path=$!{vo.uploadQ88}&fileName=$!{vo.uploadQ88FileNm}"
+                           fileFormat="$!{vo.uploadQ88FileNm}">Preview
+                        </i>
+                    #else
+                        <input autocomplete="off" type="text" id="uploadQ88FileNm" path=""
+                               class="br input310 input-name" readonly="readonly" name="uploadQ88FileNm">
+                        <input autocomplete="off" type="hidden" id="uploadQ88" path="" name="uploadQ88">
+                        <i><a href="javascript:void(0)" class="file" type="button" id="btnQ88">Upload</a></i>
+                        <i id="Q88Deleted" class="s-icon fs-close delDoucument" documentFileId=""
+                           style="display: none;">Deleted</i>
+                    #end
+                </li>
+            ##                            <li class="input_Upload">
+            ##                                <span>CP :</span>
+            ##    							<input autocomplete="off" type="hidden" name="uploadCp" value="$!{vo.uploadCp}"/>
+            ##    							<input autocomplete="off" type="hidden" name="uploadCpFileNm" value="$!{vo.uploadCpFileNm}"/>
+            ##                                <i id="CpDownload" class="down-load-file"
+            ##                					#if($!vo.uploadCpFileNm)
+            ##
+            ##                					#else
+            ##                						style="display: none;"
+            ##                					#end
+            ##                					>
+            ##                					<a href="$appServer.get('/common/doc/download.htm')?path=$!{vo.uploadCp}&fileName=$!{vo.uploadCpFileNm}"
+            ##                					class="upload_file" target="_blank">Download</a>
+            ##                				</i>
+            ##                				#if($!vo.uploadCpFileNm)
+            ##                					<i  id="CpPreview" class="lookFileDoc" id="look_$subData.fileCode_cp" style="display: inline-block;"
+            ##                						fileUrl="$appServer.get('/common/doc/file.htm')?path=$!{vo.uploadCp}&fileName=$!{vo.uploadCpFileNm}"
+            ##                						fileFormat="$!{vo.uploadCpFileNm}">Preview
+            ##                					</i>
+            ##                				#end
+            ##                            </li>
+
+
+            ##                            <li class="input_Upload">
+            ##                                <span>Upload CP :</span>
+            ##                                <input autocomplete="off" type="text" id = "uploadCpFileNm" path = "" class="br input310 input-name" readonly = "readonly" name="uploadCpFileNm">
+            ##    							<input autocomplete="off" type="hidden" id = "uploadCp" path = "" name="uploadCp">
+            ##                                <i><a href="javascript:void(0)" class="file" type="button" id="btnCP">Upload</a></i>
+            ##                                <i id ="CpDeleted" class="s-icon fs-close delDoucument2" documentFileId="" style="display: none;">Deleted</i>
+            ##                            </li>
+
+                <li id="Shipp">
+                    <span>Shipping Agent : </span>
+                    <div class="my-select cpy-select clearfix br">
+                        <div class="select s-b">
+                            <div class="select-box">
+                                <div class="select-content">
+                                    <div class="select-show-text"></div>
+                                    <input autocomplete="off" type="text" name="shippingAgent" class="vname"
+                                           readonly="readonly" data-rules="required;string;" length="20">
+                                    <input autocomplete="off" type="hidden" name="shippingAgentId" class="vcode"
+                                           readonly="readonly" data-rules="required;string;" length="20">
+                                </div>
+                            </div>
+                            <ul class="select-options">
+                                #foreach($start in $!shippingAgent)
+                                    <li data-value="$start.memberId" class="select-option ">$start.englishName</li>
+                                #end
+                            </ul>
+                        </div>
+                    </div>
+
+                </li>
+                <li>
+                    <span>Linkman :</span>
+                    <input autocomplete="off" type="text" name="linkman" class="br input310 input-name"
+                           data-rules="required;string;" length="20">
+                </li>
+                <li>
+                    <span>Phone Number :</span>
+                    <input autocomplete="off" type="text" name="phoneNumber" class="br input310 input-name"
+                           lay-verify="required|phone|number" data-rules="required;string;" length="100">
+                </li>
+
+                <span class="m-nav-line"></span>
+                <li>
+                    <div class="m-nav-btn">
+                        <em class="check-b2 button-b">
+                            <a class="br btn-sub" id="saveVesselAcceptanceForm">Save</a>
+                            <a class="br a-back" id="clickBack">Back</a>
+                        </em>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</div>

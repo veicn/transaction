@@ -1,0 +1,59 @@
+	<script src="../transport/js/shipPact/shipAgentShipPactDetailQuery.js"></script>
+	<div class="c-mod">
+			  <h3><em class="cw-ico ico-h3"></em>Charter Party</h3>
+			  <form class="form" >
+			  <div class=" c-form-xq">
+                 <ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>CP No：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipPactCode" id="shipPactCode" name="shipPactCode"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>CP Dated：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte signDate" id="signDate" name="signDate"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Charterer：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte carrierName" id="carrierName" name="carrierName" ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Ship Owner：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipOwner" id="shipOwner" name="shipOwner"  ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>VESSEL NAME：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipName" id="shipName" name="shipName"  ></span>
+					</li>
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'><i title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT" class="shipping-ico w-ico-sl"></i>LAYCAN：</span>
+						<span style="display:block; float:left; text-align:justify;" id="pactBeg" name="pactBegs" class="c-int qx-conte pactBeg" ></span>
+					</li>
+					
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'>Rate：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte pactSpeed" id="pactSpeed" name="pactSpeed" ></span>
+					</li>
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'>WS Rate：</span>
+						<span  style="display:block; float:left; text-align:justify;" class="c-int qx-conte wsRes" id="wsRes" name="wsRes"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'> Demurrage：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte demurrage" id="demurrage" name="demurrage"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Laytime：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte dockTime" id="dockTime" name="dockTime" ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Minimum Cargo Quantity(MT)：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte minQuantity" id="minQuantity" name="minQuantity"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>BROKER：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte brokerName"id="brokerName" name="brokerName"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Remarks：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte remark"  id="remark" name="remark"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>Contact：</span>
+						<div style="display:block; float:left; text-align:justify;width:355px;" >
+							<span class="c-int qx-conte accessory"id="accessory" name="accessory" ></span>
+							<span hidden="true" id="btn">&nbsp;&nbsp;<a href="javascript:;" download="" class="file1" >Download</a></span>
+						<div>
+					</li>
+				</ul>
+			  </div>
+			 </form>
+			<div class="c-subdiv">
+				<!-- <button class="c-btnsub" id="submits" >Submit</button> --><button class="c-btnsub s-btn-primary back">Back</button>
+			</div>
+	</div>

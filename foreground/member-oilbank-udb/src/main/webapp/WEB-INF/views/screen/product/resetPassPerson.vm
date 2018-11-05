@@ -1,0 +1,49 @@
+$contain.get('common/title.htm').put('title', '重置密码')
+#css($appServer.get('/product/css/work/forgotpassword.css'))
+#css($appServer.get('/product/css/work/account.css'))
+<div class="w1180 clearfix rpp-con">
+    <div class="main-tit rpp-tit">
+        <h3>Forgot Password</h3>
+    </div>
+    <ul class="stowage-steps clearfix rpp-stowage-steps">
+        <li class="steps done fl ">
+            <div class="steps-infor steps-infor-cont">
+                <span>Confirm</span><br/>
+                <span>account</span><br/>
+                <span>number</span>
+            </div>
+        </li>
+        <li class="steps done fl ">
+            <div class="steps-infor">
+                <span>Security <br/>Verification</span>
+            </div>
+        </li>
+        <li class="steps fl doing">
+            <div class="steps-infor ">
+                <span>Reset </span><br/>
+                <span>Password</span>
+            </div>
+        </li>
+    </ul>
+    <h2>Set your new password  </h2>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">New password :</div>
+            </span>
+        <input type="text" class="form-control" id=" " placeholder="Please enter password">
+        <!--<span class="errPrompt">Please enter one user name</span>-->
+    </div>
+    <div class="form-group clearfix rpp-group   ">
+            <span>
+                <div class="email">Confirm password :</div>
+            </span>
+        <input type="text" class="form-control" id=" " placeholder="Please enter password">
+    </div>
+    <em class=" button-check rpp-button">
+        <a href="javascript:;" class="br">Save changes</a>
+    </em>
+</form>
+
+

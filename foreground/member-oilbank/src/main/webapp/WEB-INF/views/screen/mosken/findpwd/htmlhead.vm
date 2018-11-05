@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Product Oil</title>
+    <script type="text/javascript" src="$imageServer.get('product/js/bigpipe.js')"></script>
+    <script src="$imageServer.get('product/js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('product/layui/layui.all.js')"></script>
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_common.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_table.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_tab.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_form.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_button.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_center.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_layout1.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/font-shey/style.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/reset.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/work/total.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/public.css')">
+</head>
+
+<header id="header">
+    <div class="header-wrap clearfix">
+        <div class="fl logo">
+            <img src="$appServer.get('/product/images/logo.png')" class="">
+        </div>
+        <nav class="fr clearfix">
+            <div class="fl clearfix">
+                <a href="$refuelingServer.get("/index.html")" #if($!{active} == 1) class="fl active" #end>首页</a>
+                #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                    <a href="$refuelingServer.get("/index.html#/hall")"#if($!{active} == 2) class="f2 active" #end>油品大厅</a>
+                #end
+                <a href="https://info.mycrudeoil.com/page/" target="_blank" #if($!{active} == 3) class="f3 active" #end>信息资讯</a>
+                <a href="https://info.mycrudeoil.com/page/#/encyclopedia" target="_blank" #if($!{active} == '4') class="f4 active" #end>船油百科</a>
+            </div>
+            <div class="fr clearfix">
+                #if(!$!session.getAttribute("_user"))
+
+
+                    <div class="fr clearfix">
+                        <a href="$systemServer.get('/login.htm')" class="language fl">登录</a>
+                        <i class="icon-search"></i>
+                    </div>
+                #else
+
+                    <div class="fr clearfix">
+                        <a href="$systemServer.get('/login.htm')">退出</a>
+                        <i class="icon-search"></i>
+                    </div>
+                    <div class="fr clearfix">
+                        <a href="$appServer.get('/center/my.htm')" class="language fl">$_user.name</a>
+                        <i class="icon-search"></i>
+                    </div>
+
+                #end
+
+            </div>
+        </nav>
+    </div>
+    <div class="header-line fl"></div>
+</header>
+<body>
+<div class="acco-h1">

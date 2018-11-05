@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+   ## $contain.get("/product/contain/server.htm")
+    $contain.get("/product/contain/htmlhead.htm")
+    $contain.get("/product/contain/nav.htm")
+#* <main id="main">
+     <div class="m-content center clearfix">
+         $contain.get("/pages/back/contain/menu.htm")
+         $screen_content
+     </div>
+ </main>*#
+
+<main id="main">
+    $screen_content
+    ##<div class="w1180 indReg-con clearfix">
+    ##  $contain.get("/product/contain/menu.htm")
+
+   ## </div>
+</main>
+
+
+    $contain.get("/product/contain/htmlend.htm")
+</html>

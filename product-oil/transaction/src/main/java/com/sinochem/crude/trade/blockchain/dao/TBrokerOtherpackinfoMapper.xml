@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerOtherpackinfoMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerOtherpackinfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="declarationuuid" jdbcType="VARCHAR" property="declarationuuid" />
+    <result column="packtypecode" jdbcType="VARCHAR" property="packtypecode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, declarationuuid, packtypecode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_otherpackinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_otherpackinfo
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_otherpackinfo
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_broker_otherpackinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+     insert into `product-trade-blockchain`.t_broker_otherpackinfo ( declarationuuid, packtypecode
+      )
+    values
+    <foreach collection="list" item="otherpackinfo" separator=",">
+      (#{otherpackinfo.declarationuuid,jdbcType=VARCHAR}, #{otherpackinfo.packtypecode,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOtherpackinfo">
+    insert into t_broker_otherpackinfo (id, declarationuuid, packtypecode
+      )
+    values (#{id,jdbcType=BIGINT}, #{declarationuuid,jdbcType=VARCHAR}, #{packtypecode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOtherpackinfo">
+    insert into t_broker_otherpackinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="declarationuuid != null">
+        declarationuuid,
+      </if>
+      <if test="packtypecode != null">
+        packtypecode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null">
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="packtypecode != null">
+        #{packtypecode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOtherpackinfo">
+    update t_broker_otherpackinfo
+    <set>
+      <if test="declarationuuid != null">
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="packtypecode != null">
+        packtypecode = #{packtypecode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOtherpackinfo">
+    update t_broker_otherpackinfo
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      packtypecode = #{packtypecode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

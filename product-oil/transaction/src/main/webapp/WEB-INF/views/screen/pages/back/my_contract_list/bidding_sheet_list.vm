@@ -1,0 +1,86 @@
+#if($!{contractListResult.list.total} == 0)
+        $contain.get('contain/nodata.htm');
+    #else
+        #foreach($item in $!{contractListResult.list})
+            #if("$!{user.epMemberId}" == "$!{item.buyer}")
+                #set($b = $!{item.sellerName})
+                #set($initiator = $!{item.seller})
+            #elseif("$!{user.epMemberId}" == "$!{item.seller}")
+                #set($b = $!{item.buyerName})
+                #set($initiator = $!{item.buyer})
+            #elseif("$!{user.epMemberId}" == "$!{item.trader}")
+                #set($b = $!{item.sellerName})
+                #set($initiator = $!{item.seller})
+            #end
+        <div class="zzyy-box">
+           <p class="cw-ico ord-status">$!{item.orderStatusStr}</p>
+            <div class="zzyy-title clearfix">
+                <div class="yy-ddh">#*<input type="checkbox">*#$!{dateUtil.getDateTime("yyyy-MM-dd",$item.createTime)}<span>订单号：<em>$!{item.orderNo}</em></span><span class="yy-gs">#if($!{item.contractType}=="D" || $!{item.contractType}=="L")对家：$!{b}#end</span></div>
+            </div>
+            <div class="orderl-cont clearfix">
+                <div class="order-blol clearfix">
+
+                    #if("$!{user.epMemberId}" == "$!{item.buyer}")
+                        <div class="order-block"><span class="order-buy">买</span></div>
+                    #elseif("$!{user.epMemberId}" == "$!{item.seller}")
+                        <div class="order-block"><span class="order-buy">卖</span></div>
+                    #elseif("$!{user.epMemberId}" == "$!{item.trader}")
+                        <div class="order-block"><span class="order-buy">中</span></div>
+                    #end
+                    ##详情链接
+                    #set($detailUrl = "$appServer.get('/buyer/crudeOilOrderInfo.htm?id=')$!{item.uuid}")
+                    #if($!{item.contractType}=="D")
+                        #if($!{item.bizType}=='CrudeOil')
+                            #set($detailUrl = "$appServer.get('/buyer/crudeOilOrderInfo.htm?uuid=')$!{item.uuid}")
+                        #elseif($!{item.bizType}=='ProductOil')
+                            #set($detailUrl = "$appServer.get('/buyer/productOilOrderInfo.htm?uuid=')$!{item.uuid}")
+                        #end
+                    #elseif($!{item.contractType}=="L")
+                        #set($detailUrl = "$appServer.get('/longTermContract/longContractDetail.htm?uuid=')$!{item.uuid}")
+                    #end
+
+                    <div class="orde-pic">
+                        <a href="$appServer.get('/buyer/productOilOrderInfo.htm').put("uuid",$!{item.uuid})">
+                            <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{initiator}.img"
+                                 onerror="this.src='$imageServer.get('images/cg_pic1.jpg')'">
+                        </a>
+                    </div>
+
+                    <dl class="orderl-txt">
+
+                        <dd>品种：$!{item.productVarietyVO.enName}</dd>
+                        <dd>规格：$!{item.productSpecificationVO.enName}</dd>
+
+
+
+                        <dd>贴水：#set($agio=$!item.agio/1000.0) $!{numberTool.format("#0.000",$!{agio})}美元/桶</dd>
+
+                        #set($num=$!{item.num}/10000000.0)
+                        <dd>数量：$!{quantityAsString}</dd>
+
+                        <dd>贸易条款：$!{item.tradeTermVO.enName}</dd>
+
+                        <dd>装期：$!{item.laycanStartDateAsString}至$!{item.laycanStartDateAsString}</dd>
+
+
+                        <dd >计价期：
+                             $!item.pricingPeriodVO.enName
+                            #if($!{item.pricingPeriodVO.enName} == 4)
+                                $!item.pricingPeriodVO.enName
+                            #end
+                            #if($!{contract.pricingPeriodVO.enName} == 5)
+                                （$!{contract.contractKind}）
+                            #end
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="order-blor clearfix">
+                    <a href="$appServer.get('/buyer/productOilOrderInfo.htm').put("uuid",$!{item.uuid})" class="view">查看</a>
+                </div>
+            </div>
+            <div class="seal-blo"></div>
+        </div>
+        #end
+                $contain.get('/common/page.htm').put("pageInfo",$contractListResult);
+    #end

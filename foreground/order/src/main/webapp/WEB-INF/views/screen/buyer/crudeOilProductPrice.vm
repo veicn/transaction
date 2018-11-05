@@ -1,0 +1,22 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>采购信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">溢短装：</span>+/-$!{contract.numFloat}%<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">贴水：</span>$!{contract.agioStr}</li>
+            <li class="c-fcos2"><span class="c-fn">计价基准：</span>$!{valuationBaseName}</li>
+
+            <li class="c-fcos2"><span class="c-fn">计价期类型：</span>$!{valuationProidTypeName}<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+
+            <li class="c-fcos2"><span class="c-fn">计价期开始时间：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidStart})<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">计价期结束时间：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidEnd})<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">付款日期：$!{payItemName}</span></li>
+
+            #*<li class="c-fcos2"><span class="c-fn">付款日期：</span>$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.payTime})<i class="c-ico cxtj-nr-ico cg-data"></i></li>*#
+
+            <li class="c-fcos2"><span class="c-fn">采购方式：$!{purchaseModeName}</span></li>
+
+            <li class="c-fcos1"><span class="c-fn">计价公式：$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos1"><span class="c-fn">备注：$!{contract.remark}</span></li>
+    </div>
+</div>

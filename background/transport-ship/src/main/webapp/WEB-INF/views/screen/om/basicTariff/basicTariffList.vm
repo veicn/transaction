@@ -1,0 +1,201 @@
+<link rel="stylesheet" href="$shipServer.get('transport/css/common.css')">
+<link rel="stylesheet" href="$shipServer.get('transport/css/f_center.css')">
+<link rel="stylesheet" href="$shipServer.get('transport/css/index.css')" >
+<script src="/lib/upload/plupload.full.min.js"></script>
+<script>
+// 提示信息
+$(function () {
+	$("td").on("mouseenter",function() {
+	    if (this.offsetWidth < this.scrollWidth) {
+	        var that = this;
+	        var text = $(this).text();
+	        layer.tips("<span style='color:black'>"+text+"</span>", that,{
+	            tips: [3,"#fff"],
+	            time: 2000
+	        });
+	    }
+	});
+})
+</script>
+<style>
+.contain {
+	width:100%;
+}
+
+table { 
+	width:100%; 
+	text-align: left;
+	border:1px solid #e3e6e8; 
+	border-collapse: collapse; 
+	table-layout: fixed; 
+	display: table;
+}
+
+th,td { 
+	overflow: hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+}
+
+
+</style>
+<div class="layui-table" style="padding:15px" id="">
+		<!--搜索条件-->
+		<div class="ry-banner">
+		<form class="layui-form" style="width:96%;">
+			
+    		<div class="layui-inline">
+		    	<label class="layui-form-label">第一装港</label>
+		    	<div class="layui-input-inline iw155 loadPortClass1">
+		    	    <select id="OnePort" name="loadPort1">
+            		<option value="">请选择</option>
+            		#foreach($lo in $loadList)
+            		#if($!lo !='其它') 
+            		<option value="$!lo">$!lo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+    		<div class="layui-inline">
+		    	<label class="layui-form-label">第二装港</label>
+		    	<div class="layui-input-inline iw155 loadPortClass2">
+		    	    <select id="TwoPort" name="loadPort2">
+            		<option value="">请选择</option>
+            		#foreach($lo in $loadList)
+            		#if($!lo !='其它') 
+            		<option value="$!lo">$!lo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+			<div class="layui-inline">
+		    	<label class="layui-form-label">第三装港</label>
+		    	<div class="layui-input-inline iw155 loadPortClass3">
+		    	    <select id="ThreePort" name="loadPort3">
+            		<option value="">请选择</option>
+            		#foreach($lo in $loadList)
+            		#if($!lo !='其它') 
+            		<option value="$!lo">$!lo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+		 	
+		 	<div class="layui-inline">
+		    	<label class="layui-form-label">年份</label>
+		    	<div class="layui-input-inline iw155 yearcxClass">
+		    	    <select id="yearcx" name="year">
+            		<option value="">请选择</option>
+            		#foreach($ye in $yearList)
+            		#if($!ye !='其它') 
+            		<option value="$!ye">$!ye</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+		 	
+			<div class="layui-inline">
+		    	<label class="layui-form-label">第一卸港</label>
+		    	<div class="layui-input-inline iw155 unloadPortClass1" id="OneunPort2">
+		    	    <select id="OneunPort" name="unloadPort1">
+            		<option value="">请选择</option>
+            		#foreach($unlo in $unloadList)
+            		#if($!unlo !='其它') 
+            		<option value="$!unlo">$!unlo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+    		<div class="layui-inline">
+		    	<label class="layui-form-label">第二卸港</label>
+		    	<div class="layui-input-inline iw155 unloadPortClass2">
+		    	    <select id="TwounPort" name="unloadPort2">
+            		<option value="">请选择</option>
+            		#foreach($unlo in $unloadList)
+            		#if($!unlo !='其它') 
+            		<option value="$!unlo">$!unlo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+			<div class="layui-inline">
+		    	<label class="layui-form-label">第三卸港</label>
+		    	<div class="layui-input-inline iw155 unloadPortClass3">
+		    	    <select id="ThreeunPort" name="unloadPort3">
+            		<option value="">请选择</option>
+            		#foreach($unlo in $unloadList)
+            		#if($!unlo !='其它') 
+            		<option value="$!unlo">$!unlo</option>
+            		#end 
+            		#end
+            		</select>
+		   		</div>
+			</div>
+			<div class="layui-input-inline4">
+			    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn" type="button">查询</button>
+			    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn2" type="button">重置</button>
+			    <button class="layui-btn layui-btn-normal layui-btn-small insertBtn" type="button">新增</button>
+			</div>
+			<div class="layui-input-inline3">
+			    <button class="layui-btn layui-btn-normal layui-btn-small" id="imports" type="button">导入</button>
+			    <button class="layui-btn layui-btn-normal layui-btn-small" id="exportEx" type="button">导出模板</button>
+			</div>
+		</form>			
+		</div>			
+		<!--列表-->
+		<div class="contain">
+		<table id="basicTariffList"  class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+		<thead>
+			<tr>
+				<th style="width:40px;">序号</th>
+				<th style="width:258px">装港</th>
+				<th style="width:190px;">卸港</th>
+				<th>费率</th>
+				<th style="width:78px">年份</th>
+				<th>里程数</th>
+				<th style="width:150px;padding-right:30px">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		#foreach($data in $datas)
+			<tr>
+				<td>${velocityCount}</td>				
+				<td>
+				$!{data.load} 
+				</td>
+				<td>
+				$!{data.unload}
+				</td>
+				<td>$!data.price</td>
+				<td>$!data.year</td>
+				<td>$!data.mileage</td>
+				<td>
+		      	<i class="layui-icon">&#xe642;</i>
+		      	<a href="javascript:;" class="dialog-link btcol editFn" attr-data="$data.uuid">
+					修改
+		      	</a>
+		      	<i class="layui-icon" style="color:red;margin-left:5px;">&#xe640;</i>
+		      	<a href="javascript:;" class="dialog-link btcol delFn" attr-data="$data.uuid">
+		      		删除
+		      	</button>
+		        </td>
+			</tr>
+		#end
+		</tbody>
+		</table>
+		</div>
+			
+	    <!--底部分页-->
+	    <div class="ry-footbar" >
+	    	<div id="ry-page" class="ry-right" style="text-align:right; margin-right:20px">
+	    		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/basicTariff/basicTariffList.htm").put('slider_path','/contain/formPagingPageSlider')
+	    	</div>
+	    </div>
+</div>
+<script src="/transport/js/om/basicTariffList.js"></script>

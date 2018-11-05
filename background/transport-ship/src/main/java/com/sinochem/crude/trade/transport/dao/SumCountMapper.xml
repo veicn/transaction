@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.transport.dao.SumCountMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.transport.domain.SumCount">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, count
+  </sql>
+  
+  <!-- 更新航次结束次数  -->
+  <update id="updatefinishShipPactCount" parameterType="com.sinochem.crude.trade.transport.domain.SumCount">
+      UPDATE t_count SET count=count+1 where code = #{code}
+  </update>
+</mapper>

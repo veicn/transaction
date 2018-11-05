@@ -1,0 +1,12 @@
+<footer id="footer">
+    <div class="ftCon-Wrapper">
+        <ul class="clearfix">
+            <li onclick="location.href='javascript:;'">about us</li>
+            <li onclick="location.href='javascript:;'">legal statment</li>
+            <li onclick="location.href='javascript:;'">help</li>
+            <li onclick="location.href='javascript:;'">contact us</li>
+            <li onclick="location.href='javascript:;'">carrers</li>
+        </ul>
+    </div>
+    <div class="cp">Copyright © 2018 Elemica. All rights reserved. | Privacy</div>
+</footer>

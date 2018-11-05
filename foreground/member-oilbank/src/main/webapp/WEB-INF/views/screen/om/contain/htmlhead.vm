@@ -1,0 +1,9 @@
+<html>
+    $contain.get("/contain/htmlhead.htm").setHost("$omServer.get('')")
+<body>
+
+<div class="layui-layout layui-layout-admin">
+
+    $contain.get("/contain/nav.htm").setHost("$omServer.get('')")
+    $contain.get("/contain/menu.htm")
+    <div class="layui-body">

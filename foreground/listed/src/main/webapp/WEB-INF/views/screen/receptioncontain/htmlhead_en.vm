@@ -1,0 +1,22 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mycrudeoil</title>
+    <link rel="stylesheet" href="$appServer.get('layui/css/layui.css')"  media="all">
+
+    <link rel="stylesheet" href="$imageServer.get('/css/f_common_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('/css/f_caigou_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('/css/f_base_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('/css/f_cpy_en.css')">
+
+
+    <script src="$imageServer.get('js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('validate/jquery.validate.min.js')"></script>
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+    
+    <link rel="stylesheet" href="$imageServer.get('/css/f_crudeoil_layer_en.css')">
+    <script src="$imageServer.get('/script/crudeOilLayer_en.js')"></script>
+</head>

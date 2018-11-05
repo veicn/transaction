@@ -1,0 +1,16 @@
+<div class="nav-wrap">
+    <div class="inner">
+        <ul class="nav clearfix">
+            <li #if($order == 1) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('')">首页</a></li>
+            <li #if($order == 10) class="nav-item act" #else class="nav-item" #end><a href="$memberServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" target="_blank">经营优化</a></li>
+            <li #if($order == 2) class="nav-item act" #else class="nav-item" #end><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm?order=2')">原油大厅</a></li>
+##            <li #if($order == 3) class="nav-item act" #else class="nav-item" #end><a href="$listedServer.get('trademall/prolist.htm')">成品油商城</a></li>
+            <li #if($order == 4) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/front_stay_tuned.htm?order=4')">企业专区</a></li>
+            <li #if($order == 5) class="nav-item act" #else class="nav-item" #end><a href="$shipServer.get('/page/#/')">贸易物流</a></li>
+            <li #if($order == 6) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/front_stay_tuned.htm?order=6')">金融服务</a></li>
+            <li #if($order == 7) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/futures/index.htm?order=7')">期货保值</a></li>
+            <li #if($order == 8) class="nav-item act" #else class="nav-item" #end><a href="$infoServer.get('page/#/encyclopedia')">石油百科</a></li>
+            <li #if($order == 9) class="nav-item act" #else class="nav-item" #end><a href="$infoServer.get('page/#/')">信息资讯</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<form class="layui-form" id="saveForm" style="padding-right: 25px;padding-top: 25px">
+
+    <input class="layui-hide" name="id" id="id" value="$versionBeanVO.id">
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">版本号</label>
+        <div class="layui-input-inline">
+            <input type="number" name="versionCode" id="versionCode" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" value="$versionBeanVO.versionCode" >
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">版本名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="versionName" id="versionName" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" value="$versionBeanVO.versionName" >
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">版本语言</label>
+        <div class="layui-input-inline">
+            <select name="versionLanguage" id="versionLanguage" lay-verify="" value="$versionBeanVO.versionLanguage" >
+                <option value="">请选择一个版本语言</option>
+                <option value="zh" #if($!{versionBeanVO.versionLanguage} == "zh") selected #end>中文</option>
+                <option value="en" #if($!{versionBeanVO.versionLanguage} == "en") selected #end>English</option>
+            </select>
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">是否强制更新</label>
+        <div class="layui-input-inline">
+            <select name="isForcedUpdate" id="isForcedUpdate" lay-verify="" value="$versionBeanVO.isForcedUpdate" >
+                <option value="">请选择</option>
+                <option value="1" #if($!{versionBeanVO.isForcedUpdate}==1) selected #end>强制</option>
+                <option value="0" #if($!{versionBeanVO.isForcedUpdate}==0) selected #end>不强制</option>
+            </select>
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">上传APP</label>
+        <div class="layui-input-inline">
+            <input type="hidden" id="url" name="url" value="$versionBeanVO.url">
+            <input type="text" id="fileName" name="fileName" value="$versionBeanVO.fileName" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" >
+        </div>
+        <div class="layui-input-inline">
+            <a class="layui-btn layui-btn-danger layui-btn-mini fileUpload" >上传</a>
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">更新内容</label>
+        <div class="layui-input-inline">
+            <textarea id="content"  name="content" style="display:inline-block;width:300px;height:80px;" >$versionBeanVO.content</textarea>
+        </div>
+    </div><br/><br/>
+
+    <div style="text-align:center;">
+        <input type= "submit" id="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交" >
+    </div>
+
+</form>
+
+<script>
+
+    ## $(function () {
+    ##     alert($versionBeanVO.content);
+    ##     $("#content").val($versionBeanVO.content);
+    ## })
+
+    layui.use("upload", function(){
+        var $ = layui.jquery,upload = layui.upload;
+
+        upload.render({
+            elem: ".fileUpload",
+            url: "$appServer.get('/common/doc/upload.json')",
+            accept: "file",
+            //size: 60 //限制文件大小，单位 KB
+            //exts: 'zip|rar|7z' //允许上传的文件后缀
+            //before: function(){
+            //  layer.tips("接口地址："+ this.url, this.item, {tips: 1});
+            //},
+            done: function(res, index, upload){
+                if(res.status === 0){
+                    var item = this.item;
+                    $("#url").val(res.datas.path);
+                    $("#fileName").val(res.datas.originalName);
+                }else{
+                    layer.tips(res.message, this.item, {tips: 1});
+                }
+            }
+        })
+    })
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+
+        //默认同步
+        $.ajaxSetup({
+            async : false
+        });
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var versionCode = $("#versionCode").val();
+            var versionName = $("#versionName").val();
+
+            if(versionCode == ''){
+                layer.alert("版本号不能为空！")
+                return false;
+            }
+            if(versionName == ''){
+                layer.alert("版本名不能为空！")
+                return false;
+            }
+
+
+            $.ajax({
+                url:'$appServer.get("om/app/update.json")',
+                type:'POST',
+                data:$("#saveForm").serializeArray(),
+                success:function(data){
+                    layer.alert(data.message,function(){
+                        if(data && data.status == 0){
+                            parent.layer.closeAll();
+                            parent.location.reload();
+                        }else{
+                            layer.alert(data.message)
+                        }
+                    });
+                },
+                error:function(r,d){
+                    layer.alert('更新失败')
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="$imageServer.get('orderexecute/css/interface/interface.css')" ></link>
+<script src="$imageServer.get('orderexecute/js/trade/tradeSubject.js')"></script>
+
+	<div class="pp15" id="layerDemo">	
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<form class="layui-form"  autocomplete="off">
+				<div class="layui-form-item">
+					<label class="layui-form-label">产品分类</label>
+				    <div class="layui-input-inline iw300" >
+				    	<select name="productType" id="productTypeId" >
+							<option value="">请选择</option>
+							<option value="1">原油</option>
+							<option value="2">成品油</option>
+							<option value="3">化工品</option>  
+						</select>
+				    </div>
+			
+					<label class="layui-form-label">费用名称</label>
+				    <div class="layui-input-inline " >
+				      <input type="text" name="subjectName" id="subjectName"   placeholder="请输入" autocomplete="off" class="layui-input" >   
+				    </div>
+			</form>
+				<div class="layui-form-item" style="float: right;margin-right: 50px; margin-top: -20px;">
+					<input type="button" style="margin-top:-12px" class="layui-btn layui-btn-normal" data-type="reload" id="btn" value="查询">
+					<input type="button" style="margin-top:-12px" class="layui-btn layui-btn-normal" id="add" value="新增">
+				</div>
+		      <!--  <button class="layui-btn layui-btn-primary resetFn">重置</button> -->
+		</div>
+		
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+			<thead>
+				<tr>
+					<th lay-data="{field:'productType', templet: '#editableTpl', width:'25%'}">产品分类</th>
+					<th lay-data="{field:'subjectName',width:'25%'}">费用名称</th>
+					<th lay-data="{field:'subjectCode',width:'25%'}">费用代码</th>			
+					<th lay-data="{fixed: 'right', width:'25%', align:'center', toolbar: '#barDemo'}">操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+		
+<script type="text/html" id="barDemo">
+	<i class="layui-icon">&#xe642;</i>
+	<a class="dialog-link" lay-event="edit" style="color:#0A529C">修改</a>
+	<i class="layui-icon" style="color:red">&#xe640;</i>
+	<a class="dialog-link btcol" lay-event="del" style="color:#0A529C">删除</a>
+</script>
+<script id="editableTpl" type="text/html">
+	{{#  if(d.productType === '1'){ }}
+	{{ '原油' }}
+	{{#  } else if (d.productType === '2') { }}
+	{{ '成品油' }}
+	{{#  } else if (d.productType === '3') { }}
+	{{ '化工品' }}
+	{{#  } }}
+</script>
+

@@ -1,0 +1,16 @@
+<div style="width: 1000px;margin-left: 411px;margin-top: 114px;">
+    <div class="s-reg-wrap">
+        <div class="s-inner">
+            <div class="clearfix s-qyxx-box">
+                <span class="s-qyxx-l"><i class="s-c-ico s-qyxx-ico"></i></span>
+                <div class="s-veri-r s-qyxx-r">
+                    <p class="s-veri-p1">企业信息提交成功，我们的审核时限为<em>3</em>个工作日，遇法定节假日顺延</p>
+                    <p><a href="$transactionServer.get('/')" class="s-btn">返回首页</a></p>
+                    <div class="s-veri-p3 s-qyxx-p3">
+                        <span>提示：企业信息经过平台审核之后才能开通业务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

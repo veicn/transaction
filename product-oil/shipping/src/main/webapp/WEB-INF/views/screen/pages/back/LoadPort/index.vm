@@ -1,0 +1,439 @@
+   <script>
+       var progress = '$!{progress}'
+</script>
+ <h2>Loading Port</h2>
+    <!--4个的切换 star-->
+    <div id="lib_Tab">
+        <div class="lib_Menubox lib_tabborder">
+            <ul class="clearfix">
+                <li class="tab-title one1 fl active">Basic information<span class="tab-line">|</span></li>
+                <li class="tab-title one2 fl">Berthing<span class="tab-line">|</span></li>
+                <li class="tab-title one3 fl">Loading<span class="tab-line">|</span></li>
+                <li class="tab-title one4 fl">Departing</li>
+            </ul>
+        </div>
+        <div class="lib_Contentbox lib_tabborder lib_tabborder1">
+            <div class="con_one_1 con_one" style="display: block">
+                <div class="m-t-tab stowage-steps-info clearfix">
+                    <ol class="v-li ">
+                        <li>
+                            <span class="m-f-span w106">Port Of Loading :</span>
+                            <span class="m-r-span">$!{loadObject.portOfLoading}</span>
+                            <input type="hidden" id="portOfLoading"  name="portOfLoading" value="$!{loadObject.portOfLoading}">
+                        <input type="hidden" id="comUuid"  name="comUuid" value="$!{loadObject.uuid}">
+                        <input type="hidden" id="uuid"  name="uuid" value="$!{lortObject.uuid}">
+                        <input type="hidden" id="step"  name="step" value="1">
+                        </li>
+                        <li>
+                            <span class="m-f-span w106">Vessel Name :</span>
+                            <span class="m-r-span">$!{loadObject.vesselName}</span>
+                              <input type="hidden" id="vesselName"  name="vesselName" value="$!{loadObject.vesselName}">
+                        </li>
+                        <li>
+                            <span class="m-f-span w106">Imo :</span>
+                            <span class="m-r-span">$!{loadObject.imo}</span>
+                             <input type="hidden" id="imo"  name="imo" value="$!{loadObject.imo}">
+                        </li>
+                        <li>
+                            <span class="m-f-span w106">Product :</span>
+                            <span class="m-r-span">$!{loadObject.product}</span>
+                            <input type="hidden" id="product"  name="product" value="$!{loadObject.product}">
+                        </li>
+                        <li>
+                            <span class="m-f-span w106">Quantity (Tons) :</span>
+                            <span class="m-r-span">$!{loadObject.quantity}  ± $!{loadObject.rangeOfError}%</span>
+                            <input type="hidden" id="quantity"  name="quantity" value="$!{loadObject.quantity}">
+                        <input type="hidden" id="quantityTons"  name="quantityTons" value="$!{loadObject.rangeOfError}">
+                        </li>
+                        <li class="time vl-time vl-time-l">
+                        <form id ="formid">
+                            <span class="m-f-span w106" style="float: left">Laycan :</span>
+                                <div class="m-r-span dateParent" style =" float: left;position: relative;   width: 320px;">
+                                <div class="datetime-wrap datetime-wrap-vl ">
+                                    <input name="laycanStart"  value="$!{lortObject.laycanStart}" class="DeadlineMonth datetime CreateStartTime" type="text" style="width: 140px;"data-rules="required" >
+                                    <div class="datetime-view" style="width: 130px;">$!{lortObject.laycanStart}</div>
+                                </div>
+                                <i>-</i>
+                                <div class="datetime-wrap datetime-wrap-vl ">
+                                    <input name="laycanEnd"  value="$!{lortObject.laycanEnd}" class="DeadlineMonth datetime " type="text" style="width: 140px;"data-rules="required"  >
+                                    <div class="datetime-view" style="width: 130px;">$!{lortObject.laycanEnd}</div>
+                                </div>
+                            </div>
+                            </form>
+                        </li>
+                    </ol>
+                </div>
+                <em class="check-b1 button-b">
+                    <a class="br btn-sub  asdadsasd">Save</a>
+                    <a href="javascript:;" class="br a-back">Next Step</a>
+                </em>
+            </div>
+
+            <div class="con_one_2 con_one ">
+                <div class="loading-port m-t-tab">
+                <form id="fomeTwo">
+                    <div class="enquiry-b">
+                        <ul class="enquiry-ul enter-ul vl-enquiry-ul">
+                            <li>
+                                <span>Nor Tendered :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="norTendered" value="$!{lortObject.norTendered}" id="NorTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.norTendered}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Anchor Aweigh :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="anchorAweigh" id="AnchorTime" value="$!{lortObject.anchorAweigh}" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.anchorAweigh}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_2_bold">
+                                <span>POB</span>
+                            </li>
+                            <li>
+                                <span>Date&Time :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="pobDatetimeOne" id="startTime1" value="$!{lortObject.pobDatetimeOne}" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.pobDatetimeOne}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Berth :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name"  style="    width: 316px;height: 36px;"
+                                          value="$!{lortObject.pobBerth}" name="pobBerth" data-rules="required" />
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_2_bold"><span>FIRST LINE</span></li>
+                            <li>
+                                <span>Date&Time :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="firstLineDatetime" value="$!{lortObject.firstLineDatetime}" id="FirstTime" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.firstLineDatetime}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Etb :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="firstLineEtb" value="$!{lortObject.firstLineEtb}" id="firstLineEtb" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.firstLineEtb}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Berth :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name" style="width: 316px;height:36px;" value="$!{lortObject.firstLineBerth}"
+                                       name="firstLineBerth" data-rules="required"  />
+                                </em>
+                            </li>
+                             <span class="lj-line-vl"></span>
+                            <li>
+                                <span>All Fast :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="allFast" value="$!{lortObject.allFast}" id="startTime2" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.allFast}</div>
+                                    </div>
+                                </em>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </form>
+                <em class="check-b1 button-b">
+                    <a href="javascript:;" class="br a-back">Previous step</a>
+                    <a class="br btn-sub" id="theSecind">Save</a>
+                    <a href="javascript:;" class="br a-back">Next Step</a>
+                </em>
+            </div>
+            <div class="con_one_3 con_one">
+                <div class="loading-port m-t-tab">
+                <form id="formTrsea">
+                    <div class="enquiry-b">
+                        <ul class="enquiry-ul enter-ul vl-enquiry-3">
+                            <li class="con_one_3_bold">
+                                <span>TANKS INSPECTION</span>
+                            </li>
+                            <li>
+                                <span>Date&Time :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="tanksInspectionDatetime" id="DateTime" value="$!{lortObject.tanksInspectionDatetime}" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.tanksInspectionDatetime}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Remarks :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name" style="width: 316px;height:36px;"
+                                         value="$!{lortObject.tanksInspectionRemarks}" name="tanksInspectionRemarks"    />
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_3_bold"><span>INDEPENDENT INSPECTION</span></li>
+                            <li>
+                                <span>Date&Time :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.independentInspectionDatetime}" name="independentInspectionDatetime" id="DaTime2" class="DeadlineMonth datetime" type="text"data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.independentInspectionDatetime}</div>
+                                    </div>
+                                </em>
+                            </li>
+
+
+
+
+
+                            <li class="s-selected-w ">
+                                <span class="m-f-span xz1">Independent Inspection :</span>
+                                <em class="check-b">
+                                    <div class="add-select">
+                                        <div class="my-select cpy-select clearfix br select1 lj-select-port shipping-lj3" style="border: 0 ;padding:0">
+                                            <div class="select s-b" style="width: 318px;" >
+                                                <div class="select-box">
+                                                    <div class="select-content" style="width: 272px;">
+                                                        <div class="select-show-text">
+                                                            $!{lortObject.independentInspection}
+                                                        </div>
+                                                        <input type="text" readonly="readonly" name="independentInspection" class="vname" value="$!{lortObject.independentInspection}" data-rules="required" >
+                                                    </div>
+
+                                                </div>
+                                                <ul class="select-options w317" style="width:317px;margin-left:-2px">
+
+
+                                                            #foreach($start in $Independent)
+                                                                <li data-value="$start.code"  class="select-option ">$start.enName</li>
+                                                            #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </em>
+                                </li>
+
+#*
+                            <li>
+                                <span>Independent Inspection :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.independentInspection}" name="independentInspection" id="IndTime" class="DeadlineMonth datetime" type="text">
+                                        <div class="datetime-view">$!{lortObject.independentInspection}</div>
+                                    </div>
+                                </em>
+                            </li>*#
+                            <li>
+                                <span>Previous Product :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name" style="width: 316px;height: 36px;"
+                                          value="$!{lortObject.independentInspectionRemarks}" name="independentInspectionRemarks" data-rules="required"  />
+                                </em>
+                            </li>
+                             <li>
+                                <span>OBQ :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name" style="width:316px;height: 36px"
+                                         value="$!{lortObject.independentInspectionObq}" name="independentInspectionObq"  data-rules="required"  />
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li>
+                                <span>Shore Arms Connecting :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.shoreArmsConnecting}" name="shoreArmsConnecting" id="ShoreTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.shoreArmsConnecting}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_3_bold">
+                                <span>COMMENCED LOADING</span>
+                            </li>
+
+                            <li>
+                                <span>Date&Time :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.commencedLoadingDatetime}" name="commencedLoadingDatetime" id="startTime3" class="DeadlineMonth datetime" type="text"                                        <input value="$!{lortObject.shoreArmsConnecting}" name="shoreArmsConnecting" id="ShoreTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.commencedLoadingDatetime}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Etc :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.etc}" name="etc" id="endTime3" class="DeadlineMonth datetime" type="text"                                         <input value="$!{lortObject.shoreArmsConnecting}" name="shoreArmsConnecting" id="ShoreTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.etc}</div>
+                                    </div>
+                                </em>
+                            </li>
+
+                        </ul>
+                        <span>LOADING PROGRESS</span>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="h1">Date&Time</th>
+                                <th class="h2">Cargo Loaded(ton)</th>
+                                <th class="h3">The Cargo To Be Loaded(ton)</th>
+                                <th class="h4">Loading Speed(ton/h)</th>
+                                <th class="h5">Etc</th>
+                                <th class="h6">Operate</th>
+                            </tr>
+                            </thead>
+                            <tbody id ="seiaBody">
+                            
+                            </tbody>
+                        </table>
+
+                        <div class="fr addBox"><a href="javascript:;" class="br addBtn addbtn3 " id="addButton">Add</a></div>
+                        <div class="Com-Load">
+                            <span>Completed Loading :</span>
+                            <span class="time5">
+                                <div class="datetime-wrap">
+                                        <input value="$!{lortObject.completedLoadingDatetime}" name="completedLoadingDatetime" id="comTime" class="DeadlineMonth datetime" type="text"                                         <input value="$!{lortObject.shoreArmsConnecting}" name="shoreArmsConnecting" id="ShoreTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view">$!{lortObject.completedLoadingDatetime}</div>
+                                    </div>
+                            </span>
+                            </td>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <em class="check-b1 button-b">
+                    <a href="javascript:;" class="br a-back">Previous step</a>
+                    <a  href="javascript:;" class="br btn-sub" id="loadPortAddFormAdd">Save</a>
+                    <a href="javascript:;" class="br a-back">Next Step</a>
+                </em>
+            </div>
+            <div class="con_one_4 con_one con_one_4_vl">
+                <div class="loading-port m-t-tab">
+                <form id="formsia">
+                    <div class="enquiry-b">
+                        <ul class="enquiry-ul enter-ul vl-enquiry-4">
+
+                            <li>
+                                <span>Shore Arm Disconnecting :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.shoreArmDisconnecting}" name="shoreArmDisconnecting" id="ShoreArmTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view datetime-view-one4">$!{lortObject.shoreArmDisconnecting}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <span>Cargo Survey :</span>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.cargoSurvey}" name="cargoSurvey" id="CargoTime" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view datetime-view-one4">$!{lortObject.cargoSurvey}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_3_bold">
+                                <span>Cargo Documents On Board</span>
+                            </li>
+                            <li>
+                                <span>Metric Tons :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name "style="width: 305px;height:36px;"
+                                        value="$!{lortObject.blMetricTons}" name="blMetricTons"  data-rules="required"  />
+                                </em>
+                            </li>
+                            <li>
+                                <span>Long Tons :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name "style="width: 305px;height:36px"
+                                        value="$!{lortObject.blLongTons}" name="blLongTons"  data-rules="required"  />
+                                </em>
+                            </li>
+
+                            <li>
+                                <span>Ltr at 15℃ :</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name"style="width: 305px;height:36px"
+                                        value="$!{lortObject.ltr}" name="ltr"  data-rules="required"   />
+                                </em>
+                            </li>
+                            <li>
+                                <span>Bbls at 60 ℉:</span>
+                                <em class="check-b">
+                                    <input type="text" class="br input310 input-name"style="width: 305px;height:36px"
+                                        value="$!{lortObject.bbls}" name="bbls"  data-rules="required"   />
+                                </em>
+
+                            </li>
+                            <span class="lj-line-vl"></span>
+                            <li class="con_one_3_bold">
+                                <span>Sailed</span></li>
+                            <li>
+                                <span>Date&Time :</span>
+
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input value="$!{lortObject.leaveDatetime}" name="leaveDatetime" id="DateTime4" class="DeadlineMonth datetime" type="text" data-rules="required" >
+                                        <div class="datetime-view datetime-view-one4">$!{lortObject.leaveDatetime}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li class="s-selected-w ">
+                            <span class="m-f-span xz1">Next Port :</span>
+                            <em class="check-b">
+                            <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1 lj-select-port w67" id="lj-select-port" style="border: 0">
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content" style="width:255px;">
+		                                       		 <div class="select-show-text">
+                                                         $!{lortObject.nextPort}
+		                                       		 </div>
+                                            <input type="hidden" readonly="readonly" name="nextPortId" class="vcode" value="$!{lortObject.nextPortId}" data-rules="required" >
+                                             <input type="text" readonly="readonly" name="nextPort" class="vname" value="$!{lortObject.nextPort}">
+                                        </div>
+
+                                    </div>
+                                    <ul class="select-options w304">
+                                        #foreach($start in $portOfDisStart)
+	                                        <li data-value="$start.code"  class="select-option ">$start.zhName</li>
+                                        #end
+                                    </ul>
+                                </div>
+							</div>
+                            </div>
+                            </em>
+                        </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                </form>
+                <em class="check-b1 button-b">
+                    <a class="br btn-sub">Previous step</a>
+                    <a  href="javascript:;" class="br btn-sub" id="fourthSteps">Save</a>
+                </em>
+            </div>
+        </div>
+    </div>

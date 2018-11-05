@@ -1,0 +1,256 @@
+#set($a = "个人中心-买原油网")
+
+<div class="s-mod">
+    <div class="s-order-box">
+        <div class="clearfix s-order-tit"><h1>Create Trade Chain</h1></div>
+        <p class="s-order-jbx"></p>
+        <div class="s-myl-blo clearfix">
+            <div class="s-myl-blol">
+                <ul class="clearfix">
+                    <li><i class="s-icon s-myl-ico1"></i><p><span class="s-myl-span1">$!{demandRelevanter3.enterpriseName}</span><span class="s-myl-span2">Seller</span></p></li>
+                    <li><i class="s-icon s-myl-ico2"></i><p><span class="s-myl-span5" ><span id="tradeName">Please choose...</span><a href="#" onclick="openAddTrader()">Add Trading Agent</a></span></p></li>
+                    <li><i class="s-icon s-myl-ico3"></i><p><span class="s-myl-span3">$!{demandRelevanter1.enterpriseName}</span><span class="s-myl-span2">Buyer</span></p></li>
+                </ul>
+                <input type="hidden" name="serller" value="$!{demandRelevanter3.eMemberId}">
+                <input type="hidden" name="buyer" value="$!{demandRelevanter1.eMemberId}">
+                <p class="s-myl-line"><i class="s-icon s-myl-ico4"></i><i class="s-icon s-myl-ico5"></i></p>
+            </div>
+            <div class="s-myl-blor">Trade Chain Valid Time： $!{dateString}</div>
+        </div>
+    </div>
+    #*原油信息*#
+    $contain.get("/crudeoilhallform/oiltypeList.htm").setParam("demandId","$!{demand.id}").put('publishType',$!{demand.publishType})
+
+    <div class="s-mod-block">
+        <div class="s-mod-btit">Intention Draft</div>
+        <form method="post" action="" id="quoteForm">
+            $contain.get('/tradeChain/quoteForm.htm').put('inspectionFeeSharingTypeMap', $!{inspectionFeeSharingTypeMap}).put('tradeItemMap', $!{tradeItemMap}).put('purchaseModes', $!{purchaseModes}).put('payItemMap', $!{payItemMap}).put('creditItem', $!{creditItem}).put('shipTypes', $!{shipTypes}).put('valuationProidTypeMap', $!{valuationProidTypeMap}).put('valuationBase', $!{valuationBase}).put('measureModeMap', $!{measureModeMap}).put('contractKindMap', $!{contractKindMap}).put('demandRelevanter3', $!{demandRelevanter3}).put('demandRelevanter1', $!{demandRelevanter1}).put('demandShip', $!{demandShip}).put('demand', $!{demand}).put('dateString', $!{dateString}).put('belongToCurrentUser', $!{belongToCurrentUser}).put('overdue', $!{overdue})
+        </form>
+    </div>
+    <div class="s-myl-jygz">
+        <input type="hidden" name="bidding.crudeOilOptions" />
+        <input type="hidden" id="biddingTypeInput" name="bidding.biddingType" />
+
+        <p><input name="agreementCk"  type="checkbox" id="agreementCk">I have read and agreed with<a href="javascript:;"  onclick="openProtocol()">Trade Chain Rules</a></p>
+    </div>
+    <div class="s-btn-box">
+        <button type="button" class="s-btn s-btn-blue" onclick="blue()">Submit</button>
+        <button type="button" class="s-btn s-btn-warm" onclick="warm()">Save</button>
+        <button type="button" class="s-btn s-btn-primary" onclick="back()">Back</button>
+    </div>
+</div>
+
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+
+<script>
+    // 返回
+    function back () {
+        window.history.go(-1);
+    };
+
+    // 友好提示
+    errorfunction();
+
+    function errorfunction() {
+
+        var msg = "$!{msg}";
+        if(msg != null && msg != ""){
+            layui.use(['layer'], function () {
+                layui.layer.alert("$!{msg}", {title:"Notice", btn: "OK"});
+            })
+        }
+    };
+
+
+    // 提交
+    function blue(){
+
+        $("input[name=status]").val(1);
+
+        //必填校验
+        if(!requiredChk())return;
+
+
+        //数据长度校验
+        if(!lengthChk())return;
+
+
+        //判断是否同意交易规则
+        var cked = $('input[name=agreementCk]').is(":checked");
+        if(!cked){
+            layui.use(['form', 'layedit', 'laydate'], function () {
+                layui.layer.alert('Please agree with Trade Chain Rules first', {title:"Notice", btn: "OK"});
+            })
+            return;
+        }
+
+        $("#quoteForm").attr("action","$appServer.get('tradeChain/insertTradeChain.htm')");
+        $("#quoteForm").submit();
+    }
+
+    // 保存
+    function warm(){
+
+        $("input[name=status]").val(2);
+
+        //必填校验
+        if(!requiredChk())return;
+
+
+        //数据长度校验
+        if(!lengthChk())return;
+
+
+        //判断是否同意交易规则
+        var cked = $('input[name=agreementCk]').is(":checked");
+        if(!cked){
+            layui.use(['form', 'layedit', 'laydate'], function () {
+                layui.layer.alert('Please agree with Trade Chain Rules first', {title:"Notice", btn: "OK"});
+            })
+            return;
+        }
+
+        $("#quoteForm").attr("action","$appServer.get('tradeChain/insertTradeChain.htm')");
+        $("#quoteForm").submit();
+    }
+
+    function openProtocol(){
+
+        $.ajax({
+            type:"POST",
+            url:'$infoServer.get("/front/infoDetailByTitle.json")',
+            //async:true
+            data:JSON.stringify({"title":"Trade Chain Rules"}),
+            contentType:"application/json; charset=utf-8",
+            dataType: 'JSON',
+            success:function(data){
+                layer.open({
+                    title: 'Trade Chain Mode Instruction',
+                    content: data.datas.textHtml //注意，如果str是object，那么需要字符拼接。
+                    ,area:'auto'
+                    ,offset: 'auto'
+                    ,btn: 'I have read and agreed with'
+                    ,yes: function(index, layero){
+                        //按钮【按钮一】的回调
+                        $("#agreementCk").attr("checked",'true');
+                        layer.close(index);
+                    }
+                    ,btnAlign: 'c'
+                    ,anim: 0
+                    ,maxWidth:800
+                    ,maxHeight:500
+                });
+            }
+        });
+    }
+
+    /*added by Yichen Zhao*/
+    var traders = [];
+
+    function openAddTrader() {
+        if (traders.length != 0) {
+            buildTradersSelect(traders, false);
+        }
+
+        var url = "$appServer.get('/queryTraders.json').toString()";
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                var datas= result.traderList;
+                if (datas) {
+                    buildTradersSelect(datas, true);
+                }
+            }
+        });
+    }
+
+    function buildTradersSelect(datas, initializing) {
+        var select = '<select id="traderInput" class="s-input s-input-sear" lay-verify="" lay-search>';
+
+        for (var i = 0; i < datas.length; i++) {
+            var data = datas[i];
+
+            //if (data.cres.indexOf('2') >= 0) { //贸易商资质
+            select += '<option value="' + data.memberId + '">' + data.englishName + '</option>';
+
+            if (initializing) {
+                traders.push(data);
+            }
+            //}
+        }
+
+        select += '</select>';
+
+        layer.open({
+            type: 0,
+            id: 'tradersSelect',
+            title: 'Add Trader',
+            shade : false,
+            scrollbar : false,
+            content: select,
+            yes: function() {
+                var selectedTraderId = $('#traderInput').val();
+                selectTrader(selectedTraderId);
+
+                // 判断贸易商是否和供应商，购买商重复
+                var maoyi = $('input[name="biddingList[1].supplierRelevanter.eMemberId"]').val();
+                var serller = $("input[name=serller]").val();
+                var buyer = $("input[name=buyer]").val();
+                if(maoyi == serller){
+
+                    $('#tradeName').html("");
+                    $('input[name="biddingList[0].buyerRelevanter.eMemberId"]').val("");
+                    $('input[name="biddingList[0].buyerRelevanter.enterpriseName"]').val("");
+
+
+                    $('input[name="biddingList[1].supplierRelevanter.eMemberId"]').val("");
+                    $('input[name="biddingList[1].supplierRelevanter.enterpriseName"]').val("");
+                    layui.use(['layer'], function () {
+                        layui.layer.alert('Trader cannot be the same as supplier', {title:"Notice", btn: "OK"});
+                    });
+                    return;
+                }else if(maoyi == buyer){
+
+                    $('#tradeName').html("");
+                    $('input[name="biddingList[0].buyerRelevanter.eMemberId"]').val("");
+                    $('input[name="biddingList[0].buyerRelevanter.enterpriseName"]').val("");
+
+
+                    $('input[name="biddingList[1].supplierRelevanter.eMemberId"]').val("");
+                    $('input[name="biddingList[1].supplierRelevanter.enterpriseName"]').val("");
+                    layui.use(['layer'], function () {
+                        layui.layer.alert('Trader cannot be the same as buyer', {title:"Notice", btn: "OK"});
+                    });
+                    return;
+                }
+
+                layer.closeAll();
+            }
+        });
+    }
+
+    function selectTrader(traderId) {
+        console.log(traderId);
+
+        for (var i = 0; i < traders.length; i++) {
+            var trader = traders[i];
+
+            if (trader.memberId == traderId) {
+                $('#tradeName').html(trader.englishName);
+
+                $('input[name="biddingList[0].buyerRelevanter.eMemberId"]').val(trader.memberId);
+                $('input[name="biddingList[0].buyerRelevanter.enterpriseName"]').val(trader.name);
+
+                $('input[name="biddingList[1].supplierRelevanter.eMemberId"]').val(trader.memberId);
+                $('input[name="biddingList[1].supplierRelevanter.enterpriseName"]').val(trader.name);
+
+                return;
+            }
+        }
+    }
+</script>

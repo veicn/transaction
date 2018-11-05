@@ -1,0 +1,107 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船舶管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit"><h1>船舶详情</h1></div>
+            <div class="s-mod-bcont s-mod-bcont1 s-mod-bcont4">
+                <form class="s-form s-form-cont s-form-cont2" action="">
+                <ul>
+                    <li class="s-form-item">
+                        <div class="s-inline">
+                          <label class="s-form-label">IMO：</label>
+                          <div class="s-input-inline">
+                              <p id="imo"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Hull Type：</label>
+                          <div class="s-input-inline">
+                              <p id="hull"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">MMSI：</label>
+                          <div class="s-input-inline">
+                             <p id="mmsi"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">SDWT(mt)：</label>
+                          <div class="s-input-inline">
+                              <p id="loadQuantity"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Vessel Name：</label>
+                          <div class="s-input-inline">
+                             <p id="name"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">LOA(m)：</label>
+                          <div class="s-input-inline">
+                             <p id="length"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Vessel Type：</label>
+                          <div class="s-input-inline">
+                             <p id="useType"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Beam(m)：</label>
+                          <div class="s-input-inline">
+                             <p id="wide"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Vessel Size：</label>
+                          <div class="s-input-inline">
+                             <p id="type"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Draft(m)：</label>
+                          <div class="s-input-inline">
+                             <p id="draft"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Built：</label>
+                          <div class="s-input-inline">
+                             <p id="date1"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline">
+                          <label class="s-form-label">Cubic(m³)：</label>
+                          <div class="s-input-inline">
+                             <p id="capacity"></p>
+                          </div>
+                        </div>
+                        <div class="s-inline rejectInfo">
+                          <label class="s-form-label">审核驳回信息：</label>
+                          <div class="s-input-inline">
+                             <p id="rejectMsg"></p>
+                          </div>
+                        </div>
+                    </li>
+                </ul>
+                </form>
+                
+                <!-- 附件回显 -->
+                <div class="s-table-wrap layui-upload" style="display:none;">
+                    <table class="s-table s-table3">
+                      <tr><th>序号</th><th>文件名</th><th>操作</th></tr>
+                      <tbody id="downloadList"></tbody>
+                    </table>
+                </div>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary returnBtn">返&nbsp;&nbsp;回</button></div>
+		</div>
+
+		<script src="../transport/js/shipOwnerSysShip/lookSysShip.js"></script>
+  

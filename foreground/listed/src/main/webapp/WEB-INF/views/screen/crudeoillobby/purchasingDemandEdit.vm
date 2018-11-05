@@ -1,0 +1,11 @@
+###################################发布采购需求信息页#####################################
+
+<div class="fabucaigou-banner"></div>
+<div class="caigou-content clearfix cg-list">
+
+    <div class="inner">
+        $contain.get("/crudeoilhallform/edit.htm")
+        $contain.get("/crudeoilhallform/sheet.htm").put("demandId","$!demandId").put("crudeOilList",$!crudeOilList)
+    </div>
+</div>
+

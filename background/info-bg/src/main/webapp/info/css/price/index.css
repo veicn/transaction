@@ -1,0 +1,118 @@
+.box{
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+.inquire{
+	height: 40px;	
+	background-color: #ccc;
+
+}
+.inquire1{
+	margin-top:20px;
+	height: 40px;	
+	background-color: #ccc;
+	border-bottom: 2px solid #0a529c;
+}
+.inquire1 h3{
+	font-size: 16px;
+	padding-left:10px ;
+	line-height: 40px;
+} 
+.inquire h3{
+	font-size: 16px;
+	padding-left:10px ;
+	line-height: 40px;
+}
+.index-name{
+	margin: 20px 0 0 20px;
+}
+.industry-name{
+	margin: 20px 0 0 20px;
+}
+.btn{
+	text-align: right;
+	margin-right: 300px;
+}
+ .one thead tr th{
+	text-align: center;
+}
+
+.one tbody tr td{
+	text-align: center;
+}
+.mr5{
+	color: #014f99;
+}
+.lypage{
+	text-align: right;
+}
+
+/*分割*/
+
+.wd{
+	width: 218px !important;
+}
+.btn1{
+	text-align: center;
+	margin-right:113px ;
+}
+
+.w{
+	width: 50px;
+} 
+.w1{
+	width: 80px;
+}
+ .two thead tr th{
+	text-align: center;
+	margin:0 2px;
+	padding:0 2px;
+}
+
+.two tbody tr td{
+	text-align: center;
+	margin:0 2px;
+	padding:0 2px;
+}
+.foot{
+	height: 60px;
+	background-color: #ccc;
+	border-top: 2px solid #0e509a;
+	text-align: center;
+	
+	
+}
+.foot button{
+	margin-top: 10px;
+}
+.t-m{
+	margin-bottom:5px;
+}
+.mt16{
+	margin-top:16px;
+}
+.ml18{
+	margin-left:18px;
+}
+.ml125{
+	margin-left:125px;
+}
+.mt15{
+	margin-top:15px;
+}
+.btnloc1{
+	margin-left:240px;
+}
+.btnloc2{
+	margin-top:50px;
+}
+
+/*弹出表单*/
+.form-w{
+	width: 80px !important;
+}
+@media screen and (min-width:1920px) and (max-width:1080px){
+     .add{
+     	width: 100%;
+     }
+}

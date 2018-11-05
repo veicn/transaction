@@ -1,0 +1,5 @@
+
+$systemServer.get("/center/safety.htm");
+$systemServer.get($contain.get("center/safety.htm"));
+$contain.get("");
+$contain.get("/sys/center/safety.htm")

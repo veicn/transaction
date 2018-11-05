@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderPartyMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderParty" id="OrderParty">
+		<result property="partyId" column="PARTY_ID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="partyType" column="PARTY_TYPE" />
+		<result property="customerName" column="CUSTOMER_NAME" />
+		<result property="customerId" column="CUSTOMER_ID" />
+		<result property="address" column="ADDRESS" />
+		<result property="contactName" column="CONTACT_NAME" />
+		<result property="tel" column="TEL" />
+		<result property="email" column="EMAIL" />
+		<result property="fax" column="FAX" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderParty"  useGeneratedKeys="true" keyProperty="partyId" >
+		insert  into t_order_party (				PARTY_ID
+						,ORDER_ID
+						,PARTY_TYPE
+						,CUSTOMER_NAME
+						,CUSTOMER_ID
+						,ADDRESS
+						,CONTACT_NAME
+						,TEL
+						,EMAIL
+						,FAX
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{partyId}
+						,#{orderId}
+						,#{partyType}
+						,#{customerName}
+						,#{customerId}
+						,#{address}
+						,#{contactName}
+						,#{tel}
+						,#{email}
+						,#{fax}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_party
+              WHERE 1=1 
+                AND PARTY_ID = #{partyId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderParty">
+        DELETE FROM t_order_party
+              WHERE 1=1 
+        <if test="partyId!=null and partyId!=''">AND  PARTY_ID = #{partyId}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="partyType!=null and partyType!=''">AND  PARTY_TYPE = #{partyType}</if>
+        <if test="customerName!=null and customerName!=''">AND  CUSTOMER_NAME = #{customerName}</if>
+        <if test="customerId!=null and customerId!=''">AND  CUSTOMER_ID = #{customerId}</if>
+        <if test="address!=null and address!=''">AND  ADDRESS = #{address}</if>
+        <if test="contactName!=null and contactName!=''">AND  CONTACT_NAME = #{contactName}</if>
+        <if test="tel!=null and tel!=''">AND  TEL = #{tel}</if>
+        <if test="email!=null and email!=''">AND  EMAIL = #{email}</if>
+        <if test="fax!=null and fax!=''">AND  FAX = #{fax}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderParty">
+		update t_order_party
+		<set>
+         PARTY_ID=#{partyId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="partyType!=null">,PARTY_TYPE = #{partyType}</if>
+		<if test="customerName!=null">,CUSTOMER_NAME = #{customerName}</if>
+		<if test="customerId!=null">,CUSTOMER_ID = #{customerId}</if>
+		<if test="address!=null">,ADDRESS = #{address}</if>
+		<if test="contactName!=null">,CONTACT_NAME = #{contactName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="fax!=null">,FAX = #{fax}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 PARTY_ID=#{partyId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_party
+		<set>
+         PARTY_ID=#{partyId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="partyType!=null">,PARTY_TYPE = #{partyType}</if>
+		<if test="customerName!=null">,CUSTOMER_NAME = #{customerName}</if>
+		<if test="customerId!=null">,CUSTOMER_ID = #{customerId}</if>
+		<if test="address!=null">,ADDRESS = #{address}</if>
+		<if test="contactName!=null">,CONTACT_NAME = #{contactName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="fax!=null">,FAX = #{fax}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="partyId!=null and partyId!=''">and  PARTY_ID=#{partyId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="partyType!=null and partyType!=''">and  PARTY_TYPE=#{partyType}</if>
+		<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+		<if test="customerId!=null and customerId!=''">and  CUSTOMER_ID=#{customerId}</if>
+		<if test="address!=null and address!=''">and  ADDRESS=#{address}</if>
+		<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="fax!=null and fax!=''">and  FAX=#{fax}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderParty">
+			select
+			* from t_order_party
+			where
+		    PARTY_ID=#{partyId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderParty">
+			select
+			* from t_order_party
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderParty" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderParty">
+		select * from t_order_party
+			where
+		 ALIVE_FLAG='1'
+		<if test="partyId!=null and partyId!=''">and  PARTY_ID=#{partyId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="partyType!=null and partyType!=''">and  PARTY_TYPE=#{partyType}</if>
+		<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+		<if test="customerId!=null and customerId!=''">and  CUSTOMER_ID=#{customerId}</if>
+		<if test="address!=null and address!=''">and  ADDRESS=#{address}</if>
+		<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="fax!=null and fax!=''">and  FAX=#{fax}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  PARTY_ID as "partyId" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   PARTY_TYPE as "partyType" 
+						 ,   CUSTOMER_NAME as "customerName" 
+						 ,   CUSTOMER_ID as "customerId" 
+						 ,   ADDRESS as "address" 
+						 ,   CONTACT_NAME as "contactName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   FAX as "fax" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_order_party
+		where
+			ALIVE_FLAG='1'
+			<if test="partyId!=null and partyId!=''">and  PARTY_ID=#{partyId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="partyType!=null and partyType!=''">and  PARTY_TYPE=#{partyType}</if>
+			<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+			<if test="customerId!=null and customerId!=''">and  CUSTOMER_ID=#{customerId}</if>
+			<if test="address!=null and address!=''">and  ADDRESS=#{address}</if>
+			<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="fax!=null and fax!=''">and  FAX=#{fax}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_party 
+		where
+		 ALIVE_FLAG='1'
+			<if test="partyId!=null and partyId!=''">and  PARTY_ID=#{partyId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="partyType!=null and partyType!=''">and  PARTY_TYPE=#{partyType}</if>
+			<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+			<if test="customerId!=null and customerId!=''">and  CUSTOMER_ID=#{customerId}</if>
+			<if test="address!=null and address!=''">and  ADDRESS=#{address}</if>
+			<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="fax!=null and fax!=''">and  FAX=#{fax}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

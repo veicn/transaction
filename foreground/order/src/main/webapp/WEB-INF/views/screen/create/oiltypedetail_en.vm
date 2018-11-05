@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="$appServer.get('/css/longcontractadd_layer_en.css')">
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Grade<span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table id="crudeDataArray">
+            <tr class="cruhead">
+				<th>Operate</th>
+	            <th class="tabl-line">Origin</th>
+	            <th>Grade</th>
+	            <th>API</th>
+	            <th>Sulphur</th>
+	            <th>Acid</th>
+	            <th>Carbon Residue</th>
+	            <th>Van</th>
+	            <th>Ni</th>
+	            <th> >350°C mass yield/%</th>
+##	            <th>Quality yield/%</th>
+##	            <th>Vanadium</th>
+##	            <th>Ni</th>
+##	            <th>Micro Carbon Residue</th>
+##	            <th>Sulphur</th>
+                <th>Remark</th>
+            </tr>
+			<tr class="c-tabcos1 oil_item">
+				<td>
+					<a class="crudeOilLayer btn-more" retFun="retFunction" style="width:50px;" data-index="1">Choose</a>
+					<input type="hidden" name="crudeOilResource.propertyId" value="$!{crudeOilResource.propertyId}">
+				</td>
+				<td class="tabl-line">
+					<span class="origin_name">$!{crudeOilResource.originName}</span>
+                    <input type="hidden" name="crudeOilResource.origin" value="$!{crudeOilResource.origin}"/>
+					<input type="hidden" name="crudeOilResource.originName" value="$!{crudeOilResource.originName}"/>
+				</td>
+				<td>
+                    <input type="hidden" name="crudeOilResource.cnName" value="$!{crudeOilResource.cnName}">
+					<input type="text" name="crudeOilResource.name" value="$!{crudeOilResource.name}">
+				</td>
+				<td><input type="text" name="crudeOilResource.indicator1MinDecimal" value="$!{crudeOilResource.entries[0].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator2MinDecimal" value="$!{crudeOilResource.entries[1].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator3MinDecimal" value="$!{crudeOilResource.entries[2].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator4MinDecimal" value="$!{crudeOilResource.entries[3].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator5MinDecimal" value="$!{crudeOilResource.entries[4].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator6MinDecimal" value="$!{crudeOilResource.entries[5].min}"></td>
+				<td><input type="text" name="crudeOilResource.indicator7MinDecimal" value="$!{crudeOilResource.entries[6].min}"></td>
+##				<td><input type="text" name="crudeOilResource.indicator8MinDecimal" value="$!{crudeOilResource.entries[7].min}"></td>
+##				<td><input type="text" name="crudeOilResource.indicator9MinDecimal" value="$!{crudeOilResource.entries[8].min}"></td>
+##				<td><input type="text" name="crudeOilResource.indicator10MinDecimal" value="$!{crudeOilResource.entries[9].min}"></td>
+##				<td><input type="text" name="crudeOilResource.indicator11MinDecimal" value="$!{crudeOilResource.entries[10].min}"></td>
+##				<td><input type="text" name="crudeOilResource.indicator12MinDecimal" value="$!{crudeOilResource.entries[11].min}"></td>
+                <td><input type="text" name="crudeOilResource.desc" value="$!{crudeOilResource.desc}"></td>
+			</tr>
+        </table>
+    </div>
+</div>
+<script>
+	function retFunction(data, index){
+        console.log(data);
+        var dd = $("#crudeDataArray tr").eq(index);
+        dd.find("input[name='crudeOilResource.propertyId']").val(data.id);
+        dd.find(".origin_name").html(data.originNameE);
+        dd.find("input[name='crudeOilResource.origin']").val(data.originId);
+        dd.find("input[name='crudeOilResource.originName']").val(data.originNameC);
+        dd.find("input[name='crudeOilResource.cnName']").val(data.crudeNameC);
+        dd.find("input[name='crudeOilResource.name']").val(data.crudeNameE);
+        dd.find("input[name='crudeOilResource.indicator1MinDecimal']").val(data.api);
+        dd.find("input[name='crudeOilResource.indicator2MinDecimal']").val(data.sulphur);
+        dd.find("input[name='crudeOilResource.indicator3MinDecimal']").val(data.acidity);
+        dd.find("input[name='crudeOilResource.indicator4MinDecimal']").val(data.carbonResidue);
+        dd.find("input[name='crudeOilResource.indicator5MinDecimal']").val(data.nickel);
+        dd.find("input[name='crudeOilResource.indicator6MinDecimal']").val(data.vanadium);
+        dd.find("input[name='crudeOilResource.indicator7MinDecimal']").val(data.yield);
+	}
+    function getDelber(q){
+	    var trData = $(q).parent().parent();
+	    if (1 < $(".oil_item").length) {
+            trData.nextAll('tr').each(function (i,v) {
+                var next = $(v);
+                var inputHtml = next.find('td:eq(2)').html();
+                var index = inputHtml.substr(inputHtml.indexOf('[')+1,1)-1;
+                next.find('input').each(function (i,v) {
+                    var nameVal = $(v).attr('name');
+                    if(nameVal != undefined && nameVal != ''){
+                        nameVal = 'crudeOilResource['+index+'].'+nameVal.substr(nameVal.indexOf('.')+1);
+                        $(v).attr('name',nameVal);
+                    }
+                })
+            });
+            trData.remove();
+		} else {
+            trData.find(".origin_name").html("");
+            trData.find("input[type='text']").val("");
+		}
+    }
+
+</script>

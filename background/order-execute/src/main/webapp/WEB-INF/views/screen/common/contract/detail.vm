@@ -1,0 +1,129 @@
+<div class="c-mod">
+  <h3><em class="cw-ico ico-h3"></em>合同详情</h3>
+  
+  <div class="charter-cont charter-cont2">
+	<div class="form-row charter-row charter-row3">
+		
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">订单编号：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.orderNo}">
+			</li>
+		</ul>
+		
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">合同编号：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.contractNo}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">销售方：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.sellerCustomer}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">购买方：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.buyerCustomer}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">油种：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.goodsName}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">数量（桶）：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!NumberTool.format($!{contract.quantity})">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">装期：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.layTime}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">船名：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.shipName}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">价格公式：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.priceFormula}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">计价期：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.pricingDesc}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">精确度：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.priceRounding}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">付款日期：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.paymentTerm}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">装/卸货允许时间：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.demurrage}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">商检费分担方式：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.inspection}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">贸易条款：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.tradeTerm}">
+			</li>
+		</ul>
+		<ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">GTC：</span>
+				<input type="text" disabled="disabled" class="c-int" value="$!{contract.gtc}">
+			</li>
+		</ul>
+		
+		##----------合同附件----------##
+		#if(${contract.contractFileList.size()} > 0)
+		 #foreach($contractFile in ${contract.contractFileList})
+		 #set($index = $velocityCount - 1)
+		 <div class="form-row charter-row charter-row3 clearfix">
+			 <ul class="c-ful">
+			 	<li class="c-fcos1">
+				<span class="c-fn">$!{contractFile.contractFileName}：</span>
+				<input type="text" value="$!{contractFile.originalName}" disabled="disabled" class="c-int">
+				</li>
+			 </ul>
+			#if("$!{contractFile.filePath}" != "")
+			<div class="controls charter-controls s-file s-file2 c-wunai" >				
+				<a href="$orderExecuteServer.get('/common/doc/download.htm')?path=$!{contractFile.filePath}&fileName=$!{contractFile.originalName}" class="file">下载</a>
+			</div>
+			#end
+		 #end
+		#end
+	</div>
+  </div>
+</div>
+</div>
+<div class="c-subdiv">
+	<button type="button" class="c-btncas" onclick="window.close()">关闭</button>
+</div>

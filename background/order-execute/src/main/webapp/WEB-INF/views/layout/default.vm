@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+$contain.get("/contain/htmlhead2.htm")
+</head>
+<body  class="s-layout-body s-body-bg">
+  <div class="s-layout s-layout-admin">
+		<div class="s-header">
+		$contain.get('mosken/center/head.htm').setHost("$memberServer.get('')")
+		</div>
+		<div class="s-side">
+			<div class="s-side-scroll">
+			$contain.get('/mosken/center/menus.htm').setHost("$memberServer.get('')")
+			</div>
+		</div>
+		<div class="s-body">
+			$screen_content
+			$contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+		</div>
+	</div>
+</body>
+</html>

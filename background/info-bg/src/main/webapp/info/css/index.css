@@ -1,0 +1,127 @@
+.pp15 {
+	padding: 15px;
+}
+.iw170{
+	width:170px;
+}
+.iw300 {
+	width: 300px;
+}
+.iw130{
+	width: 130px;
+}
+
+.ry-banner {
+	padding: 40px;
+	background-color: #eee;
+}
+
+.ry-footbar {
+	padding: 10px 5px;
+	background-color: #eee;
+}
+
+.ry-right {
+	text-align: right;
+}
+
+.bombPp {
+	padding: 25px 0 0;
+}
+
+.btn {
+	width: 50px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 2px;
+	vertical-align: top;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+
+.home {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 15px;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 -1px 5px 0;
+	background-color: #fff;
+	/* color: #fff; */
+	font-size: 12px;
+	border-radius:2px;
+}
+
+.color {
+	background-color: #009688;
+	color: #999;
+}
+.formags a{margin:0 7px;}
+
+.inp {
+	width: 50px;
+	height: 24px;
+	line-height: 30px;
+	border-radius: 2px;
+	vertical-align: top;
+	background-color: #fff;
+	box-sizing: border-box;
+	border: none;
+	margin-top:5px;
+	text-align:center;
+}
+
+/*	border: 1px solid #ccc;*/
+input:active {
+	border: 1px solid #ccc;
+}
+
+input:focus {
+	border: 1px solid #ccc;
+}
+
+.btna{
+	width:57px;
+	height: 26px;
+	line-height: 26px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	margin-top: 5px;
+}
+.layui-anim .layui-anim-upbit{
+	height:200px !important;
+}
+
+/*ȥ���߿�*/
+.border-none{
+	border:none !important;
+}
+.color-a{
+	color:#0A529C;
+}
+.layui-table th{
+	text-align:center !important;
+}
+.layui-table{
+	text-align:center !important;
+}
+.wd{
+	width:100px;
+}
+.btw{
+	margin-left:18px;
+}
+.inmt{
+	margin-top:5px;
+}
+.mt1{
+	margin-top:1px;
+}
+.btcol{
+	color:#0A529C;
+}
+.iw80{
+	width:80px !important;
+}
+table tbody tr .acss-color{width:120px; margin-left:auto;margin-right:auto;}
+table tbody tr td a {display:inline-block;  float:left; text-align:center; margin-top: 2px; marin-left:5px; margin-right: 5px;}

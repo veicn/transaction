@@ -1,0 +1,246 @@
+$contain.get('/common/title.htm').put('title', 'Demands List')
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+<style>
+    .prolist-box a{width: 100px;}
+</style>
+<div class="s-nav fl qu-con-box">
+    <div class="m-box m-sls cleafix s-box qu-t-box">
+    <form id="search_from" method="post" action="$!appServer.get('pages/back/demands/demandsList.htm')">
+        <div class="xz s-selected">
+            <ul>
+                <li class="s-selected-w">
+                  <span class="time-l">Order Number : </span>
+                  <input type="text"  value="$!{selectVo.orderNumber}"  id="" name="orderNumber" class="br" >
+                </li>
+                <li class="s-selected-w">
+                  <span class="time-l">Product : </span>
+                  <input type="text"  value="$!{selectVo.prodoctNm}"  id="" name="prodoctNm" class="br" >
+                </li>
+                <li class="s-selected-w ">
+                    <span class="m-f-span xz1">Status :</span>
+                    <div class="add-select">
+                    <div class="my-select cpy-select clearfix br select1" >
+                        <div class="select s-b">
+                            <div class="select-box">
+                                <div class="select-content">
+                                			<div class="select-show-text">
+                                	  #foreach($stutar in $!demandStutar)
+                                	  	#if($stutar.code == $!{selectVo.status})
+                                			
+                                			$stutar.enName
+                                			
+                                			#end
+				                        #end
+                                			</div>
+                                    <input type="text" readonly="readonly" class="vcode" name="status" value="$!{selectVo.status}">
+                                </div>
+                            </div>
+                            <ul class="select-options">
+	                            #foreach($stutar in $!demandStutar)
+	                                <li data-value="$!stutar.code" class="select-option ">$!stutar.enName</li>
+		                        #end
+                            </ul>
+                        </div>
+					</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="time qu-date poL-time-l">
+            <ul>
+                <li>
+                    <span class="time-l">Charter Party Date :</span>
+					<div class="datetime-wrap">
+						<input name="createStart" value="$!{selectVo.createDateStart}" id="CharterPS" class="DeadlineMonth datetime" type="text">
+						<div class="datetime-view datetime-view-one4">$!{selectVo.createDateStart}</div>
+					</div>
+					<div class=Add-time-line  style="float:  left; width: 10px;line-height: 36px ;text-align: center">-</div>
+					<div class="datetime-wrap">
+						<input name="createEnd" value="$!{selectVo.createDateEnd}" id="CharterPE" class="DeadlineMonth datetime" type="text">
+						<div class="datetime-view datetime-view-one4">$!{selectVo.createDateEnd}</div>
+					</div>
+                </li>
+            </ul>
+        </div>
+        <div class="search qu-search">
+            <span class="m-btn br" id="submitForm">Inquire</span>
+            <span class="m-btn br" id="search_resect">Empty</span>
+            <span class="m-btn br acceptance">+ Chartering Enquiry</span>
+        </div>
+        </form>
+    </div>
+    
+    #foreach($fon in $!demandsPage.list)
+    <!-- li -->
+    <div class="qulist-wrap">
+        <div class="m-box qulist-con cleafix">
+            <div class="ch-confirmed">
+                <ul>
+                	<li>
+                        <span>Current status :</span>
+                        <span class="m-tit-word">
+                       #foreach($stutar in $!demandStutar)
+                       	#if($!stutar.code == $!fon.status)
+                        
+                        $!stutar.enName
+                        
+                        #end
+                        #end
+                        </span>
+                   </li>
+                </ul>
+            </div>
+           <div class="m-text clearfix">
+                <div class="fl m-t-tab s-t-tab qu-con-top pro-con-box chart-con-box cdm-con-box">
+                    <ol class="qucon-top pro-con-l">
+                        <li>
+                            <span class="m-f-span ">Enquiry Number : </span>
+                            <span class="m-r-span ">
+                                   $!{fon.demandsCd}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                                   Enquiry Time :
+                                </span>
+                            <span class="m-r-span">
+                                $!{fon.createDate} 
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                                Trade Terms :
+                                </span>
+                            <span class="m-r-span">
+                               $!{fon.tradeTerms}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                               Order Number :
+                                </span>
+                            <span class="m-r-span">
+                                  $!{fon.orderNumber}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                                  Product :
+                                </span>
+                            <span class="m-r-span">
+                                $!{fon.prodoctNm}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                                Quantity(Tons) :
+                                </span>
+                            <span class="m-r-span">
+                            #if(${fon.quantity}!=""&&${fon.rangeOfError}!="")
+                                  $!{fon.quantity} ± $!{fon.rangeOfError}%
+                            #end
+                                </span>
+                        </li>
+                        <li>
+                            <span class="m-f-span ">Load Port :</span>
+                            <span class="m-r-span ">
+                                  $!{fon.portOfLoading}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span " id="PORTortSpan-lj">
+                                   Discharge Port :
+                                </span>
+                            <span class="m-r-span">
+                                $!{fon.portOfDischarge}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                                 Laycan :
+                                </span>
+                            <span class="m-r-span">
+                              $!{fon.laycanStart} / $!{fon.laycanEnd}
+                                </span>
+                        </li>
+                        <li>
+                                <span class="m-f-span ">
+                               Date Built :
+                                </span>
+                            <span class="m-r-span">
+                            #foreach($stutar in $!demandSelect)
+	                    	  	#if($stutar.code == $!{fon.builtDate})
+	                    	  		$stutar.enName
+                    			#end
+	                        #end
+                                </span>
+                        </li>
+                       #* <li>
+                                <span class="m-f-span ">
+                               Port of Discharge :
+                                </span>
+                            <span class="m-r-span">
+                                 $!{fon.getPortOfDischarge}
+                                </span>
+                        </li>*#
+                    </ol>
+                </div>
+                <!-- button -->
+                #if($!fon.status == 10) 
+                 	<ul class="fr  qubtn-box prolist-box cdm-box lj-demands-btn">
+	                  	<a href="$appServer.get('pages/back/demands/DemandsDateiled.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Details</a>
+                        #if($!fon.quanzhouFlag != '1')
+                            <a href="javascript:;" id="" class="br btn-s conf_del" conuuid="$!{fon.uuid}">Delete</a>
+
+                            <a href="$appServer.get('pages/back/demands/insert.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Update</a>
+                        #end
+	             	</ul>
+                #end
+                #if($!fon.status == 20) 
+                	<ul class="fr  qubtn-box prolist-box cdm-box lj-demands-btn">
+	                  	<a href="$appServer.get('pages/back/demands/DemandsDateiled.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Details</a>
+	             	</ul>
+                #end
+                #if($!fon.status == 30)
+                 	<ul class="fr  qubtn-box prolist-box cdm-box lj-demands-btn">
+	                  	<a href="$appServer.get('pages/back/demands/DemandsDateiled.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Details</a>
+	             	</ul>
+                #end
+                #if($!fon.status == 40)
+                 	<ul class="fr  qubtn-box prolist-box cdm-box lj-demands-btn">
+	                  	<a href="$appServer.get('pages/back/demands/DemandsDateiled.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Details</a>
+
+                        <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('demandsUuid', $!{fon.uuid})" id="" class="br btn-s">Logistics Tracking</a>
+	             	</ul>
+                #end
+                #if($!fon.status == 50)
+                 	<ul class="fr  qubtn-box prolist-box cdm-box lj-demands-btn">
+	                  	<a href="$appServer.get('pages/back/demands/DemandsDateiled.htm').put('uuid', $!{fon.uuid})" id="" class="br btn-s">Details</a>
+                        <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('demandsUuid', $!{fon.uuid})" id="" class="br btn-s">Logistics Tracking</a>
+	             	</ul>
+                #end
+            </div>
+        </div>
+        #end
+    	<!--分页-->	
+    	  $contain.get('/common/page.htm').put("pageInfo", $!{demandsPage})
+	    </div>
+    </div>
+</div>
+        
+
+<script>
+    // 时间组件综合调用
+    (function () {
+        commonCPY.datePicker(['CharterPS','CharterPE'],function(value, date, endDate){
+            var value1=value[0].split(' ').join('/')
+            // console.log(date)
+            // console.log(endDate)
+        });
+        commonCPY.select()
+
+    })();
+</script>    
+#js($appServer.get('script/pages/back/demands/demandsList.js?js_version=03280827'))    

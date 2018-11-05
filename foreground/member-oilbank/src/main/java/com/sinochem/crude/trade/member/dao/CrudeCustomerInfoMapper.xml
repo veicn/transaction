@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.CrudeCustomerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.CrudeCustomerInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="last_year_operation_revenue" property="lastYearOperationRevenue" jdbcType="DECIMAL" />
+    <result column="last_year_trade_volume" property="lastYearTradeVolume" jdbcType="DECIMAL" />
+    <result column="master_company" property="masterCompany" jdbcType="VARCHAR" />
+    <result column="credential_id" property="credentialId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, last_year_operation_revenue, last_year_trade_volume, master_company, 
+    credential_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crude_customer_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crude_customer_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.CrudeCustomerInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_customer_info (member_id, last_year_operation_revenue, 
+      last_year_trade_volume, master_company, credential_id
+      )
+    values (#{memberId,jdbcType=BIGINT}, #{lastYearOperationRevenue,jdbcType=DECIMAL}, 
+      #{lastYearTradeVolume,jdbcType=DECIMAL}, #{masterCompany,jdbcType=VARCHAR}, #{credentialId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeCustomerInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_customer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        last_year_operation_revenue,
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        last_year_trade_volume,
+      </if>
+      <if test="masterCompany != null" >
+        master_company,
+      </if>
+      <if test="credentialId != null" >
+        credential_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        #{lastYearTradeVolume,jdbcType=DECIMAL},
+      </if>
+      <if test="masterCompany != null" >
+        #{masterCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialId != null" >
+        #{credentialId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeCustomerInfo" >
+    update crude_customer_info
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        last_year_operation_revenue = #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        last_year_trade_volume = #{lastYearTradeVolume,jdbcType=DECIMAL},
+      </if>
+      <if test="masterCompany != null" >
+        master_company = #{masterCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialId != null" >
+        credential_id = #{credentialId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.CrudeCustomerInfo" >
+    update crude_customer_info
+    set member_id = #{memberId,jdbcType=BIGINT},
+      last_year_operation_revenue = #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      last_year_trade_volume = #{lastYearTradeVolume,jdbcType=DECIMAL},
+      master_company = #{masterCompany,jdbcType=VARCHAR},
+      credential_id = #{credentialId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from crude_customer_info
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+</mapper>

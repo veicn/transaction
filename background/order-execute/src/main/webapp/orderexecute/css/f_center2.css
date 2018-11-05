@@ -1,0 +1,61 @@
+﻿
+/*header背景颜色*/
+.c-header{background:#0071bb;}
+/*logo背景颜色*/
+.c-logo{background:url(../images/c1_logo.png) no-repeat center center #0071bb;}
+/*header~~~~~搜索*/
+.li-search{ border:none; background-color:inherit; height:36px; line-height:36px; border-radius:0; margin:22px 0 0 40px; position:relative;}
+.li-search span{ font-size:24px; color:#fff; margin-right:80px;}
+.li-search input{ width:250px; height:36px; line-height:36px; font-size:14px; color:#fff; background-color:#99c6e4; border:none; padding:0 20px; border-radius:20px; }
+.li-search a{ width:36px; height:36px; line-height:36px; text-align:center; border-radius:0; background-color:inherit; position:absolute; right:5px; top:0; display:block;}
+.ico-search-n{ background-position:-464px -267px; width:22px; height:22px; margin:0;}
+/*header~~~~~右*/
+.li-features{ width:calc(100% - 350px);}
+.li-features a{ margin:0 13px; color:#fff; font-size:14px;}
+.li-features span{ color:#fff; font-size:14px;}
+.ico-email-n{ background-position:-499px -184px; width:20px; height:14px; margin-right:5px;}
+.ico-email-n:hover{ background-position:-499px -184px; width:20px; height:14px;}
+.ico-qhzh1-n{ background-position:-276px -150px; width:20px; height:18px; margin-right:5px;}
+.ico-qhzh1-n:hover{ background-position:-276px -170px; width:20px; height:18px;}
+.ico-qhzh-n{ background-position:-502px -267px; width:19px; height:17px; cursor:pointer; margin-right:5px;}
+.ico-qhzh-n:hover{ background-position:-502px -267px; width:19px; height:17px;}
+.ico-remind-n{ background-position:-500px -152px; width:18px; height:18px; margin-right:5px;}
+.ico-remind-n:hover{ background-position:-500px -152px; width:18px; height:18px;}
+.ico-set-n{ background-position:-500px -212px; width:19px; height:17px; margin-right:5px;}
+.ico-set-n:hover{ background-position:-500px -212px; width:19px; height:17px;}
+.ico-exit-n{ background-position:-502px -243px; width:15px; height:17px; margin-right:5px;}
+.ico-exit-n:hover{ background-position:-502px -243px; width:15px; height:17px;}
+.ico-remind-n span{ background-color:#fcb322;}
+
+.c-nav-top .qhzh-list{ right:342px;}
+.c-nav-top .xx-list{ right:258px;}
+.c-nav-top .tx-list{ right:176px;}
+.c-nav-top .hf-list{ right:94px;}
+
+/*侧边栏背景颜色*/
+.c-mlb{ background:#32323a;}
+/*侧边栏~~~~~公司字体颜色*/
+.c-complogo img{ border:1px solid #fff;}
+.c-company p a{font-size:16px; color:#fff;}
+/*侧边栏~~~~~选中背景颜色&鼠标滑过背景颜色*/
+.c-menu li.c-menu-cur > a,.c-menu a:hover{background:#0071bb; color:#fff; opacity:1;}
+/*侧边栏~~~~~图标*/
+.ico-ca01{background-position: -464px -148px; width:28px; height:26px;margin-right:7px;}
+.ico-ca02{background-position: -464px -180px; width:25px; height:25px;margin-right:10px}
+.ico-ca03{background-position: -464px -209px; width:25px; height:23px;margin-right:10px;}
+.ico-ca04{background-position: -464px -237px; width:25px; height:25px;margin-right:10px;}
+/*侧边栏~~~~~一级菜单*/
+.c-menu li a{ color:#fff; background:#32323a; opacity:.8;}
+/*侧边栏~~~~~二级菜单*/
+.c-menu li ul.c-menu-two li a{ background-color:#273142;}
+.c-menu li ul.c-menu-two li a:hover,.c-menu li ul.c-menu-two li.curr a{ background-color:#1b2942;}
+
+/*侧边栏~~~~~收缩*/
+.c-mlf i{ margin-right:0; position: absolute;right:-14px;top:0;}
+.ico-arrr{background-position: -538px -151px; width:14px; height:45px;}
+.ico-arrl{background-position: -538px -201px; width:14px; height:45px;}
+
+
+
+
+

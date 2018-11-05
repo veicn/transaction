@@ -1,0 +1,121 @@
+/*--------------------长协订单----------------------*/
+/*采购商品信息*/
+tr.c-tabcos1 input {
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+/*代理商,供应商信息add*/
+.c-agencyId{
+    padding:10px 20px;
+    box-sizing: border-box;
+}
+.c-agencyId .title{
+    font-size:14px;
+}
+.c-agencyId .search{
+    margin-left:10px;
+    padding-left:10px;
+    height:28px;
+}
+.c-agencyId button{
+    margin-left:10px;
+    height:29px;
+    width:50px;
+    line-height:28px;
+    text-align: center;
+    background-color:#ffffff;
+    border:#ccc solid 1px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.c-agencyId button:hover{
+    border-color:#69f;
+    background-color:#69f;
+    color: #ffffff;
+}
+.c-mod.c-layer1{
+    padding:0;
+}
+.c-mod.c-layer1 #tbida1 tr th:first-child{
+    width:40px;
+}
+/*--------------------长协订单----------------------*/
+/**/
+
+
+/*---------------------原油大厅----------------------*/
+
+/*--------nav.vm--------*/
+.c-srh-input {
+    height: 32px
+}
+.c-tender-banner{
+    background:url(../images/caigou_banner.jpg) no-repeat center top;
+}
+/*--------images.vm--------*/
+.c-fabucaigou-banner{
+    background:url(../images/caigou_banner.jpg) no-repeat;
+    background-position:center;
+}
+/*--------edit.vm--------*/
+.c-icon-jbxx{
+    background-position: -150px -150px;
+}
+.gou .con-left-tex a {
+    color: #317ee7;
+}
+/*--------remain.vm--------*/
+/*--------pricelist.vm--------*/
+.c-fl{
+    float: left;
+}
+.c-ful li span.c-fn.c-textcenter{
+    text-align: center;
+}
+.c-inputheight1{
+    height: 31px;
+}
+.c-inputheight2{
+    height: 30px;
+}
+/*--------sheet.vm--------*/
+.c-clear{
+    clear: both;
+}
+.c-padding0{
+    padding: 0;
+}
+/*--------olitypedetail.vm--------*/
+.c-table-add.btn-more{
+    cursor: pointer;
+}
+.c-table-add .input-text{
+    width: 100%;
+    height: 100%;
+    border:none;
+    outline: none;
+    line-height: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+.c-table-add .c-tabcos1:hover input{
+    background: #ffffd9;
+}
+/*--------supplierOffer.vm--------*/
+.c-orders-banners{
+    background: url(../images/orders_banner.jpg) no-repeat center center;
+}
+/*--------sheetThree.vm--------*/
+.c-fabucaigou-con-right{
+    width: 100%;
+}
+/*--------crudeoillist.vm--------*/
+.c-table-input input{
+    border:none;
+    outline: none;
+    text-align: center;
+}
+/*---------------------原油大厅----------------------*/

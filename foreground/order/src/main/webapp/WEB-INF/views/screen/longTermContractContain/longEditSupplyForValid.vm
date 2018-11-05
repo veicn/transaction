@@ -1,0 +1,76 @@
+<div class="c-mod" id="mjxx">
+    <h3><em class="cw-ico ico-h3"></em>供应商信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>企业名称：</span>
+                <input type="hidden"  name="supplierRelevanter.eMemberId" id="companySupply" value="$!{supplierRelevanter.eMemberId}" >
+                <input type="text" required class="c-int" name="supplierRelevanter.eMemberName" id="companySupply-name" value="$!{supplierRelevanter.eMemberName}"/>
+                <div class="ac_results">
+                    <ul></ul>
+                </div>
+                <label for="companySupply-name" id="companySupply-name-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos1">
+                <span class="c-fn">企业地址：</span>
+                <input type="text" class="c-int" name="supplierRelevanter.address" id="" value="$!{supplierRelevanter.address}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>联系人：</span>
+                <input type="text"   required class="c-int" name="supplierRelevanter.contacter" id="companySupply-contacter" value="$!{supplierRelevanter.contacter}"/>
+                <label for="companySupply-contacter" id="companySupply-contacter-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>邮箱：</span>
+                <input type="text" required class="c-int" name="supplierRelevanter.email" id="companySupply-famil" value= "$!{supplierRelevanter.email}"/>
+                <label for="companySupply-famil" id="companySupply-famil-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>联系电话：</span>
+                <input type="text"  onkeyup="return clearPhono(this)"
+                       required class="c-int" name="supplierRelevanter.phoneNo" id="companySupply-phoneNo" value="$!{supplierRelevanter.phoneNo}"/>
+                <label for="companySupply-phoneNo" id="companySupply-phoneNo-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">传真：</span>
+                <input type="text"   onkeyup="return clearPhono(this)"
+                       class="c-int" name="supplierRelevanter.fax" id="fax" value="$!{supplierRelevanter.fax}"/>
+                <span class="c-ero">
+                    <label class="error" style="display: none;"></label>
+                </span>
+            </li>
+            <li><input type="hidden" value="S" name="supplierRelevanter.type"></li>
+            <li><input type="hidden" value="$!{supplierRelevanter.id}" name="supplierRelevanter.id"></li>
+        </ul>
+    </div>
+
+</div>
+<script src="$appServer.get('script/lib/jquery.autocomplete.min.js')"></script>
+<script>
+    $(function () {
+        var datas = $contain.get('/centercontain/enterpriseList.json').setHost("$memberServer.get('')");
+        var companyInput = $ ("#companySupply-name");
+        companyInput.autocomplete(datas.datas,
+        {
+            width: companyInput.outerWidth(),
+            minChars: 0,
+            matchContains: true,
+            scroll: true,
+            mustMatch: false,
+            scrollHeight: 122,
+            formatItem: function (row, i, max) {
+                return  row.name ;
+            },
+            formatMatch: function (row, i, max) {
+                return row.name;
+            },
+            formatResult: function (row) {
+                return row.name;
+            }
+        }).result(function (event, row, formatted) {
+            $('#companySupply').val(row.memberId)
+        });
+    });
+</script>

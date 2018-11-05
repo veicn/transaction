@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderStatementMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderStatement" id="OrderStatement">
+		<result property="orderStatementId" column="ORDER_STATEMENT_ID" />
+		<result property="orderStatementUuid" column="ORDER_STATEMENT_UUID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="statementType" column="STATEMENT_TYPE" />
+		<result property="orderStatementNo" column="ORDER_STATEMENT_NO" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="billWeightBbl" column="BILL_WEIGHT_BBL" />
+		<result property="billWeightT" column="BILL_WEIGHT_T" />
+		<result property="totalFee" column="TOTAL_FEE" />
+		<result property="price" column="PRICE" />
+		<result property="totalAmount" column="TOTAL_AMOUNT" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="billDate" column="BILL_DATE" />
+		<result property="payee" column="PAYEE" />
+		<result property="acount" column="ACOUNT" />
+		<result property="bankName" column="BANK_NAME" />
+		<result property="status" column="STATUS" />
+		<result property="submitPerson" column="SUBMIT_PERSON" />
+		<result property="submitPersonName" column="SUBMIT_PERSON_NAME" />
+		<result property="confirmPerson" column="CONFIRM_PERSON" />
+		<result property="confirmPersonName" column="CONFIRM_PERSON_NAME" />
+		<result property="customerName" column="CUSTOMER_NAME" />
+		<result property="contactName" column="CONTACT_NAME" />
+		<result property="tel" column="TEL" />
+		<result property="email" column="EMAIL" />
+		<result property="checkTime" column="CHECK_TIME" />
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="agentContract" column="AGENT_CONTRACT" />
+		<result property="oil" column="OIL" />
+		<result property="priceFormula" column="PRICE_FORMULA" />
+		<result property="shipName" column="SHIP_NAME" />
+		<result property="basePrice" column="BASE_PRICE" />
+		<result property="agio" column="AGIO" />
+		<result property="contractQuantity" column="CONTRACT_QUANTITY" />
+		<result property="tradeTerm" column="TRADE_TERM" />
+		<result property="settlementPrice" column="SETTLEMENT_PRICE" />
+		<result property="goodsAmount" column="GOODS_AMOUNT" />
+		<result property="payDate" column="PAY_DATE" />
+		<result property="settlementQuantityBbl" column="SETTLEMENT_QUANTITY_BBL" />
+		<result property="settledAmount" column="SETTLED_AMOUNT" />
+		<result property="sellerCustomerId" column="SELLER_CUSTOMER_ID" />
+		<result property="buyerCustomerId" column="BUYER_CUSTOMER_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+		<result property="dataJson" column="DATA_JSON" />
+		<result property="fileName" column="FILE_NAME" />
+		<result property="fileUrl" column="FILE_URL" />
+		<result property="settleStandard" column="SETTLE_STANDARD" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement"  useGeneratedKeys="true" keyProperty="orderStatementId" >
+		insert  into t_order_statement (				ORDER_STATEMENT_ID
+						,ORDER_STATEMENT_UUID
+						,ORDER_ID
+						,STATEMENT_TYPE
+						,ORDER_STATEMENT_NO
+						,ORDER_NO
+						,BILL_WEIGHT_BBL
+						,BILL_WEIGHT_T
+						,TOTAL_FEE
+						,PRICE
+						,TOTAL_AMOUNT
+						,PAYMENT_DATE
+						,BILL_DATE
+						,PAYEE
+						,ACOUNT
+						,BANK_NAME
+						,STATUS
+						,SUBMIT_PERSON
+						,SUBMIT_PERSON_NAME
+						,CONFIRM_PERSON
+						,CONFIRM_PERSON_NAME
+						,CUSTOMER_NAME
+						,CONTACT_NAME
+						,TEL
+						,EMAIL
+						,CHECK_TIME
+						,CONTRACT_NO
+						,AGENT_CONTRACT
+						,OIL
+						,PRICE_FORMULA
+						,SHIP_NAME
+						,BASE_PRICE
+						,AGIO
+						,CONTRACT_QUANTITY
+						,TRADE_TERM
+						,SETTLEMENT_PRICE
+						,GOODS_AMOUNT
+						,PAY_DATE
+						,SETTLEMENT_QUANTITY_BBL
+						,SETTLED_AMOUNT
+						,SELLER_CUSTOMER_ID
+						,BUYER_CUSTOMER_ID
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						,DATA_JSON
+						,FILE_NAME
+						,FILE_URL
+						,SETTLE_STANDARD
+						)
+		values(		#{orderStatementId}
+						,#{orderStatementUuid}
+						,#{orderId}
+						,#{statementType}
+						,#{orderStatementNo}
+						,#{orderNo}
+						,#{billWeightBbl}
+						,#{billWeightT}
+						,#{totalFee}
+						,#{price}
+						,#{totalAmount}
+						,#{paymentDate}
+						,#{billDate}
+						,#{payee}
+						,#{acount}
+						,#{bankName}
+						,#{status}
+						,#{submitPerson}
+						,#{submitPersonName}
+						,#{confirmPerson}
+						,#{confirmPersonName}
+						,#{customerName}
+						,#{contactName}
+						,#{tel}
+						,#{email}
+						,#{checkTime}
+						,#{contractNo}
+						,#{agentContract}
+						,#{oil}
+						,#{priceFormula}
+						,#{shipName}
+						,#{basePrice}
+						,#{agio}
+						,#{contractQuantity}
+						,#{tradeTerm}
+						,#{settlementPrice}
+						,#{goodsAmount}
+						,#{payDate}
+						,#{settlementQuantityBbl}
+						,#{settledAmount}
+						,#{sellerCustomerId}
+						,#{buyerCustomerId}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+						,#{dataJson}
+						,#{fileName}
+						,#{fileUrl}
+						,#{settleStandard}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_statement
+              WHERE 1=1 
+                AND ORDER_STATEMENT_ID = #{orderStatementId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement">
+        DELETE FROM t_order_statement
+              WHERE 1=1 
+        <if test="orderStatementId!=null and orderStatementId!=''">AND  ORDER_STATEMENT_ID = #{orderStatementId}</if>
+        <if test="orderStatementUuid!=null and orderStatementUuid!=''">AND  ORDER_STATEMENT_UUID = #{orderStatementUuid}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="statementType!=null and statementType!=''">AND  STATEMENT_TYPE = #{statementType}</if>
+        <if test="orderStatementNo!=null and orderStatementNo!=''">AND  ORDER_STATEMENT_NO = #{orderStatementNo}</if>
+        <if test="orderNo!=null and orderNo!=''">AND  ORDER_NO = #{orderNo}</if>
+        <if test="billWeightBbl!=null and billWeightBbl!=''">AND  BILL_WEIGHT_BBL = #{billWeightBbl}</if>
+        <if test="billWeightT!=null and billWeightT!=''">AND  BILL_WEIGHT_T = #{billWeightT}</if>
+        <if test="totalFee!=null and totalFee!=''">AND  TOTAL_FEE = #{totalFee}</if>
+        <if test="price!=null and price!=''">AND  PRICE = #{price}</if>
+        <if test="totalAmount!=null and totalAmount!=''">AND  TOTAL_AMOUNT = #{totalAmount}</if>
+        <if test="paymentDate!=null and paymentDate!=''">AND  PAYMENT_DATE = #{paymentDate}</if>
+        <if test="billDate!=null and billDate!=''">AND  BILL_DATE = #{billDate}</if>
+        <if test="payee!=null and payee!=''">AND  PAYEE = #{payee}</if>
+        <if test="acount!=null and acount!=''">AND  ACOUNT = #{acount}</if>
+        <if test="bankName!=null and bankName!=''">AND  BANK_NAME = #{bankName}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="submitPerson!=null and submitPerson!=''">AND  SUBMIT_PERSON = #{submitPerson}</if>
+        <if test="submitPersonName!=null and submitPersonName!=''">AND  SUBMIT_PERSON_NAME = #{submitPersonName}</if>
+        <if test="confirmPerson!=null and confirmPerson!=''">AND  CONFIRM_PERSON = #{confirmPerson}</if>
+        <if test="confirmPersonName!=null and confirmPersonName!=''">AND  CONFIRM_PERSON_NAME = #{confirmPersonName}</if>
+        <if test="customerName!=null and customerName!=''">AND  CUSTOMER_NAME = #{customerName}</if>
+        <if test="contactName!=null and contactName!=''">AND  CONTACT_NAME = #{contactName}</if>
+        <if test="tel!=null and tel!=''">AND  TEL = #{tel}</if>
+        <if test="email!=null and email!=''">AND  EMAIL = #{email}</if>
+        <if test="checkTime!=null and checkTime!=''">AND  CHECK_TIME = #{checkTime}</if>
+        <if test="contractNo!=null and contractNo!=''">AND  CONTRACT_NO = #{contractNo}</if>
+        <if test="agentContract!=null and agentContract!=''">AND  AGENT_CONTRACT = #{agentContract}</if>
+        <if test="oil!=null and oil!=''">AND  OIL = #{oil}</if>
+        <if test="priceFormula!=null and priceFormula!=''">AND  PRICE_FORMULA = #{priceFormula}</if>
+        <if test="shipName!=null and shipName!=''">AND  SHIP_NAME = #{shipName}</if>
+        <if test="basePrice!=null and basePrice!=''">AND  BASE_PRICE = #{basePrice}</if>
+        <if test="agio!=null and agio!=''">AND  AGIO = #{agio}</if>
+        <if test="contractQuantity!=null and contractQuantity!=''">AND  CONTRACT_QUANTITY = #{contractQuantity}</if>
+        <if test="tradeTerm!=null and tradeTerm!=''">AND  TRADE_TERM = #{tradeTerm}</if>
+        <if test="settlementPrice!=null and settlementPrice!=''">AND  SETTLEMENT_PRICE = #{settlementPrice}</if>
+        <if test="goodsAmount!=null and goodsAmount!=''">AND  GOODS_AMOUNT = #{goodsAmount}</if>
+        <if test="payDate!=null and payDate!=''">AND  PAY_DATE = #{payDate}</if>
+        <if test="settlementQuantityBbl!=null and settlementQuantityBbl!=''">AND  SETTLEMENT_QUANTITY_BBL = #{settlementQuantityBbl}</if>
+        <if test="settledAmount!=null and settledAmount!=''">AND  SETTLED_AMOUNT = #{settledAmount}</if>
+        <if test="sellerCustomerId!=null and sellerCustomerId!=''">AND  SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+        <if test="buyerCustomerId!=null and buyerCustomerId!=''">AND  BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="fileName!=null and fileName!=''">AND  FILE_NAME = #{fileName}</if>
+        <if test="fileUrl!=null and fileUrl!=''">AND  FILE_URL = #{fileUrl}</if>        
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement">
+		update t_order_statement
+		<set>
+         ORDER_STATEMENT_ID=#{orderStatementId}
+		<if test="orderStatementUuid!=null">,ORDER_STATEMENT_UUID = #{orderStatementUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="statementType!=null">,STATEMENT_TYPE = #{statementType}</if>
+		<if test="orderStatementNo!=null">,ORDER_STATEMENT_NO = #{orderStatementNo}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="billWeightBbl!=null">,BILL_WEIGHT_BBL = #{billWeightBbl}</if>
+		<if test="billWeightT!=null">,BILL_WEIGHT_T = #{billWeightT}</if>
+		<if test="totalFee!=null">,TOTAL_FEE = #{totalFee}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="totalAmount!=null">,TOTAL_AMOUNT = #{totalAmount}</if>
+		<if test="paymentDate!=null">,PAYMENT_DATE = #{paymentDate}</if>
+		<if test="billDate!=null">,BILL_DATE = #{billDate}</if>
+		<if test="payee!=null">,PAYEE = #{payee}</if>
+		<if test="acount!=null">,ACOUNT = #{acount}</if>
+		<if test="bankName!=null">,BANK_NAME = #{bankName}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="submitPerson!=null">,SUBMIT_PERSON = #{submitPerson}</if>
+		<if test="submitPersonName!=null">,SUBMIT_PERSON_NAME = #{submitPersonName}</if>
+		<if test="confirmPerson!=null">,CONFIRM_PERSON = #{confirmPerson}</if>
+		<if test="confirmPersonName!=null">,CONFIRM_PERSON_NAME = #{confirmPersonName}</if>
+		<if test="customerName!=null">,CUSTOMER_NAME = #{customerName}</if>
+		<if test="contactName!=null">,CONTACT_NAME = #{contactName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="checkTime!=null">,CHECK_TIME = #{checkTime}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="agentContract!=null">,AGENT_CONTRACT = #{agentContract}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="basePrice!=null">,BASE_PRICE = #{basePrice}</if>
+		<if test="agio!=null">,AGIO = #{agio}</if>
+		<if test="contractQuantity!=null">,CONTRACT_QUANTITY = #{contractQuantity}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="settlementPrice!=null">,SETTLEMENT_PRICE = #{settlementPrice}</if>
+		<if test="goodsAmount!=null">,GOODS_AMOUNT = #{goodsAmount}</if>
+		<if test="payDate!=null">,PAY_DATE = #{payDate}</if>
+		<if test="settlementQuantityBbl!=null">,SETTLEMENT_QUANTITY_BBL = #{settlementQuantityBbl}</if>
+		<if test="settledAmount!=null">,SETTLED_AMOUNT = #{settledAmount}</if>
+		<if test="sellerCustomerId!=null">,SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null">,BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="dataJson!=null">,DATA_JSON = #{dataJson}</if>
+		<if test="fileName!=null">,FILE_NAME = #{fileName}</if>
+		<if test="fileUrl!=null">,FILE_URL = #{fileUrl}</if>
+		<if test="settleStandard!=null and settleStandard!=''">AND  SETTLE_STANDARD = #{settleStandard}</if>
+		</set>
+		where
+       	 ORDER_STATEMENT_ID=#{orderStatementId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_statement
+		<set>
+         ORDER_STATEMENT_ID=#{orderStatementId}
+		<if test="orderStatementUuid!=null">,ORDER_STATEMENT_UUID = #{orderStatementUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="statementType!=null">,STATEMENT_TYPE = #{statementType}</if>
+		<if test="orderStatementNo!=null">,ORDER_STATEMENT_NO = #{orderStatementNo}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="billWeightBbl!=null">,BILL_WEIGHT_BBL = #{billWeightBbl}</if>
+		<if test="billWeightT!=null">,BILL_WEIGHT_T = #{billWeightT}</if>
+		<if test="totalFee!=null">,TOTAL_FEE = #{totalFee}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="totalAmount!=null">,TOTAL_AMOUNT = #{totalAmount}</if>
+		<if test="paymentDate!=null">,PAYMENT_DATE = #{paymentDate}</if>
+		<if test="billDate!=null">,BILL_DATE = #{billDate}</if>
+		<if test="payee!=null">,PAYEE = #{payee}</if>
+		<if test="acount!=null">,ACOUNT = #{acount}</if>
+		<if test="bankName!=null">,BANK_NAME = #{bankName}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="submitPerson!=null">,SUBMIT_PERSON = #{submitPerson}</if>
+		<if test="submitPersonName!=null">,SUBMIT_PERSON_NAME = #{submitPersonName}</if>
+		<if test="confirmPerson!=null">,CONFIRM_PERSON = #{confirmPerson}</if>
+		<if test="confirmPersonName!=null">,CONFIRM_PERSON_NAME = #{confirmPersonName}</if>
+		<if test="customerName!=null">,CUSTOMER_NAME = #{customerName}</if>
+		<if test="contactName!=null">,CONTACT_NAME = #{contactName}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="checkTime!=null">,CHECK_TIME = #{checkTime}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="agentContract!=null">,AGENT_CONTRACT = #{agentContract}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="basePrice!=null">,BASE_PRICE = #{basePrice}</if>
+		<if test="agio!=null">,AGIO = #{agio}</if>
+		<if test="contractQuantity!=null">,CONTRACT_QUANTITY = #{contractQuantity}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="settlementPrice!=null">,SETTLEMENT_PRICE = #{settlementPrice}</if>
+		<if test="goodsAmount!=null">,GOODS_AMOUNT = #{goodsAmount}</if>
+		<if test="payDate!=null">,PAY_DATE = #{payDate}</if>
+		<if test="settlementQuantityBbl!=null">,SETTLEMENT_QUANTITY_BBL = #{settlementQuantityBbl}</if>
+		<if test="settledAmount!=null">,SETTLED_AMOUNT = #{settledAmount}</if>
+		<if test="sellerCustomerId!=null">,SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null">,BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="dataJson!=null">,DATA_JSON = #{dataJson}</if>
+		<if test="fileName!=null">,FILE_NAME = #{fileName}</if>
+		<if test="fileUrl!=null">,FILE_URL = #{fileUrl}</if>
+		<if test="settleStandard!=null">,SETTLE_STANDARD = #{settleStandard}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="orderStatementId!=null and orderStatementId!=''">and  ORDER_STATEMENT_ID=#{orderStatementId}</if>
+		<if test="orderStatementUuid!=null and orderStatementUuid!=''">and  ORDER_STATEMENT_UUID=#{orderStatementUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="statementType!=null and statementType!=''">and  STATEMENT_TYPE=#{statementType}</if>
+		<if test="orderStatementNo!=null and orderStatementNo!=''">and  ORDER_STATEMENT_NO=#{orderStatementNo}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="billWeightBbl!=null and billWeightBbl!=''">and  BILL_WEIGHT_BBL=#{billWeightBbl}</if>
+		<if test="billWeightT!=null and billWeightT!=''">and  BILL_WEIGHT_T=#{billWeightT}</if>
+		<if test="totalFee!=null and totalFee!=''">and  TOTAL_FEE=#{totalFee}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="totalAmount!=null and totalAmount!=''">and  TOTAL_AMOUNT=#{totalAmount}</if>
+		<if test="paymentDate!=null and paymentDate!=''">and  PAYMENT_DATE=#{paymentDate}</if>
+		<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="acount!=null and acount!=''">and  ACOUNT=#{acount}</if>
+		<if test="bankName!=null and bankName!=''">and  BANK_NAME=#{bankName}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="submitPerson!=null and submitPerson!=''">and  SUBMIT_PERSON=#{submitPerson}</if>
+		<if test="submitPersonName!=null and submitPersonName!=''">and  SUBMIT_PERSON_NAME=#{submitPersonName}</if>
+		<if test="confirmPerson!=null and confirmPerson!=''">and  CONFIRM_PERSON=#{confirmPerson}</if>
+		<if test="confirmPersonName!=null and confirmPersonName!=''">and  CONFIRM_PERSON_NAME=#{confirmPersonName}</if>
+		<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+		<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="checkTime!=null and checkTime!=''">and  CHECK_TIME=#{checkTime}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="agentContract!=null and agentContract!=''">and  AGENT_CONTRACT=#{agentContract}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+		<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+		<if test="contractQuantity!=null and contractQuantity!=''">and  CONTRACT_QUANTITY=#{contractQuantity}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+		<if test="goodsAmount!=null and goodsAmount!=''">and  GOODS_AMOUNT=#{goodsAmount}</if>
+		<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+		<if test="settlementQuantityBbl!=null and settlementQuantityBbl!=''">and  SETTLEMENT_QUANTITY_BBL=#{settlementQuantityBbl}</if>
+		<if test="settledAmount!=null and settledAmount!=''">and  SETTLED_AMOUNT=#{settledAmount}</if>
+		<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="dataJson!=null and dataJson!=''">and  DATA_JSON=#{dataJson}</if>
+		<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+		<if test="fileUrl!=null and fileUrl!=''">and  FILE_URL=#{fileUrl}</if>
+		<if test="settleStandard!=null and settleStandard!=''">and  SETTLE_STANDARD=#{settleStandard}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderStatement">
+			select
+			* from t_order_statement
+			where
+		    ORDER_STATEMENT_ID=#{orderStatementId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderStatement">
+			select
+			* from t_order_statement
+			where ORDER_STATEMENT_UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderStatement" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement">
+		select * from t_order_statement
+			where
+		 ALIVE_FLAG='1'
+		<if test="orderStatementId!=null and orderStatementId!=''">and  ORDER_STATEMENT_ID=#{orderStatementId}</if>
+		<if test="orderStatementUuid!=null and orderStatementUuid!=''">and  ORDER_STATEMENT_UUID=#{orderStatementUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="statementType!=null and statementType!=''">and  STATEMENT_TYPE=#{statementType}</if>
+		<if test="orderStatementNo!=null and orderStatementNo!=''">and  ORDER_STATEMENT_NO=#{orderStatementNo}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="billWeightBbl!=null and billWeightBbl!=''">and  BILL_WEIGHT_BBL=#{billWeightBbl}</if>
+		<if test="billWeightT!=null and billWeightT!=''">and  BILL_WEIGHT_T=#{billWeightT}</if>
+		<if test="totalFee!=null and totalFee!=''">and  TOTAL_FEE=#{totalFee}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="totalAmount!=null and totalAmount!=''">and  TOTAL_AMOUNT=#{totalAmount}</if>
+		<if test="paymentDate!=null and paymentDate!=''">and  PAYMENT_DATE=#{paymentDate}</if>
+		<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="acount!=null and acount!=''">and  ACOUNT=#{acount}</if>
+		<if test="bankName!=null and bankName!=''">and  BANK_NAME=#{bankName}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="submitPerson!=null and submitPerson!=''">and  SUBMIT_PERSON=#{submitPerson}</if>
+		<if test="submitPersonName!=null and submitPersonName!=''">and  SUBMIT_PERSON_NAME=#{submitPersonName}</if>
+		<if test="confirmPerson!=null and confirmPerson!=''">and  CONFIRM_PERSON=#{confirmPerson}</if>
+		<if test="confirmPersonName!=null and confirmPersonName!=''">and  CONFIRM_PERSON_NAME=#{confirmPersonName}</if>
+		<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME=#{customerName}</if>
+		<if test="contactName!=null and contactName!=''">and  CONTACT_NAME=#{contactName}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="checkTime!=null and checkTime!=''">and  CHECK_TIME=#{checkTime}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="agentContract!=null and agentContract!=''">and  AGENT_CONTRACT=#{agentContract}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+		<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+		<if test="contractQuantity!=null and contractQuantity!=''">and  CONTRACT_QUANTITY=#{contractQuantity}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+		<if test="goodsAmount!=null and goodsAmount!=''">and  GOODS_AMOUNT=#{goodsAmount}</if>
+		<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+		<if test="settlementQuantityBbl!=null and settlementQuantityBbl!=''">and  SETTLEMENT_QUANTITY_BBL=#{settlementQuantityBbl}</if>
+		<if test="settledAmount!=null and settledAmount!=''">and  SETTLED_AMOUNT=#{settledAmount}</if>
+		<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="dataJson!=null and dataJson!=''">and  DATA_JSON=#{dataJson}</if>
+		<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+		<if test="fileUrl!=null and fileUrl!=''">and  FILE_URL=#{fileUrl}</if>
+		<if test="settleStandard!=null and settleStandard!=''">and  SETTLE_STANDARD=#{settleStandard}</if>
+			
+			order by 
+				CREATE_DATE DESC	
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ORDER_STATEMENT_ID as "orderStatementId" 
+						 ,   ORDER_STATEMENT_UUID as "orderStatementUuid" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   STATEMENT_TYPE as "statementType" 
+						 ,   ORDER_STATEMENT_NO as "orderStatementNo" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   BILL_WEIGHT_BBL as "billWeightBbl" 
+						 ,   BILL_WEIGHT_T as "billWeightT" 
+						 ,   TOTAL_FEE as "totalFee" 
+						 ,   PRICE as "price" 
+						 ,   TOTAL_AMOUNT as "totalAmount" 
+						 ,   PAYMENT_DATE as "paymentDate" 
+						 ,   BILL_DATE as "billDate" 
+						 ,   PAYEE as "payee" 
+						 ,   ACOUNT as "acount" 
+						 ,   BANK_NAME as "bankName" 
+						 ,   STATUS as "status" 
+						 ,   SUBMIT_PERSON as "submitPerson" 
+						 ,   SUBMIT_PERSON_NAME as "submitPersonName" 
+						 ,   CONFIRM_PERSON as "confirmPerson" 
+						 ,   CONFIRM_PERSON_NAME as "confirmPersonName" 
+						 ,   CUSTOMER_NAME as "customerName" 
+						 ,   CONTACT_NAME as "contactName" 
+						 ,   TEL as "tel" 
+						 ,   EMAIL as "email" 
+						 ,   CHECK_TIME as "checkTime" 
+						 ,   CONTRACT_NO as "contractNo" 
+						 ,   AGENT_CONTRACT as "agentContract" 
+						 ,   OIL as "oil" 
+						 ,   PRICE_FORMULA as "priceFormula" 
+						 ,   SHIP_NAME as "shipName" 
+						 ,   BASE_PRICE as "basePrice" 
+						 ,   AGIO as "agio" 
+						 ,   CONTRACT_QUANTITY as "contractQuantity" 
+						 ,   TRADE_TERM as "tradeTerm" 
+						 ,   SETTLEMENT_PRICE as "settlementPrice" 
+						 ,   GOODS_AMOUNT as "goodsAmount" 
+						 ,   PAY_DATE as "payDate" 
+						 ,   SETTLEMENT_QUANTITY_BBL as "settlementQuantityBbl" 
+						 ,   SETTLED_AMOUNT as "settledAmount" 
+						 ,   SELLER_CUSTOMER_ID as "sellerCustomerId" 
+						 ,   BUYER_CUSTOMER_ID as "buyerCustomerId" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						 ,   DATA_JSON as "dataJson" 
+						 ,   FILE_NAME as "fileName" 
+						 ,   FILE_URL as "fileUrl" 
+						 ,	 SETTLE_STANDARD as "settleStandard"
+						from t_order_statement
+		where
+			ALIVE_FLAG='1'
+			<if test="orderStatementId!=null and orderStatementId!=''">and  ORDER_STATEMENT_ID=#{orderStatementId}</if>
+			<if test="orderStatementUuid!=null and orderStatementUuid!=''">and  ORDER_STATEMENT_UUID=#{orderStatementUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="statementType!=null and statementType!=''">and  STATEMENT_TYPE=#{statementType}</if>
+			<if test="orderStatementNo!=null and orderStatementNo!=''">and  ORDER_STATEMENT_NO like '%${orderStatementNo}%'</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO like '%${orderNo}%' </if>
+			<if test="billWeightBbl!=null and billWeightBbl!=''">and  BILL_WEIGHT_BBL=#{billWeightBbl}</if>
+			<if test="billWeightT!=null and billWeightT!=''">and  BILL_WEIGHT_T=#{billWeightT}</if>
+			<if test="totalFee!=null and totalFee!=''">and  TOTAL_FEE=#{totalFee}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="totalAmount!=null and totalAmount!=''">and  TOTAL_AMOUNT=#{totalAmount}</if>
+			<if test="paymentDate!=null and paymentDate!=''">and  PAYMENT_DATE=#{paymentDate}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="acount!=null and acount!=''">and  ACOUNT=#{acount}</if>
+			<if test="bankName!=null and bankName!=''">and  BANK_NAME=#{bankName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="submitPerson!=null and submitPerson!=''">and  SUBMIT_PERSON=#{submitPerson}</if>
+			<if test="submitPersonName!=null and submitPersonName!=''">and  SUBMIT_PERSON_NAME=#{submitPersonName}</if>
+			<if test="confirmPerson!=null and confirmPerson!=''">and  CONFIRM_PERSON=#{confirmPerson}</if>
+			<if test="confirmPersonName!=null and confirmPersonName!=''">and  CONFIRM_PERSON_NAME=#{confirmPersonName}</if>
+			<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME like '%${customerName}%'</if>
+			<if test="contactName!=null and contactName!=''">and  CONTACT_NAME like '%${contactName}%'</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="createDateStart!=null">AND CHECK_TIME &gt; #{createDateStart}</if>
+			<if test="createDateEnd!=null">AND CHECK_TIME &lt; #{createDateEnd}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="agentContract!=null and agentContract!=''">and  AGENT_CONTRACT=#{agentContract}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+			<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+			<if test="contractQuantity!=null and contractQuantity!=''">and  CONTRACT_QUANTITY=#{contractQuantity}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+			<if test="goodsAmount!=null and goodsAmount!=''">and  GOODS_AMOUNT=#{goodsAmount}</if>
+			<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+			<if test="settlementQuantityBbl!=null and settlementQuantityBbl!=''">and  SETTLEMENT_QUANTITY_BBL=#{settlementQuantityBbl}</if>
+			<if test="settledAmount!=null and settledAmount!=''">and  SETTLED_AMOUNT=#{settledAmount}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="dataJson!=null and dataJson!=''">and  DATA_JSON=#{dataJson}</if>
+			<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+			<if test="fileUrl!=null and fileUrl!=''">and  FILE_URL=#{fileUrl}</if>
+			<if test="settleStandard!=null and settleStandard!=''">and  SETTLE_STANDARD=#{settleStandard}</if>	
+			
+			<if test="noStatus!=null and noStatus!=''">and  STATUS != #{noStatus}</if>
+			order by 
+				CREATE_DATE DESC	
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_statement 
+		where
+		 ALIVE_FLAG='1'
+			<if test="orderStatementId!=null and orderStatementId!=''">and  ORDER_STATEMENT_ID=#{orderStatementId}</if>
+			<if test="orderStatementUuid!=null and orderStatementUuid!=''">and  ORDER_STATEMENT_UUID=#{orderStatementUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="statementType!=null and statementType!=''">and  STATEMENT_TYPE=#{statementType}</if>
+			<if test="orderStatementNo!=null and orderStatementNo!=''">and  ORDER_STATEMENT_NO like '%${orderStatementNo}%'</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO like '%${orderNo}%' </if>
+			<if test="billWeightBbl!=null and billWeightBbl!=''">and  BILL_WEIGHT_BBL=#{billWeightBbl}</if>
+			<if test="billWeightT!=null and billWeightT!=''">and  BILL_WEIGHT_T=#{billWeightT}</if>
+			<if test="totalFee!=null and totalFee!=''">and  TOTAL_FEE=#{totalFee}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="totalAmount!=null and totalAmount!=''">and  TOTAL_AMOUNT=#{totalAmount}</if>
+			<if test="paymentDate!=null and paymentDate!=''">and  PAYMENT_DATE=#{paymentDate}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="acount!=null and acount!=''">and  ACOUNT=#{acount}</if>
+			<if test="bankName!=null and bankName!=''">and  BANK_NAME=#{bankName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="submitPerson!=null and submitPerson!=''">and  SUBMIT_PERSON=#{submitPerson}</if>
+			<if test="submitPersonName!=null and submitPersonName!=''">and  SUBMIT_PERSON_NAME=#{submitPersonName}</if>
+			<if test="confirmPerson!=null and confirmPerson!=''">and  CONFIRM_PERSON=#{confirmPerson}</if>
+			<if test="confirmPersonName!=null and confirmPersonName!=''">and  CONFIRM_PERSON_NAME=#{confirmPersonName}</if>
+			<if test="customerName!=null and customerName!=''">and  CUSTOMER_NAME like '%${customerName}%'</if>
+			<if test="contactName!=null and contactName!=''">and  CONTACT_NAME like '%${contactName}%'</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="createDateStart!=null">AND od.CHECK_TIME &gt; #{createDateStart}</if>
+			<if test="createDateEnd!=null">AND od.CHECK_TIME &lt; #{createDateEnd}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="agentContract!=null and agentContract!=''">and  AGENT_CONTRACT=#{agentContract}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+			<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+			<if test="contractQuantity!=null and contractQuantity!=''">and  CONTRACT_QUANTITY=#{contractQuantity}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+			<if test="goodsAmount!=null and goodsAmount!=''">and  GOODS_AMOUNT=#{goodsAmount}</if>
+			<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+			<if test="settlementQuantityBbl!=null and settlementQuantityBbl!=''">and  SETTLEMENT_QUANTITY_BBL=#{settlementQuantityBbl}</if>
+			<if test="settledAmount!=null and settledAmount!=''">and  SETTLED_AMOUNT=#{settledAmount}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="dataJson!=null and dataJson!=''">and  DATA_JSON=#{dataJson}</if>
+			<if test="fileName!=null and fileName!=''">and  FILE_NAME=#{fileName}</if>
+			<if test="fileUrl!=null and fileUrl!=''">and  FILE_URL=#{fileUrl}</if>
+			<if test="settleStandard!=null and settleStandard!=''">and  SETTLE_STANDARD=#{settleStandard}</if>	
+			<if test="noStatus!=null and noStatus!=''">and  STATUS != #{noStatus}</if>
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+
+	<select id="selectinformation" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		SELECT
+		toder.ID AS orderId
+		,toder.ORDER_NO AS orderNo
+		,toder.SELLER_CUSTOMER_ID AS sellerCustomerId
+		,toder.BUYER_CUSTOMER_ID AS buyerCustomerId
+		,tog.ZH_NAME AS zhName
+		,tog.QUANTITY AS quantity
+		,tog.SPEC AS spec
+		,tope.TRADE_TERM AS tradeTerm
+		,tope.BASE_PRICE AS basePrice
+		,tope.PRICE_FORMULA AS priceFormula
+		,tope.AGIO AS agio
+		,tope.PRICING_DESC AS pricingDesc
+		,tope.PAYMENT_TERM AS paymentTerm
+		,tof.TOTAL_FEE AS totalFee
+		,tott.LOADING_PORT AS loadingPort
+		,tott.UPLOADING_PORT AS uploadingPort
+		,DATE_FORMAT(tott.DELIVERY_DATE_START, '%Y-%m-%d') AS
+		deliveryDateStart
+		,DATE_FORMAT(tott.DELIVERY_DATE_END, '%Y-%m-%d')
+		AS deliveryDateEnd
+		,DATE_FORMAT(tott.DISCHARGE_DATE_START, '%Y-%m-%d') AS
+		dischargeDateStart
+		,DATE_FORMAT(tott.DISCHARGE_DATE_END,
+		'%Y-%m-%d') AS dischargeDateEnd
+		FROM t_order toder
+		LEFT JOIN
+		t_order_goods tog
+		ON toder.ID = tog.ORDER_ID AND tog.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_price tope
+		ON toder.ID = tope.ORDER_ID AND
+		tope.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_transport tott
+		ON toder.ID =
+		tott.ORDER_ID AND tott.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_fee tof
+		ON
+		toder.ID = tof.ORDER_ID AND tof.ALIVE_FLAG = '1'
+		WHERE toder.ID =
+		#{orderId} AND
+		toder.ALIVE_FLAG = '1'
+
+
+	</select>
+
+
+	<select id="selectData" resultType="java.util.HashMap"
+			parameterType="hashmap">
+	SELECT  
+	     pa.CONTACT_NAME AS contactName,
+	     pa.TEL AS tel,
+	     pa.CUSTOMER_NAME AS customerName,
+		 pa.EMAIL AS email,
+		 od.ZH_NAME AS oil,
+		 od.CONTRACT_NO AS agentContract,
+		 sh.`NAME` AS shipName,
+		 od.PRICE_FORMULA AS priceFormula,
+		 con.QUANTITY AS contractQuantity,
+		 od.TRADE_TERM AS tradeTerm,
+		 fee.TOTAL_FEE AS totalFee,
+		 fee.ORDER_FEE_ID AS orderFeeId,
+		 od.ORDER_ID AS orderId
+		,od.ORDER_NO AS orderNo
+		,od.UUID AS uuid
+		,od.SELLER_CUSTOMER_ID AS sellerCustomerId
+		,od.BUYER_CUSTOMER_ID AS buyerCustomerId
+		,od.AGIO AS agio
+		,shload.BL_NIGHTSTOOL AS billWeightBbl
+		,shload.BL_NET_TONNAGE AS billWeightT
+		,shload.BL_DATE AS billDate
+	FROM
+		v_order_detail od
+		LEFT JOIN t_order_party pa ON od.ORDER_ID = pa.ORDER_ID
+		AND pa.PARTY_TYPE = '1'
+		AND pa.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_contract con ON od.ORDER_ID = con.ORDER_ID
+		AND pa.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_fee fee ON od.ORDER_ID = fee.ORDER_ID
+		AND fee.FEE_TYPE = '0'
+		AND fee.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_ship sh ON od.ORDER_ID = sh.ORDER_ID
+		AND sh.ALIVE_FLAG = '1'
+		LEFT JOIN t_order_ship_loadinginfo shload ON od.ORDER_NO = shload.ORDER_NO
+		AND shload.ALIVE_FLAG = '1'
+		WHERE 
+		od.UUID = #{uuid}
+	LIMIT 1
+	</select>
+
+
+	<select id="selectExpense" resultMap="OrderStatement">
+		select
+		* from
+		t_order_statement
+		where
+		ORDER_ID=#{orderId}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<select id="selectPage" resultMap="OrderStatement">
+		SELECT
+		tos.ORDER_STATEMENT_ID AS orderStatementId
+		,DATE_FORMAT(tos.CHECK_TIME, '%Y-%m-%d %T') AS "checkTime"
+		,tos.CONFIRM_PERSON AS confirmPerson
+		,tos.CUSTOMER_NAME AS customerName
+		,tos.CONTACT_NAME AS contactName
+		,tos.TEL AS tel
+		,tos.ORDER_ID AS
+		orderId
+		,tos.`STATUS` AS 'status'
+		,tos.TOTAL_AMOUNT AS totalAmount
+		FROM
+		t_order tor
+		INNER JOIN t_order_statement tos
+		ON tos.ORDER_ID = tor.ID
+		AND tos.ALIVE_FLAG = '1'
+
+		WHERE
+		(tor.BUYER_CUSTOMER_ID = #{epMemberId}
+		OR tor.SELLER_CUSTOMER_ID =
+		#{epMemberId}
+		OR tor.AGENT_ID = #{epMemberId})
+		AND tor.ALIVE_FLAG = '1'
+		<if test="orderStatementId!=null and orderStatementId!=''">
+			AND tos.ORDER_STATEMENT_ID LIKE CONCAT('%', #{orderStatementId}, '%')
+		</if>
+		<if test="checkTime!=null and checkTime!=''">
+			AND tos.CHECK_TIME LIKE CONCAT('%', #{checkTime}, '%')
+		</if>
+		<if test="confirmPerson!=null and confirmPerson!=''">
+			AND tos.CONFIRM_PERSON = #{confirmPerson}
+		</if>
+		<if test="customerName!=null and customerName!=''">
+			AND tos.CUSTOMER_NAME = #{customerName}
+		</if>
+		<if test="contactName!=null and contactName!=''">
+			AND tos.CONTACT_NAME = #{contactName}
+		</if>
+		<if test="tel!=null and tel!=''">
+			AND tos.TEL = #{tel}
+		</if>
+	</select>
+	
+	<select id="selectAccountsPage" resultMap="OrderStatement">
+		SELECT
+		tos.ORDER_STATEMENT_ID AS orderStatementId
+		,DATE_FORMAT(tos.CHECK_TIME, '%Y-%m-%d %T') AS "checkTime"
+		,tos.CONFIRM_PERSON AS confirmPerson
+		,tos.CUSTOMER_NAME AS customerName
+		,tos.CONTACT_NAME AS contactName
+		,tos.TEL AS tel
+		,tos.ORDER_ID AS
+		orderId
+		,tos.`STATUS` AS 'status'
+		,tos.TOTAL_AMOUNT AS totalAmount
+		FROM
+		t_order tor
+		INNER JOIN t_order_settlement tos
+		ON tos.ORDER_ID = tor.ID
+		AND tos.ALIVE_FLAG = '1'
+
+		WHERE
+		(tor.BUYER_CUSTOMER_ID = #{epMemberId}
+		OR tor.SELLER_CUSTOMER_ID =
+		#{epMemberId}
+		OR tor.AGENT_ID = #{epMemberId})
+		AND tor.ALIVE_FLAG = '1'
+		<if test="orderStatementId!=null and orderStatementId!=''">
+			AND tos.ORDER_STATEMENT_ID LIKE CONCAT('%', #{orderStatementId}, '%')
+		</if>
+		<if test="checkTime!=null and checkTime!=''">
+			AND tos.CHECK_TIME LIKE CONCAT('%', #{checkTime}, '%')
+		</if>
+		<if test="confirmPerson!=null and confirmPerson!=''">
+			AND tos.CONFIRM_PERSON = #{confirmPerson}
+		</if>
+		<if test="customerName!=null and customerName!=''">
+			AND tos.CUSTOMER_NAME = #{customerName}
+		</if>
+		<if test="contactName!=null and contactName!=''">
+			AND tos.CONTACT_NAME = #{contactName}
+		</if>
+		<if test="tel!=null and tel!=''">
+			AND tos.TEL = #{tel}
+		</if>
+	</select>
+
+	<select id="calcStatementTotal" resultType="double" parameterType="long">
+	SELECT IFNULL(SUM(TOTAL_FEE),0) FROM `t_order_statement` WHERE ALIVE_FLAG = '1' AND ORDER_ID = #{orderId}
+	</select>
+
+	<select id="queryIsTrigger" resultType="int" parameterType="long">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_price top 
+		WHERE
+			top.ORDER_ID = #{orderId}
+			AND top.ALIVE_FLAG = '1'
+			AND top.PRICE_TYPE = 'Trigger'
+			AND (select QUANTITY from t_trigger_contract WHERE ORDER_ID = #{orderId}  limit 1 ) = (select sum(LOCK_QUANTITY) from t_trigger_result WHERE ORDER_ID=#{orderId})
+	</select>
+	<select id="findDifferAmount"  resultType="double" parameterType="long">
+		SELECT 
+			IFNULL(SUM(DIFFER_AMOUNT),0) 
+		FROM t_trigger_transfer 
+		WHERE 
+			ALIVE_FLAG = '1' 
+			AND ORDER_ID = #{orderId}
+	
+	</select>
+	
+	<select id="selectDataForTriggerResult" resultType="java.util.HashMap" parameterType="hashmap"> 
+		SELECT 
+			TRUNCATE(AVG((SELECT TRUNCATE(SUM(TOTAL_AMOUNT)/SUM(LOCK_QUANTITY),2) from t_trigger_result 
+						WHERE 
+							ALIVE_FLAG = '1' 
+							AND ORDER_ID = #{orderId})
+			),2) as "settlementPrice",
+			IFNULL(SUM(LOCK_QUANTITY),0) as "settlementQuantityBbl"
+		FROM t_trigger_result 
+		WHERE 
+			ALIVE_FLAG = '1' 
+			AND ORDER_ID = #{orderId}
+	</select>
+	
+	<update id="updateStatusById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement">
+		update 
+		t_order_statement
+		set STATUS = '30' , FILE_NAME = #{fileName} , FILE_URL = #{fileUrl}
+		where
+		ALIVE_FLAG='1' and 
+		ORDER_STATEMENT_ID = #{orderStatementId} and STATUS = '10' 
+	</update>
+	
+	<update id="editStatusById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderStatement">
+		update 
+		t_order_statement
+		set STATUS = '01' 
+		where
+		ALIVE_FLAG='1' and 
+		ORDER_STATEMENT_ID = #{orderStatementId} and STATUS = '05' 
+	</update>
+</mapper>

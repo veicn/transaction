@@ -1,0 +1,107 @@
+<div class="s-mod">
+		<div class="s-order-box">
+			<!-- <div class="clearfix s-order-tit2">
+				<a href="javascript:;" class="curr">货物装港信息</a>
+				<a href="javascript:;" id="unload">货物卸港信息</a>
+			</div> -->
+			<div class="clearfix s-order-tit"><h1>录入货物信息</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li class="curr"><a  href="javascript:;">货物装港信息</a></li>
+				<li><a  href="javascript:;" id="unload">货物卸港信息</a></li>
+			</ul>
+		</div>
+		<div class="all">
+		<div class="s-mod-block">
+			<div class="s-mod-btit">装港</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx form" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">装港：</label>
+					  <div class="s-input-inline">
+						 <p class="loadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">租船协议：</label>
+					  <div class="s-input-inline">
+						 <p class="agreementCode"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">油种：</label>
+					  <div class="s-input-inline">
+						 <p class="oilType"></p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Bill of Lading：</label>
+					  <div class="s-input-inline">
+						 <p class="billOfLading">
+							 <input type="text" readonly="readonly" class="billOfLadingFile s-input" id="billOfLadingFile1" >
+							 <a href="javascript:;" id="billOfLadingBtn1">上传</a>
+							 <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Certificate of Quantity：</label>
+					  <div class="s-input-inline">
+						<p class="cerOfQuantity">
+							 <input type="text" readonly="readonly" class="cerOfQuantityFile s-input" id="cerOfQuantityFile1" >
+							 <a href="javascript:;" id="cerOfQuantityBtn1">上传</a>
+							  <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Certificate of Quality：</label>
+					  <div class="s-input-inline">
+						<p class="cerOfQuality">
+							 <input type="text" readonly="readonly" class="cerOfQualityFile s-input"id="cerOfQualityFile1" >
+							 <a href="javascript:;" id="cerOfQualityBtn1">上传</a>
+							  <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Certificate of Original：</label>
+					  <div class="s-input-inline">
+						 <p class="cerOfOriginal">
+							 <input type="text" readonly="readonly" class="cerOfOriginalFile s-input" id="cerOfOriginalFile1" >
+							 <a href="javascript:;" id="cerOfOriginalBtn1">上传</a>
+							  <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Manifest：</label>
+					  <div class="s-input-inline">
+						 <p class="manifest">
+							 <input type="text" readonly="readonly" class="manifestFile s-input" id="manifestFile1" >
+							 <a href="javascript:;" id="manifestBtn1">上传</a>
+							  <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		</div>
+		<div class="accAll">
+			<div class="accClone">
+			 <div class="billOfLadingAcc" id="billOfLadingAcc1"  style="display:none;"></div>	
+			 <div class="cerOfQuantityAcc" id="cerOfQuantityAcc1"  style="display:none;"></div>	
+			 <div class="cerOfQualityAcc" id="cerOfQualityAcc1"  style="display:none;"></div>	
+			 <div class="cerOfOriginalAcc" id="cerOfOriginalAcc1"  style="display:none;"></div>	
+			 <div class="manifestAcc" id="manifestAcc1"  style="display:none;"></div>	
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue"  id="save">提&nbsp;&nbsp;交</button><button class="s-btn s-btn-primary returnFn">取消</button></div>
+	</div>
+<script src="../transport/js/sysShip/shipUtil.js"></script>
+<script src="../transport/js/shipPactNew/goodsLoadEdit.js"></script>

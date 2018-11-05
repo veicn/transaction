@@ -1,0 +1,42 @@
+<style> 
+.layui-unselect dl { max-height:200px; }  
+</style>
+<form class="layui-form" action="/info/channelSub/saveOrUpdateChannelSub.json" method="POST">
+       <div class="layui-form-item" style="margin-top:50px">
+           <label class="layui-form-label iw130">主频道类型：</label>
+           <div class="layui-input-inline iw300">
+               <select id="channelMUuid" name="channelMUuid" lay-verify="required" style="height: 200px">
+              	 <option id="channelMIdOpt" value="">== 请选择主频道  ==</option>
+               </select>
+           </div>
+       </div>
+       
+       <div class="layui-form-item">
+           <label class="layui-form-label iw130">子频道代码：</label>
+           <div class="layui-input-inline iw300">
+           <input type="text" name="channelCode"   lay-verify="required"  placeholder="请输入子频道代码" class="layui-input" >
+           </div>
+       </div>
+       <div class="layui-form-item">
+           <label class="layui-form-label iw130">子频道名：</label>
+           <div class="layui-input-inline iw300">
+           <input type="text" name="channelName" lay-verify="required"  placeholder="请输入子频道名" class="layui-input">
+           </div>
+       </div>
+       <div class="layui-form-item">
+           <label class="layui-form-label iw130">是否公开：</label>
+           <div class="layui-input-inline iw300">
+               <input type="radio" name="extend1" value="1" title="是" checked>
+      		   <input type="radio" name="extend1" value="0" title="否">
+           </div>
+       </div>
+       <div class="layui-form-item">
+           <label class="layui-form-label iw130">序号：</label>
+           <div class="layui-input-inline iw300">
+           <input type="number" name="channelOrder" id="channelOrder" placeholder="请输入序号" class="layui-input">
+           </div>
+       </div>
+       <button class="layui-btn formDemoZy" lay-submit="" style="display:none;" lay-filter="formDemoZyId">闅愯棌</button>
+       
+       
+</form>

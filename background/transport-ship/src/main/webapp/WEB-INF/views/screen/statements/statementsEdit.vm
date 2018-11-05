@@ -1,0 +1,176 @@
+
+<div>
+	<input type="hidden" id="shipPactUuid" value=""/>
+	<input type="hidden" id="shipAgreementUuid" value=""/>
+	<input type="hidden" id="uuid" name="uuid" value=""/>
+	 <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>录入结算费用</h1></div>
+			<p class="s-order-jbx"></p>
+		</div>
+		<div class="clearfix">
+			<div class="s-mod-block s-costs-block">
+				<div class="s-mod-btit">录入结算费用<!-- <span><a href="javascript:;">增加附件</a></span> --></div>
+				<div class="s-mod-bcont">
+					<form class="s-form s-form-cont s-form-cont2" action="">
+					<ul>
+						<li class="s-form-item">
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> 发票号码：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="receiptCode" name="receiptCode"  value="" class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> 租船协议编号：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="agreementStatementsId" name="agreementStatementsId" value="" placeholder="" class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> 收款方：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="payee" name="payee" placeholder="" value="" class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> 付款方：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="payer" name="payer" value="" placeholder="" class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> 附件：</label>
+							  <div class="s-input-inline s-input-up">
+								  <input id="cunImg" name="receiptAccessory" placeholder="" readonly="readonly" type="text" class="s-input"/>
+								  <input id="receiptAccessoryPath" name="receiptAccessoryPath" placeholder="" readonly="readonly" type="hidden" class="s-input"/>
+								  <a href="javascript:;" class="file1" id="btn">上传</a>
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> C/P Freight Quantily：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightQuantily" name="freightQuantily" placeholder="" class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> Freight overage Quantily：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightOverageQuantily" name="freightOverageQuantily" placeholder="" class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> Flatrate：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightOverageFlatrate" name="freightOverageFlatrate"  class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> Rate（WS)：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightOverageRate" name="freightOverageRate"  class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> Freight overage Pct：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightOveragePct" name="freightOveragePct"  class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em> Address Commission Pct：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="addressCommissionPct" name="addressCommissionPct"  class="s-input" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+							  </div>
+							</div>
+							<div class="s-inline s-inline2">
+							  <label class="s-form-label"></label>
+							  <div class="s-input-inline">
+							  <a href="javascript:;" class="s-btn file1" id="jsfy">计算费用</a>
+							  </div>
+							</div>
+						</li>
+					</ul>
+					</form>
+				</div>
+			</div>
+			<div class="s-mod-block s-costs-block">
+				<div class="s-mod-btit">计算费用</div>
+				<div class="s-mod-bcont">
+					<form class="s-form s-form-cont s-form-cont2" action="">
+					<ul>
+						<li class="s-form-item">
+							<div class="s-inline">
+							  <label class="s-form-label">Freight Total：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightTotal" readonly="readonly" name="freightTotal"  class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label">Freight overage Total：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="freightOverageTotal" readonly="readonly" name="freightOverageTotal"  class="s-input">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label">Address Commission Total：</label>
+							  <div class="s-input-inline">
+								  <input type="text" id="addressCommissionTotal" readonly="readonly" name="addressCommissionTotal" class="s-input" >
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label">Total Amount：</label>
+							  <div class="s-input-inline">
+								  <input id="balance" type="text" readonly="readonly" class="s-input" value=""/>
+							  </div>
+							</div>
+						</li>
+					</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="s-btn-box"><button id="submit"  class="s-btn" type="button">提交</button><button class="s-btn s-btn-primary goto">返回</button></div>
+ 		<div id="receiptAccessory"  style="display:none;"></div>
+	</div>
+	 
+</div>
+<script src="../transport/js/statements/statementsEdit.js"></script>
+<script>
+
+//三位小数数字正则校验
+function clearNoNumThree(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+}  
+//两位小数数字正则校验
+function clearNoNumTwo(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.-]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+} 
+
+</script>

@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.SysShipMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.SysShip" id="SysShipDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.SysShip">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.SysShip" id="SysShip">
+		<result property="sysShipId" column="SYS_SHIP_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="status" column="STATUS" />
+		<result property="imo" column="IMO" />
+		<result property="mmsi" column="MMSI" />
+		<result property="useType" column="USE_TYPE" />
+		<result property="name" column="NAME" />
+		<result property="pennant" column="PENNANT" />
+		<result property="type" column="TYPE" />
+		<result property="builder" column="BUILDER" />
+		<result property="classSociety" column="CLASS_SOCIETY" />
+		<result property="completeDate" column="COMPLETE_DATE" />
+		<result property="hull" column="HULL" />
+		<result property="length" column="LENGTH" />
+		<result property="wide" column="WIDE" />
+		<result property="draft" column="DRAFT" />
+		<result property="loadQuantity" column="LOAD_QUANTITY" />
+		<result property="allQuantity" column="ALL_QUANTITY" />
+		<result property="capacity" column="CAPACITY" />
+		<result property="accessory" column="ACCESSORY" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="publisherType" column="PUBLISHER_TYPE" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="SysShip" parameterType="com.sinochem.crude.trade.transport.domain.SysShip">
+	select * from t_ship_sys_ship
+	where
+		 ALIVE_FLAG='1'
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+		<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+		<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+		<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+		<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+		<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+		order by NAME asc
+	</select>
+	
+	<select id="findByPrimaryKey" resultMap="SysShip">
+			select
+			* from t_ship_sys_ship
+			where
+		    SYS_SHIP_ID=#{sysShipId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="SysShip">
+			select
+			* from t_ship_sys_ship
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.SysShip">
+		update t_ship_sys_ship
+		<set>
+         SYS_SHIP_ID=#{sysShipId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="mmsi!=null">,MMSI = #{mmsi}</if>
+		<if test="useType!=null">,USE_TYPE = #{useType}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="pennant!=null">,PENNANT = #{pennant}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="builder!=null">,BUILDER = #{builder}</if>
+		<if test="classSociety!=null">,CLASS_SOCIETY = #{classSociety}</if>
+		<if test="completeDate!=null">,COMPLETE_DATE = #{completeDate}</if>
+		<if test="hull!=null">,HULL = #{hull}</if>
+		<if test="length!=null">,LENGTH = #{length}</if>
+		<if test="wide!=null">,WIDE = #{wide}</if>
+		<if test="draft!=null">,DRAFT = #{draft}</if>
+		<if test="loadQuantity!=null">,LOAD_QUANTITY = #{loadQuantity}</if>
+		<if test="allQuantity!=null">,ALL_QUANTITY = #{allQuantity}</if>
+		<if test="capacity!=null">,CAPACITY = #{capacity}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="publisherType!=null">,PUBLISHER_TYPE = #{publisherType}</if>
+		</set>
+		where
+       	 SYS_SHIP_ID=#{sysShipId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.SysShip"  useGeneratedKeys="true" keyProperty="sysShipId" >
+		insert  into t_ship_sys_ship (				SYS_SHIP_ID
+						,UUID
+						,STATUS
+						,IMO
+						,MMSI
+						,USE_TYPE
+						,NAME
+						,PENNANT
+						,TYPE
+						,BUILDER
+						,CLASS_SOCIETY
+						,COMPLETE_DATE
+						,HULL
+						,LENGTH
+						,WIDE
+						,DRAFT
+						,LOAD_QUANTITY
+						,ALL_QUANTITY
+						,CAPACITY
+						,ACCESSORY
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,EP_MEMBER_ID
+						,EP_MEMBER_NAME
+						,PUBLISHER_TYPE
+						)
+		values(		#{sysShipId}
+						,#{uuid}
+						,#{status}
+						,#{imo}
+						,#{mmsi}
+						,#{useType}
+						,#{name}
+						,#{pennant}
+						,#{type}
+						,#{builder}
+						,#{classSociety}
+						,#{completeDate}
+						,#{hull}
+						,#{length}
+						,#{wide}
+						,#{draft}
+						,#{loadQuantity}
+						,#{allQuantity}
+						,#{capacity}
+						,#{accessory}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{epMemberId}
+						,#{epMemberName}
+						,#{publisherType}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_sys_ship
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 SYS_SHIP_ID=#{sysShipId} 
+																																																																																																																																								
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SYS_SHIP_ID as "sysShipId" 
+						 ,   UUID as "uuid" 
+						 ,   STATUS as "status" 
+						 ,   IMO as "imo" 
+						 ,   MMSI as "mmsi" 
+						 ,   USE_TYPE as "useType" 
+						 ,   NAME as "name" 
+						 ,   PENNANT as "pennant" 
+						 ,   TYPE as "type" 
+						 ,   BUILDER as "builder" 
+						 ,   CLASS_SOCIETY as "classSociety" 
+						 ,   COMPLETE_DATE as "completeDate" 
+						 ,   HULL as "hull" 
+						 ,   LENGTH as "length" 
+						 ,   WIDE as "wide" 
+						 ,   DRAFT as "draft" 
+						 ,   LOAD_QUANTITY as "loadQuantity" 
+						 ,   ALL_QUANTITY as "allQuantity" 
+						 ,   CAPACITY as "capacity" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   PUBLISHER_TYPE as "publisherType" 
+						from t_ship_sys_ship
+		where
+			ALIVE_FLAG='1'
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+			<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+			<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+			<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+			<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+			<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+			<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+			order by CREATE_DATE desc,field(TYPE,'VLCC','ULCC','SUEZMAX','AFRAMEAX','PANAMAX','HANDYSIZE','')
+	</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_sys_ship 
+		where
+		 ALIVE_FLAG='1'
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+			<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+			<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+			<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+			<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+			<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+			<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_sys_ship
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+		<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+		<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+		<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+		<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+		<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_sys_ship
+		<set>
+         SYS_SHIP_ID=#{sysShipId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="mmsi!=null">,MMSI = #{mmsi}</if>
+		<if test="useType!=null">,USE_TYPE = #{useType}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="pennant!=null">,PENNANT = #{pennant}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="builder!=null">,BUILDER = #{builder}</if>
+		<if test="classSociety!=null">,CLASS_SOCIETY = #{classSociety}</if>
+		<if test="completeDate!=null">,COMPLETE_DATE = #{completeDate}</if>
+		<if test="hull!=null">,HULL = #{hull}</if>
+		<if test="length!=null">,LENGTH = #{length}</if>
+		<if test="wide!=null">,WIDE = #{wide}</if>
+		<if test="draft!=null">,DRAFT = #{draft}</if>
+		<if test="loadQuantity!=null">,LOAD_QUANTITY = #{loadQuantity}</if>
+		<if test="allQuantity!=null">,ALL_QUANTITY = #{allQuantity}</if>
+		<if test="capacity!=null">,CAPACITY = #{capacity}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="publisherType!=null">,PUBLISHER_TYPE = #{publisherType}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+		<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+		<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+		<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+		<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+		<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+		<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	<select id="findSysShipByImoName" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.transport.domain.SysShip">
+		select 
+			s.SYS_SHIP_ID as sysShipId,
+			s.IMO as IMO,
+			s.MMSI as MMSI,
+			s.NAME as VesselName,
+			s.COMPLETE_DATE as Built,
+			s.USE_TYPE as VesselType,
+			s.TYPE as VesselSize,
+			(case when s.CAPACITY is not null then concat(s.CAPACITY,'m³') else '' end) as Cubic,
+			(case when s.LOAD_QUANTITY is not null then concat(s.LOAD_QUANTITY,'mt') else '' end) as SDWT,
+			(case when s.LENGTH is not null then concat(s.LENGTH,'m') else '' end) as LOA,
+			(case when s.WIDE is not null then concat(s.WIDE,'m') else '' end) as Beam,
+			(case when s.DRAFT is not null then concat(s.DRAFT,'m') else '' end) as Draft,
+			s.HULL as HullType
+		from t_ship_sys_ship s
+		where s.ALIVE_FLAG='1'
+		<if test="imo!=null and imo!=''"> and s.IMO=#{imo}</if>
+		<if test="name!=null and name!=''"> and s.NAME like CONCAT('%',#{name},'%')</if>
+		<if test="type!=null and type!=''"> and s.TYPE=#{type}</if>
+		order by s.CREATE_DATE
+	</select>
+	
+	<select id="findSysShipAccessoryByImoName" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.transport.domain.SysShip">
+		select 
+			a.PATH as path
+		from t_ship_accessory a
+		where a.ALIVE_FLAG='1' and a.ID=#{sysShipId}
+	</select>
+	
+	<select id="findSysShipStatus" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.transport.domain.SysShip">
+		select 
+			STATUS as status
+		from t_ship_ship_plate
+		where ALIVE_FLAG='1' and STATUS!='4' and SYS_SHIP_UUID=#{uuid}
+	</select>
+	
+	<!-- 根据uuid-查询对象详细信息 -->
+	<select id="findByUUIDForward" resultType="java.util.HashMap">
+		select
+			  SYS_SHIP_ID as "sysShipId"
+			 ,   a.UUID as "uuid" 
+			 ,   a.STATUS as "status" 
+			 ,   a.IMO as "imo" 
+			 ,   a.MMSI as "mmsi" 
+			 ,   a.USE_TYPE as "useType" 
+			 ,   a.NAME as "name" 
+			 ,   a.PENNANT as "pennant" 
+			 ,   a.TYPE as "type" 
+			 ,   a.BUILDER as "builder" 
+			 ,   a.CLASS_SOCIETY as "classSociety" 
+			 ,   a.COMPLETE_DATE as "completeDate" 
+			 ,   a.HULL as "hull" 
+			 ,   (case when a.LENGTH is not null then concat(a.LENGTH,'m') else '' end) as "length"
+			 ,   (case when a.WIDE is not null then concat(a.WIDE,'m') else '' end) as "wide" 
+			 ,   (case when a.DRAFT is not null then concat(a.DRAFT,'m') else '' end) as "draft"
+			 ,   (case when a.LOAD_QUANTITY is not null then concat(a.LOAD_QUANTITY,'mt') else '' end) as "loadQuantity"
+			 ,   a.ALL_QUANTITY as "allQuantity"
+			 ,   (case when a.CAPACITY is not null then concat(a.CAPACITY,'m³') else '' end) as "capacity"
+			 ,   a.ACCESSORY as "accessory"
+			 ,   a.BUILDER as "builder"
+			 ,   a.CLASS_SOCIETY as "class_society"
+			 ,   b.PATH
+			from t_ship_sys_ship a left join t_ship_accessory b on a.SYS_SHIP_ID=b.ID
+		where
+			a.UUID=#{UUID} and a.ALIVE_FLAG='1'
+	</select>
+	
+	<!-- 根据条件-查询状态为‘待审核’和‘有效’的船舶 -->
+	<select id="findShipRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SYS_SHIP_ID as "sysShipId" 
+						 ,   UUID as "uuid" 
+						 ,   STATUS as "status" 
+						 ,   IMO as "imo" 
+						 ,   MMSI as "mmsi" 
+						 ,   USE_TYPE as "useType" 
+						 ,   NAME as "name" 
+						 ,   PENNANT as "pennant" 
+						 ,   TYPE as "type" 
+						 ,   BUILDER as "builder" 
+						 ,   CLASS_SOCIETY as "classSociety" 
+						 ,   COMPLETE_DATE as "completeDate" 
+						 ,   HULL as "hull" 
+						 ,   LENGTH as "length" 
+						 ,   WIDE as "wide" 
+						 ,   DRAFT as "draft" 
+						 ,   LOAD_QUANTITY as "loadQuantity" 
+						 ,   ALL_QUANTITY as "allQuantity" 
+						 ,   CAPACITY as "capacity" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   PUBLISHER_TYPE as "publisherType" 
+						from t_ship_sys_ship
+		where
+			ALIVE_FLAG='1'
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="status!=null and status!=''">and  STATUS!=#{status}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="mmsi!=null and mmsi!=''">and  MMSI=#{mmsi}</if>
+			<if test="useType!=null and useType!=''">and  USE_TYPE=#{useType}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="pennant!=null and pennant!=''">and  PENNANT=#{pennant}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="builder!=null and builder!=''">and  BUILDER=#{builder}</if>
+			<if test="classSociety!=null and classSociety!=''">and  CLASS_SOCIETY=#{classSociety}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="hull!=null and hull!=''">and  HULL=#{hull}</if>
+			<if test="length!=null and length!=''">and  LENGTH=#{length}</if>
+			<if test="wide!=null and wide!=''">and  WIDE=#{wide}</if>
+			<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="allQuantity!=null and allQuantity!=''">and  ALL_QUANTITY=#{allQuantity}</if>
+			<if test="capacity!=null and capacity!=''">and  CAPACITY=#{capacity}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="publisherType!=null and publisherType!=''">and  PUBLISHER_TYPE=#{publisherType}</if>
+			order by STATUS asc,CREATE_DATE desc,field(TYPE,'VLCC','ULCC','SUEZMAX','AFRAMEAX','PANAMAX','HANDYSIZE','')
+	</select>
+	
+	
+	<select id="findSysShipByImoOrMmsiOrName" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT * FROM
+		(select 	
+					s.IMO as matchkey,
+		      'IMO' as matchname,
+          s.IMO	as	imo
+				from t_ship_sys_ship s
+				where s.ALIVE_FLAG='1'
+		UNION
+		select 	
+					s.MMSI as matchkey,
+		      'MMSI' as matchname,
+         s.IMO		
+				from t_ship_sys_ship s
+				where s.ALIVE_FLAG='1'
+		UNION
+		select 	
+			s.`NAME` as matchkey,
+      'NAME' as matchname,
+      s.IMO		
+		from t_ship_sys_ship s
+		where s.ALIVE_FLAG='1') a
+		<if test="keyword!=null and keyword!=''">  where a.matchkey like CONCAT('%',#{keyword},'%')</if>
+		
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

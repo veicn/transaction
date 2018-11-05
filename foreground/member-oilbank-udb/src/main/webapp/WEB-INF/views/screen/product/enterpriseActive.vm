@@ -1,0 +1,34 @@
+$contain.get('common/title.htm').put('title', '企业用户激活')
+#css($appServer.get('/product/css/work/forgotPwd.css'))
+
+<div class="w1180 clearfix rpp-con">
+    <h2 class="persRwdSet">Thank you for registration and please set your password. </h2>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">PASSWORD: </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the password</span>
+
+    </div>
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">CONFIRM PASSWORD : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control3" id=" " >
+        <span class="errPrompt">Please enter the password again</span>
+
+    </div>
+    <div class="form-group-check">
+        <span></span>
+        <em class="button-check rpp-button perPwdSet">
+            <a href="javascript:;" class="br">Submit and active account</a>
+        </em>
+    </div>
+</form>

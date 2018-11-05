@@ -1,0 +1,22 @@
+#*
+<style>#cnzz_stat_icon_1272857056{display:none}</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='"
+        + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+	$asyncContain.export()
+	</body>
+</html>*#
+
+<footer id="footer">
+    <div class="ftCon-Wrapper">
+        <ul class="clearfix">
+            <li onclick="location.href='javascript:;'">about us</li>
+            <li onclick="location.href='javascript:;'">legal statment</li>
+            <li onclick="location.href='javascript:;'">help</li>
+            <li onclick="location.href='javascript:;'">contact us</li>
+            <li onclick="location.href='javascript:;'">carrers</li>
+        </ul>
+    </div>
+    <div class="cp">Copyright © 2018 Elemica. All rights reserved. | Privacy</div>
+</footer>

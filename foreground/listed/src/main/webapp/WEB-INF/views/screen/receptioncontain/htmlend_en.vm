@@ -1,0 +1,44 @@
+<div class="footer">
+    <div class="inner">
+        <ul class="ft-list clearfix">
+            <li>
+                <h3>关于我们</h3>
+                <a href="">联系我们</a>
+                <a href="">了解买原油</a>
+                <a href="">加入我们</a>
+            </li>
+            <li>
+                <h3>供应商入门</h3>
+                <a href="">注册指南</a>
+                <a href="">忘记密码</a>
+                <a href="">商品及单品管理</a>
+            </li>
+            <li>
+                <h3>采购商入门</h3>
+                <a href="">注册指南</a>
+                <a href="">忘记密码</a>
+                <a href="">如何下单</a>
+                <a href="">管理员如何维护信息</a>
+            </li>
+            <li>
+                <h3>常见问题</h3>
+                <a href="">平台支持哪些浏览器</a>
+                <a href="">如何提高账户安全性</a>
+                <a href="">如何在平台上直接购买商品</a>
+            </li>
+            <li>
+                <h3>平台规则</h3>
+                <a href="">会员注册规则</a>
+                <a href="">知识产权保护规则</a>
+                <a href="">系统安全保障规则</a>
+                <a href="">防范和制止违规信息规则</a>
+                <a href="">隐私权和商业机密保护制度</a>
+            </li>
+        </ul>
+        <div class="ft-link">
+            <a href="">法律声明</a><em>|</em><a href="">服务条款</a><em>|</em><a href="">联系我们</a><em>|</em><a href="">帮助答疑</a><em>|</em>
+            <a href="$portalServer.get('/recruit.htm')">人才招聘</a>
+        </div>
+        <p>©买原油网</p>
+    </div>
+</div>

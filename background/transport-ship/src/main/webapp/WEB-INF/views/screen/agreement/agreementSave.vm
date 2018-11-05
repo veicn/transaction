@@ -1,0 +1,215 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>租船协议管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">完善租船协议</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx form" action="">
+				<ul>
+					<li class="s-form-item">
+						<input type="hidden"  class="c-int" id="uuid" value="" name="uuid"/>
+						<input type="hidden"  class="c-int" id="shipPlateUuid" name="shipPlateUuid"/>
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>租约日：</label>
+						  <div class="s-input-inline">
+							  <input type="text"  class="s-input" id="signDate" name="signDate"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>租船人：</label>
+						  <div class="s-input-inline">
+						  	  <input type="text" class="s-input" id="carrierName" name="carrierName"  maxlength="100"/>
+						  </div>
+						</div>
+	                    <div class="s-inline">
+						  <label class="s-form-label"><em>*</em>船东：</label>
+						  <div class="s-input-inline">
+							  <input type="text" class="s-input owner" id="shipOwner" name="shipOwner" maxlength="100"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>船名：</label>
+						  <div class="s-input-inline">
+						  	  <input type="text" class="s-input shipName" id="shipName" name="shipName" maxlength="100"/>
+						  </div>
+						</div>
+	                </li>
+	                
+	                <!-- 装港多个 -->
+	                <div class="all zhuanggangAll">
+						<li class="s-form-item wsUl">
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>数量：</label>
+							  <div class="s-input-inline">
+							  	  <input type="text" class="s-input s-mr-5 width_50 quantity" id="quantity" name="quantity" value="" onkeyup="clearNoNumThree(this)" maxlength="15"
+								  			onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+								  <!-- 单位 -->
+		                          <select class="s-select width_30 unitName" id="unitName" name="unitName">
+									  <option value="BBL">BBL</option>
+			                          <option value="MT">MT</option>
+								  </select>
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>油种：</label>
+							  <div class="s-input-inline">
+								 <input type="text" class="s-input is-oilType oilType" id="oilType" name="oilType" maxlength="100"/>
+							  </div>
+							</div>
+		                    <div class="s-inline">
+							  <label class="s-form-label"><em>*</em>装港：</label>
+							  <div class="s-input-inline">
+								 <input type="text" class="s-input shipOwner is-loadPort loadPort" id="loadPort" name="loadPort" maxlength="100"/>
+							  </div>
+							</div>
+		                    <div class="s-but-all s-but-all2 clearfix">
+								<div class="s-all-jt"><p><i class="s-icon s-icon-zhuang s-icon-plus"></i></p></div>
+							</div>
+		                 </li>
+		             </div>
+	                 <!-- 装港多个 -->
+	                 
+	                 <!-- 卸港多个 -->
+	                 <div class="xiegang xiegangAll">
+		                 <li class="s-form-item wsUl">
+		                	<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>卸港：</label>
+							  <div class="s-input-inline">
+								 <input type="text" class="s-input shipOwner is-unloadPort unloadPort" id="unloadPort" name="unloadPort" maxlength="100"/>
+							  </div>
+							</div>
+		                    <div class="s-but-all s-but-all2 clearfix">
+								<div class="s-all-jt"><p><i class="s-icon s-icon-xie s-icon-plus"></i></p></div>
+							</div>
+		                 </li>
+		             </div>
+	                 <!-- 卸港多个 -->
+	                 
+	                 <li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>装期：</label>
+						  <div class="s-input-inline">
+							 <input type="text" id="pactBeg" name="pactBegs" readonly="readonly" class="s-input width_40" placeholder="请选择时间" style="width: 25%;" />
+	                         <em class="s-fo-em">-</em>
+	                         <input type="text" id="pactEnd" placeholder="请选择时间" style="width: 25%;" name="pactEnds" class="s-input width_40" readonly="readonly"/>
+	                         <span class="s-zq-ts" title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT "><i class="shipping-ico w-ico-sl"></i></span>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>最低计费吨：</label>
+						  <div class="s-input-inline">
+							  <input type="text" class="s-input shipOwner" id="minQuantity" name="minQuantity" onkeyup="clearNoNumThree(this)" maxlength="15"
+					  						onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>WS点：</label>
+						  <div class="s-input-inline">
+							  <input type="text" class="s-input shipOwner" id="ws" name="ws" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  						onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>WS参考点：</label>
+						  <div class="s-input-inline">
+							  <select class="s-select WSRes" id="WSRes" name="WSRes">
+									<option name="wsRes"  value="WS 2017 RATES AND TERMS TO APPLY">WS 2017 RATES AND TERMS TO APPLY</option>
+									<option name="wsRes"  value="WS 2018 RATES AND TERMS TO APPLY">WS 2018 RATES AND TERMS TO APPLY</option>
+									<option name="wsRes"  value="WS 2019 RATES AND TERMS TO APPLY">WS 2019 RATES AND TERMS TO APPLY</option>
+							  </select>
+						  </div>
+						</div>	
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>滞期费率(USD/PDPR)：</label>
+						  <div class="s-input-inline">
+							  <input type="text" class="s-input shipOwner" id="demurrage" name="demurrage" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  						onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);"/>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>允许装卸时间(h)：</label>
+						  <div class="s-input-inline">
+							 <input type="text" class="s-input shipOwner" id="dockTime" name="dockTime" onkeyup="clearNoNumTwo(this)" maxlength="15"
+					  						onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);"/>
+						  </div>
+						</div>
+	                    <div class="s-inline">
+						  <label class="s-form-label"><em>*</em>航速(kts)：</label>
+						  <div class="s-input-inline">
+							 <input type="text" class="s-input shipOwner" id="pactSpeed" name="pactSpeed" maxlength="100"/>
+						  </div>
+						</div>
+	                    <div class="s-inline">
+						  <label class="s-form-label">经纪人：</label>
+						  <div class="s-input-inline">
+							 <input type="text" class="s-input broker" id="brokerName" name="brokerName" maxlength="100"/>
+						  </div>
+						</div>
+	                    <div class="s-inline s-inline100">
+						  <label class="s-form-label">备注：</label>
+						  <div class="s-input-inline">
+							 <input type="text" class="s-input shipOwner" id="remark" name="remark" maxlength="100"/>
+						  </div>
+						</div>
+	                    <div class="s-inline s-inline100">
+						  <label class="s-form-label">协议上传：</label>
+						  <div class="s-input-inline">
+	                         <p class="s-trade-p s-trade-p2">
+	                         	<input type="text" class="s-input" id="cunImg" name="accessory" style="width: 50%" placeholder="请上传协议" readonly="readonly"/>
+	                         	<span>
+	                         		<i class="s-icon fs-close"></i>				<!-- 清空文件按钮 -->
+	                         		<i class="s-icon s-icon-up" id="btn"></i>	<!-- 上传文件按钮 -->
+	                         	</span>
+	                         </p>
+	                         <span class="s-erro">*pdf，Excel，Word，TXT，JPG</span>
+						  </div>
+						</div>
+					</li>
+				</ul>
+			</form>
+			<div id="accessory"  style="display:none;"></div>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue" id="submitsw">提&nbsp;&nbsp;交</button><button class="s-btn s-btn-primary goto">返&nbsp;&nbsp;回</button></div>
+	</div>
+
+	<script src="../transport/js/agreement/agreementSave.js"></script>
+	
+	
+<script>
+		
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+	}  
+	
+	
+	//两位小数数字正则校验
+	function clearNoNumTwo(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.-]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+	} 
+	
+</script>

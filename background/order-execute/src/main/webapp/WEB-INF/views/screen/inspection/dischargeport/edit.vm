@@ -1,0 +1,754 @@
+<div class="s-mod">
+	<form id="inspection_content_form">
+	<div class="s-order-box">
+		<div class="clearfix s-order-tit"><h1>Job Edit</h1></div>
+		<p class="s-order-jbx"></p>
+		<div class="s-order-port">
+			<span class="s-inline-port clearfix">
+				<a class="s-btn s-load-port dischargeClass"  href="javascript:;" attr-id="$!{id}" attr-orderNo="$!{orderNo}">Discharge port</a>
+				<a class="s-btn loadClass" href="javascript:;" attr-id="$!{id}" attr-orderNo="$!{orderNo}">Load port</a>
+			</span>
+		</div>
+	</div>
+	<div class="s-mod-block">
+		<div class="s-mod-btit"><h1>Voyage Summary</h1></div>
+		<div class="s-mod-bcont s-mod-bcont1 s-mod-sj">
+		<div class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item s-form-item3">
+				<div class="s-inline s-inline100">
+				  <label class="s-form-label">Port of discharge:</label>
+				  <div class="s-input-inline" style="width: 863px;">
+					  <p class="s-trade-p"> $!{unloadingInfo.unloadPort}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Vessel:</label>
+				  <div class="s-input-inline" style="width: 267px;">
+					  <p class="s-trade-p"> $!{orderShip.name}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">VEF:</label>
+				  <div class="s-input-inline" style="width: 278px;">
+					  <input type="text" name="voyageSummary_vef" value="$!{data.voyageSummary_vef}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Grade:</label>
+				  <div class="s-input-inline" style="width: 269px;">
+					  <p class="s-trade-p"> $!{unloadingInfo.oil}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">BL Date:</label>
+				  <div class="s-input-inline" style="width: 259px;">
+					  <input type="text" name="voyageSummary_blDate" value="$!{data.voyageSummary_blDate}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Job location:</label>
+				  <div class="s-input-inline" style="width: 238px;">
+					  <input type="text" name="voyageSummary_joblocation" value="$!{data.voyageSummary_joblocation}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Operator:</label>
+				  <div class="s-input-inline" style="width: 255px;">
+					 <input type="text" name="voyageSummary_operator" value="$!{data.voyageSummary_operator}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+					<div class="s-input-inline2">
+					  <p class="s-trade-p clearfix">
+					  	<em>Attachments of Surveyor reports</em>
+					  	<span>
+					  		<i class="s-icon fs-close"></i>
+					  		<i class="s-icon s-icon-up fileUpload" data="voyageSummary_attachmentsOfSurveyorReports" id="file1"></i>
+					  		<i class="s-icon s-icon-down"></i>
+					  		<i class="s-icon s-icon-view"></i>
+					  		<input type="hidden" name="voyageSummary_attachmentsOfSurveyorReports" value="$!esc.html($!{data.voyageSummary_attachmentsOfSurveyorReports})" id="voyageSummary_attachmentsOfSurveyorReports">
+					  	</span>
+					  </p>
+					</div>
+				</div>
+				<div class="s-inline">
+					<div class="s-input-inline2">
+					  <p class="s-trade-p clearfix">
+						  <em>Surveyor appointment</em>
+						  <span>
+						  	<i class="s-icon fs-close"></i>
+						  	<i class="s-icon s-icon-up fileUpload" data="voyageSummary_surveyorAppointment" id="file2"></i>
+						  	<i class="s-icon s-icon-down"></i>
+						  	<i class="s-icon s-icon-view"></i>
+						  	<input type="hidden" name="voyageSummary_surveyorAppointment" value="$!esc.html($!{data.voyageSummary_surveyorAppointment})" id="voyageSummary_surveyorAppointment">
+						  </span>
+					  </p>
+					</div>
+				</div>
+				<div class="s-inline">
+					<div class="s-input-inline2">
+					  <p class="s-trade-p clearfix">
+					  	<em>Stowage plan</em>
+					  	<span>
+					  		<i class="s-icon fs-close"></i>
+					  		<i class="s-icon s-icon-up fileUpload" data="voyageSummary_stowagePlan" id="file3"></i>
+					  		<i class="s-icon s-icon-down"></i>
+					  		<i class="s-icon s-icon-view"></i>
+					  		<input type="hidden" name="voyageSummary_stowagePlan" value="$!esc.html($!{data.voyageSummary_stowagePlan})" id="voyageSummary_stowagePlan">
+					  	</span>
+					  </p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="40%">Discharge Volumes Summary</th><th width="20%">Method</th><th width="20%">BBL</th><th width="20%">MT</th></tr>
+			  <tr>
+				  <td>Free Water Before Discharging</td>
+				  <td>
+					<select class="s-select" name="voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_method" id="voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_method">
+						<option value=""></option>
+						<option value="6A">6A</option>
+						<option value="6">6</option>
+						<option value="54A">54A</option>
+						<option value="54">54</option>
+					</select>
+				  </td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_bbl" value="$!{data.voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_mt" value="$!{data.voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_mt}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship total arrival Volume</td>
+			  	<td>
+					<select class="s-select" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_method" id="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_method">
+						<option value=""></option>
+						<option value="6A">6A</option>
+						<option value="6">6</option>
+						<option value="54A">54A</option>
+						<option value="54">54</option>
+					</select>
+				  </td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_bbl" value="$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_mt" value="$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_mt}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship total arrival volume (VEF Applied)</td>
+				<td>
+					<select class="s-select" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_method" id="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_method">
+						<option value=""></option>
+						<option value="6A">6A</option>
+						<option value="6">6</option>
+						<option value="54A">54A</option>
+						<option value="54">54</option>
+					</select>
+				  </td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_bbl" value="$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_mt" value="$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_mt}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship Net arrival Volume (VEF Applied)</td>
+				<td>
+					<select class="s-select" name="voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_method" id="voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_method">
+						<option value=""></option>
+						<option value="6A">6A</option>
+						<option value="6">6</option>
+						<option value="54A">54A</option>
+						<option value="54">54</option>
+					</select>
+				  </td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_bbl" value="$!{data.voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_mt" value="$!{data.voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_mt}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+	</div>
+	</div>
+	<div class="s-mod-block">
+		<div class="s-mod-btit"><h1>Quantity Results</h1></div>
+		<div class="s-mod-bcont s-mod-bcont1 s-mod-sj">
+		<div class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item s-form-item3">
+				<div class="s-inline">
+				  <label class="s-form-label">Method:</label>
+				  <div class="s-input-inline" style="width: 263px;">
+					<select class="s-select" name="quantityResults_method" id="quantityResults_method">
+						<option value=""></option>
+						<option value="6A">6A</option>
+						<option value="6">6</option>
+						<option value="54A">54A</option>
+						<option value="54">54</option>
+					</select>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Density @15°C:</label>
+				  <div class="s-input-inline" style="width: 219px;">
+					  <input type="text" name="quantityResults_density15C" value="$!{data.quantityResults_density15C}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">API:</label>
+				  <div class="s-input-inline" style="width: 283px;">
+					  <input type="text" name="quantityResults_api" value="$!{data.quantityResults_api}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Temp:</label>
+				  <div class="s-input-inline" style="width: 273px;">
+					  <select class="s-select" name="quantityResults_temp" id="quantityResults_temp">
+						<option value=""></option>
+						<option value="F">F</option>
+						<option value="C">C</option>
+					  </select>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Water:</label>
+				  <div class="s-input-inline" style="width: 270px;">
+					  <input type="text" name="quantityResults_water" value="$!{data.quantityResults_water}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Sediment:</label>
+				  <div class="s-input-inline" style="width: 252px;">
+					  <input type="text" name="quantityResults_sediment" value="$!{data.quantityResults_sediment}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Nominated Shore tanks:</label>
+				  <div class="s-input-inline" style="width: 177px;">
+					  <input type="text" name="quantityResults_nominatedShoreTanks" value="$!{data.quantityResults_nominatedShoreTanks}" placeholder="" class="s-input">
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="20%">&nbsp;</th><th width="20%">BBL @60°F</th><th width="20%">M<em>3</em>@15°C</th><th width="20%">Mt (in air)</th><th width="20%">Mt/Tonnes (Vac)</th></tr>
+			  <tr>
+			  	<td>BL TCV</td>
+			  	<td><input type="text" name="quantityResults_BLTCV_BBL60F" value="$!{data.quantityResults_BLTCV_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLTCV_M3at15C" value="$!{data.quantityResults_BLTCV_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLTCV_Mtinair" value="$!{data.quantityResults_BLTCV_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLTCV_MtTonnesVac" value="$!{data.quantityResults_BLTCV_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>BL GCV</td>
+				<td><input type="text" name="quantityResults_BLGCV_BBL60F" value="$!{data.quantityResults_BLGCV_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLGCV_M3at15C" value="$!{data.quantityResults_BLGCV_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLGCV_Mtinair" value="$!{data.quantityResults_BLGCV_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLGCV_MtTonnesVac" value="$!{data.quantityResults_BLGCV_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>BL NCV</td>
+				<td><input type="text" name="quantityResults_BLNCV_BBL60F" value="$!{data.quantityResults_BLNCV_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLNCV_M3at15C" value="$!{data.quantityResults_BLNCV_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLNCV_Mtinair" value="$!{data.quantityResults_BLNCV_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_BLNCV_MtTonnesVac" value="$!{data.quantityResults_BLNCV_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="20%">Discharge Volumes Summary</th><th width="20%">BBL @60°F</th><th width="20%">M<em>3</em>@15°C</th><th width="20%">Mt (in air)</th><th width="20%">Mt/Tonnes (Vac)</th></tr>
+			  <tr>
+			  	<td>Free Water before discharging</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterBeforeDischarging_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship total arrival Volume</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolume_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship total arrival volume (VEF Applied)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship Net arrival Volume (VEF Applied)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shipNetArrivalVolume_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>R.O.B (Total) Oil Total</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBOilTotal_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_ROBOilTotal_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBOilTotal_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_ROBOilTotal_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBOilTotal_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_ROBOilTotal_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBOilTotal_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_ROBOilTotal_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>R.O.B (liquid)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBliquid_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_ROBliquid_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBliquid_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_ROBliquid_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBliquid_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_ROBliquid_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBliquid_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_ROBliquid_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>R.O.B (Non-liquid)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBNonLiquid_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_ROBNonLiquid_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBNonLiquid_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_ROBNonLiquid_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBNonLiquid_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_ROBNonLiquid_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBNonLiquid_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_ROBNonLiquid_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>R.O.B Free water</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBFreeWater_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_ROBFreeWater_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBFreeWater_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_ROBFreeWater_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBFreeWater_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_ROBFreeWater_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_ROBFreeWater_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_ROBFreeWater_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship discharged qty (Gross)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyGross_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ship discharged qty (Net)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shipDischargedQtyNet_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Shore received qty (Gross)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyGross_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Shore received qty (net)</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_shoreReceivedQtyNet_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Free water in shore tank</td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_BBL60F" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_BBL60F}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_M3at15C" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_M3at15C}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_Mtinair" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_Mtinair}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_MtTonnesVac" value="$!{data.quantityResults_dischargeVolumesSummary_freeWaterInShoreTank_MtTonnesVac}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="40%">Loss/Gain summary(<b>Gross</b>)</th><th width="30%">BBL</th><th width="30%">percent</th></tr>
+			  <tr>
+			  	  <td>B/L VS ship arrival</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_BLVSshipArrival_bbl" value="$!{data.quantityResults_lossGainSummaryGross_BLVSshipArrival_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_BLVSshipArrival_percent" value="$!{data.quantityResults_lossGainSummaryGross_BLVSshipArrival_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>Ship arrival VS ship discharged</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_shipArrivalVSshipDischarged_bbl" value="$!{data.quantityResults_lossGainSummaryGross_shipArrivalVSshipDischarged_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_shipArrivalVSshipDischarged_percent" value="$!{data.quantityResults_lossGainSummaryGross_shipArrivalVSshipDischarged_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>Ship discharged VS shore tank received</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_shipDischargedVSshoreTankReceived_bbl" value="$!{data.quantityResults_lossGainSummaryGross_shipDischargedVSshoreTankReceived_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_shipDischargedVSshoreTankReceived_percent" value="$!{data.quantityResults_lossGainSummaryGross_shipDischargedVSshoreTankReceived_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>B/L VS shore tank received</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_BLVSshoreTankReceived_bbl" value="$!{data.quantityResults_lossGainSummaryGross_BLVSshoreTankReceived_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryGross_BLVSshoreTankReceived_percent" value="$!{data.quantityResults_lossGainSummaryGross_BLVSshoreTankReceived_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="40%">Loss/Gain summary(<b>Net</b>)</th><th width="30%">BBL</th><th width="30%">percent</th></tr>
+			  <tr>
+			  	  <td>B/L VS ship arrival</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_BLVSshipArrival_bbl" value="$!{data.quantityResults_lossGainSummaryNet_BLVSshipArrival_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_BLVSshipArrival_percent" value="$!{data.quantityResults_lossGainSummaryNet_BLVSshipArrival_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>Ship arrival VS ship discharged</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_shipArrivalVSshipDischarged_bbl" value="$!{data.quantityResults_lossGainSummaryNet_shipArrivalVSshipDischarged_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_shipArrivalVSshipDischarged_percent" value="$!{data.quantityResults_lossGainSummaryNet_shipArrivalVSshipDischarged_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>Ship discharged VS shore tank received</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_shipDischargedVSshoreTankReceived_bbl" value="$!{data.quantityResults_lossGainSummaryNet_shipDischargedVSshoreTankReceived_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_shipDischargedVSshoreTankReceived_percent" value="$!{data.quantityResults_lossGainSummaryNet_shipDischargedVSshoreTankReceived_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	  <td>B/L VS shore tank received</td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_BLVSshoreTankReceived_bbl" value="$!{data.quantityResults_lossGainSummaryNet_BLVSshoreTankReceived_bbl}" placeholder="" class="s-input"></td>
+				  <td><input type="text" name="quantityResults_lossGainSummaryNet_BLVSshoreTankReceived_percent" value="$!{data.quantityResults_lossGainSummaryNet_BLVSshoreTankReceived_percent}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+	</div>
+	</div>
+	<div class="s-mod-block">
+		<div class="s-mod-btit"><h1>Quality test</h1></div>
+		<div class="s-mod-bcont s-mod-bcont1 s-mod-sj">
+		<div class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item s-form-item3">
+				<div class="s-inline">
+				  <label class="s-form-label">sample location:</label>
+				  <select onclick="changeSampleLocation(this)" class="s-select" style="width: 219px;" name="qualityTest_sampleLocation" id="qualityTest_sampleLocation">
+					<option value=""></option>
+					<option value="ship">ship</option>
+					<option value="shore">shore</option>
+				  </select>
+				</div>
+				<div id="div_qualityTest_shipTankComposite" class="s-inline" #if($!{data.qualityTest_sampleLocation}!="ship")style="display:none"#end>
+				  <label class="s-form-label">Ship tank composite:</label>
+				  <div class="s-input-inline" style="width: 194px;">
+					  <input type="text" name="qualityTest_shipTankComposite" value="$!{data.qualityTest_shipTankComposite}" placeholder="" class="s-input">
+				  </div>
+				</div>
+				<div id="div_qualityTest_shoreTankComposite" class="s-inline" #if($!{data.qualityTest_sampleLocation}!="shore")style="display:none"#end>
+				  <label class="s-form-label">Shore tank composite:</label>
+				  <div class="s-input-inline" style="width: 194px;">
+					  <input type="text" name="qualityTest_shoreTankComposite" value="$!{data.qualityTest_shoreTankComposite}" placeholder="" class="s-input">
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</div>
+		<div class="s-table-wrap">
+			<table class="s-table s-table3 s-table-t">
+			  <tbody><tr><th width="25%">Test Item</th><th width="15%">Method used</th><th width="15%">UOM</th><th width="15%">Limit</th><th width="15%">Result</th><th width="15%">comments/remark</th></tr>
+			  <tr>
+			  	<td>API @ 60°F</td>
+				<td><input type="text" name="qualityTest_testItem_APIat60F_methodUsed" value="$!{data.qualityTest_testItem_APIat60F_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_APIat60F_uom" value="$!{data.qualityTest_testItem_APIat60F_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_APIat60F_limit" value="$!{data.qualityTest_testItem_APIat60F_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_APIat60F_result" value="$!{data.qualityTest_testItem_APIat60F_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_APIat60F_commentsOrRemark" value="$!{data.qualityTest_testItem_APIat60F_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Density @ 15°C</td>
+				<td><input type="text" name="qualityTest_testItem_densityAt15C_methodUsed" value="$!{data.qualityTest_testItem_densityAt15C_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_densityAt15C_uom" value="$!{data.qualityTest_testItem_densityAt15C_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_densityAt15C_limit" value="$!{data.qualityTest_testItem_densityAt15C_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_densityAt15C_result" value="$!{data.qualityTest_testItem_densityAt15C_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_densityAt15C_commentsOrRemark" value="$!{data.qualityTest_testItem_densityAt15C_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Water Content in crude oil by distillation</td>
+				<td><input type="text" name="qualityTest_testItem_waterContentInCrudeOilByDistillation_methodUsed" value="$!{data.qualityTest_testItem_waterContentInCrudeOilByDistillation_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_waterContentInCrudeOilByDistillation_uom" value="$!{data.qualityTest_testItem_waterContentInCrudeOilByDistillation_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_waterContentInCrudeOilByDistillation_limit" value="$!{data.qualityTest_testItem_waterContentInCrudeOilByDistillation_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_waterContentInCrudeOilByDistillation_result" value="$!{data.qualityTest_testItem_waterContentInCrudeOilByDistillation_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_waterContentInCrudeOilByDistillation_commentsOrRemark" value="$!{data.qualityTest_testItem_waterContentInCrudeOilByDistillation_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Kinematic Viscosity @ 50°C</td>
+				<td><input type="text" name="qualityTest_testItem_kinematicViscosityAt50C_methodUsed" value="$!{data.qualityTest_testItem_kinematicViscosityAt50C_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_kinematicViscosityAt50C_uom" value="$!{data.qualityTest_testItem_kinematicViscosityAt50C_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_kinematicViscosityAt50C_limit" value="$!{data.qualityTest_testItem_kinematicViscosityAt50C_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_kinematicViscosityAt50C_result" value="$!{data.qualityTest_testItem_kinematicViscosityAt50C_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_kinematicViscosityAt50C_commentsOrRemark" value="$!{data.qualityTest_testItem_kinematicViscosityAt50C_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Flash Point</td>
+				<td><input type="text" name="qualityTest_testItem_flashPoint_methodUsed" value="$!{data.qualityTest_testItem_flashPoint_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_flashPoint_uom" value="$!{data.qualityTest_testItem_flashPoint_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_flashPoint_limit" value="$!{data.qualityTest_testItem_flashPoint_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_flashPoint_result" value="$!{data.qualityTest_testItem_flashPoint_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_flashPoint_commentsOrRemark" value="$!{data.qualityTest_testItem_flashPoint_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Pour point</td>
+				<td><input type="text" name="qualityTest_testItem_pourPoint_methodUsed" value="$!{data.qualityTest_testItem_pourPoint_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_pourPoint_uom" value="$!{data.qualityTest_testItem_pourPoint_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_pourPoint_limit" value="$!{data.qualityTest_testItem_pourPoint_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_pourPoint_result" value="$!{data.qualityTest_testItem_pourPoint_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_pourPoint_commentsOrRemark" value="$!{data.qualityTest_testItem_pourPoint_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Sulphur</td>
+				<td><input type="text" name="qualityTest_testItem_sulphur_methodUsed" value="$!{data.qualityTest_testItem_sulphur_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_sulphur_uom" value="$!{data.qualityTest_testItem_sulphur_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_sulphur_limit" value="$!{data.qualityTest_testItem_sulphur_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_sulphur_result" value="$!{data.qualityTest_testItem_sulphur_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_sulphur_commentsOrRemark" value="$!{data.qualityTest_testItem_sulphur_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Carbon Residue</td>
+				<td><input type="text" name="qualityTest_testItem_carbonResidue_methodUsed" value="$!{data.qualityTest_testItem_carbonResidue_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_carbonResidue_uom" value="$!{data.qualityTest_testItem_carbonResidue_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_carbonResidue_limit" value="$!{data.qualityTest_testItem_carbonResidue_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_carbonResidue_result" value="$!{data.qualityTest_testItem_carbonResidue_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_carbonResidue_commentsOrRemark" value="$!{data.qualityTest_testItem_carbonResidue_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Salt content</td>
+				<td><input type="text" name="qualityTest_testItem_saltContent_methodUsed" value="$!{data.qualityTest_testItem_saltContent_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_saltContent_uom" value="$!{data.qualityTest_testItem_saltContent_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_saltContent_limit" value="$!{data.qualityTest_testItem_saltContent_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_saltContent_result" value="$!{data.qualityTest_testItem_saltContent_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_saltContent_commentsOrRemark" value="$!{data.qualityTest_testItem_saltContent_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Ash</td>
+				<td><input type="text" name="qualityTest_testItem_ash_methodUsed" value="$!{data.qualityTest_testItem_ash_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_ash_uom" value="$!{data.qualityTest_testItem_ash_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_ash_limit" value="$!{data.qualityTest_testItem_ash_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_ash_result" value="$!{data.qualityTest_testItem_ash_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_ash_commentsOrRemark" value="$!{data.qualityTest_testItem_ash_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Vanadium</td>
+				<td><input type="text" name="qualityTest_testItem_vanadium_methodUsed" value="$!{data.qualityTest_testItem_vanadium_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_vanadium_uom" value="$!{data.qualityTest_testItem_vanadium_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_vanadium_limit" value="$!{data.qualityTest_testItem_vanadium_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_vanadium_result" value="$!{data.qualityTest_testItem_vanadium_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_vanadium_commentsOrRemark" value="$!{data.qualityTest_testItem_vanadium_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Alumim Sil</td>
+				<td><input type="text" name="qualityTest_testItem_alumimSil_methodUsed" value="$!{data.qualityTest_testItem_alumimSil_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_alumimSil_uom" value="$!{data.qualityTest_testItem_alumimSil_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_alumimSil_limit" value="$!{data.qualityTest_testItem_alumimSil_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_alumimSil_result" value="$!{data.qualityTest_testItem_alumimSil_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_alumimSil_commentsOrRemark" value="$!{data.qualityTest_testItem_alumimSil_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Acid Number</td>
+				<td><input type="text" name="qualityTest_testItem_acidNumber_methodUsed" value="$!{data.qualityTest_testItem_acidNumber_methodUsed}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_acidNumber_uom" value="$!{data.qualityTest_testItem_acidNumber_uom}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_acidNumber_limit" value="$!{data.qualityTest_testItem_acidNumber_limit}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_acidNumber_result" value="$!{data.qualityTest_testItem_acidNumber_result}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="qualityTest_testItem_acidNumber_commentsOrRemark" value="$!{data.qualityTest_testItem_acidNumber_commentsOrRemark}" placeholder="" class="s-input"></td>
+			  </tr>
+			  #*<tr>
+			  	<td><em>+</em></td>
+				<td><input type="text" name="" placeholder="" class="s-input"></td>
+				<td><input type="text" name="" placeholder="" class="s-input"></td>
+				<td><input type="text" name="" placeholder="" class="s-input"></td>
+				<td><input type="text" name="" placeholder="" class="s-input"></td>
+				<td><input type="text" name="" placeholder="" class="s-input"></td>
+			  </tr>*#
+			</tbody></table>
+		</div>
+	</div>
+	</div>
+	<div class="s-mod-block">
+		<div class="s-mod-btit"><h1>Time log</h1></div>
+		<div class="s-mod-bcont s-mod-bcont1 s-mod-sj">
+		<div class="s-table-wrap">
+			<table class="s-table s-table3">
+			  <tbody><tr><th width="30%">Event</th><th width="20%">Date/time</th><th width="50%">comment</th></tr>
+			  <tr>
+			  	<td>End of Sea passage</td>
+				<td><input type="text" name="timeLog_event_endOfSeaPassage_dateOrtime" value="$!{data.timeLog_event_endOfSeaPassage_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_endOfSeaPassage_comment" value="$!{data.timeLog_event_endOfSeaPassage_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>NOR Tendered</td>
+				<td><input type="text" name="timeLog_event_norTendered_dateOrtime" value="$!{data.timeLog_event_norTendered_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_norTendered_comment" value="$!{data.timeLog_event_norTendered_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Sea Pilot on board</td>
+				<td><input type="text" name="timeLog_event_seaPilotOnBoard_dateOrtime" value="$!{data.timeLog_event_seaPilotOnBoard_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_seaPilotOnBoard_comment" value="$!{data.timeLog_event_seaPilotOnBoard_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>First Rope ashore</td>
+				<td><input type="text" name="timeLog_event_firstRopeAshore_dateOrtime" value="$!{data.timeLog_event_firstRopeAshore_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_firstRopeAshore_comment" value="$!{data.timeLog_event_firstRopeAshore_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>All fast</td>
+				<td><input type="text" name="timeLog_event_allFast_dateOrtime" value="$!{data.timeLog_event_allFast_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_allFast_comment" value="$!{data.timeLog_event_allFast_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>NOR Received</td>
+				<td><input type="text" name="timeLog_event_norReceived_dateOrtime" value="$!{data.timeLog_event_norReceived_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_norReceived_comment" value="$!{data.timeLog_event_norReceived_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Commenced load</td>
+				<td><input type="text" name="timeLog_event_commencedLoad_dateOrtime" value="$!{data.timeLog_event_commencedLoad_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_commencedLoad_comment" value="$!{data.timeLog_event_commencedLoad_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Completed load</td>
+				<td><input type="text" name="timeLog_event_completedLoad_dateOrtime" value="$!{data.timeLog_event_completedLoad_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_completedLoad_comment" value="$!{data.timeLog_event_completedLoad_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			  <tr>
+			  	<td>Tanks inspected Vessel sailed</td>
+				<td><input type="text" name="timeLog_event_tanksInspectedVesselSailed_dateOrtime" value="$!{data.timeLog_event_tanksInspectedVesselSailed_dateOrtime}" placeholder="" class="s-input"></td>
+				<td><input type="text" name="timeLog_event_tanksInspectedVesselSailed_comment" value="$!{data.timeLog_event_tanksInspectedVesselSailed_comment}" placeholder="" class="s-input"></td>
+			  </tr>
+			</tbody></table>
+		</div>
+	</div>
+	</div>
+	<div class="s-btn-box">
+		#if($authUtils.checkRole("inspection"))
+		<button class="s-btn" type="button" id="submit">Submit</button>
+		<button class="s-btn s-btn-primary" type="button" onclick="javascript:location.href='detail.htm?id=$!{id}&orderNo=$!{orderNo}'">Cancel</button>
+		#end
+	</div>
+	</form>
+</div>
+
+<script>
+layui.use(['layer', 'ossUpload'], function(){
+	$("#submit").on("click",function(){
+		$.ajax({
+			type:"post",
+			url:orderServer+"/inspection/dischargeport/saveDetail.json?id=$!{id}",
+			data:$("#inspection_content_form").serialize(),
+			success:function(result){
+	  			if(result.status != 0){
+	  				layer.alert($.i18n(result.code,result.params));
+	  			}else{
+	  				layer.alert($.i18n("orderexecute.code.00149"),{title:$.i18n("orderexecute.code.00148"),btn:$.i18n("orderexecute.code.00197")}, function(index){
+	  					layer.closeAll();
+	  					location.reload();
+	  				});
+	  			}
+	  		},
+	  		error:function(){
+	  			layer.alert("error");
+	  		}
+		})
+	})
+	
+	var upload = layui.ossUpload;
+
+	//上传
+	function bindUploader(em){
+		upload.render({
+		    elem: em,
+		    done: function(res, index,upload){
+		    	if(res.status === 0){
+		    		var hiddenpathId = $(index).attr("data");
+		    		
+		    		var datajson = {path:res.datas.path,originalName:res.datas.originalName};
+		    		$("#"+hiddenpathId).val(JSON.stringify(datajson));
+		    		
+		    		var em_parent = $("#"+hiddenpathId).parent();
+		    		em_parent.find(".s-icon-down").show();
+					em_parent.find(".s-icon-view").show();
+					em_parent.find(".fs-close").show();
+		    	}
+		    }
+		 })
+	}
+	//下载
+	function bindDownloader(){
+		$(".s-icon-down").on("click",function(){
+			var fileInfoJsonStr = $(this).parent().find("input:hidden").val();
+			if(fileInfoJsonStr == ""){
+				layer.alert("please upload file",{title:'Prompt',btn:'ok'});
+				return;
+			}
+			
+			var fileInfoJson = eval("("+fileInfoJsonStr+")");
+			
+			window.location.href="$orderExecuteServer.get('/common/doc/download.htm')?path="+ fileInfoJson.path +"&fileName="+ fileInfoJson.originalName;
+		})
+	}
+	//预览
+	function bindFileView(){
+		$(".s-icon-view").on("click",function(){
+			var fileInfoJsonStr = $(this).parent().find("input:hidden").val();
+			if(fileInfoJsonStr == ""){
+				layer.alert("please upload file",{title:'Prompt',btn:'ok'});
+				return;
+			}
+			var fileInfoJson = eval("("+fileInfoJsonStr+")");
+			
+			var url = "$orderExecuteServer.get('/common/doc/file.htm')?path="+fileInfoJson.path+"&fileName="+fileInfoJson.originalName;
+			window.open("$orderExecuteServer.get('/pdfjs/web/viewer.html?file="+encodeURIComponent(url)+"')","_blank");
+		})
+	}
+	
+	//删除
+	function bindClearFile(){
+		$(".fs-close").on("click",function(){
+			layer.confirm('Confirm the operation? ', {title:'Prompt',btn:["ok","cancel"]}, function(index){
+				$(this).parent().find("input:hidden").val("");
+				layer.close(index);
+			})
+		})
+	}
+	
+	//select init
+	$("#voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_method").val("$!{data.voyageSummary_dischargeVolumesSummary_freeWaterBeforeDischarging_method}");
+	$("#voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_method").val("$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolume_method}");
+	$("#voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_method").val("$!{data.voyageSummary_dischargeVolumesSummary_shipTotalArrivalVolumeVefApplied_method}");
+	$("#voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_method").val("$!{data.voyageSummary_dischargeVolumesSummary_shipNetArrivalVolumeVefApplied_method}");
+	$("#quantityResults_method").val("$!{data.quantityResults_method}");
+	$("#quantityResults_temp").val("$!{data.quantityResults_temp}");
+	$("#qualityTest_sampleLocation").val("$!{data.qualityTest_sampleLocation}");
+	
+	//上传下载预览删除按钮事件绑定
+	bindUploader(".fileUpload");
+	bindDownloader();
+	bindFileView();
+	bindClearFile();
+	
+	$(".dischargeClass").on("click",function(){
+		var id = $(this).attr("attr-id");
+		var orderNo = $(this).attr("attr-orderNo");		
+		layer.confirm('Make sure the page is saved,continue will lose the unsaved infomation', {
+            title:'infomation', btn : [ 'Confirm', 'Cancel' ]
+        }, function(index) {
+            layer.close(index);
+            window.location.href="edit.htm?id="+id+"&orderNo="+orderNo;
+        }); 
+        
+		
+	})
+	
+	$(".loadClass").on("click",function(){
+		var id = $(this).attr("attr-id");
+		var orderNo = $(this).attr("attr-orderNo");
+		
+		layer.confirm('Make sure the page is saved,continue will lose the unsaved infomation', {
+           title:'infomation', btn : [ 'Confirm', 'Cancel' ]
+        }, function(index) {
+            layer.close(index);
+             window.location.href="../loadport/edit.htm?id="+id+"&orderNo="+orderNo;
+        }); 
+	})
+})
+
+function changeSampleLocation(select){
+	var selectedOption=select.options[select.selectedIndex];
+	if(selectedOption.value == "ship"){
+		$("#div_qualityTest_shipTankComposite").show();
+		$("#div_qualityTest_shoreTankComposite").hide();
+	}else if(selectedOption.value == "shore"){
+		$("#div_qualityTest_shoreTankComposite").show();
+		$("#div_qualityTest_shipTankComposite").hide();
+	}else{
+		$("#div_qualityTest_shoreTankComposite").hide();
+		$("#div_qualityTest_shipTankComposite").hide();
+	}
+}
+
+</script>

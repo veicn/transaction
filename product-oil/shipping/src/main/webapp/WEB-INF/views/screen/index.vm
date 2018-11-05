@@ -1,0 +1,45 @@
+	    <div class="shipping-w">
+       <div class="voyage-btn-box">
+		   #if($authUtils.checkRole("sales_trader", "buy_trader"))
+               <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')" id="" class="br btn-c vessel-btn">Charter Vessel</a>
+               <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')" id="" class="br btn-c tracking-btn">Voyage Tracking</a>
+		   #elseif($authUtils.checkRole("ship_trader"))
+               <a href="$appServer.get('pages/back/demands/agentdemandsList.htm')" id="" class="br btn-c vessel-btn">Charter Vessel</a>
+               <a href="$appServer.get('pages/back/demands/agentdemandsList.htm')" id="" class="br btn-c tracking-btn">Voyage Tracking</a>
+		   #elseif($authUtils.checkRole("depa_port"))
+               <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationAgencyIndex.htm')" id="" class="br btn-c vessel-btn">Charter Vessel</a>
+               <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationAgencyIndex.htm')" id="" class="br btn-c tracking-btn">Voyage Tracking</a>
+		   #else
+               <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')" id="" class="br btn-c vessel-btn">Charter Vessel</a>
+               <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')" id="" class="br btn-c tracking-btn">Voyage Tracking</a>
+		   #end
+       </div>
+       <div class="shipping-icn-box">
+       	<ul class="shipping-box-ul clearfix">
+       		<li>
+       			<a href="javascript:;">
+       				<img src="$imageServer.get('images/vesselinfor-icon.png')"/>
+       				<p>Vessel Information</p>
+       			</a>
+       		</li>
+       		<li>
+       			<a href="javascript:;">
+       				<img src="$imageServer.get('images/encyclopedia-icon.png')"/>
+       				<p>Oil Transportation Encyclopedia</p>
+       			</a>
+       		</li>
+       		<li>
+       			<a href="javascript:;">
+       				<img src="$imageServer.get('images/unitcon-icon.png')"/>
+       				<p>Unit Conversion</p>
+       			</a>
+       		</li>
+       		<li>
+       			<a href="javascript:;">
+       				<img src="$imageServer.get('images/tideinquire-icon.png')"/>
+       				<p>Tide Inquire</p>
+       			</a>
+       		</li>
+       	</ul>
+       </div>
+    </div>

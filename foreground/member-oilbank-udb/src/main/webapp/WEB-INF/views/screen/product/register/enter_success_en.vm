@@ -1,0 +1,13 @@
+<div class="s-reg-wrap">
+    <div class="s-inner">
+        <div class="clearfix s-qyxx-box">
+            <span class="s-qyxx-l"><i class="s-c-ico s-qyxx-ico"></i></span>
+            <div class="s-veri-r s-qyxx-r">
+                <p class="s-veri-p1">REMINDER:We will process your application within <em>3</em> working days, and will postpone to next working days automatically in case of holidays.</p>
+                <p><a href="$transactionServer.get('/')" class="s-btn">Return to the home page</a></p>
+                <div class="s-veri-p3 s-qyxx-p3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

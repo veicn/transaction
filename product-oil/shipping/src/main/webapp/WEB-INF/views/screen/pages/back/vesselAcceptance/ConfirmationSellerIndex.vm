@@ -1,0 +1,250 @@
+$contain.get('/common/title.htm').put('title', 'Confirmation List')
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+ <div class="s-nav fl">
+            <div class="m-box m-sls cleafix s-box">
+            <form id="search_from" method="post" action="$!appServer.get('pages/back/vesselAcceptance/ConfirmationSellerIndex.htm')">
+                <div class="xz s-selected">
+                    <ul>
+                        <li class="time">
+                          <span class="time-l">Vessel Acceptance Number : </span>
+                                <input type="text"  value="$!{selectVo.confirmationSheetCd}"  id="" name="confirmationSheetCd" class="br" >
+                        </li>
+                        <li class="time ">
+                            <span class="time-l">Product :</span>
+                             <input type="text"  value="$!{selectVo.product}"  name="product" class="br" >
+                        </li>
+                        <li class="s-selected-w ">
+                            <span class="m-f-span xz1">Status : </span>
+                            <div class="my-select cpy-select clearfix br select1" >
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content borderNone">
+		                                       		 <div class="select-show-text">
+                                        	#foreach($start in $!confirmStart)
+		                                       	#if($!start.code == $!{selectVo.status})
+		                                       		 $start.enName
+		                                       	#end
+		                         		 	  #end
+		                                       		 </div>
+                                            <input type="text" id="statusrem" class="vcode" readonly="readonly" name="status" value="$!{selectVo.status}">
+                                        </div>
+                                    </div>
+	                            		 <ul class="select-options">
+                                      #foreach($start in $!confirmStart)
+	                                        <li data-value="$start.code"  class="select-option ">$start.enName</li>
+                         		 	  #end
+	                                    </ul>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="time poL-time-l">
+                    <ul>
+                        <li>
+                            <span class="time-l">Create Time :</span>
+                            <div class="datetime-wrap">
+                                <input name="createStart" value="$!{selectVo.createStart}"  id="LaycanS" class="DeadlineMonth datetime" type="text">
+                                <div class="datetime-view ">$!{selectVo.createStart}</div>
+                            </div>
+                            <div class="pol-time-line">-</div>
+                            <div class="datetime-wrap">
+                                <input name="createEnd" value="$!{selectVo.createEnd}" id="LaycanD" class="DeadlineMonth datetime" type="text">
+                                <div class="datetime-view ">$!{selectVo.createEnd}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search ">
+                    <span class="m-btn br" id="submitForm">Inquire</span>
+                    <span class="m-btn br" id="search_resect">Empty</span>
+                    <span class="m-btn br acceptance" id="acceptance">Vessel Acceptance</span>
+                </div>
+                </form>
+            </div>
+            <!-- li -->
+            #foreach($fon in $!confirm)
+            <div class="m-box s-box1">
+
+                <div class="m-tit s-tit">
+                    <ul>
+                        <li>
+                            <span>Current status：</span>
+                            <span class="m-tit-word">
+                            #foreach($start in $!confirmStart)
+                            #if($!start.code == $!fon.status)
+                            	$!{start.enName}                          
+                            #else
+                            
+                            #end
+                            #end
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="m-text clearfix">
+                    <div class="fl m-t-tab w220 s-t-tab">
+                        <ol>
+                            <li>
+                                    <span class="m-f-span w94">
+                                        Vessel Acceptance Number :
+                                    </span>
+                                <span class="m-r-span w94">
+                                       $!{fon.confirmationSheetCd}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                       Quantity (tons) :
+                                    </span>
+                                <span class="m-r-span">
+                                   #if(${fon.quantity}!=""&&${fon.rangeOfError}!="")
+		                                  $!{fon.quantity} ± $!{fon.rangeOfError}%
+		                            #end
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                     Product :
+                                    </span>
+                                <span class="m-r-span">
+                                  $!{fon.product}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                   Port Of Discharge :
+                                    </span>
+                                <span class="m-r-span">
+                                    $!{fon.portOfDischarge}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                        Port Of Loading :
+                                    </span>
+                                <span class="m-r-span">
+                                    $!{fon.portOfLoading}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                    Vessel’s Name :
+                                    </span>
+                                <span class="m-r-span">
+                                      $!{fon.vesselName}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w94">
+                                     Shipping Agent :
+                                    </span>
+                                <span class="m-r-span">
+                                       $!{fon.shippingAgent}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w115">
+                                       Laycan :
+                                    </span>
+                                <span class="m-r-span w168">
+                                       $!{fon.laycanStrat} / $!{fon.laycanEnd}
+                                    </span>
+                            </li>
+                            <li>
+                                    <span class="m-f-span w115">
+                                        Create Time :
+                                    </span>
+                                <span class="m-r-span w168">
+                                    $!{fon.createTime}
+                                    </span>
+                            </li>
+                            #if(!$fon.agreementUuid)
+                            <li>
+                                    <span class="m-f-span w115">
+                                        Confirm Online :
+                                    </span>
+                                <span class="m-r-span w168">
+                                    #foreach($start in $!confirmonline)
+                                	#if($start.code ==  $!{fon.confirmOnline})
+                                		$start.enName
+                                	#end
+                                    
+                                #end
+                                    </span>
+                            </li>
+                             #end
+                        </ol>
+                    </div>
+
+                    <!-- button -->
+                    <ul class="fr m-t-btn">
+                    	#if($!fon.status == 10)
+                    	 <li class=" m-btn btn-s s-btn br">
+                            <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                         <li class=" m-btn btn-s s-btn br">
+                            <a href="$appServer.get('pages/back/vesselAcceptance/confirm.htm').put('confirmationSheetUuid', $!{fon.uuid})"  class="br ">Confirm</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 20)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 30)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('uuid', $!{fon.uuid})" id="" class="br ">Logistics Tracking</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 40)
+                        <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                        <li class=" m-btn btn-s s-btn br">
+                         <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('uuid', $!{fon.uuid})" id="" class="br ">Logistics Tracking</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 50)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                         <li class=" m-btn btn-s s-btn br">
+                           <a href="javascript:;" id=""  class="br voyage_end" conuuid="$!{fon.uuid}" constatus="$!{fon.status}">Voyage End</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 60)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                        <li class=" m-btn btn-s s-btn br">
+                           <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('uuid', $!{fon.uuid})" id="" class="br ">Logistics Tracking</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 70)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                        <li class=" m-btn btn-s s-btn br">
+                           <a href="$appServer.get('pages/back/LogisticsTracking/index.htm').put('uuid', $!{fon.uuid})" id="" class="br ">Logistics Tracking</a>
+                        </li>
+                         #end            		
+                    	#if($!fon.status == 80)
+                         <li class=" m-btn btn-s s-btn br">
+                          <a href="$appServer.get('pages/back/vesselAcceptance/details.htm').put('confirmationSheetUuid', $!{fon.uuid})" id="" class="br ">Details</a>
+                        </li>
+                         #end
+
+                    </ul>
+                </div>
+            </div>
+            #end
+             $contain.get('/common/page.htm').put("pageInfo", $!{confirmPage})
+        </div>
+#js($appServer.get('script/pages/back/vesselAcceptance/indexList.js?js_version=03280827'))

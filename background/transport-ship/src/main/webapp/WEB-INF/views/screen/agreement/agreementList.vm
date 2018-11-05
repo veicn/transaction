@@ -1,0 +1,82 @@
+	<div class="c-mod">
+		<form action="agreementList.htm" method="get">
+			<div class="c-form">
+				<ul class="c-ful c-filter">
+				<li class="c-fcos3"><span class="c-fn ">租船协议编号：</span><input id="search" name="code" type="text" class="c-int " value="$!query.code"></li>
+				<li class="c-fcos3"><span class="c-fn ">状态：</span>
+						<select class="sele sele1" name="status" id="status">
+							<option value="">请选择</option>
+							<option value="1">未匹配</option>
+							<option value="2">已匹配</option>
+							<option value="3">航次开始</option>
+							<option value="4">航次结束</option>
+							<option value="5">已取消</option>
+							<option value="6">已装港</option>
+							<option value="7">航行中</option>
+							<option value="8">已卸港</option>
+						</select>
+				</li>
+				<li class="c-libtn"><button type="submit">查询</button></li> 
+				</ul>
+		  	</div>
+		  </form>
+		  <div class="c-mod">
+		  <style>
+		.omit{width:90%; overflow: hidden; white-space:nowrap; text-overflow:ellipsis;}
+		</style>
+		    <h3><i class="cw-ico ico-h3"></i>租船协议列表<!-- <span class="cxtj-nr-an"><a href="" class="btn-more">+ 新建长协采购单</a></span> --></h3>
+				#foreach($data in $datas)
+				<div class="shipp-blo clearfix ship">
+					<ul class="sh-list sh-list-pq clearfix">
+						<li class="sh-imo" title="租船协议编号：$!{data.agreementCode}   油种：$!{data.oilType}"><div class="omit">租船协议编号：$!{data.agreementCode}&nbsp;&nbsp;&nbsp;&nbsp;油种：$!{data.oilType}</div></li>
+						<li title="$!{data.firParty}"><div class="omit">甲方：$!{data.firParty}</div></li>
+						<li title="$!{data.secParty}"><div class="omit">乙方：$!{data.secParty}</div></li>
+						<li title="$!{data.quantity}" class="title">
+							<div class="omit">数量：<span class="num3">$!{data.quantity}</span></div>
+						</li>
+						<li title="$!{data.loadPort}"><div class="omit">装港：$!{data.loadPort}</div></li>
+						<li title="$!{data.unloadPort}"><div class="omit">卸港：$!{data.unloadPort}</div></li>
+						<li title="$!{data.laycan}"><div class="omit">装期：$!{data.laycan}</div></li>
+					</ul>
+				#if($!{data.status} == '1') <p class="sh-zt sh-zt-agr">状态：未匹配</p>#end
+			 	#if($!{data.status} == '2') <p class="sh-zt sh-zt-agr">状态：已匹配</p>#end
+			 	#if($!{data.status} == '3') <p class="sh-zt sh-zt-agr">状态：航次开始</p>#end
+			 	#if($!{data.status} == '4') <p class="sh-zt sh-zt-agr">状态：航次结束</p>#end
+			 	#if($!{data.status} == '5') <p class="sh-zt sh-zt-agr">状态：已取消</p>#end
+			 	#if($!{data.status} == '6') <p class="sh-zt sh-zt-agr">状态：已装港</p>#end
+			 	#if($!{data.status} == '7') <p class="sh-zt sh-zt-agr">状态：航行中</p>#end
+			 	#if($!{data.status} == '8') <p class="sh-zt sh-zt-agr">状态：已卸港</p>#end
+				<div class="sh-but sh-but-agr">
+					<a href="javascript:;" class="queryBtn" attr-data="$!data.uuid">查看</a>
+					#if($!{data.status} == '2' || $!{data.status} == '3' || $!{data.status} == '4')
+					<span style="display:inline-block; line-height: 40PX;" >
+					<i style="margin: 0 0 0 20px; cursor: pointer;"></i>
+					</span>
+					#else
+					<span class="ship-pop">
+					  <i class="cw-ico ico-pop"></i>
+						<span class="order-blor order-blor1 clearfix">
+							 #if($!{data.status} == '1')
+						      	 <a href="javascript:;" class="editBtn" attr-data="$!data.uuid" attr-palletUuid="$!{data.palletUuid}">修改</a>
+						     #end
+						     #if($!{data.status} == '1')
+						      	<a href="javascript:;" class="delBtn" attr-data="$!data.uuid">撤销</a>
+						     #end
+						     #if($!{data.status} == '5')
+						      	<a href="javascript:;" class="delsBtn" attr-data="$!data.uuid">删除</a>
+						     #end
+							<p class="ico-sj"></p>
+						</span>
+					</span>
+					#end
+				</div>
+				</div>
+				#end
+				$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/agreement/agreementList.htm')")
+			</div>
+		</div>
+	</div>
+<script src="../transport/js/agreement/agreementList.js"></script>
+<Script>
+$('#status').val($!query.status)
+</Script>

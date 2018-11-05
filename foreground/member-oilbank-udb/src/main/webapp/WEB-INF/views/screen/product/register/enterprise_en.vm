@@ -1,0 +1,874 @@
+
+<div class="s-reg-wrap">
+    <div class="s-inner">
+        <div class="s-reg-bbox">
+            <h6 class="s-regi-title">Welcome ${user.name}，Thanks for your sign in Product Oil.com, if you want to operate your business on Product Oil , you need complete the following information:</h6>
+            <div class="s-pass-regsett">
+
+                    <form id="saveForm" class="s-form s-form-improve"  method="post" action="$appServer.get('/enterprise/register.htm')">
+
+                    <ul>
+                        <li class="s-regi-title s-regi-title1"><h6 class="s-regi-title">Company information</h6></li>
+                        <li class="s-form-item">
+                            <label class="s-form-label"><em>*</em>Registered address：</label>
+                            <div class="s-input-block" id="epType">
+                                <input type="radio" name="epType" value="0" title="China Mainland"  #if((!$enterprise.epType) || $enterprise.epType==0)checked#end>
+
+                                <div class="s-unradio s-form-radio">
+                                    <i class="fs-circle-select"></i><i class="fs-circle"></i><div>China Mainland</div></div>
+                                <input type="radio" name="epType" value="1" title="Other Countries or Areas" #if($enterprise.epType==1)checked#end>
+
+                                <div class="s-unradio s-form-radio  s-form-radioed">
+                                    <i class="fs-circle-select"></i><i class="fs-circle"></i><div>Other Countries or Areas</div></div>
+                            </div>
+                        </li>
+                    </ul>
+                <!--~~~~~~~~境内~~~~~~~~-->
+                    <div style="display:;">
+                        <ul>
+                        #if(${enterprise.id})
+                            <input type="hidden" name="id" value="$!{enterprise.id}"/>
+                        #end
+                        <input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+                        <input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+                        <input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+                        <input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+                        <input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+
+                            #springBind("enterprise.fullName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em  class="in">*</em>Company name(CN)：</label>
+                                <div class="s-input-block">
+
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter company name" maxlength="50">
+
+                                </div>
+                            </li>
+                            #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                            #springBind("enterprise.name")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em class="in">*</em>Company short name(CN)：</label>
+                                <div class="s-input-block">
+
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter company short name" maxlength="50">
+
+                                </div>
+                            </li>
+                            #springBind("enterprise.englishName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em class="forgin" style="display: none">*</em>Company name(EN)：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter company english name" class="s-input" maxlength="100">
+                                </div>
+                            </li>
+                            #springBind("enterprise.abbEnglishName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em  class="forgin" style="display: none">*</em>Company short name(EN)：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter company english short name" class="s-input" maxlength="100">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>Company / Organization type：</label>
+                                <div class="s-input-block s-input-reg">
+                                    #foreach($cred in $credentials)
+                                    <input type="checkbox" name="types" value="$!cred.code" title="$!cred.nameEn" #if($types.contains($!cred.code)) checked#end >
+                                    <div title="$!cred.nameEn" class="s-uncheckbox s-form-checkbox#if($types.contains($!cred.code)) s-form-checked#end " lay-skin="">
+                                        <span>$!cred.nameEn</span><i class="fs-checkbox-check"></i>
+                                    </div>
+                                   #end
+                                </div>
+                            </li>
+
+                            <div class="in">
+                            <li class="s-form-item">
+                                #springBind("enterprise.useSocialCreditCert")
+                                <label class="s-form-label"><em>*</em>Whether the three in one：</label>
+                                <div id="certdiv" class="s-input-block">
+                                    <input type="radio"  name="$!{status.expression}" value="1" title="Yes" #if((!$enterprise.useSocialCreditCert) || $enterprise.useSocialCreditCert==1)checked#end>
+                                    <div class="s-unradio s-form-radio s-form-radioed">
+
+                                        <i class="fs-circle-select"></i><i class="fs-circle"></i><div>Yes</div></div>
+                                    <input type="radio" name="$!{status.expression}" value="0" title="No"  #if($enterprise.useSocialCreditCert==0)checked#end>
+                                    <div class="s-unradio s-form-radio">
+
+                                        <i class="fs-circle-select"></i><i class="fs-circle"></i><div>No</div></div>
+                                </div>
+                            </li>
+                            <div class="certdiv" id="cert1" >
+                                #springBind("enterprise.socialCreditCode")
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Unified social credit code：</label>
+                                    <div class="s-input-block">
+                                        <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter a unified social credit code" class="s-input">
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="certdiv" id="cert0" style="display: none">
+                                #springBind("enterprise.organizationCode")
+
+                                <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>Organization code：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the organization code" class="s-input">
+                                </div>
+                            </li>
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>Organization code certificate：</label>
+                                <div class="s-input-block">
+                                    <div class="s-upload-list" id="orgCodeCertImgBox">
+                                        <a id="orgCodeCertBtn" href="javascript:;">
+                                            #if($!{enterprise.orgCodeCert} && $!{enterprise.orgCodeCert} != "")
+                                                <img src="$!{uploadServer}/img/$!{enterprise.orgCodeCert}.img_200_112.img"/>
+                                            #else
+                                                <img src="$imageServer.get('images/up_zm.jpg')">
+                                            #end
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                                #springBind("enterprise.taxNo")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>Tax registration certificate number：</label>
+                                <div class="s-input-block">
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the tax registration number" maxlength="20">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em >*</em>Certificate of tax registration：</label>
+                                <div class="s-input-block">
+                                    <div class="s-upload-list" id="taxRegCertImgBox">
+                                        <a id="taxRegCertBtn" href="javascript:;">
+                                            #if($!{enterprise.taxRegCert} && $!{enterprise.taxRegCert} != "")
+                                                <img src="$!{uploadServer}/img/$!{enterprise.taxRegCert}.img_200_112.img"/>
+
+                                            #else
+                                                <img src="$imageServer.get('images/up_zm.jpg')">
+                                            #end
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                                #springBind("enterprise.licenseNo")
+
+                                <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>Business license registration number：</label>
+                                <div class="s-input-block">
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the registration number of the business license" maxlength="20">
+                                </div>
+                            </li>
+
+                            </div>
+
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Business license：</label>
+                                    <div class="s-input-block">
+                                        <div class="s-upload-list" id="businessLicenseCertImgBox">
+                                            <a id="businessLicenseCertBtn" href="javascript:;">
+                                                #if($!{enterprise.businessLicenseCert} && $!{enterprise.businessLicenseCert} != "")
+                                                    <img src="$!{uploadServer}/img/$!{enterprise.businessLicenseCert}.img_200_112.img"/>
+
+                                                #else
+                                                    <img src="$imageServer.get('images/up_zm.jpg')">
+                                                #end
+                                            </a></div>
+                                    </div>
+                                </li>
+                        </div>
+                            <div class="forgin" style="display: none;">
+
+                                #springBind("enterprise.countryCode")
+                                #springBind("enterprise.country")
+
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Country：</label>
+                                    <div class="s-input-block">
+                                        <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the country" class="s-input">
+                                    </div>
+                                </li>
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Certificate of Incorporation：</label>
+                                    <div class="s-input-block">
+
+                                        #springBind("enterprise.registerCert")
+                                        <input type="hidden" id="regCertInput" name="$!{status.expression}" value="$!{status.value}" readonly placeholder="Certificate of Incorporation" id="fileName" class="s-input s-input1">
+                                        <a href="javascript:;" class="s-btn s-btn-up" id="regCert" data-type="1"
+                                           data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                           data-docType="ZCZM">Upload</a>
+                                            <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="Certificate of Incorporation" id="regCertCon">
+                                                #if($status.value && $status.value.trim() != "")
+                                                    Check uploaded
+                                                #end
+                                            </a>
+                                    </div>
+                                </li>
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Bank certification：</label>
+                                    <div class="s-input-block">
+                                        <input type="radio" name="bankCertType" value="0" title="Bank account opening documents" checked=""><div class="s-unradio s-form-radio s-form-radioed"><i class="fs-circle-select"></i><i class="fs-circle"></i><div>Bank account opening documents</div></div>
+                                        <input type="radio" name="bankCertType" value="1" title="Bank statements"><div class="s-unradio s-form-radio"><i class="fs-circle-select"></i><i class="fs-circle"></i><div>Bank statements</div></div><br><br>
+
+                                        #springBind("enterprise.bankCert")
+                                        <input  type="hidden" id="bankCertInput"  name="$!{status.expression}" value="$!{status.value}" readonly placeholder="Bank certification" id="fileName" class="s-input s-input1">
+                                        <a href="javascript:;" class="s-btn s-btn-up" id="bankCert" data-type="1"
+                                           data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                           data-docType="YXZMCL">Upload</a>
+                                        <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="Bank certification" id="bankCertCon">
+                                            #if($status.value && $status.value.trim() != "")
+                                                Check uploaded
+                                            #end
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>Company logo：</label>
+                                    <div class="s-input-block">
+                                        <div class="s-upload-list" id="businessLicenseCertImgBox">
+                                        <a id="epLogoBtn" href="javascript:;">
+                                            #if($!{enterprise.epLogo} && $!{enterprise.epLogo} != "")
+                                                <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprise.epLogo}.img_165_124.img"/>
+                                            #else
+                                                <img src="$imageServer.get('images/up_zm.jpg')">                                            #end
+                                        </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.scope")
+                                <label class="s-form-label">Business scope：</label>
+                                <div class="s-input-block">
+                                    <textarea name="$!{status.expression}" maxlength="255" value="$!{status.value}" placeholder="Please enter company business scope " class="s-textarea"></textarea>
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.description")
+
+                                <label class="s-form-label">Company introduction：</label>
+                                <div class="s-input-block">
+                                    <textarea name="$!{status.expression}" maxlength="255" value="$!{status.value}" placeholder="Please enter company introduction" class="s-textarea"></textarea>
+                                </div>
+                            </li>
+                            <li class="s-regi-title s-regi-title2">Company Contact Information</li>
+                            <li class="s-form-item">
+
+                                #springBind("enterprise.contact.id")
+                                <input type="hidden"  name="$!{status.expression}" value="$!{status.value}">
+                                #springBind("enterprise.contact.name")
+                                <label class="s-form-label"><em>*</em>Name：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter your name" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.mobile")
+                                <label class="s-form-label">Cell phone：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="please enter cell phone number" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.phone")
+                                <label class="s-form-label"><em>*</em>Office phone：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="Please enter the office phone" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.mail")
+                                <label class="s-form-label"><em>*</em>Email：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="Please enter email address" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.address")
+                                <label class="s-form-label"><em>*</em>Mailing address：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="Please enter a communication address" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.accountCert")
+                                <label class="s-form-label"><em>*</em>A letter of authorization for the registration of an company account：</label>
+                                <div class="s-input-block">
+                                    <input  type="hidden" id="regProxyInput" name="$!{status.expression}" value="$!{status.value}"  readonly placeholder="A letter of authorization for the registration of an company account" id="fileName" class="s-input s-input1">
+                                    <a href="javascript:;" class="s-btn s-btn-up" id="regProxy" data-type="1"
+                                       data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                       data-docType="QYZHZCSQWTS">Upload</a>
+                                        <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="Authorization letter template download" id="regProxyCon">
+                                            #if($status.value && $status.value.trim() != "")
+                                                Check uploaded
+                                            #end
+                                        </a>
+                                    <a class="in" href="$appServer.get('member/180205JTN.docx')" class="s-btn-down" title="Authorization letter template download" >Download template</a>
+
+                                    <a class="forgin" style="display: none" href="$appServer.get('member/AUTHORIZATION_LETTER_SAMPLE.docx')" class="s-btn-down" title="Authorization letter template download" >Download template</a>
+                                </div>
+                            </li>
+                            <li class="s-form-item" id="adminCertLi">
+                                #springBind("enterprise.contact.adminCert")
+                                <label class="s-form-label"><em>*</em>Platform contact proof：</label>
+                                <div class="s-input-block">
+                                    <input  type="hidden" id="adminCertInput"   name="$!{status.expression}" value="$!{status.value}" readonly placeholder="Copy of the contact person / Administrator identity card with the official seal" id="fileName" class="s-input s-input1">
+                                    <a href="javascript:;" class="s-btn s-btn-up" id="adminCert"  data-type="1"
+                                       data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                       data-docType="PTGLYZM"
+                                       >Upload</a>
+
+                                        <a href="$!{uploadServer}/fs/$!{status.value}.img" class="s-btn-down" title="preview" id="adminCertCon">
+                                            #if($status.value && $status.value.trim() != "")
+                                                Check uploaded
+                                            #end
+                                        </a>
+
+                                    <!--<p class="s-up-prompt">提示：企业联系人/管理员ID件复印件，加盖企业公章</p>-->
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="s-reg-submit">
+                            <button href="#" class="s-btn s-submit">Submit</button>
+                            <p>Reminder: We will process your application within 3 working days, and will postpone to next working days automatically in case of holidays.</p>
+                        </div>
+                       </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+#js("$!imageServer.get('js/jquery-1.8.3.min.js').toString()" )
+#js("$!imageServer.get('js/s_tab.js').toString()" )
+#js("$!imageServer.get('js/upload.js').toString()" )
+#js("$!imageServer.get('layui/layui.js').toString()" )
+#js("$!imageServer.get('js/lib/jquery.validate.min.en.js').toString()" )
+
+
+<script>
+    ;(function(window){
+        var Checkbox = function(dom){
+            this.init(dom);
+        };
+        $.extend(Checkbox.prototype,{
+            li:null,
+            checkbox:null,
+            el:null,
+            init:function(dom){
+                this.el = $(dom);
+                this.li = $(dom);
+                this.checkbox = $(dom).prev();
+                this.bindEvents();
+                this.isChecked()?
+                        this.check():this.unCheck();
+            },
+            bindEvents:function () {
+                var _this = this;
+                _this.li.click(function () {
+                    _this.toogleCheck();
+                });
+            },
+            toogleCheck:function(){
+                if(!this.isChecked()){
+                    this.check();
+                }else{
+                    this.unCheck();
+                }
+            },
+            isChecked : function(){
+                return !!this.checkbox.get(0).checked;
+            },
+            check : function () {
+                this.checkbox.get(0).checked = true;
+                this.li.addClass("s-form-checked");
+                this.el.trigger("check");
+            },
+            unCheck : function () {
+                this.checkbox.get(0).checked=false;
+                this.li.removeClass("s-form-checked")
+                this.el.trigger("unCheck");
+            }
+        });
+
+        jQuery.fn.Checkbox = function(method){
+            var args = [].slice.call(arguments,1);
+            this.each(function(){
+                if(!this.comp) {
+                    var comp = this.comp = new Checkbox(this);
+                }
+                method && this.comp[method].apply(this.comp,args);
+            });
+
+        }
+        $(function(){
+            $('.s-form-checkbox').Checkbox();
+        });
+    })(window);
+</script>
+
+
+<script>
+    ;(function(window){
+        var Radio = function(dom){
+            this.init(dom);
+        };
+        $.extend(Radio.prototype,{
+            li:null,
+            checkbox:null,
+            el:null,
+            init:function(dom){
+                this.el = $(dom);
+                this.li = $(dom);
+                this.checkbox = $(dom).prev();
+                this.group = $(dom).parentsUntil("form").find("[name="+this.checkbox.attr("name")+"]").next();
+                this.bindEvents();
+                this.isChecked()?
+                        this.check(true):this.unCheck(true);
+            },
+            bindEvents:function () {
+                var _this = this;
+                _this.li.click(function () {
+                    _this.check();
+                });
+            },
+            on:function(event,callback){
+                this.el.on(event,callback);
+            },
+            toogleCheck:function(){
+                if(!this.isChecked()){
+                    this.check();
+                }else{
+                    this.unCheck();
+                }
+            },
+            isChecked : function(){
+                return !!this.checkbox.get(0).checked;
+            },
+            check : function (nodeep) {
+                if(!nodeep){
+                    this.group.not(this.el).Radio("unCheck",true);
+                }
+                this.checkbox.get(0).checked = true;
+                this.li.addClass("s-form-radioed");
+                this.el.trigger("check");
+            },
+            unCheck : function (nodeep) {
+                this.checkbox.get(0).checked=false;
+                this.li.removeClass("s-form-radioed")
+                this.el.trigger("uncheck");
+            }
+        });
+
+        jQuery.fn.Radio = function(method){
+            var args = [].slice.call(arguments,1);
+            this.each(function(){
+                if(!this.comp) {
+                    var comp = this.comp = new Radio(this);
+                }
+                method && this.comp[method].apply(this.comp,args);
+
+            });
+            if (!method){
+                return this.get(0).comp;
+            }
+        }
+        $(function(){
+            $('.s-form-radio').Radio();
+        });
+    })(window);
+</script>
+
+<script>
+    $(function () {
+        $("#showFile").click(function(){
+            $(".xyxx-pop").show();
+        });
+        $(".xyxx-pop a").click(function(){
+            $(".xyxx-pop").hide();
+        });
+        $(".xyxx-pop button").click(function(){
+            $("#fileCheckbox").attr("checked","checked")
+            $(".xyxx-pop").hide();
+        });
+
+        $("#saveForm [name=is_social_credit_cert]").click(function () {
+            var val = $(this);
+            $("#cert"+val).show()
+        })
+
+
+
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //preview图片实现
+            $(".previewBtn").click(function () {
+                var imgBox = $(this).parent().find(".img_box");
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    title: false,
+                    content: imgBox
+                });
+            });
+
+            //组织机构代码证图片上传，通过设置参数获取上传情况
+            var loadIndex;
+            $("#orgCodeCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//Upload path
+                type: 0,//0：Picture 1: document 2: Video 3: Audio
+                docType: "ZZJGDMZ",//File type
+                objectId: "$!{user.memberId}",//The target ID (the personal archives)
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#orgCodeCert").val(result.id);
+                        $("#orgCodeCertBtn").children().remove();
+                        $("#orgCodeCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#orgCodeCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#orgCodeCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error, {title:"Notice", btn: "OK"});
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //税务登记证图片上传
+            $("#taxRegCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//Upload path
+                type: 0,//0：Picture 1: document 2: Video 3: Audio
+                docType: "SWDJZ",//File type
+                objectId: "$!{user.memberId}",//The target ID (the personal archives)
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#taxRegCert").val(result.id);
+                        $("#taxRegCertBtn").children().remove();
+                        $("#taxRegCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#taxRegCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#taxRegCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error, {title:"Notice", btn: "OK"});
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //营业执照图片上传
+            $("#businessLicenseCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//Upload path
+                type: 0,//0：Picture 1: document 2: Video 3: Audio
+                docType: "YYZZ",//File type
+                objectId: "$!{user.memberId}",//The target ID (the personal archives)
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#businessLicenseCert").val(result.id);
+
+
+                        $("#businessLicenseCertBtn").children().remove();
+                        $("#businessLicenseCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#businessLicenseCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#businessLicenseCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error, {title:"Notice", btn: "OK"});
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //Company logo图片上传
+            $("#epLogoBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//Upload path
+                type: 0,//0：Picture 1: document 2: Video 3: Audio
+                docType: "GSLOGO",//File type
+                objectId: "$!{user.memberId}",//The target ID (the personal archives)
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#epLogo").val(result.id);
+                        $("#epLogoBtn").children().remove();
+                        $("#epLogoBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#epLogoBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_165_134.img');
+                    } else {
+                        layer.alert(result.error, {title:"Notice", btn: "OK"});
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+        });
+
+        jQuery.validator.addMethod("englishName", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9 \\\/]*$/.test(value);
+        }, jQuery.validator.format("zip code can only be entered in letters or numerical numbers"));
+
+        jQuery.validator.addMethod("charactor", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9\-\_]*$/.test(value);
+        }, jQuery.validator.format("zip code can only be entered in letters or numerical numbers"));
+
+
+    /*****************第二种方式*****************/
+    //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""Mode setting
+    $("#regCert").fileUpload();
+    //通过监听事件获取上传情况
+    $("#regCert").on("beforeUpload", function(e, path){
+        loadIndex = layer.load(0, {shade: false});
+    });
+    $("#regCert").on("uploadEnd", function(e, result){
+        if(result.success == true){
+            $("#regCertInput").val(result.id);
+            $("#regCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>Check uploaded</a>");
+        }else{
+            layer.alert(result.error, {title:"Notice", btn: "OK"});
+        }
+        layer.close(loadIndex);
+    });
+
+    /*****************第二种方式*****************/
+    //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""Mode setting
+    $("#bankCert").fileUpload();
+    //通过监听事件获取上传情况
+    $("#bankCert").on("beforeUpload", function(e, path){
+        loadIndex = layer.load(0, {shade: false});
+    });
+    $("#bankCert").on("uploadEnd", function(e, result){
+        if(result.success == true){
+            $("#bankCertInput").val(result.id);
+            $("#bankCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>Check uploaded</a>");
+        }else{
+            layer.alert(result.error, {title:"Notice", btn: "OK"});
+        }
+        layer.close(loadIndex);
+    });
+    /*****************第二种方式*****************/
+    //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""Mode setting
+    $("#regProxy").fileUpload();
+    //通过监听事件获取上传情况
+    $("#regProxy").on("beforeUpload", function(e, path){
+        loadIndex = layer.load(0, {shade: false});
+    });
+    $("#regProxy").on("uploadEnd", function(e, result){
+        if(result.success == true){
+            $("#regProxyInput").val(result.id);
+            $("#regProxyCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>Check uploaded</a>");
+        }else{
+            layer.alert(result.error, {title:"Notice", btn: "OK"});
+        }
+        layer.close(loadIndex);
+    });
+    /*****************第二种方式*****************/
+    //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""Mode setting
+    $("#adminCert").fileUpload();
+    //通过监听事件获取上传情况
+    $("#adminCert").on("beforeUpload", function(e, path){
+        loadIndex = layer.load(0, {shade: false});
+    });
+    $("#adminCert").on("uploadEnd", function(e, result){
+        if(result.success == true){
+            $("#adminCertInput").val(result.id);
+            $("#adminCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>Check uploaded</a>");
+        }else{
+            layer.alert(result.error, {title:"Notice", btn: "OK"});
+        }
+        layer.close(loadIndex);
+    });
+
+
+
+        var baseRule = {
+            ignore: ".ignore",
+            rules: {
+                fullName: "required",
+                name: "required",
+                englishName: {
+                    required: true/*,
+                    englishName: true*/
+                },
+                abbEnglishName: {
+                    required: true/*,
+                    englishName: true*/
+                },
+                organizationCode:"required",
+                taxNo:"required",
+                licenseNo:"required",
+                socialCreditCode:"required",
+                country:"required",
+                registerCert:"required",
+                bankCert:"required",
+                "contact.name":{
+                    "required":true
+                },
+//                "contact.mobile":{
+//                    "required":true,
+//                    mobile:true
+//                },
+                "contact.phone":"required",
+                "contact.mail":{
+                    "required":true,
+                    "email":true
+                },
+                "contact.address":"required",
+                "contact.accountCert":"required",
+                "contact.adminCert":"required"
+
+            },
+            messages: {
+                fullName: "Please enter the full company name",
+                name: "Please enter the name of the company for short",
+                englishName: {
+                    required: "Please enter the company English name"/*,
+                    englishName: "企业English nameThe code can only be entered in letters or numbers"*/
+                },
+                abbEnglishName: {
+                    required: "Please enter the company English name"
+                  },
+                socialCreditCode:{
+                    required:"Please enter a unified social credit code"
+                },
+                country:{
+                    required:"Please enter the country"
+                },
+                registerCert:{
+                    required:"Please upload Registration certificate / registration certificate"
+                },
+                bankCert:{
+                    required:"Please select bank proof material"
+                },
+                organizationCode: {
+                    required: "Please enter the organization code",
+                    charactor: "The organization code can only enter letters or numbers",
+                    maxlength: "The organization code is up to 12 bits"
+                },
+                taxNo: {
+                    required: "Please enter the tax registration number",
+                    charactor: "The tax registration number can only be entered into the letter or number",
+                    minlength: "The tax registration number is at least 15",
+                    maxlength: "The number of tax registration numbers is up to 20"
+                },
+                licenseNo: {
+                    required: "Please enter the registration number of the business license",
+                    charactor: "The registration number of the business license can only be entered into the letter or number",
+                    minlength: "The registration number of the business license is at least 15",
+                    maxlength: "The number of business license registration number is up to 18"
+                },
+                "contact.name":{"required":"Please enter your name"},
+                "contact.mobile":{"required":"please enter cell phone number"},
+                "contact.phone":{"required":"Please enter the office phone"},
+                "contact.mail":{"required":"Please enter email address"},
+                "contact.address":{"required":"Please enter a communication address"},
+                "contact.accountCert":{"required":"Please upload the authorization letter of the company account registration"},
+                "contact.adminCert":{"required":"Please upload the platform administrator to prove it"}
+            },
+            errorPlacement: function(error, element) {
+                error.addClass("s-erro");
+                element.after(error);
+            },
+            submitHandler: function(form) {
+                // var cked = $('input[name=agreementCk]').is(":checked");
+                // if(!cked){
+                //     layui.use(['form', 'layedit', 'laydate'], function () {
+                //         layui.layer.alert('Please agree with the agreement on company admission first');
+                //     })
+                //     return;
+                // }
+                form.submit();
+            }
+        };
+        //境内三证合一
+        var in_one = $.extend(true,{},baseRule);
+        delete in_one.rules.organizationCode;
+        delete in_one.rules.taxNo;
+        delete in_one.rules.licenseNo;
+        delete in_one.rules.country;
+        delete in_one.rules.registerCert;
+        delete in_one.rules.bankCert;
+
+        delete in_one.rules.englishName;
+        delete in_one.rules.abbEnglishName;
+        //境内非三证合一
+        var in_not_one = $.extend(true,{},baseRule);
+        delete in_not_one.rules.socialCreditCode;
+        delete in_not_one.rules.country;
+        delete in_not_one.rules.registerCert;
+        delete in_not_one.rules.bankCert;
+        delete in_not_one.rules.englishName;
+        delete in_not_one.rules.abbEnglishName;
+
+        //境外
+        var out = $.extend(true,{},baseRule);
+        delete out.rules.organizationCode;
+        delete out.rules.taxNo;
+        delete out.rules.licenseNo;
+        delete out.rules.socialCreditCode;
+        delete out.rules.adminCert;
+        delete out.rules.fullName;
+        delete out.rules.name;
+        delete out.rules["contact.adminCert"];
+
+        //验证器
+        var validater = $ ("#saveForm").validate(in_one)
+
+        //当三证合一的按钮点击的时候
+        $("#certdiv .s-form-radio").on("check",function(){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            validater.destroy();
+            if(val == 1){
+                $("#cert1").show()
+                $("#cert0").hide()
+                $ ("#saveForm").validate(in_one);
+            }else{
+                $("#cert0").show()
+                $("#cert1").hide()
+                $ ("#saveForm").validate(in_not_one);
+            }
+        });
+        //当境内境外按钮点击的时候
+        $("#epType .s-form-radio").on("check",function(){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            validater.destroy();
+            if(val == 1){
+                $(".forgin").show()
+                $(".in").hide()
+                $ ("#saveForm").validate(out);
+                $("#adminCertLi").hide();
+                $("#jtn").hide()
+            }else{
+                $(".forgin").hide()
+                $(".in").show()
+                $ ("#saveForm").validate(in_one);
+                $("#certdiv input[value=1]").next().Radio("check");
+                $("#adminCertLi").show();
+
+                $("#jtn").show()
+            }
+        });
+       $("#epType .s-form-radio:eq(1)").Radio("check");
+    });
+</script>
+
+

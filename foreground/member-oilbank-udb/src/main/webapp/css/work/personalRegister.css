@@ -1,0 +1,168 @@
+#main{
+    margin-top: 8px;
+}
+.main-tit{
+    width: 100%;
+    height: 103px;
+    border-bottom: 1px solid #ECECEC;
+}
+.main-tit>h3{
+    font-size: 30px;
+    color: #F36523;
+    padding:  50px 0 20px  235px;
+}
+/* 灰色div */
+#main .main-prompt{
+  width: 800px;
+  height: 100%;
+  background: rgba(216,216,216,0.12) ;
+  margin:0 auto;
+  margin-top: 10px;
+  /* padding:20px; */
+  margin-bottom: 60px;
+  margin-left: 235px;
+}
+#main .main-prompt div.warm,#main .main-prompt div.notice {
+  padding-left:20px;
+  /* height:48px; */
+  height:100%;
+  line-height: 24px;
+  color: #666666;
+  font-size: 14px;
+}
+#main .main-prompt div.warm {
+  padding-top: 20px;
+  padding-bottom:13px;
+  border-bottom: 1px solid #ECECEC;
+}
+
+#main .main-prompt div.warm a{
+  color: #F36523;
+}
+#main .main-prompt div.notice{
+  padding-top:13px;
+  padding-bottom:12px;
+}
+#main .main-prompt div.notice a {
+  color: #F36523;
+}
+
+.form-group{
+    width: 800px;
+    margin: 0 auto;
+}
+
+#main .form-group.rpp-group1{
+  margin-top: -10px;
+}
+
+.form-group>span:first-of-type{
+    display: block;
+    width: 200px;
+    height: 36px;
+    float: left;
+    margin-right: 17.7px;
+}
+.form-group>span:first-of-type>div{
+    float: right;
+    text-align: right;
+    line-height: 36px;
+}
+.form-group>span:first-of-type>div:last-of-type{
+    color: #F36523;
+    margin-right: 3px;
+}
+.form-group>input{
+    width: 308px;
+    height: 34px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-radius: 2px;
+    border: 1px solid #C1C1C1;
+    float: left;
+
+}
+
+.form-group>p{
+    font-size: 18px;
+    margin-top: 5px;
+    height: 36px;
+    font-weight: normal;
+}
+.form-group>input:focus{
+    border: 1px solid #FF9D32;
+}
+
+form .form-group .errPrompt {
+  font-size: 14px;
+  color: #EE4444;
+  vertical-align: middle;
+  height: 34px;
+  line-height: 34px;
+  padding:0 10px;
+}
+
+form .form-group .email .eml-z {
+  color:#000;
+  padding:0 6px;
+}
+/* 表单下面的提示信息 */
+form .form-group-reminder {
+  width:800px;
+  margin:0 auto;
+}
+form .form-group-reminder .form-reminder{
+  display:block;
+  /* margin-bottom: 20px; */
+  font-size: 14px;
+  color: #666;
+}
+form .form-group-reminder>span:first-child {
+    display: block;
+    width: 200px;
+    height: 36px;
+    float: left;
+    margin-right: 17.7px;
+}
+
+form .form-group input.form-control {
+  margin-bottom: 10px;
+}
+
+.form-group-check {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.form-group-check > span{
+    display: block;
+    width: 200px;
+    height: 36px;
+    float: left;
+    margin-right: 17.7px;
+}
+.button-check{
+    display: block;
+    width: 178px;
+    height: 48px;
+    /* margin: 0 auto; */
+    float:left;
+    background: #F36523;
+    border-radius: 2px;
+    font-style: normal;
+}
+.button-check>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 48px;
+}
+.button-check>a:hover{background:#FF9D32;color:#fff;}
+
+#footer {
+  margin-top: 544px;
+}

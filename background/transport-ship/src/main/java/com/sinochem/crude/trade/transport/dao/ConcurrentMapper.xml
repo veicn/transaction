@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.ConcurrentMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.Concurrent" id="ConcurrentDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Concurrent">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.Concurrent" id="Concurrent">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="ext2" column="EXT2" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="Concurrent" parameterType="com.sinochem.crude.trade.transport.domain.Concurrent">
+	select * from t_ship_concurrent
+	where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="Concurrent">
+			select
+			* from t_ship_concurrent
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="Concurrent">
+			select
+			* from t_ship_concurrent
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.Concurrent">
+		update t_ship_concurrent
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="ext2!=null">,EXT2 = #{ext2}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.Concurrent" >
+		insert  into t_ship_concurrent (				ID
+						,UUID
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,EXT2
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{aliveFlag}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{ext2}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_concurrent
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 ID=#{id} 
+																																																			
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   EXT2 as "ext2" 
+						from t_ship_concurrent
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_concurrent 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_concurrent
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_concurrent
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="ext2!=null">,EXT2 = #{ext2}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<delete id="deleteRecordByKeys">
+		DELETE FROM 
+			t_ship_concurrent
+		 WHERE 
+			 ID=#{id} 
+																																																			
+	</delete>
+	
+	
+	
+	
+</mapper>

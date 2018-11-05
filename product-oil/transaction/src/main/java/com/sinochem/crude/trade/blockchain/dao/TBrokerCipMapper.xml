@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerCipMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerCip" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="declarationuuid" property="declarationuuid" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="recordno" property="recordno" jdbcType="VARCHAR" />
+    <result column="goodsno" property="goodsno" jdbcType="VARCHAR" />
+    <result column="cipname" property="cipname" jdbcType="VARCHAR" />
+    <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+    <result column="rule" property="rule" jdbcType="VARCHAR" />
+    <result column="gqty" property="gqty" jdbcType="VARCHAR" />
+    <result column="gunit" property="gunit" jdbcType="VARCHAR" />
+    <result column="priceperunit" property="priceperunit" jdbcType="VARCHAR" />
+    <result column="decltotal" property="decltotal" jdbcType="VARCHAR" />
+    <result column="tradecurr" property="tradecurr" jdbcType="VARCHAR" />
+    <result column="goodsinfo_destinationcountry" property="goodsinfoDestinationcountry" jdbcType="VARCHAR" />
+    <result column="goodsinfo_origincountry" property="goodsinfoOrigincountry" jdbcType="VARCHAR" />
+    <result column="goodsinfo_cutmode" property="goodsinfoCutmode" jdbcType="VARCHAR" />
+    <result column="superviserequire" property="superviserequire" jdbcType="VARCHAR" />
+    <result column="currentchecked" property="currentchecked" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, declarationuuid, code, recordno, goodsno, cipname, goodsname, rule, gqty, gunit, 
+    priceperunit, decltotal, tradecurr, goodsinfo_destinationcountry, goodsinfo_origincountry, 
+    goodsinfo_cutmode, superviserequire, currentchecked
+  </sql>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_cip
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_cip
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_cip
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `product-trade-blockchain`.t_broker_cip
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_broker_cip (declarationuuid, code,
+    recordno, goodsno, cipname,
+    goodsname, rule, gqty,
+    gunit, priceperunit, decltotal,
+    tradecurr, goodsinfo_destinationcountry,
+    goodsinfo_origincountry, goodsinfo_cutmode,
+    superviserequire, currentchecked)
+    values
+    <foreach collection="list" item="cip" separator=",">
+      (#{cip.declarationuuid,jdbcType=VARCHAR}, #{cip.code,jdbcType=VARCHAR},
+      #{cip.recordno,jdbcType=VARCHAR}, #{cip.goodsno,jdbcType=VARCHAR}, #{cip.cipname,jdbcType=VARCHAR},
+      #{cip.goodsname,jdbcType=VARCHAR}, #{cip.rule,jdbcType=VARCHAR}, #{cip.gqty,jdbcType=VARCHAR},
+      #{cip.gunit,jdbcType=VARCHAR}, #{cip.priceperunit,jdbcType=VARCHAR}, #{cip.decltotal,jdbcType=VARCHAR},
+      #{cip.tradecurr,jdbcType=VARCHAR}, #{cip.goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      #{cip.goodsinfoOrigincountry,jdbcType=VARCHAR}, #{cip.goodsinfoCutmode,jdbcType=VARCHAR},
+      #{cip.superviserequire,jdbcType=VARCHAR}, #{cip.currentchecked,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerCip" >
+    insert into `product-trade-blockchain`.t_broker_cip (id, declarationuuid, code,
+      recordno, goodsno, cipname, 
+      goodsname, rule, gqty, 
+      gunit, priceperunit, decltotal, 
+      tradecurr, goodsinfo_destinationcountry, 
+      goodsinfo_origincountry, goodsinfo_cutmode, 
+      superviserequire, currentchecked)
+    values (#{id,jdbcType=BIGINT}, #{declarationuuid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{recordno,jdbcType=VARCHAR}, #{goodsno,jdbcType=VARCHAR}, #{cipname,jdbcType=VARCHAR}, 
+      #{goodsname,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR}, #{gqty,jdbcType=VARCHAR}, 
+      #{gunit,jdbcType=VARCHAR}, #{priceperunit,jdbcType=VARCHAR}, #{decltotal,jdbcType=VARCHAR}, 
+      #{tradecurr,jdbcType=VARCHAR}, #{goodsinfoDestinationcountry,jdbcType=VARCHAR}, 
+      #{goodsinfoOrigincountry,jdbcType=VARCHAR}, #{goodsinfoCutmode,jdbcType=VARCHAR}, 
+      #{superviserequire,jdbcType=VARCHAR}, #{currentchecked,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerCip" >
+    insert into `product-trade-blockchain`.t_broker_cip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="declarationuuid != null" >
+        declarationuuid,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="recordno != null" >
+        recordno,
+      </if>
+      <if test="goodsno != null" >
+        goodsno,
+      </if>
+      <if test="cipname != null" >
+        cipname,
+      </if>
+      <if test="goodsname != null" >
+        goodsname,
+      </if>
+      <if test="rule != null" >
+        rule,
+      </if>
+      <if test="gqty != null" >
+        gqty,
+      </if>
+      <if test="gunit != null" >
+        gunit,
+      </if>
+      <if test="priceperunit != null" >
+        priceperunit,
+      </if>
+      <if test="decltotal != null" >
+        decltotal,
+      </if>
+      <if test="tradecurr != null" >
+        tradecurr,
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        goodsinfo_destinationcountry,
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        goodsinfo_origincountry,
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        goodsinfo_cutmode,
+      </if>
+      <if test="superviserequire != null" >
+        superviserequire,
+      </if>
+      <if test="currentchecked != null" >
+        currentchecked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null" >
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="recordno != null" >
+        #{recordno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="cipname != null" >
+        #{cipname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null" >
+        #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="gqty != null" >
+        #{gqty,jdbcType=VARCHAR},
+      </if>
+      <if test="gunit != null" >
+        #{gunit,jdbcType=VARCHAR},
+      </if>
+      <if test="priceperunit != null" >
+        #{priceperunit,jdbcType=VARCHAR},
+      </if>
+      <if test="decltotal != null" >
+        #{decltotal,jdbcType=VARCHAR},
+      </if>
+      <if test="tradecurr != null" >
+        #{tradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="superviserequire != null" >
+        #{superviserequire,jdbcType=VARCHAR},
+      </if>
+      <if test="currentchecked != null" >
+        #{currentchecked,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerCip" >
+    update `product-trade-blockchain`.t_broker_cip
+    <set >
+      <if test="declarationuuid != null" >
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="recordno != null" >
+        recordno = #{recordno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsno != null" >
+        goodsno = #{goodsno,jdbcType=VARCHAR},
+      </if>
+      <if test="cipname != null" >
+        cipname = #{cipname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null" >
+        rule = #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="gqty != null" >
+        gqty = #{gqty,jdbcType=VARCHAR},
+      </if>
+      <if test="gunit != null" >
+        gunit = #{gunit,jdbcType=VARCHAR},
+      </if>
+      <if test="priceperunit != null" >
+        priceperunit = #{priceperunit,jdbcType=VARCHAR},
+      </if>
+      <if test="decltotal != null" >
+        decltotal = #{decltotal,jdbcType=VARCHAR},
+      </if>
+      <if test="tradecurr != null" >
+        tradecurr = #{tradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="superviserequire != null" >
+        superviserequire = #{superviserequire,jdbcType=VARCHAR},
+      </if>
+      <if test="currentchecked != null" >
+        currentchecked = #{currentchecked,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerCip" >
+    update `product-trade-blockchain`.t_broker_cip
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      recordno = #{recordno,jdbcType=VARCHAR},
+      goodsno = #{goodsno,jdbcType=VARCHAR},
+      cipname = #{cipname,jdbcType=VARCHAR},
+      goodsname = #{goodsname,jdbcType=VARCHAR},
+      rule = #{rule,jdbcType=VARCHAR},
+      gqty = #{gqty,jdbcType=VARCHAR},
+      gunit = #{gunit,jdbcType=VARCHAR},
+      priceperunit = #{priceperunit,jdbcType=VARCHAR},
+      decltotal = #{decltotal,jdbcType=VARCHAR},
+      tradecurr = #{tradecurr,jdbcType=VARCHAR},
+      goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      superviserequire = #{superviserequire,jdbcType=VARCHAR},
+      currentchecked = #{currentchecked,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

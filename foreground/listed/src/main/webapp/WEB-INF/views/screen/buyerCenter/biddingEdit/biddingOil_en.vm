@@ -1,0 +1,44 @@
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Grade<span class="cxtj-nr-an"></span></h3>
+
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th class="tabl-line">Origin</th>
+                <th>Grade</th>
+                <th>API</th>
+                <th>Sulphur</th>
+                <th>Acid</th>
+                <th>Carbon<br>Residue/%</th>
+                <th>Van</th>
+                <th>Ni</th>
+                <th>>350°C mass<br>yield/%</th>
+                <th class="tabl-line1">Remark</th>
+            </tr>
+            #foreach($cor in $crudeOil)
+                #set($Min1 = $!{cor.indicator1Min}/100.00)
+                #set($Min2 = $!{cor.indicator2Min}/100.00)
+                #set($Min3 = $!{cor.indicator3Min}/100.00)
+                #set($Min4 = $!{cor.indicator4Min}/100.00)
+                #set($Min5 = $!{cor.indicator5Min}/100.00)
+                #set($Min6 = $!{cor.indicator6Min}/100.00)
+                #set($Min7 = $!{cor.indicator7Min}/100.00)
+
+                #set($index=$!velocityCount - 1)
+
+                <tr class="c-tabcos1">
+                    <td><input type="hidden" name="crudeOil[$!index].areaString" value="$!{cor.areaString}" id="area">$!{cor.areaString}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].name" value="$!{cor.name}" id="name">$!{cor.name}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator1Min" value="$!{cor.indicator1Min}" id="indicator1Min"><input type="hidden" name="crudeOil[$!index].indicator1Max" value="$!{cor.indicator1Max}">$!Min1</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator2Min" value="$!{cor.indicator2Min}" id="indicator2Min"><input type="hidden" name="crudeOil[$!index].indicator2Max" value="$!{cor.indicator2Max}">$!{Min2}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator3Min" value="$!{cor.indicator3Min}" id="indicator3Min"><input type="hidden" name="crudeOil[$!index].indicator3Max" value="$!{cor.indicator3Max}">$!{Min3}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator4Min" value="$!{cor.indicator4Min}" id="indicator4Min"><input type="hidden" name="crudeOil[$!index].indicator4Max" value="$!{cor.indicator4Max}">$!{Min4}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator5Min" value="$!{cor.indicator5Min}" id="indicator5Min"><input type="hidden" name="crudeOil[$!index].indicator5Max" value="$!{cor.indicator5Max}">$!{Min5}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator6Min" value="$!{cor.indicator6Min}" id="indicator6Min"><input type="hidden" name="crudeOil[$!index].indicator6Max" value="$!{cor.indicator6Max}">$!{Min6}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].indicator7Min" value="$!{cor.indicator7Min}" id="indicator7Min"><input type="hidden" name="crudeOil[$!index].indicator7Max" value="$!{cor.indicator7Max}">$!{Min7}</td>
+                    <td><input type="hidden" name="crudeOil[$!index].desc" value="$!{cor.desc}" id="desc">$!{cor.desc}</td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderMessagePushMapper">
+	
+	<select id="getOrderAndPeison" resultType="map">
+		SELECT
+			too.ORDER_NO AS "orderNo"
+			,toep.EXECUTE_PERSON_ID AS "executePersonId"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_execute_person toep 
+				ON toep.ORDER_ID = too.ID
+				AND toep.ALIVE_FLAG = '1'
+				<if test="role != null and role.toString() == '1'.toString() ">
+					AND toep.EP_MEMBER_ID = too.SELLER_CUSTOMER_ID
+				</if>
+				<if test="role != null and role.toString() == '2'.toString() ">
+					AND toep.EP_MEMBER_ID = too.BUYER_CUSTOMER_ID
+				</if>
+				<if test="role != null and role.toString() == '3'.toString() ">
+					AND toep.EP_MEMBER_ID = too.SELLER_CUSTOMER_ID
+				</if>
+		WHERE
+			too.UUID = #{uuid}	
+	</select>
+	
+	<select id="checkT10" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(tocf.CONTRACT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_contract toc
+				ON toc.ORDER_ID = too.ID
+				AND toc.ALIVE_FLAG = '1'
+		INNER JOIN
+			t_order_contract_file tocf
+				ON tocf.CONTRACT_ID = toc.CONTRACT_ID
+				AND tocf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '1'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; 2
+	</select>
+	
+	<select id="checkT11" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_transport tot
+				ON tot.ORDER_ID = too.ID
+				AND tot.ALIVE_FLAG = '1'
+				AND tot.DELIVERY_DATE_END is not null
+				AND ((to_days(NOW()) - to_days(tot.DELIVERY_DATE_END)) >= 5)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '1'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; (SELECT COUNT(1) FROM t_order_document_list WHERE DOCUMENT_TYPE = #{documentType})	
+	</select>
+	
+	<select id="checkT12" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_ship_loadinginfo tosl
+				ON tosl.ORDER_NO = too.ORDER_NO
+				AND tosl.ALIVE_FLAG = '1'
+				AND tosl.ETA is not null
+				AND ((to_days(NOW()) - to_days(tosl.ETA)) >= -10)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '1'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; (SELECT COUNT(1) FROM t_order_document_list WHERE DOCUMENT_TYPE = #{documentType})	
+	</select>
+	
+	<select id="checkT13" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_ship_unloadinginfo tosu
+				ON tosu.ORDER_NO = too.ORDER_NO
+				AND tosu.ALIVE_FLAG = '1'
+				AND tosu.AC_FINISH is not null
+				AND ((to_days(NOW()) - to_days(tosu.AC_FINISH)) >= 5)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '1'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; (SELECT COUNT(1) FROM t_order_document_list WHERE DOCUMENT_TYPE = #{documentType})	
+	</select>
+
+	<select id="checkT14" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,DATE_FORMAT(tos.PAYMENT_DATE, '%Y-%m-%d') AS "paymentDate"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_settlement tos
+				ON tos.ORDER_ID = too.ID
+				AND tos.ALIVE_FLAG = '1'
+				AND tos.SETTLEMENT_TYPE = #{settlementType}
+				AND ((to_days(NOW()) - to_days(tos.CREATE_DATE)) >= 1)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+				AND todf.FILE_CODE = #{fileCode}
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '1'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; 1	
+	</select>
+	
+	<select id="checkT20" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(tocf.CONTRACT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_contract toc
+				ON toc.ORDER_ID = too.ID
+				AND toc.ALIVE_FLAG = '1'
+		INNER JOIN
+			t_order_contract_file tocf
+				ON tocf.CONTRACT_ID = toc.CONTRACT_ID
+				AND tocf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '2'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; 2
+	</select>
+	
+	<select id="checkT21" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_transport tot
+				ON tot.ORDER_ID = too.ID
+				AND tot.ALIVE_FLAG = '1'
+				AND tot.DELIVERY_DATE_START is not null
+				AND ((to_days(NOW()) - to_days(tot.DELIVERY_DATE_START)) >= -10)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '2'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; (SELECT COUNT(1) FROM t_order_document_list WHERE DOCUMENT_TYPE = #{documentType})	
+	</select>
+	
+	<select id="checkT22" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_transport tot
+				ON tot.ORDER_ID = too.ID
+				AND tot.ALIVE_FLAG = '1'
+				AND tot.DELIVERY_DATE_END is not null
+				AND ((to_days(NOW()) - to_days(tot.DELIVERY_DATE_END)) >= 5)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '2'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; (SELECT COUNT(1) FROM t_order_document_list WHERE DOCUMENT_TYPE = #{documentType})	
+	</select>
+	
+	<select id="checkT24" resultType="map">
+		SELECT
+			too.ID AS "id"
+			,too.UUID AS "uuid"
+			,#{documentType} AS "documentType"
+			,DATE_FORMAT(tos.PAYMENT_DATE, '%Y-%m-%d') AS "paymentDate"
+			,count(todf.DOCUMENT_FILE_ID) AS "fileCount"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_settlement tos
+				ON tos.ORDER_ID = too.ID
+				AND tos.ALIVE_FLAG = '1'
+				AND tos.SETTLEMENT_TYPE = #{settlementType}
+				AND ((to_days(NOW()) - to_days(tos.CREATE_DATE)) >= 1)
+		LEFT JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				AND tod.ALIVE_FLAG = '1'
+				AND tod.DOCUMENT_TYPE = #{documentType}
+		LEFT JOIN
+			t_order_document_file todf
+				ON todf.ORDER_DOCUMENT_ID = tod.ORDER_DOCUMENT_ID
+				AND todf.ALIVE_FLAG = '1'
+				AND todf.FILE_CODE = #{fileCode}
+		WHERE
+			too.STATUS &lt;> '35'
+			AND too.TRADE_CATEGORY = '2'
+			AND too.ALIVE_FLAG = '1'
+		GROUP BY
+			too.id
+		HAVING
+			fileCount &lt; 1	
+	</select>
+</mapper>

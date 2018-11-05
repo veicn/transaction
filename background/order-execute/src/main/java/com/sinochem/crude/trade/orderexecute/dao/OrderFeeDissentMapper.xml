@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderFeeDissentMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderFeeDissent" id="OrderFeeDissent">
+		<result property="feeDissentId" column="FEE_DISSENT_ID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="dissentType" column="DISSENT_TYPE" />
+		<result property="billId" column="BILL_ID" />
+		<result property="isReply" column="IS_REPLY" />
+		<result property="dissentContent" column="DISSENT_CONTENT" />
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="dissentTime" column="DISSENT_TIME" />
+		<result property="version" column="VERSION" />
+		<result property="dissentPerson" column="DISSENT_PERSON" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeDissent"  useGeneratedKeys="true" keyProperty="feeDissentId" >
+		insert  into t_order_fee_dissent (				FEE_DISSENT_ID
+						,ORDER_ID
+						,DISSENT_TYPE
+						,BILL_ID
+						,IS_REPLY
+						,DISSENT_CONTENT
+						,REPLY_CONTENT
+						,DISSENT_TIME
+						,VERSION
+						,DISSENT_PERSON
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{feeDissentId}
+						,#{orderId}
+						,#{dissentType}
+						,#{billId}
+						,#{isReply}
+						,#{dissentContent}
+						,#{replyContent}
+						,#{dissentTime}
+						,#{version}
+						,#{dissentPerson}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_fee_dissent
+              WHERE 1=1 
+                AND FEE_DISSENT_ID = #{feeDissentId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeDissent">
+        DELETE FROM t_order_fee_dissent
+              WHERE 1=1 
+        <if test="feeDissentId!=null and feeDissentId!=''">AND  FEE_DISSENT_ID = #{feeDissentId}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="dissentType!=null and dissentType!=''">AND  DISSENT_TYPE = #{dissentType}</if>
+        <if test="billId!=null and billId!=''">AND  BILL_ID = #{billId}</if>
+        <if test="isReply!=null and isReply!=''">AND  IS_REPLY = #{isReply}</if>
+        <if test="dissentContent!=null and dissentContent!=''">AND  DISSENT_CONTENT = #{dissentContent}</if>
+        <if test="replyContent!=null and replyContent!=''">AND  REPLY_CONTENT = #{replyContent}</if>
+        <if test="dissentTime!=null and dissentTime!=''">AND  DISSENT_TIME = #{dissentTime}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="dissentPerson!=null and dissentPerson!=''">AND  DISSENT_PERSON = #{dissentPerson}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeDissent">
+		update t_order_fee_dissent
+		<set>
+         FEE_DISSENT_ID=#{feeDissentId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="dissentType!=null">,DISSENT_TYPE = #{dissentType}</if>
+		<if test="billId!=null">,BILL_ID = #{billId}</if>
+		<if test="isReply!=null">,IS_REPLY = #{isReply}</if>
+		<if test="dissentContent!=null">,DISSENT_CONTENT = #{dissentContent}</if>
+		<if test="replyContent!=null">,REPLY_CONTENT = #{replyContent}</if>
+		<if test="dissentTime!=null">,DISSENT_TIME = #{dissentTime}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="dissentPerson!=null">,DISSENT_PERSON = #{dissentPerson}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+       	 FEE_DISSENT_ID=#{feeDissentId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_fee_dissent
+		<set>
+         FEE_DISSENT_ID=#{feeDissentId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="dissentType!=null">,DISSENT_TYPE = #{dissentType}</if>
+		<if test="billId!=null">,BILL_ID = #{billId}</if>
+		<if test="isReply!=null">,IS_REPLY = #{isReply}</if>
+		<if test="dissentContent!=null">,DISSENT_CONTENT = #{dissentContent}</if>
+		<if test="replyContent!=null">,REPLY_CONTENT = #{replyContent}</if>
+		<if test="dissentTime!=null">,DISSENT_TIME = #{dissentTime}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="dissentPerson!=null">,DISSENT_PERSON = #{dissentPerson}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="feeDissentId!=null and feeDissentId!=''">and  FEE_DISSENT_ID=#{feeDissentId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="dissentType!=null and dissentType!=''">and  DISSENT_TYPE=#{dissentType}</if>
+		<if test="billId!=null and billId!=''">and  BILL_ID=#{billId}</if>
+		<if test="isReply!=null and isReply!=''">and  IS_REPLY=#{isReply}</if>
+		<if test="dissentContent!=null and dissentContent!=''">and  DISSENT_CONTENT=#{dissentContent}</if>
+		<if test="replyContent!=null and replyContent!=''">and  REPLY_CONTENT=#{replyContent}</if>
+		<if test="dissentTime!=null and dissentTime!=''">and  DISSENT_TIME=#{dissentTime}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="dissentPerson!=null and dissentPerson!=''">and  DISSENT_PERSON=#{dissentPerson}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderFeeDissent">
+			select
+			* from t_order_fee_dissent
+			where
+		    FEE_DISSENT_ID=#{feeDissentId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderFeeDissent">
+			select
+			* from t_order_fee_dissent
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderFeeDissent" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderFeeDissent">
+		select * from t_order_fee_dissent
+			where
+		 ALIVE_FLAG='1'
+		<if test="feeDissentId!=null and feeDissentId!=''">and  FEE_DISSENT_ID=#{feeDissentId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="dissentType!=null and dissentType!=''">and  DISSENT_TYPE=#{dissentType}</if>
+		<if test="billId!=null and billId!=''">and  BILL_ID=#{billId}</if>
+		<if test="isReply!=null and isReply!=''">and  IS_REPLY=#{isReply}</if>
+		<if test="dissentContent!=null and dissentContent!=''">and  DISSENT_CONTENT=#{dissentContent}</if>
+		<if test="replyContent!=null and replyContent!=''">and  REPLY_CONTENT=#{replyContent}</if>
+		<if test="dissentTime!=null and dissentTime!=''">and  DISSENT_TIME=#{dissentTime}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="dissentPerson!=null and dissentPerson!=''">and  DISSENT_PERSON=#{dissentPerson}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  FEE_DISSENT_ID as "feeDissentId" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   DISSENT_TYPE as "dissentType" 
+						 ,   BILL_ID as "billId" 
+						 ,   IS_REPLY as "isReply" 
+						 ,   DISSENT_CONTENT as "dissentContent" 
+						 ,   REPLY_CONTENT as "replyContent" 
+						 ,   DATE_FORMAT(DISSENT_TIME, '%Y-%m-%d %T') as "dissentTime" 
+						 ,   VERSION as "version" 
+						 ,   DISSENT_PERSON as "dissentPerson" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   DATE_FORMAT(CREATE_DATE, '%Y-%m-%d %T') as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   DATE_FORMAT(UPDATE_DATE, '%Y-%m-%d %T') as "updateDate" 
+						from t_order_fee_dissent
+		where
+			ALIVE_FLAG='1'
+			<if test="feeDissentId!=null and feeDissentId!=''">and  FEE_DISSENT_ID=#{feeDissentId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="dissentType!=null and dissentType!=''">and  DISSENT_TYPE=#{dissentType}</if>
+			<if test="billId!=null and billId!=''">and  BILL_ID=#{billId}</if>
+			<if test="isReply!=null and isReply!=''">and  IS_REPLY=#{isReply}</if>
+			<if test="dissentContent!=null and dissentContent!=''">and  DISSENT_CONTENT=#{dissentContent}</if>
+			<if test="replyContent!=null and replyContent!=''">and  REPLY_CONTENT=#{replyContent}</if>
+			<if test="dissentTime!=null and dissentTime!=''">and  DISSENT_TIME=#{dissentTime}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="dissentPerson!=null and dissentPerson!=''">and  DISSENT_PERSON=#{dissentPerson}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		order by
+			DISSENT_TIME asc
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_fee_dissent 
+		where
+		 ALIVE_FLAG='1'
+			<if test="feeDissentId!=null and feeDissentId!=''">and  FEE_DISSENT_ID=#{feeDissentId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="dissentType!=null and dissentType!=''">and  DISSENT_TYPE=#{dissentType}</if>
+			<if test="billId!=null and billId!=''">and  BILL_ID=#{billId}</if>
+			<if test="isReply!=null and isReply!=''">and  IS_REPLY=#{isReply}</if>
+			<if test="dissentContent!=null and dissentContent!=''">and  DISSENT_CONTENT=#{dissentContent}</if>
+			<if test="replyContent!=null and replyContent!=''">and  REPLY_CONTENT=#{replyContent}</if>
+			<if test="dissentTime!=null and dissentTime!=''">and  DISSENT_TIME=#{dissentTime}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="dissentPerson!=null and dissentPerson!=''">and  DISSENT_PERSON=#{dissentPerson}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<update id="updateOrderStatementStatus" parameterType="hashmap">
+		UPDATE
+			t_order_statement
+		SET
+			STATUS = #{status}
+			,CONFIRM_PERSON = #{confirmPerson}
+			,UPDATE_DATE = #{updateDate}
+			,UPDATE_USER = #{updateUser}
+		WHERE
+			ORDER_STATEMENT_ID = #{orderStatementId}
+	</update>
+	
+	<select id="getStatementInfo" resultType="map">
+		SELECT
+			tos.STATUS AS "status"	
+			,tos.STATEMENT_TYPE AS "statementType"
+			,tos.DATA_JSON AS "dataJson"
+			,too.UUID AS "uuid"
+			,too.ID AS "orderId"
+			,tis.SYS_NAME AS "sysName"
+			,tos.ORDER_STATEMENT_UUID AS "statementUuid"
+			,tos.ORDER_STATEMENT_NO AS "orderStatementNo"
+		FROM
+			t_order_statement tos
+		INNER JOIN
+			t_order too
+				ON too.ID = tos.ORDER_ID
+		LEFT JOIN
+			t_interface_system tis
+				ON tis.MEMBER_ID = too.SELLER_CUSTOMER_ID
+		WHERE
+			tos.ORDER_STATEMENT_ID = #{orderStatementId}
+	</select>
+
+</mapper>

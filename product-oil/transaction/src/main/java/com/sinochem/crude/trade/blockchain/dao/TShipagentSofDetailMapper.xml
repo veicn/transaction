@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentSofDetailMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sof_id" jdbcType="BIGINT" property="sofId" />
+    <result column="detail_date" jdbcType="DATE" property="detailDate" />
+    <result column="week" jdbcType="VARCHAR" property="week" />
+    <result column="begin_time" jdbcType="VARCHAR" property="beginTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="instruction_id" jdbcType="VARCHAR" property="instructionId" />
+    <result column="instruction" jdbcType="VARCHAR" property="instruction" />
+    <result column="row_no" jdbcType="INTEGER" property="rowNo" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sof_id, detail_date, week, begin_time, end_time, instruction_id, instruction, 
+    row_no, create_date, create_user, update_date, update_user, alive_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_sof_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_shipagent_sof_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetail">
+    insert into `product-trade-blockchain`.t_shipagent_sof_detail (id, sof_id, detail_date,
+      week, begin_time, end_time, 
+      instruction_id, instruction, row_no, 
+      create_date, create_user, update_date, 
+      update_user, alive_flag)
+    values (#{id,jdbcType=BIGINT}, #{sofId,jdbcType=BIGINT}, #{detailDate,jdbcType=DATE}, 
+      #{week,jdbcType=VARCHAR}, #{beginTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, 
+      #{instructionId,jdbcType=VARCHAR}, #{instruction,jdbcType=VARCHAR}, #{rowNo,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=BIGINT}, #{aliveFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetail">
+    insert into `product-trade-blockchain`.t_shipagent_sof_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sofId != null">
+        sof_id,
+      </if>
+      <if test="detailDate != null">
+        detail_date,
+      </if>
+      <if test="week != null">
+        week,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="instructionId != null">
+        instruction_id,
+      </if>
+      <if test="instruction != null">
+        instruction,
+      </if>
+      <if test="rowNo != null">
+        row_no,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sofId != null">
+        #{sofId,jdbcType=BIGINT},
+      </if>
+      <if test="detailDate != null">
+        #{detailDate,jdbcType=DATE},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="instructionId != null">
+        #{instructionId,jdbcType=VARCHAR},
+      </if>
+      <if test="instruction != null">
+        #{instruction,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNo != null">
+        #{rowNo,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetail">
+    update `product-trade-blockchain`.t_shipagent_sof_detail
+    <set>
+      <if test="sofId != null">
+        sof_id = #{sofId,jdbcType=BIGINT},
+      </if>
+      <if test="detailDate != null">
+        detail_date = #{detailDate,jdbcType=DATE},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="instructionId != null">
+        instruction_id = #{instructionId,jdbcType=VARCHAR},
+      </if>
+      <if test="instruction != null">
+        instruction = #{instruction,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNo != null">
+        row_no = #{rowNo,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetail">
+    update `product-trade-blockchain`.t_shipagent_sof_detail
+    set sof_id = #{sofId,jdbcType=BIGINT},
+      detail_date = #{detailDate,jdbcType=DATE},
+      week = #{week,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      instruction_id = #{instructionId,jdbcType=VARCHAR},
+      instruction = #{instruction,jdbcType=VARCHAR},
+      row_no = #{rowNo,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectBySof" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_sof_detail
+    where sof_id = #{sofId,jdbcType=BIGINT}
+  </select>
+
+
+  <insert id="bachInsert"  parameterType="java.util.List">
+    INSERT INTO
+    `product-trade-blockchain`.t_shipagent_sof_detail
+    (
+        sof_id,
+        detail_date,
+        week,
+        begin_time,
+        end_time,
+        instruction_id,
+        instruction,
+        row_no,
+        create_date,
+        create_user,
+        update_date,
+        update_user,
+        alive_flag
+    )VALUES
+    <foreach collection="list" item="detail" index="index" separator=",">
+       (
+        #{detail.sofId,jdbcType=BIGINT},
+        #{detail.detailDate,jdbcType=DATE},
+        #{detail.week,jdbcType=VARCHAR},
+        #{detail.beginTime,jdbcType=VARCHAR},
+        #{detail.endTime,jdbcType=VARCHAR},
+        #{detail.instructionId,jdbcType=TIMESTAMP},
+        #{detail.instruction,jdbcType=VARCHAR},
+        #{detail.rowNo,jdbcType=INTEGER},
+        #{detail.createDate,jdbcType=TIMESTAMP},
+        #{detail.createUser,jdbcType=TIMESTAMP},
+        #{detail.updateDate,jdbcType=TIMESTAMP},
+        #{detail.updateUser,jdbcType=VARCHAR},
+        #{detail.aliveFlag,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <update id="bachUpdate"  parameterType="java.util.List">
+    <foreach collection="detailList" item="item" index="index" open="" close="" separator=";">
+      update `product-trade-blockchain`.t_shipagent_sof_detail
+      <set>
+
+        <if test="item.detailDate != null">
+          detail_date = #{item.detailDate,jdbcType=DATE},
+        </if>
+        <if test="item.week != null">
+          week = #{item.week,jdbcType=VARCHAR},
+        </if>
+        <if test="item.beginTime != null">
+          begin_time = #{item.beginTime,jdbcType=VARCHAR},
+        </if>
+        <if test="item.endTime != null">
+          end_time = #{item.endTime,jdbcType=VARCHAR},
+        </if>
+        <if test="item.instructionId != null">
+          instruction_id = #{item.instructionId,jdbcType=VARCHAR},
+        </if>
+        <if test="item.instruction != null">
+          instruction = #{item.instruction,jdbcType=VARCHAR},
+        </if>
+        <if test="item.rowNo != null">
+          row_no = #{item.rowNo,jdbcType=INTEGER},
+        </if>
+        <if test="item.createDate != null">
+          create_date = #{item.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.createUser != null">
+          create_user = #{item.createUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.updateDate != null">
+          update_date = #{item.updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateUser != null">
+          update_user = #{item.updateUser,jdbcType=BIGINT},
+        </if>
+        <if test="item.aliveFlag != null">
+          alive_flag = #{item.aliveFlag,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=BIGINT} and
+      alive_flag = '1'
+    </foreach>
+  </update>
+</mapper>

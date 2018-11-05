@@ -1,0 +1,166 @@
+  	 <!-- 内容主体区域 -->
+  	 <div class="s-mod superDiv">
+  	 	  <style>
+				table { 
+					width:100%; 
+					text-align: left;
+					border:1px solid #e3e6e8; 
+					border-collapse: collapse; 
+					table-layout: fixed; 
+					display: table;
+				}
+		  </style>
+		  
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船盘信息</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table">
+					  <tr>
+					  	  <th title="船名"><div class="c-fn text-overflow">船名</div></th>
+					  	  <th title="船型"><div class="c-fn text-overflow">船型</div></th>
+					  	  <th title="船位"><div class="c-fn text-overflow">船位</div></th>
+					  	  <th title="OPEN"><div class="c-fn text-overflow">OPEN</div></th>
+					  	  <th title="ETA Fujairah"><div class="c-fn text-overflow">ETA Fujairah</div></th>
+					  	  <th title="ETA Cabinda"><div class="c-fn text-overflow">ETA Cabinda</div></th>
+					  	  <th title="船东"><div class="c-fn text-overflow">船东</div></th>
+					      <th title="船盘发布人"><div class="c-fn text-overflow">船盘发布人</div></th>
+					  	  <th title="备注"><div class="c-fn text-overflow">备注</div></th>
+					  </tr>
+					  <tr>
+					  	  <td><div class="name text-overflow">&nbsp;</div></td>
+						  <td><div class="type text-overflow">&nbsp;</div></td>
+						  <td><div class="position text-overflow">&nbsp;</div></td>
+						  <td><div class="open text-overflow">&nbsp;</div></td>
+						  <td><div class="eta text-overflow">&nbsp;</div></td>
+						  <td><div class="etaCabinda text-overflow">&nbsp;</div></td>
+						  <td><div class="shipOwner text-overflow">&nbsp;</div></td>
+						  <td><div class="epMemberName text-overflow">&nbsp;</div></td>
+						  <td><div class="shipPlateRemark text-overflow">&nbsp;</div></td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船舶资料</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table">
+					  <tr>
+					  	  <th title="Vessel Name"><div class="c-fn text-overflow" style="width:100px;">Vessel Name</div></th>
+					  	  <th title="IMO"><div class="c-fn text-overflow">IMO</div></th>
+					  	  <th title="Built"><div class="c-fn text-overflow">Built</div></th>
+					  	  <th title="Vessel Type"><div class="c-fn text-overflow">Vessel Type</div></th>
+					  	  <th title="Vessel Size"><div class="c-fn text-overflow">Vessel Size</div></th>
+					  	  <th title="Cubic(m³)"><div class="c-fn text-overflow">Cubic(m³)</div></th>
+					  	  <th title="SDWT(mt)"><div class="c-fn text-overflow">SDWT(mt)</div></th>
+					      <th title="LOA(m)"><div class="c-fn text-overflow">LOA(m)</div></th>
+					  	  <th title="Beam(m)"><div class="c-fn text-overflow">Beam(m)</div></th>
+					  	  <th title="Draft(m)"><div class="c-fn text-overflow">Draft(m)</div></th>
+					  	  <th title="Hull Type"><div class="c-fn text-overflow">Hull Type</div></th>
+					  </tr>
+					  <tr>
+					  	  <td><div class="shipName text-overflow">&nbsp;</div></td>
+						  <td><div class="imo text-overflow">&nbsp;</div></td>
+						  <td><div class="completeDate text-overflow">&nbsp;</div></td>
+						  <td><div class="useType text-overflow">&nbsp;</div></td>
+						  <td><div class="sysShipType text-overflow">&nbsp;</div></td>
+						  <td><div class="capacity text-overflow">&nbsp;</div></td>
+						  <td><div class="loadQuantity text-overflow">&nbsp;</div></td>
+						  <td><div class="length text-overflow">&nbsp;</div></td>
+						  <td><div class="wide text-overflow">&nbsp;</div></td>
+						  <td><div class="draft text-overflow">&nbsp;</div></td>
+						  <td><div class="hull text-overflow">&nbsp;</div></td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="confirmList">
+			
+			<div class="styleShow" style="display:none">
+			
+			<div class="s-mod-block">						
+					<div class="s-mod-btit confirmMsg" style="float:left"></div><div class="s-mod-btit otherName"></div>
+					<div class="s-mod-bcont2">
+						<div class="cg-ord-box">
+							<div class="clearfix">
+								<div class="purc-tit"><i class=""></i></div>
+								<div class="purc-tit"><i class=""></i></div>
+							</div>
+							<div class="cg-ord-blo">
+								<!-- <p>信息对比</p> -->
+								<div class="cg-ord-cont clearfix">
+									<div class="purchase">
+										<ul>
+											<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装期 LAYCAN</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coPactBeg"></span>
+												<em>&nbsp;-&nbsp;</em>
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coPactEnd"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装货量 (MT)</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coMinQuantity"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装货地点要求</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coLoadRegion"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向卸货地点要求</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coUnloadRegion"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl purc-spanlt">WS点</span><span class="purc-span3 purc-span3t">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coWs"></span>
+												</span>
+											</li>
+										</ul>
+									</div>
+									
+									<div class="purchase">
+										<ul>
+											<li class="purc-blo clearfix"><span class="purc-spanl">滞期费率 (USD/PDPR)</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coDemurrage"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl">允许装卸时间 (h)</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coDockTime"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl">航速 (kts)</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coPactSpeed"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix coCommissionShow"><span class="purc-spanl">佣金 (%)</span><span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte coCommission"></span>
+												</span>
+											</li>
+											<li class="purc-blo clearfix"><span class="purc-spanl purc-spanlt">备注</span><span class="purc-span3 purc-span3t">
+												<textarea type="text" style="border-style:none;" class="purctex coRemark" maxlength="100" readOnly="readOnly"></textarea>
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>			
+	
+				<div class="s-btn-box"><button class="s-btn s-btn-blue finishAgreementBtn" attr-intentionUuid="" attr-clauseUuid="" attr-type="">完善租船协议</button><button class="s-btn s-btn-primary returnBtn">返回</button></div>
+				<br/>
+			</div>
+		</div>
+		</div>	<!-- 样式显示控制 -->
+		
+		<br/>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary returnBtn" style="display:none;">返回</button></div>
+		
+		</div>	<!-- 整个列表 -->
+			
+	</div>
+	<script src="../transport/js/intention/confirmBill.js"></script>
+	

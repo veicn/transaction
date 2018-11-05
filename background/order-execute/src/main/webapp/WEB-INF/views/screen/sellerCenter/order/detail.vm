@@ -1,0 +1,511 @@
+<style>
+	.ship-info-style{float:right;margin-top:-15px;}
+	.ship-name-style{margin-top:30px;}
+	.ship-vessel-name{margin-left:60px;}
+	.ship-vef-style{margin-left:250px;}
+	.ship-loading-d{float:right;margin-top:-15px;}
+	.ship-table-qw{
+			border:1px solid #eee;} 
+</style>
+
+	<div class="c-mod" id="cgxx">
+		<h1>订单管理<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;订单详情</span></h1>
+		
+		##---- 订单状态begin ----##
+		$contain.get("status/list.htm").setHost("$orderServer.get('')").setParam("orderId","$!{order.tradeId}")
+		##---- 订单状态end ----##
+	
+		##---- 订单操作按钮begin ----##
+		$contain.get("/contain/order/operateButtons.htm").setParam("ouid","$!{order.uuid}")
+		##---- 订单操作按钮end ----##
+	</div>
+	<div class="c-mod" id="cgxx">
+		<h3><em class="cw-ico ico-h3"></em>订单信息</h3>
+		<div class="c-form clearfix">
+		##---- 商品详情begin ----##
+		$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!{order.id}")
+		##---- 商品详情end ----##
+		</div>
+    </div>
+    	
+    ##---- 泊位信息begin ----##
+	##$contain.get('/buyer/crudeOilBerthListInfo.htm').setHost("$orderServer.get('')").setParam("contractId","$!{order.tradeId}")
+	##---- 泊位信息end ----##
+	
+	
+	##-----------------------------船信息--------------------------------------------##
+	##----代理协议号不为空时船不可修改船----##
+	#if($!order.status != '00' && $!order.status != '09')
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>船盘信息
+		 <input type="hidden" id="orderId" name="orderId" value="$!order.id">
+		 <input type="hidden" id="orderShipId" name="orderShipId" value="$!order.orderShipInfo.orderShipId">
+			<button  id="editship" agentUuid="$!order.orderShipInfo.agentUuid" vesselName="$!order.orderShipInfo.name" 
+				vef="$!NumberTool.format('#.#####',$!{order.orderShipInfo.vef})" obq="$!NumberTool.format($!{order.orderShipInfo.obq})" 
+				class="layui-btn layui-btn-normal editship ship-info-style">维护船盘信息 </button>
+		</h3>
+		<div class="ship-name-style">
+			<span class="c-fn ship-vessel-name" >Vessel Name：</span>
+			<span class="c-int qx-conte" >$!{order.orderShipInfo.name}</span>
+			<span class="c-fn ship-vef-style" >VEF：</span>
+			<span class="c-int qx-conte">$!NumberTool.format('#.#####',$!{order.orderShipInfo.vef})</span>
+			<span class="c-fn ship-vef-style">OBQ：</span>
+			<span class="c-int qx-conte">$!NumberTool.format($!{order.orderShipInfo.obq})</span>
+		</div>
+	</div>
+	#end
+	##-----------------------------装船信息--------------------------------------------##
+	#if("$!{order.orderShipInfo}" != "" && $!order.status != '00')
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>装港信息
+		#if("$!{order.orderShipInfo.agentUuid}" == "") 
+		<button id="saveLoading" orderNo="$!order.orderNo" class="layui-btn layui-btn-normal saveLoading ship-loading-d">新增装港信息</button>
+		#end 
+		</h3>	
+		#if($order.loadinginfoList.size() > 0)
+		<div class="c-tabdiv" >
+		  <table border="1px solid #eee" >	
+		  	<tr class="ship-table-qw" > 
+				<th rowspan="2">Port of loading</th>
+				<th rowspan="2">B/L</th>
+				<th rowspan="2">laycan</th>
+				
+				<th colspan="2">US Barrels @60 ︒F</th>
+				<th colspan="2">MT (in Air)</th>
+				<th colspan="2">Cubic meters @15︒C</th>
+				
+				<th rowspan="2">Density@15︒C<br>（Kg/L）:</th>
+				<th rowspan="2">API <br>@60︒F</th>
+				<th rowspan="2">BS&W</th>
+				<th rowspan="2">Free Water</th>
+				<th rowspan="2">Others</th>
+				
+				<th colspan="2">ship figure after loading</th>
+				
+				<th rowspan="2" table-layout="fixed" >Action</th>
+			</tr>
+			<tr class="ship-table-qw"> 
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+			</tr>
+		
+			#foreach($loadinginfo in ${order.loadinginfoList})
+			<tr class="c-tabcos1 ship-table-qw">
+				<td>$!codeConvert.getValueByCode("LOAD_PORT","$!{loadinginfo.loadPort}")</td>
+				<td>$!dateUtil.convertDateToString($!{loadinginfo.blDate})</td>
+				<td>$!dateUtil.convertDateToString($!{loadinginfo.acStart})至$!dateUtil.convertDateToString($!{loadinginfo.acFinish})</td>
+				
+				<td>$!NumberTool.format($!{loadinginfo.blHairBarrel})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blNightstool})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blHairTonnage})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blNetTonnage})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shGrossCubicMeter})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shNetCubicMeter})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shDensity})</td>
+				<td>$!NumberTool.format($!{loadinginfo.api})</td>
+				<td>$!NumberTool.format($!{loadinginfo.waterImpCon})</td>
+				<td>$!NumberTool.format($!{loadinginfo.waterQuantity})</td>
+				<td>$!NumberTool.format($!{loadinginfo.remark})</th>
+				<td>$!NumberTool.format($!{loadinginfo.shHairBarrel})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shHairTonnage})</td>
+				
+				<td table-layout="fixed" >
+					<a id="editLoading" data="{loadPort:'$!{loadinginfo.loadPort}',blDate:'$!dateUtil.convertDateToString($!{loadinginfo.blDate})',
+												acStart:'$!dateUtil.convertDateToString($!{loadinginfo.acStart})',acFinish:'$!dateUtil.convertDateToString($!{loadinginfo.acFinish})',
+												blHairBarrel:'$!NumberTool.format($!{loadinginfo.blHairBarrel})',blNightstool:'$!NumberTool.format($!{loadinginfo.blNightstool})',
+												blHairTonnage:'$!NumberTool.format($!{loadinginfo.blHairTonnage})',blNetTonnage:'$!NumberTool.format($!{loadinginfo.blNetTonnage})',
+												shGrossCubicMeter:'$!NumberTool.format($!{loadinginfo.shGrossCubicMeter})',shNetCubicMeter:'$!NumberTool.format($!{loadinginfo.shNetCubicMeter})',
+												shDensity:'$!NumberTool.format($!{loadinginfo.shDensity})',api:'$!NumberTool.format($!{loadinginfo.api})',
+												waterImpCon:'$!NumberTool.format($!{loadinginfo.waterImpCon})',waterQuantity:'$!NumberTool.format($!{loadinginfo.waterQuantity})',
+												remark:'$!{loadinginfo.remark}',shHairBarrel:'$!NumberTool.format($!{loadinginfo.shHairBarrel})',
+												shHairTonnage:'$!NumberTool.format($!{loadinginfo.shHairTonnage})',id:'$!{loadinginfo.id}',
+												uuid:'$!{loadinginfo.uuid}',oil:'$!{loadinginfo.oil}'}" 
+						loadingUuid="$!loadinginfo.uuid" orderNo="$!order.orderNo" agentUuid="$!order.orderShipInfo.agentUuid" blStatus="$!loadinginfo.blStatus" class="editLoading"  >修改</a>
+					#if("$!{order.orderShipInfo.agentUuid}" == "") 
+					<a id="delLoading" loadingId="$!loadinginfo.id" loadingUuid="$!loadinginfo.uuid" class="delLoading"  >删除</a>
+					#end 
+				</td>
+			</tr>
+			#end
+		</table>
+	</div> 	
+		#end
+	</div>
+#end
+	##-----------------------------卸货信息---------------------------------------------##
+#if("$!{order.orderShipInfo}" != "" && $!order.status != '00')
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>卸港信息
+		#if("$!{order.orderShipInfo.agentUuid}" == "") 
+		<button id="saveUnloading" orderNo="$!order.orderNo" class="layui-btn layui-btn-normal saveUnloading ship-loading-d">新增卸港信息</button>
+		#end
+		</h3>
+		#if($order.unloadinginfoList.size() > 0)
+		<div class="c-tabdiv"> 
+		  <table  border="1" table-layout="fixed">
+			<tr  class="ship-table-qw"> 
+				<th rowspan="2">Port of discharge</th>
+				<th rowspan="2">NOR</th>
+				<th rowspan="2">COD</th>
+				<th rowspan="2">DDR</th>
+				
+				<th colspan="2">US Barrels @60 ︒F</th>
+				<th colspan="2">MT (in Air)</th>
+				<th colspan="2">Cubic meters @15︒C</th>
+				
+				<th rowspan="2">Density@15︒C<br>（Kg/L）</th>
+				<th rowspan="2">API<br>@60︒F</th>
+				<th rowspan="2">BS&W</th>
+				<th rowspan="2">Free Water</th>
+				<th rowspan="2">Others</th>
+				<th rowspan="2">ROB</th>
+				<th colspan="2">Ship figure on arrival</th>
+				<th colspan="2">Ship figure on arrival(VEF applied)</th>
+				<th colspan="2">Shore received figure</th>
+				<th rowspan="2">Inspection</th>
+				
+				<th rowspan="2" class="is-position is-position-top">Action</th>
+			</tr>
+			<tr  class="ship-table-qw"> 
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+			</tr>
+		
+			#foreach($unloadinginfo in ${order.unloadinginfoList})
+			<tr class="c-tabcos1 ship-table-qw">
+				<td>$!codeConvert.getValueByCode("UN_LOAD_PORT","$!{unloadinginfo.unloadPort}")</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.norDate})</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.cod})</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.acStart})至$!dateUtil.convertDateToString($!{unloadinginfo.acFinish})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.commHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commCleanBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commHairTon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commCleanTon})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.shGrossCubicMeter})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shNetCubicMeter})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shDensity})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.api})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.waterImpCon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.waterQuantity})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.remark})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.robQuanatity})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairTon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairBarVef})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairTonVef})</td>
+				
+				<td>$!NumberTool.format($!{unloadinginfo.potHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.potHairTon})</td>
+				<td>$!{unloadinginfo.inspection}</td>
+				
+				<td class="is-position is-position-bottom">
+					<a id="editUnloading" data="{unloadPort:'$!{unloadinginfo.unloadPort}',norDate:'$!dateUtil.convertDateToString($!{unloadinginfo.norDate})',
+												cod:'$!dateUtil.convertDateToString($!{unloadinginfo.cod})',
+												acStart:'$!dateUtil.convertDateToString($!{unloadinginfo.acStart})',acFinish:'$!dateUtil.convertDateToString($!{unloadinginfo.acFinish})',
+												commHairBar:'$!NumberTool.format($!{unloadinginfo.commHairBar})',commCleanBar:'$!NumberTool.format($!{unloadinginfo.commCleanBar})',
+												commHairTon:'$!NumberTool.format($!{unloadinginfo.commHairTon})',commCleanTon:'$!NumberTool.format($!{unloadinginfo.commCleanTon})',
+												shGrossCubicMeter:'$!NumberTool.format($!{unloadinginfo.shGrossCubicMeter})',shNetCubicMeter:'$!NumberTool.format($!{unloadinginfo.shNetCubicMeter})',
+												shDensity:'$!NumberTool.format($!{unloadinginfo.shDensity})',api:'$!NumberTool.format($!{unloadinginfo.api})',
+												waterImpCon:'$!NumberTool.format($!{unloadinginfo.waterImpCon})',waterQuantity:'$!NumberTool.format($!{unloadinginfo.waterQuantity})',
+												remark:'$!{unloadinginfo.remark}',robQuanatity:'$!NumberTool.format($!{unloadinginfo.robQuanatity})',
+												shipHairBar:'$!NumberTool.format($!{unloadinginfo.shipHairBar})',shipHairTon:'$!NumberTool.format($!{unloadinginfo.shipHairTon})',
+												shipHairBarVef:'$!NumberTool.format($!{unloadinginfo.shipHairBarVef})',shipHairTonVef:'$!NumberTool.format($!{unloadinginfo.shipHairTonVef})',
+												potHairBar:'$!NumberTool.format($!{unloadinginfo.potHairBar})',potHairTon:'$!NumberTool.format($!{unloadinginfo.potHairTon})',
+												id:'$!{unloadinginfo.id}',uuid:'$!{unloadinginfo.uuid}',oil:'$!{unloadinginfo.oil}'}" 
+						 orderNo="$!order.orderNo" agentUuid="$!order.orderShipInfo.agentUuid" 
+						 norStatus="$!unloadinginfo.norStatus" codStatus="$!unloadinginfo.codStatus" class="editUnloading"  >修改</a>
+					#if("$!{order.orderShipInfo.agentUuid}" == "") 
+					<a id="delUnloading" unloadingId="$!unloadinginfo.id" loadingUuid="$!unloadinginfo.uuid" class="delUnloading"  >删除</a>
+					#end
+					
+					#if("$!{unloadinginfo.inspectionMemberid}" == "")
+					<a class="inspection_select" data="{port:'$!{unloadinginfo.unloadPort}',id:'$!{unloadinginfo.id}',type:'unloading'}">指定商检</a>
+					#end
+					
+					#if("$!{unloadinginfo.inspectionContent}" != "")
+					<a class="inspection_detail" href="$orderExecuteServer.get('inspection/dischargeport/detail.htm')?id=$!{unloadinginfo.id}&orderNo=$!{unloadinginfo.orderNo}" target="_blank">商检报告</a>
+					#end
+				</td>
+			</tr>
+			#end
+		</table>
+	</div>
+		#end 
+	</div>
+#end
+	
+    #if("$!{statementInfo}" != "")
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>结算付款信息</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos2"><span class="c-fn">结算单：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{statementInfo.updateDate})</span></li>
+			<li class="c-fcos2"><span class="c-fn">付款日：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{statementInfo.paymentDate})</span></li>
+			<li class="c-fcos2"><span class="c-fn">结算量（桶）：</span><span class="c-int qx-conte">$!NumberTool.format($!{statementInfo.settlementQuantityBbl})</span></li>
+			<li class="c-fcos2"><span class="c-fn">付款金额：</span><span class="c-int qx-conte">$!NumberTool.format($!{order.receiveAcount})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">结算价格：</span><span class="c-int qx-conte">$!NumberTool.format($!{statementInfo.settlementPrice})$!{order.priceInfo.currency}/$!{order.goodsInfo.quantityUnit}</span></li>
+			<li class="c-fcos2"><span class="c-fn">货款金额：</span><span class="c-int qx-conte">$!NumberTool.format($!{statementInfo.goodsAmount})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">费用合计：</span><span class="c-int qx-conte">$!NumberTool.format($!{statementInfo.totalFee})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">结算金额合计：</span><span class="c-int qx-conte">$!NumberTool.format($!{statementTotal})$!{order.priceInfo.currency}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+
+    ##------------------------- 合约信息 -------------------------##
+    #if($!{order.priceInfo.priceType} == 'Trigger')
+    <div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>合约信息&nbsp;&nbsp;
+		 ##--<button style="float:right" class="layui-btn layui-btn-xs layui-btn-danger" data="{orderId:'$!{order.id}'}" id="resetContract"><i class="layui-icon"></i> 重置</button>--##
+		
+		#if($!{order.status} != '00')
+			<span class="cxtj-nr-an" ><a href="javascript:void(0)" class="btn-reset" data="{orderId:'$!{order.id}'}" id="resetContract"><i class="fs-refresh"></i>重置</a></span>
+		#end
+		</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>合约名称</th>
+				<th>合约数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>点价截止时间</th>
+				<th>已点数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>未点数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>转月数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>操作</th>
+			</tr>
+				#set($count1 = 0)
+				#set($count2 = 0)
+					#foreach($triggerContract in ${order.triggerContractList})
+				#set($count1 = $count1 + $!{triggerContract.doneQuantity})
+				#set($count2 = $count2 + $!{triggerContract.surplusQuantity})
+			<tr class="c-tabcos1">
+				<td>$!{triggerContract.month}</td>
+				<td>$!NumberTool.format($!{triggerContract.quantity})</td>
+				<td>$!dateUtil.convertDateToString($!{triggerContract.endTime})</td>
+				<td>$!NumberTool.format($!{triggerContract.doneQuantity})</td>
+				<td>$!NumberTool.format($!{triggerContract.surplusQuantity})</td>
+				<td>$!NumberTool.format($!{triggerContract.transferQuantity})</td>
+				<td>
+					
+					#if($!{order.status} != '00')
+						#if($!{triggerContract.surplusQuantity} > 0)
+							<a href="javascript:void(0)" data="{triggerContractId:'$!{triggerContract.id}',quantity:'$!{triggerContract.surplusQuantity}'}" class="chaidan">拆单</a>
+						#end
+						#if($velocityCount == 1)
+							#if($!{triggerContract.quantityStatus} != '1')
+							<a href="javascript:void(0)" data="{triggerContractId:'$!{triggerContract.id}',quantity:'$!{triggerContract.quantity}',quantityUnit:'$!{order.goodsInfo.quantityUnit}',quantityStatus:'$!{triggerContract.quantityStatus}'}" id="editQuantity">编辑数量</a>
+							#end
+						#end
+					
+					#end	
+				</td>
+			</tr>
+			#end
+				<tr>
+					<td>合计</td>
+					<td></td>
+					<td></td>
+					<td>$!NumberTool.format($count1)</td>
+					<td>$!NumberTool.format($count2)</td>
+					<td></td>
+					<td></td>
+				</tr>
+		</table>
+		</div>
+	</div>
+	
+	#if(${order.triggerTransferList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>转月信息</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>原合约</th>
+				<th>新合约</th>
+				<th>转月时间</th>
+				<th>转月数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>月差</th>
+				<th>月差金额（$!{order.priceInfo.currency}）</th>
+			</tr>
+			#foreach($triggerTransfer in ${order.triggerTransferList})
+			<tr class="c-tabcos1">
+				<td>$!{triggerTransfer.oldMonth}</td>
+				<td>$!{triggerTransfer.month}</td>
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerTransfer.transferTime})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.transferQuantity})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.differPrice})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.differAmount})</td>
+			</tr>
+			#end
+		</table>
+		</div>
+	</div>
+	#end
+	
+	#if(${order.triggerApplyList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>点价申请</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>申请时间</th>
+				<th>合约名称</th>
+				<th>申请数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>申请价格（$!{order.priceInfo.currency}）</th>
+				<th>点价时间</th>
+				<th>点价数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>锁价价格（$!{order.priceInfo.currency}）</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			#foreach($triggerApply in ${order.triggerApplyList})
+			<tr class="c-tabcos1">
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerApply.applyTime})</td>
+				<td>$!{triggerApply.month}</td>
+				<td>$!NumberTool.format($!{triggerApply.applyQuantity})</td>
+				<td>$!NumberTool.format($!{triggerApply.applyPrice})</td>
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerApply.lockTime})</td>
+				<td>$!NumberTool.format($!{triggerApply.lockQuantity})</td>
+				<td>$!NumberTool.format($!{triggerApply.lockPrice})</td>
+				<td>$!{triggerApply.statusDesc}</td>
+				<td>
+				#if($!{order.status} != '00')
+					#if($!{triggerApply.status} == '10')
+					<a href="javascript:void(0)" data="{triggerApplyId:'$!{triggerApply.id}',quantityUnit:'$!{order.goodsInfo.quantityUnit}'}" class="dianjiaProcess">点价</a>
+					<a href="javascript:void(0)" data="{triggerApplyId:'$!{triggerApply.id}'}" class="noDealProcess">未成交</a>
+					#end
+				#end	
+				</td>
+			</tr>
+			#end
+		</table>
+		</div>
+	</div>
+	#end
+	
+	#if(${order.triggerResultList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>拆单信息</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>拆单时间</th>
+				<th>合约名称</th>
+				<th>拆单数量（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>锁价价格（$!{order.priceInfo.currency}）</th>
+				<th>升贴水</th>
+				<th>单价（$!{order.priceInfo.currency}）</th>
+				<th>金额（$!{order.priceInfo.currency}）</th>
+				<th>月差</th>
+				<th>操作</th>
+			</tr>
+				#set($count3 = 0)
+				#set($count4 = 0)
+				#foreach($triggerResult in ${order.triggerResultList})
+				#set($count3 = $count3 + $!{triggerResult.lockQuantity})
+				#set($count4 = $count4 + $!{triggerResult.totalAmount})
+			<tr class="c-tabcos1">
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerResult.lockTime})</td>
+				<td>$!{triggerResult.contractName}</td>
+				<td>$!NumberTool.format($!{triggerResult.lockQuantity})</td>
+				<td>$!NumberTool.format($!{triggerResult.lockPrice})</td>
+				<td>$!NumberTool.format($!{triggerResult.agio})</td>
+				<td>$!NumberTool.format($!{triggerResult.unitPrice})</td>
+				<td>$!NumberTool.format($!{triggerResult.totalAmount})</td>
+				<td>$!{triggerResult.differDesc}</td>
+				<td>
+					#if($!{order.status} != '00')
+					<a href="javascript:void(0)" data="{triggerResultId:'$!{triggerResult.id}',contractName:'$!{triggerResult.contractName}',quantity:'$!{triggerResult.lockQuantity}',price:'$!{triggerResult.lockPrice}',quantityUnit:'$!{order.goodsInfo.quantityUnit}'}" class="editTransferQuantity">修改</a>
+					#end
+				</td>
+			</tr>
+			#end
+				<tr>
+					<td>合计</td>
+					<td></td>
+					<td>$!NumberTool.format($count3)</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>$!NumberTool.format($count4)</td>
+					<td></td>
+				</tr>
+		</table>
+		</div>
+	</div>
+
+	#end
+	#end
+     #if("$!{order.seller.customerName}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>供货商信息</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">供货商名称：</span><span class="c-int qx-conte">$!{order.seller.customerName}</span></li>
+			<li class="c-fcos1"><span class="c-fn">供货商地址：</span><span class="c-int qx-conte">$!{order.seller.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">交易员：</span><span class="c-int qx-conte">$!{order.seller.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">邮箱：</span><span class="c-int qx-conte">$!{order.seller.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">联系方式：</span><span class="c-int qx-conte">$!{order.seller.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">传真：</span><span class="c-int qx-conte">$!{order.seller.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+    
+    #if("$!{order.buyer.customerName}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>购买商信息</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">客户名称：</span><span class="c-int qx-conte">$!{order.buyer.customerName}</span></li>
+			<li class="c-fcos1"><span class="c-fn">客户地址：</span><span class="c-int qx-conte">$!{order.buyer.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">联系人：</span><span class="c-int qx-conte">$!{order.buyer.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">邮箱：</span><span class="c-int qx-conte">$!{order.buyer.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">联系方式：</span><span class="c-int qx-conte">$!{order.buyer.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">传真：</span><span class="c-int qx-conte">$!{order.buyer.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+    #if("$!{order.agent}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>代理商信息</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">代理商名称：</span><span class="c-int qx-conte">$!{order.agent.customerName}</span></li>
+			<li class="c-fcos1"><span class="c-fn">代理商地址：</span><span class="c-int qx-conte">$!{order.agent.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">交易员：</span><span class="c-int qx-conte">$!{order.agent.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">邮箱：</span><span class="c-int qx-conte">$!{order.agent.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">联系方式：</span><span class="c-int qx-conte">$!{order.agent.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">传真：</span><span class="c-int qx-conte">$!{order.agent.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+	<div class="c-subdiv">
+		<button type="button" class="c-btncas" onclick="location.href='list.htm'">返回</button>
+	</div>
+	
+<script src="../../orderexecute/js/order/sellerDetail.js"></script>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderPriceMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderPrice" id="OrderPrice">
+		<result property="orderPriceId" column="ORDER_PRICE_ID" />
+		<result property="orderPriceUuid" column="ORDER_PRICE_UUID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="orderGoodsId" column="ORDER_GOODS_ID" />
+		<result property="tradeTerm" column="TRADE_TERM" />
+		<result property="priceType" column="PRICE_TYPE" />
+		<result property="basePrice" column="BASE_PRICE" />
+		<result property="priceUnit" column="PRICE_UNIT" />
+		<result property="currency" column="CURRENCY" />
+		<result property="price" column="PRICE" />
+		<result property="pricingDesc" column="PRICING_DESC" />
+		<result property="priceFormula" column="PRICE_FORMULA" />
+		<result property="priceFormulaJson" column="PRICE_FORMULA_JSON" />
+		<result property="priceDesc" column="PRICE_DESC" />
+		<result property="paymentTerm" column="PAYMENT_TERM" />
+		<result property="paymentTermJson" column="PAYMENT_TERM_JSON" />
+		<result property="agio" column="AGIO" />
+		<result property="payDate" column="PAY_DATE" />
+		<result property="lockQuantityMin" column="LOCK_QUANTITY_MIN" />
+		<result property="transferCount" column="TRANSFER_COUNT" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderPrice"  useGeneratedKeys="true" keyProperty="orderPriceId" >
+		insert  into t_order_price (				ORDER_PRICE_ID
+						,ORDER_PRICE_UUID
+						,ORDER_ID
+						,ORDER_GOODS_ID
+						,TRADE_TERM
+						,PRICE_TYPE
+						,BASE_PRICE
+						,PRICE_UNIT
+						,CURRENCY
+						,PRICE
+						,PRICING_DESC
+						,PRICE_FORMULA
+						,PRICE_FORMULA_JSON
+						,PRICE_DESC
+						,PAYMENT_TERM
+						,PAYMENT_TERM_JSON
+						,AGIO
+						,PAY_DATE
+						,LOCK_QUANTITY_MIN
+						,TRANSFER_COUNT
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{orderPriceId}
+						,#{orderPriceUuid}
+						,#{orderId}
+						,#{orderGoodsId}
+						,#{tradeTerm}
+						,#{priceType}
+						,#{basePrice}
+						,#{priceUnit}
+						,#{currency}
+						,#{price}
+						,#{pricingDesc}
+						,#{priceFormula}
+						,#{priceFormulaJson}
+						,#{priceDesc}
+						,#{paymentTerm}
+						,#{paymentTermJson}
+						,#{agio}
+						,#{payDate}
+						,#{lockQuantityMin}
+						,#{transferCount}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_price
+              WHERE 1=1 
+                AND ORDER_PRICE_ID = #{orderPriceId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderPrice">
+        DELETE FROM t_order_price
+              WHERE 1=1 
+        <if test="orderPriceId!=null and orderPriceId!=''">AND  ORDER_PRICE_ID = #{orderPriceId}</if>
+        <if test="orderPriceUuid!=null and orderPriceUuid!=''">AND  ORDER_PRICE_UUID = #{orderPriceUuid}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="orderGoodsId!=null and orderGoodsId!=''">AND  ORDER_GOODS_ID = #{orderGoodsId}</if>
+        <if test="tradeTerm!=null and tradeTerm!=''">AND  TRADE_TERM = #{tradeTerm}</if>
+        <if test="priceType!=null and priceType!=''">AND  PRICE_TYPE = #{priceType}</if>
+        <if test="basePrice!=null and basePrice!=''">AND  BASE_PRICE = #{basePrice}</if>
+        <if test="priceUnit!=null and priceUnit!=''">AND  PRICE_UNIT = #{priceUnit}</if>
+        <if test="currency!=null and currency!=''">AND  CURRENCY = #{currency}</if>
+        <if test="price!=null and price!=''">AND  PRICE = #{price}</if>
+        <if test="pricingDesc!=null and pricingDesc!=''">AND  PRICING_DESC = #{pricingDesc}</if>
+        <if test="priceFormula!=null and priceFormula!=''">AND  PRICE_FORMULA = #{priceFormula}</if>
+        <if test="priceFormulaJson!=null and priceFormulaJson!=''">AND  PRICE_FORMULA_JSON = #{priceFormulaJson}</if>
+        <if test="priceDesc!=null and priceDesc!=''">AND  PRICE_DESC = #{priceDesc}</if>
+        <if test="paymentTerm!=null and paymentTerm!=''">AND  PAYMENT_TERM = #{paymentTerm}</if>
+        <if test="paymentTermJson!=null and paymentTermJson!=''">AND  PAYMENT_TERM_JSON = #{paymentTermJson}</if>
+        <if test="agio!=null and agio!=''">AND  AGIO = #{agio}</if>
+        <if test="payDate!=null and payDate!=''">AND  PAY_DATE = #{payDate}</if>
+        <if test="lockQuantityMin!=null and lockQuantityMin!=''">AND  LOCK_QUANTITY_MIN = #{lockQuantityMin}</if>
+        <if test="transferCount!=null and transferCount!=''">AND  TRANSFER_COUNT = #{transferCount}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderPrice">
+		update t_order_price
+		<set>
+         ORDER_PRICE_ID=#{orderPriceId}
+		<if test="orderPriceUuid!=null">,ORDER_PRICE_UUID = #{orderPriceUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderGoodsId!=null">,ORDER_GOODS_ID = #{orderGoodsId}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="priceType!=null">,PRICE_TYPE = #{priceType}</if>
+		<if test="basePrice!=null">,BASE_PRICE = #{basePrice}</if>
+		<if test="priceUnit!=null">,PRICE_UNIT = #{priceUnit}</if>
+		<if test="currency!=null">,CURRENCY = #{currency}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="pricingDesc!=null">,PRICING_DESC = #{pricingDesc}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="priceFormulaJson!=null">,PRICE_FORMULA_JSON = #{priceFormulaJson}</if>
+		<if test="priceDesc!=null">,PRICE_DESC = #{priceDesc}</if>
+		<if test="paymentTerm!=null">,PAYMENT_TERM = #{paymentTerm}</if>
+		<if test="paymentTermJson!=null">,PAYMENT_TERM_JSON = #{paymentTermJson}</if>
+		<if test="agio!=null">,AGIO = #{agio}</if>
+		<if test="payDate!=null">,PAY_DATE = #{payDate}</if>
+		<if test="lockQuantityMin!=null">,LOCK_QUANTITY_MIN = #{lockQuantityMin}</if>
+		<if test="transferCount!=null">,TRANSFER_COUNT = #{transferCount}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 ORDER_PRICE_ID=#{orderPriceId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_price
+		<set>
+         ORDER_PRICE_ID=#{orderPriceId}
+		<if test="orderPriceUuid!=null">,ORDER_PRICE_UUID = #{orderPriceUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderGoodsId!=null">,ORDER_GOODS_ID = #{orderGoodsId}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="priceType!=null">,PRICE_TYPE = #{priceType}</if>
+		<if test="basePrice!=null">,BASE_PRICE = #{basePrice}</if>
+		<if test="priceUnit!=null">,PRICE_UNIT = #{priceUnit}</if>
+		<if test="currency!=null">,CURRENCY = #{currency}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="pricingDesc!=null">,PRICING_DESC = #{pricingDesc}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="priceFormulaJson!=null">,PRICE_FORMULA_JSON = #{priceFormulaJson}</if>
+		<if test="priceDesc!=null">,PRICE_DESC = #{priceDesc}</if>
+		<if test="paymentTerm!=null">,PAYMENT_TERM = #{paymentTerm}</if>
+		<if test="paymentTermJson!=null">,PAYMENT_TERM_JSON = #{paymentTermJson}</if>
+		<if test="agio!=null">,AGIO = #{agio}</if>
+		<if test="payDate!=null">,PAY_DATE = #{payDate}</if>
+		<if test="lockQuantityMin!=null">,LOCK_QUANTITY_MIN = #{lockQuantityMin}</if>
+		<if test="transferCount!=null">,TRANSFER_COUNT = #{transferCount}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="orderPriceId!=null and orderPriceId!=''">and  ORDER_PRICE_ID=#{orderPriceId}</if>
+		<if test="orderPriceUuid!=null and orderPriceUuid!=''">and  ORDER_PRICE_UUID=#{orderPriceUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderGoodsId!=null and orderGoodsId!=''">and  ORDER_GOODS_ID=#{orderGoodsId}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+		<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+		<if test="priceUnit!=null and priceUnit!=''">and  PRICE_UNIT=#{priceUnit}</if>
+		<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="priceFormulaJson!=null and priceFormulaJson!=''">and  PRICE_FORMULA_JSON=#{priceFormulaJson}</if>
+		<if test="priceDesc!=null and priceDesc!=''">and  PRICE_DESC=#{priceDesc}</if>
+		<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+		<if test="paymentTermJson!=null and paymentTermJson!=''">and  PAYMENT_TERM_JSON=#{paymentTermJson}</if>
+		<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+		<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+		<if test="lockQuantityMin!=null and lockQuantityMin!=''">and  LOCK_QUANTITY_MIN=#{lockQuantityMin}</if>
+		<if test="transferCount!=null and transferCount!=''">and  TRANSFER_COUNT=#{transferCount}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderPrice">
+			select
+			* from t_order_price
+			where
+		    ORDER_PRICE_ID=#{orderPriceId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderPrice">
+			select
+			* from t_order_price
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderPrice" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderPrice">
+		select * from t_order_price
+			where
+		 ALIVE_FLAG='1'
+		<if test="orderPriceId!=null and orderPriceId!=''">and  ORDER_PRICE_ID=#{orderPriceId}</if>
+		<if test="orderPriceUuid!=null and orderPriceUuid!=''">and  ORDER_PRICE_UUID=#{orderPriceUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderGoodsId!=null and orderGoodsId!=''">and  ORDER_GOODS_ID=#{orderGoodsId}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+		<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+		<if test="priceUnit!=null and priceUnit!=''">and  PRICE_UNIT=#{priceUnit}</if>
+		<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="priceFormulaJson!=null and priceFormulaJson!=''">and  PRICE_FORMULA_JSON=#{priceFormulaJson}</if>
+		<if test="priceDesc!=null and priceDesc!=''">and  PRICE_DESC=#{priceDesc}</if>
+		<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+		<if test="paymentTermJson!=null and paymentTermJson!=''">and  PAYMENT_TERM_JSON=#{paymentTermJson}</if>
+		<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+		<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+		<if test="lockQuantityMin!=null and lockQuantityMin!=''">and  LOCK_QUANTITY_MIN=#{lockQuantityMin}</if>
+		<if test="transferCount!=null and transferCount!=''">and  TRANSFER_COUNT=#{transferCount}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ORDER_PRICE_ID as "orderPriceId" 
+						 ,   ORDER_PRICE_UUID as "orderPriceUuid" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   ORDER_GOODS_ID as "orderGoodsId" 
+						 ,   TRADE_TERM as "tradeTerm" 
+						 ,   PRICE_TYPE as "priceType" 
+						 ,   BASE_PRICE as "basePrice" 
+						 ,   PRICE_UNIT as "priceUnit" 
+						 ,   CURRENCY as "currency" 
+						 ,   PRICE as "price" 
+						 ,   PRICING_DESC as "pricingDesc" 
+						 ,   PRICE_FORMULA as "priceFormula" 
+						 ,   PRICE_FORMULA_JSON as "priceFormulaJson" 
+						 ,   PRICE_DESC as "priceDesc" 
+						 ,   PAYMENT_TERM as "paymentTerm" 
+						 ,   PAYMENT_TERM_JSON as "paymentTermJson" 
+						 ,   AGIO as "agio" 
+						 ,   PAY_DATE as "payDate" 
+						 ,   LOCK_QUANTITY_MIN as "lockQuantityMin" 
+						 ,   TRANSFER_COUNT as "transferCount" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_order_price
+		where
+			ALIVE_FLAG='1'
+			<if test="orderPriceId!=null and orderPriceId!=''">and  ORDER_PRICE_ID=#{orderPriceId}</if>
+			<if test="orderPriceUuid!=null and orderPriceUuid!=''">and  ORDER_PRICE_UUID=#{orderPriceUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="orderGoodsId!=null and orderGoodsId!=''">and  ORDER_GOODS_ID=#{orderGoodsId}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+			<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+			<if test="priceUnit!=null and priceUnit!=''">and  PRICE_UNIT=#{priceUnit}</if>
+			<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+			<if test="priceFormulaJson!=null and priceFormulaJson!=''">and  PRICE_FORMULA_JSON=#{priceFormulaJson}</if>
+			<if test="priceDesc!=null and priceDesc!=''">and  PRICE_DESC=#{priceDesc}</if>
+			<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+			<if test="paymentTermJson!=null and paymentTermJson!=''">and  PAYMENT_TERM_JSON=#{paymentTermJson}</if>
+			<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+			<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+			<if test="lockQuantityMin!=null and lockQuantityMin!=''">and  LOCK_QUANTITY_MIN=#{lockQuantityMin}</if>
+			<if test="transferCount!=null and transferCount!=''">and  TRANSFER_COUNT=#{transferCount}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_price 
+		where
+		 ALIVE_FLAG='1'
+			<if test="orderPriceId!=null and orderPriceId!=''">and  ORDER_PRICE_ID=#{orderPriceId}</if>
+			<if test="orderPriceUuid!=null and orderPriceUuid!=''">and  ORDER_PRICE_UUID=#{orderPriceUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="orderGoodsId!=null and orderGoodsId!=''">and  ORDER_GOODS_ID=#{orderGoodsId}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+			<if test="basePrice!=null and basePrice!=''">and  BASE_PRICE=#{basePrice}</if>
+			<if test="priceUnit!=null and priceUnit!=''">and  PRICE_UNIT=#{priceUnit}</if>
+			<if test="currency!=null and currency!=''">and  CURRENCY=#{currency}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+			<if test="priceFormulaJson!=null and priceFormulaJson!=''">and  PRICE_FORMULA_JSON=#{priceFormulaJson}</if>
+			<if test="priceDesc!=null and priceDesc!=''">and  PRICE_DESC=#{priceDesc}</if>
+			<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+			<if test="paymentTermJson!=null and paymentTermJson!=''">and  PAYMENT_TERM_JSON=#{paymentTermJson}</if>
+			<if test="agio!=null and agio!=''">and  AGIO=#{agio}</if>
+			<if test="payDate!=null and payDate!=''">and  PAY_DATE=#{payDate}</if>
+			<if test="lockQuantityMin!=null and lockQuantityMin!=''">and  LOCK_QUANTITY_MIN=#{lockQuantityMin}</if>
+			<if test="transferCount!=null and transferCount!=''">and  TRANSFER_COUNT=#{transferCount}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

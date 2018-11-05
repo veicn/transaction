@@ -1,0 +1,195 @@
+
+
+<style>
+.c-ful li.downd {
+    width: 70%;
+    position: relative;
+    line-height: 30px;
+}
+.s-file2 {
+   
+    position: relative;
+    left: -216px;
+}
+</style>
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Update Shipping Information</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+					<li class="curr"><a href="javascript:;"id="start" >Voyage Start</a></li>
+					<li><a href="javascript:;" id="load">Loading port</a></li>
+					<li><a href="javascript:;"  id="transit">In transit</a></li>
+					<li><a href="javascript:;"  id="unload">discharging port</a></li>
+			</ul>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Voyage Start<span><!-- <a href="#" class="export">下载模板</a><a href="#" class="import" id="imports">导入</a> --><a href="javascript:;"class="exportData">Export</a></span></div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx" action="">
+			<ul class="myul">
+			<div class="myclz">
+			
+			<div class="myli">
+			<form class="form">
+				<li class="s-form-item" >
+					<div class="s-inline">
+					  <label class="s-form-label"><em>*</em>Grade：</label>
+					  <div class="s-input-inline">
+						  <input type="text" class="s-input oilType" name="oilType" value=""  maxlength="100">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Planed Quantity (BBLs)：</label>
+					  <div class="s-input-inline">
+					  	  <input type="text" class="s-input quantityCask" name="quantityCask" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Planed Quantity (MT)：</label>
+					  <div class="s-input-inline">
+					  	 <input type="text" class="s-input quantity" name="quantity" value="" onkeyup="clearNoNumThree(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">API：</label>
+					  <div class="s-input-inline">
+						  <input type="text" class="s-input api" name="api" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Loading Temperature (℉)：</label>
+					  <div class="s-input-inline">
+						 <input type="text" class="s-input loadTemp" name="loadTemp" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Departure Draft：</label>
+					  <div class="s-input-inline">
+						 <input type="text" class="s-input loadDraft" name="loadDraft" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+					  </div>
+					</div>
+					<div class="s-but-all clearfix">
+						<div class="s-all-jt"><p><i class="s-icon s-icon-plus haha"></i></p></div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Arrival Draft：</label>
+					  <div class="s-input-inline">
+						  <input type="text" class="s-input unloadDraft" name="unloadDraft" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+									onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+					  </div>
+					</div>
+				</li>
+				</form>
+				</div>
+				
+				</div>
+				
+				<li class="s-form-item myli2">
+					<div class="myclz2 charter-cont-my loadPorts" >
+					<form class="form">
+					<div class="s-inline">
+					  <label class="s-form-label">Loading Port：</label>
+					  <div class="s-input-inline">
+						  <input type="hidden" value="1" name="type" class="type type1">
+						 <input type="text" class="s-input loadPort" name="port" value=""  maxlength="100">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Shipping Agent(Loading Port)：</label>
+					  <div class="s-input-inline">
+					  	  <select class="s-select sele" name="name">
+							<option value="">Please Choose</option>
+						  </select>
+					  </div>
+					</div>	
+					<div class="s-but-all clearfix">
+						<div class="s-all-jt"><p><i class="s-icon s-icon-plus hehe"></i></p></div>
+					</div>
+					</form>
+					</div>
+				</li>
+				<li class="s-form-item myli3">
+				<div class="myclz3 charter-cont-my unloadPorts" >
+				<form class="form">
+					<div class="s-inline">
+					  <label class="s-form-label">Discharging Port：</label>
+					  <div class="s-input-inline">
+						   <input type="hidden" value="2" name="type" class="type type2" >
+						  <input type="text" class="s-input unloadPort" name="port" value=""  maxlength="100">
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Shipping Agent(Discharge Port)：</label>
+					  <div class="s-input-inline">
+						  <select class="s-select sele2"  name="name"  >
+									<option value="">Please Choose</option>
+						 </select>
+					  </div>
+					</div>	
+					<div class="s-but-all clearfix">
+						<div class="s-all-jt"><p><i class="s-icon s-icon-plus heihei"></i></p></div>
+					</div>
+					</form>
+					</div>
+				</li>
+				<li class="s-form-item ">
+				<div class="charter-cont-my" >
+					<div class="s-inline">
+					  <label class="s-form-label">Attachment：</label>
+					  <div class="s-input-inline">
+						 <p>
+						  <input type="text" readonly="readonly" class="accessory1 s-input" id="file1" >
+							 <a href="javascript:;" id="btn1">Upload</a>
+							 <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>	
+				</div>
+			</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue" id="save">Submit</button><button class="s-btn s-btn-primary returnFn">Back</button></div>
+	 <div id="accessory1"  style="display:none;"></div>	
+	</div>
+	<script src="../transport/js/shipPactNew/shipLogistics.js"></script>
+	<script>
+//三位小数数字正则校验
+function clearNoNumThree(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+}  
+//两位小数数字正则校验
+function clearNoNumTwo(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+} 
+
+</script>
+  

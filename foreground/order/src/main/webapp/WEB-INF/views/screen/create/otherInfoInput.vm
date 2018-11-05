@@ -1,0 +1,34 @@
+<div class="c-mod">
+	  <h3><em class="cw-ico ico-h3"></em>其它信息</h3>
+	  <div class="c-form">
+        <ul class="c-ful">
+			<li class="c-fcos1">
+				<span class="c-fn">其他条款：</span>
+				<textarea name="otherItem" class="c-teta" placeholder="品质、数量装港岸罐计量为准物权与风险在装港转移">$!{contract.otherItem}</textarea>
+			</li>
+			
+			<li class="c-fcos2">
+				<span class="c-fn">信用条款：</span>
+				<select name="authItem" class="sele" value="$!{contract.authItem}">
+					#foreach($item in $creditItem.entrySet())
+                        <option value="$!{item.key}" >$!{item.value}</option>
+					#end
+				</select>
+			</li>
+			
+            <li class="c-fcos2">
+            	<span class="c-fn">商检机构：</span>
+            	<select name="businessCheckOrg" class="sele" value="$!{contract.businessCheckOrg}">
+						#foreach($item in $businessCheckOrg.entrySet())
+                            <option value="$!{item.key}" >$!{item.value}</option>
+						#end
+				</select>
+            </li>
+            
+			<li class="c-fcos1">
+				<span class="c-fn">出口配额文件：</span>
+				<a href="" class="re_up">+ 上传出口配额文件</a>
+			</li>
+		</ul>
+	  </div>
+  </div>

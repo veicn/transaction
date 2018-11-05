@@ -1,0 +1,337 @@
+
+<link rel="stylesheet" href="$orderExecuteServer.get('/orderexecute/mosken/css/s_template.css')">
+<style>
+.layui-input{height:30px;line-height:30px}
+</style>
+<div class="s-mod">
+	<form id="declareForm" class="layui-form">
+	<input type="hidden" name="orderNo" value="$!{orderNo}">
+	<div class="template">
+		<div class="title">代理报关委托书</div>
+		<div class="name">
+			<div class="layui-input-inline">
+				<input type="text" name="consignee" value="$!{data.consignee}" placeholder="" class="layui-input">
+			</div>
+			<label>：</label>
+		</div>
+		<div class="content">
+			<label>我单位现</label> <label class="space"></label> <label
+				class="strong">（A逐票、B长期）</label> <label>委托贵公司代理</label> <label
+				class="space"></label> <label>等通关事宜。</label> <label class="strong">（A、报关查验&nbsp;&nbsp;B、垫缴税款&nbsp;&nbsp;C、办理海关证明联&nbsp;&nbsp;D、审批手册&nbsp;&nbsp;E、核销手册&nbsp;&nbsp;F、申办减免税手续&nbsp;&nbsp;G、其他&nbsp;&nbsp;）</label>
+			<label>详见《委托报关协议》。</label>
+		</div>
+		<div class="content">
+			<label>我单位保证遵守《海关法》和国家有关法规，保证所提供的情况真实、完整、单货相符。否则，愿承担相关法律责任。</label>
+		</div>
+		<div class="content">
+			<label>本委托书有效期自签字之日起至</label>
+			<div class="layui-input-inline">
+				<input type="text" name="validPeriodStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.validPeriod})" placeholder="" class="layui-input dateSelect">
+			</div>
+			<label>止。</label>
+		</div>
+		<div class="content text_right height_50">
+			<label>委托方（盖章）：</label> <label class="space2"></label>
+		</div>
+		<div class="content text_right">
+			<label>法定代表人或其授权签署《代理报关委托书》的人（签字）：</label> <label class="space2"></label>
+		</div>
+		<div class="clearfix">
+			<div class="layui-input-inline float_right">
+				<input type="text" name="entrustDateStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.entrustDate})" placeholder="" class="layui-input dateSelect">
+			</div>
+		</div>
+		<div class="title">委托报关协议</div>
+		<div class="content">
+			<label>为明确委托报关具体事项和各自责任，双方经平等协商签订协议如下：</label>
+		</div>
+		<div class="clearfix">
+			<div class="table_left">
+				<table class="tabelContainer" border="1px">
+					<tbody>
+						<tr>
+							<td width="30%">委托方</td>
+							<td width="70%"><input type="text" name="consignor" value="$!{data.consignor}" placeholder=""
+								class="layui-input"></td>
+						</tr>
+						<tr>
+							<td>主要货物名称</td>
+							<td>
+								<div class="layui-input-inline">
+									<input type="text" name="goodsName" value="$!{data.goodsName}" placeholder="" class="layui-input">
+								</div> <label>原油</label>
+							</td>
+						</tr>
+						<tr>
+							<td>HS编码</td>
+							<td><input type="text" name="hsCode" value="$!{data.hsCode}" placeholder="" class="layui-input">
+							</td>
+						</tr>
+						<tr>
+							<td>货物总价</td>
+							<td><input type="text" name="totalAmount" value="$!{data.totalAmount}" lay-verify="number" placeholder="" class="layui-input">
+							</td>
+						</tr>
+						<tr>
+							<td>进出口日期</td>
+							<td><input type="text" name="importDateStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.importDate})" placeholder="" class="layui-input dateSelect">
+							</td>
+						</tr>
+						<tr>
+							<td>提单号</td>
+							<td><input type="text" name="billNo" value="$!{data.billNo}" placeholder="" class="layui-input">
+							</td>
+						</tr>
+						<tr>
+							<td>贸易方式</td>
+							<td><input type="text" name="tradeMode" value="$!{data.tradeMode}" placeholder="" class="layui-input">
+							</td>
+						</tr>
+						<tr>
+							<td>原产地/货源地</td>
+							<td><input type="text" name="origin" value="$!{data.origin}" placeholder="" class="layui-input">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="height_200">
+									<div class="text_left">
+										<label class="name">其他要求：</label>
+									</div>
+									<div class="text_left">
+										<label class="name">合同号：</label>
+										<div class="layui-input-inline gap_bottom_5">
+											<input type="text" name="contractNo" value="$!{data.contractNo}" placeholder="" class="layui-input">
+										</div>
+									</div>
+									<div class="text_left">
+										<label class="name">数量：</label>
+										<div class="layui-input-inline gap_bottom_5">
+											<input type="text" name="nightstool" value="$!{data.nightstool}" lay-verify="number" placeholder="" class="layui-input">
+										</div>
+										<label>净桶</label>
+									</div>
+									<div class="text_left">
+										<label class="name"></label>
+										<div class="layui-input-inline gap_bottom_5">
+											<input type="text" name="netTon" value="$!{data.netTon}" lay-verify="number" placeholder="" class="layui-input">
+										</div>
+										<label>净吨</label>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="text_left">背面所列通用条款是本协议不可分割的一部分，对本协议的签署构成了对背面通用条款的同意。</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="text_left height_100">
+									<label>委托方业务签章：</label>
+								</div>
+								<div class="text_left">
+									<label class="name">经办人签章：</label>
+									<div class="layui-input-inline gap_bottom_5">
+										<input type="text" name="operator" value="$!{data.operator}" placeholder="" class="layui-input">
+									</div>
+								</div>
+								<div class="text_left">
+									<label class="name">联系电话：</label>
+									<div class="layui-input-inline gap_bottom_5">
+										<input type="text" name="contactPhone" value="$!{data.contactPhone}" placeholder="" class="layui-input">
+									</div>
+									<div class="layui-input-inline gap_bottom_5" style="width: 150px;margin-left:50px">
+										<input type="text" name="stampDateStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.stampDate})" placeholder="" class="layui-input dateSelect">
+									</div>
+								</div>
+								<div class="height_50"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="table_right">
+				<table class="tabelContainer" border="1px">
+					<tbody>
+						<tr>
+							<td width="30%">被委托方</td>
+							<td width="70%" colspan="2"></td>
+						</tr>
+						<tr>
+							<td><label class="strong">*</label> <label>报关单编码</label></td>
+							<td colspan="2"><label>NO.</label></td>
+						</tr>
+						<tr>
+							<td>收到单证日期</td>
+							<td colspan="2"><label class="space_100"></label> <label>年</label>
+								<label class="space_50"></label> <label>月</label> <label
+								class="space_50"></label> <label>日</label></td>
+						</tr>
+						<tr>
+							<td rowspan="4">收到单证情况</td>
+							<td width="35%">
+								<div class="text_center">
+									<label>合同</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+							<td width="35%">
+								<div class="text_center">
+									<label>发票</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="text_center">
+									<label>装箱清单</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+							<td>
+								<div class="text_center">
+									<label>提（运）单</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="text_center">
+									<label>加工贸易手册</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+							<td>
+								<div class="text_center">
+									<label>许可证件</label>
+									<div class="layui-form-checkbox" lay-skin="primary">
+										<i class="layui-icon"></i>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="text_left">
+									<label>其他</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>报关收费</td>
+							<td colspan="2"><label>人民币：</label> <label class="space_150"></label>
+								<label>元</label></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="height_200 text_left">
+									<label class="name">承诺说明：</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="text_left">背面所列通用条款是本协议不可分割的一部分，对本协议的签署构成了对背面通用条款的同意。</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="text_left height_100">
+									<label>被委托方业务签章：</label>
+								</div>
+								<div class="text_left">
+									<label>经办报关员签章：</label>
+								</div>
+								<div class="text_left">
+									<label>联系电话：</label>
+								</div>
+								<div class="height_50 text_right">
+									<label>年</label> <label class="space_50"></label> <label>月</label>
+									<label class="space_50"></label> <label>日</label>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="bottom_message clearfix">
+			<div class="item width_25">
+				<img src="$orderExecuteServer.get('/orderexecute/mosken/images/CCBA.png')">
+			</div>
+			<div class="item text_center" style="width: 49%;">（白联：海关留存、黄联：被委托方留存、红联：委托方留存）</div>
+			<div class="item width_25 text_right">中国报关协会</div>
+		</div>
+
+		<div class="s-btn-box btnGroup">
+			<button class="s-btn s-btn-blue" type="button" lay-submit lay-filter="form_submit_btn">保存</button>
+			<button class="s-btn s-btn-blue" type="button" lay-submit lay-filter="form_submit_down_btn">保存并下载</button>
+			<button class="s-btn s-btn-blue" type="button" onclick="javascript:window.close()">关闭</button>
+		</div>
+	</div>
+	</form>
+</div>
+
+<script>
+layui.use(['laydate','form'], function(){
+	var laydate = layui.laydate,form = layui.form;
+	
+	lay('.dateSelect').each(function(){
+	    laydate.render({
+	      elem: this
+	      ,trigger: 'click'
+	      ,format: 'yyyy年MM月dd日'
+	    });
+	});
+	
+	//监听提交
+	form.on('submit(form_submit_btn)', function(data){
+		submit();
+		return false;
+	});
+	form.on('submit(form_submit_down_btn)', function(data){
+		submit(download);
+		return false;
+	});
+	
+	function submit(callback){
+		$.ajax({
+			type:"post",
+			url:orderServer+"/inspection/template/declare.json",
+			data:$("#declareForm").serialize(),
+			success:function(result){
+	  			if(result.status != 0){
+	  				layer.alert($.i18n(result.code,result.params));
+	  			}else{
+	  				layer.alert($.i18n("orderexecute.code.00149"), function(index){
+	  					if(callback){
+	  						callback();
+	  					}
+	  					layer.close(index);
+	  				});
+	  			}
+	  		},
+	  		error:function(){
+	  			layer.alert("error");
+	  		}
+		})
+	}
+	function download(){
+		window.location.href=orderServer+"/inspection/template/download.htm?orderNo=$!{orderNo}&type=1";
+	}
+})
+</script>

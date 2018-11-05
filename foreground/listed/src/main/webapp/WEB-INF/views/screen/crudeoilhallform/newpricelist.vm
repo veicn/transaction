@@ -1,0 +1,117 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>采购信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <input type="hidden" class="c-int" name="id" value="$!{demand.id}"/>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>数量(桶)：</span><input type="text"  class="c-int c-inputheight1" name="numStr" id="num" value="$!{demand.numStr}" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/></li>
+##            <li class="c-fcos2"><span class="c-fn">溢短装：</span><input type="text" class="c-int" name="numfloat" id="numfloat" value="$!{demand.numfloat}"/></i></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>贸易条款：</span><select class="sele" name="tradeItem" id="tradeItem"<option value="1">CRF</option><option value="2">FOB</option><option value="3">CIF</option><option value="4">CIP</option><option value="5">DES</option></select></li>
+##            <li class="c-fcos2"><span class="c-fn">贴水：</span> &lt;= <input type="number" style="height: 30" class="c-intt" id="agio" name="agio" value="$!{demand.agio}"/> USD/BBL</li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>计价基准：</span><input type="text" class="c-int" name="valuationBase" id="valuationBase" value="$!{demand.valuationBase}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>计价期：</span><input  type="text" class="c-int c-inputheight2" id="valuationProidType" name="valuationProidType" value="$!{demand.valuationProidType}"/></li>
+            <li class="c-fcos1"><span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>计价公式：</span><input type="text" class="c-int c-br c-fl" name="valuationFormula" id="valuationFormula" value="$!{demand.valuationFormula}"></li>
+##            <li class="c-fcos2"><span class="c-fn">付款日期：</span><select class="sele" name="payItem" id="payItem"><option value="1">After B/L 30 Days</option><option value="2">After B/L 45 Days</option><option value="3">After B/L 60 Days</option><option value="4">After NOR 30 Days</option><option value="5">After NOR 45 Days</option><option value="6">After NOR 60 Days</option></select></li>
+            <li class="c-fcos2"><span class="c-fn c-fl"><span class="notice-required">*&nbsp;</span>付款日期：</span><input type="text"  name="payItem" class="c-int zq-text c-fl"  date="true" value="$!{demand.payItem}"/></li>
+##            <li class="c-fcos2"><span class="c-fn">付款日期：</span><input type="text" class="c-int" name="payTime" id="payTime" value="$!{demand.payTime}"/><i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">采购方式：</span><select  class="sele" name="purchaseMode" id="purchaseMode"><option value="1">临时采购</option><option value="2">现货采购</option></select></li>
+
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>装货港：</span><input type="text" name="shipmentPort" class="c-int" value="$!{demandShip.shipmentPort}"/></li>
+            <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>卸货港：</span><input type="text" name="dischargePort" class="c-int" value="$!{demandShip.dischargePort}"/></li>
+            <li class="c-fcos2"><span class="c-fn c-fl" >装货期：</span><input type="text"  name="shipmentStartTime" class="c-int zq-text c-fl"  date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentStartTime})"/></li>
+            <li class="c-fcos2 c-fl" ><span class="c-fn c-fl c-textcenter">——————</span><input name="shipmentEndTime" type="text"  class="c-int zq-text c-fl" date="true" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentEndTime})"/></li>
+            <li class="c-fcos2"><span class="c-fn c-fl">到货期：</span><input type="text" name="dischargeStartTime" class="c-int zq-text c-fl" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeStartTime})"/></li>
+            <li class="c-fcos2"><span class="c-fn  c-fl c-textcenter">——————</span><input name="dischargeEndTime" type="text" class="c-int zq-text  c-fl" date="true"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeEndTime})"/></li>
+            <li class="c-fcos1"><span class="c-fn">备注：</span><textarea class="c-teta" name="remark" id="remark" maxlength="2000">$!{demand.remark}</textarea></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(function(){
+
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        // 卸货港
+        $("input[name='dischargePort']").click(function() {
+            var data = {"valueSetType": "4"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='dischargePort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='dischargePort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+
+        // 装货港
+        $("input[name='shipmentPort']").click(function() {
+            var data = {"valueSetType": "5"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='shipmentPort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='shipmentPort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+
+    })
+</script>
+
+
+

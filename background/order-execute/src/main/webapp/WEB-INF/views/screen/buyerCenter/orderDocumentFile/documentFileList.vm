@@ -1,0 +1,131 @@
+
+
+			<div class="c-mod">
+				<form method="post">
+					<ul class="c-ful c-filter">
+						<li class="c-fcos3"><span class="c-fn c-fn2">订单号：</span><input id="orderNo" type="text" name="orderNo" value="$!query.orderNo" class="c-int"/></li>
+						<li class="c-fcos3"><span class="c-fn c-fn2">合同号：</span><input id="contractNo" type="text" name="contractNo" value="$!query.contractNo" class="c-int c-int2"/></li>
+						<li class="c-fcos3"><span class="c-fn c-fn2">船名：</span><input id="shipName" type="text" name="shipName" value="$!query.shipName" class="c-int c-int2"/></li>
+							<!-- <li class="c-fcos3"><span class="c-fn c-fn2">表单类型：</span>
+					            <select id="documentType" name="documentType" class="c-int c-int2" style="height: 30px;">
+				                    <option value="">请选择</option>
+				                    #if($!{documentType} && !${documentType.empty})
+				                        #foreach($e in $documentType)
+				                            <option value="$!{e.value}" #if($!{query.documentType} == $!{e.value}) selected="selected" #end>$!{e.name}</option>
+				                        #end
+				                    #end
+			                	</select>
+							</li> -->
+						<li class="c-libtn"><button class="searchBtn" type="submit">查询</button></li>
+					</ul>
+				</form>	
+				<h3><i class="cw-ico ico-h3"></i>表单信息<a href="#" class="c-rebo"></a></h3>
+
+				<div class="c-tabdiv">
+					<table class="layui-table table-style" lay-skin="nob">
+					  	<thead>
+					    	<tr>
+					      		<th>订单编号</th>
+					      		<th>合同编号</th>
+						  		<!-- <th>表单类型</th> -->
+						  		<th>表单类别</th> 
+						  		<th>船名</th>
+					      		<th>提交时间</th>
+						  		<th>操作</th>
+					    	</tr> 
+					  	</thead>
+						<tbody>
+							#foreach($data in $dataList)
+								<tr>
+								  	<td>$!data.orderNo</td>
+								  	<td>$!data.contractNo</td>
+								  	<!-- <td>$!data.documentTypeDesc</td> -->
+									<td>$!data.fileName</td>
+									<td>$!data.shipName</td>
+									<td>$!data.createDate</td>
+							      	<td>
+							      		<a class="showFn" href="javascript:" uuid="$!data.uuid" orderDocumentId="$!data.orderDocumentId" documentType="$!data.documentType" tradeCategory="$!data.tradeCategory">
+							      			查看
+							      		</a>
+							      		<a class="editFn" href="javascript:" uuid="$!data.uuid" orderDocumentId="$!data.orderDocumentId" documentType="$!data.documentType" tradeCategory="$!data.tradeCategory">
+							      			编辑
+							      		</a>
+							      		<a class="delBtn" href="javascript:" documentFileId="$!data.documentFileId">
+							      			删除
+							      		</a>
+							      	</td>
+							    </tr>
+					  		#end
+					  	</tbody>
+					</table>
+				</div>
+				
+##-------------------- 分页开始 --------------------##
+$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target', "documentFileList.htm")
+##-------------------- 分页结束 --------------------##
+			</div>	
+			
+<script src="../../orderexecute/js/orderDocumentFile/documentFile.js"></script>
+	<script>
+		$(function(){
+			// 查看函数
+			$('.showFn').on('click',function(){
+				console.log("000");
+				var uuid = $(this).attr("uuid");
+				var orderDocumentId = $(this).attr("orderDocumentId");
+				var documentType = $(this).attr("documentType");
+				var tradeCategory = $(this).attr("tradeCategory");
+
+				window.location.href = orderServer+"/buyerCenter/orderDocument/documentEditNew.htm"
+					+ "?uuid=" + uuid
+					+ "&orderDocumentId=" + orderDocumentId
+					//+ "&documentType=" + documentType
+					+ "&tradeCategory=" + tradeCategory
+					+ "&formPage=FILELIST"
+					+ "&showDetail=1";
+			});
+			
+			// 编辑函数
+			$('.editFn').on('click',function(){
+				var uuid = $(this).attr("uuid");
+				var orderDocumentId = $(this).attr("orderDocumentId");
+				var documentType = $(this).attr("documentType");
+				var tradeCategory = $(this).attr("tradeCategory");
+
+				window.location.href = orderServer+"/buyerCenter/orderDocument/documentEditNew.htm"
+					+ "?uuid=" + uuid
+					+ "&orderDocumentId=" + orderDocumentId
+				//	+ "&documentType=" + documentType
+					+ "&tradeCategory=" + tradeCategory
+					+ "&formPage=FILELIST";
+			});
+			
+			// 删除函数
+			$('.delBtn').on('click',function(){
+				var documentFileId = $(this).attr("documentFileId");
+			    //弹框运行
+			    layer.confirm('确定删除吗？', function(index){
+			    	var params = {};
+			    	params.documentFileId = documentFileId;
+			    	
+			    	$.ajax({
+			    		type: "POST",
+			    		url: orderServer+"/buyerCenter/orderDocumentFile/deleteFile.json",
+			    		data: params,
+			    		async: false,
+			    		success: function(data) {
+							if(data.status == 0){
+								layer.alert('删除成功!', function(index) {
+								    layer.close(index);
+								    location.reload();
+								});
+							}
+						},
+						error: function(data) {
+							layer.alert("request error");
+				        }
+			    	});
+			    });
+			});
+		})
+	</script>

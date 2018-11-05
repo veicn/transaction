@@ -1,0 +1,34 @@
+<form class="layui-form"  action="/info/channelM/saveOrUpdateChannelM.json" method="POST">
+	 
+	 <div class="layui-form bombPp">
+	 <div class="layui-form-item" style="margin-top:5px;" >
+           <label class="layui-form-label">频道类型：</label>
+           <div class="layui-input-inline iw300">
+               <select id="channelMDesc1" name="channelMDesc" lay-verify="required">
+              	 <option id="channelMIdOpt" value="">== 请选择  ==</option>
+               </select>
+           </div>
+      </div>
+	 
+	 <div class="layui-form-item">
+            <label class="layui-form-label">频道代码：</label>
+            <div class="layui-input-inline iw300">
+            <input type="text" name="channelMCode" id="channelMCode"  placeholder="请输入频道代码" class="layui-input" >
+            </div>
+      </div>
+      
+      <div class="layui-form-item">
+            <label class="layui-form-label ">频道名称：</label>
+            <div class="layui-input-inline iw300">
+            <input type="text" id="channelMName" name="channelMName"  placeholder="请输入频道名称" class="layui-input" >
+            </div>
+      </div>
+      
+      <div class="layui-form-item">
+            <label class="layui-form-label ">序号：</label>
+            <div class="layui-input-inline iw300">
+            <input type="number" id="channelMOrder" name="channelMOrder"  placeholder="请输入序号" class="layui-input" >
+            </div>
+      </div>
+    </div>  
+</form>

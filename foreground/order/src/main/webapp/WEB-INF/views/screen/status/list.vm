@@ -1,0 +1,42 @@
+<div class="order-num-box clearfix">
+    <div class="order-num-l">
+        <p>订单号：$!{order.orderNo}</p>
+        <p><a href="">
+            #if(!$!{order.cancelFlag})
+                #if($!{order.doubleStatus} == '03')
+                    取消中
+                #else
+                    #if($status == 2)已完成
+                    #elseif($status==0)已确认
+                    #elseif($status==-1)未确认
+                    #{else}执行中
+                    #end
+                #end
+            #else
+                已取消
+            #end
+
+        </a></p>
+    </div>
+    <div class="order-num-r">
+        <p>#if($status == 2)订单已经完成，感谢您使用中化原油交易平台，欢迎您对本次交易及所购买的商品进行评价。#end</p>
+        <ul class="order-list clearfix">
+            #foreach($item in $statusList )
+                <li class="#if($item.value != 0) cur #end">
+                    #if($item.value == 0)
+                        #if($velocityCount != $statusList.size())
+                            <span class="order-l2"></span>
+                        #end
+                    #else
+                        #if($velocityCount != $statusList.size())
+                            <span class="order-l"></span>
+                        #end
+                    #end
+                    <span class="order-s">${item.itemDesc} </span>
+                    <h5>$!{item.valueDesc}</h5>
+                    <p>$!dateUtil.getDate(${item.createDate})<br/>$!dateUtil.getTimeNow(${item.createDate})</p>
+                </li>
+            #end
+        </ul>
+    </div>
+</div>

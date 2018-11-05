@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.FeeSubjectMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.FeeSubject" id="FeeSubject">
+		<result property="feeSubjectId" column="FEE_SUBJECT_ID" />
+		<result property="subjectName" column="SUBJECT_NAME" />
+		<result property="subjectCode" column="SUBJECT_CODE" />
+		<result property="version" column="VERSION" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.FeeSubject"  useGeneratedKeys="true" keyProperty="feeSubjectId" >
+		insert  into t_fee_subject (				FEE_SUBJECT_ID
+						,SUBJECT_NAME
+						,SUBJECT_CODE
+						,VERSION
+						,CREATE_USER
+						,CREATE_DATE
+						,ALIVE_FLAG
+						,UPDATE_USER
+						,LANG_VER
+						,UPDATE_DATE
+						)
+		values(		#{feeSubjectId}
+						,#{subjectName}
+						,#{subjectCode}
+						,#{version}
+						,#{createUser}
+						,#{createDate}
+						,#{aliveFlag}
+						,#{updateUser}
+						,#{langVer}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_fee_subject
+              WHERE 1=1 
+                AND FEE_SUBJECT_ID = #{feeSubjectId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.FeeSubject">
+        DELETE FROM t_fee_subject
+              WHERE 1=1 
+        <if test="feeSubjectId!=null and feeSubjectId!=''">AND  FEE_SUBJECT_ID = #{feeSubjectId}</if>
+        <if test="subjectName!=null and subjectName!=''">AND  SUBJECT_NAME = #{subjectName}</if>
+        <if test="subjectCode!=null and subjectCode!=''">AND  SUBJECT_CODE = #{subjectCode}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.FeeSubject">
+		update t_fee_subject
+		<set>
+         FEE_SUBJECT_ID=#{feeSubjectId}
+		<if test="subjectName!=null">,SUBJECT_NAME = #{subjectName}</if>
+		<if test="subjectCode!=null">,SUBJECT_CODE = #{subjectCode}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+       	 FEE_SUBJECT_ID=#{feeSubjectId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_fee_subject
+		<set>
+         FEE_SUBJECT_ID=#{feeSubjectId}
+		<if test="subjectName!=null">,SUBJECT_NAME = #{subjectName}</if>
+		<if test="subjectCode!=null">,SUBJECT_CODE = #{subjectCode}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="feeSubjectId!=null and feeSubjectId!=''">and  FEE_SUBJECT_ID=#{feeSubjectId}</if>
+		<if test="subjectName!=null and subjectName!=''">and  SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and  SUBJECT_CODE=#{subjectCode}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="FeeSubject">
+			select
+			* from t_fee_subject
+			where
+		    FEE_SUBJECT_ID=#{feeSubjectId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="FeeSubject">
+			select
+			* from t_fee_subject
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="FeeSubject" parameterType="com.sinochem.crude.trade.orderexecute.domain.FeeSubject">
+		select * from t_fee_subject
+			where
+		 ALIVE_FLAG='1'
+		<if test="feeSubjectId!=null and feeSubjectId!=''">and  FEE_SUBJECT_ID=#{feeSubjectId}</if>
+		<if test="subjectName!=null and subjectName!=''">and  SUBJECT_NAME=#{subjectName}</if>
+		<if test="subjectCode!=null and subjectCode!=''">and  SUBJECT_CODE=#{subjectCode}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  FEE_SUBJECT_ID as "feeSubjectId" 
+						 ,   SUBJECT_NAME as "subjectName" 
+						 ,   SUBJECT_CODE as "subjectCode" 
+						 ,   VERSION as "version" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   LANG_VER as "langVer" 
+						 ,   UPDATE_DATE as "updateDate" 
+						from t_fee_subject
+		where
+			ALIVE_FLAG='1'
+			<if test="feeSubjectId!=null and feeSubjectId!=''">and  FEE_SUBJECT_ID=#{feeSubjectId}</if>
+			<if test="subjectName!=null and subjectName!=''">and  SUBJECT_NAME=#{subjectName}</if>
+			<if test="subjectCode!=null and subjectCode!=''">and  SUBJECT_CODE=#{subjectCode}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_fee_subject 
+		where
+		 ALIVE_FLAG='1'
+			<if test="feeSubjectId!=null and feeSubjectId!=''">and  FEE_SUBJECT_ID=#{feeSubjectId}</if>
+			<if test="subjectName!=null and subjectName!=''">and  SUBJECT_NAME=#{subjectName}</if>
+			<if test="subjectCode!=null and subjectCode!=''">and  SUBJECT_CODE=#{subjectCode}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

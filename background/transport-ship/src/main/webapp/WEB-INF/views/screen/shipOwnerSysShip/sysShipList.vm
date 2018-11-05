@@ -1,0 +1,84 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船舶管理</h1></div>
+            <p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline ">
+					  <label class="s-form-label">船名</label>
+					  <div class="s-input-inline">
+						  <input id="searchName" type="text" name="name" class="s-input" >
+					  </div>
+					</div>
+                    <div class="s-inline s-inline1">
+					  <label class="s-form-label">状态</label>
+					  <div class="s-input-inline">
+						  <select class="s-select"  id="searchStatus" name="status">
+								<option value="">请选择</option>
+								<option value="1">待审核</option>
+								<option value="2">审核通过</option>
+								<option value="3">审核驳回</option>
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline0"><a class="searchBtn"><i class="s-icon s-sear-ico"></i></a></div>
+					<div class="s-inline s-inline-btn"><a class="s-btn insertBtn"><i class="s-icon fs-plus"></i>新增船舶</a></div>
+                    <div class="s-inline s-inline-btn"><a class="s-btn exportBtn">导出模板</a></div>
+                    <div class="s-inline s-inline-btn"><a class="s-btn" id="batchImportBtn">批量导入船舶</a></div>
+				</li>
+			</ul>
+			</form>
+            </div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit"><h1>船舶信息</h1></div>
+			<div class="s-mod-bcont s-mod-bcont1">
+				<div class="s-table-wrap">
+					<table class="s-table s-table3">
+					  <tr>
+						   <th title='Vessel Name'><div class="text-overflow">Vessel Name</div></th>
+						   <th title='IMO'><div class="text-overflow">IMO</div></th>
+						   <th title='Built'><div class="text-overflow">Built</div></th>
+						   <th title='Vessel Type'><div class="text-overflow">Vessel Type</div></th>
+						   <th title='Vessel Size'><div class="text-overflow">Vessel Size</div></th>
+						   <th title='Cubic(m³)'><div class="text-overflow">Cubic(m³)</div></th>
+						   <th title='SDWT(mt)'><div class="text-overflow">SDWT(mt)</div></th>
+						   <th title='LOA(m)'><div class="text-overflow">LOA(m)</div></th>
+						   <th title='Beam(m)'><div class="text-overflow">Beam(m)</div></th>
+						   <th title='Draft(m)'><div class="text-overflow">Draft(m)</div></th>
+						   <th title='Hull Type'><div class="text-overflow">Hull Type</div></th>
+						   <th title='状态'><div class="text-overflow">状态</div></th>
+						   <th title='操作'><div class="text-overflow">操作</div></th> 
+					  </tr>
+					  
+					  #foreach($data in $datas)
+						<tr class="tbStyle">
+							  <td title="$!{data.name}"><div class="text-overflow">$!data.name</div></td>
+							  <td title="$!{data.imo}"><div class="text-overflow">$!data.imo</div></td>
+							  <td title="$!{data.completeDate}"><div class="text-overflow">$!data.completeDate</div></td>
+							  <td title="$!{data.useType}"><div class="text-overflow">$!data.useType</div></td>
+							  <td title="$!{data.type}"><div class="text-overflow">$!data.type</div></td>
+							  <td title="$!{data.capacity}" class="title2"><div class="text-overflow num2">$!data.capacity</div></td>
+							  <td title="$!{data.loadQuantity}" class="title3"><div class="text-overflow num3">$!data.loadQuantity</div></td>
+							  <td title="$!{data.length}" class="title2"><div class="text-overflow num2">$!data.length</div></td>
+							  <td title="$!{data.wide}" class="title2"><div class="text-overflow num2">$!data.wide</div></td>
+							  <td title="$!{data.draft}" class="title2"><div class="text-overflow num2">$!data.draft</div></td>
+							  <td title="$!{data.hull}"><div class="text-overflow">$!data.hull</div></td>
+							  <td title="$!{data.statusMsg}"><div class="text-overflow">$!data.statusMsg</div></td>
+						      <td>
+						      	 	<a href="javascript:;" class="lookBtn" attr-data="$!data.uuid">查看</a>
+						      	 	<a href="javascript:;" class="delBtn" attr-data="$!data.uuid">删除</a>
+						      </td>
+						</tr>
+					 #end
+					</table>
+				</div>
+		    </div>
+		</div>
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipOwnerSysShip/sysShipList.htm')")
+	</div>
+	<script src="../transport/js/shipOwnerSysShip/sysShipList.js"></script>
+  

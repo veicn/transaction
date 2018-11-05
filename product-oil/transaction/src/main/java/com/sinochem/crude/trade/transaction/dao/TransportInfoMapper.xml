@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.transaction.dao.TransportInfoMapper" >
+    <resultMap id="transportInfo" type="com.sinochem.crude.trade.transaction.domain.po.TransportInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="user_created" property="userCreated" jdbcType="BIGINT" />
+        <result column="user_modified" property="userModified" jdbcType="BIGINT" />
+        <result column="alive_flag" property="aliveFlag" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+        <result column="transport_mode_code" property="transportModeCode" jdbcType="VARCHAR" />
+        <result column="loading_port" property="loadingPort" jdbcType="VARCHAR" />
+        <result column="laytime" property="laytime" jdbcType="DECIMAL" />
+        <result column="laycan_start_date" property="laycanStartDate" jdbcType="TIMESTAMP" />
+        <result column="laycan_end_date" property="laycanEndDate" jdbcType="TIMESTAMP" />
+        <result column="discharge_port" property="dischargePort" jdbcType="VARCHAR" />
+        <result column="demurrage_rate_code" property="demurrageRateCode" jdbcType="VARCHAR" />
+        <result column="demurrage_rate_num" property="demurrageRateNum" jdbcType="DECIMAL" />
+        <result column="loading_country" property="loadingCountry" jdbcType="VARCHAR" />
+        <result column="discharge_country" property="dischargeCountry" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sinochem.crude.trade.transaction.domain.po.TransportInfo"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_transport_info (
+            uuid,
+            gmt_created,
+            gmt_modified,
+            user_created,
+            user_modified,
+            alive_flag,
+            version,
+            transport_mode_code,
+            loading_port,
+            laytime,
+            laycan_start_date,
+            laycan_end_date,
+            discharge_port,
+            demurrage_rate_code,
+            demurrage_rate_num,
+            loading_country,
+            discharge_country)
+        values (
+            #{uuid, jdbcType=VARCHAR},
+            #{gmtCreated, jdbcType=TIMESTAMP},
+            #{gmtModified, jdbcType=TIMESTAMP},
+            #{userCreated, jdbcType=BIGINT},
+            #{userModified, jdbcType=BIGINT},
+            #{aliveFlag, jdbcType=INTEGER},
+            #{version, jdbcType=BIGINT},
+            #{transportModeCode, jdbcType=VARCHAR},
+            #{loadingPort, jdbcType=VARCHAR},
+            #{laytime, jdbcType=DECIMAL},
+            #{laycanStartDate, jdbcType=TIMESTAMP},
+            #{laycanEndDate, jdbcType=TIMESTAMP},
+            #{dischargePort, jdbcType=VARCHAR},
+            #{demurrageRateCode, jdbcType=VARCHAR},
+            #{demurrageRateNum, jdbcType=DECIMAL},
+            #{loadingCountry, jdbcType=VARCHAR},
+            #{dischargeCountry, jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        DELETE FROM t_transport_info
+        WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.transaction.domain.po.TransportInfo" >
+        UPDATE t_transport_info
+        <set >
+            <if test="uuid != null" >
+                uuid = #{uuid, jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreated != null" >
+                gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCreated != null" >
+                user_created = #{userCreated, jdbcType=BIGINT},
+            </if>
+            <if test="userModified != null" >
+                user_modified = #{userModified, jdbcType=BIGINT},
+            </if>
+            <if test="aliveFlag != null" >
+                alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            </if>
+            <if test="version != null" >
+                version = #{version, jdbcType=BIGINT},
+            </if>
+            <if test="transportModeCode != null" >
+                transport_mode_code = #{transportModeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="loadingPort != null" >
+                loading_port = #{loadingPort, jdbcType=VARCHAR},
+            </if>
+            <if test="laytime != null" >
+                laytime = #{laytime, jdbcType=DECIMAL},
+            </if>
+            <if test="laycanStartDate != null" >
+                laycan_start_date = #{laycanStartDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="laycanEndDate != null" >
+                laycan_end_date = #{laycanEndDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="dischargePort != null" >
+                discharge_port = #{dischargePort, jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.transaction.domain.po.TransportInfo" >
+        UPDATE t_transport_info
+        SET
+            uuid = #{uuid, jdbcType=VARCHAR},
+            gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            user_created = #{userCreated, jdbcType=BIGINT},
+            user_modified = #{userModified, jdbcType=BIGINT},
+            alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            version = #{version, jdbcType=BIGINT},
+            transport_mode_code = #{transportModeCode, jdbcType=VARCHAR},
+            loading_port = #{loadingPort, jdbcType=VARCHAR},
+            laytime = #{laytime, jdbcType=DECIMAL},
+            laycan_start_date = #{laycanStartDate, jdbcType=TIMESTAMP},
+            laycan_end_date = #{laycanEndDate, jdbcType=TIMESTAMP},
+            discharge_port = #{dischargePort, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="transportInfo" parameterType="java.lang.Long" >
+        SELECT * FROM t_transport_info
+        WHERE id = #{id, jdbcType=BIGINT}
+        AND alive_flag = 1
+    </select>
+
+    <select id="selectByUuid" resultMap="transportInfo" parameterType="java.lang.String">
+        SELECT * FROM t_transport_info
+        WHERE uuid = #{uuid, jdbcType=VARCHAR}
+        AND alive_flag = 1
+    </select>
+</mapper>

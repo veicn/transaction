@@ -1,0 +1,128 @@
+$contain.get('/common/title.htm').put('title', 'SysShip Detail')
+    <link rel="stylesheet" href="$appServer.get('/css/work/shipping.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/myResouces.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/resDetails.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/viewShipInfor.css?css_version=03280827')">
+    
+        
+        <div class="m-nav g-nav fl">
+            <div class="m-box m-sls view-box cleafix">
+                <div class="r-content g-content">
+                    <span class="r-cont-tit">Ship Details</span>
+                    <div>
+                        <ul class="g-box g-box1 view-box-ul">
+                            <li class="per-field-box">
+                                <label class="field-title" for="Address"><span class="must">* </span>Imo :</label>
+                                <input name="Address" type="text" placeholder="10,000" readonly="readonly" value="$!{shipVO.imo}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field-box">
+                                <label class="field-title" for="TraderName">Payment Terms :</label>
+                                <div class="my-select cpy-select view-select clearfix br">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">T/T after B/L 30 Days,B/L=0</div>
+                                                <input type="text"  readonly="readonly" value="Tender">
+                                            </div>
+                                        </div>
+                                        <ul class="select-options">
+                                            <li data-value="Tender" class="selected">Tender</li>
+                                            <li data-value="Html">Html</li>
+                                            <li data-value="Html5">Html5</li>
+                                            <li data-value="JavaScript">JavaScript</li>
+                                            <li data-value="Jquery">Jquery</li>
+                                            <li data-value="Java">Java</li>
+                                            <li data-value="c#">c#</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName"><span class="must">* </span>Vessel :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.vesselName}" class="br input-name">
+                         <!--  <span>$!{shipVO.vesselName}</span>  -->
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Vessel Type :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.vesselType}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field-box">
+                                <label class="field-title" for="TraderName">Trade Terms :</label>
+                                <div class="my-select cpy-select view-select clearfix br">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">T/T after B/L 30 Days,B/L=0</div>
+                                                <input type="text" readonly="readonly" value="Tender">
+                                            </div>
+                                        </div>
+                                        <ul class="select-options">
+                                            <li data-value="Tender" class="selected">Tender</li>
+                                            <li data-value="Html">Html</li>
+                                            <li data-value="Html5">Html5</li>
+                                            <li data-value="JavaScript">JavaScript</li>
+                                            <li data-value="Jquery">Jquery</li>
+                                            <li data-value="Java">Java</li>
+                                            <li data-value="c#">c#</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+							<li class="per-field-box">
+                                <label class="field-title" for="Address"><span class="must">* </span>Built :</label>
+                                <input name="Address" type="text"  readonly="readonly" value="$!{shipVO.built}"  placeholder="10,000" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Hull Type :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.hullType}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Sdwt(mt) :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.sdwt}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Loa(m) :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.loa}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Beam(m) :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.beam}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Draft(m) :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.draft}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                                <label class="field-title" for="TraderName">Cubic(m³) :</label>
+                                <input name="TraderName" type="text" readonly="readonly" value="$!{shipVO.cubic}" class="br input-name">
+                                <em class="tiperror">* Please enter the correct content</em>
+                            </li>
+                            <li class="per-field">
+                            	<!-- if 没有不能下载-->
+                            	#if($!{shipVO.accessoryFileNm} != '')
+	      							<label class="field-title" for="TraderName">Enclosure :</label>
+                                	<input name="TraderName" type="text"  readonly="readonly" value="$!{shipVO.accessoryFileNm}" class="br input-name">
+                                	<a href="/shipping/common/doc/download.htm?path=$!{shipVO.accessory}&fileName=$!{shipVO.accessoryFileNm}" 
+														class="br btn-b vs-down" target="_blank">Download</a>
+								#end
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vs-backbox">
+                    <a href="javascript:history.go(-1)" class="br btn-h">Back</a>
+                </div>
+            </div>
+        </div>
+#js($appServer.get('/script/pages/back/sysShip/saveSysShip.js?js_version=03280827'))

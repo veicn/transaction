@@ -1,0 +1,607 @@
+$contain.get('/common/title.htm').put('title', 'TransitUnloading')
+
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/stowage-plan.css?css_version=03280827'))
+#css($appServer.get('/css/transitUnloading.css?css_version=03280827'))
+
+#js("$appServer.get('/script/pages/back/transitUnloading/index.js?js_version=03280827')")
+<div class="m-nav stowage-steps-content fl clearfix">
+    <ul id="steps" class="stowage-steps clearfix constatus">
+        <input type="hidden" value="$!{confirmationSheetVO.status}" id="constartu">
+        <input type="hidden" id="constatusUuid" value="$!{confirmationSheetVO.uuid}">
+        <input type="hidden" value="$!{confirmationSheetVO.tradeTerms}" id="tradeTerms">
+        <li class="steps  fl">
+            <div class="steps-infor">
+                <span>Stowage<br>Start</span><br>
+
+            </div>
+        </li>
+        <li class="steps  fl">
+            <div class="steps-infor">
+                <span>LOADING<br>PORT</span>
+            </div>
+        </li>
+        #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+
+        <li class="steps fl">
+            <div class="steps-infor">
+                <span>VOYAGE<br>TRACKING</span>
+            </div>
+        </li>
+        <li class="steps fl">
+            <div class="steps-infor">
+                <span>PORT OF DISCHARGE</span>
+            </div>
+        </li>
+        #end
+        <li class="steps fl">
+            <div class="steps-infor atthe">
+                <span>END TASK</span>
+            </div>
+        </li>
+    </ul>
+    <div class="m-t-tab stowage-steps-info clearfix">
+        <ol class="fl">
+            <li>
+                <span class="m-f-span w106">Order Number :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.orderNumber}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Product :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.product}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Quantity :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.quantity}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Vessel’s name :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.vesselName}</span>
+            </li>
+        </ol>
+        <ul class="fr">
+            <li>
+                <span class="m-f-span wspan">Prot Of Loading :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.portOfLoading}</span>
+            </li>
+            <li>
+                <span class="m-f-span wspan">Port Of Discharge :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.portOfDischarge}</span>
+            </li>
+            <li>
+                <span class="m-f-span wspan">Laycan :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.laycanStrat}-$!{confirmationSheetVO.laycanEnd}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="split-line"></div>
+    <div id="lib_Tab">
+        <div class="lib_Menubox lib_tabborder">
+            <ul class="clearfix">
+                <li class="tab-title one1 fl active">Voyage Start<span class="tab-line">|</span></li>
+                #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+                    <li class="tab-title one2 fl">Loading Port<span class="tab-line">|</span></li>
+                    #else
+                        <li class="tab-title one2 fl">Loading Port</li>
+
+                #end
+
+               #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+                   <li class="tab-title one3 fl">In Transit<span class="tab-line">|</span></li>
+                   <li class="tab-title one4 fl">Discharge</li>
+               #end
+
+            </ul>
+        </div>
+        <div class="lib_Contentbox lib_tabborder clearfix">
+            <div class="con_one_1 con_one clearfix" style="display: block">
+                <div class="loading-port">
+                    <h3>VOYAGE START</h3>
+                    <div class="m-t-tab stowage-steps-info clearfix">
+                        <form id="stowagePlan">
+                        <ul >
+                            <li>
+                                <input type="text" name="uuid" hidden="hidden"
+                                       value="$!{voyageStartVO.uuid}">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">Product :</label>
+                                #if($!{voyageStartVO.productNm})
+                                    <input data-rules="required" length="50"  name="productNm" type="text" class="br input-name" value="$!{voyageStartVO.productNm}">
+                                #else
+                                    <input data-rules="required" length="50" name="productNm" type="text" class="br input-name"  value="$!{confirmationSheetVO.product}" >
+                                #end
+
+                                <input name="shipConfirmationSheetId" type="text" class="br input-name"
+                                       hidden="hidden" value="$!{confirmationSheetId}"/>
+                            </li>
+                            <li>
+                                <label class="field-title" for="MetricTons">Planed Quantity (MT) :</label>
+                                <div class="field-box">
+                                    <div class="fl"><input data-rules="required;decimal"  name="metricTons" type="text" class="br input-name" value="$!{voyageStartVO.metricTons}">
+                                    </div>
+                                    <i class="fl mar-left-10 mar-right-10 l-34">±</i>
+                                    <div class="fl"><input data-rules="required;decimal":decabove="2" :decAfter="2"  name="rangeOfError" type="text" class="br input-name" value="$!{voyageStartVO.rangeOfError}">
+                                    </div>
+                                    <i class="mar-left-5 l-34">%</i>
+                                </div>
+                            </li>
+                            <li>
+                                <label class="field-title" for="Bbls" >Planed Quantity (BBLs) :</label>
+                                <input name="bbls" length="20" PLACEHOLDER="Non mandatory" type="text" class="br input-name" value="$!{voyageStartVO.bbls}">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Loading Temp">Loading Temp (℉) :</label>
+                                <input name="loadingTemp"  length="10" PLACEHOLDER="Non mandatory" type="text" class="br input-name" value="$!{voyageStartVO.loadingTemp}">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Draft Restriciton Of Loading Port">Departure Draft(M) :</label>
+                                <input name="draftRestrictionOfLoadingPort"  length="20" PLACEHOLDER="Non mandatory" type="text" class="br input-name" value="$!{voyageStartVO.draftRestrictionOfLoadingPort}">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Draft Restriction Of Discharging Port">Arrival Draft(M) :</label>
+                                <input name="draftRestrictionOfDischargingPort"  length="20" PLACEHOLDER="Non mandatory" type="text" class="br input-name" value="$!{voyageStartVO.draftRestrictionOfDischargingPort}">
+                            </li>
+                            <li class="clearfix">
+                                <label class="fl field-title" for="Accessory">Upload Stowage Plan :</label>
+                                <input type="text" id="voyageFileName" PLACEHOLDER="Non mandatory" path="" class="br fl accessory-input input-name" style="margin-left:5px;"
+                                       readonly="readonly" name="accessoryFileNm" value="$!{voyageStartVO.accessoryFileNm}">
+                                <input name="accessory" hidden="hidden" id="voyageFileUrl" type="text" value="$!{voyageStartVO.accessory}"/>
+
+                                <div class="fl addBox Upload-btn">
+                                    <a href="javascript:void(0)"   class="file br addBtn startAdd"  type="button" id="voyagestartUpload" style="float: left;">Upload</a>
+                                    #if($!{voyageStartVO.accessoryFileNm})
+                                        <a href="javascript:void(0)" id="voyageFileDelete"  class=" br addBtn startAdd"  type="button" id="voyagestartUpload" style="float: left;margin-left: 10px;">Delete</a>
+                                    #else
+                                        <a href="javascript:void(0)" id="voyageFileDelete"  class=" br addBtn startAdd"  type="button" id="voyagestartUpload" style="float: left;margin-left: 10px;display: none">Delete</a>
+                                    #end
+                                </div>
+                            </li>
+
+                            <li class="clearfix">
+                                <label class="fl field-title" for="Accessory">Upload DI :</label>
+                                <input type="text" id="diFileName" path="" PLACEHOLDER="Non mandatory" class="br fl accessory-input input-name" style="margin-left:5px;"
+                                       readonly="readonly" name="diFileNm" value="$!{voyageStartVO.diFileNm}">
+                                <input name="di" hidden="hidden" id="diFileUrl" type="text" value="$!{voyageStartVO.di}"/>
+
+                                <div class="fl addBox Upload-btn">
+                                    <a href="javascript:void(0)"   class="file br addBtn startAdd"  type="button" id="diUpload" style="float: left;">Upload</a>
+                                    #if($!{voyageStartVO.diFileNm})
+                                        <a href="javascript:void(0)" id="diFileDelete"  class=" br addBtn startAdd"  type="button"  style="float: left;margin-left: 10px;">Delete</a>
+                                    #else
+                                        <a href="javascript:void(0)" id="diFileDelete"  class=" br addBtn startAdd"  type="button"  style="float: left;margin-left: 10px;display: none">Delete</a>
+                                    #end
+                                </div>
+                            </li>
+                        </ul>
+
+                        <br>
+                        <div class="sub-btn1 sub-btn2">
+                            <a href="javascript:history.go(-1)" class="br">Return</a>
+                            <a href="javascript:;" class="br"
+                               onclick="unloading.submit('stowagePlan',unloading.urls.stowagePlan)"> Submit</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="con_one_2 con_one">
+                <div class="loading-port">
+                    <h3>LOADING TRACKING</h3>
+                    <div class="m-t-tab stowage-steps-info clearfix">
+                        <ol class="fl w2">
+                            <li>
+                                <span class="m-f-span wspan">Port Of Loading :</span>
+                                <span class="m-r-span">$!{loadPortVO.portOfLoading}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Imo :</span>
+                                <span class="m-r-span">$!{loadPortVO.imo}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Quantity :</span>
+                                <span class="m-r-span">$!{loadPortVO.quantity}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Nor Tendered :</span>
+                                <span class="m-r-span">$!{loadPortVO.norTendered}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Anchor aweigh :</span>
+                                <span class="m-r-span">$!{loadPortVO.anchorAweigh}</span>
+                            </li>
+                        </ol>
+                        <ul class="fl w2">
+                            <li>
+                                <span class="m-f-span wspan">Product :</span>
+                                <span class="m-r-span">$!{loadPortVO.product}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Quantity（Tons）:</span>
+                                <span class="m-r-span">$!{loadPortVO.quantityTons}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span wspan">Laycan :</span>
+                                #if($!{loadPortVO.laycanStart}&&$!{loadPortVO.laycanEnd})
+                                    <span class="m-r-span">$!{loadPortVO.laycanStart}——$!{loadPortVO.laycanEnd}</span>
+                                #else
+                                    <span class="m-r-span">$!{loadPortVO.laycanStart}</span>
+                                #end
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="split-dash-line"></div>
+                    <div class="stowage-dd clearfix">
+                        <dl class="fl">
+                            <dt>POB</dt>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.pobDatetimeOne}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Berth :</span>
+                                <span class="m-r-span">$!{loadPortVO.pobBerth}</span>
+                            </dd>
+                        </dl>
+                        <dl class="fr">
+                            <dt>FIRST LINE</dt>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.firstLineDatetime}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Etb :</span>
+                                <span class="m-r-span">$!{loadPortVO.firstLineEtb}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Berth :</span>
+                                <span class="m-r-span">$!{loadPortVO.firstLineBerth}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="split-dash-line"></div>
+                    <div class="stowage-dd clearfix">
+                        <dl class="fl">
+                            <dt>TANKS INSPECTION</dt>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.tanksInspectionDatetime}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Berth :</span>
+                                <span class="m-r-span"></span>
+                            </dd>
+                        </dl>
+                        <dl class="fr">
+                            <dd>
+                                <span class="m-f-span wspan">All Fast :</span>
+                                <span class="m-r-span">$!{loadPortVO.allFast}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Shore arms conecting :</span>
+                                <span class="m-r-span">$!{loadPortVO.shoreArmsConnecting}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="split-dash-line"></div>
+                    <div class="stowage-dd clearfix">
+                        <dl class="fl">
+                            <dt>INDEPENDENT INSPECTION</dt>
+                            <dd>
+                                <span class="m-f-span wspan"> Independent Inspection :</span>
+                                <span class="m-r-span">$!{loadPortVO.independentInspection}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.independentInspectionDatetime}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Obq :</span>
+                                <span class="m-r-span">$!{loadPortVO.independentInspectionObq}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Other :</span>
+                                <span class="m-r-span"></span>
+                            </dd>
+                        </dl>
+                        <dl class="fr">
+                            <dt>COMMENCED LOADING</dt>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.commencedLoadingDatetime}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Etb :</span>
+                                <span class="m-r-span">$!{loadPortVO.etc}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="split-dash-line"></div>
+                    <div class="stowage-dd clearfix">
+                        <dl class="fl">
+                            <dt>CARGO DOCUMENTS ON BOARD</dt>
+                            <dd>
+                                <span class="m-f-span wspan"> Planed Quantity (MT) :</span>
+                                <span class="m-r-span">$!{loadPortVO.blMetricTons}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Long Tons :</span>
+                                <span class="m-r-span">$!{loadPortVO.blLongTons}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Ltr at 15℃ :</span>
+                                <span class="m-r-span">$!{loadPortVO.ltr}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Bbls at 60℃ :</span>
+                                <span class="m-r-span">$!{loadPortVO.bbls}</span>
+                            </dd>
+                        </dl>
+                        <dl  class="fr">
+                            <dt>ALL LINES CAST OFF AND VESSEL SAILED</dt>
+                            <dd>
+                                <span class="m-f-span wspan">Date&Time :</span>
+                                <span class="m-r-span">$!{loadPortVO.leaveDatetime}</span>
+                            </dd>
+                            <dd>
+                                <span class="m-f-span wspan">Nest Port :</span>
+                                <span class="m-r-span">$!{loadPortVO.nextPortId}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+            #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+            <div class="con_one_3 con_one">
+                <div class="loading-port">
+                    <h3>VOYAGE TRACKING</h3>
+                    <div class="m-t-tab stowage-steps-info clearfix">
+                        <table id="transit">
+                            <tr>
+                                <th>DATE</th>
+                                <th>STATE</th>
+                                <th>OPERATE</th>
+                            </tr>
+                            #foreach($!{transitUnloadingVo} in $!{transitUnloadingVOList})
+
+                                <tr id="$!{transitUnloadingVo.uuid}transit">
+                                    <td hidden
+                                                ="hidden" title="uuid">$!{transitUnloadingVo.uuid}</td>
+                                    <td hidden
+                                                ="hidden" title="shipConfirmationSheetId">$!{confirmationSheetId}</td>
+                                    <td name="datetime" title="datetime">$!{transitUnloadingVo.datetime}</td>
+                                    <td hidden
+                                                ="hidden" title="posn">$!{transitUnloadingVo.posn}</td>
+                                    <td hidden
+                                                ="hidden" title="aveSpd">$!{transitUnloadingVo.aveSpd}</td>
+                                    <td hidden
+                                                ="hidden" title="gAveSpd">$!{transitUnloadingVo.gAveSpd}</td>
+                                    <td hidden
+                                                ="hidden" title="rpm">$!{transitUnloadingVo.rpm}</td>
+                                    <td hidden
+                                                ="hidden" title="sea">$!{transitUnloadingVo.sea}</td>
+                                    <td hidden
+                                                ="hidden" title="destination">$!{transitUnloadingVo.destination}</td>
+                                    <td hidden
+                                                ="hidden" title="eta">$!{transitUnloadingVo.eta}</td>
+                                    <td hidden
+                                                ="hidden" title="accessory">$!{transitUnloadingVo.accessory}</td>
+                                    <td hidden
+                                                ="hidden" title="accessoryFileNm">$!{transitUnloadingVo.accessoryFileNm}</td>
+                                    <td title="state">done</td>
+                                    <td hidden
+                                                ="hidden">$!{transitUnloadingVOList.size}</td>
+                                    <td>
+                                        <em class="button-sp">
+                                            <a href="javascript:void(0);" class="br"
+                                               onclick="unloading.amend('$!{transitUnloadingVo.uuid}transit','$!{velocityCount}')">Amend</a>
+                                            <a href="javascript:void(0);" class="br"
+                                               onclick="unloading.deleteTransit('$!{transitUnloadingVo.uuid}',this)">Delete</a>
+                                        </em>
+                                    </td>
+                                </tr>
+                            #end
+                        </table>
+                        <em class="button-sp button-sp1">
+                            <a href="javascript:void(0);" class="br" onclick="unloading.addTransit()">Add</a>
+                        </em>
+                        <div class=""></div>
+                        <form id="uldata">
+                        <ul  class=" Transit-inp">
+                            <input name="uuid" type="text" class="br input-name" hidden="hidden"/>
+                            <input name="shipConfirmationSheetId" type="text" class="br input-name"
+                                   hidden="hidden" value="$!{confirmationSheetId}"/>
+
+                            <li>
+                                <label class="field-title" for="datatime">Time :</label>
+                                <em class="check-b dateParent">
+                                    <div class="datetime-wrap">
+                                        <input data-rules="required" name="datetime" id="time1" type="text"
+                                               class="DeadlineMonth datetime" />
+                                        <div class="datetime-view"></div>
+                                    </div>
+                                </em>
+                            </li>
+
+                            <li>
+                                <label class="field-title" for="posn">Posn :</label>
+                                <input data-rules="required" name="posn" type="text" class="br input-name">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">AVE SPD(24H) :</label>
+                                <input data-rules="required;decimal":decAbove="3" :decAfter="3" length="7" name="aveSpd" type="text" class="br input-name">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">G.AVE SPD :</label>
+                                <input  name="gAveSpd" data-rules="required;decimal":decAbove="3" :decAfter="3" length="7" type="text" class="br input-name">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">RPM :</label>
+                                <input data-rules="required" name="rpm" type="text" class="br input-name">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">SEA : </label>
+                                <input data-rules="required" name="sea" type="text" class="br input-name">
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">Destination :</label>
+                                <input inpa-rules="required" name="destination" type="text" class="br input-name">
+                            </li>
+
+
+                            <li>
+                                <label class="field-title" for="MetricTons">Eta :</label>
+                                <em class="check-b ">
+                                    <div class="datetime-wrap ">
+                                        <input require name="eta" id="time2" type="text"
+                                               class="DeadlineMonth datetime" />
+                                        <div class="datetime-view"></div>
+                                    </div>
+                                </em>
+                            </li>
+
+##                            <li style="margin-bottom: 30px" >
+##                                <label class="fl field-title" for="Accessory">Upload Stowage Plan :  </label>
+##                                <input type="text" id="transitFileName" path="" class="fl br input-name" style="margin-left: 5px;"
+##                                       readonly="readonly" name="accessoryFileNm" >
+##                                <input name="accessory" style="display: none" id="transitFileUrl" type="text" />
+##                                <div class="fl addBox Upload-btn">
+##                                    <a href="javascript:void(0)"   class="file br addBtn startAdd"  type="button" id="transitUpload" style="float: left">Upload</a>
+##                                        <a href="javascript:void(0)" id="transitFileDelete"  class=" br addBtn startAdd"  type="button" id="voyagestartUpload" style="float: left;margin-left: 10px;display: none">Delete</a></i>
+##                                </div>
+##
+##                            </li>
+                        </ul>
+                        <div class="sub-btn1 sub-btn2">
+                            <a href="javascript:history.go(-1)" class="br"  >Return</a>
+                            <a href="javascript:;" class="br" onclick="unloading.transitSubmit('uldata',unloading.urls.transitUnloading)">Submit</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="con_one_4 con_one">
+                <div class="loading-port">
+                    <h3>DISCHARGING PORT MESSAGE</h3>
+                    <div class="m-t-tab stowage-steps-info clearfix">
+                        <form id="discharg">
+                        <ul  class=" Transit-inp">
+                            <input type="text" name="uuid" hidden="hidden"
+                                   value="$!{unloadPortVo.uuid}">
+                            <li>
+                                <label class="field-title" for="Product"><span>*</span> Discharging Port :</label>
+                                <div class="my-select cpy-select h-select clearfix">
+                                    <div class="select s-b" >
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{unloadPortVo.dischargingPort}</div>
+                                                <input type="text" name="dischargingPortId" class="vcode" readonly="readonly"
+                                                       value="$!{unloadPortVo.dischargingPortId}">
+                                                <input type="hidden" name="dischargingPort" class="vname" readonly="readonly"
+                                                       value="$!{unloadPortVo.dischargingPort}">
+                                            </div>
+                                        </div>
+                                        <ul class="select-options">
+                                            #foreach($!{dictoryVo} in $!{unloadPortList})
+                                                #if($!{unloadPortVo.dischargingPortId} ==  $!{dictoryVo.code})
+                                                    <li data-value="${dictoryVo.code}"
+                                                        class="selected">$!{dictoryVo.enName}</li>
+                                                #else
+                                                    <li data-value="${dictoryVo.code}"
+                                                        class="">$!{dictoryVo.enName}</li>
+                                                #end
+                                            #end
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <label class="field-title" for="MetricTons">Anchor Aweigh :</label>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="anchorAweigh" id="time3" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.anchorAweigh}"/>
+                                        <div class="datetime-view">$!{unloadPortVo.anchorAweigh}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <input name="shipConfirmationSheetId" type="text" class="br input-name" hidden="hidden"
+                                   value="$!{confirmationSheetId}"/>
+                            <li>
+                                <label class="field-title" for="Product">Pob :</label>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="pob" id="time4" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.pob}"/>
+                                        <div class="datetime-view">$!{unloadPortVo.pob}</div>
+                                    </div>
+                                </em>
+                            </li>
+
+                            <li>
+                                <label class="field-title" for="Product">All Fast :</label>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="allFast" id="time5" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.allFast}"/>
+                                        <div class="datetime-view">$!{unloadPortVo.allFast}</div>
+                                    </div>
+                                </em>
+                            </li>
+
+
+                            <li>
+                                <label class="field-title" for="Product">Shore Arm Disconnecting :</label>
+                                <em class="check-b">
+                                    <div class="datetime-wrap">
+                                        <input name="shoreArmDisconnecting" id="time6" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.shoreArmDisconnecting}"/>
+                                        <div class="datetime-view">$!{unloadPortVo.shoreArmDisconnecting}</div>
+                                    </div>
+                                </em>
+                            </li>
+
+                            <li>
+                                <label class="field-title" for="Product">Completed Discharged :</label>
+                                <em class="check-b">
+                                    <div class="datetime-wrap dateParent">
+                                        <input data-rules="required" name="completedDischarged" id="time7" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.completedDischarged}" data-rules="require;"/>
+                                        <div class="datetime-view">$!{unloadPortVo.completedDischarged}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">Sailed :</label>
+                                <em class="check-b dateParent" >
+                                    <div class="datetime-wrap">
+                                        <input data-rules="required" name="allLinesCastOffAndVesselSailed" id="time8" type="text"
+                                               class="DeadlineMonth datetime" value="$!{unloadPortVo.allLinesCastOffAndVesselSailed}"/>
+                                        <div class="datetime-view">$!{unloadPortVo.allLinesCastOffAndVesselSailed}</div>
+                                    </div>
+                                </em>
+                            </li>
+                            <li>
+                                <label class="field-title" for="Product">Planed Quantity (MT) :</label>
+                                <input data-rules="required" name="metricTons" type="text" class="br input-name" value="$!{unloadPortVo.metricTons}"/>
+                            </li>
+
+
+                        </ul>
+                        <div class="sub-btn1 sub-btn2">
+                            <a href="javascript:history.go(-1)"  class="br">Return</a>
+                            <a href="javascript:void(0);" class="br"
+                               onclick="unloading.dischargeSubmit('discharg',unloading.urls.discharge)"> Submit</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        #end
+        </div>
+    </div>
+</div>
+
+

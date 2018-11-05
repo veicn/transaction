@@ -1,0 +1,229 @@
+#set($js_validate = "validate")##需要验证
+#set($id = $info.id)
+<script src="$!appServer.get('/script/lib/jquery.validate.min.js')" type="application/javascript"></script>
+<script src="$appServer.get('script/jquery[1].validate.cn.js')"></script>
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+<div class="c-mr">
+    <div class="c-mod">
+
+        $contain.get('tabs.htm').put("menu","shipAgencyInfo")
+        #if(!$id)
+	        <form action="#" id="shipAgencyInfoForm" method="post">
+	            <ul class="c-bczl enterbox1">
+	                #springBind("info.id")
+	                <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+	
+	                #springBind("info.shipNum")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Vessels/ships：</span>
+	                    <input type="text" class="form-inp"   maxlength="16" placeholder="Please enter the number of ships" name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+					<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+					
+					
+	                #springBind("info.shipTonnage")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Net tons of ships：</span>
+	                    <input type="text" class="form-inp" placeholder="Please enter the net ton of ships"  maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+					<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+					
+					
+	                #springBind("info.volumeOfFreight")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">The volume of freight transport：</span>
+	                    <input type="text" class="form-inp" placeholder="Please enter the volume of the freight"  maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+	                <div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+	
+	                #springBind("info.containerNum")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Container：</span>
+	                    <input type="text" class="form-inp" placeholder="Please enter the number of containers" maxlength="16"  name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+	                <div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+	
+	                #springBind("info.totalRevenue")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Total revenue of the company：</span>
+	                    <input type="text" class="form-inp" placeholder="Please enter the company's total revenue "  maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+	                <div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+	
+	                #springBind("info.shipAgencyRevenue")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Shipping revenue：</span>
+	                    <input type="text" class="form-inp" placeholder="Please enter shipping revenue" maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+	                </li>
+	                <div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+			            #else
+			                ${status.errorMessage}
+			            #end
+					</div>
+	            </ul>
+	            #if(!$id)
+	                <div class="c-subdiv c-mod-bc c-mod-bc2"><button class="c-btnsub">submit</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">return </button></div>
+	
+	            #end
+	        </form>
+		#else
+	            <ul class="c-bczl">
+	                #springBind("info.shipNum")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Vessels/ships：</span>
+						<span class="qx-conte"> $!{status.value}</span>
+	                </li>
+	
+	                #springBind("info.shipTonnage")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Net tons of ships：</span>
+						<span class="qx-conte"> $!{status.value}</span>
+	                </li>
+	
+	                #springBind("info.volumeOfFreight")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">The volume of freight transport：</span>
+						<span class="qx-conte">$!{status.value}</span>
+	                </li>
+	
+	                #springBind("info.containerNum")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Container：</span>
+						<span class="qx-conte">$!{status.value}</span>
+	                </li>
+	
+	                #springBind("info.totalRevenue")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Total revenue of the company：</span>
+						<span class="qx-conte">$!{status.value}</span>
+	                </li>
+	
+	                #springBind("info.shipAgencyRevenue")
+	                <li class="c-bcz clearfix"><span class="c-b-txt">Shipping revenue：</span>
+						<span class="qx-conte"> $!{status.value}</span>
+	                </li>
+	            </ul>
+	            #if(!$id)
+	                <div class="c-subdiv c-mod-bc c-mod-bc2"><button class="c-btnsub">submit</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">return </button></div>
+	
+	            #end
+	        </form>
+		#end
+    </div>
+</div>
+
+<script >
+  $(function(){
+         //表单验证及submit
+        $ ("#shipAgencyInfoForm").validate({
+            ignore: ".ignore",
+            debug:false,
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                shipNum: {
+                    "required":true,
+                    digits:true ,
+                    maxlength:16
+                   
+                  
+                },
+                shipTonnage: {
+                    required: true,
+                    number:true ,
+                    maxlength:16
+                },
+                volumeOfFreight: {
+                    required: true,
+                    number:true ,
+                    maxlength:16
+                },
+                containerNum:{
+                	required:true,
+                	digits:true ,
+                    maxlength:16
+                
+                },
+                totalRevenue:{
+                	required:true,
+                	number:true	 ,
+                    maxlength:16
+                },
+                shipAgencyRevenue:{
+                	required:true,
+                	number:true ,
+                    maxlength:16
+                }
+            }
+            #*,
+            messages: {
+                shipNum: {
+                    required:"Please enter the total investment amount",
+                    number:"please enter a valid number "
+                },
+                shipTonnage: {
+                    required:"Please enter fixed assets amount",
+                    number:"please enter a valid number "
+                },
+                volumeOfFreight: {
+                    required:"Please enter the main product"
+                },
+                containerNum: {
+                    required:"Please enter the device description"
+                },
+                totalRevenue: {
+                    required:"Please enter the main import products"
+                },
+                shipAgencyRevenue: {
+                    required:"Please enter the main export products"
+                }
+              }*#
+              ,  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+
+
+     });
+     
+     
+ </script> 
+
+

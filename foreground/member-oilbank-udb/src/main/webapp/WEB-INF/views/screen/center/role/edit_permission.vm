@@ -1,0 +1,39 @@
+$contain.get('/common/title.htm').put('title', '修改子账号设置')
+
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+<div class="f1 mang-con">
+    <h3>Edit  Sub Account Role</h3>
+    <span class="sp s1">User Name :</span>
+    <span class="sp s2">Bterpstra</span>
+    <div class="my-check">
+        <img src="$appServer.get('/product/images/unchecked.png')"><span>Trader</span>
+        <img src="$appServer.get('/product/images/checked.png')"><span>Marshal</span>
+        <img src="$appServer.get('/product/images/checked.png')"><span>Owner’s Broker</span>
+        <img src="$appServer.get('/product/images/unchecked.png')"><span>Ancestral Agent</span>
+        <img src="$appServer.get('/product/images/checked.png')"><span>Enterprise Leader</span>
+        <img src="$appServer.get('/product/images/checked.png')"><span>General Staff</span>
+    </div>
+    <hr class="mang-hr">
+    <div class="my-button">
+        <input class=" btnr" value="Cancel">
+        <input class=" btnr" value="Save Changes">
+
+    </div>
+</div>
+
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+<script>
+    // 复选框
+    $(".my-check img").on("click",function(){
+        var src=$(this).attr("src");
+        if(src=="$appServer.get('/product/images/unchecked.png')"){
+            $(this).attr("src","$appServer.get('/product/images/checked.png')");
+        }else{
+            $(this).attr("src","$appServer.get('/product/images/unchecked.png')");
+        }
+
+    })
+</script>

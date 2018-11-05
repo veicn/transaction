@@ -1,0 +1,107 @@
+<!--自定义单证弹框-->
+<div class="s-pop-box s-pop-batch s-pop-oeder" >
+	<a href="javascript:void(0);" class="s-close1"></a>
+	<!-- <h1>自定义单证</h1> -->
+    <div class="xyxx-cont" >
+		<form class="s-form" action="">
+			<ul>	
+			  <li class="s-form-item" pane="">
+				<label class="s-form-label"><span style="color:red;">*</span>Doc Name：</label>
+				<div class="s-input-block">
+				  <input type="text" placeholder="please choose doc name" maxlength="20" class="s-input" id="fileNameCustom" onkeyup="onChangeInput(this.value)" value=""> 
+				</div>
+			  </li>
+			  <li class="s-form-item">
+				<label class="s-form-label">Select the file：</label>
+				<div class="s-input-block">
+					<input type="text" disabled="disable" placeholder="" id="fileName" class="s-input s-input1">
+					<a href="javascript:void(0);" class="s-btn s-btn-up">Upload<input class="s-upload-file customUploadDoc" disabled="disable" type="file" id="file" ></a>
+				</div>
+			  </li>
+			</ul>   
+		</form>
+	</div>
+	<!-- <p class="s-docu-but"><a href="" class="s-btn s-reg-btn">上&nbsp;&nbsp;传</a></p> -->
+</div>
+<script>
+function onChangeInput(obj) {
+	if(obj != ''){
+		$('.customUploadDoc').removeAttr('disabled');
+	}else{
+		$('.customUploadDoc').attr('disabled','disabled');
+	}
+};
+
+ layui.use("ossUpload", function(){  
+	
+	var $ = layui.jquery,upload = layui.ossUpload;
+	
+	
+	
+	upload.render({
+	    elem: ".customUploadDoc",//绑定元素 id或class
+	    exts: 'png,gif,jpg,jpeg,bmp,pdf,xls,xlsx,doc,docx', //允许上传的文件后缀
+	    before: function(obj){ 
+	    	layer.load(); //上传loading
+	    	this.data = {
+				uuid: $("#uuid").val(),
+				fileCode: fileCode
+	    	};
+	    },
+	    done: function(res, index,upload){
+	    	if(res.status === 0){
+	    		
+	    		var params ={}
+	    		params.uuid = $("#uuid").val();
+		    	params.orderDocumentId = $("#orderDocumentId").val();
+		    	params.documentType = $("#documentType").val();
+		    	params.tradeCategory = $("#tradeCategory").val();
+		    	
+		    	params.orderNo = $("#orderNo").val();
+		    	params.contractNo = $("#contractNo").val();
+		    	params.shipName = $("#shipName").val().trim();
+	    		var fileInfoList = [];
+	    		var info ={};
+	    		//$(index).parents('.is-flag').find('.fileUploadDoc').text("");
+	    		info.originalName = res.datas.originalName;
+	    		info.filePath = res.datas.path;
+		    	info.fileFormat = res.datas.originalName.split(".")[1];
+	    		info.fileName = $('#fileNameCustom').val();
+	    		info.fileCode = "T9999";
+	    		fileInfoList.push(info);
+	    		params.fileInfoList = fileInfoList;
+	    		
+		    	//console.log(params);
+		    	//Save单证
+    			$.ajax({
+    	    		type: "POST",
+    	    		url: orderServer+"/buyerCenter/orderDocument/saveDocument.json",
+    	    		data: JSON.stringify(params),
+    	    		async: false,
+    				contentType:"application/json",
+    				beforeSend: function (request) {
+    					index = layer.load();	
+    				},
+    	    		success: function(data) {
+    					layer.close(index);
+    					if(data.status == 0){
+    						layer.alert('successful uploaded!',{title:'Prompt',btn:'ok'}, function(index){
+    							location.reload();
+    						});
+    					}else{
+    						layer.alert("error:" + $.i18n(data.code,data.params),{title:'Prompt',btn:'ok'});
+    					}
+    				},
+    				error: function(data) {
+    					layer.close(index);
+    					layer.alert("error",{title:'Prompt',btn:'ok'});
+    		        }
+    	    	});   
+
+	    	} else {
+	    		layer.tips($.i18n(res.code,res.params), index, {tips: 1});
+	    	}
+	    }
+	})
+})
+</script>

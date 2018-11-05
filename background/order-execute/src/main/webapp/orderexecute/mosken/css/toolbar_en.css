@@ -1,0 +1,47 @@
+@charset "utf-8";
+/*侧边工具栏样式*/
+/*icon*/
+.c-ico{background-image:url(../images/icon.png);}
+.ico-arrow-unfold{background-position:-150px -287px;height:10px;width:12px;}
+.ico-arrow-fold{background-position:-150px -270px;height:10px;width:12px;}
+.ico-fav{background-position:0 -275px;height:15px;width:19px;}
+.ico-vs-s{background-position:-65px -270px;height:25px;width:19px;}
+.ico-vs-b{background-position:-105px -265px;height:32px;width:25px;}
+.ico-close{background-position:-40px -280px;height:10px;width:10px;}
+.ico-delete{background-position:-180px -270px;height:11px;width:9px;}
+.ico-kf{background-position:-80px -36px;height:20px;width:24px;}
+.ico-top{background-position:-120px -36px;height:20px;width:18px;}
+
+/*toolbar*/
+.toolbar{background-color:#1f272e;width:35px;position:fixed;top:0;bottom:0;right:0;z-index:1000;}
+.toolbar-narrow{background-color:#000;float:left;width:36px;position:absolute;top:0;bottom:0;left:0;}
+.toolbar-trigger a{background-color:#5e4a4a;color:#fff;display:block;width:20px;height:55px;text-align:center;padding:20px 8px;}
+.ico-arrow-r{height:10px;width:12px;}
+.ico-arrow-l{height:10px;width:12px;}
+.toolbar-list{padding-top:60px;}
+.toolbar-item{width:20px;line-height:1.2;text-align:center;padding:15px 8px;cursor:pointer;}
+.toolbar-item.action{background-color:#7b6f6f;}
+.toolbar-item a{color:#fff;}
+.toolbar-item a i{width:19px;margin-bottom:5px;}
+.ico-fav{height:15px;}
+.ico-vs-s{height:25px;}
+.fav-num,.vs-num{background-color:#0499e2;border-radius:100%;font-size:11px;display:inline-block;height:18px;line-height:18px;width:18px;text-align:center;margin-top:5px;}
+.toolbar-item.action .fav-num,.toolbar-item.action .vs-num{background-color:#ffde01;color:#000;}
+.toolbar-top{width:20px;line-height:1.2;text-align:center;cursor:pointer;padding:20px 8px;position:absolute;bottom:0;}
+.toolbar-top a{color:#fff;}
+.ico-arrow-top{height:15px;width:14px;margin-bottom:5px;}
+.toolbar-wide{background-color:#393937;display:none;float:right;width:280px;position:absolute;top:0;bottom:0;right:0;}
+.tb-title{color:#fff;padding:20px;position:relative;}
+.ico-close{height:10px;width:10px;margin-top:-5px;position:absolute;right:20px;top:50%;}
+.ico-vs-b{height:32px;width:25px;margin-right:10px;}
+.vs-pro{width:260px;padding:0 10px;}
+.vs-item{background-color:#fff;font-size:14px;float:left;width:90px;height:90px;text-align:center;margin:0 10px 20px;padding:10px;position:relative; overflow:hidden; white-space:nowrap;}
+.vs-item img{height:60px;width:90px;margin-bottom:8px;}
+.ico-delete{height:11px;width:9px;position:absolute;right:3px;top:3px;}
+.y-vs-a{border:1px solid #fff;border-radius:3px;color:#fff;font-size:14px;display:block;height:28px;line-height:28px;width:120px;text-align:center;margin:10px auto;}
+.tool{position:absolute;bottom:5%;}
+.tool li{height:20px;width:36px;padding:15px 0;text-align:center;}
+
+/*右侧对比栏+*/
+.toolbar-item a:hover{color:#fff;}
+

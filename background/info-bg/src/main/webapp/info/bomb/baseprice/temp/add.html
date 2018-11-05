@@ -1,0 +1,33 @@
+<form class="layui-form" action="">
+	<div class="layui-form-item" style="margin-top: 50px">
+		<label class="layui-form-label iw190">基价编码</label>
+		<div class="layui-input-inline">
+			<div class="layui-input-inline">
+				<input type="text" name="baseCode"  lay-verify="required" placeholder="请输入基价编码" class="layui-input">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">地区</label>
+		<div class="layui-input-inline">
+			<!-- <select name="baseArea" lay-verify="required">
+				<option value=""></option>
+				<option value="北京">北京</option>
+				<option value="上海">上海</option>
+				<option value="广州">广州</option>
+				<option value="深圳">深圳</option>
+				<option value="杭州">杭州</option>
+			</select> -->
+			<input type="text" name="baseArea"  lay-verify="required" placeholder="请输入地区" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label ">基价名称</label>
+		<div class="layui-input-inline ">
+			<input type="text" name="baseName"  lay-verify="required" placeholder="请输入基价名称" class="layui-input">
+		</div>
+	</div>
+	 <button id="saveBasePriceTemp" class="btnloc1 btnloc2 layui-btn layui-btn-normal" lay-submit="" lay-filter="saveBasePriceTemp">保存</button>
+    <button id="ext" type="button" class="btnloc2 layui-btn layui-btn-normal">取消</button>
+</form>
+

@@ -1,0 +1,75 @@
+<ul class="order-list clearfix" id="statusList">
+
+</ul>
+
+<script>
+    const saved = 'Saved';
+    const published = 'Published';
+    const finished = 'Completed';
+
+    $(function() {
+        const abstractBiddingState = new AbstractBiddingState();
+
+        #if($!{demandStatus} == 1)
+            $('#statusList').append(abstractBiddingState.changeState(new SavedState(), 1, true, saved));
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 2, false, published));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, false, finished));
+
+        #elseif($!{demandStatus} == 2)
+            $('#statusList').append(abstractBiddingState.changeState(new SavedState(), 1, true, saved));
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 2, true, published));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, false, finished));
+
+        #elseif($!{demandStatus} == 3)
+            $('#statusList').append(abstractBiddingState.changeState(new SavedState(), 1, true, saved));
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 2, true, published));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, true, finished));
+        #end
+    })
+
+    function AbstractBiddingState() {
+        var self = this;
+
+        this.currentState = null;
+        this.changeState = function(state, order, current, text) {
+            self.currentState = state;
+            return state.render(order, current, text);
+        };
+    }
+
+    function SavedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "   <span class='order-l'></span>" +
+                    "</li>";
+        };
+    }
+
+    function PublishedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+            var spanClass = current ? "order-l" : "order-l2";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "   <span class='" + spanClass + "'></span>" +
+                    "</li>";
+        };
+    }
+
+    function FinishedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "</li>";
+        };
+    }
+</script>

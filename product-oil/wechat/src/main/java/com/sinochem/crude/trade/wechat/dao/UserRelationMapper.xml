@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.wechat.dao.UserRelationMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.dao.UserRelation" id="UserRelationDO" extends="com.sinochem.crude.trade.dao.mappers.immutable.${meta.immapperInterfaceClassName}.UserRelation">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.wechat.domain.UserRelation" id="UserRelation">
+		<result property="wechatUserId" column="WECHAT_USER_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="openid" column="OPENID" />
+		<result property="userName" column="USER_NAME" />
+		<result property="password" column="PASSWORD" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="role" column="ROLE" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="etx1" column="ETX1" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation"  useGeneratedKeys="true" keyProperty="wechatUserId" >
+		insert  into wechat_user_relation (				WECHAT_USER_ID
+						,UUID
+						,OPENID
+						,USER_NAME
+						,PASSWORD
+						,MEMBER_ID
+						,EP_MEMBER_ID
+						,ROLE
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,ETX1
+						)
+		values(		#{wechatUserId}
+						,#{uuid}
+						,#{openid}
+						,#{userName}
+						,#{password}
+						,#{memberId}
+						,#{epMemberId}
+						,#{role}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{etx1}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM wechat_user_relation
+              WHERE 1=1 
+                AND WECHAT_USER_ID = #{wechatUserId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation">
+        DELETE FROM wechat_user_relation
+              WHERE 1=1 
+        <if test="wechatUserId!=null and wechatUserId!=''">AND  WECHAT_USER_ID = #{wechatUserId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="openid!=null and openid!=''">AND  OPENID = #{openid}</if>
+        <if test="userName!=null and userName!=''">AND  USER_NAME = #{userName}</if>
+        <if test="password!=null and password!=''">AND  PASSWORD = #{password}</if>
+        <if test="memberId!=null and memberId!=''">AND  MEMBER_ID = #{memberId}</if>
+        <if test="epMemberId!=null and epMemberId!=''">AND  EP_MEMBER_ID = #{epMemberId}</if>
+        <if test="role!=null and role!=''">AND  ROLE = #{role}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="etx1!=null and etx1!=''">AND  ETX1 = #{etx1}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation">
+		update wechat_user_relation
+		<set>
+         WECHAT_USER_ID=#{wechatUserId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="openid!=null">,OPENID = #{openid}</if>
+		<if test="userName!=null">,USER_NAME = #{userName}</if>
+		<if test="password!=null">,PASSWORD = #{password}</if>
+		<if test="memberId!=null">,MEMBER_ID = #{memberId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="role!=null">,ROLE = #{role}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="etx1!=null">,ETX1 = #{etx1}</if>
+		</set>
+		where
+       	 WECHAT_USER_ID=#{wechatUserId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation">
+		update wechat_user_relation
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="openid!=null">,OPENID = #{openid}</if>
+		<if test="userName!=null">,USER_NAME = #{userName}</if>
+		<if test="password!=null">,PASSWORD = #{password}</if>
+		<if test="memberId!=null">,MEMBER_ID = #{memberId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="role!=null">,ROLE = #{role}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="etx1!=null">,ETX1 = #{etx1}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update wechat_user_relation
+		<set>
+         WECHAT_USER_ID=#{wechatUserId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="openid!=null">,OPENID = #{openid}</if>
+		<if test="userName!=null">,USER_NAME = #{userName}</if>
+		<if test="password!=null">,PASSWORD = #{password}</if>
+		<if test="memberId!=null">,MEMBER_ID = #{memberId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="role!=null">,ROLE = #{role}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="etx1!=null">,ETX1 = #{etx1}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="wechatUserId!=null and wechatUserId!=''">and  WECHAT_USER_ID=#{wechatUserId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="openid!=null and openid!=''">and  OPENID=#{openid}</if>
+		<if test="userName!=null and userName!=''">,USER_NAME = #{userName}</if>
+		<if test="password!=null and password!=''">,PASSWORD = #{password}</if>
+		<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="role!=null and role!=''">and  ROLE=#{role}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="etx1!=null and etx1!=''">and  ETX1=#{etx1}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="UserRelation">
+			select
+			* from wechat_user_relation
+			where
+		    WECHAT_USER_ID=#{wechatUserId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="UserRelation">
+			select
+			* from wechat_user_relation
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="UserRelation" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation">
+		select * from wechat_user_relation
+			where
+		 ALIVE_FLAG='1'
+		<if test="wechatUserId!=null and wechatUserId!=''">and  WECHAT_USER_ID=#{wechatUserId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="openid!=null and openid!=''">and  OPENID=#{openid}</if>
+		<if test="userName!=null and userName!=''">and USER_NAME = #{userName}</if>
+		<if test="password!=null and password!=''"> and PASSWORD = #{password}</if>
+		<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="role!=null and role!=''">and  ROLE=#{role}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="etx1!=null and etx1!=''">and  ETX1=#{etx1}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  WECHAT_USER_ID as "wechatUserId" 
+						 ,   UUID as "uuid" 
+						 ,   OPENID as "openid" 
+						 ,	 USER_NAME as "userName"
+						 ,	 PASSWORD as "password"
+						 ,   MEMBER_ID as "memberId" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   ROLE as "role" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ETX1 as "etx1" 
+						from wechat_user_relation
+		where
+			ALIVE_FLAG='1'
+			<if test="wechatUserId!=null and wechatUserId!=''">and  WECHAT_USER_ID=#{wechatUserId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="openid!=null and openid!=''">and  OPENID=#{openid}</if>
+			<if test="userName!=null and userName!=''">and USER_NAME = #{userName}</if>
+			<if test="password!=null and password!=''"> and PASSWORD = #{password}</if>
+			<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="role!=null and role!=''">and  ROLE=#{role}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="etx1!=null and etx1!=''">and  ETX1=#{etx1}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from wechat_user_relation 
+		where
+		 ALIVE_FLAG='1'
+			<if test="wechatUserId!=null and wechatUserId!=''">and  WECHAT_USER_ID=#{wechatUserId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="openid!=null and openid!=''">and  OPENID=#{openid}</if>
+			<if test="userName!=null and userName!=''">and USER_NAME = #{userName}</if>
+			<if test="password!=null and password!=''"> and PASSWORD = #{password}</if>
+			<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="role!=null and role!=''">and  ROLE=#{role}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="etx1!=null and etx1!=''">and  ETX1=#{etx1}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+
+	<select id="findByOpenid" resultMap="UserRelation">
+		select
+		* from wechat_user_relation
+		where OPENID=#{openid}
+		and ALIVE_FLAG='1' order by CREATE_DATE DESC LIMIT 0 ,1
+	</select>
+	
+	<update id="deleteRecordByOpenid" parameterType="com.sinochem.crude.trade.wechat.domain.UserRelation">
+		update wechat_user_relation
+		<set>
+			ALIVE_FLAG = '0'
+		</set>
+		where
+       	 OPENID=#{openid}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

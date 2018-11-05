@@ -1,0 +1,172 @@
+ <div class="c-mod wh-box1 clearfix">
+                <form id="saveForm" action="$appServer.get('/person/fill.htm')" method="post">
+                    #if(${item.id})
+                        <input type="hidden" name="id" value="$!{item.id}"/>
+                    #end
+                    <input id="cardImg" type="hidden" name="cardImg" value="$!{item.cardImg}"/>
+                    <input id="headImg" type="hidden" name="headImg" value="$!{item.headImg}"/>
+                <h1>个人资料</h1>
+                <ul class="c-bczl">
+                    <li class="c-bcz clearfix"><span class="c-b-txt">头像：</span><span class="c-comptx c-gr-tx">
+
+
+                    <a id="headImgBtn" href="javascript:;">
+                        #if($!{item.headImg} && $!{item.headImg} != "")
+                            <img src="$!{uploadServer}/img/$!{item.headImg}.img">
+                        #else
+                            <em class="up-avatar">上&nbsp;传</em>
+                        #end
+                    </a>
+
+                    </span></li>
+                    #springBind("item.name")
+                    <li class="c-bcz clearfix"><span class="c-b-txt">姓名：</span>
+                        <input type="text" required="true" class="form-inp form-short" name="$!{status.expression}" value="$!{status.value}" maxlength="20">
+                    </li>
+                    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                    #springBind("item.cardType")
+##                    <li class="c-bcz clearfix"><span class="c-b-txt">手机号：</span><input type="text" class="form-inp form-short" name="" placeholder="请输入手机号"><span class="c-gr-ts rd">请输入正确的手机号，便于我们及时与您联系！</span></li>
+##                    <li class="c-bcz clearfix"><span class="c-b-txt">邮箱：</span><input type="text" class="form-inp form-short" name="" placeholder="请输入邮箱"></li>
+
+                    <li class="c-bcz clearfix"><span class="c-b-txt">证件类型：</span>
+                        <select id="cardType" class="form-sel form-short"  name="$!{status.expression}" >
+                            <option value="1" #if("1" == "$!{status.value}") selected #end>身份证</option>
+                            <option value="2" #if("2" == "$!{status.value}") selected #end>护照</option>
+                            <option value="3" #if("3" == "$!{status.value}") selected #end>军官证</option>
+                        </select>
+                    </li>
+
+                    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                    #springBind("item.cardNo")
+                    <li class="c-bcz clearfix"><span class="c-b-txt">证件号码：</span>
+                        <input type="text" required="true" class="form-inp form-short" name="$!{status.expression}" value="$!{status.value}" maxlength="20">
+                    </li>
+                    <li class="c-bcz clearfix"><span class="c-b-txt"  >上传证件：</span>
+                        <span class="c-up-box"  ><a id="cardImgBtn" href="javascript:;">
+                            #if($!{item.cardImg} && $!{item.cardImg} != "")
+                                #if($httpUtil.checkHttp(${item.cardImg}))
+                                    <img src="$!{item.cardImg}"/>
+                                #else
+                                    <img src="$!{uploadServer}/img/$!{item.cardImg}.img"/>
+                                #end
+                                #else
+                                <img src="$imageServer.get('images/up_zm.jpg')">
+
+                        #end</a>
+##                            <a href="" class="c-up-close">×</a>
+                        </span>
+                    </li>
+                    </li>
+                    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+
+                </ul>
+                <div class="c-subdiv"><button class="c-btnsub">提交</button></div>
+                </form>
+            </div>
+
+
+#set($vjs = $imageServer.get('js/lib/jquery.validate.min.js'))
+#js($vjs)
+#set($ljs = $imageServer.get('layui/layui.js'))
+#js($ljs)
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($ujs)
+<script>
+    $(function () {
+
+        #if($errorMessage && $errorMessage != "")
+            layui.use("layer",function() {
+                layui.layer.alert("$!{errorMessage}");
+            });
+        #end
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //预览图片实现
+            $(".previewBtn").click(function () {
+                var imgBox = $(this).parent().find(".img_box");
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    title: false,
+                    content: imgBox
+                });
+            });
+            var loadIndex;
+            //头像图片上传
+            $("#headImgBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "GRTX",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#headImg").val(result.id);
+                        $("#headImgBtn").html("");
+                        $("#headImgBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //证件图片上传
+            $("#cardImgBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "SFZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    //切换档案类型
+                    var dType = ("2" == $("#cardType").val()) ? "HZ" : "SFZ";
+                    $("input[name='docType']").val(dType);
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#cardImg").val(result.id);
+                        $("#cardImgBtn").find('img').remove();
+                        $("#cardImgBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+        });
+
+        jQuery.validator.addMethod("charactor", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9]*$/.test(value);
+        }, jQuery.validator.format("编码仅可以输入字母或数字"));
+
+        $ ("#saveForm").validate({
+            ignore: ".ignore",
+            rules: {
+                name: "required",
+                cardType: "required",
+                cardNo: {
+                    required: true,
+                    charactor: true
+                }
+            },
+            messages: {
+                name: "请输入姓名",
+                cardType: "请选择证件类型",
+                cardNo: {
+                    required: "请输入证件号码",
+                    charactor: "证件号码尽可以输入字母和数字"
+                }
+            },
+            errorPlacement: function(error, element) {
+                $ (".error").find("label").remove();
+                element.parent().after(error);
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+</script>

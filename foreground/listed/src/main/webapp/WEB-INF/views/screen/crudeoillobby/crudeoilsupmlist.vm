@@ -1,0 +1,93 @@
+#set($a="原油大厅_原油需求大厅_原油采购大厅_买原油网")
+
+<div class="fabucaigou-banner"><div class="fabucaigou-banner-jz"></div></div>
+
+<!--原油采购-->
+<div class="cg-content clearfix">
+    <div class="inner">
+        <div class="cg-title">原油采购
+            <span class="wyfbxq"><a href="$appServer.get('crudeoillobby/purchasingDemand.htm')">发布需求</a></span>
+            <span><a href="$appServer.get('crudeoillobby/index.htm')">更多</a></span>
+        </div>
+        <ul class="cg-line clearfix"><li></li><li class="cg-line1"></li></ul>
+        #*采购报价-投标*#
+        $contain.get("/crudeoilhallform/crudeoilbiddinglist.htm")
+        #*采购报价-询价*#
+        $contain.get("/crudeoilhallform/crudeoilrequirelist.htm")
+    </div>
+</div>
+
+<!--原油销售-->
+<div class="fabucaigou-banner2">
+    <div class="cg-back">
+        <div class="inner">
+            <div class="cg-title cg-title-xs cg-morx">原油销售
+                <span class="wyfbxq1"><a href="$appServer.get('crudeoillobby/sellingDemand.htm')">发布资源</a></span>
+                <span><a href="$appServer.get('crudeoillobby/indexSell.htm')">更多</a></span>
+            </div>
+            <ul class="cg-line clearfix"><li class="cg-xt"></li><li class="cg-line1"></li></ul>
+            #*销售报价-投标*#
+            $contain.get("/crudeoilhallform/crudesellbiddinglist.htm")
+##            #*销售报价-询价*#
+            $contain.get("/crudeoilhallform/crudesellrequirelist.htm")
+        </div>
+    </div>
+</div>
+
+<!--交易工具-->
+<div class="cg-content jygj-bj clearfix">
+    <div class="inner">
+        <div class="cg-title cg-title-xs">交易工具</div>
+        <ul class="cg-line clearfix"><li class="cg-xt"></li><li class="cg-line1"></li></ul>
+        <div class="common-tooln-bto">
+            <ul class="common-tooln-list clearfix">
+                <li class="common-tooln-li2"><p><a href="$appServer.get('/crudeoillobby/instrumentOfExchange.htm#sszjj')"><i class="c-ico ico-sszjj-cg"></i><span>计价转换</span></a></span></p></li>
+                <li class="common-tooln-li2"><p><a href="$shipServer.get('/page/#/shipCost')"><i class="c-ico ico-yfyg-cg"></i><span>运费预估</span></a></p></li>
+                <li class="common-tooln-li2"><p><a href="$appServer.get('/crudeoillobby/instrumentOfExchange.htm#nwmjg')"><i class="c-ico ico-nwmjg-cg"></i><span>内外贸价格转换</span></a></p></li>
+                <li class="common-tooln-li2"><p><a href="$infoServer.get('/page/#/query')"><i class="c-ico ico-yypzs-cg"></i><span>原油品质查询</span></a></p></li>
+                <li class="common-tooln-li2"><p><a href="$infoServer.get('/page/#/query')"><i class="c-ico ico-yylfs-cg"></i><span>原油馏分查询</span></a></p></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--市场信息-->
+<div class="cg-content scxx-bj clearfix" >
+    <div class="inner">
+        $contain.get("/crudeoilhallform/crudemarketinfo.htm").put('today', $!{today})
+    </div>
+</div>
+
+#js("$imageServer.get('tools/swiper/js/swiper.min.js')")
+#js("$imageServer.get('js/cg_crude.js')")
+
+<script>
+    function epclick(id, creater, oilSaleFlag, overdue) {
+    	var now = new Date();
+    	var date = now.toLocaleDateString();
+    	if (overdue) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('已逾期不能参与投标或报价!');
+            })
+            return false;
+    	}
+    	
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('需求发起者不能参与投标或报价!');
+            })
+            return false;
+        }else{
+        	if(oilSaleFlag) {
+				window.location.href="$appServer.get('/oilSaleBidding/crudeOilBidding.htm?demandId=')" + id;
+        	} else {
+				window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + id;
+        	}
+        }
+    }
+    //定义商品比较的回调函数，主要是定义URL地址
+    function compare(idArr){
+        var url = "$appServer.get('crudeoillobby/contrast.htm')";
+        window.open(url+"?demands="+idArr.toString());
+    }
+</script>

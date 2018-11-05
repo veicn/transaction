@@ -1,0 +1,150 @@
+
+  	 <!-- 货主，新增询盘 -->
+  	 <!-- 内容主体区域 -->
+  	 <div class="s-mod">
+  	 	  <style>
+				table { 
+					width:100%; 
+					text-align: left;
+					border:1px solid #e3e6e8; 
+					border-collapse: collapse; 
+					table-layout: fixed; 
+					display: table;
+				}
+		  </style>
+		  
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船盘信息</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table">
+					  <tr>
+					  	  <th title="船名"><div class="c-fn text-overflow">船名</div></th>
+					  	  <th title="船型"><div class="c-fn text-overflow">船型</div></th>
+					  	  <th title="船位"><div class="c-fn text-overflow">船位</div></th>
+					  	  <th title="OPEN"><div class="c-fn text-overflow">OPEN</div></th>
+					  	  <th title="ETA Fujairah"><div class="c-fn text-overflow">ETA Fujairah</div></th>
+					  	  <th title="ETA Cabinda"><div class="c-fn text-overflow">ETA Cabinda</div></th>
+					  	  <th title="船东"><div class="c-fn text-overflow">船东</div></th>
+					      <th title="船盘发布人"><div class="c-fn text-overflow">船盘发布人</div></th>
+					  	  <th title="备注"><div class="c-fn text-overflow">备注</div></th>
+					  </tr>
+					  <tr>
+					  	  <td><div class="name text-overflow">&nbsp;</div></td>
+						  <td><div class="type text-overflow">&nbsp;</div></td>
+						  <td><div class="position text-overflow">&nbsp;</div></td>
+						  <td><div class="open text-overflow">&nbsp;</div></td>
+						  <td><div class="eta text-overflow">&nbsp;</div></td>
+						  <td><div class="etaCabinda text-overflow">&nbsp;</div></td>
+						  <td><div class="shipOwner text-overflow">&nbsp;</div></td>
+						  <td><div class="epMemberName text-overflow">&nbsp;</div></td>
+						  <td><div class="shipPlateRemark text-overflow">&nbsp;</div></td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船舶资料</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table">
+					  <tr>
+					  	  <th title="Vessel Name"><div class="c-fn text-overflow" style="width:100px;">Vessel Name</div></th>
+					  	  <th title="IMO"><div class="c-fn text-overflow">IMO</div></th>
+					  	  <th title="Built"><div class="c-fn text-overflow">Built</div></th>
+					  	  <th title="Vessel Type"><div class="c-fn text-overflow">Vessel Type</div></th>
+					  	  <th title="Vessel Size"><div class="c-fn text-overflow">Vessel Size</div></th>
+					  	  <th title="Cubic(m³)"><div class="c-fn text-overflow">Cubic(m³)</div></th>
+					  	  <th title="SDWT(mt)"><div class="c-fn text-overflow">SDWT(mt)</div></th>
+					      <th title="LOA(m)"><div class="c-fn text-overflow">LOA(m)</div></th>
+					  	  <th title="Beam(m)"><div class="c-fn text-overflow">Beam(m)</div></th>
+					  	  <th title="Draft(m)"><div class="c-fn text-overflow">Draft(m)</div></th>
+					  	  <th title="Hull Type"><div class="c-fn text-overflow">Hull Type</div></th>
+					  </tr>
+					  <tr>
+					  	  <td><div class="shipName text-overflow">&nbsp;</div></td>
+						  <td><div class="imo text-overflow">&nbsp;</div></td>
+						  <td><div class="completeDate text-overflow">&nbsp;</div></td>
+						  <td><div class="useType text-overflow">&nbsp;</div></td>
+						  <td><div class="sysShipType text-overflow">&nbsp;</div></td>
+						  <td><div class="capacity text-overflow">&nbsp;</div></td>
+						  <td><div class="loadQuantity text-overflow">&nbsp;</div></td>
+						  <td><div class="length text-overflow">&nbsp;</div></td>
+						  <td><div class="wide text-overflow">&nbsp;</div></td>
+						  <td><div class="draft text-overflow">&nbsp;</div></td>
+						  <td><div class="hull text-overflow">&nbsp;</div></td>
+					  </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="s-mod-block">
+			<div class="s-mod-btit" style="float:left">询盘信息</div><div class="s-mod-btit otherName"></div>
+			
+			<div class="s-mod-bcont2">
+				<div class="cg-ord-box">
+					<div class="clearfix">
+						<div class="purc-tit"><i class=""></i></div>
+						<div class="purc-tit"><i class=""></i></div>
+					</div>
+					<div class="cg-ord-blo">
+						<!-- <p>信息对比</p> -->
+						<div class="cg-ord-cont clearfix">
+							<div class="purchase">
+								<ul>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装期 LAYCAN</span><span class="purc-span3"><input type="text" id="inPactBeg" placeholder="" class="cg-tbzq" maxlength="15"><em>&nbsp;-&nbsp;</em><input type="text" id="inPactEnd" placeholder="" class="cg-tbzq" maxlength="15"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装货地点要求</span><span class="purc-span3"><input type="text" id="inLoadRegion" placeholder="" maxlength="100"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl purc-spanlt">允许装卸时间 (h)</span><span class="purc-span3 purc-span3t"><input type="text" id="inDockTime" placeholder=""  onkeyup="clearNoNumTwo(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);"  onblur="this.value=formatNumber(this.value,2,1);"></span></li>									
+								</ul>
+							</div>
+							<div class="purchase">
+								<ul>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装货量 (MT)</span><span class="purc-span3"><input type="text" id="inMinQuantity" placeholder="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);"  onblur="this.value=formatNumber(this.value,3,1);"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向卸货地点要求</span><span class="purc-span3"><input type="text" id="inUnloadRegion" placeholder="" maxlength="100"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl purc-spanlt">备注</span><span class="purc-span3 purc-span3t"><textarea type="text" id="inRemark" placeholder="" class="purctex" maxlength="100"></textarea></span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-orange submitBtn">立即询盘</button></div>
+	</div>
+	<script src="../transport/js/intention/saveIntention.js"></script>
+	
+	
+	<script>
+	
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+	} 
+	//两位小数数字正则校验
+	function clearNoNumTwo(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+	} 
+	</script>
+			

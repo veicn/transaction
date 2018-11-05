@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentDocumentMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="appoint_id" jdbcType="BIGINT" property="appointId" />
+    <result column="deal_no" jdbcType="VARCHAR" property="dealNo" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="appoint_enterprise_id" jdbcType="BIGINT" property="appointEnterpriseId" />
+    <result column="appoint_enterprise_name" jdbcType="VARCHAR" property="appointEnterpriseName" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="sof_id" jdbcType="BIGINT" property="sofId" />
+    <result column="bl_id" jdbcType="BIGINT" property="blId" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, appoint_id, deal_no, enterprise_id, enterprise_name, appoint_enterprise_id, appoint_enterprise_name, 
+    channel, sof_id, bl_id, create_user, create_date, update_user, update_date, alive_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_document
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_shipagent_document
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    insert into `product-trade-blockchain`.t_shipagent_document (id, appoint_id, deal_no,
+      enterprise_id, enterprise_name, appoint_enterprise_id, 
+      appoint_enterprise_name, channel, sof_id, 
+      bl_id, create_user, create_date, 
+      update_user, update_date, alive_flag
+      )
+    values (#{id,jdbcType=BIGINT}, #{appointId,jdbcType=BIGINT}, #{dealNo,jdbcType=VARCHAR}, 
+      #{enterpriseId,jdbcType=BIGINT}, #{enterpriseName,jdbcType=VARCHAR}, #{appointEnterpriseId,jdbcType=BIGINT}, 
+      #{appointEnterpriseName,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{sofId,jdbcType=BIGINT}, 
+      #{blId,jdbcType=BIGINT}, #{createUser,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{aliveFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    insert into `product-trade-blockchain`.t_shipagent_document
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appointId != null">
+        appoint_id,
+      </if>
+      <if test="dealNo != null">
+        deal_no,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="appointEnterpriseId != null">
+        appoint_enterprise_id,
+      </if>
+      <if test="appointEnterpriseName != null">
+        appoint_enterprise_name,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="sofId != null">
+        sof_id,
+      </if>
+      <if test="blId != null">
+        bl_id,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appointId != null">
+        #{appointId,jdbcType=BIGINT},
+      </if>
+      <if test="dealNo != null">
+        #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointEnterpriseId != null">
+        #{appointEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointEnterpriseName != null">
+        #{appointEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="sofId != null">
+        #{sofId,jdbcType=BIGINT},
+      </if>
+      <if test="blId != null">
+        #{blId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    update `product-trade-blockchain`.t_shipagent_document
+    <set>
+      <if test="appointId != null">
+        appoint_id = #{appointId,jdbcType=BIGINT},
+      </if>
+      <if test="dealNo != null">
+        deal_no = #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointEnterpriseId != null">
+        appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointEnterpriseName != null">
+        appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="sofId != null">
+        sof_id = #{sofId,jdbcType=BIGINT},
+      </if>
+      <if test="blId != null">
+        bl_id = #{blId,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sofUrl != null and sofUrl != ''">
+        sof_url = #{sofUrl , jdbcType=VARCHAR}
+      </if>
+      <if test="blUrl != null and blUrl != ''">
+        bl_url = #{blUrl , jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    update `product-trade-blockchain`.t_shipagent_document
+    set appoint_id = #{appointId,jdbcType=BIGINT},
+      deal_no = #{dealNo,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT},
+      appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      sof_id = #{sofId,jdbcType=BIGINT},
+      bl_id = #{blId,jdbcType=BIGINT},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParameter" resultType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    select
+          id as id,
+          appoint_id as appointId,
+          deal_no as dealNo,
+          enterprise_id as enterpriseId,
+          enterprise_name as enterpriseName,
+          appoint_enterprise_id as appointEnterpriseId ,
+          appoint_enterprise_name as appointEnterpriseName ,
+          channel as channel,
+          sof_id as sofId,
+          bl_id as blId,
+          create_user as createUser,
+          create_date as createDate,
+          update_user as uopdateUser,
+          update_date as updateDate,
+          alive_flag as aliveFlag
+    from `product-trade-blockchain`.t_shipagent_document
+    where alive_flag = '1'
+    <if test="appointId != null">
+      and appoint_id = #{appointId,jdbcType=BIGINT}
+    </if>
+    <if test="dealNo != null">
+      and deal_no = #{dealNo,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseId != null">
+      and enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    </if>
+    <if test="enterpriseName != null">
+      and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+    </if>
+    <if test="appointEnterpriseId != null">
+      and appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT}
+    </if>
+    <if test="appointEnterpriseName != null">
+      and appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+    </if>
+    <if test="channel != null">
+      and channel = #{channel,jdbcType=VARCHAR}
+    </if>
+    <if test="sofId != null">
+      and sof_id = #{sofId,jdbcType=BIGINT}
+    </if>
+    <if test="blId != null">
+      and bl_id = #{blId,jdbcType=BIGINT}
+    </if>
+  </select>
+
+  <select id="selectDocumentList" resultType="com.sinochem.crude.trade.shipagent.model.query.TShipagentDocumentQuery" parameterType="com.sinochem.crude.trade.shipagent.model.query.TShipagentDocumentQuery">
+    select
+    d.id as id,
+    d.appoint_id as appointId,
+    d.deal_no as dealNo,
+    d.enterprise_id as enterpriseId,
+    d.enterprise_name as enterpriseName,
+    d.appoint_enterprise_id as appointEnterpriseId ,
+    d.appoint_enterprise_name as appointEnterpriseName ,
+    d.channel as channel,
+    d.sof_id as sofId,
+    d.bl_id as blId,
+    d.create_user as createUser,
+    d.create_date as createDate,
+    d.update_user as updateUser,
+    d.update_date as updateDate,
+    d.alive_flag as aliveFlag,
+    IF(d.bl_url is NULL, '未上传' ,IF(d.bl_url = '' , '未上传' , '已上传')) as blUrl,
+    IF(d.sof_url is NULL, '未上传' ,IF(d.sof_url = '' , '未上传' , '已上传')) as sofUrl,
+    s.imo,
+    s.vessel,
+    s.voyage,
+    IF(s.status is NULL, 'N/A' ,IF(s.status = '1' , '已暂存' , '已提交')) as sofStatus,
+    s.port,
+    s.goods_name as goodsName,
+    s.metric_ton as metricTon,
+    s.sof_date as sofDate,
+    IF(b.bl_no is NULL , 'N/A' , IF(b.bl_no = '' , 'N/A' , b.bl_no))as blNo,
+    IF(b.status is NULL, 'N/A' ,IF(b.status = '1' , '已暂存' , '已提交')) as blStatus,
+    e.purchase_contract_no as purchaseContractNo
+    from `product-trade-blockchain`.t_shipagent_document d
+    left join `product-trade-blockchain`.t_shipagent_sof s on s.alive_flag='1' and d.sof_id = s.id
+    left join `product-trade-blockchain`.t_shipagent_billloading b on b.alive_flag='1' and d.bl_id = b.id
+    inner join `product-trade-blockchain`.t_trans_extend e on e.deal_no = d.deal_no
+    inner join `product-trade-blockchain`.t_shipagent_appoint a on a.deal_no = d.deal_no
+    where d.alive_flag = '1'
+
+    <if test="purchaseContractNo != null and purchaseContractNo!=''">
+      and e.purchase_contract_no like concat('%',#{purchaseContractNo,jdbcType=VARCHAR} , '%')
+    </if>
+
+    <if test="appointId != null  and appointId!=''">
+      and d.appoint_id = #{appointId,jdbcType=BIGINT}
+    </if>
+    <if test="dealNo != null  and dealNo!=''">
+      and d.deal_no = #{dealNo,jdbcType=VARCHAR}
+    </if>
+    <if test="enterpriseId != null  and enterpriseId!=''">
+      and d.enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    </if>
+    <if test="enterpriseName != null  and enterpriseName!=''">
+      and d.enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+    </if>
+    <if test="appointEnterpriseId != null  and appointEnterpriseId!=''">
+      and d.appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT}
+    </if>
+    <if test="appointEnterpriseName != null  and appointEnterpriseName!=''">
+      and d.appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+    </if>
+    <if test="channel != null  and channel!=''">
+      and d.channel = #{channel,jdbcType=VARCHAR}
+    </if>
+    <if test="sofId != null  and sofId!=''">
+      and d.sof_id = #{sofId,jdbcType=BIGINT}
+    </if>
+    <if test="blId != null  and blId!=''">
+      and d.bl_id = #{blId,jdbcType=BIGINT}
+    </if>
+    <!-- 单证状态-->
+    <if test="status != null  and status!=''">
+      and a.status = #{status , jdbcType=VARCHAR}
+    </if>
+    <if test="voyage != null  and voyage!=''">
+      and s.voyage like concat('%',#{ status, jdbcType=VARCHAR} , '%')
+    </if>
+    <if test="imo != null  and imo!=''">
+      and s.imo like concat('%',#{ imo, jdbcType=VARCHAR} , '%')
+    </if>
+    <if test="vessel != null  and vessel!=''">
+      and s.vessel like concat('%',#{ vessel, jdbcType=VARCHAR} , '%')
+    </if>
+    <if test="blNo != null  and blNo!=''">
+      and b.blNo like concat('%',#{ blNo, jdbcType=VARCHAR} , '%')
+    </if>
+    <if test="queryDate != null  and queryDate!=''">
+      and s.queryDate = #{ queryDate, jdbcType=VARCHAR}
+    </if>
+    order by d.create_date DESC
+  </select>
+
+  <update id="updateSofUrl" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    update `product-trade-blockchain`.t_shipagent_document
+    <set>
+      sof_url = #{sofUrl , jdbcType=VARCHAR}
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 单独更新BlURL-->
+  <update id="updateBlUrl" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentDocument">
+    update `product-trade-blockchain`.t_shipagent_document
+    <set>
+        bl_url = #{blUrl , jdbcType=VARCHAR}
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

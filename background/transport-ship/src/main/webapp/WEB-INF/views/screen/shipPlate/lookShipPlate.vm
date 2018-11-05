@@ -1,0 +1,103 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船盘管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船盘信息</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">船名：</label>
+					  <div class="s-input-inline">
+						  <p class="name"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船型：</label>
+					  <div class="s-input-inline">
+					  	  <p class="type"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">建造年份：</label>
+					  <div class="s-input-inline">
+					  	 <p class="completeDate"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">载重吨：</label>
+					  <div class="s-input-inline">
+						  <p class="loadQuantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船位：</label>
+					  <div class="s-input-inline">
+						 <p class="position"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">open：</label>
+					  <div class="s-input-inline">
+						 <p class="open"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Fujairah：</label>
+					  <div class="s-input-inline">
+						 <p class="eta"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Cabinda：</label>
+					  <div class="s-input-inline">
+						 <p class="etaCabinda"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船东：</label>
+					  <div class="s-input-inline">
+						 <p class="owner"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">经纪人：</label>
+					  <div class="s-input-inline">
+						 <p class="broker"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">发布日期：</label>
+					  <div class="s-input-inline">
+						 <p class="publishTime"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">时效 (天)：</label>
+					  <div class="s-input-inline">
+						 <p class="period"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">发布人：</label>
+					  <div class="s-input-inline">
+						 <p class="epMemberName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">备注：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary returnBtn">返&nbsp;&nbsp;回</button></div>
+	</div>
+	<script src="../transport/js/shipPlate/lookShipPlate.js"></script>

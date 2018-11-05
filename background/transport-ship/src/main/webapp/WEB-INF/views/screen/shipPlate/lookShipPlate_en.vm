@@ -1,0 +1,103 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Vessel Available</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Vessel Details</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Vessel Name：</label>
+					  <div class="s-input-inline">
+						  <p class="name"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Vessel Type：</label>
+					  <div class="s-input-inline">
+					  	  <p class="type"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Built：</label>
+					  <div class="s-input-inline">
+					  	 <p class="completeDate"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Quantity：</label>
+					  <div class="s-input-inline">
+						  <p class="loadQuantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Position：</label>
+					  <div class="s-input-inline">
+						 <p class="position"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Open：</label>
+					  <div class="s-input-inline">
+						 <p class="open"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Fujairah：</label>
+					  <div class="s-input-inline">
+						 <p class="eta"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ETA Cabinda：</label>
+					  <div class="s-input-inline">
+						 <p class="etaCabinda"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Ship Owner：</label>
+					  <div class="s-input-inline">
+						 <p class="owner"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Broker：</label>
+					  <div class="s-input-inline">
+						 <p class="broker"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Post Date：</label>
+					  <div class="s-input-inline">
+						 <p class="publishTime"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Effective(days)：</label>
+					  <div class="s-input-inline">
+						 <p class="period"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Poster：</label>
+					  <div class="s-input-inline">
+						 <p class="epMemberName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Remarks：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary returnBtn">Back</button></div>
+	</div>
+	<script src="../transport/js/shipPlate/lookShipPlate.js"></script>

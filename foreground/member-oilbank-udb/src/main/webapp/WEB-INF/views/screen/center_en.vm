@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Business background </title>
+	<link rel="stylesheet" href="$imageServer.get('css/s_common_en.css')">
+	<link rel="stylesheet" href="$imageServer.get('css/s_center_en.css')">
+	#js("$imageServer.get('/js/jquery-1.9.1.min.js')")
+</head>
+<body>
+	<div class="c-header clearfix">
+		<span class="c-logo"></span>
+		<div class="c-nav">
+			<ul class="c-nav-top clearfix">
+				<li class="li-search"><i class="cw-ico ico-search-n"></i><input type="text" placeholder="Search order number"></li>
+				<li class="li-features"><a href="#"><i class="cw-ico ico-email-n"></i></a><a href="#"><i class="cw-ico ico-remind-n"><span>2</span></i></a><a href="#"><i class="cw-ico ico-set-n"></i></a><a href="#"><i class="cw-ico ico-exit-n"></i></a></li>
+			</ul>
+			<ul class="wel-box clearfix">
+				<li class="wei-tit">Welcome<br><span>last time to log in:2017-11-17 10:10:10!</span></li>
+				<li class="wel-but"><a href="">pending order</a><span>2</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="c-md">
+		<div class="c-mlb"></div>
+		<div class="c-ml c-mll">
+				<!--<a href="#" class="c-mlf"><i class="cw-ico ico-arrl"></i></a>-->
+				<a href="#" class="c-mlf"><i class="cw-ico ico-arrr"></i></a>
+				<div class="c-company"><span class="c-complogo"><a href="#"><img src="$imageServer.get('images/coop_img_01.gif')"></a></span></span><p><a href="#">Quanzhou oil refining and petroleum sales company</a></p></div>
+				<ul class="c-menu">
+					<li class="c-menu-cur">
+						<a href="#"><i class="cw-ico ico-ca01"></i>Purchasing demand<span class="m-number">1</span></a>
+						<ul>
+							<li class="c-menu-cur"><a href="#"><i class="cw-ico ico-cb01"></i>Long association procurement demand</a></li>
+							<li><a href="#"><i class="cw-ico ico-cb02"></i>Purchase demand list</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><i class="cw-ico ico-ca02"></i>Purchasing demand<span class="m-number">2</span></a>
+						<ul>
+							<li><a href="#"><i class="cw-ico ico-cb03"></i>Long association procurement demand</a></li>
+							<li><a href="#"><i class="cw-ico ico-cb04"></i>Purchase demand list</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="c-mr">
+				<div class="c-mod c-modd">
+					<div class="c-content clearfix">
+						<div class="cct-blo clearfix">
+							<div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+							<div class="cct-blor"><a href="">Name of crude oil</a><br><span>Number</span><br><span>Rival company name</span></div>
+						</div>
+						<div class="cct-blo clearfix">
+							<div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+							<div class="cct-blor"><a href="">Name of crude oil</a><br><span>Number</span><br><span>Rival company name</span></div>
+						</div>
+						<div class="cct-blo clearfix">
+							<div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+							<div class="cct-blor"><a href="">Name of crude oil</a><br><span>Number</span><br><span>Rival company name</span></div>
+						</div>
+						<div class="cct-blo clearfix">
+							<div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+							<div class="cct-blor"><a href="">Name of crude oil</a><br><span>Number</span><br><span>Rival company name</span></div>
+						</div>
+					</div>
+					<div class="c-ind clearfix">
+						<div class="c-indl">
+							<div class="c-indl-t clearfix">
+								<div class="c-indl-tl"><a href=""><img src="$imageServer.get('images/com_logo.png')"></a></div>
+								<div class="c-indl-tr">
+									<h1>Corporate name<a href=""><i class="cw-ico ico-gsm"></i></a></h1>
+									<p>description</p>
+								</div>
+							</div>
+							<div class="c-indl-b clearfix">
+								<ul class="c-indl-blo clearfix">
+									<li class="c-yyxu"><a href=""><i class="cw-ico c-ico-yyxq"></i></a></li>
+									<li class="c-xutit"><a href="">Crude Demands</a><br><span><a href="">1</a></span></li>
+								</ul>
+								<ul class="c-indl-blo clearfix">
+									<li class="c-yydd"><a href=""><i class="cw-ico c-ico-yydd"></i></a></li>
+									<li class="c-xutit"><a href="">Crude Oil Deals</a><br><span><a href="">1</a></span></li>
+								</ul>
+								<ul class="c-indl-blo clearfix">
+									<li class="c-cpyxu"><a href=""><i class="cw-ico c-ico-cpyxu"></i></a></li>
+									<li class="c-xutit"><a href="">Product Demands</a><br><span><a href="">1</a></span></li>
+								</ul>
+								<ul class="c-indl-blo clearfix">
+									<li class="c-cpydd"><a href=""><i class="cw-ico c-ico-cpydd"></i></a></li>
+									<li class="c-xutit"><a href="">Product Deals</a><br><span><a href="">1</a></span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="c-indr">
+							<div class="c-indr-title">frequently asked questions</div>
+							<ul class="c-indr-cont">
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+								<li><a href=""><i class="cw-ico ico-list"></i>frequently asked questions</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="c-ind c-his-box">
+						<div class="c-his-title">Historical Data<span><a href=""><i class="cw-ico c-ico-sx"></i></a><a href=""><i class="cw-ico c-ico-sz"></i></a></span></div>
+						<div class="c-his-cont"><img src="$imageServer.get('images/c_tj1.jpg')"></div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

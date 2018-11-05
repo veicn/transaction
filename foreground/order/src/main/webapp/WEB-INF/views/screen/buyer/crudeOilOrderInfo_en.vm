@@ -1,0 +1,202 @@
+#*原油信息*#
+#set($a = "个人中心-买原油网")
+<div class="layui-fluid">
+    #*订单执行状态*#
+    <div class="c-mod" id="cgxx">
+        <h1>Deal Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Deal Details</span></h1>
+        $contain.get('/status/list.htm').setParam("orderId","$!{contract.id}")
+        #if(!$!{contract.cancelFlag})
+            ##  从执行那边来的按钮列表
+            $contain.get("/contain/order/operateButtons.htm").setHost("$order-executeServer.get('')").setParam("ouid","$!{contract.uuid}")
+        #end
+    </div>
+
+    #*商品信息*#
+    $contain.get('/buyer/crudeOilProduct.htm').setParam("contractId","$!{contract.id}")
+    #*Deal Recap*#
+    $contain.get('/buyer/crudeOilOrderInfoPrice.htm').setParam("contractId","$!{contract.id}")
+    #*买家泊位信息*#
+##    $contain.get('/buyer/crudeOilBerthListInfo.htm').setParam("contractId","$!{contract.id}")
+    #*客户信息*#
+    $contain.get('/buyer/orderInfoCustomer.htm').setParam("contractId","$!{contract.id}")
+#*    #if($!{contract.trader} != "" && $!{contract.trader})
+        *##*Agent Info*##*
+        $contain.get('/buyer/orderInfoAgent.htm').setParam("contractId","$!{contract.id}")
+    #end*#
+    #*提货商信息*#
+    $contain.get('/buyer/orderInfoSupplier.htm').setParam("contractId","$!{contract.id}")
+
+    #*操作记录*#
+        $contain.get('/buyer/contractOperList.htm').setParam("contractId","$!{contract.id}")
+
+    #*操作按钮*#
+        <div class="c-subdiv">
+            #if($!{contract.initiator} == $!{user.epMemberId} && $!{contract.doubleSign} == "00")
+                ## 发起人才可以提交订单、cancel
+                ## 目前直接允许确认订单
+                ##<button id="checkbtn1" class="c-btnsub btn-lj" onclick="wconfirm_contacrtindow.location.href='$appServer.get("/confirm_contacrt.htm").put("orderId","$!{contract.id}").put("token","$!{contract.token}").put("bizType","$!{contract.bizType}")'" >确认提交</button>
+                ##<button id="checkbtn2" class="c-btnsub btn-xgdd" onclick="window.location.href='$appServer.get("/update/createCrudeOilInfo.htm").put("uuid",$!{contract.uuid})'" >修改订单</button>
+                <button id="checkbtn1" class="c-btnsub btn-lj" onclick="confirm_contacrt('$!{contract.id}','$!{contract.token}','$!{contract.bizType}')" >submit</button>
+            #end
+
+            #if("$!{contract.doubleStatus}" != "03")##cancel
+                <button  class="c-btnsub btn-gbdd" onclick="apply_cancel_contract('$!{contract.uuid}')">Cancel</button>
+            #end
+
+            #if("$!{contract.doubleStatus}" == "03" && "$!{contract.buyer}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "10")##cancel
+                <button  class="c-btnsub btn-gbdd" onclick="revoke_cancel_contract('$!{contract.uuid}')">Cancel</button>
+            #end
+            #if("$!{contract.doubleStatus}" == "03" && "$!{contract.seller}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "10")##cancel
+                <button  class="c-btnsub btn-gbdd" onclick="confirm_cancel_contract('$!{contract.uuid}')">Confirm</button>
+            #end
+            #if("$!{contract.doubleStatus}" == "03" && "$!{contract.seller}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "01")##cancel
+                <button  class="c-btnsub btn-gbdd" onclick="revoke_cancel_contract('$!{contract.uuid}')">Cancel</button>
+            #end
+            #if("$!{contract.doubleStatus}" == "03" && "$!{contract.buyer}" == "$!{user.epMemberId}" && "$!{contract.doubleSign}" == "01")##cancel
+                <button  class="c-btnsub btn-gbdd" onclick="confirm_cancel_contract('$!{contract.uuid}')">Confirm</button>
+            #end
+            <button id="checkbtn5" class="c-btncas" onclick="go_back()">Return</button>
+
+        </div>
+</div>
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<script>
+    function apply_cancel_contract(uuid) {
+        var confirmUrl = "$appServer.get('/apply_cancel_contacrt.json')";
+        var contentHtml = "<div class='c-form'>" +
+                          "    <ul class='c-ful c-full'>" +
+                "                 <span class='c-fn'>reason：</span>" +
+                          "        <li class='c-fcos1'>" +
+                          "             <textarea class='c-teta' id='remark' style='width: 100%;' maxlength='255'></textarea>" +
+                          "        </li>" +
+                          "    </ul>" +
+                          "</div>";
+        layui.use('layer', function() {
+            layer.open({
+                title : 'Application to cancel the order',
+                content: $(contentHtml).html(),
+                area : ['500'],
+                shade: false,
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    var layer = layui.layer;
+                    var remark = $("#remark").val();
+                    $ .post(confirmUrl, {uuid : uuid, remark : remark}).always(function(res){
+                        if(res.status == 0){//成功
+                            layer.alert("Successful application！",{title:"Notice",btn:"OK"});
+                            window.location.reload();
+                        }else{//失败
+                            layui.layer.alert(res.message,{title:"Notice",btn:"OK"});
+                        }
+                    });
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+    function revoke_cancel_contract(uuid) {
+        var confirmUrl = "$appServer.get('/revoke_cancel_contacrt.json')";
+        var contentHtml = "<div class='c-form'>" +
+                "    <ul class='c-ful c-full'>" +
+                "        <li class='c-fcos1'>" +
+                "             <span class='c-fn'>reason：</span>" +
+                "             <textarea class='c-teta' id='remark' maxlength='255'></textarea>" +
+                "        </li>" +
+                "    </ul>" +
+                "</div>";
+        layui.use('layer', function() {
+            layer.open({
+                title : 'Cancel application',
+                content: $(contentHtml).html(),
+                area : ['500'],
+                shade: false,
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    var layer = layui.layer;
+                    var remark = $("#remark").val();
+                    $ .post(confirmUrl, {uuid : uuid, remark : remark}).always(function(res){
+                        if(res.status == 0){//成功
+                            layer.alert("Successfully  cancel application！",{title:"Notice",btn:"OK"});
+                            window.location.reload();
+                        }else{//失败
+                            layui.layer.alert(res.message,{title:"Notice",btn:"OK"});
+                        }
+                    });
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+    function confirm_cancel_contract(uuid) {
+        var confirmUrl = "$appServer.get('/confirm_cancel_contacrt.json')";
+        var contentHtml = "<div class='c-form'>" +
+                "    <ul class='c-ful c-full'>" +
+                "        <li class='c-fcos1'>" +
+                "                <span class='c-fn'>Operate：</span>" +
+                "                <input type='radio' checked='checked' name='operStatus' value='1' class='radi' ><span>Agree</span>" +
+                "                <input type='radio' name='operStatus' value='2' class='radi'><span>Reject</span>" +
+                "        </li>"+
+                "        <li class='c-fcos1'>" +
+                "             <span class='c-fn'>reason：</span>" +
+                "             <textarea class='c-teta' id='remark' maxlength='255'></textarea>" +
+                "        </li>" +
+                "    </ul>" +
+                "</div>";
+        layui.use('layer', function() {
+            layer.open({
+                title : 'Process cancel application',
+                content: $(contentHtml).html(),
+                area : ['500'],
+                shade: false,
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    var layer = layui.layer;
+                    var remark = $("#remark").val();
+                    var operStatus = ($('input[type=radio]:checked').val() == '1' || $('input[type=radio]:checked').val() == 1)?true:false;
+                    $ .post(confirmUrl, {uuid : uuid, remark : remark, operStatus : operStatus}).always(function(res){
+                        if(res.status == 0){//成功
+                            layer.alert("Successfully processed！",{title:"Notice",btn:"OK"});
+                            window.location.reload();
+                        }else{//失败
+                            layui.layer.alert(res.message,{title:"Notice",btn:"OK"});
+                        }
+                    });
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+
+    function go_back() {
+        window.location.href="$appServer.get('/queryCurdeOilList.htm')";
+    }
+
+    function confirm_contacrt(orderId,token,bizType){
+        var confirmUrl = "$appServer.get('/confirm_contacrt.json')";
+        layui.use("layer", function () {
+            var $ = layui.jquery, layer = layui.layer;
+            layer.confirm("Submit deal ? ", {title:"Notice",btn:["Confirm","Cancel"]},function () {
+                $ .post(confirmUrl, {orderId: orderId, token: token, bizType: bizType}).always(function(res){
+                    if(res.status == 0){//成功
+                        layer.alert("Successfully processed",{title:"Notice",btn:"OK"});
+                        if(res.message != null && res.message != ""){
+                            window.location.href = '$appServer.get("")' + res.message;
+                        }
+                    }else{//失败
+                        layui.layer.alert(res.message,{title:"Notice",btn:"OK"});
+                    }
+                });
+            });
+        });
+    }
+
+
+</script>

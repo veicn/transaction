@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录页</title>
+</head>
+<style type="text/css">
+    html,body{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: -webkit-linear-gradient(left top, #004CB9, #1677D8); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, #004CB9, #1677D8); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, #004CB9, #1677D8); /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, #004CB9 , #1677D8); /* 标准的语法 */
+    }
+    .img-logo{
+        margin-left: 22%;
+        padding-top: 55px;
+        width: 445px;
+        height: 378px;
+    }
+    .img-logo img{
+        width: 100%;
+        height: 100%;
+    }
+    .main{
+        position: absolute;
+        top: 186px;
+        left:53%;
+    }
+    .main p{
+        width: 180px;
+        color: #fff;
+    }
+    .main p:first-of-type{
+        font-size: 19px;
+    }
+    .main p:nth-of-type(2){
+        font-size: 19px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .main p:nth-of-type(3){
+        font-size: 10px;
+    }
+    .main a{
+        margin-top: 27px;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border:1px solid #ccc;
+        border-radius: 40px;
+        display: inline-block;
+        cursor:pointer;
+        color: #fff;
+        text-decoration: none;
+        font-size: 10px;
+    }
+</style>
+<body>
+<div class="content">
+    <div class="img-logo"><img src=""></div>
+    <div class="main">
+        <p>欢迎来到</p>
+        <p class="tit"></p>
+        <p class="con"></p>
+        <a href="">点击进入</a>
+    </div>
+</div>
+
+<script src="./public/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    var urlPath=document.domain;
+
+    if (urlPath.indexOf("test") != -1) {
+        urlPath='http://transaction.test.myoilbank.com/getLoginData.json';
+    }
+    else if (urlPath.indexOf("uat") != -1) {
+        urlPath='http://transaction9.test.myoilbank.com/getLoginData.json';
+    }else{
+        urlPath='http://transaction.myoilbank.com/getLoginData.json';
+    }
+
+    $.ajax({
+        url: urlPath,
+        type: 'GET',
+        data: { url: "http://"+document.domain },
+        dataType: 'jsonp',
+        jsonpCallback: "success",
+        success: function (data) {
+            //       alert(data.status);
+            // alert(data.tDataPartner.loginLogo);index.html
+            // alert(data.tDataPartner.loginBg);
+            // alert(data.tDataPartner.loginDesc);
+            // alert(data.tDataPartner.systemTitle);
+            $(".tit").text(data.tDataPartner.systemTitle);
+            $(".con").text(data.tDataPartner.loginDesc);
+            //$("body").css("background",data.tDataPartner.loginBg);
+            $(".img-logo img").attr("src", data.tDataPartner.webDomain + data.tDataPartner.loginLogo);
+            $(".main a").attr("href", data.tDataPartner.webDomain+'/getLoginOut');
+        }
+    });
+</script>
+</body>
+
+</html>

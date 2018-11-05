@@ -1,0 +1,119 @@
+<div class="layui-fluid">
+
+
+    <div style=" text-align:center; padding-top: 30px;">
+
+
+        <form class="layui-form" action="$appServer.get('om/person/update.htm')" method="post" onsubmit="return checkForm()">
+            <input type="hidden" name="id" value="$!{person.id}">
+            <input type="hidden" name="memberId" value="$!{person.memberId}">
+
+            <div class="layui-field-box" style="margin-left:350px;">
+            #if($add==1)
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userName" name="userName" value="$!{person.name}" lay-verify="required" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <br/><br/>
+            #end
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" value="$!{person.name}" lay-verify="required" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <br/><br/>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件类型</label>
+                    <div class="layui-input-inline" style="">
+                        <select name="cardType" lay-verify="required">
+                            <option value="1" #if($!{person.cardType}==1)selected#end>身份证</option>
+                            <option value="2" #if($!{person.cardType}==2)selected#end>护照</option>
+                            <option value="3" #if($!{person.cardType}==3)selected#end>军官证</option>
+                        </select>
+                    </div>
+                </div>
+                <br/><br/>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="cardNo" name="cardNo" lay-verify="required" autocomplete="off" class="layui-input"
+                               value="$!{person.cardNo}">
+                    </div>
+                </div>
+                <br/><br/>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-inline" style="padding-left: 20px;">
+                        <input type="radio" name="gender" value="1" title="男"
+                               #if($!{person.gender}!=2||!$!{person.gender})checked
+                               #end>
+                        <input type="radio" name="gender" value="2" title="女" #if($!{person.gender}==2)checked
+                        #end>
+                    </div>
+                </div>
+                <br/><br/>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="addressDetail" value="$!{person.addressDetail}" class="layui-input">
+                    </div>
+                </div>
+                <br/><br/>
+
+##                <div class="layui-form-item">
+##                    <label class="layui-form-label">生日</label>
+##                    <div class="layui-input-inline">
+##                        <input type="text" id="birth" value="$dateUtil.getDateTime("yyyy-MM-dd",$!person.birth)"
+##                               class="layui-input" lay-verify="required" readonly>
+##                        <input type="hidden" id="birthDay" name="birth">
+##                    </div>
+##                </div>
+##                <br/><br/>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="memo" value="$!{person.memo}" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <br/><br/>
+            </div>
+            <div style="margin-right:350px;">
+                <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交">
+                <a href="$appServer.get('om/person/list.htm')" return:false class="layui-btn layui-btn-xs">取消</a>
+            </div>
+        </form>
+
+</div>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+        laydate.render({
+            elem: '#birth' //指定元素
+        });
+    });
+
+    function checkForm(){
+        var userName = $("#userName").val();
+        if(userName.length<6){
+            layer.alert("用户名不能少于6个字符");
+            return false;
+        }
+        return true;
+    }
+</script>

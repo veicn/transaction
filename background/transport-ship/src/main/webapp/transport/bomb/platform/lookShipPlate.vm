@@ -1,0 +1,146 @@
+<script>
+layui.use(['laydate','upload'], function(){
+	var laydate = layui.laydate;
+	var $ = layui.jquery
+	,upload = layui.upload;
+});
+</script>
+<style>
+body .backbtn-class .layui-layer-btn a{
+	height: 28px;
+    line-height: 28px;
+    margin: 5px 5px 0;
+    padding: 0 15px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    color: #333;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+}
+</style>
+<form class="layui-form layui-form-pane" style="margin-top:50px; margin-left:90px" action="ruleSave">
+<input class="layui-input layui-hide" id="uuid" name="uuid" type="text">
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">船名</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input name" id="name" type="text" name="name" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">船型</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input type" id="type" type="text" name="type" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">建造年份</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input completeDate" id="completeDate" type="text" name="completeDate" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+			    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">载重吨</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input loadQuantity" id="loadQuantity" type="text" name="loadQuantity" readonly="true" autocomplete="off">
+			    </div>
+	    	</div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">船位</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input position" id="position" type="text" name="position" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">OPEN</label>
+		    	<div class="layui-input-inline iw300">
+		        <input class="layui-input open" id="open" type="text" name="open" readonly="true" autocomplete="off">
+		    	</div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">ETA Fujairah</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input eta" type="text" id="eta" name="eta" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">ETA Cabinda</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input etaCabinda" id="etaCabinda" type="text" name="etaCabinda" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">船东</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input owner" id="owner" type="text" name="owner" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">经纪人</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input broker" id="broker" type="text" name="broker" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">船龄</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input shipAge" id="shipAge" type="text" name="shipAge" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">时效 (天)</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input period" id="period" type="text" name="period" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px;">
+		<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">发布日期</label>
+		    <div class="layui-input-inline iw300">
+		        <input type="text" class="layui-input publishTime" id="publishTime" name="publishTime" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">发布人</label>
+		    	<div class="layui-input-inline iw300">
+		    	<input type="text" class="layui-input epMemberName" name="epMemberName" id="epMemberName" readonly="true" autocomplete="off">
+		        
+		    	</div>
+		    </div>
+		</div>  
+    </div>
+    
+	<div class="layui-form-item" style="height:25px">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width:125px">发布类型</label>
+	      	<div class="layui-input-inline iw300">
+				<input class="layui-input publishType" id="publishType" type="text" name="publishType" readonly="true" autocomplete="off">
+	      	</div>
+			<div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">备注</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input remark" id="remark" type="text" name="remark" readonly="true" autocomplete="off">
+			    </div>
+			</div>
+	    </div>
+  	</div>
+
+</form>

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sinochem.crude.trade.operation.dao.MemMenuSmemMapper">
+	<resultMap
+		type="com.sinochem.crude.trade.operation.domain.MemMenuSmem"
+		id="MemMenuSmem">
+		<result property="id" column="ID" />
+		<result property="menuId" column="MENU_ID" />
+		<result property="empId" column="EMP_ID" />
+		<result property="sort" column="SORT" />
+		<result property="menuType" column="MENU_TYPE" />
+		<result property="menuDes" column="MENU_DES" />
+		<result property="menuIcon" column="MENU_ICON" />
+		<result property="menuUrl" column="MENU_URL" />
+		<result property="menuArgu" column="MENU_ARGU" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+	</resultMap>
+
+	<select id="queryByEntitys" resultMap="MemMenuSmem"
+		parameterType="com.sinochem.crude.trade.operation.domain.MemMenuSmem">
+		select * from T_MEM_MENU
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="menuId!=null and menuId!=''">and MENU_ID=#{menuId}</if>
+		<if test="empId!=null and empId!=''">and EMP_ID=#{empId}</if>
+		<if test="sort!=null and sort!=''">and SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and MENU_ARGU=#{menuArgu}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+	</select>
+
+	<select id="findByPrimaryKey" resultMap="MemMenuSmem">
+		select
+		* from T_MEM_MENU
+		where
+		ID=#{id}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<update id="updateRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.MemMenuSmem">
+		update T_MEM_MENU
+		<set>
+			ID=#{id}
+			<if test="menuId!=null">,MENU_ID = #{menuId}</if>
+			<if test="empId!=null">,EMP_ID = #{empId}</if>
+			<if test="sort!=null">,SORT = #{sort}</if>
+			<if test="menuType!=null">,MENU_TYPE = #{menuType}</if>
+			<if test="menuDes!=null">,MENU_DES = #{menuDes}</if>
+			<if test="menuIcon!=null">,MENU_ICON = #{menuIcon}</if>
+			<if test="menuUrl!=null">,MENU_URL = #{menuUrl}</if>
+			<if test="menuArgu!=null">,MENU_ARGU = #{menuArgu}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+
+	<insert id="insertRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.MemMenuSmem">
+		insert into T_MEM_MENU ( ID
+		,MENU_ID
+		,EMP_ID
+		,SORT
+		,MENU_TYPE
+		,MENU_DES
+		,MENU_ICON
+		,MENU_URL
+		,MENU_ARGU
+		,MARKET_ID
+		,LANG_VER
+		,ALIVE_FLAG
+		,CREATE_USER
+		,CREATE_DATE
+		,UPDATE_USER
+		,UPDATE_DATE
+		)
+		values( #{id}
+		,#{menuId}
+		,#{empId}
+		,#{sort}
+		,#{menuType}
+		,#{menuDes}
+		,#{menuIcon}
+		,#{menuUrl}
+		,#{menuArgu}
+		,#{marketId}
+		,#{langVer}
+		,'1'
+		,#{createUser}
+		,#{createDate}
+		,#{updateUser}
+		,#{updateDate}
+		)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update T_MEM_MENU
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+		</set>
+		where
+		ID=#{id}
+
+	</update>
+
+	<select id="queryRecords" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+		ID as "id"
+		, MENU_ID as "menuId"
+		, EMP_ID as "empId"
+		, SORT as
+		"sort"
+		, MENU_TYPE as "menuType"
+		, MENU_DES as "menuDes"
+		, MENU_ICON as
+		"menuIcon"
+		, MENU_URL as "menuUrl"
+		, MENU_ARGU as "menuArgu"
+		, MARKET_ID
+		as "marketId"
+		, LANG_VER as "langVer"
+		, ALIVE_FLAG as "aliveFlag"
+		,
+		CREATE_USER as "createUser"
+		, CREATE_DATE as "createDate"
+		, UPDATE_USER
+		as "updateUser"
+		, UPDATE_DATE as "updateDate"
+		from T_MEM_MENU
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="menuId!=null and menuId!=''">and MENU_ID=#{menuId}</if>
+		<if test="empId!=null and empId!=''">and EMP_ID=#{empId}</if>
+		<if test="sort!=null and sort!=''">and SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and MENU_ARGU=#{menuArgu}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+	</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from T_MEM_MENU
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="menuId!=null and menuId!=''">and MENU_ID=#{menuId}</if>
+		<if test="empId!=null and empId!=''">and EMP_ID=#{empId}</if>
+		<if test="sort!=null and sort!=''">and SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and MENU_ARGU=#{menuArgu}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+
+	</select>
+
+	<update id="deleteRecords" parameterType="hashmap">
+		update T_MEM_MENU
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE =
+			SYSDATE()
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="menuId!=null and menuId!=''">and MENU_ID=#{menuId}</if>
+		<if test="empId!=null and empId!=''">and EMP_ID=#{empId}</if>
+		<if test="sort!=null and sort!=''">and SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and MENU_ARGU=#{menuArgu}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		update T_MEM_MENU
+		<set>
+			ID=#{id}
+			<if test="menuId!=null">,MENU_ID = #{menuId}</if>
+			<if test="empId!=null">,EMP_ID = #{empId}</if>
+			<if test="sort!=null">,SORT = #{sort}</if>
+			<if test="menuType!=null">,MENU_TYPE = #{menuType}</if>
+			<if test="menuDes!=null">,MENU_DES = #{menuDes}</if>
+			<if test="menuIcon!=null">,MENU_ICON = #{menuIcon}</if>
+			<if test="menuUrl!=null">,MENU_URL = #{menuUrl}</if>
+			<if test="menuArgu!=null">,MENU_ARGU = #{menuArgu}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="menuId!=null and menuId!=''">and MENU_ID=#{menuId}</if>
+		<if test="empId!=null and empId!=''">and EMP_ID=#{empId}</if>
+		<if test="sort!=null and sort!=''">and SORT=#{sort}</if>
+		<if test="menuType!=null and menuType!=''">and MENU_TYPE=#{menuType}</if>
+		<if test="menuDes!=null and menuDes!=''">and MENU_DES=#{menuDes}</if>
+		<if test="menuIcon!=null and menuIcon!=''">and MENU_ICON=#{menuIcon}</if>
+		<if test="menuUrl!=null and menuUrl!=''">and MENU_URL=#{menuUrl}</if>
+		<if test="menuArgu!=null and menuArgu!=''">and MENU_ARGU=#{menuArgu}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+	</update>
+
+
+	<select id="queryPersonMenu"
+		resultType="com.sinochem.crude.trade.operation.vo.MenuOutPut">
+		SELECT
+			t1.MENU_ID AS "menuId",
+			t2.SORT AS "sort",
+			t1.MENU_TYPE AS "menuType",
+			t1.MENU_DES AS "menuDes",
+			t1.MENU_ICON AS "menuIcon",
+			t1.MENU_URL AS "menuUrl",
+			t1.MENU_ARGU AS "menuArgu",
+			t1.MARKET_ID AS "marketId",
+			t1.TRADE_PARENT_ID AS "tradeParentId",
+			t1.TRADE_ID AS "tradeId",
+			t1.IS_PERSONAL AS "isPersonal",
+			t2.MENU_TYPE AS "mmenuType",
+			t2.ID AS "id",
+			t2.MENU_DES AS "mMenuDes",
+			t2.MARKET_ID AS "mark",
+			t2.MENU_URL AS "mMenuUrl"
+		FROM T_MEM_MENU t2
+		LEFT JOIN T_TP_MENU t1 ON t1.MENU_ID = t2.MENU_ID AND t1.ALIVE_FLAG = '1'
+		WHERE t2.ALIVE_FLAG = '1'
+		AND t1.MENU_ID IS NOT NULL
+		AND t2.MENU_ID IS NOT NULL
+		<if test="empId!=null and empId!=''">and t2.EMP_ID=#{empId}</if>
+		<if test="info!=null and info!=''">and t1.MENU_DES=#{info}</if>
+		order by t2.SORT
+	</select>
+
+	<select id="queryConcernEmpId" parameterType="hashmap"
+		resultType="java.lang.String">
+		SELECT DISTINCT
+		T1.EMP_ID
+		FROM T_MEM_MENU T1
+		LEFT JOIN T_TP_MENU T2
+		ON
+		T1.MENU_ID=T2.MENU_ID
+		WHERE
+		T1.ALIVE_FLAG='1'
+		<if test="attention!=null and attention.size()>0">
+			AND T2.MENU_DES IN
+			<foreach collection="attention" item="item" separator=","
+				open="(" close=")" index="">
+				#{item}
+			</foreach>
+		</if>
+		<if test="list!=null and list.size()>0">
+			AND T1.EMP_ID IN
+			<foreach collection="list" item="item" index="index" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
+	<select id="queryPublicMenu" parameterType="list"
+		resultType="com.sinochem.crude.trade.operation.vo.MenuOutPut">
+		SELECT
+			MENU_ID AS "menuId",
+			SORT AS "sort",
+			MENU_TYPE AS "menuType",
+			MENU_DES AS "menuDes",
+			MENU_ICON AS "menuIcon",
+			MENU_URL AS "menuUrl",
+			MENU_ARGU AS "menuArgu",
+			MARKET_ID AS "marketId",
+			TRADE_PARENT_ID AS "tradeParentId",
+			TRADE_ID AS "tradeId",
+			IS_PERSONAL AS "isPersonal"
+		FROM
+			T_TP_MENU
+		WHERE
+			ALIVE_FLAG = '1'
+		<if test="tradeLevel!=null and tradeLevel!=''">and TRADE_LEVEL=#{tradeLevel}</if>
+		and MENU_TYPE in
+		<foreach item="item" collection="list" separator="," open="(" close=")" index="">
+			#{item, jdbcType=VARCHAR}
+		</foreach>
+		ORDER BY sort
+	</select>
+	
+	<update id="deleteTradeRecommend" parameterType="hashmap">
+		update T_MEM_MENU m
+			<set>
+			m.ALIVE_FLAG='0'
+	 		,m.UPDATE_USER = #{updateUser}
+			,m.UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			m.ALIVE_FLAG='1'
+<!-- 			and t.ALIVE_FLAG='1' -->
+			and EXISTS (SELECT 1 FROM T_TP_MENU t 
+				WHERE t.MENU_ID = m.MENU_ID 
+				and t.MENU_TYPE = '20')
+			and m.MENU_TYPE = #{menuType}
+			and m.EMP_ID=#{empId}			
+	</update>
+	
+	<update id="deleteHotRecommend" parameterType="hashmap">
+		update T_MEM_MENU m
+			<set>
+			m.ALIVE_FLAG='0'
+	 		,m.UPDATE_USER = #{updateUser}
+			,m.UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			m.ALIVE_FLAG='1'
+			and EXISTS (SELECT 1 FROM T_TP_MENU t 
+				WHERE t.MENU_ID = m.MENU_ID
+				and t.ALIVE_FLAG='1'
+				and t.MENU_TYPE in ('20', '50')
+				and t.IS_PERSONAL = #{isPersonal}
+				)
+			and m.MENU_TYPE = #{menuType}
+			and m.EMP_ID=#{empId}
+	</update>
+	
+	<update id="updateRecordsDefine" parameterType="hashmap">
+		update T_MEM_MENU
+			<set>
+			MARKET_ID=''
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			ALIVE_FLAG='1'
+			and  EMP_ID=#{empId}
+			and  MARKET_ID=#{marketId}
+	</update>
+</mapper>

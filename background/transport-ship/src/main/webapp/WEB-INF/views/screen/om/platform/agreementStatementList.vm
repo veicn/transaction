@@ -1,0 +1,119 @@
+<script>
+layui.use(['layer','jquery','upload'], function(){
+	var layer = layui.layer;
+	var $ = layui.jquery
+	,upload = layui.upload;
+// 提示信息
+$(function () {
+	$("td").on("mouseenter",function() {
+	    if (this.offsetWidth < this.scrollWidth) {
+	        var that = this;
+	        var text = $(this).text();
+	        
+	        if(text.indexOf(";")>-1) {
+			　　text = text.split(';')[1];
+			}
+			
+	        layer.tips("<span style='color:black'>"+text+"</span>", that,{
+	            tips: [3,"#fff"],
+	            time: 2000
+	        });
+	    }
+	});
+})
+});
+</script>
+
+<style>
+.contain {
+	width:100%;
+}
+
+table { 
+	width:100%; 
+	text-align: left;
+	border:1px solid #e3e6e8; 
+	border-collapse: collapse; 
+	table-layout: fixed; 
+	display: table;
+}
+
+th,td {
+	overflow: hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+}
+
+.layui-layer { 
+	word-wrap: break-word; 
+	word-break: break-all;
+}
+</style>
+
+<div class="layui-table" style="padding:15px" id="layerDemo">
+	<!--搜索条件-->
+	<div class="ry-banner">
+		<div class="layui-inline">
+			<label class="layui-form-label">发票号码</label>
+		    <div class="layui-input-inline iw300" >
+		      <input class="form-inp" id="receiptCode" type="text" name="receiptCode" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!query.receiptCode">   
+		    </div>
+		 </div>
+		 <div class="layui-inline">
+		    <label class="layui-form-label">租船协议编号</label>
+		    <div class="layui-input-inline iw300" >
+		      <input class="form-inp" id="agreementCode" type="text" name="agreementCode" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!query.agreementCode">   
+		    </div>
+		</div>
+		 <div class="layui-inline">
+		    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button>
+		     <button class="layui-btn layui-btn-normal layui-btn-small reset">重置</button>
+		 </div>
+	 </div>
+		    <!-- <div class="layui-input-inline iw300" style="width:10px;"></div>
+		    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button> -->
+	</div>
+	<!--列表-->
+	<div class="contain">
+	<table id="sysShipList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+	  <thead>
+	    <tr>
+	      <tr>
+	      <th class="table-style-th">发票号码</th>
+		  <th class="table-style-th">租船协议编号</th>
+		  <th class="table-style-th">收款方</th>
+		  <th class="table-style-th">付款方</th>
+		  <th class="table-style-th">Flat Rate</th>
+		  <th class="table-style-th">Rate(WS)</th>
+		  <th class="table-style-th">C/P Quantity</th>
+		  <th class="table-style-th">Total Amount</th>
+	      <th class="table-style-th" >操作</th>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	  #foreach($data in $datas)
+	    <tr>
+		    <td>$!{data.receiptCode}</td>
+			<td>$!{data.agreementCode}</td>
+			<td>$!{data.payee}</td>
+			<td>$!{data.payer}</td>
+			<td>$!{data.freightOverageFlatrate}</td>
+			<td>$!{data.freightOverageRate}</td>
+			<td>$!{data.freightQuantily}</td>
+			<td>$!{data.balance}</td>
+		    <td>
+		      	<i class="layui-icon">&#xe605;</i>
+		      	<a href="javascript:;" class="dialog-link btcol lookBtn" attr-data="$data.uuid">查看</a>
+		      	
+		    </td>
+	    </tr>
+	  #end
+	  </tbody>
+	</table>
+	</div>
+    <!--底部分页-->
+    <div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/platform/agreementStatementList.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+</div>
+<script src="/transport/js/om/platform/agreementStatementList.js"></script>

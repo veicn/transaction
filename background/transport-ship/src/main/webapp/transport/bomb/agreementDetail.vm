@@ -1,0 +1,67 @@
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#date1' //指定元素
+  });
+});
+</script>
+<form class="layui-form layui-form-pane" style="margin-top:20px; margin-left:100px" action="ruleSave">
+
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px">租船协议编号</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="agreementCode" type="text" name="agreementCode" readonly="readonly" style="width:260px">
+		    </div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">租约日</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="signDate" type="text" name="signDate" readonly="readonly"  style="width:260px">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">甲方</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="firParty" type="text" name="firParty" readonly="readonly"  style="width:260px">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">乙方</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="secParty" type="text" name="secParty" readonly="readonly"  style="width:260px">
+	    </div>
+    </div>
+    
+   <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">船名</label>
+	    <div class="layui-input-inline iw300"  style="width:260px">
+	        <input class="layui-input" id="shipName" type="text" name="shipName" readonly="readonly" >
+	    </div>
+    </div>
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">数量（桶）</label>
+	    <div class="layui-input-inline iw300">
+	        <input type="text" class="layui-input" id="quantity" name="quantity" readonly="readonly"  style="width:260px">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <div class="layui-inline">
+	      <label class="layui-form-label" style="width:125px">附件</label>
+	      <div class="layui-input-inline" style="width:185px;">
+			<input type="text" class="layui-input" name="accessory" id="accessory" readonly="readonly"  style="width:187px">
+	      </div>
+	       <button class="layui-btn layui-btn-normal " id="shangchuans" disabled="disabled">下载</button>
+	    </div>
+  	</div>
+  
+  
+</form>

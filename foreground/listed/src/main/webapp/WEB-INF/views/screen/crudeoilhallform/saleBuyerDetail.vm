@@ -1,0 +1,45 @@
+
+<div class="cg-title cg-title2">买家信息</div>
+<ul class="or-line clearfix"><li class="or-line2"></li><li class="or-line1"></li></ul>
+<div class="c-form">
+    <ul class="c-ful c-ful-supplier">
+
+        <li class="c-fcos2">
+            <span class="c-fn"><span class="notice-required">*&nbsp;</span>企业名称：</span>
+            <input type="text" name="demandRelevanter.enterpriseName" class="c-int required true" value="$!{demandRelevanter.enterpriseName}" readonly/>
+            <input type="hidden" name="demandRelevanter.eMemberId" value="$!{user.epMemberId}"></li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>联系电话：</span>
+            <input type="text" name="demandRelevanter.phoneNo" value="$!{demandRelevanter.phoneNo}" onkeyup="return clearPhono(this)" class="c-int required true" placeholder="请输入联系电话"  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn">企业地址：</span>
+            <input type="text" name="demandRelevanter.enterpriseAddress"  value="$!{demandRelevanter.enterpriseAddress}" class="c-int true" placeholder="请输入供应商地址" maxlength="200"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>邮箱：</span>
+            <input type="text" name="demandRelevanter.famil" value="$!{demandRelevanter.famil}" class="c-int required email" placeholder="请输入邮箱"  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn"><span class="notice-required">*&nbsp;</span>联系人：</span>
+            <input type="text" name="demandRelevanter.contacter" value="$!{demandRelevanter.contacter}" class="c-int required true" placeholder="请输入联系人名称"  maxlength="100"/>
+        </li>
+        <li class="c-fcos2"><span class="c-fn">传真：</span>
+            <input type="text" name="demandRelevanter.fax" value="$!{demandRelevanter.fax}" onkeyup="return clearPhono(this)" class="c-int true" placeholder="请输入传真" maxlength="20"/>
+        </li>
+        <li><input type="hidden" value="CBB" name="demandRelevanter.type"></li>
+        <li><input type="hidden" name="demandRelevanter.id" value="$!{demandRelevanter.id}"/></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+    $('form').validate({
+        onfocusout: function(element){
+            $(element).valid();
+        }
+    });
+
+    function formValiate() {
+        if($(".required").valid()){
+            return $(".email").valid();
+        }
+        return false;
+    }
+</script>

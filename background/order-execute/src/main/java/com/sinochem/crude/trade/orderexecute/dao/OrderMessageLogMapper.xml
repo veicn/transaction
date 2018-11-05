@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderMessageLogMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderMessageLog" id="OrderMessageLog">
+		<result property="messageId" column="MESSAGE_ID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="messageTile" column="MESSAGE_TILE" />
+		<result property="content" column="CONTENT" />
+		<result property="messageType" column="MESSAGE_TYPE" />
+		<result property="fromPerson" column="FROM_PERSON" />
+		<result property="toPerson" column="TO_PERSON" />
+		<result property="status" column="STATUS" />
+		<result property="sendTime" column="SEND_TIME" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderMessageLog"  useGeneratedKeys="true" keyProperty="messageId" >
+		insert  into t_order_message_log (				MESSAGE_ID
+						,ORDER_ID
+						,MESSAGE_TILE
+						,CONTENT
+						,MESSAGE_TYPE
+						,FROM_PERSON
+						,TO_PERSON
+						,STATUS
+						,SEND_TIME
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						)
+		values(		#{messageId}
+						,#{orderId}
+						,#{messageTile}
+						,#{content}
+						,#{messageType}
+						,#{fromPerson}
+						,#{toPerson}
+						,#{status}
+						,#{sendTime}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_message_log
+              WHERE 1=1 
+                AND MESSAGE_ID = #{messageId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderMessageLog">
+        DELETE FROM t_order_message_log
+              WHERE 1=1 
+        <if test="messageId!=null and messageId!=''">AND  MESSAGE_ID = #{messageId}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="messageTile!=null and messageTile!=''">AND  MESSAGE_TILE = #{messageTile}</if>
+        <if test="content!=null and content!=''">AND  CONTENT = #{content}</if>
+        <if test="messageType!=null and messageType!=''">AND  MESSAGE_TYPE = #{messageType}</if>
+        <if test="fromPerson!=null and fromPerson!=''">AND  FROM_PERSON = #{fromPerson}</if>
+        <if test="toPerson!=null and toPerson!=''">AND  TO_PERSON = #{toPerson}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="sendTime!=null and sendTime!=''">AND  SEND_TIME = #{sendTime}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderMessageLog">
+		update t_order_message_log
+		<set>
+         MESSAGE_ID=#{messageId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="messageTile!=null">,MESSAGE_TILE = #{messageTile}</if>
+		<if test="content!=null">,CONTENT = #{content}</if>
+		<if test="messageType!=null">,MESSAGE_TYPE = #{messageType}</if>
+		<if test="fromPerson!=null">,FROM_PERSON = #{fromPerson}</if>
+		<if test="toPerson!=null">,TO_PERSON = #{toPerson}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="sendTime!=null">,SEND_TIME = #{sendTime}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 MESSAGE_ID=#{messageId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_message_log
+		<set>
+         MESSAGE_ID=#{messageId}
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="messageTile!=null">,MESSAGE_TILE = #{messageTile}</if>
+		<if test="content!=null">,CONTENT = #{content}</if>
+		<if test="messageType!=null">,MESSAGE_TYPE = #{messageType}</if>
+		<if test="fromPerson!=null">,FROM_PERSON = #{fromPerson}</if>
+		<if test="toPerson!=null">,TO_PERSON = #{toPerson}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="sendTime!=null">,SEND_TIME = #{sendTime}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="messageId!=null and messageId!=''">and  MESSAGE_ID=#{messageId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="messageTile!=null and messageTile!=''">and  MESSAGE_TILE=#{messageTile}</if>
+		<if test="content!=null and content!=''">and  CONTENT=#{content}</if>
+		<if test="messageType!=null and messageType!=''">and  MESSAGE_TYPE=#{messageType}</if>
+		<if test="fromPerson!=null and fromPerson!=''">and  FROM_PERSON=#{fromPerson}</if>
+		<if test="toPerson!=null and toPerson!=''">and  TO_PERSON=#{toPerson}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="sendTime!=null and sendTime!=''">and  SEND_TIME=#{sendTime}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderMessageLog">
+			select
+			* from t_order_message_log
+			where
+		    MESSAGE_ID=#{messageId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderMessageLog">
+			select
+			* from t_order_message_log
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderMessageLog" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderMessageLog">
+		select * from t_order_message_log
+			where
+		 ALIVE_FLAG='1'
+		<if test="messageId!=null and messageId!=''">and  MESSAGE_ID=#{messageId}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="messageTile!=null and messageTile!=''">and  MESSAGE_TILE=#{messageTile}</if>
+		<if test="content!=null and content!=''">and  CONTENT=#{content}</if>
+		<if test="messageType!=null and messageType!=''">and  MESSAGE_TYPE=#{messageType}</if>
+		<if test="fromPerson!=null and fromPerson!=''">and  FROM_PERSON=#{fromPerson}</if>
+		<if test="toPerson!=null and toPerson!=''">and  TO_PERSON=#{toPerson}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="sendTime!=null and sendTime!=''">and  SEND_TIME=#{sendTime}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  MESSAGE_ID as "messageId" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   MESSAGE_TILE as "messageTile" 
+						 ,   CONTENT as "content" 
+						 ,   MESSAGE_TYPE as "messageType" 
+						 ,   FROM_PERSON as "fromPerson" 
+						 ,   TO_PERSON as "toPerson" 
+						 ,   STATUS as "status" 
+						 ,   SEND_TIME as "sendTime" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_order_message_log
+		where
+			ALIVE_FLAG='1'
+			<if test="messageId!=null and messageId!=''">and  MESSAGE_ID=#{messageId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="messageTile!=null and messageTile!=''">and  MESSAGE_TILE=#{messageTile}</if>
+			<if test="content!=null and content!=''">and  CONTENT=#{content}</if>
+			<if test="messageType!=null and messageType!=''">and  MESSAGE_TYPE=#{messageType}</if>
+			<if test="fromPerson!=null and fromPerson!=''">and  FROM_PERSON=#{fromPerson}</if>
+			<if test="toPerson!=null and toPerson!=''">and  TO_PERSON=#{toPerson}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sendTime!=null and sendTime!=''">and  SEND_TIME=#{sendTime}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_message_log 
+		where
+		 ALIVE_FLAG='1'
+			<if test="messageId!=null and messageId!=''">and  MESSAGE_ID=#{messageId}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="messageTile!=null and messageTile!=''">and  MESSAGE_TILE=#{messageTile}</if>
+			<if test="content!=null and content!=''">and  CONTENT=#{content}</if>
+			<if test="messageType!=null and messageType!=''">and  MESSAGE_TYPE=#{messageType}</if>
+			<if test="fromPerson!=null and fromPerson!=''">and  FROM_PERSON=#{fromPerson}</if>
+			<if test="toPerson!=null and toPerson!=''">and  TO_PERSON=#{toPerson}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sendTime!=null and sendTime!=''">and  SEND_TIME=#{sendTime}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

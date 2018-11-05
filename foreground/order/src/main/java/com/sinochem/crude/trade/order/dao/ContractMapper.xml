@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.order.dao.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.order.domain.Contract">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="initiator" property="initiator" jdbcType="BIGINT" />
+    <result column="trader" property="trader" jdbcType="BIGINT" />
+    <result column="contract_type" property="contractType" jdbcType="VARCHAR" />
+    <result column="num_float" property="numFloat" jdbcType="VARCHAR" />
+    <result column="reference_id" property="referenceId" jdbcType="BIGINT" />
+    <result column="valuation_formula_json" property="valuationFormulaJson" jdbcType="VARCHAR" />
+    <result column="valuation_formula" property="valuationFormula" jdbcType="VARCHAR" />
+    <result column="trade_item" property="tradeItem" jdbcType="INTEGER" />
+    <result column="agio" property="agio" jdbcType="BIGINT" />
+    <result column="valuation_base" property="valuationBase" jdbcType="VARCHAR" />
+    <result column="valuation_proid_type" property="valuationProidType" jdbcType="INTEGER" />
+    <result column="pay_item" property="payItem" jdbcType="VARCHAR" />
+    <result column="pay_item_json" property="payItemJSON" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="purchase_mode" property="purchaseMode" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="BIGINT" />
+    <result column="unit" property="unit" jdbcType="BIGINT" />
+    <result column="rate" property="rate" jdbcType="INTEGER" />
+    <result column="meter_num" property="meterNum" jdbcType="BIGINT" />
+    <result column="meter_unit" property="meterUnit" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="buyer" property="buyer" jdbcType="BIGINT" />
+    <result column="seller" property="seller" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="double_status" property="doubleStatus" jdbcType="VARCHAR" />
+    <result column="double_sign" property="doubleSign" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="deal_type" property="dealType" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="bidding_id" property="biddingId" jdbcType="BIGINT" />
+    <result column="purchase_type" property="purchaseType" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="INTEGER" />
+    <result column="valuation_proid_start" property="valuationProidStart" jdbcType="DATE" />
+    <result column="valuation_proid_end" property="valuationProidEnd" jdbcType="DATE" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="executor" property="executor" jdbcType="BIGINT" />
+    <result column="other_item" property="otherItem" jdbcType="VARCHAR" />
+    <result column="auth_item" property="authItem" jdbcType="VARCHAR" />
+    <result column="business_check_org" property="businessCheckOrg" jdbcType="VARCHAR" />
+    <result column="export_conf_file" property="exportConfFile" jdbcType="VARCHAR" />
+    <result column="tender_out_time" property="tenderOutTime" jdbcType="DATE" />
+    <result column="stop_bid_time" property="stopBidTime" jdbcType="DATE" />
+    <result column="cancel_flag" property="cancelFlag" jdbcType="BIT" />
+    <result column="load_and_discharge_permitted_timespan" property="loadAndDischargePermittedTimespan" jdbcType="VARCHAR" />
+    <result column="measure_mode" property="measureMode" jdbcType="INTEGER" />
+    <result column="contract_kind" property="contractKind" jdbcType="VARCHAR" />
+    <result column="inspection_fee_sharing_type" property="inspectionFeeSharingType" jdbcType="INTEGER" />
+    <result column="law" property="law" jdbcType="VARCHAR" />
+    <result column="gtc" property="gtc" jdbcType="VARCHAR" />
+    <result column="original_name" property="originalName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, initiator, trader,
+    contract_type, num_float, reference_id,
+    valuation_formula_json, valuation_formula,trade_item, agio,
+
+    valuation_base, valuation_proid_type, pay_item,pay_item_json,
+    pay_time, purchase_mode,num,num as enNum,
+    unit, rate, meter_num,
+
+    meter_unit, uuid, buyer,
+    seller, remark, creater,
+    create_time,updater, update_time,
+
+    cancel_flag, double_status, double_sign, token,
+    order_status, type, deal_type,
+    biz_type, price, bidding_id,
+
+    purchase_type, valuation_proid_start,valuation_proid_end,
+    order_no, executor, other_item,
+    auth_item, business_check_org, export_conf_file,
+
+    tender_out_time, stop_bid_time, load_and_discharge_permitted_timespan,
+    measure_mode, contract_kind, inspection_fee_sharing_type, law, gtc,file_path,original_name      
+  </sql>
+  <select id="selectByContractQuery" parameterType="com.sinochem.crude.trade.order.model.query.ContractQuery" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contract
+    <where>
+      <if test="startTime != null">
+        and create_time = #{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and create_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+
+  <sql id="Unite_Ship_Column">
+    c.resource_id resourceId,cs.shipment_port shipmentPort,c.trade_item tradeItem,c.num,c.num_float numFloat,
+    c.valuation_formula_json, c.valuation_formula valuationFormula,c.agio,c.pay_item payItem,cs.shipment_start shipmentStart,
+    cs.shipment_end shipmentEnd,c.valuation_proid_type valuationProidType,c.valuation_proid_start valuationProidStart,
+    c.valuation_proid_end valuationProidEnd
+  </sql>
+  <select id="queryOrderInfoProduct" parameterType="java.lang.Long" resultType="com.sinochem.crude.trade.order.model.result.ContractProductResult">
+    select
+    <include refid="Unite_Ship_Column" />
+    from contract c
+    LEFT JOIN  contract_ship cs ON c.id = cs.contract_id
+    <where>
+      <if test="contractId != null">
+        and c.id = #{contractId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectByUUID" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contract
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contract
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    WHERE id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <sql id="Unite_Column_List">
+      c.id contractId,c.create_time createTime,c.uuid,c.initiator,c.deal_type dealType,cor.name crudeOilOptions,
+      por.product_oil_kind productOilKind,por.product_oil_specs productOilSpecs,c.valuation_formula_json, c.valuation_formula valuationFormula,c.agio,c.num,
+      c.num as enNum,
+      c.trade_item tradeItem,c.bidding_id biddingId,c.buyer,c.seller,cr.e_member_name memberName,
+      cs.shipment_port shipmentPort,cs.discharge_port dischargePort,c.original_name,c.file_path,
+      cs.shipment_start_time shipmentStart,cs.shipment_end_time shipmentEnd,cs.discharge_start_time dischargeStart,cs.discharge_end_time dischargeEnd,
+      c.valuation_proid_type valuationProidType,c.valuation_proid_start valuationProidStart,c.valuation_proid_end valuationProidEnd,
+      c.pay_item payItem,c.pay_item_json payItemJSON,c.pay_time payTime,c.biz_type bizType,c.order_status orderStatus,c.contract_type contractType,c.trader,
+      c.executor,c.cancel_flag cancelFlag,c.double_status doubleStatus,c.double_sign doubleSign,ss.sum longNum,c.order_no orderNo, c.load_and_discharge_permitted_timespan loadAndDischargePermittedTimespan
+  </sql>
+  <select id="uniteSelectByPrimaryKey" parameterType="com.sinochem.crude.trade.order.model.query.ContractQuery" resultType="com.sinochem.crude.trade.order.model.result.ContractListResult">
+    select
+        <include refid="Unite_Column_List" />
+    from contract c
+    LEFT JOIN contract_ship cs ON cs.contract_id = c.id
+    LEFT JOIN crude_oil_resource cor ON cor.contract_id = c.id
+    LEFT JOIN product_oil_resource por ON por.contract_id = c.id
+    LEFT JOIN contract_relevanter cr ON c.creater = cr.e_memberid AND c.id = cr.contract_id
+    LEFT JOIN (SELECT contract_id,SUM(num) sum FROM crude_oil_long_term_contract_plan GROUP BY contract_id) ss ON c.id = ss.contract_id
+    <where>
+      <if test="memberid != null">
+      	<if test="roleType != null and roleType.toString() == '1'.toString()">
+      		AND c.buyer = #{memberid,jdbcType=BIGINT}
+      	</if>
+      	<if test="roleType != null and roleType.toString() == '2'.toString()">
+      		AND c.seller = #{memberid,jdbcType=BIGINT}
+      	</if>
+      </if>
+      <if test="name != null">
+        AND c.uuid = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="dealType != null">
+        AND c.deal_type = #{dealType,jdbcType=VARCHAR}
+      </if>
+      <if test="bizType != null">
+        AND c.biz_type = #{bizType,jdbcType=VARCHAR}
+      </if>
+      <if test="orderNo != null">
+        AND c.order_no = #{orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null">
+        <![CDATA[ AND c.create_time >= #{startTime,jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endTime != null">
+        <![CDATA[ AND c.create_time < #{endTime,jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="orderStatus != null">
+        and c.order_status = #{orderStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="contractType != null">
+        and c.contract_type = #{contractType,jdbcType=VARCHAR}
+      </if>
+    </where>
+    <if test="orderByClause != null">
+        ORDER BY  ${orderByClause}
+    </if>
+  </select>
+
+  <select id="countOrderStatus" resultType="com.sinochem.crude.trade.order.model.result.OrderStatusCountResult">
+   SELECT
+    (SELECT COUNT(*) FROM contract) AS total,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 1 ) AS unpaid,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 2 ) AS unshipments,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 3 ) AS unreceiving,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 4 ) AS unclosing,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 5 ) AS successCount,
+    (SELECT COUNT(*) FROM contract WHERE order_status = 6 ) AS closeCount
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from contract
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.order.domain.Contract"
+                        useGeneratedKeys="true" keyProperty="id">
+    insert into contract (
+      id, initiator, trader,
+      contract_type, num_float,
+      reference_id, valuation_formula_json, valuation_formula, trade_item,
+
+      agio, valuation_base, valuation_proid_type,
+      valuation_proid_start,valuation_proid_end,pay_item,pay_item_json,
+      pay_time, purchase_mode,
+
+      num, unit,   rate,
+      meter_num, meter_unit,   uuid,
+      buyer, seller, remark,
+
+      creater, create_time, updater,
+      update_time, double_status, double_sign, token,
+      order_status,type ,deal_type,
+
+      biz_type, price,
+      bidding_id,purchase_type,
+      cancel_flag,order_no,export_conf_file,tender_out_time,stop_bid_time,
+      other_item,auth_item,business_check_org, load_and_discharge_permitted_timespan,
+      measure_mode, contract_kind, inspection_fee_sharing_type, law, gtc,file_path,original_name   
+      )
+
+    values (
+      #{id,jdbcType=BIGINT}, #{initiator,jdbcType=BIGINT}, #{trader,jdbcType=BIGINT},
+      #{contractType,jdbcType=VARCHAR}, #{numFloat,jdbcType=VARCHAR},
+      #{referenceId,jdbcType=BIGINT}, #{valuationFormulaJson, jdbcType=VARCHAR}, #{valuationFormula,jdbcType=VARCHAR}, #{tradeItem,jdbcType=INTEGER},
+
+      #{agio,jdbcType=BIGINT}, #{valuationBase,jdbcType=VARCHAR}, #{valuationProidType,jdbcType=INTEGER},
+      #{valuationProidStart,jdbcType=TIMESTAMP},#{valuationProidEnd,jdbcType=TIMESTAMP}, #{payItem,jdbcType=VARCHAR}, #{payItemJSON,jdbcType=VARCHAR},
+      #{payTime,jdbcType=TIMESTAMP}, #{purchaseMode,jdbcType=INTEGER},
+
+      #{num,jdbcType=BIGINT}, #{unit,jdbcType=BIGINT},  #{rate,jdbcType=INTEGER},
+      #{meterNum,jdbcType=BIGINT}, #{meterUnit,jdbcType=BIGINT},  #{uuid,jdbcType=VARCHAR},
+      #{buyer,jdbcType=BIGINT}, #{seller,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
+
+      #{creater,jdbcType=BIGINT}, NOW(), #{updater,jdbcType=BIGINT},
+      NOW(), #{doubleStatus,jdbcType=VARCHAR}, #{doubleSign,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR},
+      #{orderStatus,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{dealType,jdbcType=VARCHAR},
+
+      #{bizType,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{biddingId,jdbcType=BIGINT},#{purchaseType,jdbcType=INTEGER},
+      #{cancelFlag,jdbcType=VARCHAR},#{orderNo,jdbcType=VARCHAR},
+      #{exportConfFile,jdbcType=VARCHAR},#{tenderOutTime,jdbcType=DATE},#{stopBidTime,jdbcType=DATE},
+      #{otherItem,jdbcType=VARCHAR},#{authItem,jdbcType=VARCHAR},#{businessCheckOrg,jdbcType=VARCHAR},
+      #{loadAndDischargePermittedTimespan,jdbcType=VARCHAR},#{measureMode,jdbcType=INTEGER},
+      #{contractKind,jdbcType=VARCHAR}, #{inspectionFeeSharingType, jdbcType=VARCHAR},#{law,jdbcType=VARCHAR},
+      #{gtc,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR},#{originalName,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective"  parameterType="com.sinochem.crude.trade.order.domain.Contract">
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="initiator != null">
+        initiator,
+      </if>
+      <if test="trader != null">
+        trader,
+      </if>
+      <if test="contractType != null">
+        contract_type,
+      </if>
+      <if test="numFloat != null">
+        num_float,
+      </if>
+      <if test="referenceId != null">
+        reference_id,
+      </if>
+      <if test="valuationFormulaJson != null  and valuationFormulaJson != ''">
+        valuation_formula_json,
+      </if>
+      <if test="valuationFormula != null">
+        valuation_formula,
+      </if>
+      <if test="tradeItem != null">
+        trade_item,
+      </if>
+      <if test="agio != null">
+        agio,
+      </if>
+      <if test="valuationBase != null">
+        valuation_base,
+      </if>
+      <if test="valuationProidType != null">
+        valuation_proid_type,
+      </if>
+      <if test="valuationProidStart != null">
+        valuation_proid_start,
+      </if>
+      <if test="valuationProidEnd != null">
+        valuation_proid_end,
+      </if>
+      <if test="payItem != null">
+        pay_item,
+      </if>
+      <if test="payItemJSON != null">
+        pay_item_json,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="purchaseMode != null">
+        purchase_mode,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="meterNum != null">
+        meter_num,
+      </if>
+      <if test="meterUnit != null">
+        meter_unit,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="buyer != null">
+        buyer,
+      </if>
+      <if test="seller != null">
+        seller,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="1 == 1">
+        create_time,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="doubleStatus != null">
+        double_status,
+      </if>
+      <if test="doubleSign != null">
+        double_sign,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="dealType != null">
+        deal_type,
+      </if>
+      <if test="bizType != null">
+        biz_type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="biddingId != null" >
+        bidding_id,
+      </if>
+      <if test="purchaseType != null" >
+        purchase_type,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="executor != null">
+        executor,
+      </if>
+      <if test="otherItem != null">
+        other_item,
+      </if>
+      <if test="authItem != null">
+        auth_item,
+      </if>
+      <if test="businessCheckOrg != null">
+        business_check_org,
+      </if>
+      <if test="exportConfFile != null">
+        export_conf_file,
+      </if>
+      <if test="tenderOutTime != null">
+        tender_out_time,
+      </if>
+      <if test="stopBidTime != null">
+        stop_bid_time,
+      </if>
+      <if test="cancelFlag != null">
+        cancel_flag,
+      </if>
+      <if test="loadAndDischargePermittedTimespan != null">
+        load_and_discharge_permitted_timespan,
+      </if>
+      <if test="measureMode != null">
+        measure_mode,
+      </if>
+      <if test="contractKind != null">
+        contract_kind,
+      </if>
+      <if test="inspectionFeeSharingType != null">
+        inspection_fee_sharing_type,
+      </if>
+      <if test="law != null">
+        law,
+      </if>
+      <if test="gtc != null">
+        gtc,
+      </if>
+      <if test="originalName != null">
+        original_name,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="initiator != null">
+        #{initiator,jdbcType=BIGINT},
+      </if>
+      <if test="trader != null">
+        #{trader,jdbcType=BIGINT},
+      </if>
+      <if test="contractType != null">
+        #{contractType,jdbcType=VARCHAR},
+      </if>
+      <if test="numFloat != null">
+        #{numFloat,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceId != null">
+        #{referenceId,jdbcType=BIGINT},
+      </if>
+      <if test="valuationFormulaJson != null and valuationFormulaJson != ''">
+        #{valuationFormulaJson,jdbcType=VARCHAR},
+      </if>
+      <if test="valuationFormula != null">
+        #{valuationFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeItem != null">
+        #{tradeItem,jdbcType=INTEGER},
+      </if>
+      <if test="agio != null">
+        #{agio,jdbcType=BIGINT},
+      </if>
+      <if test="valuationBase != null">
+        #{valuationBase,jdbcType=VARCHAR},
+      </if>
+      <if test="valuationProidType != null">
+        #{valuationProidType,jdbcType=INTEGER},
+      </if>
+      <if test="valuationProidStart != null">
+        #{valuationProidStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valuationProidEnd != null">
+        #{valuationProidEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payItem != null">
+        #{payItem,jdbcType=VARCHAR},
+      </if>
+      <if test="payItemJSON != null">
+        #{payItemJSON,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseMode != null">
+        #{purchaseMode,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=BIGINT},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=BIGINT},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="meterNum != null">
+        #{meterNum,jdbcType=BIGINT},
+      </if>
+      <if test="meterUnit != null">
+        #{meterUnit,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null">
+        #{buyer,jdbcType=BIGINT},
+      </if>
+      <if test="seller != null">
+        #{seller,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="1 == 1">
+        NOW(),
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doubleSign != null">
+        #{doubleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},,
+      </if>
+      <if test="dealType != null">
+        #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null">
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="crudeOilOptions != null" >
+        #{crudeOilOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="biddingId != null">
+        #{biddingId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseType != null" >
+        #{purchaseType,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        #{executor,jdbcType=BIGINT},
+      </if>
+      <if test="otherItem != null">
+        #{otherItem,jdbcType=VARCHAR},
+      </if>
+      <if test="authItem != null">
+        #{authItem,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCheckOrg != null">
+        #{businessCheckOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="exportConfFile != null">
+        #{exportConfFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderOutTime != null">
+        #{tenderOutTime,jdbcType=DATE},
+      </if>
+      <if test="stopBidTime != null">
+        #{stopBidTime,jdbcType=DATE},
+      </if>
+      <if test="cancelFlag != null">
+        #{cancelFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="loadAndDischargePermittedTimespan != null">
+        #{loadAndDischargePermittedTimespan,jdbcType=VARCHAR},
+      </if>
+      <if test="measureMode != null">
+        #{measureMode,jdbcType=INTEGER},
+      </if>
+      <if test="contractKind != null">
+        #{contractKind,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionFeeSharingType != null">
+        #{inspectionFeeSharingType,jdbcType=INTEGER},
+      </if>
+      <if test="law != null">
+        #{law,jdbcType=VARCHAR},
+      </if>
+      <if test="gtc != null">
+        #{gtc,jdbcType=VARCHAR},
+      </if>
+      <if test="originalName != null">
+        #{originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR}
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.order.domain.Contract">
+    update contract
+    <set>
+      <if test="initiator != null">
+        initiator = #{initiator,jdbcType=BIGINT},
+      </if>
+      <if test="trader != null">
+        trader = #{trader,jdbcType=BIGINT},
+      </if>
+      <if test="contractType != null">
+        contract_type = #{contractType,jdbcType=VARCHAR},
+      </if>
+      <if test="numFloat != null">
+        num_float = #{numFloat,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceId != null">
+        reference_id = #{referenceId,jdbcType=BIGINT},
+      </if>
+      <if test="valuationFormulaJson != null and valuationFormulaJson != ''">
+        valuation_formula_json = #{valuationFormulaJson,jdbcType=VARCHAR},
+      </if>
+      <if test="valuationFormula != null">
+        valuation_formula = #{valuationFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelFlag != null">
+        cancel_flag = #{cancelFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeItem != null">
+        trade_item = #{tradeItem,jdbcType=INTEGER},
+      </if>
+      <if test="agio != null">
+        agio = #{agio,jdbcType=BIGINT},
+      </if>
+      <if test="valuationBase != null">
+        valuation_base = #{valuationBase,jdbcType=VARCHAR},
+      </if>
+      <if test="valuationProidType != null">
+        valuation_proid_type = #{valuationProidType,jdbcType=INTEGER},
+      </if>
+      <if test="valuationProidStart != null">
+        valuation_proid_start = #{valuationProidStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valuationProidEnd != null">
+        valuation_proid_end = #{valuationProidEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payItem != null">
+        pay_item = #{payItem,jdbcType=VARCHAR},
+      </if>
+      <if test="payItemJSON != null">
+        pay_item_json = #{payItemJSON,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseMode != null">
+        purchase_mode = #{purchaseMode,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=BIGINT},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=BIGINT},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="meterNum != null">
+        meter_num = #{meterNum,jdbcType=BIGINT},
+      </if>
+      <if test="meterUnit != null">
+        meter_unit = #{meterUnit,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null">
+        buyer = #{buyer,jdbcType=BIGINT},
+      </if>
+      <if test="seller != null">
+        seller = #{seller,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = NOW(),
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+        update_time = NOW(),
+      <if test="doubleStatus != null">
+        double_status = #{doubleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="doubleSign != null">
+        double_sign = #{doubleSign,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="dealType != null">
+        deal_type = #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null">
+        biz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="biddingId != null">
+        bidding_id = #{biddingId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseType != null" >
+        purchase_type = #{purchaseType,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        executor = #{executor,jdbcType=BIGINT},
+      </if>
+      <if test="otherItem != null">
+        other_item = #{otherItem,jdbcType=VARCHAR},
+      </if>
+      <if test="authItem != null">
+        auth_item = #{authItem,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCheckOrg != null">
+        business_check_org = #{businessCheckOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="exportConfFile != null">
+        export_conf_file = #{exportConfFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenderOutTime != null">
+        tender_out_time = #{tenderOutTime,jdbcType=DATE},
+      </if>
+      <if test="stopBidTime != null">
+        stop_bid_time = #{stopBidTime,jdbcType=DATE},
+      </if>
+      <if test="loadAndDischargePermittedTimespan != null">
+        load_and_discharge_permitted_timespan = #{loadAndDischargePermittedTimespan, jdbcType=VARCHAR},
+      </if>
+      <if test="measureMode != null">
+        measure_mode = #{measureMode, jdbcType=INTEGER},
+      </if>
+      <if test="contractKind != null">
+        contract_kind = #{contractKind, jdbcType=VARCHAR},
+      </if>
+      <if test="inspectionFeeSharingType != null">
+        inspection_fee_sharing_type = #{inspectionFeeSharingType, jdbcType=INTEGER},
+      </if>
+      <if test="law != null">
+        law = #{law, jdbcType=VARCHAR},
+      </if>
+      <if test="gtc != null">
+        gtc = #{gtc, jdbcType=VARCHAR},
+      </if>
+      <if test="originalName != null">
+        original_name = #{originalName, jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath, jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.order.domain.Contract">
+    update contract
+    set initiator = #{initiator,jdbcType=BIGINT},
+      trader = #{trader,jdbcType=BIGINT},
+      contract_type = #{contractType,jdbcType=VARCHAR},
+      cancel_flag = #{cancelFlag,jdbcType=VARCHAR},
+      num_float = #{numFloat,jdbcType=VARCHAR},
+      reference_id = #{referenceId,jdbcType=BIGINT},
+      valuation_formula_json = #{valuationFormulaJson,jdbcType=VARCHAR},
+      valuation_formula = #{valuationFormula,jdbcType=VARCHAR},
+      trade_item = #{tradeItem,jdbcType=INTEGER},
+      agio = #{agio,jdbcType=BIGINT},
+      valuation_base = #{valuationBase,jdbcType=VARCHAR},
+      valuation_proid_type = #{valuationProidType,jdbcType=VARCHAR},
+      valuation_proid_start = #{valuationProidStart,jdbcType=TIMESTAMP},
+      valuation_proid_end = #{valuationProidEnd,jdbcType=TIMESTAMP},
+      pay_item = #{payItem,jdbcType=VARCHAR},
+      pay_item_json = #{payItemJSON,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      purchase_mode = #{purchaseMode,jdbcType=INTEGER},
+      num = #{num,jdbcType=BIGINT},
+      unit = #{unit,jdbcType=BIGINT},
+      rate = #{rate,jdbcType=INTEGER},
+      meter_num = #{meterNum,jdbcType=BIGINT},
+      meter_unit = #{meterUnit,jdbcType=BIGINT},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      buyer = #{buyer,jdbcType=BIGINT},
+      seller = #{seller,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      double_status = #{doubleStatus,jdbcType=VARCHAR},
+      double_sign = #{doubleSign,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      deal_type = #{dealType,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      bidding_id = #{biddingId,jdbcType=BIGINT},
+      purchase_type = #{purchaseType,jdbcType=INTEGER},
+      load_and_discharge_permitted_timespan = #{loadAndDischargePermittedTimespan,jdbcType=VARCHAR},
+      measure_mode = #{measureMode,jdbcType=INTEGER},
+      contract_kind=#{contractKind,jdbcType=VARCHAR},
+      inspection_fee_sharing_type=#{inspectionFeeSharingType,jdbcType=INTEGER},
+      law=#{law,jdbcType=VARCHAR},
+      gtc=#{gtc,jdbcType=VARCHAR},
+      original_name=#{originalName,jdbcType=VARCHAR},
+      file_path=#{filePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--查询长协列表-->
+  <resultMap id="LongContractQueryResult" type="com.sinochem.crude.trade.order.model.result.LongContractQueryResult">
+
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sum" jdbcType="BIGINT" property="sum" />
+    <result column="double_status" jdbcType="VARCHAR" property="doubleStatus" />
+    <result column="double_sign" jdbcType="VARCHAR" property="doubleSign" />
+    <result column="trade_item" jdbcType="INTEGER" property="tradeItem" />
+    <result column="pay_item" jdbcType="VARCHAR" property="payItem" />
+    <result column="end_time" property="endTime" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="INTEGER" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="queryByLongContract" parameterType="com.sinochem.crude.trade.order.model.query.LongContractQuery" resultType="com.sinochem.crude.trade.order.model.result.LongContractQueryResult">
+    SELECT col.order_no orderNo ,col.id id ,col.end_time endTime ,cor.name name, ss.sum sum,col.trade_item tradeItem,col.pay_time payTime,col.double_sign doubleSign,col.uuid uuid,col.create_time createTime
+    FROM
+    contract col
+    LEFT JOIN crude_oil_resource cor ON col.resource_id = cor.id
+    LEFT JOIN contract_relevanter cr ON col.seller = cr.id
+    LEFT JOIN (
+    SELECT
+    contract_id,
+    SUM(num) sum
+    FROM
+    crude_oil_long_term_contract_plan
+    GROUP BY
+    contract_id
+    ) ss ON col.id = ss.contract_id
+    WHERE 1=1
+    AND col.contract_type="L"
+    <if test="memberid != null">
+      AND (col.initiator = #{memberid,jdbcType=BIGINT} OR col.trader = #{memberid,jdbcType=BIGINT} OR col.seller = #{memberid,jdbcType=BIGINT} OR col.buyer = #{memberid,jdbcType=BIGINT})
+    </if>
+    <if test="contractId != null">
+      AND col.order_no = #{contractId,jdbcType=VARCHAR}
+    </if>
+    <if test="contacter != null">
+      AND cr.contacter = #{contacter,jdbcType=VARCHAR}
+    </if>
+    <if test="cupplier != null">
+      AND cr.e_member_name = #{cupplier,jdbcType=VARCHAR}
+    </if>
+    <if test="orderByClause != null">
+      ORDER BY  ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByBiddingId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contract
+    WHERE bidding_id = #{biddingId,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectCountCrude"  resultType="java.lang.Integer">
+    select count(1)
+    from contract
+    WHERE biz_type="CrudeOil"
+    <if test="memberId != null">
+      AND (trader = #{memberId,jdbcType=BIGINT} OR seller = #{memberId,jdbcType=BIGINT} OR buyer = #{memberId,jdbcType=BIGINT})
+    </if>
+  </select>
+
+  <select id="selectCountProduct"  resultType="java.lang.Integer">
+    select count(1)
+    from contract
+    WHERE biz_type="ProductOil"
+    <if test="memberId != null">
+      AND (trader = #{memberId,jdbcType=BIGINT} OR seller = #{memberId,jdbcType=BIGINT} OR buyer = #{memberId,jdbcType=BIGINT})
+    </if>
+  </select>
+
+  <update id="updateOrderStatusById">
+    update contract
+      set update_time = now(),
+      order_status = #{orderStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <resultMap id="historyStatisticsResultMap" type="com.sinochem.crude.trade.order.model.result.CrudeStatisticsResult">
+    <result column="ymTotalNum" property="ymTotalNum" />
+    <result column="ym" property="ym" />
+  </resultMap>
+
+  <select id="statisticeDealNumData" resultMap="historyStatisticsResultMap" parameterType="com.sinochem.crude.trade.order.model.query.StatisticsQuery">
+    SELECT
+    TRUNCATE(SUM(d.num)/10000000, 4) AS ymTotalNum,
+    DATE_FORMAT(d.create_time, '%Y-%m') AS ym
+    FROM
+    contract d
+    left join contract_relevanter crb on crb.contract_id=d.id
+    WHERE
+    d.cancel_flag = 0
+    and d.contract_type = 'D'
+--     and d.double_sign = '11'
+    and d.biz_type = #{bizType, jdbcType=VARCHAR}
+    AND DATE_FORMAT(d.create_time, '%Y') = #{year, jdbcType=VARCHAR}
+    AND crb.e_memberid = #{userId, jdbcType=BIGINT} and crb.type = #{dealType, jdbcType=VARCHAR}
+    GROUP BY
+    DATE_FORMAT(d.create_time, '%Y-%m')
+    order by DATE_FORMAT(d.create_time, '%Y-%m') asc
+  </select>
+</mapper>

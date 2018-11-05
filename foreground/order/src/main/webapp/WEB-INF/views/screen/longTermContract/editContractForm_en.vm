@@ -1,0 +1,94 @@
+#set($a = "原油")
+<form  id="orderEditForm" action="$!appServer.get('/update/OilLongCrude.htm')" method="post">
+
+    $contain.get("/longTermContractContain/longFormPurchase.htm").put("tradeItemMap",$tradeItemMap).put("inspectionFeeSharingTypeMap",$inspectionFeeSharingTypeMap).put("creditItemMap",$creditItemMap).put("payItemMap",$payItemMap).put("contract",$!{contract})
+    $contain.get("/longTermContractContain/longFormPlan.htm").put("contract",$!{contract})
+    $contain.get("/longTermContractContain/longEditBuyerForValid.htm").put("buyerRelevanter", $!{contract.buyerRelevanter})
+#*
+    $contain.get("/longTermContractContain/longEditAgencyForValid.htm").put("traderRelevanter", $!{contract.traderRelevanter})
+*#
+    $contain.get("/longTermContractContain/longEditSupplyForValid.htm").put("supplierRelevanter", $!{contract.supplierRelevanter})
+
+    <div class="c-mod" id="cgxx">
+        <h3><em class="cw-ico ico-h3"></em>Upload Attachment</h3>
+        <div class="c-form">
+            <ul class="c-ful">
+                <li class="c-fcos1">
+                    <span class="c-fn">Attachment：</span>
+                    <input type="hidden" name="filePath" id="file_path" value="$!{contract.filePath}"/>
+                    <input id="file_name" class="c-int" name="originalName" type="text" style="width:41%;" value="$!{contract.originalName}" readonly/>
+                    <a class="fileUpload btn-more" name="fileUpload" id="fileUpload" style="display: inline;">Upload</a>
+
+                    <a class="fileUpload btn-more " id="fileDownload" #if($!contract.filePath != '') style="display: inline;" #else style="display: none;"  #end
+                       href="$appServer.get('/common/doc/download.htm')?path=$!{contract.filePath}&fileName=$!{contract.originalName}">Download</a>
+
+                    <a class="fileUpload btn-more" id="del_file" #if($!contract.filePath != '') style="display: inline;" #else style="display: none;"  #end>Delete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <input type="hidden" class="c-int" name="contractShip.id" value="$!{contract.contractShip.id}"/>
+    <input type="hidden" class="c-int" id="id" name="id" value="$!{contract.id}"/>
+    <input type="hidden" class="c-int" id="is_submit" name="isSubmit" value=""/>
+    <script>
+        $("#del_file").click(function(){
+            $('#file_name').val('');
+            $('#fileDownload').hide();
+            $('#del_file').hide();
+        })
+    </script>
+
+    <div class="c-subdiv">
+        <button id="checkbtn" type="button" class="c-btnsub">Submit</button>
+        <button id="checkbtn2" type="button" class="c-btnsub">Save</button>
+        <script>
+            $(function(){
+                $("#checkbtn").click(function(){
+                    setValue();
+                    $("#is_submit").val("1");
+                    if ($('#orderEditForm').validate().form()) {
+                        $('#orderEditForm')[0].submit();
+                    }
+                });
+                $("#checkbtn2").click(function(){
+                    setValue();
+                    $("#is_submit").val("0");
+                    if ($('#orderEditForm').validate().form()) {
+                        $('#orderEditForm')[0].submit();
+                    }
+                });
+            });
+        </script>
+        <button id="checkbtn1" type="button" class="c-btncas">Cancel</button>
+        <script>
+            $("#checkbtn1").click(function(){
+                window.history.go(-1);
+            });
+        </script>
+    </div>
+
+</form>
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<script>
+    layui.use("ossUpload", function(){
+        var $ = layui.jquery,upload = layui.ossUpload;
+        upload.render({
+            elem: "fileUpload",
+            done: function(res, index){
+                if(res.status == 0){
+                    $("#file_path").val(res.datas.path);
+                    $("#file_name").val(res.datas.originalName);
+                    $("#fileUpload").text("upload");
+                    $("#fileDownload").attr('href',"$appServer.get('/common/doc/download.htm')?path="+ res.datas.path +"&fileName="+ res.datas.originalName);
+                    $('#fileDownload').show();
+                    $('#del_file').show();
+
+                }else{
+                    layer.tips(res.message, this.item, {tips: 1});
+                }
+            }
+        })
+    })
+</script>
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})

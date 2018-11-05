@@ -1,0 +1,83 @@
+<ul class="order-list clearfix" id="statusList">
+
+</ul>
+
+<script>
+    const published = '已发布';
+    const intentionConfirmed = '已确认意向';
+    const actualConfirmed = '已中标';
+    const intentionNotConfirmed = '未确认意向';
+    const actualNotConfirmed = '未中标';
+    const finished = '已结束';
+
+    $(function() {
+        const abstractBiddingState = new AbstractBiddingState();
+
+        #if($!{biddingStatus} == 10)
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 1, true, published));
+            $('#statusList').append(abstractBiddingState.changeState(new ConfirmedState(), 2, false,
+                #if(${biddingType} == 1) intentionConfirmed #else actualConfirmed #end));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, false, finished));
+
+        #elseif($!{biddingStatus} == 20)
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 1, true, published));
+            $('#statusList').append(abstractBiddingState.changeState(new ConfirmedState(), 2, true,
+                #if(${biddingType} == 1) intentionConfirmed #else actualConfirmed #end));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, true, finished));
+
+        #elseif($!{biddingStatus} == 30)
+            $('#statusList').append(abstractBiddingState.changeState(new PublishedState(), 1, true, published));
+            $('#statusList').append(abstractBiddingState.changeState(new ConfirmedState(), 2, true,
+                #if(${biddingType} == 1) intentionNotConfirmed #else actualNotConfirmed #end));
+            $('#statusList').append(abstractBiddingState.changeState(new FinishedState(), 3, true, finished));
+        #end
+
+        $('#statusList').trigger('create');
+    })
+
+    function AbstractBiddingState() {
+        var self = this;
+
+        this.currentState = null;
+        this.changeState = function(state, order, current, text) {
+            self.currentState = state;
+            return state.render(order, current, text);
+        };
+    }
+
+    function PublishedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "   <span class='order-l'></span>" +
+                    "</li>";
+        };
+    }
+
+    function ConfirmedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+            var spanClass = current ? "order-l" : "order-l2";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "   <span class='" + spanClass + "'></span>" +
+                    "</li>";
+        };
+    }
+
+    function FinishedState() {
+        this.render = function(order, current, text) {
+            var liHead = current ? "<li class='cur'>" : "<li>";
+
+            return liHead +
+                    "   <span class='order-s'>" + order + "</span>" +
+                    "   <h5>" + text + "</h5>" +
+                    "</li>";
+        };
+    }
+</script>

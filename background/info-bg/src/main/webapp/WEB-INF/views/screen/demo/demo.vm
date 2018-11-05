@@ -1,0 +1,6 @@
+Demo示例
+<br/>
+#foreach($data in $datas)
+	${data}<br />
+#end
+$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/demo/demo.htm").put('slider_path','/contain/formPagingPageSlider')

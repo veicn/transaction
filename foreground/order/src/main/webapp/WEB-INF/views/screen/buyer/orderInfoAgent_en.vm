@@ -1,0 +1,13 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Agent Info</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn">Agent Info：</span><span class="c-int qx-conte">$!{contractRelevanter.eMemberName}</span></li>
+            <li class="c-fcos1"><span class="c-fn">Address：</span><span class="c-int qx-conte">$!{contractRelevanter.address}</span></li>
+            <li class="c-fcos2"><span class="c-fn">PIC：</span><span class="c-int qx-conte">$!{contractRelevanter.contacter}</span></li>
+            <li class="c-fcos2"><span class="c-fn">E-mail：</span><span class="c-int qx-conte">$!{contractRelevanter.email}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Tel：</span><span class="c-int qx-conte">$!{contractRelevanter.phoneNo}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Fax：</span><span class="c-int qx-conte">$!{contractRelevanter.fax}</span></li>
+        </ul>
+    </div>
+</div>

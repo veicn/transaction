@@ -1,0 +1,140 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')">
+<div class="layui-layout layui-layout-admin">
+		<div class="layui-tab layui-tab-brief" lay-filter="demo">
+			<ul class="layui-tab-title">
+				<li class="layui-this">未发布</li>
+				<li>已发布</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="ry-banner">
+						<form class="layui-form">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">频道栏目</label>
+									<div class="layui-input-inline">
+										<select name="channelM" id="channelM" lay-filter="channelM">
+											<option value="">请选择</option>
+											#foreach($cm in $cms) #if($cm.uuid==$!query.channelM)
+											<option value="$cm.uuid" selected>$cm.channelMName</option>
+											#else
+											<option value="$cm.uuid">$cm.channelMName</option>
+											#end #end
+										</select>
+									</div>
+									<div class="layui-input-inline">
+										<select name="channel" id="channel">
+											<option value="">请选择</option>
+											#foreach($sub in $!subList) #if($sub.uuid==$!query.channel)
+											<option value="$sub.uuid" selected>$sub.channelName</option>
+											#else
+											<option value="$sub.uuid">$sub.channelName</option>
+											#end #end
+										</select>
+									</div>
+								</div>
+								<div class="layui-inline  mb0 ">
+									<div class="layui-inline ">
+										<label class="layui-form-label">关键词</label>
+										<div class="layui-input-inline">
+											<input id="keyWords" type="text" name="keyWords" class="layui-input"
+												value="$!{query.keyWords}">
+												<input id="Type" type="hidden" name="Type" value="$!{query.Type}">
+										</div>
+									</div>
+	
+								</div>
+	
+								<div class="layui-inline inmt">
+									<label class="layui-form-label">发布时间</label>
+									<div class="layui-input-inline">
+										<input name="pubBeginTime" type="text" class="layui-input" id="test1"
+											value="$!{query.pubBeginTime}">
+									</div>
+									<div class="layui-input-inline">
+										<input name="pubEndTime" type="text" class="layui-input" id="test2"
+											value="$!{query.pubEndTime}">
+									</div>
+								</div>
+								
+								<div class="layui-inline  mb0 " style="margin-left: 50px;" >
+									<button class="layui-btn layui-btn-normal searchFn">查询</button>
+									<button class="layui-btn layui-btn-primary resetFn">重置</button>
+									<button class="layui-btn layui-btn-normal addFn">新增</button>
+								</div>
+								
+							</div>
+						</form>
+					</div>
+				</div>
+				<table class="layui-table layui-form" lay-skin="nob" lay-filter="demo" id="test">
+					<thead>
+						<tr>
+							##<th class="checkBoxAll">
+							##	<input lay-filter="layTableAllChoose" type="checkbox" name="" lay-skin="primary" />
+							##</th>
+							<th>发布日期</th>
+							<th>标题</th>
+							<th>频道</th>
+							<th>分类</th>
+							<th>发布者</th>
+							<th>标签</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($data in $datas)
+						<tr>
+							##<th class="children">
+							##	<input type="checkbox" name="test" value="${data.uuid}" lay-skin="primary" />
+							##</th>
+							<td>$!data.releaseDate</td>
+							<td>$!data.title</td>
+							<td>$!data.channelMName</td>
+							<td>$!data.channelName</td>
+							<td>$!data.createUser</td>
+							<td>$!data.tagList</td>
+							#if($data.status == '00')
+							<td>已撤销</td>
+							#elseif($data.status == '10')
+							<td>草稿</td>
+							#elseif($data.status == '20')
+							<td>待审核</td>
+							#elseif($data.status == '29')
+							<td>审核驳回</td>
+							#elseif($data.status == '30')
+							<td>已发布</td>
+							#end
+							<td class="acss-color">
+								<p>
+								#if($!data.status == "10" || $!data.status == "00")
+									<a href="javascript:;" class="deleteInfo" style="color: #2760AD;" attr-data='{"uuid":"$data.uuid"}'><i class="layui-icon">&#xe640;</i> 删除</a> 
+								#end
+								##	<a href="javascript:;" class="auditLink" style="color: #2760AD;" attr-data='{"uuid":"$data.uuid","type":"audit"}'>审核</a> 
+									<a href="javascript:;" class="editLink" style="color: #2760AD; " attr-data="$data.uuid"> <i class="layui-icon">&#xe642;</i> 编辑 </a>
+									<a href="javascript:;" class="detailLink" style="color: #2760AD;" attr-data='{"uuid":"$data.uuid","type":"detail"}'> <i class="layui-icon">&#xe63a;</i> 详情</a>
+								</p>
+							</td>
+						</tr>
+						#end
+					</tbody>
+				</table>
+				#* <div class="layui-row ry-footbar">
+						<div class="layui-col-md4">
+							<button class="layui-btn layui-btn-normal layui-btn-small batchAuditBtn">
+								  批量审核通过
+							</button>
+						</div>
+				  	</div>  *#
+				<!--底部分页-->
+				<div class="ry-footbar ry-right">
+					$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/productOil/ProductOilAudit.htm").put('slider_path','/contain/formPagingPageSlider')		
+				</div>
+			</div>
+		</div>
+
+	<script src="../../info/js/productOil/ProductOilAudit.js"></script>
+</div>
+
+

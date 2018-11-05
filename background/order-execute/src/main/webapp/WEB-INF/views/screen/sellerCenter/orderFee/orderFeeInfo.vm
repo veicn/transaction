@@ -1,0 +1,310 @@
+<div >
+<form class="editorForm0" id="orderFeeForm" enctype="multipart/form-data" method="post"
+		onsubmit="return false;">
+		<input type="text" name="orderId"  id="orderId" value="$!orderFee.orderId" hidden="hidden"></input>
+		<input type="text" name="orderFeeId" id="orderFeeId" value="$!orderFee.orderFeeId" hidden="hidden"></input>
+		<div class="c-mod">
+			<h3>
+				<em class="cw-ico ico-h3"></em>费用信息
+			</h3>
+			<div class="c-form">
+				<ul class="c-ful pro-d-1">
+					<li class="c-fcos2"><span class="c-fn">订单编号：</span><input
+							type="text" style="border:0;background:transparent;" name="orderNo" id="orderNo" readonly="readonly" value="$!orderFee.orderNo" class="c-int" /></li>
+					<li class="c-fcos2"><span class="c-fn">交易方：</span><input
+							type="text" style="border:0;background:transparent;" name="buyerCustomerName" id="buyerCustomerName" readonly="readonly" value="$!orderFee.buyerCustomerName" class="c-int" /></li>
+					<li class="c-fcos2"><span class="c-fn">船名：</span><input
+							type="text" style="border:0;background:transparent;" name="shipName" id="shipName" readonly="readonly" value="$!orderFee.shipName" class="c-int" /></li>
+					<li class="c-fcos2"><span class="c-fn">品种：</span><input
+							type="text" style="border:0;background:transparent;" name="breed" id="breed" readonly="readonly" value="$!orderFee.breed" class="c-int" /></li>
+					<li class="c-fcos2"><span class="c-fn">数量（桶）：</span><input
+							type="text" style="border:0;background:transparent;" name="quantity" id="quantity" readonly="readonly" value="$!NumberTool.format($!orderFee.quantity)" class="c-int" /></li>
+					<li class="c-fcos2"><span class="c-fn">费用合计：</span><input
+							type="text" style="border:0;background:transparent;" name="totalFee" id="totalFee" readonly="readonly" value="$!NumberTool.format($!orderFee.totalFee)" class="c-int ry-tool" /></li>
+				</ul>
+			</div>
+		</div>
+	
+			
+		<div class="c-mod">
+			<h3>
+				<i class="cw-ico ico-h3"></i>费用清单
+			</h3>
+			<div class="c-tabdiv c-inrdio">
+				<table class="ry-tab">
+					<tr>
+						<th>费用科目</th>
+						<th>计价方式</th>
+						<th>数量</th>
+						<th>单价</th>
+						<th>小计</th>
+						<th>是否计入结算</th>
+					</tr>
+					#if($orderFeeItem.size() > 0) #foreach($item in $orderFeeItem)
+
+					#set($class = $velocityCount%2+1)
+					#set($count = $velocityCount - 1)
+					<tr class="ct-tabcos$class ry-tabcosTr">
+						<td>
+						
+					<input type="hidden" value="$!item.subjectCode" name="feeItemList[$count].subjectCode" class="c-int" />
+					<!--<input type="text" value="$!item.feeItemId"
+							name="feeItemList[$count].feeItemId" hidden="hidden" class="c-int" />-->
+						<input type="text" value="$!item.subjectName"
+							name="feeItemList[$count].subjectName" readonly="readonly" maxlength="20" class="c-int ry-subjectName" /></td>
+						<td><select id="valuationModel" name="feeItemList[$count].valuationModel"
+							class="c-int c-int2 ry-select c-injjfs">
+								<option value="1" #if($!{item.valuationModel} ==
+									'1') selected="selected" #end>桶</option>
+								<option value="3" #if($!{item.valuationModel} ==
+									'3') selected="selected" #end>吨</option>
+								<option value="2" #if($!{item.valuationModel} ==
+									'2') selected="selected" #end>笔</option>
+						</select></td>
+						<td><input type="text" value="$!NumberTool.format($!item.quantity)"
+							name="feeItemList[$count].quantity" class="c-int ry-quantity" 
+							onkeyup="clearNoNumThree(this)" 
+							maxlength="18"
+							onfocus="this.value=delNumFormat(this.value);" 
+							onblur="this.value=formatNumber(this.value,3,1);"/></td>
+						<td><input type="text" value="$!NumberTool.format($!item.feePrice)"
+							name="feeItemList[$count].feePrice" class="ry-feePrice" 
+							onkeyup="clearNoNumThree(this)" 
+							maxlength="18"
+							onfocus="this.value=delNumFormat(this.value);" 
+							onblur="this.value=formatNumber(this.value,3,1);"/>USD</td>
+						<td><input type="text" value="$!NumberTool.format($!item.totalFee)"
+							name="feeItemList[$count].totalFee" readonly="readonly" class="c-int ry-totalFee" 
+							/></td>
+						<td class="ry-checkbox">
+						<label>
+						 <input type="checkbox" value="$!{item.isAgent}" onClick="clickFn(this)"	
+							name="feeItemList[$count].isAgent" #if($!{item.isAgent} =="1") checked = "checked" 
+						 #end/>
+						</label>
+						</td>
+					</tr>
+					#end #end
+				</table>
+				
+				<div class="order-add" align="right">
+					<a class="fee-add">
+						<i class="oico-plus"></i>自定义添加费用
+					</a>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		<div class="c-mod">
+			<div class="c-subdiv">
+				<button class="c-btnsub" onclick="submitData()">保存</button>
+				<button class="c-btncas" onClick="javascript:history.back(-1);">返回</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="../../orderexecute/js/orderFee/orderFeeInfo.js"></script>
+
+<script>
+	//三位小数数字正则校验
+	function clearNoNumTwo(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3'); 
+	}  
+	
+	//两位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+		//先把非数字的都替换掉，除了数字和.    
+	    $(obj).val( $(obj).val().replace(/[^\d.-]/g,""));    
+	    //保证只有出现一个.而没有多个.    
+	     $(obj).val($(obj).val().replace(/\.{2,}/g,"."));    
+	    //必须保证第一个为数字而不是.    
+	     $(obj).val( $(obj).val().replace(/^\./g,""));  
+	    //保证.只出现一次，而不能出现两次以上    
+	    $(obj).val( $(obj).val().replace(".","$#$").replace(/\./g,"").replace("$#$","."));    
+	    $(obj).val( $(obj).val().replace(/^\-/g,"$#$").replace(/\-/g,"").replace("$#$","-"));    
+	    //只能输入两个小数  
+	    $(obj).val( $(obj).val().replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3')); 
+		tool(obj);	
+	} 
+
+		function clickFn(obj){
+			var checkedValue = $(obj).val();
+			if($(obj).val() == 1){
+				$(obj).val("0");
+			}else{
+				$(obj).val("1");
+			}
+			toolFn();
+		}
+		/* $(function(){ */
+		
+			//通过判断隐藏域的value值来确定是否添加减号按钮
+			function addMinute(){
+				$('input[type="hidden"]').each(function(i, e){
+					if($(e).val() == 'F999'){
+						$(e).parents('tr').append("<td class='is_flag'><a href='javascript:;' class='shipping-ico w-ico-Less'></a></td>");
+					}
+				})
+			}
+			addMinute();
+		// 总计函数
+		function toolFn(){
+			$('.ry-tab .ry-checkbox').each(function(){
+				if($(this).find('input[type="checkbox"]:checked').val()=='1'){
+					if(delNumFormat($(this).parents('tr').find('.ry-totalFee').val())!=''){
+						sunArr.push(delNumFormat($(this).parents('tr').find('.ry-totalFee').val()));
+					}
+				}
+			});
+			// 累加计算
+			var addSum=0;
+			for(var i=0; i<sunArr.length;i++){
+				addSum += parseFloat(sunArr[i]);
+			}
+			$('.ry-tool').val(this.formatNumber(addSum,3,1));
+		}
+			
+			//checkbox  点击监听
+			$('.ry-checkbox').each(function(){
+				$(this).find('input[type="checkbox"]').on('click',function(){
+					toolFn();
+				});
+			})
+			/////////////////////////////////////////////////////////////////////////////////////////
+			//加
+			$(".fee-add").on("click",function(){
+				var size = $('.ry-tabcosTr').size() - 1;
+				size++;
+				var cloneTr = $(".ry-tab").find("tr:last").clone();
+				
+				//通过判断class来决定是否添加减号
+				if(!cloneTr.find('td').hasClass('is_flag')){
+					cloneTr.append("<td class='is_flag'><a href='javascript:;' class='shipping-ico w-ico-Less'></a></td>");
+				}
+				
+				cloneTr.find('.ry-subjectName').val('');
+				cloneTr.find('.ry-quantity').val('');
+				cloneTr.find('.ry-feePrice').val('');
+				cloneTr.find('.ry-totalFee').val('');
+				cloneTr.find('.ry-subjectName').removeAttr("readonly");
+				cloneTr.find('.ry-quantity').removeAttr("readonly");
+				
+				var textTr1 = cloneTr.find("input[name$='subjectName']").attr("name").replace(cloneTr.find("input[name$='subjectName']").attr("name"),"feeItemList["+size+"].subjectName"); 
+				var textTr2 = cloneTr.find("input[name$='quantity']").attr("name").replace(cloneTr.find("input[name$='quantity']").attr("name"),"feeItemList["+size+"].quantity");
+				var textTr3 = cloneTr.find("input[name$='feePrice']").attr("name").replace(cloneTr.find("input[name$='feePrice']").attr("name"),"feeItemList["+size+"].feePrice");
+				var textTr4 = cloneTr.find("input[name$='isAgent']").attr("name").replace(cloneTr.find("input[name$='isAgent']").attr("name"),"feeItemList["+size+"].isAgent");
+				var textTr5 = cloneTr.find("input[name$='subjectCode']").attr("name").replace(cloneTr.find("input[name$='subjectCode']").attr("name"),"feeItemList["+size+"].subjectCode");
+				var textTr7 = cloneTr.find("input[name$='totalFee']").attr("name").replace(cloneTr.find("input[name$='totalFee']").attr("name"),"feeItemList["+size+"].totalFee");
+				var textTr6 = cloneTr.find("select[name$='valuationModel']").attr("name").replace(cloneTr.find("select[name$='valuationModel']").attr("name"),"feeItemList["+size+"].valuationModel");
+				
+				cloneTr.find("input[name$='subjectCode']").attr("value","F999");
+				cloneTr.find("input[name$='subjectName']").attr("name",textTr1);
+				cloneTr.find("input[name$='quantity']").attr("name",textTr2);
+				cloneTr.find("input[name$='feePrice']").attr("name",textTr3);
+				cloneTr.find("input[name$='isAgent']").attr("name",textTr4);
+				cloneTr.find("input[name$='subjectCode']").attr("name",textTr5);
+				cloneTr.find("input[name$='totalFee']").attr("name",textTr7);
+				cloneTr.find("select[name$='valuationModel']").attr("name",textTr6);
+				
+				$(".ry-tab tbody").append(cloneTr);
+				//$(".ry-tab").find('tr:last').append("<td><a href='javascript:;' class='shipping-ico w-ico-Less'></a></td>");
+			});
+
+			//减
+			$('body').on('click','.w-ico-Less',function(){
+				$(this).parents('tr').remove();
+				toolFn();
+				
+			});
+			//////////////////////////////////////////////////////////////////////////////////////////
+			// 总计函数
+			function toolFn(){
+				var sunArr = [];
+				$('.ry-tab .ry-checkbox').each(function(){
+					if($(this).find('input[type="checkbox"]:checked').val()=='1'){
+						if(delNumFormat($(this).parents('tr').find('.ry-totalFee').val())!=''){
+							sunArr.push(delNumFormat($(this).parents('tr').find('.ry-totalFee').val()));
+						}
+					}
+				});
+				// 累加计算
+				var addSum=0;
+				for(var i=0; i<sunArr.length;i++){
+					
+					addSum += parseFloat(sunArr[i]);
+				}
+				$('.ry-tool').val(this.formatNumber(addSum,3,1));
+			}
+			
+			//价格输入框监听
+			//$('body').on('input propertychange', this, function(){
+			//	if(isNaN($(this).val())){
+			//		alert('请输入数字');
+			//		
+			//	}else{
+			//		//tool();
+			//	}
+			//})
+			
+			//select监听
+			$('body').on('change', '.ry-select', function(){
+				
+				if($(this).val()=='2'){   //按订单计算
+					$(this).parents('tr').find('.ry-quantity').val(1).attr("readonly","readonly");
+					tool(this);
+				}else{   // 按量计算
+					$(this).parents('tr').find('.ry-quantity').val('').removeAttr("readonly");
+					tool(this);
+				}
+				
+			}) 
+			
+			//数量监听
+			$('body').on('input propertychange', '.ry-quantity, .ry-feePrice', function(){
+				clearNoNumThree($(this));
+				
+			})
+				
+			//小计函数 
+			function tool(name){
+				if($(name).parents('tr').find('.ry-feePrice').val()==''){
+					$(name).parents('tr').find('.ry-totalFee').val(0);
+					toolFn();
+					return false
+				}
+				//数量没值
+				if($(name).parents('tr').find('.ry-quantity').val()==''){
+					$(name).parents('tr').find('.ry-totalFee').val(0);
+					toolFn();
+					return false
+				}	
+				//都有值
+				var price=$(name).parents('tr').find('.ry-feePrice').val().replace(/,/g, '');
+				var quantity=$(name).parents('tr').find('.ry-quantity').val().replace(/,/g, '');
+				$(name).parents('tr').find('.ry-totalFee').val((formatNumber(price*quantity,3,1)));
+				
+				toolFn();
+			}  
+			
+			
+		/* }) */
+	</script>
+	
+	<style>
+		.ry-tab input[readonly='readonly']{ background-color: #efefef; border: none;}
+	</style>
+
+

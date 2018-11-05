@@ -1,0 +1,35 @@
+SELECT dr.`contacter` as 交易员,dr.`enterprise_name` as 企业, dr.`dealer_name` as 操作用户,d.uuid as 需求单编号 ,d.`num`/1000 as 采购数量
+FROM `demand_relevanter` dr ,`demand` d
+where dr.`type` ='CBB' 
+and d.`parent_id` IS NULL
+and dr.`demand_id` = d.`id` ;
+
+
+
+SELECT dr.`contacter` as 交易员,dr.`enterprise_name` as 企业, dr.`dealer_name` as 操作用户,d.uuid as 报价单编号 ,d2.`uuid`  as 需求单编号, d.`num`/1000 as 报价数量
+FROM `demand_relevanter` dr ,`demand` d , demand d2
+where dr.`type` ='P' 
+and d.`parent_id` IS NOT NULL
+and dr.`demand_id` = d.`id` 
+and d.`parent_id` = d2.`id` ;
+
+
+
+SELECT c.`id` as 订单ID , c.`order_no` as 订单编码, c.`num`/1000 as 订单数量,
+cr1.`contacter` 买方交易员, cr1.`dealer_name` 买方操作员, cr1.`e_member_name` as 买方企业,
+cr2.`contacter` 卖方交易员, cr2.`dealer_name` 卖方操作员, cr2.`e_member_name` as 卖方企业
+FROM contract c
+LEFT JOIN `contract_relevanter` cr1 on cr1.`type` ='B' and c.`id` =cr1.`contract_id` 
+LEFT JOIN `contract_relevanter` cr2 on cr2.`type` ='S' and c.`id` =cr2.`contract_id` ;
+
+
+SELECT d.`ORDER_NO` as 订单编号,f.`FILE_NAME` as 单据类型,p.`name`  as 操作人,f.`CREATE_USER` 
+FROM `t_order_document_file` f
+LEFT JOIN `t_order_document` d on f.`ORDER_DOCUMENT_ID` = d.`ORDER_DOCUMENT_ID` 
+LEFT JOIN `crude-trade-member`.persons p on p.`member_id` =f.`CREATE_USER` ;
+
+SELECT * FROM `enterprises` WHERE `member_id` ='100008294'
+
+
+
+

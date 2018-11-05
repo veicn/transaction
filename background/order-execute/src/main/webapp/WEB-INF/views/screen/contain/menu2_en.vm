@@ -1,0 +1,121 @@
+
+<!--<a href="#" class="c-mlf"><i class="cw-ico ico-arrl"></i></a>-->
+<a href="#" class="c-mlf"><i class="cw-ico ico-arrr"></i></a>
+<div class="c-company">
+
+	<span class="c-complogo"><a href="#"><img src="$orderExecuteServer.get('/orderexecute/images/coop_img_01.gif')" style="display: inline-block; height: 100%;"></a></span>
+	<p><a href="#">泉州炼油石油销售公司</a></p>
+</div>
+<ul class="c-menu cMenu">
+	<li >
+		<a href="javascript:;"><i class="cw-ico ico-ca01"></i><em>交易</em></a>
+		<ul class="c-menu-two">
+			<li><a href="#"><i class="cw-ico cw-list"></i>Crude Oil</a></li>
+			<li><a href="#"><i class="cw-ico cw-list"></i>成品油</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca02"></i><em>订单执行1111</em></a>
+		<ul class="c-menu-child c-menu-two ry-menu-buy ">
+			<li><a href="$orderExecuteServer.get('buyerCenter/order/list.htm')"><i class="cw-ico cw-list"></i>Deal Management</a></li>
+			<li><a href="$orderExecuteServer.get('buyerCenter/orderStatement/listPre.htm')"><i class="cw-ico cw-list"></i>临时结算单管理</a></li>
+			<li><a href="$orderExecuteServer.get('buyerCenter/orderStatement/listFin.htm')"><i class="cw-ico cw-list"></i>最终结算单管理</a></li>
+			<!-- <li><a href="$orderExecuteServer.get('buyerCenter/orderSettlement/listPre.htm')"><i class="cw-ico cw-list"></i>预估结算单管理</a></li>
+			<li><a href="$orderExecuteServer.get('buyerCenter/orderSettlement/listFin.htm')"><i class="cw-ico cw-list"></i>正式结算单管理</a></li> -->
+			<li><a href="$orderExecuteServer.get('buyerCenter/orderDocumentFile/documentFileList.htm')"><i class="cw-ico cw-list"></i>单证管理</a></li>
+		</ul>
+		<ul class="c-menu-child  c-menu-two ry-menu-buy">
+			<li><a href="$orderExecuteServer.get('sellerCenter/order/list.htm')"><i class="cw-ico cw-list"></i>Deal Management</a></li>
+			<li><a href="$orderExecuteServer.get('sellerCenter/orderStatement/listPre.htm')"><i class="cw-ico cw-list"></i>临时结算单管理</a></li>
+			<li><a href="$orderExecuteServer.get('sellerCenter/orderStatement/listFin.htm')"><i class="cw-ico cw-list"></i>最终结算单管理</a></li>
+			<!-- <li><a href="$orderExecuteServer.get('sellerCenter/orderSettlement/listPre.htm')"><i class="cw-ico cw-list"></i>预估结算单管理</a></li>
+			<li><a href="$orderExecuteServer.get('sellerCenter/orderSettlement/listFin.htm')"><i class="cw-ico cw-list"></i>正式结算单管理</a></li> -->
+			<li><a href="$orderExecuteServer.get('buyerCenter/orderDocumentFile/documentFileList.htm')"><i class="cw-ico cw-list"></i>单证管理</a></li>
+		</ul>
+	</li>
+	<li class="cMenuLi">
+		<a href="javascript:;"><i class="cw-ico ico-ca03"></i><em>贸易物流</em></a>
+	</li>
+	<li class="cMenuLi">
+		<a href="javascript:;"><i class="cw-ico ico-ca04"></i><em>账户管理</em></a>
+		<ul class="c-menu-two">
+			<li><a href="#"><i class="cw-ico cw-list"></i>信息维护</a></li>
+			<li><a href="#"><i class="cw-ico cw-list"></i>子账号管理</a></li>
+		</ul>
+	</li>
+</ul>
+
+<script>
+$(function(){
+	
+	// 左侧菜单
+	var menuIndex=window.localStorage.getItem('menu');
+	var menuChildIndex=window.localStorage.getItem('menuChild');
+	$('.cMenu li').removeClass('c-menu-cur')
+	$('.cMenuLi:eq('+menuIndex+')').find('ul').show();
+	$('.c-menu-child:eq('+menuIndex+')').find('a:eq('+menuChildIndex+')').addClass('active');
+
+	//父级
+	$('.aClick').on('click',function(){
+		if($(this).next().is(':hidden')){
+			window.localStorage.setItem('menu',$(this).index('.aClick'))
+			$(this).next().show();
+			$(this).parents('.cMenuLi').siblings('li').find('.c-menu-child').hide();
+		}else{
+			$(this).next().hide();
+		}
+	})
+	
+	//子集
+	$('.c-menu-child a').each(function(){
+		$(this).on('click',function(){
+			var _index=window.localStorage.getItem('menu');
+			window.localStorage.setItem('menuChild',$('.c-menu-child:eq('+_index+') a').index(this))
+		})
+	});
+	
+	
+	//买家、卖家控制（老）
+	$('.ry-a-menu').on('click',function(){
+		//console.log($(this).text());
+		if($(this).text().indexOf('买')!=-1){
+			window.localStorage.setItem('buy','卖');
+			//$('.ry-menu-buy').eq(0).show().siblings('ul.ry-menu-buy').hide();
+		}else{
+			window.localStorage.setItem('buy','买');
+			//$('.ry-menu-buy').eq(1).show().siblings('ul.ry-menu-buy').hide();
+		}
+	})
+	
+	//买家、卖家控制（新）
+	$('.ry-a-menu2').on('click',function(){
+		console.log($('.ry-a-menu3').attr("style"));
+		if($('.ry-a-menu3').attr("style") == undefined){
+			window.localStorage.setItem('buy','卖');
+			//$('.ry-menu-buy').eq(0).show().siblings('ul.ry-menu-buy').hide();
+		}else{
+			window.localStorage.setItem('buy','买');
+			//$('.ry-menu-buy').eq(1).show().siblings('ul.ry-menu-buy').hide();
+		}
+	})
+	
+	var buyStr=window.localStorage.getItem('buy');
+	if(buyStr=='卖'){
+		$('.ry-menu-buy').eq(1).show().siblings('ul.ry-menu-buy').hide();
+	}else{
+		$('.ry-menu-buy').eq(0).show().siblings('ul.ry-menu-buy').hide();
+	}
+	
+	
+	
+	
+})
+
+</script>
+<style>
+	.c-menu-child{display:none;}
+	.c-menu li ul li a{ padding:10px 20px 10px 76px;}
+	.c-menu li a{padding:12px 20px 12px 35px;}
+	.c-menu li ul li a.active{background:#eff1f4; color:#7f96a3;}
+	.ry-menu-buy{display:none;}
+</style>

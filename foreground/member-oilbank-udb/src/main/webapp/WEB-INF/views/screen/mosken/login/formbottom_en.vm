@@ -1,0 +1,7 @@
+</div>
+<script>
+    (function(window,$){
+        $("#account").attr("placeholder","User name/Email");
+        $(".s-tab-title li:eq(1)").hide();
+    })(window,jQuery);
+</script>

@@ -1,0 +1,253 @@
+<link rel="stylesheet" href="$orderExecuteServer.get('/orderexecute/mosken/css/s_template.css')">
+<style>
+.layui-input{height:30px;line-height:30px}
+</style>
+<div class="s-mod">
+	<form id="inspectionForm" class="layui-form">
+	<input type="hidden" name="orderNo" value="$!{orderNo}">
+	<div class="template">
+		<div class="title">代理报检委托书</div>
+		<div class="num clearfix">
+			<div class="float_right">
+				<label class="s-form-label">编号：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="code" value="$!{data.code}" placeholder="" class="layui-input" readonly>
+				</div>
+			</div>
+		</div>
+		<div class="name">
+			<div class="layui-input-inline">
+				<input type="text" name="quarantineBureau" value="$!{data.quarantineBureau}" placeholder="" class="layui-input">
+			</div>
+			<label>出入境检验检疫局：</label>
+		</div>
+		<div class="content">
+			<label>本委托人（备案号/组织机构代码</label>
+			<div class="layui-input-inline">
+				<input type="text" name="organizationCode" value="$!{data.organizationCode}" placeholder="" class="layui-input">
+			</div>
+			<label>）保证遵守国家有关检验检疫法律、法规的规定，保证所提供的委托报检事项真实、单货相符。否则，愿承担相关法律责任。具体委托情况如下：</label>
+		</div>
+		<div class="content">
+			<label>本委托人将于</label>
+			<div class="layui-input-inline">
+				<input type="text" placeholder="" class="layui-input" style="width:100px">
+			</div>
+			<label>年</label>
+			<div class="layui-input-inline">
+				<input type="text" placeholder="" class="layui-input" style="width:50px">
+			</div>
+			<label>月间进口/出口如下货物：</label>
+		</div>
+		<div>
+			<table class="tabelContainer" border="1">
+				<tbody>
+					<tr>
+						<td width="20%">品名</td>
+						<td width="30%">
+							<div class="layui-input-inline">
+								<input type="text" name="commodityName" value="$!{data.commodityName}" placeholder="" class="layui-input">
+							</div> <label>原油</label>
+						</td>
+						<td width="20%">HS编码</td>
+						<td width="30%"><input type="text" name="hsCode" value="$!{data.hsCode}" placeholder=""
+							class="layui-input" value="2709000000"></td>
+					</tr>
+					<tr>
+						<td>数（重）量</td>
+						<td>
+							<div>
+								<div class="layui-input-inline gap_bottom_5">
+									<input type="text" name="nightstool" value="$!{data.nightstool}" lay-verify="number" placeholder="" class="layui-input">
+								</div>
+								<label>净桶</label>
+							</div>
+							<div>
+								<div class="layui-input-inline">
+									<input type="text" name="netTon" value="$!{data.netTon}" lay-verify="number" placeholder="" class="layui-input">
+								</div>
+								<label>净吨</label>
+							</div>
+						</td>
+						<td>包装情况</td>
+						<td><input type="text" name="packaging" value="$!{data.packaging}" placeholder="" class="layui-input">
+						</td>
+					</tr>
+					<tr>
+						<td>信用证/合同号</td>
+						<td><input type="text" name="contractNo" value="$!{data.contractNo}" placeholder="" class="layui-input">
+						</td>
+						<td>许可文件号</td>
+						<td><input type="text" name="licenseNumber" value="$!{data.licenseNumber}" placeholder="" class="layui-input">
+						</td>
+					</tr>
+					<tr>
+						<td>进口货物收货单位及地址</td>
+						<td><input type="text" name="receivingCompany" value="$!{data.receivingCompany}" placeholder="" class="layui-input">
+						</td>
+						<td>进口货物提/运单号</td>
+						<td><input type="text" name="transportNo" value="$!{data.transportNo}" placeholder="" class="layui-input">
+						</td>
+					</tr>
+					<tr>
+						<td>其他特殊要求</td>
+						<td colspan="3"><input type="text" name="otherRequirements" value="$!{data.otherRequirements}" placeholder=""
+							class="layui-input"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="content">
+			<label>特委托</label>
+			<div class="layui-input-inline">
+				<input type="text" name="consignor" value="$!{data.consignor}" placeholder="" class="layui-input">
+			</div>
+			<label>（代理报检注册登记号</label>
+			<div class="layui-input-inline">
+				<input type="text" name="registrationNo" value="$!{data.registrationNo}" placeholder="" class="layui-input">
+			</div>
+			<label>），代表本委托人办理上述货物的下列出入境检验检疫事宜：</label>
+		</div>
+		<div class="list">
+			<div class="item">
+				<div class="layui-form-checkbox" lay-skin="primary">
+					<i class="layui-icon"></i>
+				</div>
+				<label class="num">1.</label><label>办理报检手续；</label>
+			</div>
+			<div class="item">
+				<div class="layui-form-checkbox" lay-skin="primary">
+					<i class="layui-icon"></i>
+				</div>
+				<label class="num">2.</label><label>代缴纳检验检疫费；</label>
+			</div>
+			<div class="item">
+				<div class="layui-form-checkbox" lay-skin="primary">
+					<i class="layui-icon"></i>
+				</div>
+				<label class="num">3.</label><label>联系和配合检验检疫机构实施检验检疫；</label>
+			</div>
+			<div class="item">
+				<div class="layui-form-checkbox" lay-skin="primary">
+					<i class="layui-icon"></i>
+				</div>
+				<label class="num">4.</label><label>领取检验检疫证单；</label>
+			</div>
+			<div class="item">
+				<div class="layui-form-checkbox" lay-skin="primary">
+					<i class="layui-icon"></i>
+				</div>
+				<label class="num">5.</label><label>其他与报检有关的相关事宜：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="otherMatters" value="$!{data.otherMatters}" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="item">
+				<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="contactPerson" value="$!{data.contactPerson}" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="item">
+				<label>联系电话：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="contactPhone" value="$!{data.contactPhone}" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="item">
+				<label>本委托书有效期至：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="validPeriodStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.validPeriod})" placeholder="" class="layui-input dateSelect">
+				</div>
+			</div>
+		</div>
+		<div class="name text_right">委托人（加盖公章）</div>
+		<div class="clearfix">
+			<div class="layui-input-inline float_right">
+				<input type="text" name="entrustDateStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.entrustDate})" placeholder="" class="layui-input dateSelect">
+			</div>
+		</div>
+		<div class="statement">受托人确认声明</div>
+		<div class="statement_details">
+			<div>本企业完全接受本委托书。保证履行以下职责：</div>
+			<div>1.对委托人提供的货物情况和单证的真实性、完整性进行核实；</div>
+			<div>2.根据检验检疫有关法律法规规定办理上述货物的检验检疫事宜；</div>
+			<div>3.及时将办结检验检疫手续的有关委托内容的单证、文件移交委托人或其指定的人员；</div>
+			<div>4.如实告知委托人检验检疫部门对货物的后续检验检疫及监管要求。</div>
+			<div>如在委托事项中发生违法或违规行为，愿承担相关法律和行政责任。</div>
+			<div>
+				<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="entrustedContact" value="$!{data.entrustedContact}" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div>
+				<label>联系电话：</label>
+				<div class="layui-input-inline">
+					<input type="text" name="entrustedPhone" value="$!{data.entrustedPhone}" placeholder="" class="layui-input">
+				</div>
+			</div>
+			<div class="name text_right">受托人（加盖公章）</div>
+			<div class="clearfix">
+				<div class="layui-input-inline float_right">
+					<input type="text" name="entrustedDateStr" value="$!dateUtil.convertDateToString('yyyy年MM月dd日', $!{data.entrustedDate})" placeholder="" class="layui-input dateSelect">
+				</div>
+			</div>
+		</div>
+		<div class="s-btn-box btnGroup">
+			<button class="s-btn s-btn-blue" type="button" lay-submit lay-filter="form_submit_btn">保存</button>
+			<button class="s-btn s-btn-blue" type="button" lay-submit lay-filter="form_submit_down_btn">保存并下载</button>
+			<button class="s-btn s-btn-blue type="button" onclick="javascript:window.close()">关闭</button>
+		</div>
+	</div>
+	</form>
+</div>
+
+<script>
+layui.use(['laydate'], function(){
+	var laydate = layui.laydate,form = layui.form;
+	lay('.dateSelect').each(function(){
+	    laydate.render({
+	      elem: this
+	      ,trigger: 'click'
+	      ,format: 'yyyy年MM月dd日'
+	    });
+	});
+	
+	//监听提交
+	form.on('submit(form_submit_btn)', function(data){
+		submit();
+		return false;
+	});
+	form.on('submit(form_submit_down_btn)', function(data){
+		submit(download);
+		return false;
+	});
+	
+	function submit(callback){
+		$.ajax({
+			type:"post",
+			url:orderServer+"/inspection/template/inspection.json",
+			data:$("#inspectionForm").serialize(),
+			success:function(result){
+	  			if(result.status != 0){
+	  				layer.alert($.i18n(result.code,result.params));
+	  			}else{
+	  				layer.alert($.i18n("orderexecute.code.00149"), function(index){
+	  					if(callback){
+	  						callback();
+	  					}
+	  					layer.close(index);
+	  				});
+	  			}
+	  		},
+	  		error:function(){
+	  			layer.alert("error");
+	  		}
+		})
+	}
+	function download(){
+		window.location.href=orderServer+"/inspection/template/download.htm?orderNo=$!{orderNo}&type=2";
+	}
+})
+</script>

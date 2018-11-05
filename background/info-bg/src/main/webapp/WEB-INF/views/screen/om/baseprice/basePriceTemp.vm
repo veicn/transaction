@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/baseprice/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title">
+			<li class="layui-this">基价模板维护</li>
+			<li>现货基价维护</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<!--开始 查询条件-->
+				<div class="inquire">
+					<h3>查询条件</h3>
+				</div>
+
+				<!--选择框-->
+				<div class="form-box">
+					<div class="layui-form">
+						<div class="layui-input-inline">
+							<div class="layui-inline index-name">
+								<label class="layui-form-label">基价名称</label>
+								<div class="layui-input-inline">
+									<input type="text" id="baseName" name="baseName" value="$!{query.baseName}" autocomplete="off"
+										class="layui-input">
+								</div>
+							</div>
+						</div>
+						<div class="layui-input-inline btn1">
+							<button class="layui-btn layui-btn-normal selectFn">
+								查询
+							</button>
+							<button class="layui-btn layui-btn-normal addFn">
+								新增
+							</button>
+						</div>
+					</div>
+
+					<!--table标题-->
+					<div class="inquire1">
+						<h3>查询结果</h3>
+					</div>
+
+					<!--table-->
+
+					<table class="layui-table one" lay-even="" lay-skin="nob">
+						<thead style="text-align: center;">
+							<tr>
+								<th>序号</th>
+								<th>基价编码</th>
+								<th>基价名称</th>
+								<th>地区</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $basePriceTemps)
+								<tr>
+									<td>$!{velocityCount}</td>
+									<td>$!{item.baseCode}</td>
+									<td>$!{item.baseName}</td>
+									<td>$!{item.baseArea}</td>
+									<td class="acss-color" >
+										<a href="#" class="mr5 editFn"
+											attr-data='{"uuid":"$!{item.uuid}","baseName":"$!{item.baseName}","baseCode":"$!{item.baseCode}","baseArea":"$!{item.baseArea}"}'> <i class="layui-icon">&#xe642;</i> 修改</a>
+										#if($!{item.status} == '1')
+											<a href="#" class="mr5 setStatusFn" attr-data='{"uuid":"$!{item.uuid}"}'> <i class="layui-icon" style="color:red;">&#xe640;</i> 禁用</a>
+										#else
+											<a href="#" class="mr5 setStatusFn" attr-data='{"uuid":"$!{item.uuid}"}'> <i class="layui-icon" style="color:red;">&#xe640;</i> 启用</a>
+										#end
+									</td>
+								</tr>
+							#end
+						</tbody>
+
+					</table>
+				</div>
+
+				 <!--底部分页-->
+                <div class="ry-footbar ry-right">
+                    $contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/baseprice/basePriceTemp.htm").put('slider_path','/contain/formPagingPageSlider')		
+                </div>
+			</div>
+
+		</div>
+
+</div>
+<script src="$imageServer.get('info/js/baseprice/basepriceTemp.js')"></script>

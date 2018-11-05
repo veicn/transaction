@@ -1,0 +1,37 @@
+<header id="header">
+    <div class="header-wrap clearfix">
+        <div class="fl logo">
+            <img src="$imageServer.get('/images/logo.png')" onclick="location.href='$transactionServer.get('/pages/portal/home/index.htm')'" class="">
+        </div>
+        <nav class="fr clearfix">
+            <div class="fl clearfix">
+                <a href="$transactionServer.get('/pages/portal/home/index.htm')" class="fl">HOME</a>
+                <a href="$transactionServer.get('/pages/front/product_list/index.htm')" class="fl">TRADING SERVICE</a>
+                <a href="$shippingServer.get('/pages/front/shipingHome/index.htm')" class="fl active">SHIPPING</a>
+                <a href="$newsServer.get('/pages/front/news/index.htm')" class="login fl">INFORMATION</a>
+            </div>
+
+            #if($!session.getAttribute("_user"))
+
+                <div class="fr clearfix">
+                    <a href="$transactionServer.get('log/logout.htm')">Sign Out</a>
+                    <i class="icon-search"></i>
+                </div>
+
+                <div class="fr clearfix">
+                    <a href="$memberServer.get('/product/center/productToMember.htm')" class="language fl">$_user.name</a>
+                    <i class="icon-search"></i>
+                </div>
+            #else
+                <div class="fr clearfix">
+                    <a href="$memberServer.get('/product/center/tologinVm.htm')?returnUrl=$transactionServer.get('/pages/portal/home/index.htm')" class="language fl">Sign In</a>
+                    <i class="icon-search"></i>
+                </div>
+
+            #end
+
+
+        </nav>
+    </div>
+    <div class="header-line fl"></div>
+</header>

@@ -1,0 +1,94 @@
+
+    <!-- 船盘管理（船东/经纪人） -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>船盘列表</h1></div>
+		</div>
+		<div class="s-mod-block">
+			#foreach($data in $datas)
+				<div class="s-mod-btit">
+					<a href="javascript:;" class="lookBtn" attr-data="$!data.uuid" title="查看详情">$!data.epMemberName &nbsp;</a>
+					<!-- 状态 -->
+					#if($!{data.status} == '1')<span >已发布</span>#end
+					#if($!{data.status} == '2')<span >洽谈中</span>#end
+					#if($!{data.status} == '3')<span >已确认租船</span>#end
+				</div>
+				
+				<div class="s-mod-bcont">
+					<form class="s-form s-form-cont s-form-cont2" action="">
+						<ul>
+							<li class="s-form-item">
+								<div class="s-inline">
+								  <label class="s-form-label">发布日期：</label>
+								  <div class="s-input-inline" title="$!{data.publishTimeStr}">
+									  <p>$!data.publishTimeStr</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">船名：</label>
+								  <div class="s-input-inline" title="$!{data.name}">
+									  <p>$!data.name</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">船东：</label>
+								  <div class="s-input-inline" title="$!{data.shipOwner}">
+									  <p>$!data.shipOwner</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">船型：</label>
+								  <div class="s-input-inline" title="$!{data.type}">
+									  <p>$!data.type</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">船位：</label>
+								  <div class="s-input-inline" title="$!{data.position}">
+									 <p>$!data.position</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">载重吨：</label>
+								  <div class="s-input-inline s-input-inline2" title="$!{data.loadQuantity}">
+									<p>$!data.loadQuantity</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">open：</label>
+								  <div class="s-input-inline s-input-inline2" title="$!{data.openStr}">
+									<p>$!data.openStr</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">ETA Cabinda：</label>
+								  <div class="s-input-inline" title="$!{data.etaCabinda}">
+									  <p>$!data.etaCabinda</p>
+								  </div>
+								</div>
+								<div class="s-inline">
+								  <label class="s-form-label">ETA Fujairah：</label>
+								  <div class="s-input-inline" title="$!{data.eta}">
+									  <p>$!data.eta</p>
+								  </div>
+								</div>
+							</li>
+						</ul>
+					</form>
+					
+					<!-- 按钮 -->
+					<div class="s-but-all clearfix">
+						<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+							<div class="s-but-ship clearfix">
+								<a href="javascript:;" class="s-btn lookBtn" attr-data="$!data.uuid">船盘详情</a>
+								<a href="javascript:;" class="s-btn sendClauseBtn" attr-data="$!data.uuid">发送报盘</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			#end
+		</div>
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipPlate/sendClauseShipPlateList.htm')")
+	</div>
+	<script src="../transport/js/shipPlate/sendClauseShipPlateList.js"></script>
+  

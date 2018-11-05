@@ -1,0 +1,162 @@
+
+<div class="m-tab fl">
+    <div class="fl shipping-b-l">
+        <div class="s-info">
+            <dl class="clearfix">
+                <dd>
+                    <a  href="$memberServer.get('/product/center/productToMember.htm')">
+                        <img src="$imageServer.get('images/headportrait.jpg')" />
+                    </a>
+                </dd>
+                <dt>
+                    <h3>$!_user.name</h3>
+                    <p>
+                        <a href="$memberServer.get('/product/mosken/msgList.htm')">Message</a>
+                        #*<em class="tip">2</em>*#
+                    </p>
+                    #*<p>
+                        <a href="javascript:;">Notification </a>
+                    </p>*#
+                    #*<p>
+                        <a href="$transactionServer.get('log/logout.htm')">Log Out</a>
+                    </p>*#
+                </dt>
+            </dl>
+        </div>
+        <div class="s-tab">
+            <div class="s-tab-one s-tab-one1">
+            #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                <h2 class="let">TRADING</h2>
+                <ul class="trading-ul">
+                    <li #if($!{active} == 1) class="active" #end>
+                        <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')">My Deals</a>
+                    </li>
+                    #if($authUtils.checkRole("sales_trader"))
+                        <li #if($!{active} == 2) class="active" #end>
+                            <a href="$transactionServer.get('pages/back/my_product_list/index.htm')">Sales</a>
+                        </li>
+                    #end
+                    #if($authUtils.checkRole("buy_trader"))
+                        <li #if($!{active} == 3) class="active" #end>
+                            <a href="$transactionServer.get('pages/back/my_demand_list/index.htm')">Procurement</a>
+                        </li>
+                    #end
+                </ul>
+            #end
+            </div>
+
+        #*#if($!session.getAttribute("_user").epMemberId == "100008253")*#
+            <div class="s-tab-one s-tab-one1">
+                <div class="s-tab-one">
+                    <h2 class="let">Operation</h2>
+                    <ul class="trading-ul">
+                        <li #if($!{active} == 1) class="active" #end>
+                            <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')">Your appointments</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        #* #end*#
+
+            <div class="s-tab-one s-tab-one1">
+                #if($authUtils.checkRole("sales_trader"))
+                    <div class="s-tab-one">
+                        <h2 class="let">TRADE LOGISTICS(Seller)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/demands/demandsList.htm')">Chartering Requirement</a>
+                            </li>
+                            <li #if($!{active} == 2) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/agreement/charterPartyManagementByMerchant.htm')">Charter Party</a>
+                            </li>
+                            <li #if($!{active} == 3) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/vesselAcceptance/index.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("ship_trader"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Disponent Owner)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/demands/agentdemandsList.htm')">Chartering Requirement</a>
+                            </li>
+                            <li #if($!{active} == 2) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/agreement/charterPartyManagementByAgent.htm')">Charter Party</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("depa_port"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Shipping Agent)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/vesselAcceptance/ConfirmationAgencyIndex.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("buy_trader"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Buyer)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$shippingServer.get('pages/back/vesselAcceptance/ConfirmationBuyerIndex.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+            ##流程变更
+            ##                #if($RefineryFlg == "1")
+            ##                <div class="s-tab-one s-tab-two">
+            ##                    <h2 class="let">TRADE LOGISTICS(Seller)</h2>
+            ##                    <ul class="trading-ul">
+            ##                        <li #if($!{active} == 1) class="active" #end>
+            ##                            <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationSellerIndex.htm')">Vessel Acceptance</a>
+            ##                        </li>
+            ##                    </ul>
+            ##                </div>
+            ##                #end
+            </div>
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">MY SETTINGS</h2>
+                <ul class="trading-ul">
+
+                    <li>
+                        <a href="$systemServer.get("center/safety.htm")">Over View</a>
+                    </li>
+
+                    <li>
+                        <a href="$systemServer.get("center/setting.htm")" >Security</a>
+                    </li>
+                    <li>
+                        <a href="$systemServer.get("center/reset/password.htm")" >Change Password</a>
+                    </li>
+                    #if($authUtils.ownerAccess())
+                        #if($authUtils.checkRole("enter_admin","enter_master"))
+                            <li>
+                                <a href="$systemServer.get("/center/role/role_permission.htm")">Sub Account</a>
+                            </li>
+                        #end
+
+                        #if(!$authUtils.checkRole("enterprise") )
+                            <li>
+                                <a href="$systemServer.get("/center/activite_account.htm")">Link to Company</a>
+                            </li>
+
+                        #end
+
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+</script>

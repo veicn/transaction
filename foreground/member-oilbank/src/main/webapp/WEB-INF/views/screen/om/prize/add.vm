@@ -1,0 +1,138 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<form class="layui-form" id="saveForm" style="padding-right: 25px;padding-top: 25px">
+##  数据库主键Id(隐藏)、内容、联系人、联系电话、联系邮箱、创建时间、操作列表(下载)
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">联系人</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contactUser" id="contactUser" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" >
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">联系电话</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contactTelephone" id="contactTelephone" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" >
+        </div>
+    </div><br/><br/>
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">联系邮箱</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contactEmail" id="contactEmail" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" >
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">上传附件</label>
+        <div class="layui-input-inline">
+            <input type="hidden" id="enclosureUrl" name="enclosureUrl">
+            <input type="text" id="enclosureName" name="enclosureName" lay-verify="required" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" >
+        </div>
+        <div class="layui-input-inline">
+            <a class="layui-btn layui-btn-danger layui-btn-mini fileUpload" >上传</a>
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">内容</label>
+        <div class="layui-input-inline">
+            <textarea id="content" name="content" style="display:inline-block;width:300px;height:80px;"></textarea>
+        </div>
+    </div><br/><br/>
+
+    <div style="text-align:center;">
+        <input type= "submit" id="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交" >
+    </div>
+
+</form>
+
+<script>
+
+    layui.use("upload", function(){
+        var $ = layui.jquery,upload = layui.upload;
+
+        upload.render({
+            elem: ".fileUpload",
+            url: "$appServer.get('/common/doc/upload.json')",
+            accept: "file",
+            //size: 60 //限制文件大小，单位 KB
+            //exts: 'zip|rar|7z' //允许上传的文件后缀
+            //before: function(){
+            //  layer.tips("接口地址："+ this.url, this.item, {tips: 1});
+            //},
+            done: function(res, index, upload){
+                if(res.status === 0){
+                    var item = this.item;
+                    $("#enclosureUrl").val(res.datas.path);
+                    $("#enclosureName").val(res.datas.originalName);
+                }else{
+                    layer.tips(res.message, this.item, {tips: 1});
+                }
+            }
+        })
+    })
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+
+        //默认同步
+        $.ajaxSetup({
+            async : false
+        });
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var contactUser = $("#contactUser").val();
+            var contactTelephone = $("#contactTelephone").val();
+            var enclosureUrl = $("#enclosureUrl").val();
+
+            if(contactUser == ''){
+                layer.alert("联系人不能为空！")
+                return false;
+            }
+            if(contactTelephone == ''){
+                layer.alert("联系电话不能为空！")
+                return false;
+            }
+            if(enclosureUrl == ''){
+                layer.alert("您未上传附件！")
+                return false;
+            }
+            $.ajax({
+                url:'$appServer.get("om/prize/save.json")',
+                method:'POST',
+                data:$("#saveForm").serializeArray(),
+                success:function(data){
+                    layer.alert(data.message,function(){
+                        if(data && data.status == 0){
+                            parent.layer.closeAll();
+                            parent.location.reload();
+                        }else{
+                            layer.alert(data.message)
+                        }
+                    });
+                },
+                error:function(r,d){
+                    layer.alert('保存失败')
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

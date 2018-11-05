@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>买原油网油价量化分析模型</title>
+#js("$infoServer.get('/info/js/priceForecast/echarts.min.js')")
+#css("$infoServer.get('/info/css/priceForecast/AdminLTE.min.css').toString()")
+#css("$infoServer.get('/info/css/priceForecast/bootstrap.css').toString()")
+<style type="text/css">
+.nav-tabs-custom>.nav-tabs>li.active>a {
+    border-top-color: transparent;
+    border-left-color: #f4f4f4;
+    border-right-color: #f4f4f4;
+}
+</style>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+	<div class="row">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class="pull-left header" style="margin:5px;padding-left: 35px;">原油期货价格预测</li>
+            </ul>
+          </div>
+    </div>
+	<div class="row">
+	    <div style="display: flex;" class="col-xs-12">
+	         <pre style="width:100%;margin:0px 20px;white-space: pre-wrap;word-wrap: break-word;">
+名称：买原油网油价量化分析模型
+说明：由买原油网研发，基于石油行业最优秀Tradinghouse贸易团队经验，使用数据特征驱动的数据处理与机器学习技术，结合国际油价价格形成机制和主要影响因素进行量化建模和深度学习，形成对ICE BRENT，NYMEX WTI的日度价格预测、周度价格预测和月度价格预测，提供原油期货的点价预测与多个不同置信水平的区间预测以及影响因素分析结果，是您进行原油期货交易的有力指导工具。
+           </pre>
+	   </div>
+		<div style="margin-top: 145px;">
+		   <section>
+			<div class="nav-tabs-custom" style="cursor: move;">
+				<ul style="background:#999" class="nav nav-tabs ui-sortable-handle">
+				  <li id="fli" class="active" style="margin-left: 50px;"><a href="#" id="day"   data-toggle="tab">日预测</a></li>
+				   <li id="sli"><a href="#" id="week"  data-toggle="tab">周预测</a></li>
+				   <li id="tli"><a href="#" id="month"  data-toggle="tab">月预测</a></li>
+				   
+				</ul>
+			</div>
+			</section>
+			<div style="margin-left: 33%">
+				<input type="radio" name="type" id = "brent" value="brent" checked /> 布伦特 
+				<input type="radio" name="type" id = "wti" value="wti" /> WTI
+			</div>
+		</div>
+		<div style="display: flex;" class="col-xs-12">
+			<div class="col-xs-8" id="chart1" style="margin: 5px;  height: 300px; min-width:800px;display:inline-block;"></div>
+			<div  class="col-xs-4" id="chart2" style="margin: 5px;  height: 300px;"></div>
+		</div>
+		<div style="display: flex;" class="col-xs-12">
+			<div class="col-xs-8" id="chart3" style="margin: 5px;height: 300px; min-width:800px;display:inline-block;"></div>
+			<div class="col-xs-4" id="chart4" style="margin: 5px; height: 300px;"></div>
+		</div>
+		<div class="row">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="pull-left header" style="margin:5px 30px 5px 5px; padding: 0 40px;">免责声明</li>
+            </ul>
+          </div>
+           <pre style="margin-left: auto; margin-right: auto;width:94%;white-space: pre-wrap;word-wrap: break-word;">
+    【买原油】电子商务平台（以下简称“本平台/平台”）的数据源信息均来源于本平台认为可靠的、已公开的信息编制，本平台对这些信息的准确性和完整性不做任何保证，也不保证所包含的信息和建议不会发生任何变更。我们已力求网站内容的客观、公正，但所有信息中的观点、结论和建议仅供参考，网站中的信息或意见并不构成所述证券或期货的买卖出价或征价的依据，投资者据此作出的任何投资决策均与本平台无关。本平台展示的观点、建议并未考虑到个别投资者的具体投资目的、财务状况以及特定需求，在任何时候均不构成对投资者的私人投资建议。投资者应当充分考虑自身特定状况，并完整理解和使用本平台展示的内容，不应将本平台报告视为做出投资决策的唯一因素。对依据或者使用本平台报告所造成的一切后果，本公司及该报告的作者均不承担任何法律责任。本平台报告版权仅为本平台所有，未经书面许可，任何机构和个人不得以任何形式翻版、复制发布。如引用、刊发，须注明出处为【买原油】电子商务平台，且不得对本平台报告进行有悖原意的引用、删节和修改。
+           </pre>
+        </div>
+		 
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var period = "day";
+			$("#day").click(function() {
+				period = "day";
+				loadData(period);
+				$("#fli").addClass("active");
+				$("#sli").removeClass("active");
+				$("#tli").removeClass("active");
+			});
+			$("#week").click(function() {
+				period = "week";
+				loadData(period);
+				$("#sli").addClass("active");
+				$("#fli").removeClass("active");
+				$("#tli").removeClass("active");
+			});
+			$("#month").click(function() {
+				period = "month";
+				loadData(period);
+				$("#tli").addClass("active");
+				$("#sli").removeClass("active");
+				$("#fli").removeClass("active");
+			});
+			
+			$("#brent").click(function() {
+				loadData(period);
+			});
+			
+			$("#wti").click(function() {
+				loadData(period);
+			});
+			loadData(period);
+		});
+
+		function loadData(period) {
+			var target = $("input[type='radio']:checked").val();
+			$.get("/prophet/api/1/" + target +"/" + period + ".json",function(result){
+			 	console.log(result);
+				if (result.data) {
+					var myChart1 = echarts.init(document.getElementById('chart1'));
+					var col = [];
+					var value = [];
+					var predict = [];
+					var empty = [];
+					var max = -1;
+					var min = 9999999;
+					var data = result.data;
+					var length = data.length;
+					var obj = data[length - 1];
+					var obj2 = data[length - 2];
+		
+					for ( var i in data) {
+						var d = data[i];
+						col.push(d.date);
+						var p = parseFloat(d.predict);
+						var v = parseFloat(d.value);
+						if (i == (length - 1)) {
+							empty.push(d.predict);
+						} else if (i == (length - 2)) {
+							empty.push(d.predict);
+							predict.push(p);
+							value.push(v);
+						} else {
+							empty.push(null);
+							predict.push(p);
+							value.push(v);
+						}
+						
+						if (max < Math.max(p, v)) {
+							max = Math.max(p, v);
+						}
+						if (min > Math.min(p, v)) {
+							min = Math.min(p, v);
+						}
+					}
+					
+					if (obj == null){
+						alert("预测价格不能为空");
+					} else if (obj2 == null) {
+						alert("实际价格不能为空");
+					} else {
+						var val = (obj.predict - obj2.value).toFixed(2);
+						var baifenbi = (val / obj2.value * 100).toFixed(2);
+						var fh = val >= 0 ? '+': '';
+						
+						var option1 = {
+							title : [ {
+								left : 'left',
+								text : '单位:美元/桶'
+							}, {
+								left : 'center',
+								text : '                            ' + fh + val + ' ' + fh + baifenbi + '%' ,
+								textStyle : {
+									color : 'red',
+									fontSize: 14
+								}
+							} , {
+								left : 'center',
+								text : obj.predict + '          '
+							} ],
+							 legend : {
+								top : 'bottom',
+								data : [ '预测值', '实际值' ]
+							},
+							tooltip : {
+								trigger : 'axis',
+								formatter : function(params) {
+									var obj = [];
+									var text = "";
+									var oldValue = "";
+									for (var i in params) {
+										var p = params[i];
+										var value = p.value;
+										if (value != null) {
+											var name = p.seriesName;
+											if (text == "") {
+												text = p.name;
+											}
+											var fromat = "[" + name + "," + value + "]";
+											if(oldValue.indexOf(fromat) == -1) {
+												oldValue += fromat;
+												text += "<br/>"+ p.marker + p.seriesName + ":" + p.value;
+											}
+										}
+									}
+									return text;
+								}
+							},
+							grid : {
+								//left : '3%',
+								//right : '4%',
+								//bottom : '3%',
+								containLabel : true
+							},
+							xAxis : {
+								data : col,
+								type : 'category',
+								boundaryGap : false
+							},
+							yAxis : {
+								min : Math.floor(min),
+								max : Math.ceil(max),
+								type : 'value'
+							},
+							series : [ {
+								name : '预测值',
+								data : predict,
+								type : 'line'
+							}, {
+								name : '实际值',
+								data : value,
+								type : 'line'
+							}, {
+								name : '预测值',
+								data : empty,
+								type : 'line',
+								myType:'no',
+								 lineStyle: {
+						            normal: {
+						                color: 'green',
+						                width: 1.2,
+						                type: 'dashed'
+						            }
+						        }
+							} ]
+						};
+						myChart1.clear();
+						myChart1.setOption(option1);
+			
+						var myChart2 = echarts.init(document.getElementById('chart2'));
+						var option2 = {
+							title : {
+								text : '单位:美元/桶'
+							},
+							tooltip : {
+								trigger : 'axis',
+								axisPointer : { // 坐标轴指示器，坐标轴触发有效
+									type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+								},
+								formatter : function(params) {
+									var value = params[0].value;
+									var text = params[0].name;
+									if (value) {
+										text += '<br />最大值：' + value[3];
+									}
+			
+									if (value) {
+										text += '<br />最小值：' + value[4];
+									}
+									return text;
+								}
+							},
+							grid : {
+								//left : '3%',
+								//right : '3%',
+								//bottom : '3%',
+								containLabel : true
+							},
+							xAxis : {
+								type : 'category',
+								splitLine : {
+									show : false
+								},
+								data : [ '95%', '85%' ]
+							},
+							yAxis : {
+								min : Math.floor(Math.min(obj.lowerA, obj.lowerB) - 1),
+								max : Math.ceil(Math.min(obj.upperA, obj.upperB) + 2),
+								type : 'value'
+							},
+							series : [ {
+								type : 'candlestick',
+								barWidth : '10%',
+								itemStyle : {
+									color : '#03A9F4', // 往上升
+									borderColor : '#03A9F4',
+									color0 : '#03A9F4', // 往下降
+									borderColor0 : '#03A9F4'
+								},
+								markPoint : {
+									symbol : 'rect',
+									symbolSize : 1,
+									label : {
+										show : true,
+										color : '#202020'
+									},
+									data : [ {
+										value : obj.upperA,
+										coord : [ 0, obj.upperA ],
+										label : {
+											position : 'top'
+										}
+									}, {
+										value : obj.lowerA,
+										coord : [ 0, obj.lowerA ],
+										label : {
+											position : 'bottom'
+										}
+									}, {
+										value : obj.upperB,
+										coord : [ 1, obj.upperB ],
+										label : {
+											position : 'top'
+										}
+									}, {
+										value : obj.lowerB,
+										coord : [ 1, obj.lowerB ],
+										label : {
+											position : 'bottom'
+										}
+									} ]
+								},
+								data : [
+									[ obj.upperA, obj.lowerA, obj.upperA,obj.lowerA ],
+									[ obj.upperB, obj.lowerB, obj.upperB,obj.lowerB ]
+								]
+							} ]
+						};
+						myChart2.clear();
+						myChart2.setOption(option2);
+					}
+					if (result.variables) {
+						var data = result.variables;
+						var value = [];
+						var col = [];
+						var col2 = []
+						for ( var i in data) {
+							var d = data[i];
+							col.push(d.name);
+							value.push(d.value);
+							col2.push({
+								name : d.name,
+								value : d.value
+							});
+						}
+						var myChart3 = echarts.init(document.getElementById('chart3'));
+						var chart3 = {
+							title : {
+								text : '解释模型因素占比'
+							},
+							tooltip : {
+								trigger : 'axis',
+								axisPointer : {
+									type : 'shadow'
+								},
+								formatter : "{b} : {c}%"
+							},
+							grid : {
+								//left : '3%',
+								//right : '4%',
+								//bottom : '3%',
+								containLabel : true
+							},
+							xAxis : {
+								type : 'value',
+								boundaryGap : [ 0, 0.01 ],
+								"axisLabel" : {
+									"interval" : 0,
+									formatter : '{value}%',
+								}
+							},
+							yAxis : {
+								type : 'category',
+								data : col
+							},
+							series : [ {
+								barWidth : '20%',
+								name : '2016年占比',
+								type : 'bar',
+								data : value,
+								itemStyle: {   
+						                //通常情况下：
+						                normal:{  
+						　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+						                    color: function (params){
+						                        var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+						                        return colorList[params.dataIndex];
+						                    }
+						             }
+								}
+							} ]
+						};
+						myChart3.clear();
+						myChart3.setOption(chart3);
+						col.reverse();
+						var myChart4 = echarts.init(document.getElementById('chart4'));
+						var chart4 = {
+							tooltip : {
+								trigger : 'item',
+								formatter : "{a} <br/>{b}: {c} ({d}%)"
+							},
+							color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+							legend : {
+								orient : 'vertical',
+								x : 'left',
+								data : col
+							},
+							series : [ {
+								name : '解释模型因素占比',
+								type : 'pie',
+								radius : [ '50%', '70%' ],
+								avoidLabelOverlap : false,
+								label : {
+									normal : {
+										show : false,
+										position : 'center'
+									},
+									emphasis : {
+										show : true,
+										textStyle : {
+											fontSize : '30',
+											fontWeight : 'bold'
+										}
+									}
+								},
+								labelLine : {
+									normal : {
+										show : false
+									}
+								},
+								data : col2
+							} ]
+						};
+						myChart4.clear();
+						myChart4.setOption(chart4);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

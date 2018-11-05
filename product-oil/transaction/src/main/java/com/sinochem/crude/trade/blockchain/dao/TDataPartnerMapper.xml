@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TDataPartnerMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="web_domain" property="webDomain" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="system_title" property="systemTitle" jdbcType="VARCHAR" />
+    <result column="banner" property="banner" jdbcType="VARCHAR" />
+    <result column="bg_color" property="bgColor" jdbcType="VARCHAR" />
+    <result column="login_logo" property="loginLogo" jdbcType="VARCHAR" />
+    <result column="login_bg" property="loginBg" jdbcType="VARCHAR" />
+    <result column="login_desc" property="loginDesc" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="blockchain_gateway" property="blockchainGateway" jdbcType="VARCHAR" />
+    <result column="partner_role" property="partnerRole" jdbcType="VARCHAR" />
+    <result column="alive_flag" property="aliveFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, web_domain, enterprise_id, enterprise_name, logo, system_title, banner, bg_color, 
+    login_logo, login_bg, login_desc, other, remark, blockchain_gateway, partner_role, 
+    alive_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_partner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_data_partner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+    insert into t_data_partner (id, web_domain, enterprise_id, 
+      enterprise_name, logo, system_title, 
+      banner, bg_color, login_logo, 
+      login_bg, login_desc, other, 
+      remark, blockchain_gateway, partner_role, 
+      alive_flag)
+    values (#{id,jdbcType=INTEGER}, #{webDomain,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=BIGINT}, 
+      #{enterpriseName,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{systemTitle,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=VARCHAR}, #{bgColor,jdbcType=VARCHAR}, #{loginLogo,jdbcType=VARCHAR}, 
+      #{loginBg,jdbcType=VARCHAR}, #{loginDesc,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{blockchainGateway,jdbcType=VARCHAR}, #{partnerRole,jdbcType=VARCHAR}, 
+      #{aliveFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+    insert into t_data_partner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="webDomain != null" >
+        web_domain,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="systemTitle != null" >
+        system_title,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="bgColor != null" >
+        bg_color,
+      </if>
+      <if test="loginLogo != null" >
+        login_logo,
+      </if>
+      <if test="loginBg != null" >
+        login_bg,
+      </if>
+      <if test="loginDesc != null" >
+        login_desc,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="blockchainGateway != null" >
+        blockchain_gateway,
+      </if>
+      <if test="partnerRole != null" >
+        partner_role,
+      </if>
+      <if test="aliveFlag != null" >
+        alive_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="webDomain != null" >
+        #{webDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="systemTitle != null" >
+        #{systemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="bgColor != null" >
+        #{bgColor,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLogo != null" >
+        #{loginLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="loginBg != null" >
+        #{loginBg,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDesc != null" >
+        #{loginDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainGateway != null" >
+        #{blockchainGateway,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRole != null" >
+        #{partnerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null" >
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+    update t_data_partner
+    <set >
+      <if test="webDomain != null" >
+        web_domain = #{webDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="systemTitle != null" >
+        system_title = #{systemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="bgColor != null" >
+        bg_color = #{bgColor,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLogo != null" >
+        login_logo = #{loginLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="loginBg != null" >
+        login_bg = #{loginBg,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDesc != null" >
+        login_desc = #{loginDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainGateway != null" >
+        blockchain_gateway = #{blockchainGateway,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerRole != null" >
+        partner_role = #{partnerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null" >
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+    update t_data_partner
+    set web_domain = #{webDomain,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      system_title = #{systemTitle,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      bg_color = #{bgColor,jdbcType=VARCHAR},
+      login_logo = #{loginLogo,jdbcType=VARCHAR},
+      login_bg = #{loginBg,jdbcType=VARCHAR},
+      login_desc = #{loginDesc,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      blockchain_gateway = #{blockchainGateway,jdbcType=VARCHAR},
+      partner_role = #{partnerRole,jdbcType=VARCHAR},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <!--扩展-->
+    <select id="selectAllList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from `product-trade-blockchain`.t_data_partner
+        where alive_flag='1'
+
+    </select>
+
+
+
+    <select id="selectListByRole" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from `product-trade-blockchain`.t_data_partner
+        where alive_flag='1' and partner_role like concat('%',#{partnerRole, jdbcType=VARCHAR},'%')
+    </select>
+
+
+
+    <select id="findByQuery" resultMap="BaseResultMap" parameterType="com.sinochem.crude.trade.blockchain.domain.TDataPartner" >
+        select
+        <include refid="Base_Column_List" />
+        from `product-trade-blockchain`.t_data_partner
+        where alive_flag='1'
+        <if test="enterpriseId != null" >
+            and enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+        </if>
+        <if test="webDomain != null" >
+            and web_domain = #{webDomain,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

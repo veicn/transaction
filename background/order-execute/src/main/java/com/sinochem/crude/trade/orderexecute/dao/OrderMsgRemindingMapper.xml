@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderMsgRemindingMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderMsgReminding" id="OrderMsgReminding">
+		<result property="orderId" column="order_id" />
+		<result property="msgCode" column="msg_code" />
+		<result property="msgType" column="msg_type" />
+		<result property="msgTitle" column="msg_title" />
+		<result property="msgTemplate" column="msg_template" />
+		<result property="msgParams" column="msg_params" />
+		<result property="receiveUserId" column="receive_user_id" />
+		<result property="lastExecTime" column="last_exec_time" />
+		<result property="execCount" column="exec_count" />
+		<result property="status" column="status" />
+		<result property="schedule" column="schedule" />
+		<result property="createDate" column="create_date" />
+			</resultMap> 
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_msg_reminding
+              WHERE 1=1 
+                AND order_id = #{orderId}  
+                AND msg_code = #{msgCode}  
+    </delete>
+    
+	<select id="findByPrimaryKey" resultMap="OrderMsgReminding">
+			select
+			* from t_order_msg_reminding
+			where
+		    order_id=#{orderId} 
+		    and  msg_code=#{msgCode} 
+	</select>
+	
+	<insert id="createMsg" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderMsgReminding">
+		insert  into t_order_msg_reminding (
+						order_id
+						,msg_code
+						,msg_type
+						,msg_title
+						,msg_template
+						,msg_params
+						,receive_user_id
+						,schedule
+						)
+		values(		#{orderId}
+						,#{msgCode}
+						,#{msgType}
+						,#{msgTitle}
+						,#{msgTemplate}
+						,#{msgParams}
+						,#{receiveUserId}
+						,#{schedule}
+				)
+	
+	</insert>
+	
+	<update id="removeMsg">
+		update t_order_msg_reminding
+		<set>
+			status='-1'
+		</set>
+		
+		where order_id = #{orderId}
+		and msg_code = #{msgCode}
+	</update>
+	
+	<update id="updateSchedule">
+		update t_order_msg_reminding
+		<set>
+			schedule=#{schedule},
+			status='0'
+		</set>
+		
+		where order_id = #{orderId}
+		and msg_code = #{msgCode}
+	</update>
+	
+	<update id="finishExecMsg">
+		update t_order_msg_reminding
+		<set>
+			status='1',
+			last_exec_time=NOW(),
+			exec_count=exec_count+1
+		</set>
+		
+		where order_id = #{orderId}
+		and msg_code = #{msgCode}
+	</update>
+	
+	<select id="queryScheduleMsgList" resultMap="OrderMsgReminding">
+		select * from t_order_msg_reminding
+		where status &lt;&gt;-1 and schedule &lt;= NOW()
+	</select>
+	
+</mapper>

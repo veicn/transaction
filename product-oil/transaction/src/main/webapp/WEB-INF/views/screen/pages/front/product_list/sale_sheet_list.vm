@@ -1,0 +1,141 @@
+<div class="w1180 mall-con-w">
+    #foreach($saleSheetCombineVO in $saleSheetCombineVOList)
+        <div class="mall-con-one">
+            <dl class="mall-dl-box">
+                <dd>
+                    <a href="javascript:;"><img src='$appServer.get("/product_images/$!{saleSheetCombineVO.productInfoVO.productCategoryVO.code}/horizontal.jpg")' /></a>
+                    <div class="mall-state">
+                        <p> #if($!sheetFlag=="1")  $!{saleSheetCombineVO.saleSheetVO.saleSheetStatusVO.enName} #else  $!{saleSheetCombineVO.demandSheetVO.demandSheetStatusVO.enName} #end    </p>
+                    </div>
+                </dd>
+                <dt>
+                    <div class="fl m-t-tab s-t-tab toUp">
+                        <ol>
+                            <li>
+                                <span class="m-f-span">Range ：</span>
+                                <span class="m-r-span">  <p> #if($!sheetFlag=="1")   $!{saleSheetCombineVO.saleSheetVO.saleTypeVO.enName} #else   $!{saleSheetCombineVO.demandSheetVO.demandTypeVO.enName} #end   </span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Category ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.productCategoryVO.enName}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Specification ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.productSpecificationVO.enName}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Quantity(MT) ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.quantityAsString} $!{saleSheetCombineVO.productInfoVO.quantityUnitVO.enName}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Incoterms ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Pricing Period ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.pricingInfoVO.pricingPeriod}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Payment Terms ：</span>
+                                <span class="m-r-span" title="$!{saleSheetCombineVO.pricingInfoVO.paymentTerm}">$!{saleSheetCombineVO.pricingInfoVO.paymentTerm}</span>
+                            </li>
+                            <li>
+                                <span class="m-f-span">Laycan ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.transportInfoVO.laycanStartDateAsString} / $!{saleSheetCombineVO.transportInfoVO.laycanEndDateAsString}</span>
+                            </li>
+                            #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'FOB')
+                                <li>
+                                    <span class="m-f-span">Load Port ：</span>
+                                    <span class="m-r-span"> #if($!{saleSheetCombineVO.transportInfoVO.loadingCountry} ) $!{saleSheetCombineVO.transportInfoVO.loadingPort} , $!{saleSheetCombineVO.transportInfoVO.loadingCountry} #end </span>
+                                </li>
+                            #end
+                            #if($!{saleSheetCombineVO.productInfoVO.tradeTermVO.enName} != 'FOB')
+                                <li>
+                                    <span class="m-f-span">Discharge Port ：</span>
+                                    <span class="m-r-span">  $!{saleSheetCombineVO.transportInfoVO.dischargePort} ,#if($!{saleSheetCombineVO.transportInfoVO.dischargeCountry}) $!{saleSheetCombineVO.transportInfoVO.dischargeCountry} #end</span>
+                                </li>
+                            #end
+                  #*          <li>
+                                <span class="m-f-span">Laytime:</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.transportInfoVO.laytimeAsString} H+6</span>
+                            </li>*#
+
+                            <li>
+                                <span class="m-f-span">Expired Time ：</span>
+                                <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.deadlineAsString}</span>
+                            </li>
+
+                            #*#if($!{saleSheetCombineVO.saleSheetVO.saleTypeVO.code} == '1')*#
+                               #* <li>
+                                    <span class="m-f-span">Bid Valid To:</span>
+                                    <span class="m-r-span">$!{saleSheetCombineVO.productInfoVO.bidOpeningDateAsString}</span>
+                                </li>*#
+                           #* #end *#
+                            <li>
+                                <span class="m-f-span">Posting Date ：</span>
+                                <span class="m-r-span">  <p> #if($!sheetFlag=="1")   $!{saleSheetCombineVO.saleSheetVO.releasedDateAsString} #else  $!{saleSheetCombineVO.demandSheetVO.releasedDateAsString} #end </span>
+                            </li>
+                        </ol>
+
+                        <div class="mallbtn-box fr">
+                            #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                                #if($!sheetFlag=="1")
+                                    #if($!{idSingapore} == $!{saleSheetCombineVO.saleSheetVO.enterpriseId} && $!{saleSheetCombineVO.saleSheetVO.productSourceVO.code} == '1' && $!{idquanzhou})
+                                    #else
+                                        #if($!{saleSheetCombineVO.saleSheetVO.saleSheetStatusVO.code} == '2' && $!{saleSheetCombineVO.saleSheetVO.enterpriseId} != $!{userId})
+                                            #if($!{saleSheetCombineVO.productInfoVO.overdue} == false)
+                                            ##                                            <a href="$appServer.get('pages/front/product_bidding/index.htm').put('uuid',$!{saleSheetCombineVO.saleSheetVO.uuid})" class="br btn-b">
+                                                <a class="br btn-b"  onclick="bidFun('$!{saleSheetCombineVO.saleSheetVO.uuid}')">
+                                                    #if($!{saleSheetCombineVO.saleSheetVO.saleTypeVO.code} == '1')
+                                                        Bid
+                                                    #elseif($!{saleSheetCombineVO.saleSheetVO.saleTypeVO.code} == '2')
+                                                        Quote
+                                                    #end
+                                                </a>
+                                            #end
+                                        #end
+                                    #end
+
+                                #else
+                                    #if($!{saleSheetCombineVO.demandSheetVO.demandSheetStatusVO.code} == '2' && $!{saleSheetCombineVO.demandSheetVO.enterpriseId} != $!{userId})
+                                        #if($!{saleSheetCombineVO.productInfoVO.overdue} == false)
+                                            <a class="br btn-b" onclick="bidDemandFun('$!{saleSheetCombineVO.demandSheetVO.uuid}')">
+                                                #if($!{saleSheetCombineVO.demandSheetVO.demandTypeVO.code} == '1')
+                                                    Bid
+                                                #elseif($!{saleSheetCombineVO.demandSheetVO.demandTypeVO.code} == '2')
+                                                    Quote
+                                                #end
+                                            </a>
+                                        #end
+                                    #end
+
+
+                                #end
+                            #end
+
+                            #if($!sheetFlag=="1")
+                                <a href="$appServer.get('pages/front/product_detail/index.htm').put('uuid', $!{saleSheetCombineVO.saleSheetVO.uuid})" class="br btn-b">
+                             #else
+                                <a href="$appServer.get('pages/front/product_detail/demand_index.htm').put('uuid', $!{saleSheetCombineVO.demandSheetVO.uuid})" class="br btn-b">
+                             #end
+                                Details
+                            </a>
+
+                            #if($!sheetFlag=="1")
+                                <a href="javascript:;" onclick="compare($!{saleSheetCombineVO.saleSheetVO.id},'$!{saleSheetCombineVO.saleSheetVO.uuid}','$!{saleSheetCombineVO.productInfoVO.productCategoryVO.enName}' + ' '+'$!{saleSheetCombineVO.productInfoVO.productSpecificationVO.enName}','$appServer.get("/product_images/$!{saleSheetCombineVO.productInfoVO.productCategoryVO.code}/horizontal.jpg")')" class="br btn-b">
+
+                            #else
+                                <a href="javascript:;" onclick="compare($!{saleSheetCombineVO.demandSheetVO.id},'$!{saleSheetCombineVO.demandSheetVO.uuid}','$!{saleSheetCombineVO.productInfoVO.productCategoryVO.enName}' + ' '+'$!{saleSheetCombineVO.productInfoVO.productSpecificationVO.enName}','$appServer.get("/product_images/$!{saleSheetCombineVO.productInfoVO.productCategoryVO.code}/horizontal.jpg")')" class="br btn-b">
+
+                            #end
+                                Compare
+                            </a>
+
+
+                        </div>
+                    </div>
+                </dt>
+            </dl>
+        </div>
+    #end
+</div>

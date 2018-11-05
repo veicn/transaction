@@ -1,0 +1,13 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Transportation<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Transport Mode：</span><span class="c-int qx-conte"> $!{transportInfoVO.transportModeVO.enName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte"> $!{transportInfoVO.loadingPortVO.enName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Laycan：</span><span class="c-int qx-conte"> $!{transportInfoVO.laycanStartDateAsString} ~ $!{transportInfoVO.laycanEndDateAsString}</span></li>
+            <li class="c-fcos2"><span class="c-fn">laytime：</span><span class="c-int qx-conte"> $!{transportInfoVO.laytimeAsString}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte"> $!{transportInfoVO.dischargePortVO.enName}</span></li>
+
+        </ul>
+    </div>
+</div>

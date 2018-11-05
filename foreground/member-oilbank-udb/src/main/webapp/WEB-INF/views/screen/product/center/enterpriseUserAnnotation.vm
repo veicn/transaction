@@ -1,0 +1,72 @@
+$contain.get('/common/title.htm').put('title', '企业用户标注')
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/sales-resources.css'))
+#css($appServer.get('/product/css/work/shipping.css'))
+#css($appServer.get('/product/css/work/welcome.css'))
+<div class="m-nav g-nav fl">
+    <div class="wel-box-top fl cleafix">
+        <!--<div class="wel-box">
+            <h3>Welcome</h3>
+
+        </div>-->
+        <div class="wel-box infor-box">
+            <h3>Welcome</h3>
+            <dl class="infor-box-dl clearfix">
+                <dd><img src="$appServer.get('/product/images/det_img.png')"/></dd>
+                <dt class="infor-dt">
+                <h4>Sinochem Singapore Inc </h4>
+                <p>Company abbreviation :<span>SINOCHEM</span></p>
+                </dt>
+            </dl>
+        </div>
+        <div class="wel-box enterprise-box">
+            <h3>Enterprise Qualification</h3>
+            <ul class="enterprise-ul clearfix">
+                <li>
+                    <img src="$appServer.get('/product/images/tradinghouse.png')"/>
+                    <p>Trading House</p>
+                </li>
+                <li>
+                    <img src="$appServer.get('/product/images/disponentowner-sel.png')"/>
+                    <p>Disponent Owner</p>
+                </li>
+                <li>
+                    <img src="$appServer.get('/product/images/shippongagent-sel.png')"/>
+                    <p>Shippong Agent</p>
+                </li>
+                <li>
+                    <img src="$appServer.get('/product/images/refinery.png')"/>
+                    <p>Refinery</p>
+                </li>
+            </ul>
+        </div>
+        <div class="wel-box enterprise-box">
+            <div class="databox clearfix">
+                <h3 class="fl">Historical Data</h3>
+                <div class="fr yearbox">
+                    <lable>Years :</lable>
+                    <div class="yearbox-select">
+                        <div class="cpy-select clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">2016</div>
+                                        <input type="text" readonly="readonly" value="1" name="PricingPeriod" aria-invalid="false" class="valid">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    <li class="select-option selected" data-value="1">2017</li>
+                                    <li class="select-option" data-value="2">2018</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wel-chart"><img src="$appServer.get('/product/images/banner4.png')"/></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TInspectorAppointMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="deal_no" jdbcType="VARCHAR" property="dealNo" />
+    <result column="deal_uuid" jdbcType="VARCHAR" property="dealUuid" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="appoint_enterprise_id" jdbcType="BIGINT" property="appointEnterpriseId" />
+    <result column="appoint_enterprise_name" jdbcType="VARCHAR" property="appointEnterpriseName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="oilseed" jdbcType="VARCHAR" property="oilseed" />
+    <result column="sampling_date" jdbcType="TIMESTAMP" property="samplingDate" />
+    <result column="tank_num" jdbcType="VARCHAR" property="tankNum" />
+    <result column="laytime" jdbcType="VARCHAR" property="laytime" />
+    <result column="ALIVE_FLAG" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+    <result column="INSP_PRE_ID" jdbcType="BIGINT" property="inspPreId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, deal_no, deal_uuid, enterprise_id, enterprise_name, appoint_enterprise_id, appoint_enterprise_name, 
+    status, oilseed, sampling_date, tank_num, laytime, ALIVE_FLAG, CREATE_DATE, UPDATE_DATE, 
+    CREATE_USER, UPDATE_USER,insp_pre_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_inspector_appoint
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_inspector_appoint
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint" useGeneratedKeys="true" keyProperty="id">
+    insert into `product-trade-blockchain`.t_inspector_appoint (ID, deal_no, deal_uuid,
+      enterprise_id, enterprise_name, appoint_enterprise_id, 
+      appoint_enterprise_name, status, oilseed, 
+      sampling_date, tank_num, laytime, 
+      ALIVE_FLAG, CREATE_DATE, UPDATE_DATE, 
+      CREATE_USER, UPDATE_USER,insp_pre_id)
+    values (#{id,jdbcType=BIGINT}, #{dealNo,jdbcType=VARCHAR}, #{dealUuid,jdbcType=VARCHAR}, 
+      #{enterpriseId,jdbcType=BIGINT}, #{enterpriseName,jdbcType=VARCHAR}, #{appointEnterpriseId,jdbcType=BIGINT}, 
+      #{appointEnterpriseName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{oilseed,jdbcType=VARCHAR}, 
+      #{samplingDate,jdbcType=TIMESTAMP}, #{tankNum,jdbcType=VARCHAR}, #{laytime,jdbcType=VARCHAR}, 
+      #{aliveFlag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}, #{inspPreId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint">
+    insert into `product-trade-blockchain`.t_inspector_appoint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dealNo != null">
+        deal_no,
+      </if>
+      <if test="dealUuid != null">
+        deal_uuid,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="appointEnterpriseId != null">
+        appoint_enterprise_id,
+      </if>
+      <if test="appointEnterpriseName != null">
+        appoint_enterprise_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="oilseed != null">
+        oilseed,
+      </if>
+      <if test="samplingDate != null">
+        sampling_date,
+      </if>
+      <if test="tankNum != null">
+        tank_num,
+      </if>
+      <if test="laytime != null">
+        laytime,
+      </if>
+      <if test="aliveFlag != null">
+        ALIVE_FLAG,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER,
+      </if>
+      <if test="inspPreId != null">
+        insp_pre_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dealNo != null">
+        #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUuid != null">
+        #{dealUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointEnterpriseId != null">
+        #{appointEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointEnterpriseName != null">
+        #{appointEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="oilseed != null">
+        #{oilseed,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null">
+        #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tankNum != null">
+        #{tankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="laytime != null">
+        #{laytime,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint">
+    update `product-trade-blockchain`.t_inspector_appoint
+    <set>
+      <if test="dealNo != null">
+        deal_no = #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUuid != null">
+        deal_uuid = #{dealUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointEnterpriseId != null">
+        appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="appointEnterpriseName != null">
+        appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="oilseed != null">
+        oilseed = #{oilseed,jdbcType=VARCHAR},
+      </if>
+      <if test="samplingDate != null">
+        sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tankNum != null">
+        tank_num = #{tankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="laytime != null">
+        laytime = #{laytime,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="inspPreId != null">
+        insp_pre_id = #{inspPreId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where ID = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint">
+    update `product-trade-blockchain`.t_inspector_appoint
+    set deal_no = #{dealNo,jdbcType=VARCHAR},
+      deal_uuid = #{dealUuid,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT},
+      appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      oilseed = #{oilseed,jdbcType=VARCHAR},
+      sampling_date = #{samplingDate,jdbcType=TIMESTAMP},
+      tank_num = #{tankNum,jdbcType=VARCHAR},
+      laytime = #{laytime,jdbcType=VARCHAR},
+      ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=BIGINT},
+      UPDATE_USER = #{updateUser,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!-- //**************************以下方法为开发者补充*********************************/ -->
+
+  <select id="queryTaskInfoList" resultType="java.util.HashMap" parameterType="hashmap">
+    select * from (select
+    tia.ID, tia.deal_no, tia.deal_uuid, tia.enterprise_id,
+    tia.enterprise_name, tia.appoint_enterprise_id, tia.appoint_enterprise_name,
+    tia.status tia_status, tia.CREATE_DATE, tia.UPDATE_DATE,
+    tia.CREATE_USER, tia.UPDATE_USER,tia.insp_pre_id,tip.id inspector_presentation_id,tip.uuid AS tip_uuid,CASE
+    WHEN tia.UPDATE_DATE IS NULL THEN
+    tia.CREATE_DATE
+    ELSE
+    tia.UPDATE_DATE
+    END AS date,
+    CASE
+    WHEN (
+    SELECT
+    count(*)
+    FROM
+    `product-trade-blockchain`.t_common_attachments tca
+    WHERE
+    tca.business_uuid = tip.uuid
+    AND tca.alive_flag = 1
+    ) > 0
+    AND tia. STATUS = 2 THEN
+    '2'
+    ELSE
+    '1'
+    END AS status,
+    tip.state tipstatus
+    from `product-trade-transaction`.t_contract_sheet tcs
+    inner join `product-trade-blockchain`.t_inspector_appoint tia
+    on tia.deal_uuid = tcs.uuid
+    and tia.ALIVE_FLAG = '1'
+    inner join `product-trade-transaction`.t_product_info tpi
+    on tpi.id = tcs.product_info_id
+    and tpi.alive_flag = 1
+    left join `product-trade-blockchain`.t_inspector_presentation tip
+    on tia.id = tip.insp_app_id
+    and tip.alive_flag = 1
+    where
+    tcs.ALIVE_FLAG='1'
+    <if test="oilseed!=null and oilseed!=''">and tpi.product_category_code=#{oilseed}</if>
+    <if test="enterprise_id!=null and enterprise_id!=''">and tia.enterprise_id=#{enterprise_id}</if>
+    ) t
+      <if test="status!=null and status!=''">where t.STATUS=#{status}</if>
+  </select>
+
+
+
+    <!-- 扩展 -->
+    <update id="updateByDealNo" parameterType="com.sinochem.crude.trade.blockchain.domain.TInspectorAppoint" >
+        update `product-trade-blockchain`.t_inspector_appoint
+        <set >
+            <if test="enterpriseId != null" >
+                enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="enterpriseName != null" >
+                enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="appointEnterpriseId != null" >
+                appoint_enterprise_id = #{appointEnterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="appointEnterpriseName != null" >
+                appoint_enterprise_name = #{appointEnterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="aliveFlag != null" >
+                ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                CREATE_USER = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                UPDATE_USER = #{updateUser,jdbcType=BIGINT},
+            </if>
+        </set>
+        where deal_no = #{dealNo,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectByDealNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM `product-trade-blockchain`.t_inspector_appoint
+        WHERE deal_no like concat('%',#{dealNo, jdbcType=VARCHAR},'%')
+        AND alive_flag = 1
+    </select>
+
+
+</mapper>

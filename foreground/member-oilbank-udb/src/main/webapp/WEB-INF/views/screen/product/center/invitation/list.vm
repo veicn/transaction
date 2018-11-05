@@ -1,0 +1,39 @@
+$contain.get('/common/title.htm').put('title', '邀请码管理')
+
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+<div class="f1 manage-con newCode">
+    <h3>New invitation code</h3>
+    <span class="m-btn br btn1 btnr">+ Generate An Invitation Code</span>
+    <table class="account-mag">
+        <tr class="tr-fir">
+            <td>Invitation Code</td>
+            <td>Status</td>
+            <td>Setting</td>
+        </tr>
+        <tr>
+            <td>wdnrxm</td>
+            <td>Inactive</td>
+            <td><img src="$appServer.get('/product/images/delete-icon.png')"></td>
+        </tr>
+    </table>
+    <div class="c-page">
+        <span class="c-page-txt">&lt;</span>
+        <a class="c-page-num" href="">1</a>
+        <a class="c-page-num c-cur" href="">2</a>
+        <a class="c-page-num" href="">3</a>
+        <a class="c-page-num" href="">4</a>
+        <span class="c-page-point">...</span>
+        <a class="c-page-num" href="">8</a>
+        <a class="c-page-txt" href="">&gt;</a>
+    </div>
+</div>
+
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+#js($appServer.get('/product/js/common/common.js'))
+
+<script>
+    commonCPY.select();
+</script>

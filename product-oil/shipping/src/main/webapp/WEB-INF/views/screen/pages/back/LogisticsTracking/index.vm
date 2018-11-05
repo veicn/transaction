@@ -1,0 +1,435 @@
+$contain.get('/common/title.htm').put('title', 'Logistics Tracking')
+#css($appServer.get('/css/work/logisticsTrack.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/logisticstracking.css'))
+#js("$appServer.get('/script/pages/back/LogisticsTracking/index.js?js_version=03280827')")
+#js("$appServer.get('/script/pages/back/LogisticsTracking/markerclusterer.js?js_version=03280827')")
+<style>
+    .trading-ul > li > a {
+        color: #333;
+        text-decoration: none;
+    }
+</style>
+<div id="hiddenDiv">
+##<input name="startUnloadingTime" type="hidden" value="$!{startUnloadingTime}"/>
+##<input name="endUnloadingTime" type="hidden" value="$!{endUnloadingTime}"/>
+##<input name="endLoadingTime" type="hidden" value="$!{endLoadingTime}"/>
+##<input name="startLoadingTime" type="hidden" value="$!{startLoadingTime}"/>
+    <input name="imo" type="hidden" value="$!{imo}"/>
+</div>
+
+<div class="fl log-con-r clearfix">
+    <ul class="stowage-steps clearfix constatus">
+        <input type="hidden" value="$!{confirmationSheetVO.status}" id="constatu">
+        <input type="hidden" value="$!{confirmationSheetVO.tradeTerms}" id="tradeTerms">
+        <li class="steps  fl">
+            <div class="steps-infor">
+                <span>VOYAGE <br> START</span><br>
+            </div>
+        </li>
+        <li class="steps  fl">
+            <div class="steps-infor">
+                <span>LOADING <br> PORT</span>
+            </div>
+        </li>
+        #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+            <li class="steps fl">
+                <div class="steps-infor">
+                    <span>VOYAGE <br>TRACKING</span>
+                </div>
+            </li>
+            <li class="steps fl">
+                <div class="steps-infor">
+                    <span>PORT OF DISCHARGE</span>
+                </div>
+            </li>
+        #end
+
+
+        <li class="steps fl">
+            <div class="steps-infor atthe">
+                <span>END TASK</span>
+            </div>
+        </li>
+    </ul>
+    <div class="m-t-tab stowage-steps-info clearfix">
+        <ol class="fl">
+            <li>
+                <span class="m-f-span w106">Order Number :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.orderNumber}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Product :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.product}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Quantity :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.quantity}</span>
+            </li>
+            <li>
+                <span class="m-f-span w106">Vessel’s name :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.vesselName}</span>
+            </li>
+        </ol>
+        <ul class="fr">
+            <li>
+                <span class="m-f-span w120">Port Of Loading :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.portOfLoading}</span>
+            </li>
+            <li>
+                <span class="m-f-span w120">Port Of Discharge :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.portOfDischarge}</span>
+            </li>
+            <li>
+                <span class="m-f-span w120">Laycan :</span>
+                <span class="m-r-span">$!{confirmationSheetVO.laycanStrat}-$!{confirmationSheetVO.laycanEnd}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="split-line"></div>
+    <div id="lib_Tab">
+        <div class="lib_Menubox lib_tabborder">
+            <ul class="clearfix">
+                <li class="tab-title one1 fl active" flag=1>Voyage Start<span class="tab-line">|</span></li>
+                #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+                    <li class="tab-title one2 fl" flag=2>Loading Port<span class="tab-line">|</span></li>
+                #else
+                    <li class="tab-title one2 fl" flag=2>Loading Port</li>
+                #end
+                #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+                    <li class="tab-title one3 fl" flag=3>Voyage Tracking<span class="tab-line">|</span></li>
+                    <li class="tab-title one4 fl" flag=4>Port Of Discharge</li>
+                #end
+            </ul>
+        </div>
+        <div class="lib_Contentbox lib_tabborder clearfix">
+            $contain.get('/pages/back/LogisticsTracking/voyagestart.htm').put("voyageStartVO",$!{voyageStartVO}).put(
+                "transitLoadingVOList",$!{transitLoadingVOList})
+            $contain.get('/pages/back/LogisticsTracking/loadport.htm').put("loadPortVO",$!{loadPortVO}).put("loadingProgressVOList",$!{loadingProgressVOList})
+
+            #if($!{confirmationSheetVO.tradeTerms}=="CFR")
+                $contain.get('/pages/back/LogisticsTracking/voyagetracking.htm').put(
+                    "transitUnLoadingVOList",$!{transitUnLoadingVOList})
+                $contain.get('/pages/back/LogisticsTracking/unport.htm').put("unloadPortVo",$!{unloadPortVo})
+
+            #end
+        </div>
+    </div>
+
+    <div class="bmap-wrap" id="myMaps">
+
+    </div>
+    <div class="bmap-wrap" id="myMaps1" style="display:none">
+    </div>
+
+
+</div>
+
+<div class="con_one_pop">
+    <div class="con_pop_box">
+        <div class="con_pop-t">
+            <i class="layui-icon">&#x1006;</i>
+        </div>
+        <div class="con_pop-c">
+            <table class="table clearfix con_one_1_table con_one_pop_t">
+                <tr>
+                    <th>Date&Time</th>
+                    <th>Gargo Loaded(Ton)</th>
+                    <th>The Cargo To Be Loaded(Ton)</th>
+                    <th>Loading Speed(Ton/h)</th>
+                    <th>ETC</th>
+
+                </tr>
+                #foreach($!{loadingProgressVO} in $!{loadingProgressVOList})
+                    <tr>
+                        <td>$!{loadingProgressVO.datetime}</td>
+                        <td>$!{loadingProgressVO.cargoLoaded}</td>
+                        <td>$!{loadingProgressVO.theCargoToBeLoaded}</td>
+                        <td>$!{loadingProgressVO.loadingSpeed}</td>
+                        <td>$!{loadingProgressVO.etc}</td>
+                    </tr>
+                #end
+
+            </table>
+        </div>
+        <em class="button-pop br">
+            <a href="javascript:;" class="br">Return</a>
+        </em>
+    </div>
+</div>
+
+
+
+<script>
+
+    var urlStr = window.location.href;
+    var httpUrl = "";
+    if(urlStr.indexOf('shipping9.mycrudeoil')!=-1 ){   // uat
+        httpUrl = "https://sinochem-b2b-uat.oss-cn-beijing.aliyuncs.com";
+    } else if(urlStr.indexOf('shipping.mycrudeoil')!=-1){    // 生产
+        httpUrl = "https://sinochem-b2b-pro.oss-cn-beijing.aliyuncs.com";
+    } else { //测试环境
+        httpUrl = "http://sinochem-b2b-dev.oss-cn-beijing.aliyuncs.com";
+    }
+
+    document.write("<script type='text/javascript' src='"+httpUrl+"/transport/myGoogleMapEn.js'><\/script>")
+
+
+
+</script>
+<script>
+    var flag = 1;
+    (function () {
+        $('.lib_Menubox ul li').click(function () {
+            var index = $(this).index();
+            $(this).addClass('active').siblings().removeClass('active')
+            $('.lib_Contentbox>div').eq(index).show().siblings().hide();
+
+            flag = $(this).attr('flag');
+            if (flag == 3) {
+                $('#myMaps').css('display', 'none');
+                $('#myMaps1').css('display', 'block');
+
+                var message = {
+                    "imo": $("#hiddenDiv input[name='imo']").val()
+                }
+
+                $.ajax({
+                    url: "$shipServer.get('api/geojson/imowaypoint.json')",
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",  //访问格式
+                    dataType: "json",    //数据类型
+                    data: JSON.stringify(message),
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function (data) {
+                        locus = data.datas;
+                        MapEND(Maps2, locus);
+                    }
+                })
+            } else if (flag == 1) {
+                $('#myMaps').css('display', 'block');
+                //$('#myMaps').css('display', 'none');
+                $('#myMaps1').css('display', 'none');
+
+            } else {
+                $('#myMaps').css('display', 'none');
+                $('#myMaps1').css('display', 'none');
+
+            }
+        })
+        $('.button-check').on('click', function () {
+            $('.con_one_pop').show()
+        })
+        $('.con_pop-t>i').on('click', function () {
+            $('.con_one_pop').hide()
+        })
+        $('.button-pop>a').on('click', function () {
+            $('.con_one_pop').hide()
+        })
+
+    })()
+
+    function getHref(key) {
+        //获取地址拦？后面的vue值  //  $.getHref('name')
+        var str = window.location.href;
+        str = str.substring(str.indexOf("?") + 1);
+        var end = false;
+
+        var arrHref = str.split("&");
+        for (var i = 0; i < arrHref.length; i++) {
+            var chilrenArr = arrHref[i].split("=");
+            if (chilrenArr[0] == key) {
+                end = chilrenArr[1];
+                break;
+            }
+        }
+        return end;
+    }
+    var chicago = {
+        lat: 5,
+        lng: 124
+    };
+    var a = [];
+    var b = []
+    initMap();
+    function initMap() { //初始化地图
+
+        window.Maps1 = new google.maps.Map(document.getElementById("myMaps"), {
+            center: chicago,
+            zoom: 3,
+            maxZoom: 12,
+            minZoom: 3,
+            //      mapTypeControl: false,
+            zoomControl: false,
+            scaleControl: true,
+            mapTypeId: "hybrid",
+            streetViewControl: false,
+            fullscreenControl: false,
+            gestureHandling: "greedy",
+            mapTypeControl: false
+        });
+        window.Maps2 = new google.maps.Map(document.getElementById("myMaps1"), {
+            center: chicago,
+            zoom: 3,
+            maxZoom: 12,
+            minZoom: 3,
+            //      mapTypeControl: false,
+            zoomControl: false,
+            scaleControl: true,
+            mapTypeId: "hybrid",
+            streetViewControl: false,
+            fullscreenControl: false,
+            gestureHandling: "greedy",
+            mapTypeControl: false
+        });
+        satellite(Maps2)
+        satellite(Maps1)
+        //轨迹
+        window.MarkerClusterer1 = function (Maps, markers) {
+            new MarkerClusterer(Maps, markers)
+        }
+        window.ShipLine = function Trajectory(Maps, locus, rato) {
+            var symbolEnd13 = {
+                //图标
+                path: "M-6 10L0 -10L6 10z",
+                strokeColor: "#000",
+                strokeWeight: 1,
+                fillColor: "#00ff60",
+                fillOpacity: 1,
+                scale: 1,
+                rotation: 0
+            };
+            var startShipMarker = new google.maps.Marker({
+                position: {
+                    lat: locus[0].lat,
+                    lng: locus[0].lng
+                },
+                map: Maps,
+                icon: "$appServer.get( '/images/startIcon.png')"
+
+            });
+            new google.maps.Polyline({
+                map: Maps,
+                strokeColor: "#FF0000",
+                strokeWeight: 2,
+                icons: [{
+                    icon: startShipMarker,
+                    offset: "0%"
+                },
+                    {
+                        icon: symbolArrows,
+                        offset: "20px",
+                        repeat: "200px"
+                    },
+                    {
+                        icon: symbolEnd13,
+                        offset: "100%"
+                    }
+                ],
+                path: locus
+            });
+        };
+
+        //设置中心
+
+        //设置时间轴文字
+        window.MapEND = function (Maps, locus) {
+            var markers = [];
+            var markers1 = [];
+            var ship = ShipLine(Maps, locus)
+            a.push(ship)
+            Maps.setCenter({
+                lat: locus[locus.length - 1].lat,
+                lng: locus[locus.length - 1].lng
+            });
+            $(locus).each(function (i, el) {
+                var timeMarker = new google.maps.Marker({ //路线点
+                    position: {lat: el.lat, lng: el.lng},
+                    map: Maps,
+                    icon: symbolCircle,
+                });
+                a.push(timeMarker)
+                markers.push(timeMarker)
+                var timeMarkerText = new google.maps.Marker({ //时间轴
+                    position: {lat: el.lat, lng: el.lng},
+                    label: {
+                        text: el.text
+                    },
+                    map: Maps,
+                    icon: {
+                        path: 'M0-0L19-28z',
+                        fillColor: '#000000',
+                        labelOrigin: new google.maps.Point(90, -35),
+                        strokeOpacity: 0.2,
+                        anchor: new google.maps.Point(0, 0),
+                        scale: 1,
+                    }
+
+                });
+                a.push(timeMarkerText)
+                markers1.push(timeMarkerText)
+            })
+            var markerCluster = MarkerClusterer1(Maps, markers);
+
+            var markerCluster1 = MarkerClusterer1(Maps, markers1);
+        }
+        var rect = {
+            path: "M19-28L69-28z",
+            strokeColor: "#000",
+            strokeWeight: 1,
+            fillColor: "#000",
+            fillOpacity: 0.7,
+            scale: 0.6,
+            rotation: 0
+        };
+        var message = {
+            "imo": $("#hiddenDiv input[name='imo']").val()
+        }
+        console.log(message);
+
+        $.ajax({
+            url: "$shipServer.get('api/geojson/imowaypoint.json')",
+//               http://ship.test.mycrudeoil.com url: "http://ship.test.mycrudeoil.com/api/geojson/waypoint.json",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",  //访问格式
+            dataType: "json",    //数据类型
+            data: JSON.stringify(message),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                console.log("map2");
+                console.log(data);
+                locus = data.datas;
+                MapEND(Maps1, locus)
+            }
+        })
+
+
+        //轨迹箭头样式
+        window.symbolArrows = {
+            path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+            strokeWeight: 3,
+            strokeColor: "#F00",
+            fillColor: "#eaedec",
+            fillOpacity: 1,
+            scale: 1
+        };
+
+        window.symbolCircle = {
+            path: google.maps.SymbolPath.CIRCLE,
+            strokeWeight: 3,
+            strokeColor: "#F00",
+            fillColor: "#ddd",
+            fillOpacity: 1,
+            scale: 4
+        };
+
+    }
+    function satellite(Maps) { //卫星图
+        Maps.setMapTypeId('satellite')
+        Maps.setMapTypeId('hybrid')
+    }
+</script>

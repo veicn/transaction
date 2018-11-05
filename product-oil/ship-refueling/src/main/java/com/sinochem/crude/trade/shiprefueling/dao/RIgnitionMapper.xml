@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shiprefueling.dao.RIgnitionMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.RIgnition" id="RIgnitionDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.RIgnition">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition" id="RIgnition">
+		<result property="orderId" column="ORDER_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="sellCompanyId" column="SELL_COMPANY_ID" />
+		<result property="sellCompanyName" column="SELL_COMPANY_NAME" />
+		<result property="buyCompanyId" column="BUY_COMPANY_ID" />
+		<result property="buyCompanyName" column="BUY_COMPANY_NAME" />
+		<result property="orderTime" column="ORDER_TIME" />
+		<result property="orderCode" column="ORDER_CODE" />
+		<result property="totalPrice" column="TOTAL_PRICE" />
+		<result property="pickUpTime" column="PICK_UP_TIME" />
+		<result property="deliveryWay" column="DELIVERY_WAY" />
+		<result property="transportWay" column="TRANSPORT_WAY" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="status" column="STATUS" />
+        <result property="currency" column="CURRENCY" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition"  useGeneratedKeys="true" keyProperty="orderId" >
+		insert  into t_order_ignition (				ORDER_ID
+						,UUID
+						,SELL_COMPANY_ID
+						,SELL_COMPANY_NAME
+						,BUY_COMPANY_ID
+						,BUY_COMPANY_NAME
+						,ORDER_TIME
+						,ORDER_CODE
+						,TOTAL_PRICE
+						,PICK_UP_TIME
+						,DELIVERY_WAY
+						,TRANSPORT_WAY
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,STATUS,CURRENCY
+						)
+		values(		#{orderId}
+						,#{uuid}
+						,#{sellCompanyId}
+						,#{sellCompanyName}
+						,#{buyCompanyId}
+						,#{buyCompanyName}
+						,#{orderTime}
+						,#{orderCode}
+						,#{totalPrice}
+						,#{pickUpTime}
+						,#{deliveryWay}
+						,#{transportWay}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,'1',#{currency}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_ignition
+              WHERE 1=1 
+                AND ORDER_ID = #{orderId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition">
+        DELETE FROM t_order_ignition
+              WHERE 1=1 
+        <if test="orderId != null and orderId != ''">AND  ORDER_ID = #{orderId}</if>
+        <if test="uuid != null and uuid != ''">AND  UUID = #{uuid}</if>
+        <if test="sellCompanyId != null and sellCompanyId != ''">AND  SELL_COMPANY_ID = #{sellCompanyId}</if>
+        <if test="sellCompanyName != null and sellCompanyName != ''">AND  SELL_COMPANY_NAME = #{sellCompanyName}</if>
+        <if test="buyCompanyId != null and buyCompanyId != ''">AND  BUY_COMPANY_ID = #{buyCompanyId}</if>
+        <if test="buyCompanyName != null and buyCompanyName != ''">AND  BUY_COMPANY_NAME = #{buyCompanyName}</if>
+        <if test="orderTime != null and orderTime != ''">AND  ORDER_TIME = #{orderTime}</if>
+        <if test="orderCode != null and orderCode != ''">AND  ORDER_CODE = #{orderCode}</if>
+        <if test="totalPrice != null and totalPrice != ''">AND  TOTAL_PRICE = #{totalPrice}</if>
+        <if test="pickUpTime != null and pickUpTime != ''">AND  PICK_UP_TIME = #{pickUpTime}</if>
+        <if test="deliveryWay != null and deliveryWay != ''">AND  DELIVERY_WAY = #{deliveryWay}</if>
+        <if test="transportWay != null and transportWay != ''">AND  TRANSPORT_WAY = #{transportWay}</if>
+        <if test="aliveFlag != null and aliveFlag != ''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="version != null and version != ''">AND  VERSION = #{version}</if>
+        <if test="langVer != null and langVer != ''">AND  LANG_VER = #{langVer}</if>
+        <if test="createDate != null and createDate != ''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateDate != null and updateDate != ''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="createUser != null and createUser != ''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateUser != null and updateUser != ''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="ext1 != null and ext1 != ''">AND  EXT1 = #{ext1}</if>
+        <if test="status != null and status != ''">AND  STATUS = #{status}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition">
+		update t_order_ignition
+		<set>
+         ORDER_ID=#{orderId}
+		<if test="uuid != null">,UUID = #{uuid}</if>
+		<if test="sellCompanyId != null">,SELL_COMPANY_ID = #{sellCompanyId}</if>
+		<if test="sellCompanyName != null">,SELL_COMPANY_NAME = #{sellCompanyName}</if>
+		<if test="buyCompanyId != null">,BUY_COMPANY_ID = #{buyCompanyId}</if>
+		<if test="buyCompanyName != null">,BUY_COMPANY_NAME = #{buyCompanyName}</if>
+		<if test="orderTime != null">,ORDER_TIME = #{orderTime}</if>
+		<if test="orderCode != null">,ORDER_CODE = #{orderCode}</if>
+		<if test="totalPrice != null">,TOTAL_PRICE = #{totalPrice}</if>
+		<if test="pickUpTime != null">,PICK_UP_TIME = #{pickUpTime}</if>
+		<if test="deliveryWay != null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="transportWay != null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="aliveFlag != null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version != null">,VERSION = #{version}</if>
+		<if test="langVer != null">,LANG_VER = #{langVer}</if>
+		<if test="createDate != null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate != null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser != null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser != null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1 != null">,EXT1 = #{ext1}</if>
+		<if test="status != null">,STATUS = #{status}</if>
+        <if test="currency != null">,CURRENCY = #{currency}</if>
+		</set>
+		where
+       	 ORDER_ID=#{orderId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition">
+		update t_order_ignition
+		<set>
+		UUID = #{uuid}
+		<if test="uuid != null">,UUID = #{uuid}</if>
+		<if test="sellCompanyId != null">,SELL_COMPANY_ID = #{sellCompanyId}</if>
+		<if test="sellCompanyName != null">,SELL_COMPANY_NAME = #{sellCompanyName}</if>
+		<if test="buyCompanyId != null">,BUY_COMPANY_ID = #{buyCompanyId}</if>
+		<if test="buyCompanyName != null">,BUY_COMPANY_NAME = #{buyCompanyName}</if>
+		<if test="orderTime != null">,ORDER_TIME = #{orderTime}</if>
+		<if test="orderCode != null">,ORDER_CODE = #{orderCode}</if>
+		<if test="totalPrice != null">,TOTAL_PRICE = #{totalPrice}</if>
+		<if test="pickUpTime != null">,PICK_UP_TIME = #{pickUpTime}</if>
+		<if test="deliveryWay != null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="transportWay != null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="aliveFlag != null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version != null">,VERSION = #{version}</if>
+		<if test="langVer != null">,LANG_VER = #{langVer}</if>
+		<if test="createDate != null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate != null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser != null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser != null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1 != null">,EXT1 = #{ext1}</if>
+		<if test="status != null">,STATUS = #{status}</if>
+        <if test="currency != null">,CURRENCY = #{currency}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_ignition
+		<set>
+         ORDER_ID=#{orderId}
+		<if test="uuid != null">,UUID = #{uuid}</if>
+		<if test="sellCompanyId != null">,SELL_COMPANY_ID = #{sellCompanyId}</if>
+		<if test="sellCompanyName != null">,SELL_COMPANY_NAME = #{sellCompanyName}</if>
+		<if test="buyCompanyId != null">,BUY_COMPANY_ID = #{buyCompanyId}</if>
+		<if test="buyCompanyName != null">,BUY_COMPANY_NAME = #{buyCompanyName}</if>
+		<if test="orderTime != null">,ORDER_TIME = #{orderTime}</if>
+		<if test="orderCode != null">,ORDER_CODE = #{orderCode}</if>
+		<if test="totalPrice != null">,TOTAL_PRICE = #{totalPrice}</if>
+		<if test="pickUpTime != null">,PICK_UP_TIME = #{pickUpTime}</if>
+		<if test="deliveryWay != null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="transportWay != null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="aliveFlag != null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version != null">,VERSION = #{version}</if>
+		<if test="langVer != null">,LANG_VER = #{langVer}</if>
+		<if test="createDate != null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate != null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser != null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser != null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1 != null">,EXT1 = #{ext1}</if>
+		<if test="status != null">,STATUS = #{status}</if>
+        <if test="currency != null">,CURRENCY = #{currency}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="orderId != null and orderId != ''">and  ORDER_ID=#{orderId}</if>
+		<if test="uuid != null and uuid != ''">and  UUID=#{uuid}</if>
+		<if test="sellCompanyId != null and sellCompanyId != ''">and  SELL_COMPANY_ID=#{sellCompanyId}</if>
+		<if test="sellCompanyName != null and sellCompanyName != ''">and  SELL_COMPANY_NAME=#{sellCompanyName}</if>
+		<if test="buyCompanyId != null and buyCompanyId != ''">and  BUY_COMPANY_ID=#{buyCompanyId}</if>
+		<if test="buyCompanyName != null and buyCompanyName != ''">and  BUY_COMPANY_NAME=#{buyCompanyName}</if>
+		<if test="orderTime != null and orderTime != ''">and  ORDER_TIME=#{orderTime}</if>
+		<if test="orderCode != null and orderCode != ''">and  ORDER_CODE=#{orderCode}</if>
+		<if test="totalPrice != null and totalPrice != ''">and  TOTAL_PRICE=#{totalPrice}</if>
+		<if test="pickUpTime != null and pickUpTime != ''">and  PICK_UP_TIME=#{pickUpTime}</if>
+		<if test="deliveryWay != null and deliveryWay != ''">and  DELIVERY_WAY=#{deliveryWay}</if>
+		<if test="transportWay != null and transportWay != ''">and  TRANSPORT_WAY=#{transportWay}</if>
+		<if test="aliveFlag != null and aliveFlag != ''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version != null and version != ''">and  VERSION=#{version}</if>
+		<if test="langVer != null and langVer != ''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate != null and createDate != ''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser != null and createUser != ''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1 != null and ext1 != ''">and  EXT1=#{ext1}</if>
+		<if test="status != null and status != ''">and  STATUS=#{status}</if>
+        <if test="currency != null and currency != ''">and  CURRENCY=#{currency}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="RIgnition">
+			select
+			* from t_order_ignition
+			where
+		    ORDER_ID=#{orderId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="RIgnition">
+			select
+			* from t_order_ignition
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="RIgnition" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.RIgnition">
+		select * from t_order_ignition
+			where
+		 ALIVE_FLAG='1'
+		<if test="orderId != null and orderId != ''">and  ORDER_ID=#{orderId}</if>
+		<if test="uuid != null and uuid != ''">and  UUID=#{uuid}</if>
+		<if test="sellCompanyId != null and sellCompanyId != ''">and  SELL_COMPANY_ID=#{sellCompanyId}</if>
+		<if test="sellCompanyName != null and sellCompanyName != ''">and  SELL_COMPANY_NAME=#{sellCompanyName}</if>
+		<if test="buyCompanyId != null and buyCompanyId != ''">and  BUY_COMPANY_ID=#{buyCompanyId}</if>
+		<if test="buyCompanyName != null and buyCompanyName != ''">and  BUY_COMPANY_NAME=#{buyCompanyName}</if>
+		<if test="orderTime != null and orderTime != ''">and  ORDER_TIME=#{orderTime}</if>
+		<if test="orderCode != null and orderCode != ''">and  ORDER_CODE=#{orderCode}</if>
+		<if test="totalPrice != null and totalPrice != ''">and  TOTAL_PRICE=#{totalPrice}</if>
+		<if test="pickUpTime != null and pickUpTime != ''">and  PICK_UP_TIME=#{pickUpTime}</if>
+		<if test="deliveryWay != null and deliveryWay != ''">and  DELIVERY_WAY=#{deliveryWay}</if>
+		<if test="transportWay != null and transportWay != ''">and  TRANSPORT_WAY=#{transportWay}</if>
+		<if test="aliveFlag != null and aliveFlag != ''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version != null and version != ''">and  VERSION=#{version}</if>
+		<if test="langVer != null and langVer != ''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate != null and createDate != ''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate != null and updateDate != ''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser != null and createUser != ''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser != null and updateUser != ''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1 != null and ext1 != ''">and  EXT1=#{ext1}</if>
+		<if test="status != null and status != ''">and  STATUS=#{status}</if>
+        <if test="currency != null and currency != ''">and  CURRENCY=#{currency}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ORDER_ID as "orderId" 
+						 ,   UUID as "uuid" 
+						 ,   SELL_COMPANY_ID as "sellCompanyId"
+						 ,   SELL_COMPANY_NAME as "sellCompanyName" 
+						 ,   BUY_COMPANY_ID as "buyCompanyId" 
+						 ,   BUY_COMPANY_NAME as "buyCompanyName" 
+						 ,   ORDER_TIME as "orderTime" 
+						 ,   ORDER_CODE as "orderCode" 
+						 ,   TOTAL_PRICE as "totalPrice" 
+						 ,   PICK_UP_TIME as "pickUpTime" 
+						 ,   DELIVERY_WAY as "deliveryWay" 
+						 ,   TRANSPORT_WAY as "transportWay" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   STATUS as "status" ,   CURRENCY as "currency"
+        from t_order_ignition
+		where
+			ALIVE_FLAG='1'
+			<if test="orderId != null and orderId != ''">and  ORDER_ID=#{orderId}</if>
+			<if test="uuid != null and uuid != ''">and  UUID=#{uuid}</if>
+			<if test="sellCompanyId != null and sellCompanyId != ''">and  SELL_COMPANY_ID=#{sellCompanyId}</if>
+			<if test="sellCompanyName != null and sellCompanyName != ''">and  SELL_COMPANY_NAME=#{sellCompanyName}</if>
+			<if test="buyCompanyId != null and buyCompanyId != ''">and  BUY_COMPANY_ID=#{buyCompanyId}</if>
+			<if test="buyCompanyName != null and buyCompanyName != ''">and  BUY_COMPANY_NAME=#{buyCompanyName}</if>
+			<if test="orderTime != null and orderTime != ''">and  ORDER_TIME=#{orderTime}</if>
+			<if test="orderCode != null and orderCode != ''">and  ORDER_CODE=#{orderCode}</if>
+			<if test="totalPrice != null and totalPrice != ''">and  TOTAL_PRICE=#{totalPrice}</if>
+			<if test="pickUpTime != null and pickUpTime != ''">and  PICK_UP_TIME=#{pickUpTime}</if>
+			<if test="deliveryWay != null and deliveryWay != ''">and  DELIVERY_WAY=#{deliveryWay}</if>
+			<if test="transportWay != null and transportWay != ''">and  TRANSPORT_WAY=#{transportWay}</if>
+			<if test="aliveFlag != null and aliveFlag != ''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version != null and version != ''">and  VERSION=#{version}</if>
+			<if test="langVer != null and langVer != ''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate != null and createDate != ''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate != null and updateDate != ''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser != null and createUser != ''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser != null and updateUser != ''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1 != null and ext1 != ''">and  EXT1=#{ext1}</if>
+			<if test="status != null and status != ''">and  STATUS=#{status}</if>
+            <if test="currency != null and currency != ''">and  CURRENCY=#{currency}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_ignition 
+		where
+		 ALIVE_FLAG='1'
+			<if test="orderId != null and orderId != ''">and  ORDER_ID=#{orderId}</if>
+			<if test="uuid != null and uuid != ''">and  UUID=#{uuid}</if>
+			<if test="sellCompanyId != null and sellCompanyId != ''">and  SELL_COMPANY_ID=#{sellCompanyId}</if>
+			<if test="sellCompanyName != null and sellCompanyName != ''">and  SELL_COMPANY_NAME=#{sellCompanyName}</if>
+			<if test="buyCompanyId != null and buyCompanyId != ''">and  BUY_COMPANY_ID=#{buyCompanyId}</if>
+			<if test="buyCompanyName != null and buyCompanyName != ''">and  BUY_COMPANY_NAME=#{buyCompanyName}</if>
+			<if test="orderTime != null and orderTime != ''">and  ORDER_TIME=#{orderTime}</if>
+			<if test="orderCode != null and orderCode != ''">and  ORDER_CODE=#{orderCode}</if>
+			<if test="totalPrice != null and totalPrice != ''">and  TOTAL_PRICE=#{totalPrice}</if>
+			<if test="pickUpTime != null and pickUpTime != ''">and  PICK_UP_TIME=#{pickUpTime}</if>
+			<if test="deliveryWay != null and deliveryWay != ''">and  DELIVERY_WAY=#{deliveryWay}</if>
+			<if test="transportWay != null and transportWay != ''">and  TRANSPORT_WAY=#{transportWay}</if>
+			<if test="aliveFlag != null and aliveFlag != ''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version != null and version != ''">and  VERSION=#{version}</if>
+			<if test="langVer != null and langVer != ''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate != null and createDate != ''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate != null and updateDate != ''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser != null and createUser != ''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser != null and updateUser != ''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1 != null and ext1 != ''">and  EXT1=#{ext1}</if>
+			<if test="status != null and status != ''">and  STATUS=#{status}</if>
+            <if test="currency != null and currency != ''">and  CURRENCY=#{currency}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+		<select id="queryIgnitionRecords" resultType="java.util.HashMap" parameterType="hashmap">
+			SELECT
+			ignition.ORDER_ID AS "orderId",
+			ignition.UUID AS "uuid",
+			ignition.SELL_COMPANY_ID AS "sellCompanyId",
+			ignition.SELL_COMPANY_NAME AS "sellCompanyName",
+			ignition.BUY_COMPANY_ID AS "buyCompanyId",
+			ignition.BUY_COMPANY_NAME AS "buyCompanyName",
+			ignition.ORDER_TIME AS "orderTime",
+			ignition.ORDER_CODE AS "orderCode",
+			ignition.TOTAL_PRICE AS "totalPrice",
+			ignition.PICK_UP_TIME AS "pickUpTime",
+			ifnull(ignition.DELIVERY_WAY,"") AS "deliveryWay",
+            ifnull(ignition.TRANSPORT_WAY,"") AS "transportWay",
+			ignition.ALIVE_FLAG AS "aliveFlag",
+			ignition.LANG_VER AS "langVer",
+			ignition.CREATE_DATE AS "createDate",
+			ignition.UPDATE_DATE AS "updateDate",
+			ignition.CREATE_USER AS "createUser",
+			ignition.UPDATE_USER AS "updateUser",
+			ignition.EXT1 AS "ext1",
+			ignition.STATUS AS "status",
+			ignition.CURRENCY AS "currency",
+			category.OIL_CLASSIFICATION as oilClassification
+			FROM
+			t_order_ignition ignition INNER JOIN t_category category
+			on category.ORDER_ID = ignition.ORDER_ID
+			<where>
+                 1=1
+            <if test="infoType != null and infoType != ''">
+                and category.ORDER_TYPE = #{infoType}
+            </if>
+
+			and ignition.ALIVE_FLAG = 1 and category.ALIVE_FLAG = 1
+
+			<if test="buyCompanyId != null and buyCompanyId != ''">and ignition.BUY_COMPANY_ID = #{buyCompanyId}</if>
+			<if test="sellCompanyId != null and sellCompanyId != ''">and ignition.SELL_COMPANY_ID = #{sellCompanyId}</if>
+
+			<if test="orderTimeStart  != null and orderTimeStart != ''">and  ignition.ORDER_TIME &gt;= #{orderTimeStart}</if>
+			<if test="orderTimeEnd  != null and orderTimeEnd != ''">and  ignition.ORDER_TIME &lt;= #{orderTimeEnd}</if>
+			<if test="orderCode != null and orderCode != ''">and ignition.ORDER_CODE like CONCAT('%',#{orderCode},'%')</if>
+			<if test="transportWay  != null and transportWay != ''">and  ignition.TRANSPORT_WAY=#{transportWay}</if>
+			<if test="oilVarieties  != null and oilVarieties != ''">and category.OIL_VARIETIES=#{oilVarieties}</if>
+			<if test="oilClassification  !=  null and oilClassification != ''">and category.OIL_CLASSIFICATION=#{oilClassification}</if>
+			<if test="status != null and status != ''">and  ignition.STATUS=#{status}</if>
+            <if test="currency != null and currency != ''">and  ignition.CURRENCY=#{currency}</if>
+			  <!--add by fengzk-->
+				<if test="deliveryWay  != null and deliveryWay != ''">and  ignition.DELIVERY_WAY=#{deliveryWay}</if>
+			</where>
+			group by ignition.ORDER_ID
+		</select>
+
+    <select id="querySellCompanyOrder" resultType="java.util.HashMap" parameterType="hashmap">
+			select
+			count(distinct (o.ORDER_ID))  count,
+			o.SELL_COMPANY_ID             sellCompanyId,
+			max(o.UPDATE_DATE)            lastUpdateDate,
+			max(o.SELL_COMPANY_NAME)      sellCompanyName
+            from t_order_ignition o inner join t_category c on o.UUID = c.ORDER_UUID
+            <where>
+                c.ORDER_TYPE = 1
+				<if test="buyCompanyId != null and buyCompanyId != ''"> and o.BUY_COMPANY_ID = #{buyCompanyId}</if>
+				<if test="aliveFlag != null and aliveFlag != ''">
+					and o.ALIVE_FLAG = #{aliveFlag} and c.ALIVE_FLAG = #{aliveFlag}
+				</if>
+
+                <if test="orderTimeStart != null and orderTimeStart != ''">and  o.ORDER_TIME &gt;= #{orderTimeStart}</if>
+                <if test="orderTimeEnd != null and orderTimeEnd != ''">and  o.ORDER_TIME &lt;= #{orderTimeEnd}</if>
+                <if test="orderCode != null and orderCode != ''">and o.ORDER_CODE like CONCAT(CONCAT('%', #{orderCode}), '%')</if>
+                <if test="transportWay != null and transportWay != ''">and  o.TRANSPORT_WAY=#{transportWay}</if>
+				<if test="status != null and status != ''">and  o.STATUS=#{status}</if>
+                <if test="oilVarieties != null and oilVarieties != ''">and c.OIL_VARIETIES=#{oilVarieties}</if>
+                <if test="oilClassification  !=  null and oilClassification != ''">and c.OIL_CLASSIFICATION=#{oilClassification}</if>
+			</where>
+			group by o.SELL_COMPANY_ID
+    </select>
+	<select id="queryBuyCompanyOrder" resultType="java.util.HashMap" parameterType="hashmap">
+			select
+			count(distinct (o.ORDER_ID))  count,
+			o.BUY_COMPANY_ID              buyCompanyId,
+			max(o.UPDATE_DATE)            lastUpdateDate,
+			max(o.BUY_COMPANY_NAME)       buyCompanyName
+            from t_order_ignition o inner join t_category c on o.UUID = c.ORDER_UUID
+            <where>
+                c.ORDER_TYPE = 1
+				<if test="sellCompanyId != null and sellCompanyId != ''"> and o.SELL_COMPANY_ID = #{sellCompanyId}</if>
+				<if test="aliveFlag != null and aliveFlag != ''">
+					and o.ALIVE_FLAG = #{aliveFlag} and c.ALIVE_FLAG = #{aliveFlag}
+				</if>
+
+                <if test="orderTimeStart != null and orderTimeStart != ''">and  o.ORDER_TIME &gt;= #{orderTimeStart}</if>
+                <if test="orderTimeEnd != null and orderTimeEnd != ''">and  o.ORDER_TIME &lt;= #{orderTimeEnd}</if>
+                <if test="orderCode != null and orderCode != ''">and  o.ORDER_CODE=#{orderCode}</if>
+                <if test="transportWay != null and transportWay != ''">and  o.TRANSPORT_WAY=#{transportWay}</if>
+                <if test="status != null and status != ''">and  o.STATUS=#{status}</if>
+                <if test="oilVarieties != null and oilVarieties != ''">and c.OIL_VARIETIES=#{oilVarieties}</if>
+                <if test="oilClassification  !=  null and oilClassification != ''">and c.OIL_CLASSIFICATION=#{oilClassification}</if>
+			</where>
+			group by o.BUY_COMPANY_ID
+    </select>
+
+	<update id="updateRecordsAliveFlag" parameterType="Map">
+		update t_order_ignition
+		set ALIVE_FLAG = #{aliveFlag}, STATUS = 3
+		where
+			ORDER_ID = #{orderId}
+	</update>
+
+
+	<select id="queryByQueryRIgnition" resultMap="RIgnition" parameterType="com.sinochem.crude.trade.shiprefueling.model.query.QueryRIgnition">
+		select distinct ignition.* from t_order_ignition ignition
+        inner JOIN t_category category
+        ON category.ORDER_ID = ignition.ORDER_ID
+		where ignition.ALIVE_FLAG='1'
+        <if test="infoType != null and infoType != ''">
+            and category.ORDER_TYPE = #{infoType}
+        </if>
+		<if test="orderCode != null and orderCode != ''">
+			and  ignition.ORDER_CODE=#{orderCode}
+		</if>
+		<if test="transportWay != null and transportWay != ''">
+			and  ignition.TRANSPORT_WAY=#{transportWay}
+		</if>
+        <if test="deliveryWay != null and deliveryWay != ''">
+            and  ignition.DELIVERY_WAY=#{deliveryWay}
+        </if>
+		<if test="buyerCompanyId != null and buyerCompanyId != ''">
+			and  ignition.BUY_COMPANY_ID=#{buyerCompanyId}
+		</if>
+		<if test="sellerCompanyId != null and sellerCompanyId != ''">
+			and  ignition.SELL_COMPANY_ID=#{sellerCompanyId}
+		</if>
+		<if test="releasedDateStartString != null and releasedDateStartString != ''">
+			AND date_format(ignition.order_time,'%Y-%m-%d') &gt;= #{releasedDateStartString}
+		</if>
+		<if test="releasedDateEndString != null and releasedDateEndString != ''">
+            AND date_format(ignition.order_time,'%Y-%m-%d') &lt;= #{releasedDateEndString}
+		</if>
+		<if test="status != null and status != ''">
+			and  ignition.STATUS=#{status}
+		</if>
+		<if test="oilClassification != null and oilClassification != ''">
+			and  category.OIL_CLASSIFICATION=#{oilClassification}
+		</if>
+		<if test="oilVarieties != null and oilVarieties != ''">
+			and  category.OIL_VARIETIES=#{oilVarieties}
+		</if>
+	</select>
+</mapper>
+

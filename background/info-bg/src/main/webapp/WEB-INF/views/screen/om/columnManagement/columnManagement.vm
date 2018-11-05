@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/info/index.css')" >
+<script src="$imageServer.get('info/js/columnManagement/columnManagement.js')"></script>
+	<div class="pp15" id="layerDemo" style="">
+		<div class="layui-tab layui-tab-brief" lay-filter="demo">
+ 			<ul class="layui-tab-title">
+				<li class="layui-this" id="audit">待审核($!countToAudit)</li>
+				<li >审核通过($!countApproved)</li>
+				<li >审核未通过($!countAuditFailed)</li>
+			</ul>
+		</div>	
+	
+		<!--搜索条件-->		
+		<div class="ry-banner">
+			<div class="layui-inline">
+				<label class="layui-form-label">专栏名称</label>
+				<div class="layui-inline">
+					<input class="layui-input" name="columnTitle" id="columnTitle" style="width:200px; height:32px;"/>
+				</div>
+			</div>
+			<button style="margin-top:-7px" class="layui-btn layui-btn-small layui-btn-normal ml18" data-type="reload" id="btn">查询</button>
+		</div>
+		
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo" style="overflow-x:scroll">
+			<thead>
+				<tr>
+					<th lay-data="{field:'columnTitle'}">专栏名称</th>
+					<th lay-data="{field:'authorName'}">专栏作家</th>
+					<th lay-data="{field:'columnBrief'}">专栏介绍</th>
+					<th lay-data="{fixed: 'right', width:330, align:'center', toolbar: '#barDemo'}">操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+<script type="text/html" id="barDemo">
+
+	{{#  if(d.status == "10"){ }}
+      <a class="dialog-link btcol" lay-event="check">
+ 		 审核
+      </a>
+    {{#  } }}
+    {{#  if(d.status == "20" || d.status == "01"){ }}
+      <a class="dialog-link btcol" lay-event="show">
+      	查看
+      </a>
+    {{#  } }}
+	
+</script>

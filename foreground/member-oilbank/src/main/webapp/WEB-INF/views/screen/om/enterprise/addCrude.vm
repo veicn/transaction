@@ -1,0 +1,601 @@
+
+<script type="text/javascript" src="$appServer.get('script/lib/jquery.validate.min.js')"></script>
+<script type="text/javascript" src="$appServer.get('script/jquery[1].validate.cn.js')"></script>
+<style>
+    .error {display: block; color: red; text-align: left;}
+    .tip {color: red; font-size: 12px;}
+    .layui-form-label {width: 120px;}
+    .img_box {display: none;}
+</style>
+
+<div class="layui-fluid">
+    <div style=" text-align:center; padding-top: 30px;">
+        <fieldset class="layui-elem-field">
+            <legend>企业基本信息</legend>
+            <div class="layui-field-box">
+                <form id ="epForm" class="layui-form" action="$appServer.get('om/enterprise/saveEnterprise.htm')" method="post">
+                    #if(${enterprise.id} && "" != "$!{enterprise.id}")
+                        <input type="hidden" name="id" value="$!{enterprise.id}"/>
+                    #end
+                    <input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+                    <input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+                    <input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+                    <input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+                    <input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+
+                    <div class="layui-form-item">
+                        #springBind("enterprise.fullName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">企业名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入企业名称" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterprise.name")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">企业简称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入企业全名" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterprise.englishName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">英文名称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|englishName" placeholder="请输入企业英文名称" maxlength="200" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterprise.abbEnglishName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">英文简称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|englishName" placeholder="请输入企业英文简称" maxlength="200" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterprise.organizationCode")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">组织机构代码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|charactor" placeholder="请输入组织机构代码" maxlength="20" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterprise.orgCodeCert")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上传组织机构证</label>
+                            <div class="layui-input-inline">
+                                <a id="orgCodeCertBtn" class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                <a class="previewBtn layui-btn layui-btn-primary layui-btn-small">预览</a>
+                                <span class="img_box">
+                                    #if($!{status.value} && $!{status.value} != "")
+                                        #if($httpUtil.checkHttp(${status.value}))
+                                            <img src="$!{status.value}"/>
+                                        #else
+                                            <img src="$!{uploadServer}/img/$!{status.value}.img"/>
+                                        #end
+                                    #end
+                                </span>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        组织机构代码号请与附件内容一致。
+                        <p class="tip"><b>注意：</b>若为新版三证合一营业执照，请统一填写社会信用代码。</p>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterprise.taxNo")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">税务登记号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|charactor" placeholder="请输入营业执照号" maxlength="20" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterprise.taxRegCert")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上传税务登记证</label>
+                            <div class="layui-input-inline">
+                                <a id="taxRegCertBtn" class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                <a class="previewBtn layui-btn layui-btn-primary layui-btn-small">预览</a>
+                                <span class="img_box">
+                                    #if($!{status.value} && $!{status.value} != "")
+                                        #if($httpUtil.checkHttp(${status.value}))
+                                            <img src="$!{status.value}"/>
+                                        #else
+                                            <img src="$!{uploadServer}/img/$!{status.value}.img"/>
+                                        #end
+                                    #end
+                                </span>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        税务登记证号码请与附件内容一致。
+                        <p class="tip"><b>注意：</b>新版三证合一营业执照，请填写统一社会信用代码：税号如无更改请用原税号，并下载证明模板一同上传。</p>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterprise.licenseNo")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业执照号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|charactor" placeholder="请输入营业执照号" maxlength="20" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterprise.businessLicenseCert")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上传营业执照</label>
+                            <div class="layui-input-inline">
+                                <a id="businessLicenseCert" class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                <a class="previewBtn layui-btn layui-btn-primary layui-btn-small">预览</a>
+                                <span class="img_box">
+                                    #if($!{status.value} && $!{status.value} != "")
+                                        #if($httpUtil.checkHttp(${status.value}))
+                                            <img src="$!{status.value}"/>
+                                        #else
+                                            <img src="$!{uploadServer}/img/$!{status.value}.img"/>
+                                        #end
+                                    #end
+                                </span>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        营业执照号请与附件内容一致。
+                        <p class="tip"><b>注意：</b>若为新版三证合一营业执照，请统一填写社会信用代码。</p>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterprise.epLogo")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司logo</label>
+                            <div class="layui-input-inline">
+                                <a id="epLogoBtn" class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+                                <a class="previewBtn layui-btn layui-btn-primary layui-btn-small">预览</a>
+                                <span class="img_box">
+                                    #if($!{status.value} && $!{status.value} != "")
+                                        #if($httpUtil.checkHttp(${status.value}))
+                                            <img src="$!{status.value}"/>
+                                        #else
+                                            <img src="$!{uploadServer}/img/$!{status.value}.img"/>
+                                        #end
+                                    #end
+                                </span>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">&nbsp;</label>
+                            <div class="layui-input-inline">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="submit" class="layui-btn" lay-submit="" lay-filter="form1" value="提交">
+                        <a href="$appServer.get('om/enterprise/crudeList.htm')" return:false class="layui-btn layui-btn-xs">取消</a>
+                    </div>
+            </div>
+            </form>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>企业补充信息</legend>
+            <div class="layui-field-box">
+                <form id ="crudeForm" class="layui-form" action="$appServer.get('om/enterprise/saveCrude.htm')" method="post">
+                    #if($!{enterpriseCrude.id} && "" != "$!{enterpriseCrude.id}")
+                        <input type="hidden" name="id" value="$!{enterpriseCrude.id}"/>
+                    #end
+                    <input type="hidden" name="enterpriseId" value="$!{enterprise.id}"/>
+                    <input type="hidden" name="memberId" value="$!{enterprise.memberId}"/>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.nature")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">企业性质</label>
+                            <div class="layui-input-inline">
+                                <select name="$!{status.expression}" lay-verify="required">
+                                    <option value="">请选择</option>
+                                    <option value="1" #if("1" == "$!{status.value}") selected #end>有限责任公司</option>
+                                    <option value="2" #if("2" == "$!{status.value}") selected #end>股份有限公司</option>
+                                    <option value="3" #if("3" == "$!{status.value}") selected #end>国有独资公司</option>
+                                    <option value="4" #if("4" == "$!{status.value}") selected #end>个人独资公司</option>
+                                    <option value="5" #if("5" == "$!{status.value}") selected #end>合伙企业</option>
+                                    <option value="6" #if("6" == "$!{status.value}") selected #end>个体工商户</option>
+                                    <option value="7" #if("7" == "$!{status.value}") selected #end>外商投资企业</option>
+                                    <option value="8" #if("8" == "$!{status.value}") selected #end>私营企业</option>
+                                </select>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行政区域</label>
+                            <div class="layui-input-inline" style="overflow: visible;">
+                                <div class="layui-row" style="width: 300px;">
+                                    <div class="layui-col-md4">
+                                        #springBind("enterpriseCrude.provinceCode")
+                                        <select name="$!{status.expression}" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <option value="1" #if("1" == "$!{status.value}") selected #end>北京市</option>
+                                        </select>
+                                        #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                    <div class="layui-col-md4">
+                                        #springBind("enterpriseCrude.cityCode")
+                                        <select name="$!{status.expression}" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <option value="1" #if("1" == "$!{status.value}") selected #end>北京市</option>
+                                        </select>
+                                        #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                    <div class="layui-col-md4">
+                                        #springBind("enterpriseCrude.areaCode")
+                                        <select name="$!{status.expression}" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <option value="1" #if("1" == "$!{status.value}") selected #end>西城区</option>
+                                        </select>
+                                        #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.addressDetail")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册地址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入注册地址" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.legalName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">法定代表人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入法定代表人" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.legalCertificateType")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">证件类型</label>
+                            <div class="layui-input-inline">
+                                <select name="$!{status.expression}" lay-verify="required">
+                                    <option value="">请选择</option>
+                                    <option value="1" #if("1" == "$!{status.value}") selected #end>身份证</option>
+                                    <option value="2" #if("2" == "$!{status.value}") selected #end>护照</option>
+                                    <option value="3" #if("3" == "$!{status.value}") selected #end>军官证</option>
+                                </select>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.legalCertificateCode")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">证件号码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|charactor" placeholder="请输入证件号码" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.registerFund")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册资本（万元）</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入注册资本" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.registerFundCurrency")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册资金币种</label>
+                            <div class="layui-input-inline">
+                                <select name="$!{status.expression}" lay-verify="required">
+                                    <option value="">请选择</option>
+                                    <option value="RMB" #if("RMB" == "$!{status.value}") selected #end>人民币</option>
+                                </select>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.registerTime")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">成立日期</label>
+                            <div class="layui-input-inline">
+                                <input type="text" date="true" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入成立日期" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.tradeType")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行业分类</label>
+                            <div class="layui-input-inline">
+                                <div class="layui-row" style="width: 300px;">
+                                    <div class="layui-col-md6">
+                                        <select lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <option value="1">互联网</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <select name="$!{status.expression}" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <option value="1" #if("1" == "$!{status.value}") selected #end>互联网</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.mainProducts")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">经营范围</label>
+                            <div class="layui-input-inline">
+                                <textarea class="layui-textarea" name="$!{status.expression}">$!{status.value}</textarea>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.description")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司简介</label>
+                            <div class="layui-input-inline">
+                                <textarea class="layui-textarea" name="$!{status.expression}">$!{status.value}</textarea>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.creditLevel")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">资信等级</label>
+                            <div class="layui-input-inline">
+                                <select name="$!{status.expression}" lay-verify="required">
+                                    <option value="">请选择</option>
+                                    <option value="1" #if("1" == "$!{status.value}") selected #end>1级</option>
+                                    <option value="2" #if("2" == "$!{status.value}") selected #end>2级</option>
+                                    <option value="3" #if("3" == "$!{status.value}") selected #end>3级</option>
+                                </select>
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.billingBankName")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">基本账户开户银行</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入基本账户开户银行" maxlength="50" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.billingBankAccount")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">银行账号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required" placeholder="请输入银行账号" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.tel")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|phone" placeholder="请输入电话号码" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.fax")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">传真</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|number" placeholder="请输入银行账号" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.email")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|email" placeholder="请输入邮箱" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        #springBind("enterpriseCrude.postCode")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮编</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|number" placeholder="请输入邮编" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                        #springBind("enterpriseCrude.website")
+                        <div class="layui-inline">
+                            <label class="layui-form-label">网址</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="$!{status.expression}" value="$!{status.value}" lay-verify="required|url" placeholder="请输入网址" maxlength="30" autocomplete="off" class="layui-input">
+                                #if($status.isError())<span class="error">$!{status.errorMessage}</span>#end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="submit" class="layui-btn" lay-submit="" lay-filter="form2" value="提交">
+                        <a href="$appServer.get('om/enterprise/crudeList.htm')" return:false class="layui-btn layui-btn-xs">取消</a>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</div>
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($ujs)
+<script >
+    $(function(){
+        //初始化时间控件
+        function initDateInput(elems){
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                elems.each(function(){
+                    laydate.render({
+                        elem: this, //指定元素
+                        format: 'yyyy-MM-dd'
+                    });
+                });
+            });
+        }
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //预览图片实现
+            $(".previewBtn").click(function () {
+                var imgBox = $(this).parent().find(".img_box");
+                if (imgBox.find("img").length > 0) {
+                    layer.open({
+                        type: 1,
+                        shade: false,
+                        title: false,
+                        content: imgBox
+                    });
+                } else {
+                    layer.msg("请先上传文件！");
+                }
+            });
+
+            //组织机构代码证图片上传，通过设置参数获取上传情况
+            var loadIndex;
+            $("#orgCodeCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "ZZJGDMZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#orgCodeCert").val(result.id);
+                        var imgBox = $("#orgCodeCertBtn").parent().find(".img_box");
+                        imgBox.html("");
+                        imgBox.showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //税务登记证图片上传
+            $("#taxRegCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "SWDJZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#taxRegCert").val(result.id);
+                        var imgBox = $("#taxRegCertBtn").parent().find(".img_box");
+                        imgBox.html("");
+                        imgBox.showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //营业执照图片上传
+            $("#businessLicenseCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "YYZZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#businessLicenseCert").val(result.id);
+                        var imgBox = $("#businessLicenseCertBtn").parent().find(".img_box");
+                        imgBox.html("");
+                        imgBox.showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //公司logo图片上传
+            $("#epLogoBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "GSLOGO",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#epLogo").val(result.id);
+                        var imgBox = $("#epLogoBtn").parent().find(".img_box");
+                        imgBox.html("");
+                        imgBox.showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                        layer.alert("上传成功！");
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            #if($errorMessage && "" != "$!{errorMessage}")
+                layer.alert("$!{errorMessage}");
+            #end
+        });
+    });
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
+        //自定义验证规则
+        form.verify({
+            englishName: function (value) {
+                if(!/^[a-zA-Z0-9 \\\/]*$/.test(value)) {
+                    return '仅可以输入字母或数字';
+                }
+            },
+            charactor: function (value) {
+                if(!/^[a-zA-Z0-9\-\_]*$/.test(value)) {
+                    return '仅可以输入字母或数字';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(form1)', function(data){
+            url: "$appServer.get('om/enterprise/saveEnterprise.htm')"
+        });
+        //监听提交
+        form.on('submit(form2)', function(data){
+            url: "$appServer.get('om/enterprise/saveCrude.htm')"
+        });
+    });
+</script>

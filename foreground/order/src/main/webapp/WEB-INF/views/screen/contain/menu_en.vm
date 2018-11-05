@@ -1,0 +1,26 @@
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="javascript:;">买家首页</a>
+##            </li>
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="javascript:;">采购需求</a>
+##
+##            </li>
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="$appServer.get('/buyer/queryContractList.htm')">Deal Management</a>
+##            </li>
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="javascript:;">合同管理</a>
+##            </li>
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="javascript:;">贸易单证</a>
+##            </li>
+##            <li class="layui-nav-item layui-nav-itemed">
+##                <a class="" href="javascript:;">物流管理</a>
+##            </li>
+        </ul>
+    </div>
+</div>

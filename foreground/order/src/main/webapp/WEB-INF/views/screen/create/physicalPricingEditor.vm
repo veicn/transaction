@@ -1,0 +1,852 @@
+#set($acss = $imageServer.get('/css/f_calculator.css'))
+#css($acss)
+
+<div id="pPriceEditor" class="add-pop1" style="width:98%;left:10px;right:10px;display:none">
+  <div class="cg-bwdk-p cg-jjbj-p">
+    <ul class="c-state1 c-tcjj1">
+      <input type="hidden" id="priceType" value=1>
+	  <li class="c-cur1" lid=1><a>固定价</a></li>
+	  <li lid=2><a>平均价</a></li>
+      <!-- <li lid=3><a>事件计价</a></li> -->
+		<!-- <li lid=4><a>点价</a></li> -->
+		<li lid=5><a>其他</a></li>
+	</ul>
+	
+	<!-- 固定价 -->
+   	<ul class="cg-bwdkk-b1 clearfix jjfs">
+      <li class="cg-bwdkk-bt1 clearfix">
+      	<input type="text" class="bw-intt1 num_kup" placeholder="价格" name="priceFixed"/>
+      </li>
+      <li class="cg-bwdkk-bt31 clearfix"><span class="bwdk-tt1">@</span>
+      	<select class="bw-selet1" name="currencyFixed">
+      		<option value="">请选择币种</option>
+      		#foreach($currency in $currencyMap.keySet())
+	            <option value="$currencyMap.get($currency)">$currencyMap.get($currency)</option>
+	        #end
+      	</select>
+      </li>
+      <li class="cg-bwdkk-bt31 clearfix"><span class="bwdk-tt1">/</span>
+      	<select class="bw-selet1" name="unitFixed">
+      		<option value="">请选择单位</option>
+      		#foreach($unit in $unitMap.keySet())
+	            <option value="$unitMap.get($unit)">$unitMap.get($unit)</option>
+	        #end
+      	</select>
+      </li>
+      ##<li class="cg-bwdkk-bt11 clearfix"><span class="bwdk-tt1">基准：</span><select class="bw-selet1"><option>单位</option></select></li>
+    </ul>
+    
+    <!-- 平均价 -->
+    <div class="jjfs" style="display:none">
+	    <ul class="cg-bwdkk-b1 clearfix">
+	      <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 avgSym" name="commodityAvg"><option value=''>请选择品类</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 avgSym" name="priceSourceAvg"><option value=''>请选择价格源</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 avgSym" name="marketAvg"><option value=''>请选择市场</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	##<input type="text" class="bw-intt1" placeholder="期" name="periodAvg"/>
+	      	<select class="bw-selet1" name="periodAvg"><option value=''>请选择合约</option></select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="hlcAvg">
+		      	<option value="">请选择H/L/C</option>
+		  		#foreach($hlc in $hlcMap.keySet())
+		            <option value="$hlcMap.get($hlc)">$hlcMap.get($hlc)</option>
+		        #end
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="zfAvg">
+	      		<option value="+">+</option>
+	      		<option value="-">-</option>
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix"><input type="text" class="bw-intt1 num_kup" placeholder="贴水" name="tsAvg"/></li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="currencyAvg">
+		      	<option value="">请选择币种</option>
+		  		#foreach($currency in $currencyMap.keySet())
+		            <option value="$currencyMap.get($currency)">$currencyMap.get($currency)</option>
+		        #end
+	        </select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="unitAvg">
+	      		<option value="">请选择单位</option>
+	      		#foreach($unit in $unitMap.keySet())
+		            <option value="$unitMap.get($unit)">$unitMap.get($unit)</option>
+		        #end
+	      	</select>
+	      </li>
+	    </ul>
+	    
+	    <ul class="cg-bwdkk-b1 clearfix">
+	      	<li class="cg-bwdkk-bt21 clearfix"><span class="bwdk-tt1">计价期始：</span><input id="startDateAvg" name="startDateAvg" type="text" class="bw-intt21" date='true'/><i class="c-ico cg-dat1"></i></li>
+	      	<li class="cg-bwdkk-bt21 clearfix"><span class="bwdk-tt1">计价期末：</span><input name="endDateAvg" data-msg-afterDate='计价期末不能早于计价期始' afterDate="startDateAvg" type="text" class="bw-intt21" date='true'/><i class="c-ico cg-dat1"></i></li>
+	    </ul>
+    </div>
+    
+    <!-- 事件价 -->
+    <div class="jjfs" style="display:none">
+    	<ul class="cg-bwdkk-b1 clearfix">
+    	  <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 eventSym" name="commodityEvent"><option value=''>请选择品类</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 eventSym" name="priceSourceEvent"><option>价格源</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 eventSym" name="marketEvent"><option>市场</option></select></li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	##<input type="text" class="bw-intt1" placeholder="期" name="periodEvent"/>
+	      	<select class="bw-selet1" name="periodEvent"><option value=''>请选择合约</option></select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="hlcEvent">
+		      	<option value="">请选择H/L/C</option>
+		  		#foreach($hlc in $hlcMap.keySet())
+		            <option value="$hlcMap.get($hlc)">$hlcMap.get($hlc)</option>
+		        #end
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="zfEvent">
+	      		<option value="+">+</option>
+	      		<option value="-">-</option>
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix"><input type="text" class="bw-intt1 num_kup" placeholder="贴水" name="tsEvent"/></li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="currencyEvent">
+		      	<option value="">请选择币种</option>
+		  		#foreach($currency in $currencyMap.keySet())
+		            <option value="$currencyMap.get($currency)">$currencyMap.get($currency)</option>
+		        #end
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt41 clearfix">
+	      	<select class="bw-selet1" name="unitEvent">
+		      	<option value="">请选择单位</option>
+	      		#foreach($unit in $unitMap.keySet())
+		            <option value="$unitMap.get($unit)">$unitMap.get($unit)</option>
+		        #end
+	      	</select>
+	      </li>
+	      <li class="cg-bwdkk-bt21 clearfix"><span class="bwdk-tt1">事件类型：</span>
+	      	<select class="bw-selet1 sj-selet1" name="typeEvent">
+	      		<option value="">请选择</option>
+	      		#foreach($eventType in $eventTypeMap.keySet())
+		            <option value="$eventTypeMap.get($eventType)">$eventTypeMap.get($eventType)</option>
+		        #end
+	      	</select>
+	      </li>
+	    </ul>
+	    
+	    <ul class="jj-xxk1 clearfix">
+	      <li class="clearfix">
+	        <span class="jj-xxk-l1"><input type="radio" name="eventPeriod" value="event_days" checked/><em>Days</em></span>
+	        <span class="jj-xxk-r1 event-p r_event_days">
+	          <input type="text" name="eventDaysNum1" class="bw-intpu1 event-p r_event_days intnum_kup"/>
+	          <select class="bw-selett1 event-p r_event_days" name="eventDaysNum2">
+	          	<option value=0>0</option>
+	          	<option value=1>1</option>
+	          </select>
+	          <input type="text" name="eventDaysNum3" class="bw-intpu1 event-p r_event_days intnum_kup" />
+	          <em>or</em>
+	          <input type="text" class="bw-intpu1 event-p r_event_days intnum_kup" name="eventDaysNum4"/>
+	          <input type="text" class="bw-intpu1 event-p r_event_days intnum_kup" name="eventDaysNum5" value="0" readOnly/>
+	          <input type="text" class="bw-intpu1 event-p r_event_days intnum_kup" name="eventDaysNum6"/>
+	          <span><input type="checkbox" name="deemEvent" id="deemEvent"/><em>Deemed Event Date</em></span>
+	          <span class="jj-xxk-rr1"><input type="text" name="deemDate" class="bw-inpu1 event-p r_event_days" date='true' disabled/><i class="c-ico cg-dat21"></i></span>
+	        </span>
+	      </li>
+	      <li class="clearfix">
+	        <span class="jj-xxk-l1"><input type="radio" name="eventPeriod" value="event_days0"/><em>Days</em></span>
+	        <span class="jj-xxk-r1 event-p r_event_days0">
+	          <em>Event Date=Day</em>
+	          <input type="text" class="bw-intpu1 event-p r_event_days0 intnum_kup" name="eventDays0Num1"/>
+	          <em>,From Date=Day</em>
+	          <select class="bw-selett1 event-p r_event_days0" name="fromMark">
+	          	<option value="+">+</option>
+	      		<option value="-">-</option>
+	          </select>
+	          <input type="text" class="bw-intpu1 event-p r_event_days0 intnum_kup" name="eventDays0Num2"/>
+	          <select class="bw-selett1 bwsl1 event-p r_event_days0" name="eventDays0Num2Day">
+	          	<option value="business day">business day</option>
+	      		<option value="calendar day">calendar day</option>
+	          </select>
+	          <em>,To Date=Day</em>
+	          <select class="bw-selett1 event-p r_event_days0" name="toMark">
+	          	<option value="+">+</option>
+	      		<option value="-">-</option>
+	          </select>
+	          <input type="text" class="bw-intpu1 event-p r_event_days0 intnum_kup" name="eventDays0Num3"/>
+	          <select class="bw-selett1 bwsl1 event-p r_event_days0" name="eventDays0Num3Day">
+	          	<option value="business day">business day</option>
+	      		<option value="calendar day">calendar day</option>
+	          </select>
+	        </span>
+	      </li>
+	      <li class="clearfix">
+	        <span class="jj-xxk-l1"><input type="radio" name="eventPeriod" value="event_weeks"/><em>Weeks</em></span>
+	        <span class="jj-xxk-r1 event-p r_event_weeks">
+	          <input type="text" class="bw-intpu1 event-p r_event_weeks intnum_kup" name="eventWeeksNum1"/>
+	          <em>weeks totally,and</em>
+	          <input type="text" class="bw-intpu1 event-p r_event_weeks intnum_kup" name="eventWeeksNum2"/>
+	          <em>weeks before event</em>
+	        </span>
+	      </li>
+	      <li class="clearfix">
+	        <span class="jj-xxk-l1"><input type="radio" name="eventPeriod" value="event_months"/><em>Months</em></span>
+	        <span class="jj-xxk-r1 event-p r_event_months">
+	          <em>Whole month average of M</em>
+	          <select class="bw-selett1 event-p r_event_months" name="monthMark">
+	          	<option value="+">+</option>
+	      		<option value="-">-</option>
+	          </select>
+	          <input type="text" class="bw-intpu1 event-p r_event_months intnum_kup" name="eventMonthsNum1"/>
+	          <em>month which event date falls in M month</em>
+	        </span>
+	      </li>
+	    </ul>
+    </div>
+      <!-- 点价 -->
+      <div class="jjfs" style="display:none">
+          <ul class="cg-bwdkk-b1 clearfix">
+              <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 triSym" name="commodityTri"><option value=''>请选择品类</option></select></li>
+              <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 triSym" name="priceSourceTri"><option value=''>请选择价格源</option></select></li>
+              <li class="cg-bwdkk-bt41 clearfix"><select class="bw-selet1 triSym" name="marketTri"><option value=''>请选择市场</option></select></li>
+              <li class="cg-bwdkk-bt41 clearfix">
+			  ##<input type="text" class="bw-intt1" placeholder="期" name="periodAvg"/>
+                  <select class="bw-selet1" name="periodTri"><option value=''>请选择合约</option></select>
+              </li>
+              <li class="cg-bwdkk-bt41 clearfix">
+                  <select class="bw-selet1" name="hlcTri">
+                      <option value="">请选择H/L/C</option>
+					  #foreach($hlc in $hlcMap.keySet())
+                          <option value="$hlcMap.get($hlc)">$hlcMap.get($hlc)</option>
+					  #end
+                  </select>
+              </li>
+              <li class="cg-bwdkk-bt41 clearfix">
+                  <select class="bw-selet1" name="zfTri">
+                      <option value="+">+</option>
+                      <option value="-">-</option>
+                  </select>
+              </li>
+              <li class="cg-bwdkk-bt41 clearfix"><input type="text" class="bw-intt1 num_kup" placeholder="贴水" name="tsTri"/></li>
+              <li class="cg-bwdkk-bt41 clearfix">
+                  <select class="bw-selet1" name="currencyTri">
+                      <option value="">请选择币种</option>
+					  #foreach($currency in $currencyMap.keySet())
+                          <option value="$currencyMap.get($currency)">$currencyMap.get($currency)</option>
+					  #end
+                  </select>
+              </li>
+              <li class="cg-bwdkk-bt41 clearfix">
+                  <select class="bw-selet1" name="unitTri">
+                      <option value="">请选择单位</option>
+					  #foreach($unit in $unitMap.keySet())
+                          <option value="$unitMap.get($unit)">$unitMap.get($unit)</option>
+					  #end
+                  </select>
+              </li>
+              <li class="cg-bwdkk-bt41 clearfix"><input type="text" class="bw-intt1 intnum_kup" placeholder="可转月次数" name="monthOuterationTimeTri"/></li>
+              <li class="cg-bwdkk-bt41 clearfix"><input type="text" class="bw-intt1 intnum_kup" placeholder="最小操作数量" name="minOperAbleNumTri"/></li>
+          </ul>
+
+          <ul class="cg-bwdkk-b1 clearfix">
+              <li class="cg-bwdkk-bt21 clearfix" style="width:100%">
+				  <span class="bwdk-tt1" style="width:18%">首次点价/转月截止日：</span>
+				  <input name="deadlineTri"  type="text" class="bw-intt21" date='true' style="width: 30%"/>
+				  <i class="c-ico cg-dat1" style="right: 53%"></i></li>
+          </ul>
+      </div> 
+
+	  <!--其他-->
+      <ul class="cg-bwdkk-b1 clearfix jjfs"  style="display:none">
+          <li class="cg-bwdkk-bt1 clearfix">
+              <textarea class="" maxlength="1000" style="display:inline-block; width:800px; height:200px;"
+                        placeholder="请输入计价公式!" name="otherPrice" id="otherPrice" ></textarea>
+          </li>
+      </ul>
+
+    <div class="butt-zh1 bw-zh11">
+    	##<button class="btn-bc btn-ttj csys" type="button">保存计价公式</button>
+    	##<button class="btn-bc btn-ttj csys" type="button">导入</button>
+    	<button class="btn-bc1 btn-ttj1" id="pSubmit" type="button">确认</button>
+    	<button class="btn-bc1 btn-ttj1 qxys1" id="pCancel" type="button">取消</button>
+    </div>
+  </div>
+</div>
+<script>
+	$('.cg-dat1').click(function(){
+	    $(this).prev().focus().click();
+	});
+	$('.num_kup').keyup(function () {
+		this.value=/^\d+\.?\d{0,3}$/.test(this.value) ? this.value : '';
+	});
+	
+	$('.intnum_kup').keyup(function () {
+		if(this.value.length==1){
+			this.value=this.value.replace(/[^0-9]/g,'')
+		}else{
+			this.value=this.value.replace(/\D/g,'')
+		}
+	});
+	
+	$("input[name=eventPeriod]").click(function(){
+		var eventPeriod = $(this).val();
+		$(".event-p").attr("disabled", true);
+		$(".bw-selett1.event-p").each(function (index,element) {
+            $(element).addClass("c-bg-gray");
+        });
+        
+		$(".r_" + eventPeriod).removeAttr("disabled");
+		$(".bw-selett1.event-p.r_" + eventPeriod).each(function (index,element) {
+            $(element).removeClass("c-bg-gray");
+        });
+	});
+	
+	$("input[name=deemEvent]").click(function(){
+		var checked = $(this).is(':checked');
+		if(checked){
+			$("input[name=deemDate]").attr("disabled", false);
+		}else{
+			$("input[name=deemDate]").attr("disabled", true);
+			recBorder("deemDate");
+		}
+	});
+	
+	$("#pCancel").click(function(){
+		layer.closeAll();
+		$("#pPriceEditor").css("display", "none");
+	});
+	
+	$("#pSubmit").click(function(){
+		var priceType = $('#priceType').val();
+		if(priceType == 1){//固定价
+			processFixedFormula();
+		}else if(priceType == 2){//平均价
+			processAverageFormula();
+		}else if(priceType == 3){//事件价
+			processEventFormula();
+		}else if(priceType == 4){//点价
+            processTriggerFormula();
+        }else if(priceType == 5){//其他
+            processOtherFormula();
+        }
+	});
+	//其他
+	function processOtherFormula(){
+	    var otherPrice = $("#otherPrice").val();
+	    if(otherPrice==null || otherPrice==""){
+            layer.alert("请输入计价公式!");
+	        return;
+		}
+        var jsId = $(_input).attr("jsId");
+        if($("#"+jsId).size()>0){
+            $(_input).parent().find("#"+jsId).val(JSON.stringify({"complex_pricing_detail":otherPrice}));
+        }
+        $(_input).val(otherPrice);//计价公式
+        layer.closeAll();
+        $("#pPriceEditor").css("display", "none");
+        $(_input).parent().find("label.error").hide();//输入框下汉字提示
+        $(_input).removeClass("bidding-required-error");//输入框红框提示
+
+	}
+	
+	//固定价
+	function processFixedFormula(){
+		var priceFixed = checkGetInputVal("priceFixed");
+		var currencyFixed = checkGetSelectVal("currencyFixed");
+		var unitFixed = checkGetSelectVal("unitFixed");
+		
+		if(!validate()) return;
+		
+		var param = {formulaType:4, price:priceFixed, uom:unitFixed, currency:currencyFixed};
+		postPricing(param);
+	}
+	
+	//平均价
+	function processAverageFormula(){
+		var commodityAvg = checkGetSelectVal("commodityAvg");//品名
+		var priceSourceAvg = checkGetSelectVal("priceSourceAvg");//价格源
+		var marketAvg = checkGetSelectVal("marketAvg");//市场
+		var periodAvg = checkGetSelectVal("periodAvg");//期
+		var hlcAvg = checkGetSelectVal("hlcAvg");//H/L/C
+		var zfAvg = checkGetSelectVal("zfAvg");//+-
+		var tsAvg = checkGetInputVal("tsAvg");//贴水
+		var currencyAvg = checkGetSelectVal("currencyAvg");//币种
+		var unitAvg = checkGetSelectVal("unitAvg");//单位
+		var startDateAvg = checkGetInputVal("startDateAvg");//计价期始
+		var endDateAvg = checkGetInputVal("endDateAvg");//计价期末
+		
+		if(!validate()) return;
+		
+		if(startDateAvg > endDateAvg){
+			layer.alert("计价期始不能大于计价期末");
+			errBorder("startDateAvg");
+			return;
+		}else{
+			recBorder("startDateAvg");
+		}
+		
+		var param = {formulaType:1, commodity:commodityAvg, priceSource:priceSourceAvg, market:marketAvg, 
+						period:periodAvg, hlc:hlcAvg, mark:zfAvg, premium:tsAvg,
+						uom:unitAvg, currency:currencyAvg, startDate:startDateAvg, endDate:endDateAvg};
+		postPricing(param);
+	}
+	
+	//事件价
+	function processEventFormula(){
+		var commodityEvent = checkGetSelectVal("commodityEvent");//品名
+		var priceSourceEvent = checkGetSelectVal("priceSourceEvent");//价格源
+		var marketEvent = checkGetSelectVal("marketEvent");//市场
+		//var priceSourceEvent = 1;//价格源
+		//var marketEvent = 2;//市场
+		
+		var periodEvent = checkGetSelectVal("periodEvent");//期
+		var hlcEvent = checkGetSelectVal("hlcEvent");//H/L/C
+		var zfEvent = checkGetSelectVal("zfEvent");//+-
+		var tsEvent = checkGetInputVal("tsEvent");//贴水
+		var currencyEvent = checkGetSelectVal("currencyEvent");//币种
+		var unitEvent = checkGetSelectVal("unitEvent");//单位
+		var typeEvent = checkGetSelectVal("typeEvent");//事件类型
+		var eventPeriod = $('input:radio[name=eventPeriod]:checked').val();
+		
+		var param = {formulaType:3, commodity:commodityEvent, priceSource:priceSourceEvent, market:marketEvent, 
+						period:periodEvent, hlc:hlcEvent, mark:zfEvent, premium:tsEvent,
+						uom:unitEvent, currency:currencyEvent, eventType:typeEvent};
+						
+		if(eventPeriod == "event_days"){
+			var num1 = checkGetInputVal("eventDaysNum1");
+	        var num2 = checkGetSelectVal("eventDaysNum2");
+	        var num3 = checkGetInputVal("eventDaysNum3");
+	        var num4 = $('input[name=eventDaysNum4]').val();
+	        var num5 = $('input[name=eventDaysNum5]').val();
+	        var num6 = $('input[name=eventDaysNum6]').val();
+	        var deemEvent = $("#deemEvent").is(':checked');
+	        
+	        param.daysEvent = true;
+	        param.eventDaysNum1 = num1;
+	        param.eventDaysNum2 = num2;
+	        param.eventDaysNum3 = num3;
+	        param.eventDaysNum4 = num4;
+	        param.eventDaysNum5 = num5;
+	        param.eventDaysNum6 = num6;
+	        param.deemEvent = deemEvent;
+	        if(deemEvent){
+	        	param.deemDate = checkGetInputVal("deemDate");
+	        }else{
+	        	recBorder("deemDate");
+	        }
+		}
+		
+		if(eventPeriod == "event_days0"){
+			var num1 = checkGetInputVal("eventDays0Num1");
+	        var fromMark = checkGetSelectVal("fromMark");
+	        var num2 = checkGetInputVal("eventDays0Num2");
+	        var num2d = checkGetSelectVal("eventDays0Num2Day");
+	        var toMark = checkGetSelectVal("toMark");
+	        var num3 = checkGetInputVal("eventDays0Num3");
+	        var num3d = checkGetSelectVal("eventDays0Num3Day");
+	        
+	        param.daysEvent0 = true;
+	        param.eventDays0Num1 = num1;
+	        param.fromMark = fromMark;
+	        param.eventDays0Num2 = num2;
+	        param.eventDays0Num2Day = num2d;
+	        param.toMark = toMark;
+	        param.eventDays0Num3 = num3;
+	        param.eventDays0Num3Day = num3d;
+		}
+		
+		if(eventPeriod == "event_weeks"){
+			var num1 = checkGetInputVal("eventWeeksNum1");
+	        var num2 = checkGetInputVal("eventWeeksNum2");
+	        
+	        param.weeksEvent = true;
+	        param.eventWeeksNum1 = num1;
+	        param.eventWeeksNum2 = num2;
+		}
+
+		if(eventPeriod == "event_months"){
+			var num1 = checkGetInputVal("eventMonthsNum1");
+	        var monthMark = checkGetInputVal("monthMark");
+	        
+	        param.monthsEvent = true;
+	        param.eventMonthsNum1 = num1;
+	        param.monthMark = monthMark;
+		}
+	
+		if(!validate()) return;
+		
+		//console.log(param);
+		postPricing(param);
+	}
+
+    //点价
+    function processTriggerFormula(){
+        var commodityTri = checkGetSelectVal("commodityTri");//品名
+        var priceSourceTri = checkGetSelectVal("priceSourceTri");//价格源
+        var marketTri = checkGetSelectVal("marketTri");//市场
+        var periodTri = checkGetSelectVal("periodTri");//期
+        var hlcTri = checkGetSelectVal("hlcTri");//H/L/C
+        var zfTri = checkGetSelectVal("zfTri");//+-
+        var tsTri = checkGetInputVal("tsTri");//贴水
+        var currencyTri = checkGetSelectVal("currencyTri");//币种
+        var unitTri = checkGetSelectVal("unitTri");//单位
+        var monthOuterationTimeTri = checkGetInputVal("monthOuterationTimeTri");//可转月次数
+        var minOperAbleNumTri = checkGetInputVal("minOperAbleNumTri");//最小操作数量
+        var deadlineTri = checkGetInputVal("deadlineTri");//点价截止时间
+
+
+        if(!validate()) return;
+
+        var param = {formulaType:5, commodity:commodityTri, priceSource:priceSourceTri, market:marketTri,
+            period:periodTri, hlc:hlcTri, mark:zfTri, premium:tsTri,
+            uom:unitTri, currency:currencyTri, deadline:deadlineTri, monthOuterationTime:monthOuterationTimeTri,
+            minOperAbleNum:minOperAbleNumTri
+		};
+        postPricing(param);
+    }
+	
+	function postPricing(param){
+		var url = "$!appServer.get('/pricingFormula/getPricingInfo.json')";
+		$ .post(url, param
+    		).always(function(res){
+	        	//console.log(res);
+	        	if(res.status == 0){
+		        	$(_input).val(res.datas.formula);//计价公式
+					if(!!res.datas.formula && res.datas.formula != "") {
+					    //防止输入计价公式以后还有错误提示
+                        $(_input).parent().find("label.error").hide();//输入框下汉字提示
+                        $(_input).removeClass("bidding-required-error");//输入框红框提示
+					}
+		        	$(_input).attr("jsonstruc",res.datas.priceStructure);//计价公式数据结构
+		        	$(_input).attr("formulaType",res.datas.formulaType);//计价类型
+		        	var jsId = $(_input).attr("jsId");
+		        	if($("#"+jsId).size()>0){
+                        $(_input).parent().find("#"+jsId).val(res.datas.priceStructure);
+		        	}
+
+                    var pmId = $(_input).attr("pmId");
+                    if($("#"+pmId).size()>0){
+                        $(_input).parent().find("#"+pmId).val(res.datas.formulaType);
+                    }
+		        	layer.closeAll();
+		        	$("#pPriceEditor").css("display", "none");
+	        	}else{
+	        		layer.alert(res.message);
+	        	}
+    	});
+    }
+    
+	$(".c-tcjj1 li").click(function(){
+		$(".c-tcjj1 li").attr("class","");
+	   	$(this).attr("class","c-cur1");
+   	   	var lid = $(this).attr('lid');
+   	   	$("#priceType").val(lid);
+   	   	$(".jjfs").each(function (index,element) {
+            if (lid == (index + 1)) {
+            	$(element).show();
+            }else{
+            	$(element).hide();
+            }
+        })
+   	});
+   	
+   	var _input;
+   	$("body").on('click', '.pricingEditor', function () {
+   		_input = this;
+		layerOpen();
+    });
+	
+	function layerOpen(){
+		layui.use('layer', function(){
+		  	var layer = layui.layer;
+		  	var curIndex = layer.open({
+		  		id:'pricingLay',
+			   	title: '计价编辑器',
+				shade : false,
+				scrollbar : false,
+                area: ['920px', '570px'],
+                type : 1,
+				content: $("#pPriceEditor"),
+                cancel: function(index) {
+                	$("#pPriceEditor").css("display", "none");
+                }
+			});
+			$("#pricingLay").css("height","540px");
+			$("#pPriceEditor").css("display", "");
+		});
+    }
+    
+	//查询平均价价格源
+	$("select[name=commodityAvg]").change(function(){
+		var commodity = $('select[name=commodityAvg]').val();//品名
+        clearOption($('select[name=priceSourceAvg]'),"请选择价格源");
+        clearOption($('select[name=marketAvg]'),"请选择市场");
+        clearOption($('select[name=periodAvg]'),"请选择合约");
+        queryPrice(commodity,1);
+   	});
+    //查询平均价市场
+    $("select[name=priceSourceAvg]").change(function(){
+        var commodity = $('select[name=commodityAvg]').val();//品名
+        var priceSource = $('select[name=priceSourceAvg]').val();//价格源
+        clearOption($('select[name=marketAvg]'),"请选择市场");
+        clearOption($('select[name=periodAvg]'),"请选择合约");
+        queryMarket(commodity,priceSource,1);
+    });
+    //查询平均价合约
+    $("select[name=marketAvg]").change(function(){
+        var commodity = $('select[name=commodityAvg]').val();//品名
+        var priceSource = $('select[name=priceSourceAvg]').val();//价格源
+        var market = $('select[name=marketAvg]').val();//市场
+        clearOption($('select[name=periodAvg]'),"请选择合约");
+        querySymbol(commodity,priceSource,market,1);
+    });
+
+    //查询事件价价格源
+    $("select[name=commodityEvent]").change(function(){
+        var commodity = $('select[name=commodityEvent]').val();//品名
+        clearOption($('select[name=priceSourceEvent]'),"请选择价格源");
+        clearOption($('select[name=marketEvent]'),"请选择市场");
+        clearOption($('select[name=periodEvent]'),"请选择合约");
+        queryPrice(commodity,2);
+    });
+    //查询事件价市场
+    $("select[name=priceSourceEvent]").change(function(){
+        var commodity = $('select[name=commodityEvent]').val();//品名
+        var priceSource = $('select[name=priceSourceEvent]').val();//价格源
+        clearOption($('select[name=marketEvent]'),"请选择市场");
+        clearOption($('select[name=periodEvent]'),"请选择合约");
+        queryMarket(commodity,priceSource,2);
+    });
+    //查询事件价合约
+    $("select[name=marketEvent]").change(function(){
+        var commodity = $('select[name=commodityEvent]').val();//品名
+        var priceSource = $('select[name=priceSourceEvent]').val();//价格源
+        var market = $('select[name=marketEvent]').val();//市场
+        clearOption($('select[name=periodEvent]'),"请选择合约");
+        querySymbol(commodity,priceSource,market,2);
+    });
+
+    //查询点价价格源
+    $("select[name=commodityTri]").change(function(){
+        var commodity = $('select[name=commodityTri]').val();//品名
+        clearOption($('select[name=priceSourceTri]'),"请选择价格源");
+        clearOption($('select[name=marketTri]'),"请选择市场");
+        clearOption($('select[name=periodTri]'),"请选择合约");
+        queryPrice(commodity,3);
+    });
+    //查询点价市场
+    $("select[name=priceSourceTri]").change(function(){
+        var commodity = $('select[name=commodityTri]').val();//品名
+        var priceSource = $('select[name=priceSourceTri]').val();//价格源
+        clearOption($('select[name=marketTri]'),"请选择市场");
+        clearOption($('select[name=periodTri]'),"请选择合约");
+        queryMarket(commodity,priceSource,3);
+    });
+    //查询点价合约
+    $("select[name=marketTri]").change(function(){
+        var commodity = $('select[name=commodityTri]').val();//品名
+        var priceSource = $('select[name=priceSourceTri]').val();//价格源
+        var market = $('select[name=marketTri]').val();//市场
+        clearOption($('select[name=periodTri]'),"请选择合约");
+        querySymbol(commodity,priceSource,market,3);
+    });
+
+    //合约信息
+    function querySymbol(commodity,priceSource,market,type){
+        if(commodity == null || commodity == "") return;
+        if(priceSource == null || priceSource == "") return;
+        if(market == null || market == "") return;
+
+        var data = {
+            "commodity": commodity,
+            "priceSource": priceSource,
+            "market": market
+        };
+
+        $.ajax({
+            type:"POST",
+            url:'$infoServer.get("/query/symbol.json")',
+            //async:true
+            data:JSON.stringify(data),
+            contentType:"application/json; charset=utf-8",
+            dataType: 'JSON',
+            success:function(res){
+                //console.log(res.dataList.length);
+                var optStr = "<option value=''>请选择合约</option>";
+                if(res.dataList.length>0){
+                    for(var i in res.dataList){
+                        optStr = optStr + "<option value='" + res.dataList[i].symbolName + "'>" + res.dataList[i].symbolName + "</option>";
+                    }
+                }
+                if(type == 1){
+                    $("select[name=periodAvg]").html(optStr);
+                }else if(type == 2){
+                    $("select[name=periodEvent]").html(optStr);
+                }else if(type == 3){
+                    $("select[name=periodTri]").html(optStr);
+                }
+            }
+        });
+    }
+    function clearOption(select,str){
+        var optStr = "<option value=''>"+str+"</option>";
+        select.html(optStr);
+        select.val('');
+	}
+	//价格源信息
+	function queryPrice(commodity,type){
+		if(commodity == null || commodity == "") return;
+		var data = {
+		    "commodity": commodity
+		};
+        //获取价格源
+        var priceSourceUrl = '$infoServer.get("/query/priceSource.json")';
+        $ .get(priceSourceUrl, data).always(function(res){
+            //console.log(res.dataList);
+            if(res.status == "1"){
+                var optStr = "<option value=''>请选择价格源</option>";
+                for(var i in res.dataList){
+                    optStr = optStr + "<option value='" + res.dataList[i] + "'>" + res.dataList[i] + "</option>";
+                }
+                if(type == 1){
+                    $("select[name=priceSourceAvg]").html(optStr);
+                }else if(type == 2){
+                    $("select[name=priceSourceEvent]").html(optStr);
+                }else if(type == 3){
+                    $("select[name=priceSourceTri]").html(optStr);
+                }
+            }
+
+        });
+    }
+
+    //市场信息
+    function queryMarket(commodity,priceSource,type){
+        if(commodity == null || commodity == "") return;
+        if(priceSource == null || priceSource == "") return;
+
+        var data = {
+            "commodity": commodity,
+            "priceSource": priceSource
+        };
+        //获取市场
+        var marketUrl = '$infoServer.get("/query/market.json")';
+        $ .get(marketUrl, data).always(function(res){
+            if(res.status == "1"){
+                var optStr = "<option value=''>请选择市场</option>";
+                for(var i in res.dataList){
+                    optStr = optStr + "<option value='" + res.dataList[i] + "'>" + res.dataList[i] + "</option>";
+                }
+                if(type == 1){
+                    $("select[name=marketAvg]").html(optStr);
+                }else if(type == 2){
+                    $("select[name=marketEvent]").html(optStr);
+                }else if(type == 3){
+                    $("select[name=marketTri]").html(optStr);
+                }
+            }
+        });
+    }
+    
+   	$(function(){
+   		$(".event-p").attr("disabled", true);
+   		$(".r_event_days").attr("disabled", false);
+   		$(".bw-selett1.event-p").each(function (index,element) {
+            $(element).addClass("c-bg-gray");
+        });
+		$(".bw-selett1.event-p.r_event_days").each(function (index,element) {
+            $(element).removeClass("c-bg-gray");
+        });
+        
+   		$("input[name=deemDate]").attr("disabled", true);
+   		
+   		// 初始化日期
+        initDateInput($("input[date='true']"));
+        
+        //获取品类信息
+        var commodityUrl = '$infoServer.get("/query/commodity.json?extend2=1")';
+        $ .get(commodityUrl, {}).always(function(res){
+        	//console.log(res.dataList);
+        	if(res.status == "1"){
+	        	var optStr = "<option value=''>请选择品类</option>";
+	        	for(var i in res.dataList){
+	        		optStr = optStr + "<option value='" + res.dataList[i] + "'>" + res.dataList[i] + "</option>";
+	        	}
+	        	$("select[name=commodityAvg]").html(optStr);
+	        	$("select[name=commodityEvent]").html(optStr);
+                $("select[name=commodityTri]").html(optStr);
+        	}
+        	
+        });
+	});
+</script>
+
+<script>
+	var _validate = true;
+	
+	function checkGetInputVal(name,msg){
+		var _checkObj = $('input[name=' + name + ']');
+		var val = $(_checkObj).val();
+		
+		grayBorder(_checkObj)
+		if(_validate && val == ""){
+			if(msg){
+				layer.alert(msg);
+			}else{
+				layer.alert("请输入数据");
+			}
+			redBorder(_checkObj);
+			_validate = false;
+		}
+		return val;
+	}
+	
+	function checkGetSelectVal(name,msg){
+		var _checkObj = $('select[name=' + name + ']');
+		var val = $(_checkObj).val();
+		
+		grayBorder(_checkObj)
+		if(_validate && val == ""){
+			if(msg){
+				layer.alert(msg);
+			}else{
+				layer.alert("请选择数据");
+			}
+			redBorder(_checkObj);
+			_validate = false;
+		}
+		return val;
+	}
+	
+	function validate(){
+		if(!_validate){
+			_validate = true;
+			return false;
+		}
+		return true;
+	}
+	
+	function recBorder(name){
+		var obj = $('input[name=' + name + ']');
+		if(!obj){
+			obj = $('select[name=' + name + ']');
+		}
+		grayBorder(obj);
+	}
+	
+	function errBorder(name){
+		var obj = $('input[name=' + name + ']');
+		if(!obj){
+			obj = $('select[name=' + name + ']');
+		}
+		redBorder(obj);
+	}
+	
+	function grayBorder(obj){
+		$(obj).css("border","1px solid #ccc");
+	}
+	function redBorder(obj){
+		$(obj).css("border","1px solid red");
+	}
+</script>

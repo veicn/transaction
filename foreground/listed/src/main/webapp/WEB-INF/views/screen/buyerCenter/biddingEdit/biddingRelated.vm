@@ -1,0 +1,69 @@
+#if($!{type} == 'CBB')
+	#set($namePrefix='provider')
+	#set($related='买方')
+	#set($nameInputId='buyerCompanyInput')
+    #set($hiddenId='buyerHiddenId')
+#elseif($!{type} == 'CBT')
+	#set($namePrefix='merchant')
+	#set($related='代理商')
+	#set($nameInputId='tradeCompanyInput')
+    #set($hiddenId='traderHiddenId')
+#elseif($!{type} == 'P')
+	#set($namePrefix='provider')
+	#set($related='供应商')
+	#set($nameInputId='providerCompanyInput')
+    #set($hiddenId='providerHiddenId')
+#end
+
+
+<div class="c-mod" id="$divId">
+	<h3><i class="cw-ico ico-h3"></i>$!{related}信息</h3>
+	<div class="c-form">
+		<ul class="c-ful">
+			<input type="hidden" name="$!{namePrefix}.id" value="$!{relater.id}"/>
+			
+			<li class="c-fcos1">
+				<span class="c-fn">#if($!{type} != 'CBT')<span class="notice-required">*&nbsp;</span>#end $!{related}名称：</span>
+                <input type="hidden" name="$!{namePrefix}.eMemberId" id="$!{hiddenId}" value="$!{relater.eMemberId}"/>
+                <input type="text" class="c-int" placeholder="请选择公司" name="$!{namePrefix}.enterpriseName" value="$!{relater.enterpriseName}" id="$!{nameInputId}" maxlength="100" readonly="readonly"/>
+			</li>
+
+			<li class="c-fcos1">
+				<span class="c-fn">$!{related}地址：</span>
+				<input type="text" class="c-int" placeholder="请输入公司地址" name="$!{namePrefix}.enterpriseAddress" value="$!{relater.enterpriseAddress}" maxlength="200"/>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">#if($!{type} != 'CBT')<span class="notice-required">*&nbsp;</span>#end 交易员：</span>
+				<input type="text" name="$!{namePrefix}.contacter" class="c-int" #if($!{type} != 'CBT')required='true'#end value="$!{relater.contacter}" maxlength="100"/>
+                <label for="$!{namePrefix}.contacter" class="error my-error"></label>
+			</li>
+
+			<li class="c-fcos2">
+				<span class="c-fn">#if($!{type} != 'CBT')<span class="notice-required">*&nbsp;</span>#end 邮箱：</span>
+				<input type="text" name="$!{namePrefix}.famil" class="c-int email" placeholder="请输入邮箱" value="$!{relater.famil}" maxlength="100"/>
+                <label for="$!{namePrefix}.famil" class="error my-error"></label>
+			</li>
+
+			<li class="c-fcos2 c-fco2">
+				<span class="c-fn">#if($!{type} != 'CBT')<span class="notice-required">*&nbsp;</span>#end 联系方式：</span>
+				<input name="$!{namePrefix}.phoneNo" isPhone='true' #if($!{type} != 'CBT')required='true'#end type="text" class="c-int" value="$!{relater.phoneNo}" maxlength="100"/>
+                <label for="$!{namePrefix}.phoneNo" class="error my-error"></label>
+			</li>
+
+			<li class="c-fcos2">
+				<span class="c-fn">#if($!{type} != 'CBT')<span class="notice-required">*&nbsp;</span>#end 传真：</span>
+				<input  name="$!{namePrefix}.fax" type="text" class="c-int" value="$!{relater.fax}" maxlength="20"/>
+                <label for="$!{namePrefix}.fax" class="error my-error"></label>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<script>
+        $(document).ready(function () {
+            
+        })
+
+</script>
+
+

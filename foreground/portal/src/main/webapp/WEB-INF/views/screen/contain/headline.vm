@@ -1,0 +1,20 @@
+<div class="top-wrap">
+    <div class="inner clearfix">
+        #if($!user)
+            <div class="top-l"><span class="wel-txt">$!{user.name}
+                    </span><span class="t-lr-txt"><a class="t-log" href="$systemServer.get('logout.htm')">退出</a></span></div>
+        #else
+            <div class="top-l"><span class="wel-txt">您好,欢迎来到买原油网！</span><span class="t-lr-txt"><a class="t-log" href="$systemServer.get('login.htm')">登录</a>|<a class="t-reg" href="$systemServer.get('member/register.htm')">注册</a></span></div>
+        #end
+        <div class="top-r">
+            <ul class="tr-list clearfix">
+                <li><a href="$infoServer.get('/page/#/notice')" target="_blank"><i class="h-ico ico-gg"></i>公告</a></li>
+                <li><a class="user-txt" href="">会员中心</a></li>
+##                <li><a class="user-txt" href="">业务中心</a></li>
+                <li><a class="ph-txt" href=""><i class="c-ico ico-phone"></i>手机买原油</a></li>
+                <li><span class="kf-txt"><i class="c-ico ico-tel"></i>客服电话：010-59568888</span></li>
+                <li><a class="glb-link" href=""><i class="c-ico ico-glb"></i>global</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

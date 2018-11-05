@@ -1,0 +1,131 @@
+<script>
+layui.use(['laydate','upload'], function(){
+	var laydate = layui.laydate;
+	var $ = layui.jquery
+	,upload = layui.upload;
+});
+</script>
+<style>
+body .backbtn-class .layui-layer-btn a{
+	height: 28px;
+    line-height: 28px;
+    margin: 5px 5px 0;
+    padding: 0 15px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    color: #333;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+}
+</style>
+<form class="layui-form layui-form-pane" style="margin-top:50px; margin-left:90px" action="ruleSave">
+<input class="layui-input layui-hide" id="uuid" name="uuid" type="text">
+   
+		    <div class="layui-form-item" style="height:25px">
+		    	<div class="layui-inline">
+				    <label class="layui-form-label" style="width:125px">油种</label>
+				    <div class="layui-input-inline iw300">
+				        <input class="layui-input oilType" id="oilType" type="text" name="oilType" readonly="true" autocomplete="off">
+				    </div>
+				    <div class="layui-inline">
+					    <label class="layui-form-label iw300" style="margin-left:30px;width:125px">数量</label>
+					    <div class="layui-input-inline iw300">
+					        <input class="layui-input quantity" id="quantity" type="text" name="quantity" readonly="true" autocomplete="off">
+					    </div>
+			    	</div>
+			    </div>
+		    </div>
+		    
+		   <div class="layui-form-item" style="height:25px">
+    			<div class="layui-inline">
+		    		<label class="layui-form-label iw300" style="width:125px">装期</label>
+		   			 <div class="layui-input-inline iw300">
+		       			 <input class="layui-input laycan" id="laycan" type="text" name="laycan" readonly="true" autocomplete="off">
+		    		</div>
+		   		 <label class="layui-form-label iw300" style="margin-left:30px;width:125px">船型</label>
+		    	<div class="layui-input-inline iw300">
+		        <input class="layui-input shipType" id="shipType" type="text" name="shipType" readonly="true" autocomplete="off">
+		    	</div>
+			</div>
+    	</div>
+		    
+		    
+		    <div class="layui-form-item port" style="height:25px">
+		    	<div class="layui-inline">
+				    <label class="layui-form-label" style="width:125px">装港/装港区域</label>
+				    <div class="layui-input-inline iw300">
+				        <input class="layui-input loadPort" id="loadPort" type="text" name="loadPort" readonly="true" autocomplete="off">
+				    </div>
+		    	<div class="layui-inline">
+				    <label class="layui-form-label" style="margin-left:30px;width:125px">卸港/卸港区域</label>
+				    <div class="layui-input-inline iw300">
+				        <input class="layui-input unloadPort" id="unloadPort" type="text" name="unloadPort" readonly="true" autocomplete="off">
+				    </div>
+				</div>
+		    </div>
+		    </div>
+    
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">船龄</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input shipAge" type="text" id="shipAge" name="shipAge" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">其他要求</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input remark" id="remark" type="text" name="remark" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">公司</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input companyName" id="companyName" type="text" name="companyName" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">联系人</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input contacts" id="contacts" type="text" name="contacts" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+    <div class="layui-form-item" style="height:25px">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px">电话</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input tel" id="tel" type="text" name="tel" readonly="true" autocomplete="off">
+		    </div>
+		    <div class="layui-inline">
+				<label class="layui-form-label iw300" style="margin-left:30px;width:125px">邮箱</label>
+			    <div class="layui-input-inline iw300">
+			        <input class="layui-input email" id="email" type="text" name="email" readonly="true" autocomplete="off">
+			    </div>
+		    </div>
+		</div>
+    </div>
+    
+
+<!-- 	<div class="layui-upload" style="margin-top:30px">
+	  <div class="layui-upload-list">
+	    <table class="layui-table" style="width:570px;">
+	      <thead>
+	        <tr>
+		        <th style="font-size:12px; width:90px; text-align:center">序号</th>
+		        <th style="font-size:12px; width:380px; text-align:center">文件名</th>
+		        <th style="font-size:12px; width:100px; text-align:center">下载</th>
+	      </tr></thead>
+	      <tbody id="downloadList"></tbody>
+	    </table>
+	  </div>
+	</div>
+ -->
+</form>

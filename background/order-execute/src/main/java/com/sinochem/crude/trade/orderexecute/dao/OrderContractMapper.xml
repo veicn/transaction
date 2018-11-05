@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderContractMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderContract" id="OrderContract">
+		<result property="contractId" column="CONTRACT_ID" />
+		<result property="contractUuid" column="CONTRACT_UUID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="contractName" column="CONTRACT_NAME" />
+		<result property="contractType" column="CONTRACT_TYPE" />
+		<result property="buyerCustomer" column="BUYER_CUSTOMER" />
+		<result property="buyerPerson" column="BUYER_PERSON" />
+		<result property="buyerTel" column="BUYER_TEL" />
+		<result property="sellerCustomer" column="SELLER_CUSTOMER" />
+		<result property="sellerPerson" column="SELLER_PERSON" />
+		<result property="sellerTel" column="SELLER_TEL" />
+		<result property="signDate" column="SIGN_DATE" />
+		<result property="signAddress" column="SIGN_ADDRESS" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="goodsName" column="GOODS_NAME" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="contractStatus" column="CONTRACT_STATUS" />
+		<result property="inputPerson" column="INPUT_PERSON" />
+		<result property="performType" column="PERFORM_TYPE" />
+		<result property="layTime" column="LAY_TIME" />
+		<result property="shipName" column="SHIP_NAME" />
+		<result property="priceFormula" column="PRICE_FORMULA" />
+		<result property="pricingDesc" column="PRICING_DESC" />
+		<result property="priceRounding" column="PRICE_ROUNDING" />
+		<result property="paymentTerm" column="PAYMENT_TERM" />
+		<result property="demurrage" column="DEMURRAGE" />
+		<result property="inspection" column="INSPECTION" />
+		<result property="tradeTerm" column="TRADE_TERM" />
+		<result property="gtc" column="GTC" />
+		<result property="sellerCustomerId" column="SELLER_CUSTOMER_ID" />
+		<result property="buyerCustomerId" column="BUYER_CUSTOMER_ID" />
+		<result property="remark" column="REMARK" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContract"  useGeneratedKeys="true" keyProperty="contractId" >
+		insert  into t_order_contract (				CONTRACT_ID
+						,CONTRACT_UUID
+						,ORDER_ID
+						,ORDER_NO
+						,CONTRACT_NO
+						,CONTRACT_NAME
+						,CONTRACT_TYPE
+						,BUYER_CUSTOMER
+						,BUYER_PERSON
+						,BUYER_TEL
+						,SELLER_CUSTOMER
+						,SELLER_PERSON
+						,SELLER_TEL
+						,SIGN_DATE
+						,SIGN_ADDRESS
+						,START_DATE
+						,END_DATE
+						,GOODS_NAME
+						,QUANTITY
+						,CONTRACT_STATUS
+						,INPUT_PERSON
+						,PERFORM_TYPE
+						,LAY_TIME
+						,SHIP_NAME
+						,PRICE_FORMULA
+						,PRICING_DESC
+						,PRICE_ROUNDING
+						,PAYMENT_TERM
+						,DEMURRAGE
+						,INSPECTION
+						,TRADE_TERM
+						,GTC
+						,SELLER_CUSTOMER_ID
+						,BUYER_CUSTOMER_ID
+						,REMARK
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{contractId}
+						,#{contractUuid}
+						,#{orderId}
+						,#{orderNo}
+						,#{contractNo}
+						,#{contractName}
+						,#{contractType}
+						,#{buyerCustomer}
+						,#{buyerPerson}
+						,#{buyerTel}
+						,#{sellerCustomer}
+						,#{sellerPerson}
+						,#{sellerTel}
+						,#{signDate}
+						,#{signAddress}
+						,#{startDate}
+						,#{endDate}
+						,#{goodsName}
+						,#{quantity}
+						,#{contractStatus}
+						,#{inputPerson}
+						,#{performType}
+						,#{layTime}
+						,#{shipName}
+						,#{priceFormula}
+						,#{pricingDesc}
+						,#{priceRounding}
+						,#{paymentTerm}
+						,#{demurrage}
+						,#{inspection}
+						,#{tradeTerm}
+						,#{gtc}
+						,#{sellerCustomerId}
+						,#{buyerCustomerId}
+						,#{remark}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_contract
+              WHERE 1=1 
+                AND CONTRACT_ID = #{contractId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContract">
+        DELETE FROM t_order_contract
+              WHERE 1=1 
+        <if test="contractId!=null and contractId!=''">AND  CONTRACT_ID = #{contractId}</if>
+        <if test="contractUuid!=null and contractUuid!=''">AND  CONTRACT_UUID = #{contractUuid}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="orderNo!=null and orderNo!=''">AND  ORDER_NO = #{orderNo}</if>
+        <if test="contractNo!=null and contractNo!=''">AND  CONTRACT_NO = #{contractNo}</if>
+        <if test="contractName!=null and contractName!=''">AND  CONTRACT_NAME = #{contractName}</if>
+        <if test="contractType!=null and contractType!=''">AND  CONTRACT_TYPE = #{contractType}</if>
+        <if test="buyerCustomer!=null and buyerCustomer!=''">AND  BUYER_CUSTOMER = #{buyerCustomer}</if>
+        <if test="buyerPerson!=null and buyerPerson!=''">AND  BUYER_PERSON = #{buyerPerson}</if>
+        <if test="buyerTel!=null and buyerTel!=''">AND  BUYER_TEL = #{buyerTel}</if>
+        <if test="sellerCustomer!=null and sellerCustomer!=''">AND  SELLER_CUSTOMER = #{sellerCustomer}</if>
+        <if test="sellerPerson!=null and sellerPerson!=''">AND  SELLER_PERSON = #{sellerPerson}</if>
+        <if test="sellerTel!=null and sellerTel!=''">AND  SELLER_TEL = #{sellerTel}</if>
+        <if test="signDate!=null and signDate!=''">AND  SIGN_DATE = #{signDate}</if>
+        <if test="signAddress!=null and signAddress!=''">AND  SIGN_ADDRESS = #{signAddress}</if>
+        <if test="startDate!=null and startDate!=''">AND  START_DATE = #{startDate}</if>
+        <if test="endDate!=null and endDate!=''">AND  END_DATE = #{endDate}</if>
+        <if test="goodsName!=null and goodsName!=''">AND  GOODS_NAME = #{goodsName}</if>
+        <if test="quantity!=null and quantity!=''">AND  QUANTITY = #{quantity}</if>
+        <if test="contractStatus!=null and contractStatus!=''">AND  CONTRACT_STATUS = #{contractStatus}</if>
+        <if test="inputPerson!=null and inputPerson!=''">AND  INPUT_PERSON = #{inputPerson}</if>
+        <if test="performType!=null and performType!=''">AND  PERFORM_TYPE = #{performType}</if>
+        <if test="layTime!=null and layTime!=''">AND  LAY_TIME = #{layTime}</if>
+        <if test="shipName!=null and shipName!=''">AND  SHIP_NAME = #{shipName}</if>
+        <if test="priceFormula!=null and priceFormula!=''">AND  PRICE_FORMULA = #{priceFormula}</if>
+        <if test="pricingDesc!=null and pricingDesc!=''">AND  PRICING_DESC = #{pricingDesc}</if>
+        <if test="priceRounding!=null and priceRounding!=''">AND  PRICE_ROUNDING = #{priceRounding}</if>
+        <if test="paymentTerm!=null and paymentTerm!=''">AND  PAYMENT_TERM = #{paymentTerm}</if>
+        <if test="demurrage!=null and demurrage!=''">AND  DEMURRAGE = #{demurrage}</if>
+        <if test="inspection!=null and inspection!=''">AND  INSPECTION = #{inspection}</if>
+        <if test="tradeTerm!=null and tradeTerm!=''">AND  TRADE_TERM = #{tradeTerm}</if>
+        <if test="gtc!=null and gtc!=''">AND  GTC = #{gtc}</if>
+        <if test="sellerCustomerId!=null and sellerCustomerId!=''">AND  SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+        <if test="buyerCustomerId!=null and buyerCustomerId!=''">AND  BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+        <if test="remark!=null and remark!=''">AND  REMARK = #{remark}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContract">
+		update t_order_contract
+		<set>
+         CONTRACT_ID=#{contractId}
+		<if test="contractUuid!=null">,CONTRACT_UUID = #{contractUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="contractName!=null">,CONTRACT_NAME = #{contractName}</if>
+		<if test="contractType!=null">,CONTRACT_TYPE = #{contractType}</if>
+		<if test="buyerCustomer!=null">,BUYER_CUSTOMER = #{buyerCustomer}</if>
+		<if test="buyerPerson!=null">,BUYER_PERSON = #{buyerPerson}</if>
+		<if test="buyerTel!=null">,BUYER_TEL = #{buyerTel}</if>
+		<if test="sellerCustomer!=null">,SELLER_CUSTOMER = #{sellerCustomer}</if>
+		<if test="sellerPerson!=null">,SELLER_PERSON = #{sellerPerson}</if>
+		<if test="sellerTel!=null">,SELLER_TEL = #{sellerTel}</if>
+		<if test="signDate!=null">,SIGN_DATE = #{signDate}</if>
+		<if test="signAddress!=null">,SIGN_ADDRESS = #{signAddress}</if>
+		<if test="startDate!=null">,START_DATE = #{startDate}</if>
+		<if test="endDate!=null">,END_DATE = #{endDate}</if>
+		<if test="goodsName!=null">,GOODS_NAME = #{goodsName}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="contractStatus!=null">,CONTRACT_STATUS = #{contractStatus}</if>
+		<if test="inputPerson!=null">,INPUT_PERSON = #{inputPerson}</if>
+		<if test="performType!=null">,PERFORM_TYPE = #{performType}</if>
+		<if test="layTime!=null">,LAY_TIME = #{layTime}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="pricingDesc!=null">,PRICING_DESC = #{pricingDesc}</if>
+		<if test="priceRounding!=null">,PRICE_ROUNDING = #{priceRounding}</if>
+		<if test="paymentTerm!=null">,PAYMENT_TERM = #{paymentTerm}</if>
+		<if test="demurrage!=null">,DEMURRAGE = #{demurrage}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="gtc!=null">,GTC = #{gtc}</if>
+		<if test="sellerCustomerId!=null">,SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null">,BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 CONTRACT_ID=#{contractId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_contract
+		<set>
+         CONTRACT_ID=#{contractId}
+		<if test="contractUuid!=null">,CONTRACT_UUID = #{contractUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="contractName!=null">,CONTRACT_NAME = #{contractName}</if>
+		<if test="contractType!=null">,CONTRACT_TYPE = #{contractType}</if>
+		<if test="buyerCustomer!=null">,BUYER_CUSTOMER = #{buyerCustomer}</if>
+		<if test="buyerPerson!=null">,BUYER_PERSON = #{buyerPerson}</if>
+		<if test="buyerTel!=null">,BUYER_TEL = #{buyerTel}</if>
+		<if test="sellerCustomer!=null">,SELLER_CUSTOMER = #{sellerCustomer}</if>
+		<if test="sellerPerson!=null">,SELLER_PERSON = #{sellerPerson}</if>
+		<if test="sellerTel!=null">,SELLER_TEL = #{sellerTel}</if>
+		<if test="signDate!=null">,SIGN_DATE = #{signDate}</if>
+		<if test="signAddress!=null">,SIGN_ADDRESS = #{signAddress}</if>
+		<if test="startDate!=null">,START_DATE = #{startDate}</if>
+		<if test="endDate!=null">,END_DATE = #{endDate}</if>
+		<if test="goodsName!=null">,GOODS_NAME = #{goodsName}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="contractStatus!=null">,CONTRACT_STATUS = #{contractStatus}</if>
+		<if test="inputPerson!=null">,INPUT_PERSON = #{inputPerson}</if>
+		<if test="performType!=null">,PERFORM_TYPE = #{performType}</if>
+		<if test="layTime!=null">,LAY_TIME = #{layTime}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="priceFormula!=null">,PRICE_FORMULA = #{priceFormula}</if>
+		<if test="pricingDesc!=null">,PRICING_DESC = #{pricingDesc}</if>
+		<if test="priceRounding!=null">,PRICE_ROUNDING = #{priceRounding}</if>
+		<if test="paymentTerm!=null">,PAYMENT_TERM = #{paymentTerm}</if>
+		<if test="demurrage!=null">,DEMURRAGE = #{demurrage}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="gtc!=null">,GTC = #{gtc}</if>
+		<if test="sellerCustomerId!=null">,SELLER_CUSTOMER_ID = #{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null">,BUYER_CUSTOMER_ID = #{buyerCustomerId}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+		<if test="contractUuid!=null and contractUuid!=''">and  CONTRACT_UUID=#{contractUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="contractName!=null and contractName!=''">and  CONTRACT_NAME=#{contractName}</if>
+		<if test="contractType!=null and contractType!=''">and  CONTRACT_TYPE=#{contractType}</if>
+		<if test="buyerCustomer!=null and buyerCustomer!=''">and  BUYER_CUSTOMER=#{buyerCustomer}</if>
+		<if test="buyerPerson!=null and buyerPerson!=''">and  BUYER_PERSON=#{buyerPerson}</if>
+		<if test="buyerTel!=null and buyerTel!=''">and  BUYER_TEL=#{buyerTel}</if>
+		<if test="sellerCustomer!=null and sellerCustomer!=''">and  SELLER_CUSTOMER=#{sellerCustomer}</if>
+		<if test="sellerPerson!=null and sellerPerson!=''">and  SELLER_PERSON=#{sellerPerson}</if>
+		<if test="sellerTel!=null and sellerTel!=''">and  SELLER_TEL=#{sellerTel}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="signAddress!=null and signAddress!=''">and  SIGN_ADDRESS=#{signAddress}</if>
+		<if test="startDate!=null and startDate!=''">and  START_DATE=#{startDate}</if>
+		<if test="endDate!=null and endDate!=''">and  END_DATE=#{endDate}</if>
+		<if test="goodsName!=null and goodsName!=''">and  GOODS_NAME=#{goodsName}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="contractStatus!=null and contractStatus!=''">and  CONTRACT_STATUS=#{contractStatus}</if>
+		<if test="inputPerson!=null and inputPerson!=''">and  INPUT_PERSON=#{inputPerson}</if>
+		<if test="performType!=null and performType!=''">and  PERFORM_TYPE=#{performType}</if>
+		<if test="layTime!=null and layTime!=''">and  LAY_TIME=#{layTime}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+		<if test="priceRounding!=null and priceRounding!=''">and  PRICE_ROUNDING=#{priceRounding}</if>
+		<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="gtc!=null and gtc!=''">and  GTC=#{gtc}</if>
+		<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderContract">
+			select
+			* from t_order_contract
+			where
+		    CONTRACT_ID=#{contractId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderContract">
+			select
+			* from t_order_contract
+			where CONTRACT_UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderContract" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContract">
+		select * from t_order_contract
+			where
+		 ALIVE_FLAG='1'
+		<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+		<if test="contractUuid!=null and contractUuid!=''">and  CONTRACT_UUID=#{contractUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="contractName!=null and contractName!=''">and  CONTRACT_NAME=#{contractName}</if>
+		<if test="contractType!=null and contractType!=''">and  CONTRACT_TYPE=#{contractType}</if>
+		<if test="buyerCustomer!=null and buyerCustomer!=''">and  BUYER_CUSTOMER=#{buyerCustomer}</if>
+		<if test="buyerPerson!=null and buyerPerson!=''">and  BUYER_PERSON=#{buyerPerson}</if>
+		<if test="buyerTel!=null and buyerTel!=''">and  BUYER_TEL=#{buyerTel}</if>
+		<if test="sellerCustomer!=null and sellerCustomer!=''">and  SELLER_CUSTOMER=#{sellerCustomer}</if>
+		<if test="sellerPerson!=null and sellerPerson!=''">and  SELLER_PERSON=#{sellerPerson}</if>
+		<if test="sellerTel!=null and sellerTel!=''">and  SELLER_TEL=#{sellerTel}</if>
+		<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+		<if test="signAddress!=null and signAddress!=''">and  SIGN_ADDRESS=#{signAddress}</if>
+		<if test="startDate!=null and startDate!=''">and  START_DATE=#{startDate}</if>
+		<if test="endDate!=null and endDate!=''">and  END_DATE=#{endDate}</if>
+		<if test="goodsName!=null and goodsName!=''">and  GOODS_NAME=#{goodsName}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="contractStatus!=null and contractStatus!=''">and  CONTRACT_STATUS=#{contractStatus}</if>
+		<if test="inputPerson!=null and inputPerson!=''">and  INPUT_PERSON=#{inputPerson}</if>
+		<if test="performType!=null and performType!=''">and  PERFORM_TYPE=#{performType}</if>
+		<if test="layTime!=null and layTime!=''">and  LAY_TIME=#{layTime}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+		<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+		<if test="priceRounding!=null and priceRounding!=''">and  PRICE_ROUNDING=#{priceRounding}</if>
+		<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+		<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="gtc!=null and gtc!=''">and  GTC=#{gtc}</if>
+		<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+		<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  contract.CONTRACT_ID as "contractId" 
+						 ,   contract.CONTRACT_UUID as "contractUuid" 
+						 ,   contract.ORDER_ID as "orderId" 
+						 ,   contract.ORDER_NO as "orderNo" 
+						 ,   contract.CONTRACT_NO as "contractNo" 
+						 ,   contract.CONTRACT_NAME as "contractName" 
+						 ,   contract.CONTRACT_TYPE as "contractType" 
+						 ,   contract.BUYER_CUSTOMER as "buyerCustomer" 
+						 ,   contract.BUYER_PERSON as "buyerPerson" 
+						 ,   contract.BUYER_TEL as "buyerTel" 
+						 ,   contract.SELLER_CUSTOMER as "sellerCustomer" 
+						 ,   contract.SELLER_PERSON as "sellerPerson" 
+						 ,   contract.SELLER_TEL as "sellerTel" 
+						 ,   contract.SIGN_DATE as "signDate" 
+						 ,   contract.SIGN_ADDRESS as "signAddress" 
+						 ,   contract.START_DATE as "startDate" 
+						 ,   contract.END_DATE as "endDate" 
+						 ,   contract.GOODS_NAME as "goodsName" 
+						 ,   contract.QUANTITY as "quantity" 
+						 ,   contract.CONTRACT_STATUS as "contractStatus" 
+						 ,   contract.INPUT_PERSON as "inputPerson" 
+						 ,   contract.PERFORM_TYPE as "performType" 
+						 ,   contract.LAY_TIME as "layTime" 
+						 ,   contract.SHIP_NAME as "shipName" 
+						 ,   contract.PRICE_FORMULA as "priceFormula" 
+						 ,   contract.PRICING_DESC as "pricingDesc" 
+						 ,   contract.PRICE_ROUNDING as "priceRounding" 
+						 ,   contract.PAYMENT_TERM as "paymentTerm" 
+						 ,   contract.DEMURRAGE as "demurrage" 
+						 ,   contract.INSPECTION as "inspection" 
+						 ,   contract.TRADE_TERM as "tradeTerm" 
+						 ,   contract.GTC as "gtc" 
+						 ,   contract.SELLER_CUSTOMER_ID as "sellerCustomerId" 
+						 ,   contract.BUYER_CUSTOMER_ID as "buyerCustomerId" 
+						 ,   contract.REMARK as "remark" 
+						 ,   contract.LANG_VER as "langVer" 
+						 ,   contract.ALIVE_FLAG as "aliveFlag" 
+						 ,   contract.CREATE_USER as "createUser" 
+						 ,   contract.CREATE_DATE as "createDate" 
+						 ,   contract.UPDATE_USER as "updateUser" 
+						 ,   contract.UPDATE_DATE as "updateDate" 
+						 ,   contract.VERSION as "version" 
+						from t_order_contract contract
+						
+						<if test="tradeCategory!=null and tradeCategory!=''">
+						JOIN t_order torder
+						on contract.ORDER_ID = torder.ID
+						</if>
+						
+		where
+			contract.ALIVE_FLAG='1'
+			<if test="contractId!=null and contractId!=''">and  contract.CONTRACT_ID=#{contractId}</if>
+			<if test="contractUuid!=null and contractUuid!=''">and  contract.CONTRACT_UUID=#{contractUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  contract.ORDER_ID=#{orderId}</if>
+			<if test="orderNo!=null and orderNo!=''">and  contract.ORDER_NO=#{orderNo}</if>
+			<if test="contractNo!=null and contractNo!=''">and  contract.CONTRACT_NO=#{contractNo}</if>
+			<if test="contractName!=null and contractName!=''">and  contract.CONTRACT_NAME=#{contractName}</if>
+			<if test="contractType!=null and contractType!=''">and  contract.CONTRACT_TYPE=#{contractType}</if>
+			<if test="buyerCustomer!=null and buyerCustomer!=''">and  contract.BUYER_CUSTOMER=#{buyerCustomer}</if>
+			<if test="buyerPerson!=null and buyerPerson!=''">and  contract.BUYER_PERSON=#{buyerPerson}</if>
+			<if test="buyerTel!=null and buyerTel!=''">and  contract.BUYER_TEL=#{buyerTel}</if>
+			<if test="sellerCustomer!=null and sellerCustomer!=''">and  contract.SELLER_CUSTOMER=#{sellerCustomer}</if>
+			<if test="sellerPerson!=null and sellerPerson!=''">and  contract.SELLER_PERSON=#{sellerPerson}</if>
+			<if test="sellerTel!=null and sellerTel!=''">and  contract.SELLER_TEL=#{sellerTel}</if>
+			<if test="signDate!=null and signDate!=''">and  contract.SIGN_DATE=#{signDate}</if>
+			<if test="signAddress!=null and signAddress!=''">and  contract.SIGN_ADDRESS=#{signAddress}</if>
+			<if test="startDate!=null and startDate!=''">and  contract.START_DATE=#{startDate}</if>
+			<if test="endDate!=null and endDate!=''">and  contract.END_DATE=#{endDate}</if>
+			<if test="goodsName!=null and goodsName!=''">and  contract.GOODS_NAME=#{goodsName}</if>
+			<if test="quantity!=null and quantity!=''">and  contract.QUANTITY=#{quantity}</if>
+			<if test="contractStatus!=null and contractStatus!=''">and  contract.CONTRACT_STATUS=#{contractStatus}</if>
+			<if test="inputPerson!=null and inputPerson!=''">and  contract.INPUT_PERSON=#{inputPerson}</if>
+			<if test="performType!=null and performType!=''">and  contract.PERFORM_TYPE=#{performType}</if>
+			<if test="layTime!=null and layTime!=''">and  contract.LAY_TIME=#{layTime}</if>
+			<if test="shipName!=null and shipName!=''">and  contract.SHIP_NAME=#{shipName}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  contract.PRICE_FORMULA=#{priceFormula}</if>
+			<if test="pricingDesc!=null and pricingDesc!=''">and  contract.PRICING_DESC=#{pricingDesc}</if>
+			<if test="priceRounding!=null and priceRounding!=''">and  contract.PRICE_ROUNDING=#{priceRounding}</if>
+			<if test="paymentTerm!=null and paymentTerm!=''">and  contract.PAYMENT_TERM=#{paymentTerm}</if>
+			<if test="demurrage!=null and demurrage!=''">and  contract.DEMURRAGE=#{demurrage}</if>
+			<if test="inspection!=null and inspection!=''">and  contract.INSPECTION=#{inspection}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  contract.TRADE_TERM=#{tradeTerm}</if>
+			<if test="gtc!=null and gtc!=''">and  contract.GTC=#{gtc}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  contract.SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  contract.BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="remark!=null and remark!=''">and  contract.REMARK=#{remark}</if>
+			<if test="createUser!=null and createUser!=''">and  contract.CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  contract.CREATE_DATE=#{createDate}</if>
+			
+			<if test="contractNameLike!=null and contractNameLike!=''">
+			and contract.CONTRACT_NAME like '%${contractNameLike}%'
+			</if>
+			<if test="customerId!=null and customerId!=''">
+			and (
+				contract.BUYER_CUSTOMER_ID = #{customerId}
+				OR contract.SELLER_CUSTOMER_ID = #{customerId}
+			)
+			</if>
+			<if test="tradeCategory!=null and tradeCategory!=''">
+			and torder.TRADE_CATEGORY=#{tradeCategory}
+			</if>
+			ORDER BY contract.CREATE_DATE DESC
+	</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_contract 
+		where
+		 ALIVE_FLAG='1'
+			<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+			<if test="contractUuid!=null and contractUuid!=''">and  CONTRACT_UUID=#{contractUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="contractName!=null and contractName!=''">and  CONTRACT_NAME=#{contractName}</if>
+			<if test="contractType!=null and contractType!=''">and  CONTRACT_TYPE=#{contractType}</if>
+			<if test="buyerCustomer!=null and buyerCustomer!=''">and  BUYER_CUSTOMER=#{buyerCustomer}</if>
+			<if test="buyerPerson!=null and buyerPerson!=''">and  BUYER_PERSON=#{buyerPerson}</if>
+			<if test="buyerTel!=null and buyerTel!=''">and  BUYER_TEL=#{buyerTel}</if>
+			<if test="sellerCustomer!=null and sellerCustomer!=''">and  SELLER_CUSTOMER=#{sellerCustomer}</if>
+			<if test="sellerPerson!=null and sellerPerson!=''">and  SELLER_PERSON=#{sellerPerson}</if>
+			<if test="sellerTel!=null and sellerTel!=''">and  SELLER_TEL=#{sellerTel}</if>
+			<if test="signDate!=null and signDate!=''">and  SIGN_DATE=#{signDate}</if>
+			<if test="signAddress!=null and signAddress!=''">and  SIGN_ADDRESS=#{signAddress}</if>
+			<if test="startDate!=null and startDate!=''">and  START_DATE=#{startDate}</if>
+			<if test="endDate!=null and endDate!=''">and  END_DATE=#{endDate}</if>
+			<if test="goodsName!=null and goodsName!=''">and  GOODS_NAME=#{goodsName}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="contractStatus!=null and contractStatus!=''">and  CONTRACT_STATUS=#{contractStatus}</if>
+			<if test="inputPerson!=null and inputPerson!=''">and  INPUT_PERSON=#{inputPerson}</if>
+			<if test="performType!=null and performType!=''">and  PERFORM_TYPE=#{performType}</if>
+			<if test="layTime!=null and layTime!=''">and  LAY_TIME=#{layTime}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="priceFormula!=null and priceFormula!=''">and  PRICE_FORMULA=#{priceFormula}</if>
+			<if test="pricingDesc!=null and pricingDesc!=''">and  PRICING_DESC=#{pricingDesc}</if>
+			<if test="priceRounding!=null and priceRounding!=''">and  PRICE_ROUNDING=#{priceRounding}</if>
+			<if test="paymentTerm!=null and paymentTerm!=''">and  PAYMENT_TERM=#{paymentTerm}</if>
+			<if test="demurrage!=null and demurrage!=''">and  DEMURRAGE=#{demurrage}</if>
+			<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="gtc!=null and gtc!=''">and  GTC=#{gtc}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<select id="findByOrderUuid" parameterType="string" resultMap="OrderContract">
+	SELECT c.* from t_order o 
+	JOIN t_order_contract c
+	ON o.ID = c.ORDER_ID
+	WHERE c.ALIVE_FLAG='1' 
+	and o.UUID = #{orderUuid}
+	
+	</select>
+	
+	<update id="removeRecordByIdOrUuid">
+		update t_order_contract
+		<set>
+			ALIVE_FLAG='0'
+		</set>
+		WHERE ALIVE_FLAG='1'
+		and (
+			BUYER_CUSTOMER_ID = #{customerId}
+			OR SELLER_CUSTOMER_ID = #{customerId}
+		)
+		and (
+			CONTRACT_ID=#{id}
+			OR CONTRACT_UUID=#{uuid}
+		)
+	
+	</update>
+	
+</mapper>

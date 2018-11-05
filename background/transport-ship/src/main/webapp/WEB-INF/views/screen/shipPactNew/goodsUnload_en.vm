@@ -1,0 +1,150 @@
+	<div class="s-mod">
+		<div class="s-order-box">
+			<!-- <div class="clearfix s-order-tit2">
+			<a href="javascript:;" id="load" >Loading port</a>
+			<a  href="javascript:;" id="unload"  class="curr">Discharging Port</a>
+			</div> -->
+			<div class="clearfix s-order-tit"><h1>Cargo Information</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li><a  href="javascript:;"  id="load" >Loading port</a></li>
+				<li  class="curr"><a  href="javascript:;" id="unload">Discharging Port</a></li>
+			</ul>
+		</div>
+		<div class="all" hidden="true">
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Discharging Port</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Discharging Port：</label>
+					  <div class="s-input-inline">
+						  <p class="unloadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Grade：</label>
+					  <div class="s-input-inline">
+						  <p class="oilType"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Charter Party No：</label>
+					  <div class="s-input-inline">
+						  <p class="agreementCode"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">COD：</label>
+					  <div class="s-input-inline">
+					  	 <p class="cod"></p>
+					  </div>
+					</div>
+					
+					<div class="s-inline">
+					  <label class="s-form-label">US Barrels @60︒F（Gross）：</label>
+					  <div class="s-input-inline">
+						 <p class="commHairBar"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">US Barrels @60︒F（Net）：</label>
+					  <div class="s-input-inline">
+						 <p class="commCleanBar"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">MT (in Air)（Gross）：</label>
+					  <div class="s-input-inline">
+						 <p class="commHairTon"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">MT (in Air)（Net）：</label>
+					  <div class="s-input-inline">
+						 <p class="commCleanTon"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Cubic meters @15︒C（Gross ）：</label>
+					  <div class="s-input-inline">
+						 <p class="shGrossCubicMeter"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Cubic meters @15︒C（Net）：</label>
+					  <div class="s-input-inline">
+						 <p class="shNetCubicMeter"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Density @15︒C（Kg/L）：</label>
+					  <div class="s-input-inline">
+						 <p class="shDensity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">API @60︒F：</label>
+					  <div class="s-input-inline">
+						 <p class="api"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">BS&W ：</label>
+					  <div class="s-input-inline">
+						 <p class="waterImpCon"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Free Water：</label>
+					  <div class="s-input-inline">
+						 <p class="waterQuantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Others：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ROB：</label>
+					  <div class="s-input-inline">
+						 <p class="robQuanatity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ship figure after loadingBbl. (Gross)：</label>
+					  <div class="s-input-inline">
+						 <p class="shipHairBar"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">ship figure after loadingMT in air (Gross)：</label>
+					  <div class="s-input-inline">
+						 <p class="shipHairTon"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Shore received figureBbl. (Gross)：</label>
+					  <div class="s-input-inline">
+						 <p class="potHairBar"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Shore received figureMT in air (Gross)：</label>
+					  <div class="s-input-inline">
+						 <p class="potHairTon"></p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary returnFn">Back</button></div>
+	</div>
+<script src="../transport/js/shipPactNew/goodsUnload.js"></script>

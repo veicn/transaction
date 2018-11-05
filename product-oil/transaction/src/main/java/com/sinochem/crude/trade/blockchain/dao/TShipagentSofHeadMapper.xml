@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentSofHeadMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentSofHead">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="enterprise_name_en" jdbcType="VARCHAR" property="enterpriseNameEn" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="selected" jdbcType="VARCHAR" property="selected" />
+    <result column="head_content" jdbcType="VARCHAR" property="headContent" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, enterprise_name, enterprise_name_en, enterprise_id, selected, head_content, create_user, 
+    create_date, update_user, update_date, alive_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_shipagent_sof_head
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_shipagent_sof_head
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofHead">
+    insert into t_shipagent_sof_head (id, enterprise_name, enterprise_name_en, 
+      enterprise_id, selected, head_content, 
+      create_user, create_date, update_user, 
+      update_date, alive_flag)
+    values (#{id,jdbcType=BIGINT}, #{enterpriseName,jdbcType=VARCHAR}, #{enterpriseNameEn,jdbcType=VARCHAR}, 
+      #{enterpriseId,jdbcType=BIGINT}, #{selected,jdbcType=VARCHAR}, #{headContent,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{aliveFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofHead">
+    insert into t_shipagent_sof_head
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="enterpriseNameEn != null">
+        enterprise_name_en,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="selected != null">
+        selected,
+      </if>
+      <if test="headContent != null">
+        head_content,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameEn != null">
+        #{enterpriseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="selected != null">
+        #{selected,jdbcType=VARCHAR},
+      </if>
+      <if test="headContent != null">
+        #{headContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofHead">
+    update t_shipagent_sof_head
+    <set>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNameEn != null">
+        enterprise_name_en = #{enterpriseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="selected != null">
+        selected = #{selected,jdbcType=VARCHAR},
+      </if>
+      <if test="headContent != null">
+        head_content = #{headContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofHead">
+    update t_shipagent_sof_head
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_name_en = #{enterpriseNameEn,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      selected = #{selected,jdbcType=VARCHAR},
+      head_content = #{headContent,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,2 @@
+#set($a = "个人中心-买原油网")
+        $contain.get("/crudeoilhallform/compare.htm")

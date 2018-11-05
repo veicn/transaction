@@ -1,0 +1,22 @@
+## 所需参数
+## shipPortCode
+
+<table class="table1">
+        <td class="active">No.</td>
+        <td class="active">Berth</td>
+        <td class="active">Tonnage</td>
+        <td class="active">Draft</td>
+        <td class="active">Vessel Size</td>
+        <td class="active">Remark</td>
+    </tr>
+    #foreach($!shipBerthVO in $!{datas})
+        <tr>
+            <td>$velocityCount</td>
+            <td #if($velocityCount / 2 != 0) class="active" #end>$!{shipBerthVO.enName}</td>
+            <td #if($velocityCount / 2 != 0) class="active" #end>$!{shipBerthVO.berthTonnage}</td>
+            <td #if($velocityCount / 2 != 0) class="active" #end>$!{shipBerthVO.berthDraft}</td>
+            <td #if($velocityCount / 2 != 0) class="active" #end>$!{shipBerthVO.vesselType}</td>
+            <td #if($velocityCount / 2 != 0) class="active" #end>$!{shipBerthVO.remark}</td>
+        </tr>
+    #end
+</table>

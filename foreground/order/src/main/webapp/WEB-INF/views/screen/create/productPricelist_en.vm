@@ -1,0 +1,58 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Purchase Recap<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <input type="hidden" class="c-int" name="id" value="$!{contract.id}"/>
+            <li class="c-fcos2"><span class="c-fn">Tolerance：+/-</span><input type="text" class="c-intt" name="numfloat" id="numfloat" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"  value="$!{contract.numFloat}"/>%<i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">Premium/Discount：</span> <input type="text" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" class="c-int" id="agio" name="agioStr"  value="$!{numberTool.format("#0.000",$!{contract.agioStr})}"/></li>
+            <li class="c-fcos1"><span class="c-fn">Pricing Basis：</span>
+                <select class="sele seleone" name="valuationBase" id="valuationBase" value = "$!{contract.valuationBase}">
+                    #foreach($item in $valuationBaseMap.entrySet())
+                        <option value="$!{item.key}" >$!{item.value}</option>
+                    #end
+                </select>
+            </li>
+            <li class="c-fcos1"><span class="c-fn">Pricing period type：</span>
+                <i class="c-ico cxtj-nr-ico cg-data"></i>
+                <select class="sele seleone" name="valuationProidType" id="valuationProidType" value="$!{contract.valuationProidType}">
+                    #foreach($item in $valuationProidTypeMap.entrySet())
+                        <option value="$!{item.key}" >$!{item.value}</option>
+                    #end
+                </select>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">Pricing period start time：</span><input date="true" type="text" class="c-int" id="valuationProidStart" name="valuationProidStart" value="$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidStart})"/><i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">End time of pricing period：</span><input date="true" type="text" class="c-int" id="valuationProidEnd" name="valuationProidEnd" value="$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.valuationProidEnd})"/><i class="c-ico cxtj-nr-ico cg-data"></i></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Date：</span>
+                <select class="sele" name="payItem" id="payItem" value="$!{contract.payItem}">
+                    #foreach($!item in $!payItemMap.entrySet())
+                        <option value="$!item.key" >$!item.value</option>
+                    #end
+                </select>
+            </li>
+           #* <li class="c-fcos2"><span class="c-fn">Payment Date：</span><input date="true" type="text" class="c-int" name="payTime" id="payTime" value="$dateUtil.getDateTime("yyyy-MM-dd",$!{contract.payTime})"/><i class="c-ico cxtj-nr-ico cg-data"></i></li>*#            #*<li class="c-fcos2"><span class="c-fn">Purchase type：</span>
+                <select class="sele" name="purchaseMode" id="purchaseMode">
+
+                    #foreach($item in $PurchaseModes.entrySet())
+                        <option value="$!{item.key}" >$!{item.value}</option>
+                    #end
+
+
+                    <option>1</option><option>2</option><option>3</option>
+                </select>
+            </li>*#
+            <li class="c-fcos1">
+                <span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>Price Fomula：</span>
+                <input type="text" class="c-int c-br c-fl pricingEditor" jsonstruc="" jsId="valuationFormulaJson" pmId="pricingMode" name="valuationFormula" id="valuationFormula" value="$!{contract.valuationFormula}" readonly>
+                <!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+                <input type="hidden" name="valuationFormulaJson" id="valuationFormulaJson" /><input type="hidden" name="pricingMode" id="pricingMode" value="$!{contract.pricingMode}"/>
+            </li>
+            $contain.get("/pricingFormula/physicalPricingEditor.htm")
+            <li class="c-fcos1"><span class="c-fn">Remark：</span><textarea class="c-teta" name="remark" id="remark"></textarea></li>
+    </div>
+</div>
+<script>
+    $(function(){
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+    })
+</script>

@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="$imageServer.get('css/f_common.css')">
+<link rel="stylesheet" href="$imageServer.get('css/f_base.css')">
+<div class="reg-wrap">
+    <div class="inner">
+        <div class="fro-succ">
+            <span class="fro-succ-t"><i class="cw-ico ico-error"></i>发生错误</span>
+            <span class="fro-succ-c"><em>系统发生错误，请联系管理员</em></span>
+            <span class="fro-succ-c"><em>$!message</em></span>
+            <p style="display: none">$!{exception}</p>
+            <p class="fro-succ-b"><a href="$!indexUrl">返回首页</a></p>
+        </div>
+    </div>
+</div>

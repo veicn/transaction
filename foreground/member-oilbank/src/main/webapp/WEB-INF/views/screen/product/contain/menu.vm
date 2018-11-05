@@ -1,0 +1,82 @@
+
+
+#js("$imageServer.get('/js/leftnav.js' )")
+
+<div class="m-tab fl">
+    <!--左侧 star-->
+    <div class="fl shipping-b-l">
+        <div class="s-info">
+            <dl class="clearfix">
+                <dd>
+                    <a href="javascript:;">
+                        <img #if(${logo} && "$!{logo}"!="")src="$!{uploadServer}/img/$!{logo}.img_40_40.img" #{else}src="$imageServer.get('/images/enter_bg1.jpg')"#end >
+                    #* <img src="$appServer.get('/product/images/people.png')"/>*#
+                    </a>
+                </dd>
+                <dt>
+                <h3>
+                    #if($!session.getAttribute("_user"))
+                        $_user.name
+                    #end
+                </h3>
+
+               #* <p>
+                    <a href="$appServer.get('product/logout.htm')">Sign Out</a>
+                </p>*##**##**#
+
+                </dt>
+            </dl>
+        </div>
+        #set($flag = 0)
+        <div class="s-tab">
+                #if($authUtils.checkRole("sales_trader","buy_trader","admin","trade_executor"))
+                    <div class="s-tab-one s-tab-one1">
+                        <h2 class="let">TRADING</h2>
+                        <ul class="trading-ul">
+                            <li>
+                                <a href="javascript:;">My Orders</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">My Requsources</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">My Quotes</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                #end
+
+            #set($flag = $flag + 1)
+
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">MY SETTINGS</h2>
+                <ul class="trading-ul">
+
+                    <li>
+                        <a href="$appServer.get('/center/role/safety.htm')">Message</a>
+                    </li>
+                    <li>
+                        <a href="$appServer.get('/center/role/safety.htm')" >Security</a>
+                    </li>
+                    #if($authUtils.ownerAccess())
+                        #if($authUtils.checkRole("enter_admin","enter_master"))
+                            <li>
+                                <a href="javascript:;">Sub Account</a>
+                            </li>
+                        #end
+
+                        #if(!$authUtils.checkRole("enterprise") )
+                            <li>
+                                <a href="javascript:;">绑定邀请码</a>
+                            </li>
+
+                        #end
+
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

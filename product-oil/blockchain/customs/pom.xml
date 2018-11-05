@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>blockchain</artifactId>
+        <groupId>com.sinochem.crude.trade.product-oil.blockchain</groupId>
+        <version>1.0.5-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>|------|------海关/政府模块</name>
+    <groupId>com.sinochem.crude.trade.product-oil.blockchain.customs</groupId>
+    <artifactId>customs</artifactId>
+    <packaging>war</packaging>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profileActive>test</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <profileActive>uat</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zhqkl</groupId>
+            <artifactId>com.zhqkl.api</artifactId>
+            <scope>system</scope>
+            <version>20180925</version>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/zhqkl-sdk-1.0.jar</systemPath>
+        </dependency>
+    </dependencies>
+</project>

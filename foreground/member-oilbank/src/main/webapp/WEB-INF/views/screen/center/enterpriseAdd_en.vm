@@ -1,0 +1,49 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Business background</title>
+	<link rel="stylesheet" href="$imageServer.get('css/s_common_en.css')">
+	<link rel="stylesheet" href="$imageServer.get('css/s_center_en.css')">
+	<script type="text/javascript" src="$appServer.get('script/lib/jquery.validate.min.js')"></script>
+	
+</head>
+<body>
+		<div class="c-mr">
+			<div class="c-mod" id="cgxx">
+			  <h3><em class="cw-ico ico-h3"></em>business background information</h3>
+			  <form action="$appServer.get('center/toadd.htm')" method="post" id="from1">
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">company number：</span><span class="c-int qx-conte"><input type="text" required="true"  class="c-fcos2" name="code" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">company name：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="name" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">company name：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="fullName" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">Certificate number of organization：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="organizationCode" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">company tax number：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="taxCode" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">registered company  lisence number：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="licenseNo" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">certificate of company tax registration：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="taxNo" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">founder of company：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="createUser" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">description：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="description" ></span></li>
+				</ul>
+				
+			  </div>
+			  
+			<div class="c-subdiv">
+				<button type= "submit" class="c-btncas" >submit</button>
+			</div>
+			  </form>
+		    </div>
+		    
+			
+		</div>	
+	</div>
+	
+</body>
+<script >
+   $(function(){
+        $("#form1").validate();
+     });
+ </script>    
+</html>

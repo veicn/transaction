@@ -1,0 +1,244 @@
+#set($id = $info.id)
+#set($js_validate = "validate")##需要验证
+
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm').put("menu","potrerillosInfo")
+    #if(!$id)
+        <form action="#" method="post" id="potrerillosForm">
+
+        <ul class="c-bczl enterbox1">
+
+            #springBind("info.id")
+            <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+
+            #springBind("info.totalInvestment")
+            <li class="c-bcz clearfix"><span class="c-b-txt">total investment：</span>
+				<input type="text" class="form-inp"  placeholder="Please enter the total investment amount" maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+           
+           
+            #springBind("info.fixedAssets")
+            <li class="c-bcz clearfix"><span class="c-b-txt">fixed assets：</span>
+                <input type="text" class="form-inp" placeholder="Please enter fixed assets amount"  maxlength="16"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+            #springBind("info.mainProducts")
+            <li class="c-bcz clearfix"><span class="c-b-txt">main products：</span>
+				<input type="text" class="form-inp" placeholder="Please enter the main product"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.deviceDescription")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Device description：</span>
+				<input type="text" class="form-inp" placeholder="Please enter the device description"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.canTrading")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Do you have the right to import and export：</span>
+				<input type="checkbox" class="form-checkbox" id="canTradingCheckbox"  >
+	            <input type="hidden"  id="canTrading" value="0" name="$!{status.expression}"  >
+##                <ul class="gwjs-blo clearfix">
+##                    <li class=""><span>company administrator</span>
+##                        <input type="checkbox" style="display:none" name="roles" value="enter_admin" title="company administrator"> <i class="cw-ico ico-che-h"></i>
+##                    </li>
+##
+##                </ul>
+            </li>
+            
+			
+			
+            #springBind("info.mainImportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Main import products：</span>
+				<input type="text" class="form-inp" placeholder="Please enter the main import products"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.mainExportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Main export products：</span>
+				<input type="text" class="form-inp" placeholder="Please enter the main export products" name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+        </ul>
+           
+        <div class="c-subdiv c-mod-bc c-mod-bc2"><button  class="c-btnsub">Submit</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">Back</button></div>
+
+          
+        </form>
+    #else
+        <form action="#" method="post">
+
+        <ul class="c-bczl">
+            #springBind("info.totalInvestment")
+            <li class="c-bcz clearfix"><span class="c-b-txt">total investment：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.fixedAssets")
+            <li class="c-bcz clearfix"><span class="c-b-txt">fixed assets：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.mainProducts")
+            <li class="c-bcz clearfix"><span class="c-b-txt">main product：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.deviceDescription")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Device description：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.canTrading")
+            <li class="c-bcz clearfix"><span class="c-b-txt">do you have the rights to import and export ：</span>
+                <span class="qx-conte">#if($!{status.value})
+               		是
+               	#else
+               		否
+               	#end</span>
+            </li>
+            #springBind("info.mainImportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Main import products：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.mainExportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">Main export products：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+        </ul>
+           
+        </form>
+        
+        
+    #end
+
+    </div>
+
+</div>
+
+<script >
+
+  $(function(){
+  
+  		//给do you have the rights to import and export CheckBox绑定事件
+  		$("#canTradingCheckbox").click(function(){
+  			var canTradingInput = $("#canTrading");
+  			if($(this).is(":checked")){
+  				canTradingInput.val(1);
+  			}else{
+  				canTradingInput.val(0);
+  			}
+  		});
+  
+         //表单验证及Submit
+        $ ("#potrerillosForm").validate({
+            ignore: ".ignore",
+            debug:false,
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                totalInvestment: {
+                    "required":true,
+                    digits:true ,
+                    maxlength:16
+                   
+                  
+                },
+                fixedAssets: {
+                    required: true,
+                    digits:true ,
+                    maxlength:16
+                },
+                mainProducts: {
+                    required: true
+                },
+                deviceDescription:{required:true},
+                mainImportProduct:{required:true},
+                mainExportProduct:{required:true}
+            },
+            messages: {
+                totalInvestment: {
+                    required:"Please enter the total investment amount"
+                },
+                fixedAssets: {
+                    required:"Please enter fixed assets amount"
+                },
+                mainProducts: {
+                    required:"Please enter the main product"
+                },
+                deviceDescription: {
+                    required:"Please enter the device description"
+                },
+                mainImportProduct: {
+                    required:"Please enter the main import products"
+                },
+                mainExportProduct: {
+                    required:"Please enter the main export products"
+                }
+              },  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+
+
+        
+     });
+     
+     
+ </script> 
+

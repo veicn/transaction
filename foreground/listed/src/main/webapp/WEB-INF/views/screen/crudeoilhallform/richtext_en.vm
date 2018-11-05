@@ -1,0 +1,56 @@
+<div class="c-mod" id="gxhxxbj">
+    <h3><em class="cw-ico ico-h3"></em>个性化信息编辑</h3>
+    #if($!demandDetails)
+        #foreach($obj in $!demandDetails)
+            #if($velocityCount == 1)
+                <div class="xxbjq">
+                    <ul class="c-ful bjq">
+                        <li class="c-fcos1"><span class="c-fn">大标题：</span><input name="demandDetailList[0].head" type="text" class="c-int" value="$!{obj.head}"/><input type="hidden" name="demandDetailList[0].id" value="$!{obj.id}"></li>
+                        <li class="c-fcos1"><span class="c-fn">小标题：</span><input name="demandDetailList[0].subHead" type="text" class="c-int" value="$!{obj.subHead}"/></li>
+                        <li class="c-fcos1"><span class="c-fn">内容：</span><textarea name="demandDetailList[0].content" class="c-teta">$!{obj.content}</textarea></li>
+                    </ul>
+                    <div class="bjq-tj"><a class="add" >＋</a></div>
+                    <div style="clear: both"></div>
+                </div>
+
+            #else
+                <div class="xxbjq">
+                    <ul class="c-ful bjq">
+                        <li class="c-fcos1"><span class="c-fn">大标题：</span><input type="text" name="demandDetailList[$velocityCount].head"  class="c-int" value="$!{obj.head}"/><input type="hidden" name="demandDetailList[$velocityCount].id" value="$!{obj.id}"></li>
+                        <li class="c-fcos1"><span class="c-fn">小标题：</span><input type="text" name="demandDetailList[$velocityCount].subHead"  class="c-int" value="$!{obj.subHead}"/></li>
+                        <li class="c-fcos1"><span class="c-fn">内容：</span><textarea  name="demandDetailList[$velocityCount].content"  class="c-teta">$!{obj.content}</textarea></li>
+                    </ul>
+                    <div class="bjq-tj"><a class="delete" style="padding: 6px 16px;">-</a></div>
+                    <div style="clear: both"></div>
+                </div>
+            #end
+
+        #end
+
+        #else
+
+            <div class="xxbjq">
+                <ul class="c-ful bjq">
+                    <li class="c-fcos1"><span class="c-fn">大标题：</span><input name="demandDetailList[0].head" type="text" class="c-int" value="$!{obj.head}"/><input type="hidden" name="demandDetailList[0].id" value="$!{obj.id}"></li>
+                    <li class="c-fcos1"><span class="c-fn">小标题：</span><input name="demandDetailList[0].subHead" type="text" class="c-int" value="$!{obj.subHead}"/></li>
+                    <li class="c-fcos1"><span class="c-fn">内容：</span><textarea name="demandDetailList[0].content" class="c-teta">$!{obj.content}</textarea></li>
+                </ul>
+                <div class="bjq-tj"><a class="add" >＋</a></div>
+                <div style="clear: both"></div>
+            </div>
+
+    #end
+
+</div>
+<script>
+
+    $('.add').click(function () {
+        var len=$('.xxbjq').length;
+        $('#gxhxxbj').append('<div class="xxbjq"><ul class="c-ful bjq"><li class="c-fcos1"><span class="c-fn">大标题：</span><input type="text" name="demandDetailList['+len+'].head"  class="c-int"/></li> <li class="c-fcos1"><span class="c-fn">小标题：</span><input type="text" name="demandDetailList['+len+'].subHead"  class="c-int"/></li> <li class="c-fcos1"><span class="c-fn">内容：</span><textarea  name="demandDetailList['+len+'].content"  class="c-teta"></textarea></li> </ul> <div class="bjq-tj"><a class="delete" style="padding: 6px 16px;">-</a></div><div style="clear: both"></div> </div>')
+
+    })
+    $('#gxhxxbj').on('click','.xxbjq .delete',function () {
+        $(this).parents('.xxbjq').remove()
+    })
+</script>
+

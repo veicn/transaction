@@ -1,0 +1,1151 @@
+#*成品油信息*#
+#set($contractSheetVO = $!{contractSheetCombineVO.contractSheetVO})
+#set($saleSheetVO = $!{contractSheetCombineVO.saleSheetVO})
+#set($productInfoVO = $!{contractSheetCombineVO.productInfoVO})
+#set($pricingInfoVO = $!{contractSheetCombineVO.pricingInfoVO})
+#set($transportInfoVO = $!{contractSheetCombineVO.transportInfoVO})
+#set($salerInfoVO = $!{contractSheetCombineVO.salerInfoVO})
+#set($buyerInfoVO = $!{contractSheetCombineVO.buyerInfoVO})
+#set($otherInfoVO = $!{contractSheetCombineVO.otherInfoVO})
+
+#set($tBrokerAppoint = $!{contractSheetCombineVO.tBrokerAppoint})
+#set($tShipagentAppoint = $!{contractSheetCombineVO.tShipagentAppoint})
+#set($tInspectorAppoint = $!{contractSheetCombineVO.tInspectorAppoint})
+
+$contain.get('/common/title.htm').put('title', 'Order Detail')
+
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_contract_list/index.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_contract_detail/index.js?js_version=04261116'))
+
+#css("$appServer.get('/css/common/reset.css?css_version=03280827')")
+#css("$appServer.get('/css/common/public.css?css_version=03280827')")
+#css("$appServer.get('/css/common/bootstrap.min.css?css_version=03280827')")
+#css("$appServer.get('/css/work/addAgreement.css?css_version=03280827')")
+#css("$appServer.get('/css/work/shipping.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myResouces.css?css_version=03280827')")
+#css("$appServer.get('/css/fonts/iconfont.css?css_version=03280827')")
+#css("$appServer.get('/css/work/resDetails.css?css_version=03280827')")
+<style>
+    .con_pop-c>li>input{display:none}
+
+    .shadow{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background:rgba(0,0,0,0.5);
+        z-index: 99;
+        display: none;
+
+    }
+    .pop{
+        width: 514px;
+        position: absolute;
+        left: 50%;
+        top: 180px;
+        margin-left: -257px;
+        background: #fff;
+        font-size: 14px;
+    }
+    .pop-title{
+        padding-left:20px;
+        border-bottom:1px solid rgba(236,236,236,1);
+        font-weight: bold;
+        font-size: 22px;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    .pop-title span:first-of-type{
+        width:3px;
+        height:16px;
+        background:#F36523;
+        margin-right: 10px;
+        display: inline-block;
+        margin-top: 2px;
+    }
+    .pop-title p{
+        display: inline-block;
+        margin-left: 280px;
+        width: 28px;
+        height: 28px;
+    }
+    .pop-title img{
+        width: 100%;
+    }
+    .pop-content{
+        padding-left: 20px;
+        padding-top: 30px;
+    }
+    .pop-content div{
+        height: 36px;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+    .pop-content div span{
+        display: inline-block;
+        width:159px;
+    }
+    .pop-content div input{
+        display: inline-block;
+        height: 36px;
+        line-height: 36px;
+        width:305px;
+        border:1px solid rgba(235,235,235,1);
+        outline: none;
+    }
+    .btns{
+        margin-top:30px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .btns p{
+        width:125px;
+        height: 36px;
+        line-height: 36px;
+        border-radius:2px;
+        display: inline-block;
+        color: #fff;
+        cursor: pointer;
+    }
+    .btns p:first-of-type{
+        margin-right: 10px;
+        background: #F36523;
+    }
+    /*.btns p:first-of-type:hover{
+         background: ;
+    }*/
+    .btns p:nth-of-type(2){
+        background:#323338;
+    }
+    .popclose{
+        cursor: pointer;
+    }
+
+    /*委托区域start*/
+
+    .sel-win select{
+        border: solid 1px rgba(193,193,193,1);
+        /*很关键：将默认的select选择框样式清除*/
+        appearance:none;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        /*在选择框的最右侧中间显示下拉箭头图片*/
+        background: url("$appServer.get('/layui/images/b_arrow.png')")  288px center no-repeat;
+        background-size: 24px 24px;
+        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+        padding-right: 36px;
+        height: 36px;
+        line-height: 36px;
+        width: 320px;
+        outline: none;
+        padding-left: 10px;
+    }
+ /*   .sel-win .sel{
+        background: url("$appServer.get('/layui/images/b_arrow2.png')")  288px center no-repeat;
+        background-size: 24px 24px;
+    }*/
+    .sel-win{
+        position: relative;
+        width: 320px;
+    }
+    .sel-win .line{
+        width: 1px;
+        height: 36px;
+        background: rgba(193,193,193,1);
+        position: absolute;
+        top: 0;
+        right: 36px;
+    }
+    .sel-win select::-ms-expand {
+        display: none;
+    }
+    .app-li,.sel-win,.btn-con{
+        display: inline-block;
+    }
+    .app-li{
+        width:210px;
+        margin-right: 8px;
+    }
+    .appoints{
+        font-size: 14px;
+        font-family:ArialMT;
+    }
+    .appoints li{
+        list-style: none;
+        margin-top:25px;
+    }
+
+    .appoints .btn-con{
+        width:120px;
+        height:36px;
+        line-height: 36px;
+        background:rgba(243,101,35,1);
+        border-radius:2px;
+        text-align: center;
+        color:#fff;
+        margin-left: 96px;
+    }
+    .appoints .btn-con:hover{
+        background:#FF9D32;
+    }
+    /*委托区域end*/
+</style>
+
+<div class="shadow">
+    <div class="pop">
+        <div class="pop-title">
+            <span></span>
+            <span>Contract No.</span>
+            <p>
+                <img src="$appServer.get('/layui/images/X.png')" class="popclose">
+            </p>
+        </div>
+        <div class="pop-content">
+            <div>
+                <span>Purchase contract No.</span>
+                <input id="purchaseContractNo" name="purchaseContractNo" value="$!{tTransExtend.purchaseContractNo}" class="contractInput"/>
+            </div>
+            <div>
+                <span>Agency agreement No.</span>
+                <input id="agencyAgreementNo" name="agencyAgreementNo" value="$!{tTransExtend.agencyAgreementNo}" class="contractInput"/>
+            </div>
+        </div>
+        <div class="btns">
+            <p class="confirm">Confirm</p>
+            <p class="popclose">Cancel</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="layui-fluid">
+    <div class="m-nav fl r-nav" >
+        <div class="m-sls cleafix">
+            <div class="r-tit">
+                <a href="$appServer.get('/pages/back/my_contract_list/index.htm')">My Deals ></a>
+                <span>Deal Details</span>
+            </div>
+            <div class="o-tab">
+                <ul class="r-tab-left od-tab-left ">
+                    <li>
+                        <span>Deal No:  </span>
+                        <span> $!{contractSheetVO.serialNumber} </span>
+                        <span class="file-name" style="display:none" id="contractuuid">$!{contractSheetVO.uuid}</span>
+                        <span  style="display:none" id="MemberType">$!{MemberType}</span>
+
+                    </li>
+                    <li>
+                        <span></span>
+                        <span>$!{contractSheetVO.contractSheetStatusVO.enName}</span>
+                    </li>
+
+                    <li class="m-nav-btn" >
+                        <em class="check-b1 check-b2 check-b3 button-b1">
+                            <a href="javascript:;" class="br btn-sub" onclick="checkContract('$!{contractSheetVO.uuid}','$!{contractSheetVO.id}')">Chartering</a>
+                            #if($!{contractSheetVO.contractSheetStatusVO.code} != '1')
+                                <a href="javascript:;" class="br a-back q-Quote">Logistics Tracking</a>
+                            #end
+                            <a href="javascript:;" class="br a-back q-Quote" onclick="checkVesselConfirmation('$!{contractSheetVO.uuid}','$!{contractSheetVO.id}')">Vessel Confirmation</a>
+                            <a href="$appServer.get('/pages/back/billCoreUpload/index.htm').put('uuid',$!{contractSheetVO.uuid})" id="uploadSurvey" class="br a-back q-Quote">Upload Doc</a>
+                            #if($!{userId} == "100008254")
+                                <a href="#" class="br a-back q-Quote" id="contractID">Contract No.</a>
+                            #end
+
+                            <a href="javascript:history.back(-1)" class="br a-back">Back</a>
+                        </em>
+                    </li>
+                </ul>
+
+                <div class="r-tab-right">
+                    $contain.get('/pages/back/my_contract_detail/contract_sheet_status.htm').put('contractSheetVO', $!{contractSheetVO})
+                </div>
+            </div>
+
+<!-- 委托start-->
+#if($!{userId} == "100008253")
+
+            <div class="" style="border-bottom: 1px solid #ECECEC;padding-bottom: 30px;margin-bottom: 25px;">
+                <span class="r-cont-tit" style="color:#F5650A;font-size: 20px;padding-top:40px;display: inline-block;">Your appointments</span>
+                <div class="">
+                    <ul class="appoints">
+                        <li>
+                            <span class="app-li">Customs Broker Appointment : </span>
+                            <div class="sel-win">
+                                <select id="brokerId" #if(${tBrokerAppoint.enterpriseId}) disabled="disabled" #end >
+                                    #*<option value ="$!{tBrokerAppoint.enterpriseId}">$!{tBrokerAppoint.enterpriseName}</option>*#
+                                    <option value =""></option>
+                                    #foreach($broker in $!{brokerAppointList})
+
+                                        <option value ="$!{broker.enterpriseId}"  #if($!{broker.enterpriseId} == $!{tBrokerAppoint.enterpriseId}) selected #end>$!{broker.enterpriseName}</option>
+                                    #end
+                                </select>
+                                <span class="line"></span>
+                            </div>
+                            #if(${tBrokerAppoint.enterpriseId}=="null"||!${tBrokerAppoint.enterpriseId})
+
+                                <p class="btn-con" id="brokerConfirm" onclick="confirm('1','brokerId')" style="cursor: pointer">Confirm</p>
+                            #end
+
+                        </li>
+                        <li>
+                            <span class="app-li">Shipping Agent Appointment : </span>
+                            <div class="sel-win">
+                                <select id="shipId" #if(${tShipagentAppoint.enterpriseId}) disabled="disabled" #end>
+                                    #*<option value ="$!{tShipagentAppoint.enterpriseId}">$!{tShipagentAppoint.enterpriseName}</option>*#
+                                    <option value =""></option>
+                                    #foreach($shipagent in $!{shipAppointList})
+                                        <option value ="$!{shipagent.enterpriseId}"  #if($!{shipagent.enterpriseId} == $!{tShipagentAppoint.enterpriseId}) selected #end>$!{shipagent.enterpriseName}</option>
+                                    #end
+                                </select>
+                                <span class="line"></span>
+                            </div>
+                            #if(${tShipagentAppoint.enterpriseId}=="null"||!${tShipagentAppoint.enterpriseId})
+                                <p class="btn-con" id="shipConfirm" onclick="confirm('2','shipId')" style="cursor: pointer">Confirm</p>
+                            #end
+                        </li>
+                        <li>
+                            <span class="app-li">Inspector appointment :</span>
+                            <div class="sel-win">
+                                <select id="inspectorId" #if(${tInspectorAppoint.enterpriseId})   disabled="disabled" #end>
+                                    #*<option value ="$!{tInspectorAppoint.enterpriseId}">$!{tInspectorAppoint.enterpriseName}</option>*#
+                                    <option value =""></option>
+                                    #foreach($inspector in $!{inspectorAppointList})
+                                        <option value ="$!{inspector.enterpriseId}" #if($!{inspector.enterpriseId} == $!{tInspectorAppoint.enterpriseId}) selected #end>$!{inspector.enterpriseName}</option>
+                                    #end
+                                </select>
+                                <span class="line"></span>
+                            </div>
+                            #if(${tInspectorAppoint.enterpriseId}=="null"||!${tInspectorAppoint.enterpriseId})
+                                <p class="btn-con" id="inspectorConfirm" onclick="confirm('3','inspectorId')" style="cursor: pointer">Confirm</p>
+                            #end
+                        </li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+#end
+  <!-- 委托 end-->
+
+            <div class="r-content q-content Basic-con-lj">
+                <span class="r-cont-tit">Deal Recap</span>
+##                <span class="r-cont-tab">$!{productInfoVO.productCategoryVO.enName}($!{productInfoVO.productSpecificationVO.enName})</span>
+                <ul class="clearfix">
+                    <div class="q-content-img">
+                        <img src="$imageServer.get('/images/jp1.jpg')" alt="">
+                    </div>
+##                    <li>
+##                        <span class="r-cont-tit">$!{productInfoVO.productCategoryVO.enName}    ($!{productInfoVO.productSpecificationVO.enName})</span>
+##
+####                        <span>$!{productInfoVO.quantityAsString}</span>
+##                    </li>
+                    <div class="main-title">
+                        <h3>$!{productInfoVO.productCategoryVO.enName}   ($!{productInfoVO.productSpecificationVO.enName})</h3>
+                    </div>
+
+                    <li style="width:600px">
+                        <span style="width:152px;">Purchase contract No. :</span>
+                        <span>$!{tTransExtend.purchaseContractNo}</span>
+                    </li>
+
+                    <li style="width:600px">
+                        <span style="width:152px;">Agency agreement No. :</span>
+                        <span>$!{tTransExtend.agencyAgreementNo}</span>
+                    </li>
+
+
+                    <li>
+                        <span>Quantity :</span>
+                        <span>$!{productInfoVO.quantityAsString} $!{productInfoVO.quantityUnitVO.enName}</span>
+                    </li>
+                #*<li>
+                    <span>ExportType :</span>
+                    <span>$!{productInfoVO.exportTypeVO.enName}</span>
+                </li>*#
+                    <li>
+                        <span>Incoterms :</span>
+                        <span>$!{productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Tolerance :</span>
+                        <span>+/- $!{productInfoVO.tolerance}% at OT</span>
+                    </li>
+
+                    <li>
+                        <span> Quality Standard :</span>
+                        <span class="file-name qualityStandard" style="display:none">$!{productInfoVO.qualityStandard}</span>
+                        <span id="r-content1-active" style="text-decoration: underline;cursor: pointer;left:266px;" class = "qualityStandardName">$!{productInfoVO.qualityStandardName}</span>
+                    </li>
+##                </ul>
+##            </div>
+##            <div class="r-content o-content">
+##                <span class="r-cont-tit">Pricing</span>
+                <p class="benchmark-txt"><span style="width: 146px;text-align: right" >Benchmark :</span>
+                    <em>
+                        Mean of $!{pricingInfoVO.priceSourceVO.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO.enName} under $!{pricingInfoVO.priceRegionVO.enName}
+                    </em>
+                </p>
+                #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                    <p class="benchmark-txt"><span  style="width: 146px;">Benchmark2 :</span>
+                        <em>
+                            Mean of $!{pricingInfoVO.priceSourceVO2.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO2.enName} under $!{pricingInfoVO.priceRegionVO2.enName}
+                        </em>
+                    </p>
+                #end
+##                <ul>
+                    <li>
+                        <span>Premium :</span>
+                        <span>$!{pricingInfoVO.premiumsAndDiscountsAsString} $!{pricingInfoVO.currencyVO.enName}/$!{pricingInfoVO.pricingUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Pricing Period :</span>
+                        <span>$!{pricingInfoVO.pricingPeriod}</span>
+                    </li>
+                    <li>
+                        <span>Payment Terms:</span>
+                        <span>$!{pricingInfoVO.paymentTerm}</span>
+                    </li>
+                    <li>
+                        <span>Quantity DTER :</span>
+                        <span>$!{pricingInfoVO.settlementQuantity}</span>
+                    </li>
+                    <li>
+                        <span>Inspection :</span>
+                        <span>$!{pricingInfoVO.inspectionVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Law :</span>
+                        <span>$!{pricingInfoVO.law}</span>
+                    </li>
+##
+##                    <li>
+##                        <span>Currency :</span>
+##                        <span>$!{pricingInfoVO.currencyVO.enName}</span>
+##                    </li>
+##                    <li>
+##                        <span>Unit :</span>
+##                        <span>$!{pricingInfoVO.pricingUnitVO.enName}</span>
+##                    </li>
+
+
+
+                    <li class="formuli">
+                        <span>Pricing Formula :</span>
+                        <span class="formulspan">
+                            #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                                <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                            #else
+                                <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                            #end
+                        </span>
+                    </li>
+                    <li class="term-txtbox">
+                        <span class="ntma">Other Terms :</span>
+                    ##<em class="terms-text">$!{otherInfoVO.otherTerm}</em>
+                        <textarea class="terms-text" readonly style="border: none; font-size: 14px; color: #333;resize:none;">$!{otherInfoVO.otherTerm}</textarea>
+                    </li>
+                </ul>
+
+
+            #* <ul>
+                 <li>
+                     <span>Quantity DTER :</span>
+                     <span>$!{pricingInfoVO.settlementQuantityVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Benchmark :</span>
+                     <span>$!{pricingInfoVO.pricingBenchmarkVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Source :</span>
+                     <span>$!{pricingInfoVO.priceSourceVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Region:</span>
+                     <span>$!{pricingInfoVO.priceRegionVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Premium/Discount :</span>
+                     <span>$!{pricingInfoVO.premiumsAndDiscountsAsString}</span>
+                 </li>
+                 <li>
+                     <span>Currency :</span>
+                     <span>$!{pricingInfoVO.currencyVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Unit :</span>
+                     <span>$!{pricingInfoVO.pricingUnitVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Pricing Period :</span>
+                     <span>$!{pricingInfoVO.pricingPeriodVO.enName}</span>
+                 </li>
+                 <li>
+                     <span>Payment Terms:</span>
+                     <span>$!{pricingInfoVO.paymentTermVO.enName}</span>
+                 </li>
+             </ul>*#
+            </div>
+            <div class="r-content Trans-con-lj">
+                <span class="r-cont-tit">Transportation</span>
+                <ul>
+                    <li>
+                        <span>Transport Mode:</span>
+                        <span>$!{transportInfoVO.transportModeVO.enName}</span>
+                    </li>
+                    <li>
+                        <span >Laycan:</span>
+                        <span>$!{transportInfoVO.laycanStartDateAsString} - $!{transportInfoVO.laycanEndDateAsString}</span>
+                    </li>
+                    <li>
+                        <span >Laytime:</span>
+                        <span>$!{transportInfoVO.laytimeAsString} H+6</span>
+                    </li>
+                    <li>
+                        <span>Demurrage Rate:</span>
+                        <span>$!{transportInfoVO.demurrageRateVO.enName}</span>
+                    </li>
+                    #if($!{productInfoVO.tradeTermVO.enName} == 'FOB')
+                        <li>
+                            <span>Load Port:</span>
+                            <span>$!{transportInfoVO.loadingPort}, $!{transportInfoVO.loadingCountry}  </span>
+                        </li>
+                    #end
+
+                    #if($!{productInfoVO.tradeTermVO.enName} == 'CFR')
+                        <li>
+                            <span  class="Trans-span1-lj">Discharge Port:</span>
+                            <span> $!{transportInfoVO.dischargePort}, $!{transportInfoVO.dischargeCountry} </span>
+                        </li>
+                    #end
+
+                </ul>
+            </div>
+            <div class="r-content">
+            #*<span class="r-cont-tit">Seller Berth</span>
+            $contain.get('/pages/components/berth_list.htm').setParam("shipPortCode", $!{transportInfoVO.loadingPortVO.code})
+            *#
+                <div class="r-content o-content">
+                    <span class="r-cont-tit">Seller</span>
+                    <div class="contract-txt">
+                        <label>Company :</label>
+                        <em>$!{salerInfoVO.enterpriseName}</em>
+                    </div>
+                    <div class="contract-txt" id="content-li-long">
+                        <label>Address : </label>
+                        <em>$!{salerInfoVO.address}</em>
+                    </div>
+                    <ul>
+                    #*<li>
+                        <span>Company :</span>
+                        <span>$!{salerInfoVO.enterpriseName}</span>
+                    </li>
+                    <li id="content-li-long">
+                        <span>Address :</span>
+                        <span >$!{salerInfoVO.address}</span>
+                    </li>
+*#
+                        <li>
+                            <span>Contact Person :</span>
+                            <span>$!{salerInfoVO.traderName}</span>
+                        </li>
+                        <li>
+                            <span>Email :</span>
+                            <span>$!{salerInfoVO.email}</span>
+                        </li>
+                        <li>
+                            <span>Tel : </span>
+                            <span>$!{salerInfoVO.telephone}</span>
+                        </li>
+                        <li>
+                            <span>Fax :</span>
+                            <span>$!{salerInfoVO.fax}</span>
+                        </li>
+                    </ul>
+                </div>
+#if($!{agentEnterpriseVo})
+                <div class="r-content o-content">
+                    <span class="r-cont-tit">Export agent</span>
+                    <div class="contract-txt">
+                        <label>Company :</label>
+                        <em>$!{agentEnterpriseVo.fullName}</em>
+                    </div>
+                    <div class="contract-txt" id="content-li-long">
+                        <label>Address : </label>
+                        <em>$!{agentEnterpriseVo.contactAddress}</em>
+                    </div>
+                    <ul>
+                    #*<li>
+                        <span>Company :</span>
+                        <span>$!{salerInfoVO.enterpriseName}</span>
+                    </li>
+                    <li id="content-li-long">
+                        <span>Address :</span>
+                        <span >$!{salerInfoVO.address}</span>
+                    </li>
+*#
+                        <li>
+                            <span>Contact Person :</span>
+                            <span>$!{agentEnterpriseVo.contactName}</span>
+                        </li>
+                        <li>
+                            <span>Email :</span>
+                            <span>$!{agentEnterpriseVo.contactMail}</span>
+                        </li>
+                        <li>
+                            <span>Tel : </span>
+                            <span>$!{agentEnterpriseVo.contactPhone}</span>
+                        </li>
+                        <li>
+                            <span>Fax :</span>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+#end
+                <div class="r-content Buyer-con-lj">
+                    <span class="r-cont-tit">Buyer</span>
+                    <div class="buy-txt">
+                        <label>Company : </label>
+                        <em>$!{buyerInfoVO.enterpriseName}</em>
+                    </div>
+                    <div class="buy-txt" id="content-li-long">
+                        <label>Address :</label>
+                        <em>$!{buyerInfoVO.address}</em>
+                    </div>
+                    <ul>
+                    #* <li>
+                         <span>Company :</span>
+                         <span>$!{buyerInfoVO.enterpriseName}</span>
+                     </li>
+                     <li id="content-li-long">
+                         <span>Address :</span>
+                         <span >$!{buyerInfoVO.address}</span>
+                     </li>*#
+
+                        <li>
+                            <span>Contact Person :</span>
+                            <span>$!{buyerInfoVO.traderName}</span>
+                        </li>
+                        <li>
+                            <span>Email :</span>
+                            <span>$!{buyerInfoVO.email}</span>
+                        </li>
+                        <li>
+                            <span>Tel : </span>
+                            <span>$!{buyerInfoVO.telephone}</span>
+                        </li>
+                        <li>
+                            <span>Fax :</span>
+                            <span>$!{buyerInfoVO.fax}</span>
+                        </li>
+                    </ul>
+                </div>
+
+            #*<div class="r-content">
+                <span class="r-cont-tit">Other Info</span>
+                <ul>
+                    <li>
+                        <span>Other Terms :</span>
+                        <span>$!{otherInfoVO.otherTerm}</span>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>*#
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="con_one_pop clearfix">
+    <div class="con_pop_box clearfix">
+        <div class="con_pop-t clearfix">
+            <h3>Upload Survey Report</h3>
+            <i></i>
+        </div>
+        <ul class="con_pop-c">
+            <li>
+                <span>COQ (Refinery) :</span>
+                <span  class="orange quantity"  style="   display: block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;color:#ffff" >+Upload</span>
+
+                <input type="hidden" name="coqRefinery" id="Refinery"/>
+                <input type="hidden" name="coqRefineryName" id="RefineryName" />
+
+                <span class="file-name" style="display:none" id="spanRefinery">$!{contractSheetVO.coqRefinery}</span>
+                <span class="file-name" id="spanRefineryName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.coqRefineryName}</span>
+
+            </li>
+            <span class="upload-word"></span>
+            <li>
+                <span>COQ (Shore Tanks) :</span>
+                <span  class="orange quantitytwo"  style="   display: block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;color:#ffff" >+Upload</span>
+
+                <input type="hidden" name="productInfoVO.qualityStandard" id="ShoreTanks"/>
+                <input type="hidden" name="productInfoVO.qualityStandardName" id="ShoreTanksName" />
+
+                <span class="file-name" style="display:none" id="spanShoreTanks">$!{contractSheetVO.coqShoreTanks}</span>
+                <span class="file-name" id="spanShoreTanksName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.coqShoreTanksName}</span>
+
+
+            </li>
+            <span class="upload-word"></span>
+            <li>
+                <span>CIQ :</span>
+                <span  class="orange quantityth"  style="   display: block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;color:#ffff" >+Upload</span>
+
+                <input type="hidden"  id="CIQ"/>
+                <input type="hidden"  id="CIQName" />
+
+                <span class="file-name" style="display:none" id="spanCIQ">$!{contractSheetVO.ciq}</span>
+                <span class="file-name" id="spanCIQName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.ciqName}</span>
+            </li>
+            <span class="upload-word"></span>
+            <li>
+                <span>Loading Survey Report :</span>
+                <span  class="orange quantityfo"  style="   display: block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;color:#ffff" >+Upload</span>
+
+                <input type="hidden" name="productInfoVO.qualityStandard" id="SurveyReport"/>
+                <input type="hidden" name="productInfoVO.qualityStandardName" id="SurveyReportName" />
+
+                <span class="file-name" style="display:none" id="spanSurveyReport">$!{contractSheetVO.loadingSurveyReport}</span>
+                <span class="file-name" id="spanSurveyReportName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.loadingSurveyReportName}</span>
+
+            </li>
+            <span class="upload-word"></span>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="con_one_pop1 clearfix">
+    <div class="con_pop_box1 clearfix">
+        <div class="con_pop-t1 clearfix">
+            <h3>Quality Report</h3>
+            <i></i>
+        </div>
+        <ul class="con_pop-c1">
+            <li>
+                <span>COQ (Refinery) :</span>
+
+
+                <input type="hidden" name="coqRefinery" id="Refinery"/>
+                <input type="hidden" name="coqRefineryName" id="RefineryName" />
+                #if($!{contractSheetVO.coqRefinery})
+                    <span class="file-name" style="display:none" id="viewspanRefinery">$!{contractSheetVO.coqRefinery}</span>
+                    <span class="file-name" id="viewspanRefineryName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.coqRefineryName}</span>
+                #end
+
+            </li>
+            <span class="upload-word1"></span>
+            <li>
+                <span>COQ (Shore Tanks) :</span>
+
+
+                <input type="hidden" name="productInfoVO.qualityStandard" id="ShoreTanks"/>
+                <input type="hidden" name="productInfoVO.qualityStandardName" id="ShoreTanksName" />
+
+                #if($!{contractSheetVO.coqShoreTanks})
+                    <span class="file-name" style="display:none" id="viewspanShoreTanks">$!{contractSheetVO.coqShoreTanks}</span>
+                    <span class="file-name" id="viewspanShoreTanksName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.coqShoreTanksName}</span>
+                #end
+            </li>
+            <span class="upload-word1"></span>
+            <li>
+                <span>CIQ :</span>
+
+
+                <input type="hidden"  id="CIQ"/>
+                <input type="hidden"  id="CIQName" />
+
+                #if($!{contractSheetVO.ciq})
+                    <span class="file-name" style="display:none" id="viewspanCIQ">$!{contractSheetVO.ciq}</span>
+                    <span class="file-name" id="viewspanCIQName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.ciqName}</span>
+                #end
+            </li>
+            <span class="upload-word1"></span>
+            <li>
+                <span>Loading Survey Report :</span>
+
+
+                <input type="hidden" name="productInfoVO.qualityStandard" id="SurveyReport"/>
+                <input type="hidden" name="productInfoVO.qualityStandardName" id="SurveyReportName" />
+
+                #if($!{contractSheetVO.loadingSurveyReport})
+                    <span class="file-name" style="display:none" id="viewspanSurveyReport">$!{contractSheetVO.loadingSurveyReport}</span>
+                    <span class="file-name" id="viewspanSurveyReportName" style="text-align:left;text-decoration: underline;cursor: pointer">$!{contractSheetVO.loadingSurveyReportName}</span>
+                #end
+
+            </li>
+            <span class="upload-word1"></span>
+        </ul>
+    </div>
+</div>
+
+<script>//viewSurvey
+
+var viewspanRefinery= $("#viewspanRefinery").html();
+var viewspanRefineryName= $("#viewspanRefineryName").html();
+$("#viewspanRefineryName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+viewspanRefinery+"&fileName="+viewspanRefineryName;
+});
+
+var spanRefinery= $("#spanRefinery").html();
+var spanRefineryName= $("#spanRefineryName").html();
+$("#spanRefineryName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+spanRefinery+"&fileName="+spanRefineryName;
+});
+
+var viewspanShoreTanks= $("#viewspanShoreTanks").html();
+var viewspanShoreTanksName= $("#viewspanShoreTanksName").html();
+$("#viewspanShoreTanksName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+viewspanShoreTanks+"&fileName="+viewspanShoreTanksName;
+});
+
+var spanShoreTanks= $("#spanShoreTanks").html();
+var spanShoreTanksName= $("#spanShoreTanksName").html();
+$("#spanShoreTanksName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+spanShoreTanks+"&fileName="+spanShoreTanksName;
+});
+
+
+var viewspanCIQ= $("#viewspanCIQ").html();
+var viewspanCIQName= $("#viewspanCIQName").html();
+$("#viewspanCIQName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+viewspanCIQ+"&fileName="+viewspanCIQName;
+});
+
+
+var spanCIQ= $("#spanCIQ").html();
+var spanCIQName= $("#spanCIQName").html();
+$("#spanCIQName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+spanCIQ+"&fileName="+spanCIQName;
+});
+
+var viewspanSurveyReport= $("#viewspanSurveyReport").html();
+var viewspanSurveyReportName= $("#viewspanSurveyReportName").html();
+$("#viewspanSurveyReportName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+viewspanSurveyReport+"&fileName="+viewspanSurveyReportName;
+});
+
+var spanSurveyReport= $("#spanSurveyReport").html();
+var spanSurveyReportName= $("#spanSurveyReportName").html();
+$("#spanSurveyReportName").on("click",function(){
+    window.location.href = appServer +"common/doc/download.htm?"+"path="+spanSurveyReport+"&fileName="+spanSurveyReportName;
+});
+
+
+
+
+layui.use("upload", function () {
+    var $ = layui.jquery, upload = layui.upload;
+    var contractuuid= $("#contractuuid").html();
+    upload.render({
+        elem: ".quantity",
+        url: appServer +"common/doc/upload.json",
+        accept: "file",
+        done: function (res, index, upload) {
+            var path = res.datas.path;
+            var fileName = res.datas.originalName;
+            $.post(appServer + "pages/back/my_contract_detail/uploadRefinery.htm", {
+                "contractuuid": contractuuid,"contractfilepath":path,"contractfilename":fileName
+            }, function (result) {
+
+            })
+
+
+            if (res.status === 0) {
+                var item = this.item;
+
+                $("#Refinery").val(res.datas.path);
+                $("#RefineryName").val(fileName);
+                $("#spanRefineryName").html(res.datas.originalName);
+                $("#spanRefineryName").off("click");
+                $("#spanRefineryName").on("click",function(){
+                    window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+fileName;
+                });
+
+            } else {
+                layer.tips(res.message, this.item, {tips: 1});
+                $("#QuantityStandardName").off("click");
+            }
+        }
+    })
+})
+
+layui.use("upload", function () {
+    var $ = layui.jquery, upload = layui.upload;
+
+    var contractuuid= $("#contractuuid").html();
+
+    upload.render({
+        elem: ".quantitytwo",
+        url: appServer +"common/doc/upload.json",
+        accept: "file",
+        done: function (res, index, upload) {
+
+            var path = res.datas.path;
+            var fileName = res.datas.originalName;
+            $.post(appServer + "pages/back/my_contract_detail/uploadShoreTanks.htm", {
+                "contractuuid": contractuuid,"contractfilepath":path,"contractfilename":fileName
+            }, function (result) {
+
+            })
+
+            if (res.status === 0) {
+                var item = this.item;
+                var path = res.datas.path;
+                var fileName = res.datas.originalName;
+                $("#ShoreTanks").val(res.datas.path);
+                $("#ShoreTanksName").val(fileName);
+                $("#spanShoreTanksName").html(res.datas.originalName);
+                $("#spanShoreTanksName").off("click");
+                $("#spanShoreTanksName").on("click",function(){
+                    window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+fileName;
+                });
+
+            } else {
+                layer.tips(res.message, this.item, {tips: 1});
+                $("#spanShoreTanksName").off("click");
+            }
+        }
+    })
+})
+//uploadciq
+
+layui.use("upload", function () {
+    var $ = layui.jquery, upload = layui.upload;
+
+    var contractuuid= $("#contractuuid").html();
+
+    upload.render({
+        elem: ".quantityth",
+        url: appServer +"common/doc/upload.json",
+        accept: "file",
+        done: function (res, index, upload) {
+
+            var path = res.datas.path;
+            var fileName = res.datas.originalName;
+
+            $.post(appServer + "pages/back/my_contract_detail/uploadciq.htm", {
+                "contractuuid": contractuuid,"contractfilepath":path,"contractfilename":fileName
+            }, function (result) {
+
+            })
+
+
+
+            if (res.status === 0) {
+                var item = this.item;
+
+                $("#CIQ").val(res.datas.path);
+                $("#CIQName").val(fileName);
+                $("#spanCIQName").html(res.datas.originalName);
+                $("#spanCIQName").off("click");
+                $("#spanCIQName").on("click",function(){
+                    window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+fileName;
+                });
+
+            } else {
+                layer.tips(res.message, this.item, {tips: 1});
+                $("#spanCIQName").off("click");
+            }
+        }
+    })
+})
+//spanSurveyReportName
+layui.use(['upload','jquery'], function () {
+    var $ = layui.jquery,
+            upload = layui.upload;
+
+    var contractuuid= $("#contractuuid").html();
+
+    upload.render({
+        elem: ".quantityfo",
+        url: appServer +"common/doc/upload.json",
+        accept: "file",
+        done: function (res, index, upload) {
+            var path = res.datas.path;
+            var fileName = res.datas.originalName;
+
+            $.post(appServer + "pages/back/my_contract_detail/uploadloadingSurveyReport.htm", {
+                "contractuuid": contractuuid,"contractfilepath":path,"contractfilename":fileName
+            }, function (result) {
+
+            })
+
+
+            if (res.status === 0) {
+                var item = this.item;
+
+                $("#SurveyReport").val(res.datas.path);
+                $("#SurveyReportName").val(fileName);
+                $("#spanSurveyReportName").html(res.datas.originalName);
+                $("#spanSurveyReportName").off("click");
+                $("#spanSurveyReportName").on("click",function(){
+                    window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+fileName;
+                });
+
+            } else {
+                layer.tips(res.message, this.item, {tips: 1});
+                $("#spanSurveyReportName").off("click");
+            }
+        }
+    })
+})
+
+var MemberType=$("#MemberType").html();
+/*if(MemberType=='1'){
+    $("#uploadSurvey").hide();
+}
+if(MemberType=='2'){
+    $("#viewSurvey").hide();
+}*/
+/*$("#uploadSurvey").on("click", function () {
+    $('.con_one_pop').css('display','block')
+});
+
+$("#viewSurvey").on("click", function () {
+    $('.con_one_pop1').css('display','block')
+});*/
+
+$('.con_pop-t>i').on('click',function () {
+    $('.con_one_pop').css('display','none')
+})
+
+$('.con_pop-t1>i').on('click',function () {
+    $('.con_one_pop1').css('display','none')
+})
+
+
+$('#contractID').on('click',function () {
+    $('.shadow').css('display','block');
+    //$('.contractInput').val("");
+
+})
+
+$(".popclose").click(function(){
+    $(".shadow").css("display","none");
+})
+
+
+
+$(".confirm").click(function(){
+    var purchaseContractNo= $("#purchaseContractNo").val();
+    var agencyAgreementNo=$("#agencyAgreementNo").val();
+
+    $.ajax({
+        type: "POST",
+        url: "$appServer/pages/back/my_contract_list/updateTransExtend.json",
+        data: {'id':"$!{tTransExtend.id}",
+            'dealNo': "$!{contractSheetVO.serialNumber}",
+            'purchaseContractNo': purchaseContractNo,
+            'agencyAgreementNo': agencyAgreementNo
+        },
+        success: function (msg) {
+            $(".shadow").css("display","none");
+            layer.alert("" + msg.message, {title: 'Info', btn: ['OK']});
+        },
+        error: function (msg) {
+            $(".shadow").css("display","none");
+            layer.alert("" + msg.message, {title: 'Info', btn: ['OK']});
+        }
+    });
+
+})
+
+function confirm(typ,appiontId){
+
+    layui.use(['layer'], function(){
+        layer.confirm('Are you sure to confirm it?', {
+            title:'Info',
+            area: ['535px'],
+            type: 1,
+            icon: 2,
+            //anim: 6, //默认动画风格
+            skin: 'demo-class',
+            closeBtn: 3,
+            shadeClose: false,
+            shade: [0.5, '#000000'],
+            btnAlign: 'c',
+            btn: ['Yes','No'] //按钮
+        }, function(){
+
+            confirmBtn(typ,appiontId);
+
+        }, function(){
+
+        });
+    });
+
+
+}
+
+function confirmBtn(typ,appiontId){
+    var appointType = typ;
+    var appointEnterpriseId = $('#'+appiontId+' option:selected').val();
+    var appointEnterpriseName = $('#'+appiontId+' option:selected').text();
+
+    $.ajax({
+        type: "POST",
+        url: "$appServer/pages/back/my_contract_detail/contractAppoint.json",
+        data: {'contractuuid':"$!{contractSheetVO.uuid}",
+            'appointType': appointType,
+            'appointEnterpriseId': appointEnterpriseId,
+            'appointEnterpriseName': appointEnterpriseName
+        },
+        success: function (msg) {
+
+            layer.alert(msg.message, {title: 'Info', btn: ['OK']}, function () {
+                window.location.reload()
+            });
+        },
+        error: function (msg) {
+
+            layer.alert("" + msg.message, {title: 'Info', btn: ['OK']});
+
+        }
+    });
+
+
+
+}
+
+
+
+</script>
+

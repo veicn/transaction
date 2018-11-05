@@ -1,0 +1,45 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>企业详情</title>
+	<link rel="stylesheet" href="$imageServer.get('css/s_common.css')">
+	<link rel="stylesheet" href="$imageServer.get('css/s_center.css')">
+		<script type="text/javascript" src="$appServer.get('script/lib/jquery.validate.min.js')"></script>
+	
+</head>
+<body>
+		<div class="c-mr">
+			<div class="c-mod" id="cgxx">
+			  <h3><em class="cw-ico ico-h3"></em>个人详细信息</h3>
+			  <form action="$appServer.get('center/personToadd.htm')" method="post">
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">用户名称：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="name" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">证件类型：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="cardType" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">证件号码：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="cardNo" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">创建人：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="createUser" ></span></li>
+					<li class="c-fcos2"><span class="c-fn">备注：</span><span class="c-int qx-conte"><input type="text" required="true" class="c-fcos2" name="memo" ></span></li>
+				</ul>
+				
+			  </div>
+			  
+			<div class="c-subdiv">
+				<button type= "submit" class="c-btncas" >提交</button>
+			</div>
+			  </form>
+		    </div>
+		    
+			
+		</div>	
+	</div>
+	
+</body>
+<script >
+   $(function(){
+        $("#form1").validate();
+     });
+ </script>  
+</html>

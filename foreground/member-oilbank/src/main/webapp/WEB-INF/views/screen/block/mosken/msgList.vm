@@ -1,0 +1,25 @@
+
+<div class="fr content-rgh" style="width:1000px">
+    <h3 class="con-tit1">消息列表</h3>
+    <table class="con-table con-table1">
+        <tr>
+            <td>时间</td>
+            <td>内容</td>
+        </tr>
+    </table>
+    <table class="con-table" id="idData">
+
+        #foreach($msge in $!{msgList})
+            <tr  style="width: 950px;">
+                <td  style="width:300px;">$!msge.createTime</td>
+                <td  style="width:550px;">$!msge.content</td>
+            </tr>
+        #end
+    </table>
+    <div id="barcon" name="barcon" class="pageh"></div>
+    <table width="60%" align="right">
+        <tr><td></td></tr>
+    </table>
+
+</div>
+#js($imageServer.get('product/js/productOil_zh.js'))

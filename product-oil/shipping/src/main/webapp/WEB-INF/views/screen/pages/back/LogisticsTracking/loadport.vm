@@ -1,0 +1,176 @@
+<div class="con_one_2 con_one">
+    <div class="loading-port">
+        <h3>LOADING TRACKING</h3>
+        <div class="m-t-tab stowage-steps-info clearfix">
+            <ol class="fl w2">
+                <li>
+                    <span class="m-f-span wspan">Port Of Loading :</span>
+                    <span class="m-r-span">$!{loadPortVO.portOfLoading}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Vessel Name :</span>
+                    <span class="m-r-span">$!{loadPortVO.vesselName}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Imo :</span>
+                    <span class="m-r-span">$!{loadPortVO.imo}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Nor Tendered :</span>
+                    <span class="m-r-span">$!{loadPortVO.norTendered}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Anchor aweigh :</span>
+                    <span class="m-r-span">$!{loadPortVO.anchorAweigh}</span>
+                </li>
+            </ol>
+            <ul class="fl w2">
+                <li>
+                    <span class="m-f-span wspan">Product :</span>
+                    <span class="m-r-span">$!{loadPortVO.product}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Quantity（Tons）:</span>
+                    <span class="m-r-span">$!{loadPortVO.quantity}</span>
+                </li>
+                <li>
+                    <span class="m-f-span wspan">Laycan :</span>
+                    #if($!{loadPortVO.laycanStart}&&$!{loadPortVO.laycanEnd})
+                        <span class="m-r-span">$!{loadPortVO.laycanStart}——$!{loadPortVO.laycanEnd}</span>
+                    #else
+                        <span class="m-r-span">$!{loadPortVO.laycanStart}</span>
+                    #end
+                </li>
+            </ul>
+        </div>
+        <div class="split-dash-line"></div>
+        <div class="stowage-dd clearfix">
+            <dl class="fl w2">
+                <dt>POB</dt>
+                <dd>
+                    <span class="m-f-span wspan">Date&Time :</span>
+                    <span>$!{loadPortVO.pobDatetimeOne}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Berth :</span>
+                    <span>$!{loadPortVO.pobBerth}</span>
+                </dd>
+            </dl>
+            <dl class="fl w2">
+                <dt>FIRST LINE</dt>
+                <dd>
+                    <span class="m-f-span wspan">Date&Time :</span>
+                    <span>$!{loadPortVO.firstLineDatetime}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Etb :</span>
+                    <span>$!{loadPortVO.firstLineEtb}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Berth :</span>
+                    <span>$!{loadPortVO.firstLineBerth}</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="split-dash-line"></div>
+        <div class="stowage-dd clearfix">
+            <dl class="fl stowage-dl-tanks w2">
+                <dt>TANKS INSPECTION</dt>
+                <dd>
+                    <span class="m-f-span wspan">Date&Time :</span>
+                    <span>$!{loadPortVO.tanksInspectionDatetime}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Remarks :</span>
+                    <span>$!{loadPortVO.tanksInspectionRemarks}</span>
+                </dd>
+            </dl>
+            <dl class="fl w2">
+                <dd>
+                    <span class="m-f-span  wspan ">All Fast :</span>
+                    <span>$!{loadPortVO.allFast}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span  wspan">Shore arms conecting :</span>
+                    <span>$!{loadPortVO.shoreArmsConnecting}</span>
+                </dd>
+            </dl>
+        </div>
+        <div class="split-dash-line"></div>
+        <div class="stowage-dd clearfix">
+            <dl class="fl stowage-dl-tanks w2">
+                <dt>INDEPENDENT INSPECTION</dt>
+                <dd>
+                    <span class="m-f-span wspan"> Independent Inspection :</span>
+                    <span>$!{loadPortVO.independentInspection}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Date&Time :</span>
+                    <span>$!{loadPortVO.independentInspectionDatetime}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Obq :</span>
+                    <span>$!{loadPortVO.independentInspectionObq}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Other :</span>
+                    <span>$!{loadPortVO.portOfLoading}</span>
+                </dd>
+            </dl>
+            <dl class="fl ">
+                <dt class="stowage-dt-com">COMMENCED LOADING</dt>
+                <dd>
+                    <span class="  wspan ">Date&Time :</span>
+                    <span class="h36">$!{loadPortVO.commencedLoadingDatetime}</span>
+                </dd>
+                <dd>
+                    <span class="  wspan">Etc :</span>
+                    <span>$!{loadPortVO.etc}</span>
+                </dd>
+                <dd>
+                    <span class="  wspan">Loading Progress :</span>
+                    <span>
+                                            <em class=" button-check">
+                                                 <a href="javascript:;" class="br">Check</a>
+                                            </em>
+                                        </span>
+                </dd>
+            </dl>
+
+        </div>
+        <div class="split-dash-line"></div>
+        <div class="stowage-dd clearfix">
+            <dl class="fl stowage-dl-tanks w2">
+                <dt>CARGO DOCUMENTS ON BOARD</dt>
+                <dd>
+                    <span class="m-f-span wspan"> Planed Quantity (MT) :</span>
+                    <span>$!{loadPortVO.blMetricTons}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Long Tons :</span>
+                    <span>$!{loadPortVO.blLongTons}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Ltr at 15℃ :</span>
+                    <span>$!{loadPortVO.ltr}</span>
+                </dd>
+                <dd>
+                    <span class="m-f-span wspan">Bbls at 60℃ :</span>
+                    <span>$!{loadPortVO.bbls}</span>
+                </dd>
+            </dl>
+            <dl class="fl w2">
+                <dt>ALL LINES CAST OFF AND VESSEL SAILED</dt>
+                <dd>
+                    <span class="m-f-span wspan">Date&Time :</span>
+                    <span>$!{loadPortVO.leaveDatetime}</span>
+                </dd>
+                <dd >
+                    <span class="m-f-span wspan">Nest Port :</span>
+                    <span>$!{loadPortVO.nextPort}</span>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,34 @@
+<div class="c-mod" id="mjbwxx">
+    <h3><em class="cw-ico ico-h3"></em>泊位信息
+        <span class="cxtj-nr-an">
+        </span>
+
+    </h3>
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+##                <th class="tabl-line">序号</th>
+                <th>泊位名称</th>
+                <th>泊位等级</th>
+                <th>泊位吃水</th>
+                <th>适合船型</th>
+##                <th>载重区间</th>
+                <th>泊位说明</th>
+            </tr>
+            #foreach($ship in $!demandShipBerthList)
+                <tr>
+##                    <td>$velocityCount</td>
+                    <td><input type="hidden" value="$!{ship.berthName}" name="" >$!{ship.berthName}</td>
+                    <td><input type="hidden" value="$!{ship.berthGrade}" name="" id="berthGrade$velocityCount">$!{ship.berthGrade}万吨</td>
+                    <td><input type="hidden" value="$!{ship.draftLimitation}" name="" id="draftLimitation$velocityCount">$!{ship.draftLimitation}m</td>
+
+                        <td><input type="hidden" value="1" name="" id="shipType$velocityCount">$!{shipTypeMap.get($!{ship.shipType})}</td>
+
+##                    <td><input type="hidden" value="$!{ship.carryingCapacityMin}" name="" id="carryingCapacityMin$velocityCount">$!{ship.carryingCapacityMin}万吨~<input type="hidden" value="$!{ship.carryingCapacityMin}" name="" id="carryingCapacityMax$velocityCount">$!{ship.carryingCapacityMax}万吨</td>
+                    <td><input type="hidden" value="$!{ship.berthDesc}" name="" id="berthDesc$velocityCount">$!{ship.berthDesc}</td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+

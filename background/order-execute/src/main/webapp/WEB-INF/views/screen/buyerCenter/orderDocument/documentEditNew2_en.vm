@@ -1,0 +1,307 @@
+#if($!query.showDetail == 1)
+	#set( $isDis = "disabled='disabled'" )
+#else
+	#set( $isDis = "" )
+#end
+
+<div class="c-mod">
+	<h3><em class="cw-ico ico-h3"></em>单证管理</h3>
+	<form id="form1" enctype="multipart/form-data" method="post"
+		onsubmit="return false;">
+		<input type="file" id="uploadFile" multiple="multiple" name="file"
+			onchange="selectFile()" accept="*/*"
+			style="width: 70px; display: none;" />
+		<input id="type" nane="type" type="hidden" value="2">
+	</form>
+
+	<input id="uuid" type="hidden" value="$!query.uuid">
+	<input id="tradeCategory" type="hidden" value="$!query.tradeCategory">
+	
+	<input id="orderDocumentId" type="hidden" value="$!query.orderDocumentId">
+	<input id="documentType" type="hidden" value="$!query.documentType">
+	<input id="formPage" type="hidden" value="$!query.formPage">
+	<input id="showDetail" type="hidden" value="$!query.showDetail">
+	
+	<div class="cwxx-tit" style="margin-top:40px;">
+		#foreach($subData in $subDatas)
+		 	
+			<input id="orderNo" name="orderNo" value="$!mainData.orderNo" type="hidden" class="c-int" disabled='disabled'/></li>
+			<input id="contractNo" name="contractNo" value="$!mainData.contractNo" type="hidden" class="c-int" disabled='disabled'/></li>
+			<input id="shipName" name="shipName" value="$!mainData.shipName" type="hidden" class="c-int" $isDis/></li>
+			
+			<div class="form-row charter-row charter-row3 clearfix is-flag clone-node-list">
+				<input id="fileCode" name="fileCode" value="$!subData.fileCode" type="hidden" class="c-int fileCode" $isDis/></li>	
+				<ul class="c-ful">
+					<li style="width:100%;white-space:nowrap; ">
+							<em style="width:354px;float:left;">
+								<label>
+									<span class="add-benchmark" style="display:inline-block;width:220px;vertical-align:middle;height:13px;">
+									#if($!query.showDetail != 1)
+									<input class="checkDoc" name="checkDoc" type="checkbox" style="display:inline-block;float:right;"/>
+									#end
+									</span>
+									<span class="subCode" style="display:inline-block;width:130px;margin-top:5px;font-size:15px;">$!subData.fileName：</span>
+								 </label>
+							</em>
+							<input id="input_$subData.fileCode" style="width:340px;" value="$!subData.originalName" type="text" name="myShowVal" class="c-int" readonly="readonly" $isDis/>
+					</li>
+				</ul>
+				#if($!query.showDetail != 1)
+					<div class="controls charter-controls s-file s-file2 c-wunai">
+						<a href="javascript:" id="file$subData.fileCode" class="file fileUpload each-button">上传</a>
+					</div>
+				#end
+				<div id="down_$subData.fileCode" class="controls charter-controls s-file s-file2 c-wunai down-load-file" 
+					#if($!subData.filePath)
+						
+					#else
+						style="display: none;"
+					#end
+					>
+					<a id="downLink_$subData.fileCode" href="$orderExecuteServer.get('/common/doc/download.htm')?path=$!{subData.filePath}&fileName=$!{subData.originalName}" class="file upload_file" target="_blank">下载</a>
+				</div>
+				
+				<div class="controls charter-controls s-file s-file2 c-wunai look_load_file" 
+						#if($!subData.filePath)
+							
+						#else
+							style="display: none;"
+						#end
+					>
+						<a href="javascript:void(0);" fileUrl="$orderExecuteServer.get('/common/doc/file.htm')?path=$!{subData.filePath}&fileName=$!{subData.originalName}"
+							id="file$subData.fileCode"  class="file look_file">浏览</a> 
+				</div>
+			</div>
+		#end
+	</div>
+	#if($!query.showDetail != 1)
+	<div class="order-add" style="margin-left:60%;display:inline-block;width:220px;vertical-align:middle;height:13px;" >
+		<a class="doc-add">
+			<i class="oico-plus"></i>自定义添加单证
+		</a>
+	</div>
+	#end
+	<div class="c-subdiv">
+		<button class="c-btncas backBtn" style="margin-right:20%;position:relative;">返回</button>
+	</div>
+	
+</div>
+
+<script src="../../orderexecute/js/orderDocument/documentEditNew.js"></script>
+<script>
+	layui.use("ossUpload", function(){  
+		
+		var $ = layui.jquery,upload = layui.ossUpload;
+		bindUploader(".fileUpload");
+		
+		function bindUploader(em){
+			upload.render({
+			    elem: em,//绑定元素 id或class
+			    //url: "$orderExecuteServer.get('/common/doc/upload.json')",
+			    //accept: "",
+			    //size: 60 //限制文件大小，单位 KB
+			    exts: 'jpg|jpeg|bmp|pdf|xls|xlsx|doc|docx', //允许上传的文件后缀
+			    before: function(obj){ 
+			    	layer.load(); //上传loading
+			    	this.data = {
+						uuid: $("#uuid").val(),
+						fileCode: fileCode
+			    	};
+			    },
+			    done: function(res, index,upload){
+			    	if(res.status === 0){
+				    	//$orderExecuteServer.get('/common/doc/download.htm')?path=$!{subData.filePath}&fileName=$!{subData.originalName}
+				    	$(index).parents('.is-flag').find('input[name="myShowVal"]').val(res.datas.originalName);
+				    	$(index).parents('.is-flag').find('.down-load-file').show();
+				    	$(index).parents('.is-flag').find('.look_load_file').show();
+				    	$(index).parents('.is-flag').find('.each-button').text("上传");
+				    	
+				    	//oss下载
+				    	$(index).parents('.is-flag').find('.down-load-file a').attr('href', "$orderExecuteServer.get('/common/doc/download.htm')?path="+ res.datas.path +"&fileName="+ res.datas.originalName +"");
+				    	//浏览
+				    	$(index).parents('.is-flag').find('.look_load_file a').attr('fileUrl', "$orderExecuteServer.get('/common/doc/file.htm')?path="+ res.datas.path +"&fileName="+ res.datas.originalName +"");
+				    	
+				    	var fileName1 = $(index).parents('.is-flag').find('.subCode').text();
+				    	var fileName2 = $(index).parents('.is-flag').find('.getValue').val();
+				    	
+				    	//////////////////////////////////////////
+				    	var params = {};
+				    	var info = {};
+				    	params.uuid = $("#uuid").val();
+				    	params.orderDocumentId = $("#orderDocumentId").val();
+				    	params.documentType = $("#documentType").val();
+				    	params.tradeCategory = $("#tradeCategory").val();
+				    	
+				    	params.orderNo = $("#orderNo").val();
+				    	params.contractNo = $("#contractNo").val();
+				    	params.shipName = $("#shipName").val().trim();
+			    	
+				    	////////////////////////////////////////////
+				    	//文件信息
+				    	var fileInfoList = [];
+				    	info.fileCode = $(index).parents('.is-flag').find('.fileCode').val().trim();
+				    	info.originalName = res.datas.originalName;
+						info.filePath = res.datas.path;
+						info.fileFormat = res.datas.suffix;
+						info.fileSize = res.datas.size;
+						//单个单证上传
+						if(fileName1 != "" && fileName1 != undefined){
+							info.fileName = fileName1.substring(0,fileName1.length-1);
+							fileInfoList.push(info);
+						}
+						//自定义单个单证上传
+						if($(index).parents('.is-flag').find('.getValue').val() != "" && $(index).parents('.is-flag').find('.getValue').val() != undefined){
+							info.fileName = $(index).parents('.is-flag').find('.getValue').val();
+							info.fileCode = "T9999";
+							fileInfoList.push(info);
+						}
+				    	////////////////////////////////////////////
+				    	//遍历所有checkbox，多单证上传
+				    	$('.checkDoc').each(function(index, element){
+				    		if($(element).prop('checked')){
+				    			$('.duoCheckUpload').text("上传");
+				    			//$('.duoCheckUpload').hide();
+				    			$(element).parents('.is-flag').find('input[name="myShowVal"]').val(res.datas.originalName);    			
+				    			$(element).parents('.is-flag').find('.down-load-file').show();
+				    			$(element).parents('.is-flag').find('.look_load_file').show();
+				    			
+				    			//$(element).parents('.is-flag').find('.down-load-file a').attr('href', res.datas.path);
+				    			//oss下载
+				    			$(element).parents('.is-flag').find('.down-load-file a').attr('href', "$orderExecuteServer.get('/common/doc/download.htm')?path="+ res.datas.path +"&fileName="+ res.datas.originalName +"");
+				    			//浏览
+				    			$(element).parents('.is-flag').find('.look_load_file a').attr('fileUrl', "$orderExecuteServer.get('/common/doc/file.htm')?path="+ res.datas.path +"&fileName="+ res.datas.originalName +"");
+				    			
+				    			$(element).prop('checked',false);
+				    			
+				    			var info = {};
+				    			info.originalName = res.datas.originalName;
+								info.filePath = res.datas.path;
+								info.fileFormat = res.datas.suffix;
+								info.fileSize = res.datas.size;
+								
+				    			var fileName3 = $(element).parents('.is-flag').find('.subCode').text();
+				    			$(element).parents('.is-flag').find('.subCode').text()
+				    			//一般复选框多个上传
+				    			if(fileName3 != "" && fileName3 != undefined){
+				    				info.fileName = fileName3.substring(0,fileName3.length-1);
+				    				info.fileCode = $(element).parents('.is-flag').find('.fileCode').val();
+				    			}
+					    		//自定义复选框多个上传
+				    			if($(element).parents('.is-flag').find('.getValue').val() != "" && $(element).parents('.is-flag').find('.getValue').val() != undefined){
+				    				info.fileName = $(element).parents('.is-flag').find('.getValue').val();
+				    				info.fileCode = "T9999";
+				    				
+				    			}
+				    			fileInfoList.push(info);
+				    			//////////////////////////////////////////////////
+				    		}
+				    	})
+				    	
+				    	params.fileInfoList = fileInfoList;
+				    	//console.log(fileInfoList);
+				    	//Save单证
+		    			   $.ajax({
+		    	    		type: "POST",
+		    	    		url: orderServer+"/buyerCenter/orderDocument/saveDocument.json",
+		    	    		data: JSON.stringify(params),
+		    	    		async: false,
+		    				contentType:"application/json",
+		    				beforeSend: function (request) {
+		    					index = layer.load();
+		    				},
+		    	    		success: function(data) {
+		    	    			layer.close(index);
+		    	    			
+		    					if(data.status == 0){
+		    						layer.alert('successful uploaded!');
+		    					}
+		    				},
+		    				error: function(data) {
+		    					layer.close(index);
+		    					layer.alert("request error");
+		    		        }
+		    	    	});  
+
+			    	} else {
+			    		layer.tips($.i18n(res.code,res.params), this.item, {tips: 1});
+					    //uploadSuccess(res.datas);
+			    	}
+			    }
+			})
+		}
+		//浏览文件（支持PDF和图片格式）
+		$(".look_file").on("click",function(){
+			var url = $(this).parent().last().find('a').attr('fileUrl');
+			//alert(url);
+			//http://www.sinochem.com/order-execute/common/doc/browserFile.htm?path=orderexecute/DhkhRnwKkw.pdf&fileName=API手册 - 调用.pdf
+			
+			if((url).split("&")[1].split(".")[1] == 'pdf'){				
+				//pdf文件浏览
+				window.open(orderServer + "/pdfjs/web/viewer.html?file=" + encodeURIComponent(url),'_blank');
+			}else if((url).split("&")[1].split(".")[1] == 'doc' || (url).split("&")[1].split(".")[1] == 'docx'){
+				//word浏览
+				layer.alert("不支持word格式，目前支持pdf和图片浏览");
+				//word转换pdf
+				
+				//window.open(orderServer + "/pdfjs/web/viewer.html?file=" + encodeURIComponent(url),'_blank');
+			}else if((url).split("&")[1].split(".")[1] == 'xls' || (url).split("&")[1].split(".")[1] == 'xlsx'){
+				//execl浏览
+				layer.alert("不支持execl格式，目前支持pdf和图片浏览");
+				//execl转换pdf
+				
+			}else{
+				//图片弹框
+				layer.open({
+					area: ['850px', '650px'],
+					title: $(this).parents('.is-flag').find('.subCode').text(),
+					btn: ['返回'],
+					content:"<html><body><img src='"+ url +"' style='width:800px;height:600px'></img><body><html>"
+				});
+			}
+		});
+		
+		//复选框控制显示与隐藏
+		$('.checkDoc').on('click',function(){
+			var checked = [];
+	        $('input:checkbox:checked').each(function() {
+	            checked.push($(this).val());
+	        });
+	        if(checked.length > 0){
+	        	$(".checkUpdate").show();
+	        }else{
+				$(".checkUpdate").hide();
+			}
+		});
+		
+		//自定义添加
+		$(".doc-add").on("click",function(){
+			var htmlNode = $('.clone-node-list:last').clone(true);			
+			htmlNode.find('input[name="myShowVal"]').val('');				 //将克隆后的input value值清空
+			htmlNode.find('input[type="checkbox"]').prop('checked', false);  //将克隆后的checkbox设置为未选中状态
+			htmlNode.find('.down-load-file a').prop('href', 'javascript:;'); //清空下载按钮上的href
+			htmlNode.find('.down-load-file').hide();
+			htmlNode.find('.getValue').val("");
+			htmlNode.find('.subCode').remove(); 							 //删除克隆后的span用下面的input替换
+			htmlNode.find('.each-button').removeAttr('id');
+			if(!htmlNode.find('input,a').hasClass('isExistence')){		     //通过判断input上有没有该class来确定是否添加该input避免重复克隆
+				//获取该input的value值 请在加个class
+				htmlNode.find('.add-benchmark').after(`<input class="isExistence getValue" type='text' value="" style="width:120px;height:27px;"/>`); 
+				htmlNode.append(`<a href='javascript:;' class="isExistence shipping-ico w-ico-Less" style="margin-top:16px;margin-left:0px;">`);
+			}
+			
+			var emId = "file"+Date.now();
+			htmlNode.find(".fileUpload").attr("id",emId);
+			htmlNode.find(".fileUpload").siblings().remove();
+			$('.cwxx-tit').append(htmlNode);
+			bindUploader(emId);
+			///////////////////////////////////////
+			
+		})
+		//删除一行
+		$('body').on('click','.w-ico-Less',function(){
+			$(this).parents('.is-flag').remove();
+			
+		});
+		
+	})
+</script>

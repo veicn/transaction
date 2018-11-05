@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/crudeOilInsert/crudeOilInsert.css')" >
+<script src="$imageServer.get('info/js/crudeOilInsert/crudeOilInsert.js')"></script>  
+<script src="$imageServer.get('lib/jquery/extend.js')"></script>    
+	<div class="layui-form-item layui-container ry-banner">
+                        <form class="layui-form" id="addForm">
+                        	<div class="layui-form-item">
+                                <label class="layui-form-label iw280">原油英文名：</label>
+                                <input type="hidden" name="uuid" id="uuid">
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" id="extend4" name="extend4" autocomplete="off" lay-verify="required">
+                                </div>
+                                <label class="layui-form-label layui-input-inline iw280">原油中文名：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" id="extend5" name="extend5" autocomplete="off" lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">API度：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="api" id="api" autocomplete="off" lay-verify="required|number">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">含硫量(%wt)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="sulphur" id="sulphur" autocomplete="off" lay-verify="required|number">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">酸值(mgKOH/g)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="acidity" id="acidity" autocomplete="off" lay-verify="required|number">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">凝点(℃)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="freezingPoint" id="freezingPoint" autocomplete="off" lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">闪点(℃)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="flashPoint" id="flashPoint" autocomplete="off" lay-verify="required">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">黏度(50℃)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="viscosity" id="viscosity" autocomplete="off" lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">残碳(%wt)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="carbonResidue" id="carbonResidue" autocomplete="off" lay-verify="required">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">镍含量(ppm wt)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="nickel" id="nickel" autocomplete="off" lay-verify="required">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">钒含量(ppm wt)：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="vanadium" id="vanadium" autocomplete="off" lay-verify="required">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">品质登记日期：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input type="text" class="layui-input" name="simpleDate" id="simpleDate" placeholder="yyyy-MM-dd" lay-verify="required">   
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">区域：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="extend1" id="extend1" autocomplete="off" lay-verify="required">
+                                </div>
+                            
+                                <label class="layui-form-label layui-input-inline iw280">产地：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="extend2" id="extend2" autocomplete="off" lay-verify="required"> 
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label iw280">原油类型：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="extend3" id="extend3" autocomplete="off" lay-verify="required">
+                                </div>
+                                
+                                <label class="layui-form-label layui-input-inline iw280">大于350℃质量收率：</label>
+                                <div class="layui-input-inline iw200">
+                                    <input class="layui-input" type="text" name="yield" id="yield" autocomplete="off" lay-verify="required"> 
+                                </div>
+                            </div>
+	                        <div class="layui-layer-btn layui-layer-btn-c">
+	                            <button class="layui-btn layui-btn-small layui-btn-normal" lay-filter="demo1" lay-submit="">确定</button>
+	                            <button type="button" class="layui-btn layui-btn-small layui-btn-normal retutnFn">返回列表</button>
+	                        </div>
+                        </form>
+
+
+                </div>

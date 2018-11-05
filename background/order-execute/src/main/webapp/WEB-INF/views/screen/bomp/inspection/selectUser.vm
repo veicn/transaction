@@ -1,0 +1,113 @@
+<style>
+##控制layui下拉框最大高度
+.layui-form-select dl { max-height:150px; }
+</style>
+<form id="inspection_select_form">
+<div class="c-form1" style="padding:0 20px">
+	<ul class="c-ful" style="height: 230px;">
+		<li class="c-fcos2 layui-form" lay-filter="inspection_area">
+			<span class="c-fn">指定商检：</span>
+			##<div class="layui-input-inline">
+			##<select id="inspection-select" class="sele" lay-filter="inspection_select">
+				## <option value="">请选择</option>
+				## #foreach($item in $inspectionList)
+				## <option value="$item.memberId">$item.name</option>
+				## #end
+			##</select>
+			##</div>
+			<div class="control-label" style="width:70%;">
+				<select id="inspection-select" lay-verify="required" lay-search=""  class="sele" lay-filter="inspection_select">
+		        	<option value="">请选择</option>
+		        	#foreach($item in $inspectionList)
+		        		<option value="$item.memberId">$item.name</option>
+		        	#end
+		        </select>
+			</div>
+			
+		</li>
+		<li class="c-fcos2 layui-form" lay-filter="contact_area">
+			<span class="c-fn">联系人：</span>
+			<div class="layui-input-inline">
+			<select id="contact-select" class="sele" lay-filter="contact_select">
+				<option value="">请选择</option>
+			</select>
+			</div>
+		</li>
+		<li class="c-fcos2 layui-form" lay-filter="port_area">
+			<span class="c-fn">港口：</span>
+			<div id="port" style="height:32px">$portname</div>
+		</li>
+		<li class="c-fcos2 layui-form" lay-filter="port_area">
+			<span class="c-fn">码头：</span>
+			<div class="layui-input-inline">
+				<input type="text" id="terminal" class="c-int" />
+			</div>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">电话：</span>
+			<div id="tel" style="height:32px"></div>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">邮箱：</span>
+			<div id="mail" style="height:32px"></div>
+		</li>
+	</ul>
+</div>
+</form>
+
+<script>
+layui.use(['form'], function(){
+	var form = layui.form;
+	form.render('select');
+	//默认选择项
+	var dafaultOption = document.createElement("OPTION");
+	dafaultOption.value = "";
+	dafaultOption.text  = $.i18n("orderexecute.code.00203");
+	
+	form.on('select(inspection_select)', function(data){
+	    queryContactByInspection(data.value);
+	});
+	form.on('select(contact_select)', function(data){
+		changeContact(data);
+	});
+	
+	form.render();
+	$('dd').css({"text-align":"left"});
+	
+	function queryContactByInspection(inspectionId){
+		$("#contact-select").empty();
+		changeContact("");
+		if(inspectionId != ""){
+			$.get(orderServer+"/api/inspection/queryContactByInspection.json",{epMemberId:inspectionId},function(result){
+				var select = document.getElementById("contact-select");
+				select.options.add(dafaultOption);
+				
+				for(var index in result.datas){
+					var data = result.datas[index];
+					var opt = document.createElement("OPTION");
+					opt.value = "{name:'"+data.contactName+"',tel:'"+data.tel+"',email:'"+data.email+"'}";
+					opt.text  = data.contactName;
+					
+					select.options.add(opt);
+				}
+				
+				form.render('select','contact_area');
+			})
+		}else{
+			form.render('select','contact_area');
+		}
+	}
+	
+	function changeContact(data){
+		if(data == "" || data.value == ""){
+			$("#tel").html("");
+		    $("#mail").html("");
+		}else{
+			var dataObj = eval("("+data.value+")");
+		    $("#tel").html(dataObj.tel);
+		    $("#mail").html(dataObj.email);
+		}
+	}
+})
+</script>
+

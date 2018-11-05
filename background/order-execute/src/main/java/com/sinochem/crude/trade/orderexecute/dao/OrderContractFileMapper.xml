@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderContractFileMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderContractFile" id="OrderContractFile">
+		<result property="contractFileId" column="CONTRACT_FILE_ID" />
+		<result property="contractId" column="CONTRACT_ID" />
+		<result property="contractFileName" column="CONTRACT_FILE_NAME" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="originalName" column="ORIGINAL_NAME" />
+		<result property="uploadTime" column="UPLOAD_TIME" />
+		<result property="uploadPerson" column="UPLOAD_PERSON" />
+		<result property="fileStatus" column="FILE_STATUS" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContractFile"  useGeneratedKeys="true" keyProperty="contractFileId" >
+		insert  into t_order_contract_file (				CONTRACT_FILE_ID
+						,CONTRACT_ID
+						,CONTRACT_FILE_NAME
+						,ORIGINAL_NAME
+						,FILE_PATH
+						,UPLOAD_TIME
+						,UPLOAD_PERSON
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{contractFileId}
+						,#{contractId}
+						,#{contractFileName}
+						,#{originalName}
+						,#{filePath}
+						,#{uploadTime}
+						,#{uploadPerson}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_contract_file
+              WHERE 1=1 
+                AND CONTRACT_FILE_ID = #{contractFileId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContractFile">
+        DELETE FROM t_order_contract_file
+              WHERE 1=1 
+        <if test="contractFileId!=null and contractFileId!=''">AND  CONTRACT_FILE_ID = #{contractFileId}</if>
+        <if test="contractId!=null and contractId!=''">AND  CONTRACT_ID = #{contractId}</if>
+        <if test="contractFileName!=null and contractFileName!=''">AND  CONTRACT_FILE_NAME = #{contractFileName}</if>
+        <if test="filePath!=null and filePath!=''">AND  FILE_PATH = #{filePath}</if>
+        <if test="originalName!=null and originalName!=''">AND  ORIGINAL_NAME = #{originalName}</if>
+        <if test="uploadTime!=null and uploadTime!=''">AND  UPLOAD_TIME = #{uploadTime}</if>
+        <if test="uploadPerson!=null and uploadPerson!=''">AND  UPLOAD_PERSON = #{uploadPerson}</if>
+        <if test="fileStatus!=null and fileStatus!=''">AND  FILE_STATUS = #{fileStatus}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContractFile">
+		update t_order_contract_file
+		<set>
+         CONTRACT_FILE_ID=#{contractFileId}
+		<if test="contractId!=null">,CONTRACT_ID = #{contractId}</if>
+		<if test="contractFileName!=null">,CONTRACT_FILE_NAME = #{contractFileName}</if>
+		<if test="filePath!=null">,FILE_PATH = #{filePath}</if>
+		<if test="originalName!=null">,ORIGINAL_NAME = #{originalName}</if>
+		<if test="uploadTime!=null">,UPLOAD_TIME = #{uploadTime}</if>
+		<if test="uploadPerson!=null">,UPLOAD_PERSON = #{uploadPerson}</if>
+		<if test="fileStatus!=null">,FILE_STATUS = #{fileStatus}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 CONTRACT_FILE_ID=#{contractFileId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_contract_file
+		<set>
+         CONTRACT_FILE_ID=#{contractFileId}
+		<if test="contractId!=null">,CONTRACT_ID = #{contractId}</if>
+		<if test="contractFileName!=null">,CONTRACT_FILE_NAME = #{contractFileName}</if>
+		<if test="filePath!=null">,FILE_PATH = #{filePath}</if>
+		<if test="originalName!=null">,ORIGINAL_NAME = #{originalName}</if>
+		<if test="uploadTime!=null">,UPLOAD_TIME = #{uploadTime}</if>
+		<if test="uploadPerson!=null">,UPLOAD_PERSON = #{uploadPerson}</if>
+		<if test="fileStatus!=null">,FILE_STATUS = #{fileStatus}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="contractFileId!=null and contractFileId!=''">and  CONTRACT_FILE_ID=#{contractFileId}</if>
+		<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+		<if test="contractFileName!=null and contractFileName!=''">and  CONTRACT_FILE_NAME=#{contractFileName}</if>
+		<if test="filePath!=null and filePath!=''">and  FILE_PATH=#{filePath}</if>
+		<if test="originalName!=null and originalName!=''">and  ORIGINAL_NAME=#{originalName}</if>
+		<if test="uploadTime!=null and uploadTime!=''">and  UPLOAD_TIME=#{uploadTime}</if>
+		<if test="uploadPerson!=null and uploadPerson!=''">and  UPLOAD_PERSON=#{uploadPerson}</if>
+		<if test="fileStatus!=null and fileStatus!=''">and  FILE_STATUS=#{fileStatus}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderContractFile">
+			select
+			* from t_order_contract_file
+			where
+		    CONTRACT_FILE_ID=#{contractFileId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderContractFile">
+			select
+			* from t_order_contract_file
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderContractFile" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderContractFile">
+		select * from t_order_contract_file
+			where
+		 ALIVE_FLAG='1'
+		<if test="contractFileId!=null and contractFileId!=''">and  CONTRACT_FILE_ID=#{contractFileId}</if>
+		<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+		<if test="contractFileName!=null and contractFileName!=''">and  CONTRACT_FILE_NAME=#{contractFileName}</if>
+		<if test="filePath!=null and filePath!=''">and  FILE_PATH=#{filePath}</if>
+		<if test="originalName!=null and originalName!=''">and  ORIGINAL_NAME=#{originalName}</if>
+		<if test="uploadTime!=null and uploadTime!=''">and  UPLOAD_TIME=#{uploadTime}</if>
+		<if test="uploadPerson!=null and uploadPerson!=''">and  UPLOAD_PERSON=#{uploadPerson}</if>
+		<if test="fileStatus!=null and fileStatus!=''">and  FILE_STATUS=#{fileStatus}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  CONTRACT_FILE_ID as "contractFileId" 
+						 ,   CONTRACT_ID as "contractId" 
+						 ,   CONTRACT_FILE_NAME as "contractFileName" 
+						 ,   FILE_PATH as "filePath" 
+						 ,   ORIGINAL_NAME as "originalName" 
+						 ,   UPLOAD_TIME as "uploadTime" 
+						 ,   UPLOAD_PERSON as "uploadPerson" 
+						 ,   FILE_STATUS as "fileStatus" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_order_contract_file
+		where
+			ALIVE_FLAG='1'
+			<if test="contractFileId!=null and contractFileId!=''">and  CONTRACT_FILE_ID=#{contractFileId}</if>
+			<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+			<if test="contractFileName!=null and contractFileName!=''">and  CONTRACT_FILE_NAME=#{contractFileName}</if>
+			<if test="filePath!=null and filePath!=''">and  FILE_PATH=#{filePath}</if>
+			<if test="originalName!=null and originalName!=''">and  ORIGINAL_NAME=#{originalName}</if>
+			<if test="uploadTime!=null and uploadTime!=''">and  UPLOAD_TIME=#{uploadTime}</if>
+			<if test="uploadPerson!=null and uploadPerson!=''">and  UPLOAD_PERSON=#{uploadPerson}</if>
+			<if test="fileStatus!=null and fileStatus!=''">and  FILE_STATUS=#{fileStatus}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_contract_file 
+		where
+		 ALIVE_FLAG='1'
+			<if test="contractFileId!=null and contractFileId!=''">and  CONTRACT_FILE_ID=#{contractFileId}</if>
+			<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+			<if test="contractFileName!=null and contractFileName!=''">and  CONTRACT_FILE_NAME=#{contractFileName}</if>
+			<if test="filePath!=null and filePath!=''">and  FILE_PATH=#{filePath}</if>
+			<if test="originalName!=null and originalName!=''">and  ORIGINAL_NAME=#{originalName}</if>
+			<if test="uploadTime!=null and uploadTime!=''">and  UPLOAD_TIME=#{uploadTime}</if>
+			<if test="uploadPerson!=null and uploadPerson!=''">and  UPLOAD_PERSON=#{uploadPerson}</if>
+			<if test="fileStatus!=null and fileStatus!=''">and  FILE_STATUS=#{fileStatus}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	<select id="findByPrimaryKeyAndCreater" resultMap="OrderContractFile">
+			select
+			* from t_order_contract_file
+			where
+		    CONTRACT_FILE_ID=#{contractFileId} 
+			and ALIVE_FLAG='1'
+			and CREATE_USER=#{userId}
+	</select>
+	
+	
+</mapper>

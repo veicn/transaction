@@ -1,0 +1,56 @@
+$contain.get('common/title.htm').put('title', '个人注册')
+#css($appServer.get('/product/css/work/personalRegister.css'))
+<div class="w1180 clearfix rpp-con">
+    <div class="main-tit rpp-tit">
+        <h3>Individual Registration</h3>
+    </div>
+    <div class="main-prompt">
+        <div class="warm">
+            <h4>WARM REMINDER:</h4>
+            <p>Please read
+                <a href="#"> < Individual User registration agreements > </a>
+                before registration
+            </p>
+        </div>
+        <div class="notice">
+            <h4>NOTICE TO CLIENTS:</h4>
+            <p>Please kindly call us at 010-59568888 when you have any enquires.</p>
+        </div>
+    </div>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">User name : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the User name</span>
+    </div>
+    <div class="form-group-reminder clearfix">
+        <span></span>
+        <span class="form-reminder fl">REMINDER: please enter your user name</span>
+    </div>
+    </br>
+    <div class="form-group clearfix rpp-group1">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">Email : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the Email</span>
+    </div>
+    <div class="form-group-reminder clearfix">
+        <span></span>
+        <span class="form-reminder fl">Reminder : email address will be used for activation of accounts and set password </span>
+    </div>
+    </br>
+    <div class="form-group-check">
+        <span></span>
+        <em class="button-check rpp-button">
+            <a href="javascript:;" class="br">Continue</a>
+        </em>
+    </div>
+</form>

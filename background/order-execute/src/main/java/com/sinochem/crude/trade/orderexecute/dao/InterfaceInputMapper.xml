@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.InterfaceInputMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.InterfaceInput" id="InterfaceInput">
+		<result property="inputId" column="INPUT_ID" />
+		<result property="sysName" column="SYS_NAME" />
+		<result property="interfaceCode" column="INTERFACE_CODE" />
+		<result property="inputUrl" column="INPUT_URL" />
+		<result property="methodType" column="METHOD_TYPE" />
+		<result property="status" column="STATUS" />
+		<result property="inputTime" column="INPUT_TIME" />
+		<result property="inputPara" column="INPUT_PARA" />
+		<result property="outputPara" column="OUTPUT_PARA" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceInput"  useGeneratedKeys="true" keyProperty="inputId" >
+		insert  into t_interface_input (				INPUT_ID
+						,SYS_NAME
+						,INTERFACE_CODE
+						,INPUT_URL
+						,METHOD_TYPE
+						,STATUS
+						,INPUT_TIME
+						,INPUT_PARA
+						,OUTPUT_PARA
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						)
+		values(		#{inputId}
+						,#{sysName}
+						,#{interfaceCode}
+						,#{inputUrl}
+						,#{methodType}
+						,#{status}
+						,#{inputTime}
+						,#{inputPara}
+						,#{outputPara}
+						,#{langVer}
+						,'1'
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_interface_input
+              WHERE 1=1 
+                AND INPUT_ID = #{inputId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceInput">
+        DELETE FROM t_interface_input
+              WHERE 1=1 
+        <if test="inputId!=null and inputId!=''">AND  INPUT_ID = #{inputId}</if>
+        <if test="sysName!=null and sysName!=''">AND  SYS_NAME = #{sysName}</if>
+        <if test="interfaceCode!=null and interfaceCode!=''">AND  INTERFACE_CODE = #{interfaceCode}</if>
+        <if test="inputUrl!=null and inputUrl!=''">AND  INPUT_URL = #{inputUrl}</if>
+        <if test="methodType!=null and methodType!=''">AND  METHOD_TYPE = #{methodType}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="inputTime!=null and inputTime!=''">AND  INPUT_TIME = #{inputTime}</if>
+        <if test="inputPara!=null and inputPara!=''">AND  INPUT_PARA = #{inputPara}</if>
+        <if test="outputPara!=null and outputPara!=''">AND  OUTPUT_PARA = #{outputPara}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceInput">
+		update t_interface_input
+		<set>
+         INPUT_ID=#{inputId}
+		<if test="sysName!=null">,SYS_NAME = #{sysName}</if>
+		<if test="interfaceCode!=null">,INTERFACE_CODE = #{interfaceCode}</if>
+		<if test="inputUrl!=null">,INPUT_URL = #{inputUrl}</if>
+		<if test="methodType!=null">,METHOD_TYPE = #{methodType}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="inputTime!=null">,INPUT_TIME = #{inputTime}</if>
+		<if test="inputPara!=null">,INPUT_PARA = #{inputPara}</if>
+		<if test="outputPara!=null">,OUTPUT_PARA = #{outputPara}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 INPUT_ID=#{inputId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_interface_input
+		<set>
+         INPUT_ID=#{inputId}
+		<if test="sysName!=null">,SYS_NAME = #{sysName}</if>
+		<if test="interfaceCode!=null">,INTERFACE_CODE = #{interfaceCode}</if>
+		<if test="inputUrl!=null">,INPUT_URL = #{inputUrl}</if>
+		<if test="methodType!=null">,METHOD_TYPE = #{methodType}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="inputTime!=null">,INPUT_TIME = #{inputTime}</if>
+		<if test="inputPara!=null">,INPUT_PARA = #{inputPara}</if>
+		<if test="outputPara!=null">,OUTPUT_PARA = #{outputPara}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="inputId!=null and inputId!=''">and  INPUT_ID=#{inputId}</if>
+		<if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+		<if test="interfaceCode!=null and interfaceCode!=''">and  INTERFACE_CODE=#{interfaceCode}</if>
+		<if test="inputUrl!=null and inputUrl!=''">and  INPUT_URL=#{inputUrl}</if>
+		<if test="methodType!=null and methodType!=''">and  METHOD_TYPE=#{methodType}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="inputTime!=null and inputTime!=''">and  INPUT_TIME=#{inputTime}</if>
+		<if test="inputPara!=null and inputPara!=''">and  INPUT_PARA=#{inputPara}</if>
+		<if test="outputPara!=null and outputPara!=''">and  OUTPUT_PARA=#{outputPara}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="InterfaceInput">
+			select
+			* from t_interface_input
+			where
+		    INPUT_ID=#{inputId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="InterfaceInput">
+			select
+			* from t_interface_input
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="InterfaceInput" parameterType="com.sinochem.crude.trade.orderexecute.domain.InterfaceInput">
+		select * from t_interface_input
+			where
+		 ALIVE_FLAG='1'
+		<if test="inputId!=null and inputId!=''">and  INPUT_ID=#{inputId}</if>
+		<if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+		<if test="interfaceCode!=null and interfaceCode!=''">and  INTERFACE_CODE=#{interfaceCode}</if>
+		<if test="inputUrl!=null and inputUrl!=''">and  INPUT_URL=#{inputUrl}</if>
+		<if test="methodType!=null and methodType!=''">and  METHOD_TYPE=#{methodType}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="inputTime!=null and inputTime!=''">and  INPUT_TIME=#{inputTime}</if>
+		<if test="inputPara!=null and inputPara!=''">and  INPUT_PARA=#{inputPara}</if>
+		<if test="outputPara!=null and outputPara!=''">and  OUTPUT_PARA=#{outputPara}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  INPUT_ID as "inputId" 
+						 ,   SYS_NAME as "sysName" 
+						 ,   INTERFACE_CODE as "interfaceCode" 
+						 ,   INPUT_URL as "inputUrl" 
+						 ,   METHOD_TYPE as "methodType" 
+						 ,   STATUS as "status" 
+						 ,   date_format(INPUT_TIME,'%y-%m-%d %H:%i:%s') as "inputTime" 
+						 ,   INPUT_PARA as "inputPara" 
+						 ,   OUTPUT_PARA as "outputPara" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_interface_input
+		where
+			ALIVE_FLAG='1'
+			<if test="inputId!=null and inputId!=''">and  INPUT_ID=#{inputId}</if>
+			<if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+			<if test="interfaceCode!=null and interfaceCode!=''">and  INTERFACE_CODE=#{interfaceCode}</if>
+			<if test="inputUrl!=null and inputUrl!=''">and  INPUT_URL=#{inputUrl}</if>
+			<if test="methodType!=null and methodType!=''">and  METHOD_TYPE=#{methodType}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inputTime!=null and inputTime!=''">and  INPUT_TIME=#{inputTime}</if>
+			<if test="inputPara!=null and inputPara!=''">AND INPUT_PARA LIKE '%${inputPara}%'</if>
+			<if test="outputPara!=null and outputPara!=''">AND OUTPUT_PARA LIKE '%${outputPara}%'</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		order by
+		 	INPUT_TIME DESC 
+		</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_interface_input 
+		where
+		 ALIVE_FLAG='1'
+			<if test="inputId!=null and inputId!=''">and  INPUT_ID=#{inputId}</if>
+			<if test="sysName!=null and sysName!=''">and  SYS_NAME=#{sysName}</if>
+			<if test="interfaceCode!=null and interfaceCode!=''">and  INTERFACE_CODE=#{interfaceCode}</if>
+			<if test="inputUrl!=null and inputUrl!=''">and  INPUT_URL=#{inputUrl}</if>
+			<if test="methodType!=null and methodType!=''">and  METHOD_TYPE=#{methodType}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inputTime!=null and inputTime!=''">and  INPUT_TIME=#{inputTime}</if>
+			<if test="inputPara!=null and inputPara!=''">and  INPUT_PARA=#{inputPara}</if>
+			<if test="outputPara!=null and outputPara!=''">and  OUTPUT_PARA=#{outputPara}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

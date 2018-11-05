@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/info/index.css')" >
+<script src="$imageServer.get('info/js/adImage/adImage.js')"></script>
+
+<form class="layui-form">
+	<div class="pp15" id="layerDemo">
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label iw70">系统类型：</label>
+					<div class="layui-input-inline">
+						<select name="typeCode" id="typeCode" lay-filter="typeCode">
+						</select>
+					</div>
+					<label class="layui-form-label iw70">区域：</label>
+					<div class="layui-input-inline">
+						<select name="pageCode" id="pageCode">
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label iw70">图片描述</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="imageDes" id="imageDes" style="width: 190px;"/>
+					</div>
+					<button class="layui-btn layui-btn-small layui-btn-normal ml18" type="button" data-type="reload" id="search">查询</button>
+					<button class="layui-btn layui-btn-small layui-btn-normal" type="button" id='add'>新增</button>
+				</div>
+			</div>
+		</div>
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+			<thead>
+				<tr>
+					<th lay-data="{field:'typeCode', width:100}">系统类型</th>
+					<th lay-data="{field:'pageCode', width:100}">区域</th>
+					<th lay-data="{field:'imageDes', width:100}">图片描述</th>
+					<th lay-data="{field:'gotoUrl', width:350}">点击URL</th>
+					<th lay-data="{field:'sortCode', width:100}">排序规则</th>
+					<th lay-data="{field:'imageUrl'}">图片URL</th>
+					<th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</form>
+
+<script type="text/html" id="barDemo">
+	<a class="btcol" lay-event="edit"><i class="layui-icon">&#xe642;</i>图片管理</a>
+	<a class="btcol" lay-event="del"><i class="layui-icon" style="color:red;">&#xe640;</i>删除</a>
+</script>

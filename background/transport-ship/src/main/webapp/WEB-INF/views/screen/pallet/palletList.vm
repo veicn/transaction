@@ -1,0 +1,156 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+		<div class="clearfix s-order-tit"><h1>租船需求列表</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li ><a href="palletQueryList.htm">有订单租船</a></li>
+				<li class="curr"><a class="curr" href="javascript:;" >无订单租船</a></li>
+			</ul>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2" action="palletList.htm">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline4">
+					  <label class="s-form-label">装港/区域:</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="searchLoadPort" id="searchLoadPort" value="$!{searchLoadPort}"  placeholder="" class="s-input">
+					  </div>
+					</div>
+					<div class="s-inline s-inline4">
+					  <label class="s-form-label">卸港/区域:</label>
+					  <div class="s-input-inline">
+						   <input type="text" name="searchUnLoadPort" id="searchUnLoadPort" value="$!{searchUnLoadPort}"  placeholder="" class="s-input">
+					  </div>
+					</div>
+					<div class="s-inline s-inline4">
+					  <label class="s-form-label">状态:</label>
+					  <div class="s-input-inline">
+						  <select class="s-select" id="searchStatus" name="searchStatus">
+							<option value="">请选择</option>
+							<option value="1">待处理</option>
+							<option value="2">处理中</option>
+							<option value="3">已报盘</option>
+							<option value="4">已确认</option>
+							<option value="5">已关闭</option>
+							<option value="6">已完成</option>
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline0"><a><i class="s-icon s-sear-ico searchBtn"></i></a></div>
+					<div class="s-inline s-inline-btn"><a href="javascript:;" class="s-btn" id="insert">申请租船</a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		#foreach($data in $datas)
+		<div class="s-mod-block">  
+		<div class="s-mod-btit"><a href="javascript:;" title="查看详情"  class="queryBtn" attr-data="$!data.uuid">申请单编号：$!{data.palletCode}</a>
+			<span>
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '1') 待转租船东处理 #end
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '0') 待处理 #end
+				#if($!{data.status} == '2') 处理中#end
+				#if($!{data.status} == '3') 已报盘#end
+				#if($!{data.status} == '4') 已确认#end
+				#if($!{data.status} == '5') 已关闭#end
+				#if($!{data.status} == '6') 已完成#end
+			</span>
+		</div>
+		<div class="s-mod-bcont">
+		<form class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item">
+				<div class="s-inline">
+				  <label class="s-form-label">油品名称：</label>
+				  <div class="s-input-inline" title="$!{data.oilType}">
+					  <p>$!{data.oilType}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">装港/装港区域：</label>
+				  <div class="s-input-inline" title="$!{data.loadPort} $!{data.loadPortRegion}">
+					  <p>$!{data.loadPort} $!{data.loadPortRegion}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">卸港/卸港区域：</label>
+				  <div class="s-input-inline" title="$!{data.unloadPort} $!{data.unloadPortRegion}">
+					  <p>$!{data.unloadPort} $!{data.unloadPortRegion}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">装期LAYCAN：</label>
+				  <div class="s-input-inline s-input-inline2" title="$!{data.laycanBeg}--$!{data.laycanEnd}">
+					<p>$!{data.laycanBeg}--$!{data.laycanEnd}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">数量：</label>
+				  <div class="s-input-inline" title="$!{data.quantity}">
+					 <p>$!{data.quantity}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">船型：</label>
+				  <div class="s-input-inline" title="$!{data.shipType}">
+					  <p>$!{data.shipType}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">船龄：</label>
+				  <div class="s-input-inline" title="$!{data.shipAge}">
+					  <p>$!{data.shipAge}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">公司：</label>
+				  <div class="s-input-inline s-input-inline2" title="$!{data.companyName} / $!{data.contacts} / $!{data.email} / $!{data.tel}">
+					<p>$!{data.companyName}</p>
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</form>
+		<div class="s-but-all clearfix">
+			<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+			<div class="s-but-ship clearfix">
+						<a href="javascript:;" class="queryBtn s-btn" attr-data="$!data.uuid">需求详情</a>
+				#if($!{data.traderSel} == '1')		
+					#if($!{data.status} == '4')	
+			  			<a href="javascript:;" class="confirmsDetails s-btn" attr-data="$!data.uuid">租船详情</a>
+					#end
+					#if($!{data.status} == '3')
+						<a href="javascript:;" class="queryClause s-btn" attr-data="$!data.uuid">报盘详情</a>
+					#end
+					#if($!{data.status} == '1')
+						<a href="javascript:;" class="editBtn s-btn" attr-data="$!data.uuid">修改</a>
+						<a href="javascript:;" class="delBtn s-btn" attr-data="$!data.uuid">撤销</a>
+			      	#end
+	      		#else  
+	      			#if($!{data.status} == '4')	
+		  				<a href="javascript:;" class="confirmsDetails s-btn" attr-data="$!data.uuid">租船详情</a>
+					#end
+					#if($!{data.status} == '2')
+						<a href="javascript:;" class="chooseAsk s-btn" attr-data="$!data.uuid">继续选择船盘</a>
+						<a href="javascript:;" class="queryAsk s-btn" attr-data="$!data.uuid">询盘信息</a>
+					#end
+					#if($!{data.status} == '1')
+						<a href="javascript:;" class="chooseAsk s-btn" attr-data="$!data.uuid">继续选择船盘</a>
+						<a href="javascript:;" class="editBtn s-btn" attr-data="$!data.uuid">修改</a>
+						<a href="javascript:;" class="delBtn s-btn" attr-data="$!data.uuid">撤销</a>
+		      		#end
+	      		#end
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	#end
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/pallet/palletList.htm')")
+	</div>
+  <script src="../transport/js/pallet/palletList.js"></script>
+<script type="text/javascript">
+ $('#searchStatus').val($!{searchStatus});
+</script>

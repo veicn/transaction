@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shiprefueling.dao.InfoMapper">
+	<resultMap type="com.sinochem.crude.trade.shiprefueling.domain.po.Info" id="Info">
+		<id property="infoId" column="INFO_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="infoType" column="INFO_TYPE" />
+		<result property="infoTitle" column="INFO_TITLE" />
+		<result property="oilClassification" column="OIL_CLASSIFICATION" />
+		<result property="oilVarieties" column="OIL_VARIETIES" />
+		<result property="releasedDate" column="RELEASED_DATE" />
+		<result property="deliveryWay" column="DELIVERY_WAY" />
+		<result property="unit" column="UNIT" />
+		<result property="unitPrice" column="UNIT_PRICE" />
+		<result property="locationProvince" column="LOCATION_PROVINCE" />
+		<result property="locationCity" column="LOCATION_CITY" />
+		<result property="detailedDescription" column="DETAILED_DESCRIPTION" />
+		<result property="port" column="PORT" />
+		<result property="transportWay" column="TRANSPORT_WAY" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info"  useGeneratedKeys="true" keyProperty="infoId" >
+		INSERT  INTO T_SALE_INFO (
+			 INFO_ID
+			,UUID
+			,INFO_TYPE
+			,INFO_TITLE
+			,OIL_CLASSIFICATION
+			,OIL_VARIETIES
+			,RELEASED_DATE
+			,DELIVERY_WAY
+			,UNIT
+			,UNIT_PRICE
+			,LOCATION_PROVINCE
+			,LOCATION_CITY
+			,DETAILED_DESCRIPTION
+			,PORT
+			,TRANSPORT_WAY
+			,EP_MEMBER_ID
+			,EP_MEMBER_NAME
+			,ALIVE_FLAG
+			,VERSION
+			,LANG_VER
+			,CREATE_DATE
+			,UPDATE_DATE
+			,CREATE_USER
+			,UPDATE_USER
+			,EXT1
+			,STATUS)
+		values(
+			#{infoId}
+			,#{uuid}
+			,#{infoType}
+			,#{infoTitle}
+			,#{oilClassification}
+			,#{oilVarieties}
+			,#{releasedDate}
+			,#{deliveryWay}
+			,#{unit}
+			,#{unitPrice}
+			,#{locationProvince}
+			,#{locationCity}
+			,#{detailedDescription}
+			,#{port}
+			,#{transportWay}
+			,#{epMemberId}
+			,#{epMemberName}
+			,#{aliveFlag}
+			,#{version}
+			,#{langVer}
+			,SYSDATE()
+			,SYSDATE()
+			,#{createUser}
+			,#{updateUser}
+			,#{ext1}
+			,#{status})
+	</insert>
+
+	<delete id="deleteById">
+        DELETE FROM
+       		T_SALE_INFO
+       	WHERE
+       		INFO_ID = #{infoId}
+    </delete>
+
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+        DELETE FROM
+			T_SALE_INFO
+		WHERE 1=1
+        <if test="infoId!=null and infoId!=''">AND  INFO_ID = #{infoId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="infoType!=null and infoType!=''">AND  INFO_TYPE = #{infoType}</if>
+        <if test="infoTitle!=null and infoTitle!=''">AND  INFO_TITLE = #{infoTitle}</if>
+        <if test="oilClassification!=null and oilClassification!=''">AND  OIL_CLASSIFICATION = #{oilClassification}</if>
+        <if test="oilVarieties!=null and oilVarieties!=''">AND  OIL_VARIETIES = #{oilVarieties}</if>
+		<if test="oilVarieties!=null and oilVarieties!=''">AND  RELEASED_DATE = #{releasedDate}</if>
+        <if test="deliveryWay!=null and deliveryWay!=''">AND  DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="unitP!=null and unit!=''">AND  UNIT = #{unit}</if>
+        <if test="unitPrice!=null and unitPrice!=''">AND  UNIT_PRICE = #{unitPrice}</if>
+        <if test="locationProvince!=null and locationProvince!=''">AND  LOCATION_PROVINCE = #{locationProvince}</if>
+        <if test="locationCity!=null and locationCity!=''">AND  LOCATION_CITY = #{locationCity}</if>
+        <if test="detailedDescription!=null and detailedDescription!=''">AND  DETAILED_DESCRIPTION = #{detailedDescription}</if>
+        <if test="port!=null and port!=''">AND  PORT = #{port}</if>
+        <if test="transportWay!=null and transportWay!=''">AND  TRANSPORT_WAY = #{transportWay}</if>
+        <if test="epMemberId!=null and epMemberId!=''">AND  EP_MEMBER_ID = #{epMemberId}</if>
+        <if test="epMemberName!=null and epMemberName!=''">AND  EP_MEMBER_NAME = #{epMemberName}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="ext1!=null and ext1!=''">AND  EXT1 = #{ext1}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+    </delete>
+
+	<delete id="deleteByuuid" parameterType="string">
+		  DELETE FROM
+		  		T_SALE_INFO
+          WHERE
+          		UUID = #{uuid}
+	</delete>
+
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		UPDATE T_SALE_INFO
+		<set>
+         INFO_ID=#{infoId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="infoType!=null">,INFO_TYPE = #{infoType}</if>
+		<if test="infoTitle!=null">,INFO_TITLE = #{infoTitle}</if>
+		<if test="oilClassification!=null">,OIL_CLASSIFICATION = #{oilClassification}</if>
+		<if test="oilVarieties!=null">,OIL_VARIETIES = #{oilVarieties}</if>
+		<if test="oilVarieties!=null">,RELEASED_DATE = #{releasedDate}</if>
+		<if test="deliveryWay!=null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="unit!=null">,UNIT = #{unit}</if>
+		<if test="unitPrice!=null">,UNIT_PRICE = #{unitPrice}</if>
+		<if test="locationProvincIe!=null">,LOCATION_PROVINCE = #{locationProvince}</if>
+		<if test="locationCity!=null">,LOCATION_CITY = #{locationCity}</if>
+		<if test="detailedDescription!=null">,DETAILED_DESCRIPTION = #{detailedDescription}</if>
+		<if test="port!=null">,PORT = #{port}</if>
+		<if test="transportWay!=null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		WHERE
+       	 INFO_ID=#{infoId} and ALIVE_FLAG='1'
+	</update>
+
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		UPDATE T_SALE_INFO
+		<set>
+		UUID = #{uuid}
+		<if test="infoType!=null">,INFO_TYPE = #{infoType}</if>
+		<if test="infoTitle!=null">,INFO_TITLE = #{infoTitle}</if>
+		<if test="oilClassification!=null">,OIL_CLASSIFICATION = #{oilClassification}</if>
+		<if test="oilVarieties!=null">,OIL_VARIETIES = #{oilVarieties}</if>
+		<if test="releasedDate!=null">,RELEASED_DATE = #{releasedDate}</if>
+		<if test="deliveryWay!=null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="unit!=null">,UNIT = #{unit}</if>
+		<if test="unitPrice!=null">,UNIT_PRICE = #{unitPrice}</if>
+		<if test="locationProvince!=null">,LOCATION_PROVINCE = #{locationProvince}</if>
+		<if test="locationCity!=null">,LOCATION_CITY = #{locationCity}</if>
+		<if test="detailedDescription!=null">,DETAILED_DESCRIPTION = #{detailedDescription}</if>
+		<if test="port!=null">,PORT = #{port}</if>
+		<if test="transportWay!=null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		,UPDATE_DATE = SYSDATE()
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		WHERE  UUID = #{uuid} AND ALIVE_FLAG='1'
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		UPDATE T_SALE_INFO
+		<set>
+         INFO_ID=#{infoId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="infoType!=null">,INFO_TYPE = #{infoType}</if>
+		<if test="infoTitle!=null">,INFO_TITLE = #{infoTitle}</if>
+		<if test="oilClassification!=null">,OIL_CLASSIFICATION = #{oilClassification}</if>
+		<if test="oilVarieties!=null">,OIL_VARIETIES = #{oilVarieties}</if>
+		<if test="oilVarieties!=null">,RELEASED_DATE = #{releasedDate}</if>
+		<if test="deliveryWay!=null">,DELIVERY_WAY = #{deliveryWay}</if>
+		<if test="unit!=null">,UNIT = #{unit}</if>
+		<if test="unitPrice!=null">,UNIT_PRICE = #{unitPrice}</if>
+		<if test="locationProvince!=null">,LOCATION_PROVINCE = #{locationProvince}</if>
+		<if test="locationCity!=null">,LOCATION_CITY = #{locationCity}</if>
+		<if test="detailedDescription!=null">,DETAILED_DESCRIPTION = #{detailedDescription}</if>
+		<if test="port!=null">,PORT = #{port}</if>
+		<if test="transportWay!=null">,TRANSPORT_WAY = #{transportWay}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		WHERE
+			ALIVE_FLAG='1'
+		<if test="infoId!=null and infoId!=''">and  INFO_ID=#{infoId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="infoType!=null and infoType!=''">and  INFO_TYPE=#{infoType}</if>
+		<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+		<if test="oilClassification!=null and oilClassification!=''">and  OIL_CLASSIFICATION=#{oilClassification}</if>
+		<if test="oilVarieties!=null and oilVarieties!=''">and  OIL_VARIETIES=#{oilVarieties}</if>
+		<if test="releasedDate!=null and releasedDate!=''">and  RELEASED_DATE=#{releasedDate}</if>
+		<if test="deliveryWay!=null and deliveryWay!=''">and  DELIVERY_WAY=#{deliveryWay}</if>
+		<if test="unit!=null and unit!=''">and  UNIT=#{unit}</if>
+		<if test="unitPrice!=null and unitPrice!=''">and  UNIT_PRICE=#{unitPrice}</if>
+		<if test="locationProvince!=null and locationProvince!=''">and  LOCATION_PROVINCE=#{locationProvince}</if>
+		<if test="locationCity!=null and locationCity!=''">and  LOCATION_CITY=#{locationCity}</if>
+		<if test="detailedDescription!=null and detailedDescription!=''">and  DETAILED_DESCRIPTION=#{detailedDescription}</if>
+		<if test="port!=null and port!=''">and  PORT=#{port}</if>
+		<if test="transportWay!=null and transportWay!=''">and  TRANSPORT_WAY=#{transportWay}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</update>
+    <update id="updateByUuidStatus" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		UPDATE t_sale_info
+		<set>
+			UPDATE_USER=SYSDATE(),
+			STATUS = #{status}
+		</set>
+		WHERE
+		 UUID=#{uuid}
+	</update>
+
+
+    <select id="findByPrimaryKey" resultMap="Info">
+			SELECT
+				*
+			FROM
+				T_SALE_INFO
+			WHERE
+		    	INFO_ID=#{infoId} AND ALIVE_FLAG='1'
+	</select>
+
+	<select id="findByUuid" resultMap="Info" parameterType="String">
+			SELECT
+					S.INFO_ID
+				,   S.UUID
+				,   S.INFO_TYPE
+				,   S.INFO_TITLE
+				,   D.DICT_NAME AS "OIL_CLASSIFICATION"
+				,   NULLIF (D2.DICT_NAME,"") AS "OIL_VARIETIES"
+				,  S.RELEASED_DATE
+				,   S.DELIVERY_WAY
+				,   S.UNIT
+				,   S.UNIT_PRICE
+				,   S.LOCATION_PROVINCE
+				,   S.LOCATION_CITY
+				,   S.DETAILED_DESCRIPTION
+				,   S.PORT
+				,   S.TRANSPORT_WAY
+				,   S.EP_MEMBER_ID
+				,   S.EP_MEMBER_NAME
+				,   S.ALIVE_FLAG
+				,   S.VERSION
+				,   S.LANG_VER
+				,   S.CREATE_DATE
+				,   S.UPDATE_DATE
+				,   S.CREATE_USER
+				,   S.UPDATE_USER
+				,   S.EXT1
+				,   S.STATUS
+			FROM T_SALE_INFO S
+			LEFT JOIN T_DATA_DICT D ON S.OIL_CLASSIFICATION = D.DICT_CODE AND D.TYPE_CODE = '100'
+			LEFT JOIN T_DATA_DICT D2 ON D2.TYPE_CODE = '101' AND S.OIL_VARIETIES = D2.DICT_CODE AND S.OIL_CLASSIFICATION = D2.P_DICT_CODE
+            WHERE
+            	 S.UUID=#{uuid}
+            AND  S.ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="Info" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		SELECT
+			*
+		FROM
+			T_SALE_INFO
+		WHERE
+		 ALIVE_FLAG='1'
+		<if test="infoId!=null and infoId!=''">and  INFO_ID=#{infoId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="infoType!=null and infoType!=''">and  INFO_TYPE=#{infoType}</if>
+		<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+		<if test="oilClassification!=null and oilClassification!=''">and  OIL_CLASSIFICATION=#{oilClassification}</if>
+		<if test="oilVarieties!=null and oilVarieties!=''">and  OIL_VARIETIES=#{oilVarieties}</if>
+		<if test="releasedDate!=null and releasedDate!=''">and  RELEASED_DATE=#{releasedDate}</if>
+		<if test="deliveryWay!=null and deliveryWay!=''">and  DELIVERY_WAY=#{deliveryWay}</if>
+		<if test="unit!=null and unit!=''">and  UNIT=#{unit}</if>
+		<if test="unitPrice!=null and unitPrice!=''">and  UNIT_PRICE=#{unitPrice}</if>
+		<if test="locationProvince!=null and locationProvince!=''">and  LOCATION_PROVINCE=#{locationProvince}</if>
+		<if test="locationCity!=null and locationCity!=''">and  LOCATION_CITY=#{locationCity}</if>
+		<if test="detailedDescription!=null and detailedDescription!=''">and  DETAILED_DESCRIPTION=#{detailedDescription}</if>
+		<if test="port!=null and port!=''">and  PORT=#{port}</if>
+		<if test="transportWay!=null and transportWay!=''">and  TRANSPORT_WAY=#{transportWay}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</select>
+
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			     INFO_ID AS "infoId"
+			 ,   UUID AS "uuid"
+			 ,   INFO_TYPE AS "infoType"
+			 ,   INFO_TITLE AS "infoTitle"
+			 ,   OIL_CLASSIFICATION AS "oilClassification"
+			 ,   OIL_VARIETIES AS "oilVarieties"
+			 ,	 RELEASED_DATE AS "releasedDate"
+			 ,   DELIVERY_WAY AS "deliveryWay"
+			 ,   UNIT AS "unit"
+			 ,   UNIT_PRICE AS "unitPrice"
+			 ,   LOCATION_PROVINCE AS "locationProvince"
+			 ,   LOCATION_CITY AS "locationCity"
+			 ,   DETAILED_DESCRIPTION AS "detailedDescription"
+			 ,   PORT AS "port"
+			 ,   TRANSPORT_WAY AS "transportWay"
+			 ,   EP_MEMBER_ID AS "epMemberId"
+			 ,   EP_MEMBER_NAME AS "epMemberName"
+			 ,   ALIVE_FLAG AS "aliveFlag"
+			 ,   VERSION AS "version"
+			 ,   LANG_VER AS "langVer"
+			 ,   CREATE_DATE AS "createDate"
+			 ,   UPDATE_DATE AS "updateDate"
+			 ,   CREATE_USER AS "createUser"
+			 ,   UPDATE_USER AS "updateUser"
+			 ,   EXT1 AS "ext1"
+			 ,   STATUS AS "status"
+		FROM
+			T_SALE_INFO
+		WHERE
+			ALIVE_FLAG='1'
+			<if test="infoId!=null and infoId!=''">and  INFO_ID=#{infoId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="infoType!=null and infoType!=''">and  INFO_TYPE=#{infoType}</if>
+			<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+			<if test="oilClassification!=null and oilClassification!=''">and  OIL_CLASSIFICATION=#{oilClassification}</if>
+			<if test="oilVarieties!=null and oilVarieties!=''">and  OIL_VARIETIES=#{oilVarieties}</if>
+			<if test="releasedDate!=null and releasedDate!=''">and  RELEASED_DATE=#{releasedDate}</if>
+			<if test="deliveryWay!=null and deliveryWay!=''">and  DELIVERY_WAY=#{deliveryWay}</if>
+			<if test="unit!=null and unit!=''">and  UNIT=#{unit}</if>
+			<if test="unitPrice!=null and unitPrice!=''">and  UNIT_PRICE=#{unitPrice}</if>
+			<if test="locationProvince!=null and locationProvince!=''">and  LOCATION_PROVINCE=#{locationProvince}</if>
+			<if test="locationCity!=null and locationCity!=''">and  LOCATION_CITY=#{locationCity}</if>
+			<if test="detailedDescription!=null and detailedDescription!=''">and  DETAILED_DESCRIPTION=#{detailedDescription}</if>
+			<if test="port!=null and port!=''">and  PORT=#{port}</if>
+			<if test="transportWay!=null and transportWay!=''">and  TRANSPORT_WAY=#{transportWay}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		SELECT
+			COUNT(*)
+		FROM
+			T_SALE_INFO
+		WHERE
+		 	ALIVE_FLAG='1'
+			<if test="infoId!=null and infoId!=''">and  INFO_ID=#{infoId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="infoType!=null and infoType!=''">and  INFO_TYPE=#{infoType}</if>
+			<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+			<if test="oilClassification!=null and oilClassification!=''">and  OIL_CLASSIFICATION=#{oilClassification}</if>
+			<if test="oilVarieties!=null and oilVarieties!=''">and  OIL_VARIETIES=#{oilVarieties}</if>
+			<if test="releasedDate!=null and releasedDate!=''">and  RELEASED_DATE=#{releasedDate}</if>
+			<if test="deliveryWay!=null and deliveryWay!=''">and  DELIVERY_WAY=#{deliveryWay}</if>
+			<if test="unit!=null and unit!=''">and  UNIT_PRICE=#{unit}</if>
+			<if test="unitPrice!=null and unitPrice!=''">and  UNIT_PRICE=#{unitPrice}</if>
+			<if test="locationProvince!=null and locationProvince!=''">and  LOCATION_PROVINCE=#{locationProvince}</if>
+			<if test="locationCity!=null and locationCity!=''">and  LOCATION_CITY=#{locationCity}</if>
+			<if test="detailedDescription!=null and detailedDescription!=''">and  DETAILED_DESCRIPTION=#{detailedDescription}</if>
+			<if test="port!=null and port!=''">and  PORT=#{port}</if>
+			<if test="transportWay!=null and transportWay!=''">and  TRANSPORT_WAY=#{transportWay}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+
+	</select>
+
+
+
+    <!-- //**************************以下方法为开发者补充*********************************/ -->
+	<select id="queryByUserId" resultType="java.util.HashMap"  parameterType="com.sinochem.crude.trade.shiprefueling.model.query.InfoQuery">
+		SELECT
+		S.INFO_ID
+		,   S.UUID
+		,   S.INFO_TYPE
+		,   S.INFO_TITLE
+		,   D.DICT_NAME AS "OIL_CLASSIFICATION"
+		,   NULLIF(D2.DICT_NAME,"") AS "OIL_VARIETIES"
+		,   S.RELEASED_DATE
+		,   NULLIF(S.DELIVERY_WAY,"") AS "DELIVERY_WAY"
+		,   S.UNIT
+		,   S.UNIT_PRICE
+		,   S.LOCATION_PROVINCE
+		,   S.LOCATION_CITY
+		,   S.DETAILED_DESCRIPTION
+		,   S.PORT
+		,   NULLIF(S.TRANSPORT_WAY,"") AS "TRANSPORT_WAY"
+		,   S.EP_MEMBER_ID
+		,   S.EP_MEMBER_NAME
+		,   S.ALIVE_FLAG
+		,   S.VERSION
+		,   S.LANG_VER
+		,   S.CREATE_DATE
+		,   S.UPDATE_DATE
+		,   S.CREATE_USER
+		,   S.UPDATE_USER
+		,   S.EXT1
+		,   S.STATUS
+	  	<!-- 报价数量 -->
+		,  (SELECT COUNT(I.INQUIRY_QUOTATION_ID) FROM T_INQUIRY_QUOTATION I WHERE I.NEED_UUID = S.UUID AND I.TYPE = '1' AND I.ALIVE_FLAG = '1' ) OFFER_NUM
+		FROM T_SALE_INFO S
+		LEFT JOIN T_DATA_DICT D ON S.OIL_CLASSIFICATION = D.DICT_CODE AND D.TYPE_CODE = '100'
+		LEFT JOIN T_DATA_DICT D2 ON d2.TYPE_CODE = '101' AND S.OIL_VARIETIES = D2.DICT_CODE AND S.OIL_CLASSIFICATION = D2.P_DICT_CODE
+		WHERE
+			S.ALIVE_FLAG='1'
+		<if test="uuid!=null and uuid!=''">and  S.UUID=#{uuid}</if>
+		<if test="oilClassification!=null and oilClassification!=''">and  S.OIL_CLASSIFICATION=#{oilClassification}</if>
+		<if test="oilVarieties!=null and oilVarieties!=''">and  S.OIL_VARIETIES=#{oilVarieties}</if>
+		<if test="deliveryWay!=null and deliveryWay!=''">and  S.TRANSPORT_WAY=#{deliveryWay}</if>
+		<if test="releaseBeginDate != null and releaseBeginDate!=''">and DATE_FORMAT(S.RELEASED_DATE, '%Y-%m-%d') &gt;= #{releaseBeginDate}</if>
+		<if test="releaseEndDate != null and releaseEndDate!=''">and DATE_FORMAT(S.RELEASED_DATE, '%Y-%m-%d') &lt;= #{releaseEndDate}</if>
+		<if test="port!=null and port!=''">and  S.PORT=#{port}</if>
+		<if test="transportWay!=null and transportWay!=''">and  S.TRANSPORT_WAY=#{transportWay}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  S.EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  S.EP_MEMBER_NAME like CONCAT('%',#{epMemberName},'%')</if>
+		<if test="locationProvince!=null and locationProvince!=''">and S.LOCATION_PROVINCE=#{locationProvince}</if>
+		<if test="locationCity!=null and locationCity!=''">and S.LOCATION_CITY=#{locationCity}</if>
+		<if test="status!=null and status!=''">and S.STATUS IN
+			<foreach collection="statusList" index="index" item="status" open="(" separator="," close=")">
+				#{status}
+			</foreach>
+		</if>
+		<if test="infoTypeList!=null">
+			and S.INFO_TYPE in
+			<foreach collection="infoTypeList" index="index" item="infoType" open="(" separator="," close=")">
+				#{infoType}
+			</foreach>
+		</if>
+	</select>
+
+    <select id="selectNewSellInfoList" resultType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		SELECT
+			  INFO_ID AS "infoId"
+			 ,   UUID AS "uuid"
+			 ,   INFO_TYPE AS "infoType"
+			 ,   INFO_TITLE AS "infoTitle"
+			 ,   OIL_CLASSIFICATION AS "oilClassification"
+			 ,   OIL_VARIETIES AS "oilVarieties"
+			 ,   RELEASED_DATE AS "releasedDate"
+			 ,   DELIVERY_WAY AS "deliveryWay"
+			 ,   UNIT AS "unit"
+			 ,   UNIT_PRICE AS "unitPrice"
+			 ,   LOCATION_PROVINCE AS "locationProvince"
+			 ,   LOCATION_CITY AS "locationCity"
+			 ,   DETAILED_DESCRIPTION AS "detailedDescription"
+			 ,   PORT AS "port"
+			 ,   TRANSPORT_WAY AS "transportWay"
+			 ,   EP_MEMBER_ID AS "epMemberId"
+			 ,   EP_MEMBER_NAME AS "epMemberName"
+			 ,   ALIVE_FLAG AS "aliveFlag"
+			 ,   VERSION AS "version"
+			 ,   LANG_VER AS "langVer"
+			 ,   CREATE_DATE AS "createDate"
+			 ,   UPDATE_DATE AS "updateDate"
+			 ,   CREATE_USER AS "createUser"
+			 ,   UPDATE_USER AS "updateUser"
+			 ,   EXT1 AS "ext1"
+			 ,   STATUS AS "status"
+		FROM
+			T_SALE_INFO
+		WHERE
+			ALIVE_FLAG = '1'
+	</select>
+
+	<update id="deleteRecordByUuid"  parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.Info">
+		UPDATE
+			T_SALE_INFO
+		<set>
+			ALIVE_FLAG = '0'
+		</set>
+		WHERE
+			UUID = #{uuid} AND ALIVE_FLAG='1'
+	</update>
+
+	<!-- 首页查询列表-->
+	<select id="queryList" resultType="java.util.HashMap">
+		SELECT
+			b.dict_name as 'OIL_CLASSIFICATION',IFNULL(c.dict_name,"") as 'OIL_VARIETIES',
+t.UNIT                  ,
+t.DETAILED_DESCRIPTION  ,
+t.UNIT_PRICE            ,
+t.LANG_VER              ,
+t.UPDATE_DATE           ,
+t.UUID                  ,
+t.INFO_TITLE            ,
+t.EP_MEMBER_ID          ,
+t.STATUS                ,
+t.EP_MEMBER_NAME        ,
+t.RELEASED_DATE         ,
+t.LOCATION_CITY         ,
+t.INFO_ID               ,
+t.LOCATION_PROVINCE     ,
+t.INFO_TYPE             ,
+t.CREATE_USER           ,
+t.ALIVE_FLAG            ,
+t.TRANSPORT_WAY
+		FROM
+			T_SALE_INFO t left join t_data_dict b
+  on t.OIL_CLASSIFICATION = b.dict_code and b.TYPE_code='100'
+left join t_data_dict c
+  on c.TYPE_code='101'  and c.p_dict_code=t.OIL_CLASSIFICATION and t.OIL_VARIETIES=c.dict_code
+		WHERE
+			EXISTS (
+				SELECT
+					*
+				FROM
+					(
+						SELECT
+							e.EP_MEMBER_ID,
+							MAX(e.CREATE_DATE) CREATE_DATE
+						FROM
+							T_SALE_INFO e
+						WHERE
+							e.INFO_TYPE = 2
+						AND e.ALIVE_FLAG = 1 AND e.status in(1,2)
+						GROUP BY
+							e.EP_MEMBER_ID
+						ORDER BY
+							MAX(e.CREATE_DATE) DESC
+						LIMIT 4
+					) h
+				WHERE
+					h.EP_MEMBER_ID = t.EP_MEMBER_ID
+				AND h.CREATE_DATE = t.CREATE_DATE
+			)
+		AND t.INFO_TYPE = 2
+		AND t.ALIVE_FLAG = 1 AND t.status in(1,2)
+		UNION ALL
+			SELECT
+				b.dict_name as 'OIL_CLASSIFICATION',IFNULL(c.dict_name,"") as 'OIL_VARIETIES',
+t.UNIT                  ,
+t.DETAILED_DESCRIPTION  ,
+t.UNIT_PRICE            ,
+t.LANG_VER              ,
+t.UPDATE_DATE           ,
+t.UUID                  ,
+t.INFO_TITLE            ,
+t.EP_MEMBER_ID          ,
+t.STATUS                ,
+t.EP_MEMBER_NAME        ,
+t.RELEASED_DATE         ,
+t.LOCATION_CITY         ,
+t.INFO_ID               ,
+t.LOCATION_PROVINCE     ,
+t.INFO_TYPE             ,
+t.CREATE_USER           ,
+t.ALIVE_FLAG            ,
+t.TRANSPORT_WAY
+			FROM
+				T_SALE_INFO t left join t_data_dict b
+  on t.OIL_CLASSIFICATION = b.dict_code and b.TYPE_code='100'
+left join t_data_dict c
+  on c.TYPE_code='101'  and c.p_dict_code=t.OIL_CLASSIFICATION and t.OIL_VARIETIES=c.dict_code
+			WHERE
+				EXISTS (
+					SELECT
+						*
+					FROM
+						(
+							SELECT
+								e.EP_MEMBER_ID,
+								MAX(e.CREATE_DATE) CREATE_DATE
+							FROM
+								T_SALE_INFO e
+							WHERE
+								e.INFO_TYPE = 1
+							AND e.ALIVE_FLAG = 1 AND e.status in(1,2)
+							GROUP BY
+								e.EP_MEMBER_ID
+							ORDER BY
+								MAX(e.CREATE_DATE) DESC
+							LIMIT 4
+						) h
+					WHERE
+						h.EP_MEMBER_ID = t.EP_MEMBER_ID
+					AND h.CREATE_DATE = t.CREATE_DATE
+				)
+			AND t.INFO_TYPE = 1
+			AND t.ALIVE_FLAG = 1 AND t.status in(1,2)
+			UNION ALL
+				SELECT
+					b.dict_name as 'OIL_CLASSIFICATION',IFNULL(c.dict_name,"") as 'OIL_VARIETIES',
+t.UNIT                  ,
+t.DETAILED_DESCRIPTION  ,
+t.UNIT_PRICE            ,
+t.LANG_VER              ,
+t.UPDATE_DATE           ,
+t.UUID                  ,
+t.INFO_TITLE            ,
+t.EP_MEMBER_ID          ,
+t.STATUS                ,
+t.EP_MEMBER_NAME        ,
+t.RELEASED_DATE         ,
+t.LOCATION_CITY         ,
+t.INFO_ID               ,
+t.LOCATION_PROVINCE     ,
+t.INFO_TYPE             ,
+t.CREATE_USER           ,
+t.ALIVE_FLAG            ,
+t.TRANSPORT_WAY
+				FROM
+					T_SALE_INFO t left join t_data_dict b
+  on t.OIL_CLASSIFICATION = b.dict_code and b.TYPE_code='100'
+left join t_data_dict c
+  on c.TYPE_code='101'  and c.p_dict_code=t.OIL_CLASSIFICATION and t.OIL_VARIETIES=c.dict_code
+				WHERE
+					EXISTS (
+						SELECT
+							*
+						FROM
+							(
+								SELECT
+									e.EP_MEMBER_ID,
+									MAX(e.CREATE_DATE) CREATE_DATE
+								FROM
+									T_SALE_INFO e
+								WHERE
+									e.INFO_TYPE = 3
+								AND e.ALIVE_FLAG = 1 AND e.status in(1,2)
+								GROUP BY
+									e.EP_MEMBER_ID
+								ORDER BY
+									MAX(e.CREATE_DATE) DESC
+								LIMIT 4
+							) h
+						WHERE
+							h.EP_MEMBER_ID = t.EP_MEMBER_ID
+						AND h.CREATE_DATE = t.CREATE_DATE
+					)
+				AND t.INFO_TYPE = 3
+				AND t.ALIVE_FLAG = 1 AND t.status in(1,2)
+	</select>
+
+</mapper>

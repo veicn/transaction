@@ -1,0 +1,5 @@
+$contain.get("/contain/html_head.htm")
+</head>
+<body>
+$screen_content
+$contain.get("/contain/html_end.htm")

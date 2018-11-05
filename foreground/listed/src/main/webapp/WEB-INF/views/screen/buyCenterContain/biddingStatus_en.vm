@@ -1,0 +1,17 @@
+<div class="c-mod" id="cgxx">
+    <h1>Quotation Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Details</span></h1>
+    <div class="order-num-box clearfix">
+        <div class="order-num-l">
+            <p>$!{demand.bEnterpriseName}</p>
+            <p>NO.：$!{demand.uuid}</p>
+            <p><span>Post Date：</span><span>$!{demand.pubDateAsString}</span></p>
+        </div>
+        <div class="order-num-r">
+            <p class="ord-ntit">Quotation Status：</p>
+            $contain.get("/buyCenterContain/biddingStatusState.htm").put("biddingType", "$!{demand.biddingType}").put("biddingStatus", "$!{demand.status}")
+        </div>
+    </div>
+    <ul class="order-num-list clearfix">
+
+    </ul>
+</div>

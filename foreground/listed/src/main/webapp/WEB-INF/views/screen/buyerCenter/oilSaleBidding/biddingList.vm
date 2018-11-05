@@ -1,0 +1,182 @@
+#set($a = "个人中心-买原油网")
+
+<div class="c-mod">
+    <ul class="c-state" style="clear:both">
+        #if($authUtils.checkRole("buy_trader"))
+            <li><a href="$appServer.get('purchaseManager/buyingLeadsDemandList.htm')">我的采购需求</a></li>
+            <li class="c-cur"><a href="$appServer.get('oilSaleBidding/biddingList.htm')">我的采购报价</a></li>
+        #end
+    </ul>
+    <form id="form1" >
+        <div class="c-form">
+            <ul class="c-ful">
+                <li class="c-fcos3"><span class="c-fn c-fn2 c-fn3">报价单编号：</span><input type="text" class="c-int c-int3" name="demandCode" value="$!{queryForm.demandCode}"/></li>
+                <li class="c-fcos3 c-tx"><span class="c-fn c-fn2">报价时间：</span><input type="text" class="c-int c-int4" date="true" name="createTimeStart" value="$!{queryForm.createTimeStart}"/>—<input type="text" class="c-int c-int4" date="true" name="createTimeEnd" value="$!{queryForm.createTimeEnd}"/></li>
+
+
+
+##                <li class="c-fcos3">
+##                    <span class="c-fn c-fn2">付款日期：</span>
+##                    <select class="c-fcsel" id="typeEvent" class="sele" >
+##                        <option value="" >请选择</option>
+##                        #foreach($!typeEvent in $payItemMap.entrySet())
+##                            <option value="$!typeEvent.value" >$!typeEvent.value</option>
+##                        #end
+##                    </select>
+##
+##                    <input id="otherDate"   placeholder="输入日期" style="display: none" type="text"  date="true" />
+##                    <select class="c-fcsel" id="eventInclusion" >
+##                        <option value="">请选择</option>
+##                        <option value="after">After</option>
+##                        <option value="from">From</option>
+##                    </select>
+##                    <em id="typeEvent2" class="c-fcem" >B/L</em>
+##                    <input id="eventDays"   type="text"  placeholder="输入天数" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+##                    <em id="eventDays2" class="c-fcem">Days</em>
+##
+##                    <input id="payItem" name="payItem" style="display: none" value="$!{queryForm.payItem}" />
+##                    <input id="payItemJSON" name="payItemJSON" style="display: none" value='$!{queryForm.payItemJSON}' />
+##                </li>
+
+
+                <li class="c-libtn"><button id="button1">查询</button></li>
+
+
+            </ul>
+        </div>
+    </form>
+
+#*原油报价列表*#
+    #if($!{pageInfoList.list.total} == 0)
+        $contain.get('/contain/nodata.htm')
+    #else
+        #foreach($record in $!{pageInfoList.list})
+            <div class="zzyy-box s-mod-block">
+                <div class="zzyy-title clearfix">
+                    <div class="yy-ddh">$!{record.createTime}<span>单号：<em>$!{record.uuid}</em></span>
+                        <span class="yy-gs">供应商：$!{record.pEnterpriseName}</span>
+                    </div>
+                </div>
+                <div class="s-mod-bcont clearfix">
+                        <div class="orde-pic">
+                            <a href="$appServer.get('/oilSaleBidding/biddingDetail.htm').put('demandId', $!{record.id})">
+                                <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{record.peMemberId}.img"
+                                     onerror="this.src='$imageServer.get('images/cg_pic1.jpg')'">
+                            </a>
+                        </div>
+                        <dl class="orderl-txt">
+                            <dd>品种：<a href="$appServer.get('/oilSaleBidding/biddingDetail.htm').put('demandId', $!{record.id}).put('bidding', 'b')">$!{record.crudeOilOptions}</a><span></dd>
+                            <dd>数量(万桶)：$!{record.num}</dd>
+							<dd>贸易条款：$!{record.tradeItem}</dd>
+                            <dd>计价基准：$!{record.valuationBase}</dd>
+                            <dd>计价期：$!{record.valuationProidType}</dd>
+                            <dd>升贴水：$!{record.agio}</dd>
+                            <dd>付款日期：$!{record.payItem}</dd>
+                            <dd>装期：$!{record.shipmentStartTime}至$!{record.shipmentEndTime}</dd>
+                            <dd>计价公式：$!{record.valuationFormula}</dd>
+                        </dl>
+                    <div class="s-but-all clearfix">
+                        <div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+                            <div class="s-but-blo s-but-blo1 clearfix">
+                                <a href="$appServer.get('/oilSaleBidding/biddingDetail.htm').put('demandId', $!{record.id}).put('bidding', 'b')" class="s-btn">查看</a>
+                                #if($!{record.status} == '10' and $!{record.stopBid} == 0)
+                                    <a href="$appServer.get('/purchaseManager/buyBiddingEdit.htm').put('demandId', $!{record.id}).put('bizType', 'CrudeOil').put('oilSaleFlag', 1)" class="s-btn">修改</a>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        #end
+        $contain.get('/common/page.htm').put("pageInfo",$!{pageInfoList})
+    #end
+</div>
+
+<script>
+    $(function () {
+        initDateInput($("input[date='true']"))
+    })
+
+    $(function () {
+//      如果payItem和payItemJSON有值就给其他输入框渲染上
+//        getValue();
+//        监听表单提交
+        $("#button1").on("click", function () {
+//            setValue();
+            $.ajax({
+                url:'$appServer.get('/oilSaleBidding/biddingList.htm')',
+                method:'POST',
+                data:$("#form1").serializeArray(),
+            });
+        })
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+    })
+
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+    }
+
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+
+    }
+</script>

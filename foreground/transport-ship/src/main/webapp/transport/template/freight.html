@@ -1,0 +1,210 @@
+<html>
+    <head>
+    <title>买原油网后台管理#if($title)-${title}#end</title>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../layui/css/layui.css"  media="all">
+    <script src="../../layui/layui.js"></script>
+    <link rel="stylesheet" href="../css/index.css" >
+	</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+	<!--nav-->
+	<div class="layui-header">
+	    <div class="layui-logo">买原油网后台管理</div>
+	    <!-- 头部区域（可配合layui已有的水平导航） -->
+	    <ul class="layui-nav layui-layout-left">
+	        <li class="layui-nav-item"><a href="">控制台</a></li>
+	        <li class="layui-nav-item"><a href="">商品管理</a></li>
+	        <li class="layui-nav-item"><a href="$memberServer.get('om/welcome.htm')">用户管理</a></li>
+	        <li class="layui-nav-item">
+	            <a href="javascript:;">其它系统</a>
+	            <dl class="layui-nav-child">
+	                <dd><a href="">邮件管理</a></dd>
+	                <dd><a href="">消息管理</a></dd>
+	                <dd><a href="">授权管理</a></dd>
+	            </dl>
+	        </li>
+	    </ul>
+	    <ul class="layui-nav layui-layout-right">
+	        <li class="layui-nav-item">
+	            <a href="javascript:;">
+	                <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+	                $!{user.name}
+	            </a>
+	            <dl class="layui-nav-child">
+	                <dd><a href="">基本资料</a></dd>
+	                <dd><a href="">安全设置</a></dd>
+	            </dl>
+	        </li>
+	        <li class="layui-nav-item"><a href="$memberServer.get('logout.htm')">退出</a></li>
+	    </ul>
+	</div>
+	<!--menu-->
+	<div class="layui-side layui-bg-black">
+	    <div class="layui-side-scroll">
+	        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+	        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+	            <li class="layui-nav-item layui-nav-itemed">
+	                <a class="" href="javascript:;">会员管理</a>
+	                <dl class="layui-nav-child">
+	                    <dd><a href="$appServer.get('om/member/list.htm')">会员列表</a></dd>
+	                    <dd><a href="$appServer.get('om/accounts/list.htm')">账号管理</a></dd>
+	                    <dd><a href="$appServer.get('om/permission/list.htm')">权限管理</a></dd>
+	                    <dd><a href="$appServer.get('om/role/list.htm')">角色管理</a></dd>
+	                </dl>
+	            </li>
+	            <li class="layui-nav-item layui-nav-itemed">
+	                <a class="" href="javascript:;">企业管理</a>
+	                <dl class="layui-nav-child">
+	                    <dd><a href="$appServer.get('om/enterprise/list.htm')">企业列表</a></dd>
+	                </dl>
+	            </li>
+	            <li class="layui-nav-item layui-nav-itemed">
+	                <a class="" href="javascript:;">人员管理</a>
+	                <dl class="layui-nav-child">
+	                    <dd><a href="$appServer.get('om/person/list.htm')">人员列表</a></dd>
+	                </dl>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="layui-body pp15">
+		
+		<!--搜索条件-->
+		<div  class="ry-banner">
+			<form class="layui-form"  >
+				<div class="layui-form-item">
+					
+					<div class="layui-inline">
+					  <label class="layui-form-label">第一装港</label>
+				      <div class="layui-input-inline">
+				        <input type="tel" name="one"  class="layui-input">
+				      </div>
+			     	</div>
+
+				    <div class="layui-inline">
+				      <label class="layui-form-label">第一卸港</label>
+				      <div class="layui-input-inline">
+				        <input type="tel" name="oneX"  class="layui-input">
+				      </div>
+				    </div>
+				    <div class="layui-inline">
+				      <label class="layui-form-label">第二装港</label>
+				      <div class="layui-input-inline">
+				        <input type="text" name="email" class="layui-input">
+				      </div>
+				    </div>
+				  </div>
+				  <div class="layui-form-item mb0">
+					
+					<div class="layui-inline">
+					  <label class="layui-form-label">第二卸港</label>
+				      <div class="layui-input-inline">
+				        <input type="tel" name="one"  class="layui-input">
+				      </div>
+			     	</div>
+
+				    <div class="layui-inline">
+				      <label class="layui-form-label">第三装港</label>
+				      <div class="layui-input-inline">
+				        <input type="tel" name="oneX"  class="layui-input">
+				      </div>
+				    </div>
+				    <div class="layui-inline">
+				      <label class="layui-form-label">第三卸港</label>
+				      <div class="layui-input-inline">
+				        <input type="text" name="email" class="layui-input">
+				      </div>
+				    </div>
+				    
+				    <button class="layui-btn" lay-submit lay-filter="formId" >查询</button>
+				    <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+		    		<button class="layui-btn layui-btn-normal" id="addList">新增</button>
+				  </div>
+			</form>
+		</div>
+	
+		
+		<!--列表-->
+		<table class="layui-table" lay-skin="nob">
+		  <thead>
+		    <tr>
+		      <th>装港</th>
+		      <th>卸港</th>
+		      <th>运价</th>
+		      <th>年份</th>
+		      <th>里程</th>
+		      <th>操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>贤心</td>
+		      <td>2016-11-29</td>
+		      <td>人生就像是一场修行</td>
+		      <td>10</td>
+		      <td>-1</td>
+		      <td>
+		      	<button class="layui-btn layui-btn-normal layui-btn-small editFn" attr-data="id1">
+		      		<i class="layui-icon">&#xe642;</i>
+					修改
+		      	</button>
+		      	<button class="layui-btn layui-btn-danger layui-btn-small delFn" attr-data="id1">
+		      		<i class="layui-icon">&#xe640;</i>
+		      		删除
+		      	</button>
+		      </td>
+		    </tr>
+		    <tr>
+		      <td>许闲心</td>
+		      <td>2016-11-28</td>
+		      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+		      <td>10</td>
+		      <td>-1</td>
+		      <td>
+		      	<button class="layui-btn layui-btn-normal layui-btn-small editFn"  attr-data="id2">
+		      		<i class="layui-icon">&#xe642;</i>
+					修改
+		      	</button>
+		      	<button class="layui-btn layui-btn-danger layui-btn-small delFn" attr-data="id2">
+		      		<i class="layui-icon">&#xe640;</i>
+		      		删除
+		      	</button>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar">
+	    	<div id="ry-page" class="ry-right"></div>
+	    </div>
+
+	 
+	 
+		<script src="../js/freight.js"></script>
+	
+	
+	
+	
+	
+	
+	<!--底部-->
+	<div class="layui-footer">
+	    <!-- 底部固定区域 -->
+	    © layui.com - 底部固定区域
+	</div>
+</div>
+</body>
+
+
+</html>

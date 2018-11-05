@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	$contain.get("/common/server.htm")
+    	$contain.get("/pages/front/contain/htmlhead.htm")
+    </head>
+
+    <body>
+
+        $contain.get("/pages/front/contain/nav.htm")
+        $screen_content
+        $contain.get("/pages/front/contain/htmlend.htm")
+
+	</body>
+</html>

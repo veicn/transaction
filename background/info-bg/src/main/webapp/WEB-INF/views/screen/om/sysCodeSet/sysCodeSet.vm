@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/info/index.css')" >
+<script src="$imageServer.get('info/js/sysCodeSet/sysCodeSet.js')"></script>
+	<div class="pp15" id="layerDemo" style="">
+		<!--搜索条件-->		
+		<div class="ry-banner">
+			<div class="layui-inline">
+				<label class="layui-form-label">模块代码</label>
+				<div class="layui-inline">
+					<input class="layui-input" name="module" id="module" style="width:200px; height:32px;"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width:100px">值集类型名称</label>
+				<div class="layui-inline">
+					<input class="layui-input" name="setName" id="setName" style="width:200px;height:32px"/>
+				</div>
+			</div>
+			<button style="margin-top:-7px" class="layui-btn layui-btn-small layui-btn-normal ml18" data-type="reload" id="btn">查询</button>
+			<button style="margin-top:-7px" class="layui-btn layui-btn-small layui-btn-normal" id="add">新增</button>
+		</div>
+		
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo" style="overflow-x:scroll">
+			<thead>
+				<tr>
+					<th lay-data="{field:'module'}">模块代码</th>
+					<th lay-data="{field:'setCode'}">值集类别代码</th>
+					<th lay-data="{field:'setName'}">值集类型名称</th>
+					<th lay-data="{field:'editable', templet: '#editableTpl'}">是否可编辑</th>
+					<th lay-data="{fixed: 'right', width:330, align:'center', toolbar: '#barDemo'}"></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+<script type="text/html" id="barDemo">
+	<i class="layui-icon">&#xe605;</i>
+	<a class="dialog-link" lay-event="show" style="color:#0A529C">显示值集</a>
+	<i class="layui-icon">&#xe654;</i>
+	<a class="dialog-link btcol" lay-event="add">添加值集</a>
+	<i class="layui-icon">&#xe642;</i>
+	<a class="dialog-link btcol" lay-event="edit">修改</a>
+	<i class="layui-icon" style="color:red">&#xe640;</i>
+	<a class="dialog-link btcol" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="barDemo2">
+	<a class="btcol" lay-event="itemEdit">
+		<i class="layui-icon">&#xe642;</i>修改
+	</a>
+	<a class="btcol" lay-event="itemDel">
+		<i class="layui-icon">&#xe640;</i>删除
+	</a>
+</script>
+<script id="editableTpl" type="text/html">
+	{{#  if(d.editable){ }}
+	{{ '可编辑' }}
+	{{#  } else { }}
+	{{ '不可编辑' }}
+	{{#  } }}
+</script>

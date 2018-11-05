@@ -1,0 +1,17 @@
+#css($appServer.get('/product/css/work/emailSendSuccess.css'))
+<div class="rps-box">
+    <div class="rps-l">
+        <img src="$appServer.get('/product/images/suc_bg.png')" alt="">
+    </div>
+    <div class="rps-r">
+        <h2>Submit successfully !</h2>
+        <!-- <h2>is changed successfully.</h2> -->
+        <p class="arrd">
+            please active your account through email in 24 hours.
+        </p>
+        <!-- <div class="com-btn-b">
+            <a href="javascript:;" class="br btn-c com-btn">Sign in  immediately</a>
+        </div> -->
+    </div>
+
+</div>

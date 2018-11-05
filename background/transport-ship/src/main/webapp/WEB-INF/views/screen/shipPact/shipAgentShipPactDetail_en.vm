@@ -1,0 +1,126 @@
+	
+	<div class="c-mod">
+			<style>
+				.c-ful li.c-fcos2 .c-int{width:60%;}
+				.c-ful li .sele{width:60%;}
+				.charter-add2{ width:94.2%; border:1px solid #d6d6d6; box-shadow:0 0 3px 0 #d6d6d6; padding:10px 0; position:relative; margin-top:20px; overflow:visible;}
+				.description2{ position:absolute; right:-6.5%; top:50%; margin-top:-15px;}
+				.charter-add2 li.c-fcos2 span.c-fn{ width:29.5%;}
+				.charter-add2 li.c-fcos2 .c-inpt{ width:63.6%;border:1px #ccc solid;box-sizing:border-box;padding-left:6px;vertical-align:top;height:30px;}
+				.charter-add2 li.c-fcos2 .c-intt{width:29%}
+				.c-ful li.c-fcos2 .input-line{width:3.3%; margin:0 1%; display:inline-block; text-align:center;}
+			</style>
+			  <h3><em class="cw-ico ico-h3"></em>船合同信息编辑</h3>
+			  <form class="form " >
+			  <div class="c-form"> 
+                 <ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>CP Dated：</span>
+						<input type="text"  class="c-int" id="signDate" name="signDates" placeholder="" readonly="readonly"/>
+					</li>
+					<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>Charterer：</span>
+						<input type="text" class="c-int" id="carrierName" name="carrierName"  maxlength="100"/>
+					</li>
+					</ul>
+				<div class="all">
+					<ul class="c-ful charter-add2 clearfix wsUl">
+						<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>WS Rate：</span>
+							<input type="text" class="c-inpt ws"  name=""  onkeyup="clearNoNumTwo(this)" maxlength="15"
+								onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+						</li>
+						<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>请选择：</span>
+							 <select class="sele wsRes" name="">
+								<option value="WS 2017 RATES AND TERMS TO APPLY">WS 2017 RATES AND TERMS TO APPLY</option>
+								<option value="WS 2018 RATES AND TERMS TO APPLY">WS 2018 RATES AND TERMS TO APPLY</option>
+								<option value="WS 2019 RATES AND TERMS TO APPLY">WS 2019 RATES AND TERMS TO APPLY</option>
+							</select>
+						</li>
+						<li class="c-fcos2"><span class="c-fn">BASIS：</span>
+							<input type="text" class="c-intt zq-text time time1" placeholder="" readonly="readonly" style="width: 29.3%;">
+							<em>——</em>
+							<input readonly="readonly" type="text" style="width: 29.3%;" placeholder="" class="c-intt zq-text time2" />
+						</li>
+						<span class="description2 clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus"></a></span>
+					</ul>
+				</div>
+					
+					<ul class="c-ful">
+					<li class="c-fcos2" style="position:relative;"><span class="c-fn"><span class="redicn">*</span>Laycan：</span>
+						<input type="text" id="pactBeg" name="pactBegs" readonly="readonly" class="c-intt zq-text" placeholder="" style="width: 25%;" />
+						<em>——</em>
+						<input type="text" id="pactEnd" placeholder="" style="width: 25%;" name="pactEnds" class="c-intt zq-text" readonly="readonly"/>
+						<span title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT " ><i class="shipping-ico w-ico-sl"></i></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" ><span class="redicn">*</span>Minimum Cargo Quantity(MT)：</span>
+						<input type="text" class="c-intt format-t2" id="minQuantity" name="minQuantity" style="width: 50%" onkeyup="clearNoNumThree(this)" maxlength="15"/>
+						<span>MT</span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>VESSEL NAME：</span>
+						<select class="sele" id="shipName" name="shipName"  >
+						<option value="">请选择</option>
+						</select>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" title=""><span class="redicn">*</span> Demurrage：</span>
+						<input type="text" class="c-intt format-t2" id="demurrage" name="demurrage" style="width: 50%" onkeyup="clearNoNumTwo(this)" maxlength="15"/>
+						<span title="USD/PDPR">USD/PDPR</span>
+					</li>
+					
+					<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>Ship Owner：</span>
+						<input type="text" class="c-int shipOwner" id="shipOwner" name="shipOwner" maxlength="100"/>
+					</li>
+					<li class="c-fcos2"><span class="c-fn"  title=""><span class="redicn">*</span>Rate：</span>
+						<input type="text" class="c-intt format-t2" id="pactSpeed" name="pactSpeed" style="width: 50%" onkeyup="clearNoNumTwo(this)" maxlength="15"/>
+						<span  title="KNOTS，CHOPT WEATHER AND SAFE NAVIGATION PERMITTING">KNOTS</span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn"><span class="redicn">*</span>BROKER：</span>
+						<input type="text" class="c-int brokerName" id="brokerName" name="brokerName" maxlength="100"/>
+					</li>
+					<li class="c-fcos2"><span class="c-fn"  title=""><span class="redicn">*</span>Laytime：</span>
+						<input type="text" class="c-intt format-t2" id="dockTime" name="dockTime" style="width: 50%" onkeyup="clearNoNumTwo(this)" maxlength="15"/>
+						<span   title="HOURS SHINC">HOURS</span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn">Remarks：</span>
+						<input type="text" class="c-int" id="remark" name="remark" maxlength="100"/>
+					</li>
+					<li class="c-fcos2"><span class="c-fn">Contact：</span>
+						<input type="text" class="c-intt" id="cunImg" name="accessory" style="width: 50%" placeholder="" readonly="readonly"/>
+						<span  style="position:absolute;left: 78%;">&nbsp;<a href="javascript:;" class="file1" id="btn">Upload</a></span>
+						<span style="padding-left: 29%;color: #f00;font-size: 12px; line-height: 16px;">*pdf，Excel，Word，TXT，JPG</span>
+					</li>
+				</ul> 
+			 </form>
+			 <div id="accessory"  style="display:none;"></div>
+			<div class="c-subdiv">
+				<button type="button" class="c-btnsub" id="submits" >Submit</button><button type="button" class="c-btncas s-btn-primary back">Back</button>
+			</div>
+	</div>
+<script src="../transport/js/shipPact/shipAgentShipPactDetail.js"></script>	
+<script>
+		//数量数字正则校验
+		function clearNoNumThree(obj)    
+		{    
+		    //先把非数字的都替换掉，除了数字和.    
+		    obj.value = obj.value.replace(/[^\d.]/g,"");    
+		    //保证只有出现一个.而没有多个.    
+		    obj.value = obj.value.replace(/\.{2,}/g,".");    
+		    //必须保证第一个为数字而不是.    
+		    obj.value = obj.value.replace(/^\./g,"");    
+		    //保证.只出现一次，而不能出现两次以上    
+		    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+		    //只能输入两个小数  
+		    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+		}  
+		//单价数字正则校验
+		function clearNoNumTwo(obj)    
+		{    
+		    //先把非数字的都替换掉，除了数字和.    
+		    obj.value = obj.value.replace(/[^\d.]/g,"");    
+		    //保证只有出现一个.而没有多个.    
+		    obj.value = obj.value.replace(/\.{2,}/g,".");    
+		    //必须保证第一个为数字而不是.    
+		    obj.value = obj.value.replace(/^\./g,"");    
+		    //保证.只出现一次，而不能出现两次以上    
+		    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+		    //只能输入两个小数  
+		    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+		}  
+</script>

@@ -1,0 +1,16 @@
+<body >
+<div class="zcxx-wrap2">
+<div class="s-register ">
+    <ul class="clearfix s-regis-title">
+        <li class="curr"><a href="?t=0">个人注册</a></li>
+        <li><a href="?t=1">企业注册</a></li>
+    </ul>
+    <div class="s-tab s-tab-brief">
+        <ul class="s-tab-title s-tab-regtitle">
+            <li data-t="0" class="s-this" data-onshow="showphone"> 手机注册</li>
+            <li data-t="1" data-onshow="showmail" >邮箱注册</li>
+        </ul>
+        <div class="s-tab-content s-reg-top">
+            <div class="clearfix  s-show">
+                <div class="s-rleft  s-tab-item  s-rtab-item">
+                    <h6 class="s-regi-title">欢迎注册成品油会员</h6>

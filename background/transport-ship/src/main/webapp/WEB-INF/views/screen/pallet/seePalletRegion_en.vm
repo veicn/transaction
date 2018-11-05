@@ -1,0 +1,14 @@
+	<script src="../transport/js/pallet/seePalletRegion.js"></script>
+	<div class="c-mod">
+			
+			  <h3><em class="cw-ico ico-h3"></em>我要租船详情</h3>
+			  <div class="c-form c-form-xq">
+				<ul class="c-ful" id="thisBc"></ul>
+				<ul class="c-ful c-ful-line" id="thisBc2"></ul>
+				<ul class="c-ful c-ful-line" id="thisBc3"></ul>
+			  </div>
+			
+			<div class="c-subdiv">
+				<a href="palletList.htm"><button class="c-btncas">返回</button></a>
+			</div>
+	</div>

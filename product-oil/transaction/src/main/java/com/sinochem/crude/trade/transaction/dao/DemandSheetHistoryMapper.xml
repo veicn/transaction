@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.transaction.dao.DemandSheetHistoryMapper" >
+    <resultMap id="demandSheet" type="com.sinochem.crude.trade.transaction.domain.po.DemandSheet" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="user_created" property="userCreated" jdbcType="BIGINT" />
+        <result column="user_modified" property="userModified" jdbcType="BIGINT" />
+        <result column="alive_flag" property="aliveFlag" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+        <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
+        <result column="demand_sheet_status_code" property="demandSheetStatusCode" jdbcType="VARCHAR" />
+        <result column="saved_date" property="savedDate" jdbcType="TIMESTAMP" />
+        <result column="released_date" property="releasedDate" jdbcType="TIMESTAMP" />
+        <result column="cancelled_date" property="cancelledDate" jdbcType="TIMESTAMP" />
+        <result column="completed_date" property="completedDate" jdbcType="TIMESTAMP" />
+        <result column="demand_type_code" property="demandTypeCode" jdbcType="VARCHAR" />
+        <result column="product_source_code" property="productSourceCode" jdbcType="VARCHAR" />
+        <result column="specified_enterprise_id_list" property="specifiedEnterpriseIdList" jdbcType="VARCHAR" />
+        <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
+        <result column="product_info_id" property="productInfoId" jdbcType="BIGINT" />
+        <result column="pricing_info_id" property="pricingInfoId" jdbcType="BIGINT" />
+        <result column="transport_info_id" property="transportInfoId" jdbcType="BIGINT" />
+        <result column="ship_berth_code" property="shipBerthCode" jdbcType="VARCHAR" />
+        <result column="stakeholder_info_id" property="stakeholderInfoId" jdbcType="BIGINT" />
+        <result column="other_info_id" property="otherInfoId" jdbcType="BIGINT" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sinochem.crude.trade.transaction.domain.po.DemandSheet"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_demand_sheet_history (
+            uuid,
+            gmt_created,
+            gmt_modified,
+            user_created,
+            user_modified,
+            alive_flag,
+            version,
+            serial_number,
+            demand_sheet_status_code,
+            saved_date,
+            released_date,
+            cancelled_date,
+            completed_date,
+            demand_type_code,
+            product_source_code,
+            specified_enterprise_id_list,
+            enterprise_id,
+            product_info_id,
+            pricing_info_id,
+            transport_info_id,
+            ship_berth_code,
+            stakeholder_info_id,
+            other_info_id)
+        VALUES (
+            #{uuid, jdbcType=VARCHAR},
+            #{gmtCreated, jdbcType=TIMESTAMP},
+            #{gmtModified, jdbcType=TIMESTAMP},
+            #{userCreated, jdbcType=BIGINT},
+            #{userModified, jdbcType=BIGINT},
+            #{aliveFlag, jdbcType=INTEGER},
+            #{version, jdbcType=BIGINT},
+            #{serialNumber, jdbcType=VARCHAR},
+            #{demandSheetStatusCode, jdbcType=VARCHAR},
+            #{savedDate, jdbcType=TIMESTAMP},
+            #{releasedDate, jdbcType=TIMESTAMP},
+            #{cancelledDate, jdbcType=TIMESTAMP},
+            #{completedDate, jdbcType=TIMESTAMP},
+            #{demandTypeCode, jdbcType=VARCHAR},
+            #{productSourceCode, jdbcType=VARCHAR},
+            #{specifiedEnterpriseIdList, jdbcType=VARCHAR},
+            #{enterpriseId, jdbcType=BIGINT},
+            #{productInfoId, jdbcType=BIGINT},
+            #{pricingInfoId, jdbcType=BIGINT},
+            #{transportInfoId, jdbcType=BIGINT},
+            #{shipBerthCode, jdbcType=VARCHAR},
+            #{stakeholderInfoId, jdbcType=BIGINT},
+            #{otherInfoId, jdbcType=BIGINT})
+    </insert>
+
+</mapper>

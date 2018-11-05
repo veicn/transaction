@@ -1,0 +1,32 @@
+.s-table-wrap{}
+.s-table-wrap *{box-sizing:border-box;}
+.s-table{width:100%;}
+.s-table tr{transition:all .3s;-webkit-transition:all .3s;}
+.s-table th,.s-table td{border:1px solid #e6e6e6;height:30px;line-height:30px;padding:5px 10px;}
+.s-table th{background:#f2f2f2;font-weight:400;text-align:left;}
+.s-table td{}
+.s-table-line th,.s-table-space th{background:#69f;border:0;color:#fff;}
+.s-table-line td{border-width:1px 0;}
+.s-table-space th,.s-table-space td{border:0;}
+.s-table-space tr:nth-child(odd){background-color:#f2f2f2;}
+.s-table tr:hover{background-color:#f9f9f9;}
+
+/* 带分页表格 */
+.CJJ-Table .clearfix{clear:both;}
+.CJJ-Table .pagenumberBox{float:left;}
+.CJJ-Table .pagenumberBox li{box-sizing:border-box;float:left;padding:0 9px;border:1px solid #d9d9d9;height:28px;line-height:28px;margin-left:5px;margin-right:5px;cursor:pointer;color:#333;}
+.CJJ-Table .pagenumberBox li:hover{background:#69f !important;padding:0 10px !important;color:white !important;border:none !important;}
+.CJJ-Table .pagenumberBoxLi{background:#69f !important;box-sizing:border-box;padding:0 10px !important;color:white !important;border:none !important;}
+.CJJ-Table tfoot span{box-sizing:border-box;padding:0 15px;border:1px solid #d9d9d9;color:#333;height:28px;line-height:28px;}
+.CJJ-Table tfoot span:hover{background:#69f !important;padding:0 16px !important;color:white !important;border:none !important;}
+.CJJ-Table .tfootRight input{box-sizing:border-box;width:80px;padding-left:10px;height:28px;border:1px solid #d9d9d9;color:#333;vertical-align:top;}
+.CJJ-Table .tfootRight button{box-sizing:border-box;width:60px;height:28px;border:1px solid #d9d9d9;color:#333;margin-left:10px;cursor:pointer;}
+.CJJ-Table .tfootRight button:hover{background:#69f !important;height:28px;color:white !important;border:none !important;}
+.CJJ-Table{width:100%;margin-bottom:20px;}
+.CJJ-Table thead{border-bottom:1px solid #ccc;background:#f2f2f2;}
+.CJJ-Table thead th{font-size:14px;line-height:30px;padding:5px;text-align:left;}
+.CJJ-Table tbody td{line-height:30px;padding:5px;}
+.CJJ-Table tbody tr{border-bottom:1px dashed #d9d9d9;}
+.CJJ-Table tbody tr:hover{background-color:#f9f9f9;}
+.CJJ-Table tfoot td{padding:10px 0;}
+.CJJ-Table tfoot select{width:80px;padding-left:10px;height:28px;border:1px solid #d9d9d9;color:#333;}

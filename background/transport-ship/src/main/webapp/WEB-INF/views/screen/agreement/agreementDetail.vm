@@ -1,0 +1,111 @@
+	
+	<style>
+	.redicn{color:red;padding-right:5px;}
+	</style>
+			<div class="c-mod">
+				<h3><em class="cw-ico ico-h3"></em>租船协议</h3>
+				<div class="cwxx-tit"></div>
+				<div class="charter-cont charter-cont2">
+			   <form action="" class="form">
+                    <div class="form-row charter-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>租船协议日：</label>
+					    <div class="controls add-controls">
+						  <input type="text" class=" form-inp  czt-inp signDate " style="width: 50%" name="signDate" value="" id="date" placeholder="请选择日期" readonly="readonly">
+						</div>
+					</div>
+                    <div class="form-row charter-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>甲方：</label>
+					    <div class="controls add-controls">
+						  <input type="text" class=" form-inp  czt-inp firParty " style="width: 50%" name="firParty" value="" maxlength="100">
+						</div>
+					</div>
+                    <div class="form-row charter-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>乙方：</label>
+					    <div class="controls add-controls">
+						  <input type="text" class=" form-inp  czt-inp secParty " style="width: 50%" name="secParty" value="" maxlength="100">
+						</div>
+					</div>
+                    <div class="form-row charter-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>船名：</label>
+					    <div class="controls add-controls"><select style="width: 52.5%"  class="c-int  form-sel shipName" id="shipName" name="shipName"  ><option value="">请选择</option></select>
+						</div>
+					</div>
+					<div class="all zhuanggangAll">
+						<div class="charter-add charter-add2 zhuangDiv">
+		                    <div class="form-row charter-row charter-row">
+								<label class="control-label add-label"><span class="redicn">*</span>数量：</label>
+							    <div class="controls add-controls clearfix">
+								  <input style="width:53%" type="text" class="form-inp  czt-inp quantity"  name="quantity" value="" onkeyup="clearNoNumTwo(this)" maxlength="15"
+								  	onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+								  <select style="position:absolute;right:47px;width:30%" class="form-sel form-sel-c unitName" name="unitName">
+										<option value="吨">吨</option>
+										<option value="桶">桶</option>
+								  </select>
+								</div>
+							</div>
+							<div class="form-row charter-row">
+								<label class="control-label add-label"><span class="redicn">*</span>油种：</label>
+								<div class="controls add-controls">
+								  <input type="text" class=" form-inp  czt-inp oilType"  name="oilType" value="" maxlength="100">
+								</div>
+							</div>
+							<div class="form-row charter-row">
+								<label class="control-label add-label"><span class="redicn">*</span>装港：</label>
+								<div class="controls add-controls">
+								  <input type="text" class=" form-inp  czt-inp loadPort"  name="loadPort" value="" maxlength="100">
+								</div>
+							</div>
+							<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus zhuang"></a></div>
+						</div>
+                    </div>
+					<div class="all xiegangAll">
+						<div class="charter-add charter-add2">
+							<div class="form-row charter-row">
+								<label class="control-label add-label"><span class="redicn">*</span>卸港：</label>
+								<div class="controls add-controls">
+								  <input type="text" class=" form-inp  czt-inp unloadPort"  name="unloadPort" value="" maxlength="100">
+								</div>
+							</div>
+							<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus xie"></a></div>
+						</div>
+                    </div>
+                    <div class="form-row charter-row charter-row2 clearfix">
+						<ul class="c-ful">
+							<li class="c-fcos1"><span class="c-fn"><span class="redicn">*</span>装期LAYCAN：</span><input type="text" id="pactBeg" name="pactBeg" class="c-int zq-text" placeholder="请选择日期" readonly="readonly" style="width: 28%;"/><em>——</em><input type="text" id="pactEnd" placeholder="请选择日期" readonly="readonly" name="pactEnd" class="c-int zq-text" style="width: 28%;"/></li>
+						</ul>
+					</div>	
+                    <div class="form-row charter-row charter-row3 clearfix">
+						<ul class="c-ful">
+							<li class="c-fcos1"><span class="c-fn">附件：</span><input type="text" class="c-int" id="cunImg" readonly="readonly" />
+							<span class="conspan">*pdf，Excel，Word，TXT，JPG</span>
+							</li>
+						</ul>
+						<div class="controls charter-controls s-file2">
+							<a href="javascript:;" class="file " type="button" id="btn">上传</a>
+						</div>
+				</div>
+			  </form>
+		</div>
+				<div id="accessory"  style="display:none;"></div>
+			</div>
+			<div class="c-subdiv">
+				<button class="c-btnsub save" id="save">提交</button><button class="c-btncas s-btn-primary cancel">返回</button>
+			</div>
+<script src="../transport/js/agreement/agreementDetail.js"></script>
+<script>
+
+//两位小数数字正则校验
+function clearNoNumTwo(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+} 
+</script>

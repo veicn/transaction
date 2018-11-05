@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.CrudeTradingCompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.CrudeTradingCompanyInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="can_trading" property="canTrading" jdbcType="BIT" />
+    <result column="trading_complay_code" property="tradingComplayCode" jdbcType="VARCHAR" />
+    <result column="main_import_product" property="mainImportProduct" jdbcType="VARCHAR" />
+    <result column="main_export_product" property="mainExportProduct" jdbcType="VARCHAR" />
+    <result column="last_year_operation_revenue" property="lastYearOperationRevenue" jdbcType="DECIMAL" />
+    <result column="last_year_trade_volume" property="lastYearTradeVolume" jdbcType="DECIMAL" />
+    <result column="credential_id" property="credentialId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, can_trading, trading_complay_code, main_import_product, main_export_product, 
+    last_year_operation_revenue, last_year_trade_volume, credential_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crude_trading_company_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crude_trading_company_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.CrudeTradingCompanyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_trading_company_info (member_id, can_trading, trading_complay_code, 
+      main_import_product, main_export_product, last_year_operation_revenue, 
+      last_year_trade_volume, credential_id)
+    values (#{memberId,jdbcType=BIGINT}, #{canTrading,jdbcType=BIT}, #{tradingComplayCode,jdbcType=VARCHAR}, 
+      #{mainImportProduct,jdbcType=VARCHAR}, #{mainExportProduct,jdbcType=VARCHAR}, #{lastYearOperationRevenue,jdbcType=DECIMAL}, 
+      #{lastYearTradeVolume,jdbcType=DECIMAL}, #{credentialId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeTradingCompanyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crude_trading_company_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="canTrading != null" >
+        can_trading,
+      </if>
+      <if test="tradingComplayCode != null" >
+        trading_complay_code,
+      </if>
+      <if test="mainImportProduct != null" >
+        main_import_product,
+      </if>
+      <if test="mainExportProduct != null" >
+        main_export_product,
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        last_year_operation_revenue,
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        last_year_trade_volume,
+      </if>
+      <if test="credentialId != null" >
+        credential_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="canTrading != null" >
+        #{canTrading,jdbcType=BIT},
+      </if>
+      <if test="tradingComplayCode != null" >
+        #{tradingComplayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImportProduct != null" >
+        #{mainImportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="mainExportProduct != null" >
+        #{mainExportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        #{lastYearTradeVolume,jdbcType=DECIMAL},
+      </if>
+      <if test="credentialId != null" >
+        #{credentialId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.CrudeTradingCompanyInfo" >
+    update crude_trading_company_info
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="canTrading != null" >
+        can_trading = #{canTrading,jdbcType=BIT},
+      </if>
+      <if test="tradingComplayCode != null" >
+        trading_complay_code = #{tradingComplayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImportProduct != null" >
+        main_import_product = #{mainImportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="mainExportProduct != null" >
+        main_export_product = #{mainExportProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="lastYearOperationRevenue != null" >
+        last_year_operation_revenue = #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastYearTradeVolume != null" >
+        last_year_trade_volume = #{lastYearTradeVolume,jdbcType=DECIMAL},
+      </if>
+      <if test="credentialId != null" >
+        credential_id = #{credentialId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.CrudeTradingCompanyInfo" >
+    update crude_trading_company_info
+    set member_id = #{memberId,jdbcType=BIGINT},
+      can_trading = #{canTrading,jdbcType=BIT},
+      trading_complay_code = #{tradingComplayCode,jdbcType=VARCHAR},
+      main_import_product = #{mainImportProduct,jdbcType=VARCHAR},
+      main_export_product = #{mainExportProduct,jdbcType=VARCHAR},
+      last_year_operation_revenue = #{lastYearOperationRevenue,jdbcType=DECIMAL},
+      last_year_trade_volume = #{lastYearTradeVolume,jdbcType=DECIMAL},
+      credential_id = #{credentialId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from crude_trading_company_info
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+</mapper>

@@ -1,0 +1,48 @@
+<div class="footer">
+    <div class="inner">
+        <ul class="ft-list clearfix">
+            <li>
+                <h3>关于我们</h3>
+                <a href="javascript:void(0)">关于买原油</a>
+                <a href="javascript:void(0)">联系我们</a>
+                <a href="$appServer.get('/recruit.htm')">人才招聘</a>
+            </li>
+            <li>
+                <h3>帮助中心</h3>
+                <a href="javascript:;" onclick="getHelp('账号问题')">账号问题</a>
+                <a href="javascript:;" onclick="getHelp('原油交易流程')">原油交易流程</a>
+                <a href="javascript:;" onclick="getHelp('订单执行')">订单执行</a>
+                <a href="javascript:;" onclick="getHelp('租船交易流程')">租船交易流程</a>
+                <a href="javascript:;" onclick="getHelp('炼厂采购优化')">炼厂采购优化</a>
+            </li>
+            <li>
+                <h3>注册与服务协议</h3>
+                <a href="javascript:;" onclick="getStatement('入驻协议')">企业入驻协议</a>
+                <a href="javascript:;" onclick="getStatement('注册协议')">个人注册协议</a>
+                <a href="javascript:;" onclick="getStatement('权限说明')">用户权限说明</a>
+                <a href="javascript:;" onclick="getStatement('原油交易规则')">原油交易规则</a>
+                <a href="javascript:;" onclick="getStatement('租船交易规则')">租船交易规则</a>
+            </li>
+            <li>
+                <h3>法律声明</h3>
+                <a href="javascript:;" onclick="getStatement('法律（免责）声明')">法律（免责）声明</a>
+                <a href="javascript:;" onclick="getStatement('风险告知书')">风险告知书</a>
+                <a href="javascript:;" onclick="getStatement('防范和制止违禁信息声明')">防范和制止违禁信息声明</a>
+                <a href="javascript:;" onclick="getStatement('知识产权声明')">知识产权声明</a>
+            </li>
+        </ul>
+        <p>©中国中化股份有限公司 版权所有 京ICP备13009914号-6</p>
+    </div>
+</div>
+<script>
+    function getHelp(para){
+
+        var name = encodeURIComponent(para);
+        window.open( "$infoServer.get('/page/#/helpCenter?id=')" + name,"_blank");
+    }
+    function getStatement(para){
+
+        var name = encodeURIComponent(para);
+        window.open("$infoServer.get('/page/#/ptStatement?id=')" + name,"_blank");
+    }
+</script>

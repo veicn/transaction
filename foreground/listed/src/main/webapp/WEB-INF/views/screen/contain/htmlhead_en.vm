@@ -1,0 +1,27 @@
+
+
+    <title>Mycrudeoil</title>
+
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta dom>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css')"  media="all">
+
+    <link rel="stylesheet" href="$imageServer.get('/css/f_common_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('/css/f_base_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('/css/s_center_en.css')">
+
+    <script src="$imageServer.get('js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('script/lib/jquery-migrate-1.2.0.min.js')"></script>
+    <script src="$imageServer.get('validate/jquery.validate.min.js')"></script>
+    <script src="$imageServer.get('validate/jquery.validate.extends.js')"></script>
+    <script src="$imageServer.get('validate/jquery.validate.message.en.js')"></script>
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+    <script src="$imageServer.get('js/layout_common_en.js')"></script>
+    
+    <link rel="stylesheet" href="$imageServer.get('/css/f_crudeoil_layer_en.css')">
+    <script src="$appServer.get('/script/crudeOilLayer_en.js')"></script>
+    <script src="$appServer.get('script/check.js')"></script>
+

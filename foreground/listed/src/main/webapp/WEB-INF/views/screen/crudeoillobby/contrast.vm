@@ -1,0 +1,10 @@
+##采购单比较
+    $contain.get("/crudeoilhallform/compare.htm").put("demandList",$!demandList).put("dictMap",$dictMap).put("user",$user).put("dealType",$dealType)
+
+
+
+
+
+
+
+

@@ -1,0 +1,147 @@
+<div class="c-mod">
+	<h3><i class="cw-ico ico-h3"></i>运输信息</h3>
+	<div class="c-tabdiv">
+		<ul class="c-ful">
+			<input type="hidden" name="contractShip.id" value="$!{contractShip.id}"/>
+            <li class="c-fcos2">
+                <span class="c-fn">运输方式：</span>
+				<select class="sele" name="contractShip.transportModes" value="$!{contractShip.transportModes}">
+					<option value="1">海运</option>
+				</select>
+            </li>
+            #*卖方发布*#
+            #if($!{executer} == "SALER")
+                <li class="c-fcos1">
+                    <span class="c-fn">装货港：</span>
+                    <input type="text" class="c-int" placeholder="装货港口" name="contractShip.shipmentPort" value="$!{contractShip.shipmentPort}"/>
+                </li>
+
+                <li class="c-fcos1">
+                    <span class="c-fn">装期：</span>
+                    <input name="contractShip.shipmentStartTime" type="text" class="c-int zq-text" style="width:40.5%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentStartTime})}"/>
+                    <em>—</em>
+                    <input name="contractShip.shipmentEndTime" type="text" class="c-int zq-text" style="width:40%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentEndTime})}"/>
+                </li>
+                #elseif($!{executer} == "BUYER")
+                    #*买方发布*#
+                    <li class="c-fcos1">
+                        <span class="c-fn">卸货港：</span>
+                        <input type="text" class="c-int" placeholder="卸货港口" name="contractShip.dischargePort" value="$!{contractShip.dischargePort}"/>
+                    </li>
+
+                    #*<li class="c-fcos1">
+                        <span class="c-fn">卸货期：</span>
+                        <input name="contractShip.dischargeStart" type="text" class="c-int zq-text" style="width:39%" date="true" value="$!{dischargeStartTime}"/>——
+                        <input name="contractShip.dischargeEnd" type="text" class="c-int zq-text" style="width:39%" date="true" value="$!{dischargeEndTime}"/>
+                    </li>*#
+                #else
+                #*报价等其他阶段*#
+                    <li class="c-fcos1">
+                        <span class="c-fn">装货港：</span>
+                        <input type="text" class="c-int" placeholder="装货港口" name="contractShip.shipmentPort" value="$!{contractShip.shipmentPort}"/>
+                    </li>
+
+                    <li class="c-fcos1">
+                        <span class="c-fn">装期：</span>
+                        <input name="contractShip.shipmentStartTime" type="text" class="c-int zq-text" style="width:40.5%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentStartTime})}"/>
+                        <em>—</em>
+                        <input name="contractShip.shipmentEndTime" type="text" class="c-int zq-text" style="width:40%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentEndTime})}"/>
+                    </li>
+
+                    <li class="c-fcos1">
+                        <span class="c-fn">卸货港：</span>
+                        <input type="text" class="c-int" placeholder="卸货港口" name="contractShip.dischargePort" value="$!{contractShip.dischargePort}"/>
+                    </li>
+
+                    <li class="c-fcos1">
+                        <span class="c-fn">到货期：</span>
+                        <input name="contractShip.dischargeStartTime" type="text" class="c-int zq-text" style="width:40.5%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeStartTime})}"/>
+                        <em>—</em>
+                        <input name="contractShip.dischargeEndTime" type="text" class="c-int zq-text" style="width:40%" date="true" value="$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeEndTime})}"/>
+                    </li>
+            #end
+
+		</ul>
+	</div>
+</div>
+
+<script>
+    $(function () {
+        // 装货港
+        $("input[name='contractShip.shipmentPort']").click(function() {
+            var data = {"valueSetType": "5"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='contractShip.shipmentPort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.shipmentPort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+        // 卸货港
+        $("input[name='contractShip.dischargePort']").click(function() {
+            var data = {"valueSetType": "4"};
+            $.ajax({
+                type: "POST",
+                url: "$shipServer.get('shipPact/queryValueSet.json')",
+                //async:true
+                data: JSON.stringify(data),
+                dataType: 'JSON',
+                success: function (res) {
+
+                    $ ("input[name='contractShip.dischargePort']").autocomplete(
+                            res.datas,
+                            {
+                                width: $("input[name='contractShip.dischargePort']").outerWidth,
+                                minChars: 0,
+                                matchContains: true,
+                                scroll: true,
+                                mustMatch: false,
+                                scrollHeight: 122,
+                                formatItem: function (row, i, max) {
+                                    return  row.value ;
+                                },
+                                formatMatch: function (row, i, max) {
+                                    return row.value;
+                                },
+                                formatResult: function (row) {
+                                    return row.value;
+                                }
+                            }).result(function (event, row, formatted) {
+
+                    });
+                },
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        })
+    })
+</script>

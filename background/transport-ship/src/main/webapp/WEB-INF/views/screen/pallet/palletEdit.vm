@@ -1,0 +1,231 @@
+	
+	<div class="c-mod">
+		<h1 class="charter-title">我要租船</h1>
+		<ul class="c-state">
+			<li class="c-cur"><a href="javascript:;" id="load">按港口</a></li>
+			<li><a href="javascript:;" id="quyu">按区域</a></li>
+		</ul>
+		<!--按港口-->
+		<div class="charter-cont">
+		<input type="hidden" value='1' id="fn">
+		<div class="load1" >
+		<div class="all zhuanggangAll">
+			<div class="charter-add zhuanggang">
+				<div class="form-row charter-row">
+					<label class="control-label add-label"><span class="redicn">*</span>油种</label>
+					<div class="controls add-controls">
+						<input type="text" class="form-inp oilType" name="oilType" value="" maxlength="100">
+					</div>
+				</div>
+				<div class="form-row charter-row">
+					<label class="control-label add-label"><span class="redicn">*</span>数量</label>
+					<div class="controls add-controls clearfix">
+						<input type="text" class="form-inp form-inp-c quantity"  name="quantity" value="" onkeyup="clearNoNumThree(this)" maxlength="15"
+							onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);">
+						<select class="form-sel form-sel-c unitName">
+							<option value="MT">MT</option>
+							<option value="BBL">BBL</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row charter-row">
+					<label class="control-label add-label"><span class="redicn">*</span>装港</label>
+					<div class="controls add-controls">
+						<!-- <select class="form-sel loadPort sel">
+							<option value="">请选择</option>
+						</select> -->
+						<input type="text" class="form-inp loadPort" name="loadPort" value="" maxlength="100">
+					</div>
+				</div>
+				<!-- <div class="form-row charter-row inps loadPortZ" hidden="true">
+					<label class="control-label add-label"><span class="redicn">*</span>&nbsp;</label>
+					<div class="controls add-controls">
+						<input type="text" class="form-inp loadPorts" name="loadPorts" value="" maxlength="100">
+					</div>
+				</div> -->
+				<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus"></a></div>
+			</div>
+			</div>
+	<div class="all xiegangAll">
+		<div class="charter-add xiegang">
+			<div class="form-row charter-row">
+					<label class="control-label add-label"><span class="redicn">*</span>卸港</label>
+					<div class="controls add-controls ">
+						<!-- <select class="form-sel unloadPort sel">
+							<option value="">请选择</option>
+						</select> -->
+						<input type="text" class="form-inp unloadPort" name="unloadPort" value="" maxlength="100">
+					</div>
+			</div>
+			<!-- <div class="form-row charter-row inps unloadPortZ" hidden="true">
+					<label class="control-label add-label"><span class="redicn">*</span>&nbsp;</label>
+					<div class="controls add-controls">
+						<input type="text" class="form-inp unloadPorts" name="unloadPorts" value="" maxlength="100">
+					</div>
+			</div> -->
+			<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus"></a></div>
+		</div>
+	</div>
+</div>
+	<!--按区域-->
+		<div class="quyu1" hidden="true">
+			<div class="all zhuanghuoAll">
+				<div class="charter-add zhuanghuo">
+					<div class="form-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>油种</label>
+						<div class="controls add-controls">
+						<input type="text" class="form-inp oilType" name="oilType" value="" maxlength="100">
+						</div>
+					</div>
+					<div class="form-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>数量</label>
+						<div class="controls add-controls clearfix">
+							<input type="text" class="form-inp form-inp-c quantity"  name="quantity" value="" onkeyup="clearNoNumThree(this)" maxlength="15"
+								onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,2,1);"> 
+							<select class="form-sel form-sel-c unitName">
+								<option value='MT'>MT</option>
+								<option value='BBL'>BBL</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>装货区域</label>
+						<div class="controls add-controls">
+							<input type="text" class="form-inp loadRegion" name="" value="" maxlength="100">
+						</div>
+					</div>
+				<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus"></a></div>
+			</div>
+			</div>
+			<div class="all xiehuoAll">
+				<div class="charter-add xiehuo">
+					<div class="form-row charter-row">
+						<label class="control-label add-label"><span class="redicn">*</span>卸货区域</label>
+						<div class="controls add-controls">
+							<input type="text" class="form-inp unloadRegion" name="unloadRegion" value="" maxlength="100">
+						</div>
+					</div>
+				<div class="description clearfix"><a href="javascript:;" class="shipping-ico w-ico-plus"></a></div>
+				</div>
+			</div>
+	</div>
+		<form class="form">
+			<div class="form-row charter-row">
+				<label class="control-label charter-label"><span class="redicn">*</span>装期laycan</label>
+				<div class="controls charter-controls charter-time">
+					<input type="text" class="form-inp laycanBeg" name="laycanBeg" value="" placeholder="请选择日期" id="time1" readonly="readonly" maxlength="15" >
+					<span>&mdash;</span>
+					<input type="text" class="form-inp laycanEnd" name="laycanEnd" value="" placeholder="请选择日期" id="time2" readonly="readonly" maxlength="15">
+				</div>
+			</div>
+			<div class="charter-blo"><span></span></div>
+			<div class="form-row charter-row shipType checkboxFn">
+				<label class="control-label charter-label"><span class="redicn">*</span>船型</label>
+			</div>
+			<div class="form-row charter-row shipTypess" hidden="true">
+				<label class="control-label charter-label">&nbsp;</label>
+				<div class="controls charter-controls">
+					<input type="text" class="form-inp shipTypes" name="" value="" placeholder="输入要求" maxlength="100">
+				</div>
+			</div>
+			<div class="form-row charter-row shipAge checkboxFn">
+				<label class="control-label charter-label"><span class="redicn">*</span>船龄(年)</label>
+				<div class="controls charter-controls charter-time">
+					<input type="text" class="form-inp shipAgeBeg" name="shipAgeBeg" value="" onkeyup="clearNoNumThree(this)" maxlength="3">
+					<span>&mdash;</span>
+					<input type="text" class="form-inp shipAgeEnd" name="shipAgeEnd" value="" onkeyup="clearNoNumThree(this)" maxlength="3">
+				</div>
+			</div>
+			<div class="form-row charter-row">
+				<label class="control-label charter-label">租船其他要求</label>
+				<div class="controls charter-controls">
+					<textarea class="charter-textarea remark" name="remark" placeholder="" maxlength="100"></textarea>
+				</div>
+			</div>
+			<!-- <div class="form-row charter-row traderSel" style="line-height:37px;font-size: 14px;">
+				<label class="control-label charter-label"><span class="redicn">*</span><span>是否通过代理租船</span></label>
+				<div class="controls charter-controls" style="font-size: 14px;">
+					<label>
+						<input type="radio" name="traderSel" value="1" checked="true" style="vertical-align:middle;">
+						<span>通过代理租船</span>
+					</label>
+					
+					<label>
+						<input type="radio" name="traderSel" value="0" style="vertical-align:middle;">
+						<span>不通过代理租船</span>
+					</label>
+					
+				</div>
+			</div> -->
+			<!-- <div class="form-row charter-row traderNameHide">
+				<label class="control-label charter-label"><span class="redicn">*</span>指定承运商</label>
+				<div class="controls charter-controls">
+					<select class="form-sel traderName" name="traderName"><option value=''>请选择</option></select>
+				</div>
+			</div> -->
+			<div class="charter-blo"><span></span></div>
+			<div class="form-row charter-row">
+				<label class="control-label charter-label"><span class="redicn">*</span>公司</label>
+				<div class="controls charter-controls">
+					<input type="text" class="form-inp companyName" name="companyName" value="" maxlength="100" readonly="readonly">
+				</div>
+			</div>
+			<div class="form-row charter-row">
+				<label class="control-label charter-label"><span class="redicn">*</span>联系人</label>
+				<div class="controls charter-controls">
+					<input type="text" class="form-inp contacts" name="contacts" value="" maxlength="100">
+				</div>
+			</div>
+			<div class="form-row charter-row">
+				<label class="control-label charter-label"><span class="redicn">*</span>邮箱</label>
+				<div class="controls charter-controls">
+					<input type="text" class="form-inp email" name="email" value="" maxlength="50">
+				</div>
+			</div>
+			<div class="form-row charter-row">
+				<label class="control-label charter-label"><span class="redicn">*</span>电话</label>
+				<div class="controls charter-controls">
+					<input type="text" class="form-inp tel" name="tel" value=""  maxlength="15">
+					<span class="conspan" style="color: red;"></span>
+				</div>
+			</div>
+			</form>
+		</div>
+		
+			</div>
+			<div class="c-subdiv">
+				<button class="c-btnsub" id="save">提交</button><button class="c-btncas returnBtn" >返回</button>
+			</div>
+<script src="../transport/js/pallet/palletEdit.js"></script>
+<script>
+
+//三位小数数字正则校验
+function clearNoNumThree(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+}  
+//两位小数数字正则校验
+function clearNoNumTwo(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+} 
+
+</script>

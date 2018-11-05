@@ -1,0 +1,91 @@
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#date' //指定元素
+  });
+});
+</script>
+<script src="/transport/js/om/editDealPoints.js"></script>
+<form class="layui-form layui-form-pane" style="margin-top:20px; margin-left:130px">
+
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px"><span style="color:red;padding-right:5px">*</span>地区</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="region" type="text" name="region" required  lay-verify="required" placeholder="请输入地区（必填）" autocomplete="off">
+		    </div>
+	    </div>
+    </div>
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px"><span style="color:red;padding-right:5px">*</span>船型</label>
+		    <div class="layui-input-inline iw300 selectDatas">
+		        <select id="type" name="type" lay-filter="test1">
+            	<option value="">请选择船型（必选）</option>
+            	</select>
+		    </div>
+		</div>
+    </div>
+    <div class="layui-form-item" id="tollgle">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px"><span style="color:red;padding-right:5px">*</span>自定义船型</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="typeq" type="text" name="typeq" required  lay-verify="required" placeholder="请输入船型（必填）" autocomplete="off">
+		    </div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px"><span style="color:red;padding-right:5px">*</span>WS点</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="price" type="text" name="price" required  lay-verify="required" placeholder="请输入WS点（必填）" autocomplete="off">
+		    </div>
+		</div>
+    </div>
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px"><span style="color:red;padding-right:5px">*</span>名称</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="name" type="text" name="name" required  lay-verify="required" placeholder="请输入名称（必填）" autocomplete="off">
+		    </div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:125px"><span style="color:red;padding-right:5px">*</span>预估单桶费用</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="singleFare" type="text" name="singleFare" required  lay-verify="required" placeholder="请输入预估单桶费用（必填）" autocomplete="off">
+		    </div>
+		</div>
+    </div>
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:125px"><span style="color:red;padding-right:5px">*</span>参考路线</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="refRoute" type="text" name="refRoute" required  lay-verify="required" placeholder="请输入参考路线（必填）" autocomplete="off">
+		    </div>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px"><span style="color:red;padding-right:5px">*</span>日期</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="date" type="text" name="date" required  lay-verify="required" placeholder="请选择日期（必填）" autocomplete="off">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:125px">描述内容</label>
+	    <div class="layui-input-inline iw300">
+	        <textarea id="remark" name="remark" required lay-verify="required" placeholder="（最多输入50字）" class="layui-textarea"></textarea>
+	    </div>
+    </div>
+    
+ 	
+    
+</form>

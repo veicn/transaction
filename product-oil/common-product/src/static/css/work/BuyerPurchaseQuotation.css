@@ -1,0 +1,353 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.cpy-select .select-options li{
+    margin: 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.cpy-select .select-options.open{
+    height: auto;
+}
+#main {
+    min-width: 1180px;
+    width: 1180px;
+    margin: 0 auto;
+}
+
+#main .main-title {
+    width: 100%;
+}
+
+#main .main-title h3 {
+    font-weight: bold;
+    font-size: 26px;
+    color: #333333;
+    margin-top: 30px;
+}
+
+.pur-text {
+    width: 47%;
+    border-right: 1px solid #D8D8D8;
+}
+
+.pur-text h3 {
+    font-size: 20px;
+    color: #F36523;
+    height: 36px;
+}
+
+.pur-text ul li {
+    display: flex;
+    height: 36px;
+    margin: 20px 0;
+    line-height: 36px;
+}
+
+.pur-text ul li span:first-of-type {
+    width: 169px;
+    text-align: right;
+    font-size: 14px;
+    color: #666666;
+}
+
+.pur-text ul li span:nth-of-type(2) {
+    width:362px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333333;
+    line-height:38px;
+}
+.pur-text ul li span.Termstext{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.pur-text ul li span.file-active {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #F36523
+}
+
+.span-req {
+    color: #F36523;
+}
+
+.pur-ent {
+    width: 52%;
+    padding-left: 20px;
+}
+
+.pur-ent h3 {
+    font-size: 20px;
+    color: #F36523;
+}
+
+.pur-ent ul li {
+    display: flex;
+    height: 36px;
+    margin: 20px 0;
+    line-height: 36px;
+}
+.pur-ent ul li span:first-of-type i{
+    margin-right: 2px   ;
+}
+.pur-ent ul li span:first-of-type{
+    width: 175px;
+    text-align: right;
+    font-size: 14px;
+    color: #666666;
+    margin-right: 10px;
+}
+.pur-ent ul li span input {
+    border-radius: 2px;
+    border: 1px solid #C1C1C1;
+    height: 36px;
+    padding: 10px;
+    margin: 0 10px;
+}
+.pur-ent ul li span textarea{
+    margin: 0 10px;
+    border-radius: 2px;
+    border: 1px solid #C1C1C1;
+    height: 72px;
+    /*overflow: scroll;*/
+    resize:none;outline:none;
+    padding: 10px;
+
+}
+.cpy-select .select{
+    height: 36px;
+}
+.cpy-select .select-content{
+    height: 35px;
+}
+.pur-ent ul li span input:focus{border: 1px solid #FF9D32;}
+.quantity-select {
+    margin-left: 10px;
+}
+
+.quantity-select .select {
+    width: 130px;
+}
+
+.quantity-select .select-content {
+    width: 94px;
+}
+
+.quantity-input {
+    width: 177px;
+    height: 36px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #C1C1C1;
+}
+
+.cpy-select .select input[type='text'] {
+    height: 36px;
+}
+
+.incoterms-select .select {
+    width: 317px;
+}
+
+.incoterms-select .select-content {
+    width: 281px;
+}
+.Benchmark-title{
+    display: flex;
+}
+.Benchmark-title>.Benchmark-title_i{
+    width: 58px;
+    text-align: right;
+    margin-right: 10px;
+}
+.Benchmark-title>i.Benchmark-last{
+    margin-left: 10px;
+}
+.main-con-one{
+    padding: 20px 0;
+    border-bottom: 1px solid #ECECEC;
+}
+.Benchmark-add{
+    color: #F36523;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Benchmark-del{
+    color: #F36523;
+    font-size: 37px;
+    cursor: pointer;
+}
+.benchmark-select .select {
+    width: 249px;
+}
+
+.benchmark-select .select-content {
+    width: 213px;
+}
+.premium-select .select {
+    width: 98px;
+}
+
+.premium-select .select-content {
+    width: 62px;
+}
+.Inspec-select .select {
+    width: 306px;
+}
+
+.Inspec-select .select-content {
+    width: 270px;
+}
+.premium-input{
+    width: 81px;
+}
+.precing-input {
+    width: 306px;
+}
+/*}*/
+/*.tran-line{*/
+/*width: 1px;*/
+/*height: 10px;*/
+/*background: #D8D8D8;*/
+/*}*/
+/*.pur-line {*/
+/*width: 1px;*/
+/*height: 1136px;*/
+/*background: #D8D8D8;*/
+/*}*/
+.laycan-box{
+    margin-left: 10px;
+}
+.laytime-box input{
+    width: 70px;
+}
+.demurrage-box input{
+    width: 120px;
+
+}
+.port-box input:first-of-type{
+    width: 120px;
+}
+.port-box input:nth-of-type(2){
+    width: 170px;
+    margin-left: 0px;
+}
+.demurrage-box .radio input{
+    width: 16px;
+    height: 16px;
+    margin: 0 5px 0 10px;
+}
+.per-field {
+    margin-top: 20px;
+}
+.per-field-box {
+    height: 36px;
+    line-height: 36px;
+    position: relative;
+}
+.field-title {
+    display: inline-block;
+    width: 169px;
+    height: 36px;
+    line-height: 36px;
+    text-align: right;
+    margin-right: 8px;
+}
+.per-field-box input[type='text'] {
+    width: 305px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #C1C1C1;
+    border-radius: 2px;
+    text-indent: 9px;
+}
+.form-left, .form-right {
+    width: 50%;
+}
+.buyer-title{
+    font-size: 20px;
+    color: #F36523;
+}
+.per-field-box input[type='text']:focus{border: 1px solid #FF9D32;}
+.submit-box{
+    width: 316px;
+    height: 50px;
+    margin: 30px auto;
+}
+.submit-box .button{
+    width: 140px;
+    height: 48px;
+    border: 0;
+    background: #F36523;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.submit-box .button:last-of-type{
+    margin-left: 30px;
+    background: #323338;
+}
+.submit-box .button:hover{
+    background: #FF9D32;
+}
+/*模糊查询*/
+.selectReg .s-b:before,.selectReg .s-r:before{
+    display: none;
+}
+.selectReg .select-content{
+    border: 0;
+}
+.Inspec-select .load-select-one{
+    width: 120px;
+}
+.Inspec-select .load-select-two{
+    width: 170px;
+}
+.Inspec-select .load-select-two .select-show-text{
+    width: 170px;
+}
+.demurrage-box .radio input{
+    display: none;
+}
+.demurrage-box .radio i {
+    font-size: 15px;
+    font-style: normal;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    line-height: 11px;
+    color: #fff;
+    font-weight: bold;
+    vertical-align: middle;
+    margin: -2px 3px 1px 0;
+    padding-right: 5px;
+    background: #FFFFFF no-repeat center;
+    border: 1px solid #E8E8E8;
+    border-radius: 50%;
+}
+
+.demurrage-box .radio input[type="radio"]:checked+i {
+    color: #F36523;
+    border-color: #F36523;
+}
+.port-select .select-content{
+    width: 117px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.wordwrap{
+    line-height: 38px;
+}
+.pricFormula{
+    width:175px;
+}

@@ -1,0 +1,472 @@
+
+<div class="inner">
+    <div class="qh-bc clearfix">
+        <h1><em></em>Arbitrage</h1>
+        <ul class="qh-bc-cont">
+            <li>
+                <div class="qh-bc-cont-t">
+                    <span>Real-time futures price</span>
+                    <p id="realTimeINEPrice">
+                        ¥<em>/BBL</em>
+                    </p>
+                </div>
+                <ul class="qh-bc-cont-b clearfix">
+                    <li><span>Exchanges：</span><p>INE</p></li>
+                    <li><span>Products：：</span><p>SC</p></li>
+                    <li><span>Contract：：</span>
+                        <select class="qh-bc-sel" id="ineSymbols" name="futuresSymbol" value="$!{spotEstimationVO.futuresSymbol}">
+                            #foreach($ineSymbol in $!{ineSymbolList})
+                                <option value="$!{ineSymbol.symbol}"
+                                    #if($!{ineSymbol.symbol} == $!{spotEstimationVO.futuresSymbol})
+                                        selected
+                                    #end>
+                                    $!{ineSymbol.symbolName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <input type="hidden" name="futuresYearMonthPair" id="futuresYearMonthPair" value="$!{spotEstimationVO.futuresYearMonthPair}"/>
+                </ul>
+            </li>
+            <li class="qh-bc-cont-li">
+                <span class="">VS</span>
+                <button type="button" id="compareButton" onclick="compare()">Compare</button>
+            </li>
+            <li>
+                <div class="qh-bc-cont-t">
+                    <span>Estimated physical cost</span>
+                    <p>
+                        #if($!{spotEstimationVO.currencyCode} == '1')
+                            $
+                        #elseif($!{spotEstimationVO.currencyCode} == '2')
+                            ¥
+                        #else
+                            ¥
+                        #end
+                        $!{spotEstimationVO.spotPriceResult}
+                        #if($!{spotEstimationVO.currencyCode} == '1')
+                            <em>dollar/BBL</em>
+                        #elseif($!{spotEstimationVO.currencyCode} == '2')
+                            <em>yuan/BBL</em>
+                        #else
+                            <em>yuan/BBL</em>
+                        #end
+
+                    </p>
+                </div>
+                <ul class="qh-bc-cont-b clearfix">
+                    <li><span>Currency：</span>
+                        #foreach($currency in $currencyList)
+                            <input class="qh-bc-rad currencySelect" type="radio" name="radio" value="$!{currency.code}"
+                                #if($!{currency.code} == $!{spotEstimationVO.currencyCode})
+                                    checked
+                                #end>
+                            $!{currency.enName}
+                        #end
+
+                        <input type="hidden" id="currencyCode" name="currencyCode" value="$!{spotEstimationVO.currencyCode}"/>
+                    </li>
+                    <li>
+                        <span>Crade：</span>
+                        <select class="qh-bc-sel" name="oilTypeCode" value="$!{spotEstimationVO.oilTypeCode}">
+                            #foreach($oilType in $oilTypeList)
+                                <option value="$!{oilType.code}"
+                                    #if($!{oilType.code} ==  $!{spotEstimationVO.oilTypeCode})
+                                        selected
+                                    #end>
+                                    $!{oilType.enName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>Laytime：</span>
+                        <select class="qh-bc-sel" id="arrivalYearMonthPair" name="arrivalYearMonthPair" value="$!{spotEstimationVO.arrivalYearMonthPair}">
+                            #foreach($availableArrivalMonth in $availableArrivalMonthList)
+                                <option value="$!{availableArrivalMonth.code}"
+                                    #if($!{availableArrivalMonth.code} == $!{spotEstimationVO.arrivalYearMonthPair})
+                                        selected
+                                    #end>
+                                    $!{availableArrivalMonth.enName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>Discharge Port：</span>
+                        <select class="qh-bc-sel" name="shipPortCode" value="$!{spotEstimationVO.shipPortCode}">
+                            #foreach($availableDischargePort in $availableDischargePortList)
+                                <option value="$!{availableDischargePort.code}"
+                                    #if($!{availableDischargePort.code} == $!{spotEstimationVO.shipPortCode})
+                                        selected
+                                    #end>
+                                    $!{availableDischargePort.value}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>Storage fee：</span>
+                        <input class="qh-bc-inp" name="storageCost" value="$!{spotEstimationVO.storageCost}"/>yuan
+                        <em><i class="c-ico inf-zy" id="openDetailTip"></i><a href="javascript:void(0)" id="openSpotEstimationDetail">Details</a></em>
+
+                        <div class="qh-cccb" id="detailTip" style="display: none">
+                            Min Storage Fee: 4 ￥/bbl<br/>
+                            Storage time: Selected Futures contract month ~ Physical discharge month
+                        </div>
+                    </li>
+                    <span class="qh-ann"><button type="button" onclick="submitForm()">Confirm</button></span>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--数据明细弹出框-->
+<div class="qh-sjmx" id="spotEstimation" style="display: none">
+    <ul class="qh-sjmx-con clearfix">
+        <li><span>FOB Price：</span><input type="text" name="spotCostFOB" value="$!{spotEstimationVO.spotCostFOB}"/><em>dollar/bbl</em></li>
+        <li><span>Fright fee：</span><input type="text" name="abroadTransportationFee" value="$!{spotEstimationVO.abroadTransportationFee}"/><em>dollar/bbl</em></li>
+        <li id="openDemurrageChargeTip"><span>Demurrage fee：
+            <a href=""><i class="c-ico inf-sjmx"></i></a></span>
+            <input type="text" name="demurrageCharge" value="$!{spotEstimationVO.demurrageCharge}"/><em>dollar/bbl</em>
+        </li>
+        <li><span>Insurance fee：</span>
+            <input type="text" name="cargoPremium" value="$!{spotEstimationVO.cargoPremium}"/><em>dollar/bbl</em>
+        </li>
+        <li id="openCapitalCostTip"><span>Cost of capital：<a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="capitalCost" value="$!{spotEstimationVO.capitalCost}"/><em>yuan/bbl</em>
+        </li>
+        <li id="openFixedCostTip"><span>Fixed fee：<a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="fixedCost" value="$!{spotEstimationVO.fixedCost}"/><em>yuan/bbl</em>
+        </li>
+        <li id="openEstimationTip"><span>Others：
+            <a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="otherCost" value="$!{spotEstimationVO.otherCost}"/><em>yuan/bbl</em>
+        </li>
+        <li><span>Freight damage：</span><p>0.005</p></li>
+        <li><span>CNY forward rate：</span><p>$!{spotEstimationVO.exchangeRate}</p></li>
+        <li><span>Loss：</span><p>0.006</p></li>
+    </ul>
+    <div class="qh-sjmx-butt"><button type="button" id="closeSpotEstimationDetail">Confirm</button></div>
+</div>
+
+<!--滞期费弹出框-->
+<div class="qh-sjmx-dau" id="demurrageChargeTip" style="display: none">Demurrage fee(default:7days)</div>
+
+<!--资金成本弹出框-->
+<div class="qh-sjmx-zj" id="capitalCostTip" style="display: none">Financing Cost：Annual Interest of 7%</div>
+
+<!--固定费用弹出框-->
+<div class="qh-sjmx-gd" id="fixedCostTip" style="display: none">Delivery Fee：0.05yuan/bbl <br>Delivery Premium：0yuan/bbl</div>
+
+<!--成本费用弹出框-->
+<div class="qh-sjmx-tab" id="estimationTip" style="display: none">
+    <table>
+        <tr>
+            <th>Inspection fee</th>
+            <td>$!{estimationTipVO.commodityInspectionFee}</td>
+            <td>yuan/bbl</td>
+        </tr>
+        <tr>
+            <th>Agency fee</th>
+            <td>$!{estimationTipVO.forwarderAgencyFee}</td>
+            <td>yuan/bbl</td>
+        </tr>
+        <tr>
+            <th>Handling charges</th>
+            <td>$!{estimationTipVO.handlingCharges}</td>
+            <td>yuan/bbl</td>
+        </tr>
+        <tr>
+            <th>Compensation fund for pollution damage</th>
+            <td>$!{estimationTipVO.oilPollutionCompensation}</td>
+            <td>yuan/bbl</td>
+        </tr>
+        <tr>
+            <th>Collection for insurance premiums</th>
+            <td>$!{estimationTipVO.proxySecurityCharge}</td>
+            <td>yuan/bbl</td>
+        </tr>
+        <tr>
+            <th>Oil and port charge</th>
+            <td>$!{estimationTipVO.proxyOilInHarbourCharge}</td>
+            <td>yuan/bbl</td>
+        </tr>
+    </table>
+</div>
+
+<!--对比结果弹出框-->
+<div class="qh-dbjg clearfix" id="sellPrefer" style="display:none;">
+    <h1><em></em>Hint<span><a href=""><i class="c-ico inf-gb"></i></a></span></h1>
+    <p>Selling Arbitrage Opportunity<em class="compareResult"></em>yuan，good to sell futures</p>
+    <button class="closeResult" type="button">close</button>
+</div>
+
+<div class="qh-dbjg clearfix" id="buyPrefer" style="display:none;">
+    <h1><em></em>Hint<span><a href=""><i class="c-ico inf-gb"></i></a></span></h1>
+    <p>Buying Arbitrage Opportunity<em class="compareResult"></em>yuan，good to buy futures</p>
+    <button class="closeResult" type="button">close</button>
+</div>
+
+<div class="qh-dbjg clearfix" id="unableToEarnProfit" style="display:none;">
+    <h1><em></em>Hint<span><a href=""><i class="c-ico inf-gb"></i></a></span></h1>
+    <p>No Opportunity</p>
+    <button class="closeResult" type="button">close</button>
+</div>
+
+<script>
+    var comparing = false;
+
+    var futuresPrice = "";
+    var spotPrice = "$!{spotEstimationVO.spotPriceResult}";
+
+    var selectedSymbolName;
+    var selectedSymbol;
+    var selectedIndex;
+    var firstRequest = true;
+
+    $(function() {
+        if (!spotPrice) {
+            layer.alert("Failed to calculate spot price", {
+                btn: false
+            });
+        }
+
+        $('.closeResult').click(function() {
+            layer.closeAll();
+        });
+
+        $('.currencySelect').click(function() {
+            var value = $(this).val();
+            $('#currencyCode').val(value);
+        });
+
+        $('#ineSymbols').change(function() {
+            setSelected();
+        });
+
+        $('#openSpotEstimationDetail').click(function() {
+            $('#spotEstimation').css("display", "block");
+        });
+
+        $('#closeSpotEstimationDetail').click(function() {
+            $('#spotEstimation').css("display", "none");
+        });
+
+        $('#openDemurrageChargeTip').mouseenter(function() {
+            $('#demurrageChargeTip').css("display", "block");
+        });
+
+        $('#openDemurrageChargeTip').mouseleave(function() {
+            $('#demurrageChargeTip').css("display", "none");
+        });
+
+        $('#openCapitalCostTip').mouseenter(function() {
+            $('#capitalCostTip').css("display", "block");
+        });
+
+        $('#openCapitalCostTip').mouseleave(function() {
+            $('#capitalCostTip').css("display", "none");
+        });
+
+        $('#openFixedCostTip').mouseenter(function() {
+            $('#fixedCostTip').css("display", "block");
+        });
+
+        $('#openFixedCostTip').mouseleave(function() {
+            $('#fixedCostTip').css("display", "none");
+        });
+
+        $('#openEstimationTip').mouseenter(function() {
+            $('#estimationTip').css("display", "block");
+        });
+
+        $('#openEstimationTip').mouseleave(function() {
+            $('#estimationTip').css("display", "none");
+        });
+
+        $('#openDetailTip').mouseenter(function() {
+            $('#detailTip').css("display", "block");
+        });
+
+        $('#openDetailTip').mouseleave(function() {
+            $('#detailTip').css("display", "none");
+        });
+
+
+        setSelected();
+        setInterval("querySymbolPrice()", 10000);
+    })
+
+    function setSelected() {
+        selectedSymbol = $("#ineSymbols").find("option:selected").val();
+        $("#ineSymbols").val(selectedSymbol);
+
+        selectedSymbolName = $("#ineSymbols").find("option:selected").text();
+        selectedSymbolName = $.trim(selectedSymbolName);
+
+        selectedIndex = $('#ineSymbols').prop('selectedIndex');
+
+        var futuresYearMonthPair = selectedSymbolName.substring(selectedSymbolName.length - 4);
+        $('#futuresYearMonthPair').val(futuresYearMonthPair);
+
+        firstRequest = true;
+        querySymbolPrice();
+    }
+
+    function submitForm() {
+        $('#spotPriceForm').submit();
+    }
+
+    function querySymbolPrice() {
+        if (!selectedSymbolName || !selectedSymbol) {
+            return;
+        }
+
+        var symbolPriceUrl = "$appServer.get('/getIneSymbolPriceRealtime.json').toString()";
+        symbolPriceUrl = symbolPriceUrl + "?symbolName=" + selectedSymbolName;
+
+        $.ajax({
+            type: "GET",
+            url: symbolPriceUrl,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function(result) {
+                console.log(result);
+
+                var data = result.symbolPriceRealTime;
+                if (!data) {
+                    console.log('Fail to load symbol data');
+                    var symbolPriceUrlLastDay = "$infoServer.get('/query/newSymbolPrice.json').toString()";
+
+                    $.ajax({
+                        type: "POST",
+                        url: symbolPriceUrlLastDay,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            symbol: selectedSymbol,
+                            symbolName: selectedSymbolName
+                        }),
+                        success: function(result) {
+                            console.log(result);
+
+                            var dataLastDay = result.dataList.settlementPrice;
+                            if (!dataLastDay) {
+                                console.log('Fail to load symbol data');
+
+
+                                if (firstRequest) {
+                                    firstRequest = false;
+                                    layer.alert('Fail to load symbol data', {
+                                        btn: false
+                                    });
+                                }
+
+                                return;
+                            }
+
+                            futuresPrice = "" + dataLastDay;
+                            $('#realTimeINEPrice').html("¥" + dataLastDay + "<em>yuan/BBL</em>");
+                            return;
+                        }
+                    });
+
+                    return;
+                }
+
+                futuresPrice = "" + data;
+                $('#realTimeINEPrice').html("¥" + data + "<em>yuan/BBL</em>");
+            }
+        });
+    }
+
+    function compare() {
+        if (!futuresPrice || !spotPrice) {
+            return;
+        }
+
+        var futuresYearMonth = $('#futuresYearMonthPair').val();
+        if (!futuresYearMonth) {
+            return;
+        }
+
+        var arrivalYearMonth = $('#arrivalYearMonthPair').val();
+        if (!arrivalYearMonth) {
+            return;
+        }
+
+        var futuresPriceNum = parseFloat(futuresPrice).toFixed(4);
+        var spotPriceNum = parseFloat(spotPrice).toFixed(4);
+
+        var compareUrl = "$appServer.get('/priceCompare.json').toString()";
+        var currencyCode = "$!{spotEstimationVO.currencyCode}";
+
+        $.ajax({
+            type: "POST",
+            url: compareUrl,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({
+                currencyCode: currencyCode,
+                futuresYearMonthPair: futuresYearMonth,
+                futuresPrice: futuresPrice,
+                spotPrice: spotPrice
+            }),
+            success: function (result) {
+                var error = result.error;
+                if (error) {
+                    layer.alert('Fail to get compare result', {
+                        btn: false
+                    });
+                    return;
+                }
+
+                var type = result.type;
+                if (type == '1') {
+                    layer.open({
+                        type: 0,
+                        id: 'unableToEarnProfit',
+                        title: 'Compare Result',
+                        shade: false,
+                        scrollbar: false,
+                        content: "<p>No profit opportunity</p>",
+                        btn: false
+                    });
+
+                    return
+                } else {
+                    var compareResult = result.result;
+                    var unit = result.currencyCode == '1' ? 'dollar' : 'yuan';
+
+                    if (type == '2') {
+                        layer.open({
+                            type: 0,
+                            id: 'sellerPrefer',
+                            title: 'Compare Result',
+                            shade: false,
+                            scrollbar: false,
+                            content: "<p>Physical is underestimated<em>" + compareResult + "</em>" + unit + "</p>",
+                            btn: false
+
+                        });
+
+                        return
+                    }
+
+                    if (type == '3') {
+                        layer.open({
+                            type: 0,
+                            id: 'buyerPrefer',
+                            title: 'Compare Result',
+                            shade: false,
+                            scrollbar: false,
+                            content: "<p>Physical is overvalued ：<em>" + compareResult + "</em>" + unit + "</p>",
+                            btn: false
+                        });
+
+                        return;
+                    }
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,213 @@
+<script>
+layui.use(['layer','jquery','upload'], function(){
+	var layer = layui.layer;
+	var $ = layui.jquery
+	,upload = layui.upload;
+// 提示信息
+$(function () {
+	$("td").on("mouseenter",function() {
+	    if (this.offsetWidth < this.scrollWidth) {
+	        var that = this;
+	        var text = $(this).text();
+	        
+	        if(text.indexOf(";")>-1) {
+			　　text = text.split(';')[1];
+			}
+			
+	        layer.tips("<span style='color:black'>"+text+"</span>", that,{
+	            tips: [3,"#fff"],
+	            time: 2000
+	        });
+	    }
+	});
+})
+});
+</script>
+
+<style>
+.contain {
+	width:100%;
+}
+
+table { 
+	width:100%; 
+	text-align: left;
+	border:1px solid #e3e6e8; 
+	border-collapse: collapse; 
+	table-layout: fixed; 
+	display: table;
+}
+
+th,td {
+	overflow: hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+}
+
+.layui-layer { 
+	word-wrap: break-word; 
+	word-break: break-all;
+}
+</style>
+
+<div class="layui-table" style="padding:15px" id="layerDemo">
+
+		<!--搜索条件-->
+	<div class="ry-banner">
+		<div class="layui-inline">
+			<div class="layui-input-inline iw100" >
+				<label class="layui-form-label">船需求编号</label>
+				<div class="layui-input-inline">
+				    <input id="palletCode" type="text" name="palletCode" style="width:280px;height:33px" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!query.palletCode">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">油品名称</label>
+				<div class="layui-input-inline">
+				 	<input class="form-inp" id="oilName" type="text" name="oilName" style="width:280px;height:33px" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!query.oilName">   
+			    </div>      
+		    </div>
+			<div class="layui-input-inline iw100" >
+				<label class="layui-form-label">发布人</label>
+				<div class="layui-input-inline">
+					 <input class="form-inp" id="publisher" type="text" name="publisher" style="width:280px;height:33px" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!query.publisher">   
+			    </div>      
+		    </div>
+		    <br/>
+		      <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">装港</label>
+				<div class="layui-input-inline">
+					<input class="layui-input" id="loadPort" type="text" name="loadPort" style="width:280px;height:33px" required lay-verify="required" placeholder="" autocomplete="off"  value="$!query.loadPort">   
+			    </div>      
+		    </div>
+		     <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">卸港</label>
+				<div class="layui-input-inline">
+				<input class="layui-input" id="unloadPort" type="text" name="unloadPort" style="width:280px;height:33px" required lay-verify="required" placeholder="" autocomplete="off"  value="$!query.unloadPort">   
+		   		</div>
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">装期</label>
+				<div class="layui-input-inline">
+					 <input style="width:131px;height:33px"  class="time" name="layCanBeg" id="layCanBeg" type="text"  value="$!query.layCanBeg" placeholder="请选择日期" readonly="readonly" class="layui-input" required lay-verify="required" maxlength="15" value="$!query.layCanBeg">
+			    </div>      
+				<span>---<span>
+				<div class="layui-input-inline">
+					<input style="width:131px;height:33px" class="time" name="layCanEnd" id="layCanEnd" type="text"  value="$!query.layCanEnd" placeholder="请选择日期" readonly="readonly" class="layui-input" maxlength="15" value="$!query.layCanEnd">
+			    </div>      
+		    </div>
+		     <br/>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">船龄</label>
+				<div class="layui-input-inline">
+					<input type="text" class="form-inp1" id="shipAgeBeg" name="shipAgeBeg" value="$!query.shipAgeBeg"  maxlength="3" style="width:131px;height:33px">
+			    </div>      
+				<span>---<span>
+				<div class="layui-input-inline">
+					<input type="text" class="form-inp1" id="shipAgeEnd" name="shipAgeEnd" value="$!query.shipAgeEnd"  maxlength="3" style="width:131px;height:33px">
+			    </div>      
+		    </div>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">发布时间</label>
+				<div class="layui-input-inline">
+					<input class="time" name="publishTimeBeg" id="publishTimeBeg" type="text" style="width:131px;height:33px" value="$!query.publishTimeBeg" placeholder="请选择日期" readonly="readonly" class="cg-tbzq" maxlength="15" >
+			    </div>      
+				<span>---<span>
+				<div class="layui-input-inline">
+					<input class="time" name="publishTimeBeg"  id="publishTimeEnd" type="text" style="width:131px;height:33px" value="$!query.publishTimeEnd" placeholder="请选择日期" readonly="readonly" class="cg-tbzq" maxlength="15">
+			    </div>      
+		    </div>
+		    
+		     <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">租船类型</label>
+				<select class="layui-input" id="orderNo" name="orderNo" style="width:280px;height:33px" lay-search="" lay-filter="" >
+					<option value="">请选择</option>
+					<option value="0">无订单租船</option>
+					<option value="1">有订单租船</option>
+	        	</select>
+		    </div>
+		    <br/>
+		    <div class="layui-input-inline iw100" >
+				<label class="layui-form-label">状态</label>
+				<select class="layui-input" id="status" name="status" style="width:280px;height:33px" lay-search="" lay-filter="" >
+					<option value="">请选择</option>
+					<option value="1">待处理</option>
+					<option value="2">处理中</option>
+					<option value="3">已报盘</option>
+					<option value="4">已确认</option>
+					<option value="5">已关闭</option>
+					<option value="6">已完成</option>
+	        	</select>
+		    </div>
+		    <div class="layui-input-inline iw100" >
+		    	<label class="layui-form-label"></label>
+				<div class="layui-input-inline iw300" style="width:10px;"></div>
+			    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button>
+			    <button class="layui-btn layui-btn-normal layui-btn-small resetBtn">重置</button>
+		    </div>
+		</div>
+	</div>
+
+	<!--列表-->
+	<div class="contain">
+	<table id="sysShipList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+	  <thead>
+	    <tr>
+	      <tr>
+	      <th class="table-style-th">序号</th>
+	      <th class="table-style-th">租船需求编号</th>
+		  <th class="table-style-th">油品名称</th>
+		  <th class="table-style-th">数量(tons)</th>
+		  <th class="table-style-th">装港/装港区域</th>
+		  <th class="table-style-th">卸港/卸港区域</th>
+		  <th class="table-style-th">装期</th>
+		  <th class="table-style-th">船型</th>
+		  <th class="table-style-th">船龄</th>
+		  <th class="table-style-th">发布人</th>
+		  <th class="table-style-th">租船类型</th>
+		  <th class="table-style-th">状态</th>
+	      <th class="table-style-th" >操作</th>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	  #foreach($data in $datas)
+	    <tr>
+	    	<td>$!{velocityCount}</td>
+		    <td>$!{data.palletCode}</td>
+			<td>$!{data.oilType}</td>
+			<td>$!{data.quantity}</td>
+			<td>$!{data.loadPort} $!{data.loadPortRegion}</td>
+			<td>$!{data.unloadPort} $!{data.unloadPortRegion}</td>
+			<td>$!{data.laycanBeg}--$!{data.laycanEnd}</td>
+			<td>$!{data.shipType}</td>
+			<td>$!{data.shipAge}</td>
+			<td>$!{data.companyName}</td>
+			<td>$!{data.orderNoText}</td>
+			<td>
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '1') 待转租船东处理 #end
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '0') 待处理 #end
+				#if($!{data.status} == '2') 处理中#end
+				#if($!{data.status} == '3') 已报盘#end
+				#if($!{data.status} == '4') 已确认#end
+				#if($!{data.status} == '5') 已关闭#end
+				#if($!{data.status} == '6') 已完成#end
+			</td>
+		    <td>
+		      	<i class="layui-icon">&#xe605;</i>
+		      	<a href="javascript:;" class="dialog-link btcol lookBtn" attr-data="$data.uuid">查看</a>
+		    </td>
+	    </tr>
+	  #end
+	  </tbody>
+	</table>
+	</div>
+    <!--底部分页-->
+    <div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/platform/palletList.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+</div>
+<script src="/transport/js/om/platform/palletList.js"></script>
+<script type="text/javascript">
+ $('#status').val($!{query.status});
+ $('#orderNo').val($!{query.orderNo});
+</script>

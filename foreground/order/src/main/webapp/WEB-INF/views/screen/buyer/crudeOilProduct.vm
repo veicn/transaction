@@ -1,0 +1,104 @@
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>油种基本信息
+    </h3>
+    <div class="c-imglist">
+        <table>
+            <tr>
+                <th>原油产地</th>
+                <th>油种</th>
+                <th>API度</th>
+                <th>硫含量/ m%</th>
+                <th>酸值/ (mgKOH/g)</th>
+                <th>残炭/%</th>
+                <th>镍/ ppm</th>
+                <th>钒/ ppm</th>
+                <th>> 350°C 质量收率/%</th>
+                <th class="tabl-line1">备注</th>
+            </tr>
+            <tr class="c-tabcos1">
+                <td>$!{originNameC}</td>
+                <td>$!{crudeOilResource.name}</td>
+                <td>
+                    #set($Min1 = $!{crudeOilResource.entries[0].min})
+                    #set($Max1 = $!{crudeOilResource.entries[0].max})
+                    #if($!{crudeOilResource.indicator1Min}==$!{crudeOilResource.indicator1Max})
+                        $!{Min1}
+                    #elseif($!{crudeOilResource.indicator1Min}!=0 && $!{crudeOilResource.indicator1Max}!=0)
+                        $!{Min1}--$!{Max1}
+                    #else
+                        $!{Min1}
+                    #end
+                </td>
+                <td>
+                    #set($Min2 = $!{crudeOilResource.entries[1].min})
+                    #set($Max2 = $!{crudeOilResource.entries[1].max})
+                    #if($!{crudeOilResource.indicator2Min}==$!{crudeOilResource.indicator2Max})
+                        $!{Min2}
+                    #elseif($!{crudeOilResource.indicator2Min}!=0 && $!{crudeOilResource.indicator2Max}!=0)
+                        $!{Min2}--$!{Max2}
+                    #else
+                        $!{Min2}
+                    #end
+                </td>
+                <td>
+                    #set($Min3 = $!{crudeOilResource.entries[2].min})
+                    #set($Max3 = $!{crudeOilResource.entries[2].max})
+                    #if($!{crudeOilResource.indicator3Min}==$!{crudeOilResource.indicator3Max})
+                        $!{Min3}
+                    #elseif($!{crudeOilResource.indicator3Min}!=0 && $!{crudeOilResource.indicator3Max}!=0)
+                        $!{Min3}--$!{Max3}
+                    #else
+                        $!{Min3}
+                    #end
+                </td>
+                <td>
+                    #set($Min4 = $!{crudeOilResource.entries[3].min})
+                    #set($Max4 = $!{crudeOilResource.entries[0].max})
+                    #if($!{crudeOilResource.indicator4Min}==$!{crudeOilResource.indicator4Max})
+                        $!{Min4}
+                    #elseif($!{crudeOilResource.indicator4Min}!=0 && $!{crudeOilResource.indicator4Max}!=0)
+                        $!{Min4}--$!{Max4}
+                    #else
+                        $!{Min4}
+                    #end
+                </td>
+                <td>
+                    #set($Min5 = $!{crudeOilResource.entries[4].min})
+                    #set($Max5 = $!{crudeOilResource.entries[4].max})
+                    #if($!{crudeOilResource.indicator5Min}==$!{crudeOilResource.indicator5Max})
+                        $!{Min5}
+                    #elseif($!{crudeOilResource.indicator5Min}!=0 && $!{crudeOilResource.indicator5Max}!=0)
+                        $!{Min5}--$!{Max5}
+                    #else
+                        $!{Min5}
+                    #end
+                </td>
+                <td>
+                    #set($Min6 = $!{crudeOilResource.entries[5].min})
+                    #set($Max6 = $!{crudeOilResource.entries[5].max})
+                    #if($!{crudeOilResource.indicator6Min}==$!{crudeOilResource.indicator6Max})
+                        $!{Min6}
+                    #elseif($!{crudeOilResource.indicator6Min}!=0 && $!{crudeOilResource.indicator6Max}!=0)
+                        $!{Min6}--$!{Max6}
+                    #else
+                        $!{Min6}
+                    #end
+                </td>
+                <td>
+                    #set($Min7 = $!{crudeOilResource.entries[6].min})
+                    #set($Max7 = $!{crudeOilResource.entries[6].max})
+                    #if($!{crudeOilResource.indicator7Min}==$!{crudeOilResource.indicator7Max})
+                        $!{Min7}
+                    #elseif($!{crudeOilResource.indicator7Min}!=0 && $!{crudeOilResource.indicator7Max}!=0)
+                        $!{Min7}--$!{Max7}
+                    #else
+                        $!{Min7}
+                    #end
+                </td>
+                <td>$!crudeOilResource.desc</td>
+            </tr>
+
+        </table>
+    </div>
+    <span class="cg-zy">注意：物性表仅供参考</span>
+</div>

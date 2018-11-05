@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="$imageServer.get('/css/f_longcontractadd_layer.css')">
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>采购基本信息<span class="cxtj-nr-an"><a class="btn-more crudeOilLayer" retFun="retFunction" appServer="$appServer/">+ 选择油种</a></span></h3>
+    <div class="c-tabdiv">
+        <table id="crudeDataArray">
+            <tr class="cruhead">
+				<th>操作</th>
+	            <th class="tabl-line">原油产地</th>
+	            <th>油种</th>
+	            <th>API度</th>
+	            <th>硫含量/ m%</th>
+	            <th>酸值/ (mgKOH/g)</th>
+	            <th>残炭/%</th>
+	            <th>镍/ ppm</th>
+	            <th>钒/ ppm</th>
+	            <th>质量收率/%</th>
+	            <th>质量收率/%</th>
+	            <th>镍/ ppm</th>
+	            <th>钒/ ppm</th>
+	            <th>残炭/%</th>
+	            <th>硫含量/ m%</th>
+            </tr>
+
+
+            <tr class="c-tabcos1">
+                <td onClick="getDelber(this)"><input type="button" value="删除" class="btn-more"></td>
+                <td>$!{originNameC}</td>
+                <td>$!{crudeOilResource.name}</td>
+                <td>
+					#if($!{crudeOilResource.indicator1Min}==$!{crudeOilResource.indicator1Max})
+						$!{crudeOilResource.indicator1Min}
+					#elseif($!{crudeOilResource.indicator1Min}!=0 && $!{crudeOilResource.indicator1Max}!=0)
+						$!{crudeOilResource.indicator1Min}--$!{crudeOilResource.indicator1Max}
+					#else
+						$!{crudeOilResource.indicator1Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator2Min}==$!{crudeOilResource.indicator2Max})
+						$!{crudeOilResource.indicator2Min}
+					#elseif($!{crudeOilResource.indicator2Min}!=0 && $!{crudeOilResource.indicator2Max}!=0)
+						$!{crudeOilResource.indicator2Min}--$!{crudeOilResource.indicator2Max}
+					#else
+						$!{crudeOilResource.indicator2Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator3Min}==$!{crudeOilResource.indicator3Max})
+						$!{crudeOilResource.indicator3Min}
+					#elseif($!{crudeOilResource.indicator3Min}!=0 && $!{crudeOilResource.indicator3Max}!=0)
+						$!{crudeOilResource.indicator3Min}--$!{crudeOilResource.indicator3Max}
+					#else
+						$!{crudeOilResource.indicator3Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator4Min}==$!{crudeOilResource.indicator4Max})
+						$!{crudeOilResource.indicator4Min}
+					#elseif($!{crudeOilResource.indicator4Min}!=0 && $!{crudeOilResource.indicator4Max}!=0)
+						$!{crudeOilResource.indicator4Min}--$!{crudeOilResource.indicator4Max}
+					#else
+						$!{crudeOilResource.indicator4Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator5Min}==$!{crudeOilResource.indicator5Max})
+						$!{crudeOilResource.indicator5Min}
+					#elseif($!{crudeOilResource.indicator5Min}!=0 && $!{crudeOilResource.indicator5Max}!=0)
+						$!{crudeOilResource.indicator5Min}--$!{crudeOilResource.indicator5Max}
+					#else
+						$!{crudeOilResource.indicator5Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator6Min}==$!{crudeOilResource.indicator6Max})
+						$!{crudeOilResource.indicator6Min}
+					#elseif($!{crudeOilResource.indicator6Min}!=0 && $!{crudeOilResource.indicator6Max}!=0)
+						$!{crudeOilResource.indicator6Min}--$!{crudeOilResource.indicator6Max}
+					#else
+						$!{crudeOilResource.indicator6Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator7Min}==$!{crudeOilResource.indicator7Max})
+						$!{crudeOilResource.indicator7Min}
+					#elseif($!{crudeOilResource.indicator7Min}!=0 && $!{crudeOilResource.indicator7Max}!=0)
+						$!{crudeOilResource.indicator7Min}--$!{crudeOilResource.indicator7Max}
+					#else
+						$!{crudeOilResource.indicator7Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator8Min}==$!{crudeOilResource.indicator8Max})
+						$!{crudeOilResource.indicator8Min}
+					#elseif($!{crudeOilResource.indicator8Min}!=0 && $!{crudeOilResource.indicator8Max}!=0)
+						$!{crudeOilResource.indicator8Min}--$!{crudeOilResource.indicator8Max}
+					#else
+						$!{crudeOilResource.indicator8Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator9Min}==$!{crudeOilResource.indicator9Max})
+						$!{crudeOilResource.indicator9Min}
+					#elseif($!{crudeOilResource.indicator9Min}!=0 && $!{crudeOilResource.indicator9Max}!=0)
+						$!{crudeOilResource.indicator9Min}--$!{crudeOilResource.indicator9Max}
+					#else
+						$!{crudeOilResource.indicator9Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator10Min}==$!{crudeOilResource.indicator10Max})
+						$!{crudeOilResource.indicator10Min}
+					#elseif($!{crudeOilResource.indicator10Min}!=0 && $!{crudeOilResource.indicator10Max}!=0)
+						$!{crudeOilResource.indicator10Min}--$!{crudeOilResource.indicator10Max}
+					#else
+						$!{crudeOilResource.indicator10Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator11Min}==$!{crudeOilResource.indicator11Max})
+						$!{crudeOilResource.indicator11Min}
+					#elseif($!{crudeOilResource.indicator11Min}!=0 && $!{crudeOilResource.indicator11Max}!=0)
+						$!{crudeOilResource.indicator11Min}--$!{crudeOilResource.indicator11Max}
+					#else
+						$!{crudeOilResource.indicator11Min}
+					#end
+                </td>
+                <td>
+					#if($!{crudeOilResource.indicator12Min}==$!{crudeOilResource.indicator12Max})
+						$!{crudeOilResource.indicator12Min}
+					#elseif($!{crudeOilResource.indicator12Min}!=0 && $!{crudeOilResource.indicator12Max}!=0)
+						$!{crudeOilResource.indicator12Min}--$!{crudeOilResource.indicator12Max}
+					#else
+						$!{crudeOilResource.indicator12Min}
+					#end
+                </td>
+                <td><input type="text" name="" value="备注"></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<script>
+	function retFunction(data){
+	    var dd = $("#crudeDataArray tr")
+		//var cc = '<tr class="cruhead">' + $("#crudeDataArray").find(".cruhead").html() + '</tr>';
+		var cc = '';
+		for(var i in data){
+            cc = cc + '<tr class="c-tabcos1">';
+            cc = cc + '<td onClick="getDelber(this)"><input type="button" value="删除" class="btn-more"><input type="hidden" name="crudeOilResource.propertyId" value="' + data[i][0] + '"></td>';
+			cc = cc + 	'<td class="tabl-line">' + data[i][2] + '</td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.name" value="' + data[i][1] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator1MinDecimal" value="' + data[i][4] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator2MinDecimal" value="' + data[i][5] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator3MinDecimal" value="' + data[i][6] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator4MinDecimal" value="' + data[i][7] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator5MinDecimal" value="' + data[i][8] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator6MinDecimal" value="' + data[i][9] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator7MinDecimal" value="' + data[i][10] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator8MinDecimal" value="' + data[i][11] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator9MinDecimal" value="' + data[i][12] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator10MinDecimal" value="' + data[i][13] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator11MinDecimal" value="' + data[i][14] + '"></td>';
+			cc = cc + 	'<td><input type="text" name="crudeOilResource.indicator12MinDecimal" value="' + data[i][15] + '"></td>';
+			cc = cc + '</tr>';
+		}
+		$("#crudeDataArray").append(cc);
+
+        var lenObj=$("#crudeDataArray tr").length
+//		if(lenObj>2){
+//            $('#crudeDataArray tr:eq(1)').remove();
+//		}
+
+	}
+    function getDelber(q){
+	    var trData = $(q).parent();
+        trData.nextAll('tr').each(function (i,v) {
+            var next = $(v);
+            var inputHtml = next.find('td:eq(2)').html();
+            var index = inputHtml.substr(inputHtml.indexOf('[')+1,1)-1;
+            next.find('input').each(function (i,v) {
+                var nameVal = $(v).attr('name');
+                if(nameVal != undefined && nameVal != ''){
+                    nameVal = 'crudeOilResource['+index+'].'+nameVal.substr(nameVal.indexOf('.')+1);
+                    $(v).attr('name',nameVal);
+                }
+            })
+        });
+        trData.remove();
+    }
+
+</script>

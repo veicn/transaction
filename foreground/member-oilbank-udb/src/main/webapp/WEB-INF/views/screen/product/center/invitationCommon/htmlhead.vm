@@ -1,0 +1,7 @@
+<head>
+    <meta charset="UTF-8">
+    #css($appServer.get('/product/css/common/reset.css'))
+    #css($appServer.get('/product/css/common/public.css'))
+
+
+</head>

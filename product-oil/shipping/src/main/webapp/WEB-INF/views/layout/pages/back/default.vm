@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/pages/back/contain/htmlhead.htm")
+    $contain.get("/pages/back/contain/nav.htm")
+	$contain.get("/common/server.htm")
+    <main id="main">
+        <div class="m-content w1180 stowage-plan-content center clearfix">
+
+            $contain.get("/pages/back/contain/menu.htm")
+##            $contain.get("/pages/back/contain/menu.htm").setHost("$transactionServer.get('')")
+            $screen_content
+        </div>
+    </main>
+
+    $contain.get("/pages/back/contain/htmlend.htm")
+</html>

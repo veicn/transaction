@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.TriggerContractMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.TriggerContract" id="TriggerContract">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="name" column="NAME" />
+		<result property="month" column="MONTH" />
+		<result property="commodity" column="COMMODITY" />
+		<result property="market" column="MARKET" />
+		<result property="priceSource" column="PRICE_SOURCE" />
+		<result property="priceType" column="PRICE_TYPE" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="quantityStatus" column="QUANTITY_STATUS" />
+		<result property="beginTime" column="BEGIN_TIME" />
+		<result property="endTime" column="END_TIME" />
+		<result property="doneQuantity" column="DONE_QUANTITY" />
+		<result property="surplusQuantity" column="SURPLUS_QUANTITY" />
+		<result property="transferQuantity" column="TRANSFER_QUANTITY" />
+		<result property="status" column="STATUS" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="version" column="VERSION" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.TriggerContract"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_trigger_contract (				ID
+						,UUID
+						,ORDER_ID
+						,NAME
+						,MONTH
+						,COMMODITY
+						,MARKET
+						,PRICE_SOURCE
+						,PRICE_TYPE
+						,QUANTITY
+						,QUANTITY_STATUS
+						,BEGIN_TIME
+						,END_TIME
+						,DONE_QUANTITY
+						,SURPLUS_QUANTITY
+						,TRANSFER_QUANTITY
+						,STATUS
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{orderId}
+						,#{name}
+						,#{month}
+						,#{commodity}
+						,#{market}
+						,#{priceSource}
+						,#{priceType}
+						,#{quantity}
+						,#{quantityStatus}
+						,#{beginTime}
+						,#{endTime}
+						,#{doneQuantity}
+						,#{surplusQuantity}
+						,#{transferQuantity}
+						,#{status}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_trigger_contract
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.TriggerContract">
+        DELETE FROM t_trigger_contract
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="name!=null and name!=''">AND  NAME = #{name}</if>
+        <if test="month!=null and month!=''">AND  MONTH = #{month}</if>
+        <if test="commodity!=null and commodity!=''">AND  COMMODITY = #{commodity}</if>
+        <if test="market!=null and market!=''">AND  MARKET = #{market}</if>
+        <if test="priceSource!=null and priceSource!=''">AND  PRICE_SOURCE = #{priceSource}</if>
+        <if test="priceType!=null and priceType!=''">AND  PRICE_TYPE = #{priceType}</if>
+        <if test="quantity!=null and quantity!=''">AND  QUANTITY = #{quantity}</if>
+        <if test="quantityStatus!=null and quantityStatus!=''">AND  QUANTITY_STATUS = #{quantityStatus}</if>
+        <if test="beginTime!=null and beginTime!=''">AND  BEGIN_TIME = #{beginTime}</if>
+        <if test="endTime!=null and endTime!=''">AND  END_TIME = #{endTime}</if>
+        <if test="doneQuantity!=null and doneQuantity!=''">AND  DONE_QUANTITY = #{doneQuantity}</if>
+        <if test="surplusQuantity!=null and surplusQuantity!=''">AND  SURPLUS_QUANTITY = #{surplusQuantity}</if>
+        <if test="transferQuantity!=null and transferQuantity!=''">AND  TRANSFER_QUANTITY = #{transferQuantity}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.TriggerContract">
+		update t_trigger_contract
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="month!=null">,MONTH = #{month}</if>
+		<if test="commodity!=null">,COMMODITY = #{commodity}</if>
+		<if test="market!=null">,MARKET = #{market}</if>
+		<if test="priceSource!=null">,PRICE_SOURCE = #{priceSource}</if>
+		<if test="priceType!=null">,PRICE_TYPE = #{priceType}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="quantityStatus!=null">,QUANTITY_STATUS = #{quantityStatus}</if>
+		<if test="beginTime!=null">,BEGIN_TIME = #{beginTime}</if>
+		<if test="endTime!=null">,END_TIME = #{endTime}</if>
+		<if test="doneQuantity!=null">,DONE_QUANTITY = #{doneQuantity}</if>
+		<if test="surplusQuantity!=null">,SURPLUS_QUANTITY = #{surplusQuantity}</if>
+		<if test="transferQuantity!=null">,TRANSFER_QUANTITY = #{transferQuantity}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_trigger_contract
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="month!=null">,MONTH = #{month}</if>
+		<if test="commodity!=null">,COMMODITY = #{commodity}</if>
+		<if test="market!=null">,MARKET = #{market}</if>
+		<if test="priceSource!=null">,PRICE_SOURCE = #{priceSource}</if>
+		<if test="priceType!=null">,PRICE_TYPE = #{priceType}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="quantityStatus!=null">,QUANTITY_STATUS = #{quantityStatus}</if>
+		<if test="beginTime!=null">,BEGIN_TIME = #{beginTime}</if>
+		<if test="endTime!=null">,END_TIME = #{endTime}</if>
+		<if test="doneQuantity!=null">,DONE_QUANTITY = #{doneQuantity}</if>
+		<if test="surplusQuantity!=null">,SURPLUS_QUANTITY = #{surplusQuantity}</if>
+		<if test="transferQuantity!=null">,TRANSFER_QUANTITY = #{transferQuantity}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="month!=null and month!=''">and  MONTH=#{month}</if>
+		<if test="commodity!=null and commodity!=''">and  COMMODITY=#{commodity}</if>
+		<if test="market!=null and market!=''">and  MARKET=#{market}</if>
+		<if test="priceSource!=null and priceSource!=''">and  PRICE_SOURCE=#{priceSource}</if>
+		<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="quantityStatus!=null and quantityStatus!=''">and  QUANTITY_STATUS=#{quantityStatus}</if>
+		<if test="beginTime!=null and beginTime!=''">and  BEGIN_TIME=#{beginTime}</if>
+		<if test="endTime!=null and endTime!=''">and  END_TIME=#{endTime}</if>
+		<if test="doneQuantity!=null and doneQuantity!=''">and  DONE_QUANTITY=#{doneQuantity}</if>
+		<if test="surplusQuantity!=null and surplusQuantity!=''">and  SURPLUS_QUANTITY=#{surplusQuantity}</if>
+		<if test="transferQuantity!=null and transferQuantity!=''">and  TRANSFER_QUANTITY=#{transferQuantity}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="TriggerContract">
+			select
+			* from t_trigger_contract
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="TriggerContract">
+			select
+			* from t_trigger_contract
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="TriggerContract" parameterType="com.sinochem.crude.trade.orderexecute.domain.TriggerContract">
+		select * from t_trigger_contract
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="month!=null and month!=''">and  MONTH=#{month}</if>
+		<if test="commodity!=null and commodity!=''">and  COMMODITY=#{commodity}</if>
+		<if test="market!=null and market!=''">and  MARKET=#{market}</if>
+		<if test="priceSource!=null and priceSource!=''">and  PRICE_SOURCE=#{priceSource}</if>
+		<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="quantityStatus!=null and quantityStatus!=''">and  QUANTITY_STATUS=#{quantityStatus}</if>
+		<if test="beginTime!=null and beginTime!=''">and  BEGIN_TIME=#{beginTime}</if>
+		<if test="endTime!=null and endTime!=''">and  END_TIME=#{endTime}</if>
+		<if test="doneQuantity!=null and doneQuantity!=''">and  DONE_QUANTITY=#{doneQuantity}</if>
+		<if test="surplusQuantity!=null and surplusQuantity!=''">and  SURPLUS_QUANTITY=#{surplusQuantity}</if>
+		<if test="transferQuantity!=null and transferQuantity!=''">and  TRANSFER_QUANTITY=#{transferQuantity}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   NAME as "name" 
+						 ,   MONTH as "month" 
+						 ,   COMMODITY as "commodity" 
+						 ,   MARKET as "market" 
+						 ,   PRICE_SOURCE as "priceSource" 
+						 ,   PRICE_TYPE as "priceType" 
+						 ,   QUANTITY as "quantity" 
+						 ,   QUANTITY_STATUS as "quantityStatus" 
+						 ,   BEGIN_TIME as "beginTime" 
+						 ,   END_TIME as "endTime" 
+						 ,   DONE_QUANTITY as "doneQuantity" 
+						 ,   SURPLUS_QUANTITY as "surplusQuantity" 
+						 ,   TRANSFER_QUANTITY as "transferQuantity" 
+						 ,   STATUS as "status" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   VERSION as "version" 
+						from t_trigger_contract
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="name!=null and name!=''">and  NAME=#{name}</if>
+			<if test="month!=null and month!=''">and  MONTH=#{month}</if>
+			<if test="commodity!=null and commodity!=''">and  COMMODITY=#{commodity}</if>
+			<if test="market!=null and market!=''">and  MARKET=#{market}</if>
+			<if test="priceSource!=null and priceSource!=''">and  PRICE_SOURCE=#{priceSource}</if>
+			<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="quantityStatus!=null and quantityStatus!=''">and  QUANTITY_STATUS=#{quantityStatus}</if>
+			<if test="beginTime!=null and beginTime!=''">and  BEGIN_TIME=#{beginTime}</if>
+			<if test="endTime!=null and endTime!=''">and  END_TIME=#{endTime}</if>
+			<if test="doneQuantity!=null and doneQuantity!=''">and  DONE_QUANTITY=#{doneQuantity}</if>
+			<if test="surplusQuantity!=null and surplusQuantity!=''">and  SURPLUS_QUANTITY=#{surplusQuantity}</if>
+			<if test="transferQuantity!=null and transferQuantity!=''">and  TRANSFER_QUANTITY=#{transferQuantity}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_trigger_contract 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="name!=null and name!=''">and  NAME=#{name}</if>
+			<if test="month!=null and month!=''">and  MONTH=#{month}</if>
+			<if test="commodity!=null and commodity!=''">and  COMMODITY=#{commodity}</if>
+			<if test="market!=null and market!=''">and  MARKET=#{market}</if>
+			<if test="priceSource!=null and priceSource!=''">and  PRICE_SOURCE=#{priceSource}</if>
+			<if test="priceType!=null and priceType!=''">and  PRICE_TYPE=#{priceType}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="quantityStatus!=null and quantityStatus!=''">and  QUANTITY_STATUS=#{quantityStatus}</if>
+			<if test="beginTime!=null and beginTime!=''">and  BEGIN_TIME=#{beginTime}</if>
+			<if test="endTime!=null and endTime!=''">and  END_TIME=#{endTime}</if>
+			<if test="doneQuantity!=null and doneQuantity!=''">and  DONE_QUANTITY=#{doneQuantity}</if>
+			<if test="surplusQuantity!=null and surplusQuantity!=''">and  SURPLUS_QUANTITY=#{surplusQuantity}</if>
+			<if test="transferQuantity!=null and transferQuantity!=''">and  TRANSFER_QUANTITY=#{transferQuantity}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,44 @@
+<div class="c-mod">
+    <h3><em class="cw-ico ico-h3"></em>Quotation List<span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th>Quote No.</th>
+                <th>Status</th>
+                <th>Buyer</th>
+                <th>Quantity</th>
+                <th>Trade Terms</th>
+                <th>Discharge Port</th>
+                <th>Payment Terms</th>
+                <th>Premiums/Discounts</th>
+                <th>Create Time</th>
+                <th>Action</th>
+            </tr>
+
+            #foreach($record in $!{bidList})
+                <tr>
+                    <td><a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.biddingSheetVO.uuid})" class="c-tablink">$!{record.biddingSheetVO.uuid}</a></td>
+                    <td>$!{record.biddingSheetVO.biddingSheetStatusVO.enName}</td>
+                    <td>$!{record.buyerInfoVO.enterpriseName}</td>
+                    <td>$!{record.productInfoVO.quantityAsString}</td>
+                    <td>$!{record.productInfoVO.tradeTermVO}</td>
+                    <td>$!{record.transportInfoVO.dischargePortVO.enName}</td>
+                    <td>$!{record.pricingInfoVO.paymentTermVO.enName}</td>
+                    <td>$!{record.pricingInfoVO.premiumsAndDiscountsAsString}</td>
+                    <td>$!{record.biddingSheetVO.gmtCreated}</td>
+                #*操作*#
+                    <td>
+                        <a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.id})" class="c-tablink">Details</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0)" class="c-tablink">Accept</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0)" id="compareC_$!{record.id}_$!{record.id}"  sn="$!{record.id}" img="$docServer.get('/img/GSLOGO/')$!{record.creater}.img" name="$!{record.crudeOilOptions}" value="$!{record.id}"
+                           class="detail-bsc cg-jrdb compareC c-tablink">Compare</a>
+                    </td>
+
+                </tr>
+            #end
+
+        </table>
+    </div>
+</div>

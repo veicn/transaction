@@ -1,0 +1,24 @@
+<!--Commodity Information-->
+<div class="c-mod" id="mjbwxx">
+    <h3><em class="cw-ico ico-h3"></em>Purchased list<span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th class="tabl-line">No.</th>
+                <th>Purchase Period</th>
+                <th>Grade</th>
+                <th>Qty</th>
+                <th>Price Formula</th>
+            </tr>
+         #foreach($item in $planList)
+            <tr class="c-tabcos1">
+                <td class="tabl-line">$velocityCount</td>
+                <td>$!{item.dateStr} / $!{item.dateStr2}</td>
+                <td>$!{item.crudeOilResource.name}</td>
+                <td>$!{item.num}</td>
+                <td>$!{item.valuationFormula}</td>
+            </tr>
+        #end
+        </table>
+    </div>
+</div>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.InfoInterfaceMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.InfoInterface" id="InfoInterfaceDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.InfoInterface">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.InfoInterface" id="InfoInterface">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="externalId" column="EXTERNAL_ID" />
+		<result property="channelName" column="CHANNEL_NAME" />
+		<result property="infoTitle" column="INFO_TITLE" />
+		<result property="infoContent" column="INFO_CONTENT" />
+		<result property="author" column="AUTHOR" />
+		<result property="infoSource" column="INFO_SOURCE" />
+		<result property="infoSourceUrl" column="INFO_SOURCE_URL" />
+		<result property="infoTag" column="INFO_TAG" />
+		<result property="editTime" column="EDIT_TIME" />
+		<result property="externalSystem" column="EXTERNAL_SYSTEM" />
+		<result property="interfaceDate" column="INTERFACE_DATE" />
+		<result property="processPerson" column="PROCESS_PERSON" />
+		<result property="processDate" column="PROCESS_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.InfoInterface"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_cms_info_interface (				ID
+						,UUID
+						,EXTERNAL_ID
+						,CHANNEL_NAME
+						,INFO_TITLE
+						,INFO_CONTENT
+						,AUTHOR
+						,INFO_SOURCE
+						,INFO_SOURCE_URL
+						,INFO_TAG
+						,EDIT_TIME
+						,EXTERNAL_SYSTEM
+						,INTERFACE_DATE
+						,PROCESS_PERSON
+						,PROCESS_DATE
+						,STATUS
+						,ALIVE_FLAG
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{externalId}
+						,#{channelName}
+						,#{infoTitle}
+						,#{infoContent}
+						,#{author}
+						,#{infoSource}
+						,#{infoSourceUrl}
+						,#{infoTag}
+						,#{editTime}
+						,#{externalSystem}
+						,#{interfaceDate}
+						,#{processPerson}
+						,#{processDate}
+						,#{status}
+						,'1'
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_cms_info_interface
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.InfoInterface">
+        DELETE FROM t_cms_info_interface
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="externalId!=null and externalId!=''">AND  EXTERNAL_ID = #{externalId}</if>
+        <if test="channelName!=null and channelName!=''">AND  CHANNEL_NAME = #{channelName}</if>
+        <if test="infoTitle!=null and infoTitle!=''">AND  INFO_TITLE = #{infoTitle}</if>
+        <if test="infoContent!=null and infoContent!=''">AND  INFO_CONTENT = #{infoContent}</if>
+        <if test="author!=null and author!=''">AND  AUTHOR = #{author}</if>
+        <if test="infoSource!=null and infoSource!=''">AND  INFO_SOURCE = #{infoSource}</if>
+        <if test="infoSourceUrl!=null and infoSourceUrl!=''">AND  INFO_SOURCE_URL = #{infoSourceUrl}</if>
+        <if test="infoTag!=null and infoTag!=''">AND  INFO_TAG = #{infoTag}</if>
+        <if test="editTime!=null and editTime!=''">AND  EDIT_TIME = #{editTime}</if>
+        <if test="externalSystem!=null and externalSystem!=''">AND  EXTERNAL_SYSTEM = #{externalSystem}</if>
+        <if test="interfaceDate!=null and interfaceDate!=''">AND  INTERFACE_DATE = #{interfaceDate}</if>
+        <if test="processPerson!=null and processPerson!=''">AND  PROCESS_PERSON = #{processPerson}</if>
+        <if test="processDate!=null and processDate!=''">AND  PROCESS_DATE = #{processDate}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.InfoInterface">
+		update t_cms_info_interface
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="externalId!=null">,EXTERNAL_ID = #{externalId}</if>
+		<if test="channelName!=null">,CHANNEL_NAME = #{channelName}</if>
+		<if test="infoTitle!=null">,INFO_TITLE = #{infoTitle}</if>
+		<if test="infoContent!=null">,INFO_CONTENT = #{infoContent}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="infoSource!=null">,INFO_SOURCE = #{infoSource}</if>
+		<if test="infoSourceUrl!=null">,INFO_SOURCE_URL = #{infoSourceUrl}</if>
+		<if test="infoTag!=null">,INFO_TAG = #{infoTag}</if>
+		<if test="editTime!=null">,EDIT_TIME = #{editTime}</if>
+		<if test="externalSystem!=null">,EXTERNAL_SYSTEM = #{externalSystem}</if>
+		<if test="interfaceDate!=null">,INTERFACE_DATE = #{interfaceDate}</if>
+		<if test="processPerson!=null">,PROCESS_PERSON = #{processPerson}</if>
+		<if test="processDate!=null">,PROCESS_DATE = #{processDate}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_cms_info_interface
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="externalId!=null">,EXTERNAL_ID = #{externalId}</if>
+		<if test="channelName!=null">,CHANNEL_NAME = #{channelName}</if>
+		<if test="infoTitle!=null">,INFO_TITLE = #{infoTitle}</if>
+		<if test="infoContent!=null">,INFO_CONTENT = #{infoContent}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="infoSource!=null">,INFO_SOURCE = #{infoSource}</if>
+		<if test="infoSourceUrl!=null">,INFO_SOURCE_URL = #{infoSourceUrl}</if>
+		<if test="infoTag!=null">,INFO_TAG = #{infoTag}</if>
+		<if test="editTime!=null">,EDIT_TIME = #{editTime}</if>
+		<if test="externalSystem!=null">,EXTERNAL_SYSTEM = #{externalSystem}</if>
+		<if test="interfaceDate!=null">,INTERFACE_DATE = #{interfaceDate}</if>
+		<if test="processPerson!=null">,PROCESS_PERSON = #{processPerson}</if>
+		<if test="processDate!=null">,PROCESS_DATE = #{processDate}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="externalId!=null and externalId!=''">and  EXTERNAL_ID=#{externalId}</if>
+		<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+		<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+		<if test="infoContent!=null and infoContent!=''">and  INFO_CONTENT=#{infoContent}</if>
+		<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+		<if test="infoSource!=null and infoSource!=''">and  INFO_SOURCE=#{infoSource}</if>
+		<if test="infoSourceUrl!=null and infoSourceUrl!=''">and  INFO_SOURCE_URL=#{infoSourceUrl}</if>
+		<if test="infoTag!=null and infoTag!=''">and  INFO_TAG=#{infoTag}</if>
+		<if test="editTime!=null and editTime!=''">and  EDIT_TIME=#{editTime}</if>
+		<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+		<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+		<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+		<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="InfoInterface">
+			select
+			* from t_cms_info_interface
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="InfoInterface">
+			select
+			* from t_cms_info_interface
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="InfoInterface" parameterType="com.sinochem.crude.trade.info.domain.InfoInterface">
+		select * from t_cms_info_interface
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="externalId!=null and externalId!=''">and  EXTERNAL_ID=#{externalId}</if>
+		<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+		<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+		<if test="infoContent!=null and infoContent!=''">and  INFO_CONTENT=#{infoContent}</if>
+		<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+		<if test="infoSource!=null and infoSource!=''">and  INFO_SOURCE=#{infoSource}</if>
+		<if test="infoSourceUrl!=null and infoSourceUrl!=''">and  INFO_SOURCE_URL=#{infoSourceUrl}</if>
+		<if test="infoTag!=null and infoTag!=''">and  INFO_TAG=#{infoTag}</if>
+		<if test="editTime!=null and editTime!=''">and  EDIT_TIME=#{editTime}</if>
+		<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+		<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+		<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+		<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   EXTERNAL_ID as "externalId" 
+						 ,   CHANNEL_NAME as "channelName" 
+						 ,   INFO_TITLE as "infoTitle" 
+						 ,   INFO_CONTENT as "infoContent" 
+						 ,   AUTHOR as "author" 
+						 ,   INFO_SOURCE as "infoSource" 
+						 ,   INFO_SOURCE_URL as "infoSourceUrl" 
+						 ,   INFO_TAG as "infoTag" 
+						 ,   EDIT_TIME as "editTime" 
+						 ,   EXTERNAL_SYSTEM as "externalSystem" 
+						 ,   INTERFACE_DATE as "interfaceDate" 
+						 ,   PROCESS_PERSON as "processPerson" 
+						 ,   PROCESS_DATE as "processDate" 
+						 ,   STATUS as "status" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						from t_cms_info_interface
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="externalId!=null and externalId!=''">and  EXTERNAL_ID=#{externalId}</if>
+			<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+			<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+			<if test="infoContent!=null and infoContent!=''">and  INFO_CONTENT=#{infoContent}</if>
+			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+			<if test="infoSource!=null and infoSource!=''">and  INFO_SOURCE=#{infoSource}</if>
+			<if test="infoSourceUrl!=null and infoSourceUrl!=''">and  INFO_SOURCE_URL=#{infoSourceUrl}</if>
+			<if test="infoTag!=null and infoTag!=''">and  INFO_TAG=#{infoTag}</if>
+			<if test="editTime!=null and editTime!=''">and  EDIT_TIME=#{editTime}</if>
+			<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+			<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+			<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+			<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_cms_info_interface 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="externalId!=null and externalId!=''">and  EXTERNAL_ID=#{externalId}</if>
+			<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+			<if test="infoTitle!=null and infoTitle!=''">and  INFO_TITLE=#{infoTitle}</if>
+			<if test="infoContent!=null and infoContent!=''">and  INFO_CONTENT=#{infoContent}</if>
+			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+			<if test="infoSource!=null and infoSource!=''">and  INFO_SOURCE=#{infoSource}</if>
+			<if test="infoSourceUrl!=null and infoSourceUrl!=''">and  INFO_SOURCE_URL=#{infoSourceUrl}</if>
+			<if test="infoTag!=null and infoTag!=''">and  INFO_TAG=#{infoTag}</if>
+			<if test="editTime!=null and editTime!=''">and  EDIT_TIME=#{editTime}</if>
+			<if test="externalSystem!=null and externalSystem!=''">and  EXTERNAL_SYSTEM=#{externalSystem}</if>
+			<if test="interfaceDate!=null and interfaceDate!=''">and  INTERFACE_DATE=#{interfaceDate}</if>
+			<if test="processPerson!=null and processPerson!=''">and  PROCESS_PERSON=#{processPerson}</if>
+			<if test="processDate!=null and processDate!=''">and  PROCESS_DATE=#{processDate}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

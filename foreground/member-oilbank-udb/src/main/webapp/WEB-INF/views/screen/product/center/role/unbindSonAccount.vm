@@ -1,0 +1,56 @@
+$contain.get('/common/title.htm').put('title', '解绑子账号')
+
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+<div class="f1 manage-con">
+    <h3>Sub - Account Management</h3>
+    <span class="m-btn br btn1 btnr">+ New Sub-Account</span>
+    <span class="m-btn br btn2 btnr">+ New Invitation</span>
+    <table class="account-mag unbind-tab">
+        <tr class="tr-fir">
+            <td>Account No</td>
+            <td>Role</td>
+            <td>Settings</td>
+        </tr>
+        <tr>
+            <td>***</td>
+            <td>Sales,Trader,Operator,Purchase,Trader,Potimization</td>
+            <td><!-- <a href="javascript:;" class="br unbindBtn startUnbind btnr">Unbind</a><a href="javascript:;" class="br editBtn startEdit btnr">Edit</a> --></td>
+        </tr>
+        <tr>
+            <td>***</td>
+            <td>Sales,Trader,Operator,Purchase,Trader,Potimization</td>
+            <td><!-- <a href="javascript:;" class="br unbindBtn startUnbind btnr">Unbind</a><a href="javascript:;" class="br editBtn startEdit btnr">Edit</a> --></td>
+        </tr>
+    </table>
+    <div class="c-page">
+        <span class="c-page-txt">&lt;</span>
+        <a class="c-page-num" href="">1</a>
+        <a class="c-page-num c-cur" href="">2</a>
+        <a class="c-page-num" href="">3</a>
+        <a class="c-page-num" href="">4</a>
+        <span class="c-page-point">...</span>
+        <a class="c-page-num" href="">8</a>
+        <a class="c-page-txt" href="">&gt;</a>
+    </div>
+</div>
+
+<!-- 带遮罩层的弹窗 star-->
+<div class="pop-win"></div>
+<div class="pop-center">
+    <h3>UNBIND SUB ACCOUNT</h3>
+    <p class="cen1">You are unconnected with sub-account caoaihuan3，/*caoaihuan3*/</p>
+    <p class="cen2">Are you sure to remove this account?</p>
+    <a href="" class="unbindCon btnr">Confirm To Unbind</a>
+    <a href="" class="unbindCan btnr">Cancel</a>
+    <img src="$appServer.get('/product/images/del_x.png')" class="closed">
+</div>
+
+
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+#js($appServer.get('/product/js/common/common.js'))
+<script>
+    commonCPY.select();
+</script>

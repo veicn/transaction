@@ -1,0 +1,37 @@
+
+		
+		<!--查询-->
+		<div class="demoTable">
+		        外部系统别名：
+		    <div class="layui-inline">
+		        <input class="layui-input" name="sysName" id="sysName" />
+		    </div>
+		        用户账号：
+		    <div class="layui-inline">
+		        <input class="layui-input" name="loginName" id="loginName" />
+		    </div>
+		    <button class="layui-btn" data-type="reload" id="btn">搜索</button>
+		    <button class="layui-btn" id="add">新增</button>
+		</div>
+		
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+		  <thead>
+		    <tr>
+		      <th lay-data="{field:'sysName'}">系统别名</th>
+		      <th lay-data="{field:'loginName'}">用户账号</th>
+		      <th lay-data="{field:'password'}">用户密码</th>
+		      <th lay-data="{field:'memberRole'}">用户角色</th>
+		      <th lay-data="{fixed: 'right', width:118, align:'center', toolbar: '#barDemo'}"></th>
+		    </tr>
+		  </thead>
+		</table>
+		
+		<script type="text/html" id="barDemo">
+		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+		
+		
+		
+		<script src="$imageServer.get('orderexecute/js/interface/interfaceMember.js')"></script>

@@ -1,0 +1,47 @@
+<div class="header">
+    <div class="top-wrap">
+        <div class="inner clearfix">
+            #if($!user)
+                <div class="top-l"><span class="wel-txt">$!{user.name}
+                    </span><span class="t-lr-txt"><a class="t-log" href="$systemServer.get('logout.htm')">Exit</a></span></div>
+                #else
+                    <div class="top-l"><span class="wel-txt">Hello， welcome to Mycrudeoil！</span><span class="t-lr-txt"><a class="t-log" href="$systemServer.get('login.htm')">log-in</a>|<a class="t-reg" href="$systemServer.get('member/register.htm')">Register</a></span></div>
+            #end
+
+            <div class="top-r">
+                <ul class="tr-list clearfix">
+##                    <li><a href="$infoServer.get('/page/#/notice')" target="_blank"><i class="c-ico ico-gg1"></i>Notice</a></li>
+                #if($!user)
+                    <li><a class="user-txt" href="$memberServer.get('center/my.htm')">Membership Center</a></li>
+                #end
+                   ## <li><a class="user-txt" href="">业务中心</a></li>
+                <li>
+                	<a class="ph-txt" href=""><i class="c-ico ico-phone"></i>APP
+                        <span class="index-tc1 clearfix">
+						    <span><i class="ios"></i><em>IOS</em></span>
+						    <span><i class="andriod"></i><em>Android</em></span>
+						    <p class="ico-sj1"></p>
+					      </span>
+				     </a>
+			     </li> 
+                <li><span class="kf-txt"><i class="c-ico ico-tel"></i>+86 10 59568888</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="head-con clearfix">
+        <div class="inner">
+            <div class="head-l">
+                <a href="$appServer.get("")" class="logo"></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+	$contain.get("/commonContain/nav.htm").put('order',$order)
+</div>
+#jscode()
+    $('.nav-item a').click(function () {
+        $(this).addClass("act").siblings("a").removeClass("act")
+    })
+#end

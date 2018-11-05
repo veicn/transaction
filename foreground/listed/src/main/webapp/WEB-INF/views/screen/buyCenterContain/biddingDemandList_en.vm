@@ -1,0 +1,63 @@
+<div class="c-mod">
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th>Quotation No.</th>
+                <th>Seller</th>
+                <th>Grade</th>
+
+                <th>Qty</th>
+                <th>Incoterm</th>
+                <th>Price Fomula</th>
+
+                <th>Pricing Period</th>
+                <th>Payment Date</th>
+                <th>DDR</th>
+
+                <th>Quotation Type</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+            #foreach($record in $!{pageInfoList.list})
+                <tr>
+                    #*Demands No.*#
+                    <td><a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.id})" class="c-tablink">$!{record.uuid}</a></td>
+                    #*Seller*#
+                    <td>$!{record.pEnterpriseName}</td>
+                    #*Grade*#
+                    <td>$!{record.crudeOilOptions}</td>
+
+                    #*Qty*#
+                    <td>$!record.num</td>
+                    #*Incoterm*#
+                    <td>$!{record.tradeItem}</td>
+                    #*Price Fomula*#
+                    <td>$!{record.valuationFormula}</td>
+
+                    #*Pricing Period*#
+                    <td>$!record.valuationProidType</td>
+                    #*Payment Date*#
+                    <td>$!{record.payItem}</td>
+                    #*DDR*#
+                    <td>$!{record.dischargeStartTime} to $!{record.dischargeEndTime}</td>
+
+                    #*Quotation Type*#
+                    <td>#if($!{record.biddingType} == 1) Intention Quotation #else Formal quotation #end</td>
+                    #*Status*#
+                    <td>#if($!{record.status} =='10') Quoted #elseif($!{record.status} =='20') Deal Done #elseif($!{record.status} =='30') Completed #end</td>
+                    #*Action*#
+                    <td>
+                    	<a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.id})" class="c-tablink">Details</a>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<a href="javascript:void(0)" id="compareC_$!{record.id}_$!{record.id}" sn="$!{record.id}" dealType="B" img="$docServer.get('/img/GSLOGO/')$!{record.creater}.img" name="$!{record.crudeOilOptions}" value="$!{record.id}"
+                           class="detail-bsc cg-jrdb compareC c-tablink">Add to Compare</a>
+                    </td>
+					
+                </tr>
+            #end
+
+        </table>
+    </div>
+</div>

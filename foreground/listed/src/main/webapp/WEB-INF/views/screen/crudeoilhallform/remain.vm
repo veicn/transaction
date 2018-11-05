@@ -1,0 +1,94 @@
+<div class="c-mod c-mod-dd" id="cgqk">
+    <h3><em class="cw-ico ico-h3"></em>采购详情</h3>
+    <div class="c-form">
+        <ul class="c-ful cgqk-cont">
+            <li class="c-fcos1">
+                <span class="c-fn">采购类型：</span>
+                <input type="radio" #if($!{demand.purchaseType} ==  1 || !$!{demand.purchaseType})checked="checked"#end  name="demand.purchaseType" value="1" class="radi" id="bidId"><span>招标</span>
+                <input type="radio" #if($!{demand.purchaseType} ==  2)checked="checked"#end name="demand.purchaseType" value="2" class="radi" id="enquiryId" ><span>询价</span>
+            </li>
+
+            <li class="c-fcos2" id="jiebiaoID">
+            	<span class="c-fn c-fl" ><span class="notice-required">*&nbsp;</span>投标截止日期：</span>
+            	<input type="text" name="demand.stopBidTime"  class="c-int zq-text c-fl" date="true" id="stopBidTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.stopBidTime})"/>
+                <label for="stopBidTime" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2" id="kaibaiID">
+            	<span class="c-fn c-fl" >公布中标日期：</span>
+            	<input type="text" data-msg-afterDate='公布中标日期不能早于投标截止日期' afterDate="stopBidTime" name="demand.tenderOutTime"  class="c-int zq-text c-fl" date="true" id="tenderDateId"  value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.tenderOutTime})"/>
+            	<label for="tenderDateId" class="error my-error"></label>
+            	<label id="tenderDateId-error" class="error my-error" style="display: none;"></label>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    const layer = layui.layer;
+
+    $(function () {
+		 // 初始化日期
+        initDateInput($("input[date='true']"));
+        
+        // 询价的场合
+        #if($!{demand.purchaseType} ==  2)
+        	// 公布中标日期->清空
+            $('#tenderDateId').val("");
+            $('#tenderDateId-error').html("");
+            $("#kaibaiID").hide();
+            
+        #else
+        	$("#kaibaiID").show();
+            $("#jiebiaoID").show();
+        #end
+
+        //询价
+        $("#enquiryId").click(function () {
+            $("#tenderDateId").attr("name","")
+            var html = '<span class="notice-required">*&nbsp;</span>';
+            html += '报价截止日期：';
+            $("#stopBidTime").prev().html(html);
+            $("#zhaobiao").attr("name","");
+            $("#xunjia").attr("name","purchaseType");
+            $("#hiddenYes").attr("name","");
+            $("#isdealId").hide();
+            $("#kaibaiID").hide();
+            // 清空公布中标日期
+            $('#tenderDateId').val("");
+            $('#tenderDateId-error').html("");
+        })
+        //招标
+        $("#bidId").click(function () {
+            $("#tenderDateId").attr("name","demand.tenderOutTime")
+            var html = '<span class="notice-required">*&nbsp;</span>';
+            html += '投标截止日期：';
+            $("#stopBidTime").prev().html(html);
+            $("#zhaobiao").attr("name","purchaseType");
+            $("#xunjia").attr("name","");
+            $("#isdealId").show();
+            $("#kaibaiID").show();
+            $("#jiebiaoID").show();
+
+        })
+        //点击是
+        $("#raiIdYes").click(function () {
+            $("#hiddenNo").attr("name","");
+            $("#hiddenYes").attr("name","isSeal");
+
+        })
+        //点击否
+        $("#raiIdNo").click(function () {
+            $("#hiddenYes").attr("name","");
+            $("#hiddenNo").attr("name","isSeal");
+        })
+
+        //设置公布中标日期不能低于当日
+        layui.use('laydate', function() {
+            const laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#tenderDateId',
+                min: 0
+            });
+        })
+    })
+</script>

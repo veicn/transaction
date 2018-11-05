@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentSofMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentSof">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="vessel" jdbcType="VARCHAR" property="vessel" />
+    <result column="voyage" jdbcType="VARCHAR" property="voyage" />
+    <result column="imo" jdbcType="VARCHAR" property="imo" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="metric_ton" jdbcType="VARCHAR" property="metricTon" />
+    <result column="sof_date" jdbcType="TIMESTAMP" property="sofDate" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="contact_person" jdbcType="VARCHAR" property="contactPerson" />
+    <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="ship_gross_weight" jdbcType="DECIMAL" property="shipGrossWeight" />
+    <result column="ship_net_weight" jdbcType="DECIMAL" property="shipNetWeight" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uuid, enterprise_id, vessel, voyage, imo, goods_name, metric_ton, sof_date, port, 
+    contact_person, contact_number, remark, ship_gross_weight, ship_net_weight, alive_flag, 
+    status, create_user, create_date, update_user, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    id, uuid, enterprise_id, vessel, voyage, imo, goods_name,
+    IF(metric_ton is NULL, null ,if(metric_ton = '' ,null , format(metric_ton , 4) )) as metric_ton,
+    sof_date, port,
+    contact_person, contact_number, remark, ship_gross_weight, ship_net_weight, alive_flag,
+    status, create_user, create_date, update_user, update_date
+
+    from `product-trade-blockchain`.t_shipagent_sof
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_shipagent_sof
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSof">
+    insert into `product-trade-blockchain`.t_shipagent_sof (id, uuid, enterprise_id,
+      vessel, voyage, imo, 
+      goods_name, metric_ton, sof_date, 
+      port, contact_person, contact_number, 
+      remark, ship_gross_weight, ship_net_weight, 
+      alive_flag, status, create_user, 
+      create_date, update_user, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=BIGINT}, 
+      #{vessel,jdbcType=VARCHAR}, #{voyage,jdbcType=VARCHAR}, #{imo,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{metricTon,jdbcType=DECIMAL}, #{sofDate,jdbcType=TIMESTAMP}, 
+      #{port,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{shipGrossWeight,jdbcType=DECIMAL}, #{shipNetWeight,jdbcType=DECIMAL}, 
+      #{aliveFlag,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSof">
+    insert into `product-trade-blockchain`.t_shipagent_sof
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="vessel != null">
+        vessel,
+      </if>
+      <if test="voyage != null">
+        voyage,
+      </if>
+      <if test="imo != null">
+        imo,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="metricTon != null">
+        metric_ton,
+      </if>
+      <if test="sofDate != null">
+        sof_date,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="contactPerson != null">
+        contact_person,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="shipGrossWeight != null">
+        ship_gross_weight,
+      </if>
+      <if test="shipNetWeight != null">
+        ship_net_weight,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="vessel != null">
+        #{vessel,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage != null">
+        #{voyage,jdbcType=VARCHAR},
+      </if>
+      <if test="imo != null">
+        #{imo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="metricTon != null">
+        #{metricTon,jdbcType=DECIMAL},
+      </if>
+      <if test="sofDate != null">
+        #{sofDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null">
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shipGrossWeight != null">
+        #{shipGrossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="shipNetWeight != null">
+        #{shipNetWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSof">
+    update `product-trade-blockchain`.t_shipagent_sof
+    <set>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="vessel != null">
+        vessel = #{vessel,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage != null">
+        voyage = #{voyage,jdbcType=VARCHAR},
+      </if>
+      <if test="imo != null">
+        imo = #{imo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="metricTon != null">
+        metric_ton = #{metricTon,jdbcType=VARCHAR},
+      </if>
+      <if test="sofDate != null">
+        sof_date = #{sofDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null">
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="shipGrossWeight != null">
+        ship_gross_weight = #{shipGrossWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="shipNetWeight != null">
+        ship_net_weight = #{shipNetWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSof">
+    update `product-trade-blockchain`.t_shipagent_sof
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      vessel = #{vessel,jdbcType=VARCHAR},
+      voyage = #{voyage,jdbcType=VARCHAR},
+      imo = #{imo,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      metric_ton = #{metricTon,jdbcType=VARCHAR},
+      sof_date = #{sofDate,jdbcType=TIMESTAMP},
+      port = #{port,jdbcType=VARCHAR},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      ship_gross_weight = #{shipGrossWeight,jdbcType=DECIMAL},
+      ship_net_weight = #{shipNetWeight,jdbcType=DECIMAL},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="deleteSofById" parameterType="java.lang.Long">
+      UPDATE `product-trade-blockchain`.t_shipagent_sof
+  </update>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_sof
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+</mapper>

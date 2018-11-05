@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.sinochem.crude.trade.wechat.dao.AccessTokenMapper">
+		<resultMap type="com.sinochem.crude.trade.wechat.domain.AccessTokenClazz" id="AccessTokenClazz">
+			<result property="id" column="ID" />
+			<result property="accessToken" column="ACCESS_TOKEN" />
+			<result property="createDate" column="CREATE_DATE" />
+			<result property="tokentype" column="TOKEN_TYPE" />
+			<!--<result column="CREATE_DATE" jdbcType="DATE" property="createDate" />-->
+		</resultMap>
+		
+		<insert id="insertAccessToken" parameterType="com.sinochem.crude.trade.wechat.domain.AccessTokenClazz">
+			insert into wechat_access_token(
+				 ID,
+				 ACCESS_TOKEN,
+				 CREATE_DATE,
+				 TOKEN_TYPE
+			)values(
+				#{id},
+				#{accessToken},
+				#{createDate},
+			<if test="tokentype != null" >
+				#{tokentype}
+			</if>
+			<if test="tokentype == null" >
+				#{0}
+			</if>
+			)
+		</insert>
+		
+		<select id="findAnAccessToken" resultMap="AccessTokenClazz">
+			select * from wechat_access_token where CREATE_DATE = (select max(CREATE_DATE) from wechat_access_token)
+		</select>
+
+	<select id="findvolidAccessToken" resultMap="AccessTokenClazz" parameterType="com.sinochem.crude.trade.wechat.domain.AccessTokenClazz">
+		select * from wechat_access_token where CREATE_DATE >= DATE_ADD(CURRENT_TIME(),INTERVAL -100 minute)
+		<if test="tokentype != null" >
+			AND TOKEN_TYPE=#{tokentype}
+		</if>
+		order by CREATE_DATE DESC LIMIT 1
+	</select>
+		
+		<delete id="deleteAccessToken">
+			delete from wechat_access_token
+			where CREATE_DATE &lt; (select date_sub(current_date(),interval 1 day))
+		</delete>
+		
+	</mapper>

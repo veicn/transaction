@@ -1,0 +1,28 @@
+
+	<ul class="c-ful pro-d-l">
+		<li class="c-fcos1"><h1>$!{order.goodsInfo.zhName}<span class="qx-conte qx-nub">#if("$!{order.goodsInfo.spec}"!="")（$!{order.goodsInfo.spec}）#end</span></h1></li>
+		<li class="c-fcos2"><span class="c-fn">Qty (BBL)：</span><span class="c-int qx-conte">$!NumberTool.format($!{order.goodsInfo.quantity})</span></li>
+		<li class="c-fcos2"><span class="c-fn">Tolerance：</span><span class="c-int qx-conte">+/-$!NumberTool.format('#.######',$!{order.goodsInfo.moreLess})%</span></li>
+		<li class="c-fcos2"><span class="c-fn">Premium/Discount：</span><span class="c-int qx-conte">$!NumberTool.format('#.######',$!{order.priceInfo.agio}) $!{order.priceInfo.currency}/$!{order.goodsInfo.quantityUnit}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Incoterm：</span><span class="c-int qx-conte">$!{order.priceInfo.tradeTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Pricing Period：</span><span class="c-int qx-conte">$!{order.priceInfo.pricingDesc}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Pricing Basis：</span><span class="c-int qx-conte">$!{order.priceInfo.basePrice}</span></li>
+		<li class="c-fcos1"><span class="c-fn">Price Fomula：</span><span class="c-int qx-conte">$!{order.priceInfo.priceFormula}</span></li>
+		#if($!{order.priceInfo.priceType} == 'Trigger')
+		<li class="c-fcos2"><span class="c-fn">Min Trigger Qty：</span><span class="c-int qx-conte">$!{order.priceInfo.lockQuantityMin}BBL</span></li>
+		<li class="c-fcos2"><span class="c-fn">Roll over option：</span><span class="c-int qx-conte">$!{order.priceInfo.transferCount}(months)</span></li>
+		#end
+		<li class="c-fcos2"><span class="c-fn">Credit term：</span><span class="c-int qx-conte">$!{order.creditTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Payment date：</span><span class="c-int qx-conte">$!{order.priceInfo.paymentTerm}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Discharge port：</span><span class="c-int qx-conte">$!{order.transportInfo.uploadingPort}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte">$!{order.transportInfo.loadingPort}</span></li>
+		<li class="c-fcos2"><span class="c-fn">DDR：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateStart}) to $!dateUtil.convertDateToString($!{order.transportInfo.dischargeDateEnd})</span></li>
+		<li class="c-fcos2"><span class="c-fn">Laycan：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateStart}) to $!dateUtil.convertDateToString($!{order.transportInfo.deliveryDateEnd})</span></li>
+		
+		<li class="c-fcos2"><span class="c-fn">Qty Determination：</span><span class="c-int qx-conte">$!{order.settlStandard} </span></li>
+		<li class="c-fcos2"><span class="c-fn">Allowed Laytime：</span><span class="c-int qx-conte">$!{order.loadAndDischargeTime}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Inspection：</span><span class="c-int qx-conte">$!{order.inspectionFeeSharingType}</span></li>
+		<li class="c-fcos2"><span class="c-fn">Law：</span><span class="c-int qx-conte">$!{order.law}</span></li>
+		<li class="c-fcos2"><span class="c-fn">GTC：</span><span class="c-int qx-conte">$!{order.gtc}</span></li>
+		<li class="c-fcos1"><span class="c-fn">Remark：</span><span class="c-int qx-conte">$!{order.remark}</span></li>
+	</ul>

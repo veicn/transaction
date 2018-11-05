@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        $contain.get("/forecontain/htmlhead.htm").put("a",$a)
+        <link rel="stylesheet" href="$imageServer.get('/css/f_longcontractadd_layer.css')">
+        <link rel="stylesheet" href="$imageServer.get('/css/f_cpy.css')">
+    </head>
+
+    <script>
+        //商品对比名称，主要用来区分原油大厅和成品油商城中两个对比，此处为成品油对比
+        window.CompareGoodsName="PRODUCTOILCOMPAREGOODS";
+
+        //定义商品比较的回调函数，主要是定义URL地址
+        function compare(idArr){
+            var url = "$appServer.get('trademall/productCompare.htm')";
+            window.open(url+"?demands="+idArr.toString());
+        }
+        $(function(){
+            var form = $("#productOilEditForm");
+            var input = "<input type='hidden' name='pageType' value='mall'/>";
+            form.prepend(input);
+        });
+    </script>
+
+   <body>
+   <style>#cnzz_stat_icon_1272857056{display:none}</style>
+   <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+       $contain.get("/commonContain/headline.htm").setHost("$portalServer.get('')").setParam('order','3')
+       $screen_content
+       $contain.get("/commonContain/foot.htm").setHost("$portalServer.get('')")
+   <div class="toolbar" style="right: -280px;width: 316px;">
+       $contain.get("/forecontain/righttool.htm")
+   </div>
+   <!--飘窗-->
+       $contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+   </body>
+</html>

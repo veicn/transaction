@@ -1,0 +1,115 @@
+<script>
+layui.use(['layer','jquery','upload'], function(){
+	var layer = layui.layer;
+	var $ = layui.jquery
+	,upload = layui.upload;
+// 提示信息
+$(function () {
+	$("td").on("mouseenter",function() {
+	    if (this.offsetWidth < this.scrollWidth) {
+	        var that = this;
+	        var text = $(this).text();
+	        
+	        if(text.indexOf(";")>-1) {
+			　　text = text.split(';')[1];
+			}
+			
+	        layer.tips("<span style='color:black'>"+text+"</span>", that,{
+	            tips: [3,"#fff"],
+	            time: 2000
+	        });
+	    }
+	});
+})
+});
+</script>
+
+<style>
+.contain {
+	width:100%;
+}
+
+table { 
+	width:100%; 
+	text-align: left;
+	border:1px solid #e3e6e8; 
+	border-collapse: collapse; 
+	table-layout: fixed; 
+	display: table;
+}
+
+th,td {
+	overflow: hidden; 
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+}
+
+.layui-layer { 
+	word-wrap: break-word; 
+	word-break: break-all;
+}
+</style>
+
+<div class="layui-table" style="padding:15px" id="layerDemo">
+	<!--搜索条件-->
+	<div class="ry-banner">
+		<div class="layui-inline">
+			<label class="layui-form-label">船名</label>
+		    <div class="layui-input-inline iw300" >
+		      <input id="searchName" type="text" name="searchName" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="$!searchName">   
+		    </div>
+		    <div class="layui-input-inline iw300" style="width:10px;"></div>
+		    <button class="layui-btn layui-btn-normal layui-btn-small searchBtn">查询</button>
+		</div>
+	</div>
+	<!--列表-->
+	<div class="contain">
+	<table id="sysShipList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+	  <thead>
+	    <tr>
+	      <th class="table-style-th" style="width:150px;">租船协议编号</th>
+	      <th class="table-style-th">租船人</th>
+		  <th class="table-style-th">船东</th>
+		  <th class="table-style-th">船名</th>
+		  <th class="table-style-th">装期</th>
+		  <th class="table-style-th">最小货量</th>
+		  <th class="table-style-th">装港</th>
+		  <th class="table-style-th">状态</th>
+	      <th class="table-style-th" >操作</th>
+	    </tr> 
+	  </thead>
+	  <tbody>
+	  #foreach($data in $datas)
+	    <tr>
+		  <td>$!{data.agreementCode}</td>
+		  <td>$!{data.carrierName}</td>
+		  <td>$!{data.shipOwner}</td>
+		  <td>$!{data.shipName}</td>
+		  <td>$!{data.laycan}</td>
+		  <td>$!{data.minQuantity} MT</td>
+		  <td>$!{data.loadPort}</td>
+		  <td>#if($!{data.status} == '1')已生成租船协议#end
+			    #if($!{data.status} == '2')确认执行#end
+			 	#if($!{data.status} == '3')航次开始#end
+			 	#if($!{data.status} == '4')已装港#end
+			    #if($!{data.status} == '5')航行中#end
+			 	#if($!{data.status} == '6')已卸港#end
+			 	#if($!{data.status} == '7')航次结束#end
+			 	#if($!{data.status} == '8')已结算#end
+		  </td>
+	      <td>
+	      	<i class="layui-icon">&#xe605;</i>
+	      	<a href="javascript:;" class="dialog-link btcol detail" attr-data="$data.uuid">查看</a>
+	      	
+	      </td>
+	    </tr>
+	  #end
+	  </tbody>
+	</table>
+	</div>
+    <!--底部分页-->
+    <div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/platform/agreementList.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+</div>
+<script src="$shipServer.get('transport/js/om/platform/agreementList.js')"></script>

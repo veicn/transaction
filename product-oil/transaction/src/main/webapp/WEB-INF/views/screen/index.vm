@@ -1,0 +1,196 @@
+<style type="text/css">
+    #header{display: none}
+    #main{display: none}
+    #footer{display: none}
+</style>
+
+<main id="main">
+    <div class="swiper-container home-banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background: url('$imageServer.get('/images/banner1.png')') no-repeat center; background-size: cover; height:auto; width: 100%;">
+                <div class="banner-intro">
+                    <h2>OILBANK</h2>
+                    <p>OIL BANK, the first online refined oil trading platform of China,  provides the physical commodity trading, transport, operation, news, blockchain and other services for international oil business participants.</p>
+##                    <button class="banner-more" onclick="location.href='javascript:void(0);'">
+##                        More
+##                    </button>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background: url('$imageServer.get('/images/banner2.png')') no-repeat center; background-size: cover; height:auto; width: 100%;">
+                <div class="banner-intro">
+                    <h2>TRADING</h2>
+                    <p>provides integrity and efficient transaction service for the global oil industrial customers.</p>
+                    <button class="banner-more" onclick="location.href='$appServer.get('/pages/front/product_list/index.htm')'">
+                        More
+                    </button>
+                </div>
+            </div>
+
+            <div class="swiper-slide" style="background: url('$imageServer.get('/images/banner3.png')') no-repeat center; background-size: cover; height:auto; width: 100%;">
+                <div class="banner-intro">
+                    <h2>SHIPPING</h2>
+                    <p>provides real-time visual voyage and port operation tracking to improve the timeliness and accuracy of shipping information</p>
+                    <button class="banner-more" onclick="location.href='$shippingServer.get('/pages/front/shipingHome/index.htm')'">More</button>
+                </div>
+            </div>
+
+
+            <div class="swiper-slide" style="background: url('$imageServer.get('/images/banner4.png')') no-repeat center; background-size: cover; height:auto; width: 100%;">
+                <div class="banner-intro">
+                    <h2>INFORMATION</h2>
+                    <p>provides you practical, professional and efficient oil industrial news service.</p>
+                    <button class="banner-more" onclick="location.href='$newsServer.get('/pages/front/news/index.htm')'">More</button>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev arraw"></div>
+        <div class="swiper-button-next arraw"></div>
+    </div>
+    <div class="home-content w1180 clearfix">
+        <div class="fl w380 trading-center c">
+            <div class="trading-center-img m" style="background: url('$imageServer.get('/images/jp1.jpg')') no-repeat center; background-size: cover; height:448px; width: auto; max-width: 380px;">
+                <div class="tip-content">
+                    <h3>TRADING</h3>
+                    <p>Extensive Industrial Participants<br>
+                       Abundant Business Information<br>
+                       Efficient Transaction Service</p>
+                    <div class="read-more" onclick="location.href='$transactionServer.get('/pages/front/product_list/index.htm')'">
+                        Read More
+                    </div>
+                </div>
+            </div>
+            <div class="singapore-gasoline">
+                <h3 onclick="location.href='$appServer.get('/pages/front/product_list/index.htm')'">GASOLINE (92#)</h3>
+                <div class="singapore-gasoline-content">
+                    <ul>
+                        <li class="padding20"><i>Grade</i>&nbsp;&nbsp;:&nbsp;&nbsp;<span>Gasoline</span></li>
+                        <li class="padding20"><i>Quantity(MT)</i>&nbsp;&nbsp;:&nbsp;&nbsp;<span>10,000</span></li>
+                        <li class="padding20"><i>Incoterm</i>&nbsp;&nbsp;:&nbsp;&nbsp;<span>FOB</span></li>
+                        <li class="padding20"><i>Load port</i>&nbsp;&nbsp;:&nbsp;&nbsp;<span>Quanzhou, China</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fl w380 logistics c">
+            <div class="logistics-img m" style="background: url('$imageServer.get('/images/jp2.jpg')') no-repeat center; background-size: cover; height:448px; width: auto; max-width: 380px;">
+                <!--<span class="tip">LOGISTICS</span>-->
+                <div class="tip-content">
+                    <h3>SHIPPING</h3>
+                    <p>The visualization of voyage tracking and the monitoring of loading and unloading work improves the timeliness and accuracy of shipping information updating </p>
+                    <div class="read-more" onclick="location.href='$shippingServer.get('/pages/front/shipingHome/index.htm')'">
+                        Read More
+                    </div>
+                </div>
+            </div>
+            <div class="shop-tide-wrap">
+                <div class="shop-positioning">
+                    <div><h3 class="title">Voyage Tracking</h3></div>
+                    <div class="shop-positioning-content clearfix">
+
+                        <div class="cpy-select fl clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">Vessel</div>
+                                        <input type="text" readonly="readonly" value="Port">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    <li class="select-option selected" data-value="IMO">Vessel</li>
+                                    <li class="select-option" data-value="IMO">IMO</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="text" class="fl" value="DD2018">
+                        <input type="button" class="fl" value="Inquiry">
+                    </div>
+                </div>
+                <div class="tide">
+                    <div class="clearfix">
+                        <h3 class="title fl">Tide</h3>
+                        <!--<div class="fr date-wrap datetime-wrap">-->
+                            <!--<input name="startEtb" id="startEtb" class="DeadlineMonth datetime" type="text" style="width: 278px;">-->
+                            <!--<div class="datetime-view datetime-view-vl" style="width: 278px; text-align: right; padding-right: 28px;"></div>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="title-content s clearfix">
+
+                        <div class="cpy-select fl clearfix">
+                            <div class="select s-b">
+                                <div class="select-box">
+                                    <div class="select-content">
+                                        <div class="select-show-text">Port</div>
+                                        <input type="text" readonly="readonly" value="Port">
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    <li class="select-option" data-value="Quan Zhou">Port</li>
+                                    <li class="select-option selected" data-value="Quan Zhou">Quan Zhou</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="datetime-wrap sales-wrap br fl">
+                            <input id="LaycanMonthS" class="datetime" type="text" style="">
+                            <div class="datetime-view br tide-datetime" style=""></div>
+                        </div>
+                        <!--<input type="text" class="fl" value="GuanZhouGang">-->
+                        <input type="button" class="fl" value="Inquiry">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fl information">
+            <div class="information-theme padding20">
+                <span class="fl">INFORMATION</span>
+                <a href="$newsServer.get('/pages/front/news/index.htm')" class="fr">More</a>
+            </div>
+            <div class="information-category padding20 clearfix">
+
+            </div>
+            <ul class="information-list padding20">
+            </ul>
+        </div>
+    </div>
+    <div class="partner-wrap">
+        <h3 class="w1180">PARTNER</h3>
+        <div class="partner-box">
+            <ul class="clearfix">
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation1.jpg')" width="180" height="120">
+                </li>
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation2.jpg')" width="180" height="120">
+                </li>
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation3.jpg')" width="180" height="120">
+                </li>
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation4.jpg')" width="180" height="120">
+                </li>
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation5.jpg')" width="180" height="120">
+                </li>
+                <li class="fl" onclick="location.href='javascript:void(0);'">
+                    <img src="$imageServer.get('/images/cooperation6.jpg')" width="180" height="120">
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</main>
+
+<script type="text/javascript">
+    if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        window.location.href=newsServer + "pages/front/oilwap/oil_index.htm";
+    } else {
+        document.getElementById('main').style.display = 'block';
+        document.getElementById('header').style.display = 'block';
+        document.getElementById('footer').style.display = 'block';
+    }
+</script>

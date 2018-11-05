@@ -1,0 +1,44 @@
+<form id="editReviewColumn" class="layui-form layui-form-pane"  style="margin:20px 80px">
+	<div class="layui-form-item">
+	    <label class="layui-form-label">专栏标题:</label>
+	    	<div class="layui-input-block">
+	        <input type="text" name="columnTitle" lay-verify="required" id="modelCode" class="layui-input" style="width:200px" readonly="readonly">
+	        <input type="hidden" name="id" id="modelCode" class="layui-input" style="width:200px" readonly="readonly">
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">专栏介绍:</label>
+	   	<div class="layui-input-block">
+	        <input type="text" name="columnBrief" id="modelCode" class="layui-input" style="width:200px" readonly="readonly">
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">专栏封面:</label>
+	   	<div class="layui-input-block">
+	        <input type="text" name="columnCover" id="modelCode" class="layui-input" style="display:none; width:200px" readonly="readonly">
+	    </div>
+	</div>
+	<div>
+  		<div class="layui-upload-list" align=center>
+    		<img id="image" style="height:80px; width:200px; display:none">
+  		</div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;核:</label>
+	   	<div class="layui-input-block">
+	        <input type="radio" name="status" lay-verify="required" lay-filter="radio1" id="modelCode" class="layui-input" style="width:200px" title="通过" value="20" disabled="disabled">
+	        <input type="radio" name="status" lay-verify="required" lay-filter="radio1" id="modelCode" class="layui-input" style="width:200px" title="不通过" value="01" disabled="disabled">
+	    </div>
+	</div>
+	<div class="layui-form-item layui-form-text">
+	    <div class="layui-input-block">
+	      <textarea class="layui-textarea" style="display:none;" id="examineNoDesc" name="examineNoDesc" readonly="readonly"></textarea>
+	    </div>
+	</div>
+	<div class="layui-form-item iw350 mt20">
+	    <div align="right">
+	    	<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo3" id="c">关闭</button>
+	    </div>
+	</div>
+	<input type="text" style="display:none" name="id" >
+</form>

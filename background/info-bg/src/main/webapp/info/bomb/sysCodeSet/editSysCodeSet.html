@@ -1,0 +1,28 @@
+<form id="editSysCodeSet" class="layui-form layui-form-pane"  style="margin:20px 80px">
+	<div class="layui-form-item">
+	    <label class="layui-form-label">模块代码*</label>
+	    <div class="layui-input-block">
+	        <input type="text" name="modelCode" lay-verify="required" id="modelCode" class="layui-input" style="width:200px" readonly="readonly">
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">类别代码*</label>
+	    <div class="layui-input-block">
+	        <input type="text" name="setCode" lay-verify="required" id="setCode" class="layui-input" style="width:200px" readonly="readonly">
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">类别名称*</label>
+	    <div class="layui-input-block">
+	        <input type="text" name="setName" lay-verify="required" placeholder="请输入"  class="layui-input" style="width:200px">
+	    </div>
+	</div>
+	<div class="layui-form-item iw350 mt20">
+	    <div align="right">
+	    	<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo2" id="submit">提交</button>
+	    	<!-- <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button> -->
+	    </div>
+	</div>
+	<input type="text" style="display:none" name="oldModule" >
+	<input type="text" style="display:none" name="oldSetCode" >
+</form>

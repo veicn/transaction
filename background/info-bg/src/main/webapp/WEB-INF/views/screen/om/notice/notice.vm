@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/notice/index4.css')" >
+<script src="$imageServer.get('info/js/notice/notice.js')"></script>
+
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
+                        <ul class="layui-tab-title">
+                          <li class="layui-this">公告维护</li>
+                          <li>历史公告</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <!-- 公告维护 -->
+                            <div class="layui-tab-item layui-show">
+                                <!--搜索条件-->
+                                <div class="ry-banner dh40">
+                                    <!-- <form class="layui-form"> -->
+                                        <div class="layui-form-item layui-container">
+                                            <label class="layui-form-label">自</label>
+                                            <div class="layui-input-inline iw200">
+                                                <input type="text" id="validBegin" class="layui-input test1" placeholder="yyyy-MM-dd" value="$!{query.validBegin}">   
+                                            </div>
+                                            <label class="layui-form-label iw10">到</label>
+                                            <div class="layui-input-inline iw200">
+                                                <input type="text" id="validEnd" class="layui-input test2" placeholder="yyyy-MM-dd" value="$!{query.validEnd}">   
+                                            </div>
+                                            <button class="layui-btn layui-btn-normal btw">查询</button>
+                                            <button class="layui-btn layui-btn-normal addFn">新增</button>
+                                        </div>
+                                    <!-- </form> -->
+                                </div>
+                                <!-- 列表 -->
+                                <table class="layui-table table-style" lay-even lay-skin="nob">
+                                    <thead> 
+                                        <tr>
+                                        <th>序号</th>
+                                        <th>发布日期</th>
+                                        <th>频道</th>
+                                        <th>发布者</th>
+                                        <th>公告标题</th>
+                                        <th>操作</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                   	  #foreach($notice in $!notices)
+										 <tr>
+                                     			 <td>$!{velocityCount}</td>
+                                   				 <td>$!notice.releaseDate</td>
+                                    				 <td>平台公告</td>
+                                   				 <td>$!{notice.releaseId}</td>
+                                  				 <td>$!{notice.title}</td>
+                                      			 <td class="acss-color">
+                                          			<a href = "javascript:;" class="dialog-link btcol detailFn"attr-data='{"uuid":"$!{notice.uuid}"}'><i class="layui-icon">&#xe63a;</i>详情</a>
+                                       			    <a style="margin-left: 5px;" href = "javascript:;" class="dialog-link btcol retFn" attr-data='{"uuid":"$!{notice.uuid}"}'>撤销</a>
+                                      			  </td>
+                                      		</tr>
+										#end
+                                    </tbody>
+                                </table>
+                            </div>
+
+                          
+                            <!--底部分页-->
+                            <div class="ry-footbar ry-right demo1">
+                                $contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/notice/notice.htm").put('slider_path','/contain/formPagingPageSlider')		
+                            </div>
+                           
+                        </div>
+            
+            
+                <!--底部-->
+                <div class="layui-footer">
+                    <!-- 底部固定区域 -->
+                    © layui.com - 底部固定区域
+                </div>
+            </div>

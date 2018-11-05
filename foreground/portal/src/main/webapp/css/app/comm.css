@@ -1,0 +1,89 @@
+/*---------扩展通用样式-----------*/
+.all-bg{
+    background: #efeff4;
+    font-family: "Microsoft YaHei" ,sans-serif;
+    /*--font-family:"Hiragino Sans GB"--*/
+}
+.all-head{
+    background:#12b7f5;
+    position:fixed;
+    top:0;
+    z-index:100;
+    color:white;
+    height:2.7em;
+    width: 100%
+}
+.all-title{text-align: center;font-size:1em}
+
+/*------------通用顶部、底部占位样式---------------*/
+.empty-4-top{width:100%;height:3.7em}
+.empty-4-bottom{width:100%;height:6em}
+.empty-4-bottom2{width:100%;height:4em}
+.empty-4-bottom3{width:100%;height:2.6em}
+/*------------通用底部按钮样式---------------*/
+.btn-4-bottom{
+    width:100%;
+    height:2.5em;
+    line-height:2.5em;
+    background:#12B7F5;
+    font-size:1em;
+    text-align:center;
+    color:white;
+    bottom:0;
+    position:fixed;
+    z-index:100
+}
+.btn-4-code{
+    background: red;
+    height:3em;
+    width: 6em;
+    background-color:red;
+    color: white;
+    border: none;
+    font-size: 1em;
+    text-align:center
+}
+
+.commFont{
+    font-family: "Microsoft Yahei",sans-serif;
+}
+
+.red{background:red}
+.white{background:white}
+
+/*------------通用顶部样式---------------*/
+.t-left{width:4em;}
+.t-left-img{
+    background-image:url("../common/img/goback.png");
+    background-repeat: no-repeat;
+    background-size: 1em 1.4em;
+    width:.8em;
+    height:1.6em;
+    margin-left:1em;
+    margin-top:.7em
+}
+.t-right{width:4em;}
+.t-right-img{
+    background-repeat: no-repeat;
+    background-size: 1.6em 1.6em;
+    width:.1.6em;
+    height:1.6em;
+    margin-left:1.7em;
+    margin-top:.6em;  
+}
+.t-center{text-align: center;font-size:1em;}
+
+/*------------通用搜索框样式---------------*/
+.div-4-search{height:3em;background:#EFEFF4;}
+.div-4-search-1{width:1.5em;height:2em;background:white}
+.div-4-search-2{width:80%;background:white;height:2em;}
+.div-4-search-3{background:#12B7F5;width:20%;height:2em;color:white;line-height: 2em;text-align:center}
+.img-4-search{width:1em;height:1em;background-image:url('../common/img/search2.png');background-repeat: no-repeat;background-size: 1em 1em;margin-left:.5em;margin-top:.5em}
+.input-4-search{text-align: center;font-family:Microsoft YaHei;border:0;width: 100%;-webkit-appearance: none;font-size:.8em;display: block;}
+
+
+/*------------通用图片---------------*/
+.comm-4-service{background-image:url("../common/img/service.png")}
+.comm-4-home{background-image:url("../common/img/home.png")}
+
+

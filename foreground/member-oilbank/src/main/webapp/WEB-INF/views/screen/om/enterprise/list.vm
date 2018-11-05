@@ -1,0 +1,50 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+        
+    </div>
+   <center>
+	<form action="$appServer.get('om/enterprise/listMH.htm')" method="post">
+		<input name="name" value="$!{name}">
+		<input type="submit" value="搜索">
+	</form>
+	</center>
+    <a href="$appServer.get('om/enterprise/add.htm')" class="layui-btn layui-btn-xs">添加</a>
+<table class="layui-table"  lay-filter="demo">
+    <thead>
+    <tr>
+        <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+        <th lay-data="{field:'name', width:80}">企业名称</th>
+        <th lay-data="{field:'fullName', width:80, sort: true}">企业全名</th>
+        <th lay-data="{field:'organizationCode', width:80}">组织机构证件号</th>
+        <th lay-data="{field:'licenseNo', width:177}">工商执照证件号</th>
+        <th lay-data="{field:'taxNo', width:80, sort: true}">税务登记证件</th>
+        <th lay-data="{field:'createUser', width:80, sort: true}">创建用户</th>
+        <th lay-data="{field:'description', width:80}">描述</th>
+        <th lay-data="{field:'wealth', width:135, sort: true}">操作</th>
+    </tr>
+    </thead>
+    #foreach($item in $list)
+        <tr>
+            <td>$!item.id</td>
+            <td>$!item.name</td>
+            <td>$!item.fullName</td>
+            <td>$!item.organizationCode</td>
+            <td>$!item.licenseNo</td>
+            <td>$!item.taxNo</td>
+            <td>$!item.createUser</td>
+            <td>$!item.description</td>
+            <td >
+              <a href="$appServer.get('om/enterprise/toupdate.htm')?id=${item.id}" class="layui-btn layui-btn-xs">修改</a>
+               <a href="$appServer.get('om/enterprise/deleteenterprise.htm')?id=${item.id}" class="layui-btn layui-btn-xs">删除</a>
+             </td>
+        </tr>
+    #end
+</table>
+
+</div>
+
+<script>
+   
+ 
+});
+</script>

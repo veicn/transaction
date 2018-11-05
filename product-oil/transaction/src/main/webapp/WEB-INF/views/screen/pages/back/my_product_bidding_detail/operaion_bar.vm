@@ -1,0 +1,40 @@
+<form method="post" action="$appServer.get('/resourceManager/acceptBidding.htm')">
+    <div class="c-subdiv">
+        <input type="hidden" name="uuid" value="$!{biddingSheetVO.uuid}" />
+        ##<input type="hidden" name="biddingType" value="$!{demand.biddingType}" />
+
+        <button type="submit" class="btn-bc btn-lj" >
+            Accept
+        </button>
+        <button type="button" class="c-btnsub" onclick="window.location.href='$appServer.get("/trademall/index.htm")'">
+            Re-Quote
+        </button>
+
+        #*
+        #if($!bidding=='trademall')
+            <button type="button" class="c-btnsub" onclick="window.location.href='$appServer.get("/trademall/index.htm")'">返回</button>
+        #else
+            <button type="button" class="c-btnsub" onclick="window.history.back()">返回</button>
+        #end
+        #if($!{demand.status} == 10 && !$!{belongToCurrentUser})
+            #if($!{demand.biddingType} == 1)
+                <button type="submit" class="btn-bc btn-lj" >
+                    确认意向中标
+                </button>
+            #else
+                #if(!$!{overdue})
+                    <button type="submit" class="btn-bc btn-lj" >
+                        确认中标
+                    </button>
+                    <input type="checkbox" name="remindFlag" />关闭其他报价并通知未中标企业
+                #else
+                    该投标已逾期
+                #end
+            #end
+        #elseif($!{demand.status} == 20 && $!{belongToCurrentUser})
+            <button type="button" class="btn-bc btn-lj" onclick="window.location.href='$appServer.get("/trademall/tender.htm?demand=$!{demand.parentId}")'">
+                前往正式报价
+            </button>
+        #end*#
+    </div>
+</form>

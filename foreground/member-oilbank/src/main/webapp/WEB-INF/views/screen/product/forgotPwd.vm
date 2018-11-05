@@ -1,0 +1,59 @@
+$contain.get('common/title.htm').put('title', '忘记密码')
+#css($appServer.get('/product/css/work/forgotPwd.css'))
+<div class="w1180 clearfix rpp-con">
+    <div class="main-tit rpp-tit">
+        <h3>Forgot Password</h3>
+    </div>
+    <ul class="stowage-steps clearfix rpp-stowage-steps">
+        <li class="steps doing fl ">
+            <div class="steps-infor steps-infor-cont">
+                <span>CONFIRM</span><br/>
+                <span>ACCOUNT</span><br/>
+                <span>NUMBER</span>
+            </div>
+        </li>
+        <li class="steps fl willDone">
+            <div class="steps-infor">
+                <span>SECURITY<br/>VERIFICATION</span>
+            </div>
+        </li>
+        <li class="steps fl willDone">
+            <div class="steps-infor">
+                <span>RESET<br/>PASSWORD</span>
+            </div>
+        </li>
+    </ul>
+    <h2>Please fill in the account you need to find.    </h2>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">Email: </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the Email</span>
+
+    </div>
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">Verification Code : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control2" id=" " >
+        <div class="vcode-img">
+            <img src="images/Group6.png" alt="">
+        </div>
+        <em class="vcode-Refresh"></em>
+        <span class="errPrompt"> &nbsp;&nbsp;&nbsp;Please enter the Verification Code</span>
+
+    </div>
+    <div class="form-group-check">
+        <span></span>
+        <em class="button-check rpp-button">
+            <a href="javascript:;" class="br">Next</a>
+        </em>
+    </div>
+</form>

@@ -1,0 +1,116 @@
+  <!-- 内容区域 -->
+    <div class="s-mod">
+      <div class="s-mod-block">
+        <div class="s-mod-btit">添加船舶</div>
+        <div class="s-mod-bcont s-mod-bcont4">
+          <form class="s-form s-form-cont s-form-cont2" action="">
+            <ul>
+              <li class="s-form-item">
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>IMO：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input width_100" name="imo" id="imo" maxlength="15">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Hull Type：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input width_100"  name="hull" id="hull" maxlength="100">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">MMSI：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input mmsi" name="mmsi" id="mmsi" placeholder="请先输入IMO编号" maxlength="15">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">SDWT(mt)：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="loadQuantity" id="loadQuantity" maxlength="15">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Vessel Name：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="name" id="name" placeholder="请输入船名" maxlength="100">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">LOA(m)：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="length" id="length" maxlength="15" >
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Vessel Type：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="useType" id="useType" maxlength="100"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Beam(m)：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input"  name="wide" id="wide" maxlength="15"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Vessel Size：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input vesselSize" name="type" id="type" maxlength="100">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Draft(m)：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="draft" id="draft" maxlength="15">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Built：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input " id="date1" name="date1" readonly="true"  placeholder="请选择建造年份">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Cubic(m³)：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="capacity" id="capacity" maxlength="15" autocomplete="off">
+                  </div>
+                </div>
+              </li>
+              
+              <!-- 附件上传 -->
+              <div class="all">
+	              <li class="s-form-item wsUl">
+	              	<div class="s-inline s-inline100">
+	                  <label class="s-form-label">附件：</label>
+	                  <div class="s-input-inline">
+	                     <p class="s-trade-p s-trade-p2">
+	                     	<input type="text" name="" placeholder="" class="s-input path filePath" readOnly="true"/>
+	                     	<span>
+	                     		<i class="s-icon fs-close"></i>
+	                     		<i class="s-icon s-icon-up fileUpBtn"></i>
+	                     	</span>
+	                     </p>
+	                  </div>
+	                  <div class="s-but-all s-but-all2 clearfix">
+	                      <div class="s-all-jt"><p><i class="s-icon s-icon-plus addIcon"></i></p></div>
+	                  </div>
+	                </div>
+	              </li>
+	          </div>
+              <!-- 附件上传 -->
+              
+            </ul>
+          </form>
+        </div>
+      </div>
+      <div class="s-btn-box">
+        <button class="s-btn s-btn-blue saveBtn">提&nbsp;&nbsp;交</button>
+        <button class="s-btn s-btn-primary returnBtn">返&nbsp;&nbsp;回</button>
+      </div>
+	  </div>
+	  
+	  <script src="../transport/js/shipOwnerSysShip/addSysShip.js"></script>
+ 

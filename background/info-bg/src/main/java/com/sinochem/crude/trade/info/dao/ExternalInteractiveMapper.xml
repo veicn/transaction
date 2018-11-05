@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.ExternalInteractiveMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.ExternalInteractive" id="ExternalInteractiveDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.ExternalInteractive">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.ExternalInteractive" id="ExternalInteractive">
+		<result property="id" column="ID" />
+		<result property="sysCode" column="SYS_CODE" />
+		<result property="method" column="METHOD" />
+		<result property="format" column="FORMAT" />
+		<result property="charset" column="CHARSET" />
+		<result property="timeStamp" column="TIME_STAMP" />
+		<result property="bizContent" column="BIZ_CONTENT" />
+		<result property="receiveDate" column="RECEIVE_DATE" />
+		<result property="returnMsg" column="RETURN_MSG" />
+		<result property="returnSubMsg" column="RETURN_SUB_MSG" />
+		<result property="returnBizContent" column="RETURN_BIZ_CONTENT" />
+		<result property="returnDate" column="RETURN_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.ExternalInteractive"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_external_interactive (				ID
+						,SYS_CODE
+						,METHOD
+						,FORMAT
+						,CHARSET
+						,TIME_STAMP
+						,BIZ_CONTENT
+						,RECEIVE_DATE
+						,RETURN_MSG
+						,RETURN_SUB_MSG
+						,RETURN_BIZ_CONTENT
+						,RETURN_DATE
+						,ALIVE_FLAG
+						)
+		values(		#{id}
+						,#{sysCode}
+						,#{method}
+						,#{format}
+						,#{charset}
+						,#{timeStamp}
+						,#{bizContent}
+						,#{receiveDate}
+						,#{returnMsg}
+						,#{returnSubMsg}
+						,#{returnBizContent}
+						,#{returnDate}
+						,'1'
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_external_interactive
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.ExternalInteractive">
+        DELETE FROM t_external_interactive
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="sysCode!=null and sysCode!=''">AND  SYS_CODE = #{sysCode}</if>
+        <if test="method!=null and method!=''">AND  METHOD = #{method}</if>
+        <if test="format!=null and format!=''">AND  FORMAT = #{format}</if>
+        <if test="charset!=null and charset!=''">AND  CHARSET = #{charset}</if>
+        <if test="timeStamp!=null and timeStamp!=''">AND  TIME_STAMP = #{timeStamp}</if>
+        <if test="bizContent!=null and bizContent!=''">AND  BIZ_CONTENT = #{bizContent}</if>
+        <if test="receiveDate!=null and receiveDate!=''">AND  RECEIVE_DATE = #{receiveDate}</if>
+        <if test="returnMsg!=null and returnMsg!=''">AND  RETURN_MSG = #{returnMsg}</if>
+        <if test="returnSubMsg!=null and returnSubMsg!=''">AND  RETURN_SUB_MSG = #{returnSubMsg}</if>
+        <if test="returnBizContent!=null and returnBizContent!=''">AND  RETURN_BIZ_CONTENT = #{returnBizContent}</if>
+        <if test="returnDate!=null and returnDate!=''">AND  RETURN_DATE = #{returnDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.ExternalInteractive">
+		update t_external_interactive
+		<set>
+         ID=#{id}
+		<if test="sysCode!=null">,SYS_CODE = #{sysCode}</if>
+		<if test="method!=null">,METHOD = #{method}</if>
+		<if test="format!=null">,FORMAT = #{format}</if>
+		<if test="charset!=null">,CHARSET = #{charset}</if>
+		<if test="timeStamp!=null">,TIME_STAMP = #{timeStamp}</if>
+		<if test="bizContent!=null">,BIZ_CONTENT = #{bizContent}</if>
+		<if test="receiveDate!=null">,RECEIVE_DATE = #{receiveDate}</if>
+		<if test="returnMsg!=null">,RETURN_MSG = #{returnMsg}</if>
+		<if test="returnSubMsg!=null">,RETURN_SUB_MSG = #{returnSubMsg}</if>
+		<if test="returnBizContent!=null">,RETURN_BIZ_CONTENT = #{returnBizContent}</if>
+		<if test="returnDate!=null">,RETURN_DATE = #{returnDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_external_interactive
+		<set>
+         ID=#{id}
+		<if test="sysCode!=null">,SYS_CODE = #{sysCode}</if>
+		<if test="method!=null">,METHOD = #{method}</if>
+		<if test="format!=null">,FORMAT = #{format}</if>
+		<if test="charset!=null">,CHARSET = #{charset}</if>
+		<if test="timeStamp!=null">,TIME_STAMP = #{timeStamp}</if>
+		<if test="bizContent!=null">,BIZ_CONTENT = #{bizContent}</if>
+		<if test="receiveDate!=null">,RECEIVE_DATE = #{receiveDate}</if>
+		<if test="returnMsg!=null">,RETURN_MSG = #{returnMsg}</if>
+		<if test="returnSubMsg!=null">,RETURN_SUB_MSG = #{returnSubMsg}</if>
+		<if test="returnBizContent!=null">,RETURN_BIZ_CONTENT = #{returnBizContent}</if>
+		<if test="returnDate!=null">,RETURN_DATE = #{returnDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="sysCode!=null and sysCode!=''">and  SYS_CODE=#{sysCode}</if>
+		<if test="method!=null and method!=''">and  METHOD=#{method}</if>
+		<if test="format!=null and format!=''">and  FORMAT=#{format}</if>
+		<if test="charset!=null and charset!=''">and  CHARSET=#{charset}</if>
+		<if test="timeStamp!=null and timeStamp!=''">and  TIME_STAMP=#{timeStamp}</if>
+		<if test="bizContent!=null and bizContent!=''">and  BIZ_CONTENT=#{bizContent}</if>
+		<if test="receiveDate!=null and receiveDate!=''">and  RECEIVE_DATE=#{receiveDate}</if>
+		<if test="returnMsg!=null and returnMsg!=''">and  RETURN_MSG=#{returnMsg}</if>
+		<if test="returnSubMsg!=null and returnSubMsg!=''">and  RETURN_SUB_MSG=#{returnSubMsg}</if>
+		<if test="returnBizContent!=null and returnBizContent!=''">and  RETURN_BIZ_CONTENT=#{returnBizContent}</if>
+		<if test="returnDate!=null and returnDate!=''">and  RETURN_DATE=#{returnDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="ExternalInteractive">
+			select
+			* from t_external_interactive
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="ExternalInteractive">
+			select
+			* from t_external_interactive
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="ExternalInteractive" parameterType="com.sinochem.crude.trade.info.domain.ExternalInteractive">
+		select * from t_external_interactive
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="sysCode!=null and sysCode!=''">and  SYS_CODE=#{sysCode}</if>
+		<if test="method!=null and method!=''">and  METHOD=#{method}</if>
+		<if test="format!=null and format!=''">and  FORMAT=#{format}</if>
+		<if test="charset!=null and charset!=''">and  CHARSET=#{charset}</if>
+		<if test="timeStamp!=null and timeStamp!=''">and  TIME_STAMP=#{timeStamp}</if>
+		<if test="bizContent!=null and bizContent!=''">and  BIZ_CONTENT=#{bizContent}</if>
+		<if test="receiveDate!=null and receiveDate!=''">and  RECEIVE_DATE=#{receiveDate}</if>
+		<if test="returnMsg!=null and returnMsg!=''">and  RETURN_MSG=#{returnMsg}</if>
+		<if test="returnSubMsg!=null and returnSubMsg!=''">and  RETURN_SUB_MSG=#{returnSubMsg}</if>
+		<if test="returnBizContent!=null and returnBizContent!=''">and  RETURN_BIZ_CONTENT=#{returnBizContent}</if>
+		<if test="returnDate!=null and returnDate!=''">and  RETURN_DATE=#{returnDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   SYS_CODE as "sysCode" 
+						 ,   METHOD as "method" 
+						 ,   FORMAT as "format" 
+						 ,   CHARSET as "charset" 
+						 ,   TIME_STAMP as "timeStamp" 
+						 ,   BIZ_CONTENT as "bizContent" 
+						 ,   RECEIVE_DATE as "receiveDate" 
+						 ,   RETURN_MSG as "returnMsg" 
+						 ,   RETURN_SUB_MSG as "returnSubMsg" 
+						 ,   RETURN_BIZ_CONTENT as "returnBizContent" 
+						 ,   RETURN_DATE as "returnDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						from t_external_interactive
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="sysCode!=null and sysCode!=''">and  SYS_CODE=#{sysCode}</if>
+			<if test="method!=null and method!=''">and  METHOD=#{method}</if>
+			<if test="format!=null and format!=''">and  FORMAT=#{format}</if>
+			<if test="charset!=null and charset!=''">and  CHARSET=#{charset}</if>
+			<if test="timeStamp!=null and timeStamp!=''">and  TIME_STAMP=#{timeStamp}</if>
+			<if test="bizContent!=null and bizContent!=''">and  BIZ_CONTENT=#{bizContent}</if>
+			<if test="receiveDate!=null and receiveDate!=''">and  RECEIVE_DATE=#{receiveDate}</if>
+			<if test="returnMsg!=null and returnMsg!=''">and  RETURN_MSG=#{returnMsg}</if>
+			<if test="returnSubMsg!=null and returnSubMsg!=''">and  RETURN_SUB_MSG=#{returnSubMsg}</if>
+			<if test="returnBizContent!=null and returnBizContent!=''">and  RETURN_BIZ_CONTENT=#{returnBizContent}</if>
+			<if test="returnDate!=null and returnDate!=''">and  RETURN_DATE=#{returnDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_external_interactive 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="sysCode!=null and sysCode!=''">and  SYS_CODE=#{sysCode}</if>
+			<if test="method!=null and method!=''">and  METHOD=#{method}</if>
+			<if test="format!=null and format!=''">and  FORMAT=#{format}</if>
+			<if test="charset!=null and charset!=''">and  CHARSET=#{charset}</if>
+			<if test="timeStamp!=null and timeStamp!=''">and  TIME_STAMP=#{timeStamp}</if>
+			<if test="bizContent!=null and bizContent!=''">and  BIZ_CONTENT=#{bizContent}</if>
+			<if test="receiveDate!=null and receiveDate!=''">and  RECEIVE_DATE=#{receiveDate}</if>
+			<if test="returnMsg!=null and returnMsg!=''">and  RETURN_MSG=#{returnMsg}</if>
+			<if test="returnSubMsg!=null and returnSubMsg!=''">and  RETURN_SUB_MSG=#{returnSubMsg}</if>
+			<if test="returnBizContent!=null and returnBizContent!=''">and  RETURN_BIZ_CONTENT=#{returnBizContent}</if>
+			<if test="returnDate!=null and returnDate!=''">and  RETURN_DATE=#{returnDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

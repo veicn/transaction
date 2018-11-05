@@ -1,0 +1,21 @@
+
+<div class="cg-content clearfix cg-redxq">
+    <div class="inner">
+        <div class="cg-title">热点需求</div>
+        <ul class="cg-line clearfix"><li></li><li class="cg-line1"></li></ul>
+        <ul class="cg-cont clearfix">
+
+            #set($countIndex=0)
+            #foreach( $demand in $hotDemand.list)
+                #if($countIndex<5)
+                    <li class="cg-rdxq">
+                        <div class="cg-rd-img"><a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{demand.id}"><img src="$imageServer.get('/images/cg_pic4.jpg')" /></a></div>
+                        <div class="cg-rd-txt"><a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{demand.id}">$!{demand.crudeOilOptions}</a><span></span></div>
+                        <div class="cg-rd-txt">Qty(BBL)：<span class="cg-txt-tj">$!{demand.numBBL}</span></div>
+                    </li>
+                #end
+                #set($countIndex=$countIndex+1)
+            #end
+        </ul>
+    </div>
+</div>

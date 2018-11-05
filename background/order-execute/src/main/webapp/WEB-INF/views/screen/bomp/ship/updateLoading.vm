@@ -1,0 +1,144 @@
+<style>
+.qw-width-style{width:40%;}
+.qw-width-style-45{width:45%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+.qw-width-style-41{width:41%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+.qw-width-style-40{width:40%;border: 1px solid #ccc;
+				    height: 32px;
+				    line-height: 32px;
+				    padding: 0 1%;}
+</style>
+
+<form class="loadingForm layui-form" id="loadingForm"
+				enctype="multipart/form-data" method="post" onsubmit="return false;">
+			<div class="form-row charter-row "></div>
+	<div class="form-row charter-row ">
+		<label class="control-label qw-width-style"><span style="color:red;">*</span>Port of loading：</label>
+		<div class="control-label" style="width:40%;">
+			<select name="loadPort" id="loadPort" lay-verify="required" lay-search="" >
+	        	<option value="">请选择</option>
+	      </select>
+		</div>
+	</div>
+	<input type="hidden" id="orderNo" name="orderNo" >
+	<input type="hidden" id="id" name="id" >
+	<input type="hidden" id="uuid" name="uuid" >
+	<input type="hidden" id="oil" name="oil">
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style" ><span style="color:red;">*</span>B/L：</label>
+		<div class="control-label " >
+			<input class="api form-inp" type="text" id="blDate" name="blDateS" lay-verify="required" style="width:43%;"><i class="c-ico xg-data"></i>
+			<input type="radio"  name="blStatus" value="0" title="预估" >   
+			<input type="radio"  name="blStatus" value="1" title="最终" >  
+		</div>
+	</div>
+	
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">laycan：</label>
+		<div class="controls qw-width-style">
+			<input class="api qw-width-style-41" type="text" id="acStart" name="acStartS" ><i class="c-ico xg-data"></i>
+			──
+			<input class="api qw-width-style-40" type="text" id="acFinish" name="acFinishS" ><i class="c-ico xg-data"></i>
+		</div>
+	</div>
+	
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">US Barrels @60 ︒F（Gross）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp api" name="blHairBarrel" id="blHairBarrel" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">US Barrels @60 ︒F（Net）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp loadTemp" name="blNightstool" id="blNightstool" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">MT (in Air)（Gross）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp loadDraft" name="blHairTonnage" id="blHairTonnage" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">MT (in Air)（Net）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="blNetTonnage" id="blNetTonnage" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">Cubic meters @15︒C（Gross）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="shGrossCubicMeter" id="shGrossCubicMeter" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">Cubic meters @15︒C（Net）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="shNetCubicMeter" id="shNetCubicMeter" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">Density@15︒C（Kg/L）：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="shDensity" id="shDensity" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">API @60 ︒F：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="api" id="api" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">BS&W：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="waterImpCon" id="waterImpCon" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">Free Water：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="waterQuantity" id="waterQuantity" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">Others：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="remark" id="remark" value="" >
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">ship figure after loading Bbl. (Gross)：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="shHairBarrel" id="shHairBarrel" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">ship figure after loading MT in air (Gross)：</label>
+		<div class="controls qw-width-style">
+			<input type="text" class="form-inp unloadDraft" name="shHairTonnage" id="shHairTonnage" value="" onkeyup="clearNoNumThree(this)" maxlength="15" onfocus="this.value=delNumFormat(this.value);" onblur="this.value=formatNumber(this.value,3,1);">
+			</div>
+		</div>
+</form>
+<script>
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+	}  
+</script>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.transaction.dao.ContractSheetMapper" >
+    <resultMap id="contractSheet" type="com.sinochem.crude.trade.transaction.domain.po.ContractSheet" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="user_created" property="userCreated" jdbcType="BIGINT" />
+        <result column="user_modified" property="userModified" jdbcType="BIGINT" />
+        <result column="alive_flag" property="aliveFlag" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+        <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
+        <result column="sale_sheet_id" property="saleSheetId" jdbcType="BIGINT" />
+        <result column="sale_sheet_uuid" property="saleSheetUuid" jdbcType="VARCHAR" />
+        <result column="bidding_sheet_id" property="biddingSheetId" jdbcType="BIGINT" />
+        <result column="bidding_sheet_uuid" property="biddingSheetUuid" jdbcType="VARCHAR" />
+        <result column="contract_sheet_status_code" property="contractSheetStatusCode" jdbcType="VARCHAR" />
+        <result column="confirmed_date" property="confirmedDate" jdbcType="TIMESTAMP" />
+        <result column="completed_date" property="completedDate" jdbcType="TIMESTAMP" />
+        <result column="product_info_id" property="productInfoId" jdbcType="BIGINT" />
+        <result column="pricing_info_id" property="pricingInfoId" jdbcType="BIGINT" />
+        <result column="transport_info_id" property="transportInfoId" jdbcType="BIGINT" />
+        <result column="ship_berth_code" property="shipBerthCode" jdbcType="VARCHAR" />
+        <result column="saler_info_id" property="salerInfoId" jdbcType="BIGINT" />
+        <result column="saler_id" property="salerId" jdbcType="BIGINT" />
+        <result column="buyer_info_id" property="buyerInfoId" jdbcType="BIGINT" />
+        <result column="buyer_id" property="buyerId" jdbcType="BIGINT" />
+        <result column="other_info_id" property="otherInfoId" jdbcType="BIGINT" />
+        <result column="coq_refinery" property="coqRefinery" jdbcType="VARCHAR" />
+        <result column="coq_refinery_name" property="coqRefineryName" jdbcType="VARCHAR" />
+        <result column="coq_shore_tanks" property="coqShoreTanks" jdbcType="VARCHAR" />
+        <result column="coq_shore_tanks_name" property="coqShoreTanksName" jdbcType="VARCHAR" />
+        <result column="ciq" property="ciq" jdbcType="VARCHAR" />
+        <result column="ciq_name" property="ciqName" jdbcType="VARCHAR" />
+        <result column="loading_survey_report" property="loadingSurveyReport" jdbcType="VARCHAR" />
+        <result column="loading_survey_report_name" property="loadingSurveyReportName" jdbcType="VARCHAR" />
+        <result column="contract_date" property="contractDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sinochem.crude.trade.transaction.domain.po.ContractSheet"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_contract_sheet (
+            uuid,
+            gmt_created,
+            gmt_modified,
+            user_created,
+            user_modified,
+            alive_flag,
+            version,
+            serial_number,
+            sale_sheet_id,
+            sale_sheet_uuid,
+            bidding_sheet_id,
+            bidding_sheet_uuid,
+            contract_sheet_status_code,
+            confirmed_date,
+            completed_date,
+            product_info_id,
+            pricing_info_id,
+            transport_info_id,
+            ship_berth_code,
+            saler_info_id,
+            saler_id,
+            buyer_info_id,
+            buyer_id,
+            other_info_id,
+            coq_refinery,
+            coq_refinery_name,
+            coq_shore_tanks,
+            coq_shore_tanks_name,
+            ciq,
+            ciq_name,
+            loading_survey_report,
+            loading_survey_report_name
+            )
+        VALUES (
+            #{uuid, jdbcType=VARCHAR},
+            #{gmtCreated, jdbcType=TIMESTAMP},
+            #{gmtModified, jdbcType=TIMESTAMP},
+            #{userCreated, jdbcType=BIGINT},
+            #{userModified, jdbcType=BIGINT},
+            #{aliveFlag, jdbcType=INTEGER},
+            #{version, jdbcType=BIGINT},
+            #{serialNumber, jdbcType=VARCHAR},
+            #{saleSheetId, jdbcType=BIGINT},
+            #{saleSheetUuid, jdbcType=VARCHAR},
+            #{biddingSheetId, jdbcType=BIGINT},
+            #{biddingSheetUuid, jdbcType=VARCHAR},
+            #{contractSheetStatusCode, jdbcType=VARCHAR},
+            #{confirmedDate, jdbcType=TIMESTAMP},
+            #{completedDate, jdbcType=TIMESTAMP},
+            #{productInfoId, jdbcType=BIGINT},
+            #{pricingInfoId, jdbcType=BIGINT},
+            #{transportInfoId, jdbcType=BIGINT},
+            #{shipBerthCode, jdbcType=VARCHAR},
+            #{salerInfoId, jdbcType=BIGINT},
+            #{salerId, jdbcType=BIGINT},
+            #{buyerInfoId, jdbcType=BIGINT},
+            #{buyerId, jdbcType=BIGINT},
+            #{otherInfoId, jdbcType=BIGINT},
+            #{coqRefinery, jdbcType=VARCHAR},
+            #{coqRefineryName, jdbcType=VARCHAR},
+            #{coqShoreTanks, jdbcType=VARCHAR},
+            #{coqShoreTanksName, jdbcType=VARCHAR},
+            #{ciq, jdbcType=VARCHAR},
+            #{ciqName, jdbcType=VARCHAR},
+            #{loadingSurveyReport, jdbcType=VARCHAR},
+            #{loadingSurveyReportName, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        DELETE FROM t_contract_sheet
+        WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.transaction.domain.po.ContractSheet" >
+        UPDATE t_contract_sheet
+        <set>
+            <if test="uuid != null" >
+                uuid = #{uuid, jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreated != null" >
+                gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCreated != null" >
+                user_created = #{userCreated, jdbcType=BIGINT},
+            </if>
+            <if test="userModified != null" >
+                user_modified = #{userModified, jdbcType=BIGINT},
+            </if>
+            <if test="aliveFlag != null" >
+                alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            </if>
+            <if test="version != null" >
+                version = #{version, jdbcType=BIGINT},
+            </if>
+            <if test="serialNumber != null" >
+                serial_number = #{serialNumber, jdbcType=VARCHAR},
+            </if>
+            <if test="saleSheetId != null" >
+                sale_sheet_id = #{saleSheetId, jdbcType=BIGINT},
+            </if>
+            <if test="saleSheetUuid != null" >
+                sale_sheet_uuid = #{saleSheetUuid, jdbcType=VARCHAR},
+            </if>
+            <if test="biddingSheetId != null" >
+                bidding_sheet_id = #{biddingSheetId, jdbcType=BIGINT},
+            </if>
+            <if test="biddingSheetUuid != null" >
+                bidding_sheet_uuid = #{biddingSheetUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="contractSheetStatusCode != null" >
+                contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR},
+            </if>
+            <if test="confirmedDate != null" >
+                confirmed_date = #{confirmedDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="completedDate != null" >
+                completed_date = #{completedDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="productInfoId != null" >
+                product_info_id = #{productInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="pricingInfoId != null" >
+                pricing_info_id = #{pricingInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="transportInfoId != null" >
+                transport_info_id = #{transportInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="shipBerthCode != null" >
+                ship_berth_code = #{shipBerthCode, jdbcType=VARCHAR},
+            </if>
+            <if test="salerInfoId != null" >
+                saler_info_id = #{salerInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="salerId != null" >
+                saler_id = #{salerId, jdbcType=BIGINT},
+            </if>
+            <if test="buyerInfoId != null" >
+                buyer_info_id = #{buyerInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="buyerId != null" >
+                buyer_id = #{buyerId, jdbcType=BIGINT},
+            </if>
+            <if test="otherInfoId != null" >
+                other_info_id = #{otherInfoId, jdbcType=BIGINT},
+            </if>
+           <!--  coq_refinery,
+            coq_refinery_name,
+            coq_shore_tanks,
+            coq_shore_tanks_name,
+            ciq,
+            ciq_name,
+            loading_survey_report,
+            loading_survey_report_name
+            #{coqRefinery, jdbcType=VARCHAR}
+            #{coqRefineryName, jdbcType=VARCHAR}
+            #{coqShoreTanks, jdbcType=VARCHAR}
+            #{coqShoreTanksName, jdbcType=VARCHAR}
+            #{ciq, jdbcType=VARCHAR}
+            #{ciqName, jdbcType=VARCHAR}
+            #{loadingSurveyReport, jdbcType=VARCHAR}
+            #{loadingSurveyReportName, jdbcType=VARCHAR} -->
+            <if test="coqRefinery != null" >
+                coq_refinery = #{coqRefinery, jdbcType=VARCHAR},
+            </if>
+            <if test="coqRefineryName != null" >
+                coq_refinery_name = #{coqRefineryName, jdbcType=VARCHAR},
+            </if>
+            <if test="coqShoreTanks != null" >
+                coq_shore_tanks = #{coqShoreTanks, jdbcType=VARCHAR},
+            </if>
+            <if test="coqShoreTanksName != null" >
+                coq_shore_tanks_name = #{coqShoreTanksName, jdbcType=VARCHAR},
+            </if>
+            <if test="ciq != null" >
+                ciq = #{ciq, jdbcType=VARCHAR},
+            </if>
+            <if test="ciqName != null" >
+                ciq_name = #{ciqName, jdbcType=VARCHAR},
+            </if>
+            <if test="loadingSurveyReport != null" >
+                loading_survey_report = #{loadingSurveyReport, jdbcType=VARCHAR},
+            </if>
+            <if test="loadingSurveyReportName != null" >
+                loading_survey_report_name = #{loadingSurveyReportName, jdbcType=VARCHAR}
+            </if>
+            
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.transaction.domain.po.ContractSheet" >
+        UPDATE t_contract_sheet
+        SET
+            uuid = #{uuid, jdbcType=VARCHAR},
+            gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            user_created = #{userCreated, jdbcType=BIGINT},
+            user_modified = #{userModified, jdbcType=BIGINT},
+            alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            version = #{version, jdbcType=BIGINT},
+            serial_number = #{serialNumber, jdbcType=VARCHAR},
+            sale_sheet_id = #{saleSheetId, jdbcType=BIGINT},
+            sale_sheet_uuid = #{saleSheetUuid, jdbcType=VARCHAR},
+            bidding_sheet_id = #{biddingSheetId, jdbcType=BIGINT},
+            bidding_sheet_uuid = #{biddingSheetUuid, jdbcType=VARCHAR},
+            contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR},
+            confirmed_date = #{confirmedDate, jdbcType=TIMESTAMP},
+            completed_date = #{completedDate, jdbcType=TIMESTAMP},
+            product_info_id = #{productInfoId, jdbcType=BIGINT},
+            pricing_info_id = #{pricingInfoId, jdbcType=BIGINT},
+            transport_info_id = #{transportInfoId, jdbcType=BIGINT},
+            ship_berth_code = #{shipBerthCode, jdbcType=VARCHAR},
+            saler_info_id = #{salerInfoId, jdbcType=BIGINT},
+            saler_id = #{salerId, jdbcType=BIGINT},
+            buyer_info_id = #{buyerInfoId, jdbcType=BIGINT},
+            buyer_id = #{buyerId, jdbcType=BIGINT},
+            other_info_id = #{otherInfoId, jdbcType=BIGINT},
+          coq_refinery =  #{coqRefinery, jdbcType=VARCHAR},
+           coq_refinery_name = #{coqRefineryName, jdbcType=VARCHAR},
+           coq_shore_tanks = #{coqShoreTanks, jdbcType=VARCHAR},
+           coq_shore_tanks_name = #{coqShoreTanksName, jdbcType=VARCHAR},
+           ciq = #{ciq, jdbcType=VARCHAR},
+           ciq_name = #{ciqName, jdbcType=VARCHAR},
+            loading_survey_report =#{loadingSurveyReport, jdbcType=VARCHAR},
+           loading_survey_report_name = #{loadingSurveyReportName, jdbcType=VARCHAR}
+            
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="contractSheet" parameterType="java.lang.Long" >
+        SELECT * FROM t_contract_sheet
+        WHERE id = #{id, jdbcType=BIGINT}
+        AND alive_flag = 1
+    </select>
+
+    <select id="selectByUuid" resultMap="contractSheet" parameterType="java.lang.String">
+        SELECT * FROM t_contract_sheet
+        WHERE uuid = #{uuid, jdbcType=VARCHAR}
+        AND alive_flag = 1
+    </select>
+
+    <select id="getContractBySaleSheetId" resultMap="contractSheet" parameterType="java.lang.Long">
+        SELECT * FROM t_contract_sheet
+        WHERE sale_sheet_id = #{saleSheetId, jdbcType=VARCHAR}
+        AND alive_flag = 1
+    </select>
+<!--om后台带分页功能-->
+    <select id="getContractSheetPage" resultMap="contractSheet" parameterType="com.sinochem.crude.trade.transaction.model.query.ContractSheetQuery">
+        SELECT contractSheet.* FROM t_contract_sheet contractSheet
+        <!-- 拼装JOIN -->
+        <if test="productCategoryCode != null or tradeTermCode != null">
+            LEFT JOIN t_product_info productInfo
+            ON contractSheet.product_info_id = productInfo.id
+        </if>
+        <if test="dischargePort != null">
+            LEFT JOIN t_transport_info transportInfo
+            ON contractSheet.transport_info_id = transportInfo.id
+        </if>
+
+            LEFT JOIN t_contract_extend contractextend
+            ON contractextend.ref_contract_id = contractSheet.id
+
+        <!-- 拼装条件 -->
+        WHERE contractSheet.alive_flag = 1
+        <if test="productCategoryCode != null and productCategoryCode != ''">
+            AND productInfo.product_category_code = #{productCategoryCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractSheetStatusCode != null and contractSheetStatusCode != ''">
+            AND contractSheet.contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR}
+        </if>
+        <if test="serialNumber != null and serialNumber != ''">
+
+            AND contractSheet.serial_number LIKE "%"#{serialNumber, jdbcType=VARCHAR}"%"
+        </if>
+        <if test="contractNO != null and contractNO != ''">
+
+            AND contractextend.contract_no LIKE "%"#{contractNO, jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="tradeTermCode != null and tradeTermCode != ''">
+            AND productInfo.trade_term_code = #{tradeTermCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractDateStart != null and contractDateStart != ''">
+            <![CDATA[ AND contractextend.contract_date >= #{contractDateStart, jdbcType=VARCHAR} ]]>
+        </if>
+        <if test="contractDateEnd != null and contractDateEnd != ''">
+            <![CDATA[ AND contractextend.contract_date <= #{contractDateEnd, jdbcType=VARCHAR} ]]>
+        </if>
+
+        <if test="salerId != null">
+            AND ( contractSheet.saler_id = #{salerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{salerId, jdbcType=BIGINT})
+        </if>
+        <if test="buyerId != null">
+            AND ( contractSheet.saler_id = #{buyerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{buyerId, jdbcType=BIGINT})
+        </if>
+        <if test="dischargePort != null and dischargePort != ''">
+            AND transportInfo.discharge_port = #{dischargePort, jdbcType=VARCHAR}
+        </if>
+
+        ORDER BY contractSheet.gmt_created
+        DESC
+    </select>
+
+    <select id="getContractSheetList" resultMap="contractSheet" parameterType="com.sinochem.crude.trade.transaction.model.query.ContractSheetQuery">
+        SELECT contractSheet.* FROM t_contract_sheet contractSheet
+        <!-- 拼装JOIN -->
+        <if test="productCategoryCode != null or tradeTermCode != null">
+            LEFT JOIN t_product_info productInfo
+            ON contractSheet.product_info_id = productInfo.id
+        </if>
+        <if test="dischargePort != null">
+            LEFT JOIN t_transport_info transportInfo
+            ON contractSheet.transport_info_id = transportInfo.id
+        </if>
+
+        <!-- 拼装条件 -->
+        WHERE contractSheet.alive_flag = 1
+        <if test="productCategoryCode != null and productCategoryCode != ''">
+            AND productInfo.product_category_code = #{productCategoryCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractSheetStatusCode != null and contractSheetStatusCode != ''">
+            AND contractSheet.contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR}
+        </if>
+        <if test="serialNumber != null and serialNumber != ''">
+
+            AND contractSheet.serial_number LIKE "%"#{serialNumber, jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="tradeTermCode != null and tradeTermCode != ''">
+            AND productInfo.trade_term_code = #{tradeTermCode, jdbcType=VARCHAR}
+        </if>
+        <if test="gmtCreatedStart != null">
+            <![CDATA[ AND contractSheet.gmt_created >= #{gmtCreatedStart, jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="gmtCreatedEnd != null">
+            <![CDATA[ AND contractSheet.gmt_created <= #{gmtCreatedEnd, jdbcType=TIMESTAMP} ]]>
+        </if>
+
+        <if test="salerId != null">
+            AND ( contractSheet.saler_id = #{salerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{salerId, jdbcType=BIGINT})
+        </if>
+        <if test="buyerId != null">
+            AND ( contractSheet.saler_id = #{buyerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{buyerId, jdbcType=BIGINT})
+        </if>
+        <if test="dischargePort != null and dischargePort != ''">
+            AND transportInfo.discharge_port = #{dischargePort, jdbcType=VARCHAR}
+        </if>
+
+        ORDER BY contractSheet.gmt_created
+        DESC
+    </select>
+<!--微信交易列表-->
+    <select id="getContractSheetListwx" resultMap="contractSheet" parameterType="com.sinochem.crude.trade.transaction.model.query.ContractSheetQuery">
+        SELECT contractSheet.* FROM t_contract_sheet contractSheet
+        <!-- 拼装JOIN -->
+        <if test="productCategoryCode != null ">
+            LEFT JOIN t_product_info productInfo
+            ON contractSheet.product_info_id = productInfo.id
+        </if>
+        <!-- 拼装条件 -->
+        WHERE contractSheet.alive_flag = 1
+        <if test="productCategoryCode != null and productCategoryCode != ''">
+            AND productInfo.product_category_code = #{productCategoryCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractSheetStatusCode != null and contractSheetStatusCode != ''">
+            AND contractSheet.contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR}
+        </if>
+        <if test="serialNumber != null and serialNumber != ''">
+            AND contractSheet.serial_number = #{serialNumber, jdbcType=VARCHAR}
+        </if>
+        <if test="tradeTermCode != null and tradeTermCode != ''">
+            AND productInfo.trade_term_code = #{tradeTermCode, jdbcType=VARCHAR}
+        </if>
+        <if test="gmtCreatedStart != null">
+            <![CDATA[ AND contractSheet.gmt_created >= #{gmtCreatedStart, jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="gmtCreatedEnd != null">
+            <![CDATA[ AND contractSheet.gmt_created <= #{gmtCreatedEnd, jdbcType=TIMESTAMP} ]]>
+        </if>
+
+        <if test="salerId != null">
+            AND ( contractSheet.saler_id = #{salerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{salerId, jdbcType=BIGINT})
+        </if>
+        <if test="buyerId != null">
+            AND ( contractSheet.saler_id = #{buyerId, jdbcType=BIGINT}
+            OR contractSheet.buyer_id = #{buyerId, jdbcType=BIGINT})
+        </if>
+        ORDER BY contractSheet.gmt_created
+        DESC
+    </select>
+    <!--微信交易列表-泉炼-->
+    <select id="getQuanzhouContractSheetListwx" resultMap="contractSheet" parameterType="com.sinochem.crude.trade.transaction.model.query.ContractSheetQuery">
+        SELECT contractSheet.* FROM t_contract_sheet contractSheet
+        <!-- 拼装JOIN -->
+        <if test="productCategoryCode != null ">
+            LEFT JOIN t_product_info productInfo
+            ON contractSheet.product_info_id = productInfo.id
+        </if>
+        <if test="enterpriseIdSingapore != null">
+            INNER JOIN  t_sale_sheet salesheet on contractSheet.sale_sheet_id = salesheet.id
+            AND (((salesheet.product_source_code = '1' AND contractSheet.saler_id = #{enterpriseIdSingapore, jdbcType=BIGINT})
+            OR contractSheet.saler_id = #{salerId, jdbcType=BIGINT})
+            OR contractSheet.buyer_id = #{salerId, jdbcType=BIGINT})
+        </if>
+        <!-- 拼装条件 -->
+        WHERE contractSheet.alive_flag = 1
+
+        <if test="productCategoryCode != null and productCategoryCode != ''">
+            AND productInfo.product_category_code = #{productCategoryCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractSheetStatusCode != null and contractSheetStatusCode != ''">
+            AND contractSheet.contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR}
+        </if>
+        <if test="serialNumber != null and serialNumber != ''">
+            AND contractSheet.serial_number = #{serialNumber, jdbcType=VARCHAR}
+        </if>
+        <if test="tradeTermCode != null and tradeTermCode != ''">
+            AND productInfo.trade_term_code = #{tradeTermCode, jdbcType=VARCHAR}
+        </if>
+        <if test="gmtCreatedStart != null">
+            <![CDATA[ AND contractSheet.gmt_created >= #{gmtCreatedStart, jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="gmtCreatedEnd != null">
+            <![CDATA[ AND contractSheet.gmt_created <= #{gmtCreatedEnd, jdbcType=TIMESTAMP} ]]>
+        </if>
+
+        ORDER BY contractSheet.gmt_created
+        DESC
+    </select>
+
+    <select id="getQuanzhouContractSheetList" resultMap="contractSheet" parameterType="com.sinochem.crude.trade.transaction.model.query.ContractSheetQuery">
+        SELECT contractSheet.* FROM t_contract_sheet contractSheet
+        <!-- 拼装JOIN -->
+        <if test="productCategoryCode != null and tradeTermCode != null">
+            LEFT JOIN t_product_info productInfo
+            ON contractSheet.product_info_id = productInfo.id
+        </if>
+        <if test="enterpriseIdSingapore != null">
+            INNER JOIN  t_sale_sheet salesheet on contractSheet.sale_sheet_id = salesheet.id
+            AND (((salesheet.product_source_code = '1' AND contractSheet.saler_id = #{enterpriseIdSingapore, jdbcType=BIGINT})
+            OR contractSheet.saler_id = #{salerId, jdbcType=BIGINT})
+            OR contractSheet.buyer_id = #{salerId, jdbcType=BIGINT})
+        </if>
+        <!-- 拼装条件 -->
+        WHERE contractSheet.alive_flag = 1
+
+        <if test="productCategoryCode != null and productCategoryCode != ''">
+            AND productInfo.product_category_code = #{productCategoryCode, jdbcType=VARCHAR}
+        </if>
+        <if test="contractSheetStatusCode != null and contractSheetStatusCode != ''">
+            AND contractSheet.contract_sheet_status_code = #{contractSheetStatusCode, jdbcType=VARCHAR}
+        </if>
+        <if test="serialNumber != null and serialNumber != ''">
+
+            AND contractSheet.serial_number LIKE "%"#{serialNumber, jdbcType=VARCHAR}"%"
+        </if>
+        <if test="tradeTermCode != null and tradeTermCode != ''">
+            AND productInfo.trade_term_code = #{tradeTermCode, jdbcType=VARCHAR}
+        </if>
+        <if test="gmtCreatedStart != null">
+            <![CDATA[ AND contractSheet.gmt_created >= #{gmtCreatedStart, jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="gmtCreatedEnd != null">
+            <![CDATA[ AND contractSheet.gmt_created <= #{gmtCreatedEnd, jdbcType=TIMESTAMP} ]]>
+        </if>
+
+        ORDER BY contractSheet.gmt_created
+        DESC
+    </select>
+
+
+    <select id="selectBySerialNumber" resultMap="contractSheet" parameterType="java.lang.String">
+        SELECT * FROM t_contract_sheet
+        WHERE serial_number = #{serialNumber, jdbcType=VARCHAR}
+        AND alive_flag = 1
+    </select>
+</mapper>

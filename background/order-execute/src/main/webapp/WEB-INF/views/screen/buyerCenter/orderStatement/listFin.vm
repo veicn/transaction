@@ -1,0 +1,143 @@
+
+<div >
+	<div class="c-mod">
+	
+		<form method="post">
+		<ul class="c-state">
+		<span class="c-mmxz-mm">
+			<a href="$orderExecuteServer.get('sellerCenter/orderStatement/listFin.htm')" class="c-mmxz-mm1 ry-a-menu">
+				<i class="c-mmxz-m"></i>买</a>
+		</span>
+		</ul>
+		<ul class="c-ful c-filter">
+			<li class="c-fcos3"><span class="c-fn c-fn2">对账单编号：</span><input
+				type="text" name="orderStatementNo" value="$!query.orderStatementNo" class="c-int  c-int2" /></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">对账日期：</span><input
+				type="text" class="c-int c-int2" id="checkTimeDesc" name="checkTimeDesc" value="$!query.checkTimeDesc" />
+				<i class="c-ico xg-data"></i>
+				</li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">订单编号：</span><input
+				type="text" class="c-int c-int2"  name="orderNo" value="$!query.orderNo"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">联系人：</span><input
+				type="text" class="c-int c-int2"  name="contactName" value="$!query.contactName"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">对账方：</span><input
+				type="text" class="c-int c-int2"  name="customerName" value="$!query.customerName"/></li>
+			<li class="c-fcos3"><span class="c-fn c-fn2">状态：</span>
+			<select id="query.status" name="status" style="height: 30px;margin-left:-4px;"
+							class="c-int c-int2" style="">
+							<option value="">请选择</option>
+								<option value="01" #if($!{query.status} ==
+									'01') selected="selected" #end>初始</option>
+								<option value="05" #if($!{query.status} ==
+									'05') selected="selected" #end>待确认</option>
+								<option value="10" #if($!{query.status} ==
+									'10') selected="selected" #end>已确认</option>
+								<option value="20" #if($!{query.status} ==
+									'20') selected="selected" #end>已驳回</option>
+								<option value="30" #if($!{query.status} ==
+									'30') selected="selected" #end>已结算</option>
+								
+						</select>
+			</li>
+			<li class="c-libtn"><button type="submit">查询</button></li>
+		</ul>
+		</form>
+		<h3>
+			<i class="cw-ico ico-h3"></i>最终结算单<a href="#" class="c-rebo"></a>
+		</h3>
+		<div class="c-tabdiv">
+			<table>
+				<tr>
+					<th>对账单编号</th>
+					<th>对账方名称</th>
+					<th>联系人</th>
+					<th>联系电话</th>
+					<th>结算量（桶）</th>
+					<th>总金额（美元）</th>
+					<th>对账日期</th>
+					<!--<th>对账人</th>-->
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+
+				#foreach($data in $datas) #set($class = $velocityCount%2+1)
+				<tr class="c-tabcos$class">
+					<td><a href="javascript:void(0)" class="showFn" orderId="$!data.orderId" orderStatementUuid="$!data.orderStatementUuid">$!data.orderStatementNo</a></td>
+					<td>$!data.customerName</a></td>
+					<td>$!data.contactName</td>
+					<td>$!data.tel</td>
+					<td>$!NumberTool.format($!data.settlementQuantityBbl)</td>
+					<td>$!NumberTool.format($!data.totalAmount)</td>
+					<td>$!dateUtil.convertDateToString($!data.checkTime)</td>
+					<!--<td>$!data.confirmPerson</td>-->
+					<td>#if($data.status == '01') 初始 #elseif($data.status == '05')
+						待确认 #elseif($data.status == '10') 已确认 #elseif($data.status ==
+						'20') 已驳回 #elseif($data.status == '30') 已结算 #end </span>
+					</li>
+					</td>
+					<td>	
+					<a href="javascript:void(0)" class="showFn" orderId="$!data.orderId" orderStatementUuid="$!data.orderStatementUuid">查看</a>
+						#if($data.status == '10')
+							<a href="javascript:void(0)" class="fileUpload" data_id="$!data.orderStatementId" id="statementUpload2_$velocityCount">上传付款凭证</a>	
+						#end
+						#if($data.status == '30')
+							#if("$!data.fileUrl" != "")
+							<a href="$orderExecuteServer.get('/common/doc/download.htm')?path=$!{data.fileUrl}&fileName=$!{data.fileName}" class="downLoad">下载付款凭证</a>	
+							#end
+						#end
+				</tr>
+				#end
+
+			</table>
+		</div>
+		<div class="order-bot">
+			$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('buyerCenter/orderStatement/listFin.htm')")
+		</div>
+	</div>
+</div>
+<script
+	src="../../orderexecute/js/orderStatement/buyerStatementListFin.js"></script>
+<script>
+	layui.use("ossUpload", function(){
+		var $ = layui.jquery,upload = layui.ossUpload;
+		
+		upload.render({
+		    elem: ".fileUpload",
+		    done: function(res , em){
+		     var item = $(em);
+		   	 var fileName = res.datas.originalName
+		   	 var fileUrl = res.datas.path
+		     var orderStatementId = item.attr("data_id");
+			    if(res.status === 0){
+			    	 $.ajax({
+						url: orderServer+"/orderStatement/statementEditStatus.json",
+						data:{"orderStatementId":orderStatementId,
+							  "fileName":fileName,
+							  "fileUrl":fileUrl
+						
+						},
+								
+						type: "POST",
+						success: function(data) {
+							layer.open({
+								  content: '上传成功',
+								  yes: function(index, layero){
+								   		location.reload()
+								    layer.close(index); //如果设定了yes回调，需进行手工关闭
+								  }
+								});       
+							
+						},
+						error: function(data) {
+							alert("request error");
+					 }
+				})
+		      		
+		  }else{
+			  layer.tips($.i18n(res.code,res.params), this.item, {tips: 1});
+			  }
+			   
+ 	 }   
+	})
+})
+</script>

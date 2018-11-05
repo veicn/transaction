@@ -1,0 +1,8 @@
+<div class="cct-blo clearfix">
+    <div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+    <div class="cct-blor"><a href="$orderServer.get('queryCurdeOilList.htm')">Crude Oil Deals</a><br><span>$!{crudeOil}</span><br></div>
+</div>
+##<div class="cct-blo clearfix">
+##    <div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+##    <div class="cct-blor"><a href="$orderServer.get('queryProductOilList.htm')">Product Deals</a><br><span>$!{productOil}</span><br></div>
+##</div>

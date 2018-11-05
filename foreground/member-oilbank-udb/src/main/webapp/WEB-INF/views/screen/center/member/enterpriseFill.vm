@@ -1,0 +1,367 @@
+
+<style>
+    label.error {
+        color: red;
+        display: block;
+        margin-left: 160px;
+    }
+    .dn {display: none;}
+</style>
+<link rel="stylesheet" href="$appServer.get('css/udbfile/style.css')">
+<div class="c-mr">
+    <div class="c-mod clearfix">
+        <h1>补充企业信息</h1>
+        <form id="saveForm" method="post" action="$appServer.get('/enterprise/fill.htm')">
+
+            #if(${enterprise.id})
+                <input type="hidden" name="id" value="$!{enterprise.id}"/>
+            #end
+            <input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+            <input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+            <input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+            <input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+            <input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+            <ul class="c-bczl">
+                #springBind("enterprise.fullName")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">企业名称：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入企业名称" maxlength="50">
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                #springBind("enterprise.name")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">公司简称：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司简称" maxlength="50">
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                #springBind("enterprise.englishName")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">公司英文名称：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文名称" maxlength="200">
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                #springBind("enterprise.abbEnglishName")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">公司英文简称：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文简称" maxlength="200">
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+            ##<li class="c-b-ts">请认真填写，有提交时可以随时联系您！</li>
+            #*<li class="c-bcz clearfix">
+                <span class="c-b-txt">机构类型：</span>
+                <select name="" class="form-inp sel">
+                    <option>企业</option>
+                </select>
+            </li>*#
+
+                <li class="c-bcz clearfix"><span class="c-b-txt">上传组织机构代码证：</span>
+                    <span class="c-up-box" id="orgCodeCertImgBox"><a id="orgCodeCertBtn" href="">
+                        #if($!{enterprise.orgCodeCert} && $!{enterprise.orgCodeCert} != "")
+                          <img src="$!{uploadServer}/img/$!{enterprise.orgCodeCert}.img_200_112.img"/>
+                        #else
+                            <img src="$imageServer.get('images/up_zm.jpg')">
+                        #end
+                    </a></span>
+
+                </li>
+                #springBind("enterprise.organizationCode")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">组织机构代码：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入组织机构代码" maxlength="20">
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                <li class="c-b-ts">组织机构代码号请与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码）</span></li>
+
+                <li class="c-bcz clearfix"><span class="c-b-txt">上传税务登记证：</span>
+                    <span class="c-up-box" id="taxRegCertImgBox"><a id="taxRegCertBtn" href="">
+                        #if($!{enterprise.taxRegCert} && $!{enterprise.taxRegCert} != "")
+                                <img src="$!{uploadServer}/img/$!{enterprise.taxRegCert}.img_200_112.img"/>
+
+                        #else
+                            <img src="$imageServer.get('images/up_zm.jpg')">
+                        #end
+                    </a></span>
+
+                </li>
+                #springBind("enterprise.taxNo")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">税务登记号：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入税务登记号" maxlength="20">
+
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                <li class="c-b-ts">税务登记证号码与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码：税号如无更改请用原税号，并下载证明模板一同上传）</span></li>
+
+                <li class="c-bcz clearfix"><span class="c-b-txt">上传营业执照：</span>
+                    <span class="c-up-box" id="businessLicenseCertImgBox"><a id="businessLicenseCertBtn" href="">
+                        #if($!{enterprise.businessLicenseCert} && $!{enterprise.businessLicenseCert} != "")
+                            <img src="$!{uploadServer}/img/$!{enterprise.businessLicenseCert}.img_200_112.img"/>
+
+                        #else
+                            <img src="$imageServer.get('images/up_zm.jpg')">
+                        #end
+                    </a></span>
+
+                </li>
+                #springBind("enterprise.licenseNo")
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">营业执照注册号：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入营业执照注册号" maxlength="20">
+                    <div class="c-qy-tx">#if($status.isError())$!{status.errorMessage}#end</div>
+                </li>
+                #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                <li class="c-b-ts">营业执照注册号请与附件内容一致。<span class="rd">（新版三证合一营业执照，请填写统一社会信用代码）</span></li>
+            ##<li class="c-bcz clearfix"><span class="c-b-txt">企业性质：</span><select class="form-inp sel"><option>请选择</option></select></li>
+                <li class="c-bcz clearfix">
+                    <span class="c-b-txt">公司logo：</span>
+                    <span class="c-bcz-p" id="epLogoImgBox">
+                        <a id="epLogoBtn" href="javascript:;">
+                            #if($!{enterprise.epLogo} && $!{enterprise.epLogo} != "")
+                                <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprise.epLogo}.img_165_124.img"/>
+                            #else
+                                <i class="cw-ico c-b-ico"></i>
+                            #end
+                        </a>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="c-subdiv">
+                <p style="padding-bottom: 20px"><span class="c-qyxx"><input id="fileCheckbox" type="checkbox" name="readFlag" value=""><em>我已阅读并同意</em><a id="showFile" href="javascript:;">《企业入驻协议》</a></span></p>
+                <button class="c-btnsub" type="submit">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="xyxx-pop" style="display:none;">
+    <div class="pop_alpha"></div>
+    <div class="xyxx-box">
+        <div class="xyxx-tit">企业入驻协议<span><a href="">×</a></span></div>
+        <div class="xyxx-cont">
+            <iframe src="$memberServer.get("/center/member/enterpriseProtocol.htm")" scrolling="auto" frameborder="0" width="100%" height="330px"></iframe>
+        </div>
+        <div class="c-subdiv"><button class="c-btnsub c-btnlp">同意并继续</button><button class="c-btncas">取消</button></div>
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="$appServer.get('script/lib/plupload-2.1.2/js/plupload.full.min.js')"></script>
+<script src="$appServer.get('script/upload.js')"></script>
+
+#set($vjs = $imageServer.get('js/lib/jquery.validate.min.js'))
+#js($vjs)
+#set($ljs = $imageServer.get('layui/layui.js'))
+#js($ljs)
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($ujs)
+
+
+<script>
+    $(function () {
+        $("#showFile").click(function(){
+            $(".xyxx-pop").show();
+        });
+        $(".xyxx-pop a").click(function(){
+            $(".xyxx-pop").hide();
+        });
+        $(".xyxx-pop button").click(function(){
+            $("#fileCheckbox").attr("checked","checked")
+            $(".xyxx-pop").hide();
+        });
+
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //预览图片实现
+            $(".previewBtn").click(function () {
+                var imgBox = $(this).parent().find(".img_box");
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    title: false,
+                    content: imgBox
+                });
+            });
+
+            //组织机构代码证图片上传，通过设置参数获取上传情况
+            var loadIndex;
+            $("#orgCodeCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "ZZJGDMZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#orgCodeCert").val(result.id);
+                        $("#orgCodeCertBtn").children().remove();
+                        $("#orgCodeCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#orgCodeCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#orgCodeCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //税务登记证图片上传
+            $("#taxRegCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "SWDJZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#taxRegCert").val(result.id);
+                        $("#taxRegCertBtn").children().remove();
+                        $("#taxRegCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#taxRegCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#taxRegCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //营业执照图片上传
+            $("#businessLicenseCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "YYZZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#businessLicenseCert").val(result.id);
+
+
+                        $("#businessLicenseCertBtn").children().remove();
+                        $("#businessLicenseCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#businessLicenseCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#businessLicenseCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //公司logo图片上传
+            $("#epLogoBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "GSLOGO",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#epLogo").val(result.id);
+                        $("#epLogoBtn").children().remove();
+                        $("#epLogoBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#epLogoBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_165_134.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+        });
+
+        jQuery.validator.addMethod("englishName", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9 \\\/]*$/.test(value);
+        }, jQuery.validator.format("编码仅可以输入字母或数字"));
+
+        jQuery.validator.addMethod("charactor", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9\-\_]*$/.test(value);
+        }, jQuery.validator.format("编码仅可以输入字母或数字"));
+
+        $ ("#saveForm").validate({
+            ignore: ".ignore",
+            rules: {
+                fullName: "required",
+                name: "required",
+                englishName: {
+                    required: true/*,
+                    englishName: true*/
+                },
+                organizationCode: {
+                    required: true,
+                    charactor: true,
+                    maxlength: 20
+                },
+                taxNo: {
+                    required: true,
+                    charactor: true,
+                    minlength: 15,
+                    maxlength: 20
+                },
+                licenseNo: {
+                    required: true,
+                    charactor: true,
+                    minlength: 15,
+                    maxlength: 20
+                }
+            },
+            messages: {
+                fullName: "请输入完整企业名称",
+                name: "请输入企业简称",
+                englishName: {
+                    required: "请输入企业英文名称"/*,
+                    englishName: "企业英文名称仅可以输入字母或数字"*/
+                },
+                organizationCode: {
+                    required: "请输入组织机构代码",
+                    charactor: "组织机构代码仅可以输入字母或数字",
+                    maxlength: "组织机构代码最多12位"
+                },
+                taxNo: {
+                    required: "请输入税务登记号",
+                    charactor: "税务登记号仅可以输入字母或数字",
+                    minlength: "税务登记号最少15位",
+                    maxlength: "税务登记号最多20位"
+                },
+                licenseNo: {
+                    required: "请输入营业执照注册号",
+                    charactor: "营业执照注册号仅可以输入字母或数字",
+                    minlength: "营业执照注册号最少15位",
+                    maxlength: "营业执照注册号最多18位"
+                }
+            },
+            errorPlacement: function(error, element) {
+                $ (".error").find("label").remove();
+                element.parent().after(error);
+            },
+            submitHandler: function(form) {
+                var cked = $('input[name=readFlag]').is(":checked");
+                if(!cked){
+                    layui.use(['form', 'layedit', 'laydate'], function () {
+                        layui.layer.alert('请先同意《企业入驻协议》');
+                    })
+                    return;
+                }
+
+                form.submit();
+            }
+        });
+    });
+</script>

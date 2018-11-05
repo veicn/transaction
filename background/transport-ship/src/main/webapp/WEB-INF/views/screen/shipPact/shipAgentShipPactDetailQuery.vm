@@ -1,0 +1,59 @@
+	<script src="../transport/js/shipPact/shipAgentShipPactDetailQuery.js"></script>
+	<div class="c-mod">
+			  <h3><em class="cw-ico ico-h3"></em>船合同信息</h3>
+			  <form class="form" >
+			  <div class=" c-form-xq">
+                 <ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>船合同编号：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipPactCode" id="shipPactCode" name="shipPactCode"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>租约日：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte signDate" id="signDate" name="signDate"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>租船人：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte carrierName" id="carrierName" name="carrierName" ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>船东：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipOwner" id="shipOwner" name="shipOwner"  ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>船名：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte shipName" id="shipName" name="shipName"  ></span>
+					</li>
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'><i title="0001-2359 IF BASRAH FIRST LOAD PORT - 0001-1200 IF SAUDI FIRST LOAD PORT - 0001-1600 IF NEITHER BASRAH NOR SAUDI FIRST LOAD PORT" class="shipping-ico w-ico-sl"></i>LAYCAN：</span>
+						<span style="display:block; float:left; text-align:justify;" id="pactBeg" name="pactBegs" class="c-int qx-conte pactBeg" ></span>
+					</li>
+					
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'>合同航速：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte pactSpeed" id="pactSpeed" name="pactSpeed" ></span>
+					</li>
+					<li class="c-fcos2" ><span class="c-fn" style='float:left !important;'>WS点：</span>
+						<span  style="display:block; float:left; text-align:justify;" class="c-int qx-conte wsRes" id="wsRes" name="wsRes"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>滞期费率：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte demurrage" id="demurrage" name="demurrage"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>允许装卸时间：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte dockTime" id="dockTime" name="dockTime" ></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>最小货量：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte minQuantity" id="minQuantity" name="minQuantity"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>经纪人：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte brokerName"id="brokerName" name="brokerName"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>备注：</span>
+						<span style="display:block; float:left; text-align:justify;" class="c-int qx-conte remark"  id="remark" name="remark"></span>
+					</li>
+					<li class="c-fcos2"><span class="c-fn" style='float:left !important;'>合同：</span>
+						<div style="display:block; float:left; text-align:justify;width:355px;" >
+							<span class="c-int qx-conte accessory"id="accessory" name="accessory" ></span>
+							<span hidden="true" id="btn">&nbsp;&nbsp;<a href="javascript:;" download="" class="file1" >下载</a></span>
+						<div>
+					</li>
+				</ul>
+			  </div>
+			 </form>
+			<div class="c-subdiv">
+				<!-- <button class="c-btnsub" id="submits" >提交</button> --><button class="c-btnsub s-btn-primary back">返回</button>
+			</div>
+	</div>

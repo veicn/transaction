@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/notice/index4.css')" >
+<script src="$imageServer.get('info/js/notice/historyList.js')"></script>
+
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
+                        <ul class="layui-tab-title">
+                          <li>公告维护</li>
+                          <li class="layui-this">历史公告</li>
+                        </ul>
+                        <div class="layui-tab-content">
+
+                            <!-- 历史公告 -->
+                            <div class="">
+                                <!--搜索条件-->
+                                <div class="ry-banner dh40">
+                                    <!-- <form class="layui-form"> -->
+                                        <div class="layui-form-item layui-container">
+                                            <label class="layui-form-label">自</label>
+                                            <div class="layui-input-inline iw200">
+                                                <input type="text"  class="layui-input test1" id="validBegin" value="$!{query.validBegin}" placeholder="yyyy-MM-dd">   
+                                            </div>
+                                            <label class="layui-form-label iw10">到</label>
+                                            <div class="layui-input-inline iw200">
+                                                <input type="text" class="layui-input test2" id="validEnd" value="$!{query.validEnd}" placeholder="yyyy-MM-dd">   
+                                            </div>
+                                            <button class="layui-btn layui-btn-normal btw historyBtw">查询</button>
+                                            ##<button class="layui-btn layui-btn-normal addFn">新增</button>
+                                        </div>
+                                    <!-- </form> -->
+                                </div>
+                                <!-- 列表 -->
+                                <table class="layui-table table-style" lay-even lay-skin="nob">
+                                    <thead> 
+                                        <tr>
+                                        <th class="table-style-th wd80">序号</th>
+                                        <th class="table-style-th wd150">发布日期</th>
+                                        <th class="table-style-th wd150">频道</th>
+                                        <th class="table-style-th wd150">发布者</th>
+                                        <th class="table-style-th wd150">公告标题</th>
+                                        <th class="table-style-th">操作</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        #foreach($historyNotice in $!historyNotices)
+												 <tr>
+                                       				 <td>$!{velocityCount}</td>
+                                     				 <td>$!historyNotice.releaseDate</td>
+                                      				 <td>平台公告</td>
+                                     				 <td>$!{historyNotice.releaseId}</td>
+                                    				 <td>$!{historyNotice.title}</td>
+                                        			 <td class="acss-color">
+                                            			<a href="javascript:;" class="btcol editilFn" attr-data='{"uuid":"$!{historyNotice.uuid}"}'>
+                                               			 <i class="layui-icon">&#xe642;</i>
+                                            			    编辑
+                                            			</a>
+                                           			    <a style="margin-left: 5px;margin-right: 5px;" href="javascript:;" class="btcol faFn" attr-data='{"uuid":"$!{historyNotice.uuid}"}'>
+                                             			 <i class="layui-icon">&#xe609;</i>
+                                               			    发布
+                                           				</a>
+                                           				<a href="javascript:;" class="btcol delFn" attr-data='{"uuid":"$!{historyNotice.uuid}"}'>
+                                             			 <i class="layui-icon" style="color:red;">&#xe640;</i>
+                                               			    删除
+                                           				</a>
+                                        			  </td>
+                                        		</tr>
+                                        
+											#end
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+
+                          
+                            <!--底部分页-->
+                            <div class="ry-footbar ry-right">
+                                $contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/notice/historyNotice.htm").put('slider_path','/contain/formPagingPageSlider')		
+                            </div>
+                           
+                        </div>
+            
+            
+                <!--底部-->
+                <div class="layui-footer">
+                    <!-- 底部固定区域 -->
+                    © layui.com - 底部固定区域
+                </div>
+            </div>

@@ -1,0 +1,82 @@
+
+			<div class="c-mod">
+				<input id="orderId" type="hidden" value="$!orderInfo.orderId">
+				<input id="uuid" type="hidden" value="$!orderInfo.uuid">
+				<input id="formPage" type="hidden" value="$!formPage">
+			
+				<h1>Deal Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Funds-in confirm</span></h1>
+				<div class="zzyy-box">
+					<div class="zzyy-title clearfix">
+						<div class="yy-ddh">$!dateUtil.convertDateToString('yyyy-MM-dd HH:mm:ss', $!orderInfo.createDate)<span>Deal No.：<em>$!orderInfo.orderNo</em></span><span>$!orderInfo.buyerCustomerName</span></div>
+						<div class="yy-ddxx"><a href="$orderExecuteServer.get('sellerCenter/order/detail.htm')?uid=$!{orderInfo.uuid}">Deal details</a></div>
+					</div>
+					<div class="left-cont clearfix">
+						<a href="$orderExecuteServer.get('sellerCenter/order/detail.htm')?uid=$!{orderInfo.uuid}" class="left-cont-pic">
+							<img src="../../orderexecute/images/m1_con_bg.jpg" style="width: 129px; height: 97px;">
+						</a>
+						<dl class="left-cont-txt">
+						  <dd class="left-cont-txt-n">Grade：$!orderInfo.zhName</dd>
+						  #if("${orderInfo.tradeCategory}"=="2")<dd class="left-cont-txt-n">规格：$!orderInfo.spec</dd>#end
+						  <dd class="left-cont-txt-n">Price($!{orderInfo.currency})：$!NumberTool.format( $!orderInfo.price)$!{orderInfo.currency}/$!{orderInfo.quantityUnit}</dd>
+						  <dd class="left-cont-txt-n">Premium/Discount：$!NumberTool.format( $!orderInfo.agio) $!{orderInfo.currency}/$!{orderInfo.quantityUnit}</dd>
+						  <dd class="left-cont-txt-n">Quantity($!{orderInfo.quantityUnit})：$!NumberTool.format( $!orderInfo.quantity)</dd>
+						  <dd class="left-cont-txt-n">Incoterm：$!orderInfo.tradeTerm</dd>
+						  <dd class="left-cont-txt-n">Laycan：$!dateUtil.convertDateToString($!orderInfo.deliveryDateStart) - $!dateUtil.convertDateToString($!orderInfo.deliveryDateEnd)</dd>
+						  <dd class="left-cont-txt-n">Payment date：$!orderInfo.paymentTerm</dd>
+						  <dd class="left-cont-txt-n">Pricing Period：$!orderInfo.pricingDesc</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="c-mod">
+				<h3><em class="cw-ico ico-h3"></em>Beneficiary Information </h3>
+				<div class="charter-cont charter-cont2">
+					<div class="form-row charter-row charter-row3">
+						<ul class="c-ful">
+							<li class="c-fcos1"><span class="c-fn">Receivable amount（$!{orderInfo.currency}）：</span>
+							<input id="receiveAmount" name="receiveAmount" value="$!NumberTool.format($!{totalAmountSum})" 
+							type="text" class="c-int"
+							onkeyup="clearNoNumThree(this)" 
+							maxlength="16"
+							onfocus="this.value=delNumFormat(this.value);" 
+							onblur="this.value=formatNumber(this.value,3,1);"/>
+							</li>
+						</ul>
+					</div>
+					<div class="form-row charter-row charter-row3">
+						<ul class="c-ful">
+							<li class="c-fcos1"><span class="c-fn">Collection Time：</span><input id="receiveTime" name="receiveTime" value="$!{receiveData}" type="text" class="c-int"/></li>
+						</ul>
+					</div>
+					<div class="form-row charter-row charter-row3">
+						<ul class="c-ful">
+							<li class="c-fcos1"><span class="c-fn">Name：</span><input id="payee" name="payee" value="$!{orderInfo.sellerCustomerName}" type="text" class="c-int"/></li>
+						</ul>
+					</div>
+				</div>
+				<div class="c-subdiv">
+					<button class="c-btnsub saveReceive">Save</button>
+					<button class="c-btncas backBtn">back</button>
+				</div>
+			</div>
+<script src="../../orderexecute/js/order/orderPayConfirm.js"></script>
+<script>
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+	    //先把非数字的都替换掉，除了数字和.    
+	    obj.value = obj.value.replace(/[^\d.]/g,"");    
+	    //保证只有出现一个.而没有多个.    
+	    obj.value = obj.value.replace(/\.{2,}/g,".");    
+	    //必须保证第一个为数字而不是.    
+	    obj.value = obj.value.replace(/^\./g,"");    
+	    //保证.只出现一次，而不能出现两次以上    
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+	    //只能输入两个小数  
+	    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3');   
+	}  
+	
+</script>
+			

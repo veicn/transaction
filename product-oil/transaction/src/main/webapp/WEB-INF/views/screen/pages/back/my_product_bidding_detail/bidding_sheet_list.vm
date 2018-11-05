@@ -1,0 +1,43 @@
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Quote History<span class="cxtj-nr-an"></span></h3>
+
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th>Quote No.</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Trade Terms</th>
+                <th>Discharge Port</th>
+                <th>Payment Terms</th>
+                <th>Premiums/Discounts</th>
+                <th>Create Time</th>
+            </tr>
+
+            #foreach($record in $!{pageInfoList.list})
+                <tr>
+                #*报价单编号*#
+                    <td><a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('serialNumber', $!{record.biddingSheetVO.serialNumber})" class="c-tablink">$!{record.biddingSheetVO.serialNumber}</a></td>
+                #*报价单状态*#
+                    <td>$!{record.biddingSheetVO.biddingSheetStatusVO.enName}</td>
+                #*数量*#
+                    <td>$!{record.productInfoVO.quantityAsString}</td>
+
+                #*贸易条款*#
+                    <td>$!{record.productInfoVO.tradeTermVO.enName}</td>
+                #*卸货港*#
+                    <td>$!{record.transportInfoVO.dischargePortVO.enName}</td>
+                #*付款条约*#
+                    <td>$!{record.pricingInfoVO.paymentTermVO.enName}</td>
+
+                #*升贴水*#
+                    <td>$!{record.pricingInfoVO.premiumsAndDiscountsAsString}</td>
+                #*创建时间*#
+                    <td>$!{record.biddingSheetVO.gmtCreated}</td>
+
+                </tr>
+            #end
+
+        </table>
+    </div>
+</div>

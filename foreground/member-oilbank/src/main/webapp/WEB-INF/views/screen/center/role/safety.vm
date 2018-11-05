@@ -1,0 +1,50 @@
+$contain.get('/common/title.htm').put('title', '账户信息')
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+
+<div class="f1 m-content">
+    <h3 class="con-title">Previous activity</h3>
+    <p class="con-remind"><span class="remind-s1">If there are any abnormal activities . please change your password immediately.</span><a class="remind-s2"> Change password</a></p>
+    <table class="log-list">
+        <tr class="list-fir list-tr">
+            <th class="fir">Time</th>
+            <th class="sec">IP</th>
+            <th class="thir">Browser</th>
+            <th class="forth">Verification mode</th>
+            <th class="fifth">Loging from</th>
+        </tr>
+        <tr class="list-sec list-tr">
+            <td class="fir">15/03/2018  11:38:11</td>
+            <td class="sec">60.247.55.10</td>
+            <td class="thir">Firefox</td>
+            <td class="fir">sign in</td>
+            <td class="fifth">PC</td>
+        </tr>
+        <tr class="list-th list-tr">
+            <td class="fir">15/03/2018  11:38:11</td>
+            <td class="sec">60.247.55.10</td>
+            <td class="thir">Firefox</td>
+            <td class="forth">sign in</td>
+            <td class="fifth">PC</td>
+        </tr>
+    </table>
+    <hr class="right-hr">
+    <h3 class="title-sec">Linked Company</h3>
+    <div class="con-mark">
+        <div class="mark-logo">
+            <img src="$appServer.get('/product/images/small_logo.png')">
+            <p class="p1">Main Account1Main </p>
+            <p class="p2">Account1</p>
+        </div>
+        <div class="mark-tuibiao">
+            <img src="$appServer.get('/product/images/lit_logo.png')">
+            <p>Main Account1</p>
+        </div>
+    </div>
+</div>
+#js($appServer.get('/product/js/common/query-1.9.1.min.js'))
+#js($appServer.get('/product/js/common/common.js'))
+<script>
+    commonCPY.select();
+</script>

@@ -1,0 +1,12 @@
+<!--飘窗-->
+<div id="prize" style="width: 66px;position: fixed;bottom: 20px;right: 85px;font-size: 15px;line-height: 15px;z-index: 1000;">
+    <a href='javascript:void(0)' onclick='hide()' style="position:relative;top:20px;right: -71px;background-color: #e6e6e6;
+        font-size:13px">隐藏</a>
+    <a href="$memberServer.get('/tradeHall/rc_prize.htm')" target="_blank">
+        <img src="$imageServer.get('/images/drift.png')" style="width: 110px;"></a>
+</div>
+<script>
+    function hide(){
+        $("#prize").hide();
+    }
+</script>

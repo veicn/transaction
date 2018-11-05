@@ -1,0 +1,265 @@
+<form id="orderHeadForm" action="$!appServer.get('/buyer/queryContractList.htm')" method="post">
+    <ul class="c-ful c-filter">
+        <li class="c-fcos3"><span class="c-fn">Method of sales：</span>
+            <select class="c-int" id="dealType" name="dealType">
+                <option value="0">All</option>
+                <option value="1">Tender</option>
+                <option value="2">Inquiry</option>
+            </select></li>
+        <li class="c-fcos3"><span class="c-fn">Deal Type：</span>
+            <select class="c-int" id="bizType" name="bizType">
+                <option value="0">&nbsp;&nbsp;&nbsp; All orders</option>
+                <option value="P">&nbsp;&nbsp;&nbsp; 成品油订单</option>
+                <option value="C">&nbsp;&nbsp;&nbsp; Deal</option>
+            </select>
+        </li>
+        <li class="c-fcos3"><span class="c-fn"></span><input type="text" class="c-int" /></li>
+        <li class="c-libtn">
+            <button onclick="function(){$('#orderHeadForm').submit()}">Search</button>
+        </li>
+        #*<li class="c-libtn">
+           *##* <a href="$appServer.get('/create/createCrudeOilInfo.htm')">New</a>*##*
+               <button id="addData">New</button>
+        </li>*#
+    </ul>
+    <ul class="c-ful c-filter">
+        <li class="c-fcos3"><span class="c-fn">Order state：</span>
+            <select class="c-int" id="orderStatus" name="orderStatus">
+                <option value="0">All states</option>
+                <option value="1">Ordered</option>
+                <option value="2">Confirmed</option>
+                <option value="3">Chartered</option>
+                <option value="4">Loaded</option>
+                <option value="5">Already arrived</option>
+                <option value="6">Discharged</option>
+                <option value="7">Pay-off</option>
+                <option value="8">Paid</option>
+                <option value="9">Complete</option>
+                <option value="10">Cancelled </option>
+                <option value="11">Closed</option>
+            </select>
+        </li>
+        <li class="c-fcos3"><span class="c-fn">Deal Time：</span>
+            <select class="c-int" id="dataTime" name="dataTime">
+                <option value="0">All</option>
+                <option value="1">within 3 months</option>
+                <option value="2">within 6 months</option>
+                <option value="3">within a year</option>
+            </select>
+        </li>
+    </ul>
+</form>
+#foreach($item in $!{contractListResult.list})
+<div class="zzyy-box">
+    <div class="zzyy-title clearfix">
+        <div class="yy-ddh"><input type="checkbox">$!{dateUtil.getDateTime("yyyy-MM-dd",$item.createTime)}<span>Deal NO.：<em>$!{item.orderNo}</em></span><span class="yy-gs">$!{item.memberName}</span></div>
+    </div>
+    <div class="orderl-cont clearfix">
+        <div class="order-blol clearfix">
+            #if($!{item.contractType}=="D")
+                #if($!{user.epMemberId}==$!{item.buyer})
+                    <div class="order-block"><span class="order-buy">buy</span></div>
+                #elseif($!{user.epMemberId}==$!{item.seller})
+                    <div class="order-block"><span class="order-buy">sell</span></div>
+                #elseif($!{user.epMemberId}==$!{item.trader})
+                    <div class="order-block"><span class="order-buy">中</span></div>
+                #end
+            #elseif($!{item.contractType}=="L")
+                <div class="order-block"><span class="order-buy">长</span></div>
+            #end
+
+
+
+
+
+            <div class="orde-pic"><a href="cg_cgxqxq.html"><img src="$imageServer.get('images/cg_pic1.jpg')"></a></div>
+
+            <dl class="orderl-txt">
+                #if($!{item.bizType}=='C')
+                    <dd>Grade：$!{item.crudeOilOptions}</dd>
+                #elseif($!{item.bizType}=='P')
+                    <dd>Grade：$!{item.productOilKind}</dd>
+                    <dd>Specification：$!{item.productOilSpecs}</dd>
+                #end
+
+                <dd>Price Formula：$!{item.valuationFormula}</dd>
+                <dd>Premium/Discount：$!{item.agio}USD/BBL.</dd>
+
+
+
+                #if($!{item.contractType}=="D")
+                    #set($num=$!{item.num}/10000000)
+                    <dd>Qty(BBL)：$!{numberTool.format("#0.0",$!{num})}</dd>
+                #elseif($!{item.contractType}=="L")
+                    #set($num=$!{item.longNum}/10000000)
+                    <dd>Qty(BBL)：$!{numberTool.format("#0.0",$!{num})}</dd>
+                #end
+
+
+
+                #if($!{item.tradeItem}=="1")
+                    <dd>Incoterm：FOB</dd>
+                #elseif($!{item.tradeItem}=="2")
+                    <dd>Incoterm：CFR</dd>
+                #elseif($!{item.tradeItem}=="3")
+                    <dd>Incoterm：CIF</dd>
+                #elseif($!{item.tradeItem}=="4")
+                    <dd>Incoterm：CIP</dd>
+                #elseif($!{item.tradeItem}=="5")
+                    <dd>Incoterm：DES</dd>
+                #end
+
+
+
+
+
+                <dd>Laycan：$!{dateUtil.getDateTime("yyyy-MM-dd",$!{item.shipmentStart})}</dd>
+
+
+                #if($!{item.payItem}=="1")
+                    <dd>Payment Date：After NOR 10 Days</dd>
+                #elseif($!{item.payItem}=="2")
+                    <dd>Payment Date：After B/L 30 Days</dd>
+                #elseif($!{item.payItem}=="3")
+                    <dd>Payment Date：After B/L 60 Days</dd>
+                #end
+
+
+
+
+                <dd>Pricing Period：$!{dateUtil.getDateTime("yyyy-MM-dd",$!{item.valuationProidStart})}</dd>
+            </dl>
+        </div>
+        <div class="order-blor clearfix">
+            #if($!{item.contractType}=="D")
+                #if($!{item.bizType}=='C')
+                    <a href="$appServer.get('/buyer/crudeOilOrderInfo.htm').put("contractId",$!{item.contractId}).put("biddingId",$!{item.biddingId})" class="view">View</a>
+                #elseif($!{item.bizType}=='P')
+                    <a href="$appServer.get('/buyer/productOilOrderInfo.htm').put("contractId",$!{item.contractId}).put("biddingId",$!{item.biddingId})" class="view">View</a>
+                #end
+            #elseif($!{item.contractType}=="L")
+                <a href="$appServer.get('/longTermContract/longContractDetail.htm').put("id",$!{item.uuid})" class="view">View</a>
+            #end
+
+            #*#if($!{user.epMemberId}==$!{item.buyer})
+                #if($!{item.doubleSign}=="10")
+                    <a href="$appServer.get("/longTermContract/Countersign.htm").put("uuid","$!{item.uuid}").put("token","$!{item.token}")" class="confirm">Confirm</a>
+                #elseif($!{item.doubleSign}!="10")
+                    <a hidden href="$appServer.get("/longTermContract/Countersign.htm").put("uuid","$!{item.uuid}").put("token","$!{item.token}")" class="confirm">Confirm</a>
+                #end
+            #elseif($!{user.epMemberId}==$!{item.seller})
+
+                #if($!{item.doubleSign}=="01")
+                    <a href="$appServer.get("/longTermContract/Countersign.htm").put("uuid","$!{item.uuid}").put("token","$!{item.token}")" class="confirm">Confirm</a>
+                #elseif($!{item.doubleSign}!="01")
+                    <a  hidden href="$appServer.get("/longTermContract/Countersign.htm").put("uuid","$!{item.uuid}").put("token","$!{item.token}")" class="confirm">Confirm</a>
+                #end
+            #end*#
+
+
+            #if($!{item.contractType}=="D")
+                <a href="$appServer.get('/update/createCrudeOilInfo.htm').put("contractId",$!{item.contractId})" class="cancel">Edit</a>
+            #elseif($!{item.contractType}=="L")
+                <a href="$appServer.get("/longTermContract/editContractForm.htm").put("id","$!{item.uuid}")" class="cancel">Edit</a>
+            #end
+        </div>
+    </div>
+
+    #if($!{item.contractType}=="D")
+        <div class="seal-blo"></div>
+    #elseif($!{item.contractType}=="L")
+        <div class="seal-blo"><i class="seal-about"></i></div>
+    #end
+
+</div>
+#end
+#*<div class="c-tabdiv">
+<table>
+    <tr>
+        <th>Create Date</th>
+        <th>Deal No.</th>
+        <th>Company Name</th>
+        <th>Grade</th>
+        <th>Grade Name</th>
+        <th>Specification</th>
+        <th>Price</th>
+        <th>Premium/Discount</th>
+        <th>Qty</th>
+        <th>Incoterm</th>
+        <th>Laycan</th>
+        <th>Payment Date</th>
+        <th>Pricing Period</th>
+        <th>Payment Date</th>
+        *##*<th>业务类型</th>*##*
+        <th>Quotation No.</th>
+        <th>Status</th>
+        <th>Operate</th>
+    </tr>
+    #foreach($item in $!{contractListResult.list})
+        #if(!$null.isNull($item) && $!{item.dealType}==1)
+            <tr>
+                <td>$!{dateUtil.getDateTime("yyyy-MM-dd",$item.createTime)}</td>
+                <td>$!{item.uuid}</td>
+                <td>$!{item.memberName}</td>
+                <td>$!{item.tradeItem}</td>
+                <td>成品油</td>
+                <td>$!{item.crudeOilOptions}</td>
+                <td>$!{item.productOilKind}</td>
+                <td>$!{item.productOilSpecs}</td>
+                <td>$!{item.valuationFormula}</td>
+                <td>$!{item.agio}</td>
+                <td>$!{item.num}</td>
+                <td>$!{item.tradeItem}</td>
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$item.shipmentStart)-$!{dateUtil.getDateTime("yyyy-MM-dd",$!{item.shipmentEnd})}</td>
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$item.dischargeStart)-$!{dateUtil.getDateTime("yyyy-MM-dd",$!{item.dischargeEnd})}</td>
+                *##*<td>$item.payItem</td>*##*
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$item.valuationProidStart)-$!{dateUtil.getDateTime("yyyy-MM-dd",$!{item.valuationProidEnd})}</td>
+                <td>$!{item.orderStatus}</td>
+                <td>
+                    <a href="$appServer.get('/buyer/productOilOrderInfo.htm').put("contractId",$!{item.contractId}).put("biddingId",$!{item.biddingId})">View</a>
+                    <a href="$appServer.get('/update/createCrudeOilInfo.htm').put("contractId",$!{item.contractId})">Edit</a>
+                </td>
+            </tr>
+        #else
+            <tr>
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$!{item.createTime})</td>
+                <td>$!{item.uuid}</td>
+                <td>$!{item.memberName}</td>
+                <td>$!{item.tradeItem}</td>
+                <td>Crude Oil</td>
+                <td>$!{item.crudeOilOptions}</td>
+                <td>$!{item.productOilKind}</td>
+                <td>$!{item.productOilSpecs}</td>
+                <td>$!{item.valuationFormula}</td>
+                <td>$!{item.agio}</td>
+                <td>$!{item.num}</td>
+                <td>$!{item.tradeItem}</td>
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$!{item.shipmentStart})-$dateUtil.getDateTime("yyyy-MM-dd",$!{item.shipmentEnd})</td>
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$!{item.dischargeStart})-$dateUtil.getDateTime("yyyy-MM-dd",$!{item.dischargeEnd})</td>
+                *##*<td>$item.payItem</td>*##*
+                <td>$dateUtil.getDateTime("yyyy-MM-dd",$!{item.valuationProidStart})-$dateUtil.getDateTime("yyyy-MM-dd",$!{item.valuationProidEnd})</td>
+                <td>$!{item.orderStatus}</td>
+                <td>
+                    <a href="$appServer.get('/buyer/crudeOilOrderInfo.htm').put("contractId",$!{item.contractId}).put("biddingId",$!{item.biddingId})">View</a>
+                    <a href="$appServer.get('/update/createCrudeOilInfo.htm').put("contractId",$!{item.contractId})">Edit</a>
+                </td>
+            </tr>
+        #end
+    #end
+</table>
+</div>*#
+#*
+<script>
+    layui.use('layer', function(){
+        $('#addData').on('click', function(){
+                layer.open({
+                    type: 1,
+                    title:'Please choose to place an order',
+                    area: ['600px', '360px'],
+                    shadeClose: false,
+                    content: '<div><a href="$appServer.get('/create/createCrudeOilInfo.htm').put("t","1")">Buyer</a><br/><a href="$appServer.get('/create/createCrudeOilInfo.htm').put("t","2")">中间商</a><br/><a href="$appServer.get('/create/createCrudeOilInfo.htm').put("t","3")">Seller</a></div>'
+                });
+            return false;
+            });
+    });
+</script>*#

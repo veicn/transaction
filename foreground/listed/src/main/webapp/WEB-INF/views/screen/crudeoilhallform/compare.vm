@@ -1,0 +1,180 @@
+<div class="caigou-content">
+    <div class="inner">
+        <table class="cg-cgdbj">
+
+            <tr>
+                <th scope="row">
+                	#if($!{dealType} == "B")
+                		采购需求单编号
+                	#else
+                		销售资源单编号
+                	#end
+                </th>
+                #foreach($d in $!demandList)
+                	#if($!{d.dealType} == "B")
+                		<td tdIndex="$!velocityCount"><a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{d.id}">$!{d.uuid}</a><a class="cg-close" closeIndex="$!velocityCount" href="javascript:void(0)"><i>×</i></a></td>
+                	#else
+                		<td tdIndex="$!velocityCount"><a href="$appServer.get('crudeoillobby/sellingDemandDetail.htm?demandId=')$!{d.id}">$!{d.uuid}</a><a class="cg-close" closeIndex="$!velocityCount" href="javascript:void(0)"><i>×</i></a></td>
+                	#end
+                #end
+            </tr>
+            <tr>
+                <th scope="row">企业名称</th>
+                #foreach($d in $!demandList)
+                	<td tdIndex="$!velocityCount">
+                		#if($!{d.dealType} == "B")
+                			$!{d.bEnterpriseName}
+                		#else
+                			$!{d.pEnterpriseName}
+                		#end
+                	</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">截止日期</th>
+                #foreach($d in $!demandList)
+                	<td tdIndex="$!velocityCount">$!{d.stopBidTime}</td>
+                #end
+            </tr>    
+            <tr>
+                <th scope="row">油种</th>
+                #foreach($d in $!demandList)
+                	<td tdIndex="$!velocityCount">$!{d.crudeOilOptions}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row" >数量(桶)</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.num}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row" >溢短装</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.numfloat}</td>
+                #end
+            </tr>   
+            #*<tr>
+                <th scope="row">升贴水</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.agio}</td>
+                #end
+            </tr>*#
+            <tr>
+                <th scope="row">贸易条款</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.tradeItem}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">计价基准</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.valuationBase}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">计价期</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">
+						$!{d.valuationPeriodTypeContent}
+						#if($!{d.valuationProidType} == 4)
+                                                    （$!{d.valuationPeriodStart} - $!{d.valuationPeriodEnd}）
+                        #end
+						#if($!{d.valuationProidType} == 5)
+							（$!d.contractKind）
+						#end
+                    </td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">付款日期</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.payItem}</td>
+                #end
+            </tr>            
+            <tr>
+                <th scope="row">结算量标准</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.measureMode}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">装卸允许时间</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.loadAndDischargePermittedTimespan}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">装货港</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.shipmentPort}</td>
+                #end
+            </tr>                     
+            <tr>
+                <th scope="row">卸货港</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">$!{d.dischargePort}</td>
+                #end
+            </tr>
+            <tr>
+                <th scope="row">装货期</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">
+                    	$!{d.shipmentStartTime} 至 $!{d.shipmentEndTime}
+                    </td>
+                #end
+            </tr>         
+            <tr>
+                <th scope="row">到货期</th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount">
+                    	$!{d.dischargeStartTime} 至 $!{d.dischargeEndTime}
+                    </td>
+                #end
+            </tr>
+            <tr>
+                <th style="background: #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-right: 1px solid #ffffff;"></th>
+                #foreach($d in $!demandList)
+                    <td tdIndex="$!velocityCount" style="background: #ffffff; border-left: 1px solid #ffffff; border-bottom: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+                    	<div class="detail-ibut" style="margin-top: 20px;">
+	                    	#if($!{d.purchaseType} == "询价")
+	                    		<a href="javascript:void(0)" onclick="epclick('$!{d.id}', '$!{d.creater}', '$!{d.dealType}',$!{d.overdue},'报价')" class="detail-bxj" style="width: 150px; color: #ff9400;"><i class="c-ico c-ico-bj"></i>报价</a>
+	                    	#else
+	                    		<a href="javascript:void(0)" onclick="epclick('$!{d.id}', '$!{d.creater}', '$!{d.dealType}',$!{d.overdue},'投标')" class="detail-btb" style="width: 150px; color: #ffffff;"><i class="c-ico c-ico-tb"></i>投标</a>
+	                    	#end
+                    	</div>
+                    </td>
+                #end
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    ##绑定删除按钮事件
+    $(".cg-close").click(function(){
+        var index = $(this).attr("closeIndex");
+        $("td[tdIndex='"+index+"']").remove();
+    });
+    
+    function epclick(id, creater, dealType,overdue,msg) {
+        if (overdue){
+            layui.use(['layer'], function () {
+                layui.layer.alert('该需求已逾期，不能发起'+msg);
+            })
+            return false;
+        }
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('需求发起者不能参与投标');
+            })
+            return false;
+        }else{
+        	if(dealType == "B") {
+        		window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + id;
+        	} else {
+        		window.location.href="$appServer.get('/oilSaleBidding/crudeOilBidding.htm?demandId=')" + id;
+        	}
+        }
+    }
+</script>

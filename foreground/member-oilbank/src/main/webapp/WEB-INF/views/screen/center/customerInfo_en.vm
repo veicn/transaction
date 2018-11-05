@@ -1,0 +1,140 @@
+#set($js_validate = "validate")##需要验证
+#set($id = $info.id)
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm').put("menu","customerInfo")
+        <form action="#" method="post" id="customerForm">
+        <ul class="c-bczl enterbox1">
+            #springBind("info.id")
+          ##  <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+
+            #springBind("info.lastYearOperationRevenue")
+            <li class="c-bcz clearfix"><span class="c-b-txt">
+            	<em>*</em>last year business revenue：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearOperationRevenue" placeholder="please enter last year's busness revenue" class="form-inp"  name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            	#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+            #springBind("info.lastYearTradeVolume")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Last year's trade volume：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearTradeVolume" placeholder="Please enter the last year's trade volume" class="form-inp"  name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+				#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+            #springBind("info.masterCompany")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Parent company：</span>
+            	#if(!$id)
+	            	<input type="text" id="masterCompany" class="form-inp" placeholder="Please enter the name of your parent company" name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            	#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+        </ul>
+        #if(!$id)
+	        <div class="c-subdiv c-mod-bc c-mod-bc2">
+                <button class="c-btnsub">submit</button>
+                <button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">return</button></div>
+        #end
+        </form>
+    </div>
+</div>
+
+#jscode()
+  $(function(){
+         //表单验证及submit
+        $ ("#customerForm").validate({
+            ignore: ".ignore",
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                lastYearOperationRevenue: {
+                    "required":true,
+                    number:true  ,
+                    maxlength:16
+                  
+                },
+                lastYearTradeVolume: {
+                    required: true,
+                    number:true  ,
+                    maxlength:16
+                },
+                masterCompany: {
+                    required: true 
+                } 
+            },
+            messages: {
+                lastYearOperationRevenue: {
+                    required:"please enter last year's busness revenue",
+                    number:"please enter a valid number"
+                },
+                lastYearTradeVolume: {
+                    required:"Please enter the last year's trade volume",
+                    number:"Please enter a valid number"
+                },
+                masterCompany: {
+                    required:"Please enter the name of the parent company"
+                }
+              },  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+
+
+        $('input').blur(function(){
+            var span = $(this) .parent().next();
+            if(!span.find("label").get(0)){
+                span.html(".");
+            }
+        })
+     });
+#end

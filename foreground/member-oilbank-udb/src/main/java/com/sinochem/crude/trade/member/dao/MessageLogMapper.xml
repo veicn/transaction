@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.member.dao.MessageLogMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.MessageLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="cron" jdbcType="VARCHAR" property="cron" />
+    <result column="cron_desc" jdbcType="VARCHAR" property="cronDesc" />
+    <result column="is_send" jdbcType="CHAR" property="isSend" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creater" jdbcType="BIGINT" property="creater" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sinochem.crude.trade.member.domain.MessageLog">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, title, method, cron, cron_desc, is_send, del_flg, create_time, creater, 
+    update_time, updater
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from message_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.MessageLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message_log (type, title, method, 
+      cron, cron_desc, is_send, 
+      del_flg, create_time, creater, 
+      update_time, updater, content
+      )
+    values (#{type,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{cron,jdbcType=VARCHAR}, #{cronDesc,jdbcType=VARCHAR}, #{isSend,jdbcType=CHAR}, 
+      #{delFlg,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.MessageLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="cron != null">
+        cron,
+      </if>
+      <if test="cronDesc != null">
+        cron_desc,
+      </if>
+      <if test="isSend != null">
+        is_send,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="cron != null">
+        #{cron,jdbcType=VARCHAR},
+      </if>
+      <if test="cronDesc != null">
+        #{cronDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isSend != null">
+        #{isSend,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.MessageLog">
+    update message_log
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="cron != null">
+        cron = #{cron,jdbcType=VARCHAR},
+      </if>
+      <if test="cronDesc != null">
+        cron_desc = #{cronDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isSend != null">
+        is_send = #{isSend,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sinochem.crude.trade.member.domain.MessageLog">
+    update message_log
+    set type = #{type,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      cron = #{cron,jdbcType=VARCHAR},
+      cron_desc = #{cronDesc,jdbcType=VARCHAR},
+      is_send = #{isSend,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.MessageLog">
+    update message_log
+    set type = #{type,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      cron = #{cron,jdbcType=VARCHAR},
+      cron_desc = #{cronDesc,jdbcType=VARCHAR},
+      is_send = #{isSend,jdbcType=CHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <sql id="dynamicWhere">
+      <if test="isSend != null">
+        AND ${alias}.is_send = #{isSend}
+      </if>
+    </sql>
+
+    <select id="getLogList" parameterType="com.sinochem.crude.trade.member.domain.MessageLog" resultMap="ResultMapWithBLOBs">
+        SELECT
+        <include refid="Base_Column_List" />,
+        <include refid="Blob_Column_List" />
+        FROM message_log ml
+        WHERE 9=9
+      <include refid="dynamicWhere" >
+        <property name="alias" value="ml"/>
+      </include>
+        ORDER BY ml.create_time desc
+    </select>
+</mapper>

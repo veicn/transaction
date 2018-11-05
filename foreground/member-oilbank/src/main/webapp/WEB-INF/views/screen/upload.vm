@@ -1,0 +1,61 @@
+<!-- 引入脚本 -->
+#set($jjs = $imageServer.get('js/jquery-1.8.3.min.js'))
+#set($ljs = $imageServer.get('layui/layui.js'))
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($jjs)
+#js($ljs)
+#js($ujs)
+
+<!-- 触发dom -->
+<button id="upImg">点击上传图片</button>
+<button id="upFile" data-type="1"
+        data-uploadUrl="$!{uploadServer}/upload/file.htm"
+        data-docType="T1101"
+        data-objectId="1">点击上传文件</button>
+
+<!-- 显示位置 -->
+<div id="showBox"></div>
+<div id="resultCon"></div>
+
+<!-- 请求 -->
+<script>
+    layui.use("layer");
+    $(function(){
+        /*****************第一种方式*****************/
+        //图片上传，通过设置参数获取上传情况
+        var loadIndex;
+        $("#upImg").fileUpload({
+            uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+            type: 0,
+            docType: "T1101",
+            objectId: "1",
+            beforeUpload: function(path){
+                loadIndex = layer.load(0, {shade: false});
+            },
+            uploadEnd: function(result){
+                if(result.success == true){
+                    $("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                }else{
+                    layer.alert(result.error);
+                }
+                layer.close(loadIndex);
+            }
+        });
+
+        /*****************第二种方式*****************/
+        //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""方式设置
+        $("#upFile").fileUpload();
+        //通过监听事件获取上传情况
+        $("#upFile").on("beforeUpload", function(e, path){
+            loadIndex = layer.load(0, {shade: false});
+        });
+        $("#upFile").on("uploadEnd", function(e, result){
+            if(result.success == true){
+                $("#resultCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>下载或查看</a>");
+            }else{
+                layer.alert(result.error);
+            }
+            layer.close(loadIndex);
+        });
+    });
+</script>

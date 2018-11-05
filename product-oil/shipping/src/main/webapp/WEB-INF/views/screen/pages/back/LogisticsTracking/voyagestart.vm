@@ -1,0 +1,100 @@
+<div class="con_one_1 con_one " style="display: block">
+    <div class="loading-port">
+        <h3 class="con_one_h31">STOWAGE START</h3>
+        <div class="m-t-tab stowage-steps-info clearfix con_one_box_lv">
+            <ol class="fl con_one_ol_lv">
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Stowage Plan Product :</span>
+                    <span class="m-r-span">$!{voyageStartVO.productNm}</span>
+                </li>
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Planed Quantity (MT) :</span>
+                    #if($!{voyageStartVO.metricTons}&&$!{voyageStartVO.rangeOfError})
+                        <span class="m-r-span">$!{voyageStartVO.metricTons}
+                            ±$!{voyageStartVO.rangeOfError}%</span>
+                    #else
+                        <span class="m-r-span">$!{voyageStartVO.metricTons}</span>
+                    #end
+
+                </li>
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Planed Quantity (BBLs) :</span>
+                    <span class="m-r-span">$!{voyageStartVO.bbls}</span>
+                </li>
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Loading Temp (℉):</span>
+                    <span class="m-r-span">$!{voyageStartVO.loadingTemp}</span>
+                </li>
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Departure Draft(M) :</span>
+                    <span class="m-r-span">$!{voyageStartVO.draftRestrictionOfLoadingPort}</span>
+                </li>
+                <li style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106">Arrival Draft(M) :</span>
+                    <span class="m-r-span">$!{voyageStartVO.draftRestrictionOfDischargingPort}</span>
+                </li>
+                <li class="con_one_1_last input_Upload" style="    height: 35px;line-height: 36px;">
+                    <span class="m-f-span w106 ">Stowage Plan :</span>
+
+                    #if($!{voyageStartVO.accessory} && $!{voyageStartVO.accessoryFileNm} && $!{voyageStartVO.accessory}!="")
+                        <em class="button-b2 br">
+                            <a id="voyageFileName" class="lookFileDoc br" id="look_$voyageStartVO.accessory"
+                               style="display: inline-block;" fileUrl="$appServer.get(
+                                '/common/doc/file.htm')?path=$!{voyageStartVO.accessory}&fileName=$!{voyageStartVO.accessoryFileNm}"
+                               fileFormat="$!{voyageStartVO.accessoryFileNm}">Preview
+                            </a>
+                            <a id="voyageFileDownload" target="_blank" class=" br"
+                               style="display: inline-block;" href="$appServer.get(
+                                '/common/doc/download.htm')?path=$!{voyageStartVO.accessory}&fileName=$!{voyageStartVO.accessoryFileNm}"
+                               fileFormat="$!{voyageStartVO.accessoryFileNm}">Download
+                            </a>
+                        </em>
+                    #end
+                </li>
+
+                <li class="con_one_1_last input_Upload"  style="height: 35px;line-height: 36px;margin-top:10px;">
+                    <span class="m-f-span w106 ">Upload DI :</span>
+
+                    #if($!{voyageStartVO.di} && $!{voyageStartVO.diFileNm} && $!{voyageStartVO.di}!="")
+                        <em class="button-b2 br">
+                            <a id="diFileName" class="lookFileDoc br" style="display: inline-block;"
+                               fileUrl="$appServer.get(
+                                   '/common/doc/file.htm')?path=$!{voyageStartVO.di}&fileName=$!{voyageStartVO.diFileNm}"
+                               fileFormat="$!{voyageStartVO.diFileNm}">Preview
+                            </a>
+                            <a id="diFileDownload" target="_blank" class=" br"
+                               style="display: inline-block;" href="$appServer.get(
+                                '/common/doc/download.htm')?path=$!{voyageStartVO.di}&fileName=$!{voyageStartVO.diFileNm}"
+                               fileFormat="$!{voyageStartVO.diFileNm}">Download
+                            </a>
+                        </em>
+                    #end
+                </li>
+            </ol>
+        </div>
+        <h3 class="con_one_h3">Voyage Tracking</h3>
+        <table class="table clearfix con_one_1_table">
+            <tr>
+                <th>Date</th>
+                <th>Loading Port</th>
+                <th>Eta</th>
+                <th>Etb</th>
+                <th>Posn</th>
+                <th>Sea</th>
+                <th>Ave Spd 24h(km/h)</th>
+            </tr>
+            #foreach($!{transitLoadingVO} in $!{transitLoadingVOList})
+                <tr>
+                    <td>$!{transitLoadingVO.date}</td>
+                    <td>$!{transitLoadingVO.loadingPort}</td>
+                    <td>$!{transitLoadingVO.eta}</td>
+                    <td>$!{transitLoadingVO.etb}</td>
+                    <td>$!{transitLoadingVO.posn}</td>
+                    <td>$!{transitLoadingVO.sea}</td>
+                    <td>$!{transitLoadingVO.aveSpd24h}</td>
+                </tr>
+            #end
+        </table>
+
+    </div>
+</div>

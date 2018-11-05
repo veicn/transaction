@@ -1,0 +1,218 @@
+$contain.get('/common/title.htm').put('title', 'Resource Bidding Detail')
+
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+<style>
+    .q-box2 > table > thead > tr > th { width: 55px;}
+    .q-box2 > table > thead > tr > th:nth-of-type(3) {width: 30px;}
+    .q-box2 > table > thead > tr > th:nth-of-type(5) { width: 36px;}
+    .q-box2 > table > thead > tr > th:nth-of-type(6) {width: 42px;}
+    .q-box2 > table > thead > tr > th:nth-of-type(7) {width: 40px;}
+</style>
+
+<div class="s-nav fl">
+    <div class="q-box m-sls cleafix">
+        <div class="xz s-selected">
+                    <span class="layui-breadcrumb" lay-separator=">">
+                      <a href="$appServer.get('/pages/back/my_demand_list/index.htm')">My Demands</a>
+                      <a href="$appServer.get('/pages/back/my_demand_detail/index.htm').put("uuid",$!{demandSheetCombineVO.demandSheetVO.uuid})">Demand Details</a>
+                      <a><cite>Quotation List</cite></a>
+                    </span>
+        </div>
+    </div>
+    <div class="m-box s-box1 q-box q-box1">
+        <span class="q-tit">Demand Info</span>
+        <div class="m-tit">
+            <ul>
+                <li>
+                    <span>Create Time :</span>
+                    <span class="m-tit-word">$!{demandSheetCombineVO.demandSheetVO.gmtCreated}</span>
+                </li>
+                <li>
+                    <span>Resource No :</span>
+                    <span class="m-tit-word">$!{demandSheetCombineVO.demandSheetVO.serialNumber}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="m-text clearfix q-text">
+            <div class="m-t-img">
+                <a href="">
+                    <img src='$appServer.get("/product_images/$!{demandSheetCombineVO.productInfoVO.productCategoryVO.code}/vertical.jpg")' />
+                </a>
+            </div>
+            <div class="fl m-t-tab w220 s-t-tab q-t-tab">
+                <ol>   <li>
+                    <span class="m-f-span w94">Range :</span>
+                    <span class="m-r-span w94">$!{demandSheetCombineVO.demandSheetVO.demandTypeVO.enName}</span>
+                </li>
+
+                    <li>
+                        <span class="m-f-span w94">Category :</span>
+                        <span class="m-r-span">$!{demandSheetCombineVO.productInfoVO.productCategoryVO.enName}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w94">Specification :</span>
+                        <span class="m-r-span">$!{demandSheetCombineVO.productInfoVO.productSpecificationVO.enName}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w94">Quantity :</span>
+                        <span class="m-r-span">$!{demandSheetCombineVO.productInfoVO.quantityAsString} $!{demandSheetCombineVO.productInfoVO.quantityUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w94">Incoterms :</span>
+                        <span class="m-r-span">$!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+
+                    #if($!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'FOB')
+                        <li>
+                            <span class="m-f-span w94">Load Port :</span>
+                            <span class="m-r-span">$!{demandSheetCombineVO.transportInfoVO.loadingPort}, $!{demandSheetCombineVO.transportInfoVO.loadingCountry}</span>
+                        </li>
+                    #end
+
+                    <li>
+                        <span class="m-f-span w115">Laycan :</span>
+                        <span class="m-r-span w168">$!{demandSheetCombineVO.transportInfoVO.laycanStartDateAsString} - $!{demandSheetCombineVO.transportInfoVO.laycanEndDateAsString}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w115">Laytime :</span>
+                        <span class="m-r-span w168">$!{demandSheetCombineVO.transportInfoVO.laytimeAsString} H+6</span>
+                    </li>
+                    #if($!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CFR' || $!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CIF')
+
+                        <li>
+                            <span class="m-f-span w115">Discharge Port :</span>
+                            <span class="m-r-span w168">$!{demandSheetCombineVO.transportInfoVO.dischargePort}, $!{demandSheetCombineVO.transportInfoVO.dischargeCountry}</span>
+                        </li>
+                    #end
+                    <li>
+                        <span class="m-f-span w115">Payment Terms :</span>
+                        <span class="m-r-span w168" title="$!{demandSheetCombineVO.pricingInfoVO.paymentTerm}">$!{demandSheetCombineVO.pricingInfoVO.paymentTerm}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w115">Expired Time :</span>
+                        <span class="m-r-span w168">$!{demandSheetCombineVO.productInfoVO.deadlineAsString}</span>
+                    </li>
+                    #*#if($!{demandSheetCombineVO.demandSheetVO.saleTypeVO.code} == '1')
+                        <li>
+                            <span class="m-f-span w115">Bid Valid To:</span>
+                            <span class="m-r-span w168">$!{demandSheetCombineVO.productInfoVO.bidOpeningDateAsString}</span>
+                        </li>
+                    #end*#
+                    <li>
+                        <span class="m-f-span w115">Posting Date :</span>
+                        <span class="m-r-span w168">$!{demandSheetCombineVO.demandSheetVO.releasedDateAsString}</span>
+                    </li>
+
+                </ol>
+
+            </div>
+
+            <!-- button -->
+            <ul class="fr m-t-btn">
+                <li class=" m-btn btn-s q-btn  br">
+                    <a  href="$appServer.get('pages/back/my_demand_detail/index.htm').put('uuid',$!{demandSheetCombineVO.demandSheetVO.uuid})">
+                        Details
+                    </a>
+                </li>
+                <br>
+                #if($!{demandSheetCombineVO.demandSheetVO.demandSheetStatusVO.code} == '2' || $!{demandSheetCombineVO.demandSheetVO.demandSheetStatusVO.code} == '5')
+                    #if($!{demandSheetCombineVO.demandSheetVO.userCreated} == $!{user.memberId})
+                        <li class=" m-btn btn-s q-btn br" >
+                            <a style="color: #fff" onclick="cancel('$!{demandSheetCombineVO.demandSheetVO.uuid}')" >
+                                Cancel
+                            </a>
+                        </li>
+                    #end
+                #end
+                <li class=" m-btn btn-s q-btn br" >
+                    <a href="javascript:history.back()" style="color: #fff">
+                        Back
+                    </a>
+                </li>
+                <br>
+            </ul>
+        </div>
+    </div>
+    <div class="m-box q-box2">
+        <span class="q-tit">Quotation List</span>
+
+        <table class="layui-table">
+            <colgroup>
+                <!--<col width="150">-->
+                <!--<col width="200">-->
+                <!--<col>-->
+            </colgroup>
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Status</th>
+                <th>Seller</th>
+                <th>Quantity</th>
+                <th>Incoterms</th>
+            #*       <th>Discharge<br/>
+                       Port</th>*#
+                <th>Payment<br/>
+                    Terms</th>
+                <th>Premium<br/>
+                    /Discount</th>
+                <th>Create Time</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach($record in $!{biddingSheetCombineVOList})
+                <tr>
+                    <td>$!{record.biddingSheetVO.serialNumber}</td>
+                    <td>$!{record.biddingSheetVO.biddingSheetStatusVO.enName}</td>
+                    <td>$!{record.salerInfoVO.enterpriseName}</td>
+                    <td>$!{record.productInfoVO.quantityAsString}</td>
+                    <td>$!{record.productInfoVO.tradeTermVO.enName}</td>
+                #*<td>$!{record.transportInfoVO.dischargePortVO.enName}</td>*#
+                    <td title="$!{record.pricingInfoVO.paymentTerm}">$!{record.pricingInfoVO.paymentTerm}</td>
+                    <td>$!{record.pricingInfoVO.premiumsAndDiscountsAsString}</td>
+                    <td>$!{record.biddingSheetVO.gmtCreated}</td>
+                    <td class="table-active">
+                        <a href="$appServer.get('pages/back/my_demand_list/demand_bidding_compare.htm').put('biddingUuid',$!{record.biddingSheetVO.uuid})">
+                            <img src="$appServer.get('/images/xq.png')" alt="">
+                            <span class="table-mouse">
+                                Details
+                            </span>
+                        </a>
+                        #if($!{record.biddingSheetVO.biddingSheetStatusVO.code} == '1' )
+                            #if($!{demandSheetCombineVO.demandSheetVO.userCreated} == $!{user.memberId})
+                                <a href="javascript:accept('$!{record.biddingSheetVO.uuid}')">
+
+                                    <img src="$appServer.get('/images/dh.png')" alt="">
+                                    <span class="table-mouse">
+                                    Accept
+                                </span>
+                                </a>
+                            #end
+                        #end
+                    #*<a href="javascript:void(0);">
+                        <img src="$appServer.get('/images/1.png')" alt="">
+                        <span class="table-mouse">
+                            Compare
+                        </span>
+                    </a>*#
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_demand_list/demand_bidding_inventory.js?js_version=04260827'))

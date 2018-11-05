@@ -1,0 +1,23 @@
+
+<div class="enter-cont clearfix">
+    <div class="enter-tx">
+        #if(${person.headImg} && $person.headImg!="")
+            <img src='$!{uploadServer}/img/$!{person.headImg}.img_180_180.img'>
+        #else`
+            <img src="../images/enter_tx.png">
+        #end
+    </div>
+    <div class="enter-xx">
+
+        <ul class="enter-list clearfix">
+            #if(!$authUtils.checkRole("enter_admin"))
+                <li>真实姓名：$!person.name #if(!$person)<a href="$appServer.get('center/member/personFill.htm')"  >去认证</a>#else<a href="javascript:void(0))">已认证</a> #end</li>
+            #end
+            <li>用户名：$!member.userName </li>
+            <li>登录密码：<a href="$systemServer.get('member/password_modify.htm')">修改</a></li>
+            <li class="enter-rz">手机：$!member.mobile #*<a href="">已验证</a>*#</li>
+            <li>邮箱：$!member.email #*<a href="">添加</a>*#</li>
+        ##    <li>安全等级：<span class="enter-dj"><span class="enter-jd"></span></span></li>
+        </ul>
+    </div>
+</div>

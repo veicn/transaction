@@ -1,0 +1,4 @@
+<!--飘窗-->
+$contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+
+$contain.get("/common/htmlend.htm")

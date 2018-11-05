@@ -1,0 +1,64 @@
+#set($pagerUuid = $dateUtil.getToday().getTimeInMillis())
+<form action="$!_pageInfo.basePath" id="pager-$!pagerUuid" method = "$_pageInfo.requestMethod">
+    <div class="c-page page">
+    ##首页
+        #set($url="javascript:Pager.jump("+1+","+$pagerUuid+")")
+        <#if($_pageInfo.pageNum==1)span#{else}a#end class="c-page-txt" href="$url" >&nbsp;Start</#if($_pageInfo.pageNum==1)span#{else}a#end >
+    ##上一页
+        #set($url="javascript:Pager.jump("+$_pageInfo.prePage+","+$pagerUuid+")")
+        <#if($_pageInfo.isFirstPage)span#{else}a#end class="c-page-txt" href="$url" >&lt;&nbsp;</#if($_pageInfo.isFirstPage)span#{else}a#end >
+    ##循环导航页面
+        #foreach($no in $_pageInfo.navigatepageNums)
+            #set($url="javascript:Pager.jump("+$no+","+$pagerUuid+")")
+            <a class="c-page-num #if($_pageInfo.pageNum == $no)c-cur#end " href="$url">$no</a>
+        #end
+
+    ##下一页
+        #set($url="javascript:Pager.jump("+$_pageInfo.nextPage+","+$pagerUuid+")")
+        <#if($_pageInfo.isLastPage)span#{else}a#end class="c-page-txt" href="$url" >&nbsp;&gt;</#if($_pageInfo.isLastPage)span#{else}a#end >
+
+    ##尾页
+        #set($url="javascript:Pager.jump("+$_pageInfo.pages+","+$pagerUuid+")")
+        <#if($_pageInfo.pageNum==$_pageInfo.pages)span#{else}a#end class="c-page-txt" href="$url" >&nbsp;End</#if($_pageInfo.pageNum==$_pageInfo.pages)span#{else}a#end >
+
+    ##        共有
+    ##    <span class="c-page-amount">共$!_pageInfo.pages页，到第<input class="c-page-inp pages" type="text" value="$!{_pageInfo.pageNum}" data-max="$!_pageInfo.pages" data-min="1" oninput="this.value=this.value.replace(/\D/g,'')" >页</span>
+    ##    <a class="c-page-txt" onclick="Pager.jumpToInput('$!pagerUuid',$('.page .pages'))">跳转</a>
+        #foreach($entry in $_pageInfo.parameterMap.entrySet())
+            #if("$!entry.value" != "")
+                <input type="hidden" name="$!entry.key" value="$!entry.value">
+            #end
+        #end
+        <input type="hidden" id="pageinp" name="_p">
+    </div>
+</form>
+
+
+<script language="javascript">
+    var Pager = Pager || {pageSize:"$_pageInfo.pageSize"};
+    (function(P,$ ){
+        Pager.jump = function(pageNumber,pagerUuid){
+            var form = $('#pager-'+pagerUuid)
+            form.find('#pageinp').val(pageNumber + "" + "_" + Pager.pageSize + "_$_pageInfo.total");
+            form.submit();
+        }
+        Pager.setPageSize = function(pagesize){
+            Pager.pageSize = pagesize;
+        }
+        Pager.refresh = function(){
+            Pager.jump($_pageInfo.pageNum,'$pagerUuid');
+        }
+        Pager.jumpToInput=function(pagerUuid,dom){
+            var dom$ = $(dom);
+            var val = dom$ .val();
+            if($(dom).data('max') < val) {
+                val = $(dom).data('max');
+            }else if($(dom).data('min') > val){
+                val = $(dom).data('min');
+            }
+            Pager.jump(val,pagerUuid);
+        }
+    })(Pager,jQuery);
+</script>
+
+

@@ -1,0 +1,173 @@
+<h1>计价转换</h1>
+<span></span><!--横线-->
+<ul class="cg-tradt-n">
+    <i class="c-ico ico-sszic"></i>
+    <li class="clearfix">
+        <p>
+            <span>品种</span>
+            <select class="oilTypeList" id="originOilType">
+                <option value=''>请选择</option>
+            </select>
+        </p>
+        <p>
+            <span>合约</span>
+            <select class="symbolDateList" id="originTime">
+            </select>
+        </p>
+    </li>
+    <li class="clearfix">
+        <p>
+            <span>品种</span>
+            <select class="oilTypeList" id="targetOilType">
+                <option value=''>请选择</option>
+            </select>
+        </p>
+        <p>
+            <span>合约</span>
+            <select class="symbolDateList" id="targetTime">
+            </select>
+        </p>
+    </li>
+    <li>
+        <a onclick="getPriceDifferece()" class="cg-gj-ann">转&nbsp;&nbsp;&nbsp;&nbsp;换</a>
+    </li>
+    <li class="cg-tradt-tet">
+        <p id="result">预估转换成本：</p>
+        <em>（基于近期价格数据计算，结果仅供参考）</em>
+    </li>
+</ul>
+
+<script>
+    layui.layer.closeAll();
+    var layer = layui.layer;
+
+    $(function() {
+        getOilTypeList();
+
+        /* 初始化 */
+        var selectDoms = $('.oilTypeList');
+        $(selectDoms).each(function(index, selectDom) {
+            var oilType = $(selectDom).val();
+            if (oilType != null && '' != oilType) {
+                setSymbolDateSelect(selectDom)
+            }
+        })
+
+        /* 绑定onchange */
+        $('.oilTypeList').change(function() {
+            setSymbolDateSelect($(this));
+        });
+    });
+
+    function setSymbolDateSelect(select) {
+        var oilType = $(select).val();
+        if (oilType == null || "" == oilType) {
+            return;
+        }
+
+        var callback = function(datas) {
+            var correspondingSymbolDateSelect = $(select).parent().siblings(":last").children(".symbolDateList");
+            $(correspondingSymbolDateSelect).empty();
+
+            $(datas).each(function(index, data) {
+                var dateString = data.yearMonthPair;
+
+                $(correspondingSymbolDateSelect).append(
+                        "<option value='" + dateString + "'>" + dateString + "</option>"
+                );
+            });
+        }
+
+        getSymbolDateList(oilType, callback);
+    }
+
+    function getPriceDifferece() {
+        var originOilType = $('#originOilType').val();
+        if (originOilType == null || '' == originOilType) {
+            layer.alert('请选择待转油种');
+            return;
+        }
+
+        var originTime = $('#originTime').val();
+        if (originTime == null || '' == originTime) {
+            layer.alert('请选择待转油种时间');
+            return;
+        }
+
+        var targetOilType = $('#targetOilType').val();
+        if (targetOilType == null || '' == targetOilType) {
+            layer.alert('请选择目标油种');
+            return;
+        }
+
+        var targetTime = $('#targetTime').val();
+        if (targetTime == null || '' == targetTime) {
+            layer.alert('请选择目标油种时间');
+            return;
+        }
+
+        var param = {
+            "originOilModel": {
+                "oilType": originOilType,
+                "year": parseInt(originTime.substr(0, 4)),
+                "month": parseInt(originTime.substr(4, 2))
+            },
+            "targetOilModel": {
+                "oilType": targetOilType,
+                "year": parseInt(targetTime.substr(0, 4)),
+                "month": parseInt(targetTime.substr(4, 2))
+            }
+        };
+
+        $.ajax({
+            url: "$appServer.get('/oilPriceConvertion/getPriceDifference.json')",
+            type: 'post',
+            data: JSON.stringify(param),
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function(result) {
+                if (!result || result.status != 0) {
+                    layer.alert('获取转价结果失败');
+                    return;
+                }
+
+                $('#result').html("预估转换成本：" + result.datas);
+            }
+        });
+    }
+
+    function getSymbolDateList(oilType, callback) {
+        $(".symbolDateList").attr("disabled","disabled");
+
+        $.get("$appServer.get('/oilPriceConvertion/getSymbolDateList.json')", {
+            "oilType": oilType
+        }, function(result) {
+            $(".symbolDateList").removeAttr("disabled");
+
+            if (!result || result.status != 0) {
+                layer.alert('获取合约日期列表失败');
+                return;
+            }
+
+            var datas = result.datas;
+            callback(datas);
+        });
+    }
+
+    function getOilTypeList() {
+        $.get("$appServer.get('/oilPriceConvertion/getOilModelTypeList.json')", function(result) {
+            if (!result || result.status != 0) {
+                layer.alert('获取油种列表失败');
+                return;
+            }
+
+            var datas = result.datas;
+            $(datas).each(function(index, data) {
+                $('.oilTypeList').append(
+                    "<option value='" + data + "'>" + data + "</option>"
+                );
+            });
+        });
+    }
+
+</script>

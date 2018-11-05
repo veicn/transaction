@@ -1,0 +1,115 @@
+  <!-- 内容区域 -->
+    <div class="s-mod">
+      <div class="s-mod-block">
+        <div class="s-mod-btit">Vessel Details<span><a href="javascript:;" class="addShip">+ Add Vessel</a></span></div>
+        <div class="s-mod-bcont s-mod-bcont4">
+          <form class="s-form s-form-cont s-form-cont2" action="">
+            <ul>
+              <li class="s-form-item">
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Vessel Name：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input width_100 name" name="name" id="name" maxlength="100" >
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Vessel Type：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input width_100" id="type" name="type" readonly="true" autocomplete="off" maxlength="100">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Built：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" name="completeDate" id="completeDate" readonly="true" autocomplete="off">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Quantity：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="loadQuantity" name="loadQuantity" readonly="true" autocomplete="off" maxlength="15">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Position：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="position" name="position" maxlength="100" autocomplete="off">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>open：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="date3" readonly="readonly" name="open" placeholder="Please select a date"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>ETA Fujairah：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="date1" readonly="readonly" name="eta" placeholder="Please select a date"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">ETA Cabinda：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="date2" readonly="readonly" name="etaCabinda" placeholder="Please select a date"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label"><em>*</em>Ship Owner：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input owner" name="owner" id="owner" maxlength="100" >
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Broker：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input broker" name="broker" id="broker" maxlength="100" >
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Post Date：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="date4" readonly="true" name="publishTime" placeholder="Default"/>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Effective(days)：</label>
+                  <div class="s-input-inline">
+                  	<select class="s-select" id="period" name="period">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7" selected="true">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Poster：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="epMemberName" readonly="true" name="epMemberName" maxlength="100" autocomplete="off">
+                  </div>
+                </div>
+                <div class="s-inline">
+                  <label class="s-form-label">Remarks：</label>
+                  <div class="s-input-inline">
+                    <input type="text" class="s-input" id="remark" name="remark" maxlength="100" autocomplete="off">
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+      <div class="s-btn-box">
+        <button class="s-btn s-btn-blue saveBtn">Publish</button>
+        <button class="s-btn s-btn-primary returnBtn">Back</button>
+      </div>
+	  </div>
+	  
+  	  <script src="../transport/js/shipPlate/editShipPlate.js"></script>

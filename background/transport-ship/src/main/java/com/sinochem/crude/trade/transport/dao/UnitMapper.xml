@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.UnitMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.Unit" id="UnitDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Unit">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.Unit" id="Unit">
+		<result property="unitId" column="UNIT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="chName" column="CH_NAME" />
+		<result property="usName" column="US_NAME" />
+		<result property="type" column="TYPE" />
+		<result property="isDefaultUnit" column="IS_DEFAULT_UNIT" />
+		<result property="rank" column="RANK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="Unit" parameterType="com.sinochem.crude.trade.transport.domain.Unit">
+	select * from t_ship_unit
+	where
+		 ALIVE_FLAG='1'
+		<if test="unitId!=null and unitId!=''">and  UNIT_ID=#{unitId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="chName!=null and chName!=''">and  CH_NAME=#{chName}</if>
+		<if test="usName!=null and usName!=''">and  US_NAME=#{usName}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="isDefaultUnit!=null and isDefaultUnit!=''">and  IS_DEFAULT_UNIT=#{isDefaultUnit}</if>
+		<if test="rank!=null and rank!=''">and  RANK=#{rank}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="Unit">
+			select
+			* from t_ship_unit
+			where
+		    UNIT_ID=#{unitId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="Unit">
+			select
+			* from t_ship_unit
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.Unit">
+		update t_ship_unit
+		<set>
+         UNIT_ID=#{unitId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="chName!=null">,CH_NAME = #{chName}</if>
+		<if test="usName!=null">,US_NAME = #{usName}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="isDefaultUnit!=null">,IS_DEFAULT_UNIT = #{isDefaultUnit}</if>
+		<if test="rank!=null">,RANK = #{rank}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+       	 UNIT_ID=#{unitId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.Unit"  useGeneratedKeys="true" keyProperty="unitId" >
+		insert  into t_ship_unit (				UNIT_ID
+						,UUID
+						,CH_NAME
+						,US_NAME
+						,TYPE
+						,IS_DEFAULT_UNIT
+						,RANK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						)
+		values(		#{unitId}
+						,#{uuid}
+						,#{chName}
+						,#{usName}
+						,#{type}
+						,#{isDefaultUnit}
+						,#{rank}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_unit
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 UNIT_ID=#{unitId} 
+																																																																																	
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  UNIT_ID as "unitId" 
+						 ,   UUID as "uuid" 
+						 ,   CH_NAME as "chName" 
+						 ,   US_NAME as "usName" 
+						 ,   TYPE as "type" 
+						 ,   IS_DEFAULT_UNIT as "isDefaultUnit" 
+						 ,   RANK as "rank" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						from t_ship_unit
+		where
+			ALIVE_FLAG='1'
+			<if test="unitId!=null and unitId!=''">and  UNIT_ID=#{unitId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="chName!=null and chName!=''">and  CH_NAME=#{chName}</if>
+			<if test="usName!=null and usName!=''">and  US_NAME=#{usName}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="isDefaultUnit!=null and isDefaultUnit!=''">and  IS_DEFAULT_UNIT=#{isDefaultUnit}</if>
+			<if test="rank!=null and rank!=''">and  RANK=#{rank}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_unit 
+		where
+		 ALIVE_FLAG='1'
+			<if test="unitId!=null and unitId!=''">and  UNIT_ID=#{unitId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="chName!=null and chName!=''">and  CH_NAME=#{chName}</if>
+			<if test="usName!=null and usName!=''">and  US_NAME=#{usName}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="isDefaultUnit!=null and isDefaultUnit!=''">and  IS_DEFAULT_UNIT=#{isDefaultUnit}</if>
+			<if test="rank!=null and rank!=''">and  RANK=#{rank}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_unit
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="unitId!=null and unitId!=''">and  UNIT_ID=#{unitId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="chName!=null and chName!=''">and  CH_NAME=#{chName}</if>
+		<if test="usName!=null and usName!=''">and  US_NAME=#{usName}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="isDefaultUnit!=null and isDefaultUnit!=''">and  IS_DEFAULT_UNIT=#{isDefaultUnit}</if>
+		<if test="rank!=null and rank!=''">and  RANK=#{rank}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_unit
+		<set>
+         UNIT_ID=#{unitId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="chName!=null">,CH_NAME = #{chName}</if>
+		<if test="usName!=null">,US_NAME = #{usName}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="isDefaultUnit!=null">,IS_DEFAULT_UNIT = #{isDefaultUnit}</if>
+		<if test="rank!=null">,RANK = #{rank}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="unitId!=null and unitId!=''">and  UNIT_ID=#{unitId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="chName!=null and chName!=''">and  CH_NAME=#{chName}</if>
+		<if test="usName!=null and usName!=''">and  US_NAME=#{usName}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="isDefaultUnit!=null and isDefaultUnit!=''">and  IS_DEFAULT_UNIT=#{isDefaultUnit}</if>
+		<if test="rank!=null and rank!=''">and  RANK=#{rank}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	<!-- 根据UUID逻辑删除对象 -->
+	<update id="deleteRecordsByUuid" parameterType="hashmap">
+		update t_ship_unit
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	<!-- 根据UUID修改对象 -->
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.transport.domain.Unit">
+		update t_ship_unit
+		<set>
+			UPDATE_USER = #{updateUser}
+		<if test="chName!=null">,CH_NAME = #{chName}</if>
+		<if test="usName!=null">,US_NAME = #{usName}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="isDefaultUnit!=null">,IS_DEFAULT_UNIT = #{isDefaultUnit}</if>
+		<if test="rank!=null">,RANK = #{rank}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	<!-- 修改默认参考单位 -->
+	<update id="updateDefaultUnit" parameterType="com.sinochem.crude.trade.transport.domain.Unit">
+		update t_ship_unit
+		<set>
+			UPDATE_USER = #{updateUser}
+		,IS_DEFAULT_UNIT = '0'
+		</set>
+		where
+		ALIVE_FLAG = '1'
+		and TYPE = #{type}
+		and IS_DEFAULT_UNIT = '1'
+	</update>
+	<!-- 根据中文名称查询单位对象 -->
+	<select id="findByName" parameterType="string" resultMap="Unit">
+	select * from t_ship_unit
+	where ALIVE_FLAG = '1'
+	and CH_NAME = #{chName}
+	</select>
+	
+</mapper>

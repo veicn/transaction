@@ -1,0 +1,15 @@
+<div class="nav-wrap">
+    <div class="inner">
+        <ul class="nav clearfix">
+            <li #if($order == 1) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('')">Home</a></li>
+            <li #if($order == 10) class="nav-item act" #else class="nav-item" #end><a href="$memberServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" target="_blank">Smart Factory</a></li>
+            <li #if($order == 2) class="nav-item act" #else class="nav-item" #end><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')">Trading</a></li>
+            <li #if($order == 4) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/front_stay_tuned.htm')">Enterprise Zone</a></li>
+            <li #if($order == 5) class="nav-item act" #else class="nav-item" #end><a href="$shipServer.get('/page/#/')">Shipping</a></li>
+            <li #if($order == 6) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/front_stay_tuned.htm')">Financing</a></li>
+            <li #if($order == 7) class="nav-item act" #else class="nav-item" #end><a href="$appServer.get('/futures/index.htm?order=7')">Futures&Paper</a></li>
+            <li #if($order == 8) class="nav-item act" #else class="nav-item" #end><a href="$infoServer.get('page/#/encyclopedia')">Encyclopedia</a></li>
+            <li #if($order == 9) class="nav-item act" #else class="nav-item" #end><a href="$infoServer.get('page/#/')">News&Reports</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,348 @@
+#css($appServer.get('/css/work/goodsDetails.css?css_version=03280827'))
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+<SCRIPT>
+
+
+    var cflag=2;
+</SCRIPT>
+<!--main-->
+<main id="main">
+#*引入右边对比栏*#
+    $contain.get("/pages/components/compare_widget.htm")
+
+    <div class="g-content center clearfix">
+        <div class="banner clearfix">
+            <div class="banner-left clearfix">
+                <div class="ban" id="demo1">
+                    <div class="ban2" id="ban_pic1">
+                        <ul>
+                            <li><img src='$appServer.get("/product_images/$!{productInfoVO.productCategoryVO.code}/horizontal.jpg")' width="480" height="320" alt=""></li>
+                            <div class="mall-state">
+                                <p>  $!{demandSheetVO.demandSheetStatusVO.enName}</p>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="min_pic">
+                        <div class="prev_btn1" id="prev_btn1"><img src="../images/left-goods.png" width="15" height="14"  alt=""></div>
+                        <!--  <div class="num clearfix" id="ban_num1">
+                            <ul>
+                                <li><img src="$imageServer.get('/images/oil.png')" width="90" height="60" alt=""></li>
+                                <li><img src="$imageServer.get('/images/det_img.png')" width="90" height="60" alt=""></li>
+                                <li><img src="$imageServer.get('/images/cooperation6.jpg')" width="90" height="60" alt=""></li>
+                                <li><img src="$imageServer.get('/images/oil.png')" width="90" height="60" alt=""></li>
+                            </ul>
+                        </div> -->
+                        <!-- <div class="next_btn1" id="next_btn1"><img src="$imageServer.get('/images/right-goos.png')" width="15" height="14"  alt=""></div> -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="banner-right clearfix">
+                <span class="r-cont-tit"></span>
+                <span class="file-name" style="display:none" id="SaleType">$!{demandSheetVO.demandTypeVO.code}</span>
+                <span class="r-cont-tab">$!{productInfoVO.productCategoryVO.enName} ($!{productInfoVO.productSpecificationVO.enName})</span>
+                <ul class="g-box" >
+                    <!-- #*<li>
+                        <span>Category :$!{productInfoVO.productCategoryVO.enName}</span>
+                    </li>*# -->
+                    <li>
+                        <span>Quantity ：</span>
+                        <span>$!{productInfoVO.quantityAsString} $!{productInfoVO.quantityUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Incoterms ：</span>
+                        <span>$!{productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+                #*<li>
+                    <span>Export Type ：</span>
+                    <span>$!{productInfoVO.exportTypeVO.enName}</span>
+                </li>*#
+                    <li>
+                        <span>Tolerance ：</span>
+                        <span>+/- $!{productInfoVO.tolerance}% at OT</span>
+                    </li>
+                    <li>
+                        <span>Quality Standard ：</span>
+                        <span class="file-name" style="display:none" id="qualityStandard">$!{productInfoVO.qualityStandard}</span>
+                        <span id="qualityStandardName" style="text-decoration: underline;cursor: pointer;left:266px;">$!{productInfoVO.qualityStandardName}</span>
+                    </li>
+                    <li>
+                        <span>Expired Time ：</span>
+                        <span>$!{productInfoVO.deadlineAsString}</span>
+                    </li>
+                #* #if($!{saleSheetVO.saleTypeVO.code} == '1')
+                     <li>
+                         <span>Bid Valid To ：</span>
+                         <span>$!{productInfoVO.bidOpeningDateAsString}</span>
+                     </li>
+                 #end*#
+                </ul>
+                <div class="g-btn">
+                    <em class=" button-b1">
+                        #if($authUtils.checkRole("sales_trader", "buy_trader"))
+                            #if($!{demandSheetVO.demandSheetStatusVO.code} == '2' && $!{demandSheetVO.enterpriseId} != $!{userId})
+                                #if($!{productInfoVO.overdue} == false)
+                                    #if($!{demandSheetVO.demandTypeVO.code} == '1')
+                                        <a href="$appServer.get('pages/front/product_bidding/demand_index.htm').put('uuid',$!{demandSheetVO.uuid})"  class="br Bid">
+                                            Bid
+                                        </a>
+                                    #end
+                                    #if($!{demandSheetVO.demandTypeVO.code} == '2')
+                                        <a href="$appServer.get('pages/front/product_bidding/demand_index.htm').put('uuid',$!{demandSheetVO.uuid})"  class="br Quote">
+                                            Quote
+                                        </a>
+                                    #end
+                                #end
+                            #end
+                        #end
+
+                        <a href="javascript:;" onclick="compare($!{demandSheetVO.id},'$!{demandSheetVO.uuid}','$!{productInfoVO.productCategoryVO.enName}' + ' '+'$!{productInfoVO.productSpecificationVO.enName}','$appServer.get("/product_images/$!{productInfoVO.productCategoryVO.code}/horizontal.jpg")')" class="br">
+                            Compare
+                        </a>
+                    </em>
+                </div>
+            </div>
+
+        </div>
+        <div class="r-content o-content">
+            <span class="r-cont-tit">Details</span>
+            <p class="benchmark-txt"><span>Benchmark ：</span>
+                <em>
+                    Mean of $!{pricingInfoVO.priceSourceVO.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO.enName} under $!{pricingInfoVO.priceRegionVO.enName}
+                </em>
+            </p>
+            #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                <p class="benchmark-txt" ><span style="margin-left:60px ">Benchmark2 ：</span>
+                    <em>
+                        Mean of $!{pricingInfoVO.priceSourceVO2.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO2.enName} under $!{pricingInfoVO.priceRegionVO2.enName}
+                    </em>
+                </p>
+            #end
+            <ul>
+                <li>
+                    <span>Premium ：</span>
+                    <span>$!{pricingInfoVO.premiumsAndDiscountsAsString} $!{pricingInfoVO.currencyVO.enName}/$!{pricingInfoVO.pricingUnitVO.enName}</span>
+                </li>
+                <li>
+                    <span>Pricing Period ：</span>
+                    <span>$!{pricingInfoVO.pricingPeriod}</span>
+                </li>
+                <li>
+                    <span>Payment Terms ：</span>
+                    <span>$!{pricingInfoVO.paymentTerm}</span>
+                </li>
+                <li>
+                    <span>Quantity DTER ：</span>
+                    <span>$!{pricingInfoVO.settlementQuantity}</span>
+                </li>
+                <li>
+                    <span>Inspection ：</span>
+                    <span> $!{pricingInfoVO.inspectionVO.enName}</span>
+                </li>
+                <li>
+                    <span>Law ：</span>
+                    <span>$!{pricingInfoVO.law}</span>
+                </li>
+
+                <li class="formuli">
+                    <span>Pricing Formula ：</span>
+                    <span class="formulspan">
+                        #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                            <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                        #else
+                            <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                        #end
+                    </span>
+                </li>
+
+                <li class="term-txtbox">
+                    <span class="ntma">Other Terms ：</span>
+                ##<em class="terms-text">$!{otherInfoVO.otherTerm}</em>
+                    <textarea class="terms-text" readonly style="border: none; font-size: 14px; color: #333;resize:none;">$!{otherInfoVO.otherTerm}</textarea>
+                </li>
+            </ul>
+        #*<li>
+            <span> Quantity DTER ：</span>
+            <span>$!{pricingInfoVO.settlementQuantityVO.enName}</span>
+        </li>
+        <li>
+            <span>Benchmark ：</span>
+            <span>$!{pricingInfoVO.pricingBenchmarkVO.enName}</span>
+        </li>
+        <li>
+            <span>Source ：</span>
+            <span>$!{pricingInfoVO.priceSourceVO.enName}</span>
+        </li>
+        <li>
+            <span>Region ：</span>
+            <span>$!{pricingInfoVO.priceRegionVO.enName}</span>
+        </li>
+        <li>
+            <span>Currency ：</span>
+            <span>$!{pricingInfoVO.currencyVO.enName}</span>
+        </li>
+        <li>
+            <span>Unit ：</span>
+            <span>$!{pricingInfoVO.pricingUnitVO.enName}</span>
+        </li>
+        <li>
+            <span>Pricing Period ：</span>
+            <span>$!{pricingInfoVO.pricingPeriodVO.enName}</span>
+        </li>
+        <li>
+            <span>Payment Terms ：</span>
+            <span>$!{pricingInfoVO.paymentTermVO.enName}</span>
+        </li>
+*#
+
+        </div>
+        <div class="r-content o-content">
+            <span class="r-cont-tit">Transportation</span>
+            <ul>
+                <li>
+                    <span>Transport Mode ：</span>
+                    <span>$!{transportInfoVO.transportModeVO.enName}</span>
+                </li>
+                <li>
+                    <span>Laycan ：  </span>
+                    <span>$!{transportInfoVO.laycanStartDateAsString}-$!{transportInfoVO.laycanEndDateAsString}</span>
+                </li>
+                <li>
+                    <span>Laytime ：</span>
+                    <span>$!{transportInfoVO.laytimeAsString} H+6</span>
+                </li>
+
+                <li>
+                    <span>Demurrage Rate ：</span>
+                    <span> #if($!transportInfoVO.demurrageRateVO.code=='1')  $!transportInfoVO.demurrageRateNumAsString $!transportInfoVO.demurrageRateVO.enName #end
+                           #if($!transportInfoVO.demurrageRateVO.code=='2')  $!transportInfoVO.demurrageRateVO.enName  #end
+
+                    </span>
+                </li>
+
+
+                #if($!{productInfoVO.tradeTermVO.code} == '1')
+                    <li>
+                        <span>Load Port ：</span>
+                        <span> $!{transportInfoVO.loadingPort},$!{transportInfoVO.loadingCountry} </span>
+                    </li>
+                #end
+                #if($!{productInfoVO.tradeTermVO.code} == '2' || $!{productInfoVO.tradeTermVO.code} == '3')
+                    <li>
+                        <span>Discharge Port ：</span>
+                        <span> $!{transportInfoVO.dischargeCountry} , $!{transportInfoVO.dischargePort}</span>
+                    </li>
+                #end
+
+            </ul>
+        </div>
+    #*<div class="r-content">
+        <span class="r-cont-tit">Seller Berth</span>
+        $contain.get('/pages/components/berth_list2.htm').setParam("shipPortCode", $!{transportInfoVO.loadingPortVO.code})
+    </div>*#
+        <div class="r-content o-content">
+            <span class="r-cont-tit">Buyer</span>
+            <div class="address-txt">
+                <label>Company ：</label>
+                <span>$!{buyerInfoVO.enterpriseName} </span>
+            </div>
+            <div class="address-txt">
+                <label>Address ：</label>
+                <span>$!{buyerInfoVO.address}</span>
+            </div>
+            <ul>
+            #*<li class="address-li">
+                <span>Company ：</span>
+                <span>we dsrd dsfd dsd dsrd dsfdrs dsrd dsd fds dtsdt dsdf dfsd we dsrd dsfd dsd dsrd dsfdrs dsrd dsd fds dtsdt dsdf dfsd </span>
+            </li>
+            <li class="address-li">
+                <span>Address ：</span>
+                <span>$!{buyerInfoVO.address}</span>
+            </li>*#
+                <li>
+                    <span>Contact Person ：</span>
+                    <span>$!{buyerInfoVO.traderName}</span>
+                </li>
+                <li>
+                    <span>Email ：</span>
+                    <span>$!{buyerInfoVO.email}</span>
+                </li>
+                <li>
+                    <span>Tel ：</span>
+                    <span>$!{buyerInfoVO.telephone}</span>
+                </li>
+                <li>
+                    <span>Fax ：</span>
+                    <span>$!{buyerInfoVO.fax}</span>
+                </li>
+
+                <li>
+                    <span></span>
+                    <span></span>
+                </li>
+
+                <li>
+                    <span></span>
+                    <span></span>
+                </li>
+
+            </ul>
+        </div>
+    #*<div class="r-content o-content">
+        <span class="r-cont-tit">Other Info</span>
+        <ul>
+            <li>
+                <span>Other Terms：</span>
+                <span>$!{otherInfoVO.otherTerm}</span>
+            </li>
+
+        </ul>
+    </div>*#
+    </div>
+    </div>
+</main>
+
+#js("$appServer.get('js/work/L_checked.js?js_version=03280827')")
+#js("$appServer.get('js/common/idangerous.swiper2.7.6.js?js_version=03280827')")
+#js("$appServer.get('/js/common/validate.js?js_version=03280827')")
+#js("$appServer.get('/js/common/pikaday.js?js_version=03280827')")
+#js("$appServer.get('/js/common/common.js?js_version=03280827')")
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/pic_tab.js?js_version=03280827'))
+#js($appServer.get('/script/pages/front/product_detail/index.js?js_version=03280827'))
+<script type="text/javascript">
+    //$("#Quote").attr("style","display:none");
+    var SaleType = $("#SaleType").html();
+    if(SaleType=='1'){
+        $(".Quote").hide();
+    }
+    if(SaleType=='2'){
+        $(".Bid").hide();
+    }
+
+    jq('#demo1').banqh({
+        box:"#demo1",//总框架
+        pic:"#ban_pic1",//大图框架
+        pnum:"#ban_num1",//小图框架
+        prev_btn:"#prev_btn1",//小图左箭头
+        next_btn:"#next_btn1",//小图右箭头
+        pop_prev:"#prev2",//弹出框左箭头
+        pop_next:"#next2",//弹出框右箭头
+        pop_div:"#demo2",//弹出框框架
+        pop_pic:"#ban_pic2",//弹出框图片框架
+        pop_xx:".pop_up_xx",//关闭弹出框按钮
+        mhc:".mhc",//朦灰层
+        autoplay:true,//是否自动播放
+        interTime:5000,//图片自动切换间隔
+        delayTime:400,//切换一张图片时间
+        pop_delayTime:400,//弹出框切换一张图片时间
+        order:0,//当前显示的图片（从0开始）
+        picdire:true,//大图滚动方向（true为水平方向滚动）
+        mindire:true,//小图滚动方向（true为水平方向滚动）
+        min_picnum:1,//小图显示数量
+        pop_up:true//大图是否有弹出框
+    })
+
+</script>

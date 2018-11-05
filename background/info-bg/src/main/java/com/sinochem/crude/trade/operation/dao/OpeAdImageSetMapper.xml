@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.operation.dao.OpeAdImageSetMapper">
+	<resultMap type="com.sinochem.crude.trade.operation.domain.OpeAdImageSet"
+		id="OpeAdImageSet">
+		<result property="adSetId" column="ad_set_id" />
+		<result property="adSysType" column="ad_sys_type" />
+		<result property="adPageNo" column="ad_page_no" />
+		<result property="adPageSet" column="ad_page_set" />
+		<result property="adSetDesc" column="ad_set_desc" />
+		<result property="adImageDesc" column="ad_image_desc" />
+		<result property="defaultImage" column="default_image" />
+		<result property="defaultLinkUrl" column="default_link_url" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+	</resultMap>
+
+	<select id="queryByEntitys" resultMap="OpeAdImageSet"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSet">
+		select * from t_ope_ad_image_set
+		where
+		ALIVE_FLAG='1'
+		<if test="adSetId!=null and adSetId!=''">and ad_set_id=#{adSetId}</if>
+		<if test="adSysType!=null and adSysType!=''">and ad_sys_type=#{adSysType}</if>
+		<if test="adPageNo!=null and adPageNo!=''">and ad_page_no=#{adPageNo}</if>
+		<if test="adPageSet!=null and adPageSet!=''">and ad_page_set=#{adPageSet}</if>
+		<if test="adSetDesc!=null and adSetDesc!=''">and ad_set_desc=#{adSetDesc}</if>
+		<if test="adImageDesc!=null and adImageDesc!=''">and ad_image_desc=#{adImageDesc}</if>
+		<if test="defaultImage!=null and defaultImage!=''">and default_image=#{defaultImage}</if>
+		<if test="defaultLinkUrl!=null and defaultLinkUrl!=''">and default_link_url=#{defaultLinkUrl}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="extend1!=null and extend1!=''">and EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and EXTEND10=#{extend10}</if>
+	</select>
+
+	<select id="findByPrimaryKey" resultMap="OpeAdImageSet">
+		select
+		* from
+		t_ope_ad_image_set
+		where
+		ad_set_id=#{adSetId}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<update id="updateRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSet">
+		update t_ope_ad_image_set
+		<set>
+			ad_set_id=#{adSetId}
+			<if test="adSysType!=null">,ad_sys_type = #{adSysType}</if>
+			<if test="adPageNo!=null">,ad_page_no = #{adPageNo}</if>
+			<if test="adPageSet!=null">,ad_page_set = #{adPageSet}</if>
+			<if test="adSetDesc!=null">,ad_set_desc = #{adSetDesc}</if>
+			<if test="adImageDesc!=null">,ad_image_desc = #{adImageDesc}</if>
+			<if test="defaultImage!=null">,default_image = #{defaultImage}</if>
+			<if test="defaultLinkUrl!=null">,default_link_url = #{defaultLinkUrl}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+			<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+			<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+			<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+			<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+			<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+			<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+			<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+			<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+			<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ad_set_id=#{adSetId}
+		and ALIVE_FLAG='1'
+	</update>
+
+	<insert id="insertRecord"
+		parameterType="com.sinochem.crude.trade.operation.domain.OpeAdImageSet">
+		insert into t_ope_ad_image_set ( ad_set_id
+		,ad_sys_type
+		,ad_page_no
+		,ad_page_set
+		,ad_set_desc
+		,ad_image_desc
+		,default_image
+		,default_link_url
+		,MARKET_ID
+		,LANG_VER
+		,ALIVE_FLAG
+		,CREATE_USER
+		,CREATE_DATE
+		,UPDATE_USER
+		,UPDATE_DATE
+		,EXTEND1
+		,EXTEND2
+		,EXTEND3
+		,EXTEND4
+		,EXTEND5
+		,EXTEND6
+		,EXTEND7
+		,EXTEND8
+		,EXTEND9
+		,EXTEND10
+		)
+		values( #{adSetId}
+		,#{adSysType}
+		,#{adPageNo}
+		,#{adPageSet}
+		,#{adSetDesc}
+		,#{adImageDesc}
+		,#{defaultImage}
+		,#{defaultLinkUrl}
+		,#{marketId}
+		,#{langVer}
+		,'1'
+		,#{createUser}
+		,#{createDate}
+		,#{updateUser}
+		,#{updateDate}
+		,#{extend1}
+		,#{extend2}
+		,#{extend3}
+		,#{extend4}
+		,#{extend5}
+		,#{extend6}
+		,#{extend7}
+		,#{extend8}
+		,#{extend9}
+		,#{extend10}
+		)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ope_ad_image_set
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE =
+			SYSDATE()
+		</set>
+		where
+		ad_set_id=#{adSetId}
+
+	</update>
+
+	<select id="queryRecords" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+		ad_set_id "adSetId"
+		, ad_sys_type "adSysType"
+		, ad_page_no
+		"adPageNo"
+		, ad_page_set "adPageSet"
+		, ad_set_desc "adSetDesc"
+		,
+		ad_image_desc "adImageDesc"
+		, default_image "defaultImage"
+		,
+		default_link_url "defaultLinkUrl"
+		, MARKET_ID "marketId"
+		, LANG_VER
+		"langVer"
+		, ALIVE_FLAG "aliveFlag"
+		, CREATE_USER "createUser"
+		,
+		CREATE_DATE "createDate"
+		, UPDATE_USER "updateUser"
+		, UPDATE_DATE
+		"updateDate"
+		, EXTEND1 "extend1"
+		, EXTEND2 "extend2"
+		, EXTEND3 "extend3"
+		, EXTEND4 "extend4"
+		, EXTEND5 "extend5"
+		, EXTEND6 "extend6"
+		, EXTEND7
+		"extend7"
+		, EXTEND8 "extend8"
+		, EXTEND9 "extend9"
+		, EXTEND10 "extend10"
+		from t_ope_ad_image_set
+		where
+		ALIVE_FLAG='1'
+		<if test="adSetId!=null and adSetId!=''">and ad_set_id=#{adSetId}</if>
+		<if test="adSysType!=null and adSysType!=''">and ad_sys_type=#{adSysType}</if>
+		<if test="adPageNo!=null and adPageNo!=''">and ad_page_no like '%' #{adPageNo} '%'</if>
+		<if test="adPageSet!=null and adPageSet!=''">and ad_page_set=#{adPageSet}</if>
+		<if test="adSetDesc!=null and adSetDesc!=''">and ad_set_desc like '%' #{adSetDesc} '%'</if>
+		<if test="adImageDesc!=null and adImageDesc!=''">and ad_image_desc=#{adImageDesc}</if>
+		<if test="defaultImage!=null and defaultImage!=''">and default_image=#{defaultImage}</if>
+		<if test="defaultLinkUrl!=null and defaultLinkUrl!=''">and default_link_url=#{defaultLinkUrl}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="extend1!=null and extend1!=''">and EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and EXTEND10=#{extend10}</if>
+		<if test="keyWord!=null and keyWord!=''"> and (ad_sys_type like '%' #{keyWord} '%' or ad_page_no
+			like '%' #{keyWord} '%'
+			or ad_image_desc like '%' #{keyWord} '%' or
+			ad_set_desc like '%' #{keyWord} '%')
+		</if>
+		order by CREATE_DATE desc
+	</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ope_ad_image_set
+		where
+		ALIVE_FLAG='1'
+		<if test="adSetId!=null and adSetId!=''">and ad_set_id=#{adSetId}</if>
+		<if test="adSysType!=null and adSysType!=''">and ad_sys_type=#{adSysType}</if>
+		<if test="adPageNo!=null and adPageNo!=''">and ad_page_no=#{adPageNo}</if>
+		<if test="adPageSet!=null and adPageSet!=''">and ad_page_set=#{adPageSet}</if>
+		<if test="adSetDesc!=null and adSetDesc!=''">and ad_set_desc=#{adSetDesc}</if>
+		<if test="adImageDesc!=null and adImageDesc!=''">and ad_image_desc=#{adImageDesc}</if>
+		<if test="defaultImage!=null and defaultImage!=''">and default_image=#{defaultImage}</if>
+		<if test="defaultLinkUrl!=null and defaultLinkUrl!=''">and default_link_url=#{defaultLinkUrl}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="extend1!=null and extend1!=''">and EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and EXTEND10=#{extend10}</if>
+
+	</select>
+
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ope_ad_image_set
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE =
+			SYSDATE()
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="adSetId!=null and adSetId!=''">and ad_set_id=#{adSetId}</if>
+		<if test="adSysType!=null and adSysType!=''">and ad_sys_type=#{adSysType}</if>
+		<if test="adPageNo!=null and adPageNo!=''">and ad_page_no=#{adPageNo}</if>
+		<if test="adPageSet!=null and adPageSet!=''">and ad_page_set=#{adPageSet}</if>
+		<if test="adSetDesc!=null and adSetDesc!=''">and ad_set_desc=#{adSetDesc}</if>
+		<if test="adImageDesc!=null and adImageDesc!=''">and ad_image_desc=#{adImageDesc}</if>
+		<if test="defaultImage!=null and defaultImage!=''">and default_image=#{defaultImage}</if>
+		<if test="defaultLinkUrl!=null and defaultLinkUrl!=''">and default_link_url=#{defaultLinkUrl}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="extend1!=null and extend1!=''">and EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and EXTEND10=#{extend10}</if>
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ope_ad_image_set
+		<set>
+			<if test="adSetId!=null">,ad_set_id = #{adSetId}</if>
+			<if test="adSysType!=null">,ad_sys_type = #{adSysType}</if>
+			<if test="adPageNo!=null">,ad_page_no = #{adPageNo}</if>
+			<if test="adPageSet!=null">,ad_page_set = #{adPageSet}</if>
+			<if test="adSetDesc!=null">,ad_set_desc = #{adSetDesc}</if>
+			<if test="adImageDesc!=null">,ad_image_desc = #{adImageDesc}</if>
+			<if test="defaultImage!=null">,default_image = #{defaultImage}</if>
+			<if test="defaultLinkUrl!=null">,default_link_url = #{defaultLinkUrl}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+			<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+			<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+			<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+			<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+			<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+			<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+			<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+			<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+			<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="adSetId!=null and adSetId!=''">and ad_set_id=#{adSetId}</if>
+		<if test="adSysType!=null and adSysType!=''">and ad_sys_type=#{adSysType}</if>
+		<if test="adPageNo!=null and adPageNo!=''">and ad_page_no=#{adPageNo}</if>
+		<if test="adPageSet!=null and adPageSet!=''">and ad_page_set=#{adPageSet}</if>
+		<if test="adSetDesc!=null and adSetDesc!=''">and ad_set_desc=#{adSetDesc}</if>
+		<if test="adImageDesc!=null and adImageDesc!=''">and ad_image_desc=#{adImageDesc}</if>
+		<if test="defaultImage!=null and defaultImage!=''">and default_image=#{defaultImage}</if>
+		<if test="defaultLinkUrl!=null and defaultLinkUrl!=''">and default_link_url=#{defaultLinkUrl}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="extend1!=null and extend1!=''">and EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and EXTEND10=#{extend10}</if>
+	</update>
+
+</mapper>

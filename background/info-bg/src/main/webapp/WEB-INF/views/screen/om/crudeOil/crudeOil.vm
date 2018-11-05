@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/crudeOil/crudeOil.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<script src="$imageServer.get('info/js/crudeOil/crudeOil.js')"></script>
+	<div class="pp15" id="layerDemo">	
+		<!--搜索条件-->
+		<div class="ry-banner ">
+            <div class="layui-form-item layui-container">
+                <form class="layui-form" action="crudeOil.htm" method="post">
+                    <label class="layui-form-label">原油名称：</label>
+                    <div class="layui-input-inline iw200">
+                        <input type="text" id="oilName" name="oilName" value="$!{query.oilName}" class="layui-input test1">   
+                    </div>
+                    <label class="layui-form-label iw80">原油产地：</label>
+                    <div class="layui-input-inline iw200">
+                        <input type="text" id="oilPlace" name="oilPlace" value="$!{query.oilPlace}" class="layui-input test2">   
+                    </div>
+                    <label class="layui-form-label iw80">原油区域：</label>
+                    <div class="layui-input-inline iw200">
+                        <input type="text" id="oilArea" name="oilArea" value="$!{query.oilArea}" class="layui-input test2">   
+                    </div>
+                    
+                    <div class="layui-form-item">
+                       #* <label class="layui-form-label">酸值：</label>
+                        <div class="layui-input-inline iw200">
+                            <input type="range" value="$!{query.oilAcidity}" max="100" mmin="0" step="1" id="oilAcidity" name="oilAcidity" class="mt10 iw200"/>   
+                        </div>
+                        <label class="layui-form-label">含硫量：</label>
+                        <div class="layui-input-inline iw200">
+                            <input type="range" value="$!{query.oilSulphur}" max="100" mmin="0" step="1" id="oilSulphur" name="oilSulphur" class="mt10 iw200"/>   
+                        </div>
+                        <label class="layui-form-label">API：</label>
+                        <div class="layui-input-inline iw200">
+                            <input type="range" value="$!{query.oilApi}" max="100" mmin="0" step="1" id="oilApi" name="oilApi" class="mt10 iw200"/> 
+                        </div>*#
+                    </div>
+                        <label class="layui-form-label">登记日期：</label>
+                        <div class="layui-input-inline iw200">
+                            <input type="text" name="dateStart" class="layui-input" id="dateStart" value="$!{query.dateStart}" placeholder="yyyy-MM-dd">   
+                        </div>
+                        <label class="layui-form-label iw10">--</label>
+                        <div class="layui-input-inline iw200">
+                            <input type="text" name="dateEnd" class="layui-input" id="dateEnd" value="$!{query.dateEnd}" placeholder="yyyy-MM-dd">   
+                        </div>
+                        <div class="layui-input-inline " style="width:360px !important ;margin-left:25px;margin-right: 10%;" >
+	                    	<!-- <button type="button" class="layui-btn layui-btn-normal" id="download">下载模板</button> -->
+	                        <!-- <button type="button" class="layui-btn layui-btn-normal" id="browse">选择文件</button> -->
+	                    	<button type="submit" class="layui-btn layui-btn-normal" >查询</button>
+	                        <button type="button" class="layui-btn layui-btn-normal addFn">新增</button>	
+                        </div></br>     
+		               
+		                 <div class="layui-form-item"></div>
+		                 <div class="layui-input-inline" style="width:110px !important;">
+		                 	 <label class="layui-form-label">附件：</label>
+		                 </div>
+		                 <div class="layui-input-inline iw200" style="margin-left:-10px !important;">
+	                         <input type="text" id="file-list" class="layui-input" placeholder="请选择文件..." readonly="true"> 
+                         </div>
+                         <div class="layui-input-inline iw200" style="margin-left:25px !important;">
+	                         <button type="button" class="layui-btn layui-btn-normal" id="upload">导入</button>
+	                         <button type="button" class="layui-btn layui-btn-normal" id="export">导出</button>
+                          </div>
+                 </form>
+                        
+            </div>
+                       
+            
+		</div>
+		<table  class="layui-table table-style tb-top" id="crudeOil">
+	        <tr class="inrq-t">
+	          <th>原油名称</th>
+	          <th colspan="8">品质</th>
+	          <th>品质登记日期</th>
+	          <th class="iw40">操作</th>
+	        </tr>
+	         #foreach($crude in $!crudes)
+	         	<tr>
+		          <th rowspan="4" class="inrq-txt">$!{crude.crudeNameE}</th>
+		          <td class="inrq-bg">API</td>
+		          <td>$!{crude.api}</td>
+		          <td class="inrq-bg">硫含量%wt</td>
+		          <td>$!{crude.sulphur}</td>
+		          <td class="inrq-bg">酸值mgKOH/g</td>
+		          <td>$!{crude.acidity}</td>
+		          <td class="inrq-bg">凝点℃</td>
+		          <td>$!{crude.freezingPoint}</td>
+		          <td rowspan="4">$!{crude.simpleDate}</td>
+		          <td rowspan="4" align="center">
+		          	<a href="javascript:;" class="editFn" attr-data='{"crudeId":"$!{crude.crudeId}","simpleDate":"$!{crude.simpleDate}","crudeNameE":"$!{crude.crudeNameE}","crudeNameC":"$!{crude.crudeNameC}","uuid":"$!{crude.uuid}","api":"$!{crude.api}","sulphur":"$!{crude.sulphur}","acidity":"$!{crude.acidity}","freezingPoint":"$!{crude.freezingPoint}","flashPoint":"$!{crude.flashPoint}","viscosity":"$!{crude.viscosity}","carbonResidue":"$!{crude.carbonResidue}","nickel":"$!{crude.nickel}","vanadium":"$!{crude.vanadium}","yield":"$!{crude.yield}","extend1":"$!{crude.originName}","extend2":"$!{crude.originArea}","extend3":"$!{crude.catagoryName}"}'>
+			      		<i class="layui-icon">&#xe642;</i>
+						编辑
+			      	</a>
+			      	<br/>
+			      	<a  href="javascript:;" class="mr delFn" attr-data='{"uuid":"$!{crude.uuid}"}' style="margin-left: 0px !important;">
+			      		<i class="layui-icon" style="color:red;">&#xe640;</i>
+			      		删除
+			      	</a>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td class="inrq-bg">闪点℃</td>
+		          <td>$!{crude.flashPoint}</td>
+		          <td class="inrq-bg">黏度（50℃）</td>
+		          <td>$!{crude.viscosity}</td>
+		          <td class="inrq-bg">残碳%wt</td>
+		          <td>$!{crude.carbonResidue}</td>
+		          <td class="inrq-bg">镍含量ppm wt</td>
+		          <td>$!{crude.nickel}</td>
+		        </tr>
+		        <tr>
+		          <td class="inrq-bg">钒含量ppm wt</td>
+		          <td>$!{crude.vanadium}</td>
+		          <td class="inrq-bg">&gt;350℃质量收率</td>
+		          <td>$!{crude.yield}</td>
+		          <td class="inrq-bg">区域</td>
+		          <td>$!{crude.originName}</td>
+		          <td class="inrq-bg">产地</td>
+		          <td>$!{crude.originArea}</td>
+		        </tr>
+		        <tr>
+		          <td class="inrq-bg">原油类型</td>
+		          <td>$!{crude.catagoryName}</td>
+		          <td class="inrq-bg">&nbsp;</td>
+		          <td>&nbsp;</td>
+		          <td class="inrq-bg">&nbsp;</td>
+		          <td>&nbsp;</td>
+		          <td class="inrq-bg">&nbsp;</td>
+		          <td>&nbsp;</td>
+		        </tr>
+			   #end 
+       </table> 
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    	<!-- <div id="ry-page" class="ry-right"></div> -->
+	    	$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/crudeOil/crudeOil.htm").put('slider_path','/contain/formPagingPageSlider')
+	    </div>
+
+	 
+	 
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	    <!--底部-->
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>	
+    </div>

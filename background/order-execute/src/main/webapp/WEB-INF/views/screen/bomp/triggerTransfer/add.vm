@@ -1,0 +1,67 @@
+<form id="triggerTransfer_add_form">
+<div class="c-form1">
+	<div style="color:red;text-align:center;">注意：点价转月次数不能超过$!{transferCountMax}次</div>
+	<ul class="c-ful">
+		<li class="c-fcos1">
+			<span class="c-fn">原合约：</span>
+			$!{triggerContractInfo.month}
+			
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">新合约：</span>
+			<select id="zy-month-select" class="sele">
+				<option value="">请选择</option>
+			</select>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">点价截止时间：</span>
+			<input type="text" id="zy-enddate-input" class="c-int">
+			<i class="c-ico xg-data"></i>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">数量(BBL)：</span>
+			<input type="text" id="zy-quantity-input" class="c-int" onkeyup="clearNoNumThree(this)">
+			
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">月差(USD)：</span>
+			<input type="text" id="zy-yuecha-input" class="c-int"  onkeyup="clearNoNumThreeFu(this)">
+		</li>
+	</ul>
+</div>
+
+<script>
+layui.use(['layer','laydate'], function(){
+	//日期
+	var laydate = layui.laydate;
+	laydate.render({
+		elem: '#zy-enddate-input'
+	});
+	
+	getMonthList();
+	
+	//合约月份下拉值集
+	function getMonthList(){
+		$.ajax({
+      		url:infoServer+"/query/symbol.json",
+      		data:JSON.stringify({commodity:"$!{triggerContractInfo.commodity}",priceSource:"$!{triggerContractInfo.priceSource}",market:"$!{triggerContractInfo.market}"}),
+      		type:"post",
+      		dataType:"json",
+      		contentType:"application/json; charset=utf-8",
+      		success:function(result){
+      			if(result.dataList.length > 0){
+      				$.each(result.dataList, function(i,d){
+      					$("#zy-month-select").append("<option value='"+d.symbolName+"'>"+d.symbolName+"</option>");
+      				})
+      			}
+      		},
+      		error:function(){
+      			layer.alert("error");
+      		}
+      	})
+	}
+})
+
+	
+</script>
+

@@ -1,0 +1,222 @@
+<div class="c-mod">
+    <h3><em class="cw-ico ico-h3"></em>供应商报价详情</h3>
+    <div class="cg-ord-box">
+        <div class="cg-ord-blo">
+            <div class="cg-ord-cont clearfix">
+                <div class="purchase">
+                    <p>采购需求信息</p>
+                    <ul>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">数量（桶）：</span>
+                            <span class="purc-span2">$!{demandParent.numStr}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">溢短装：</span>
+                            <span class="purc-span2">+/- $!{demandParent.numfloat} %</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">贸易条款：</span>
+                            <span class="purc-span2">$!{tradeItemMap.get($!{demandParent.tradeItem})}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价基准：</span>
+                            <span class="purc-span2">$!valuationBaseMap.get($!{demandParent.valuationBase})</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价期：</span>
+                            <span class="purc-span2">
+                                    $!{dictUtils.getValue("valuationProidTypeMap", "$!demandParent.valuationProidType")}
+                                #if($!{demandParent.valuationProidType} == 4)
+                                    （$!dateUtil.convertDateToString('yyyy/MM/dd',$!demandParent.valuationProidStart) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!demandParent.valuationProidEnd)）
+                                #end
+                                #if($!{demandParent.valuationProidType} == 5)
+                                    （$!demandParent.contractKind）
+                                #end
+                                </span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">付款日期：</span>
+                            <span class="purc-span2">$!{demandParent.payItem}</span>
+                        </li>
+                        
+                        #if($!{tradeItemMap.get($!{demand.tradeItem})}=="FOB")
+                        	 <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">装货港：</span>
+	                            <span class="purc-span2">$!{demandParentShips.shipmentPort}</span>
+	                        </li>
+                            <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+	                        <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">装期：</span>
+	                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.shipmentEndTime})</span>
+	                        </li>
+                            <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+						#elseif($!{tradeItemMap.get($!{demand.tradeItem})}=="DES" || $!{tradeItemMap.get($!{demand.tradeItem})}=="FCA" || $!{tradeItemMap.get($!{demand.tradeItem})}=="DDU" || $!{tradeItemMap.get($!{demand.tradeItem})}=="ITT")
+                            <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                            <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">卸货港：</span>
+	                            <span class="purc-span2">$!{demandParentShips.dischargePort}</span>
+	                        </li>
+                            <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+	                        <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">到货期：</span>
+	                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.dischargeEndTime})</span>
+	                        </li>
+						#elseif($!{tradeItemMap.get($!{demand.tradeItem})}=="CFR" || $!{tradeItemMap.get($!{demand.tradeItem})}=="CIF")
+							 <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">装货港：</span>
+	                            <span class="purc-span2">$!{demandParentShips.shipmentPort}</span>
+	                        </li>
+	                        <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">卸货港：</span>
+	                            <span class="purc-span2">$!{demandParentShips.dischargePort}</span>
+	                        </li>
+	                        <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">装期：</span>
+	                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.shipmentEndTime})</span>
+	                        </li>
+	                        <li class="purc-blo clearfix">
+	                            <span class="purc-spanl">到货期：</span>
+	                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandParentShips.dischargeEndTime})</span>
+	                        </li>
+						#end
+						
+					
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">结算量标准：</span>
+                            <span class="purc-span2">$!{measureModeMap.get($!{demandParent.measureMode})}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">装卸允许时间：</span>
+                            <span class="purc-span2">$!{demandParent.loadAndDischargePermittedTimespan}</span>
+                        </li>
+                        #*
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">采购方式：</span>
+                            <span class="purc-span2">$!{purchaseModeMap.get($!{demandParent.purchaseMode})}</span>
+                        </li>
+                        *#
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><textarea class="purc-spant" disabled></textarea></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    </ul>
+                    <div class="ord-bz clearfix">
+                        <ul class="ord-bzl">
+                            <li class="purc-blo clearfix"><span class="purc-spanl">备注</span></li>
+                        </ul>
+                        <div class="">
+                            <textarea class="purc-spant" disabled>$!{demandParent.remark}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="purchase">
+                    <p>报价信息</p>
+                    <ul>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">数量（桶）：</span>
+                            <span class="purc-span2">$!{demand.numStr}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">溢短装：</span>
+                            <span class="purc-span2">+/- $!{demand.numfloat} %</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">贸易条款：</span>
+                            <span class="purc-span2">$!{tradeItemMap.get($!{demand.tradeItem})}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价基准：</span>
+                            <span class="purc-span2">$!valuationBaseMap.get($!{demand.valuationBase})</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价期：</span>
+                            <span class="purc-span2">
+                                    $!{dictUtils.getValue("valuationProidTypeMap", "$!demand.valuationProidType")}
+                                    #if($!{demand.valuationProidType} == 4)
+                                        （$!dateUtil.convertDateToString('yyyy/MM/dd',$!demand.valuationProidStart) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!demand.valuationProidEnd)）
+                                    #end
+                                    #if($!{demand.valuationProidType} == 5)
+                                        （$!demand.contractKind）
+                                    #end
+                                </span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">付款日期：</span>
+                            <span class="purc-span2">$!{demand.payItem}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">装货港：</span>
+                            <span class="purc-span2">$!{demandShips.shipmentPort}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">卸货港：</span>
+                            <span class="purc-span2">$!{demandShips.dischargePort}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">装期：</span>
+                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.shipmentEndTime})</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">到货期：</span>
+                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy/MM/dd',$!{demandShips.dischargeEndTime})</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">结算量标准：</span>
+                            <span class="purc-span2">$!{measureModeMap.get($!{demand.measureMode})}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">装卸允许时间：</span>
+                            <span class="purc-span2">$!{demand.loadAndDischargePermittedTimespan}</span>
+                        </li>
+                        #*
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">采购方式：</span>
+                            <span class="purc-span2">$!{purchaseModeMap.get($!{demand.purchaseMode})}</span>
+                        </li>
+                        *#
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">报价有效期：</span>
+                            <span class="purc-span2">$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.stopBidTime})</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">信用条款：</span>
+                            <span class="purc-span2">$!{authItemBaseMap.get($!{demand.authItem})}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">升贴水：</span>
+                            <span class="purc-span2">$!{demand.agioStr}</span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">计价公式：</span>
+                            <textarea class="purc-spant" disabled>$!{demand.valuationFormula}</textarea>
+                        </li>
+                        <li class="purc-blo clearfix"><span class="purc-spanl">商检费分摊：</span><span class="purc-span2">$!{demand.inspectionFeeSharingTypeContent}</span></li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">法律</span>
+                            <span class="purc-span2">
+                                $!{demand.law}
+                            </span>
+                        </li>
+                        <li class="purc-blo clearfix">
+                            <span class="purc-spanl">GTC</span>
+                            <span class="purc-span2">
+                                $!{demand.gtc}
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="ord-bz clearfix">
+                        <ul class="ord-bzl">
+                            <li class="purc-blo clearfix"><span class="purc-spanl bortop">备注</span></li>
+                        </ul>
+                        <div class="">
+                            <textarea class="purc-spant" disabled>$!{demand.remark}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

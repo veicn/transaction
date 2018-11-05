@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.EFractionMsgMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.EFractionMsg" id="EFractionMsgDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.EFractionMsg">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.EFractionMsg" id="EFractionMsg">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="crudeId" column="CRUDE_ID" />
+		<result property="crudeNameE" column="CRUDE_NAME_E" />
+		<result property="crudeNameC" column="CRUDE_NAME_C" />
+		<result property="lightNaptha" column="LIGHT_NAPTHA" />
+		<result property="mediumNaptha" column="MEDIUM_NAPTHA" />
+		<result property="aviationFuel" column="AVIATION_FUEL" />
+		<result property="gasOil" column="GAS_OIL" />
+		<result property="vacuumGasOil" column="VACUUM_GAS_OIL" />
+		<result property="heavyFeliefOil" column="HEAVY_FELIEF_OIL" />
+		<result property="vacuumResidue" column="VACUUM_RESIDUE" />
+		<result property="createPerson" column="CREATE_PERSON" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="sulphurContent" column="SULPHUR_CONTENT" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="modifyPerson" column="MODIFY_PERSON" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.EFractionMsg"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_crude_fraction_msg (				ID
+						,UUID
+						,CRUDE_ID
+						,CRUDE_NAME_E
+						,CRUDE_NAME_C
+						,LIGHT_NAPTHA
+						,MEDIUM_NAPTHA
+						,AVIATION_FUEL
+						,GAS_OIL
+						,VACUUM_GAS_OIL
+						,HEAVY_FELIEF_OIL
+						,VACUUM_RESIDUE
+						,CREATE_PERSON
+						,CREATE_DATE
+						,SULPHUR_CONTENT
+						,ALIVE_FLAG
+						,MODIFY_DATE
+						,MODIFY_PERSON
+						,EXTEND1
+						,EXTEND2
+						,EXTEND3
+						,EXTEND4
+						,EXTEND5
+						,EXTEND6
+						,EXTEND7
+						,EXTEND8
+						,EXTEND9
+						,EXTEND10
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{crudeId}
+						,#{crudeNameE}
+						,#{crudeNameC}
+						,#{lightNaptha}
+						,#{mediumNaptha}
+						,#{aviationFuel}
+						,#{gasOil}
+						,#{vacuumGasOil}
+						,#{heavyFeliefOil}
+						,#{vacuumResidue}
+						,#{createPerson}
+						,#{createDate}
+						,#{sulphurContent}
+						,'1'
+						,#{modifyDate}
+						,#{modifyPerson}
+						,#{extend1}
+						,#{extend2}
+						,#{extend3}
+						,#{extend4}
+						,#{extend5}
+						,#{extend6}
+						,#{extend7}
+						,#{extend8}
+						,#{extend9}
+						,#{extend10}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_crude_fraction_msg
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.EFractionMsg">
+        DELETE FROM t_crude_fraction_msg
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="crudeId!=null and crudeId!=''">AND  CRUDE_ID = #{crudeId}</if>
+        <if test="crudeNameE!=null and crudeNameE!=''">AND  CRUDE_NAME_E = #{crudeNameE}</if>
+        <if test="crudeNameC!=null and crudeNameC!=''">AND  CRUDE_NAME_C = #{crudeNameC}</if>
+        <if test="lightNaptha!=null and lightNaptha!=''">AND  LIGHT_NAPTHA = #{lightNaptha}</if>
+        <if test="mediumNaptha!=null and mediumNaptha!=''">AND  MEDIUM_NAPTHA = #{mediumNaptha}</if>
+        <if test="aviationFuel!=null and aviationFuel!=''">AND  AVIATION_FUEL = #{aviationFuel}</if>
+        <if test="gasOil!=null and gasOil!=''">AND  GAS_OIL = #{gasOil}</if>
+        <if test="vacuumGasOil!=null and vacuumGasOil!=''">AND  VACUUM_GAS_OIL = #{vacuumGasOil}</if>
+        <if test="heavyFeliefOil!=null and heavyFeliefOil!=''">AND  HEAVY_FELIEF_OIL = #{heavyFeliefOil}</if>
+        <if test="vacuumResidue!=null and vacuumResidue!=''">AND  VACUUM_RESIDUE = #{vacuumResidue}</if>
+        <if test="createPerson!=null and createPerson!=''">AND  CREATE_PERSON = #{createPerson}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="sulphurContent!=null and sulphurContent!=''">AND  SULPHUR_CONTENT = #{sulphurContent}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="modifyDate!=null and modifyDate!=''">AND  MODIFY_DATE = #{modifyDate}</if>
+        <if test="modifyPerson!=null and modifyPerson!=''">AND  MODIFY_PERSON = #{modifyPerson}</if>
+        <if test="extend1!=null and extend1!=''">AND  EXTEND1 = #{extend1}</if>
+        <if test="extend2!=null and extend2!=''">AND  EXTEND2 = #{extend2}</if>
+        <if test="extend3!=null and extend3!=''">AND  EXTEND3 = #{extend3}</if>
+        <if test="extend4!=null and extend4!=''">AND  EXTEND4 = #{extend4}</if>
+        <if test="extend5!=null and extend5!=''">AND  EXTEND5 = #{extend5}</if>
+        <if test="extend6!=null and extend6!=''">AND  EXTEND6 = #{extend6}</if>
+        <if test="extend7!=null and extend7!=''">AND  EXTEND7 = #{extend7}</if>
+        <if test="extend8!=null and extend8!=''">AND  EXTEND8 = #{extend8}</if>
+        <if test="extend9!=null and extend9!=''">AND  EXTEND9 = #{extend9}</if>
+        <if test="extend10!=null and extend10!=''">AND  EXTEND10 = #{extend10}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.EFractionMsg">
+		update t_crude_fraction_msg
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="crudeId!=null">,CRUDE_ID = #{crudeId}</if>
+		<if test="crudeNameE!=null">,CRUDE_NAME_E = #{crudeNameE}</if>
+		<if test="crudeNameC!=null">,CRUDE_NAME_C = #{crudeNameC}</if>
+		<if test="lightNaptha!=null">,LIGHT_NAPTHA = #{lightNaptha}</if>
+		<if test="mediumNaptha!=null">,MEDIUM_NAPTHA = #{mediumNaptha}</if>
+		<if test="aviationFuel!=null">,AVIATION_FUEL = #{aviationFuel}</if>
+		<if test="gasOil!=null">,GAS_OIL = #{gasOil}</if>
+		<if test="vacuumGasOil!=null">,VACUUM_GAS_OIL = #{vacuumGasOil}</if>
+		<if test="heavyFeliefOil!=null">,HEAVY_FELIEF_OIL = #{heavyFeliefOil}</if>
+		<if test="vacuumResidue!=null">,VACUUM_RESIDUE = #{vacuumResidue}</if>
+		<if test="createPerson!=null">,CREATE_PERSON = #{createPerson}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="sulphurContent!=null">,SULPHUR_CONTENT = #{sulphurContent}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="modifyDate!=null">,MODIFY_DATE = #{modifyDate}</if>
+		<if test="modifyPerson!=null">,MODIFY_PERSON = #{modifyPerson}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.info.domain.EFractionMsg">
+		update t_crude_fraction_msg
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="crudeId!=null">,CRUDE_ID = #{crudeId}</if>
+		<if test="crudeNameE!=null">,CRUDE_NAME_E = #{crudeNameE}</if>
+		<if test="crudeNameC!=null">,CRUDE_NAME_C = #{crudeNameC}</if>
+		<if test="lightNaptha!=null">,LIGHT_NAPTHA = #{lightNaptha}</if>
+		<if test="mediumNaptha!=null">,MEDIUM_NAPTHA = #{mediumNaptha}</if>
+		<if test="aviationFuel!=null">,AVIATION_FUEL = #{aviationFuel}</if>
+		<if test="gasOil!=null">,GAS_OIL = #{gasOil}</if>
+		<if test="vacuumGasOil!=null">,VACUUM_GAS_OIL = #{vacuumGasOil}</if>
+		<if test="heavyFeliefOil!=null">,HEAVY_FELIEF_OIL = #{heavyFeliefOil}</if>
+		<if test="vacuumResidue!=null">,VACUUM_RESIDUE = #{vacuumResidue}</if>
+		<if test="createPerson!=null">,CREATE_PERSON = #{createPerson}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="sulphurContent!=null">,SULPHUR_CONTENT = #{sulphurContent}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="modifyDate!=null">,MODIFY_DATE = #{modifyDate}</if>
+		<if test="modifyPerson!=null">,MODIFY_PERSON = #{modifyPerson}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_crude_fraction_msg
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="crudeId!=null">,CRUDE_ID = #{crudeId}</if>
+		<if test="crudeNameE!=null">,CRUDE_NAME_E = #{crudeNameE}</if>
+		<if test="crudeNameC!=null">,CRUDE_NAME_C = #{crudeNameC}</if>
+		<if test="lightNaptha!=null">,LIGHT_NAPTHA = #{lightNaptha}</if>
+		<if test="mediumNaptha!=null">,MEDIUM_NAPTHA = #{mediumNaptha}</if>
+		<if test="aviationFuel!=null">,AVIATION_FUEL = #{aviationFuel}</if>
+		<if test="gasOil!=null">,GAS_OIL = #{gasOil}</if>
+		<if test="vacuumGasOil!=null">,VACUUM_GAS_OIL = #{vacuumGasOil}</if>
+		<if test="heavyFeliefOil!=null">,HEAVY_FELIEF_OIL = #{heavyFeliefOil}</if>
+		<if test="vacuumResidue!=null">,VACUUM_RESIDUE = #{vacuumResidue}</if>
+		<if test="createPerson!=null">,CREATE_PERSON = #{createPerson}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="sulphurContent!=null">,SULPHUR_CONTENT = #{sulphurContent}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="modifyDate!=null">,MODIFY_DATE = #{modifyDate}</if>
+		<if test="modifyPerson!=null">,MODIFY_PERSON = #{modifyPerson}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="crudeId!=null and crudeId!=''">and  CRUDE_ID=#{crudeId}</if>
+		<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+		<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+		<if test="lightNaptha!=null and lightNaptha!=''">and  LIGHT_NAPTHA=#{lightNaptha}</if>
+		<if test="mediumNaptha!=null and mediumNaptha!=''">and  MEDIUM_NAPTHA=#{mediumNaptha}</if>
+		<if test="aviationFuel!=null and aviationFuel!=''">and  AVIATION_FUEL=#{aviationFuel}</if>
+		<if test="gasOil!=null and gasOil!=''">and  GAS_OIL=#{gasOil}</if>
+		<if test="vacuumGasOil!=null and vacuumGasOil!=''">and  VACUUM_GAS_OIL=#{vacuumGasOil}</if>
+		<if test="heavyFeliefOil!=null and heavyFeliefOil!=''">and  HEAVY_FELIEF_OIL=#{heavyFeliefOil}</if>
+		<if test="vacuumResidue!=null and vacuumResidue!=''">and  VACUUM_RESIDUE=#{vacuumResidue}</if>
+		<if test="createPerson!=null and createPerson!=''">and  CREATE_PERSON=#{createPerson}</if>
+		<if test="createDate!=null ">and  CREATE_DATE=#{createDate}</if>
+		<if test="sulphurContent!=null and sulphurContent!=''">and  SULPHUR_CONTENT=#{sulphurContent}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="modifyDate!=null ">and  MODIFY_DATE=#{modifyDate}</if>
+		<if test="modifyPerson!=null and modifyPerson!=''">and  MODIFY_PERSON=#{modifyPerson}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="EFractionMsg">
+			select
+			* from t_crude_fraction_msg
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="EFractionMsg">
+			select
+			* from t_crude_fraction_msg
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="EFractionMsg" parameterType="com.sinochem.crude.trade.info.domain.EFractionMsg">
+		select * from t_crude_fraction_msg
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="crudeId!=null and crudeId!=''">and  CRUDE_ID=#{crudeId}</if>
+		<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+		<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+		<if test="lightNaptha!=null and lightNaptha!=''">and  LIGHT_NAPTHA=#{lightNaptha}</if>
+		<if test="mediumNaptha!=null and mediumNaptha!=''">and  MEDIUM_NAPTHA=#{mediumNaptha}</if>
+		<if test="aviationFuel!=null and aviationFuel!=''">and  AVIATION_FUEL=#{aviationFuel}</if>
+		<if test="gasOil!=null and gasOil!=''">and  GAS_OIL=#{gasOil}</if>
+		<if test="vacuumGasOil!=null and vacuumGasOil!=''">and  VACUUM_GAS_OIL=#{vacuumGasOil}</if>
+		<if test="heavyFeliefOil!=null and heavyFeliefOil!=''">and  HEAVY_FELIEF_OIL=#{heavyFeliefOil}</if>
+		<if test="vacuumResidue!=null and vacuumResidue!=''">and  VACUUM_RESIDUE=#{vacuumResidue}</if>
+		<if test="createPerson!=null and createPerson!=''">and  CREATE_PERSON=#{createPerson}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="sulphurContent!=null and sulphurContent!=''">and  SULPHUR_CONTENT=#{sulphurContent}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="modifyDate!=null and modifyDate!=''">and  MODIFY_DATE=#{modifyDate}</if>
+		<if test="modifyPerson!=null and modifyPerson!=''">and  MODIFY_PERSON=#{modifyPerson}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   CRUDE_ID as "crudeId" 
+						 ,   CRUDE_NAME_E as "crudeNameE" 
+						 ,   CRUDE_NAME_C as "crudeNameC" 
+						 ,   LIGHT_NAPTHA as "lightNaptha" 
+						 ,   MEDIUM_NAPTHA as "mediumNaptha" 
+						 ,   AVIATION_FUEL as "aviationFuel" 
+						 ,   GAS_OIL as "gasOil" 
+						 ,   VACUUM_GAS_OIL as "vacuumGasOil" 
+						 ,   HEAVY_FELIEF_OIL as "heavyFeliefOil" 
+						 ,   VACUUM_RESIDUE as "vacuumResidue" 
+						 ,   CREATE_PERSON as "createPerson" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   SULPHUR_CONTENT as "sulphurContent" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   MODIFY_DATE as "modifyDate" 
+						 ,   MODIFY_PERSON as "modifyPerson" 
+						 ,   EXTEND1 as "extend1" 
+						 ,   EXTEND2 as "extend2" 
+						 ,   EXTEND3 as "extend3" 
+						 ,   EXTEND4 as "extend4" 
+						 ,   EXTEND5 as "extend5" 
+						 ,   EXTEND6 as "extend6" 
+						 ,   EXTEND7 as "extend7" 
+						 ,   EXTEND8 as "extend8" 
+						 ,   EXTEND9 as "extend9" 
+						 ,   EXTEND10 as "extend10" 
+						from t_crude_fraction_msg
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="crudeId!=null and crudeId!=''">and  CRUDE_ID=#{crudeId}</if>
+			<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+			<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+			<if test="lightNaptha!=null and lightNaptha!=''">and  LIGHT_NAPTHA=#{lightNaptha}</if>
+			<if test="mediumNaptha!=null and mediumNaptha!=''">and  MEDIUM_NAPTHA=#{mediumNaptha}</if>
+			<if test="aviationFuel!=null and aviationFuel!=''">and  AVIATION_FUEL=#{aviationFuel}</if>
+			<if test="gasOil!=null and gasOil!=''">and  GAS_OIL=#{gasOil}</if>
+			<if test="vacuumGasOil!=null and vacuumGasOil!=''">and  VACUUM_GAS_OIL=#{vacuumGasOil}</if>
+			<if test="heavyFeliefOil!=null and heavyFeliefOil!=''">and  HEAVY_FELIEF_OIL=#{heavyFeliefOil}</if>
+			<if test="vacuumResidue!=null and vacuumResidue!=''">and  VACUUM_RESIDUE=#{vacuumResidue}</if>
+			<if test="createPerson!=null and createPerson!=''">and  CREATE_PERSON=#{createPerson}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="sulphurContent!=null and sulphurContent!=''">and  SULPHUR_CONTENT=#{sulphurContent}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="modifyDate!=null and modifyDate!=''">and  MODIFY_DATE=#{modifyDate}</if>
+			<if test="modifyPerson!=null and modifyPerson!=''">and  MODIFY_PERSON=#{modifyPerson}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_crude_fraction_msg 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="crudeId!=null and crudeId!=''">and  CRUDE_ID=#{crudeId}</if>
+			<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E=#{crudeNameE}</if>
+			<if test="crudeNameC!=null and crudeNameC!=''">and  CRUDE_NAME_C=#{crudeNameC}</if>
+			<if test="lightNaptha!=null and lightNaptha!=''">and  LIGHT_NAPTHA=#{lightNaptha}</if>
+			<if test="mediumNaptha!=null and mediumNaptha!=''">and  MEDIUM_NAPTHA=#{mediumNaptha}</if>
+			<if test="aviationFuel!=null and aviationFuel!=''">and  AVIATION_FUEL=#{aviationFuel}</if>
+			<if test="gasOil!=null and gasOil!=''">and  GAS_OIL=#{gasOil}</if>
+			<if test="vacuumGasOil!=null and vacuumGasOil!=''">and  VACUUM_GAS_OIL=#{vacuumGasOil}</if>
+			<if test="heavyFeliefOil!=null and heavyFeliefOil!=''">and  HEAVY_FELIEF_OIL=#{heavyFeliefOil}</if>
+			<if test="vacuumResidue!=null and vacuumResidue!=''">and  VACUUM_RESIDUE=#{vacuumResidue}</if>
+			<if test="createPerson!=null and createPerson!=''">and  CREATE_PERSON=#{createPerson}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="sulphurContent!=null and sulphurContent!=''">and  SULPHUR_CONTENT=#{sulphurContent}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="modifyDate!=null and modifyDate!=''">and  MODIFY_DATE=#{modifyDate}</if>
+			<if test="modifyPerson!=null and modifyPerson!=''">and  MODIFY_PERSON=#{modifyPerson}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+
+	
+	
+	<select id="queryeFractionMsg" parameterType="java.lang.String" resultType="java.util.HashMap">
+	SELECT 
+		ID AS "id" 
+		,   UUID AS "uuid"  
+		,   CRUDE_NAME_E AS "crudeNameE" 
+		,   CRUDE_NAME_C AS "crudeNameC" 
+		,   LIGHT_NAPTHA AS "lightNaptha" 
+		,   MEDIUM_NAPTHA AS "mediumNaptha" 
+		,   AVIATION_FUEL AS "aviationFuel" 
+		,   GAS_OIL AS "gasOil" 
+		,   VACUUM_GAS_OIL AS "vacuumGasOil" 
+		,   HEAVY_FELIEF_OIL AS "heavyFeliefOil" 
+		,   VACUUM_RESIDUE AS "vacuumResidue"  
+		,   CREATE_DATE AS "createDate" 
+		,   SULPHUR_CONTENT AS "sulphurContent"  
+		,   (LIGHT_NAPTHA + MEDIUM_NAPTHA + AVIATION_FUEL + GAS_OIL + VACUUM_GAS_OIL + HEAVY_FELIEF_OIL + VACUUM_RESIDUE) AS "check" 
+	FROM t_crude_fraction_msg
+			WHERE
+		 ALIVE_FLAG='1'
+		<if test="crudeNameE!=null and crudeNameE!=''">and  CRUDE_NAME_E LIKE "%"#{crudeNameE}"%"</if>
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

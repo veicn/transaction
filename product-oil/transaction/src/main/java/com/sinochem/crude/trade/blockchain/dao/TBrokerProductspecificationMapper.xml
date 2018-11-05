@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerProductspecificationMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerProductspecification" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="declarationuuid" property="declarationuuid" jdbcType="VARCHAR" />
+    <result column="rules" property="rules" jdbcType="VARCHAR" />
+    <result column="productinfo" property="productinfo" jdbcType="VARCHAR" />
+    <result column="brandtype" property="brandtype" jdbcType="VARCHAR" />
+    <result column="exitdiscount" property="exitdiscount" jdbcType="VARCHAR" />
+    <result column="distill" property="distill" jdbcType="VARCHAR" />
+    <result column="sulphurcontent" property="sulphurcontent" jdbcType="VARCHAR" />
+    <result column="gtin" property="gtin" jdbcType="VARCHAR" />
+    <result column="cas" property="cas" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="modelrule" property="modelrule" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, declarationuuid, rules, productinfo, brandtype, exitdiscount, distill, sulphurcontent, 
+    gtin, cas, other, modelrule
+  </sql>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_productspecification
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_productspecification
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_productspecification
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `product-trade-blockchain`.t_broker_productspecification
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_broker_productspecification (declarationuuid, rules,
+    productinfo, brandtype, exitdiscount,distill, sulphurcontent, gtin,cas, other, modelrule
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      ( #{item.declarationuuid,jdbcType=VARCHAR}, #{item.rules,jdbcType=VARCHAR},
+      #{item.productinfo,jdbcType=VARCHAR}, #{item.brandtype,jdbcType=VARCHAR}, #{item.exitdiscount,jdbcType=VARCHAR},
+      #{item.distill,jdbcType=VARCHAR}, #{item.sulphurcontent,jdbcType=VARCHAR}, #{item.gtin,jdbcType=VARCHAR},
+      #{item.cas,jdbcType=VARCHAR}, #{item.other,jdbcType=VARCHAR}, #{item.modelrule,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerProductspecification" >
+    insert into `product-trade-blockchain`.t_broker_productspecification (declarationuuid, rules,
+      productinfo, brandtype, exitdiscount, 
+      distill, sulphurcontent, gtin, 
+      cas, other, modelrule
+      )
+    values ( #{declarationuuid,jdbcType=VARCHAR}, #{rules,jdbcType=VARCHAR},
+      #{productinfo,jdbcType=VARCHAR}, #{brandtype,jdbcType=VARCHAR}, #{exitdiscount,jdbcType=VARCHAR}, 
+      #{distill,jdbcType=VARCHAR}, #{sulphurcontent,jdbcType=VARCHAR}, #{gtin,jdbcType=VARCHAR}, 
+      #{cas,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{modelrule,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerProductspecification" >
+    insert into `product-trade-blockchain`.t_broker_productspecification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="declarationuuid != null" >
+        declarationuuid,
+      </if>
+      <if test="rules != null" >
+        rules,
+      </if>
+      <if test="productinfo != null" >
+        productinfo,
+      </if>
+      <if test="brandtype != null" >
+        brandtype,
+      </if>
+      <if test="exitdiscount != null" >
+        exitdiscount,
+      </if>
+      <if test="distill != null" >
+        distill,
+      </if>
+      <if test="sulphurcontent != null" >
+        sulphurcontent,
+      </if>
+      <if test="gtin != null" >
+        gtin,
+      </if>
+      <if test="cas != null" >
+        cas,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="modelrule != null" >
+        modelrule,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null" >
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="rules != null" >
+        #{rules,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null" >
+        #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandtype != null" >
+        #{brandtype,jdbcType=VARCHAR},
+      </if>
+      <if test="exitdiscount != null" >
+        #{exitdiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="distill != null" >
+        #{distill,jdbcType=VARCHAR},
+      </if>
+      <if test="sulphurcontent != null" >
+        #{sulphurcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="gtin != null" >
+        #{gtin,jdbcType=VARCHAR},
+      </if>
+      <if test="cas != null" >
+        #{cas,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="modelrule != null" >
+        #{modelrule,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerProductspecification" >
+    update `product-trade-blockchain`.t_broker_productspecification
+    <set >
+      <if test="declarationuuid != null" >
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="rules != null" >
+        rules = #{rules,jdbcType=VARCHAR},
+      </if>
+      <if test="productinfo != null" >
+        productinfo = #{productinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="brandtype != null" >
+        brandtype = #{brandtype,jdbcType=VARCHAR},
+      </if>
+      <if test="exitdiscount != null" >
+        exitdiscount = #{exitdiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="distill != null" >
+        distill = #{distill,jdbcType=VARCHAR},
+      </if>
+      <if test="sulphurcontent != null" >
+        sulphurcontent = #{sulphurcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="gtin != null" >
+        gtin = #{gtin,jdbcType=VARCHAR},
+      </if>
+      <if test="cas != null" >
+        cas = #{cas,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="modelrule != null" >
+        modelrule = #{modelrule,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerProductspecification" >
+    update `product-trade-blockchain`.t_broker_productspecification
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      rules = #{rules,jdbcType=VARCHAR},
+      productinfo = #{productinfo,jdbcType=VARCHAR},
+      brandtype = #{brandtype,jdbcType=VARCHAR},
+      exitdiscount = #{exitdiscount,jdbcType=VARCHAR},
+      distill = #{distill,jdbcType=VARCHAR},
+      sulphurcontent = #{sulphurcontent,jdbcType=VARCHAR},
+      gtin = #{gtin,jdbcType=VARCHAR},
+      cas = #{cas,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      modelrule = #{modelrule,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

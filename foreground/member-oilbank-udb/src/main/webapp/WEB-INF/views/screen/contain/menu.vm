@@ -1,0 +1,75 @@
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">成品油用户</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/enterprise/crudeList.htm')">企业列表</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/person/list.htm')">人员列表</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/exosystemAcc/list.htm')">关联系统用户</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/partner/list.htm')">合作伙伴管理</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/sualification/list.htm')">资质管理</a></dd>
+                </dl>
+            </li>
+
+            #*<li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">版本管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/app/list.htm')">APP版本管理</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/prize/list.htm')">有奖征集</a></dd>
+                </dl>
+
+            </li>*#
+           #* <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">推送管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('om/messageLog/list.htm')">推送管理</a></dd>
+                </dl>
+            </li>*#
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">船加油管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/buyersOrder.htm")">买家订单</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/sellerOrder.htm")">卖家订单</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/salesInformation.htm")">销售信息管理</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/purchasingInfor.htm")">采购信息管理</a></dd>
+                </dl>
+
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/theQuotation.htm")">报价单管理</a></dd>
+                </dl>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get("/om/ifroms/make_an_inquiry.htm")">询价单管理</a></dd>
+                </dl>
+
+            </li>
+
+
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">成品油管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$appServer.get('/om/ifroms/prodOrderManage.htm')">订单管理</a></dd>
+                </dl>
+
+            </li>
+
+        </ul>
+    </div>
+</div>

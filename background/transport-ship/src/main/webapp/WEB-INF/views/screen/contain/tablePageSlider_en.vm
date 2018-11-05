@@ -1,0 +1,85 @@
+<script>
+	// 最后页删除时的处理
+	$(function () {
+		var prevPage = ${sliderPrev}+1;
+		var tableCnt = "";
+		
+		if ($("tbody").length > 0) {
+			// 平台
+			tableCnt = $("tbody tr").length;
+		} else {
+			// 后台
+			var a  = $(".shipp-blo").length;
+			var b  = $(".s-mod-block").length;
+			if (a == 0){
+				tableCnt = b;
+			} else if (b == 0){
+				tableCnt = a;
+			} else {
+				tableCnt = 0;
+			}
+		}
+		if (tableCnt == 0) {
+			if (prevPage > 0) {
+				goto$!{sliderRandom}(prevPage);
+			}
+		}
+	});
+		
+
+	function goto$!{sliderRandom}(pg){
+		document.page_slider_$!{sliderRandom}.$!{sliderPage}.value=pg;
+		document.page_slider_$!{sliderRandom}.submit();
+	}
+</script>
+#if($sliderTotal != 0)
+<script>
+	function goto$!{sliderRandom}(pg){
+		document.page_slider_$!{sliderRandom}.$!{sliderPage}.value=pg;
+		document.page_slider_$!{sliderRandom}.submit();
+	}
+</script>
+<div class="c-page">
+	<form name="page_slider_$!{sliderRandom}" action="$!{sliderTarget}" method="get">
+	##--------------------- page参数 ---------------------
+		#foreach($queryParam in $sliderQuery.parameters.entrySet())
+		<input type="hidden" name="$!{queryParam.key}" value="$!{queryParam.value}"/>
+		#end
+		<input type="hidden" name="$!{sliderPage}" value="$sliderQuery.currentPage"/>
+	
+	##--------------------- 分页按钮 ---------------------
+	#if($sliderCurrent == '1')
+	<span class="c-page-txt"> &laquo; </span>
+	#else
+	<a href="#" onclick="goto$!{sliderRandom}('1')">First page</a>
+	<a href="#" onclick="goto$!{sliderRandom}('${sliderPrev}')" class="c-page-txt">&laquo;</a>
+	#end
+	
+	#foreach($grid in $grids)
+		#if($grid == 0)
+		<span class="c-page-point">...</span>
+		#elseif($grid == $sliderCurrent)
+		<span class="c-page-num c-cur">${grid}</span>
+		#else
+		<a href="#" onclick="goto$!{sliderRandom}('${grid}')">${grid}</a>
+		#end
+	#end
+	
+	#if($sliderCurrent == $sliderTotal )
+		<span class="c-page-txt"> &raquo; </span>
+	#else
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderNext}')" class="c-page-txt">&raquo;</a>
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')">Last page</a>
+	#end
+	
+	</form>
+</div>
+#else
+<script>
+	$('.ry-footbar').removeClass('ry-footbar');
+</script>
+<div class="c-mod">
+	<div class="nodataDiv"><i class="cw-ico cw-nodata"></i><span class="nodata">No Record</span></div>
+</div>
+#end
+

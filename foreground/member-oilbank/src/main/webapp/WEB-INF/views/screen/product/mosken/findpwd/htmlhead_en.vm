@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Product Oil</title>
+    <script type="text/javascript" src="$imageServer.get('product/js/bigpipe.js')"></script>
+    <script src="$imageServer.get('product/js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('product/layui/layui.all.js')"></script>
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_common_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_table_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_tab_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_form_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_button_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_center_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_layout1_en.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/font-shey/style.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/reset.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/work/total.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/public.css')">
+</head>
+
+<header id="header">
+    <div class="header-wrap clearfix">
+        <div class="fl logo">
+            <img src="$imageServer.get('/product/images/logo.png')" class="">
+        </div>
+        <nav class="fr clearfix">
+            <div class="fl clearfix">
+                <a href="$transactionServer.get('/pages/portal/home/index.htm')" #if($!{active} == 1) class="fl active" #end>HOME</a>
+                <a href="$transactionServer.get('/pages/front/product_list/index.htm')" #if($!{active} == 2) class="f2 active" #end>TRADING SERVICE</a>
+                <a href="$shippingServer.get('/pages/front/shipingHome/index.htm')" #if($!{active} == 3) class="f3 active" #end>SHIPPING</a>
+                <a href="$newsServer.get('/pages/front/news/index.htm')" #if($!{active} == '4') class="f4 active" #end>INFORMATION</a>
+            </div>
+            <div class="fr clearfix">
+				#if(!$!session.getAttribute("_user"))
+
+
+                    <div class="fr clearfix">
+                        <a href="$appServer.get('/product/center/tologinVm.htm')?returnUrl=$transactionServer.get('/pages/portal/home/index.htm')" class="language fl">Sign In</a>
+                        <i class="icon-search"></i>
+                    </div>
+				#else
+
+                    <div class="fr clearfix">
+                        <a href="$systemServer.get('/login.htm')">Sign Out</a>
+                        <i class="icon-search"></i>
+                    </div>
+                    <div class="fr clearfix">
+						$contain.get("message/listAlert.htm").setHost("$messageServer.get('')").setParam("isPrivate","true")
+                        <i class="icon-search"></i>
+                    </div>
+
+
+				#end
+
+            </div>
+        </nav>
+    </div>
+    <div class="header-line fl"></div>
+</header>
+<body>
+<div class="acco-h1">

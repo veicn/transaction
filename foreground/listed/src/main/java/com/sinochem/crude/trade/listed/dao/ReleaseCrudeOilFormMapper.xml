@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.ReleaseCrudeOilFormMapper">
+    <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.model.vo.ReleaseCrudeOilVO">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="num" property="num" jdbcType="BIGINT" />
+        <result column="purchase_type" property="purchaseType" jdbcType="BIGINT" />
+        <result column="crude_oil_options" property="crudeOilOptions" jdbcType="VARCHAR" />
+        <result column="trade_item" property="tradeItem" jdbcType="INTEGER" />
+        <result column="valuation_base" property="valuationBase" jdbcType="VARCHAR" />
+        <result column="tender_out_time" property="tenderOutTime" jdbcType="DATE" />
+        <result column="stop_bid_time" property="stopBidTime" jdbcType="DATE" />
+        <result column="pub_date" property="pubDate" jdbcType="TIMESTAMP" />
+        <result column="pay_item" property="payItem" jdbcType="INTEGER" />
+        <result column="publish_type" property="publishType" jdbcType="INTEGER" />
+        <result column="valuation_proid_type" property="valuationProidType" jdbcType="INTEGER" />
+        <result column="valuation_proid_start" property="valuationProidStart" jdbcType="DATE" />
+        <result column="valuation_proid_end" property="valuationProidEnd" jdbcType="DATE" />
+        <result column="discharge_start_time" property="dischargeStartTime" jdbcType="DATE" />
+        <result column="discharge_end_time" property="dischargeEndTime" jdbcType="DATE" />
+        <result column="discharge_port" property="dischargePort" jdbcType="VARCHAR" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="getReleaseCrudeOilFormList" resultMap="BaseResultMap">
+        SELECT
+        DISTINCT
+        d.num,
+        d.id,
+        d.purchase_type,
+        d.trade_item,
+        d.valuation_base,
+        d.valuation_proid_type,
+        d.valuation_proid_start,
+        d.valuation_proid_end,
+        d.pay_item,
+        d.pub_date,
+        d.tender_out_time,
+        d.stop_bid_time,
+        d.uuid,
+        d.creater,
+        ds.discharge_start_time,
+        d.crude_oil_options,
+        ds.discharge_end_time,
+        ds.discharge_port,
+        d.publish_type
+        FROM
+        demand AS d
+        LEFT  JOIN  demand_ship ds ON ds.demand_id = d.id
+        LEFT  JOIN  crude_oil_resource cor ON cor.demand_id = d.id
+        WHERE
+        (
+          d.specified  = 0  or d.specified is null
+            <if test="epMemberId != null">
+                or (d.specified  = 1 and exists (select * from demand_specify_enterprise se where se.ep_memberid = #{epMemberId} and se.demand_id = d.id))
+            </if>
+        )
+        and d.status = 2 AND
+        d.biz_type = 'CrudeOil'
+        <if test="purchaseType != null">
+            and purchase_type = #{purchaseType}
+        </if>        
+        <if test="dealType != null">
+            and deal_type = #{dealType}
+        </if>
+        <if test="crudePlace != null">
+            and cor.origin = #{crudePlace}
+        </if>
+        <if test="oilType != null">
+            and crude_oil_options LIKE concat('%',#{oilType},'%')
+        </if>
+        <if test="oilNumberMin != null and oilNumberMax != null">
+            <![CDATA[ and #{oilNumberMin} <= num and  num < #{oilNumberMax} ]]>
+        </if>
+        <if test="orderByKeys != null">
+            ORDER  BY  ${orderByKeys}
+        </if>
+    </select>
+</mapper>

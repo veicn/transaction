@@ -1,0 +1,122 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/tpMenu/tpMenu.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<script src="$imageServer.get('info/js/tpMenu/tpMenu.js')"></script>
+<script src="$imageServer.get('info/js/domesticPrice/plupload.full.min.js')"></script>
+	<div class="pp15" id="layerDemo">	
+		<!--搜索条件-->
+		<div class="ry-banner">
+              <form class="layui-form" id="selForm"  method="post">
+		            <div class="layui-form-item layui-container">
+		                  <label class="layui-form-label">菜单类型：</label>
+		                  <div class="layui-input-inline iw200">
+		                  	<select id="menuTypeQuery"  value="$!{query.menuType}" lay-verify="required">
+		             	   		<option  value="">== 请选择类型  ==</option>
+		             	   		<option  value="10" #if($!{query.menuType} == 10) selected #end>普通</option>
+		             	   		<option  value="20" #if($!{query.menuType} == 20) selected #end>热门推荐</option>
+		              		</select>
+		                  </div>
+		                  <label class="layui-form-label">菜单描述：</label>
+		                  <div class="layui-input-inline iw200">
+		                      <input type="text" id="menuDesQuery"  value="$!{query.menuDes}" class="layui-input">   
+		                  </div>
+		            </div>
+		            <div class="layui-form-item layui-container">
+		            	<label class="layui-form-label">菜单代码：</label>
+		                  <div class="layui-input-inline iw200">
+		                      <input type="text" id="menuUrlQuery"  value="$!{query.menuUrl}" class="layui-input">   
+		                  </div>
+		                  <div class="layui-input-inline">
+		                  <button type="button" class="layui-btn layui-btn-normal ml18 searchBtn">查询</button>
+		                  <button type="button" class="layui-btn layui-btn-normal addFn">新增</button>
+		                  </div>
+		            </div>
+               </form>
+		</div>
+		
+		<table class="layui-table table-style tb-top" id="crudeOil">
+		  <thead>
+		    <tr>
+		      <th class="table-style-th">排序</th>
+		      <th class="table-style-th">菜单类型</th>
+			  <th class="table-style-th">菜单描述</th>
+			  <th class="table-style-th">菜单代码</th>
+              <th class="table-style-th">推荐层级</th>
+		      <th class="table-style-th">操作</th>
+			  <!-- <th class="table-style-th">菜单图标地址</th>
+              <th class="table-style-th">菜单参数</th>
+              <th class="table-style-th">行业推荐大类id</th>
+              <th class="table-style-th">行业推荐父id</th>
+              <th class="table-style-th">是否个人</th>
+              <th class="table-style-th">市场编号</th>
+              <th class="table-style-th">语言类型</th> -->
+		    </tr> 
+		  </thead>
+		  <tbody id="crudeOil">
+		  #foreach($menu in $!datas)
+			    <tr>
+				  <td>$!{menu.sort}</td>
+				  #if($!{menu.menuType} == "10")
+	              	<td>普通</td>
+	              #elseif($!{menu.menuType} == "20")
+	              	<td>热门推荐</td>
+	              #else
+	              <td></td>
+	              #end
+				  <td>$!{menu.menuDes}</td>
+				  <td>$!{menu.menuUrl}</td>
+	              #if($!{menu.tradeLevel} == "1")
+	              	<td>优先推荐</td>
+	              #else
+	              <td></td>
+	              #end
+			      <td class="acss-color">
+			      	<a href="javascript:;" class="btcol editFn" attr-data='{"sort":"$!{menu.sort}","menuId":"$!{menu.menuId}","menuType":"$!{menu.menuType}","menuDes":"$!{menu.menuDes}","menuIcon":"$!{menu.menuIcon}","menuUrl":"$!{menu.menuUrl}","menuArgu":"$!{menu.menuArgu}","tradeId":"$!{menu.tradeId}","tradeParentId":"$!{menu.tradeParentId}","tradeLevel":"$!{menu.tradeLevel}","isPersonal":"$!{menu.isPersonal}","marketId":"$!{menu.marketId}","langVer":"$!{menu.langVer}"}'>
+			      		<i class="layui-icon">&#xe642;</i>
+						编辑
+			      	</a>
+			      	<a href="javascript:;" class="mr btcol delFn" attr-data='{"menuId":"$!{menu.menuId}"}'>
+			      		<i class="layui-icon" style="color:red;">&#xe640;</i>
+			      		删除
+			      	</a>
+			      </td>
+			      <!--<td>$!{menu.menuIcon}</td>
+	              <td>$!{menu.menuArgu}</td>
+	              <td>$!{menu.tradeId}</td>
+	              <td>$!{menu.tradeParentId}</td>
+	              #if($!{menu.isPersonal} == "1")
+	              	<td>个人</td>
+	              #elseif($!{menu.isPersonal} == "0")
+	              	<td>企业</td>
+	              #else
+	              <td></td>
+	              #end
+	              <td>$!{menu.marketId}</td>
+	              <td>$!{menu.langVer}</td> -->
+			    </tr>
+			   #end 
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    	<!-- <div id="ry-page" class="ry-right"></div> -->
+	    	$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/tpMenu/tpMenu.htm?selProductName=$!{query.selProductName}").put('slider_path','/contain/formPagingPageSlider')
+	    </div>
+
+	 
+	 
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	    <!--底部-->
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>	
+    </div>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TCommonAttachmentsMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="file_oss_id" jdbcType="VARCHAR" property="fileOssId" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="business_uuid" jdbcType="VARCHAR" property="businessUuid" />
+    <result column="broker_billsfiletype" jdbcType="VARCHAR" property="brokerBillsFileType" />
+    <result column="broker_billsno" jdbcType="VARCHAR" property="brokerBillsNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, file_oss_id, channel, name, path, alive_flag, create_date, update_date, create_user, 
+    update_user, file_type, business_uuid,broker_billsfiletype,broker_billsno
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_common_attachments
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByBusinessUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_common_attachments
+    where alive_flag = '1'
+    and  business_uuid = #{businessUuid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByBusinessId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    tca.*
+    from `product-trade-blockchain`.t_common_attachments tca
+    where tca.alive_flag = '1'
+    and tca.business_uuid = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_common_attachments
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByBusinessUuid">
+    delete from `product-trade-blockchain`.t_common_attachments
+    where business_uuid = #{businessUuid,jdbcType=VARCHAR}
+    <if test="fileType!=null and fileType!=''">
+      AND file_type=#{fileType,jdbcType=VARCHAR}
+    </if>
+  </delete>
+
+  <insert id="insertList" useGeneratedKeys="true" keyProperty="id"  parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_common_attachments (file_oss_id, channel,
+    name, path, alive_flag,
+    create_date, update_date, create_user,
+    update_user, file_type, business_uuid,broker_billsfiletype,broker_billsno
+    )  values
+    <foreach collection="list" separator="," item="tcc">
+
+   ( #{tcc.fileOssId,jdbcType=VARCHAR}, #{tcc.channel,jdbcType=VARCHAR},
+    #{tcc.name,jdbcType=VARCHAR}, #{tcc.path,jdbcType=VARCHAR}, #{tcc.aliveFlag,jdbcType=VARCHAR},
+    #{tcc.createDate,jdbcType=TIMESTAMP}, #{tcc.updateDate,jdbcType=TIMESTAMP}, #{tcc.createUser,jdbcType=BIGINT},
+    #{tcc.updateUser,jdbcType=BIGINT}, #{tcc.fileType,jdbcType=VARCHAR}, #{tcc.businessUuid,jdbcType=VARCHAR},
+    #{tcc.brokerBillsFileType,jdbcType=VARCHAR}, #{tcc.brokerBillsNo,jdbcType=VARCHAR}
+    )
+    </foreach>
+  </insert>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments">
+
+    insert into `product-trade-blockchain`.t_common_attachments (file_oss_id, channel,
+      name, path, alive_flag, 
+      create_date, update_date, create_user, 
+      update_user, file_type, business_uuid,broker_billsfiletype,broker_billsno
+      )
+    values ( #{fileOssId,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{aliveFlag,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+      #{updateUser,jdbcType=BIGINT}, #{fileType,jdbcType=VARCHAR}, #{businessUuid,jdbcType=VARCHAR},
+      #{brokerBillsFileType,jdbcType=VARCHAR}, #{brokerBillsNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments">
+    insert into `product-trade-blockchain`.t_common_attachments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fileOssId != null">
+        file_oss_id,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="businessUuid != null">
+        business_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileOssId != null">
+        #{fileOssId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUuid != null">
+        #{businessUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments">
+    update `product-trade-blockchain`.t_common_attachments
+    <set>
+      <if test="fileOssId != null">
+        file_oss_id = #{fileOssId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUuid != null">
+        business_uuid = #{businessUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments">
+    update `product-trade-blockchain`.t_common_attachments
+    set file_oss_id = #{fileOssId,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      business_uuid = #{businessUuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParameter" parameterType="com.sinochem.crude.trade.blockchain.domain.TCommonAttachments" resultMap="BaseResultMap">
+    SELECT * from `product-trade-blockchain`.t_common_attachments
+    WHERE  alive_flag = '1'
+    <if test="fileOssId != null and fileOssId != ''">
+      and file_oss_id = #{fileOssId,jdbcType=VARCHAR}
+    </if>
+    <if test="channel != null and channel != ''">
+      and channel = #{channel,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null and name != ''">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="path != null and path != ''">
+      and path = #{path,jdbcType=VARCHAR}
+    </if>
+    <if test="aliveFlag != null and aliveFlag != ''">
+      and alive_flag = #{aliveFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="createDate != null">
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateDate != null">
+      and update_date = #{updateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createUser != null">
+      and create_user = #{createUser,jdbcType=BIGINT}
+    </if>
+    <if test="updateUser != null">
+      and update_user = #{updateUser,jdbcType=BIGINT}
+    </if>
+    <if test="fileType != null and fileType != ''">
+      and file_type = #{fileType,jdbcType=VARCHAR}
+    </if>
+    <if test="businessUuid != null and businessUuid != ''">
+      and business_uuid = #{businessUuid,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+    <select id="selectTradeAnnex" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+        t.blockchain_id
+        FROM
+        `product-trade-blockchain`.t_blockchain_event_record t
+        WHERE
+        t.event_code IN ('4002', '4004')
+        AND t.busi_id NOT IN (
+        SELECT
+        e.busi_id
+        FROM
+        `product-trade-blockchain`.t_blockchain_event_record e
+        WHERE
+        e.event_code IN ('4001', '4003')
+        and e.DEAL_NO = #{deal_no,jdbcType=VARCHAR  }
+        )
+        and t.DEAL_NO = #{deal_no,jdbcType=VARCHAR  }
+    </select>
+
+</mapper>

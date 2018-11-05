@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderButtonMapper">
+	
+	<select id="checkLogistics" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_ship tos
+				ON tos.ORDER_ID = too.ID
+				AND tos.AGENT_UUID is not null
+				AND tos.ALIVE_FLAG = '1'
+		WHERE
+			too.ID = #{orderId}
+			<!-- AND too.STATUS = '10' -->
+			AND too.ALIVE_FLAG = '1'
+	</select>
+	
+	<select id="checkRouteQuery" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_ship tos
+				ON tos.ORDER_ID = too.ID
+				AND tos.AGENT_UUID is null
+				AND tos.ALIVE_FLAG = '1'
+		WHERE
+			too.ID = #{orderId}
+			<!-- AND too.STATUS = '10' -->
+			AND too.ALIVE_FLAG = '1'
+	</select>
+	
+	<select id="checkIsTrigger" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_price  
+		WHERE
+			ORDER_ID = #{orderId}
+			AND ALIVE_FLAG = '1'
+			AND PRICE_TYPE = 'Trigger'
+	</select>
+	
+	<select id="checkIsQuantity" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order
+		WHERE
+			ID = #{orderId}
+			AND ALIVE_FLAG = '1'
+			AND (select QUANTITY from t_trigger_contract WHERE ORDER_ID = #{orderId}  limit 1 ) = (select sum(LOCK_QUANTITY) from t_trigger_result WHERE ORDER_ID=#{orderId})
+	</select>
+	
+	<select id="checkFee" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_fee
+		WHERE
+			ORDER_ID = #{orderId}
+			AND ALIVE_FLAG = '1'
+	</select>
+		
+	<select id="checkSettlementPreSell" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_statement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND STATEMENT_TYPE = '1'
+			AND STATUS = '10'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+	<select id="checkSettlementFinSell" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_statement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND STATEMENT_TYPE = '2'
+			AND STATUS = '10'
+			AND ALIVE_FLAG = '1'
+	</select>	
+		
+	<select id="checkReceiveAmount" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order
+		WHERE
+			ID = #{orderId}
+			AND STATUS = '30'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+	<select id="checkStatementPreBuy" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_statement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND STATEMENT_TYPE = '1'
+			AND STATUS &lt;&gt; '01'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+	<select id="checkSettlementPreBuy" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_settlement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND SETTLEMENT_TYPE = '1'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+	<select id="checkStatementFinBuy" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_statement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND STATEMENT_TYPE = '2'
+			AND STATUS &lt;&gt; '01'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+	<select id="checkSettlementFinBuy" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			t_order_settlement
+		WHERE
+			ORDER_ID = #{orderId}
+			AND SETTLEMENT_TYPE = '2'
+			AND ALIVE_FLAG = '1'
+	</select>	
+	
+</mapper>

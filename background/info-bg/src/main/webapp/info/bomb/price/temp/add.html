@@ -1,0 +1,26 @@
+<form class="layui-form" action="" >
+    <div class="layui-form-item" style="margin-top:50px">
+        <label class="layui-form-label iw190">指数代码</label>
+        <div class="layui-input-inline">
+           <div class="layui-input-inline">
+        <input type="text" name="indexCode"  lay-verify="required" placeholder="请输入指数代码" class="layui-input">
+        </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">指数名称</label>
+        <div class="layui-input-inline ">
+        <input type="text" name="indexName" lay-verify="required" placeholder="请输入指数名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">指数排序</label>
+        <div class="layui-input-inline ">
+        <input type="number" min="1"  name="priority" lay-verify="required" placeholder="请输入指数排序" class="layui-input">
+        </div>
+    </div>
+    	<button id="savePriceIndexTemp" style="margin-top: 0px;" class="btnloc1 btnloc2 layui-btn layui-btn-normal" lay-submit="" lay-filter="savePriceIndexTemp">保存</button>
+    	<button id="ext" type="button" style="margin-top: 0px;" class="btnloc2 layui-btn layui-btn-normal">取消</button>
+    
+</form>
+

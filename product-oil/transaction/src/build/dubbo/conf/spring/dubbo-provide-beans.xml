@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+    
+
+    <dubbo:service interface="com.sinochem.crude.trade.transaction.remote.ContractSheetRemoteService" version="${dubbo.version}" group="${dubbo.group}" ref="contractSheetRemoteServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.sinochem.crude.trade.transaction.remote.BillCoreUploadRemoteService" version="${dubbo.version}" group="${dubbo.group}" ref="billCoreUploadRemoteServiceImpl"></dubbo:service>
+</beans>

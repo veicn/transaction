@@ -1,0 +1,157 @@
+#set($layout='')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>企业详情</title>
+	<link rel="stylesheet" href="$imageServer.get('css/s_common.css')">
+	<link rel="stylesheet" href="$imageServer.get('css/s_center.css')">
+	#js("$imageServer.get('js/jquery-1.8.3.min.js')")
+	<script>  
+		function enterprise(){
+			#if(${p}==1)
+			
+			$("#cgEenterprise").hide();
+			$("#cgperson").hide();
+			#elseif(${p}==2)
+			
+			$("#cgperson").hide();
+			$("#cgEenterpriseAdd").hide();
+			#elseif(${p}==3)
+			
+			$("#cgEenterprise").hide();
+			$("#cgpersonAdd").hide();
+			#elseif(${p}==4)
+			
+			$("#cgEenterpriseAdd").hide();
+			$("#cgpersonAdd").hide();
+		
+		#end
+		}
+		$(function(){
+		 enterprise()
+		});
+	</script>
+	
+</head>
+<body>
+		<div class="c-mr">
+			<div class="c-mod" id="cgEenterprise">
+			  <h3><em class="cw-ico ico-h3"></em>企业详细信息</h3>
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">企业编号：</span><span class="c-int qx-conte">$!{enterprise.code}</span></li>
+					<li class="c-fcos2"><span class="c-fn">企业名称：</span><span class="c-int qx-conte">$!{enterprise.name}</span></li>
+					<li class="c-fcos2"><span class="c-fn">企业全名：</span><span class="c-int qx-conte">$!{enterprise.fullName}</span></li>
+					<li class="c-fcos2"><span class="c-fn">组织机构证号：</span><span class="c-int qx-conte">$!{enterprise.organizationCode}</span></li>
+					<li class="c-fcos2"><span class="c-fn">税号：</span><span class="c-int qx-conte">$!{enterprise.taxCode}</span></li>
+					<li class="c-fcos2"><span class="c-fn">工商执照证件号：</span><span class="c-int qx-conte">$!{enterprise.licenseNo}</span></li>
+					<li class="c-fcos2"><span class="c-fn">税务登记证件：</span><span class="c-int qx-conte">$!{enterprise.taxNo}</span></li>
+					<li class="c-fcos2"><span class="c-fn">注册时间：</span><span class="c-int qx-conte">$!{enterpriseRegisterTime}</span></li>
+					<li class="c-fcos2"><span class="c-fn">创建时间：</span><span class="c-int qx-conte">$!{enterpriseCreateTime} </span></li>
+					<li class="c-fcos2"><span class="c-fn">创建人：</span><span class="c-int qx-conte">$!{enterprise.createUser}</span></li>
+					<li class="c-fcos2"><span class="c-fn">描述：</span><span class="c-int qx-conte">$!{enterprise.description}</span></li>
+				</ul>
+			  </div>
+		    </div>
+		    
+			<div class="c-mod" id="cgperson">
+			  <h3><em class="cw-ico ico-h3"></em>个人信息<span class="cxtj-nr-an"></h3>
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">用户ID：</span><span class="c-int qx-conte">$!{person.id}</span></li>
+					<li class="c-fcos2"><span class="c-fn">用户编号：</span><span class="c-int qx-conte">$!{person.code}</span></li>
+					<li class="c-fcos2"><span class="c-fn">用户名称：</span><span class="c-int qx-conte">$!{person.name}</span></li>
+					<li class="c-fcos2"><span class="c-fn">证件类型：</span><span class="c-int qx-conte">$!{person.cardType}</span></li>
+					<li class="c-fcos2"><span class="c-fn">证件号码：</span><span class="c-int qx-conte">$!{person.cardNo}</span></li>
+					<li class="c-fcos2"><span class="c-fn">创建时间：</span><span class="c-int qx-conte">$!{personCreateTime}</span></li>
+					<li class="c-fcos2"><span class="c-fn">创建人：</span><span class="c-int qx-conte">$!{person.createUser}</span></li>
+					<li class="c-fcos2"><span class="c-fn">备注：</span><span class="c-int qx-conte">$!{person.memo}</span></li>
+				</ul>
+			  </div>
+		    </div>
+		    
+		    <div class="c-mod" id="cgEenterpriseAdd">
+			  <h3><em class="cw-ico ico-h3"></em>企业详细信息</h3>
+			  <div class="c-form">
+					<center> <h1><a class="c-btnsub" href="$appServer.get('enterpriseAdd.htm')">企业信息不全，请完善企业信息</a></h1></center>
+			  </div>
+		    </div>
+		    
+		    <div class="c-mod" id="cgpersonAdd">
+			  <h3><em class="cw-ico ico-h3"></em>个人详细信息</h3>
+			  <div class="c-form">
+					<center> <h1><a class="c-btnsub" href="$appServer.get('personAdd.htm')">个人信息不全，请补充完善个人信息</a></h1></center>
+			  </div>
+		    </div>
+		    
+		    
+			<div class="c-mod" id="cgxx">
+			  $contain.get('buyerCenter/topfivebidding.htm').setHost("$listedServer.get('')")
+		    </div>
+			<div class="c-mod" id="cgxx">
+			  $contain.get('buyerCenter/topfivedemand.htm').setHost("$listedServer.get('')")
+			</div>
+		  
+			
+			
+			<div class="c-mod" id="cgxx">
+			   $contain.get('salerCenter/topfivebidding.htm').setHost("$listedServer.get('')")
+			  </div>
+		   
+			<div class="c-mod">
+			$contain.get('salerCenter/topfivedemand.htm').setHost("$listedServer.get('')")
+			</div>
+			#*<div class="c-mod" id="cgjbxx">
+				<h3><i class="cw-ico ico-h3"></i>装船信息<span class="cxtj-nr-an"><a href="" class="btn-more">+ 选择泊位</a><a href="" class="btn-more">+ 添加泊位信息</a></span></h3>
+				<div class="c-tabdiv">
+				  <table>                                                                            
+					<tr><th>分类</th><th>品种</th><th>规格</th><th>装船港</th><th>装船日</th><th>订单量<br>(万桶)</th><th>装船量<br>（净吨）</th><th>装船量<br>（净桶）</th><th>提单日</th><th>提单量<br>（净吨）</th><th>提单量<br>（净桶）</th><th>吨桶比</th><th>差量<br>（净桶）</th></tr>
+					<tr class="c-tabcos1"><td>柴油</td><td>澳大利亚柴油</td><td>0#</td><td>中国泉州港</td><td>2017/11/5-2017/11/5</td><td>30</td><td>4200</td><td>29.92</td><td>2017/11/6</td><td>4200</td><td>29.93</td><td>8.5</td><td>0.03</td></tr>
+					<tr class="c-tabcos2"><td>柴油</td><td>澳大利亚柴油</td><td>0#</td><td>中国泉州港</td><td>2017/11/5-2017/11/5</td><td>30</td><td>4200</td><td>29.92</td><td>2017/11/6</td><td>4200</td><td>29.93</td><td>8.5</td><td>0.03</td></tr>
+				</table>
+				</div>
+			</div>
+			<div class="c-mod" id="cgjbxx">
+				<h3><i class="cw-ico ico-h3"></i>卸港信息<span class="cxtj-nr-an"><a href="" class="btn-more">+ 选择泊位</a><a href="" class="btn-more">+ 添加泊位信息</a></span></h3>
+				<div class="c-tabdiv">
+				  <table>                                                                            
+					<tr><th>分类</th><th>品种</th><th>规格</th><th>装船港</th><th>装船日</th><th>订单量<br>(万桶)</th><th>装船量<br>（净吨）</th><th>装船量<br>（净桶）</th><th>提单日</th><th>提单量<br>（净吨）</th><th>提单量<br>（净桶）</th><th>吨桶比</th><th>差量<br>（净桶）</th></tr>
+					<tr class="c-tabcos1"><td>柴油</td><td>澳大利亚柴油</td><td>0#</td><td>中国泉州港</td><td>2017/11/5-2017/11/5</td><td>30</td><td>4200</td><td>29.92</td><td>2017/11/6</td><td>4200</td><td>29.93</td><td>8.5</td><td>0.03</td></tr>
+					<tr class="c-tabcos2"><td>柴油</td><td>澳大利亚柴油</td><td>0#</td><td>中国泉州港</td><td>2017/11/5-2017/11/5</td><td>30</td><td>4200</td><td>29.92</td><td>2017/11/6</td><td>4200</td><td>29.93</td><td>8.5</td><td>0.03</td></tr>
+				</table>
+				</div>
+			</div>
+			<div class="c-mod" id="cgxx">
+			  <h3><em class="cw-ico ico-h3"></em>结算付款信息<span class="cxtj-nr-an"><a class="btn-more">收起 ∧</a></span></h3>
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">提单日：</span><span class="c-int qx-conte">2017/11/08</span></li>
+					<li class="c-fcos2"><span class="c-fn">付款日：</span><span class="c-int qx-conte">2017/12/07</span></li>
+					<li class="c-fcos2"><span class="c-fn">收款人：</span><span class="c-int qx-conte">赵泽菊</span></li>
+					<li class="c-fcos2"><span class="c-fn">账号：</span><span class="c-int qx-conte">3334456633366</span></li>
+					<li class="c-fcos2"><span class="c-fn">开户行：</span><span class="c-int qx-conte">西城区复兴门外A2号中化大厦703室</span></li>
+				</ul>
+			  </div>
+		    </div>
+			<div class="c-mod" id="cgxx">
+			  <h3><em class="cw-ico ico-h3"></em>其它信息<span class="cxtj-nr-an"><a class="btn-more">收起 ∧</a></span></h3>
+			  <div class="c-form">
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">其他条款：</span><span class="c-int qx-conte">品质、数量装港岸罐计量为准</span></li>
+					<li class="c-fcos2"><span class="c-fn">授信条款：</span><span class="c-int qx-conte">Open (Open Credit)</span></li>
+					<li class="c-fcos2"><span class="c-fn">商检机构：</span><span class="c-int qx-conte">CCIC</span></li>
+					<li class="c-fcos2"><span class="c-fn">账号：</span><span class="c-int qx-conte">出口配额文件</span></li>
+				</ul>
+			  </div>
+		    </div>
+		    *#
+			<div class="c-subdiv">
+				<button class="c-btnsub">保存</button><button class="c-btncas">返回</button>
+			</div>
+		</div>	
+	</div>
+	
+</body>
+</html>

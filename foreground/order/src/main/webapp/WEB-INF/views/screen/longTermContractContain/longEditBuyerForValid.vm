@@ -1,0 +1,76 @@
+<div class="c-mod" id="mjxx">
+    <h3><em class="cw-ico ico-h3"></em>购买商信息<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>企业名称：</span>
+                <input type="hidden"  name="buyerRelevanter.eMemberId" id="company" value="$!{buyerRelevanter.eMemberId}" >
+                <input type="text" required class="c-int" name="buyerRelevanter.eMemberName" id="company-name" value="$!{buyerRelevanter.eMemberName}"/>
+                <div class="ac_results">
+                    <ul>
+                    </ul>
+                </div>
+                <label for="company-name" id="company-name-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos1">
+                <span class="c-fn">企业地址：</span>
+                <input type="text" class="c-int" name="buyerRelevanter.address" value="$!{buyerRelevanter.address}"/>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>联系人：</span>
+                <input type="text"   required class="c-int" name="buyerRelevanter.contacter" id="company-contacter" value="$!{buyerRelevanter.contacter}"/>
+                <label for="company-contacter" id="company-contacter-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>邮箱：</span>
+                <input type="text" required class="c-int" name="buyerRelevanter.email" id="company-famil" value= "$!{buyerRelevanter.email}"/>
+                <label for="company-famil" id="company-famil-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn"><span class="notice-required">*&nbsp;</span>联系电话：</span>
+                <input type="text"  onkeyup="return clearPhono(this)" required class="c-int" name="buyerRelevanter.phoneNo" id="company-phoneNo" value="$!{buyerRelevanter.phoneNo}"/>
+                <label for="company-phoneNo" id="company-phoneNo-error" class="error my-error"></label>
+            </li>
+            <li class="c-fcos2">
+                <span class="c-fn">传真：</span>
+                <input type="text"   onkeyup="return clearPhono(this)" class="c-int" name="buyerRelevanter.fax" id="fax" value="$!{buyerRelevanter.fax}"/>
+            </li>
+            <li><input type="hidden" value="B" name="buyerRelevanter.type"></li>
+            <li><input type="hidden" value="$!{buyerRelevanter.id}" name="buyerRelevanter.id"></li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="$appServer.get('script/lib/jquery.autocomplete.min.js')"></script>
+<script>
+
+    $(function () {
+        $(document).ready(function () {
+            var datas = $contain.get('/centercontain/enterpriseList.json').setHost("$memberServer.get('')")
+            var companyInput = $ ("#company-name");
+            companyInput.autocomplete(
+                    datas.datas,
+                    {
+                        width: companyInput.outerWidth(),
+                        minChars: 0,
+                        matchContains: true,
+                        scroll: true,
+                        mustMatch: false,
+                        scrollHeight: 122,
+                        formatItem: function (row, i, max) {
+                            return  row.name ;
+                        },
+                        formatMatch: function (row, i, max) {
+                            return row.name;
+                        },
+                        formatResult: function (row) {
+                            return row.name;
+                        }
+                    }).result(function (event, row, formatted) {
+                $('#company').val(row.memberId)
+            })
+        })
+    });
+
+</script>

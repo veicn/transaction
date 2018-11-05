@@ -1,0 +1,125 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+        <form class="layui-form" action="$appServer.get("om/partner/list.htm")" method="post">
+            <span style="padding-left: 50px;">企业类型:</span>
+            <div class="layui-inline">
+                <select name="type" class="layui-select">
+                    <option value="">请选择</option>
+                    #foreach($c in $!credentials)
+                        <option value="$!{c.code}" #if($!{partner.type} == $!{c.code}) selected #end>$!{c.name}</option>
+                    #end
+                </select>
+            </div>
+            <span style="padding-left: 50px;">企业名称:</span>
+            <div class="layui-inline">
+                <input class="layui-input" name="name" value="$!{partner.name}">
+            </div>
+            <button class="layui-btn" type="submit">查询</button>
+            <button data-method="setTop" class="layui-btn" type="button" id="add">新增</button>
+        </form>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>企业类型</th>
+                <th>企业名称</th>
+                <th>URL</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            #foreach($item in $!page.list)
+                <tr>
+                    <td>
+                        #foreach($c in $!credentials)
+                            #if($!item.type == $!c.code)
+                            $!c.name
+                        #end
+                        #end
+                    </td>
+                    <td>$!item.name ($!item.nameEn)</td>
+                    <td>$!item.url</td>
+                    <td>
+                        <a data-method="setTop" data-id="${item.id}" class="layui-btn layui-btn-xs update">图片管理</a>
+                        <a href="javascript:deleteRecord($!{item.id})" class="layui-btn layui-btn-xs">删除</a>
+                    </td>
+
+                </tr>
+            #end
+        </table>
+        $contain.get('/page/page.htm').put('pageInfo',$!{page})
+    </div>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+        });
+
+        $(function () {
+            var title;
+            var type;
+            var url;
+            var active = {
+                setTop: function () {
+                    var that = this;
+                    //多窗口模式，层叠置顶
+                    layer.open({
+                        type: 2 //此处以iframe举例
+                        , title: title
+                        , area: ['800px', '500px']
+                        , shade: 0
+                        , maxmin: true
+                        , id: 1
+                        , content: url
+                        , zIndex: layer.zIndex //重点1
+                        , success: function (layero) {
+                            layer.setTop(layero); //重点2
+                        }
+                    });
+                }
+            }
+
+            $("#add").click(function () {
+                title = '新增';
+                type = 'add';
+                url = "$appServer.get('om/partner/update.htm')";
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            })
+
+            $(".update").click(function () {
+                title = '图片管理';
+                type = 'update';
+                var id = $(this).data('id');
+                url = "$appServer.get('om/partner/update.htm?id=')" + id;
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            })
+        });
+
+        function deleteRecord(id) {
+            layer.confirm('确定要删除么？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.ajax({
+                    url: '$appServer.get('om/partner/delete.json')',
+                    data: {id: id},
+                    success: function (o) {
+                        if (o.status == 0) {
+                            layer.alert('删除成功', function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            layer.alert(o.message);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest.status);
+                        console.log(XMLHttpRequest.readyState);
+                        console.log(textStatus);
+                        layer.alert('网络异常');
+                    }
+
+                });
+            }, function(){
+                layer.closeAll();
+            });
+        }
+    </script>

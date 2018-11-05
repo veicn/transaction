@@ -1,0 +1,19 @@
+<div class="layui-fluid">
+    <table class="layui-table" lay-data="{height:100%}">
+        <thead>
+        <tr>
+            <th lay-data="{width:80, sort: true}">ID</th>
+            <th lay-data="{width:80}">角色名</th>
+            <th lay-data="{width:80, sort: true}">模块号</th>
+            <th lay-data="{width:80, sort: true}">Sort</th>
+            <th lay-data="{width:80}">时间</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+    });
+</script>

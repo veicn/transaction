@@ -1,0 +1,240 @@
+<a href="javascript:;" class="c-mlf"><i class="cw-ico ico-arrr"></i></a>
+<div class="c-company"><span class="c-complogo">
+	<a href="#if($type == 1) $systemServer.get('member/enterpriseFill.htm') #else $systemServer.get('member/personFill.htm') #end">
+		<img #if(${logo} && "$!{logo}"!="")src="$!{uploadServer}/img/$!{logo}.img" #{else}src="$appServer.get('/images/enter_bg1.jpg')"#end >
+	</a></span>
+	<p><a href="#if($type == 1) $systemServer.get('member/enterpriseFill.htm') #else $systemServer.get('member/personFill.htm') #end">$!{user.name}</a></p>
+</div>
+<div id="buy" style="display:none;">
+</div>
+
+<ul class="c-menu cMenu">
+  <!--   <li>
+        <a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca03"></i><em>贸易物流</em></a>
+        <ul class="c-menu-child c-menu-two">
+            <li m="17"><a class="menuHref" href="$shipServer.get('/pallet/palletQueryList.htm')"><i class="cw-ico cw-list"></i>租船需求管理（货主）</a></li>
+            <li m="18"><a class="menuHref" ><i class="cw-ico cw-list"></i>租船协议管理（货主）</a></li>
+            <li m="19"><a class="menuHref" href="$shipServer.get('/agreement/orderList.htm')"><i class="cw-ico cw-list"></i>租船需求管理（代理）</a></li>
+            <li m="20"><a class="menuHref" href="$shipServer.get('/agreement/agreementList.htm')"><i class="cw-ico cw-list"></i>租船协议管理（代理）</a></li>
+            <li m="21"><a class="menuHref" href="$shipServer.get('/shipPlate/shipPlateList.htm')"><i class="cw-ico cw-list"></i>船盘管理</a></li>
+            <li m="22"><a class="menuHref" href="$shipServer.get('/shipPact/shipPactList.htm')"><i class="cw-ico cw-list"></i>船合同管理</a></li>
+        </ul>
+
+    </li> -->
+<li>
+			<a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca03"></i><em>贸易物流（船东/经纪人）</em></a>
+			<ul class="c-menu-child c-menu-two">
+				<li><a class="menuHref" href="$shipServer.get('/shipPlate/shipPlateList.htm')"><i class="cw-ico cw-list"></i>船盘管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/shipPactNew/shipPactListNew.htm')"><i class="cw-ico cw-list"></i>租船协议管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/statements/agreementsStatementsList.htm')"><i class="cw-ico cw-list"></i>结算单管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/shipOwnerSysShip/sysShipList.htm')"><i class="cw-ico cw-list"></i>船舶管理</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			<a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca03"></i><em>贸易物流（转租船东）</em></a>
+			<ul class="c-menu-child c-menu-two">
+				<li><a class="menuHref" href="$shipServer.get('/shipPlate/shipAgentShipPlateList.htm')"><i class="cw-ico cw-list"></i>船盘管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/pallet/palletQueryListShipowner.htm')"><i class="cw-ico cw-list"></i>租船需求管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/shipPactNew/shipPactListNew.htm')"><i class="cw-ico cw-list"></i>租船合同管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/statements/agreementsStatementsList.htm')"><i class="cw-ico cw-list"></i>结算单管理</a></li>
+			</ul>
+		</li>
+		
+		<li>
+			<a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca03"></i><em>贸易物流（货主）</em></a>
+			<ul class="c-menu-child c-menu-two">
+				<li><a class="menuHref" href="$shipServer.get('/pallet/palletQueryList.htm')"><i class="cw-ico cw-list"></i>租船需求管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/pallet/agreementList.htm')"><i class="cw-ico cw-list"></i>租船协议管理</a></li>
+				<li><a class="menuHref" href="$shipServer.get('/shipperstatements/shipperagreementsStatementsList.htm')"><i class="cw-ico cw-list"></i>结算单管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:void(0)" class="aClick show"><i class="cw-ico ico-ca03"></i><em>贸易物流（船代）</em></a>
+			<ul class="c-menu-child c-menu-two">
+				<li><a class="menuHref" href="$shipServer.get('/shipPact/shipPactList.htm"')><i class="cw-ico cw-list"></i>租船合同管理</a></li>
+			</ul>
+		</li>
+		
+
+</ul>
+
+
+<iframe id="iframeZy" src="$appServer.get('iframeData.html')" style="display: none;"></iframe>
+<script>
+
+   window.onload=function(){
+    
+    	var menu = 0;
+		var menuChild = 0;
+    	var iframeZy=document.getElementById('iframeZy');
+    	
+    	var buyStr=window.localStorage.getItem('buy');
+    	var buyHtml1=$('.ry-menu-buy:eq(0)').clone(true);
+    	var buyHtml2=$('.ry-menu-buy:eq(1)').clone(true);
+    	$('#buyBox').find('ul').remove();
+    	if(buyStr=='1'){
+    		$('#buyBox').append(buyHtml1);
+    	}else{
+    		$('#buyBox').append(buyHtml2);
+    	}
+    	$('.c-mmxz-mm').on('click',function(){
+    		if($(this).find('.c-mmxz-mm1').length>0){
+    			window.localStorage.setItem('buy',0);
+    		}else{
+    			window.localStorage.setItem('buy',1);
+    		}
+    	});
+    	
+    	
+    	
+    	
+		
+		
+		
+		$('.cMenu>li>a').on('click',function(){
+			if(!$(this).next().is(':visible')){
+				$('.cMenu>li>a').removeClass('active');
+				$('.cMenu ul').hide();
+				$(this).addClass('active').next().show();
+			}else{
+				$(this).removeClass('active').next().hide();
+				$(this).find('li').removeClass('active');
+			}
+			
+		});
+		$('.c-menu-child li').each(function(){
+			$(this).on('click',function(){
+				$('.c-menu-child li').removeClass('active');
+				$(this).addClass('active');
+				
+				
+				menu= $(this).parent().parents('li').index('.cMenu>li');
+				menuChild=  $(this).index();
+				var objData = {"menu":menu,"menuChild":menuChild};
+				objData = JSON.stringify(objData);
+				iframeZy=document.getElementById('iframeZy');
+				window.frames[0].postMessage(objData,'*');   
+			})			
+		});
+
+    };
+    
+    var urlStr=window.location.href;
+	var onOff=true;
+	$('.cMenu a').each(function(i){
+		if($(this).attr('href').indexOf(urlStr)!=-1){
+			$(this).parent().addClass('active');
+			$(this).parents('ul').show();
+
+			menu= $(this).parent().parents('li').index('.cMenu>li');
+			menuChild=  $(this).parents('ul li').index();
+			var objData = {"menu":menu,"menuChild":menuChild};
+			objData = JSON.stringify(objData);
+			var iframeZy=document.getElementById('iframeZy');
+			window.frames[0].postMessage(objData,'*'); 
+			onOff=false;
+			return onOff;
+		}
+	});
+	
+	$('.cMenu>li').on('click',function(){
+		$(this).addClass('c-menu-cur').siblings('li').removeClass('c-menu-cur');
+	});
+	   
+
+	window.addEventListener('message',function(e){
+		var newData = JSON.parse(e.data);
+		
+		
+		if(urlStr.indexOf('/shipPact/shipPactDetail.htm')!=-1 || urlStr.indexOf('/shipPact/shipPactList.htm')!=-1){ 
+			/*船合同管理*/
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu ul').hide();
+			$('.cMenu a').each(function(i){
+				if($(this).attr('href').indexOf('/shipPact/shipPactList.htm')!=-1){
+					$('.cMenu>li>a').removeClass('active');
+					$('.cMenu>li').removeClass('c-menu-cur');
+					$('.cMenu ul').hide();
+					$(this).parent().addClass('active');
+					$(this).parents('ul').show();
+					$(this).parents('ul').parent().addClass('c-menu-cur');
+				}
+			});
+		}else if(urlStr.indexOf('/pallet/palletEdit.htm')!=-1 || urlStr.indexOf('/pallet/orderPageList.htm')!=-1){ 
+			/*租船需求管理（货主）*/
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu ul').hide();
+			$('.cMenu a').each(function(i){
+				if($(this).attr('href').indexOf('/pallet/palletQueryList.htm')!=-1){
+					$('.cMenu>li>a').removeClass('active');
+					$('.cMenu>li').removeClass('c-menu-cur');
+					$('.cMenu ul').hide();
+					$(this).parent().addClass('active');
+					$(this).parents('ul').show();
+					$(this).parents('ul').parent().addClass('c-menu-cur');
+				}
+			});
+		}else if(urlStr.indexOf('/pallet/agreementList.htm')!=-1){ 
+			/*租船协议管理（货主）*/
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu ul').hide();
+			$('.cMenu a').each(function(i){
+				if($(this).attr('href').indexOf('/pallet/agreementList.htm')!=-1){
+					$('.cMenu>li>a').removeClass('active');
+					$('.cMenu>li').removeClass('c-menu-cur');
+					$('.cMenu ul').hide();
+					$(this).parent().addClass('active');
+					$(this).parents('ul').show();
+					$(this).parents('ul').parent().addClass('c-menu-cur');
+				}
+			});
+		}else if(urlStr.indexOf('/agreement/orderList.htm')!=-1){ 
+			/*租船需求管理（代理）*/
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu ul').hide();
+			$('.cMenu a').each(function(i){
+				if($(this).attr('href').indexOf('/agreement/orderList.htm')!=-1){
+					$('.cMenu>li>a').removeClass('active');
+					$('.cMenu>li').removeClass('c-menu-cur');
+					$('.cMenu ul').hide();
+					$(this).parent().addClass('active');
+					$(this).parents('ul').show();
+					$(this).parents('ul').parent().addClass('c-menu-cur');
+				}
+			});
+		}else if(urlStr.indexOf('/agreement/agreementList.htm')!=-1 
+			|| urlStr.indexOf('/agreement/agreementDetailQuery.htm')!=-1
+			|| urlStr.indexOf('/agreement/agreementDetail.htm')!=-1){ 
+			/*租船协议管理（代理）*/
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu ul').hide();
+			$('.cMenu a').each(function(i){
+				if($(this).attr('href').indexOf('/agreement/agreementList.htm')!=-1){
+					$('.cMenu>li>a').removeClass('active');
+					$('.cMenu>li').removeClass('c-menu-cur');
+					$('.cMenu ul').hide();
+					$(this).parent().addClass('active');
+					$(this).parents('ul').show();
+					$(this).parents('ul').parent().addClass('c-menu-cur');
+				}
+			});
+		}else{   
+			$('.cMenu>li li').removeClass('active');
+			$('.cMenu>li').removeClass('c-menu-cur');
+			$('.cMenu>li').eq(newData.menu).addClass('c-menu-cur').find('ul').show().find('li:eq('+newData.menuChild+')').addClass('active');
+		}
+		
+	});
+
+	
+
+</script>
+<style>
+    .c-menu-child{display:none;}
+    .c-menu li ul li a{ padding:10px 20px 10px 76px;}
+    .c-menu li a{padding:12px 20px 12px 35px;}
+    .c-menu .c-menu-two li.active a{ color:#0091ea;}
+    .cMenu ul{display:none;}
+</style>
+

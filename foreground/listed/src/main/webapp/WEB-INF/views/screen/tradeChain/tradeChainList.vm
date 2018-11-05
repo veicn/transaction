@@ -1,0 +1,159 @@
+#set($a = "个人中心-买原油网")
+
+<!-- 内容主体区域 -->
+<div class="s-mod">
+    <div class="s-order-box">
+        <div class="clearfix s-order-tit"><h1>贸易链</h1></div>
+        <p class="s-order-jbx"></p>
+        <div class="s-order-sear">
+            <form class="s-form s-form-cont s-form-cont2" id="queryTradeChainForm" action="$appServer.get('/tradeChain/tradeChainList.htm')">
+                <ul>
+                    <li class="s-form-item">
+                        <div class="s-inline s-inline3">
+                            <label class="s-form-label">企业名称</label>
+                            <div class="s-input-inline">
+
+                                <select class="s-select" name="enterpriseId" value="$!{tradeChainQuery.enterpriseId}">
+                                    <option value="">请选择</option>
+                                    #foreach(${involvedEnterprise} in $!{involvedEnterpriseList})
+                                        <option value="$!{involvedEnterprise.memberId}"
+                                            #if($!{tradeChainQuery.enterpriseId} == $!{involvedEnterprise.memberId})
+                                                selected
+                                            #end
+                                        >$!{involvedEnterprise.enterpriseNameZH}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="s-inline s-inline3">
+                            <label class="s-form-label">贸易链有效期</label>
+                            <div class="s-input-inline">
+                                <input type="text" date="true" class="s-input width_45" name="tradingChainIndate1" value="$!{tradeChainQuery.tradingChainIndate1}">
+                                <em>-</em>
+                                <input type="text" date="true" class="s-input width_45" name="tradingChainIndate2" value="$!{tradeChainQuery.tradingChainIndate2}">
+                            </div>
+                        </div>
+                        <div class="s-inline s-inline3">
+                            <label class="s-form-label">创建时间</label>
+                            <div class="s-input-inline">
+                                <select class="s-select" name="dataTime" value="$!{tradeChainQuery.dataTime}">
+                                    <option></option>
+                                    #foreach(${tradeChainPublishTimeOption} in $!{tradeChainPublishTimeOptionList})
+                                        <option value="$!{tradeChainPublishTimeOption.code}"
+                                            #if($!{tradeChainPublishTimeOption.code} == $!{tradeChainQuery.dataTime})
+                                                selected
+                                            #end
+                                        >$!{tradeChainPublishTimeOption.zhName}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="s-inline s-inline0"><a onclick="queryTradeChainList()"><i class="s-icon s-sear-ico"></i></a></div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    #if($!{tradingChainList.total} == 0)
+       #* $contain.get('contain/nodata.htm');*#
+    #else
+        #foreach($record in $!{tradeChainList})
+            <div class="s-mod-block">
+                <div class="s-mod-btit"><a href="" title="查看详情"><em>$!{record.orderDate}</em><em>编号：$!{record.serialNumber}</em></a>
+                    #if($!{record.aliveFlag} == 1)
+                        <p class="cw-ico ord-status">已保存</p>
+                    #elseif($!{record.aliveFlag} == 2)
+                        <p class="cw-ico ord-status">已发布</p>
+                    #elseif($!{record.aliveFlag} == 3)
+                        <p class="cw-ico ord-status">确认中</p>
+                    #elseif($!{record.aliveFlag} == 4)
+                        <p class="cw-ico ord-status">已取消</p>
+                    #elseif($!{record.aliveFlag} == 5)
+                        <p class="cw-ico ord-status">已完成</p>
+                    #elseif($!{record.aliveFlag} == 6)
+                        <p class="cw-ico ord-status">已逾期</p>
+                    #end
+                </div>
+                <div class="s-mod-bcont">
+                    <div class="s-myl-blol">
+                        <ul class="clearfix">
+                            <li><i class="s-icon s-myl-ico1"></i><p><span class="s-myl-span1">$!{record.seller}</span><span class="s-myl-span2">供应商</span></p></li>
+                            <li><i class="s-icon s-myl-ico2"></i><p><span class="s-myl-span4">$!{record.maoyi}</span><span class="s-myl-span2">贸易商</span></p></li>
+                            <li><i class="s-icon s-myl-ico3"></i><p><span class="s-myl-span4">$!{record.buyer}</span><span class="s-myl-span2">采购商</span></p></li>
+                        </ul>
+                        <p class="s-myl-line"><i class="s-icon s-myl-ico4"></i><i class="s-icon s-myl-ico5"></i></p>
+                    </div>
+                    <form class="s-form s-form-cont s-form-cont2 s-myl-blol2" action="">
+                        <ul>
+                            <li class="s-form-item">
+                                <div class="s-inline">
+                                    <label class="s-form-label">油种：</label>
+                                    <div class="s-input-inline">
+                                        <p>$!{record.OilType}</p>
+                                    </div>
+                                </div>
+                                <div class="s-inline">
+                                    <label class="s-form-label">贸易链有效期：</label>
+                                    <div class="s-input-inline s-input-inline2">
+                                        <p>$!{record.youxiao}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                    <div class="s-but-all clearfix">
+                        <div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+                            <div class="s-but-ship clearfix">
+                                #*供应商*#
+                                #if($!{record.merberId} == $!{record.sellerId})
+                                    <a href='$appServer.get("/tradeChain/getTradingChainDetails.htm?uuid=$!{record.uuid}")' class="s-btn">查看</a>
+                                #*贸易商*#
+                                #elseif($!{record.merberId} == $!{record.maoyiId})
+                                    <a href='$appServer.get("/tradeChain/getTradingChainDetails.htm?uuid=$!{record.uuid}")' class="s-btn">查看</a>
+                                #*购买商*#
+                                #elseif($!{record.merberId} == $!{record.buyerId})
+                                    #if($!{record.aliveFlag} == 1)
+                                        <a href='$appServer.get("/tradeChain/submitOrWithdrawTradingChain.htm?uuid=$!{record.uuid}&status=2")' class="s-btn">提交</a>
+                                        <a href='$appServer.get("/tradeChain/toTradeChainEdit.htm?uuid=$!{record.uuid}")' class="s-btn">修改</a>
+                                    #elseif($!{record.aliveFlag} == 2)
+                                        <a href='$appServer.get("/tradeChain/submitOrWithdrawTradingChain.htm?uuid=$!{record.uuid}&status=1")' class="s-btn">撤回</a>
+                                    #end
+                                    <a href='$appServer.get("/tradeChain/getTradingChainDetails.htm?uuid=$!{record.uuid}")' class="s-btn">查看</a>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        #end
+    #end
+    $contain.get('/common/page.htm').put("pageInfo",$!{tradingChainList})
+</div>
+
+<div class="s-footer">
+
+</div>
+
+
+<script>
+    function queryTradeChainList() {
+        $('#queryTradeChainForm').submit();
+    };
+
+
+
+    // 友好提示
+    errorfunction();
+
+    function errorfunction() {
+
+        var msg = "$!{msg}";
+        if(msg != null && msg != ""){
+            layui.use(['layer'], function () {
+                layui.layer.alert("$!{msg}");
+            })
+        }
+    };
+
+</script>

@@ -1,0 +1,36 @@
+/** 初始化 **/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,input,button,textarea,p,blockquote,th,td,form,pre{margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+a:active,a:hover{outline:0}
+img{display:inline-block;border:none;vertical-align:middle;}
+li{list-style:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+table{border-collapse:collapse;border-spacing:0;box-sizing:border-box;}
+h1,h2,h3{font-weight:400;}
+h4,h5,h6{font-size:100%;font-weight:400;}
+button,input,select,textarea{font-size:100%;}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;outline:0;}
+pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;}
+
+/** 初始化全局标签 **/
+body{line-height:24px;font:14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif,"Microsoft YaHei","simsun";}
+hr{height:1px;margin:10px 0;border:0;clear:both;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#777;}
+a cite{font-style:normal;*cursor:pointer;}
+i,em{font-style:normal;}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#aaa;font-size:14px;}
+input:-moz-placeholder,textarea:-moz-placeholder{color:#aaa;font-size:14px;}
+input::-moz-placeholder,textarea::-moz-placeholder{color:#aaa;font-size:14px;}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder{color:#aaa;font-size:14px;}
+::-webkit-scrollbar{ width:10px; height:auto; background-color:#e9edf4;}
+::-webkit-scrollbar-thumb{background-color:#ccc;border-radius:2em;-webkit-border-radius:2em;-moz-border-radius:2em;-o-border-radius:2em;}
+::-webkit-scrollbar-thumb:hover{background-color:#9bbbfa;}
+
+/* 消除第三方ui可能造成的冲突 */
+.s-clear{clear:both;*zoom:1;}
+.s-clear:after{content:'\20';clear:both;*zoom:1;display:block;height:0;visibility:hidden;}
+
+/*清除浮动*/
+.clearfix:after{content:".";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}

@@ -1,0 +1,14 @@
+    $contain.get("/contain/html_head.htm").put('title',$a).setHost("$memberServer")
+
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css')"  media="all">
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+    <script src="$imageServer.get('/layui/layui.all.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.min.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.extends.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.message.en.js')"></script>
+    <script src="$imageServer.get('js/layout_common_en.js')"></script>
+
+	<link rel="stylesheet" href="$imageServer.get('/css/f_crudeoil_layer_en.css')">
+    <script src="$appServer.get('/script/crudeOilLayer_en.js')"></script>
+    <script src="$appServer.get('script/check.js')"></script>
+    <script src="$appServer.get('script/lib/effect-productdetail_en.js')"></script>

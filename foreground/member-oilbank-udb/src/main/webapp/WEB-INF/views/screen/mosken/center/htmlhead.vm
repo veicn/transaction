@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>成品油-$!{title}</title>
+    <script type="text/javascript" src="$imageServer.get('product/js/bigpipe.js')"></script>
+    <script src="$imageServer.get('product/js/jquery-1.8.3.min.js')"></script>
+    <script src="$imageServer.get('product/layui/layui.all.js')"></script>
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_common.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_table.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_tab.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_form.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_button.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_center.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/s_layout1.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/font-shey/style.css')">
+
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/reset.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/work/total.css')">
+    <link rel="stylesheet" href="$imageServer.get('product/css/common/public.css')">
+    <link rel="stylesheet" href="$appServer.get('css/udbfile/style.css')">
+
+
+#*#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/work/total.css'))
+#css($appServer.get('/product/css/common/public.css'))*#
+    <style>
+        .fl {
+            float: left;
+            display: block;
+        }
+
+        .fr {
+            float: right;
+            display: block;
+        }
+
+        .clearfix {
+
+        }
+
+        ul, li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .header-box {
+            width: 100%;
+            background: #EEEEEE;
+
+        }
+
+        .show {
+            position: absolute;
+            z-index: 999;
+            background: #ffffff;
+        }
+
+        .header {
+            width: 1180px;
+            margin: 0 auto;
+            line-height: 34px;
+            height: 34px;
+            color: #333333;
+            font-size: 12px;
+        }
+
+        .h-left span:first-of-type {
+            font-size: 12px;
+            color: #333333;
+            font-weight: bold;
+            margin-right: 46px;
+        }
+
+        .h-left span:first-of-type:hover {
+            cursor: pointer;
+        }
+
+        .h-left span:nth-of-type(2) {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .header li {
+            color: #666666;
+        }
+
+        .h-right {
+            font-size: 12px;
+
+        }
+
+        .h-right span {
+            margin-right: 15px;
+        }
+
+        .h-right span:nth-of-type(4):hover, .h-right span:nth-of-type(5):hover {
+            cursor: pointer;
+        }
+
+        .h-right span:nth-of-type(5):hover, .h-right span:nth-of-type(2):hover {
+            color: #FF9D32;
+            cursor: pointer;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+        {
+            opacity: 0;
+        }
+
+        .personlist {
+            position: relative;
+        }
+
+        .personlist ul {
+            border-top: 0;
+
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .personlist ul li {
+            width: 90%;
+            padding: 0 8px;
+            border-bottom: 1px solid #ECECEC;
+            border-top: 0;
+            text-align: center;
+        }
+
+        .personlist ul li:last-of-type {
+            border: 0;
+        }
+
+        .personlist ul li a {
+
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .personlist ul li:hover {
+            background: #F36523;
+        }
+
+        .personlist ul li a:hover {
+            color: #fff;
+        }
+
+        .personlist {
+            overflow: hidden;
+            position: absolute;
+            left: -19px;
+            width: 100px;
+            height: 0;
+            border: 1px solid #ECECEC;
+            transition: all .5s ease;
+            z-index: 9999;
+            top: 30px;
+            border-radius: 4px;
+            background: #fff;
+            -webkit-padding-start: 0;
+            box-shadow: 0 1px 5px #ECECEC;
+        }
+
+        .personfn {
+            cursor: pointer;
+        }
+
+        .oneicon {
+            display: none;
+            position: absolute;
+            z-index: 9999999;
+            left: 29px;
+            top: 18px;
+            border-width: 7px;
+            border-style: solid dashed dashed;
+            border-color: transparent transparent #FFF;
+        }
+    </style>
+</head>
+<div class="header-box">
+    <div class="header clearfix ">
+        <div class="fl h-left clearfix">
+            <span class="fl "><a href="$refuelingServer.get("/index.html")">船加油首页</a></span>
+            #if(!$!session.getAttribute("_user"))
+                <span> 您好，游客</span>
+                <span><a href="$systemServer.get('/login.htm')">登录</a></span>
+            #else
+                <span> 您好，<a href="$appServer.get('/center/my.htm')">$_user.name</a></span>
+                <span class="fr"></span><a href="$systemServer.get('/logout.htm')">退出</a>
+                <span>消息$contain.get("/mosken/msgProduct.htm")</span>
+            #end
+
+        ##                <span class="fl ">联系电话 :&nbsp010-56088802</span>
+
+        </div>
+        <div class="fr h-right clearfix">
+            #if($!session.getAttribute("_user"))
+                <span class="fr " style="position: relative" onmouseover="personfn(this)" onmouseout="personout(this)">
+                    <span class="oneicon"></span>
+                    <div class="personfn">账户中心</div>
+                    <div class="personlist">
+                        <ul>
+							<li><a href="$systemServer.get("center/safety.htm")">账户信息</a></li>
+                            <li><a href="$systemServer.get("center/setting.htm")">账号安全</a></li>
+                            <li><a href="$systemServer.get("center/reset/password.htm")">修改密码</a></li>
+                        ##		之前多加了一条判断					#if($authUtils.ownerAccess())
+                            #if($authUtils.checkRole("enter_admin","enter_master"))
+                                <li>  <a href="$systemServer.get("/center/role/role_permission.htm")">子账户管理</a></li>
+                            #end
+                            #if(!$authUtils.checkRole("enterprise") )
+                                <li> <a href="$systemServer.get("/center/activite_account.htm")">绑定企业</a></li>
+                            #end
+                        </ul>
+                    </div>
+                </span>
+                    ##卖家中心
+                #if($authUtils.checkRole("buy_trader"))
+                ##    之前多加了一条判段 <span><a href="$refuelingServer.get("/center/index.html#/sellerOrdersUp")">卖家中心</a></span>
+                    <span class="fr " style="position: relative" onmouseover="personfn(this)"
+                          onmouseout="personout(this)">
+                    <span class="oneicon"></span>
+                    <div class="personfn">买家中心</div>
+                    <div class="personlist">
+                                            ##   TODO:
+                         <ul>
+							<li><a>我的求购</a></li>
+                            <li><a>我的订单</a></li>
+                        </ul>
+                    </div>
+                </span>
+                #end
+                #if($authUtils.checkRole("sales_trader"))
+                ##     <span><a  href="$refuelingServer.get("center/index.html#/buyerOrdersUp")">买家中心</a></span>
+                    <span class="fr " style="position: relative" onmouseover="personfn(this)"
+                          onmouseout="personout(this)">
+                    <span class="oneicon"></span>
+                    <div class="personfn">卖家中心</div>
+                    ##   TODO:
+                    <div class="personlist">
+                        <ul>
+							<li><a>我的商品</a></li>
+                            <li><a>我的订单</a></li>
+                        </ul>
+                    </div>
+                    </span>
+                #end
+            #end
+
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var flag = true;
+    function personfn(thisSpan) {
+        var oneicon = thisSpan.querySelector('.oneicon')
+        var list = thisSpan.querySelector('.personlist')
+        var personlistul = thisSpan.querySelector('.personlist ul')
+        var personlistulHeight = window.getComputedStyle(personlistul).height;
+        var s = 3;
+        oneicon.style.display = 'block'
+        list.style.height = personlistulHeight;
+    }
+    function personout(thisSpan) {
+        var oneicon = thisSpan.querySelector('.oneicon')
+        var list = thisSpan.querySelector('.personlist')
+
+        oneicon.style.display = 'none'
+        list.style.height = 0;
+    }
+
+
+</script>
+
+
+
+<body>
+
+

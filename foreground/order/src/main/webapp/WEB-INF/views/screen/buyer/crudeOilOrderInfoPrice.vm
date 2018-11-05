@@ -1,0 +1,38 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>订单信息</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">数量(桶)：</span><span class="c-int qx-conte">$!{contract.numStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">溢短装：</span><span class="c-int qx-conte">+/- $!{contract.numFloat} %</span></li>
+            <li class="c-fcos2"><span class="c-fn">贴水：</span><span class="c-int qx-conte">$!{contract.agioStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">贸易条款：</span><span class="c-int qx-conte">$!{tradeItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">计价期：</span>
+                <span class="c-int qx-conte">
+                    ${dictUtils.getValue("valuationProidTypeMap", "$!contract.valuationProidType")}
+                    #if($!{contract.valuationProidType} == 4)
+                        （$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidStart})至$!dateUtil.convertDateToString('yyyy-MM-dd',$!{contract.valuationProidEnd})）
+                    #end
+                    #if($!{contract.valuationProidType} == 5)
+                        （$!{contract.contractKind}）
+                    #end
+                </span>
+            </li>
+            <li class="c-fcos2"><span class="c-fn">计价基准：</span><span class="c-int qx-conte">$!{valuationBaseName}</span></li>
+            <li class="c-fcos1"><span class="c-fn">计价公式：</span><span class="c-int qx-conte">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos2"><span class="c-fn">信用条款：</span><span class="c-int qx-conte">$!{dictUtils.getValue("creditItem", "$!contract.authItem")}</span></li>
+            <li class="c-fcos2"><span class="c-fn">付款日期：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">结算量标准：</span><span class="c-int qx-conte">$!{measureModeMap.get($!{contract.measureMode})}</span></li>
+            <li class="c-fcos2"><span class="c-fn">装卸允许时间：</span><span class="c-int qx-conte">$!{contract.loadAndDischargePermittedTimespan}</span></li>
+            <li class="c-fcos2"><span class="c-fn">卸货港：</span><span class="c-int qx-conte">$!{contractShip.dischargePort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">装货港：</span><span class="c-int qx-conte">$!{contractShip.shipmentPort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">到货期：</span><span class="c-int qx-conte">$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeStartTime})至$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeEndTime})</span></li>
+            <li class="c-fcos2"><span class="c-fn">装期：</span><span class="c-int qx-conte">$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentStartTime})至$dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentEndTime})</span></li>
+            <li class="c-fcos2"><span class="c-fn">法律：</span><span class="c-int qx-conte">$!{contract.law}</span></li>
+            <li class="c-fcos2"><span class="c-fn">GTC：</span><span class="c-int qx-conte">$!{contract.gtc}</span></li>
+            #if($!{contract.contractType}!="L")
+            <li class="c-fcos2"><span class="c-fn">商检费分摊：</span><span class="c-int qx-conte">$!{contract.inspectionFeeSharingTypeContent}</span></li>
+             #end
+            <li class="c-fcos1"><span class="c-fn">备注：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

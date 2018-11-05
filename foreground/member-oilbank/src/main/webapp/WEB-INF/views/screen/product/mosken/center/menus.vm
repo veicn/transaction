@@ -1,0 +1,540 @@
+
+
+<div class="m-tab fl" >
+    <!--左侧 star-->
+    <div class="fl shipping-b-l">
+        <div class="s-info">
+            <dl class="clearfix">
+                <dd>
+                    <a href="$appServer.get('product/center/my.htm')">
+                        <img #if(${logo} && "$!{logo}"!="")src="$!{uploadServer}/img/$!{logo}.img_40_40.img" #{else}src="$imageServer.get('/images/enter_bg1.jpg')"#end >
+					#* <img src="$appServer.get('/product/images/people.png')"/>*#
+                    </a>
+                </dd>
+                <dt>
+                <h3>
+					#if($!session.getAttribute("_user"))
+                        $_user.name
+                    #end
+                </h3>
+                <p class="s-peoname">
+                    #if(!$authUtils.checkRole("enterprise","enterprise_first"))
+                        <br><a href="$appServer.get('product/center/info.htm')"><i class="fs fs-edit"></i></a>
+                    #end
+                </p>
+                </dt>
+            </dl>
+        </div>
+		#set($flag = 0)
+        <div class="s-tab">
+			#if($authUtils.checkRole("sales_trader","buy_trader","admin","ship_trader","ship_broker","depa_port","info_oper"))
+                <div class="s-tab-one s-tab-one1">
+                    <h2 class="let">TRADING</h2>
+                    <ul class="trading-ul">
+                        <li #if($!{active} == 1) class="active" #end>
+                            <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')">My Deals</a>
+                        </li>
+                        #if($authUtils.checkRole("sales_trader"))
+                            <li #if($!{active} == 2) class="active" #end>
+                                <a href="$transactionServer.get('pages/back/my_product_list/index.htm')">Sales</a>
+                            </li>
+                        #end
+                        #if($authUtils.checkRole("buy_trader"))
+                            <li #if($!{active} == 3) class="active" #end>
+                                <a href="$transactionServer.get('pages/back/my_demand_list/index.htm')">Procurement</a>
+                            </li>
+                        #end
+
+                    </ul>
+                </div>
+			#end
+
+        #*#if($!session.getAttribute("_user").epMemberId == "100008253")*#
+            <div class="s-tab-one s-tab-one1">
+                <div class="s-tab-one">
+                    <h2 class="let">Operation</h2>
+                    <ul class="trading-ul">
+                        <li #if($!{active} == 1) class="active" #end>
+                            <a href="$transactionServer.get('pages/back/my_contract_list/index.htm')">Your appointments</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        #* #end*#
+
+            <div class="s-tab-one s-tab-one1">
+                #if($authUtils.checkRole("trade_executor"))
+                    <div class="s-tab-one">
+                        <h2 class="let">TRADE LOGISTICS(Trader)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$appServer.get('pages/back/demands/demandsList.htm')">Chartering Requirement</a>
+                            </li>
+                            <li #if($!{active} == 2) class="active" #end>
+                                <a href="$appServer.get('pages/back/agreement/charterPartyManagementByMerchant.htm')">Charter Party</a>
+                            </li>
+                            <li #if($!{active} == 3) class="active" #end>
+                                <a href="$appServer.get('pages/back/vesselAcceptance/index.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("ship_trader"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Disponent Owner)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$appServer.get('pages/back/demands/agentdemandsList.htm')">Chartering Requirement</a>
+                            </li>
+                            <li #if($!{active} == 2) class="active" #end>
+                                <a href="$appServer.get('pages/back/agreement/charterPartyManagementByAgent.htm')">Charter Party</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("depa_port"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Shipping Agent)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationAgencyIndex.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("buy_trader"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Buyer)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationBuyerIndex.htm')">Vessel Acceptance</a>
+                                <!--<a href="$appServer.get('pages/back/vesselAcceptance/index.htm')">Vessel Acceptance</a>-->
+                            </li>
+                        </ul>
+                    </div>
+                #end
+                #if($authUtils.checkRole("sales_trader"))
+                    <div class="s-tab-one s-tab-two">
+                        <h2 class="let">TRADE LOGISTICS(Seller)</h2>
+                        <ul class="trading-ul">
+                            <li #if($!{active} == 1) class="active" #end>
+                                <a href="$appServer.get('pages/back/vesselAcceptance/ConfirmationSellerIndex.htm')">Vessel Acceptance</a>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+            </div>
+
+			#set($flag = $flag + 1)
+
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">MY SETTINGS</h2>
+                <ul class="trading-ul">
+
+                    <li>
+                        <a href="$systemServer.get("center/safety.htm")">Over View</a>
+                    </li>
+                    <li>
+                        <a href="$systemServer.get("center/setting.htm")" >Security</a>
+                    </li>
+                    <li>
+                        <a href="$systemServer.get("center/reset/password.htm")" >Change password</a>
+                    </li>
+                    #if($authUtils.ownerAccess())
+                        #if($authUtils.checkRole("enter_admin","enter_master"))
+                            <li>
+                                <a href="$systemServer.get("/center/role/role_permission.htm")">Sub Account</a>
+                            </li>
+                        #end
+
+                        #if(!$authUtils.checkRole("enterprise") )
+                            <li>
+                                <a href="$systemServer.get("/center/activite_account.htm")">Link to Company</a>
+                            </li>
+
+                        #end
+
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+#*
+
+
+
+
+<div class="m-tab fl">
+    <!--左侧 star-->
+    <div class="fl shipping-b-l">
+        <div class="s-info">
+            <dl class="clearfix">
+                <dd>
+                    <a href="javascript:;">
+                        <img #if(${logo} && "$!{logo}"!="")src="$!{uploadServer}/img/$!{logo}.img_40_40.img" #{else}src="$imageServer.get('/images/enter_bg1.jpg')"#end >
+
+*#
+#* <img src="$appServer.get('/product/images/people.png')"/>*##*
+
+
+                    </a>
+                </dd>
+                <dt>
+                <h3>
+					#if($!session.getAttribute("_user"))
+                        $_user.name
+                    #end
+                </h3>
+
+                <p>
+                    <a href="$appServer.get('product/logout.htm')">Sign Out</a>
+                </p>
+
+
+                </dt>
+            </dl>
+        </div>
+		#set($flag = 0)
+        <div class="s-tab">
+	#if($authUtils.checkRole("sales_trader","buy_trader","admin","trade_executor"))
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">MY SETTINGS</h2>
+                <ul class="trading-ul">
+                    <li>
+                        <a href="$systemServer.get("center/safety.htm")" >账户信息</a>
+                    </li><li>
+                        <a href="$systemServer.get("center/setting.htm")" >Security</a>
+                    </li>
+                    <li class="active">
+                      ##  <a href="$appServer.get('/center/invitation/inviteCodeBound.htm')">Sub Account</a>
+                        <a href="$systemServer.get("/center/role/role_permission.htm")">Sub Account</a>
+                    </li>
+                    <li>
+                        <a href="$appServer.get('/center/role/safety.htm')">Message</a>
+                    </li>
+                </ul>
+            </div>
+	#end
+			#set($flag = $flag + 1)
+            <div class="s-tab-one s-tab-one1">
+                <h2 class="let">TRADING</h2>
+                <ul class="trading-ul">
+                    <li>
+                        <a href="javascript:;">My Orders</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">My Requsources</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">My Quotes</a>
+                    </li>
+			#if($authUtils.ownerAccess())
+				#if($authUtils.checkRole("enter_admin","enter_master"))
+                <li>
+                    <a href="$systemServer.get("/center/role/role_permission.htm")">子账号管理</a>
+                </li>
+				#end
+				#if(!$authUtils.checkRole("enterprise") )
+                <li>
+                    <a href="$systemServer.get("/center/activite_account.htm")">绑定邀请码</a>
+                </li>
+				#end
+
+			#end
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+#js("$imageServer.get('/js/leftnav.js' )")
+<a href="#" class="s-mlf"><i class="fs fs-sort"></i></a>
+<a href="#" class="s-backmenu"><i class="fs fs-next"></i>主目录XXXXXXXXXXXXXX</a>
+<div class="s-peoimg">
+    <span class="s-peoimgspan">
+		<a href="$appServer.get('/center/my.htm')" class="s-headimglink">
+			<img #if(${logo} && "$!{logo}"!="")src="$!{uploadServer}/img/$!{logo}.img_40_40.img" #{else}src="$imageServer.get('/images/enter_bg1.jpg')"#end >
+		</a>
+	</span>
+    <p class="s-peoname">$!{user.name}
+		#if(!$authUtils.checkRole("enterprise","enterprise_first"))
+            <br><a href="$appServer.get('/center/info.htm')"><i class="fs fs-edit"></i></a>
+		#end
+    </p>
+</div>
+#set($flag = 0)
+<ul class="s-nav-tree" >
+	#if($authUtils.checkRole("sales_trader","buy_trader","trade_executor"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-transaction"></i><em class="s-menu-txt">交易</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+                <li>
+                    <a href="$orderServer.get('/queryCurdeOilList.htm')"><div class="s-link"><i class="fa fs-circle"></i>订单<i class="fs fs-chevron-down"></i></div></a>
+                </li>
+
+				#if($authUtils.checkRole("buy_trader"))
+                    <li>
+                        <a href="$listedServer.get('/purchaseManager/buyingLeadsDemandList.htm')"><div class="s-link"><i class="fa fs-circle"></i>采购<i class="fs fs-chevron-down"></i></div></a>
+                    </li>
+				#end
+
+				#if($authUtils.checkRole("sales_trader"))
+                    <li>
+                        <a href="$listedServer.get('/oilSaleResources/resourcesList.htm')"><div class="s-link"><i class="fa fs-circle"></i>销售<i class="fs fs-chevron-down"></i></div></a>
+                    </li>
+				#end
+            </ul>
+        </li>
+	#end
+	#if($authUtils.checkRole("sales_trader","buy_trader","trade_executor"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-order"></i><em class="s-menu-txt">订单执行</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+                <li>
+                    <a href="$order-executeServer.get('buyerCenter/order/list.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>订单管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+			##                <li>
+			##					<a href="$order-executeServer.get('buyerCenter/contract/list.htm')">
+			##						<div class="s-link"><i class="fa fs-circle"></i>合同管理<i class="fa fa-chevron-down"></i></div>
+			##					</a>
+			##                </li>
+                <li>
+                    <a href="$order-executeServer.get('buyerCenter/orderStatement/listPre.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>临时结算管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$order-executeServer.get('buyerCenter/orderStatement/listFin.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>最终结算管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+	#end
+	#if($authUtils.checkRole("sales_trader","buy_trader","trade_executor"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-goods"></i><em class="s-menu-txt">贸易物流</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+                <li>
+                    <a href="$shipServer.get('/pallet/palletQueryList.htm')">
+                        <div class="s-link"> <i class="fa fs-circle"></i>租船需求管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$shipServer.get('/pallet/agreementList.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>租船协议管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$shipServer.get('/shipperstatements/shipperagreementsStatementsList.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>结算单管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+	#end
+	#if($authUtils.checkRole("ship_owner","ship_broker"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-owner"></i> <em class="s-menu-txt">贸易物流</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+                <li>
+                    <a href="$shipServer.get('/shipPlate/shipPlateList.htm')">
+                        <div class="s-link"> <i class="fa fs-circle"></i>船盘管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$shipServer.get('/shipPactNew/shipPactListNewOwner.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>租船协议管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$shipServer.get('/statements/agreementsStatementsList.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>结算单管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="$shipServer.get('/shipOwnerSysShip/sysShipList.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>船舶管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+	#end
+	#if($authUtils.checkRole("ship_trader","ship_executor"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-sublet"></i><em class="s-menu-txt">贸易物流</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+				#if($authUtils.checkRole("ship_trader"))
+                    <li>
+                        <a href="$shipServer.get('/shipPlate/shipAgentShipPlateList.htm')">
+                            <div class="s-link"> <i class="fa fs-circle"></i>船盘管理<i class="fa fa-chevron-down"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="$shipServer.get('/pallet/palletQueryListShipowner.htm')">
+                            <div class="s-link"><i class="fa fs-circle"></i>租船需求管理<i class="fa fa-chevron-down"></i></div>
+                        </a>
+                    </li>
+				#end
+                <li>
+                    <a href="$shipServer.get('/shipPactNew/shipPactListNew.htm')">
+                        <div class="s-link"><i class="fa fs-circle"></i>租船合同管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+				#if($authUtils.checkRole("ship_executor"))
+                    <li>
+                        <a href="$shipServer.get('/statements/agreementsStatementsList.htm')">
+                            <div class="s-link"><i class="fa fs-circle"></i>结算单管理<i class="fa fa-chevron-down"></i></div>
+                        </a>
+                    </li>
+				#end
+            </ul>
+        </li>
+	#end
+	#if($authUtils.checkRole("depa_port","arriv_port"))
+        <li class="s-nav-li" flag='$!{flag}'>
+			#set($flag = $flag + 1)
+            <p class="s-line-jb"></p>
+            <a class="s-menu-link" href="javascript:;"><i class="fs fs-generation"></i><em class="s-menu-txt">贸易物流</em><em class="s-number">1</em></a>
+            <ul id="accordion" class="s-accordion">
+                <li>
+                    <a href="$shipServer.get('/shipPactNew/shipPactListAgency.htm')">
+                        <div class="s-link"> <i class="fa fs-circle"></i>租船合同管理<i class="fa fa-chevron-down"></i></div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+	#end
+    <li class="s-nav-li" flag='$!{flag}'>
+		#set($flag = $flag + 1)
+        <p class="s-line-jb"></p>
+        <a class="s-menu-link" href="javascript:;"><i class="fs fs-account-management"></i><em class="s-menu-txt">账户管理</em><em class="s-number">1</em></a>
+        <ul id="accordion" class="s-accordion">
+            <li>
+                <a href="$systemServer.get("center/safety.htm")">
+                    <div class="s-link"><i class="fa fs-circle"></i>账号信息<i class="fa fa-chevron-down"></i></div>
+                </a>
+            </li>
+            <li>
+                <a href="$systemServer.get("center/setting.htm")">
+                    <div class="s-link"><i class="fa fs-circle"></i>安全管理<i class="fa fa-chevron-down"></i></div>
+                </a>
+            </li>
+			#if($authUtils.ownerAccess())
+
+				#if($authUtils.checkRole("enter_admin","enter_master"))
+                    <li>
+                        <a href="$systemServer.get("/center/role/role_permission.htm")">
+                            <div class="s-link"><i class="fa fs-circle"></i>子账号管理<i class="fa fa-chevron-down"></i></div>
+                        </a>
+                    </li>
+				#end
+				#if(!$authUtils.checkRole("enterprise"))
+                    <li>
+                        <a href="$systemServer.get("/center/activite_account.htm")">
+                            <div class="s-link"><i class="fa fs-circle"></i>绑定邀请码<i class="fa fa-chevron-down"></i></div>
+                        </a>
+                    </li>
+				#end
+				#if($authUtils.checkRole("enterprise"))
+					$authUtils.checkRole("enterprise")1
+				#end
+				#if(!$authUtils.checkRole("enterprise"))
+					$authUtils.checkRole("enterprise")2
+				#end
+
+			#end
+        </ul>
+        <p class="s-line-jb"></p>
+    </li>
+</ul>
+#jscode()
+$('.s-nav-tree').find('a').each(function(i,el){
+if($(el).attr('href') == window.location.href){
+$(el).parent().parent().css('display','block')
+}
+})
+#end
+
+
+
+<script>
+    //菜单选中船务
+    window.onload=function(){
+        //货主租船需求列表
+        menu("/pallet/palletQueryList.htm",["/pallet/palletList.htm","/pallet/palletEdit.htm","/pallet/orderPageList.htm","/pallet/seePallet.htm","/shipPlateNew/recommendShipPlate.htm","/shipPlate/lookShipPlate.htm","/intention/saveIntention.htm"]);
+        //货主租船协议列表
+        menu("/pallet/agreementList.htm",["/agreement/agreementDetailQuery.htm"]);
+        //货主结算单列表
+        menu("/shipperstatements/shipperagreementsStatementsList.htm",["/shipperstatements/toshipperagreementsStatementsByUuid.htm"]);
+        //船东船盘列表
+        menu("/shipPlate/shipPlateList.htm",["/shipPlate/shipPlateList.htm","/shipPlate/editShipPlate.htm","/shipPlate/addSysShip.htm","/shipPlate/lookShipPlate.htm"]);
+        //船东协议列表
+        menu("/shipPactNew/shipPactListNewOwner.htm",["/shipPact/shipPactDetailQuery.htm?","/agreement/agreementDetailQuery.htm","/statements/statementsSave.htm","/shipPactNew/shipLogistics.htm","/shipPactNew/shipLoad.htm","/shipPactNew/shipTransit.htm","/shipPactNew/shipUnload.htm","/shipPactNew/goodsLoad.htm","/shipPactNew/goodsLoadEdit.htm","/shipPactNew/goodsUnload.htm","/shipPactNew/goodsUnloadEdit.htm","/statements/toagreementsStatementsByUuid.htm"]);
+        //船东结算单列表
+        menu("/statements/agreementsStatementsList.htm",["/statements/toagreementsStatementsByUuid.htm","/statements/statementsEdit.htm"]);
+        //船东船舶列表
+        menu("/shipOwnerSysShip/sysShipList.htm",["/shipOwnerSysShip/lookSysShip.htm","/shipOwnerSysShip/addSysShip.htm"]);
+        //转租船东船盘列表
+        menu("/shipPlate/shipAgentShipPlateList.htm",["/shipPlate/shipAgentShipPlateList.htm","/shipPlate/shipAgentEditShipPlate.htm","/shipPlate/shipAgentAddSysShip.htm","/shipPlate/shipAgentLookShipPlate.htm","/shipPlate/shipAgentEditShipPlate.htm","/intention/confirmBill.htm?","/clause/talkingClause.htm","/intention/talkingList.htm","/clause/findClauseDetails.htm","/intention/intentionDetail.htm?"]);
+        //转租船东需求列表
+        menu("/pallet/palletQueryListShipowner.htm",["/pallet/palletListShipowner.htm","/pallet/seePallet.htm","/clause/clauseDetails.htm","/shipPlate/sendClauseShipPlateList.htm","/shipPlate/lookShipPlate.htm","/clause/addClause.htm"]);
+        //转租船东船合同列表
+        menu("/shipPactNew/shipPactListNew.htm",["/shipPact/shipPactDetailQuery.htm?","/shipPactNew/shipLogistics.htm","/shipPactNew/shipLoad.htm","/shipPactNew/shipTransit.htm","/shipPactNew/shipUnload.htm","/shipPactNew/goodsLoad.htm","/shipPactNew/goodsLoadEdit.htm", "/shipPactNew/goodsUnload.htm","/shipPactNew/goodsUnloadEdit.htm","/agreement/agreementDetailQuery.htm","/statements/toagreementsStatementsByUuid.htm","/shipPact/shipPactDetail.htm?"]);
+        //转租船东结算单列表
+        menu("/statements/agreementsStatementsList.htm",["/statements/toagreementsStatementsByUuid.htm","/statements/statementsEdit.htm"]);
+        //船代船合同列表
+        menu("/shipPactNew/shipPactListAgency.htm",["/shipPactNew/shipLoad.htm","/shipPactNew/shipUnload.htm"]);
+    }
+    function menu(url1,urlArr){
+        var urlStr=window.location.href;
+        if (urlArr != null){
+            for (var i = 0; i < urlArr.length; i++) {
+                if(urlStr.indexOf(urlArr[i])!=-1){
+                    $('.s-accordion li').each(function(){
+                        if ($(this).find('a').attr('href').indexOf(url1)!=-1 && !$(".s-accordion").hasClass('menu-show')){
+                            $(this).parent().addClass('menu-show');
+                            $(this).parent().removeClass('menu-hide');
+                        }
+                    });
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .menu-show{display: block;}
+    .menu-hide{display: none;}
+</style>*#

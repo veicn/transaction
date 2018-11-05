@@ -1,0 +1,43 @@
+#set($a = "个人中心-买原油网")
+<form  id="orderUpdateForm" action="$!appServer.get('/update/productOrder.htm')" method="post">
+
+    #*商品信息*#
+    $contain.get("/create/productOilGoodsInfo.htm").setParam("contractId","$!{contract.id}").put("productOilSpecs",$!{productOilSpecs}).put("productOilKind",$!{productOilKind}).put("exportType",$!{exportType}).put("regionProductOil",$!{regionProductOil}).put("tradeItemMap",$!{tradeItemMap}).put("productOilKindAndSpecsMap",$!productOilKindAndSpecsMap)
+    #*船运信息*#
+    $contain.get("/create/shipInput.htm").setParam("contractId","$!{contract.id}")
+    #*价格信息*#
+    $contain.get("/create/productPricelist.htm").setParam("contractId","$!{contract.id}").put("payItemMap",$!{payItemMap}).put("valuationBaseMap",$!{valuationBaseMap}).put("valuationProidTypeMap",$!{valuationProidTypeMap})
+
+    $contain.get("/create/transportInfoInput.htm").setParam("contractId","$!{contract.id}")
+
+    $contain.get("/longTermContractContain/longEditBuyer.htm").setParam("contractId","$!{contract.id}").setParam("type","B")
+
+    $contain.get("/longTermContractContain/longEditAgency.htm").setParam("contractId","$!{contract.id}").setParam("type","T")
+
+    $contain.get("/longTermContractContain/longEditSupply.htm").setParam("contractId","$!{contract.id}").setParam("type","S")
+
+    #*其他信息*#
+    $contain.get("/create/otherInfoInput.htm").setParam("contractId","$!{contract.id}").put("creditItem",$!{creditItem}).put("businessCheckOrg",$!{businessCheckOrg})
+    <!--保存-->
+            <div class="c-subdiv">
+                <button id="updatebtn" class="c-btnsub">update</button>
+                <script>
+                    $(function(){
+                        $("#updatebtn").click(function(){
+                            if ($('#orderUpdateForm').validate().form()) {
+                                $('#orderUpdateForm')[0].submit();
+                            }
+                        });
+                    });
+                </script>
+                <button type="button" id="checkbtn1" class="c-btncas">Cancel</button>
+                <script>
+                    $("#checkbtn1").click(function(){
+                        window.history.go(-1);
+                    });
+                </script>
+            </div>
+
+
+
+</form>

@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.InfoMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.Info" id="InfoDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Info">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.Info" id="Info">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="infoGrabId" column="INFO_GRAB_ID" />
+		<result property="channelId" column="CHANNEL_ID" />
+		<result property="title" column="TITLE" />
+		<result property="shortTitle" column="SHORT_TITLE" />
+		<result property="general" column="GENERAL" />
+		<result property="origin" column="ORIGIN" />
+		<result property="originUrl" column="ORIGIN_URL" />
+		<result property="author" column="AUTHOR" />
+		<result property="informationType" column="INFORMATION_TYPE" />
+		<result property="selectedEndtime" column="SELECTED_ENDTIME" />
+		<result property="stick" column="STICK" />
+		<result property="stickEdntime" column="STICK_EDNTIME" />
+		<result property="hasTitleImg" column="HAS_TITLE_IMG" />
+		<result property="recommendFlag" column="RECOMMEND_FLAG" />
+		<result property="status" column="STATUS" />
+		<result property="browseCount" column="BROWSE_COUNT" />
+		<result property="commentCount" column="COMMENT_COUNT" />
+		<result property="shareCount" column="SHARE_COUNT" />
+		<result property="collectionCount" column="COLLECTION_COUNT" />
+		<result property="fabulousCount" column="FABULOUS_COUNT" />
+		<result property="trampleCount" column="TRAMPLE_COUNT" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="validBegin" column="VALID_BEGIN" />
+		<result property="validEnd" column="VALID_END" />
+		<result property="voidPath" column="VOID_PATH" />
+		<result property="displayMode" column="DISPLAY_MODE" />
+		<result property="bizId" column="BIZ_ID" />
+		<result property="articleType" column="ARTICLE_TYPE" />
+		<result property="probationFlag" column="PROBATION_FLAG" />
+		<result property="isShowGeneral" column="IS_SHOW_GENERAL" />
+		<result property="isShowOrigin" column="IS_SHOW_ORIGIN" />
+		<result property="isShowCopyright" column="IS_SHOW_COPYRIGHT" />
+		<result property="isShowDisclaimer" column="IS_SHOW_DISCLAIMER" />
+		<result property="isShowAuthor" column="IS_SHOW_AUTHOR" />
+		<result property="releaseId" column="RELEASE_ID" />
+		<result property="releaseDate" column="RELEASE_DATE" />
+		<result property="reviewerId" column="REVIEWER_ID" />
+		<result property="reviewer" column="REVIEWER" />
+		<result property="auditTime" column="AUDIT_TIME" />
+		<result property="revokeId" column="REVOKE_ID" />
+		<result property="revoker" column="REVOKER" />
+		<result property="revokeTime" column="REVOKE_TIME" />
+		<result property="resufeRemark" column="RESUFE_REMARK" />
+		<result property="tagList" column="TAG_LIST" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.Info"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_cms_info (				ID
+						,UUID
+						,INFO_GRAB_ID
+						,CHANNEL_ID
+						,TITLE
+						,SHORT_TITLE
+						,GENERAL
+						,ORIGIN
+						,ORIGIN_URL
+						,AUTHOR
+						,INFORMATION_TYPE
+						,SELECTED_ENDTIME
+						,STICK
+						,STICK_EDNTIME
+						,HAS_TITLE_IMG
+						,RECOMMEND_FLAG
+						,STATUS
+						,BROWSE_COUNT
+						,COMMENT_COUNT
+						,SHARE_COUNT
+						,COLLECTION_COUNT
+						,FABULOUS_COUNT
+						,TRAMPLE_COUNT
+						,DESCRIPTION
+						,VALID_BEGIN
+						,VALID_END
+						,VOID_PATH
+						,DISPLAY_MODE
+						,BIZ_ID
+						,ARTICLE_TYPE
+						,PROBATION_FLAG
+						,IS_SHOW_GENERAL
+						,IS_SHOW_ORIGIN
+						,IS_SHOW_COPYRIGHT
+						,IS_SHOW_DISCLAIMER
+						,IS_SHOW_AUTHOR
+						,RELEASE_ID
+						,RELEASE_DATE
+						,REVIEWER_ID
+						,REVIEWER
+						,AUDIT_TIME
+						,REVOKE_ID
+						,REVOKER
+						,REVOKE_TIME
+						,RESUFE_REMARK
+						,TAG_LIST
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,ALIVE_FLAG
+						,EXTEND1
+						,EXTEND2
+						,EXTEND3
+						,EXTEND4
+						,EXTEND5
+						,EXTEND6
+						,EXTEND7
+						,EXTEND8
+						,EXTEND9
+						,EXTEND10
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{infoGrabId}
+						,#{channelId}
+						,#{title}
+						,#{shortTitle}
+						,#{general}
+						,#{origin}
+						,#{originUrl}
+						,#{author}
+						,#{informationType}
+						,#{selectedEndtime}
+						,#{stick}
+						,#{stickEdntime}
+						,#{hasTitleImg}
+						,#{recommendFlag}
+						,#{status}
+						,#{browseCount}
+						,#{commentCount}
+						,#{shareCount}
+						,#{collectionCount}
+						,#{fabulousCount}
+						,#{trampleCount}
+						,#{description}
+						,#{validBegin}
+						,#{validEnd}
+						,#{voidPath}
+						,#{displayMode}
+						,#{bizId}
+						,#{articleType}
+						,#{probationFlag}
+						,#{isShowGeneral}
+						,#{isShowOrigin}
+						,#{isShowCopyright}
+						,#{isShowDisclaimer}
+						,#{isShowAuthor}
+						,#{releaseId}
+						,#{releaseDate}
+						,#{reviewerId}
+						,#{reviewer}
+						,#{auditTime}
+						,#{revokeId}
+						,#{revoker}
+						,#{revokeTime}
+						,#{resufeRemark}
+						,#{tagList}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,'1'
+						,#{extend1}
+						,#{extend2}
+						,#{extend3}
+						,#{extend4}
+						,#{extend5}
+						,#{extend6}
+						,#{extend7}
+						,#{extend8}
+						,#{extend9}
+						,#{extend10}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_cms_info
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.Info">
+        DELETE FROM t_cms_info
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="infoGrabId!=null and infoGrabId!=''">AND  INFO_GRAB_ID = #{infoGrabId}</if>
+        <if test="channelId!=null and channelId!=''">AND  CHANNEL_ID = #{channelId}</if>
+        <if test="title!=null and title!=''">AND  TITLE = #{title}</if>
+        <if test="shortTitle!=null and shortTitle!=''">AND  SHORT_TITLE = #{shortTitle}</if>
+        <if test="general!=null and general!=''">AND  GENERAL = #{general}</if>
+        <if test="origin!=null and origin!=''">AND  ORIGIN = #{origin}</if>
+        <if test="originUrl!=null and originUrl!=''">AND  ORIGIN_URL = #{originUrl}</if>
+        <if test="author!=null and author!=''">AND  AUTHOR = #{author}</if>
+        <if test="informationType!=null and informationType!=''">AND  INFORMATION_TYPE = #{informationType}</if>
+        <if test="selectedEndtime!=null and selectedEndtime!=''">AND  SELECTED_ENDTIME = #{selectedEndtime}</if>
+        <if test="stick!=null and stick!=''">AND  STICK = #{stick}</if>
+        <if test="stickEdntime!=null and stickEdntime!=''">AND  STICK_EDNTIME = #{stickEdntime}</if>
+        <if test="hasTitleImg!=null and hasTitleImg!=''">AND  HAS_TITLE_IMG = #{hasTitleImg}</if>
+        <if test="recommendFlag!=null and recommendFlag!=''">AND  RECOMMEND_FLAG = #{recommendFlag}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+        <if test="browseCount!=null and browseCount!=''">AND  BROWSE_COUNT = #{browseCount}</if>
+        <if test="commentCount!=null and commentCount!=''">AND  COMMENT_COUNT = #{commentCount}</if>
+        <if test="shareCount!=null and shareCount!=''">AND  SHARE_COUNT = #{shareCount}</if>
+        <if test="collectionCount!=null and collectionCount!=''">AND  COLLECTION_COUNT = #{collectionCount}</if>
+        <if test="fabulousCount!=null and fabulousCount!=''">AND  FABULOUS_COUNT = #{fabulousCount}</if>
+        <if test="trampleCount!=null and trampleCount!=''">AND  TRAMPLE_COUNT = #{trampleCount}</if>
+        <if test="description!=null and description!=''">AND  DESCRIPTION = #{description}</if>
+        <if test="validBegin!=null and validBegin!=''">AND  VALID_BEGIN = #{validBegin}</if>
+        <if test="validEnd!=null and validEnd!=''">AND  VALID_END = #{validEnd}</if>
+        <if test="voidPath!=null and voidPath!=''">AND  VOID_PATH = #{voidPath}</if>
+        <if test="displayMode!=null and displayMode!=''">AND  DISPLAY_MODE = #{displayMode}</if>
+        <if test="bizId!=null and bizId!=''">AND  BIZ_ID = #{bizId}</if>
+        <if test="articleType!=null and articleType!=''">AND  ARTICLE_TYPE = #{articleType}</if>
+        <if test="probationFlag!=null and probationFlag!=''">AND  PROBATION_FLAG = #{probationFlag}</if>
+        <if test="isShowGeneral!=null and isShowGeneral!=''">AND  IS_SHOW_GENERAL = #{isShowGeneral}</if>
+        <if test="isShowOrigin!=null and isShowOrigin!=''">AND  IS_SHOW_ORIGIN = #{isShowOrigin}</if>
+        <if test="isShowCopyright!=null and isShowCopyright!=''">AND  IS_SHOW_COPYRIGHT = #{isShowCopyright}</if>
+        <if test="isShowDisclaimer!=null and isShowDisclaimer!=''">AND  IS_SHOW_DISCLAIMER = #{isShowDisclaimer}</if>
+        <if test="isShowAuthor!=null and isShowAuthor!=''">AND  IS_SHOW_AUTHOR = #{isShowAuthor}</if>
+        <if test="releaseId!=null and releaseId!=''">AND  RELEASE_ID = #{releaseId}</if>
+        <if test="releaseDate!=null and releaseDate!=''">AND  RELEASE_DATE = #{releaseDate}</if>
+        <if test="reviewerId!=null and reviewerId!=''">AND  REVIEWER_ID = #{reviewerId}</if>
+        <if test="reviewer!=null and reviewer!=''">AND  REVIEWER = #{reviewer}</if>
+        <if test="auditTime!=null and auditTime!=''">AND  AUDIT_TIME = #{auditTime}</if>
+        <if test="revokeId!=null and revokeId!=''">AND  REVOKE_ID = #{revokeId}</if>
+        <if test="revoker!=null and revoker!=''">AND  REVOKER = #{revoker}</if>
+        <if test="revokeTime!=null and revokeTime!=''">AND  REVOKE_TIME = #{revokeTime}</if>
+        <if test="resufeRemark!=null and resufeRemark!=''">AND  RESUFE_REMARK = #{resufeRemark}</if>
+        <if test="tagList!=null and tagList!=''">AND  TAG_LIST = #{tagList}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="extend1!=null and extend1!=''">AND  EXTEND1 = #{extend1}</if>
+        <if test="extend2!=null and extend2!=''">AND  EXTEND2 = #{extend2}</if>
+        <if test="extend3!=null and extend3!=''">AND  EXTEND3 = #{extend3}</if>
+        <if test="extend4!=null and extend4!=''">AND  EXTEND4 = #{extend4}</if>
+        <if test="extend5!=null and extend5!=''">AND  EXTEND5 = #{extend5}</if>
+        <if test="extend6!=null and extend6!=''">AND  EXTEND6 = #{extend6}</if>
+        <if test="extend7!=null and extend7!=''">AND  EXTEND7 = #{extend7}</if>
+        <if test="extend8!=null and extend8!=''">AND  EXTEND8 = #{extend8}</if>
+        <if test="extend9!=null and extend9!=''">AND  EXTEND9 = #{extend9}</if>
+        <if test="extend10!=null and extend10!=''">AND  EXTEND10 = #{extend10}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="infoGrabId!=null">,INFO_GRAB_ID = #{infoGrabId}</if>
+		<if test="channelId!=null">,CHANNEL_ID = #{channelId}</if>
+		<if test="title!=null">,TITLE = #{title}</if>
+		<if test="shortTitle!=null">,SHORT_TITLE = #{shortTitle}</if>
+		<if test="general!=null">,GENERAL = #{general}</if>
+		<if test="origin!=null">,ORIGIN = #{origin}</if>
+		<if test="originUrl!=null">,ORIGIN_URL = #{originUrl}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="informationType!=null">,INFORMATION_TYPE = #{informationType}</if>
+		<if test="selectedEndtime!=null">,SELECTED_ENDTIME = #{selectedEndtime}</if>
+		<if test="stick!=null">,STICK = #{stick}</if>
+		<if test="stickEdntime!=null">,STICK_EDNTIME = #{stickEdntime}</if>
+		<if test="hasTitleImg!=null">,HAS_TITLE_IMG = #{hasTitleImg}</if>
+		<if test="recommendFlag!=null">,RECOMMEND_FLAG = #{recommendFlag}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="browseCount!=null">,BROWSE_COUNT = #{browseCount}</if>
+		<if test="commentCount!=null">,COMMENT_COUNT = #{commentCount}</if>
+		<if test="shareCount!=null">,SHARE_COUNT = #{shareCount}</if>
+		<if test="collectionCount!=null">,COLLECTION_COUNT = #{collectionCount}</if>
+		<if test="fabulousCount!=null">,FABULOUS_COUNT = #{fabulousCount}</if>
+		<if test="trampleCount!=null">,TRAMPLE_COUNT = #{trampleCount}</if>
+		<if test="description!=null">,DESCRIPTION = #{description}</if>
+		<if test="validBegin!=null">,VALID_BEGIN = #{validBegin}</if>
+		<if test="validEnd!=null">,VALID_END = #{validEnd}</if>
+		<if test="voidPath!=null">,VOID_PATH = #{voidPath}</if>
+		<if test="displayMode!=null">,DISPLAY_MODE = #{displayMode}</if>
+		<if test="bizId!=null">,BIZ_ID = #{bizId}</if>
+		<if test="articleType!=null">,ARTICLE_TYPE = #{articleType}</if>
+		<if test="probationFlag!=null">,PROBATION_FLAG = #{probationFlag}</if>
+		<if test="isShowGeneral!=null">,IS_SHOW_GENERAL = #{isShowGeneral}</if>
+		<if test="isShowOrigin!=null">,IS_SHOW_ORIGIN = #{isShowOrigin}</if>
+		<if test="isShowCopyright!=null">,IS_SHOW_COPYRIGHT = #{isShowCopyright}</if>
+		<if test="isShowDisclaimer!=null">,IS_SHOW_DISCLAIMER = #{isShowDisclaimer}</if>
+		<if test="isShowAuthor!=null">,IS_SHOW_AUTHOR = #{isShowAuthor}</if>
+		<if test="releaseId!=null">,RELEASE_ID = #{releaseId}</if>
+		<if test="releaseDate!=null">,RELEASE_DATE = #{releaseDate}</if>
+		<if test="reviewerId!=null">,REVIEWER_ID = #{reviewerId}</if>
+		<if test="reviewer!=null">,REVIEWER = #{reviewer}</if>
+		<if test="auditTime!=null">,AUDIT_TIME = #{auditTime}</if>
+		<if test="revokeId!=null">,REVOKE_ID = #{revokeId}</if>
+		<if test="revoker!=null">,REVOKER = #{revoker}</if>
+		<if test="revokeTime!=null">,REVOKE_TIME = #{revokeTime}</if>
+		<if test="resufeRemark!=null">,RESUFE_REMARK = #{resufeRemark}</if>
+		<if test="tagList!=null">,TAG_LIST = #{tagList}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_cms_info
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="infoGrabId!=null">,INFO_GRAB_ID = #{infoGrabId}</if>
+		<if test="channelId!=null">,CHANNEL_ID = #{channelId}</if>
+		<if test="title!=null">,TITLE = #{title}</if>
+		<if test="shortTitle!=null">,SHORT_TITLE = #{shortTitle}</if>
+		<if test="general!=null">,GENERAL = #{general}</if>
+		<if test="origin!=null">,ORIGIN = #{origin}</if>
+		<if test="originUrl!=null">,ORIGIN_URL = #{originUrl}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="informationType!=null">,INFORMATION_TYPE = #{informationType}</if>
+		<if test="selectedEndtime!=null">,SELECTED_ENDTIME = #{selectedEndtime}</if>
+		<if test="stick!=null">,STICK = #{stick}</if>
+		<if test="stickEdntime!=null">,STICK_EDNTIME = #{stickEdntime}</if>
+		<if test="hasTitleImg!=null">,HAS_TITLE_IMG = #{hasTitleImg}</if>
+		<if test="recommendFlag!=null">,RECOMMEND_FLAG = #{recommendFlag}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="browseCount!=null">,BROWSE_COUNT = #{browseCount}</if>
+		<if test="commentCount!=null">,COMMENT_COUNT = #{commentCount}</if>
+		<if test="shareCount!=null">,SHARE_COUNT = #{shareCount}</if>
+		<if test="collectionCount!=null">,COLLECTION_COUNT = #{collectionCount}</if>
+		<if test="fabulousCount!=null">,FABULOUS_COUNT = #{fabulousCount}</if>
+		<if test="trampleCount!=null">,TRAMPLE_COUNT = #{trampleCount}</if>
+		<if test="description!=null">,DESCRIPTION = #{description}</if>
+		<if test="validBegin!=null">,VALID_BEGIN = #{validBegin}</if>
+		<if test="validEnd!=null">,VALID_END = #{validEnd}</if>
+		<if test="voidPath!=null">,VOID_PATH = #{voidPath}</if>
+		<if test="displayMode!=null">,DISPLAY_MODE = #{displayMode}</if>
+		<if test="bizId!=null">,BIZ_ID = #{bizId}</if>
+		<if test="articleType!=null">,ARTICLE_TYPE = #{articleType}</if>
+		<if test="probationFlag!=null">,PROBATION_FLAG = #{probationFlag}</if>
+		<if test="isShowGeneral!=null">,IS_SHOW_GENERAL = #{isShowGeneral}</if>
+		<if test="isShowOrigin!=null">,IS_SHOW_ORIGIN = #{isShowOrigin}</if>
+		<if test="isShowCopyright!=null">,IS_SHOW_COPYRIGHT = #{isShowCopyright}</if>
+		<if test="isShowDisclaimer!=null">,IS_SHOW_DISCLAIMER = #{isShowDisclaimer}</if>
+		<if test="isShowAuthor!=null">,IS_SHOW_AUTHOR = #{isShowAuthor}</if>
+		<if test="releaseId!=null">,RELEASE_ID = #{releaseId}</if>
+		<if test="releaseDate!=null">,RELEASE_DATE = #{releaseDate}</if>
+		<if test="reviewerId!=null">,REVIEWER_ID = #{reviewerId}</if>
+		<if test="reviewer!=null">,REVIEWER = #{reviewer}</if>
+		<if test="auditTime!=null">,AUDIT_TIME = #{auditTime}</if>
+		<if test="revokeId!=null">,REVOKE_ID = #{revokeId}</if>
+		<if test="revoker!=null">,REVOKER = #{revoker}</if>
+		<if test="revokeTime!=null">,REVOKE_TIME = #{revokeTime}</if>
+		<if test="resufeRemark!=null">,RESUFE_REMARK = #{resufeRemark}</if>
+		<if test="tagList!=null">,TAG_LIST = #{tagList}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="infoGrabId!=null and infoGrabId!=''">and  INFO_GRAB_ID=#{infoGrabId}</if>
+		<if test="channelId!=null and channelId!=''">and  CHANNEL_ID=#{channelId}</if>
+		<if test="title!=null and title!=''">and  TITLE=#{title}</if>
+		<if test="shortTitle!=null and shortTitle!=''">and  SHORT_TITLE=#{shortTitle}</if>
+		<if test="general!=null and general!=''">and  GENERAL=#{general}</if>
+		<if test="origin!=null and origin!=''">and  ORIGIN=#{origin}</if>
+		<if test="originUrl!=null and originUrl!=''">and  ORIGIN_URL=#{originUrl}</if>
+		<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+		<if test="informationType!=null and informationType!=''">and  INFORMATION_TYPE=#{informationType}</if>
+		<if test="selectedEndtime!=null and selectedEndtime!=''">and  SELECTED_ENDTIME=#{selectedEndtime}</if>
+		<if test="stick!=null and stick!=''">and  STICK=#{stick}</if>
+		<if test="stickEdntime!=null and stickEdntime!=''">and  STICK_EDNTIME=#{stickEdntime}</if>
+		<if test="hasTitleImg!=null and hasTitleImg!=''">and  HAS_TITLE_IMG=#{hasTitleImg}</if>
+		<if test="recommendFlag!=null and recommendFlag!=''">and  RECOMMEND_FLAG=#{recommendFlag}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="browseCount!=null and browseCount!=''">and  BROWSE_COUNT=#{browseCount}</if>
+		<if test="commentCount!=null and commentCount!=''">and  COMMENT_COUNT=#{commentCount}</if>
+		<if test="shareCount!=null and shareCount!=''">and  SHARE_COUNT=#{shareCount}</if>
+		<if test="collectionCount!=null and collectionCount!=''">and  COLLECTION_COUNT=#{collectionCount}</if>
+		<if test="fabulousCount!=null and fabulousCount!=''">and  FABULOUS_COUNT=#{fabulousCount}</if>
+		<if test="trampleCount!=null and trampleCount!=''">and  TRAMPLE_COUNT=#{trampleCount}</if>
+		<if test="description!=null and description!=''">and  DESCRIPTION=#{description}</if>
+		<if test="validBegin!=null and validBegin!=''">and  VALID_BEGIN=#{validBegin}</if>
+		<if test="validEnd!=null and validEnd!=''">and  VALID_END=#{validEnd}</if>
+		<if test="voidPath!=null and voidPath!=''">and  VOID_PATH=#{voidPath}</if>
+		<if test="displayMode!=null and displayMode!=''">and  DISPLAY_MODE=#{displayMode}</if>
+		<if test="bizId!=null and bizId!=''">and  BIZ_ID=#{bizId}</if>
+		<if test="articleType!=null and articleType!=''">and  ARTICLE_TYPE=#{articleType}</if>
+		<if test="probationFlag!=null and probationFlag!=''">and  PROBATION_FLAG=#{probationFlag}</if>
+		<if test="isShowGeneral!=null and isShowGeneral!=''">and  IS_SHOW_GENERAL=#{isShowGeneral}</if>
+		<if test="isShowOrigin!=null and isShowOrigin!=''">and  IS_SHOW_ORIGIN=#{isShowOrigin}</if>
+		<if test="isShowCopyright!=null and isShowCopyright!=''">and  IS_SHOW_COPYRIGHT=#{isShowCopyright}</if>
+		<if test="isShowDisclaimer!=null and isShowDisclaimer!=''">and  IS_SHOW_DISCLAIMER=#{isShowDisclaimer}</if>
+		<if test="isShowAuthor!=null and isShowAuthor!=''">and  IS_SHOW_AUTHOR=#{isShowAuthor}</if>
+		<if test="releaseId!=null and releaseId!=''">and  RELEASE_ID=#{releaseId}</if>
+		<if test="releaseDate!=null and releaseDate!=''">and  RELEASE_DATE=#{releaseDate}</if>
+		<if test="reviewerId!=null and reviewerId!=''">and  REVIEWER_ID=#{reviewerId}</if>
+		<if test="reviewer!=null and reviewer!=''">and  REVIEWER=#{reviewer}</if>
+		<if test="auditTime!=null and auditTime!=''">and  AUDIT_TIME=#{auditTime}</if>
+		<if test="revokeId!=null and revokeId!=''">and  REVOKE_ID=#{revokeId}</if>
+		<if test="revoker!=null and revoker!=''">and  REVOKER=#{revoker}</if>
+		<if test="revokeTime!=null and revokeTime!=''">and  REVOKE_TIME=#{revokeTime}</if>
+		<if test="resufeRemark!=null and resufeRemark!=''">and  RESUFE_REMARK=#{resufeRemark}</if>
+		<if test="tagList!=null and tagList!=''">and  TAG_LIST=#{tagList}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="Info">
+			select
+			* from t_cms_info
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="Info">
+			select   ID as "id" 
+					 ,   TAG_LIST as "tagList"
+					 ,   UUID as "uuid" 
+					 ,   INFO_GRAB_ID as "infoGrabId" 
+					 ,   CHANNEL_ID as "channelId" 
+					 ,   TITLE as "title" 
+					 ,   SHORT_TITLE as "shortTitle" 
+					 ,   GENERAL as "general" 
+					 ,   ORIGIN as "origin" 
+					 ,   ORIGIN_URL as "originUrl" 
+					 ,   AUTHOR as "author" 
+					 ,   INFORMATION_TYPE as "informationType" 
+					 ,   SELECTED_ENDTIME as "selectedEndtime" 
+					 ,   STICK as "stick" 
+					 ,   STICK_EDNTIME as "stickEdntime" 
+					 ,   HAS_TITLE_IMG as "hasTitleImg" 
+					 ,   RECOMMEND_FLAG as "recommendFlag" 
+					 ,   STATUS as "status" 
+					 ,   BROWSE_COUNT as "browseCount" 
+					 ,   COMMENT_COUNT as "commentCount" 
+					 ,   SHARE_COUNT as "shareCount" 
+					 ,   COLLECTION_COUNT as "collectionCount" 
+					 ,   FABULOUS_COUNT as "fabulousCount" 
+					 ,   TRAMPLE_COUNT as "trampleCount" 
+					 ,   DESCRIPTION as "description" 
+					 ,   VALID_BEGIN as "validBegin" 
+					 ,   VALID_END as "validEnd" 
+					 ,   VOID_PATH as "voidPath" 
+					 ,   DISPLAY_MODE as "displayMode" 
+					 ,   BIZ_ID as "bizId" 
+					 ,   ARTICLE_TYPE as "articleType" 
+					 ,   PROBATION_FLAG as "probationFlag" 
+					 ,   IS_SHOW_GENERAL as "isShowGeneral" 
+					 ,   IS_SHOW_ORIGIN as "isShowOrigin" 
+					 ,   IS_SHOW_COPYRIGHT as "isShowCopyright" 
+					 ,   IS_SHOW_DISCLAIMER as "isShowDisclaimer" 
+					 ,   IS_SHOW_AUTHOR as "isShowAuthor" 
+					 ,   RELEASE_ID as "releaseId" 
+					 ,   RELEASE_DATE as "releaseDate" 
+					 ,   REVIEWER_ID as "reviewerId" 
+					 ,   REVIEWER as "reviewer" 
+					 ,   AUDIT_TIME as "auditTime" 
+					 ,   REVOKE_ID as "revokeId" 
+					 ,   REVOKER as "revoker" 
+					 ,   REVOKE_TIME as "revokeTime" 
+					 ,   RESUFE_REMARK as "resufeRemark" 
+					 ,   CREATE_USER as "createUser" 
+					 ,   CREATE_DATE as "createDate" 
+					 ,   UPDATE_USER as "updateUser" 
+					 ,   UPDATE_DATE as "updateDate" 
+					 ,   ALIVE_FLAG as "aliveFlag" 
+					 ,   EXTEND1 as "extend1" 
+					 ,   EXTEND2 as "extend2" 
+					 ,   EXTEND3 as "extend3" 
+					 ,   EXTEND4 as "extend4" 
+					 ,   EXTEND5 as "extend5" 
+					 ,   EXTEND6 as "extend6" 
+					 ,   EXTEND7 as "extend7" 
+					 ,   EXTEND8 as "extend8" 
+					 ,   EXTEND9 as "extend9" 
+					 ,   EXTEND10 as "extend10" 
+			 from t_cms_info
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="Info" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		select * from t_cms_info
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="infoGrabId!=null and infoGrabId!=''">and  INFO_GRAB_ID=#{infoGrabId}</if>
+		<if test="channelId!=null and channelId!=''">and  CHANNEL_ID=#{channelId}</if>
+		<if test="title!=null and title!=''">and  TITLE=#{title}</if>
+		<if test="shortTitle!=null and shortTitle!=''">and  SHORT_TITLE=#{shortTitle}</if>
+		<if test="general!=null and general!=''">and  GENERAL=#{general}</if>
+		<if test="origin!=null and origin!=''">and  ORIGIN=#{origin}</if>
+		<if test="originUrl!=null and originUrl!=''">and  ORIGIN_URL=#{originUrl}</if>
+		<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+		<if test="informationType!=null and informationType!=''">and  INFORMATION_TYPE=#{informationType}</if>
+		<if test="selectedEndtime!=null and selectedEndtime!=''">and  SELECTED_ENDTIME=#{selectedEndtime}</if>
+		<if test="stick!=null and stick!=''">and  STICK=#{stick}</if>
+		<if test="stickEdntime!=null and stickEdntime!=''">and  STICK_EDNTIME=#{stickEdntime}</if>
+		<if test="hasTitleImg!=null and hasTitleImg!=''">and  HAS_TITLE_IMG=#{hasTitleImg}</if>
+		<if test="recommendFlag!=null and recommendFlag!=''">and  RECOMMEND_FLAG=#{recommendFlag}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="browseCount!=null and browseCount!=''">and  BROWSE_COUNT=#{browseCount}</if>
+		<if test="commentCount!=null and commentCount!=''">and  COMMENT_COUNT=#{commentCount}</if>
+		<if test="shareCount!=null and shareCount!=''">and  SHARE_COUNT=#{shareCount}</if>
+		<if test="collectionCount!=null and collectionCount!=''">and  COLLECTION_COUNT=#{collectionCount}</if>
+		<if test="fabulousCount!=null and fabulousCount!=''">and  FABULOUS_COUNT=#{fabulousCount}</if>
+		<if test="trampleCount!=null and trampleCount!=''">and  TRAMPLE_COUNT=#{trampleCount}</if>
+		<if test="description!=null and description!=''">and  DESCRIPTION=#{description}</if>
+		<if test="validBegin!=null and validBegin!=''">and  VALID_BEGIN=#{validBegin}</if>
+		<if test="validEnd!=null and validEnd!=''">and  VALID_END=#{validEnd}</if>
+		<if test="voidPath!=null and voidPath!=''">and  VOID_PATH=#{voidPath}</if>
+		<if test="displayMode!=null and displayMode!=''">and  DISPLAY_MODE=#{displayMode}</if>
+		<if test="bizId!=null and bizId!=''">and  BIZ_ID=#{bizId}</if>
+		<if test="articleType!=null and articleType!=''">and  ARTICLE_TYPE=#{articleType}</if>
+		<if test="probationFlag!=null and probationFlag!=''">and  PROBATION_FLAG=#{probationFlag}</if>
+		<if test="isShowGeneral!=null and isShowGeneral!=''">and  IS_SHOW_GENERAL=#{isShowGeneral}</if>
+		<if test="isShowOrigin!=null and isShowOrigin!=''">and  IS_SHOW_ORIGIN=#{isShowOrigin}</if>
+		<if test="isShowCopyright!=null and isShowCopyright!=''">and  IS_SHOW_COPYRIGHT=#{isShowCopyright}</if>
+		<if test="isShowDisclaimer!=null and isShowDisclaimer!=''">and  IS_SHOW_DISCLAIMER=#{isShowDisclaimer}</if>
+		<if test="isShowAuthor!=null and isShowAuthor!=''">and  IS_SHOW_AUTHOR=#{isShowAuthor}</if>
+		<if test="releaseId!=null and releaseId!=''">and  RELEASE_ID=#{releaseId}</if>
+		<if test="releaseDate!=null and releaseDate!=''">and  RELEASE_DATE=#{releaseDate}</if>
+		<if test="reviewerId!=null and reviewerId!=''">and  REVIEWER_ID=#{reviewerId}</if>
+		<if test="reviewer!=null and reviewer!=''">and  REVIEWER=#{reviewer}</if>
+		<if test="auditTime!=null and auditTime!=''">and  AUDIT_TIME=#{auditTime}</if>
+		<if test="revokeId!=null and revokeId!=''">and  REVOKE_ID=#{revokeId}</if>
+		<if test="revoker!=null and revoker!=''">and  REVOKER=#{revoker}</if>
+		<if test="revokeTime!=null and revokeTime!=''">and  REVOKE_TIME=#{revokeTime}</if>
+		<if test="resufeRemark!=null and resufeRemark!=''">and  RESUFE_REMARK=#{resufeRemark}</if>
+		<if test="tagList!=null and tagList!=''">and  TAG_LIST=#{tagList}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   INFO_GRAB_ID as "infoGrabId" 
+						 ,   CHANNEL_ID as "channelId" 
+						 ,   TITLE as "title" 
+						 ,   SHORT_TITLE as "shortTitle" 
+						 ,   GENERAL as "general" 
+						 ,   ORIGIN as "origin" 
+						 ,   ORIGIN_URL as "originUrl" 
+						 ,   AUTHOR as "author" 
+						 ,   INFORMATION_TYPE as "informationType" 
+						 ,   SELECTED_ENDTIME as "selectedEndtime" 
+						 ,   STICK as "stick" 
+						 ,   STICK_EDNTIME as "stickEdntime" 
+						 ,   HAS_TITLE_IMG as "hasTitleImg" 
+						 ,   RECOMMEND_FLAG as "recommendFlag" 
+						 ,   STATUS as "status" 
+						 ,   BROWSE_COUNT as "browseCount" 
+						 ,   COMMENT_COUNT as "commentCount" 
+						 ,   SHARE_COUNT as "shareCount" 
+						 ,   COLLECTION_COUNT as "collectionCount" 
+						 ,   FABULOUS_COUNT as "fabulousCount" 
+						 ,   TRAMPLE_COUNT as "trampleCount" 
+						 ,   DESCRIPTION as "description" 
+						 ,   VALID_BEGIN as "validBegin" 
+						 ,   VALID_END as "validEnd" 
+						 ,   VOID_PATH as "voidPath" 
+						 ,   DISPLAY_MODE as "displayMode" 
+						 ,   BIZ_ID as "bizId" 
+						 ,   ARTICLE_TYPE as "articleType" 
+						 ,   PROBATION_FLAG as "probationFlag" 
+						 ,   IS_SHOW_GENERAL as "isShowGeneral" 
+						 ,   IS_SHOW_ORIGIN as "isShowOrigin" 
+						 ,   IS_SHOW_COPYRIGHT as "isShowCopyright" 
+						 ,   IS_SHOW_DISCLAIMER as "isShowDisclaimer" 
+						 ,   IS_SHOW_AUTHOR as "isShowAuthor" 
+						 ,   RELEASE_ID as "releaseId" 
+						 ,   DATE_FORMAT(RELEASE_DATE,'%Y-%m-%d') as "releaseDate" 
+						 ,   REVIEWER_ID as "reviewerId" 
+						 ,   REVIEWER as "reviewer" 
+						 ,   AUDIT_TIME as "auditTime" 
+						 ,   REVOKE_ID as "revokeId" 
+						 ,   REVOKER as "revoker" 
+						 ,   REVOKE_TIME as "revokeTime" 
+						 ,   RESUFE_REMARK as "resufeRemark" 
+						 ,   TAG_LIST as "tagList" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   EXTEND1 as "extend1" 
+						 ,   EXTEND2 as "extend2" 
+						 ,   EXTEND3 as "extend3" 
+						 ,   EXTEND4 as "extend4" 
+						 ,   EXTEND5 as "extend5" 
+						 ,   EXTEND6 as "extend6" 
+						 ,   EXTEND7 as "extend7" 
+						 ,   EXTEND8 as "extend8" 
+						 ,   EXTEND9 as "extend9" 
+						 ,   EXTEND10 as "extend10" 
+						from t_cms_info
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="infoGrabId!=null and infoGrabId!=''">and  INFO_GRAB_ID=#{infoGrabId}</if>
+			<if test="channelId!=null and channelId!=''">and  CHANNEL_ID=#{channelId}</if>
+			<if test="title!=null and title!=''">and  TITLE=#{title}</if>
+			<if test="shortTitle!=null and shortTitle!=''">and  SHORT_TITLE=#{shortTitle}</if>
+			<if test="general!=null and general!=''">and  GENERAL=#{general}</if>
+			<if test="origin!=null and origin!=''">and  ORIGIN=#{origin}</if>
+			<if test="originUrl!=null and originUrl!=''">and  ORIGIN_URL=#{originUrl}</if>
+			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+			<if test="informationType!=null and informationType!=''">and  INFORMATION_TYPE=#{informationType}</if>
+			<if test="selectedEndtime!=null and selectedEndtime!=''">and  SELECTED_ENDTIME=#{selectedEndtime}</if>
+			<if test="stick!=null and stick!=''">and  STICK=#{stick}</if>
+			<if test="stickEdntime!=null and stickEdntime!=''">and  STICK_EDNTIME=#{stickEdntime}</if>
+			<if test="hasTitleImg!=null and hasTitleImg!=''">and  HAS_TITLE_IMG=#{hasTitleImg}</if>
+			<if test="recommendFlag!=null and recommendFlag!=''">and  RECOMMEND_FLAG=#{recommendFlag}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="browseCount!=null and browseCount!=''">and  BROWSE_COUNT=#{browseCount}</if>
+			<if test="commentCount!=null and commentCount!=''">and  COMMENT_COUNT=#{commentCount}</if>
+			<if test="shareCount!=null and shareCount!=''">and  SHARE_COUNT=#{shareCount}</if>
+			<if test="collectionCount!=null and collectionCount!=''">and  COLLECTION_COUNT=#{collectionCount}</if>
+			<if test="fabulousCount!=null and fabulousCount!=''">and  FABULOUS_COUNT=#{fabulousCount}</if>
+			<if test="trampleCount!=null and trampleCount!=''">and  TRAMPLE_COUNT=#{trampleCount}</if>
+			<if test="description!=null and description!=''">and  DESCRIPTION=#{description}</if>
+			<!-- <if test="validBegin!=null and validBegin!=''">and  VALID_BEGIN=#{validBegin}</if>
+			<if test="validEnd!=null and validEnd!=''">and  VALID_END=#{validEnd}</if> -->
+			<if test="voidPath!=null and voidPath!=''">and  VOID_PATH=#{voidPath}</if>
+			<if test="displayMode!=null and displayMode!=''">and  DISPLAY_MODE=#{displayMode}</if>
+			<if test="bizId!=null and bizId!=''">and  BIZ_ID=#{bizId}</if>
+			<if test="articleType!=null and articleType!=''">and  ARTICLE_TYPE=#{articleType}</if>
+			<if test="probationFlag!=null and probationFlag!=''">and  PROBATION_FLAG=#{probationFlag}</if>
+			<if test="isShowGeneral!=null and isShowGeneral!=''">and  IS_SHOW_GENERAL=#{isShowGeneral}</if>
+			<if test="isShowOrigin!=null and isShowOrigin!=''">and  IS_SHOW_ORIGIN=#{isShowOrigin}</if>
+			<if test="isShowCopyright!=null and isShowCopyright!=''">and  IS_SHOW_COPYRIGHT=#{isShowCopyright}</if>
+			<if test="isShowDisclaimer!=null and isShowDisclaimer!=''">and  IS_SHOW_DISCLAIMER=#{isShowDisclaimer}</if>
+			<if test="isShowAuthor!=null and isShowAuthor!=''">and  IS_SHOW_AUTHOR=#{isShowAuthor}</if>
+			<if test="releaseId!=null and releaseId!=''">and  RELEASE_ID=#{releaseId}</if>
+			<if test="releaseDate!=null and releaseDate!=''">and  RELEASE_DATE=#{releaseDate}</if>
+			<if test="reviewerId!=null and reviewerId!=''">and  REVIEWER_ID=#{reviewerId}</if>
+			<if test="reviewer!=null and reviewer!=''">and  REVIEWER=#{reviewer}</if>
+			<if test="auditTime!=null and auditTime!=''">and  AUDIT_TIME=#{auditTime}</if>
+			<if test="revokeId!=null and revokeId!=''">and  REVOKE_ID=#{revokeId}</if>
+			<if test="revoker!=null and revoker!=''">and  REVOKER=#{revoker}</if>
+			<if test="revokeTime!=null and revokeTime!=''">and  REVOKE_TIME=#{revokeTime}</if>
+			<if test="resufeRemark!=null and resufeRemark!=''">and  RESUFE_REMARK=#{resufeRemark}</if>
+			<if test="tagList!=null and tagList!=''">and  TAG_LIST=#{tagList}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			<if test="noticeFlag!=null and noticeFlag!=''">and  CHANNEL_ID=-1</if>
+			<if test="noticeFlag==null or noticeFlag==''">and  CHANNEL_ID!=-1</if>
+			<if test="validBegin!=null and validBegin!=''">and  DATE_FORMAT(RELEASE_DATE, '%Y-%m-%d') &gt;= #{validBegin}</if>
+			<if test="validEnd!=null and validEnd!=''">and  DATE_FORMAT(RELEASE_DATE, '%Y-%m-%d') &lt;= #{validEnd}</if>
+			order by id DESC		
+		</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_cms_info 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="infoGrabId!=null and infoGrabId!=''">and  INFO_GRAB_ID=#{infoGrabId}</if>
+			<if test="channelId!=null and channelId!=''">and  CHANNEL_ID=#{channelId}</if>
+			<if test="title!=null and title!=''">and  TITLE=#{title}</if>
+			<if test="shortTitle!=null and shortTitle!=''">and  SHORT_TITLE=#{shortTitle}</if>
+			<if test="general!=null and general!=''">and  GENERAL=#{general}</if>
+			<if test="origin!=null and origin!=''">and  ORIGIN=#{origin}</if>
+			<if test="originUrl!=null and originUrl!=''">and  ORIGIN_URL=#{originUrl}</if>
+			<if test="author!=null and author!=''">and  AUTHOR=#{author}</if>
+			<if test="informationType!=null and informationType!=''">and  INFORMATION_TYPE=#{informationType}</if>
+			<if test="selectedEndtime!=null and selectedEndtime!=''">and  SELECTED_ENDTIME=#{selectedEndtime}</if>
+			<if test="stick!=null and stick!=''">and  STICK=#{stick}</if>
+			<if test="stickEdntime!=null and stickEdntime!=''">and  STICK_EDNTIME=#{stickEdntime}</if>
+			<if test="hasTitleImg!=null and hasTitleImg!=''">and  HAS_TITLE_IMG=#{hasTitleImg}</if>
+			<if test="recommendFlag!=null and recommendFlag!=''">and  RECOMMEND_FLAG=#{recommendFlag}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="browseCount!=null and browseCount!=''">and  BROWSE_COUNT=#{browseCount}</if>
+			<if test="commentCount!=null and commentCount!=''">and  COMMENT_COUNT=#{commentCount}</if>
+			<if test="shareCount!=null and shareCount!=''">and  SHARE_COUNT=#{shareCount}</if>
+			<if test="collectionCount!=null and collectionCount!=''">and  COLLECTION_COUNT=#{collectionCount}</if>
+			<if test="fabulousCount!=null and fabulousCount!=''">and  FABULOUS_COUNT=#{fabulousCount}</if>
+			<if test="trampleCount!=null and trampleCount!=''">and  TRAMPLE_COUNT=#{trampleCount}</if>
+			<if test="description!=null and description!=''">and  DESCRIPTION=#{description}</if>
+			<if test="validBegin!=null and validBegin!=''">and  VALID_BEGIN=#{validBegin}</if>
+			<if test="validEnd!=null and validEnd!=''">and  VALID_END=#{validEnd}</if>
+			<if test="voidPath!=null and voidPath!=''">and  VOID_PATH=#{voidPath}</if>
+			<if test="displayMode!=null and displayMode!=''">and  DISPLAY_MODE=#{displayMode}</if>
+			<if test="bizId!=null and bizId!=''">and  BIZ_ID=#{bizId}</if>
+			<if test="articleType!=null and articleType!=''">and  ARTICLE_TYPE=#{articleType}</if>
+			<if test="probationFlag!=null and probationFlag!=''">and  PROBATION_FLAG=#{probationFlag}</if>
+			<if test="isShowGeneral!=null and isShowGeneral!=''">and  IS_SHOW_GENERAL=#{isShowGeneral}</if>
+			<if test="isShowOrigin!=null and isShowOrigin!=''">and  IS_SHOW_ORIGIN=#{isShowOrigin}</if>
+			<if test="isShowCopyright!=null and isShowCopyright!=''">and  IS_SHOW_COPYRIGHT=#{isShowCopyright}</if>
+			<if test="isShowDisclaimer!=null and isShowDisclaimer!=''">and  IS_SHOW_DISCLAIMER=#{isShowDisclaimer}</if>
+			<if test="isShowAuthor!=null and isShowAuthor!=''">and  IS_SHOW_AUTHOR=#{isShowAuthor}</if>
+			<if test="releaseId!=null and releaseId!=''">and  RELEASE_ID=#{releaseId}</if>
+			<if test="releaseDate!=null and releaseDate!=''">and  RELEASE_DATE=#{releaseDate}</if>
+			<if test="reviewerId!=null and reviewerId!=''">and  REVIEWER_ID=#{reviewerId}</if>
+			<if test="reviewer!=null and reviewer!=''">and  REVIEWER=#{reviewer}</if>
+			<if test="auditTime!=null and auditTime!=''">and  AUDIT_TIME=#{auditTime}</if>
+			<if test="revokeId!=null and revokeId!=''">and  REVOKE_ID=#{revokeId}</if>
+			<if test="revoker!=null and revoker!=''">and  REVOKER=#{revoker}</if>
+			<if test="revokeTime!=null and revokeTime!=''">and  REVOKE_TIME=#{revokeTime}</if>
+			<if test="resufeRemark!=null and resufeRemark!=''">and  RESUFE_REMARK=#{resufeRemark}</if>
+			<if test="tagList!=null and tagList!=''">and  TAG_LIST=#{tagList}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+
+	
+
+		<!-- 公告列表  -->
+	<select	id="listNotice" resultMap="Info" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		select 
+			 			ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   INFO_GRAB_ID as "infoGrabId" 
+						 ,   CHANNEL_ID as "channelId" 
+						 ,   TITLE as "title" 
+						 ,   SHORT_TITLE as "shortTitle" 
+						 ,   GENERAL as "general" 
+						 ,   ORIGIN as "origin" 
+						 ,   ORIGIN_URL as "originUrl" 
+						 ,   AUTHOR as "author" 
+						 ,   INFORMATION_TYPE as "informationType" 
+						 ,   SELECTED_ENDTIME as "selectedEndtime" 
+						 ,   STICK as "stick" 
+						 ,   STICK_EDNTIME as "stickEdntime" 
+						 ,   HAS_TITLE_IMG as "hasTitleImg" 
+						 ,   RECOMMEND_FLAG as "recommendFlag" 
+						 ,   STATUS as "status" 
+						 ,   BROWSE_COUNT as "browseCount" 
+						 ,   COMMENT_COUNT as "commentCount" 
+						 ,   SHARE_COUNT as "shareCount" 
+						 ,   COLLECTION_COUNT as "collectionCount" 
+						 ,   FABULOUS_COUNT as "fabulousCount" 
+						 ,   TRAMPLE_COUNT as "trampleCount" 
+						 ,   DESCRIPTION as "description" 
+						 ,   VALID_BEGIN as "validBegin" 
+						 ,   VALID_END as "validEnd" 
+						 ,   VOID_PATH as "voidPath" 
+						 ,   DISPLAY_MODE as "displayMode" 
+						 ,   BIZ_ID as "bizId" 
+						 ,   ARTICLE_TYPE as "articleType" 
+						 ,   PROBATION_FLAG as "probationFlag" 
+						 ,   IS_SHOW_GENERAL as "isShowGeneral" 
+						 ,   IS_SHOW_ORIGIN as "isShowOrigin" 
+						 ,   IS_SHOW_COPYRIGHT as "isShowCopyright" 
+						 ,   IS_SHOW_DISCLAIMER as "isShowDisclaimer" 
+						 ,   IS_SHOW_AUTHOR as "isShowAuthor" 
+						 ,   RELEASE_ID as "releaseId" 
+						 ,   RELEASE_DATE as "releaseDate" 
+						 ,   REVIEWER_ID as "reviewerId" 
+						 ,   REVIEWER as "reviewer" 
+						 ,   AUDIT_TIME as "auditTime" 
+						 ,   REVOKE_ID as "revokeId" 
+						 ,   REVOKER as "revoker" 
+						 ,   REVOKE_TIME as "revokeTime" 
+						 ,   RESUFE_REMARK as "resufeRemark" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   EXTEND1 as "extend1" 
+						 ,   EXTEND2 as "extend2" 
+						 ,   EXTEND3 as "extend3" 
+						 ,   EXTEND4 as "extend4" 
+						 ,   EXTEND5 as "extend5" 
+						 ,   EXTEND6 as "extend6" 
+						 ,   EXTEND7 as "extend7" 
+						 ,   EXTEND8 as "extend8" 
+						 ,   EXTEND9 as "extend9" 
+						 ,   EXTEND10 as "extend10" 
+		from t_cms_info
+			where
+		 ALIVE_FLAG='1' and CHANNEL_ID = -1
+		<if test="validBegin!=null">
+			<![CDATA[
+			  and DATE_FORMAT(RELEASE_DATE,'%Y-%m-%d') >= DATE_FORMAT(#{validBegin},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="validEnd!=null">
+		  <![CDATA[
+		  	and  DATE_FORMAT(RELEASE_DATE,'%Y-%m-%d') <= DATE_FORMAT(#{validEnd},'%Y-%m-%d')
+		  ]]>
+		</if>
+		<if test="status!=null and status!=''">and  STATUS = #{status}</if>
+		 order by id DESC 
+	</select>
+	
+	<!-- 更新公告 -->
+	<update id="updateNoticeStatus" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+			<if test="status!=null">STATUS = #{status}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="releaseId!=null">,RELEASE_ID = #{releaseId}</if>
+			<if test="releaseDate!=null">,RELEASE_DATE = #{releaseDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		 and  UUID=#{uuid}
+	</update>
+	
+	<!-- 更新标题 -->
+	<update id="updateInfoTitle" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+			<if test="title!=null">TITLE = #{title}</if>
+			<if test="status!=null">, STATUS = #{status}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		 <if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+	</update>
+	
+	<!-- 删除公告  -->
+	<update id="deleteByInfo" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+         ALIVE_FLAG = '0'
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1' and STATUS = '00'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 更新资讯表中分享,收藏,评论条数 -->
+	<update id="updateInfoCount" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+			<if test="browseCount!=null">BROWSE_COUNT = #{browseCount}</if>
+			<if test="commentCount!=null">,COMMENT_COUNT = #{commentCount}</if>
+			<if test="shareCount!=null">,SHARE_COUNT = #{shareCount}</if>
+			<if test="collectionCount!=null">,COLLECTION_COUNT = #{collectionCount}</if>
+			<if test="fabulousCount!=null">,FABULOUS_COUNT = #{fabulousCount}</if>
+			<if test="trampleCount!=null">,TRAMPLE_COUNT = #{trampleCount}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		</set>
+		where
+       	 ID=#{id} and ALIVE_FLAG='1' and  UUID=#{uuid}
+	</update>
+
+	<!-- 批量审核通过 -->
+	<update id="updateRecordsBatch" parameterType="hashmap">
+		update t_cms_info
+        SET STATUS = '30'
+		where
+		ALIVE_FLAG='1'
+		and UUID = #{uuid}
+	</update>
+	
+	<!-- 查询待审核/已发布列表 -->
+	<select id="ListInfo" resultType="java.util.HashMap" parameterType="hashmap">
+		SELECT
+			tci.ID AS "id",
+			tci.UUID AS "uuid",
+			tci.INFO_GRAB_ID AS "infoGrabId",
+			tci.CHANNEL_ID AS "channelId",
+			tci.TITLE AS "title",
+			tci.SHORT_TITLE AS "shortTitle",
+			tci.GENERAL AS "general",
+			tci.ORIGIN AS "origin",
+			tci.ORIGIN_URL AS "originUrl",
+			tci.AUTHOR AS "author",
+			tci.INFORMATION_TYPE AS "informationType",
+			DATE_FORMAT(
+				tci.SELECTED_ENDTIME,
+				'%Y-%m-%d %T'
+			) AS "selectedEndtime",
+			tci.STICK AS "stick",
+			DATE_FORMAT(
+				tci.STICK_EDNTIME,
+				'%Y-%m-%d %T'
+			) AS "stickEdntime",
+			tci.HAS_TITLE_IMG AS "hasTitleImg",
+			tci.RECOMMEND_FLAG AS "recommendFlag",
+			tci. STATUS AS "status",
+			tci.BROWSE_COUNT AS "browseCount",
+			tci.COMMENT_COUNT AS "commentCount",
+			tci.SHARE_COUNT AS "shareCount",
+			tci.COLLECTION_COUNT AS "collectionCount",
+			tci.FABULOUS_COUNT AS "fabulousCount",
+			tci.TRAMPLE_COUNT AS "trampleCount",
+			tci.DESCRIPTION AS "description",
+			DATE_FORMAT(tci.VALID_BEGIN, '%Y-%m-%d') AS "validBegin",
+			DATE_FORMAT(tci.VALID_END, '%Y-%m-%d') AS "validEnd",
+			tci.VOID_PATH AS "voidPath",
+			tci.DISPLAY_MODE AS "displayMode",
+			tci.BIZ_ID AS "bizId",
+			tci.ARTICLE_TYPE AS "articleType",
+			tci.PROBATION_FLAG AS "probationFlag",
+			tci.IS_SHOW_GENERAL AS "isShowGeneral",
+			tci.IS_SHOW_ORIGIN AS "isShowOrigin",
+			tci.IS_SHOW_COPYRIGHT AS "isShowCopyright",
+			tci.IS_SHOW_DISCLAIMER AS "isShowDisclaimer",
+			tci.IS_SHOW_AUTHOR AS "isShowAuthor",
+			tci.RELEASE_ID AS "releaseId",
+			DATE_FORMAT(
+				tci.RELEASE_DATE,
+				'%Y-%m-%d'
+			) AS "releaseDate",
+			tci.REVIEWER_ID AS "reviewerId",
+			tci.REVIEWER AS "reviewer",
+			DATE_FORMAT(tci.AUDIT_TIME, '%Y-%m-%d') AS "auditTime",
+			tci.REVOKE_ID AS "revokeId",
+			tci.REVOKER AS "revoker",
+			DATE_FORMAT(tci.REVOKE_TIME, '%Y-%m-%d') AS "revokeTime",
+			tci.RESUFE_REMARK AS "resufeRemark",
+			tci.TAG_LIST AS "tagList",
+			tci.CREATE_USER AS "createUser",
+			DATE_FORMAT(tci.CREATE_DATE, '%Y-%m-%d') AS "createDate",
+			tci.UPDATE_USER AS "updateUser",
+			DATE_FORMAT(tci.UPDATE_DATE, '%Y-%m-%d') AS "updateDate",
+			tci.ALIVE_FLAG AS "aliveFlag",
+			tci.EXTEND1 AS "extend1",
+			tci.EXTEND2 AS "extend2",
+			tci.EXTEND3 AS "extend3",
+			tci.EXTEND4 AS "extend4",
+			tci.EXTEND5 AS "extend5",
+			tci.EXTEND6 AS "extend6",
+			tci.EXTEND7 AS "extend7",
+			tci.EXTEND8 AS "extend8",
+			tci.EXTEND9 AS "extend9",
+			tci.EXTEND10 AS "extend10",
+			sub.CHANNEL_NAME AS "channelName",
+			m.CHANNEL_M_NAME as "channelMName"
+		FROM
+			t_cms_info tci,
+			t_cms_info_content c,
+			t_cms_channel_sub sub,
+			t_cms_channel_m m
+		WHERE
+			tci.ALIVE_FLAG='1'
+		AND tci.ID = c.INFO_ID
+		AND tci.CHANNEL_ID = sub.ID 
+		AND sub.CHANNEL_M_ID = m.ID
+		AND tci.CHANNEL_ID > 0
+		AND m.CHANNEL_M_DESC = #{infoType}
+
+		<if test="channelMUuid != null and channelMUuid != ''">
+			and m.uuid = #{channelMUuid}
+		</if>
+		<if test="channelSubUuid != null and channelSubUuid != ''">
+			and sub.uuid = #{channelSubUuid}
+		</if>
+		<if test="keyWords != null and keyWords != ''">
+			and ( tci.TITLE like concat('%', trim(#{keyWords}), '%') 
+				or  m.CHANNEL_M_NAME like concat('%', trim(#{keyWords}), '%')
+				or  m.CHANNEL_M_CODE like concat('%', trim(#{keyWords}), '%') 
+				)
+		</if>
+		
+		
+		<if test="pubBeginTime != null and pubBeginTime != ''">
+			<![CDATA[
+			  and DATE_FORMAT(tci.RELEASE_DATE,"%Y-%m-%d") >= DATE_FORMAT(#{pubBeginTime},"%Y-%m-%d")
+			]]>
+		</if>
+		<if test="pubEndTime != null and pubEndTime != ''">
+			  <![CDATA[
+			  	and DATE_FORMAT(tci.RELEASE_DATE,"%Y-%m-%d") <= DATE_FORMAT(#{pubEndTime},"%Y-%m-%d")
+			  ]]>
+		</if>
+		
+		
+		<if test="informationType != null and informationType != ''">
+			and tci.INFORMATION_TYPE = #{informationType}
+		</if>
+		<if test="tab == '0'.toString()">
+			<if test="status == null or status == ''">
+				and tci.STATUS != '30'
+			</if>
+			<if test="status != null and status != ''">
+				and tci.STATUS = #{status}
+			</if>
+		</if>
+		<if test="tab == '1'.toString()">
+			and tci.STATUS = '30'
+		</if>
+		order by tci.ID desc
+	</select>
+	
+	
+	<!-- 更新资讯 -->
+	<update id="updatInfoByUUId" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+		UUID=#{uuid}
+		<if test="infoGrabId!=null">,INFO_GRAB_ID = #{infoGrabId}</if>
+		<if test="channelId!=null">,CHANNEL_ID = #{channelId}</if>
+		<if test="title!=null">,TITLE = #{title}</if>
+		<if test="shortTitle!=null">,SHORT_TITLE = #{shortTitle}</if>
+		<if test="general!=null">,GENERAL = #{general}</if>
+		<if test="origin!=null">,ORIGIN = #{origin}</if>
+		<if test="originUrl!=null">,ORIGIN_URL = #{originUrl}</if>
+		<if test="author!=null">,AUTHOR = #{author}</if>
+		<if test="informationType!=null">,INFORMATION_TYPE = #{informationType}</if>
+		<if test="selectedEndtime!=null">,SELECTED_ENDTIME = #{selectedEndtime}</if>
+		<if test="stick!=null">,STICK = #{stick}</if>
+		<if test="stickEdntime!=null">,STICK_EDNTIME = #{stickEdntime}</if>
+		<if test="hasTitleImg!=null">,HAS_TITLE_IMG = #{hasTitleImg}</if>
+		<if test="recommendFlag!=null">,RECOMMEND_FLAG = #{recommendFlag}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="browseCount!=null">,BROWSE_COUNT = #{browseCount}</if>
+		<if test="commentCount!=null">,COMMENT_COUNT = #{commentCount}</if>
+		<if test="shareCount!=null">,SHARE_COUNT = #{shareCount}</if>
+		<if test="collectionCount!=null">,COLLECTION_COUNT = #{collectionCount}</if>
+		<if test="fabulousCount!=null">,FABULOUS_COUNT = #{fabulousCount}</if>
+		<if test="trampleCount!=null">,TRAMPLE_COUNT = #{trampleCount}</if>
+		<if test="description!=null">,DESCRIPTION = #{description}</if>
+		<if test="validBegin!=null">,VALID_BEGIN = #{validBegin}</if>
+		<if test="validEnd!=null">,VALID_END = #{validEnd}</if>
+		<if test="voidPath!=null">,VOID_PATH = #{voidPath}</if>
+		<if test="displayMode!=null">,DISPLAY_MODE = #{displayMode}</if>
+		<if test="bizId!=null">,BIZ_ID = #{bizId}</if>
+		<if test="articleType!=null">,ARTICLE_TYPE = #{articleType}</if>
+		<if test="probationFlag!=null">,PROBATION_FLAG = #{probationFlag}</if>
+		<if test="isShowGeneral!=null">,IS_SHOW_GENERAL = #{isShowGeneral}</if>
+		<if test="isShowOrigin!=null">,IS_SHOW_ORIGIN = #{isShowOrigin}</if>
+		<if test="isShowCopyright!=null">,IS_SHOW_COPYRIGHT = #{isShowCopyright}</if>
+		<if test="isShowDisclaimer!=null">,IS_SHOW_DISCLAIMER = #{isShowDisclaimer}</if>
+		<if test="isShowAuthor!=null">,IS_SHOW_AUTHOR = #{isShowAuthor}</if>
+		<if test="releaseId!=null">,RELEASE_ID = #{releaseId}</if>
+		<if test="releaseDate!=null">,RELEASE_DATE = #{releaseDate}</if>
+		<if test="reviewerId!=null">,REVIEWER_ID = #{reviewerId}</if>
+		<if test="reviewer!=null">,REVIEWER = #{reviewer}</if>
+		<if test="auditTime!=null">,AUDIT_TIME = #{auditTime}</if>
+		<if test="revokeId!=null">,REVOKE_ID = #{revokeId}</if>
+		<if test="revoker!=null">,REVOKER = #{revoker}</if>
+		<if test="revokeTime!=null">,REVOKE_TIME = #{revokeTime}</if>
+		<if test="resufeRemark!=null">,RESUFE_REMARK = #{resufeRemark}</if>
+		<if test="tagList!=null">,TAG_LIST = #{tagList}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 查询未发布列表 -->
+	<select id="ListUnreleased" resultType="java.util.HashMap" parameterType="hashmap">
+		select   ID as "id" 
+				 ,   UUID as "uuid" 
+				 ,   INFO_GRAB_ID as "infoGrabId" 
+				 ,   CHANNEL_ID as "channelId" 
+				 ,   TITLE as "title" 
+				 ,   SHORT_TITLE as "shortTitle" 
+				 ,   GENERAL as "general" 
+				 ,   ORIGIN as "origin" 
+				 ,   ORIGIN_URL as "originUrl" 
+				 ,   AUTHOR as "author" 
+				 ,   INFORMATION_TYPE as "informationType" 
+				 ,   date_format(SELECTED_ENDTIME, '%Y-%m-%d %T') as "selectedEndtime"
+				 ,   STICK as "stick" 
+				 ,   date_format(STICK_EDNTIME, '%Y-%m-%d %T') as "stickEdntime"
+				 ,   HAS_TITLE_IMG as "hasTitleImg" 
+				 ,   RECOMMEND_FLAG as "recommendFlag" 
+				 ,   STATUS as "status" 
+				 ,   BROWSE_COUNT as "browseCount" 
+				 ,   COMMENT_COUNT as "commentCount" 
+				 ,   SHARE_COUNT as "shareCount" 
+				 ,   COLLECTION_COUNT as "collectionCount" 
+				 ,   FABULOUS_COUNT as "fabulousCount" 
+				 ,   TRAMPLE_COUNT as "trampleCount" 
+				 ,   DESCRIPTION as "description" 
+				 ,   date_format(VALID_BEGIN, '%Y-%m-%d') as "validBegin"
+				 ,   date_format(VALID_END, '%Y-%m-%d') as "validEnd"
+				 ,   VOID_PATH as "voidPath" 
+				 ,   DISPLAY_MODE as "displayMode" 
+				 ,   BIZ_ID as "bizId" 
+				 ,   ARTICLE_TYPE as "articleType" 
+				 ,   PROBATION_FLAG as "probationFlag" 
+				 ,   IS_SHOW_GENERAL as "isShowGeneral" 
+				 ,   IS_SHOW_ORIGIN as "isShowOrigin" 
+				 ,   IS_SHOW_COPYRIGHT as "isShowCopyright" 
+				 ,   IS_SHOW_DISCLAIMER as "isShowDisclaimer" 
+				 ,   IS_SHOW_AUTHOR as "isShowAuthor" 
+				 ,   RELEASE_ID as "releaseId" 
+				 ,   date_format(RELEASE_DATE, '%Y-%m-%d') as "releaseDate"
+				 ,   REVIEWER_ID as "reviewerId" 
+				 ,   REVIEWER as "reviewer" 
+				 ,   date_format(AUDIT_TIME, '%Y-%m-%d') as "auditTime"
+				 ,   REVOKE_ID as "revokeId" 
+				 ,   REVOKER as "revoker" 
+				 ,   date_format(REVOKE_TIME, '%Y-%m-%d') as "revokeTime"
+				 ,   RESUFE_REMARK as "resufeRemark" 
+				 ,   TAG_LIST as "tagList" 
+				 ,   CREATE_USER as "createUser" 
+				 ,   date_format(CREATE_DATE, '%Y-%m-%d') as "createDate"
+				 ,   UPDATE_USER as "updateUser" 
+				 ,   date_format(UPDATE_DATE, '%Y-%m-%d') as "updateDate"
+				 ,   ALIVE_FLAG as "aliveFlag" 
+				 ,   EXTEND1 as "extend1" 
+				 ,   EXTEND2 as "extend2" 
+				 ,   EXTEND3 as "extend3" 
+				 ,   EXTEND4 as "extend4" 
+				 ,   EXTEND5 as "extend5" 
+				 ,   EXTEND6 as "extend6" 
+				 ,   EXTEND7 as "extend7" 
+				 ,   EXTEND8 as "extend8" 
+				 ,   EXTEND9 as "extend9" 
+				 ,   EXTEND10 as "extend10" 
+		from t_cms_info
+		where
+			ALIVE_FLAG='1'
+		and 
+			(STATUS = '00' or STATUS = '20' or STATUS = '29')
+		and 
+			CREATE_USER = #{createUser}
+	</select>
+	
+	<!-- 资讯置顶 -->
+	<update id="settingInfoTopByUUId" parameterType="com.sinochem.crude.trade.info.domain.Info">
+		update t_cms_info
+		<set>
+          ID=#{id},STICK = #{stick},STICK_EDNTIME = #{stickEdntime}
+		</set>
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 查询置顶的资讯 -->
+	<select id="findStickInfo" parameterType="java.lang.Long" resultMap="Info">
+		select
+			id,STICK,uuid from t_cms_info
+			where  ALIVE_FLAG='1' and STATUS='30' /** STATUS 30 已发布状态*/
+			and STICK='1' and CHANNEL_ID = #{channelId}
+	</select>
+	
+	<!-- 查询我的资讯列表 -->
+	<select id="myInfoList" parameterType="hashmap" resultMap="Info">
+		select * 
+		from t_cms_info
+		where 
+			ALIVE_FLAG='1'
+		and CREATE_USER = #{userName}
+		<if test="status == null or status == ''">
+			<if test="tab != null and tab == '1'.toString()">
+				and STATUS = '30'
+			</if>
+			<if test="tab != null and tab == '2'.toString()">
+				and (STATUS = '00' or STATUS = '20' or STATUS = '29')
+			</if>
+			<if test="tab != null and tab == '3'.toString()">
+				and STATUS = '10'
+			</if>
+		</if>
+		<if test="status != null and status != ''">
+			and STATUS = #{status}
+		</if>
+		<if test="channelIds != null and channelIds != ''">
+			and CHANNEL_ID in (${channelIds})
+		</if>
+		<if test="channelId != null and channelId != ''">
+			and CHANNEL_ID = #{channelId}
+		</if>
+		order by ID desc
+	</select>
+	
+	<!-- 根据uuid查询记录（包括栏目内容） -->
+	<select id="selectByUuid" resultType="java.util.HashMap">
+		select   tci.ID as "id" 
+				 ,   tci.TAG_LIST as "tagList"
+				 ,   tci.UUID as "uuid" 
+				 ,   tci.INFO_GRAB_ID as "infoGrabId" 
+				 ,   tci.CHANNEL_ID as "channelId" 
+				 ,   tci.TITLE as "title" 
+				 ,   tci.SHORT_TITLE as "shortTitle" 
+				 ,   tci.GENERAL as "general" 
+				 ,   tci.ORIGIN as "origin" 
+				 ,   tci.ORIGIN_URL as "originUrl" 
+				 ,   tci.AUTHOR as "author" 
+				 ,   tci.INFORMATION_TYPE as "informationType" 
+				 ,   tci.SELECTED_ENDTIME as "selectedEndtime" 
+				 ,   tci.STICK as "stick" 
+				 ,   tci.STICK_EDNTIME as "stickEdntime" 
+				 ,   tci.HAS_TITLE_IMG as "hasTitleImg" 
+				 ,   tci.RECOMMEND_FLAG as "recommendFlag" 
+				 ,   tci.STATUS as "status" 
+				 ,   tci.BROWSE_COUNT as "browseCount" 
+				 ,   tci.COMMENT_COUNT as "commentCount" 
+				 ,   tci.SHARE_COUNT as "shareCount" 
+				 ,   tci.COLLECTION_COUNT as "collectionCount" 
+				 ,   tci.FABULOUS_COUNT as "fabulousCount" 
+				 ,   tci.TRAMPLE_COUNT as "trampleCount" 
+				 ,   tci.DESCRIPTION as "description" 
+				 ,   tci.VALID_BEGIN as "validBegin" 
+				 ,   tci.VALID_END as "validEnd" 
+				 ,   tci.VOID_PATH as "voidPath" 
+				 ,   tci.DISPLAY_MODE as "displayMode" 
+				 ,   tci.BIZ_ID as "bizId" 
+				 ,   tci.ARTICLE_TYPE as "articleType" 
+				 ,   tci.PROBATION_FLAG as "probationFlag" 
+				 ,   tci.IS_SHOW_GENERAL as "isShowGeneral" 
+				 ,   tci.IS_SHOW_ORIGIN as "isShowOrigin" 
+				 ,   tci.IS_SHOW_COPYRIGHT as "isShowCopyright" 
+				 ,   tci.IS_SHOW_DISCLAIMER as "isShowDisclaimer" 
+				 ,   tci.IS_SHOW_AUTHOR as "isShowAuthor" 
+				 ,   tci.RELEASE_ID as "releaseId" 
+				 ,   date_format(tci.RELEASE_DATE, '%Y-%m-%d %T') as "releaseDate" 
+				 ,   tci.REVIEWER_ID as "reviewerId" 
+				 ,   tci.REVIEWER as "reviewer" 
+				 ,   tci.AUDIT_TIME as "auditTime" 
+				 ,   tci.REVOKE_ID as "revokeId" 
+				 ,   tci.REVOKER as "revoker" 
+				 ,   tci.REVOKE_TIME as "revokeTime" 
+				 ,   tci.RESUFE_REMARK as "resufeRemark" 
+				 ,   tci.CREATE_USER as "createUser" 
+				 ,   tci.CREATE_DATE as "createDate" 
+				 ,   tci.UPDATE_USER as "updateUser" 
+				 ,   tci.UPDATE_DATE as "updateDate" 
+				 ,   tci.ALIVE_FLAG as "aliveFlag" 
+				 ,   tci.EXTEND1 as "extend1" 
+				 ,   tci.EXTEND2 as "extend2" 
+				 ,   tci.EXTEND3 as "extend3" 
+				 ,   tci.EXTEND4 as "extend4" 
+				 ,   tci.EXTEND5 as "extend5" 
+				 ,   tci.EXTEND6 as "extend6" 
+				 ,   tci.EXTEND7 as "extend7" 
+				 ,   tci.EXTEND8 as "extend8" 
+				 ,   tci.EXTEND9 as "extend9" 
+				 ,   tci.EXTEND10 as "extend10" 
+				 ,   tcic.TEX as "tex"
+				 ,   tcic.TEX_HTML as "texHtml"
+		from 
+			t_cms_info tci
+		left join 
+			t_cms_info_content tcic
+		on tci.ID = tcic.INFO_ID
+		where tci.UUID=#{uuid} 
+		and tci.ALIVE_FLAG='1'
+	</select>
+	
+	<select id="getFrontList" resultType="java.util.HashMap" parameterType="hashmap">
+		select	
+				i.ID as id,
+				i.CHANNEL_ID as channelId,
+				i.TITLE AS "title",
+				IFNULL(author, '平台') AS "author",
+				i.BROWSE_COUNT AS "browseCount",
+				DATE_FORMAT(i.RELEASE_DATE, '%Y-%m-%d %H:%i:%s') AS "releaseDate",
+				c.TEX AS "text",
+				c.TEX_HTML AS "textHtml",
+				i.TAG_LIST AS "tagList",
+				s.channel_name AS "channelName",
+				i.ORIGIN as "origin",
+				i.IS_SHOW_COPYRIGHT as "isShowCopyright",
+				i.IS_SHOW_DISCLAIMER as "isShowDisclaimer"
+			FROM
+				t_cms_info i,
+				t_cms_info_content c,
+				t_cms_channel_sub s
+			WHERE
+				i.ALIVE_FLAG = '1'
+			AND i.ID = c.INFO_ID
+			AND i.CHANNEL_ID = s.ID
+			<if test="infoUuid!=null and infoUuid!=''">and  i.UUID=#{infoUuid}</if>
+			<if test="channelUuid!=null and channelUuid!=''">
+				AND s.uuid = #{channelUuid}
+			</if>
+			<if test="channelMUuid!=null and channelMUuid!=''">
+				AND EXISTS ( SELECT 1 FROM t_cms_channel_m m 
+					WHERE s.channel_m_id = m.id AND m.uuid = #{channelMUuid} )
+			</if>
+	</select>
+	
+	<select id="getPreInfo" resultType="java.util.HashMap">
+		SELECT
+			t.UUID AS "preUuid",
+			t.TITLE AS "preTitle"
+		FROM
+			t_cms_info t
+		WHERE
+			t.alive_flag = '1'
+		and t.channel_id = #{channelId}
+		and DATE_FORMAT(t.RELEASE_DATE, '%Y-%m-%d %H:%i:%s') &lt; #{releaseDate}
+		ORDER BY
+			t.RELEASE_DATE DESC
+		limit 0, 1
+	</select>
+	
+	<select id="getNextInfo" resultType="java.util.HashMap">
+		SELECT
+			t.UUID AS "nextUuid",
+			t.TITLE AS "nextTitle"
+		FROM
+			t_cms_info t
+		WHERE t.alive_flag = '1'
+		and  t.channel_id = #{channelId}
+		and DATE_FORMAT(t.RELEASE_DATE, '%Y-%m-%d %H:%i:%s') &gt; #{releaseDate}
+		ORDER BY
+			t.RELEASE_DATE asc
+		limit 0, 1
+	</select>
+	
+	<update id="updateBrowseCount">
+		update t_cms_info set BROWSE_COUNT = BROWSE_COUNT + 1
+			where ALIVE_FLAG='1'
+		and  ID = #{id}
+	</update>
+	<select id="findMaxInfoGrabId" resultType="Integer" parameterType="String">
+		SELECT 
+			MAX(INFO_GRAB_ID) 
+		FROM `t_cms_info` 
+		WHERE ALIVE_FLAG='1' AND ORIGIN = '金凯讯' AND  EXTEND2 = #{typ} 
+	</select>
+</mapper>
+

@@ -1,0 +1,46 @@
+<div class="cg-cont clearfix">
+    <div class="cg-zbbj cg-zbbj1"></div>
+    <h1 class="cg-zb">询价</h1>
+
+
+    <div class="swiper-container" id="swiper2">
+        <div class="swiper-wrapper">
+            #foreach($dd in $require.list)
+                <div class="swiper-slide">
+                    <div class="cg-zbnr clearfix">
+                        <dl class="cg-zbnr-t clearfix">
+                            #if($!{dd.specified} == 1) <em><i class="c-ico cg-dxfb"></i></em> #end
+                            #if($!{dd.overdue}) <em><i class="c-ico cg-xxygq1"></i></em> #end
+                            <dt class="cg-zt-title">$!{dd.bEnterpriseName}</dt>
+                            <dd class="cg-zt-contt">#if($!{dd.publishType} == 2) 性质要求： #else 油种名称： #end $!{dd.crudeOilOptions}</dd>
+                            <dd class="cg-zt-cont">发布时间：$!{dd.pubDate}</dd>
+                            <dd class="cg-zt-cont">截止时间：$!{dd.stopBidTime}</dd>
+                            <dd class="cg-zt-cont">数量（万桶）：$!{dd.num}</dd>
+                            <dd class="cg-zt-cont">贸易条款：$!{dd.tradeItem}</dd>
+                            #if($!{dd.tradeItem} == 'FOB')
+                                <dd class="cg-zt-cont">装货港：$!{dd.shipmentPort}</dd>
+                                <dd class="cg-zt-cont">装货期：$!{dd.shipmentStartTime} 到 $!{dd.shipmentEndTime}</dd>
+                            #else
+                                <dd class="cg-zt-cont">卸货港：$!{dd.dischargePort}</dd>
+                                <dd class="cg-zt-cont">到货期：$!{dd.dischargeStartTime} 到 $!{dd.dischargeEndTime}</dd>
+                            #end
+                            <dd class="cg-zt-cont">计价基准：$!{dd.valuationBase}</dd>
+                            <dd class="cg-zt-cont">付款日期：$!{dd.payItem}</dd>
+                            <div class="cg-zb-an">
+                                #if($!{dd.overdue})
+                                    <a href="javascript:void(0)" class="cg-an-tb-h"><i class="c-ico cg-icbj"></i>报价</a>
+                                #else
+                                    <a href="javascript:void(0)" onclick="epclick('$!{dd.id}','$!{dd.creater}',false,$!{dd.overdue})" class="cg-an-tb"><i class="c-ico cg-icbj"></i>报价</a>
+                                #end
+                                <a href="javascript:void(0)" class="cg-an-tb dbi compareC" id="compareC_$!{dd.id}_$!{dd.id}" sn="$!{dd.id}" dealType="B" img="$imageServer.get('/images/cg_pic21.jpg')" name="$!{dd.crudeOilOptions}" value="$!{dd.id}" ><i class="c-ico cg-icdb"></i>对比</a>
+                                <a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{dd.id}" class="cg-an-tb chkxq">查看详情</a>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            #end
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>

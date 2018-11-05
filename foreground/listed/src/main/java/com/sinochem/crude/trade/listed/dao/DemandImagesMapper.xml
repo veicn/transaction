@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandImagesMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.DemandImages" >
+
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, demand_id, images
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from demand_images
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByDemandId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select
+    <include refid="Base_Column_List" />
+    from demand_images
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    delete from demand_images
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByDemandId" parameterType="java.lang.Long" >
+
+    delete from demand_images
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.listed.domain.DemandImages" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_images (demand_id, images
+      )
+    values ( #{demandId,jdbcType=BIGINT}, #{images,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandImages" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_images
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandImages" >
+
+    update demand_images
+    <set >
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.listed.domain.DemandImages" >
+
+    update demand_images
+    set demand_id = #{demandId,jdbcType=BIGINT},
+      images = #{images,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+</div>
+<div  class="s-rright s-rright-reg op-tip-0 " style="display: none">
+    <p class="s-r-tit">已有账号？请直接登录<a href="$systemServer.get('login.htm')" class="s-btn s-btn-warm">登录</a></p>
+    <p class="s-r-kf s-reg-kf">温馨提示</p>
+    <p class="s-r-cont">
+        1.注册前请仔细阅读《个人用户注册协议》。<br/>
+    </p>
+    <p class="s-r-kf s-reg-kf">服务须知</p>
+    <p class="s-r-cont">
+        1.如您对注册有疑问或需要帮助，请拨打平台服务热线：010-59568888。<br/>
+    </p>
+</div>
+
+<div class="s-rright s-rright-reg op-tip-1" style="display: none">
+    <p class="s-r-tit">已有账号？请直接登录<a href="$systemServer.get('login.htm')" class="s-btn s-btn-warm">登录</a></p>
+    <div class="s-notes">
+        <p class="s-r-kf s-reg-kf">温馨提示</p>
+        <p class="s-r-cont">
+            1.境内企业在平台注册所需资料：<br/>
+            1）<font color="red">营业执照、税务登记证、组织机构代码证原件（三证合一企业准备营业执照即可）</font>，扫描或拍照成彩色正面图片，图片需清晰完整，文件格式为JPG或PEG,图片大小应小于2M。<br/>
+            2） 需准备好<font color="red">平台注册授权委托书及加盖企业公章的联系人个人身份证复印件</font>。<a style="color: blue" href="$appServer.get('member/180205JTN.docx')">平台授权委托书（境内企业）</a>下载。<br/>
+            2. 境外企业在平台注册所需资料：<br/>
+            1）<font color="red">企业注册证明或注册登记证、银行开户证明或银行资信证明材料。</font><br/>
+            2）需准备好<font color="red">平台注册授权委托书</font>。<a style="color: blue" href="$appServer.get('member/180309JTN.docx')">平台授权委托书（境外企业）</a>下载。<br/>
+        </p>
+        <p class="s-r-kf s-reg-kf">服务须知</p>
+        <p class="s-r-cont">
+            1. 我们的审核时限为3个工作日，遇法定节假日顺延。<br/>
+            2. 如您对会员注册有疑问或需要帮助，请拨打平台服务热线：010-59568888。<br/>
+            3. 注册前请仔细阅读《企业入驻协议》。<br/>
+        </p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+    /*设置reg.code为1*/
+    function getUrlParms(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+            return unescape(r[2]);
+        return null;
+    }
+    $(function () {
+        var op = getUrlParms("op") || 'mail';
+        var type = getUrlParms("t") || 0;
+        $(".op-regcode").val( type );
+        $(".op-tip-"+type).show();
+
+        //改变注册方式点击链接
+        $(".s-tab-regtitle li").each(function(){
+            var op = $(this).data("onshow");
+            $(this).attr("onclick", "location.href='register.htm?op="+ op +"&t=" + type + "'");
+        });
+
+        var a = $(".s-regis-title li");
+        a.removeClass("curr");
+        a.eq(type).addClass("curr");
+        if(type==1){
+            $("input[name=emailTpl]").val("email_activation_enterprise");
+        }else{
+            $("input[name=emailTpl]").val("email_activation_person");
+        }
+
+        if (type == 1 && op == 'mobile') {
+            $("#divProtocol").html('<li class="s-form-item regChemic">' +
+                    '<input type="checkbox" lay-skin="primary"  title="同时注册壹化网">' +
+                    ' <div class="s-uncheckbox s-form-checkbox" id="checkSub" lay-skin="primary"><span>同时注册壹化网</span><i class="fs-checkbox"></i></div>' +
+                    '</li>' +
+                    ' <li>点击注册表示您已同意' +
+                    ' <a  href="javascript:;" class="s-protocol btnProtocol">《【成品油】企业入驻协议》</a>' +
+                    ' <a style="display: none"  href="javascript:;" class="s-protocol chemic_org">《【壹化网】企业入驻协议》</a>' +
+                    '<a style="display: none" href="javascript:;" class="s-protocol chemic_user">《【壹化网】用户注册协议》</a>' +
+                    '</li>');
+        }
+        $(".regChemic").toggle(
+                function(){
+                   $(".chemic_org").show();
+                   $(".chemic_user").show();
+                },
+                function(){
+                    $(".chemic_org").hide();
+                    $(".chemic_user").hide();
+                }
+        );
+    });
+
+</script>

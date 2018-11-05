@@ -1,0 +1,56 @@
+<div class="c-mod" id="cgjbxx">
+    <h3><em class="cw-ico ico-h3"></em>Basic procurement infor<mation></mation><span class="cxtj-nr-an"></span></h3>
+    <div class="c-tabdiv">
+        <table id="tableId">
+            <tr><th></th><th class="tabl-line">Origin</th><th>Grade</th><th>API</th><th>Sulphur</th><th>Acid</th><th>Carbon Residue</th><th>Van</th><th>Ni</th><th>Quality yield/%</th><th>Quality yield/%</th><th>Van</th><th>Ni</th><th>Carbon Residue</th><th>Sulphur</th><th class="tabl-line1">Remark</th></tr>
+            #foreach($cor in $crudeOilResourceList)
+                <tr class="c-tabcos1"><td class="tabl-line"><input name="Fruit" type="radio" /></td>
+                    <td>
+                        #if($!{cor.area}==2)
+                            <input type="text" name="" value="中东" id="area">
+                        #end
+
+                    </td>
+                    <td><input type="text" name="" value="$!{cor.name}" id="name"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator1Min}" id="indicator1Min"><input type="hidden" name="" value="indicator1Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator2Min}" id="indicator2Min"><input type="hidden" name="" value="indicator2Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator3Min}" id="indicator3Min"><input type="hidden" name="" value="indicator3Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator4Min}" id="indicator4Min"><input type="hidden" name="" value="indicator4Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator5Min}" id="indicator5Min"><input type="hidden" name="" value="indicator5Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator6Min}" id="indicator6Min"><input type="hidden" name="" value="indicator6Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator7Min}" id="indicator7Min"><input type="hidden" name="" value="indicator7Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator8Min}" id="indicator8Min"><input type="hidden" name="" value="indicator8Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator9Min}" id="indicator9Min"><input type="hidden" name="" value="indicator9Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator10Min}" id="indicator10Min"><input type="hidden" name="" value="indicator10Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator11Min}" id="indicator11Min"><input type="hidden" name="" value="indicator11Max"></td>
+                    <td><input type="text" name="" value="$!{cor.indicator12Min}" id="indicator12Min"><input type="hidden" name="" value="indicator12Max"></td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("table input[type='radio']").click(function () {
+            if($("table input[type='radio']:checked")){
+                //$("#area").attr("name",);
+                $("#name").attr("name",name);
+                $("#indicator1Min").attr("name",indicator1Min);
+                $("#indicator2Min").attr("name",indicator2Min);
+                $("#indicator3Min").attr("name",indicator3Min);
+                $("#indicator4Min").attr("name",indicator4Min);
+                $("#indicator5Min").attr("name",indicator5Min);
+                $("#indicator6Min").attr("name",indicator6Min);
+                $("#indicator7Min").attr("name",indicator7Min);
+                $("#indicator8Min").attr("name",indicator8Min);
+                $("#indicator9Min").attr("name",indicator9Min);
+                $("#indicator10Min").attr("name",indicator10Min);
+                $("#indicator11Min").attr("name",indicator11Min);
+                $("#indicator12Min").attr("name",indicator12Min);
+            }
+
+        })
+    })
+
+
+</script>

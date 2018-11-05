@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--本文件内为系统生成文件，不允许人工修改， 如果被覆盖后果自负-->
+<mapper namespace="com.sinochem.crude.trade.info.dao.immt.ColSubscribeImmtMapper">
+	<resultMap type="com.sinochem.crude.trade.info.domain.ColSubscribe" id="ColSubscribe">
+		<result property="id" column="ID" />
+		<result property="subscribeUser" column="SUBSCRIBE_USER" />
+		<result property="subscribeUserName" column="SUBSCRIBE_USER_NAME" />
+		<result property="startEffectiveDate" column="START_EFFECTIVE_DATE" />
+		<result property="endEffectiveDate" column="END_EFFECTIVE_DATE" />
+		<result property="subscribeDate" column="SUBSCRIBE_DATE" />
+		<result property="subscribePrice" column="SUBSCRIBE_PRICE" />
+		<result property="columnId" column="COLUMN_ID" />
+		<result property="columnName" column="COLUMN_NAME" />
+		<result property="subscribeType" column="SUBSCRIBE_TYPE" />
+		<result property="columnCyc" column="COLUMN_CYC" />
+		<result property="settleType" column="SETTLE_TYPE" />
+		<result property="status" column="STATUS" />
+		<result property="payOrderNo" column="PAY_ORDER_NO" />
+		<result property="payPlatform" column="PAY_PLATFORM" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="ext1" column="EXT1" />
+		<result property="ext2" column="EXT2" />
+		<result property="ext3" column="EXT3" />
+		<result property="ext4" column="EXT4" />
+		<result property="ext5" column="EXT5" />
+		<result property="ext6" column="EXT6" />
+		<result property="ext7" column="EXT7" />
+		<result property="ext8" column="EXT8" />
+		<result property="ext9" column="EXT9" />
+		<result property="ext10" column="EXT10" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="ColSubscribe" parameterType="com.sinochem.crude.trade.info.domain.ColSubscribe">
+	select * from t_col_subscribe
+	where
+		 ALIVE_FLAG='1'
+								<if test="id!=null and id!=''">and  ID=#{id}</if>
+											<if test="subscribeUser!=null and subscribeUser!=''">and  SUBSCRIBE_USER=#{subscribeUser}</if>
+											<if test="subscribeUserName!=null and subscribeUserName!=''">and  SUBSCRIBE_USER_NAME=#{subscribeUserName}</if>
+											<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+											<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+											<if test="subscribeDate!=null">and  SUBSCRIBE_DATE=#{subscribeDate}</if>
+											<if test="subscribePrice!=null">and  SUBSCRIBE_PRICE=#{subscribePrice}</if>
+											<if test="columnId!=null and columnId!=''">and  COLUMN_ID=#{columnId}</if>
+											<if test="columnName!=null and columnName!=''">and  COLUMN_NAME=#{columnName}</if>
+											<if test="subscribeType!=null and subscribeType!=''">and  SUBSCRIBE_TYPE=#{subscribeType}</if>
+											<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+											<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+											<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+											<if test="payOrderNo!=null and payOrderNo!=''">and  PAY_ORDER_NO=#{payOrderNo}</if>
+											<if test="payPlatform!=null and payPlatform!=''">and  PAY_PLATFORM=#{payPlatform}</if>
+											<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+											<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+											<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+											<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+											<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+											<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+											<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+											<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+											<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+											<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+											<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+											<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+											<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+											<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+											<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+											<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+											<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+						</select>
+	
+	<select id="findByPrimaryKey" resultMap="ColSubscribe">
+			select
+			* from t_col_subscribe
+			where
+							 ID=#{id} 
+																																																																																																				and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.info.domain.ColSubscribe">
+		update t_col_subscribe
+		<set>
+         ID=#{id}
+		<if test="subscribeUser!=null">,SUBSCRIBE_USER = #{subscribeUser}</if>
+		<if test="subscribeUserName!=null">,SUBSCRIBE_USER_NAME = #{subscribeUserName}</if>
+		<if test="startEffectiveDate!=null">,START_EFFECTIVE_DATE = #{startEffectiveDate}</if>
+		<if test="endEffectiveDate!=null">,END_EFFECTIVE_DATE = #{endEffectiveDate}</if>
+		<if test="subscribeDate!=null">,SUBSCRIBE_DATE = #{subscribeDate}</if>
+		<if test="subscribePrice!=null">,SUBSCRIBE_PRICE = #{subscribePrice}</if>
+		<if test="columnId!=null">,COLUMN_ID = #{columnId}</if>
+		<if test="columnName!=null">,COLUMN_NAME = #{columnName}</if>
+		<if test="subscribeType!=null">,SUBSCRIBE_TYPE = #{subscribeType}</if>
+		<if test="columnCyc!=null">,COLUMN_CYC = #{columnCyc}</if>
+		<if test="settleType!=null">,SETTLE_TYPE = #{settleType}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="payOrderNo!=null">,PAY_ORDER_NO = #{payOrderNo}</if>
+		<if test="payPlatform!=null">,PAY_PLATFORM = #{payPlatform}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="ext2!=null">,EXT2 = #{ext2}</if>
+		<if test="ext3!=null">,EXT3 = #{ext3}</if>
+		<if test="ext4!=null">,EXT4 = #{ext4}</if>
+		<if test="ext5!=null">,EXT5 = #{ext5}</if>
+		<if test="ext6!=null">,EXT6 = #{ext6}</if>
+		<if test="ext7!=null">,EXT7 = #{ext7}</if>
+		<if test="ext8!=null">,EXT8 = #{ext8}</if>
+		<if test="ext9!=null">,EXT9 = #{ext9}</if>
+		<if test="ext10!=null">,EXT10 = #{ext10}</if>
+		</set>
+				where
+								         ID=#{id}
+																																																																																																																																				and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.ColSubscribe" >
+		insert  into t_col_subscribe (				ID
+						,SUBSCRIBE_USER
+						,SUBSCRIBE_USER_NAME
+						,START_EFFECTIVE_DATE
+						,END_EFFECTIVE_DATE
+						,SUBSCRIBE_DATE
+						,SUBSCRIBE_PRICE
+						,COLUMN_ID
+						,COLUMN_NAME
+						,SUBSCRIBE_TYPE
+						,COLUMN_CYC
+						,SETTLE_TYPE
+						,STATUS
+						,PAY_ORDER_NO
+						,PAY_PLATFORM
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,ALIVE_FLAG
+						,MARKET_ID
+						,LANG_VER
+						,EXT1
+						,EXT2
+						,EXT3
+						,EXT4
+						,EXT5
+						,EXT6
+						,EXT7
+						,EXT8
+						,EXT9
+						,EXT10
+						)
+		values(		#{id}		
+						,#{subscribeUser}		
+						,#{subscribeUserName}		
+						,#{startEffectiveDate}		
+						,#{endEffectiveDate}		
+						,#{subscribeDate}		
+						,#{subscribePrice}		
+						,#{columnId}		
+						,#{columnName}		
+						,#{subscribeType}		
+						,#{columnCyc}		
+						,#{settleType}		
+						,#{status}		
+						,#{payOrderNo}		
+						,#{payPlatform}		
+						,#{createUser}		
+						,#{createDate}		
+						,#{updateUser}		
+						,#{updateDate}		
+						,'1'		
+						,#{marketId}		
+						,#{langVer}		
+						,#{ext1}		
+						,#{ext2}		
+						,#{ext3}		
+						,#{ext4}		
+						,#{ext5}		
+						,#{ext6}		
+						,#{ext7}		
+						,#{ext8}		
+						,#{ext9}		
+						,#{ext10}		
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_col_subscribe
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 ID=#{id} 
+																																																																																																																																																																						
+	</update>
+
+
+    <!--
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+	select
+			  ID as "id" 
+			 ,   SUBSCRIBE_USER as "subscribeUser" 
+			 ,   SUBSCRIBE_USER_NAME as "subscribeUserName" 
+			 ,   START_EFFECTIVE_DATE as "startEffectiveDate" 
+			 ,   END_EFFECTIVE_DATE as "endEffectiveDate" 
+			 ,   SUBSCRIBE_DATE as "subscribeDate" 
+			 ,   SUBSCRIBE_PRICE as "subscribePrice" 
+			 ,   COLUMN_ID as "columnId" 
+			 ,   COLUMN_NAME as "columnName" 
+			 ,   SUBSCRIBE_TYPE as "subscribeType" 
+			 ,   COLUMN_CYC as "columnCyc" 
+			 ,   SETTLE_TYPE as "settleType" 
+			 ,   STATUS as "status" 
+			 ,   PAY_ORDER_NO as "payOrderNo" 
+			 ,   PAY_PLATFORM as "payPlatform" 
+			 ,   CREATE_USER as "createUser" 
+			 ,   CREATE_DATE as "createDate" 
+			 ,   UPDATE_USER as "updateUser" 
+			 ,   UPDATE_DATE as "updateDate" 
+			 ,   ALIVE_FLAG as "aliveFlag" 
+			 ,   MARKET_ID as "marketId" 
+			 ,   LANG_VER as "langVer" 
+			 ,   EXT1 as "ext1" 
+			 ,   EXT2 as "ext2" 
+			 ,   EXT3 as "ext3" 
+			 ,   EXT4 as "ext4" 
+			 ,   EXT5 as "ext5" 
+			 ,   EXT6 as "ext6" 
+			 ,   EXT7 as "ext7" 
+			 ,   EXT8 as "ext8" 
+			 ,   EXT9 as "ext9" 
+			 ,   EXT10 as "ext10" 
+			from t_col_subscribe
+	where
+		ALIVE_FLAG='1'
+								<if test="id!=null and id!=''">and  ID=#{id}</if>
+											<if test="subscribeUser!=null and subscribeUser!=''">and  SUBSCRIBE_USER=#{subscribeUser}</if>
+											<if test="subscribeUserName!=null and subscribeUserName!=''">and  SUBSCRIBE_USER_NAME=#{subscribeUserName}</if>
+											<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+											<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+											<if test="subscribeDate!=null">and  SUBSCRIBE_DATE=#{subscribeDate}</if>
+											<if test="subscribePrice!=null">and  SUBSCRIBE_PRICE=#{subscribePrice}</if>
+											<if test="columnId!=null and columnId!=''">and  COLUMN_ID=#{columnId}</if>
+											<if test="columnName!=null and columnName!=''">and  COLUMN_NAME=#{columnName}</if>
+											<if test="subscribeType!=null and subscribeType!=''">and  SUBSCRIBE_TYPE=#{subscribeType}</if>
+											<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+											<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+											<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+											<if test="payOrderNo!=null and payOrderNo!=''">and  PAY_ORDER_NO=#{payOrderNo}</if>
+											<if test="payPlatform!=null and payPlatform!=''">and  PAY_PLATFORM=#{payPlatform}</if>
+											<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+											<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+											<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+											<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+											<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+											<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+											<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+											<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+											<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+											<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+											<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+											<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+											<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+											<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+											<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+											<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+											<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+						</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_col_subscribe 
+		where
+		 ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="subscribeUser!=null and subscribeUser!=''">and  SUBSCRIBE_USER=#{subscribeUser}</if>
+															<if test="subscribeUserName!=null and subscribeUserName!=''">and  SUBSCRIBE_USER_NAME=#{subscribeUserName}</if>
+															<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+															<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+															<if test="subscribeDate!=null">and  SUBSCRIBE_DATE=#{subscribeDate}</if>
+															<if test="subscribePrice!=null">and  SUBSCRIBE_PRICE=#{subscribePrice}</if>
+															<if test="columnId!=null and columnId!=''">and  COLUMN_ID=#{columnId}</if>
+															<if test="columnName!=null and columnName!=''">and  COLUMN_NAME=#{columnName}</if>
+															<if test="subscribeType!=null and subscribeType!=''">and  SUBSCRIBE_TYPE=#{subscribeType}</if>
+															<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+															<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+															<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+															<if test="payOrderNo!=null and payOrderNo!=''">and  PAY_ORDER_NO=#{payOrderNo}</if>
+															<if test="payPlatform!=null and payPlatform!=''">and  PAY_PLATFORM=#{payPlatform}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+								</select>
+
+	<update id="deleteRecord" parameterType="com.sinochem.crude.trade.info.domain.ColSubscribe">
+	update t_col_subscribe
+		<set>
+		ALIVE_FLAG='0'
+ 		,UPDATE_USER = #{updateUser}
+		,UPDATE_DATE = SYSDATE()
+		</set> 
+	where
+			ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="subscribeUser!=null and subscribeUser!=''">and  SUBSCRIBE_USER=#{subscribeUser}</if>
+															<if test="subscribeUserName!=null and subscribeUserName!=''">and  SUBSCRIBE_USER_NAME=#{subscribeUserName}</if>
+															<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+															<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+															<if test="subscribeDate!=null">and  SUBSCRIBE_DATE=#{subscribeDate}</if>
+															<if test="subscribePrice!=null">and  SUBSCRIBE_PRICE=#{subscribePrice}</if>
+															<if test="columnId!=null and columnId!=''">and  COLUMN_ID=#{columnId}</if>
+															<if test="columnName!=null and columnName!=''">and  COLUMN_NAME=#{columnName}</if>
+															<if test="subscribeType!=null and subscribeType!=''">and  SUBSCRIBE_TYPE=#{subscribeType}</if>
+															<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+															<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+															<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+															<if test="payOrderNo!=null and payOrderNo!=''">and  PAY_ORDER_NO=#{payOrderNo}</if>
+															<if test="payPlatform!=null and payPlatform!=''">and  PAY_PLATFORM=#{payPlatform}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+								</update>
+
+	<delete id="deleteRecord" parameterType="com.sinochem.crude.trade.info.domain.ColSubscribe">
+	delete from t_col_subscribe
+	<where>						<if test="id!=null and id!=''">and  ID=#{id}</if>
+										<if test="subscribeUser!=null and subscribeUser!=''">and  SUBSCRIBE_USER=#{subscribeUser}</if>
+										<if test="subscribeUserName!=null and subscribeUserName!=''">and  SUBSCRIBE_USER_NAME=#{subscribeUserName}</if>
+										<if test="startEffectiveDate!=null">and  START_EFFECTIVE_DATE=#{startEffectiveDate}</if>
+										<if test="endEffectiveDate!=null">and  END_EFFECTIVE_DATE=#{endEffectiveDate}</if>
+										<if test="subscribeDate!=null">and  SUBSCRIBE_DATE=#{subscribeDate}</if>
+										<if test="subscribePrice!=null">and  SUBSCRIBE_PRICE=#{subscribePrice}</if>
+										<if test="columnId!=null and columnId!=''">and  COLUMN_ID=#{columnId}</if>
+										<if test="columnName!=null and columnName!=''">and  COLUMN_NAME=#{columnName}</if>
+										<if test="subscribeType!=null and subscribeType!=''">and  SUBSCRIBE_TYPE=#{subscribeType}</if>
+										<if test="columnCyc!=null and columnCyc!=''">and  COLUMN_CYC=#{columnCyc}</if>
+										<if test="settleType!=null and settleType!=''">and  SETTLE_TYPE=#{settleType}</if>
+										<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+										<if test="payOrderNo!=null and payOrderNo!=''">and  PAY_ORDER_NO=#{payOrderNo}</if>
+										<if test="payPlatform!=null and payPlatform!=''">and  PAY_PLATFORM=#{payPlatform}</if>
+										<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+										<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+										<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+										<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+										<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+										<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+										<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+										<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+										<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+										<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+										<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+										<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+										<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+										<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+										<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+										<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+										<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+					</where>
+	</delete>
+	
+	<delete id="deleteRecordByKey">
+	delete from t_col_subscribe
+	where
+								 ID=#{id} 
+																																																																																																				
+	</delete> 
+	
+-->
+</mapper>

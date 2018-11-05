@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderDetailViewMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderDetailView" id="OrderDetailView">
+		<result property="orderId" column="ORDER_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="tradeUuid" column="TRADE_UUID" />
+		<result property="contractId" column="CONTRACT_ID" />
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="buysell" column="BUYSELL" />
+		<result property="buyerCustomerId" column="BUYER_CUSTOMER_ID" />
+		<result property="buyerCustomerName" column="BUYER_CUSTOMER_NAME" />
+		<result property="buyerPersonId" column="BUYER_PERSON_ID" />
+		<result property="buyerPersonName" column="BUYER_PERSON_NAME" />
+		<result property="sellerCustomerId" column="SELLER_CUSTOMER_ID" />
+		<result property="sellerCustomerName" column="SELLER_CUSTOMER_NAME" />
+		<result property="sellerPersonId" column="SELLER_PERSON_ID" />
+		<result property="sellerPersonName" column="SELLER_PERSON_NAME" />
+		<result property="agentId" column="AGENT_ID" />
+		<result property="agentName" column="AGENT_NAME" />
+		<result property="agentType" column="AGENT_TYPE" />
+		<result property="billDate" column="BILL_DATE" />
+		<result property="tradeMode" column="TRADE_MODE" />
+		<result property="tradeTime" column="TRADE_TIME" />
+		<result property="remark" column="REMARK" />
+		<result property="status" column="STATUS" />
+		<result property="tradeType" column="TRADE_TYPE" />
+		<result property="tradeCategory" column="TRADE_CATEGORY" />
+		<result property="tradeCategoryDesc" column="TRADE_CATEGORY_DESC" />
+		<result property="closeDesc" column="CLOSE_DESC" />
+		<result property="closeStatus" column="CLOSE_STATUS" />
+		<result property="otherTerm" column="OTHER_TERM" />
+		<result property="creditTerm" column="CREDIT_TERM" />
+		<result property="survey" column="SURVEY" />
+		<result property="creditModel" column="CREDIT_MODEL" />
+		<result property="quatoFile" column="QUATO_FILE" />
+		<result property="receiveTime" column="RECEIVE_TIME" />
+		<result property="receiveAmount" column="RECEIVE_AMOUNT" />
+		<result property="receivePerson" column="RECEIVE_PERSON" />
+		<result property="payee" column="PAYEE" />
+		<result property="receiveBank" column="RECEIVE_BANK" />
+		<result property="receiveAcount" column="RECEIVE_ACOUNT" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		
+		<result property="orderTransportId" column="ORDER_TRANSPORT_ID" />
+		<result property="orderTransportUuid" column="ORDER_TRANSPORT_UUID" />
+		<result property="shipModel" column="SHIP_MODEL" />
+		<result property="loadingPort" column="LOADING_PORT" />
+		<result property="uploadingPort" column="UPLOADING_PORT" />
+		<result property="deliveryDateStart" column="DELIVERY_DATE_START" />
+		<result property="deliveryDateEnd" column="DELIVERY_DATE_END" />
+		<result property="dischargeDateStart" column="DISCHARGE_DATE_START" />
+		<result property="dischargeDateEnd" column="DISCHARGE_DATE_END" />
+		
+		
+		<result property="orderPriceId" column="ORDER_PRICE_ID" />
+		<result property="orderPriceUuid" column="ORDER_PRICE_UUID" />
+		<result property="orderGoodsId" column="ORDER_GOODS_ID" />
+		<result property="tradeTerm" column="TRADE_TERM" />
+		<result property="priceType" column="PRICE_TYPE" />
+		<result property="basePrice" column="BASE_PRICE" />
+		<result property="priceUnit" column="PRICE_UNIT" />
+		<result property="currency" column="CURRENCY" />
+		<result property="price" column="PRICE" />
+		<result property="pricingDesc" column="PRICING_DESC" />
+		<result property="priceFormula" column="PRICE_FORMULA" />
+		<result property="priceDesc" column="PRICE_DESC" />
+		<result property="paymentTerm" column="PAYMENT_TERM" />
+		<result property="agio" column="AGIO" />
+		<result property="payDate" column="PAY_DATE" />
+		
+		
+		<result property="orderGoodsId" column="ORDER_GOODS_ID" />
+		<result property="orderGoodsUuid" column="ORDER_GOODS_UUID" />
+		<result property="resourceId" column="RESOURCE_ID" />
+		<result property="zhName" column="ZH_NAME" />
+		<result property="enName" column="EN_NAME" />
+		<result property="region" column="REGION" />
+		<result property="countryOrigin" column="COUNTRY_ORIGIN" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="quantityUnit" column="QUANTITY_UNIT" />
+		<result property="spec" column="SPEC" />
+		<result property="api" column="API" />
+		<result property="moreLess" column="MORE_LESS" />
+			</resultMap> 
+	
+	<select id="findByPrimaryKey" resultMap="OrderDetailView">
+			select
+			* from v_order_detail
+			where
+		    ORDER_ID=#{orderId} 
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderDetailView">
+			select
+			* from v_order_detail
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderDetailView" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDetailView">
+		select * from v_order_detail
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="tradeUuid!=null and tradeUuid!=''">and  TRADE_UUID=#{tradeUuid}</if>
+		<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="buysell!=null and buysell!=''">and  BUYSELL=#{buysell}</if>
+		<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+		<if test="buyerCustomerName!=null and buyerCustomerName!=''">and  BUYER_CUSTOMER_NAME=#{buyerCustomerName}</if>
+		<if test="buyerPersonId!=null and buyerPersonId!=''">and  BUYER_PERSON_ID=#{buyerPersonId}</if>
+		<if test="buyerPersonName!=null and buyerPersonName!=''">and  BUYER_PERSON_NAME=#{buyerPersonName}</if>
+		<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+		<if test="sellerCustomerName!=null and sellerCustomerName!=''">and  SELLER_CUSTOMER_NAME=#{sellerCustomerName}</if>
+		<if test="sellerPersonId!=null and sellerPersonId!=''">and  SELLER_PERSON_ID=#{sellerPersonId}</if>
+		<if test="sellerPersonName!=null and sellerPersonName!=''">and  SELLER_PERSON_NAME=#{sellerPersonName}</if>
+		<if test="agentId!=null and agentId!=''">and  AGENT_ID=#{agentId}</if>
+		<if test="agentName!=null and agentName!=''">and  AGENT_NAME=#{agentName}</if>
+		<if test="agentType!=null and agentType!=''">and  AGENT_TYPE=#{agentType}</if>
+		<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+		<if test="tradeMode!=null and tradeMode!=''">and  TRADE_MODE=#{tradeMode}</if>
+		<if test="tradeTime!=null and tradeTime!=''">and  TRADE_TIME=#{tradeTime}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="tradeType!=null and tradeType!=''">and  TRADE_TYPE=#{tradeType}</if>
+		<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+		<if test="closeDesc!=null and closeDesc!=''">and  CLOSE_DESC=#{closeDesc}</if>
+		<if test="closeStatus!=null and closeStatus!=''">and  CLOSE_STATUS=#{closeStatus}</if>
+		<if test="otherTerm!=null and otherTerm!=''">and  OTHER_TERM=#{otherTerm}</if>
+		<if test="creditTerm!=null and creditTerm!=''">and  CREDIT_TERM=#{creditTerm}</if>
+		<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+		<if test="creditModel!=null and creditModel!=''">and  CREDIT_MODEL=#{creditModel}</if>
+		<if test="quatoFile!=null and quatoFile!=''">and  QUATO_FILE=#{quatoFile}</if>
+		<if test="receiveTime!=null and receiveTime!=''">and  RECEIVE_TIME=#{receiveTime}</if>
+		<if test="receiveAmount!=null and receiveAmount!=''">and  RECEIVE_AMOUNT=#{receiveAmount}</if>
+		<if test="receivePerson!=null and receivePerson!=''">and  RECEIVE_PERSON=#{receivePerson}</if>
+		<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+		<if test="receiveBank!=null and receiveBank!=''">and  RECEIVE_BANK=#{receiveBank}</if>
+		<if test="receiveAcount!=null and receiveAcount!=''">and  RECEIVE_ACOUNT=#{receiveAcount}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ORDER_ID as "orderId" 
+						 ,   UUID as "uuid" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   TRADE_UUID as "tradeUuid" 
+						 ,   CONTRACT_ID as "contractId" 
+						 ,   CONTRACT_NO as "contractNo" 
+						 ,   BUYSELL as "buysell" 
+						 ,   BUYER_CUSTOMER_ID as "buyerCustomerId" 
+						 ,   BUYER_CUSTOMER_NAME as "buyerCustomerName" 
+						 ,   BUYER_PERSON_ID as "buyerPersonId" 
+						 ,   BUYER_PERSON_NAME as "buyerPersonName" 
+						 ,   SELLER_CUSTOMER_ID as "sellerCustomerId" 
+						 ,   SELLER_CUSTOMER_NAME as "sellerCustomerName" 
+						 ,   SELLER_PERSON_ID as "sellerPersonId" 
+						 ,   SELLER_PERSON_NAME as "sellerPersonName" 
+						 ,   AGENT_ID as "agentId" 
+						 ,   AGENT_NAME as "agentName" 
+						 ,   AGENT_TYPE as "agentType" 
+						 ,   BILL_DATE as "billDate" 
+						 ,   TRADE_MODE as "tradeMode" 
+						 ,   TRADE_TIME as "tradeTime" 
+						 ,   REMARK as "remark" 
+						 ,   STATUS as "status" 
+						 ,   TRADE_TYPE as "tradeType" 
+						 ,   TRADE_CATEGORY as "tradeCategory" 
+						 ,   TRADE_CATEGORY_DESC as "tradeCategoryDesc" 
+						 ,   CLOSE_DESC as "closeDesc" 
+						 ,   CLOSE_STATUS as "closeStatus" 
+						 ,   OTHER_TERM as "otherTerm" 
+						 ,   CREDIT_TERM as "creditTerm" 
+						 ,   SURVEY as "survey" 
+						 ,   CREDIT_MODEL as "creditModel" 
+						 ,   QUATO_FILE as "quatoFile" 
+						 ,   RECEIVE_TIME as "receiveTime" 
+						 ,   RECEIVE_AMOUNT as "receiveAmount" 
+						 ,   RECEIVE_PERSON as "receivePerson" 
+						 ,   PAYEE as "payee" 
+						 ,   RECEIVE_BANK as "receiveBank" 
+						 ,   RECEIVE_ACOUNT as "receiveAcount" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,	 ORDER_TRANSPORT_ID as "orderTransportId" 
+						 ,   ORDER_TRANSPORT_UUID as "orderTransportUuid" 
+						 ,   SHIP_MODEL as "shipModel" 
+						 ,   LOADING_PORT as "loadingPort" 
+						 ,   UPLOADING_PORT as "uploadingPort" 
+						 ,   DELIVERY_DATE_START as "deliveryDateStart" 
+						 ,   DELIVERY_DATE_END as "deliveryDateEnd" 
+						 ,   DISCHARGE_DATE_START as "dischargeDateStart" 
+						 ,   DISCHARGE_DATE_END as "dischargeDateEnd" 
+						 ,   ORDER_PRICE_ID as "orderPriceId" 
+						 ,   ORDER_PRICE_UUID as "orderPriceUuid" 
+						 ,   TRADE_TERM as "tradeTerm" 
+						 ,   PRICE_TYPE as "priceType" 
+						 ,   BASE_PRICE as "basePrice" 
+						 ,   PRICE_UNIT as "priceUnit" 
+						 ,   CURRENCY as "currency" 
+						 ,   PRICE as "price" 
+						 ,   PRICING_DESC as "pricingDesc" 
+						 ,   PRICE_FORMULA as "priceFormula" 
+						 ,   PRICE_DESC as "priceDesc" 
+						 ,   PAYMENT_TERM as "paymentTerm" 
+						 ,   AGIO as "agio" 
+						 ,   PAY_DATE as "payDate" 
+						 ,   ORDER_GOODS_ID as "orderGoodsId" 
+						 ,   ORDER_GOODS_UUID as "orderGoodsUuid" 
+						 ,   RESOURCE_ID as "resourceId" 
+						 ,   ZH_NAME as "zhName" 
+						 ,   EN_NAME as "enName" 
+						 ,   REGION as "region" 
+						 ,   COUNTRY_ORIGIN as "countryOrigin" 
+						 ,   QUANTITY as "quantity" 
+						 ,   QUANTITY_UNIT as "quantityUnit" 
+						 ,   SPEC as "spec" 
+						 ,   API as "api" 
+						 ,   MORE_LESS as "moreLess" 
+						 ,	 TRADE_MODE_DESC as "tradeModeDesc"
+						 ,	 TRADE_TYPE_DESC as "tradeTypeDesc"
+						 ,	 CREDIT_MODEL_DESC as "creditModelDesc"
+						from v_order_detail
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="tradeUuid!=null and tradeUuid!=''">and  TRADE_UUID=#{tradeUuid}</if>
+			<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="buysell!=null and buysell!=''">and  BUYSELL=#{buysell}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="buyerCustomerName!=null and buyerCustomerName!=''">and  BUYER_CUSTOMER_NAME=#{buyerCustomerName}</if>
+			<if test="buyerPersonId!=null and buyerPersonId!=''">and  BUYER_PERSON_ID=#{buyerPersonId}</if>
+			<if test="buyerPersonName!=null and buyerPersonName!=''">and  BUYER_PERSON_NAME=#{buyerPersonName}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="sellerCustomerName!=null and sellerCustomerName!=''">and  SELLER_CUSTOMER_NAME=#{sellerCustomerName}</if>
+			<if test="sellerPersonId!=null and sellerPersonId!=''">and  SELLER_PERSON_ID=#{sellerPersonId}</if>
+			<if test="sellerPersonName!=null and sellerPersonName!=''">and  SELLER_PERSON_NAME=#{sellerPersonName}</if>
+			<if test="agentId!=null and agentId!=''">and  AGENT_ID=#{agentId}</if>
+			<if test="agentName!=null and agentName!=''">and  AGENT_NAME=#{agentName}</if>
+			<if test="agentType!=null and agentType!=''">and  AGENT_TYPE=#{agentType}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="tradeMode!=null and tradeMode!=''">and  TRADE_MODE=#{tradeMode}</if>
+			<if test="tradeTime!=null and tradeTime!=''">and  TRADE_TIME=#{tradeTime}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="tradeType!=null and tradeType!=''">and  TRADE_TYPE=#{tradeType}</if>
+			<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+			<if test="closeDesc!=null and closeDesc!=''">and  CLOSE_DESC=#{closeDesc}</if>
+			<if test="closeStatus!=null and closeStatus!=''">and  CLOSE_STATUS=#{closeStatus}</if>
+			<if test="otherTerm!=null and otherTerm!=''">and  OTHER_TERM=#{otherTerm}</if>
+			<if test="creditTerm!=null and creditTerm!=''">and  CREDIT_TERM=#{creditTerm}</if>
+			<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+			<if test="creditModel!=null and creditModel!=''">and  CREDIT_MODEL=#{creditModel}</if>
+			<if test="quatoFile!=null and quatoFile!=''">and  QUATO_FILE=#{quatoFile}</if>
+			<if test="receiveTime!=null and receiveTime!=''">and  RECEIVE_TIME=#{receiveTime}</if>
+			<if test="receiveAmount!=null and receiveAmount!=''">and  RECEIVE_AMOUNT=#{receiveAmount}</if>
+			<if test="receivePerson!=null and receivePerson!=''">and  RECEIVE_PERSON=#{receivePerson}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="receiveBank!=null and receiveBank!=''">and  RECEIVE_BANK=#{receiveBank}</if>
+			<if test="receiveAcount!=null and receiveAcount!=''">and  RECEIVE_ACOUNT=#{receiveAcount}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="tradeUuid!=null and tradeUuid!=''">and  TRADE_UUID=#{tradeUuid}</if>
+			<if test="contractId!=null and contractId!=''">and  CONTRACT_ID=#{contractId}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="buysell!=null and buysell!=''">and  BUYSELL=#{buysell}</if>
+			<if test="buyerCustomerId!=null and buyerCustomerId!=''">and  BUYER_CUSTOMER_ID=#{buyerCustomerId}</if>
+			<if test="buyerCustomerName!=null and buyerCustomerName!=''">and  BUYER_CUSTOMER_NAME=#{buyerCustomerName}</if>
+			<if test="buyerPersonId!=null and buyerPersonId!=''">and  BUYER_PERSON_ID=#{buyerPersonId}</if>
+			<if test="buyerPersonName!=null and buyerPersonName!=''">and  BUYER_PERSON_NAME=#{buyerPersonName}</if>
+			<if test="sellerCustomerId!=null and sellerCustomerId!=''">and  SELLER_CUSTOMER_ID=#{sellerCustomerId}</if>
+			<if test="sellerCustomerName!=null and sellerCustomerName!=''">and  SELLER_CUSTOMER_NAME=#{sellerCustomerName}</if>
+			<if test="sellerPersonId!=null and sellerPersonId!=''">and  SELLER_PERSON_ID=#{sellerPersonId}</if>
+			<if test="sellerPersonName!=null and sellerPersonName!=''">and  SELLER_PERSON_NAME=#{sellerPersonName}</if>
+			<if test="agentId!=null and agentId!=''">and  AGENT_ID=#{agentId}</if>
+			<if test="agentName!=null and agentName!=''">and  AGENT_NAME=#{agentName}</if>
+			<if test="agentType!=null and agentType!=''">and  AGENT_TYPE=#{agentType}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="tradeMode!=null and tradeMode!=''">and  TRADE_MODE=#{tradeMode}</if>
+			<if test="tradeTime!=null and tradeTime!=''">and  TRADE_TIME=#{tradeTime}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="tradeType!=null and tradeType!=''">and  TRADE_TYPE=#{tradeType}</if>
+			<if test="tradeCategory!=null and tradeCategory!=''">and  TRADE_CATEGORY=#{tradeCategory}</if>
+			<if test="closeDesc!=null and closeDesc!=''">and  CLOSE_DESC=#{closeDesc}</if>
+			<if test="closeStatus!=null and closeStatus!=''">and  CLOSE_STATUS=#{closeStatus}</if>
+			<if test="otherTerm!=null and otherTerm!=''">and  OTHER_TERM=#{otherTerm}</if>
+			<if test="creditTerm!=null and creditTerm!=''">and  CREDIT_TERM=#{creditTerm}</if>
+			<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+			<if test="creditModel!=null and creditModel!=''">and  CREDIT_MODEL=#{creditModel}</if>
+			<if test="quatoFile!=null and quatoFile!=''">and  QUATO_FILE=#{quatoFile}</if>
+			<if test="receiveTime!=null and receiveTime!=''">and  RECEIVE_TIME=#{receiveTime}</if>
+			<if test="receiveAmount!=null and receiveAmount!=''">and  RECEIVE_AMOUNT=#{receiveAmount}</if>
+			<if test="receivePerson!=null and receivePerson!=''">and  RECEIVE_PERSON=#{receivePerson}</if>
+			<if test="payee!=null and payee!=''">and  PAYEE=#{payee}</if>
+			<if test="receiveBank!=null and receiveBank!=''">and  RECEIVE_BANK=#{receiveBank}</if>
+			<if test="receiveAcount!=null and receiveAcount!=''">and  RECEIVE_ACOUNT=#{receiveAcount}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

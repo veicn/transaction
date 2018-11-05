@@ -1,0 +1,247 @@
+<!-- 内容主体区域 -->
+ <div class="s-mod">
+	<div class="s-order-box">
+		<div class="clearfix s-order-tit"><h1>Upload doc</h1></div>
+		<p class="s-order-jbx"></p>
+	</div>
+	<div class="s-mod-block">
+		<div class="s-mod-btit">Attachments
+			<span class="s-icon-plsc">
+				<a href="javascript:void(0);" class="customUploadFile">
+					<i class="s-icon s-tab-sq"></i>Others
+				</a>
+				<a href="javascript:void(0);" class="batchUploadFile">
+					<i class="s-icon s-tab-batch"></i>Batch Upload
+				</a>
+			</span>
+		</div>
+		
+		<input id="uuid" type="hidden" value="$!query.uuid">
+		<input id="tradeCategory" type="hidden" value="$!query.tradeCategory">
+		
+		<input id="orderNo" name="orderNo" value="$!mainData.orderNo" type="hidden" /></li>
+		<input id="contractNo" name="contractNo" value="$!mainData.contractNo" type="hidden"/></li>
+		<input id="shipName" name="shipName" value="$!mainData.shipName" type="hidden"/></li>
+		
+		<input id="orderDocumentId" type="hidden" value="$!query.orderDocumentId">
+		
+		<input id="documentType" type="hidden" value="$!query.documentType">
+		<input id="formPage" type="hidden" value="$!query.formPage">
+		<input id="showDetail" type="hidden" value="$!query.showDetail">
+		
+		<div class="s-mod-bcont s-mod-bcont6 ">
+			<ul class="s-docu-up clearfix is-flag"  style="display: inline-block;">
+			#foreach($subData in $subDatas)
+				<input class="fileCode" id="fileCode" name="fileCode" value="$!subData.fileCode" type="hidden" />
+				<input class="fileName" id="fileName" name="fileName" value="$!subData.fileName" type="hidden" />
+				<input class="documentFileId" id="documentFileId" type="hidden" name="documentFileId" value="$!subData.documentFileId" >
+				<li #if($!subData.filePath) class="curr"  #end>
+					<h3 class="fileNameClass">$!subData.fileName</h3>
+					<span>
+						#if($!subData.filePath) 
+						<i title="Delete" class="s-icon fs-close delDoucument" documentFileId="$!subData.documentFileId" style="display: inline-block;">
+						</i> 
+						#end
+						
+						<i title="Upload" class="s-icon s-icon-up fileUploadDoc" id="file_$subData.fileCode" 
+						   data="{fileName:'$!subData.fileName',fileCode:'$!subData.fileCode'}"
+							#if(!$!subData.filePath) style="display: inline-block;"#else  #end></i>
+						
+						#if($!subData.filePath) 
+						<i title="Download" class="s-icon s-icon-down fileDownloadDoc" style="display: inline-block;"
+							hrefUrl="$!{subData.downloadUrl}"></i> 
+						#end
+						
+						#if($!subData.filePath) 
+						<i title="Preview" class="s-icon s-icon-view lookFileDoc" id="look_$subData.fileCode" style="display: inline-block;" 
+							fileUrl="$!{subData.lookUrl}"
+							fileFormat="$!{subData.fileFormat}"></i> 
+						#end
+					</span>
+				</li>
+			#end
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="../../orderexecute/js/orderDocument/documentEditNew.js"></script>
+<script>
+ layui.use("ossUpload", function(){  
+	
+	var $ = layui.jquery,upload = layui.ossUpload;
+	
+	upload.render({
+	    elem: ".fileUploadDoc",//绑定元素 id或class
+	    //accept: 'file',
+	    exts: 'png,gif,jpg,jpeg,bmp,pdf,xls,xlsx,doc,docx', //允许上传的文件后缀
+	    before: function(obj){ 
+	    	layer.load(); //上传loading
+	    	this.data = {
+				uuid: $("#uuid").val(),
+				fileCode: fileCode
+	    	};
+	    },
+	    done: function(res, index,upload){
+	    	if(res.status === 0){
+	    		var params ={}
+	    		params.uuid = $("#uuid").val();
+		    	params.orderDocumentId = $("#orderDocumentId").val();
+		    	params.documentType = $("#documentType").val();
+		    	params.tradeCategory = $("#tradeCategory").val();
+		    	
+		    	params.orderNo = $("#orderNo").val();
+		    	params.contractNo = $("#contractNo").val();
+		    	params.shipName = $("#shipName").val().trim();
+	    		var fileInfoList = [];
+	    		var info ={};
+	    		$(index).parents('.is-flag').find('.fileUploadDoc').text("");
+	    		info.originalName = res.datas.originalName;
+	    		info.filePath = res.datas.path;
+		    	info.fileFormat = res.datas.originalName.split(".")[1];
+		    	var data = $(index).attr("data");
+				data = eval("("+data+")");
+	    		info.fileName = data.fileName;
+	    		info.fileCode = data.fileCode;
+	    		
+	    		fileInfoList.push(info);
+	    		params.fileInfoList = fileInfoList;
+	    		
+		    	//console.log(params);
+		    	//Save单证
+    			$.ajax({
+    	    		type: "POST",
+    	    		url: orderServer+"/buyerCenter/orderDocument/saveDocument.json",
+    	    		data: JSON.stringify(params),
+    	    		async: false,
+    				contentType:"application/json",
+    				beforeSend: function (request) {
+    					index = layer.load();	
+    				},
+    	    		success: function(data) {
+    					layer.close(index);
+    					if(data.status == 0){
+    						layer.alert('successful uploaded!',{title:'Prompt',btn:'ok'}, function(index){
+    							location.reload();
+    						});
+    					}else{
+    						layer.alert("error:" + $.i18n(data.code,data.params),{title:'Prompt',btn:'ok'});
+    					}
+    				},
+    				error: function(data) {
+    					layer.close(index);
+    					layer.alert("request error",{title:'Prompt',btn:'ok'});
+    		        }
+    	    	});   
+
+	    	} else {
+	    		layer.tips($.i18n(res.code,res.params), index, {tips: 1});
+	    	}
+	    }
+	})
+	
+	//删除附件
+	$(".delDoucument").on("click",function(){
+		
+		var documentFileId = $(this).attr('documentFileId');
+		layer.confirm('Please confirm to delete the attachment.', {title:'Prompt',btn:["ok","cancel"]}, function(index){
+			 $.ajax({
+	      		url:orderServer+"/buyerCenter/orderDocumentFile/deleteFile.json",
+	      		data:{documentFileId:documentFileId},
+	      		type:"post",
+	      		success:function(result){
+	      			if(result.status != 0){
+	      				if(result.message == null){
+	      					layer.alert("System error",{title:'Prompt',btn:'ok'});
+	      				}else{
+	      					layer.alert($.i18n(result.code,result.params),{title:'Prompt',btn:'ok'});
+	      				}
+	      			}else{
+	      				layer.alert("Successfully deleted!",{title:'Prompt',btn:'ok'}, function(index){
+	      					layer.closeAll();
+	      					location.reload();
+	      				});
+	      			}
+	      		},
+	      		error:function(){
+	      			layer.alert("Request exception",{title:'Prompt',btn:'ok'});
+	      		}
+	      	}) 
+		})
+	})
+	//下载文件
+	$(".fileDownloadDoc").on("click",function(){
+		var url = $(this).attr('hrefUrl');
+		window.open(url);
+	})
+	//浏览文件（支持PDF和图片格式）
+	$(".lookFileDoc").on("click",function(){
+		var url = $(this).attr('fileUrl');
+		var fileFormat = $(this).attr('fileFormat');
+		//http://www.sinochem.com/order-execute/common/doc/browserFile.htm?path=orderexecute/DhkhRnwKkw.pdf&fileName=API手册 - 调用.pdf
+		if(fileFormat == 'pdf'){				
+			//pdf文件浏览
+			window.open(orderServer + "/pdfjs/web/viewer.html?file=" + encodeURIComponent(url),'_blank');
+		}else if(fileFormat == 'doc' || fileFormat == 'docx'){
+			//word浏览
+			layer.alert("The format is not readable.",{title:'Prompt',btn:'ok'});
+		}else if(fileFormat == 'xls' || fileFormat == 'xlsx'){
+			//execl浏览
+			layer.alert("The format is not readable.",{title:'Prompt',btn:'ok'});
+		}else if(fileFormat == 'png' || fileFormat == 'gif' || fileFormat == 'jpg' || fileFormat == 'jpeg'|| fileFormat == 'bmp' ){
+			//图片弹框 png,gif,jpg,jpeg,bmp
+			layer.open({
+				area: ['850px', '650px'],
+				title: $(this).parents('.is-flag').find('.subCode').text(),
+				btn: ['back '],
+				content:"<html><body><img src='"+ url +"' style='width:800px;height:600px'></img><body><html>"
+			});
+		}else{
+			layer.alert("Preview failed due by unproper template",{title:'Prompt',btn:'ok'});
+		}
+	});
+	//批量Upload
+	$(".batchUploadFile").on("click",function(){
+		//alert("000");
+		var uuid = $("#uuid").val();
+    	var tradeCategory = $("#tradeCategory").val();
+		$.ajax({
+			url:orderServer+'/bomp/docUpload/batchUpload.htm',
+			data:{uuid:uuid,tradeCategory:tradeCategory},
+			success:function(data1){
+					//自带弹框 
+					layer.open({
+					      area: ['850px', '380px'],
+					      title:"Batch Upload",
+					      btn: [],
+						  content: data1,
+					});
+					
+			},
+			error:function(data1){
+				alert('request failed ');
+			}
+		})  
+	});
+	//自定义Upload
+	$(".customUploadFile").on("click",function(){
+		   $.ajax({
+			url:orderServer+'/bomp/docUpload/customUpload.htm',
+			success:function(data1){
+					//自带弹框 
+					layer.open({
+					      area: ['530px', '250px'],
+					      title:"Self-defining upload",
+					      btn: [],
+						  content: data1,
+					});
+					
+			},
+			error:function(data1){
+				alert('request failed');
+			}
+		})   
+	});
+	
+}) 
+	
+</script>

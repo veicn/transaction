@@ -1,0 +1,116 @@
+
+  	  <div class="s-mod">
+		<!-- <div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1></h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-status">
+				<ul class="clearfix">
+					<li class="curr">Chartering<span><em>1</em></span></li>
+					<li class="on">Select Order<span><em>2</em></span></li>
+					<li>Chartering Demand<span><em>3</em></span></li>
+					<li>Recommend Vessel<span><em>4</em></span></li>
+					<li>Inquiry/Assigned Charter<span><em>5</em></span></li>
+					<li>Counter/Offer<span><em>6</em></span></li>
+					<li>On Sub<span><em>7</em></span></li>
+				</ul>
+			</div>
+		</div> -->
+		<div class="s-mod-block">
+			<div class="s-order-sear">
+				<form class="s-form s-form-cont s-form-cont2" action="moreShipPlate.htm">
+				<ul>
+					<li class="s-form-item">
+						<div class="s-inline s-inline7">
+						  <label class="s-form-label">Vessel Name</label>
+						  <div class="s-input-inline">
+							  <input id="searchName" type="text" name="name" class="s-input" value="$!searchName">
+							  <input id="palletUuid" type="hidden" name="palletUuid">
+						  </div>
+						</div>
+						<div class="s-inline s-inline0"><a><i class="s-icon s-sear-ico searchBtn"></i></a></div>
+					</li>
+				</ul>
+				</form>
+				</div>
+		
+			<div class="s-mod-btit">More</div>
+			#foreach($data in $datas)
+			<div class="s-mod-block s-mod-block4">
+			<div class="s-mod-btit queryBtn" attr-data="$!data.uuid"><a href="javascript:void(0);" title="More Details">$!data.epMemberName
+				<span>
+						#if($!{data.haveIntention} == '1') 已询盘 #end
+				</span>
+				</a>
+			</div>
+			<div class="s-mod-bcont">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Vessel Name：</label>
+					  <div class="s-input-inline" title="$!data.name">
+						  <p>$!data.name</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >Vessel Type：</label>
+					  <div class="s-input-inline" title="$!data.type">
+						  <p>$!data.type</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >Vessel Age：</label>
+					  <div class="s-input-inline" title="$!data.shipAge">
+					  	  <p>$!data.shipAge</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >Position：</label>
+					  <div class="s-input-inline" title="$!data.position">
+					  	 <p>$!data.position</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >ETA Cabinda：</label>
+					  <div class="s-input-inline" title="$!data.etaCabinda">
+						  <p>$!data.etaCabinda</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >ETA Fujairah：</label>
+					  <div class="s-input-inline" title="$!data.eta">
+						  <p>$!data.eta</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >Ship Owner：</label>
+					  <div class="s-input-inline s-input-inline2" title="$!data.shipOwner">
+						<p>$!data.shipOwner</p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label" >Broker：</label>
+					  <div class="s-input-inline s-input-inline2" title="$!data.brokerName">
+						<p>$!data.brokerName</p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			<div class="s-but-all clearfix">
+				<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+				<div class="s-but-ship clearfix"><a href="javascript:void(0);" attr-data="$!data.uuid" class="s-btn queryBtn">More Details</a>
+				#if($!{data.haveIntention} == '1') 	<a href="javascript:void(0);" class="s-btn details" attr-data="$!data.intention.uuid" attr-status="$!data.intention.status" >Inquiry</a>
+				#else <a href="javascript:void(0);" class="s-btn askBtn" attr-data="$!data.uuid" >Inquiry</a>
+				#end
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		#end
+		</div>
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipPlate/moreShipPlate.htm')")
+		</div>
+	<script src="../transport/js/shipPlate/moreShipPlate.js"></script>
+	

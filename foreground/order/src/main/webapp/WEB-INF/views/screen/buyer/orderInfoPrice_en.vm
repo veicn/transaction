@@ -1,0 +1,12 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Price info</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn cfn-qttk">Price Formula：</span><span class="c-int qx-conte cfn-qtnr">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Pricing Basis：</span><span class="c-int qx-conte">$!{valuationBaseName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Payment Date：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Premium/Discount：</span><span class="c-int qx-conte">$!{contract.agioStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Remark：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

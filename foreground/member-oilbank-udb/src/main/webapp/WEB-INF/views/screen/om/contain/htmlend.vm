@@ -1,0 +1,15 @@
+</div>
+$contain.get("/contain/htmlend.htm").setHost("$omServer.get('')")
+
+
+</div>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+
+$contain.get("/common/htmlend.htm")

@@ -1,0 +1,10 @@
+<h1><i class="cw-ico ico-h3"></i>订单管理</h1>
+<ul class="c-state">
+    <li class="c-cur"><a href="">全部<span>$!{orderStatusCountResult.total}</span></a></li>
+    <li><a href="javascript:void(0))">待支付<span>$!{orderStatusCountResult.unpaid}</span></a></li>
+    <li><a href="javascript:void(0)">待发货<span class="c-gray">$!{orderStatusCountResult.unshipments}</span></a></li>
+    <li><a href="javascript:void(0)">待收货<span>$!{orderStatusCountResult.unreceiving}</span></a></li>
+    <li><a href="javascript:void(0)">待结算<span>$!{orderStatusCountResult.unclosing}</span></a></li>
+    <li><a href="javascript:void(0)">交易成功<span>$!{orderStatusCountResult.successCount}</span></a></li>
+    <li><a href="javascript:void(0)">交易关闭<span>$!{orderStatusCountResult.closeCount}</span></a></li>
+</ul>

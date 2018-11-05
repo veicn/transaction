@@ -1,0 +1,24 @@
+#set($orderByColumnList = $!datas.orderByColumnList)
+
+<div class="w1180 mall-c-w">
+    <div class="sortBox clearfix">
+        <div class="sort fl">Sort by</div>
+        <ul class="fl left-bq">
+            #foreach($orderByColumn in $orderByColumnList)
+                <li>
+                    <a href="javascript:void(0)" onclick="sendQueryOrderData('$!{orderByColumn.code}', this)">${orderByColumn.enName}</a>
+                    #if($!{orderByColumn.code} == $!{saleSheetQueryVO.orderByColumn})
+                        #if($!{saleSheetQueryVO.orderType} == 'ASC')
+                            <i class="triangle-up"></i>
+                        #else
+                            <i class="triangle-down"></i>
+                        #end
+                    #else
+                        <i class="triangle-down"></i>
+                    #end
+                </li>
+            #end
+        </ul>
+        #*<a class="fr br right-fbxq" href="$appServer.get('pages/front/publish_product/index.htm')">Post New Resource</a>*#
+    </div>
+</div>

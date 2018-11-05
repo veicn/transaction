@@ -1,0 +1,779 @@
+#set($demandSheetVO = $!{demandSheetCombineVO.demandSheetVO})
+#set($productInfoVO = $!{demandSheetCombineVO.productInfoVO})
+#set($pricingInfoVO = $!{demandSheetCombineVO.pricingInfoVO})
+#set($transportInfoVO = $!{demandSheetCombineVO.transportInfoVO})
+#set($buyerInfoVO = $!{demandSheetCombineVO.buyerInfoVO})
+#set($otherInfoVO = $!{demandSheetCombineVO.otherInfoVO})
+<script>
+    var productInfoVOa = '$!{demandSheetCombineVO.productInfoVO.tradeTermVO.code}';
+    var shipPortCode = '$!{demandSheetCombineVO.transportInfoVO.loadingPortVO.code}';
+    var shipPortCode2 = '';
+    var shipPortCode3 = '';
+    var demurrageRateCode = '$!{demandSheetCombineVO.transportInfoVO.demurrageRateVO.code}';
+    var isSingapore = $!{isSingapore}
+</script>
+#css($appServer.get('/css/common/pikaday.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/work/sales-resources.css?css_version=03280827'))
+
+<main id="main">
+    <div class="w1180 shipping-b clearfix">
+        <!--左侧 star-->
+        <div class="fl shipping-b-l" style="height: 300px;">
+        </div>
+        <div class="fl shipping-b-l" style="position: fixed">
+            <ul class="left-menu-box">
+                <li class="left-item active">Demand Details</li>
+            #*<li class="left-item">Pricing</li>*#
+                <li class="left-item">Transportation</li>
+                <li class="left-item">Buyer</li>
+
+            </ul>
+        </div>
+        <!--左侧 end-->
+        <!--右侧 start-->
+        <div class="fl sales-resources-right">
+            <div class="form-box">
+                <form class="basic-info" id="publishProductForm" method="post" action="$appServer.get('/pages/front/publish_product/post_sale_sheet.htm')">
+
+                    <h3 class="form-title">Demand Details</h3>
+                    <div class="check-b per-field saleType-wrap">
+                        <label class="field-title" for="saleType"><span class="must">* </span>Range:</label>
+                        <label class="radio"><input type="radio" #if($!{demandSheetVO.demandTypeVO.code} == '1' || !$!{demandSheetVO.demandTypeVO.code}) checked="checked" #end onclick="inquiry(this.value)" name="demandType"  value="1"/><i></i>Public</label>
+                        <label class="radio Inquiry saleTypeInquiry"><input #if($!{demandSheetVO.demandTypeVO.code} == '2') checked="checked" #end  onclick="inquiry(this.value)" type="radio" name="demandType" value="2"/><i></i>Directional</label>
+                        <input type="button" class="sales-resources-btn add-quoter inquiry-private" style="display: none" value="Add Seller" />
+                        <input type="hidden" name="demandSheetVO.demandTypeVO.code" id="demandTypeCode" #if(!$!{demandSheetVO.demandTypeVO.code}) value="1"  #end value="$!{demandSheetVO.demandTypeVO.code}"/>
+                    </div>
+                    <div class="form-table">
+                        <table class="inquiry-private inquiry-private-table">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Company</th>
+                                <th class="number">Action</th>
+                                <th style="display: none"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                #if($!{demandSheetVO.specifiedEnterpriseVOList})
+                                    #foreach($!specifiedEnterpriseVO in $!{demandSheetVO.specifiedEnterpriseVOList})
+                                    <tr>
+                                        <td>$velocityCount</td>
+                                        <td>$!{specifiedEnterpriseVO.englishName}</td>
+                                        <td class="delete" style="background: url('$appServer.get("/images/delete-icon.png")') no-repeat center center"></td>
+                                        <td style="display:none">$!{specifiedEnterpriseVO.memberId}</td>
+                                    </tr>
+                                    #end
+                                #end
+                            </tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" name="demandSheetVO.specifiedEnterpriseIdList" id="specifiedEnterpriseIdList" />
+                    <div class="form-box-content clearfix">
+                        <ul class="form-left fl">
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title" for=""><span class="must">* </span> Category:</label>
+                                    <div class="cpy-select clearfix">
+                                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{productInfoVO.productCategoryVO.enName}</div>
+                                                    <input class='transaction-quantity-input vcode'  data-rules="required"
+                                                           id="categoryCode"  name="productInfoVO.productCategoryVO.code" type="text" readonly="readonly" value="$!{productInfoVO.productCategoryVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul class="select-options" data-class="productCategory">
+                                                #foreach($!productCategory in $!productCategoryList)
+                                                    <li class="select-option productCategory" data-value="$!{productCategory.code}">$!{productCategory.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        #*<li class="per-field">
+                            <div class="per-field-box " id="per-field-box">
+                                <label class="field-title" for="Quantity"><span class="must">*</span> Quantity(MT):</label>
+                                <input  data-rules="required;decimal"
+                                        data-regexp="^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$"
+                                        data-regexp-message="Please enter the positive number"
+                                        class='transaction-quantity-input' name="productInfoVO.quantityAsString" id="quantityAsStringNumber" type="number" value="$!{productInfoVO.quantityAsString}">
+                            </div>
+                        </li>*#
+                            <li class="per-field">
+                                <div class="per-field-box" id="per-field-box">
+                                    <label class="field-title" for="Quantity"><span class="must">*</span> Quantity:</label>
+                                    <input type="text" class="quantity-input abs-class-rea" name="productInfoVO.quantityAsString"  value="$!{productInfoVO.quantityAsString}"
+                                           data-rules="required"
+                                           data-regexp="^\d+(\.\d+)?$"
+                                           data-regexp-message="Please enter the positive number"
+                                    >
+                                    <div class="cpy-select clearfix  quantity-select">
+                                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{productInfoVO.quantityUnitVO.enName}</div>
+                                                    <input class="vcode"  data-rules="required"
+                                                           name="productInfoVO.quantityUnitVO.code" type="text" readonly="readonly" value="$!{productInfoVO.quantityUnitVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul class="select-options">
+                                                #foreach($!quantityUnit in $!quantityUnitList)
+                                                    <li class="select-option " data-value="$!{quantityUnit.code}">$!{quantityUnit.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label for="" class="field-title"><span class="must">*</span> Tolerance:</label>
+                                    <span>
+                                        <i>+/-</i>
+                                        <input type="text"
+                                               data-rules="required"
+                                               data-regexp="^\d+(\.\d+)?$"
+                                               data-regexp-message="Please enter the positive number"
+                                               name="productInfoVO.tolerance" value="$!{productInfoVO.tolerance}" class="tolerance-input abs-class-rea">
+                                        <i>% at OT</i>
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box" style="position: relative">
+                                    <label class="field-title" for="Standard" style="float:left"><span class="must">* </span>Quality Standard:</label>
+                                    <span  class="orange quantity"  style="   display: block;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #F36523;color:#fff;float:left;border-radius:2px;margin-left:4px;cursor: pointer;" >+Upload</span>
+                                    <input type="hidden" name="productInfoVO.qualityStandard" id="productQuantity" value="$!{productInfoVO.qualityStandard}"/>
+                                    <input type="hidden" name="productInfoVO.qualityStandardName" data-rules="upload" class="upload validHidden" id="productQuantityName" value="$!{productInfoVO.qualityStandardName}" />
+
+                                    <span class="file-name" style="display:none" id="QuantityStandardPath">$!{productInfoVO.qualityStandard}</span>
+                                    <p class="my-up">
+                                        <span class="file-name" id="QuantityStandardName" style="text-decoration: underline;cursor: pointer;left:266px;">$!{productInfoVO.qualityStandardName}</span>
+                                    <p>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="form-right fl clearfix">
+
+                            <li class="per-field fr">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span>Specification:</label>
+                                    <div class="cpy-select clearfix ">
+                                        <div class="select s-b select-ajax">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" id="SpecificationId">$!{productInfoVO.productSpecificationVO.enName}</div>
+                                                    <input data-rules="required" type="text"  id="SpecificatioCode" class="vcode productSpecificationValue" name="productInfoVO.productSpecificationVO.code" readonly="readonly" value="$!{productInfoVO.productSpecificationVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul name="productInfoVO.productSpecificationVO.code" class="select-options productSpecificationList">
+                                                #if($demandSheetVO.uuid)
+                                                    #foreach($productSpecification in $productSpecificationList)
+                                                        <li class="select-option" data-value="$productSpecification.code">$!{productSpecification.enName}</li>
+                                                    #end
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field fr">
+                                <div class="per-field-box">
+                                    <label for="" class="field-title"><span class="must">* </span>Incoterms:</label>
+                                    <div class="cpy-select clearfix ">
+                                        <div class="select s-b">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{productInfoVO.tradeTermVO.enName}</div>
+                                                    <input data-rules="required" class="vcode" type="text"   name="productInfoVO.tradeTermVO.code" readonly="readonly" value="$!{productInfoVO.tradeTermVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul name="productInfoVO.tradeTermVO.code" class=" select-options " data-class="tradeTermCode">
+                                                #foreach($!tradeTerm in $!tradeTermList)
+                                                    <li class="select-option tradeTermCode" data-value="$!{tradeTerm.code}">$!{tradeTerm.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field dateParent deadlineTime fr" >
+                                <div class="per-field-box   ">
+                                    <label class="field-title" for="Deadline"><span class="must">* </span>Expired Time:</label>
+                                    <div class="datetime-wrap">
+                                        <input  data-rules="required" name="productInfoVO.deadlineAsString" value="$!{productInfoVO.deadlineAsString}"class="DeadlineMonth2   datetime " type="text">
+                                        <div class="datetime-view">$!{productInfoVO.deadlineAsString}</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                #*<hr class="form-split-line">
+                <h3 class="form-title">Pricing</h3>*#
+                    <div class="form-box-content clearfix" style="position: relative;padding-bottom: 90px">
+                        <div class="addBenchmark">
+                            <div class="addBench2" onclick="addBench()">+</div>
+                            <span style="display:block;width: 36px;height: 54px" class="divBlock"></span>
+                            <div class="delBench2" onclick="delBench()">-</div>
+                        </div>
+                        <ul>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title fl"><span class="must">*</span>Benchmark :</label>
+                                    <div class="fl">
+                                        <span class="fl BenchSpan">Mean of</span>
+                                        <div class="cpy-select fl clearfix benchmark" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{pricingInfoVO.priceSourceVO.enName}</div>
+                                                        <input data-rules="required" type="text" class="vcode" name="pricingInfoVO.priceSourceVO.code" readonly="readonly" value="$!{pricingInfoVO.priceSourceVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceSourceVO.code" class="select-options">
+                                                    #foreach($priceSource in $priceSourceList)
+                                                        <li class="select-option" data-value="$!{priceSource.code}">$!{priceSource.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fl">
+                                        <span class="fl BenchSpan">Quotations for</span>
+                                        <div class="cpy-select fl clearfix benchmark benchmark2" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{pricingInfoVO.pricingBenchmarkVO.enName}</div>
+                                                        <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.pricingBenchmarkVO.code" readonly="readonly" value="$!{pricingInfoVO.pricingBenchmarkVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.pricingBenchmarkVO.code" class="select-options">
+                                                    #foreach($pricingBenchmark in $pricingBenchmarkList)
+                                                        <li class="select-option" data-value="$!{pricingBenchmark.code}">$!{pricingBenchmark.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fl ">
+                                        <span class="fl BenchSpan">under</span>
+                                        <div class="cpy-select fl clearfix benchmark benchmarkLast" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text">$!{pricingInfoVO.priceRegionVO.enName}</div>
+                                                        <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.priceRegionVO.code" readonly="readonly" value="$!{pricingInfoVO.priceRegionVO.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceRegionVO.code" class="select-options">
+                                                    #foreach($priceRegion in $priceRegionList)
+                                                        <li class="select-option" data-value="$!{priceRegion.code}">$!{priceRegion.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field per-field-Bench" style="display: none">
+                                <div class="per-field-box">
+                                    <label class="field-title fl"><span class="must">* </span>Benchmark2 :</label>
+                                    <div class="fl">
+                                        <span class="fl BenchSpan">Mean of</span>
+                                        <div class="cpy-select fl clearfix benchmark" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="priceSourceVO">$!{pricingInfoVO.priceSourceVO2.enName}</div>
+                                                        <input data-rules="required" id="priceSourceVO2" type="text" class="vcode" name="pricingInfoVO.priceSourceVO2.code" readonly="readonly" value="$!{pricingInfoVO.priceSourceVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceSourceVO2.code" class="select-options">
+                                                    #foreach($priceSource in $priceSourceList)
+                                                        <li class="select-option" data-value="$!{priceSource.code}">$!{priceSource.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fl">
+                                        <span class="fl BenchSpan">Quotations for</span>
+                                        <div class="cpy-select fl clearfix benchmark benchmark2" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="pricingBenchmarkVO">$!{pricingInfoVO.pricingBenchmarkVO2.enName}</div>
+                                                        <input  data-rules="required" id="pricingBenchmarkVO2" class="vcode" type="text" name="pricingInfoVO.pricingBenchmarkVO2.code" readonly="readonly" value="$!{pricingInfoVO.pricingBenchmarkVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.pricingBenchmarkVO2.code" class="select-options">
+                                                    #foreach($pricingBenchmark in $pricingBenchmarkList)
+                                                        <li class="select-option" data-value="$!{pricingBenchmark.code}">$!{pricingBenchmark.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fl ">
+                                        <span class="fl BenchSpan">under</span>
+                                        <div class="cpy-select fl clearfix benchmark benchmarkLast" >
+                                            <div class="select s-b" >
+                                                <div class="select-box">
+                                                    <div class="select-content">
+                                                        <div class="select-show-text" id="priceRegionVO">$!{pricingInfoVO.priceRegionVO2.enName}</div>
+                                                        <input  data-rules="required" id="priceRegionVO2" class="vcode" type="text" name="pricingInfoVO.priceRegionVO2.code" readonly="readonly" value="$!{pricingInfoVO.priceRegionVO2.code}">
+                                                    </div>
+                                                </div>
+                                                <ul name="pricingInfoVO.priceRegionVO2.code" class="select-options">
+                                                    #foreach($priceRegion in $priceRegionList)
+                                                        <li class="select-option" data-value="$!{priceRegion.code}">$!{priceRegion.enName}</li>
+                                                    #end
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="form-left fl">
+                            <li class="per-field ">
+                                <div class="per-field-box Premium-li-sr" >
+                                    <label class="field-title"><span class="must">* </span>Premium :</label>
+                                    <span>
+									<input type="text" class="premium-input abs-class-rea" data-rules="required;string;decimal" :decAfter="2"  :decabove="8" value="$!{pricingInfoVO.premiumsAndDiscountsAsString}" name="pricingInfoVO.premiumsAndDiscountsAsString">
+									<div class="cpy-select clearfix premium-select ">
+									<div class="select s-b">
+										<div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{pricingInfoVO.currencyVO.enName}</div>
+                                                <input data-rules="required" class="vcode" type="text" name="pricingInfoVO.currencyVO.code" readonly="readonly" value="$!{pricingInfoVO.currencyVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.currencyVO.code" class="select-options">
+                                            #foreach($currency in $currencyList)
+                                                <li class="select-option" data-value="$!{currency.code}">$!{currency.enName}</li>
+                                            #end
+                                        </ul>
+									</div>
+								</div>
+									<i>/</i>
+									<div class="cpy-select clearfix premium-select ">
+									<div class="select s-b">
+										<div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{pricingInfoVO.pricingUnitVO.enName}</div>
+                                                <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.pricingUnitVO.code" readonly="readonly" value="$!{pricingInfoVO.pricingUnitVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.pricingUnitVO.code" class="select-options">
+                                            #foreach($pricingUnit in $pricingUnitList)
+                                                <li class="select-option" data-value="$!{pricingUnit.code}">$!{pricingUnit.enName}</li>
+                                            #end
+                                        </ul>
+									</div>
+								</div>
+								</span>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span> Payment Terms :</label>
+                                    <div class="cpy-select clearfix selectReg">
+                                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true"  style="z-index:999;">$!{pricingInfoVO.paymentTerm}</div>
+                                                    <input  data-rules="required" class="vname" type="text" name="pricingInfoVO.paymentTerm" readonly="readonly" value="$!{pricingInfoVO.paymentTerm}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.paymentTermVO.code" class="select-options">
+                                                #foreach($paymentTerm in $paymentTermList)
+                                                    <li class="select-option" data-value="$!{paymentTerm.code}">$!{paymentTerm.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span>Inspection : </label>
+                                    <div class="cpy-select clearfix">
+                                        <div class="select s-b">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{pricingInfoVO.inspectionVO.enName}</div>
+                                                    <input data-rules="required" class="vcode" type="text" name="pricingInfoVO.inspectionVO.code" readonly="readonly" value="$!{pricingInfoVO.inspectionVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.settlementQuantityVO.code"  class="select-options">
+                                                #foreach($inspection in $inspectionList)
+                                                    <li class="select-option" data-value="$inspection.code">$!{inspection.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        #*<li class="per-field">
+                            <div class="per-field-box">
+                                <label class="field-title"><span class="must">* </span>Currency :</label>
+                                <div class="cpy-select clearfix">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{pricingInfoVO.currencyVO.enName}</div>
+                                                <input data-rules="required" class="vcode" type="text" name="pricingInfoVO.currencyVO.code" readonly="readonly" value="$!{pricingInfoVO.currencyVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.currencyVO.code" class="select-options">
+                                            #foreach($currency in $currencyList)
+                                                <li class="select-option" data-value="$!{currency.code}">$!{currency.enName}</li>
+                                            #end
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>*#
+
+                            <li class="per-field">
+                                <div class="per-field-box" style="width: 850px;">
+                                    <label class="field-title fl"><span class="must"></span>Pricing Formula :</label>
+                                    <span class="isBenchmark fl" style="width: 640px">Benchmark+ Premium/Discount Currency/Unit</span>
+                                    <span class="isBenchmark2 fl" style="width: 640px;display: none">（Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</span>
+                                </div>
+                            </li>
+                            <li class="per-field" >
+                                <div class="per-field-box " style=" width:880px;">
+                                    <label class="field-title fl"><span class="must">* </span>Other Terms :</label>
+                                    <textarea name="otherInfoVO.otherTerm" data-rules="string" :length="2000" class="OtherTerms" style="width: 720px;" value="$!{otherInfoVO.otherTerm}">$!{otherInfoVO.otherTerm}</textarea>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="form-right fl clearfix">
+                        #*<li class="per-field">
+                            <div class="per-field-box">
+                                <label class="field-title"><span class="must">* </span>Unit :</label>
+                                <div class="cpy-select clearfix">
+                                    <div class="select s-b">
+                                        <div class="select-box">
+                                            <div class="select-content">
+                                                <div class="select-show-text">$!{pricingInfoVO.pricingUnitVO.enName}</div>
+                                                <input  data-rules="required" class="vcode" type="text" name="pricingInfoVO.pricingUnitVO.code" readonly="readonly" value="$!{pricingInfoVO.pricingUnitVO.code}">
+                                            </div>
+                                        </div>
+                                        <ul name="pricingInfoVO.pricingUnitVO.code" class="select-options">
+                                            #foreach($pricingUnit in $pricingUnitList)
+                                                <li class="select-option" data-value="$!{pricingUnit.code}">$!{pricingUnit.enName}</li>
+                                            #end
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>*#
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span>Pricing Period :</label>
+                                    <div class="cpy-select clearfix selectReg">
+                                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index:999;">$!{pricingInfoVO.pricingPeriod}</div>
+                                                    <input data-rules="required" class="vname" type="text" name="pricingInfoVO.pricingPeriod" readonly="readonly" value="$!{pricingInfoVO.pricingPeriod}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.pricingPeriodVO.code" class="select-options">
+                                                #foreach($pricingPeriod in $pricingPeriodList)
+                                                    <li class="select-option" data-value="$!{pricingPeriod.code}">$!{pricingPeriod.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span>Quantity DTER :</label>
+                                    <div class="cpy-select clearfix selectReg">
+                                        <div class="select s-b select_search">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index:999;">$!{pricingInfoVO.settlementQuantity}</div>
+                                                    <input data-rules="required" class="vname" type="text" name="pricingInfoVO.settlementQuantity" readonly="readonly" value="$!{pricingInfoVO.settlementQuantity}">
+                                                </div>
+                                            </div>
+                                            <ul name="pricingInfoVO.settlementQuantityVO.code"  class="select-options">
+                                                #foreach($settlementQuantity in $settlementQuantityList)
+                                                    <li class="select-option" data-value="$settlementQuantity.code">$!{settlementQuantity.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"> Law :</label>
+                                    <input type="text" class="precing-input" value="$!{pricingInfoVO.law}" name="pricingInfoVO.law">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr class="form-split-line">
+                    <h3 class="form-title">Transportation</h3>
+                    <div class="form-box-content clearfix">
+                        <ul class="form-left fl">
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span> Transport Mode:</label>
+                                    <div class="cpy-select clearfix">
+                                        <div class="select s-b">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text">$!{transportInfoVO.transportModeVO.enName}</div>
+                                                    <input data-rules="required" class="vcode" type="text" name="transportInfoVO.transportModeVO.code" readonly="readonly" value="$!{transportInfoVO.transportModeVO.code}">
+                                                </div>
+                                            </div>
+                                            <ul name="transportInfoVO.transportModeVO.code" class="select-options">
+                                                #foreach($transportMode in $transportModeList)
+                                                    <li class="select-option" data-value="$!{transportMode.code}">$!{transportMode.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span> Laytime:</label>
+                                    #*<input  data-rules="required;digits" :digitsMax="8" ;*#
+                                    <input  data-rules="required"
+                                            data-regexp="^\d+(\.\d+)?$"
+                                            data-regexp-message="Please enter the positive number" type="text" name="transportInfoVO.laytimeAsString" value="$!{transportInfoVO.laytimeAsString}" style="width: 70px;">
+                                    <span style="position: absolute;top: 0;left: 233px;">H+6</span>
+                                </div>
+                            </li>
+                            <li class="per-field" id="loadPortShowOrHide">
+                                <div class="per-field-box">
+                                    <label class="field-title"><span class="must">* </span>Load Port:</label>
+                                    <div class="small-select cpy-select clearfix selectReg" style="margin-right: 13px;">
+                                        <div class="select s-b select_search" style="width: 130px;">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text "  style="z-index:999;" contentEditable="true" id="LoadPortid">$!{transportInfoVO.loadingCountry}</div>
+                                                    <input data-rules="" class="vname" type="text" name="transportInfoVO.loadingCountry" id="LoadPortidCode" readonly="readonly" value="$!{transportInfoVO.loadingCountry}">
+                                                </div>
+                                                #foreach($loadingPortCountry in $loadingPortCountryList)
+                                                    #if($!{loadingPortCountry.enName} == $!{transportInfoVO.loadingCountry})
+                                                        <script>
+                                                            var shipPortCode2 = '$!{loadingPortCountry.code}';
+                                                        </script>
+                                                    #end
+                                                #end
+                                            </div>
+                                            <ul class="select-options" data-class="loadli" >
+                                                #foreach($loadingPortCountry in $loadingPortCountryList)
+                                                    <li class="select-option loadli" data-value="$!{loadingPortCountry.code}">$!{loadingPortCountry.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="small-select cpy-select clearfix selectReg">
+                                        <div class="select s-b select_search" style="width: 130px;">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true"  style="z-index:999;" id="LoadPortTwo">$!{transportInfoVO.loadingPort}</div>
+                                                    <input data-rules="" class="vname" id="LoadPortTwoCode" type="text" name="transportInfoVO.loadingPort" readonly="readonly" value="$!{transportInfoVO.loadingPort}">
+                                                </div>
+                                            </div>
+                                            <ul name="transportInfoVO.loadingPort" id="loadingPortList" class="select-options">
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <ul class="form-right fl clearfix">
+                            <li class="per-field " >
+                                <div class="per-field-box m-r-span ">
+                                    <label class="field-title laycan-label"><span class="must">* </span> Laycan:</label>
+                                    <div class="datetime-wrap dateParent laycanTime">
+                                        <input  data-rules="required" name="transportInfoVO.laycanStartDateAsString"  value="$!{transportInfoVO.laycanStartDateAsString}"
+                                                class="DeadlineMonth datetime validateTime1  CreateStartTime" type="text" style="width: 140px;">
+                                        <div class="datetime-view" style="width: 140px;">$!{transportInfoVO.laycanStartDateAsString}</div>
+                                    </div>
+                                    <i>-</i>
+                                    <div class="datetime-wrap sales-wrap br dateParent laycanTime">
+                                        <input  data-rules="required" name="transportInfoVO.laycanEndDateAsString"  value="$!{transportInfoVO.laycanEndDateAsString}"
+                                                class="DeadlineMonth datetime validateTime2 " type="text" style="width: 140px;">
+                                        <div class="datetime-view" style="width: 140px;">$!{transportInfoVO.laycanEndDateAsString}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="per-field demurrage-box" >
+                                <label class="field-title laycan-label"><span class="must"></span>Demurrage Rate :</label>
+                            ##                                <span class="demurrage-box">
+                            ##                                    <input type="text"name="transportInfoVO.demurrageRateNumAsString" placeholder="30000" class="precing-input" class="input">
+                            ##                                    <i>USD PDPR</i>
+                            ##                                <i class="radio"><input type="radio" name="transportInfoVO.demurrageRateVO.code" class="radio"><i></i>As per C/P</i>
+                            ##
+                            ##                                </span>
+                                <span class="demurrage-box check-b">
+                                <input type="text"#* data-rules="decimal"*#
+                                       data-regexp="^[1-9]\d*$"
+                                       data-regexp-message="Please enter the positive integer"
+                                       class="precing-input dem_input abs-class-rea" name="transportInfoVO.demurrageRateNumAsString" value="$!{transportInfoVO.demurrageRateNumAsString}">
+                                <i>USD PDPR</i>
+                                    <input type="hidden" name="transportInfoVO.demurrageRateVO.code" value="$!{transportInfoVO.demurrageRateVO.code}">
+                                <i class="radio demurrage-radio" onclick="disablefn(this)">
+                                    <input  type="radio">
+                                    <i ></i>As per C/P
+                                </i>
+                            </span>
+                            </li>
+                        #*<li class="per-field" >
+                            <label class="field-title laycan-label"><span class="must">* </span>Demurrage Rate :</label>
+                            <span class="demurrage-box check-b">
+                            <input type="text" placeholder="30000" name="transportInfoVO.demurrageRateNumAsString" class="precing-input" class="input">
+                            <i>USD PDPR</i>
+                            <i class="radio demurrage-radio"><input *##*onclick="inquiry(this.value)"*##*  type="radio" name="transportInfoVO.demurrageRateVO.code" ><i></i>As per C/P</i>
+                        </span>*#
+                            </li>
+                            <li class="per-field" id="dischargeShowOrHide">
+                                <div class="per-field-box">
+                                    <label class="field-title" for="DischargePort"><span class="must">* </span>Discharge Port:</label>
+                                    <div class="small-select cpy-select clearfix selectReg" style="margin-right: 13px;">
+                                        <div class="select s-b select_search" style="width: 130px;">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index: 999;">$!{transportInfoVO.dischargeCountry}</div>
+                                                    <input  data-rules="" type="text" id="DischargeOne" class="vname" name="transportInfoVO.dischargeCountry" readonly="readonly" value="$!{transportInfoVO.dischargeCountry}">
+                                                </div>
+                                                #foreach($dischargePortCountry in $dischargePortCountryList)
+                                                    #if($!{dischargePortCountry.enName} == $!{transportInfoVO.dischargeCountry})
+                                                        <script>
+                                                            var shipPortCode3 = '$!{dischargePortCountry.code}';
+                                                        </script>
+                                                    #end
+                                                #end
+                                            </div>
+                                            <ul class="select-options" data-class="dischargeli">
+                                                #foreach($dischargePortCountry in $dischargePortCountryList)
+                                                    <li class="select-option dischargeli" data-value="$!{dischargePortCountry.code}">$!{dischargePortCountry.enName}</li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="small-select cpy-select clearfix selectReg">
+                                        <div class="select s-b select_search" style="width: 130px;">
+                                            <div class="select-box">
+                                                <div class="select-content">
+                                                    <div class="select-show-text" contentEditable="true" style="z-index: 999;" id="DischargeTwo">$!{transportInfoVO.dischargePort}</div>
+                                                    <input  data-rules="" class="vname" type="text" id="DischargeTwoCode" name="transportInfoVO.dischargePort" readonly="readonly" value="$!{transportInfoVO.dischargePort}">
+                                                </div>
+                                            </div>
+                                            <ul name="transportInfoVO.dischargePort" id="dischargePortList" class="select-options">
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr class="form-split-line" >
+                    <h3 class="form-title">Buyer</h3>
+                    <div class="form-box-content clearfix">
+                        <div class="per-field">
+                            <div class="per-field-box">
+                                <label class="field-title" for="Deadline">Company:</label>
+                                <span class="">$!{enterpriseName}</span>
+                            </div>
+                        </div>
+                        <div class="per-field">
+                            <div class="per-field-box">
+                                <label class="field-title" for="Address">Address:</label>
+                                <input name="buyerInfoVO.address" class="notcheckes" type="text" style="width: 400px;" value="$!{buyerInfoVO.address}">
+                            </div>
+                        </div>
+                        <ul class="form-left fl">
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title" for="TraderName"><span class="must">* </span>Contact Person:</label>
+                                    <input data-rules="required" name="buyerInfoVO.traderName" type="text" value="$!{buyerInfoVO.traderName}">
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title" for="Tel"><span class="must">* </span> Tel:</label>
+                                    <input data-rules="required;tell" name="buyerInfoVO.telephone" type="text" value="$!{buyerInfoVO.telephone}">
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="form-right fl clearfix">
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title" for=" mailAddress"><span class="must">* </span>Email:</label>
+                                    <input data-rules="required;email" name="buyerInfoVO.email" type="text" value="$!{buyerInfoVO.email}">
+                                </div>
+                            </li>
+                            <li class="per-field">
+                                <div class="per-field-box">
+                                    <label class="field-title" for="Fax"> Fax:</label>
+                                    <input name="buyerInfoVO.fax" class="notcheckes"  type="text" value="$!{buyerInfoVO.fax}">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+            </div>
+        </div>
+        <div class="submit-box">
+            <input type="hidden" name="demandSheetVO.demandSheetStatusVO.code" value=""/>
+            <input type="button" class="button cancel fr" value="Cancel" onclick="window.history.back();"/>
+            <input type="button" class="button shelf fr post" onclick="postDemandSheet('2',this)" value="Post" />
+            <input type="button" class="button fr save" onclick="postDemandSheet('1',this)" value="Save" />
+        </div>
+        </form>
+    </div>
+    </div>
+    <!--右侧 end-->
+    </div>
+</main>
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+
+
+#js($appServer.get('/js/common/idangerous.swiper2.7.6.js?js_version=03280827'))
+#js($appServer.get('/js/common/validate.js?js_version=03280827'))
+#js($appServer.get('/js/common/pikaday.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+#js($appServer.get('/script/pages/front/publish_demand/sales-resources.js?js_version=03280827'))
+#js($appServer.get('/script/pages/front/publish_demand/index.js?js_version=03280827'))
+#js($appServer.get('/js/work/jquery.validate.js'))
+
+<style>
+    .transaction-quantity-input {
+        width: 278px;
+        height: 34px;
+        line-height: 36px;
+        border: 1px solid #C1C1C1;
+        border-radius: 2px;
+        text-indent: 9px;
+    }
+</style>

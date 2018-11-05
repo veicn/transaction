@@ -1,0 +1,150 @@
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+
+    </div>
+##    <button data-method="setTop" class="layui-btn" id="add">添加</button>
+    <!--搜索条件-->
+    <div  class="ry-banner">
+        <form class="layui-form" action="$appServer.get('/om/prize/list.htm')" type="post">
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="contactUser" id="contactUser"  class="layui-input" value="$!contactUser">
+                    </div>
+                </div>
+
+                <button class="layui-btn" type="submit" >查询</button>
+                <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+
+            </div>
+        </form>
+    </div>
+
+
+    <table class="layui-table"  lay-filter="demo">
+        <thead>
+        <tr>
+        ##  数据库主键Id(隐藏)、内容、联系人、联系电话、联系邮箱、创建时间、操作列表(下载)
+            <th lay-data="{field:'id'}" class="layui-hide">数据库Id</th>
+            <th lay-data="{field:'contactUser', width:80}">联系人</th>
+            <th lay-data="{field:'contactTelephone', width:200, sort: true}">联系电话</th>
+            <th lay-data="{field:'contactEmail', width:200, sort: true}">联系邮箱</th>
+            <th lay-data="{field:'content', width:80, sort: true}">内容</th>
+            <th lay-data="{field:'createTime', width:80}">创建时间</th>
+            <th lay-data="{field:'wealth', width:135, sort: true}">操作列表</th>
+        </tr>
+        </thead>
+        #foreach($item in $list)
+            <tr>
+                <td class="layui-hide">$!item.id</td>
+                <td>$!item.contactUser</td>
+                <td>$!item.contactTelephone</td>
+                <td>$!item.contactEmail</td>
+                <td>$!item.content</td>
+                <td>$!dateUtil.convertDateToString('yyyy-MM-dd',$!item.createTime)</td>
+                <td>
+##                    <a class="layui-btn layui-btn-mini" data-method="setTop" id="view" data-id="$!item.id">查看</a>
+                #if($item.enclosureUrl && $item.enclosureUrl != "")
+                    <a href="$appServer.get('/common/doc/download.htm')?path=$!item.enclosureUrl&fileName=$!item.enclosureName" class="layui-btn layui-btn-mini" id="fileDownload" >下载附件</a>
+                #end
+                    <a class="layui-btn layui-btn-danger layui-btn-mini" id="del" data-id="$!item.id">删除</a>
+                </td>
+            </tr>
+        #end
+    </table>
+
+
+</div>
+
+<script>
+
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    $(function(){
+        var title;
+        var type;
+        var url;
+        var active = {
+            setTop: function () {
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: title
+                    , area: ['700px', '400px']
+                    , shade: 0
+                    , maxmin: true
+                    , id:1
+                    , content: url
+                    , zIndex: layer.zIndex //重点1
+                    , success: function (layero) {
+                        layer.setTop(layero); //重点2
+                    }
+                });
+            }
+        }
+    });
+        ## $("[id=edit]").click(function(){
+        ##     title = '编辑';
+        ##     type = 'edit';
+        ##     var id = $(this).attr('data-id');
+        ##     url = "$appServer.get('om/app/edit.htm')?id="+id;
+        ##     var othis = $(this), method = othis.data('method');
+        ##     active[method] ? active[method].call(this, othis) : '';
+        ## })
+        ##
+    $("[id=del]").click(function(){
+         var id = $(this).attr('data-id');
+         layer.alert('请确认删除.',function() {
+             $.ajax({
+                 url:'$appServer.get("om/prize/delete.json")',
+                 method:'POST',
+                 data:{'id' : id},
+                 success:function(data){
+                     layer.alert(data.message,function(){
+                         if(data && data.status == 0){
+                            parent.layer.closeAll();
+                             parent.location.reload();
+                         }else{
+                             layer.alert(data.message)
+                         }
+                     });
+                 },error:function(r,d){
+                     layer.alert('删除失败')
+                 }
+             });
+         })
+     })
+
+
+    layui.use("upload", function(){
+        var $ = layui.jquery,upload = layui.upload;
+
+        upload.render({
+            elem: ".fileUpload",
+            url: "$appServer.get('/common/doc/upload.json')",
+            accept: "file",
+            //size: 60 //限制文件大小，单位 KB
+            //exts: 'zip|rar|7z' //允许上传的文件后缀
+            //before: function(){
+            //  layer.tips("接口地址："+ this.url, this.item, {tips: 1});
+            //},
+            done: function(res, index, upload){
+                if(res.status === 0){
+                    var item = this.item;
+                    $("#fileDownload").attr("href", "$appServer.get('/common/doc/download.htm')" + "?path=" + res.datas.path + "&fileName=" + encodeURI(res.datas.originalName));
+                }else{
+                    layer.tips(res.message, this.item, {tips: 1});
+                }
+            }
+        })
+    })
+</script>

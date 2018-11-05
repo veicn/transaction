@@ -1,0 +1,14 @@
+
+feignUrl: http://transaction.test.myoilbank.com
+parter: shipagent
+apikey: 670ae10a2c87dcd1be94c68602463d0d
+userDomin: http://user.test.myoilbank.com
+hystrix.command.default.execution.timeout.enabled: false
+
+#log
+logging:
+config: classpath:logback.xml
+
+#aes 加解密
+aeskey: "sinochemOILBANK1"
+useaes: "true1"

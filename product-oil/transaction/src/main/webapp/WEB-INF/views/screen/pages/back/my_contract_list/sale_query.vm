@@ -1,0 +1,22 @@
+<form id="orderHeadForm" action="$!appServer.get('/queryProductOilList.htm')" method="post">
+    <div class="c-form">
+        <ul class="c-ful c-fulf">
+            <li class="c-fcos3"><span class="c-fn c-fn2">订单类别：</span>
+                <select class="sele sele1" id="contractType" name="contractType">
+                    <option value="D">普通订单</option>
+                </select>
+            </li>
+            <li class="c-fcos3"><span class="c-fn c-fn2">订单时间：</span>
+                <select class="sele sele1" id="dataTime" name="dataTime">
+                    <option value="0">请选择</option>
+                    <option value="1">三个月内</option>
+                    <option value="2">半年内</option>
+                    <option value="3">一年内</option>
+                </select>
+            </li>
+            <li class="c-fcos3 c-fcos4"><span class="c-fn"></span><input type="text" name="orderNo" class="c-int c-fnk c-int1" value="$!{form.orderNo}" placeholder="订单号"/></li>
+
+            <span class="c-libtn"><button onclick="function(){$('#orderHeadForm').submit()}">查询</button></span>
+        </ul>
+    </div>
+</form>

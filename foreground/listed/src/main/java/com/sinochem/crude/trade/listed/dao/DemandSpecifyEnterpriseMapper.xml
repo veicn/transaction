@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandSpecifyEnterpriseMapper" >
+    <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.DemandSpecifyEnterprise" >
+        <result column="id" property="id" />
+        <result column="demand_id" property="demandId" />
+        <result column="ep_memberid" property="epMemberId" />
+        <result column="enterprise_name" property="enterpriseName" />
+        <result column="create_time" property="createTime" />
+        <result column="creater" property="creater" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+        id, demand_id, ep_memberid, enterprise_name, create_time, creater
+    </sql>
+
+    <select id="selectObjByDemandId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List" />
+        FROM demand_specify_enterprise
+        where demand_id = #{demandId, jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByDemandId" parameterType="java.lang.Long">
+        DELETE FROM demand_specify_enterprise where demand_id = #{demandId, jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertSpecifyEnterprise" parameterType="com.sinochem.crude.trade.listed.domain.DemandSpecifyEnterprise">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into demand_specify_enterprise (demand_id, ep_memberid, enterprise_name, creater)
+        values (#{demandId, jdbcType=BIGINT}, #{epMemberId, jdbcType=BIGINT}, #{enterpriseName, jdbcType=VARCHAR}, #{creater, jdbcType=BIGINT})
+    </insert>
+</mapper>

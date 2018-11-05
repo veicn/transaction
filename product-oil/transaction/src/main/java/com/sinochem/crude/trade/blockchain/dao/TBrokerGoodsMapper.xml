@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerGoods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="goodsinfo_decgno" property="goodsinfoDecgno" jdbcType="VARCHAR" />
+    <result column="goodsinfo_priceperunit" property="goodsinfoPriceperunit" jdbcType="DECIMAL" />
+    <result column="goodsinfo_decltotal" property="goodsinfoDecltotal" jdbcType="DECIMAL" />
+    <result column="goodsinfo_gqty" property="goodsinfoGqty" jdbcType="DECIMAL" />
+    <result column="goodsinfo_gunit" property="goodsinfoGunit" jdbcType="VARCHAR" />
+    <result column="goodsinfo_cutmode" property="goodsinfoCutmode" jdbcType="VARCHAR" />
+    <result column="goodsinfo_tradecurr" property="goodsinfoTradecurr" jdbcType="VARCHAR" />
+    <result column="goodsinfo_codets" property="goodsinfoCodets" jdbcType="VARCHAR" />
+    <result column="goodsinfo_gname" property="goodsinfoGname" jdbcType="VARCHAR" />
+    <result column="goodsinfo_qty1" property="goodsinfoQty1" jdbcType="DECIMAL" />
+    <result column="goodsinfo_qty2" property="goodsinfoQty2" jdbcType="DECIMAL" />
+    <result column="goodsinfo_destinationcountry" property="goodsinfoDestinationcountry" jdbcType="VARCHAR" />
+    <result column="goodsinfo_origincountry" property="goodsinfoOrigincountry" jdbcType="VARCHAR" />
+    <result column="goodsinfo_districtcode" property="goodsinfoDistrictcode" jdbcType="VARCHAR" />
+    <result column="declarationuuid" property="declarationuuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, status,goodsinfo_decgno, goodsinfo_priceperunit, goodsinfo_decltotal, goodsinfo_gqty,
+    goodsinfo_gunit, goodsinfo_cutmode, goodsinfo_tradecurr, goodsinfo_codets, goodsinfo_gname, 
+    goodsinfo_qty1, goodsinfo_qty2, goodsinfo_destinationcountry, goodsinfo_origincountry, 
+    goodsinfo_districtcode, declarationuuid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_goods
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_goods
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_broker_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_broker_goods (goodsinfo_decgno, goodsinfo_priceperunit,
+    goodsinfo_decltotal, goodsinfo_gqty, goodsinfo_gunit,
+    goodsinfo_cutmode, goodsinfo_tradecurr, goodsinfo_codets,
+    goodsinfo_gname, goodsinfo_qty1, goodsinfo_qty2,
+    goodsinfo_destinationcountry, goodsinfo_origincountry,
+    goodsinfo_districtcode, declarationuuid,status)
+    values
+    <foreach collection="list" item="document" separator=",">
+      (#{document.goodsinfoDecgno,jdbcType=VARCHAR}, #{document.goodsinfoPriceperunit,jdbcType=DECIMAL},
+      #{document.goodsinfoDecltotal,jdbcType=DECIMAL}, #{document.goodsinfoGqty,jdbcType=DECIMAL}, #{document.goodsinfoGunit,jdbcType=VARCHAR},
+      #{document.goodsinfoCutmode,jdbcType=VARCHAR}, #{document.goodsinfoTradecurr,jdbcType=VARCHAR}, #{document.goodsinfoCodets,jdbcType=VARCHAR},
+      #{document.goodsinfoGname,jdbcType=VARCHAR}, #{document.goodsinfoQty1,jdbcType=DECIMAL}, #{document.goodsinfoQty2,jdbcType=DECIMAL},
+      #{document.goodsinfoDestinationcountry,jdbcType=VARCHAR}, #{document.goodsinfoOrigincountry,jdbcType=VARCHAR},
+      #{document.goodsinfoDistrictcode,jdbcType=VARCHAR}, #{document.declarationuuid,jdbcType=VARCHAR},#{document.status,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerGoods" >
+    insert into t_broker_goods (id, goodsinfo_decgno, goodsinfo_priceperunit, 
+      goodsinfo_decltotal, goodsinfo_gqty, goodsinfo_gunit, 
+      goodsinfo_cutmode, goodsinfo_tradecurr, goodsinfo_codets, 
+      goodsinfo_gname, goodsinfo_qty1, goodsinfo_qty2, 
+      goodsinfo_destinationcountry, goodsinfo_origincountry, 
+      goodsinfo_districtcode, declarationuuid)
+    values (#{id,jdbcType=INTEGER}, #{goodsinfoDecgno,jdbcType=VARCHAR}, #{goodsinfoPriceperunit,jdbcType=DECIMAL}, 
+      #{goodsinfoDecltotal,jdbcType=DECIMAL}, #{goodsinfoGqty,jdbcType=DECIMAL}, #{goodsinfoGunit,jdbcType=VARCHAR}, 
+      #{goodsinfoCutmode,jdbcType=VARCHAR}, #{goodsinfoTradecurr,jdbcType=VARCHAR}, #{goodsinfoCodets,jdbcType=VARCHAR}, 
+      #{goodsinfoGname,jdbcType=VARCHAR}, #{goodsinfoQty1,jdbcType=DECIMAL}, #{goodsinfoQty2,jdbcType=DECIMAL}, 
+      #{goodsinfoDestinationcountry,jdbcType=VARCHAR}, #{goodsinfoOrigincountry,jdbcType=VARCHAR}, 
+      #{goodsinfoDistrictcode,jdbcType=VARCHAR}, #{declarationuuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerGoods" >
+    insert into t_broker_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsinfoDecgno != null" >
+        goodsinfo_decgno,
+      </if>
+      <if test="goodsinfoPriceperunit != null" >
+        goodsinfo_priceperunit,
+      </if>
+      <if test="goodsinfoDecltotal != null" >
+        goodsinfo_decltotal,
+      </if>
+      <if test="goodsinfoGqty != null" >
+        goodsinfo_gqty,
+      </if>
+      <if test="goodsinfoGunit != null" >
+        goodsinfo_gunit,
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        goodsinfo_cutmode,
+      </if>
+      <if test="goodsinfoTradecurr != null" >
+        goodsinfo_tradecurr,
+      </if>
+      <if test="goodsinfoCodets != null" >
+        goodsinfo_codets,
+      </if>
+      <if test="goodsinfoGname != null" >
+        goodsinfo_gname,
+      </if>
+      <if test="goodsinfoQty1 != null" >
+        goodsinfo_qty1,
+      </if>
+      <if test="goodsinfoQty2 != null" >
+        goodsinfo_qty2,
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        goodsinfo_destinationcountry,
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        goodsinfo_origincountry,
+      </if>
+      <if test="goodsinfoDistrictcode != null" >
+        goodsinfo_districtcode,
+      </if>
+      <if test="declarationuuid != null" >
+        declarationuuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsinfoDecgno != null" >
+        #{goodsinfoDecgno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoPriceperunit != null" >
+        #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDecltotal != null" >
+        #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGqty != null" >
+        #{goodsinfoGqty,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGunit != null" >
+        #{goodsinfoGunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoTradecurr != null" >
+        #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCodets != null" >
+        #{goodsinfoCodets,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoGname != null" >
+        #{goodsinfoGname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoQty1 != null" >
+        #{goodsinfoQty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoQty2 != null" >
+        #{goodsinfoQty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDistrictcode != null" >
+        #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="declarationuuid != null" >
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerGoods" >
+    update t_broker_goods
+    <set >
+      <if test="goodsinfoDecgno != null" >
+        goodsinfo_decgno = #{goodsinfoDecgno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoPriceperunit != null" >
+        goodsinfo_priceperunit = #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDecltotal != null" >
+        goodsinfo_decltotal = #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGqty != null" >
+        goodsinfo_gqty = #{goodsinfoGqty,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGunit != null" >
+        goodsinfo_gunit = #{goodsinfoGunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null" >
+        goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoTradecurr != null" >
+        goodsinfo_tradecurr = #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCodets != null" >
+        goodsinfo_codets = #{goodsinfoCodets,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoGname != null" >
+        goodsinfo_gname = #{goodsinfoGname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoQty1 != null" >
+        goodsinfo_qty1 = #{goodsinfoQty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoQty2 != null" >
+        goodsinfo_qty2 = #{goodsinfoQty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDestinationcountry != null" >
+        goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null" >
+        goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDistrictcode != null" >
+        goodsinfo_districtcode = #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="declarationuuid != null" >
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerGoods" >
+    update t_broker_goods
+    set goodsinfo_decgno = #{goodsinfoDecgno,jdbcType=VARCHAR},
+      goodsinfo_priceperunit = #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      goodsinfo_decltotal = #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      goodsinfo_gqty = #{goodsinfoGqty,jdbcType=DECIMAL},
+      goodsinfo_gunit = #{goodsinfoGunit,jdbcType=VARCHAR},
+      goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      goodsinfo_tradecurr = #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      goodsinfo_codets = #{goodsinfoCodets,jdbcType=VARCHAR},
+      goodsinfo_gname = #{goodsinfoGname,jdbcType=VARCHAR},
+      goodsinfo_qty1 = #{goodsinfoQty1,jdbcType=DECIMAL},
+      goodsinfo_qty2 = #{goodsinfoQty2,jdbcType=DECIMAL},
+      goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      goodsinfo_districtcode = #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      declarationuuid = #{declarationuuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

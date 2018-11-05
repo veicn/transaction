@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.DealPointsMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.DealPoints" id="DealPointsDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.DealPoints">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.DealPoints" id="DealPoints">
+		<result property="dealPointsId" column="DEAL_POINTS_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="region" column="REGION" />
+		<result property="refRoute" column="REF_ROUTE" />
+		<result property="singleFare" column="SINGLE_FARE" />
+		<result property="type" column="TYPE" />
+		<result property="price" column="PRICE" />
+		<result property="name" column="NAME" />
+		<result property="date" column="DATE" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="DealPoints" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints">
+	select * from t_ship_deal_points
+	where
+		 ALIVE_FLAG='1'
+		<if test="dealPointsId!=null and dealPointsId!=''">and  DEAL_POINTS_ID=#{dealPointsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="region!=null and region!=''">and  REGION=#{region}</if>
+		<if test="refRoute!=null and refRoute!=''">and  REF_ROUTE=#{refRoute}</if>
+		<if test="singleFare!=null and singleFare!=''">and  SINGLE_FARE=#{singleFare}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="date!=null and date!=''">and  DATE=#{date}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="DealPoints">
+			select
+			* from t_ship_deal_points
+			where
+		    DEAL_POINTS_ID=#{dealPointsId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="DealPoints">
+			select
+			* from t_ship_deal_points
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints">
+		update t_ship_deal_points
+		<set>
+         DEAL_POINTS_ID=#{dealPointsId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="region!=null">,REGION = #{region}</if>
+		<if test="refRoute!=null">,REF_ROUTE = #{refRoute}</if>
+		<if test="singleFare!=null">,SINGLE_FARE = #{singleFare}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="date!=null">,DATE = #{date}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+       	 DEAL_POINTS_ID=#{dealPointsId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints"  useGeneratedKeys="true" keyProperty="dealPointsId" >
+		insert  into t_ship_deal_points (				DEAL_POINTS_ID
+						,UUID
+						,REGION
+						,REF_ROUTE
+						,SINGLE_FARE
+						,TYPE
+						,PRICE
+						,NAME
+						,DATE
+						,REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						)
+		values(		#{dealPointsId}
+						,#{uuid}
+						,#{region}
+						,#{refRoute}
+						,#{singleFare}
+						,#{type}
+						,#{price}
+						,#{name}
+						,#{date}
+						,#{remark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_deal_points
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 DEAL_POINTS_ID=#{dealPointsId} 
+																																																																																																
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  DEAL_POINTS_ID as "dealPointsId" 
+						 ,   UUID as "uuid" 
+						 ,   REGION as "region" 
+						 ,   REF_ROUTE as "refRoute" 
+						 ,   SINGLE_FARE as "singleFare" 
+						 ,   TYPE as "type" 
+						 ,   PRICE as "price" 
+						 ,   NAME as "name" 
+						 ,   DATE as "date" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						from t_ship_deal_points
+		where
+			ALIVE_FLAG='1'
+			<if test="dealPointsId!=null and dealPointsId!=''">and  DEAL_POINTS_ID=#{dealPointsId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="region!=null and region!=''">and REGION like CONCAT(CONCAT('%',#{region}),'%')</if>
+			<if test="refRoute!=null and refRoute!=''">and  REF_ROUTE=#{refRoute}</if>
+			<if test="singleFare!=null and singleFare!=''">and  SINGLE_FARE=#{singleFare}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="name!=null and name!=''">and  NAME=#{name}</if>
+			<if test="date!=null and date!=''">and  DATE=#{date}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		order by
+			DATE DESC
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_deal_points 
+		where
+		 ALIVE_FLAG='1'
+			<if test="dealPointsId!=null and dealPointsId!=''">and  DEAL_POINTS_ID=#{dealPointsId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="region!=null and region!=''">and  REGION like CONCAT(CONCAT('%',#{region}),'%')</if>
+			<if test="refRoute!=null and refRoute!=''">and  REF_ROUTE=#{refRoute}</if>
+			<if test="singleFare!=null and singleFare!=''">and  SINGLE_FARE=#{singleFare}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="name!=null and name!=''">and  NAME=#{name}</if>
+			<if test="date!=null and date!=''">and  DATE=#{date}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_deal_points
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="dealPointsId!=null and dealPointsId!=''">and  DEAL_POINTS_ID=#{dealPointsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="region!=null and region!=''">and  REGION=#{region}</if>
+		<if test="refRoute!=null and refRoute!=''">and  REF_ROUTE=#{refRoute}</if>
+		<if test="singleFare!=null and singleFare!=''">and  SINGLE_FARE=#{singleFare}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="date!=null and date!=''">and  DATE=#{date}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_deal_points
+		<set>
+         DEAL_POINTS_ID=#{dealPointsId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="region!=null">,REGION = #{region}</if>
+		<if test="refRoute!=null">,REF_ROUTE = #{refRoute}</if>
+		<if test="singleFare!=null">,SINGLE_FARE = #{singleFare}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="date!=null">,DATE = #{date}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="dealPointsId!=null and dealPointsId!=''">and  DEAL_POINTS_ID=#{dealPointsId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="region!=null and region!=''">and  REGION=#{region}</if>
+		<if test="refRoute!=null and refRoute!=''">and  REF_ROUTE=#{refRoute}</if>
+		<if test="singleFare!=null and singleFare!=''">and  SINGLE_FARE=#{singleFare}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="date!=null and date!=''">and  DATE=#{date}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<!-- 根据uuid逻辑删除 -->
+	<update id="deleteRecordsByUuid" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints">
+		update t_ship_deal_points
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 根据uuid修改 -->
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints">
+		update t_ship_deal_points
+		<set>
+		UPDATE_DATE = #{updateDate}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="region!=null">,REGION = #{region}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="date!=null">,DATE = #{date}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 查重 -->
+	<select id="checkDp" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints" resultMap="DealPoints">
+	select * from (
+		select * from t_ship_deal_points where 
+			ALIVE_FLAG='1'
+		<if test="date!=null">and DATE =  DATE_FORMAT(#{date},'%Y-%m-%d')</if> ) t
+		where ALIVE_FLAG='1'
+		<if test="refRoute!=null">and REF_ROUTE = #{refRoute}</if>
+		<if test="type!=null">and TYPE = #{type}</if>
+		<if test="uuid!=null">and UUID != #{uuid}</if>
+	</select>
+
+	<!-- 根据日期，船型，地区查找点数 -->
+	<select id="findDpByTdr" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints" resultMap="DealPoints">
+	select * from (
+		select * from t_ship_deal_points where 
+			ALIVE_FLAG='1'
+		<if test="date!=null">and DATE =  DATE_FORMAT(#{date},'%Y-%m-%d')</if> ) t
+		where ALIVE_FLAG='1'
+		<if test="region!=null">and REGION = #{region}</if>
+		<if test="type!=null">and TYPE = #{type}</if>
+		<if test="uuid!=null">and UUID != #{uuid}</if>
+	</select>
+
+	<!-- 查询当天成交点数，时间倒序返回 -->
+	<select id="getTodayDealPoints" parameterType="string" resultMap="DealPoints">
+		SELECT
+			* 
+		FROM
+			t_ship_deal_points 
+		WHERE
+			ALIVE_FLAG = '1' 
+			AND DATE = (
+						SELECT DISTINCT DATE 
+						FROM
+							t_ship_deal_points 
+						WHERE
+							ALIVE_FLAG = '1' 
+						GROUP BY DATE 
+						ORDER BY DATE DESC 
+						LIMIT 0,1 
+						) 
+		ORDER BY CREATE_DATE DESC
+		
+
+	</select>
+	
+	<!-- 查询今年的当前地区成交点数，构造线形图 -->
+	<select id="getThisYearDealPoints"  parameterType="com.sinochem.crude.trade.transport.domain.DealPoints" resultMap="DealPoints">
+		select * from t_ship_deal_points
+		where ALIVE_FLAG='1'
+		and REGION = #{region}
+		and DATE like CONCAT(#{ext1},'%')
+		order by CREATE_DATE desc
+	</select>
+	
+	<select id="queryByEntitys2" resultMap="DealPoints">
+	select * from t_ship_deal_points
+	where
+		 ALIVE_FLAG='1'
+	</select>
+	
+	<select id="getNowDealPoints" resultMap="DealPoints">
+		select * from t_ship_deal_points t
+			where ALIVE_FLAG= '1' 
+			and (t.REGION,t.DATE) in  
+				(select d.region, max(d.DATE) from t_ship_deal_points d
+					where d.ALIVE_FLAG='1'
+					group by
+						d.region
+				)
+	</select>
+	<select id="getDealPointsByRecode" resultMap="DealPoints" parameterType="com.sinochem.crude.trade.transport.domain.DealPoints">
+		select * from t_ship_deal_points 
+			where REGION = #{region} and DATE = (
+				select DATE from t_ship_deal_points 
+					where REGION = #{region} 
+					order by DATE desc 
+					limit 1,1
+			)
+	</select>
+	
+	<select id="findAllDates" resultType="java.util.Date">
+		select distinct DATE from t_ship_deal_points ORDER BY DATE DESC
+	</select>
+	
+	<select id="findDealPointsPageListByRecords" resultType="hashmap" parameterType="hashmap">
+		select 
+			REGION as region,
+			REF_ROUTE as refRoute,
+			SINGLE_FARE as singleFare,
+			TYPE as type,
+			PRICE as price,
+			DATE as pricingDate,
+			REMARK as remark
+		from t_ship_deal_points 
+		where 
+			ALIVE_FLAG='1'
+			<if test="date!='' and date!=null">and Date = #{date}</if>
+			<if test="dateStart!='' and dateStart!=null">and Date &gt;= #{dateStart}</if>
+			<if test="dateEnd!='' and dateEnd!=null">and Date &lt;= #{dateEnd}</if>
+	</select>
+</mapper>

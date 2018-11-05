@@ -1,0 +1,64 @@
+<style> 
+.layui-unselect dl { max-height:200px; }  
+</style>
+<form class="layui-form" id="editForm" method="post">
+              <div class="layui-form-item mt10">
+                  <label class="layui-form-label iw154">产品：</label>
+                  <input type="hidden" id="uuid" name="uuid">
+                  <div class="layui-input-inline">
+                  		<select id="productCode" name="productCode" lay-verify="required" style="height: 100px">
+	              	   		<option id="productName" value="">== 请选择产品  ==</option>
+	               		</select>
+               	   </div>
+     	          <label class="layui-form-label iw100">价格趋势：</label>
+                  <div class="layui-input-inline">
+                  		<select id="priceTrend" name="priceTrend" lay-verify="required">
+	              	   		<option id="priceTrendNm" value="">== 请选择趋势  ==</option>
+	               		</select>
+               	   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">价格：</label>
+                   <div class="layui-input-inline iw80">
+                       <input class="layui-input" type="text" name="lowPrice" id="lowPrice" lay-verify="required|number" autocomplete="off">
+                   </div>
+				   <div class="layui-input-inline iw10">
+				   ~
+                   </div>
+                   <div class="layui-input-inline iw80">
+                       <input class="layui-input" type="text" name="highPrice" id="highPrice" lay-verify="required|number|price" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">价格单位：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="priceUnit" id="priceUnit" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">价格日期：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="priceDate" id="priceDate" lay-verify="required|date" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">区域名称：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="areaName" id="areaName" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">价格来源：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="priceSource" id="priceSource" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">价格变动：</label>
+                   <div class="layui-input-inline iw80">
+                       <input class="layui-input" type="text" name="lowPriceChange" id="lowPriceChange" lay-verify="required|number" autocomplete="off">
+                   </div>
+				   <div class="layui-input-inline iw10">
+				   ~
+                   </div>
+                   <div class="layui-input-inline iw80">
+                       <input class="layui-input" type="text" name="highPriceChange" id="highPriceChange" lay-verify="required|number|highPriceChange" autocomplete="off">
+                   </div>
+               </div>
+                <button class="btnloc1 btnloc2 layui-btn layui-btn-normal" type="submit" lay-submit lay-filter="btn_edit">确定</button>
+                <button class="btnloc2 layui-btn layui-btn-normal" type="button" id="btn_close">取 消</button>
+</form>

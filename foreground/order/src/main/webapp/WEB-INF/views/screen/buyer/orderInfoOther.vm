@@ -1,0 +1,18 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>其它信息</h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn cfn-qttk">其他条款：</span><span class="c-int qx-conte  cfn-qtnr ">$!{contract.otherItem}</span></li>
+            <li class="c-fcos2"><span class="c-fn">信用条款：</span><span class="c-int qx-conte">$!{authItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">商检机构：</span><span class="c-int qx-conte">$!{businessCheckOrgName}</span></li>
+            <li class="c-fcos2">
+                <span class="c-fn">出口配额文件：</span>
+                <span class="c-int qx-conte">
+                    #if(${contract.exportConfFile} && "${contract.exportConfFile}" != "")
+                        <a href="$!{docServer}/fs/$!{contract.exportConfFile}.img" class="re_up">点此下载</a>
+                    #end
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>

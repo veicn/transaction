@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/price/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="demo">
+		<ul class="layui-tab-title">
+			<li class="layui-this">指数模板维护</li>
+			<li>指数维护</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<!--开始 查询条件-->
+				<div class="inquire">
+					<h3>查询条件</h3>
+				</div>
+
+				<!--选择框-->
+				<div class="form-box">
+
+					<div class="layui-form">
+						<div class="layui-form-item">
+							<div class="layui-inline index-name">
+								<label class="layui-form-label">指数名称</label>
+								<div class="layui-input-inline">
+									<input type="tel" id="indexName" name="indexName" value="$!{query.indexName}"
+										autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<button class="layui-btn layui-btn-normal mt16 selectFn">
+								查询
+							</button>
+							<button class="layui-btn layui-btn-normal mt16 addFn">
+								新增
+							</button>
+						</div>
+						
+					</div>
+
+					<!--table标题-->
+					<div class="inquire1">
+						<h3>查询结果</h3>
+					</div>
+
+					<!--table-->
+
+					<table class="layui-table one" lay-even="" lay-skin="nob">
+						<thead style="text-align: center;">
+							<tr>
+								<th>序号</th>
+								<th>指数名称</th>
+								<th>指数代码</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($priceIndexTemp in $priceIndexTemps)
+							<tr>
+								<td>$!{velocityCount}</td>
+								<td>$!{priceIndexTemp.indexName}</td>
+								<td>$!{priceIndexTemp.indexCode}</td>
+								<td class="acss-color">
+									<a href="#" class="mr5 editFn" attr-data='{"uuid":"$!{priceIndexTemp.uuid}","indexName":"$!{priceIndexTemp.indexName}","indexCode":"$!{priceIndexTemp.indexCode}","priority":"$!{priceIndexTemp.priority}"}'> <i class="layui-icon">&#xe642;</i> 修改</a>
+									#if($!{priceIndexTemp.status} == '1')
+										<a href="#" class="mr5 setStatusFn" attr-data='{"uuid":"$!{priceIndexTemp.uuid}"}'> <i class="layui-icon" style="color:red;">&#xe640;</i> 禁用</a>
+									#else
+										<a href="#" class="mr5 setStatusFn" attr-data='{"uuid":"$!{priceIndexTemp.uuid}"}'> <i class="layui-icon" style="color:red;">&#xe640;</i> 启用</a>
+									#end
+								</td>
+							</tr>
+							#end
+						</tbody>
+					</table>
+					 <div class="ry-footbar ry-right">
+						$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/price/priceTemp.htm").put('slider_path','/contain/formPagingPageSlider')	
+					</div>
+				</div>
+
+		</div>
+
+		<script src="$imageServer.get('info/js/price/priceTemp.js')"></script>

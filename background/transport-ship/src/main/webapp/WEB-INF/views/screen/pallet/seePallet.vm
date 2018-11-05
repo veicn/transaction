@@ -1,0 +1,94 @@
+
+    <!-- 需求详情页 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>租船需求管理</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">我要租船详情</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			 <ul>
+				<li class="s-form-item list">
+					<div class="s-inline">
+					  <label class="s-form-label">油种：</label>
+					  <div class="s-input-inline">
+						  <p class="oilType"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">数量：</label>
+					  <div class="s-input-inline">
+						  <p class="quantity"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">装港/装港区域：</label>
+					  <div class="s-input-inline">
+					  	  <p class="loadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">卸港/卸港区域：</label>
+					  <div class="s-input-inline">
+					  	 <p class="unloadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">装期layCan：</label>
+					  <div class="s-input-inline">
+						  <p class="laycan"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船型：</label>
+					  <div class="s-input-inline">
+						 <p class="shipType"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">船龄：</label>
+					  <div class="s-input-inline">
+						 <p class="shipAge"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">其他要求：</label>
+					  <div class="s-input-inline">
+						 <p class="remark"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">公司：</label>
+					  <div class="s-input-inline">
+						 <p class="companyName"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">联系人：</label>
+					  <div class="s-input-inline">
+						 <p class="contacts"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">邮箱：</label>
+					  <div class="s-input-inline">
+						 <p class="email"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">电话：</label>
+					  <div class="s-input-inline">
+						 <p class="tel"></p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-btn-box"><button id="returnFn" class="s-btn s-btn-primary">返&nbsp;&nbsp;回</button></div>
+	</div>
+	<script src="../transport/js/pallet/seePallet.js"></script>
+  
+

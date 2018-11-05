@@ -1,0 +1,1 @@
+ALTER TABLE members ADD COLUMN `nick_name` VARCHAR(100) NULL   COMMENT '昵称或姓名' AFTER `user_name`;

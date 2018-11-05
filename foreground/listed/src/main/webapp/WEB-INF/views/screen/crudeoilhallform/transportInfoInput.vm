@@ -1,0 +1,155 @@
+
+
+<div class="c-mod" id="mjbwxx">
+  <h3><em class="cw-ico ico-h3"></em>买家泊位信息
+  <span class="cxtj-nr-an">
+      #if(!$!{viewflag})
+          <a class="btn-more" id="addShipBerth">+维护泊位信息</a>
+      #end
+  </span>
+      #*<span class="cxtj-nr-an"><a class="btn-more" id="selectAddShipBerth">+选择泊位</a></span>*#
+  </h3>
+  <div class="c-tabdiv">
+	<table> 
+		<tr>
+            <th>泊位名称</th>
+            <th>泊位吨级</th>
+            <th>泊位吃水</th>
+            <th>适合船型</th>
+            <th>泊位说明</th>
+            <th class="tabl-line">操作</th>
+         </tr>
+
+		#foreach($record in $!shipBerths)
+            #set($index = $velocityCount - 1)
+            <tr class="c-tabcos1">
+                <td>$!{record.berthName}<input type="hidden" name="demandShipBerthList[$index].berthName" value="$!{record.berthName}" />
+                    <span class="c-ero">
+                        <label class="error" style="display: none;"></label>
+                    </span>
+                    <input type="hidden" name="demandShipBerthList[$index].id" value="$!{record.id}" /></td>
+                <td>$!{record.berthGrade}万吨<input type="hidden" name="demandShipBerthList[$index].berthGrade" value="$!{record.berthGrade}" /></td>
+                <td>$!{record.draftLimitation}m<input type="hidden" name="demandShipBerthList[$index].draftLimitation" value="$!{record.draftLimitation}" /></td>
+                <td>$!dictUtils.getValue("shipTypes","$!{record.shipType}")<input type="hidden" name="demandShipBerthList[$index].shipType" value="$!{record.shipType}" /></td>
+                <td>$!{record.berthDesc}<input type="hidden" name="demandShipBerthList[$index].berthDesc" value="$!{record.berthDesc}" /></td>
+                
+				<td><a name="deleteLine" onclick="deleteline(this)">删除</a></td>
+            </tr>
+		#end
+	</table>
+  </div>
+</div>
+
+
+<script>
+    $(function () {
+        $("#addShipBerth").click(function () {
+            berthAddLayerOpen();
+        });
+
+        $("a[name='deleteLine']").click(function () {
+            $(this).parent("td").parent("tr").remove();
+        });
+
+
+        $("#confirm").click(function () {
+            getShipBerthToTable();
+        })
+    });
+    function deleteline(obj) {
+        $(obj).parent("td").parent("tr").remove();
+    }
+
+    function berthAddLayerOpen() {
+        var curIndex = layui.use('layer', function(){
+
+            layer.open({
+                title: "泊位信息维护",
+                shade : false,
+                area : '1000px',
+                type : '1',
+                content: $("#addShipBerthWin")
+            });
+        });
+    }
+
+    function getShipBerthToTable() {
+        var obj = new Object();
+        // 泊位名称
+        obj.berthName = $("#addShipBerthWin").find("input[name='berthName']").val();
+        if(obj.berthName == "") {
+            layui.use("layer",function() {
+                layer.alert("请输入泊位名称");
+            });
+            return false;
+        }
+        if(obj.berthName.length >100){
+            layui.use("layer",function() {
+                layer.alert("泊位名称长度不能超过100");
+            });
+            return false;
+        }
+        
+        // 泊位吨级（万吨）
+        obj.berthGrade = $("#addShipBerthWin").find("select[name='berthGrade']").val();
+        
+        // 泊位吃水（m）
+        obj.draftLimitation = $("#addShipBerthWin").find("input[name='draftLimitation']").val();
+		// 数值正则
+		var reg = new RegExp("^[0-9]+.?[0-9]*$");  
+		if (obj.draftLimitation == "") {
+            layui.use("layer",function() {
+                layer.alert("请输入泊位吃水");
+            });
+		    return false;
+		}
+		if (!reg.test(obj.draftLimitation)) {
+            layui.use("layer",function() {
+                layer.alert("泊位吃水请输入数字");
+            });
+		    return false;
+		}		
+        
+        obj.shipType = $("#addShipBerthWin").find("select[name='shipType']").val();
+        var shipType = $("#addShipBerthWin").find("select[name='shipType']").find("option:selected").html();
+        obj.carryingCapacityMin = $("#addShipBerthWin").find("input[name='carryingCapacityMin']").val();
+        obj.carryingCapacityMax = $("#addShipBerthWin").find("input[name='carryingCapacityMax']").val();
+        obj.berthDesc = $("#addShipBerthWin").find("input[name='berthDesc']").val();
+        if(obj.berthDesc.length >255){
+            layui.use("layer",function() {
+                layer.alert("泊位说明长度不能超过255");
+            });
+            return false;
+        }
+
+        var berthsNum = $("#mjbwxx table tr").length -1;
+        var subIndex =  berthsNum;
+        $("#mjbwxx table").append("<tr class='c-tabcos1'>" +
+                "<td><input type='hidden' name='demandShipBerthList["+(subIndex)+"].id' />"
+                +obj.berthName+"<input type='hidden' name='demandShipBerthList["+(subIndex)+"].berthName' value='"+obj.berthName+"'/></td><td>"
+                +obj.berthGrade+"万吨<input type='hidden' name='demandShipBerthList["+(subIndex)+"].berthGrade' value='"+obj.berthGrade+"'/></td><td>"
+                +obj.draftLimitation+"m<input type='hidden' name='demandShipBerthList["+(subIndex)+"].draftLimitation' value='"+obj.draftLimitation+"'/></td><td>"
+                +shipType+"<input type='hidden' name='demandShipBerthList["+(subIndex)+"].shipType' value='"+obj.shipType+"'/><td>"
+                +obj.berthDesc+"<input type='hidden' name='demandShipBerthList["+(subIndex)+"].berthDesc' value='"+obj.berthDesc+"'/></td><td><a name='deleteLine' onclick='deleteline(this)'>删除</a></td></tr>");
+        layer.closeAll();
+        $("#addShipBerthWin").hide();
+    }
+
+</script>
+<div class="cg-bwdk" id="addShipBerthWin" style="display: none;width: 100%;">
+    <ul class="cg-bwdk-b clearfix">
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位名称：</span><input type="text" name="berthName" class="bw-int" maxlength="100"/></li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吨级（万吨）：</span><select class="bw-sele" name="berthGrade"><option value="10">10万吨</option><option value="20">20万吨</option><option value="30">30万吨</option><option value="40">40万吨</option><option value="50">50万吨</option></select></li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位吃水（m）：</span><input type="text" name="draftLimitation" class="bw-int" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" maxlength="12"/></li>
+        <li class="cg-bwdk-bt2">
+            <span class="bwdk-t">适合船型：</span>
+            <select class="bw-sele" name="shipType">
+                #foreach($kv in $!dictUtils.getCacheMap('shipTypes').entrySet())
+                    <option value="$!{kv.key}">$!{kv.value}</option>
+                #end
+            </select>
+        </li>
+        <li class="cg-bwdk-bt2"><span class="bwdk-t">泊位说明：</span><input type="text" name="berthDesc" class="bw-int" maxlength="255"/></li>
+    </ul>
+    <div class="butt-zh bw-zh"><button class="btn-bc btn-tj" type="button" id="confirm">确认</button></div>
+</div>

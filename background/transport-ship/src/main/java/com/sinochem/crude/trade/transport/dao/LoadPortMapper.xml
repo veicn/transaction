@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.LoadPortMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.LoadPort" id="LoadPortDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.LoadPort">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.LoadPort" id="LoadPort">
+		<result property="loadPortId" column="LOAD_PORT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="shipPlateUuid" column="SHIP_PLATE_UUID" />
+		<result property="shipPlateId" column="SHIP_PLATE_ID" />
+		<result property="shipPactUuid" column="SHIP_PACT_UUID" />
+		<result property="shipPactId" column="SHIP_PACT_ID" />
+		<result property="agreementUuid" column="AGREEMENT_UUID" />
+		<result property="agreementCode" column="AGREEMENT_CODE" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="loadPort" column="LOAD_PORT" />
+		<result property="oilType" column="OIL_TYPE" />
+		<result property="eta" column="ETA" />
+		<result property="exBerth" column="EX_BERTH" />
+		<result property="norDate" column="NOR_DATE" />
+		<result property="waterDate" column="WATER_DATE" />
+		<result property="atripDate" column="ATRIP_DATE" />
+		<result property="berthDate" column="BERTH_DATE" />
+		<result property="acStart" column="AC_START" />
+		<result property="acFinish" column="AC_FINISH" />
+		<result property="exLeave" column="EX_LEAVE" />
+		<result property="acLeave" column="AC_LEAVE" />
+		<result property="remTubeDate" column="REM_TUBE_DATE" />
+		<result property="inspection" column="INSPECTION" />
+		<result property="agency" column="AGENCY" />
+		<result property="accessory1" column="ACCESSORY1" />
+		<result property="accessory2" column="ACCESSORY2" />
+		<result property="accessory3" column="ACCESSORY3" />
+		<result property="accessory1Path" column="ACCESSORY1_PATH" />
+		<result property="accessory2Path" column="ACCESSORY2_PATH" />
+		<result property="accessory3Path" column="ACCESSORY3_PATH" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="loadPortEn" column="LOAD_PORT_EN" />
+		<result property="loadPortCode" column="LOAD_PORT_CODE" />
+		<result property="oilTypeEn" column="OIL_TYPE_EN" />
+		<result property="oilTypeCode" column="OIL_TYPE_CODE" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="LoadPort" parameterType="com.sinochem.crude.trade.transport.domain.LoadPort">
+	select * from t_ship_load_port
+	where
+		 ALIVE_FLAG='1'
+		<if test="loadPortId!=null and loadPortId!=''">and  LOAD_PORT_ID=#{loadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID like '%${agreementUuid}%'</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+		<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+		<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+		<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+		<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+		<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+		<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+		<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+		<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+		<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+		<if test="accessory1!=null and accessory1!=''">and  ACCESSORY1=#{accessory1}</if>
+		<if test="accessory2!=null and accessory2!=''">and  ACCESSORY2=#{accessory2}</if>
+		<if test="accessory3!=null and accessory3!=''">and  ACCESSORY3=#{accessory3}</if>
+		<if test="accessory1Path!=null and accessory1Path!=''">and  ACCESSORY1_PATH=#{accessory1Path}</if>
+		<if test="accessory2Path!=null and accessory2Path!=''">and  ACCESSORY2_PATH=#{accessory2Path}</if>
+		<if test="accessory3Path!=null and accessory3Path!=''">and  ACCESSORY3_PATH=#{accessory3Path}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+		ORDER BY EXT1 ASC
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where
+		    LOAD_PORT_ID=#{loadPortId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="LoadPort">
+			select
+			* from t_ship_load_port
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.LoadPort">
+		update t_ship_load_port
+		<set>
+         LOAD_PORT_ID=#{loadPortId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="agreementUuid!=null">,AGREEMENT_UUID = #{agreementUuid}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="oilType!=null">,OIL_TYPE = #{oilType}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="exBerth!=null">,EX_BERTH = #{exBerth}</if>
+		<if test="norDate!=null">,NOR_DATE = #{norDate}</if>
+		<if test="waterDate!=null">,WATER_DATE = #{waterDate}</if>
+		<if test="atripDate!=null">,ATRIP_DATE = #{atripDate}</if>
+		<if test="berthDate!=null">,BERTH_DATE = #{berthDate}</if>
+		<if test="acStart!=null">,AC_START = #{acStart}</if>
+		<if test="acFinish!=null">,AC_FINISH = #{acFinish}</if>
+		<if test="exLeave!=null">,EX_LEAVE = #{exLeave}</if>
+		<if test="acLeave!=null">,AC_LEAVE = #{acLeave}</if>
+		<if test="remTubeDate!=null">,REM_TUBE_DATE = #{remTubeDate}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="agency!=null">,AGENCY = #{agency}</if>
+		<if test="accessory1!=null">,ACCESSORY1 = #{accessory1}</if>
+		<if test="accessory2!=null">,ACCESSORY2 = #{accessory2}</if>
+		<if test="accessory3!=null">,ACCESSORY3 = #{accessory3}</if>
+		<if test="accessory1Path!=null">,ACCESSORY1_PATH = #{accessory1Path}</if>
+		<if test="accessory2Path!=null">,ACCESSORY2_PATH = #{accessory2Path}</if>
+		<if test="accessory3Path!=null">,ACCESSORY3_PATH = #{accessory3Path}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="loadPortEn!=null">,LOAD_PORT_EN = #{loadPortEn}</if>
+		<if test="loadPortCode!=null">,LOAD_PORT_CODE = #{loadPortCode}</if>
+		<if test="oilTypeEn!=null">,OIL_TYPE_EN = #{oilTypeEn}</if>
+		<if test="oilTypeCode!=null">,OIL_TYPE_CODE = #{oilTypeCode}</if>
+		</set>
+		where
+       	 LOAD_PORT_ID=#{loadPortId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.LoadPort"  useGeneratedKeys="true" keyProperty="loadPortId" >
+		insert  into t_ship_load_port (				LOAD_PORT_ID
+						,UUID
+						,SHIP_PLATE_UUID
+						,SHIP_PLATE_ID
+						,SHIP_PACT_UUID
+						,SHIP_PACT_ID
+						,AGREEMENT_UUID
+						,AGREEMENT_CODE
+						,EP_MEMBER_ID
+						,LOAD_PORT
+						,OIL_TYPE
+						,ETA
+						,EX_BERTH
+						,NOR_DATE
+						,WATER_DATE
+						,ATRIP_DATE
+						,BERTH_DATE
+						,AC_START
+						,AC_FINISH
+						,EX_LEAVE
+						,AC_LEAVE
+						,REM_TUBE_DATE
+						,INSPECTION
+						,AGENCY
+						,ACCESSORY1
+						,ACCESSORY2
+						,ACCESSORY3
+						,ACCESSORY1_PATH
+						,ACCESSORY2_PATH
+						,ACCESSORY3_PATH
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,LOAD_PORT_EN
+						,LOAD_PORT_CODE
+						,OIL_TYPE_EN
+						,OIL_TYPE_CODE
+						)
+		values(		#{loadPortId}
+						,#{uuid}
+						,#{shipPlateUuid}
+						,#{shipPlateId}
+						,#{shipPactUuid}
+						,#{shipPactId}
+						,#{agreementUuid}
+						,#{agreementCode}
+						,#{epMemberId}
+						,#{loadPort}
+						,#{oilType}
+						,#{eta}
+						,#{exBerth}
+						,#{norDate}
+						,#{waterDate}
+						,#{atripDate}
+						,#{berthDate}
+						,#{acStart}
+						,#{acFinish}
+						,#{exLeave}
+						,#{acLeave}
+						,#{remTubeDate}
+						,#{inspection}
+						,#{agency}
+						,#{accessory1}
+						,#{accessory2}
+						,#{accessory3}
+						,#{accessory1Path}
+						,#{accessory2Path}
+						,#{accessory3Path}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{loadPortEn}
+						,#{loadPortCode}
+						,#{oilTypeEn}
+						,#{oilTypeCode}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_load_port
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 LOAD_PORT_ID=#{loadPortId} 
+																																																																																																																																																																																																				
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  LOAD_PORT_ID as "loadPortId" 
+						 ,   UUID as "uuid" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PACT_UUID as "shipPactUuid" 
+						 ,   SHIP_PACT_ID as "shipPactId" 
+						 ,   AGREEMENT_UUID as "agreementUuid" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   LOAD_PORT as "loadPort" 
+						 ,   OIL_TYPE as "oilType" 
+						 ,   ETA as "eta" 
+						 ,   EX_BERTH as "exBerth" 
+						 ,   NOR_DATE as "norDate" 
+						 ,   WATER_DATE as "waterDate" 
+						 ,   ATRIP_DATE as "atripDate" 
+						 ,   BERTH_DATE as "berthDate" 
+						 ,   AC_START as "acStart" 
+						 ,   AC_FINISH as "acFinish" 
+						 ,   EX_LEAVE as "exLeave" 
+						 ,   AC_LEAVE as "acLeave" 
+						 ,   REM_TUBE_DATE as "remTubeDate" 
+						 ,   INSPECTION as "inspection" 
+						 ,   AGENCY as "agency" 
+						 ,   ACCESSORY1 as "accessory1" 
+						 ,   ACCESSORY2 as "accessory2" 
+						 ,   ACCESSORY3 as "accessory3" 
+						 ,   ACCESSORY1_PATH as "accessory1Path" 
+						 ,   ACCESSORY2_PATH as "accessory2Path" 
+						 ,   ACCESSORY3_PATH as "accessory3Path" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   LOAD_PORT_EN as "loadPortEn" 
+						 ,   LOAD_PORT_CODE as "loadPortCode" 
+						 ,   OIL_TYPE_EN as "oilTypeEn" 
+						 ,   OIL_TYPE_CODE as "oilTypeCode" 
+						from t_ship_load_port
+		where
+			ALIVE_FLAG='1'
+			<if test="loadPortId!=null and loadPortId!=''">and  LOAD_PORT_ID=#{loadPortId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+			<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+			<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+			<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+			<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+			<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+			<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+			<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+			<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+			<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+			<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+			<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+			<if test="accessory1!=null and accessory1!=''">and  ACCESSORY1=#{accessory1}</if>
+			<if test="accessory2!=null and accessory2!=''">and  ACCESSORY2=#{accessory2}</if>
+			<if test="accessory3!=null and accessory3!=''">and  ACCESSORY3=#{accessory3}</if>
+			<if test="accessory1Path!=null and accessory1Path!=''">and  ACCESSORY1_PATH=#{accessory1Path}</if>
+			<if test="accessory2Path!=null and accessory2Path!=''">and  ACCESSORY2_PATH=#{accessory2Path}</if>
+			<if test="accessory3Path!=null and accessory3Path!=''">and  ACCESSORY3_PATH=#{accessory3Path}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+			<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+			<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+			<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_load_port 
+		where
+		 ALIVE_FLAG='1'
+			<if test="loadPortId!=null and loadPortId!=''">and  LOAD_PORT_ID=#{loadPortId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+			<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+			<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+			<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+			<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+			<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+			<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+			<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+			<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+			<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+			<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+			<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+			<if test="accessory1!=null and accessory1!=''">and  ACCESSORY1=#{accessory1}</if>
+			<if test="accessory2!=null and accessory2!=''">and  ACCESSORY2=#{accessory2}</if>
+			<if test="accessory3!=null and accessory3!=''">and  ACCESSORY3=#{accessory3}</if>
+			<if test="accessory1Path!=null and accessory1Path!=''">and  ACCESSORY1_PATH=#{accessory1Path}</if>
+			<if test="accessory2Path!=null and accessory2Path!=''">and  ACCESSORY2_PATH=#{accessory2Path}</if>
+			<if test="accessory3Path!=null and accessory3Path!=''">and  ACCESSORY3_PATH=#{accessory3Path}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+			<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+			<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+			<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_load_port
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="loadPortId!=null and loadPortId!=''">and  LOAD_PORT_ID=#{loadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+		<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+		<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+		<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+		<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+		<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+		<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+		<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+		<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+		<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+		<if test="accessory1!=null and accessory1!=''">and  ACCESSORY1=#{accessory1}</if>
+		<if test="accessory2!=null and accessory2!=''">and  ACCESSORY2=#{accessory2}</if>
+		<if test="accessory3!=null and accessory3!=''">and  ACCESSORY3=#{accessory3}</if>
+		<if test="accessory1Path!=null and accessory1Path!=''">and  ACCESSORY1_PATH=#{accessory1Path}</if>
+		<if test="accessory2Path!=null and accessory2Path!=''">and  ACCESSORY2_PATH=#{accessory2Path}</if>
+		<if test="accessory3Path!=null and accessory3Path!=''">and  ACCESSORY3_PATH=#{accessory3Path}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_load_port
+		<set>
+         LOAD_PORT_ID=#{loadPortId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="agreementUuid!=null">,AGREEMENT_UUID = #{agreementUuid}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="oilType!=null">,OIL_TYPE = #{oilType}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="exBerth!=null">,EX_BERTH = #{exBerth}</if>
+		<if test="norDate!=null">,NOR_DATE = #{norDate}</if>
+		<if test="waterDate!=null">,WATER_DATE = #{waterDate}</if>
+		<if test="atripDate!=null">,ATRIP_DATE = #{atripDate}</if>
+		<if test="berthDate!=null">,BERTH_DATE = #{berthDate}</if>
+		<if test="acStart!=null">,AC_START = #{acStart}</if>
+		<if test="acFinish!=null">,AC_FINISH = #{acFinish}</if>
+		<if test="exLeave!=null">,EX_LEAVE = #{exLeave}</if>
+		<if test="acLeave!=null">,AC_LEAVE = #{acLeave}</if>
+		<if test="remTubeDate!=null">,REM_TUBE_DATE = #{remTubeDate}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="agency!=null">,AGENCY = #{agency}</if>
+		<if test="accessory1!=null">,ACCESSORY1 = #{accessory1}</if>
+		<if test="accessory2!=null">,ACCESSORY2 = #{accessory2}</if>
+		<if test="accessory3!=null">,ACCESSORY3 = #{accessory3}</if>
+		<if test="accessory1Path!=null">,ACCESSORY1_PATH = #{accessory1Path}</if>
+		<if test="accessory2Path!=null">,ACCESSORY2_PATH = #{accessory2Path}</if>
+		<if test="accessory3Path!=null">,ACCESSORY3_PATH = #{accessory3Path}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="loadPortEn!=null">,LOAD_PORT_EN = #{loadPortEn}</if>
+		<if test="loadPortCode!=null">,LOAD_PORT_CODE = #{loadPortCode}</if>
+		<if test="oilTypeEn!=null">,OIL_TYPE_EN = #{oilTypeEn}</if>
+		<if test="oilTypeCode!=null">,OIL_TYPE_CODE = #{oilTypeCode}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="loadPortId!=null and loadPortId!=''">and  LOAD_PORT_ID=#{loadPortId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+		<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+		<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+		<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+		<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+		<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+		<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+		<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+		<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+		<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+		<if test="accessory1!=null and accessory1!=''">and  ACCESSORY1=#{accessory1}</if>
+		<if test="accessory2!=null and accessory2!=''">and  ACCESSORY2=#{accessory2}</if>
+		<if test="accessory3!=null and accessory3!=''">and  ACCESSORY3=#{accessory3}</if>
+		<if test="accessory1Path!=null and accessory1Path!=''">and  ACCESSORY1_PATH=#{accessory1Path}</if>
+		<if test="accessory2Path!=null and accessory2Path!=''">and  ACCESSORY2_PATH=#{accessory2Path}</if>
+		<if test="accessory3Path!=null and accessory3Path!=''">and  ACCESSORY3_PATH=#{accessory3Path}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

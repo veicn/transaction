@@ -1,0 +1,384 @@
+#set($tradeTerms = $!{tradeTermVOList})
+#set($category = $!{categoryVOList})
+#set($biddingSheetStatus = $!{biddingSheetStatusVOList})
+
+$contain.get('/common/title.htm').put('title', "My Offers")
+
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+#css($appServer.get('/css/common/pikaday.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+<style>
+    .mylist-con .s-t-tab > ol > li > span{
+        /*font-size: 12px;*/
+        white-space: inherit;
+        overflow: hidden;
+        text-overflow: ellipsis;}
+    .mylist-con .s-t-tab > ol > li > span.w94{width:42%;}
+    /*.qubtn-box a{font-size: 12px;}*/
+
+
+    /*我的销售资源列表买卖家按钮*/
+    .s-nav  .tit .buyman-btn {
+        display: inline-block;
+        height: 36px;
+        width: 120px;
+        line-height: 36px;
+        /* padding: 0 20px; */
+        margin: 10px 10px 0 0;
+        font-size: 14px;
+        border-radius: 2px;
+        color: #FFFFFF;
+        cursor: pointer;
+        text-align: center;
+        background: #F36523;
+    }
+    .s-nav .tit .buyman-btn:nth-of-type(1){
+        height:34px;
+        border: 1px solid #F36523;
+        color: #F36523;
+        background: #FFFFFF;
+    }
+    .s-nav .tit .buyman-btn:nth-of-type(2):hover{
+        background: #FF9D32 ;
+    }
+    .s-nav .tit .buyman-btn:first-of-type:hover{
+        height:34px;
+        background: #F36523 ;
+        color: #FFFFFF;
+    }
+</style>
+
+
+<div class="s-nav fl qu-con-box">
+
+    <div class="tit">
+        <span onclick="MyResources()" class="buyman-btn">My Resources</span>
+##        <a href="$appServer.get('/pages/back/my_product_list/index.htm')"><span  class="buyman-btn">My Resources</span></a>
+        <span id="myOffers" class="buyman-btn">My Offers</span>
+    </div>
+    <form id="myDemandBiddingList" method="post" action="$appServer.get('/pages/back/my_demand_bidding_list/index.htm')">
+        <input type="hidden" name="biddingFlag"  value="2">
+    </form>
+
+    <div class="m-box m-sls cleafix s-box qu-t-box">
+
+        <form id="myBiddingList" method="post" action="$appServer.get('/pages/back/my_demand_bidding_list/index.htm')">
+            <input type="hidden" name="biddingFlag" readonly="readonly" value="$!{biddingSheetQueryVO.biddingFlag}">
+            <div class="xz s-selected">
+                <ul>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Category : </span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1" >
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($category in $category)
+                                                    #if($category.code == $!{biddingSheetQueryVO.productCategoryCode})
+                                                        $category.enName
+                                                    #end
+                                                #end
+                                            </div>
+                                            <input type="text" class="vcode" name="productCategoryCode" readonly="readonly" value="$!{biddingSheetQueryVO.productCategoryCode}" >
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($category in $category)
+                                            <li class="select-option" data-value="$category.code">$category.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Status :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1" >
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+                                            <div class="select-show-text">
+                                                #foreach($biddingSheetStatus in $biddingSheetStatus)
+                                                    #if($biddingSheetStatus.code == $!{biddingSheetQueryVO.biddingSheetStatusCode})
+                                                        $biddingSheetStatus.enName
+                                                    #end
+                                                #end
+                                            </div>
+                                            <input type="text" class="vcode" name="biddingSheetStatusCode" readonly="readonly" value="$!{biddingSheetQueryVO.biddingSheetStatusCode}">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($biddingSheetStatus in $biddingSheetStatusVOList)
+                                            <li class="select-option" data-value="$biddingSheetStatus.code">$biddingSheetStatus.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Offer No :</span>
+                        <input type="text" name="serialNumber" class="br input-name" value="$!{biddingSheetQueryVO.serialNumber}"/>
+                    </li>
+                    <li class="s-selected-w ">
+                        <span class="m-f-span xz1">Incoterms :</span>
+                        <div class="add-select">
+                            <div class="my-select cpy-select clearfix br select1" >
+                                <div class="select s-b">
+                                    <div class="select-box">
+                                        <div class="select-content">
+
+                                            <div class="select-show-text">
+                                                #foreach($tradeTerms in $tradeTerms)
+                                                    #if($tradeTerms.code == $!{biddingSheetQueryVO.tradeTermCode})
+                                                        $tradeTerms.enName
+                                                    #end
+                                                #end
+                                            </div>
+                                            <input type="text" class="vcode" name="tradeTermCode" readonly="readonly" value="$!{biddingSheetQueryVO.tradeTermCode}">
+                                        </div>
+                                    </div>
+                                    <ul class="select-options">
+                                        #foreach($tradeTerms in $tradeTermVOList)
+                                            <li class="select-option" data-value="$tradeTerms.code">$tradeTerms.enName</li>
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="time qu-date poL-time-l">
+                <ul>
+                    <li>
+                        <span class="time-l">Create Date :</span>
+                        <div class="datetime-wrap">
+                            <input name="gmtCreatedStartAsString" id="LaycanS" value="$!{biddingSheetQueryVO.gmtCreatedStartAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view ">$!{biddingSheetQueryVO.gmtCreatedStartAsString}</div>
+                        </div>
+                        <div class="pol-time-line">-</div>
+                        <div class="datetime-wrap">
+                            <input name="gmtCreatedEndAsString" id="LaycanD" value="$!{biddingSheetQueryVO.gmtCreatedEndAsString}" class="DeadlineMonth datetime" type="text">
+                            <div class="datetime-view ">$!{biddingSheetQueryVO.gmtCreatedEndAsString}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="search qu-search">
+                <span id="submitForm" class="m-btn br">Search</span>
+            </div>
+        </form>
+    </div>
+    <!-- li -->
+    #foreach($res in $!{myBiddingListResult.list})
+        <div class="qulist-wrap">
+            <div class="qulist-wrap">
+                <div class="m-box qulist-con mylist-con cleafix">
+                    <div class="m-tit s-tit">
+                        <ul>
+                            <li>
+                                <span>Create Time:</span>
+                                <span class="m-tit-word">$!{res.biddingSheetVO.gmtCreated}</span>
+                            </li>
+                            <li>
+                                <span>Offer No:</span>
+                                <span class="m-tit-word">$!{res.biddingSheetVO.serialNumber}</span>
+                            </li>
+
+                        #*<a  class="br btn-s deBtn mrbtn">
+                            $!{res.biddingSheetVO.biddingSheetStatusVO.enName}
+                        </a>*#
+                        </ul>
+                    </div>
+                    <div class="m-text clearfix">
+                        <div class="qu-img fl">
+                            <img src='$appServer.get("/product_images/$!{res.productInfoVO.productCategoryVO.code}/vertical.jpg")' />
+                            #if($!{res.biddingSheetVO.biddingSheetStatusVO.code} == '1')
+                                <div class="mall-state"></div>
+                            #elseif($!{res.biddingSheetVO.biddingSheetStatusVO.code} == '2')
+                                <div class="quolist-cancell"></div>
+                            #elseif($!{res.biddingSheetVO.biddingSheetStatusVO.code} == '3')
+                                <div class="mall-won"></div>
+                            #elseif($!{res.biddingSheetVO.biddingSheetStatusVO.code} == '4')
+                                <div class="mall-lost"></div>
+                            #end
+                        </div>
+                        <div class="fl m-t-tab s-t-tab qu-con-top">
+                            <ol class="qucon-top">
+                                <li>
+                                    <span class="m-f-span w94">Range :</span>
+                                    <span class="m-r-span w94">
+                                        $!{res.productInfoVO.demandTypeVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Category :</span>
+                                    <span class="m-r-span">
+                                        $!{res.productInfoVO.productCategoryVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Specification :</span>
+                                    <span class="m-r-span">
+                                        $!{res.productInfoVO.productSpecificationVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Tolerance :</span>
+                                    <span class="m-r-span">
+                                      +/- $!{res.productInfoVO.tolerance}% at OT
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Expired Time :</span>
+                                    <span class="m-r-span">
+                                        $!{res.productInfoVO.deadlineAsString}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Laycan :</span>
+                                    <span class="m-r-span">
+                                        $!{res.transportInfoVO.laycanStartDateAsString} - $!{res.transportInfoVO.laycanEndDateAsString}
+                                    </span>
+                                </li>
+                            </ol>
+                            <ol class="qucon-top qucon-btm">
+                                <li>
+                                    <span class="m-f-span w94">Quantity :</span>
+                                    <span class="m-r-span w94">
+                                        $!{res.productInfoVO.quantityAsString} $!{res.productInfoVO.quantityUnitVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Incoterms :</span>
+                                    <span class="m-r-span">
+                                        $!{res.productInfoVO.tradeTermVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Premium :</span>
+                                    <span class="m-r-span">
+                                        $!{res.pricingInfoVO.premiumsAndDiscountsAsString} $!{res.pricingInfoVO.currencyVO.enName}/$!{res.pricingInfoVO.pricingUnitVO.enName}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="m-f-span w94">Payment Terms :</span>
+                                    <span class="m-r-span">
+                                        $!{res.pricingInfoVO.paymentTerm}
+                                    </span>
+                                </li>
+                                #if($!{res.productInfoVO.tradeTermVO.enName} == 'FOB')
+                                    <li>
+                                        <span class="m-f-span w94">Load Port :</span>
+                                        <span class="m-r-span">
+                                            $!{res.transportInfoVO.loadingPort}, $!{res.transportInfoVO.loadingCountry}
+                                        </span>
+                                    </li>
+                                #end
+
+                                #if($!{res.productInfoVO.tradeTermVO.enName} == 'CFR' || $!{res.productInfoVO.tradeTermVO.enName} == 'CIF')
+                                    <li>
+                                        <span class="m-f-span w94">Discharge Port :</span>
+                                        <span class="m-r-span">
+                                            $!{res.transportInfoVO.dischargePort}, $!{res.transportInfoVO.dischargeCountry}
+                                        </span>
+                                    </li>
+                                #end
+
+                            </ol>
+                        </div>
+                        <!-- button -->
+                        <ul class="fr m-t-btn qubtn-box mbl-box">
+                            #if($!{res.biddingSheetVO.biddingSheetStatusVO.code} == '1')
+                                <a onclick="ReOffer('$!{res.biddingSheetVO.demandSheetUuid}','$!{res.biddingSheetVO.uuid}')" class="br fr btn-s">
+                                    Re-Offer
+                                </a>
+                            #end
+                            <a href="$appServer.get('pages/back/my_demand_bidding_detail/index.htm').put('uuid', $!{res.biddingSheetVO.uuid})" class="br fr btn-s deBtn">
+                                Details
+                            </a>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    #end
+
+    $contain.get('/common/page.htm').put("pageInfo", $!{myBiddingListResult})
+</div>
+
+
+<script>
+    /*$(function () {
+    })*/
+    (function () {
+        window.commonCPY.datePicker(['LaycanS','LaycanD'],function(value, date, endDate){
+            var value=value[0].split(' ').join('/')
+            console.log(value)
+        });
+        commonCPY.select()
+    })();
+
+    $("#myProductListForm").on("click", function () {
+
+        document.getElementById("myProductList").submit();
+
+    });
+    $("#myOffers").on("click", function () {
+
+        document.getElementById("myDemandBiddingList").submit();
+
+    });
+
+    $("#submitForm").on("click", function () {
+        document.getElementById("myBiddingList").submit();
+    });
+
+    function MyResources(){
+        location.href="$appServer.get('/pages/back/my_product_list/index.htm')"
+    }
+    function ReOffer(uuid,biddingSheetUuid){
+        layui.use(['layer'], function(){
+            layer.confirm("You have offered for this purchase demand.</br> Are you sure to re-offer ?", {
+                title:'Info',
+                area: ['535px'],
+                type: 1,
+                icon: 2,
+                //anim: 6, //默认动画风格
+                skin: 'demo-class',
+                closeBtn: 3,
+                shadeClose: false,
+                shade: [0.5, '#000000'],
+                btnAlign: 'c',
+                btn: ['Yes','No','View Existed Offer'] //按钮
+            ##href="$appServer.get('/pages/front/product_bidding/index.htm').put('uuid', $!{res.biddingSheetVO.saleSheetUuid}).put('biddingSheetUuid',$!{res.biddingSheetVO.uuid})"
+                ,btn3:function(){
+                    window.location.href =appServer + "pages/back/my_demand_bidding_detail/index.htm?uuid="+biddingSheetUuid;
+
+                }
+            }, function(){
+                window.location.href =appServer + "pages/front/product_bidding/demand_index.htm?uuid="+uuid+"&&biddingSheetUuid="+biddingSheetUuid;
+
+            },function(){
+                return;
+            })
+        })
+
+    }
+
+</script>
+##js($appServer.get('/script/pages/back/my_bidding_list/index.js?js_version=03280827'))

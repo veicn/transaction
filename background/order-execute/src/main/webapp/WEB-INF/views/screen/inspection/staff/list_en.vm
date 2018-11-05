@@ -1,0 +1,81 @@
+<div>
+	<div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Information Maintains</h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2 queryInspForm" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline8">
+					  <label class="s-form-label">Port</label>
+					  <div class="s-input-inline" width="200">
+						<select id="query_port" name="port"  class="s-select">
+							##<option value="">Choose</option>
+							##	#if($!query.port != '')
+							##	<option value="$!query.port" >$!query.portName</option>
+							##	#end							
+							<option value="" >Choose</option>
+							#foreach($unloading in $unloadingSet) 
+								#if($unloading.code==$!query.port)
+								<option value="$unloading.code" selected>$unloading.value</option>
+								#else
+								<option value="$unloading.code">$unloading.value</option>
+								#end 
+							#end
+						</select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline8">
+					  <label class="s-form-label">Pic</label>
+					  <div class="s-input-inline">
+						  <input type="text" id="query_contactName" name="contactName" value="$!query.contactName" placeholder="Pic" class="s-input">
+					  </div>
+					</div>			
+					<div class="s-inline s-inline0"><a href="javascript:void(0);" class="queryInsp"><i class="s-icon s-sear-ico"></i></a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		
+	<div class="s-mod-block">
+			<div class="s-mod-btit ">Information</a> <a href="javascript:void(0)" class="more saveFn">+ ADD</a></div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap">
+					<table class="s-table s-table3">
+					<tr>
+						<th>Port</th>
+						<th>PIC</th>
+						<th>Office No</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+
+				#foreach($data in $datas) #set($class = $velocityCount%2+1)
+					
+					<tr class="s-tabcos$class">
+						<td>$!data.portName</td>
+						<td>$!data.contactName</td>
+						<td>$!data.tel</td>
+						<td>$!data.email</td>
+						<td>
+							<a href="javascript:void(0)" class="updateFn" data="{id:'$!{data.id}',port:'$!{data.port}',contactName:'$!{data.contactName}',tel:'$!{data.tel}',email:'$!{data.email}'}">Edit</a>
+							<a href="javascript:void(0)" class="delFn" data="{id:'$!{data.id}'}" >Delete</a>	
+						</td>
+					</tr>
+					#end
+				</table>
+			</div>
+		</div>
+	</div>
+ </div>
+			<div class="order-bot">
+				$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('inspection/staff/list_en.htm')")
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../orderexecute/js/inspection/staff/list.js"></script>
+

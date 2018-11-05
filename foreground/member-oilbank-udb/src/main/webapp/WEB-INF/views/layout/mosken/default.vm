@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+## $contain.get("/product/mosken/center/server.htm")
+    $contain.get("/mosken/center/htmlhead.htm")
+    $contain.get("/mosken/center/head.htm")
+#* <main id="main">
+     <div class="m-content center clearfix">
+         $contain.get("/pages/back/contain/menu.htm")
+         $screen_content
+     </div>
+ </main>*#
+
+<main id="main">
+    <div class="w1180 welcon clearfix">
+        $contain.get("/mosken/center/menus.htm")
+                $screen_content
+    </div>
+</main>
+
+
+    $contain.get("/mosken/center/htmlend.htm")
+</html>

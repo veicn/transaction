@@ -1,0 +1,24 @@
+<div class="detail-ibut">
+    #if($!{saleSheetVO.saleTypeVO.code}==1)
+    ##                招标
+        <a href="javascript:void(0)" onclick="epclick('$!{saleSheetVO.id}','$!{saleSheetVO.userCreated}','投标')"  class="detail-btb epclick"><i class="c-ico c-ico-tb"></i>Bid</a>
+    #elseif($!{saleSheetVO.saleTypeVO.code}==2)
+    ##                询价
+        <a href="javascript:void(0)" onclick="epclick('$!{saleSheetVO.id}','$!{saleSheetVO.userCreated}','报价')" class="detail-bxj epclick"><i class="c-ico c-ico-bj"></i>Quote</a>
+    #end
+
+</div>
+
+
+<script>
+    function epclick(id,creater,msg) {
+        if (creater != "" && "$!{user.epMemberId}" == creater){
+            layui.use(['layer'], function () {
+                layui.layer.alert('需求发起者不能参与'+msg);
+            })
+            return false;
+        }else{
+            window.location.href="$appServer.get('/crudeoillobby/crudeOilBidding.htm?demandId=')" + id;
+        }
+    }
+</script>

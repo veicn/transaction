@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerDeclarationMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="unifiedcode" jdbcType="VARCHAR" property="unifiedcode" />
+    <result column="purchase_contract_no" jdbcType="VARCHAR" property="purchaseContractNo" />
+    <result column="inseastradeco" jdbcType="VARCHAR" property="inseastradeco" />
+    <result column="overseastradeco" jdbcType="VARCHAR" property="overseastradeco" />
+    <result column="enterprisename_ch" jdbcType="VARCHAR" property="enterprisenameCh" />
+    <result column="enterprisename_en" jdbcType="VARCHAR" property="enterprisenameEn" />
+    <result column="checkoutno" jdbcType="VARCHAR" property="checkoutno" />
+    <result column="customscode" jdbcType="VARCHAR" property="customscode" />
+    <result column="declare_creditcode" jdbcType="VARCHAR" property="declareCreditcode" />
+    <result column="declare_customscode" jdbcType="VARCHAR" property="declareCustomscode" />
+    <result column="declare_checkoutno" jdbcType="VARCHAR" property="declareCheckoutno" />
+    <result column="declare_enterprisename" jdbcType="VARCHAR" property="declareEnterprisename" />
+    <result column="production_creditcode" jdbcType="VARCHAR" property="productionCreditcode" />
+    <result column="production_customscode" jdbcType="VARCHAR" property="productionCustomscode" />
+    <result column="production_checkoutno" jdbcType="VARCHAR" property="productionCheckoutno" />
+    <result column="production_enterprisename" jdbcType="VARCHAR" property="productionEnterprisename" />
+    <result column="customsinfo_customscode" jdbcType="VARCHAR" property="customsinfoCustomscode" />
+    <result column="customsinfo_ieportcode" jdbcType="VARCHAR" property="customsinfoIeportcode" />
+    <result column="customsinfo_trafmode" jdbcType="VARCHAR" property="customsinfoTrafmode" />
+    <result column="customsinfo_voyno" jdbcType="VARCHAR" property="customsinfoVoyno" />
+    <result column="customsinfo_distinateport" jdbcType="VARCHAR" property="customsinfoDistinateport" />
+    <result column="customsinfo_nativeshipname" jdbcType="VARCHAR" property="customsinfoNativeshipname" />
+    <result column="customsinfo_deliveryno" jdbcType="VARCHAR" property="customsinfoDeliveryno" />
+    <result column="customsinfo_trademode" jdbcType="VARCHAR" property="customsinfoTrademode" />
+    <result column="customsinfo_cutmode" jdbcType="VARCHAR" property="customsinfoCutmode" />
+    <result column="customsinfo_transmode" jdbcType="VARCHAR" property="customsinfoTransmode" />
+    <result column="customsinfo_licenseno" jdbcType="VARCHAR" property="customsinfoLicenseno" />
+    <result column="customsinfo_tradecountry" jdbcType="VARCHAR" property="customsinfoTradecountry" />
+    <result column="customsinfo_packqty" jdbcType="DECIMAL" property="customsinfoPackqty" />
+    <result column="customsinfo_packtype" jdbcType="VARCHAR" property="customsinfoPacktype" />
+    <result column="customsinfo_grosswt" jdbcType="DECIMAL" property="customsinfoGrosswt" />
+    <result column="customsinfo_netwt" jdbcType="DECIMAL" property="customsinfoNetwt" />
+    <result column="customsinfo_entyportcode" jdbcType="VARCHAR" property="customsinfoEntyportcode" />
+    <result column="customsinfo_entrytype" jdbcType="VARCHAR" property="customsinfoEntrytype" />
+    <result column="customsinfo_tradeareacode" jdbcType="VARCHAR" property="customsinfoTradeareacode" />
+    <result column="customsinfo_goodsplace" jdbcType="VARCHAR" property="customsinfoGoodsplace" />
+    <result column="customsinfo_vsaorgcode" jdbcType="VARCHAR" property="customsinfoVsaorgcode" />
+    <result column="customsinfo_orgcode" jdbcType="VARCHAR" property="customsinfoOrgcode" />
+    <result column="customsinfo_insporgcode" jdbcType="VARCHAR" property="customsinfoInsporgcode" />
+    <result column="customsinfo_note" jdbcType="VARCHAR" property="customsinfoNote" />
+    <result column="customsinfo_markno" jdbcType="VARCHAR" property="customsinfoMarkNo" />
+    <result column="goodsinfo_decgno" jdbcType="VARCHAR" property="goodsinfoDecgno" />
+    <result column="goodsinfo_priceperunit" jdbcType="DECIMAL" property="goodsinfoPriceperunit" />
+    <result column="goodsinfo_decltotal" jdbcType="DECIMAL" property="goodsinfoDecltotal" />
+    <result column="goodsinfo_gqty" jdbcType="DECIMAL" property="goodsinfoGqty" />
+    <result column="goodsinfo_gunit" jdbcType="VARCHAR" property="goodsinfoGunit" />
+    <result column="goodsinfo_cutmode" jdbcType="VARCHAR" property="goodsinfoCutmode" />
+    <result column="goodsinfo_tradecurr" jdbcType="VARCHAR" property="goodsinfoTradecurr" />
+    <result column="goodsinfo_codets" jdbcType="VARCHAR" property="goodsinfoCodets" />
+    <result column="goodsinfo_gname" jdbcType="VARCHAR" property="goodsinfoGname" />
+    <result column="goodsinfo_qty1" jdbcType="DECIMAL" property="goodsinfoQty1" />
+    <result column="goodsinfo_qty2" jdbcType="DECIMAL" property="goodsinfoQty2" />
+    <result column="goodsinfo_destinationcountry" jdbcType="VARCHAR" property="goodsinfoDestinationcountry" />
+    <result column="goodsinfo_origincountry" jdbcType="VARCHAR" property="goodsinfoOrigincountry" />
+    <result column="goodsinfo_districtcode" jdbcType="VARCHAR" property="goodsinfoDistrictcode" />
+    <result column="contactperson" jdbcType="VARCHAR" property="contactperson" />
+    <result column="contactway" jdbcType="VARCHAR" property="contactway" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, enterprise_id, status, unifiedcode, purchase_contract_no, inseastradeco, overseastradeco, 
+    enterprisename_ch, enterprisename_en, checkoutno, customscode, declare_creditcode, 
+    declare_customscode, declare_checkoutno, declare_enterprisename, production_creditcode, 
+    production_customscode, production_checkoutno, production_enterprisename, customsinfo_customscode, 
+    customsinfo_ieportcode, customsinfo_trafmode, customsinfo_voyno, customsinfo_distinateport, 
+    customsinfo_nativeshipname, customsinfo_deliveryno, customsinfo_trademode, customsinfo_cutmode, 
+    customsinfo_transmode, customsinfo_licenseno, customsinfo_tradecountry, customsinfo_packqty, 
+    customsinfo_packtype, customsinfo_grosswt, customsinfo_netwt, customsinfo_entyportcode, 
+    customsinfo_entrytype, customsinfo_tradeareacode, customsinfo_goodsplace, customsinfo_vsaorgcode, 
+    customsinfo_orgcode, customsinfo_insporgcode, customsinfo_note,customsinfo_markno, goodsinfo_decgno,
+    goodsinfo_priceperunit, goodsinfo_decltotal, goodsinfo_gqty, goodsinfo_gunit, goodsinfo_cutmode, 
+    goodsinfo_tradecurr, goodsinfo_codets, goodsinfo_gname, goodsinfo_qty1, goodsinfo_qty2, 
+    goodsinfo_destinationcountry, goodsinfo_origincountry, goodsinfo_districtcode, contactperson, 
+    contactway, uuid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_declaration
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByQuery" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_declaration
+    <where>
+      enterprise_id=#{enterpriseId,jdbcType=BIGINT}
+      <if test="purchaseContractNo != null and purchaseContractNo != ''">
+        AND  purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR}
+      </if>
+      <if test="inseastradeco != null and inseastradeco != ''">
+        AND  inseastradeco = #{inseastradeco,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_declaration
+    where uuid = #{uuid,jdbcType=VARCHAR}  LIMIT 0,1
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_broker_declaration
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_declaration
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration">
+    insert into `product-trade-blockchain`.t_broker_declaration (id, enterprise_id, status,
+      unifiedcode, purchase_contract_no, inseastradeco, 
+      overseastradeco, enterprisename_ch, enterprisename_en, 
+      checkoutno, customscode, declare_creditcode, 
+      declare_customscode, declare_checkoutno, 
+      declare_enterprisename, production_creditcode, 
+      production_customscode, production_checkoutno, 
+      production_enterprisename, customsinfo_customscode, 
+      customsinfo_ieportcode, customsinfo_trafmode, 
+      customsinfo_voyno, customsinfo_distinateport, 
+      customsinfo_nativeshipname, customsinfo_deliveryno, 
+      customsinfo_trademode, customsinfo_cutmode, 
+      customsinfo_transmode, customsinfo_licenseno, 
+      customsinfo_tradecountry, customsinfo_packqty, 
+      customsinfo_packtype, customsinfo_grosswt, 
+      customsinfo_netwt, customsinfo_entyportcode, 
+      customsinfo_entrytype, customsinfo_tradeareacode, 
+      customsinfo_goodsplace, customsinfo_vsaorgcode, 
+      customsinfo_orgcode, customsinfo_insporgcode, 
+      customsinfo_note, goodsinfo_decgno, goodsinfo_priceperunit, 
+      goodsinfo_decltotal, goodsinfo_gqty, goodsinfo_gunit, 
+      goodsinfo_cutmode, goodsinfo_tradecurr, goodsinfo_codets, 
+      goodsinfo_gname, goodsinfo_qty1, goodsinfo_qty2, 
+      goodsinfo_destinationcountry, goodsinfo_origincountry, 
+      goodsinfo_districtcode, contactperson, contactway, 
+      uuid, createtime)
+    values (#{id,jdbcType=INTEGER}, #{enterpriseId,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, 
+      #{unifiedcode,jdbcType=VARCHAR}, #{purchaseContractNo,jdbcType=VARCHAR}, #{inseastradeco,jdbcType=VARCHAR}, 
+      #{overseastradeco,jdbcType=VARCHAR}, #{enterprisenameCh,jdbcType=VARCHAR}, #{enterprisenameEn,jdbcType=VARCHAR}, 
+      #{checkoutno,jdbcType=VARCHAR}, #{customscode,jdbcType=VARCHAR}, #{declareCreditcode,jdbcType=VARCHAR}, 
+      #{declareCustomscode,jdbcType=VARCHAR}, #{declareCheckoutno,jdbcType=VARCHAR}, 
+      #{declareEnterprisename,jdbcType=VARCHAR}, #{productionCreditcode,jdbcType=VARCHAR}, 
+      #{productionCustomscode,jdbcType=VARCHAR}, #{productionCheckoutno,jdbcType=VARCHAR}, 
+      #{productionEnterprisename,jdbcType=VARCHAR}, #{customsinfoCustomscode,jdbcType=VARCHAR}, 
+      #{customsinfoIeportcode,jdbcType=VARCHAR}, #{customsinfoTrafmode,jdbcType=VARCHAR}, 
+      #{customsinfoVoyno,jdbcType=VARCHAR}, #{customsinfoDistinateport,jdbcType=VARCHAR}, 
+      #{customsinfoNativeshipname,jdbcType=VARCHAR}, #{customsinfoDeliveryno,jdbcType=VARCHAR}, 
+      #{customsinfoTrademode,jdbcType=VARCHAR}, #{customsinfoCutmode,jdbcType=VARCHAR}, 
+      #{customsinfoTransmode,jdbcType=VARCHAR}, #{customsinfoLicenseno,jdbcType=VARCHAR}, 
+      #{customsinfoTradecountry,jdbcType=VARCHAR}, #{customsinfoPackqty,jdbcType=DECIMAL}, 
+      #{customsinfoPacktype,jdbcType=VARCHAR}, #{customsinfoGrosswt,jdbcType=DECIMAL}, 
+      #{customsinfoNetwt,jdbcType=DECIMAL}, #{customsinfoEntyportcode,jdbcType=VARCHAR}, 
+      #{customsinfoEntrytype,jdbcType=VARCHAR}, #{customsinfoTradeareacode,jdbcType=VARCHAR}, 
+      #{customsinfoGoodsplace,jdbcType=VARCHAR}, #{customsinfoVsaorgcode,jdbcType=VARCHAR}, 
+      #{customsinfoOrgcode,jdbcType=VARCHAR}, #{customsinfoInsporgcode,jdbcType=VARCHAR}, 
+      #{customsinfoNote,jdbcType=VARCHAR}, #{goodsinfoDecgno,jdbcType=VARCHAR}, #{goodsinfoPriceperunit,jdbcType=DECIMAL}, 
+      #{goodsinfoDecltotal,jdbcType=DECIMAL}, #{goodsinfoGqty,jdbcType=DECIMAL}, #{goodsinfoGunit,jdbcType=VARCHAR}, 
+      #{goodsinfoCutmode,jdbcType=VARCHAR}, #{goodsinfoTradecurr,jdbcType=VARCHAR}, #{goodsinfoCodets,jdbcType=VARCHAR}, 
+      #{goodsinfoGname,jdbcType=VARCHAR}, #{goodsinfoQty1,jdbcType=DECIMAL}, #{goodsinfoQty2,jdbcType=DECIMAL}, 
+      #{goodsinfoDestinationcountry,jdbcType=VARCHAR}, #{goodsinfoOrigincountry,jdbcType=VARCHAR}, 
+      #{goodsinfoDistrictcode,jdbcType=VARCHAR}, #{contactperson,jdbcType=VARCHAR}, #{contactway,jdbcType=VARCHAR}, 
+      #{uuid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration">
+    insert into `product-trade-blockchain`.t_broker_declaration
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="unifiedcode != null">
+        unifiedcode,
+      </if>
+      <if test="purchaseContractNo != null">
+        purchase_contract_no,
+      </if>
+      <if test="inseastradeco != null">
+        inseastradeco,
+      </if>
+      <if test="overseastradeco != null">
+        overseastradeco,
+      </if>
+      <if test="enterprisenameCh != null">
+        enterprisename_ch,
+      </if>
+      <if test="enterprisenameEn != null">
+        enterprisename_en,
+      </if>
+      <if test="checkoutno != null">
+        checkoutno,
+      </if>
+      <if test="customscode != null">
+        customscode,
+      </if>
+      <if test="declareCreditcode != null">
+        declare_creditcode,
+      </if>
+      <if test="declareCustomscode != null">
+        declare_customscode,
+      </if>
+      <if test="declareCheckoutno != null">
+        declare_checkoutno,
+      </if>
+      <if test="declareEnterprisename != null">
+        declare_enterprisename,
+      </if>
+      <if test="productionCreditcode != null">
+        production_creditcode,
+      </if>
+      <if test="productionCustomscode != null">
+        production_customscode,
+      </if>
+      <if test="productionCheckoutno != null">
+        production_checkoutno,
+      </if>
+      <if test="productionEnterprisename != null">
+        production_enterprisename,
+      </if>
+      <if test="customsinfoCustomscode != null">
+        customsinfo_customscode,
+      </if>
+      <if test="customsinfoIeportcode != null">
+        customsinfo_ieportcode,
+      </if>
+      <if test="customsinfoTrafmode != null">
+        customsinfo_trafmode,
+      </if>
+      <if test="customsinfoVoyno != null">
+        customsinfo_voyno,
+      </if>
+      <if test="customsinfoDistinateport != null">
+        customsinfo_distinateport,
+      </if>
+      <if test="customsinfoNativeshipname != null">
+        customsinfo_nativeshipname,
+      </if>
+      <if test="customsinfoDeliveryno != null">
+        customsinfo_deliveryno,
+      </if>
+      <if test="customsinfoTrademode != null">
+        customsinfo_trademode,
+      </if>
+      <if test="customsinfoCutmode != null">
+        customsinfo_cutmode,
+      </if>
+      <if test="customsinfoTransmode != null">
+        customsinfo_transmode,
+      </if>
+      <if test="customsinfoLicenseno != null">
+        customsinfo_licenseno,
+      </if>
+      <if test="customsinfoTradecountry != null">
+        customsinfo_tradecountry,
+      </if>
+      <if test="customsinfoPackqty != null">
+        customsinfo_packqty,
+      </if>
+      <if test="customsinfoPacktype != null">
+        customsinfo_packtype,
+      </if>
+      <if test="customsinfoGrosswt != null">
+        customsinfo_grosswt,
+      </if>
+      <if test="customsinfoNetwt != null">
+        customsinfo_netwt,
+      </if>
+      <if test="customsinfoEntyportcode != null">
+        customsinfo_entyportcode,
+      </if>
+      <if test="customsinfoEntrytype != null">
+        customsinfo_entrytype,
+      </if>
+      <if test="customsinfoTradeareacode != null">
+        customsinfo_tradeareacode,
+      </if>
+      <if test="customsinfoGoodsplace != null">
+        customsinfo_goodsplace,
+      </if>
+      <if test="customsinfoVsaorgcode != null">
+        customsinfo_vsaorgcode,
+      </if>
+      <if test="customsinfoOrgcode != null">
+        customsinfo_orgcode,
+      </if>
+      <if test="customsinfoInsporgcode != null">
+        customsinfo_insporgcode,
+      </if>
+      <if test="customsinfoNote != null">
+        customsinfo_note,
+      </if>
+      <if test="customsinfoMarkNo != null">
+        customsinfo_markno,
+      </if>
+      <if test="goodsinfoDecgno != null">
+        goodsinfo_decgno,
+      </if>
+      <if test="goodsinfoPriceperunit != null">
+        goodsinfo_priceperunit,
+      </if>
+      <if test="goodsinfoDecltotal != null">
+        goodsinfo_decltotal,
+      </if>
+      <if test="goodsinfoGqty != null">
+        goodsinfo_gqty,
+      </if>
+      <if test="goodsinfoGunit != null">
+        goodsinfo_gunit,
+      </if>
+      <if test="goodsinfoCutmode != null">
+        goodsinfo_cutmode,
+      </if>
+      <if test="goodsinfoTradecurr != null">
+        goodsinfo_tradecurr,
+      </if>
+      <if test="goodsinfoCodets != null">
+        goodsinfo_codets,
+      </if>
+      <if test="goodsinfoGname != null">
+        goodsinfo_gname,
+      </if>
+      <if test="goodsinfoQty1 != null">
+        goodsinfo_qty1,
+      </if>
+      <if test="goodsinfoQty2 != null">
+        goodsinfo_qty2,
+      </if>
+      <if test="goodsinfoDestinationcountry != null">
+        goodsinfo_destinationcountry,
+      </if>
+      <if test="goodsinfoOrigincountry != null">
+        goodsinfo_origincountry,
+      </if>
+      <if test="goodsinfoDistrictcode != null">
+        goodsinfo_districtcode,
+      </if>
+      <if test="contactperson != null">
+        contactperson,
+      </if>
+      <if test="contactway != null">
+        contactway,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="unifiedcode != null">
+        #{unifiedcode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContractNo != null">
+        #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inseastradeco != null">
+        #{inseastradeco,jdbcType=VARCHAR},
+      </if>
+      <if test="overseastradeco != null">
+        #{overseastradeco,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenameCh != null">
+        #{enterprisenameCh,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenameEn != null">
+        #{enterprisenameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="checkoutno != null">
+        #{checkoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="customscode != null">
+        #{customscode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCreditcode != null">
+        #{declareCreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCustomscode != null">
+        #{declareCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCheckoutno != null">
+        #{declareCheckoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="declareEnterprisename != null">
+        #{declareEnterprisename,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCreditcode != null">
+        #{productionCreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCustomscode != null">
+        #{productionCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCheckoutno != null">
+        #{productionCheckoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="productionEnterprisename != null">
+        #{productionEnterprisename,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoCustomscode != null">
+        #{customsinfoCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoIeportcode != null">
+        #{customsinfoIeportcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTrafmode != null">
+        #{customsinfoTrafmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoVoyno != null">
+        #{customsinfoVoyno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoDistinateport != null">
+        #{customsinfoDistinateport,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoNativeshipname != null">
+        #{customsinfoNativeshipname,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoDeliveryno != null">
+        #{customsinfoDeliveryno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTrademode != null">
+        #{customsinfoTrademode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoCutmode != null">
+        #{customsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTransmode != null">
+        #{customsinfoTransmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoLicenseno != null">
+        #{customsinfoLicenseno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTradecountry != null">
+        #{customsinfoTradecountry,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoPackqty != null">
+        #{customsinfoPackqty,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoPacktype != null">
+        #{customsinfoPacktype,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoGrosswt != null">
+        #{customsinfoGrosswt,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoNetwt != null">
+        #{customsinfoNetwt,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoEntyportcode != null">
+        #{customsinfoEntyportcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoEntrytype != null">
+        #{customsinfoEntrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTradeareacode != null">
+        #{customsinfoTradeareacode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoGoodsplace != null">
+        #{customsinfoGoodsplace,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoVsaorgcode != null">
+        #{customsinfoVsaorgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoOrgcode != null">
+        #{customsinfoOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoInsporgcode != null">
+        #{customsinfoInsporgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoNote != null">
+        #{customsinfoNote,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoMarkNo != null">
+        #{customsinfoMarkNo,jdbcType=VARCHAR},
+      </if>
+
+      <if test="goodsinfoDecgno != null">
+        #{goodsinfoDecgno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoPriceperunit != null">
+        #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDecltotal != null">
+        #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGqty != null">
+        #{goodsinfoGqty,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGunit != null">
+        #{goodsinfoGunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null">
+        #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoTradecurr != null">
+        #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCodets != null">
+        #{goodsinfoCodets,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoGname != null">
+        #{goodsinfoGname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoQty1 != null">
+        #{goodsinfoQty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoQty2 != null">
+        #{goodsinfoQty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDestinationcountry != null">
+        #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null">
+        #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDistrictcode != null">
+        #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null">
+        #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByUuidSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration">
+    update `product-trade-blockchain`.t_broker_declaration
+    <set>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="unifiedcode != null">
+        unifiedcode = #{unifiedcode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContractNo != null">
+        purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inseastradeco != null">
+        inseastradeco = #{inseastradeco,jdbcType=VARCHAR},
+      </if>
+      <if test="overseastradeco != null">
+        overseastradeco = #{overseastradeco,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenameCh != null">
+        enterprisename_ch = #{enterprisenameCh,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisenameEn != null">
+        enterprisename_en = #{enterprisenameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="checkoutno != null">
+        checkoutno = #{checkoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="customscode != null">
+        customscode = #{customscode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCreditcode != null">
+        declare_creditcode = #{declareCreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCustomscode != null">
+        declare_customscode = #{declareCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="declareCheckoutno != null">
+        declare_checkoutno = #{declareCheckoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="declareEnterprisename != null">
+        declare_enterprisename = #{declareEnterprisename,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCreditcode != null">
+        production_creditcode = #{productionCreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCustomscode != null">
+        production_customscode = #{productionCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="productionCheckoutno != null">
+        production_checkoutno = #{productionCheckoutno,jdbcType=VARCHAR},
+      </if>
+      <if test="productionEnterprisename != null">
+        production_enterprisename = #{productionEnterprisename,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoCustomscode != null">
+        customsinfo_customscode = #{customsinfoCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoIeportcode != null">
+        customsinfo_ieportcode = #{customsinfoIeportcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTrafmode != null">
+        customsinfo_trafmode = #{customsinfoTrafmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoVoyno != null">
+        customsinfo_voyno = #{customsinfoVoyno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoDistinateport != null">
+        customsinfo_distinateport = #{customsinfoDistinateport,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoNativeshipname != null">
+        customsinfo_nativeshipname = #{customsinfoNativeshipname,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoDeliveryno != null">
+        customsinfo_deliveryno = #{customsinfoDeliveryno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTrademode != null">
+        customsinfo_trademode = #{customsinfoTrademode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoCutmode != null">
+        customsinfo_cutmode = #{customsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTransmode != null">
+        customsinfo_transmode = #{customsinfoTransmode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoLicenseno != null">
+        customsinfo_licenseno = #{customsinfoLicenseno,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTradecountry != null">
+        customsinfo_tradecountry = #{customsinfoTradecountry,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoPackqty != null">
+        customsinfo_packqty = #{customsinfoPackqty,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoPacktype != null">
+        customsinfo_packtype = #{customsinfoPacktype,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoGrosswt != null">
+        customsinfo_grosswt = #{customsinfoGrosswt,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoNetwt != null">
+        customsinfo_netwt = #{customsinfoNetwt,jdbcType=DECIMAL},
+      </if>
+      <if test="customsinfoEntyportcode != null">
+        customsinfo_entyportcode = #{customsinfoEntyportcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoEntrytype != null">
+        customsinfo_entrytype = #{customsinfoEntrytype,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoTradeareacode != null">
+        customsinfo_tradeareacode = #{customsinfoTradeareacode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoGoodsplace != null">
+        customsinfo_goodsplace = #{customsinfoGoodsplace,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoVsaorgcode != null">
+        customsinfo_vsaorgcode = #{customsinfoVsaorgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoOrgcode != null">
+        customsinfo_orgcode = #{customsinfoOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoInsporgcode != null">
+        customsinfo_insporgcode = #{customsinfoInsporgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoNote != null">
+        customsinfo_note = #{customsinfoNote,jdbcType=VARCHAR},
+      </if>
+      <if test="customsinfoMarkNo != null">
+        customsinfo_markno = #{customsinfoMarkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDecgno != null">
+        goodsinfo_decgno = #{goodsinfoDecgno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoPriceperunit != null">
+        goodsinfo_priceperunit = #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDecltotal != null">
+        goodsinfo_decltotal = #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGqty != null">
+        goodsinfo_gqty = #{goodsinfoGqty,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoGunit != null">
+        goodsinfo_gunit = #{goodsinfoGunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCutmode != null">
+        goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoTradecurr != null">
+        goodsinfo_tradecurr = #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoCodets != null">
+        goodsinfo_codets = #{goodsinfoCodets,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoGname != null">
+        goodsinfo_gname = #{goodsinfoGname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoQty1 != null">
+        goodsinfo_qty1 = #{goodsinfoQty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoQty2 != null">
+        goodsinfo_qty2 = #{goodsinfoQty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsinfoDestinationcountry != null">
+        goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoOrigincountry != null">
+        goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinfoDistrictcode != null">
+        goodsinfo_districtcode = #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null">
+        contactperson = #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactway != null">
+        contactway = #{contactway,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDeclaration">
+    update `product-trade-blockchain`.t_broker_declaration
+    set enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR},
+      unifiedcode = #{unifiedcode,jdbcType=VARCHAR},
+      purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      inseastradeco = #{inseastradeco,jdbcType=VARCHAR},
+      overseastradeco = #{overseastradeco,jdbcType=VARCHAR},
+      enterprisename_ch = #{enterprisenameCh,jdbcType=VARCHAR},
+      enterprisename_en = #{enterprisenameEn,jdbcType=VARCHAR},
+      checkoutno = #{checkoutno,jdbcType=VARCHAR},
+      customscode = #{customscode,jdbcType=VARCHAR},
+      declare_creditcode = #{declareCreditcode,jdbcType=VARCHAR},
+      declare_customscode = #{declareCustomscode,jdbcType=VARCHAR},
+      declare_checkoutno = #{declareCheckoutno,jdbcType=VARCHAR},
+      declare_enterprisename = #{declareEnterprisename,jdbcType=VARCHAR},
+      production_creditcode = #{productionCreditcode,jdbcType=VARCHAR},
+      production_customscode = #{productionCustomscode,jdbcType=VARCHAR},
+      production_checkoutno = #{productionCheckoutno,jdbcType=VARCHAR},
+      production_enterprisename = #{productionEnterprisename,jdbcType=VARCHAR},
+      customsinfo_customscode = #{customsinfoCustomscode,jdbcType=VARCHAR},
+      customsinfo_ieportcode = #{customsinfoIeportcode,jdbcType=VARCHAR},
+      customsinfo_trafmode = #{customsinfoTrafmode,jdbcType=VARCHAR},
+      customsinfo_voyno = #{customsinfoVoyno,jdbcType=VARCHAR},
+      customsinfo_distinateport = #{customsinfoDistinateport,jdbcType=VARCHAR},
+      customsinfo_nativeshipname = #{customsinfoNativeshipname,jdbcType=VARCHAR},
+      customsinfo_deliveryno = #{customsinfoDeliveryno,jdbcType=VARCHAR},
+      customsinfo_trademode = #{customsinfoTrademode,jdbcType=VARCHAR},
+      customsinfo_cutmode = #{customsinfoCutmode,jdbcType=VARCHAR},
+      customsinfo_transmode = #{customsinfoTransmode,jdbcType=VARCHAR},
+      customsinfo_licenseno = #{customsinfoLicenseno,jdbcType=VARCHAR},
+      customsinfo_tradecountry = #{customsinfoTradecountry,jdbcType=VARCHAR},
+      customsinfo_packqty = #{customsinfoPackqty,jdbcType=DECIMAL},
+      customsinfo_packtype = #{customsinfoPacktype,jdbcType=VARCHAR},
+      customsinfo_grosswt = #{customsinfoGrosswt,jdbcType=DECIMAL},
+      customsinfo_netwt = #{customsinfoNetwt,jdbcType=DECIMAL},
+      customsinfo_entyportcode = #{customsinfoEntyportcode,jdbcType=VARCHAR},
+      customsinfo_entrytype = #{customsinfoEntrytype,jdbcType=VARCHAR},
+      customsinfo_tradeareacode = #{customsinfoTradeareacode,jdbcType=VARCHAR},
+      customsinfo_goodsplace = #{customsinfoGoodsplace,jdbcType=VARCHAR},
+      customsinfo_vsaorgcode = #{customsinfoVsaorgcode,jdbcType=VARCHAR},
+      customsinfo_orgcode = #{customsinfoOrgcode,jdbcType=VARCHAR},
+      customsinfo_insporgcode = #{customsinfoInsporgcode,jdbcType=VARCHAR},
+      customsinfo_note = #{customsinfoNote,jdbcType=VARCHAR},
+      goodsinfo_decgno = #{goodsinfoDecgno,jdbcType=VARCHAR},
+      goodsinfo_priceperunit = #{goodsinfoPriceperunit,jdbcType=DECIMAL},
+      goodsinfo_decltotal = #{goodsinfoDecltotal,jdbcType=DECIMAL},
+      goodsinfo_gqty = #{goodsinfoGqty,jdbcType=DECIMAL},
+      goodsinfo_gunit = #{goodsinfoGunit,jdbcType=VARCHAR},
+      goodsinfo_cutmode = #{goodsinfoCutmode,jdbcType=VARCHAR},
+      goodsinfo_tradecurr = #{goodsinfoTradecurr,jdbcType=VARCHAR},
+      goodsinfo_codets = #{goodsinfoCodets,jdbcType=VARCHAR},
+      goodsinfo_gname = #{goodsinfoGname,jdbcType=VARCHAR},
+      goodsinfo_qty1 = #{goodsinfoQty1,jdbcType=DECIMAL},
+      goodsinfo_qty2 = #{goodsinfoQty2,jdbcType=DECIMAL},
+      goodsinfo_destinationcountry = #{goodsinfoDestinationcountry,jdbcType=VARCHAR},
+      goodsinfo_origincountry = #{goodsinfoOrigincountry,jdbcType=VARCHAR},
+      goodsinfo_districtcode = #{goodsinfoDistrictcode,jdbcType=VARCHAR},
+      contactperson = #{contactperson,jdbcType=VARCHAR},
+      contactway = #{contactway,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

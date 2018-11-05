@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="$imageServer.get('orderexecute/css/interface/interface.css')" ></link>
+<script src="$imageServer.get('orderexecute/js/interface/interfaceList.js')"></script>
+
+	<div class="pp15" id="layerDemo">
+		<!--搜索条件-->
+		<div class="ry-banner">
+			<div class="layui-form-item layui-container">
+				<div class="layui-inline">
+					<label class="layui-form-label">外部系统别名</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="sysName" id="sysName" placeholder="请输入外部系统别名"/>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">接口业务类型</label>
+					<div class="layui-inline">
+						<input class="layui-input" name="businessType" id="businessType" placeholder="请输入接口业务类型"/>
+					</div>
+				</div>
+				<button style="margin-top:-12px" class="layui-btn layui-btn-normal" data-type="reload" id="btn">Find</button>
+				<button style="margin-top:-12px" class="layui-btn layui-btn-normal" id="add">新增</button>
+			</div>
+		</div>
+		<!--列表-->
+		<table class="layui-table" id="test" lay-filter="demo">
+			<thead>
+				<tr>
+					<th lay-data="{field:'sysName', width:120}">系统别名</th>
+					<th lay-data="{field:'memRole', width:120}">系统用户角色</th>
+					<th lay-data="{field:'interfaceType', width:120}">接口类型</th>
+					<th lay-data="{field:'businessType', width:120}">接口业务类型</th>
+					<th lay-data="{field:'interfaceCode', width:120}">接口唯一编码</th>
+					<th lay-data="{field:'interfaceUrl'}">接口地址</th>
+					<th lay-data="{field:'interfaceDesc', width:200}">接口说明</th>
+					<th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#barDemo'}">操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+		
+<script type="text/html" id="barDemo">
+	<i class="layui-icon">&#xe642;</i>
+	<a class="dialog-link" lay-event="edit" style="color:#0A529C">Edit</a>
+	<i class="layui-icon" style="color:red">&#xe640;</i>
+	<a class="dialog-link btcol" lay-event="del" style="color:#0A529C">remove</a>
+</script>

@@ -1,0 +1,178 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.clearfix:after{clear:both;}/*清楚浮动*/
+.clearfix{*zoom:1;zoom:1;} /*解决ie6/7下面的浮动塌陷问题*/
+body,html{
+    width: 100%;
+    height: 100%;
+    background: url("../../images/loginBJ.jpg") center/cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+main{
+    width: 430px;
+    height: 520px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 2px;
+}
+.login-h{
+    width: 100%;
+    margin-bottom: 37px ;
+}
+.login-h>h3{
+    font-size: 24px;
+    color: #333333 ;
+    margin-top: 40px;
+    margin-bottom: 8px;
+}
+.login-h>p{
+    font-size: 14px;
+    color: #999999 ;
+}
+.login-h>h3,.login-h>p{
+    width: 100%;
+    text-align: center;
+}
+.form-group{
+    width: 330px;
+    height:58px;
+    margin-left: 50px;
+    border-radius: 4px;
+    position: relative;
+}
+.form-group:last-child{
+    width: 344px;
+    border-bottom: 1px solid #ECECEC;
+}
+.form-group>input{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding-left: 45px;
+    border-radius: 2px;
+    border: 1px solid #C1C1C1 ;
+    font-size: 15px;
+    color: #999999;
+}
+.form-vcode{
+    height: 173px;
+}
+.form-vcode>input {
+    width: 237px;
+    float: left;
+}
+.form-group>i:after{
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 8px;
+    width:20px;
+    height: 23px;
+}
+.form-group>.username:after{
+    left: 10px;
+    top: 6px;
+    background: url("../../images/person.png") center/cover no-repeat;
+}
+.form-group>.password:after{
+    width: 17px;
+    height: 21px;
+    background: url("../../images/password.png") center/cover no-repeat;
+}
+.form-group>.vcode:after{
+    background: url("../../images/vcode.png") center/cover no-repeat;
+    width: 18px;
+    height: 20px;
+}
+.form-group>span{
+    width: 100%;
+    display: inline-block;
+    color: #EA2A2A;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    text-align: right;
+    /*display: none;*/
+}
+.form-vcode>span{
+    text-align: left;
+    float: left;
+    width: 190px;
+    line-height: 29px;
+}
+.vcode-img{
+    width: 70px;
+    height: 34px;
+    padding: 10px;
+    float: left;
+}
+.vcode-Refresh{
+    float: left;
+    width: 16px;
+    height: 16px;
+}
+.form-vcode>.vcode-Refresh:after{
+    content: '';
+    position: absolute;
+    top:10px;
+    right: 11px;
+    width: 16px;
+    height: 16px;
+    transform:rotate(0deg);
+    background: url("../../images/refresh.png") center/cover no-repeat;
+}
+.form-vcode>a{
+    font-size: 14px;
+    text-decoration: none;
+    color: #F36523;
+    float: right;
+    line-height: 30px;
+}
+.button-check{
+    display: inline-block;
+    width: 330px;
+    height: 48px;
+    margin: 40px auto 0 auto;
+    background: #F36523;
+    border-radius: 2px;
+    font-style: normal;
+}
+.button-check>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 48px;
+}
+.button-check>a:hover{
+    background: #FF9D32;
+}
+.footer{
+    padding:17px 50px  0  50px;
+}
+.footer>p{
+    font-size: 14px;
+    color: #333333;
+    float: left;
+}
+.footer>div>a{
+    font-size: 14px;
+    color: #F36523;
+    float: right;
+    text-decoration: none;
+}
+/*.rotate:after{*/
+    /*transform:rotate(270deg);*/
+/*}*/

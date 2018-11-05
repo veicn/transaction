@@ -1,0 +1,138 @@
+#set($js_validate = "validate")##需要验证
+#set($id = $info.id)
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm').put("menu","customerInfo")
+        <form action="#" method="post" id="customerForm">
+        <ul class="c-bczl enterbox1">
+            #springBind("info.id")
+          ##  <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+
+            #springBind("info.lastYearOperationRevenue")
+            <li class="c-bcz clearfix"><span class="c-b-txt">
+            	<em>*</em>上一年营业收入：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearOperationRevenue" placeholder="请输入上一年营业收入" class="form-inp"  name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            	#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+            #springBind("info.lastYearTradeVolume")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">上一年贸易额：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearTradeVolume" placeholder="请输入上一年贸易额" class="form-inp"  name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+				#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+            #springBind("info.masterCompany")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">所属母公司：</span>
+            	#if(!$id)
+	            	<input type="text" id="masterCompany" class="form-inp" placeholder="请输入所属母公司" name="$!{status.expression}" value="$!{status.value}" >
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            	#if(!$id)
+				 	<div class="c-qy-tx"> 
+						#if(!$status.isError()&&  !$!{status.value})
+
+		                #else
+		                    ${status.errorMessage}
+		                #end
+	                </div>
+            	#end
+        </ul>
+        #if(!$id)
+	        <div class="c-subdiv c-mod-bc c-mod-bc2"><button class="c-btnsub">提交</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">返回</button></div>
+        #end
+        </form>
+    </div>
+</div>
+
+#jscode()
+  $(function(){
+         //表单验证及提交
+        $ ("#customerForm").validate({
+            ignore: ".ignore",
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                lastYearOperationRevenue: {
+                    "required":true,
+                    number:true  ,
+                    maxlength:16
+                  
+                },
+                lastYearTradeVolume: {
+                    required: true,
+                    number:true  ,
+                    maxlength:16
+                },
+                masterCompany: {
+                    required: true 
+                } 
+            },
+            messages: {
+                lastYearOperationRevenue: {
+                    required:"请输入上一年收入",
+                    number:"请输入有效数字"
+                },
+                lastYearTradeVolume: {
+                    required:"请输入上一年贸易额",
+                    number:"请输入有效数字"
+                },
+                masterCompany: {
+                    required:"请输入所属母公司"
+                }
+              },  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+
+
+        $('input').blur(function(){
+            var span = $(this) .parent().next();
+            if(!span.find("label").get(0)){
+                span.html(".");
+            }
+        })
+     });
+#end

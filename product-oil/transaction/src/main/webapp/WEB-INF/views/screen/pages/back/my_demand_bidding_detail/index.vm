@@ -1,0 +1,489 @@
+$contain.get('/common/title.htm').put('title', 'My Bidding Detail')
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/script/pages/back/my_bidding_detail/index.js?js_version=04261116'))
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/common/bootstrap.min.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+#css("$appServer.get('/css/work/addAgreement.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myResouces.css?css_version=03280827')")
+#css("$appServer.get('/css/work/resDetails.css?css_version=03280827')")
+#css("$appServer.get('/css/work/myPurchaseDetails.css?css_version=03280827')")
+<style>
+    .r-content .benchmark-txt span {
+        width: 121px !important;
+    }
+</style>
+
+<div class="m-nav fl r-nav" >
+    <div class="m-sls cleafix">
+        <div class="r-tit">
+            <a onclick="MyDemandBiddingList()" href="$appServer.get('/pages/back/my_demand_bidding_list/index.htm')">My Offers ></a>
+            <span>Offer Details</span>
+        </div>
+        <form id="myDemandBiddingList" method="post" action="$appServer.get('/pages/back/my_demand_bidding_list/index.htm')">
+            <input type="hidden" name="biddingFlag"  value="2">
+        </form>
+        <div class="r-tab">
+            <ul class="r-tab-left qd-tab-left ">
+                <li>
+                    <span>Offer No:  </span>
+                    <span> $!{biddingSheetCombineVO.biddingSheetVO.serialNumber} </span>
+                </li>
+                <li>
+                    <span> $!{biddingSheetCombineVO.biddingSheetVO.biddingSheetStatusVO.enName} </span>
+                </li>
+
+                <li class="m-nav-btn" >
+                    #if($!{biddingSheetCombineVO.biddingSheetVO.biddingSheetStatusVO.code} == '1')
+                        <em class="check-b1 check-b2 button-b1">
+                            <a onclick="reOffer('$!{biddingSheetCombineVO.biddingSheetVO.demandSheetUuid}','$!{biddingSheetCombineVO.biddingSheetVO.uuid}')" class="br a-back q-Quote">
+                                Re-Offer
+                            </a>
+                        </em>
+                    #end
+                    <a href="javascript:history.back(-1)" style="height: 36px;line-height: 36px;
+                                    font-size: 14px;margin-left: 20px;width: 120px;text-align: center;color: #fff;" class="br a-back">
+                        Back
+                    </a>
+                </li>
+            </ul>
+
+            <div class="r-tab-right">
+                $contain.get('/pages/back/my_product_bidding_detail/bidding_sheet_status.htm').put('biddingSheetVO', $!{biddingSheetCombineVO.biddingSheetVO})
+            </div>
+        </div>
+
+        <div class="main-title">
+            <h3>$!{biddingSheetCombineVO.productInfoVO.productCategoryVO.enName}   ($!{biddingSheetCombineVO.productInfoVO.productSpecificationVO.enName})</h3>
+        </div>
+        <div class="main-con-one clearfix">
+            <div class="fl pur-text">
+                <h3>Demand Details</h3>
+                <ul>
+                    <li>
+                        <span>Quantity :</span>
+                        <span>$!{demandSheetCombineVO.productInfoVO.quantityAsString} $!{demandSheetCombineVO.productInfoVO.quantityUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Incoterms :</span>
+                        <span>$!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Tolerance :</span>
+                        <span>+/-  $!{demandSheetCombineVO.productInfoVO.tolerance}% at OT</span>
+                    </li>
+                    <li>
+                        <span style="width: 174.84px">Quality Standard :</span>
+                        <span class="file-name qualityStandard" style="display:none">$!{demandSheetCombineVO.productInfoVO.qualityStandard}</span>
+                        <span id="r-content1-active" style="text-decoration: underline;cursor: pointer;left:266px;" class = "qualityStandardName">$!{demandSheetCombineVO.productInfoVO.qualityStandardName}</span>
+                    </li>
+                    <li>
+                        <span>Expired Time :</span>
+                        <span>$!{demandSheetCombineVO.productInfoVO.deadlineAsString}</span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span>Benchmark :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.priceSourceVO.enName}</span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span></span>
+                        <span>for $!{demandSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.enName}</span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span></span>
+                        <span>under $!{demandSheetCombineVO.pricingInfoVO.priceRegionVO.enName}</span>
+                    </li>
+                    #if($!{demandSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                        <li class="pur-text-bench">
+                            <span>Benchmark2 :</span>
+                            <span>$!{demandSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span>for $!{demandSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.enName}</span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span>under $!{demandSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</span>
+                        </li>
+                    #elseif($!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                    #end
+
+                    <li>
+                        <span>Premium :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.premiumsAndDiscountsAsString} $!{demandSheetCombineVO.pricingInfoVO.currencyVO.enName}/$!{demandSheetCombineVO.pricingInfoVO.pricingUnitVO.enName}</span>
+                    </li>
+                    <li class="pur-text-lone pur-text-price">
+                        <span>Pricing Formula :</span>
+                        <span class="formulspan">
+                            #if($!{demandSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                            <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                            #else
+                                <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                            #end
+                        </span>
+                    </li>
+                    <li>
+                        <span>Precing Period :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.pricingPeriod}</span>
+                    </li>
+                    <li>
+                        <span>Payment Terms :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.paymentTerm}</span>
+                    </li>
+                    <li>
+                        <span>Quantity Determination :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.settlementQuantity}</span>
+                    </li>
+                    <li>
+                        <span>Inspection :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.inspectionVO.enName}</span>
+                    </li>
+                    <li >
+                        <span>Law :</span>
+                        <span>$!{demandSheetCombineVO.pricingInfoVO.law}</span>
+                    </li>
+                    <li>
+                        <span>Other Terms :</span>
+                        ##<textarea class="terms-text" readonly style="border: none; font-size: 14px; color: #333;resize:none;">$!{demandSheetCombineVO.otherInfoVO.otherTerm}</textarea>
+                        <span class="termText">$!{demandSheetCombineVO.otherInfoVO.otherTerm}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="fl pur-text pur-text-two">
+                <h3>Offer Details</h3>
+                <ul>
+                    <li>
+                        <span>Quantity :</span>
+                        <span>$!{biddingSheetCombineVO.productInfoVO.quantityAsString} $!{biddingSheetCombineVO.productInfoVO.quantityUnitVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Incoterms :</span>
+                        <span>$!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Tolerance :</span>
+                        <span>+/-  $!{biddingSheetCombineVO.productInfoVO.tolerance}% at OT</span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span class="file-active"></span>
+                    </li>
+                    <li>
+                        <span></span>
+                        <span></span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span>Benchmark :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.priceSourceVO.enName}</span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span></span>
+                        <span>for $!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO.enName}</span>
+                    </li>
+                    <li class="pur-text-bench">
+                        <span></span>
+                        <span>under $!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO.enName}</span>
+                    </li>
+                    #if($!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                        <li class="pur-text-bench">
+                            <span>Benchmark2 :</span>
+                            <span>$!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span>for $!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2.enName}</span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span>under $!{biddingSheetCombineVO.pricingInfoVO.priceRegionVO2.enName}</span>
+                        </li>
+                    #elseif($!{demandSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                        <li class="pur-text-bench">
+                            <span></span>
+                            <span></span>
+                        </li>
+                    #end
+                    <li>
+                        <span>Premium :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.premiumsAndDiscountsAsString} $!{biddingSheetCombineVO.pricingInfoVO.currencyVO.enName}/$!{biddingSheetCombineVO.pricingInfoVO.pricingUnitVO.enName}</span>
+                    </li>
+                    <li class="pur-text-lone pur-text-price">
+                        <span>Pricing Formula :</span>
+                        <span class="formulspan">
+                            #if($!{biddingSheetCombineVO.pricingInfoVO.pricingBenchmarkVO2})
+                            <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                            #else
+                                <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                            #end
+                        </span>
+                    </li>
+                    <li>
+                        <span>Precing Period :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.pricingPeriod}</span>
+                    </li>
+                    <li>
+                        <span>Payment Terms :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.paymentTerm}</span>
+                    </li>
+                    <li>
+                        <span>Quantity Determination :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.settlementQuantity}</span>
+                    </li>
+                    <li>
+                        <span>Inspection :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.inspectionVO.enName}</span>
+                    </li>
+                    <li >
+                        <span>Law :</span>
+                        <span>$!{biddingSheetCombineVO.pricingInfoVO.law}</span>
+                    </li>
+                    <li>
+                        <span>Other Terms :</span>
+                        ##<textarea class="terms-text" readonly style="border: none; font-size: 14px; color: #333;resize:none;">$!{biddingSheetCombineVO.otherInfoVO.otherTerm}</textarea>
+                        <span class="termText">$!{biddingSheetCombineVO.otherInfoVO.otherTerm}</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-con-one clearfix">
+            <div class="fl pur-text">
+                <h3>Transportation</h3>
+                <ul>
+                    <li>
+                        <span>Transport Mode :</span>
+                        <span>$!{demandSheetCombineVO.transportInfoVO.transportModeVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Laycan :</span>
+                        <span>$!{demandSheetCombineVO.transportInfoVO.laycanStartDateAsString} - $!{demandSheetCombineVO.transportInfoVO.laycanEndDateAsString}</span>
+                    </li>
+                    <li>
+                        <span>Laytime :</span>
+                        <span>$!{demandSheetCombineVO.transportInfoVO.laytimeAsString} H+6</span>
+                    </li>
+                    <li>
+                        <span>Demurrage Rate :</span>
+                        ##<span>$!{saleSheetCombineVO.transportInfoVO.demurrageRateVO.enName}</span>
+                        #if($!{demandSheetCombineVO.transportInfoVO.demurrageRateVO.code} == "1")
+                            <span>$!{demandSheetCombineVO.transportInfoVO.demurrageRateNumAsString} $!{demandSheetCombineVO.transportInfoVO.demurrageRateVO.enName}</span>
+                        #else
+                            <span>$!{demandSheetCombineVO.transportInfoVO.demurrageRateVO.enName}</span>
+                        #end
+                    </li>
+                    #if($!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'FOB')
+                        <li>
+                            <span>Load Port:</span>
+                            <span>$!{demandSheetCombineVO.transportInfoVO.loadingPort}, $!{demandSheetCombineVO.transportInfoVO.loadingCountry}</span>
+                        </li>
+                    #end
+                    #if($!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CFR' || $!{demandSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CIF')
+                        <li>
+                            <span>Discharge Port:</span>
+                            <span>$!{demandSheetCombineVO.transportInfoVO.dischargePort}, $!{demandSheetCombineVO.transportInfoVO.dischargeCountry} </span>
+                        </li>
+                    #end
+                </ul>
+            </div>
+            <div class="fl pur-text pur-text-two">
+                <h3>Transportation</h3>
+                <ul>
+                    <li>
+                        <span>Transport Mode :</span>
+                        <span>$!{biddingSheetCombineVO.transportInfoVO.transportModeVO.enName}</span>
+                    </li>
+                    <li>
+                        <span>Laycan :</span>
+                        <span>$!{biddingSheetCombineVO.transportInfoVO.laycanStartDateAsString} - $!{biddingSheetCombineVO.transportInfoVO.laycanEndDateAsString}</span>
+                    </li>
+                    <li>
+                        <span>Laytime :</span>
+                        <span>$!{biddingSheetCombineVO.transportInfoVO.laytimeAsString} H+6</span>
+                    </li>
+                    <li>
+                        <span>Demurrage Rate :</span>
+                        #if($!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.code} == "1")
+                            <span>$!{biddingSheetCombineVO.transportInfoVO.demurrageRateNumAsString} $!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.enName}</span>
+                        #else
+                            <span>$!{biddingSheetCombineVO.transportInfoVO.demurrageRateVO.enName}</span>
+                        #end
+                    </li>
+                    #if($!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'FOB')
+                        <li>
+                            <span>Load Port:</span>
+                            <span>$!{biddingSheetCombineVO.transportInfoVO.loadingPort}, $!{biddingSheetCombineVO.transportInfoVO.loadingCountry}  </span>
+                        </li>
+                    #end
+                    #if($!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CFR' || $!{biddingSheetCombineVO.productInfoVO.tradeTermVO.enName} == 'CIF')
+                        <li>
+                            <span>Discharge Port:</span>
+                            <span>$!{biddingSheetCombineVO.transportInfoVO.dischargePort}, $!{biddingSheetCombineVO.transportInfoVO.dischargeCountry} </span>
+                        </li>
+                    #end
+                </ul>
+            </div>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Buyer</span>
+            <div class="company-txt">
+                <label style="width: 121px">Company :</label>
+                <em>$!{demandSheetCombineVO.buyerInfoVO.enterpriseName}</em>
+            </div>
+            <div class="company-txt">
+                <label style="width: 121px">Address :</label>
+                <em>$!{demandSheetCombineVO.buyerInfoVO.address}</em>
+            </div>
+            <ul>
+                <li>
+                    <span>Contact Person :</span>
+                    <span>$!{demandSheetCombineVO.buyerInfoVO.traderName}</span>
+                </li>
+                <li>
+                    <span>Email  :</span>
+                    <span> $!{demandSheetCombineVO.buyerInfoVO.email}</span>
+                </li>
+                <li>
+                    <span>Tel : </span>
+                    <span>$!{demandSheetCombineVO.buyerInfoVO.telephone}</span>
+                </li>
+                <li>
+                    <span>Fax :</span>
+                    <span>$!{demandSheetCombineVO.buyerInfoVO.fax}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Seller</span>
+            <div class="company-txt">
+                <label style="width: 121px">Company :</label>
+                <em>$!{biddingSheetCombineVO.salerInfoVO.enterpriseName}</em>
+            </div>
+            <div class="company-txt">
+                <label style="width: 121px">Address :</label>
+                <em>$!{biddingSheetCombineVO.salerInfoVO.address}</em>
+            </div>
+            <ul>
+                <li>
+                    <span>Contact Person :</span>
+                    <span>$!{biddingSheetCombineVO.salerInfoVO.traderName}</span>
+                </li>
+                <li>
+                    <span>Email  :</span>
+                    <span> $!{biddingSheetCombineVO.salerInfoVO.email}</span>
+                </li>
+                <li>
+                    <span>Tel : </span>
+                    <span>$!{biddingSheetCombineVO.salerInfoVO.telephone}</span>
+                </li>
+                <li>
+                    <span>Fax :</span>
+                    <span>$!{biddingSheetCombineVO.salerInfoVO.fax}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="r-content q-history">
+            <span class="r-cont-tit">Bid History</span>
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>No.</th>
+                    <th>Status</th>
+                    <th>Quantity</th>
+                    <th>Incoterms</th>
+                    <th>Payment Terms</th>
+                    <th>Premium</th>
+                    <th >Creat Time</th>
+                </tr>
+                #foreach($record in $!{biddingSheetCombineListVO})
+                    <tr>
+                    #*报价单编号*#
+                        <td>$!{record.biddingSheetVO.serialNumber}</td>
+                    #*报价单状态*#
+                        <td>$!{record.biddingSheetVO.biddingSheetStatusVO.enName}</td>
+                    #*数量*#
+                        <td>$!{record.productInfoVO.quantityAsString}</td>
+                    #*贸易条款*#
+                        <td>$!{record.productInfoVO.tradeTermVO.enName}</td>
+                    #*付款条约*#
+                        <td title="$!{record.pricingInfoVO.paymentTerm}">$!{record.pricingInfoVO.paymentTerm}</td>
+                    #*升贴水*#
+                        <td>$!{record.pricingInfoVO.premiumsAndDiscountsAsString} $!{record.pricingInfoVO.currencyVO.enName}/$!{record.pricingInfoVO.pricingUnitVO.enName}</td>
+                    #*创建时间*#
+                        <td title="$!{record.biddingSheetVO.gmtCreated}">$!{record.biddingSheetVO.gmtCreated}</td>
+                    </tr>
+                #end
+            </table>
+        </div>
+    </div>
+
+</div>
+<script>
+    $('.termText').attr('title',function () {
+        return $(this).text()
+    })
+    function MyDemandBiddingList(){
+        document.getElementById("#myDemandBiddingList").submit();
+    }
+    ##href="$appServer.get('/pages/front/product_bidding/index.htm').put('uuid', $!{biddingSheetCombineVO.biddingSheetVO.demandSheetUuid}).put('biddingSheetUuid',$!{biddingSheetCombineVO.biddingSheetVO.uuid})"
+    function reOffer(uuid,biddingSheetUuid){
+        layui.use(['layer'], function(){
+            layer.confirm("You have offered for this purchase demand.</br> Are you sure to re-offer ?", {
+                title:'Info',
+                area: ['535px'],
+                type: 1,
+                icon: 2,
+                //anim: 6, //默认动画风格
+                skin: 'demo-class',
+                closeBtn: 3,
+                shadeClose: false,
+                shade: [0.5, '#000000'],
+                btnAlign: 'c',
+                btn: ['Yes','No','View Existed Offer'] //按钮
+            ##href="$appServer.get('/pages/front/product_bidding/index.htm').put('uuid', $!{res.biddingSheetVO.saleSheetUuid}).put('biddingSheetUuid',$!{res.biddingSheetVO.uuid})"
+                ,btn3:function(){
+                    window.location.href =appServer + "pages/back/my_demand_bidding_detail/index.htm?uuid="+biddingSheetUuid;
+
+                }
+            }, function(){
+                window.location.href =appServer + "pages/front/product_bidding/demand_index.htm?uuid="+uuid+"&&biddingSheetUuid="+biddingSheetUuid;
+
+            },function(){
+                return;
+            })
+        })
+    }
+</script>
+
+
+
+
+
+
+
+

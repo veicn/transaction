@@ -1,0 +1,19 @@
+<div class="caigou-content-right">
+    <a class="right-fbxq" href="$appServer.get('crudeoillobby/purchasingDemand.htm')"  >发布采购需求</a>
+    <div class="right-rdxq">
+        <div class="rdxq-bt">热点需求</div>
+        <ul>
+            #foreach($!d in $!pageInfoResult.list)
+                #if($!velocityCount<=6)
+                    <li class="rdxq-bt-con">
+                        <div class="rdxq-bt-con-pic"><a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{d.id}"><img src="$imageServer.get('/images/cg_pic.jpg')"/></a></div>
+                        <div class="rdxq-bt-con-text">
+                            <a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{d.id}" disabled>$!{d.crudeOilOptions}</a>
+                            <a href="$appServer.get('crudeoillobby/purchasingDemandDetail.htm?demandId=')$!{d.id}" disabled>数量（万桶）<span>$!{d.num}</span></a>
+                        </div>
+                    </li>
+                #end
+            #end
+        </ul>
+    </div>
+</div>

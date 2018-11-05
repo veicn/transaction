@@ -1,0 +1,65 @@
+<form id="triggerTransfer_add_form">
+<div class="c-form1">
+	<div style="color:red;text-align:center;">remark: the roll over option only being exercised to extend the pricing reference month for a maximum period of $!{transferCountMax} months.</div>
+	<ul class="c-ful">
+		<li class="c-fcos1">
+			<span class="c-fn">From：</span>
+			$!{triggerContractInfo.month}
+			
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">to：</span>
+			<select id="zy-month-select" class="sele">
+				<option value="">please choose</option>
+			</select>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">Expire Date：</span>
+			<input type="text" id="zy-enddate-input" class="c-int">
+			<i class="c-ico xg-data"></i>
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">Quantity (BBL)：</span>
+			<input type="text" id="zy-quantity-input" class="c-int" onkeyup="clearNoNumThree(this)">
+		</li>
+		<li class="c-fcos2">
+			<span class="c-fn">Spread (USD)：</span>
+			<input type="text" id="zy-yuecha-input" class="c-int" onkeyup="clearNoNumThreeFu(this)">
+		</li>
+	</ul>
+</div>
+
+<script>
+layui.use(['layer','laydate'], function(){
+	//日期
+	var laydate = layui.laydate;
+	laydate.render({
+		elem: '#zy-enddate-input'
+		,lang: 'en'
+	});
+	
+	getMonthList();
+	
+	//合约月份下拉值集
+	function getMonthList(){
+		$.ajax({
+      		url:infoServer+"/query/symbol.json",
+      		data:JSON.stringify({commodity:"$!{triggerContractInfo.commodity}",priceSource:"$!{triggerContractInfo.priceSource}",market:"$!{triggerContractInfo.market}"}),
+      		type:"post",
+      		dataType:"json",
+      		contentType:"application/json; charset=utf-8",
+      		success:function(result){
+      			if(result.dataList.length > 0){
+      				$.each(result.dataList, function(i,d){
+      					$("#zy-month-select").append("<option value='"+d.symbolName+"'>"+d.symbolName+"</option>");
+      				})
+      			}
+      		},
+      		error:function(){
+      			layer.alert("Data error",{title:'Prompt',btn:'ok'});
+      		}
+      	})
+	}
+})
+</script>
+

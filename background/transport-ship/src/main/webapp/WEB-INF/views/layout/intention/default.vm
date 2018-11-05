@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+$contain.get("/contain/htmlhead3.htm")
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?469b0210be7581c5a68ba34d43e1b3bc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+<body class="s-layout-body s-body-bg">
+    <div class="s-layout s-layout-admin">
+		  <div class="s-header">
+            $contain.get('mosken/center/head.htm').setHost("$memberServer.get('')")
+        </div>
+   		 ## 消息推送处理页面
+        $contain.get("/message/messagePop.htm").setHost("$messageServer.get('')")
+        <div class="s-side">
+            <div class="s-side-scroll">
+                $contain.get('/mosken/center/menus.htm').setHost("$memberServer.get('')")
+            </div>
+        </div>
+		<div class="s-body">
+			$screen_content
+		</div>
+	</div>
+			$contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+			$contain.get("/contain/html_end.htm").setHost("$memberServer.get('')")
+			
+</body>
+</html>

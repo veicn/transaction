@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shiprefueling.dao.IryQuotationMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.IryQuotation" id="IryQuotationDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.IryQuotation">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation" id="IryQuotation">
+		<result property="inquiryQuotationId" column="INQUIRY_QUOTATION_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="companyId" column="COMPANY_ID" />
+		<result property="companyName" column="COMPANY_NAME" />
+		<result property="number" column="NUMBER" />
+		<result property="price" column="PRICE" />
+		<result property="tel" column="TEL" />
+		<result property="contacts" column="CONTACTS" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createUserName" column="CREATE_USER_NAME" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="type" column="TYPE" />
+		<result property="needId" column="NEED_ID" />
+		<result property="needUuid" column="NEED_UUID" />
+		<result property="status" column="STATUS" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation"  useGeneratedKeys="true" keyProperty="inquiryQuotationId" >
+		insert  into t_inquiry_quotation (				INQUIRY_QUOTATION_ID
+						,UUID
+						,EP_MEMBER_ID
+						,EP_MEMBER_NAME
+						,COMPANY_ID
+						,COMPANY_NAME
+						,NUMBER
+						,PRICE
+						,TEL
+						,CONTACTS
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,CREATE_USER_NAME
+						,UPDATE_USER
+						,EXT1
+						,TYPE
+						,NEED_ID
+						,NEED_UUID
+						,STATUS
+						)
+		values(		#{inquiryQuotationId}
+						,#{uuid}
+						,#{epMemberId}
+						,#{epMemberName}
+						,#{companyId}
+						,#{companyName}
+						,#{number}
+						,#{price}
+						,#{tel}
+						,#{contacts}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{createUserName}
+						,#{updateUser}
+						,#{ext1}
+						,#{type}
+						,#{needId}
+						,#{needUuid}
+						,#{status}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_inquiry_quotation
+              WHERE 1=1 
+                AND INQUIRY_QUOTATION_ID = #{inquiryQuotationId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+        DELETE FROM t_inquiry_quotation
+              WHERE 1=1 
+        <if test="inquiryQuotationId!=null and inquiryQuotationId!=''">AND  INQUIRY_QUOTATION_ID = #{inquiryQuotationId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="epMemberId!=null and epMemberId!=''">AND  EP_MEMBER_ID = #{epMemberId}</if>
+        <if test="epMemberName!=null and epMemberName!=''">AND  EP_MEMBER_NAME = #{epMemberName}</if>
+        <if test="companyId!=null and companyId!=''">AND  COMPANY_ID = #{companyId}</if>
+        <if test="companyName!=null and companyName!=''">AND  COMPANY_NAME = #{companyName}</if>
+        <if test="number!=null and number!=''">AND  NUMBER = #{number}</if>
+        <if test="price!=null and price!=''">AND  PRICE = #{price}</if>
+        <if test="tel!=null and tel!=''">AND  TEL = #{tel}</if>
+        <if test="contacts!=null and contacts!=''">AND  CONTACTS = #{contacts}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+		<if test="createUserName!=null and createUserName!=''">AND  CREATE_USER_NAME = #{createUserName}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="ext1!=null and ext1!=''">AND  EXT1 = #{ext1}</if>
+        <if test="type!=null and type!=''">AND  TYPE = #{type}</if>
+        <if test="needId!=null and needId!=''">AND  NEED_ID = #{needId}</if>
+        <if test="needUuid!=null and needUuid!=''">AND  NEED_UUID = #{needUuid}</if>
+        <if test="status!=null and status!=''">AND  STATUS = #{status}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+		update t_inquiry_quotation
+		<set>
+         INQUIRY_QUOTATION_ID=#{inquiryQuotationId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+		<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+		<if test="number!=null">,NUMBER = #{number}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createUserName!=null">,CREATE_USER_NAME = #{createUserName}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="needId!=null">,NEED_ID = #{needId}</if>
+		<if test="needUuid!=null">,NEED_UUID = #{needUuid}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where
+       	 INQUIRY_QUOTATION_ID=#{inquiryQuotationId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+		update t_inquiry_quotation
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+		<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+		<if test="number!=null">,NUMBER = #{number}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createUserName!=null">,CREATE_USER_NAME = #{createUserName}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="needId!=null">,NEED_ID = #{needId}</if>
+		<if test="needUuid!=null">,NEED_UUID = #{needUuid}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+
+	<!-- 根据needUuid 和type 来更新 -->
+	<update id="updateRecordByNeedUuid" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+		update t_inquiry_quotation
+		<set>
+			NEED_UUID = #{needUuid}
+			<if test="uuid!=null">,UUID = #{uuid}</if>
+			<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+			<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+			<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+			<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+			<if test="number!=null">,NUMBER = #{number}</if>
+			<if test="price!=null">,PRICE = #{price}</if>
+			<if test="tel!=null">,TEL = #{tel}</if>
+			<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="version!=null">,VERSION = #{version}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createUserName!=null">,CREATE_USER_NAME = #{createUserName}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="ext1!=null">,EXT1 = #{ext1}</if>
+			<if test="type!=null">,TYPE = #{type}</if>
+			<if test="needId!=null">,NEED_ID = #{needId}</if>
+			<if test="needUuid!=null">,NEED_UUID = #{needUuid}</if>
+			<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where  NEED_UUID = #{needUuid} and `TYPE` = #{type} and ALIVE_FLAG = '1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_inquiry_quotation
+		<set>
+         INQUIRY_QUOTATION_ID=#{inquiryQuotationId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="companyId!=null">,COMPANY_ID = #{companyId}</if>
+		<if test="companyName!=null">,COMPANY_NAME = #{companyName}</if>
+		<if test="number!=null">,NUMBER = #{number}</if>
+		<if test="price!=null">,PRICE = #{price}</if>
+		<if test="tel!=null">,TEL = #{tel}</if>
+		<if test="contacts!=null">,CONTACTS = #{contacts}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createUserName!=null">,CREATE_USER_NAME = #{createUserName}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="needId!=null">,NEED_ID = #{needId}</if>
+		<if test="needUuid!=null">,NEED_UUID = #{needUuid}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="number!=null and number!=''">and  NUMBER=#{number}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createUserName!=null and createUserName!=''">and CREATE_USER_NAME = #{createUserName}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+		<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</update>
+	<update id="updateByuuidStatus" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+		update t_inquiry_quotation
+		<set>
+			UPDATE_DATE = SYSDATE()
+			<if test="status!=null">,STATUS = #{status}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		</set>
+		where
+		and  UUID=#{uuid}
+		<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+		<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</update>
+
+
+	<select id="findByPrimaryKey" resultMap="IryQuotation">
+			select
+			* from t_inquiry_quotation
+			where
+		    INQUIRY_QUOTATION_ID=#{inquiryQuotationId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="IryQuotation">
+			select
+			* from t_inquiry_quotation
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="IryQuotation" parameterType="com.sinochem.crude.trade.shiprefueling.domain.po.IryQuotation">
+		select * from t_inquiry_quotation
+			where 
+		 ALIVE_FLAG='1'
+		<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="number!=null and number!=''">and  NUMBER=#{number}</if>
+		<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createUserName!=null and createUserName!=''">and CREATE_USER_NAME = #{createUserName}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+		<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  INQUIRY_QUOTATION_ID as "inquiryQuotationId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   NUMBER as "number" 
+						 ,   PRICE as "price" 
+						 ,   TEL as "tel" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate"
+						 ,	 CREATE_USER_NAME as "createUserName"
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   TYPE as "type" 
+						 ,   NEED_ID as "needId" 
+						 ,   NEED_UUID as "needUuid" 
+						 ,   STATUS as "status" 
+						from t_inquiry_quotation
+		where
+			ALIVE_FLAG='1'
+			<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+			<if test="number!=null and number!=''">and  NUMBER=#{number}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createUserName!=null and createUserName!=''">and  CREATE_USER_NAME=#{createUserName}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+			<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_inquiry_quotation 
+		where
+		 ALIVE_FLAG='1'
+			<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+			<if test="number!=null and number!=''">and  NUMBER=#{number}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+			<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createUserName!=null and createUserName!=''">and  CREATE_USER_NAME=#{createUserName}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+			<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+					 
+	</select>
+
+
+
+    <!-- //**************************以下方法为开发者补充*********************************/ -->
+    
+    	<select id="queryiryQuotationRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  INQUIRY_QUOTATION_ID as "inquiryQuotationId" 
+						 ,   UUID as "uuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   COMPANY_ID as "companyId" 
+						 ,   COMPANY_NAME as "companyName" 
+						 ,   NUMBER as "number" 
+						 ,   PRICE as "price" 
+						 ,   TEL as "tel" 
+						 ,   CONTACTS as "contacts" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser"
+						,   CREATE_USER_NAME as "createUserName"
+						,   UPDATE_USER as "updateUser"
+						 ,   EXT1 as "ext1" 
+						 ,   TYPE as "type" 
+						 ,   NEED_ID as "needId" 
+						 ,   NEED_UUID as "needUuid" 
+						 ,   STATUS as "status" 
+						from t_inquiry_quotation
+		where
+			ALIVE_FLAG='1'
+			<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+            <if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME  like CONCAT('%',#{epMemberName},'%')  </if>
+			<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+			<if test="companyName!=null and companyName!=''">and  COMPANY_NAME like CONCAT('%',#{companyName},'%')</if>
+			<if test="number!=null and number!=''">and  NUMBER=#{number}</if>
+			<if test="price!=null and price!=''">and  PRICE=#{price}</if>
+			<if test="tel!=null and tel!=''">and  TEL like  CONCAT('%',#{tel},'%')</if> 
+			<if test="contacts!=null and contacts!=''">and  CONTACTS like CONCAT('%',#{contacts},'%')</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createUserName!=null and createUserName!=''">and  CREATE_USER_NAME=#{createUserName}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+			<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="issueTimeStart!=null and issueTimeStart!=''">and  CREATE_DATE &gt; #{issueTimeStart}</if>
+			<if test="issueTimeEnd!=null and issueTimeEnd!=''">and  DATE_FORMAT(CREATE_DATE, '%Y-%m-%d') &lt;= #{issueTimeEnd}</if>
+	</select>
+    
+	<select id="findByInfoSelectAll" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.shiprefueling.model.query.IryQuotationQuery">
+		select
+		* from t_inquiry_quotation
+		where
+		ALIVE_FLAG='1'
+		<if test="inquiryQuotationId!=null and inquiryQuotationId!=''">and  INQUIRY_QUOTATION_ID=#{inquiryQuotationId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="companyId!=null and companyId!=''">and  COMPANY_ID=#{companyId}</if>
+		<if test="companyName!=null and companyName!=''">and  COMPANY_NAME=#{companyName}</if>
+		<if test="iryQuotationBegin != null and iryQuotationBegin!=''">and DATE_FORMAT(CREATE_DATE, '%d-%m-%Y') &gt;=
+			#{iryQuotationBegin}
+		</if>
+		<if test="iryQuotationEnd != null and iryQuotationEnd!=''">and DATE_FORMAT(CREATE_DATE, '%d-%m-%Y') &lt;= #{iryQuotationEnd}
+		</if>
+		<if test="tel!=null and tel!=''">and  TEL=#{tel}</if>
+		<if test="contacts!=null and contacts!=''">and  CONTACTS=#{contacts}</if>
+		<if test="needId!=null and needId!=''">and  NEED_ID=#{needId}</if>
+		<if test="needUuid!=null and needUuid!=''">and  NEED_UUID=#{needUuid}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</select>
+
+</mapper>

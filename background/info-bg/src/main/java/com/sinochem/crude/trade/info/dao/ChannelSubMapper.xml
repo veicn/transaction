@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.ChannelSubMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.ChannelSub" id="ChannelSubDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.ChannelSub">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.ChannelSub" id="ChannelSub">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="channelMId" column="CHANNEL_M_ID" />
+		<result property="channelCode" column="CHANNEL_CODE" />
+		<result property="channelName" column="CHANNEL_NAME" />
+		<result property="channelDesc" column="CHANNEL_DESC" />
+		<result property="channelOrder" column="CHANNEL_ORDER" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_cms_channel_sub (				ID
+						,UUID
+						,CHANNEL_M_ID
+						,CHANNEL_CODE
+						,CHANNEL_NAME
+						,CHANNEL_DESC
+						,CHANNEL_ORDER
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,ALIVE_FLAG
+						,EXTEND1
+						,EXTEND2
+						,EXTEND3
+						,EXTEND4
+						,EXTEND5
+						,EXTEND6
+						,EXTEND7
+						,EXTEND8
+						,EXTEND9
+						,EXTEND10
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{channelMId}
+						,#{channelCode}
+						,#{channelName}
+						,#{channelDesc}
+						,#{channelOrder}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,'1'
+						,#{extend1}
+						,#{extend2}
+						,#{extend3}
+						,#{extend4}
+						,#{extend5}
+						,#{extend6}
+						,#{extend7}
+						,#{extend8}
+						,#{extend9}
+						,#{extend10}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_cms_channel_sub
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+        DELETE FROM t_cms_channel_sub
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="channelMId!=null and channelMId!=''">AND  CHANNEL_M_ID = #{channelMId}</if>
+        <if test="channelCode!=null and channelCode!=''">AND  CHANNEL_CODE = #{channelCode}</if>
+        <if test="channelName!=null and channelName!=''">AND  CHANNEL_NAME = #{channelName}</if>
+        <if test="channelDesc!=null and channelDesc!=''">AND  CHANNEL_DESC = #{channelDesc}</if>
+        <if test="channelOrder!=null and channelOrder!=''">AND  CHANNEL_ORDER = #{channelOrder}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="extend1!=null and extend1!=''">AND  EXTEND1 = #{extend1}</if>
+        <if test="extend2!=null and extend2!=''">AND  EXTEND2 = #{extend2}</if>
+        <if test="extend3!=null and extend3!=''">AND  EXTEND3 = #{extend3}</if>
+        <if test="extend4!=null and extend4!=''">AND  EXTEND4 = #{extend4}</if>
+        <if test="extend5!=null and extend5!=''">AND  EXTEND5 = #{extend5}</if>
+        <if test="extend6!=null and extend6!=''">AND  EXTEND6 = #{extend6}</if>
+        <if test="extend7!=null and extend7!=''">AND  EXTEND7 = #{extend7}</if>
+        <if test="extend8!=null and extend8!=''">AND  EXTEND8 = #{extend8}</if>
+        <if test="extend9!=null and extend9!=''">AND  EXTEND9 = #{extend9}</if>
+        <if test="extend10!=null and extend10!=''">AND  EXTEND10 = #{extend10}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		update t_cms_channel_sub
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="channelMId!=null">,CHANNEL_M_ID = #{channelMId}</if>
+		<if test="channelCode!=null">,CHANNEL_CODE = #{channelCode}</if>
+		<if test="channelName!=null">,CHANNEL_NAME = #{channelName}</if>
+		<if test="channelDesc!=null">,CHANNEL_DESC = #{channelDesc}</if>
+		,CHANNEL_ORDER = #{channelOrder}
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_cms_channel_sub
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="channelMId!=null">,CHANNEL_M_ID = #{channelMId}</if>
+		<if test="channelCode!=null">,CHANNEL_CODE = #{channelCode}</if>
+		<if test="channelName!=null">,CHANNEL_NAME = #{channelName}</if>
+		<if test="channelDesc!=null">,CHANNEL_DESC = #{channelDesc}</if>
+		<if test="channelOrder!=null">,CHANNEL_ORDER = #{channelOrder}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="channelMId!=null and channelMId!=''">and  CHANNEL_M_ID=#{channelMId}</if>
+		<if test="channelCode!=null and channelCode!=''">and  CHANNEL_CODE=#{channelCode}</if>
+		<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+		<if test="channelDesc!=null and channelDesc!=''">and  CHANNEL_DESC=#{channelDesc}</if>
+		<if test="channelOrder!=null and channelOrder!=''">and  CHANNEL_ORDER=#{channelOrder}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="ChannelSub">
+			select
+			* from t_cms_channel_sub
+			where
+		    ID=#{id} 
+	</select>
+	
+	<select id="findByUuid" resultMap="ChannelSub">
+			select
+			* from t_cms_channel_sub
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="ChannelSub" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		select * from t_cms_channel_sub
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="channelMId!=null and channelMId!=''">and  CHANNEL_M_ID=#{channelMId}</if>
+		<if test="channelCode!=null and channelCode!=''">and  CHANNEL_CODE=#{channelCode}</if>
+		<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+		<if test="channelDesc!=null and channelDesc!=''">and  CHANNEL_DESC=#{channelDesc}</if>
+		<if test="channelOrder!=null and channelOrder!=''">and  CHANNEL_ORDER=#{channelOrder}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						   sub.UUID as "uuid" 
+						 ,   sub.CHANNEL_M_ID as "channelMId" 
+						 ,   sub.CHANNEL_CODE as "channelCode" 
+						 ,   sub.CHANNEL_NAME as "channelName" 
+						 ,   m.CHANNEL_M_DESC as "channelMDesc" 
+						 ,   sub.CHANNEL_DESC as "channelDesc" 
+						 ,   sub.CHANNEL_ORDER as "channelOrder" 
+						 ,   sub.CREATE_USER as "createUser" 
+						 ,   sub.CREATE_DATE as "createDate" 
+						 ,   sub.UPDATE_USER as "updateUser" 
+						 ,   sub.UPDATE_DATE as "updateDate" 
+						 ,   sub.ALIVE_FLAG as "aliveFlag" 
+						 ,   sub.EXTEND1 as "extend1" 
+						 ,   sub.EXTEND2 as "extend2" 
+						 ,   sub.EXTEND3 as "extend3" 
+						 ,   sub.EXTEND4 as "extend4" 
+						 ,   sub.EXTEND5 as "extend5" 
+						 ,   sub.EXTEND6 as "extend6" 
+						 ,   sub.EXTEND7 as "extend7" 
+						 ,   sub.EXTEND8 as "extend8" 
+						 ,   sub.EXTEND9 as "extend9" 
+						 ,   sub.EXTEND10 as "extend10" 
+						 ,	 m.CHANNEL_M_NAME as "channelMName"
+						 , 	 m.UUID as "channelMUuid"
+						from t_cms_channel_sub sub, t_cms_channel_m m
+		where
+			sub.ALIVE_FLAG='1' and m.ALIVE_FLAG='1' and m.ID = sub.CHANNEL_M_ID
+			<if test="id!=null and id!=''">and  sub.ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  sub.UUID=#{uuid}</if>
+			<if test="channelMId!=null and channelMId!=''">and  sub.CHANNEL_M_ID=#{channelMId}</if>
+			<if test="channelCode!=null and channelCode!=''">and  sub.CHANNEL_CODE=#{channelCode}</if>
+			<if test="channelName!=null and channelName!=''">and  sub.CHANNEL_NAME like "%"#{channelName}"%"</if>
+			<if test="channelMName!=null and channelMName!=''">and  m.CHANNEL_M_NAME like "%"#{channelMName}"%"</if>
+			<if test="channelDesc!=null and channelDesc!=''">and  m.CHANNEL_M_DESC=#{channelDesc}</if>
+			<if test="channelOrder!=null and channelOrder!=''">and  sub.CHANNEL_ORDER=#{channelOrder}</if>
+			<if test="createUser!=null and createUser!=''">and  sub.CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  sub.CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  sub.UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  sub.UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  sub.ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  sub.EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  sub.EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  sub.EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  sub.EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  sub.EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  sub.EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  sub.EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  sub.EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  sub.EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  sub.EXTEND10=#{extend10}</if>
+				ORDER BY m.CHANNEL_M_DESC,m.CHANNEL_M_ORDER,sub.CHANNEL_ORDER,sub.id desc
+				</select>
+				
+	<select id="queryChannelSubList" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						   sub.UUID as "uuid" 
+						 ,   sub.CHANNEL_M_ID as "channelMId" 
+						 ,   sub.CHANNEL_CODE as "channelCode" 
+						 ,   sub.CHANNEL_NAME as "channelName" 
+						 ,   m.CHANNEL_M_DESC as "channelMDesc" 
+						 ,   sub.CHANNEL_DESC as "channelDesc" 
+						 ,   sub.CHANNEL_ORDER as "channelOrder" 
+						 ,   sub.CREATE_USER as "createUser" 
+						 ,   sub.CREATE_DATE as "createDate" 
+						 ,   sub.UPDATE_USER as "updateUser" 
+						 ,   sub.UPDATE_DATE as "updateDate" 
+						 ,   sub.ALIVE_FLAG as "aliveFlag" 
+						 ,   sub.EXTEND1 as "extend1" 
+						 ,   sub.EXTEND2 as "extend2" 
+						 ,   sub.EXTEND3 as "extend3" 
+						 ,   sub.EXTEND4 as "extend4" 
+						 ,   sub.EXTEND5 as "extend5" 
+						 ,   sub.EXTEND6 as "extend6" 
+						 ,   sub.EXTEND7 as "extend7" 
+						 ,   sub.EXTEND8 as "extend8" 
+						 ,   sub.EXTEND9 as "extend9" 
+						 ,   sub.EXTEND10 as "extend10" 
+						 ,	 m.CHANNEL_M_NAME as "channelMName"
+						 , 	 m.UUID as "channelMUuid"
+						from t_cms_channel_sub sub, t_cms_channel_m m
+		where
+			sub.ALIVE_FLAG='1' and m.ALIVE_FLAG='1' and m.ID = sub.CHANNEL_M_ID
+			<if test="id!=null and id!=''">and  sub.ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  sub.UUID=#{uuid}</if>
+			<if test="channelMId!=null and channelMId!=''">and  sub.CHANNEL_M_ID=#{channelMId}</if>
+			<if test="channelCode!=null and channelCode!=''">and  sub.CHANNEL_CODE=#{channelCode}</if>
+			<if test="channelName!=null and channelName!=''">and  sub.CHANNEL_NAME like "%"#{channelName}"%"</if>
+			<if test="channelMName!=null and channelMName!=''">and  m.CHANNEL_M_NAME like "%"#{channelMName}"%"</if>
+			<if test="channelMCode!=null and channelMCode!=''">and  m.CHANNEL_M_CODE=#{channelMCode}</if>
+			<if test="channelMDesc!=null and channelMDesc!=''">and  m.CHANNEL_M_DESC=#{channelMDesc}</if>
+			<if test="channelOrder!=null and channelOrder!=''">and  sub.CHANNEL_ORDER=#{channelOrder}</if>
+			<if test="createUser!=null and createUser!=''">and  sub.CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  sub.CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  sub.UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  sub.UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  sub.ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  sub.EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  sub.EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  sub.EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  sub.EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  sub.EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  sub.EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  sub.EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  sub.EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  sub.EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  sub.EXTEND10=#{extend10}</if>
+				ORDER BY m.CHANNEL_M_DESC,m.CHANNEL_M_ORDER,sub.CHANNEL_ORDER,sub.id desc
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_cms_channel_sub 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="channelMId!=null and channelMId!=''">and  CHANNEL_M_ID=#{channelMId}</if>
+			<if test="channelCode!=null and channelCode!=''">and  CHANNEL_CODE=#{channelCode}</if>
+			<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+			<if test="channelDesc!=null and channelDesc!=''">and  CHANNEL_DESC=#{channelDesc}</if>
+			<if test="channelOrder!=null and channelOrder!=''">and  CHANNEL_ORDER=#{channelOrder}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<!-- 通过子频道代码和名称查询是否存在 -->
+	<select id="findChannelByCodeAndName" resultType="int">
+		select
+			count(*) from t_cms_channel_sub
+			where
+			and ALIVE_FLAG='1'
+			<if test="channelCode!=null and channelCode!=''">and  CHANNEL_CODE=#{channelCode}</if>
+			<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+	</select>
+	
+	<!-- 通过子频道名称或子频道代码查询子频道是否存在 -->
+	<select id="findChannelByCodeOrName" resultType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		select
+			 ID as "id" 
+			 ,   UUID as "uuid" 
+			 ,   CHANNEL_M_ID as "channelMId" 
+			 ,   CHANNEL_CODE as "channelCode" 
+			 ,   CHANNEL_NAME as "channelName" 
+			 ,   CHANNEL_DESC as "channelDesc" 
+			 ,   CHANNEL_ORDER as "channelOrder" 
+			 ,   CREATE_USER as "createUser" 
+			 ,   CREATE_DATE as "createDate" 
+			 ,   UPDATE_USER as "updateUser" 
+			 ,   UPDATE_DATE as "updateDate" 
+			 ,   ALIVE_FLAG as "aliveFlag" 
+			 ,   EXTEND1 as "extend1" 
+			 ,   EXTEND2 as "extend2" 
+			 ,   EXTEND3 as "extend3" 
+			 ,   EXTEND4 as "extend4" 
+			 ,   EXTEND5 as "extend5" 
+			 ,   EXTEND6 as "extend6" 
+			 ,   EXTEND7 as "extend7" 
+			 ,   EXTEND8 as "extend8" 
+			 ,   EXTEND9 as "extend9" 
+			 ,   EXTEND10 as "extend10" 
+			 from t_cms_channel_sub
+			where
+			ALIVE_FLAG='1'
+			<if test="channelCode!=null and channelCode!=''">and  CHANNEL_CODE=#{channelCode}</if>
+			<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME=#{channelName}</if>
+			limit 1
+	</select>
+	
+	<!-- 删除子频道 -->
+	<update id="updateChannelSubByUUId">
+		update t_cms_channel_sub
+        set	ALIVE_FLAG = '0'
+		where
+		ALIVE_FLAG='1'
+		and  UUID=#{uuid}
+	</update>
+	
+	<!-- 修改子频道 -->
+	<update id="updateChannelCodeAndName" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		update t_cms_channel_sub
+        <set>
+        		<if test="channelCode!=null">CHANNEL_CODE = #{channelCode}</if>
+				<if test="channelName!=null">,CHANNEL_NAME = #{channelName}</if>
+        </set>
+		where
+		ALIVE_FLAG='1'
+		and   UUID=#{uuid}
+	</update>
+	
+	<!-- 分页查找列表 -->
+	<select id="listChannelSub" resultMap="ChannelSub" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		select * from t_cms_channel_sub
+			where
+		 ALIVE_FLAG='1'
+		<if test="channelName!=null and channelName!=''">and  CHANNEL_NAME like '%' #{channelName} '%'</if>
+		 order by id DESC 
+	</select>
+	
+	<!-- 加载下拉列表 -->
+	<select id="selectListChannelSub" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.info.domain.ChannelSub">
+		select   ID as "id"
+		     ,   UUID as "uuid" 
+			 ,   CHANNEL_NAME as "name" 
+		 from t_cms_channel_sub
+			where
+		 ALIVE_FLAG='1' and  CHANNEL_M_ID=#{channelMId}
+		 order by id DESC 
+	 </select>	
+	 
+	 <!-- 根据主键查找记录(包括已被删除的) -->
+	 <select id="selectByPrimaryKey" resultMap="ChannelSub">
+			select
+			* from t_cms_channel_sub
+			where
+		    ID=#{id} 
+	</select>
+	<!-- 通过角色权限获取子频道id-->
+	<select id="selectListChannelMByRoles" resultType="Integer" parameterType="String">
+		select   CHANNEL_ID as "channelId"
+		 from t_cms_rule
+			where
+		 ALIVE_FLAG='1' and  ROLE_CODE in 
+		 	 <foreach collection="roles" item="roles"  
+                    index="index" open="(" close=")" separator=",">  
+                    #{roles}  
+             </foreach> 
+		 order by id DESC 
+	 </select>	
+	 <!-- 通过子频道id获取主频道信息-->
+	<select id="selectChannelmByChannelIds" resultType="java.util.HashMap" parameterType="java.util.List">
+		 	SELECT 
+			   m.UUID as "uuid" 
+			 , m.CHANNEL_M_NAME as "name" 
+			FROM
+			  `t_cms_channel_m` m 
+			WHERE EXISTS 
+			  (SELECT 
+			    CHANNEL_M_ID 
+			  FROM
+			    `t_cms_channel_sub` sub 
+			  WHERE ALIVE_FLAG = '1' 
+			    AND id IN 
+			    	<foreach collection="list" item="channelIdList"  
+		                    index="index" open="(" close=")" separator=",">  
+		                    #{channelIdList}  
+		             </foreach>  
+			    AND sub.CHANNEL_M_ID = m.id) AND m.ALIVE_FLAG='1'
+
+		 
+		 	 
+	 </select>	
+	 <select id="selectListChannelSubByRoles" resultType="java.util.HashMap" >
+	 	SELECT 
+		  sub.ID as "id",
+		  sub.UUID as "uuid",
+		  sub.CHANNEL_NAME as "name",
+		  sub.CHANNEL_M_ID
+		FROM
+		  t_cms_channel_sub sub 
+		WHERE EXISTS 
+		  (SELECT 
+		    rule.CHANNEL_ID 
+		  FROM
+		    t_cms_rule rule 
+		  WHERE rule.CHANNEL_ID = sub.ID 
+		    AND  rule.ALIVE_FLAG='1' AND rule.ROLE_CODE IN 
+		    	<foreach collection="roles" item="roles"  
+                    index="index" open="(" close=")" separator=",">  
+                    #{roles}  
+            	</foreach> 
+		    )
+		    AND sub.CHANNEL_M_ID = #{param.channelMId} AND sub.ALIVE_FLAG='1'
+	 </select>
+</mapper>

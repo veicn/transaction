@@ -1,0 +1,163 @@
+#css($appServer.get('/css/work/mallHome.css?css_version=03280827'))
+#css($appServer.get('/js/common/layui/css/layui.css?css_version=03280827'))
+<!--对比弹窗部分-->
+<div class="toolbar">
+
+    <div class="toolbar-con">
+        <div class="toolbar-con-t">
+            <span>Compare</span>
+            <i class="layui-icon">&#x1006;</i>
+        </div>
+        <ul class="toolbar-con-img clearfix">
+
+        </ul>
+        <em class="check-b">
+            <a class="br" onclick="getVsArr()">Contrast</a>
+            <a href="javascript:;" class="br delAll">Delete</a>
+        </em>
+    </div>
+    <div class="toolbar-vs">
+        vs
+        <i>0</i>
+    </div>
+</div>
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js("$appServer.get('/script/pages/front/product_list/compare.js?js_version=03280827')")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 邮编栏  收藏夹/对比栏
+#*
+#set($layout="")
+#js($imageServer.get("/js/right_tool.js?js_version=03280827").toString())
+<script language="javascript">
+    var vs = {};
+    ;(function(Page,$){
+        $(function(){
+            jQuery.setCompareBox("vsBox", "$!imageServer");
+            var total = jQuery.getCompareGoodsCount();
+            total = total==null?0:total;
+            if(total==0){
+                jQuery("#vsall").hide();
+                jQuery("#delvsall").hide();
+            }else{
+                jQuery("#vsall").show();
+                jQuery("#delvsall").show();
+            }
+            jQuery(".vs-num").text(total);
+
+            vs.delCom = function(id) {
+                jQuery("#compareC_"+id).prop("checked", false);
+                jQuery.delCompareGoods(id);
+                jQuery.setCompareBox("vsBox", "$!imageServer");
+                var total = jQuery.getCompareGoodsCount();
+                total = total==null?0:total;
+                if(total==0){
+                    jQuery("#vsall").hide();
+                    jQuery("#delvsall").hide();
+                }else{
+                    jQuery("#vsall").show();
+                    jQuery("#delvsall").show();
+                }
+                jQuery(".vs-num").text(total);
+            }
+
+        });
+    })(vs,jQuery);
+
+</script>
+
+<div class="toolbar" style="right: -280px;width: 316px;">
+    <div class="toolbar-narrow">
+        <div class="toolbar-trigger"><a class="whitehover" id="toolbarButton" href="javascript:void(0)"><span>展开</span><i class="c-ico ico-arrow-unfold"></i></a></div>
+        <ul class="toolbar-list">
+          *#
+#*  <li class="toolbar-item" id="favoritesButton">
+                <a href=""><i class="c-ico ico-fav"></i>
+                    <span>收藏夹</span>
+                    <span class="fav-num" id="favoriteCount">#if($!{memLoginUser.favoriteCount})$!{memLoginUser.favoriteCount}#else 0#end</span></a>
+            </li>
+            *##*
+
+            <li class="toolbar-item action"  id="contrastButton">
+                <a class="whitehover" href="javascript:"><i class="c-ico ico-vs-s"></i>
+                    <span>对比栏</span>
+                    <span class="vs-num">3</span></a>
+            </li>
+        </ul>
+        <ul class="tool">
+            <li><a href=""><i class="c-ico ico-kf"></i></a></li>
+            <li><a ><i class="c-ico ico-top"></i></a></li>
+        </ul>
+    </div>
+    <div class="toolbar-wide" id="contrastBox" style="display:block;">
+        <h3 class="tb-title"><span><i class="c-ico ico-vs-b"></i>对比栏</span><a class="c-ico ico-close"></a></h3>
+        <ul class="vs-pro clearfix" id="vsBox">
+##            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+##            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+##            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span><a class="c-ico ico-delete" href=""></a></li>
+##            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+        </ul>
+        <a class="y-vs-a" id="vsall" href="javascript:;" onclick="jQuery.vs()">一键对比</a>
+        <a class="y-vs-a" id="delvsall" href="javascript:;" onclick="jQuery.delVSAll()">全部清除</a>
+    </div>
+
+    <div class="toolbar-wide" id="favoritesBox">
+        <h3 class="tb-title"><span><i class="c-ico ico-vs-b"></i>收藏夹</span><a class="c-ico ico-close" href=""></a></h3>
+        <ul class="vs-pro clearfix" id="favoriteBoxLi">
+            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span><a class="c-ico ico-delete" href=""></a></li>
+            <li class="vs-item"><img src="../images/inf_pic.jpg" alt="" /><span>贝尔4000</span></li>
+        </ul>
+        <a class="y-vs-a"  id="delfavall" href="javascript:;" onclick="jQuery.delFavAll()">全部清除</a>
+    </div>
+</div>
+
+#js($imageServer.get("/script/lib/jquery.fly.js?js_version=03280827").toString())
+#js($imageServer.get("/script/lib/effect-productdetail.js?js_version=03280827").toString())
+#js($imageServer.get("/script/lib/mz-packed.js?js_version=03280827").toString())
+<script>
+    var timer=0;
+    $(window).scroll(function(){
+        var scrollTop=$(document).scrollTop();
+        if(scrollTop==0){
+            clearInterval(timer);
+            timer=0;
+        }
+    });
+    $('.toolbar .tool li').eq(1).click(function () {
+        timer=setInterval(function(){
+            var scrollTop1=$(document).scrollTop();
+            scrollTop1-=300;
+            $(document).scrollTop(scrollTop1)
+        },8);
+    })
+    </script>
+*#

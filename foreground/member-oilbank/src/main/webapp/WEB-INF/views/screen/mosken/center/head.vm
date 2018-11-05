@@ -1,0 +1,87 @@
+
+
+    <div class="outer_div">
+
+            <div class="head-left ">
+                <img src="$imageServer.get('/product/layui/images/oilbank_logo.png')" >
+                中国首个成品油国际贸易平台
+            </div>
+            <div class="fr  head-right">
+
+                <a href="$refuelingServer.get("/index.html")" #if($!{active} == 1) class="fl active" #end>首页</a>
+##                #if($authUtils.checkRole("sales_traderOil", "buy_traderOil"))
+                    <a href="$refuelingServer.get("/index.html#/hall")"#if($!{active} == 2) class="f2 active" #end>油品大厅</a>
+##                    #end
+
+                <a href="https://info.mycrudeoil.com/page/" target="_blank" #if($!{active} == 3) class="f3 active" #end>信息资讯</a>
+                <a href="https://info.mycrudeoil.com/page/#/encyclopedia" target="_blank" #if($!{active} == '4') class="f4 active" #end>船油百科</a>
+
+            </div>
+
+
+    </div>
+   #* <div class="header-line fl"></div>*#
+
+
+<script>
+    function OILEnglish()  {
+        document.cookie= "_l_=en_US;domain=.test.myoilbank.com;path=/";
+        window.location.href="$transactionServer.get('')";
+    }
+</script>
+
+#*
+
+
+<div class="s-logo" onclick="window.location.href='$!indexUrl'">成品油</div>
+    <!-- 头部区域（可配合whui已有的水平导航） -->
+    <div class="s-layout-left">
+##        <div class="s-search"><span class="s-searchspan"><input type="text" placeholder="搜索订单号" class="s-searchinput"><a href="" class="s-searchlink"><i class="fs fs-search"></i></a></span></div>
+        <ul class="s-nav-left">
+            <li class="s-nav-item"><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')" class="s-navblink" title="原油大厅" ><i class="s-icon s-nav-yydt"></i><em>原油大厅<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$shipServer.get('/page/#/')" class="s-navblink" title="贸易物流" target="_blank"><i class="s-icon s-nav-mywl"></i><em>贸易物流<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$infoServer.get('page/#/')" class="s-navblink" title="信息资讯" target="_blank"><i class="s-icon s-nav-xxzx"></i><em>信息资讯<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$appServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" class="s-navblink" title="经营优化" target="_blank"><i class="s-icon s-nav-jyyh"></i><em>经营优化<i class="fs fs-chevron-down"></i></em></a></li>
+        </ul>
+    </div>
+    <ul class="s-nav s-layout-right">
+        <li class="s-nav-item">
+            $contain.get("contain/accounts.htm").setHost("$systemServer.get('')")
+        </li>
+        <li class="s-nav-item">
+            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')").setParam("isPrivate","true")
+        </li>
+##        <li class="s-nav-item">
+##            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')")
+##        </li>
+        <li class="s-nav-item"><a href="$systemServer.get('logout.htm')" class="s-navblink" class="s-navblink" title="退出"><i class="fs fs-log-out"></i><em>退出</em></a></li>
+
+    </ul>*#
+
+
+#*
+<div class="s-logo" onclick="window.location.href='$!indexUrl'">Mycrudeoil</div>
+    <!-- 头部区域（可配合whui已有的水平导航） -->
+    <div class="s-layout-left">
+##        <div class="s-search"><span class="s-searchspan"><input type="text" placeholder="搜索订单号" class="s-searchinput"><a href="" class="s-searchlink"><i class="fs fs-search"></i></a></span></div>
+        <ul class="s-nav-left">
+            <li class="s-nav-item"><a href="$listedServer.get('crudeoillobby/crudeoilsupmlist.htm')" class="s-navblink" title="Crude Oil" ><i class="s-icon s-nav-yydt"></i><em>Crude Oil<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$shipServer.get('/page/#/')" class="s-navblink" title="Shipping" target="_blank"><i class="s-icon s-nav-mywl"></i><em>Shipping<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$infoServer.get('page/#/')" class="s-navblink" title="News&Reports" target="_blank"><i class="s-icon s-nav-xxzx"></i><em>News&Reports<i class="fs fs-chevron-down"></i></em></a></li>
+            <li class="s-nav-item"><a href="$appServer.get('sso/aso/redirectTgs.htm?Sys=GROMS')" class="s-navblink" title="Smart Factory" target="_blank"><i class="s-icon s-nav-jyyh"></i><em>Smart Factory<i class="fs fs-chevron-down"></i></em></a></li>
+        </ul>
+    </div>
+    <ul class="s-nav s-layout-right">
+        <li class="s-nav-item">
+            $contain.get("contain/accounts.htm").setHost("$systemServer.get('')")
+        </li>
+        <li class="s-nav-item">
+            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')").setParam("isPrivate","true")
+        </li>
+##        <li class="s-nav-item">
+##            $contain.get("message/listAlert.htm").setHost("$messageServer.get('')")
+##        </li>
+        <li class="s-nav-item"><a href="$systemServer.get('logout.htm')" class="s-navblink" class="s-navblink" title="Exit"><i class="fs fs-log-out"></i><em>Exit</em></a></li>
+
+    </ul>
+*#

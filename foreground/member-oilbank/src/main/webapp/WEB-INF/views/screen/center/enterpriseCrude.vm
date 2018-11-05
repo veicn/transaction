@@ -1,0 +1,170 @@
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm')
+        $contain.get("center/member/enterpriseInfo.htm").setHost("$systemServer.get('')").put("layout","")
+        <form action="$appServer.get('center/enterpriseCrude.htm')" method="post">
+            #if($!{enterpriseCrude.id} && "" != "$!{enterpriseCrude.id}")
+                <input type="hidden" name="id" value="$!{enterpriseCrude.id}"/>
+                <input type="hidden" name="enterpriseId" value="$!{enterpriseCrude.enterpriseId}"/>
+            #end
+            <ul class="c-bczl">
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.nature")
+                    <span class="c-b-txt"> 企业性质：</span>
+                    <select name="$!{status.expression}" class="form-inp sel">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>有限责任公司</option>
+                        <option value="2" #if("2" == "$!{status.value}") selected #end>股份有限公司</option>
+                        <option value="3" #if("3" == "$!{status.value}") selected #end>国有独资公司</option>
+                        <option value="4" #if("4" == "$!{status.value}") selected #end>个人独资公司</option>
+                        <option value="5" #if("5" == "$!{status.value}") selected #end>合伙企业</option>
+                        <option value="6" #if("6" == "$!{status.value}") selected #end>个体工商户</option>
+                        <option value="7" #if("7" == "$!{status.value}") selected #end>外商投资企业</option>
+                        <option value="8" #if("8" == "$!{status.value}") selected #end>私营企业</option>
+                    </select>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.provinceCode")
+                    <span class="c-b-txt"> 行政区域：</span>
+                    <select class="form-inp sel selwh" name="$!{status.expression}">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>北京市</option>
+                    </select>
+                    #springBind("enterpriseCrude.cityCode")
+                    <select class="form-inp sel selwh" name="$!{status.expression}">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>北京市</option>
+                    </select>
+                    #springBind("enterpriseCrude.areaCode")
+                    <select class="form-inp sel selwh1" name="$!{status.expression}">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>西城区</option>
+                    </select>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.addressDetail")
+                    <span class="c-b-txt"> 注册地址：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-b-ts"></li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.legalName")
+                    <span class="c-b-txt"> 法定代表人：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-b-ts"></li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.legalCertificateType")
+                    <span class="c-b-txt"> 证件类型：</span>
+                    <select class="form-inp sel" name="$!{status.expression}">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>身份证</option>
+                        <option value="2" #if("2" == "$!{status.value}") selected #end>护照</option>
+                        <option value="3" #if("3" == "$!{status.value}") selected #end>军官证</option>
+                    </select>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.legalCertificateCode")
+                    <span class="c-b-txt"> 证件号码：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.registerFund")
+                    <span class="c-b-txt"> 注册资本（万元）：</span>
+                    <input type="number" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.registerFundCurrency")
+                    <span class="c-b-txt"> 注册资金币种：</span>
+                    <select name="$!{status.expression}" class="form-inp sel">
+                        <option>请选择</option>
+                        <option value="RMB" #if("RMB" == "$!{status.value}") selected #end>人民币</option>
+                    </select>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.registerTime")
+                    <span class="c-b-txt"> 成立日期：</span>
+                    <input type="text" class="form-inp qj-text" date="true" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.tradeType")
+                    <span class="c-b-txt"> 行业分类：</span>
+                    <select class="form-inp sel selw">
+                        <option>请选择</option>
+                        <option value="1">互联网</option>
+                    </select>
+                    <select name="$!{status.expression}" class="form-inp sel selh">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>互联网</option>
+                    </select>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.mainProducts")
+                    <span class="c-b-txt"> 经营范围：</span>
+                    <textarea class="form-textarea" name="$!{status.expression}">$!{status.value}</textarea>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.description")
+                    <span class="c-b-txt"> 公司简介：</span>
+                    <textarea class="form-textarea" name="$!{status.expression}">$!{status.value}</textarea>
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.creditLevel")
+                    <span class="c-b-txt"> 资信等级：</span>
+                    <select class="form-inp sel">
+                        <option>请选择</option>
+                        <option value="1" #if("1" == "$!{status.value}") selected #end>1级</option>
+                        <option value="2" #if("2" == "$!{status.value}") selected #end>2级</option>
+                        <option value="3" #if("3" == "$!{status.value}") selected #end>3级</option>
+                    </select>
+                </li>
+##                <li class="c-bcz clearfix">
+##                    <span class="c-b-txt"> 平台管理员姓名：</span>
+##                    <input type="text" class="form-inp form-inpw" name="">
+##                    <div class="c-bcz-fj c-bcz-fjw">
+##                        <a href=" " class="file">上传平台管理员证明</a>
+##                        <a href=" " class="file fi-yl">预览</a>
+##                        <a href=" " class="file fi-bg">平台管理员证明模板下载</a>
+##                    </div>
+##                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.billingBankName")
+                    <span class="c-b-txt"> 基本账户开户银行：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+                <li class="c-bcz clearfix">
+                    #springBind("enterpriseCrude.billingBankAccount")
+                    <span class="c-b-txt"> 银行账号：</span>
+                    <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                </li>
+            </ul>
+            <div class="c-subdiv c-mod-bc c-mod-bc2">
+                <button class="c-btnsub" type="submit">保存</button>
+                <button class="c-btnrel" type="reset">重置</button>
+                <button class="c-btncas" type="button" onclick="javascript:history.back();">返回</button>
+            </div>
+        </form>
+    </div>
+</div>
+#set($ljs = $imageServer.get('layui/layui.js'))
+#js($ljs)
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($ujs)
+<script>
+    $(function () {
+        //初始化时间空间
+        function initDateInput(elems){
+            layui.use('laydate', function(){
+                var laydate = layui.laydate;
+                elems.each(function(){
+                    laydate.render({
+                        elem: this, //指定元素
+                        format: 'yyyy-MM-dd'
+                    });
+                });
+            });
+        }
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+    });
+</script>

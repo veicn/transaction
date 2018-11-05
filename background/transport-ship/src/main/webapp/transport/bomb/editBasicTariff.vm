@@ -1,0 +1,162 @@
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+});
+</script>
+<script src="/transport/js/om/editBasicTariff.js"></script>
+<form class="layui-form layui-form-pane" style="margin-top:20px; margin-left:125px" >
+
+    <div class="layui-form-item">
+    
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>第一装港</label>
+		    <div class="layui-input-inline iw300">
+		    	<select id="loadPort1" name="loadPort1" lay-filter="test1">
+            	<option value="">请输入第一装港（必选）</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto1">    
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>自定义第一装港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="loadPort1q" type="text" name="loadPort1q" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+		</div>
+		
+		<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>第一卸港</label>
+		    <div class="layui-input-inline iw300">
+		        <select id="unloadPort1" name="unloadPort1" lay-filter="test2">
+            	<option value="">请输入第一卸港（必选）</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto2">
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>自定义第一卸港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="unloadPort1q" type="text" name="unloadPort1q" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+	    </div>
+	
+	</div>   
+	 
+    <div class="layui-form-item">	
+    
+    	<div class="layui-inline">
+		    <label class="layui-form-label" style="width:150px">第二装港</label>
+		    <div class="layui-input-inline iw300">
+		    	<select id="loadPort2" name="loadPort2" lay-filter="test3">
+            	<option value="">请输入第二装港</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto3">
+		    <label class="layui-form-label" style="width:150px">自定义第二装港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="loadPort2q" type="text" name="loadPort2q" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+		</div> 
+		
+		<div class="layui-inline">   
+		    <label class="layui-form-label" style="width:150px">第二卸港</label>
+		    <div class="layui-input-inline iw300">
+		    	<select id="unloadPort2" name="unloadPort2" lay-filter="test4">
+            	<option value="">请输入第二卸港</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto4"> 
+		    <label class="layui-form-label" style="width:150px">自定义第二卸港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="unloadPort2q" type="text" name="unloadPort2q" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+	    </div>
+	    	
+ 	</div>
+	    
+   <div class="layui-form-item">
+   
+		<div class="layui-inline">
+		    <label class="layui-form-label" style="width:150px">第三装港</label>
+		    <div class="layui-input-inline iw300">
+		    	<select id="loadPort3" name="loadPort3" lay-filter="test5">
+            	<option value="">请输入第三装港</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto5">
+			<label class="layui-form-label" style="width:150px">自定义第三装港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="loadPort3q" type="text" name="loadPort3q" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+		</div>
+		
+		<div class="layui-inline">
+		    <label class="layui-form-label" style="width:150px">第三卸港</label>
+		    <div class="layui-input-inline iw300">
+		    	<select id="unloadPort3" name="unloadPort3" lay-filter="test6">
+            	<option value="">请输入第三卸港</option>
+            	</select>
+		    </div>
+		</div>
+		<div class="layui-inline" id="toto6">
+		    <label class="layui-form-label" style="width:150px">自定义第三卸港</label>
+		    <div class="layui-input-inline iw300">
+            	<input class="layui-input" id="unloadPort3" type="text" name="unloadPort3" required  lay-verify="required" placeholder="" autocomplete="off">
+		    </div>
+	    </div>       
+   </div>
+    
+    
+    <div class="layui-form-item">
+    
+	    <div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>费率</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="price" type="text" name="price" required  lay-verify="required" placeholder="请输入基础运价（必填）" autocomplete="off">
+		    </div>
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>年份</label>
+		    <div class="layui-input-inline iw300">
+		        <select id="year" name="year">
+            	<option value="">请选择年份</option>
+            	</select>
+		    </div>
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>地区</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="region" type="text" name="region" required  lay-verify="required" placeholder="请输入地区（必填）" autocomplete="off">
+		    </div>
+	    </div>
+	    
+	</div>
+	
+	
+	<div class="layui-form-item">
+	
+	    <div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>里程数</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="mileage" type="text" name="mileage" required  lay-verify="required" placeholder="请输入里程（必填）" autocomplete="off">
+		    </div>
+		    <label class="layui-form-label iw300" style="width:150px">注意事项</label>
+		    <div class="layui-input-inline iw300">
+		        <input class="layui-input" id="remark" type="text" name="remark" required  lay-verify="required" placeholder="（最多输入50字）" autocomplete="off">
+		    </div>
+	    </div>
+	    
+	    
+	</div>
+	
+	
+    <div class="layui-form-item">
+    	<div class="layui-inline">
+		    <label class="layui-form-label iw300" style="width:150px">路线选择</label>
+		    <div class="layui-input-inline iw300">
+		        <textarea id="remark2" name="remark2" required lay-verify="required" placeholder="（最多输入255字）" class="layui-textarea"></textarea>
+		    </div>
+	    </div>
+    </div>
+    
+ 
+    
+</form>

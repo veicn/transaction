@@ -1,0 +1,451 @@
+<div class="cg-title cg-title3">Quotation</div>
+<ul class="or-line clearfix"><li class="or-line2"></li><li class="or-line1"></li></ul>
+<div class="cg-ord-box">
+    <div class="clearfix">
+        <div class="purc-tit"><i class="c-ico ico-purchase"></i>Requirement</div>
+        <div class="quote-tit"><i class="c-ico ico-quote"></i>Quotation</div>
+    </div>
+    <div class="cg-ord-blo">
+        <p></p>
+        <div class="cg-ord-cont clearfix">
+            <div class="purchase">
+                <ul><li>
+                		<input type="hidden" name="bidding.parentId" value="$!{demand.id}">
+                	</li>
+
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Qty(BBL)</span><span class="purc-span2">$!{demand.numStr}</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Tolerance</span><span class="purc-span2">+/- $!{demand.numfloat} % </span></li>
+
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Incoterm</span><span class="purc-span2">$!{tradeItemMap.get($!{demand.tradeItem})}</span></li>
+
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Basis</span><span class="purc-span2">$!valuationBase.get($!{demand.valuationBase})</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Period</span><span class="purc-span2">$!valuationProidTypeMap.get($!{demand.valuationProidType})</span></li>
+                    #if($!{demand.valuationProidType} == 4)
+                        <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Period</span><span class="purc-span2">$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidStart})-$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demand.valuationProidEnd})</span></li>
+                    #elseif($!{demand.valuationProidType} == 5)
+                        <li class="purc-blo clearfix"><span class="purc-spanl">Contract Type</span><span class="purc-span2">$!contractKindMap.get($!{demand.contractKind})</span></li>
+                    #end
+                    <li class="purc-blo clearfix #if($!{demand.valuationProidType} != 4 && $!{demand.valuationProidType} != 5) valuationProidDemand #end hidden"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Payment Date</span><span class="purc-span2">$!{demand.payItem}</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+
+                    <li id="a1" class="purc-blo clearfix"><span class="purc-spanl">Load Port</span><span class="purc-span2">$!{demandShips.shipmentPort}</span></li>
+                    <li id="a2" class="purc-blo clearfix"><span class="purc-spanl">Discharge Port</span><span class="purc-span2">$!{demandShips.dischargePort}</span></li>
+                    <li id="a3" class="purc-blo clearfix"><span class="purc-spanl">Laycan</span><span class="purc-span2">$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShips.shipmentStartTime}) - $!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShips.shipmentEndTime})</span></li>
+                    <li id="a4" class="purc-blo clearfix"><span class="purc-spanl">DDR</span><span class="purc-span2">$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShips.dischargeStartTime}) - $!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShips.dischargeEndTime})</span></li>
+
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Qty Determination</span><span class="purc-span2">$!{measureModeMap.get($!{demand.measureMode})}</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Laytime</span><span class="purc-span2">$!{demand.loadAndDischargePermittedTimespan}</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">&nbsp;</span><span class="purc-span2">&nbsp;</span></li>
+                    <li class="purc-blo1 clearfix"><span class="purc-spanl">Remark</span>
+                        <textarea class="purc-span22" disabled>&nbsp;$!{demand.remark}</textarea>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="purchase">
+                <ul>
+                    <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Qty(BBL)</span><span class="purc-span3"><input class="biddingNeeded biddingNumChk" type="text"  name="bidding.numStr" value="$!{bidding.numStr}" placeholder="" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"  ></span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Tolerance</span><span class="purc-span3">+/- &nbsp;<input class="cg-ydzfo biddingNeeded biddingNumChk" type="text" name="bidding.numfloat"  value="$!{bidding.numfloat}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" maxlength="100">&nbsp;%</span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Incoterm</span>
+                        <span class="purc-span3">
+                        <select class="sele " name="bidding.tradeItem" id="tradeItem" value="$!{bidding.tradeItem}">#foreach($!tim in $!tradeItemMap.entrySet())<option value="$!tim.key" #if($!{bidding.tradeItem} == $!{tim.key}) selected #end>$!tim.value</option>
+                        #end</select></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Premium/Discount</span><span class="purc-span3"><input type="text" class="biddingNeeded biddingNumChk" name="bidding.agioStr" value="$!{bidding.agioStr}" onkeypress="return noNumbersZF(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"  placeholder=""  /></span></li>
+                                            <li class="purc-blo clearfix"><span class="purc-spanl">Pricing Basis</span>
+                                                <span class="purc-span3">
+                        <select class="sele " name="bidding.valuationBase" value="$!{bidding.valuationBase}" >
+                            #foreach($item in $valuationBase.entrySet())
+                                <option value="$!{item.key}" #if($!{bidding.valuationBase} == $!{item.key}) selected #end>$!{item.value}</option>
+                            #end
+                        </select>
+                        </span>
+                    </li>
+                    <li class="purc-blo clearfix">
+                        <span class="purc-spanl">Pricing Period</span>
+                        <span class="purc-span3">
+                            <select onchange="periodTypeChange(this.value)" class="sele " name="bidding.valuationProidType" value="$!{bidding.valuationProidType}">
+                                #foreach($!tim in $!valuationProidTypeMap.entrySet())
+                                    <option value="$!tim.key"
+                                        #if($!{bidding.valuationProidType} == $!{tim.key})
+                                            selected
+                                        #end>
+                                        $!tim.value
+                                    </option>
+                                #end
+                            </select>
+                        </span>
+                    </li>
+
+                    <li class="purc-blo clearfix" #if($!{bidding.valuationProidType} != 4) hidden #end id="valuationPeriod">
+                        <span class="purc-spanl purc-spbtx"><em></em></span><span class="purc-span3"><input type="text" id="valuationPeriodStart" placeholder="from" class="cg-tbzqr 
+                            #if($!{bidding.valuationProidType} == 4)
+                                biddingNeeded
+                            #end" name="bidding.valuationProidStart" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{bidding.valuationProidStart})" data="true" />
+                        <em>&nbsp;-&nbsp;</em> <input type="text" id="valuationPeriodEnd" placeholder="to" class="cg-tbzqr
+                            #if($!{bidding.valuationProidType} == 4)
+                                biddingNeeded
+                            #end" name="bidding.valuationProidEnd" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{bidding.valuationProidEnd})" data="true" /></span></li>
+                                            <li class="purc-blo clearfix" #if($!bidding.valuationProidType != 5) hidden #end id="contractKind">
+                                                <span class="purc-spanl purc-spbtx"><em>*</em>Contract Type：</span>
+                                                <span class="purc-span3"><select class="sele" name="bidding.contractKind" value="$!{bidding.contractKind}" id="contractKindContent">
+                                                    #foreach($!pm in $!contractKindMap.entrySet())
+                                                        <option value="$!pm.key" #if($!{bidding.contractKind} == $!{pm.key}) selected #end>$!pm.value</option>
+                                                    #end
+                        </select></span>
+                    </li>
+                    <li class="purc-blo clearfix #if($!{demand.valuationProidType} == 4 || $!{demand.valuationProidType} == 5) valuationProidBidding #end hidden"><span class="purc-spanl">&nbsp;</span><span class="purc-span3">&nbsp;</span></li>
+                    <li class="purc-blot clearfix">
+                        <span class="purc-spanl purc-spbtx"><em>*</em>Price Fomula</span><span class="purc-span3t">
+                         <textarea class="biddingNeeded purctex pricingEditor" jsonstruc="" pmId="pricingMode" jsId="valuationFormulaJson" name="bidding.valuationFormula" id="valuationFormula" readonly>$!{bidding.valuationFormula}</textarea>
+                            <!--下面的元素是json格式的，如果需要请添加，不需要的话就不用添加了，id值需和上面的jsId属性值保持一致-->
+                         <input type="hidden" name="bidding.valuationFormulaJson" id="valuationFormulaJson" value='$!{bidding.valuationFormulaJson}' /><input type="hidden" name="bidding.pricingMode" id="pricingMode" value='$!{bidding.pricingMode}' /> </span>
+                    </li>
+                    $contain.get("/pricingFormula/physicalPricingEditor.htm")
+
+
+                    <li class="purc-blo clearfix">
+                        <span class="spanltt purc-spbtx"><em>*</em>Payment Date</span>
+                        <span class="purc-span4">
+                             <select  id="typeEvent" name="bidding.typeEvent">
+                                 #foreach($!typeEvent in $!payItemMap.entrySet())
+                                     <option value="$!typeEvent.value">$!typeEvent.value</option>
+                                 #end
+                            </select>
+                            <input id="otherDate" name="bidding.otherDate" class="tim-inpu"  placeholder="Input Date" style="display: none" type="text"  date="true" />
+                            <select  id="eventInclusion" name="bidding.eventInclusion" >
+                                <option value="after" >After</option>
+                                <option value="from" >From</option>
+                            </select>
+                            <em id="typeEvent2">B/L</em>
+                            <input  id="eventDays" name="bidding.eventDays"  type="text"   placeholder="" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+                            <em id="eventDays2">Days</em>
+
+                            <input id="payItem" name="bidding.payItem" style="display: none" value="$!{bidding.payItem}" />
+                            <input id="payItemJSON" name="bidding.payItemJSON" style="display: none" value='$!{bidding.payItemJSON}' />
+                         </span>
+                    </li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Credit term</span><span class="purc-span3"><select class="sele" name="bidding.authItem">#foreach($!ct in $!creditItem.entrySet())<option value="$!ct.key" #if($!{bidding.authItem} == $!{ct.key}) selected #end>$!ct.value</option>
+                    #end</select></span></li>
+
+                    <li id="u1" class="purc-blo clearfix"><span class="purc-spanl">Load Port</span><span class="purc-span3">
+                     <input type="text" name="demandShip.shipmentPort" value="$!{demandShip.shipmentPort}" class="" maxlength="100"/></span>
+                    </li>
+                    <li id="u2" class="purc-blo clearfix"><span class="purc-spanl">Discharge Port</span><span class="purc-span3">
+                     <input type="text" name="demandShip.dischargePort" value="$!{demandShip.dischargePort}" class="" maxlength="100"/></span></li>
+                    <li id="u3" class="purc-blo clearfix"><span class="purc-spanl">Laycan</span>
+                        <span class="purc-span3">
+                            <input type="text" class="cg-tbzqr" name="demandShip.shipmentStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentStartTime})" />
+                            <em>&nbsp;-&nbsp;</em>
+                            <input type="text" class="cg-tbzqr" name="demandShip.shipmentEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.shipmentEndTime})" />
+                        </span>
+                    </li>
+                    <li id="u4" class="purc-blo clearfix"><span class="purc-spanl">DDR</span><span class="purc-span3">
+                        <input type="text" class="cg-tbzqr" name="demandShip.dischargeStartTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeStartTime})" data="true" />
+                        <em>&nbsp;-&nbsp;</em> <input type="text" class="cg-tbzqr" name="demandShip.dischargeEndTime" value="$!dateUtil.convertDateToString('yyyy-MM-dd',$!{demandShip.dischargeEndTime})" /></span></li>
+
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Qty Determination</span><span class="purc-span3"><select class="sele" name="bidding.measureMode" id="measureMode" value="bidding.measureMode">#foreach($!pim in $!measureModeMap.entrySet())<option value="$!pim.key" #if($!{bidding.measureMode} == $!{pim.key}) selected #end>$!pim.value</option>
+                    #end</select></span></li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl purc-spbtx"><em>*</em>Valid to</span>
+                        <span class="purc-span3">
+                        <input type="text" class="biddingNeeded" name="bidding.stopBidTime"
+                               value="$!dateUtil.convertDateToString('yyyy-MM-dd', $!{bidding.stopBidTime})" data="true" />
+                        </span>
+                    </li>
+                    <li class="purc-blo clearfix"><span class="purc-spanl">Laytime</span>
+                        <span class="purc-span3">
+                        <input type="text" class="" name="bidding.loadAndDischargePermittedTimespan" value="$!{bidding.loadAndDischargePermittedTimespan}" maxlength="255" />
+                        </span>
+                    </li>
+                </ul>
+                <li class="purc-blo clearfix">
+                    <span class="purc-spanl">Inspection</span>
+                    <span class="purc-span3">
+                    <select class="sele" id="inspectionFeeSharingType" name="bidding.inspectionFeeSharingType" value="$!{bidding.inspectionFeeSharingType}">
+                        #foreach($!item in $!inspectionFeeSharingTypeMap.entrySet())
+                            <option value="$!{item.key}" #if($!{bidding.inspectionFeeSharingType} == $!{item.key}) selected #end >$!{item.value}</option>
+                        #end
+                    </select>
+                    </span>
+                </li>
+                <li class="purc-blo clearfix">
+                    <span class="purc-spanl">Law</span>
+                    <span class="purc-span3">
+                    <input type="text" class="" name="bidding.law" value="$!{bidding.law}" maxlength="100"/>
+                    </span>
+                </li>
+                <li class="purc-blo clearfix">
+                    <span class="purc-spanl">GTC</span>
+                    <span class="purc-span3">
+                    <input type="text" class="" name="bidding.gtc" value="$!{bidding.gtc}" maxlength="100"/>
+                    </span>
+                </li>
+                <div class="ord-bz clearfix">
+                    <ul class="ord-bzl">
+                        <li class="purc-blo clearfix"><span class="purc-spanl">Remark</span></li>
+                    </ul>
+                    <div class="ord-bzr"><textarea name="bidding.remark" maxlength="2000">$!{bidding.remark}</textarea></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+$contain.get("/pricingFormula/physicalPricingEditor.htm")
+#*引入js*#
+#set($autocompleteJs = $appServer.get('script/lib/jquery.autocomplete.min.js'))
+#js($autocompleteJs)
+
+<script>
+
+	$('#inspectionFeeSharingType').val($!{bidding.inspectionFeeSharingType});
+
+    function ValuationPeriodType() {
+        this.show = function() {
+            $('#valuationPeriod').show();
+            if (!$('#valuationPeriodStart').hasClass('biddingNeeded')) {
+                $('#valuationPeriodStart').addClass('biddingNeeded')
+            }
+            if (!$('#valuationPeriodEnd').hasClass('biddingNeeded')) {
+                $('#valuationPeriodEnd').addClass('biddingNeeded')
+            }
+        };
+
+        this.hide = function() {
+            $('#valuationPeriod').hide();
+            if ($('#valuationPeriodStart').hasClass('biddingNeeded')) {
+                $('#valuationPeriodStart').removeClass('biddingNeeded')
+            }
+            if ($('#valuationPeriodEnd').hasClass('biddingNeeded')) {
+                $('#valuationPeriodEnd').removeClass('biddingNeeded')
+            }
+        };
+    }
+
+    function ContractKindType() {
+        this.show = function() {
+            $('#contractKind').show();
+            if (!$('#contractKindContent').hasClass('biddingNeeded')) {
+                $('#contractKindContent').addClass('biddingNeeded');
+            }
+        };
+        this.hide = function() {
+            $('#contractKind').hide();
+            if ($('#contractKindContent').hasClass('biddingNeeded')) {
+                $('#contractKindContent').removeClass('biddingNeeded');
+            }
+        };
+    }
+
+    const periodTypes = new Object();
+    periodTypes[4] = new ValuationPeriodType();
+    periodTypes[5] = new ContractKindType();
+
+    periodTypeChange($!{bidding.valuationProidType});
+    
+    function periodTypeChange(value) {
+        if(value == '4' || value == '5'){
+            $('.valuationProidBidding').hide();
+            $('.valuationProidDemand').show();
+        }else{
+            $('.valuationProidBidding').show();
+            $('.valuationProidDemand').hide();
+        }
+        for (var item in periodTypes) {
+            if (value == item) {
+                periodTypes[item].show();
+            } else {
+                periodTypes[item].hide();
+            }
+        }
+    }
+
+    $(function(){
+        if($("#tradeItem").val() == '5' || $("#tradeItem").val() == '6'){
+            //$("[name='demandShip.shipmentPort']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+            //$("[name='demandShip.shipmentStartTime']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+            //$("[name='demandShip.shipmentEndTime']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+        }else{
+            //$("[name='demandShip.shipmentPort']").removeClass("biddingNeeded");
+            //$("[name='demandShip.shipmentStartTime']").removeClass("biddingNeeded");
+            //$("[name='demandShip.shipmentEndTime']").removeClass("biddingNeeded");
+            //$("[name='demandShip.shipmentPort']").addClass("biddingNeeded");
+            //$("[name='demandShip.shipmentStartTime']").addClass("biddingNeeded");
+            //$("[name='demandShip.shipmentEndTime']").addClass("biddingNeeded");
+        }
+
+        $("#tradeItem").on("change",function(){
+            if($("#tradeItem").val() == '5' || $("#tradeItem").val() == '6'){
+                //$("[name='demandShip.shipmentPort']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+                //$("[name='demandShip.shipmentStartTime']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+                //$("[name='demandShip.shipmentEndTime']").removeClass("biddingNeeded").removeClass("bidding-required-error");
+            }else{
+                //$("[name='demandShip.shipmentPort']").removeClass("biddingNeeded");
+                //$("[name='demandShip.shipmentStartTime']").removeClass("biddingNeeded");
+                //$("[name='demandShip.shipmentEndTime']").removeClass("biddingNeeded");
+                //$("[name='demandShip.shipmentPort']").addClass("biddingNeeded");
+                //$("[name='demandShip.shipmentStartTime']").addClass("biddingNeeded");
+                //$("[name='demandShip.shipmentEndTime']").addClass("biddingNeeded");
+            }
+        });
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        // 卸货港
+        var data = {"valueSetType": "4"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='demandShip.dischargePort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='demandShip.dischargePort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        // 装货港
+        var data = {"valueSetType": "5"};
+        $.ajax({
+            type: "POST",
+            url: "$shipServer.get('shipPact/queryValueSet.json')",
+            //async:true
+            data: JSON.stringify(data),
+            dataType: 'JSON',
+            success: function (res) {
+
+                $ ("input[name='demandShip.shipmentPort']").autocomplete(
+                        res.datas,
+                        {
+                            width: $ ("input[name='demandShip.shipmentPort']").outerWidth,
+                            minChars: 0,
+                            matchContains: true,
+                            scroll: true,
+                            mustMatch: false,
+                            scrollHeight: 122,
+                            formatItem: function (row, i, max) {
+                                return  row.value ;
+                            },
+                            formatMatch: function (row, i, max) {
+                                return row.value;
+                            },
+                            formatResult: function (row) {
+                                return row.value;
+                            }
+                        }).result(function (event, row, formatted) {
+
+                });
+            },
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+    })
+
+    $(function () {
+//      付款日期赋值
+        getValue();
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+    })
+
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+    }
+
+
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+
+    }
+
+</script>
+

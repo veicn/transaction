@@ -1,0 +1,42 @@
+
+<div>
+	#if($slider_borker)
+		#set($s_broker = $slider_borker)
+	#else
+		#set($s_broker = $appServer)	
+	#end
+	<form name="page_slider_$!{sliderRandom}" action="${s_broker.get("$sliderTarget")}" method="post">
+		#foreach($queryParam in $sliderQuery.parameters.entrySet())
+		<input type="hidden" name="$!{queryParam.key}" value="$!{queryParam.value}"/>
+		#end
+	#if($sliderCurrent == '1')
+	<a href="#" onclick="goto$!{sliderRandom}('1')"> 首页 </a>
+	#else
+	<a href="#" onclick="goto$!{sliderRandom}('1')"> 首页 </a>
+	<a href="#" onclick="goto$!{sliderRandom}('${sliderPrev}')"> 上一页 </a>
+	#end
+	#foreach($grid in $grids)
+		#if($grid == 0)
+		<span>...</span>
+		#elseif($grid == $sliderCurrent)
+		<span class="home color">${grid}</span>
+		#else
+		<a href="#" class="home" onclick="goto$!{sliderRandom}('${grid}')">${grid}</a>
+		#end
+	#end
+	#if($sliderCurrent == $sliderTotal )
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')"> 尾页 </a>
+	#else
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderNext}')"> 下一页 </a>
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')"> 尾页 </a>
+	#end
+	<input type="text" class="inp inp-border" name="$!{sliderPage}" value="$sliderQuery.currentPage"/>
+	<input type="submit" class="btna" name="sb" value="跳转到"/>
+	</form>
+</div>
+<script>
+	function goto$!{sliderRandom}(pg){
+		document.page_slider_$!{sliderRandom}.$!{sliderPage}.value=pg;
+		document.page_slider_$!{sliderRandom}.submit();
+	}
+</script>

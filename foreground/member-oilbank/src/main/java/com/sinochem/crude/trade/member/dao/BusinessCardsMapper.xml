@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.BusinessCardsMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.BusinessCards" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="professional_name" property="professionalName" jdbcType="VARCHAR" />
+    <result column="nick_name_en" property="nickNameEn" jdbcType="VARCHAR" />
+    <result column="org_name_en" property="orgNameEn" jdbcType="VARCHAR" />
+    <result column="professional_name_en" property="professionalNameEn" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, nick_name, org_name, professional_name, nick_name_en, org_name_en, 
+    professional_name_en, phone, email, del_flg, create_time, creater, update_time, updater
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_cards
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from business_cards
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.BusinessCards" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_cards (member_id, nick_name, org_name, 
+      professional_name, nick_name_en, org_name_en, 
+      professional_name_en, phone, email, 
+      del_flg, create_time, creater, 
+      update_time, updater)
+    values (#{memberId,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{professionalName,jdbcType=VARCHAR}, #{nickNameEn,jdbcType=VARCHAR}, #{orgNameEn,jdbcType=VARCHAR}, 
+      #{professionalNameEn,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{delFlg,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.BusinessCards" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_cards
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="professionalName != null" >
+        professional_name,
+      </if>
+      <if test="nickNameEn != null" >
+        nick_name_en,
+      </if>
+      <if test="orgNameEn != null" >
+        org_name_en,
+      </if>
+      <if test="professionalNameEn != null" >
+        professional_name_en,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalName != null" >
+        #{professionalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickNameEn != null" >
+        #{nickNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNameEn != null" >
+        #{orgNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalNameEn != null" >
+        #{professionalNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.BusinessCards" >
+    update business_cards
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalName != null" >
+        professional_name = #{professionalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickNameEn != null" >
+        nick_name_en = #{nickNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNameEn != null" >
+        org_name_en = #{orgNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="professionalNameEn != null" >
+        professional_name_en = #{professionalNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.BusinessCards" >
+    update business_cards
+    set member_id = #{memberId,jdbcType=BIGINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      professional_name = #{professionalName,jdbcType=VARCHAR},
+      nick_name_en = #{nickNameEn,jdbcType=VARCHAR},
+      org_name_en = #{orgNameEn,jdbcType=VARCHAR},
+      professional_name_en = #{professionalNameEn,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByEntity" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM business_cards where 1=1
+    <if test="memberId != null" >
+       and member_id = #{memberId,jdbcType=BIGINT}
+    </if>
+    <if test="nickName != null" >
+      and nick_name = #{nickName,jdbcType=VARCHAR}
+    </if>
+    <if test="orgName != null" >
+      and org_name = #{orgName,jdbcType=VARCHAR}
+    </if>
+    <if test="professionalName != null" >
+      and professional_name = #{professionalName,jdbcType=VARCHAR}
+    </if>
+    <if test="nickNameEn != null" >
+      and nick_name_en = #{nickNameEn,jdbcType=VARCHAR}
+    </if>
+    <if test="orgNameEn != null" >
+      and org_name_en = #{orgNameEn,jdbcType=VARCHAR}
+    </if>
+    <if test="professionalNameEn != null" >
+      and professional_name_en = #{professionalNameEn,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null" >
+      and phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null" >
+      and email = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlg != null" >
+      and del_flg = #{delFlg,jdbcType=CHAR}
+    </if>
+    <if test="createTime != null" >
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="creater != null" >
+      and creater = #{creater,jdbcType=BIGINT}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updater != null" >
+      and updater = #{updater,jdbcType=BIGINT}
+    </if>
+  </select>
+
+  <select id="getBusinessCardByQuery" resultMap="BaseResultMap"  >
+      select   bc.id, bc.member_id, bc.nick_name, bc.org_name, bc.professional_name, bc.nick_name_en, bc.org_name_en,
+          bc.professional_name_en, bc.phone, bc.email, bc.del_flg, bc.create_time, bc.creater, bc.update_time, bc.updater
+      FROM business_cards bc
+      <if test="memberId != null" >
+        INNER JOIN business_card_collect bcc ON bcc.collect_Member_Id = bc.member_id
+      </if>
+      WHERE 1=1
+      <if test="queryName != null" >
+        AND (nick_name like concat('%',#{queryName,jdbcType=VARCHAR},'%')
+        or org_name like concat('%',#{queryName,jdbcType=VARCHAR},'%')
+        or professional_name like concat('%',#{queryName,jdbcType=VARCHAR},'%')
+        )
+      </if>
+      <if test="memberId != null" >
+        AND bcc.member_id = #{memberId,jdbcType=BIGINT}
+      </if>
+  </select>
+
+
+
+</mapper>

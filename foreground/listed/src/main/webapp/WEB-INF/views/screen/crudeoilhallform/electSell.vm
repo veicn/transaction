@@ -1,0 +1,229 @@
+<div class="inner">
+    <div class="cgdt-info">
+        <span class="cgdt-num">共有$!{total}条相关信息</span>
+        <a>全部结果 &gt;</a>
+        #if($!{crudeOilDemandQuery.purchaseType} != "" && $!{crudeOilDemandQuery.purchaseType})
+            <a  href="javascript:void(0)" onclick="sendCancelData(1,'$!{crudeOilDemandQuery.purchaseType}','$!{crudeOilDemandQuery.purchaseType}')" class="c-result">$!{crudeOilDemandQuery.purchaseTypeName}
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+        #end
+        #if($!{crudeOilDemandQuery.oilNumber}!= "" && $!{crudeOilDemandQuery.oilNumber})
+            <a href="javascript:void(0)" onclick="sendCancelData(4,'$!{crudeOilDemandQuery.oilNumber}','$!{crudeOilDemandQuery.oilNumber}')" class="c-result">$!{crudeOilDemandQuery.oilNumberName}
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+        #end
+        #if($!{crudeOilDemandQuery.specified}!= "" && $!{crudeOilDemandQuery.specified})
+            <a href="javascript:void(0)" onclick="sendCancelData(5,'$!{crudeOilDemandQuery.specified}')" class="c-result">$!{crudeOilDemandQuery.specifiedName}
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+        #end
+        #if($!{crudeOilDemandQuery.publishType}!= "" && $!{crudeOilDemandQuery.publishType})
+            <a href="javascript:void(0)" onclick="sendCancelData(6,'$!{crudeOilDemandQuery.publishType}')" class="c-result">$!{crudeOilDemandQuery.publishTypeName}
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+        #end
+        #if($!{crudeOilDemandQuery.enterprise}!= "" && $!{crudeOilDemandQuery.enterprise})
+            <a href="javascript:void(0)" onclick="sendCancelData(7,'$!{crudeOilDemandQuery.enterprise}')" class="c-result">$!{crudeOilDemandQuery.enterpriseName}
+                <span class="c-ico ico-btn-x"></span>
+            </a>
+        #end
+    </div>
+    <form id="formData" action="$appServer.get('crudeoillobby/indexSell.htm')" method="post">
+        <input type="hidden" id="type" name="type" />
+        <input type="hidden" id="purchaseType" name="purchaseType" value="$!{crudeOilDemandQuery.purchaseType}"/>
+        <input type="hidden" id="oilNumber" name="oilNumber" value="$!{crudeOilDemandQuery.oilNumber}"/>
+        <input type="hidden" id="specified" name="specified" value="$!{crudeOilDemandQuery.specified}"/>
+        <input type="hidden" id="publishType" name="publishType" value="$!{crudeOilDemandQuery.publishType}" />
+        <input type="hidden" id="enterprise" name="enterprise" value="$!{crudeOilDemandQuery.enterprise}" />
+
+        <input type="hidden" id="purchaseTypeName" name="purchaseTypeName" value="$!{crudeOilDemandQuery.purchaseTypeName}"/>
+        <input type="hidden" id="oilNumberName" name="oilNumberName" value="$!{crudeOilDemandQuery.oilNumberName}"/>
+        <input type="hidden" id="specifiedName" name="specifiedName" value="$!{crudeOilDemandQuery.specifiedName}"/>
+        <input type="hidden" id="publishTypeName" name="publishTypeName" value="$!{crudeOilDemandQuery.publishTypeName}" />
+        <input type="hidden" id="enterpriseName" name="enterpriseName" value="$!{crudeOilDemandQuery.enterpriseName}" />
+
+        <input type="hidden" id="time" name="time" value="$!{crudeOilDemandQuery.time}"/>
+        <input type="hidden" id="sort" name="sort" #if($!{crudeOilDemandQuery.sort}) value="$!{crudeOilDemandQuery.sort}" #else value="0" #end>
+        <input type="hidden" id="orderByKeys" name="orderByKeys" value="$!{crudeOilDemandQuery.orderByKeys}">
+        <input type="hidden" id="pageSize" name="pageSize" value="$!{crudeOilDemandQuery.pageSize}">
+        <input type="submit" style="display: none;" id="crudeOilSearchSubmit">
+    </form>
+    <div class="cgdt-cxtj search-box">
+        <ul>
+            #foreach($searchOptions in $searchOptionsList)
+            	#if($searchOptions.searchOptionType.name != "采购方式")
+					<li class="cxtj-nr clearfix #if($searchOptions.searchOptionType.code == 7) qcxx #end">
+	                    <div class="cxtj-nr-bt">$!{searchOptions.searchOptionType.name}</div>
+	                    <div class="cxtj-nr-text  search-box-con
+	                        #if($searchOptions.searchOptionType.code == "1") jyfs #end">
+	                        #foreach($searchOption in $!{searchOptions.searchOptionList})
+	                            #if($!{searchOptions.searchOptionType.code} == 1)
+	                                #if($!{searchOption.key} == "1")
+	                                    <a href="javascript:void(0)" onclick="sendQueryData('$!{searchOptions.searchOptionType.code}','$!{searchOption.key}','$!{searchOption.value}')" >$!{searchOption.value}<i class="c-ico cg-tb"></i></a>
+	                                #else
+	                                    <a class="xj-txt" href="javascript:void(0)" onclick="sendQueryData('$!{searchOptions.searchOptionType.code}','$!{searchOption.key}','$!{searchOption.value}')" class="c-elect">$!{searchOption.value}<i class="c-ico cg-xj"></i></a>
+	                                #end
+	                            #else
+	                                <a href="javascript:void(0)" onclick="sendQueryData('$!{searchOptions.searchOptionType.code}','$!{searchOption.key}','$!{searchOption.value}')" class="c-elect">$!{searchOption.value}</a>
+	                            #end
+	                        #end
+	                    </div>
+	
+	                    #if(8 < $!{searchOptions.searchOptionList.size()})
+	                        <div class="cxtj-nr-an ">
+	                            <a class="btn-more">展开 ∨</a>
+	                        </div>
+	                    #end
+	                </li>
+            	#end
+            #end
+        </ul>
+    </div>
+</div>
+
+<script>
+    ;(function(window){
+        var SearchBox = function(dom){this.init(dom)};
+        $.extend(SearchBox.prototype,{
+            lines:[],
+            init:function(dom){
+                _this = this;
+                _this.dom = dom;
+                $(_this.dom).find('ul li').each(function(){
+                    _this.lines.push(new SearchLine(this));
+                })
+            },
+            expandAll:function(){
+                $(this.lines).each(function(){
+                    this.expand();
+                })
+            },
+            collapseAll:function(){
+                $(this.lines).each(function(){
+                    this.collapse();
+                })
+            }
+        });
+
+        var SearchLine = function(dom){this.init(dom)};
+        $.extend(SearchLine.prototype,{
+            init:function(dom){
+                this.dom = $(dom);
+                this.con = this.dom.find('.search-box-con');
+                this.moreBtn = this.dom.find('.btn-more');
+                this.initEvents();
+            },
+            initEvents:function(){
+                var _this = this;
+                $(this.dom).on('click','.btn-more',function(){
+                    _this.toogleExpand();
+                })
+            },
+            toogleExpand :function(){
+                this.dom.hasClass("ctl-expanded") ?
+                        this.collapse():this.expand();
+
+            },
+            expand:function(){
+                this.con.children("a:gt(4)").show();
+                this.moreBtn.text("折叠∧");
+                this.dom.addClass("ctl-expanded");
+            },
+            collapse:function(){
+                this.con.children("a:gt(4)").hide();
+                this.moreBtn.text("展开∨");
+                this.dom.removeClass("ctl-expanded");
+
+            }
+        });
+
+        jQuery.fn.searchBox = function(method){
+            var args = [].concat(arguments);
+            this.each(function(){
+                if(!this.comp) {
+                    this.comp = new SearchBox(this);
+                }
+                this.comp[method].apply(this.comp,args.splice(1));
+            });
+
+        }
+        $('.search-box').searchBox("collapseAll");
+    })(window);
+
+    function sendQueryData(id,no,name){
+        var params = "";
+        $("#type").val(1)
+        if (id == 1) {
+            $("#purchaseType").val(no);
+            $("#purchaseTypeName").val(name);
+        } else if (id == 2) {
+            $("#crudePlace").val(no);
+            $("#crudePlaceName").val(name);
+        } else if (id == 3) {
+            $("#oilType").val(no);
+            $("#oilTypeName").val(name);
+        } else if (id == 4) {
+            $("#oilNumber").val(no);
+            $("#oilNumberName").val(name);
+        } else if (id == 5) {
+            $("#specified").val(no);
+            $("#specifiedName").val(name);
+        } else if (id == 6) {
+            $("#publishType").val(no);
+            $("#publishTypeName").val(name);
+        } else if (id == 7) {
+            $("#enterprise").val(no);
+            $("#enterpriseName").val(name);
+        }
+
+        $("#crudeOilSearchSubmit").click();
+    }
+
+    function sendCancelData(type,id,name){
+        var params = "";
+        $("#type").val(0)
+        if (type == 1) {
+            $("#purchaseType").val("");
+            $("#purchaseTypeName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 2) {
+            $("#crudePlace").val("");
+            $("#crudePlaceName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 3) {
+            $("#oilType").val("");
+            $("#oilTypeName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 4) {
+            $("#oilNumber").val("");
+            $("#oilNumberName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 5) {
+            $("#specified").val("");
+            $("#specifiedName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 6) {
+            $("#publishType").val("");
+            $("#publishTypeName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        } else if (type == 7) {
+            $("#enterprise").val("");
+            $("#enterpriseName").val("");
+            $(".c-result").css({'border':'1px solid #000'})
+        }
+
+        $("#crudeOilSearchSubmit").click();
+    }
+
+
+</script>
+<style>
+    .jyfs a.c-elect{
+        color: #000;
+        border:none;
+    }
+    .c-result{
+        display: inline-block;
+        padding:2px 5px;
+    }
+</style>

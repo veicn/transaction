@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.IntentionMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.Intention" id="IntentionDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Intention">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.Intention" id="Intention">
+		<result property="intentionId" column="INTENTION_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="intentionCode" column="INTENTION_CODE" />
+		<result property="palletId" column="PALLET_ID" />
+		<result property="palletUuid" column="PALLET_UUID" />
+		<result property="shipPlateId" column="SHIP_PLATE_ID" />
+		<result property="shipPlateUuid" column="SHIP_PLATE_UUID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="shipPlateMemberId" column="SHIP_PLATE_MEMBER_ID" />
+		<result property="shipPlateMemberName" column="SHIP_PLATE_MEMBER_NAME" />
+		<result property="shipPlateMemberSimName" column="SHIP_PLATE_MEMBER_SIM_NAME" />
+		<result property="status" column="STATUS" />
+		<result property="inPactBeg" column="IN_PACT_BEG" />
+		<result property="inPactEnd" column="IN_PACT_END" />
+		<result property="inMinQuantity" column="IN_MIN_QUANTITY" />
+		<result property="inWs" column="IN_WS" />
+		<result property="inPactSpeed" column="IN_PACT_SPEED" />
+		<result property="inDemurrage" column="IN_DEMURRAGE" />
+		<result property="inDockTime" column="IN_DOCK_TIME" />
+		<result property="inUnloadRegion" column="IN_UNLOAD_REGION" />
+		<result property="inLoadRegion" column="IN_LOAD_REGION" />
+		<result property="inCommission" column="IN_COMMISSION" />
+		<result property="inRemark" column="IN_REMARK" />
+		<result property="coPactBeg" column="CO_PACT_BEG" />
+		<result property="coPactEnd" column="CO_PACT_END" />
+		<result property="coMinQuantity" column="CO_MIN_QUANTITY" />
+		<result property="coWs" column="CO_WS" />
+		<result property="coPactSpeed" column="CO_PACT_SPEED" />
+		<result property="coDemurrage" column="CO_DEMURRAGE" />
+		<result property="coDockTime" column="CO_DOCK_TIME" />
+		<result property="coUnloadRegion" column="CO_UNLOAD_REGION" />
+		<result property="coLoadRegion" column="CO_LOAD_REGION" />
+		<result property="coCommission" column="CO_COMMISSION" />
+		<result property="coRemark" column="CO_REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="epMemberNameEn" column="EP_MEMBER_NAME_EN" />
+		<result property="shipPlateMemberNameEn" column="SHIP_PLATE_MEMBER_NAME_EN" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="Intention" parameterType="com.sinochem.crude.trade.transport.domain.Intention">
+	select * from t_ship_intention
+	where
+		 ALIVE_FLAG='1'
+		<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+		<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+		<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+		<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+		<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+		<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+		<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+		<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+		<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+		<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+		<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+		<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+		<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+		<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+		<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+		<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+		<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+		<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+		<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+		<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+		<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+		<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+		<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+		<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+			</select>
+			
+	<select id="findByEntitys" resultMap="Intention" parameterType="com.sinochem.crude.trade.transport.domain.Intention">
+	select * from t_ship_intention
+	where
+		 ALIVE_FLAG='1'
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+	</select>
+	
+	<select id="findByPrimaryKey" resultMap="Intention">
+			select
+			* from t_ship_intention
+			where
+		    INTENTION_ID=#{intentionId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="Intention">
+			select
+			* from t_ship_intention
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.Intention">
+		update t_ship_intention
+		<set>
+         INTENTION_ID=#{intentionId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="intentionCode!=null">,INTENTION_CODE = #{intentionCode}</if>
+		<if test="palletId!=null">,PALLET_ID = #{palletId}</if>
+		<if test="palletUuid!=null">,PALLET_UUID = #{palletUuid}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="shipPlateMemberId!=null">,SHIP_PLATE_MEMBER_ID = #{shipPlateMemberId}</if>
+		<if test="shipPlateMemberName!=null">,SHIP_PLATE_MEMBER_NAME = #{shipPlateMemberName}</if>
+		<if test="shipPlateMemberSimName!=null">,SHIP_PLATE_MEMBER_SIM_NAME = #{shipPlateMemberSimName}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="inPactBeg!=null">,IN_PACT_BEG = #{inPactBeg}</if>
+		<if test="inPactEnd!=null">,IN_PACT_END = #{inPactEnd}</if>
+		<if test="inMinQuantity!=null">,IN_MIN_QUANTITY = #{inMinQuantity}</if>
+		<if test="inWs!=null">,IN_WS = #{inWs}</if>
+		<if test="inPactSpeed!=null">,IN_PACT_SPEED = #{inPactSpeed}</if>
+		<if test="inDemurrage!=null">,IN_DEMURRAGE = #{inDemurrage}</if>
+		<if test="inDockTime!=null">,IN_DOCK_TIME = #{inDockTime}</if>
+		<if test="inUnloadRegion!=null">,IN_UNLOAD_REGION = #{inUnloadRegion}</if>
+		<if test="inLoadRegion!=null">,IN_LOAD_REGION = #{inLoadRegion}</if>
+		<if test="inCommission!=null">,IN_COMMISSION = #{inCommission}</if>
+		<if test="inRemark!=null">,IN_REMARK = #{inRemark}</if>
+		<if test="coPactBeg!=null">,CO_PACT_BEG = #{coPactBeg}</if>
+		<if test="coPactEnd!=null">,CO_PACT_END = #{coPactEnd}</if>
+		<if test="coMinQuantity!=null">,CO_MIN_QUANTITY = #{coMinQuantity}</if>
+		<if test="coWs!=null">,CO_WS = #{coWs}</if>
+		<if test="coPactSpeed!=null">,CO_PACT_SPEED = #{coPactSpeed}</if>
+		<if test="coDemurrage!=null">,CO_DEMURRAGE = #{coDemurrage}</if>
+		<if test="coDockTime!=null">,CO_DOCK_TIME = #{coDockTime}</if>
+		<if test="coUnloadRegion!=null">,CO_UNLOAD_REGION = #{coUnloadRegion}</if>
+		<if test="coLoadRegion!=null">,CO_LOAD_REGION = #{coLoadRegion}</if>
+		<if test="coCommission!=null">,CO_COMMISSION = #{coCommission}</if>
+		<if test="coRemark!=null">,CO_REMARK = #{coRemark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipPlateMemberNameEn!=null">,SHIP_PLATE_MEMBER_NAME_EN = #{shipPlateMemberNameEn}</if>
+		</set>
+		where
+       	 INTENTION_ID=#{intentionId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.Intention"  useGeneratedKeys="true" keyProperty="intentionId" >
+		insert  into t_ship_intention (				INTENTION_ID
+						,UUID
+						,INTENTION_CODE
+						,PALLET_ID
+						,PALLET_UUID
+						,SHIP_PLATE_ID
+						,SHIP_PLATE_UUID
+						,EP_MEMBER_ID
+						,EP_MEMBER_NAME
+						,SHIP_PLATE_MEMBER_ID
+						,SHIP_PLATE_MEMBER_NAME
+						,SHIP_PLATE_MEMBER_SIM_NAME
+						,STATUS
+						,IN_PACT_BEG
+						,IN_PACT_END
+						,IN_MIN_QUANTITY
+						,IN_WS
+						,IN_PACT_SPEED
+						,IN_DEMURRAGE
+						,IN_DOCK_TIME
+						,IN_UNLOAD_REGION
+						,IN_LOAD_REGION
+						,IN_COMMISSION
+						,IN_REMARK
+						,CO_PACT_BEG
+						,CO_PACT_END
+						,CO_MIN_QUANTITY
+						,CO_WS
+						,CO_PACT_SPEED
+						,CO_DEMURRAGE
+						,CO_DOCK_TIME
+						,CO_UNLOAD_REGION
+						,CO_LOAD_REGION
+						,CO_COMMISSION
+						,CO_REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,EP_MEMBER_NAME_EN
+						,SHIP_PLATE_MEMBER_NAME_EN
+						)
+		values(		#{intentionId}
+						,#{uuid}
+						,#{intentionCode}
+						,#{palletId}
+						,#{palletUuid}
+						,#{shipPlateId}
+						,#{shipPlateUuid}
+						,#{epMemberId}
+						,#{epMemberName}
+						,#{shipPlateMemberId}
+						,#{shipPlateMemberName}
+						,#{shipPlateMemberSimName}
+						,#{status}
+						,#{inPactBeg}
+						,#{inPactEnd}
+						,#{inMinQuantity}
+						,#{inWs}
+						,#{inPactSpeed}
+						,#{inDemurrage}
+						,#{inDockTime}
+						,#{inUnloadRegion}
+						,#{inLoadRegion}
+						,#{inCommission}
+						,#{inRemark}
+						,#{coPactBeg}
+						,#{coPactEnd}
+						,#{coMinQuantity}
+						,#{coWs}
+						,#{coPactSpeed}
+						,#{coDemurrage}
+						,#{coDockTime}
+						,#{coUnloadRegion}
+						,#{coLoadRegion}
+						,#{coCommission}
+						,#{coRemark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{epMemberNameEn}
+						,#{shipPlateMemberNameEn}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_intention
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+													 INTENTION_ID=#{intentionId} 
+																																																																																																																																																																																																																																		
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  INTENTION_ID as "intentionId" 
+						 ,   UUID as "uuid" 
+						 ,   INTENTION_CODE as "intentionCode" 
+						 ,   PALLET_ID as "palletId" 
+						 ,   PALLET_UUID as "palletUuid" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   SHIP_PLATE_MEMBER_ID as "shipPlateMemberId" 
+						 ,   SHIP_PLATE_MEMBER_NAME as "shipPlateMemberName" 
+						 ,   SHIP_PLATE_MEMBER_SIM_NAME as "shipPlateMemberSimName" 
+						 ,   STATUS as "status" 
+						 ,   IN_PACT_BEG as "inPactBeg" 
+						 ,   IN_PACT_END as "inPactEnd" 
+						 ,   IN_MIN_QUANTITY as "inMinQuantity" 
+						 ,   IN_WS as "inWs" 
+						 ,   IN_PACT_SPEED as "inPactSpeed" 
+						 ,   IN_DEMURRAGE as "inDemurrage" 
+						 ,   IN_DOCK_TIME as "inDockTime" 
+						 ,   IN_UNLOAD_REGION as "inUnloadRegion" 
+						 ,   IN_LOAD_REGION as "inLoadRegion" 
+						 ,   IN_COMMISSION as "inCommission" 
+						 ,   IN_REMARK as "inRemark" 
+						 ,   CO_PACT_BEG as "coPactBeg" 
+						 ,   CO_PACT_END as "coPactEnd" 
+						 ,   CO_MIN_QUANTITY as "coMinQuantity" 
+						 ,   CO_WS as "coWs" 
+						 ,   CO_PACT_SPEED as "coPactSpeed" 
+						 ,   CO_DEMURRAGE as "coDemurrage" 
+						 ,   CO_DOCK_TIME as "coDockTime" 
+						 ,   CO_UNLOAD_REGION as "coUnloadRegion" 
+						 ,   CO_LOAD_REGION as "coLoadRegion" 
+						 ,   CO_COMMISSION as "coCommission" 
+						 ,   CO_REMARK as "coRemark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_PLATE_MEMBER_NAME_EN as "shipPlateMemberNameEn" 
+						from t_ship_intention
+		where
+			ALIVE_FLAG='1'
+			<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE LIKE CONCAT('%',#{intentionCode},'%')</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+			<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+			<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+			<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+			<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+			<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+			<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+			<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+			<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+			<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+			<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+			<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+			<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+			<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+			<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+			<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+			<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+			<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+			<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+			<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+			<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+			<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+			<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+			<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_intention 
+		where
+		 ALIVE_FLAG='1'
+			<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+			<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+			<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+			<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+			<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+			<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+			<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+			<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+			<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+			<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+			<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+			<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+			<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+			<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+			<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+			<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+			<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+			<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+			<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+			<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+			<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+			<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+			<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+			<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_intention
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+		<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+		<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+		<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+		<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+		<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+		<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+		<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+		<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+		<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+		<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+		<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+		<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+		<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+		<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+		<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+		<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+		<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+		<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+		<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+		<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+		<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+		<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+		<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_intention
+		<set>
+         INTENTION_ID=#{intentionId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="intentionCode!=null">,INTENTION_CODE = #{intentionCode}</if>
+		<if test="palletId!=null">,PALLET_ID = #{palletId}</if>
+		<if test="palletUuid!=null">,PALLET_UUID = #{palletUuid}</if>
+		<if test="shipPlateId!=null">,SHIP_PLATE_ID = #{shipPlateId}</if>
+		<if test="shipPlateUuid!=null">,SHIP_PLATE_UUID = #{shipPlateUuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="shipPlateMemberId!=null">,SHIP_PLATE_MEMBER_ID = #{shipPlateMemberId}</if>
+		<if test="shipPlateMemberName!=null">,SHIP_PLATE_MEMBER_NAME = #{shipPlateMemberName}</if>
+		<if test="shipPlateMemberSimName!=null">,SHIP_PLATE_MEMBER_SIM_NAME = #{shipPlateMemberSimName}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="inPactBeg!=null">,IN_PACT_BEG = #{inPactBeg}</if>
+		<if test="inPactEnd!=null">,IN_PACT_END = #{inPactEnd}</if>
+		<if test="inMinQuantity!=null">,IN_MIN_QUANTITY = #{inMinQuantity}</if>
+		<if test="inWs!=null">,IN_WS = #{inWs}</if>
+		<if test="inPactSpeed!=null">,IN_PACT_SPEED = #{inPactSpeed}</if>
+		<if test="inDemurrage!=null">,IN_DEMURRAGE = #{inDemurrage}</if>
+		<if test="inDockTime!=null">,IN_DOCK_TIME = #{inDockTime}</if>
+		<if test="inUnloadRegion!=null">,IN_UNLOAD_REGION = #{inUnloadRegion}</if>
+		<if test="inLoadRegion!=null">,IN_LOAD_REGION = #{inLoadRegion}</if>
+		<if test="inCommission!=null">,IN_COMMISSION = #{inCommission}</if>
+		<if test="inRemark!=null">,IN_REMARK = #{inRemark}</if>
+		<if test="coPactBeg!=null">,CO_PACT_BEG = #{coPactBeg}</if>
+		<if test="coPactEnd!=null">,CO_PACT_END = #{coPactEnd}</if>
+		<if test="coMinQuantity!=null">,CO_MIN_QUANTITY = #{coMinQuantity}</if>
+		<if test="coWs!=null">,CO_WS = #{coWs}</if>
+		<if test="coPactSpeed!=null">,CO_PACT_SPEED = #{coPactSpeed}</if>
+		<if test="coDemurrage!=null">,CO_DEMURRAGE = #{coDemurrage}</if>
+		<if test="coDockTime!=null">,CO_DOCK_TIME = #{coDockTime}</if>
+		<if test="coUnloadRegion!=null">,CO_UNLOAD_REGION = #{coUnloadRegion}</if>
+		<if test="coLoadRegion!=null">,CO_LOAD_REGION = #{coLoadRegion}</if>
+		<if test="coCommission!=null">,CO_COMMISSION = #{coCommission}</if>
+		<if test="coRemark!=null">,CO_REMARK = #{coRemark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipPlateMemberNameEn!=null">,SHIP_PLATE_MEMBER_NAME_EN = #{shipPlateMemberNameEn}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+		<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+		<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+		<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+		<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+		<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+		<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+		<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+		<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+		<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+		<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+		<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+		<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+		<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+		<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+		<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+		<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+		<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+		<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+		<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+		<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+		<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+		<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+		<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	
+	<select id="findByConditions" resultMap="Intention" parameterType="hashmap">
+		select
+			* from t_ship_intention
+		where
+			ALIVE_FLAG='1'
+			<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+			<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+			<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+			<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+			<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+			<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+			<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+			<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+			<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+			<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+			<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+			<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+			<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+			<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+			<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+			<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+			<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+			<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+			<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+			<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+			<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+			<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+			<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+			<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+				</select>
+	
+	
+	<!-- 根据uuid修改对象 -->
+	<update id="updateRecordsFn" parameterType="hashmap">
+		update t_ship_intention
+		<set>
+         ALIVE_FLAG = '1'
+			<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE=#{intentionCode}</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+			<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+			<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+			<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+			<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+			<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+			<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+			<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+			<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+			<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+			<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+			<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+			<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+			<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+			<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+			<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+			<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+			<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+			<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+			<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+			<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+			<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+			<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+			<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+	</update>
+	
+	
+	<!-- 根据条件查询（询盘状态不为...） -->
+	<select id="findIntentionListQueryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  INTENTION_ID as "intentionId" 
+						 ,   UUID as "uuid" 
+						 ,   INTENTION_CODE as "intentionCode" 
+						 ,   PALLET_ID as "palletId" 
+						 ,   PALLET_UUID as "palletUuid" 
+						 ,   SHIP_PLATE_ID as "shipPlateId" 
+						 ,   SHIP_PLATE_UUID as "shipPlateUuid" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   EP_MEMBER_NAME as "epMemberName" 
+						 ,   SHIP_PLATE_MEMBER_ID as "shipPlateMemberId" 
+						 ,   SHIP_PLATE_MEMBER_NAME as "shipPlateMemberName" 
+						 ,   SHIP_PLATE_MEMBER_SIM_NAME as "shipPlateMemberSimName" 
+						 ,   STATUS as "status" 
+						 ,   IN_PACT_BEG as "inPactBeg" 
+						 ,   IN_PACT_END as "inPactEnd" 
+						 ,   IN_MIN_QUANTITY as "inMinQuantity" 
+						 ,   IN_WS as "inWs" 
+						 ,   IN_PACT_SPEED as "inPactSpeed" 
+						 ,   IN_DEMURRAGE as "inDemurrage" 
+						 ,   IN_DOCK_TIME as "inDockTime" 
+						 ,   IN_UNLOAD_REGION as "inUnloadRegion" 
+						 ,   IN_LOAD_REGION as "inLoadRegion" 
+						 ,   IN_COMMISSION as "inCommission" 
+						 ,   IN_REMARK as "inRemark" 
+						 ,   CO_PACT_BEG as "coPactBeg" 
+						 ,   CO_PACT_END as "coPactEnd" 
+						 ,   CO_MIN_QUANTITY as "coMinQuantity" 
+						 ,   CO_WS as "coWs" 
+						 ,   CO_PACT_SPEED as "coPactSpeed" 
+						 ,   CO_DEMURRAGE as "coDemurrage" 
+						 ,   CO_DOCK_TIME as "coDockTime" 
+						 ,   CO_UNLOAD_REGION as "coUnloadRegion" 
+						 ,   CO_LOAD_REGION as "coLoadRegion" 
+						 ,   CO_COMMISSION as "coCommission" 
+						 ,   CO_REMARK as "coRemark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_PLATE_MEMBER_NAME_EN as "shipPlateMemberNameEn" 
+						from t_ship_intention
+		where
+			ALIVE_FLAG='1'
+			<if test="intentionId!=null and intentionId!=''">and  INTENTION_ID=#{intentionId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="intentionCode!=null and intentionCode!=''">and  INTENTION_CODE LIKE CONCAT('%',#{intentionCode},'%')</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="shipPlateMemberId!=null and shipPlateMemberId!=''">and  SHIP_PLATE_MEMBER_ID=#{shipPlateMemberId}</if>
+			<if test="shipPlateMemberName!=null and shipPlateMemberName!=''">and  SHIP_PLATE_MEMBER_NAME=#{shipPlateMemberName}</if>
+			<if test="shipPlateMemberSimName!=null and shipPlateMemberSimName!=''">and  SHIP_PLATE_MEMBER_SIM_NAME=#{shipPlateMemberSimName}</if>
+			<if test="status!=null and status!=''">and  STATUS!=#{status}</if>
+			<if test="inPactBeg!=null and inPactBeg!=''">and  IN_PACT_BEG=#{inPactBeg}</if>
+			<if test="inPactEnd!=null and inPactEnd!=''">and  IN_PACT_END=#{inPactEnd}</if>
+			<if test="inMinQuantity!=null and inMinQuantity!=''">and  IN_MIN_QUANTITY=#{inMinQuantity}</if>
+			<if test="inWs!=null and inWs!=''">and  IN_WS=#{inWs}</if>
+			<if test="inPactSpeed!=null and inPactSpeed!=''">and  IN_PACT_SPEED=#{inPactSpeed}</if>
+			<if test="inDemurrage!=null and inDemurrage!=''">and  IN_DEMURRAGE=#{inDemurrage}</if>
+			<if test="inDockTime!=null and inDockTime!=''">and  IN_DOCK_TIME=#{inDockTime}</if>
+			<if test="inUnloadRegion!=null and inUnloadRegion!=''">and  IN_UNLOAD_REGION=#{inUnloadRegion}</if>
+			<if test="inLoadRegion!=null and inLoadRegion!=''">and  IN_LOAD_REGION=#{inLoadRegion}</if>
+			<if test="inCommission!=null and inCommission!=''">and  IN_COMMISSION=#{inCommission}</if>
+			<if test="inRemark!=null and inRemark!=''">and  IN_REMARK=#{inRemark}</if>
+			<if test="coPactBeg!=null and coPactBeg!=''">and  CO_PACT_BEG=#{coPactBeg}</if>
+			<if test="coPactEnd!=null and coPactEnd!=''">and  CO_PACT_END=#{coPactEnd}</if>
+			<if test="coMinQuantity!=null and coMinQuantity!=''">and  CO_MIN_QUANTITY=#{coMinQuantity}</if>
+			<if test="coWs!=null and coWs!=''">and  CO_WS=#{coWs}</if>
+			<if test="coPactSpeed!=null and coPactSpeed!=''">and  CO_PACT_SPEED=#{coPactSpeed}</if>
+			<if test="coDemurrage!=null and coDemurrage!=''">and  CO_DEMURRAGE=#{coDemurrage}</if>
+			<if test="coDockTime!=null and coDockTime!=''">and  CO_DOCK_TIME=#{coDockTime}</if>
+			<if test="coUnloadRegion!=null and coUnloadRegion!=''">and  CO_UNLOAD_REGION=#{coUnloadRegion}</if>
+			<if test="coLoadRegion!=null and coLoadRegion!=''">and  CO_LOAD_REGION=#{coLoadRegion}</if>
+			<if test="coCommission!=null and coCommission!=''">and  CO_COMMISSION=#{coCommission}</if>
+			<if test="coRemark!=null and coRemark!=''">and  CO_REMARK=#{coRemark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipPlateMemberNameEn!=null and shipPlateMemberNameEn!=''">and  SHIP_PLATE_MEMBER_NAME_EN=#{shipPlateMemberNameEn}</if>
+				</select>
+	<update id="changeStatus" parameterType="hashmap">
+		update t_ship_intention
+		<set>
+         ALIVE_FLAG = '1'
+         <if test="status!=null">,STATUS=#{status}</if>
+         <if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		 <if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+         </set>
+        where
+			ALIVE_FLAG='1' AND STATUS in ('1','2') 
+		<if test="shipPlateUuid!=null and shipPlateUuid!=''">and  SHIP_PLATE_UUID=#{shipPlateUuid}</if>
+	</update>
+</mapper>

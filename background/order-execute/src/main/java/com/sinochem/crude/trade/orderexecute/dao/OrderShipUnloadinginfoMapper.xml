@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderShipUnloadinginfoMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo" id="OrderShipUnloadinginfo">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="waybillUuid" column="WAYBILL_UUID" />
+		<result property="unloadPort" column="UNLOAD_PORT" />
+		<result property="oil" column="OIL" />
+		<result property="eta" column="ETA" />
+		<result property="exBerth" column="EX_BERTH" />
+		<result property="norDate" column="NOR_DATE" />
+		<result property="norStatus" column="NOR_STATUS" />
+		<result property="cod" column="COD" />
+		<result property="codStatus" column="COD_STATUS" />
+		<result property="waterDate" column="WATER_DATE" />
+		<result property="exArrive" column="EX_ARRIVE" />
+		<result property="atripDate" column="ATRIP_DATE" />
+		<result property="berthDate" column="BERTH_DATE" />
+		<result property="acStart" column="AC_START" />
+		<result property="acFinish" column="AC_FINISH" />
+		<result property="remTubeDate" column="REM_TUBE_DATE" />
+		<result property="exLeave" column="EX_LEAVE" />
+		<result property="acLeave" column="AC_LEAVE" />
+		<result property="inspection" column="INSPECTION" />
+		<result property="inspectionMemberid" column="INSPECTION_MEMBERID" />
+		<result property="inspectionTerminal" column="INSPECTION_TERMINAL" />
+		<result property="inspectionContact" column="INSPECTION_CONTACT" />
+		<result property="inspectionEmail" column="INSPECTION_EMAIL" />
+		<result property="inspectionTel" column="INSPECTION_TEL" />
+		<result property="inspectionContent" column="INSPECTION_CONTENT" />
+		<result property="monitor" column="MONITOR" />
+		<result property="monitorTel" column="MONITOR_TEL" />
+		<result property="agency" column="AGENCY" />
+		<result property="agencyTel" column="AGENCY_TEL" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="shipHairBar" column="SHIP_HAIR_BAR" />
+		<result property="shipHairTon" column="SHIP_HAIR_TON" />
+		<result property="shipHairBarVef" column="SHIP_HAIR_BAR_VEF" />
+		<result property="shipHairTonVef" column="SHIP_HAIR_TON_VEF" />
+		<result property="api" column="API" />
+		<result property="waterImpCon" column="WATER_IMP_CON" />
+		<result property="waterQuantity" column="WATER_QUANTITY" />
+		<result property="shGrossCubicMeter" column="SH_GROSS_CUBIC_METER" />
+		<result property="shNetCubicMeter" column="SH_NET_CUBIC_METER" />
+		<result property="shDensity" column="SH_DENSITY" />
+		<result property="commHairBar" column="COMM_HAIR_BAR" />
+		<result property="commHairTon" column="COMM_HAIR_TON" />
+		<result property="commCleanBar" column="COMM_CLEAN_BAR" />
+		<result property="commCleanTon" column="COMM_CLEAN_TON" />
+		<result property="counCleanBar" column="COUN_CLEAN_BAR" />
+		<result property="counCleanTon" column="COUN_CLEAN_TON" />
+		<result property="potHairBar" column="POT_HAIR_BAR" />
+		<result property="potHairTon" column="POT_HAIR_TON" />
+		<result property="blHairBarRate" column="BL_HAIR_BAR_RATE" />
+		<result property="blHairTonRate" column="BL_HAIR_TON_RATE" />
+		<result property="counCleanBarRate" column="COUN_CLEAN_BAR_RATE" />
+		<result property="counCleanTonRate" column="COUN_CLEAN_TON_RATE" />
+		<result property="robQuanatity" column="ROB_QUANATITY" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_order_ship_unloadinginfo (				ID
+						,UUID
+						,ORDER_NO
+						,WAYBILL_UUID
+						,UNLOAD_PORT
+						,OIL
+						,ETA
+						,EX_BERTH
+						,NOR_DATE
+						,NOR_STATUS
+						,COD
+						,COD_STATUS
+						,WATER_DATE
+						,EX_ARRIVE
+						,ATRIP_DATE
+						,BERTH_DATE
+						,AC_START
+						,AC_FINISH
+						,REM_TUBE_DATE
+						,EX_LEAVE
+						,AC_LEAVE
+						,INSPECTION
+						,INSPECTION_MEMBERID
+						,INSPECTION_TERMINAL
+						,INSPECTION_CONTACT
+						,INSPECTION_EMAIL
+						,INSPECTION_TEL
+						,INSPECTION_CONTENT
+						,MONITOR
+						,MONITOR_TEL
+						,AGENCY
+						,AGENCY_TEL
+						,EP_MEMBER_ID
+						,SHIP_HAIR_BAR
+						,SHIP_HAIR_TON
+						,SHIP_HAIR_BAR_VEF
+						,SHIP_HAIR_TON_VEF
+						,API
+						,WATER_IMP_CON
+						,WATER_QUANTITY
+						,SH_GROSS_CUBIC_METER
+						,SH_NET_CUBIC_METER
+						,SH_DENSITY
+						,COMM_HAIR_BAR
+						,COMM_HAIR_TON
+						,COMM_CLEAN_BAR
+						,COMM_CLEAN_TON
+						,COUN_CLEAN_BAR
+						,COUN_CLEAN_TON
+						,POT_HAIR_BAR
+						,POT_HAIR_TON
+						,BL_HAIR_BAR_RATE
+						,BL_HAIR_TON_RATE
+						,COUN_CLEAN_BAR_RATE
+						,COUN_CLEAN_TON_RATE
+						,ROB_QUANATITY
+						,REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{orderNo}
+						,#{waybillUuid}
+						,#{unloadPort}
+						,#{oil}
+						,#{eta}
+						,#{exBerth}
+						,#{norDate}
+						,#{norStatus}
+						,#{cod}
+						,#{codStatus}
+						,#{waterDate}
+						,#{exArrive}
+						,#{atripDate}
+						,#{berthDate}
+						,#{acStart}
+						,#{acFinish}
+						,#{remTubeDate}
+						,#{exLeave}
+						,#{acLeave}
+						,#{inspection}
+						,#{inspectionMemberid}
+						,#{inspectionTerminal}
+						,#{inspectionContact}
+						,#{inspectionEmail}
+						,#{inspectionTel}
+						,#{inspectionContent}
+						,#{monitor}
+						,#{monitorTel}
+						,#{agency}
+						,#{agencyTel}
+						,#{epMemberId}
+						,#{shipHairBar}
+						,#{shipHairTon}
+						,#{shipHairBarVef}
+						,#{shipHairTonVef}
+						,#{api}
+						,#{waterImpCon}
+						,#{waterQuantity}
+						,#{shGrossCubicMeter}
+						,#{shNetCubicMeter}
+						,#{shDensity}
+						,#{commHairBar}
+						,#{commHairTon}
+						,#{commCleanBar}
+						,#{commCleanTon}
+						,#{counCleanBar}
+						,#{counCleanTon}
+						,#{potHairBar}
+						,#{potHairTon}
+						,#{blHairBarRate}
+						,#{blHairTonRate}
+						,#{counCleanBarRate}
+						,#{counCleanTonRate}
+						,#{robQuanatity}
+						,#{remark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_ship_unloadinginfo
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo">
+        DELETE FROM t_order_ship_unloadinginfo
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="orderNo!=null and orderNo!=''">AND  ORDER_NO = #{orderNo}</if>
+        <if test="waybillUuid!=null and waybillUuid!=''">AND  WAYBILL_UUID = #{waybillUuid}</if>
+        <if test="unloadPort!=null and unloadPort!=''">AND  UNLOAD_PORT = #{unloadPort}</if>
+        <if test="oil!=null and oil!=''">AND  OIL = #{oil}</if>
+        <if test="eta!=null and eta!=''">AND  ETA = #{eta}</if>
+        <if test="exBerth!=null and exBerth!=''">AND  EX_BERTH = #{exBerth}</if>
+        <if test="norDate!=null and norDate!=''">AND  NOR_DATE = #{norDate}</if>
+        <if test="norStatus!=null and norStatus!=''">AND  NOR_STATUS = #{norStatus}</if>
+        <if test="cod!=null and cod!=''">AND  COD = #{cod}</if>
+        <if test="codStatus!=null and codStatus!=''">AND  COD_STATUS = #{codStatus}</if>
+        <if test="waterDate!=null and waterDate!=''">AND  WATER_DATE = #{waterDate}</if>
+        <if test="exArrive!=null and exArrive!=''">AND  EX_ARRIVE = #{exArrive}</if>
+        <if test="atripDate!=null and atripDate!=''">AND  ATRIP_DATE = #{atripDate}</if>
+        <if test="berthDate!=null and berthDate!=''">AND  BERTH_DATE = #{berthDate}</if>
+        <if test="acStart!=null and acStart!=''">AND  AC_START = #{acStart}</if>
+        <if test="acFinish!=null and acFinish!=''">AND  AC_FINISH = #{acFinish}</if>
+        <if test="remTubeDate!=null and remTubeDate!=''">AND  REM_TUBE_DATE = #{remTubeDate}</if>
+        <if test="exLeave!=null and exLeave!=''">AND  EX_LEAVE = #{exLeave}</if>
+        <if test="acLeave!=null and acLeave!=''">AND  AC_LEAVE = #{acLeave}</if>
+        <if test="inspection!=null and inspection!=''">AND  INSPECTION = #{inspection}</if>
+        <if test="inspectionMemberid!=null and inspectionMemberid!=''">AND  INSPECTION_MEMBERID = #{inspectionMemberid}</if>
+        <if test="inspectionTerminal!=null and inspectionTerminal!=''">AND  INSPECTION_TERMINAL = #{inspectionTerminal}</if>
+        <if test="inspectionContact!=null and inspectionContact!=''">AND  INSPECTION_CONTACT = #{inspectionContact}</if>
+        <if test="inspectionEmail!=null and inspectionEmail!=''">AND  INSPECTION_EMAIL = #{inspectionEmail}</if>
+        <if test="inspectionTel!=null and inspectionTel!=''">AND  INSPECTION_TEL = #{inspectionTel}</if>
+        <if test="inspectionContent!=null and inspectionContent!=''">AND  INSPECTION_CONTENT = #{inspectionContent}</if>
+        <if test="monitor!=null and monitor!=''">AND  MONITOR = #{monitor}</if>
+        <if test="monitorTel!=null and monitorTel!=''">AND  MONITOR_TEL = #{monitorTel}</if>
+        <if test="agency!=null and agency!=''">AND  AGENCY = #{agency}</if>
+        <if test="agencyTel!=null and agencyTel!=''">AND  AGENCY_TEL = #{agencyTel}</if>
+        <if test="epMemberId!=null and epMemberId!=''">AND  EP_MEMBER_ID = #{epMemberId}</if>
+        <if test="shipHairBar!=null and shipHairBar!=''">AND  SHIP_HAIR_BAR = #{shipHairBar}</if>
+        <if test="shipHairTon!=null and shipHairTon!=''">AND  SHIP_HAIR_TON = #{shipHairTon}</if>
+        <if test="shipHairBarVef!=null and shipHairBarVef!=''">AND  SHIP_HAIR_BAR_VEF = #{shipHairBarVef}</if>
+        <if test="shipHairTonVef!=null and shipHairTonVef!=''">AND  SHIP_HAIR_TON_VEF = #{shipHairTonVef}</if>
+        <if test="api!=null and api!=''">AND  API = #{api}</if>
+        <if test="waterImpCon!=null and waterImpCon!=''">AND  WATER_IMP_CON = #{waterImpCon}</if>
+        <if test="waterQuantity!=null and waterQuantity!=''">AND  WATER_QUANTITY = #{waterQuantity}</if>
+        <if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">AND  SH_GROSS_CUBIC_METER = #{shGrossCubicMeter}</if>
+        <if test="shNetCubicMeter!=null and shNetCubicMeter!=''">AND  SH_NET_CUBIC_METER = #{shNetCubicMeter}</if>
+        <if test="shDensity!=null and shDensity!=''">AND  SH_DENSITY = #{shDensity}</if>
+        <if test="commHairBar!=null and commHairBar!=''">AND  COMM_HAIR_BAR = #{commHairBar}</if>
+        <if test="commHairTon!=null and commHairTon!=''">AND  COMM_HAIR_TON = #{commHairTon}</if>
+        <if test="commCleanBar!=null and commCleanBar!=''">AND  COMM_CLEAN_BAR = #{commCleanBar}</if>
+        <if test="commCleanTon!=null and commCleanTon!=''">AND  COMM_CLEAN_TON = #{commCleanTon}</if>
+        <if test="counCleanBar!=null and counCleanBar!=''">AND  COUN_CLEAN_BAR = #{counCleanBar}</if>
+        <if test="counCleanTon!=null and counCleanTon!=''">AND  COUN_CLEAN_TON = #{counCleanTon}</if>
+        <if test="potHairBar!=null and potHairBar!=''">AND  POT_HAIR_BAR = #{potHairBar}</if>
+        <if test="potHairTon!=null and potHairTon!=''">AND  POT_HAIR_TON = #{potHairTon}</if>
+        <if test="blHairBarRate!=null and blHairBarRate!=''">AND  BL_HAIR_BAR_RATE = #{blHairBarRate}</if>
+        <if test="blHairTonRate!=null and blHairTonRate!=''">AND  BL_HAIR_TON_RATE = #{blHairTonRate}</if>
+        <if test="counCleanBarRate!=null and counCleanBarRate!=''">AND  COUN_CLEAN_BAR_RATE = #{counCleanBarRate}</if>
+        <if test="counCleanTonRate!=null and counCleanTonRate!=''">AND  COUN_CLEAN_TON_RATE = #{counCleanTonRate}</if>
+        <if test="robQuanatity!=null and robQuanatity!=''">AND  ROB_QUANATITY = #{robQuanatity}</if>
+        <if test="remark!=null and remark!=''">AND  REMARK = #{remark}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo">
+		update t_order_ship_unloadinginfo
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="waybillUuid!=null">,WAYBILL_UUID = #{waybillUuid}</if>
+		<if test="unloadPort!=null">,UNLOAD_PORT = #{unloadPort}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="exBerth!=null">,EX_BERTH = #{exBerth}</if>
+		<if test="norDate!=null">,NOR_DATE = #{norDate}</if>
+		<if test="norStatus!=null">,NOR_STATUS = #{norStatus}</if>
+		<if test="cod!=null">,COD = #{cod}</if>
+		<if test="codStatus!=null">,COD_STATUS = #{codStatus}</if>
+		<if test="waterDate!=null">,WATER_DATE = #{waterDate}</if>
+		<if test="exArrive!=null">,EX_ARRIVE = #{exArrive}</if>
+		<if test="atripDate!=null">,ATRIP_DATE = #{atripDate}</if>
+		<if test="berthDate!=null">,BERTH_DATE = #{berthDate}</if>
+		<if test="acStart!=null">,AC_START = #{acStart}</if>
+		<if test="acFinish!=null">,AC_FINISH = #{acFinish}</if>
+		<if test="remTubeDate!=null">,REM_TUBE_DATE = #{remTubeDate}</if>
+		<if test="exLeave!=null">,EX_LEAVE = #{exLeave}</if>
+		<if test="acLeave!=null">,AC_LEAVE = #{acLeave}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="inspectionMemberid!=null">,INSPECTION_MEMBERID = #{inspectionMemberid}</if>
+		<if test="inspectionTerminal!=null">,INSPECTION_TERMINAL = #{inspectionTerminal}</if>
+		<if test="inspectionContact!=null">,INSPECTION_CONTACT = #{inspectionContact}</if>
+		<if test="inspectionEmail!=null">,INSPECTION_EMAIL = #{inspectionEmail}</if>
+		<if test="inspectionTel!=null">,INSPECTION_TEL = #{inspectionTel}</if>
+		<if test="inspectionContent!=null">,INSPECTION_CONTENT = #{inspectionContent}</if>
+		<if test="monitor!=null">,MONITOR = #{monitor}</if>
+		<if test="monitorTel!=null">,MONITOR_TEL = #{monitorTel}</if>
+		<if test="agency!=null">,AGENCY = #{agency}</if>
+		<if test="agencyTel!=null">,AGENCY_TEL = #{agencyTel}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="shipHairBar!=null">,SHIP_HAIR_BAR = #{shipHairBar}</if>
+		<if test="shipHairTon!=null">,SHIP_HAIR_TON = #{shipHairTon}</if>
+		<if test="shipHairBarVef!=null">,SHIP_HAIR_BAR_VEF = #{shipHairBarVef}</if>
+		<if test="shipHairTonVef!=null">,SHIP_HAIR_TON_VEF = #{shipHairTonVef}</if>
+		<if test="api!=null">,API = #{api}</if>
+		<if test="waterImpCon!=null">,WATER_IMP_CON = #{waterImpCon}</if>
+		<if test="waterQuantity!=null">,WATER_QUANTITY = #{waterQuantity}</if>
+		<if test="shGrossCubicMeter!=null">,SH_GROSS_CUBIC_METER = #{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null">,SH_NET_CUBIC_METER = #{shNetCubicMeter}</if>
+		<if test="shDensity!=null">,SH_DENSITY = #{shDensity}</if>
+		<if test="commHairBar!=null">,COMM_HAIR_BAR = #{commHairBar}</if>
+		<if test="commHairTon!=null">,COMM_HAIR_TON = #{commHairTon}</if>
+		<if test="commCleanBar!=null">,COMM_CLEAN_BAR = #{commCleanBar}</if>
+		<if test="commCleanTon!=null">,COMM_CLEAN_TON = #{commCleanTon}</if>
+		<if test="counCleanBar!=null">,COUN_CLEAN_BAR = #{counCleanBar}</if>
+		<if test="counCleanTon!=null">,COUN_CLEAN_TON = #{counCleanTon}</if>
+		<if test="potHairBar!=null">,POT_HAIR_BAR = #{potHairBar}</if>
+		<if test="potHairTon!=null">,POT_HAIR_TON = #{potHairTon}</if>
+		<if test="blHairBarRate!=null">,BL_HAIR_BAR_RATE = #{blHairBarRate}</if>
+		<if test="blHairTonRate!=null">,BL_HAIR_TON_RATE = #{blHairTonRate}</if>
+		<if test="counCleanBarRate!=null">,COUN_CLEAN_BAR_RATE = #{counCleanBarRate}</if>
+		<if test="counCleanTonRate!=null">,COUN_CLEAN_TON_RATE = #{counCleanTonRate}</if>
+		<if test="robQuanatity!=null">,ROB_QUANATITY = #{robQuanatity}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_ship_unloadinginfo
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="waybillUuid!=null">,WAYBILL_UUID = #{waybillUuid}</if>
+		<if test="unloadPort!=null">,UNLOAD_PORT = #{unloadPort}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="exBerth!=null">,EX_BERTH = #{exBerth}</if>
+		<if test="norDate!=null">,NOR_DATE = #{norDate}</if>
+		<if test="norStatus!=null">,NOR_STATUS = #{norStatus}</if>
+		<if test="cod!=null">,COD = #{cod}</if>
+		<if test="codStatus!=null">,COD_STATUS = #{codStatus}</if>
+		<if test="waterDate!=null">,WATER_DATE = #{waterDate}</if>
+		<if test="exArrive!=null">,EX_ARRIVE = #{exArrive}</if>
+		<if test="atripDate!=null">,ATRIP_DATE = #{atripDate}</if>
+		<if test="berthDate!=null">,BERTH_DATE = #{berthDate}</if>
+		<if test="acStart!=null">,AC_START = #{acStart}</if>
+		<if test="acFinish!=null">,AC_FINISH = #{acFinish}</if>
+		<if test="remTubeDate!=null">,REM_TUBE_DATE = #{remTubeDate}</if>
+		<if test="exLeave!=null">,EX_LEAVE = #{exLeave}</if>
+		<if test="acLeave!=null">,AC_LEAVE = #{acLeave}</if>
+		<if test="inspection!=null">,INSPECTION = #{inspection}</if>
+		<if test="inspectionMemberid!=null">,INSPECTION_MEMBERID = #{inspectionMemberid}</if>
+		<if test="inspectionTerminal!=null">,INSPECTION_TERMINAL = #{inspectionTerminal}</if>
+		<if test="inspectionContact!=null">,INSPECTION_CONTACT = #{inspectionContact}</if>
+		<if test="inspectionEmail!=null">,INSPECTION_EMAIL = #{inspectionEmail}</if>
+		<if test="inspectionTel!=null">,INSPECTION_TEL = #{inspectionTel}</if>
+		<if test="inspectionContent!=null">,INSPECTION_CONTENT = #{inspectionContent}</if>
+		<if test="monitor!=null">,MONITOR = #{monitor}</if>
+		<if test="monitorTel!=null">,MONITOR_TEL = #{monitorTel}</if>
+		<if test="agency!=null">,AGENCY = #{agency}</if>
+		<if test="agencyTel!=null">,AGENCY_TEL = #{agencyTel}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="shipHairBar!=null">,SHIP_HAIR_BAR = #{shipHairBar}</if>
+		<if test="shipHairTon!=null">,SHIP_HAIR_TON = #{shipHairTon}</if>
+		<if test="shipHairBarVef!=null">,SHIP_HAIR_BAR_VEF = #{shipHairBarVef}</if>
+		<if test="shipHairTonVef!=null">,SHIP_HAIR_TON_VEF = #{shipHairTonVef}</if>
+		<if test="api!=null">,API = #{api}</if>
+		<if test="waterImpCon!=null">,WATER_IMP_CON = #{waterImpCon}</if>
+		<if test="waterQuantity!=null">,WATER_QUANTITY = #{waterQuantity}</if>
+		<if test="shGrossCubicMeter!=null">,SH_GROSS_CUBIC_METER = #{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null">,SH_NET_CUBIC_METER = #{shNetCubicMeter}</if>
+		<if test="shDensity!=null">,SH_DENSITY = #{shDensity}</if>
+		<if test="commHairBar!=null">,COMM_HAIR_BAR = #{commHairBar}</if>
+		<if test="commHairTon!=null">,COMM_HAIR_TON = #{commHairTon}</if>
+		<if test="commCleanBar!=null">,COMM_CLEAN_BAR = #{commCleanBar}</if>
+		<if test="commCleanTon!=null">,COMM_CLEAN_TON = #{commCleanTon}</if>
+		<if test="counCleanBar!=null">,COUN_CLEAN_BAR = #{counCleanBar}</if>
+		<if test="counCleanTon!=null">,COUN_CLEAN_TON = #{counCleanTon}</if>
+		<if test="potHairBar!=null">,POT_HAIR_BAR = #{potHairBar}</if>
+		<if test="potHairTon!=null">,POT_HAIR_TON = #{potHairTon}</if>
+		<if test="blHairBarRate!=null">,BL_HAIR_BAR_RATE = #{blHairBarRate}</if>
+		<if test="blHairTonRate!=null">,BL_HAIR_TON_RATE = #{blHairTonRate}</if>
+		<if test="counCleanBarRate!=null">,COUN_CLEAN_BAR_RATE = #{counCleanBarRate}</if>
+		<if test="counCleanTonRate!=null">,COUN_CLEAN_TON_RATE = #{counCleanTonRate}</if>
+		<if test="robQuanatity!=null">,ROB_QUANATITY = #{robQuanatity}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+		<if test="unloadPort!=null and unloadPort!=''">and  UNLOAD_PORT=#{unloadPort}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+		<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+		<if test="norStatus!=null and norStatus!=''">and  NOR_STATUS=#{norStatus}</if>
+		<if test="cod!=null and cod!=''">and  COD=#{cod}</if>
+		<if test="codStatus!=null and codStatus!=''">and  COD_STATUS=#{codStatus}</if>
+		<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+		<if test="exArrive!=null and exArrive!=''">and  EX_ARRIVE=#{exArrive}</if>
+		<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+		<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+		<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+		<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+		<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+		<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+		<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="inspectionMemberid!=null and inspectionMemberid!=''">and  INSPECTION_MEMBERID=#{inspectionMemberid}</if>
+		<if test="inspectionTerminal!=null and inspectionTerminal!=''">and  INSPECTION_TERMINAL=#{inspectionTerminal}</if>
+		<if test="inspectionContact!=null and inspectionContact!=''">and  INSPECTION_CONTACT=#{inspectionContact}</if>
+		<if test="inspectionEmail!=null and inspectionEmail!=''">and  INSPECTION_EMAIL=#{inspectionEmail}</if>
+		<if test="inspectionTel!=null and inspectionTel!=''">and  INSPECTION_TEL=#{inspectionTel}</if>
+		<if test="inspectionContent!=null and inspectionContent!=''">and  INSPECTION_CONTENT=#{inspectionContent}</if>
+		<if test="monitor!=null and monitor!=''">and  MONITOR=#{monitor}</if>
+		<if test="monitorTel!=null and monitorTel!=''">and  MONITOR_TEL=#{monitorTel}</if>
+		<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+		<if test="agencyTel!=null and agencyTel!=''">and  AGENCY_TEL=#{agencyTel}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="shipHairBar!=null and shipHairBar!=''">and  SHIP_HAIR_BAR=#{shipHairBar}</if>
+		<if test="shipHairTon!=null and shipHairTon!=''">and  SHIP_HAIR_TON=#{shipHairTon}</if>
+		<if test="shipHairBarVef!=null and shipHairBarVef!=''">and  SHIP_HAIR_BAR_VEF=#{shipHairBarVef}</if>
+		<if test="shipHairTonVef!=null and shipHairTonVef!=''">and  SHIP_HAIR_TON_VEF=#{shipHairTonVef}</if>
+		<if test="api!=null and api!=''">and  API=#{api}</if>
+		<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+		<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+		<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+		<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+		<if test="commHairBar!=null and commHairBar!=''">and  COMM_HAIR_BAR=#{commHairBar}</if>
+		<if test="commHairTon!=null and commHairTon!=''">and  COMM_HAIR_TON=#{commHairTon}</if>
+		<if test="commCleanBar!=null and commCleanBar!=''">and  COMM_CLEAN_BAR=#{commCleanBar}</if>
+		<if test="commCleanTon!=null and commCleanTon!=''">and  COMM_CLEAN_TON=#{commCleanTon}</if>
+		<if test="counCleanBar!=null and counCleanBar!=''">and  COUN_CLEAN_BAR=#{counCleanBar}</if>
+		<if test="counCleanTon!=null and counCleanTon!=''">and  COUN_CLEAN_TON=#{counCleanTon}</if>
+		<if test="potHairBar!=null and potHairBar!=''">and  POT_HAIR_BAR=#{potHairBar}</if>
+		<if test="potHairTon!=null and potHairTon!=''">and  POT_HAIR_TON=#{potHairTon}</if>
+		<if test="blHairBarRate!=null and blHairBarRate!=''">and  BL_HAIR_BAR_RATE=#{blHairBarRate}</if>
+		<if test="blHairTonRate!=null and blHairTonRate!=''">and  BL_HAIR_TON_RATE=#{blHairTonRate}</if>
+		<if test="counCleanBarRate!=null and counCleanBarRate!=''">and  COUN_CLEAN_BAR_RATE=#{counCleanBarRate}</if>
+		<if test="counCleanTonRate!=null and counCleanTonRate!=''">and  COUN_CLEAN_TON_RATE=#{counCleanTonRate}</if>
+		<if test="robQuanatity!=null and robQuanatity!=''">and  ROB_QUANATITY=#{robQuanatity}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderShipUnloadinginfo">
+			select
+			* from t_order_ship_unloadinginfo
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderShipUnloadinginfo">
+			select
+			* from t_order_ship_unloadinginfo
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderShipUnloadinginfo" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo">
+		select * from t_order_ship_unloadinginfo
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+		<if test="unloadPort!=null and unloadPort!=''">and  UNLOAD_PORT=#{unloadPort}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+		<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+		<if test="norStatus!=null and norStatus!=''">and  NOR_STATUS=#{norStatus}</if>
+		<if test="cod!=null and cod!=''">and  COD=#{cod}</if>
+		<if test="codStatus!=null and codStatus!=''">and  COD_STATUS=#{codStatus}</if>
+		<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+		<if test="exArrive!=null and exArrive!=''">and  EX_ARRIVE=#{exArrive}</if>
+		<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+		<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+		<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+		<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+		<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+		<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+		<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+		<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+		<if test="inspectionMemberid!=null and inspectionMemberid!=''">and  INSPECTION_MEMBERID=#{inspectionMemberid}</if>
+		<if test="inspectionTerminal!=null and inspectionTerminal!=''">and  INSPECTION_TERMINAL=#{inspectionTerminal}</if>
+		<if test="inspectionContact!=null and inspectionContact!=''">and  INSPECTION_CONTACT=#{inspectionContact}</if>
+		<if test="inspectionEmail!=null and inspectionEmail!=''">and  INSPECTION_EMAIL=#{inspectionEmail}</if>
+		<if test="inspectionTel!=null and inspectionTel!=''">and  INSPECTION_TEL=#{inspectionTel}</if>
+		<if test="inspectionContent!=null and inspectionContent!=''">and  INSPECTION_CONTENT=#{inspectionContent}</if>
+		<if test="monitor!=null and monitor!=''">and  MONITOR=#{monitor}</if>
+		<if test="monitorTel!=null and monitorTel!=''">and  MONITOR_TEL=#{monitorTel}</if>
+		<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+		<if test="agencyTel!=null and agencyTel!=''">and  AGENCY_TEL=#{agencyTel}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="shipHairBar!=null and shipHairBar!=''">and  SHIP_HAIR_BAR=#{shipHairBar}</if>
+		<if test="shipHairTon!=null and shipHairTon!=''">and  SHIP_HAIR_TON=#{shipHairTon}</if>
+		<if test="shipHairBarVef!=null and shipHairBarVef!=''">and  SHIP_HAIR_BAR_VEF=#{shipHairBarVef}</if>
+		<if test="shipHairTonVef!=null and shipHairTonVef!=''">and  SHIP_HAIR_TON_VEF=#{shipHairTonVef}</if>
+		<if test="api!=null and api!=''">and  API=#{api}</if>
+		<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+		<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+		<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+		<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+		<if test="commHairBar!=null and commHairBar!=''">and  COMM_HAIR_BAR=#{commHairBar}</if>
+		<if test="commHairTon!=null and commHairTon!=''">and  COMM_HAIR_TON=#{commHairTon}</if>
+		<if test="commCleanBar!=null and commCleanBar!=''">and  COMM_CLEAN_BAR=#{commCleanBar}</if>
+		<if test="commCleanTon!=null and commCleanTon!=''">and  COMM_CLEAN_TON=#{commCleanTon}</if>
+		<if test="counCleanBar!=null and counCleanBar!=''">and  COUN_CLEAN_BAR=#{counCleanBar}</if>
+		<if test="counCleanTon!=null and counCleanTon!=''">and  COUN_CLEAN_TON=#{counCleanTon}</if>
+		<if test="potHairBar!=null and potHairBar!=''">and  POT_HAIR_BAR=#{potHairBar}</if>
+		<if test="potHairTon!=null and potHairTon!=''">and  POT_HAIR_TON=#{potHairTon}</if>
+		<if test="blHairBarRate!=null and blHairBarRate!=''">and  BL_HAIR_BAR_RATE=#{blHairBarRate}</if>
+		<if test="blHairTonRate!=null and blHairTonRate!=''">and  BL_HAIR_TON_RATE=#{blHairTonRate}</if>
+		<if test="counCleanBarRate!=null and counCleanBarRate!=''">and  COUN_CLEAN_BAR_RATE=#{counCleanBarRate}</if>
+		<if test="counCleanTonRate!=null and counCleanTonRate!=''">and  COUN_CLEAN_TON_RATE=#{counCleanTonRate}</if>
+		<if test="robQuanatity!=null and robQuanatity!=''">and  ROB_QUANATITY=#{robQuanatity}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   WAYBILL_UUID as "waybillUuid" 
+						 ,   UNLOAD_PORT as "unloadPort" 
+						 ,   OIL as "oil" 
+						 ,   ETA as "eta" 
+						 ,   EX_BERTH as "exBerth" 
+						 ,   NOR_DATE as "norDate" 
+						 ,   NOR_STATUS as "norStatus" 
+						 ,   COD as "cod" 
+						 ,   COD_STATUS as "codStatus" 
+						 ,   WATER_DATE as "waterDate" 
+						 ,   EX_ARRIVE as "exArrive" 
+						 ,   ATRIP_DATE as "atripDate" 
+						 ,   BERTH_DATE as "berthDate" 
+						 ,   AC_START as "acStart" 
+						 ,   AC_FINISH as "acFinish" 
+						 ,   REM_TUBE_DATE as "remTubeDate" 
+						 ,   EX_LEAVE as "exLeave" 
+						 ,   AC_LEAVE as "acLeave" 
+						 ,   INSPECTION as "inspection" 
+						 ,   INSPECTION_MEMBERID as "inspectionMemberid" 
+						 ,   INSPECTION_TERMINAL as "inspectionTerminal" 
+						 ,   INSPECTION_CONTACT as "inspectionContact" 
+						 ,   INSPECTION_EMAIL as "inspectionEmail" 
+						 ,   INSPECTION_TEL as "inspectionTel" 
+						 ,   INSPECTION_CONTENT as "inspectionContent" 
+						 ,   MONITOR as "monitor" 
+						 ,   MONITOR_TEL as "monitorTel" 
+						 ,   AGENCY as "agency" 
+						 ,   AGENCY_TEL as "agencyTel" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   SHIP_HAIR_BAR as "shipHairBar" 
+						 ,   SHIP_HAIR_TON as "shipHairTon" 
+						 ,   SHIP_HAIR_BAR_VEF as "shipHairBarVef" 
+						 ,   SHIP_HAIR_TON_VEF as "shipHairTonVef" 
+						 ,   API as "api" 
+						 ,   WATER_IMP_CON as "waterImpCon" 
+						 ,   WATER_QUANTITY as "waterQuantity" 
+						 ,   SH_GROSS_CUBIC_METER as "shGrossCubicMeter" 
+						 ,   SH_NET_CUBIC_METER as "shNetCubicMeter" 
+						 ,   SH_DENSITY as "shDensity" 
+						 ,   COMM_HAIR_BAR as "commHairBar" 
+						 ,   COMM_HAIR_TON as "commHairTon" 
+						 ,   COMM_CLEAN_BAR as "commCleanBar" 
+						 ,   COMM_CLEAN_TON as "commCleanTon" 
+						 ,   COUN_CLEAN_BAR as "counCleanBar" 
+						 ,   COUN_CLEAN_TON as "counCleanTon" 
+						 ,   POT_HAIR_BAR as "potHairBar" 
+						 ,   POT_HAIR_TON as "potHairTon" 
+						 ,   BL_HAIR_BAR_RATE as "blHairBarRate" 
+						 ,   BL_HAIR_TON_RATE as "blHairTonRate" 
+						 ,   COUN_CLEAN_BAR_RATE as "counCleanBarRate" 
+						 ,   COUN_CLEAN_TON_RATE as "counCleanTonRate" 
+						 ,   ROB_QUANATITY as "robQuanatity" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						from t_order_ship_unloadinginfo
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+			<if test="unloadPort!=null and unloadPort!=''">and  UNLOAD_PORT=#{unloadPort}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+			<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+			<if test="norStatus!=null and norStatus!=''">and  NOR_STATUS=#{norStatus}</if>
+			<if test="cod!=null and cod!=''">and  COD=#{cod}</if>
+			<if test="codStatus!=null and codStatus!=''">and  COD_STATUS=#{codStatus}</if>
+			<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+			<if test="exArrive!=null and exArrive!=''">and  EX_ARRIVE=#{exArrive}</if>
+			<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+			<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+			<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+			<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+			<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+			<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+			<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+			<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+			<if test="inspectionMemberid!=null and inspectionMemberid!=''">and  INSPECTION_MEMBERID=#{inspectionMemberid}</if>
+			<if test="inspectionTerminal!=null and inspectionTerminal!=''">and  INSPECTION_TERMINAL=#{inspectionTerminal}</if>
+			<if test="inspectionContact!=null and inspectionContact!=''">and  INSPECTION_CONTACT=#{inspectionContact}</if>
+			<if test="inspectionEmail!=null and inspectionEmail!=''">and  INSPECTION_EMAIL=#{inspectionEmail}</if>
+			<if test="inspectionTel!=null and inspectionTel!=''">and  INSPECTION_TEL=#{inspectionTel}</if>
+			<if test="inspectionContent!=null and inspectionContent!=''">and  INSPECTION_CONTENT=#{inspectionContent}</if>
+			<if test="monitor!=null and monitor!=''">and  MONITOR=#{monitor}</if>
+			<if test="monitorTel!=null and monitorTel!=''">and  MONITOR_TEL=#{monitorTel}</if>
+			<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+			<if test="agencyTel!=null and agencyTel!=''">and  AGENCY_TEL=#{agencyTel}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="shipHairBar!=null and shipHairBar!=''">and  SHIP_HAIR_BAR=#{shipHairBar}</if>
+			<if test="shipHairTon!=null and shipHairTon!=''">and  SHIP_HAIR_TON=#{shipHairTon}</if>
+			<if test="shipHairBarVef!=null and shipHairBarVef!=''">and  SHIP_HAIR_BAR_VEF=#{shipHairBarVef}</if>
+			<if test="shipHairTonVef!=null and shipHairTonVef!=''">and  SHIP_HAIR_TON_VEF=#{shipHairTonVef}</if>
+			<if test="api!=null and api!=''">and  API=#{api}</if>
+			<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+			<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+			<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+			<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+			<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+			<if test="commHairBar!=null and commHairBar!=''">and  COMM_HAIR_BAR=#{commHairBar}</if>
+			<if test="commHairTon!=null and commHairTon!=''">and  COMM_HAIR_TON=#{commHairTon}</if>
+			<if test="commCleanBar!=null and commCleanBar!=''">and  COMM_CLEAN_BAR=#{commCleanBar}</if>
+			<if test="commCleanTon!=null and commCleanTon!=''">and  COMM_CLEAN_TON=#{commCleanTon}</if>
+			<if test="counCleanBar!=null and counCleanBar!=''">and  COUN_CLEAN_BAR=#{counCleanBar}</if>
+			<if test="counCleanTon!=null and counCleanTon!=''">and  COUN_CLEAN_TON=#{counCleanTon}</if>
+			<if test="potHairBar!=null and potHairBar!=''">and  POT_HAIR_BAR=#{potHairBar}</if>
+			<if test="potHairTon!=null and potHairTon!=''">and  POT_HAIR_TON=#{potHairTon}</if>
+			<if test="blHairBarRate!=null and blHairBarRate!=''">and  BL_HAIR_BAR_RATE=#{blHairBarRate}</if>
+			<if test="blHairTonRate!=null and blHairTonRate!=''">and  BL_HAIR_TON_RATE=#{blHairTonRate}</if>
+			<if test="counCleanBarRate!=null and counCleanBarRate!=''">and  COUN_CLEAN_BAR_RATE=#{counCleanBarRate}</if>
+			<if test="counCleanTonRate!=null and counCleanTonRate!=''">and  COUN_CLEAN_TON_RATE=#{counCleanTonRate}</if>
+			<if test="robQuanatity!=null and robQuanatity!=''">and  ROB_QUANATITY=#{robQuanatity}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_ship_unloadinginfo 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+			<if test="unloadPort!=null and unloadPort!=''">and  UNLOAD_PORT=#{unloadPort}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="exBerth!=null and exBerth!=''">and  EX_BERTH=#{exBerth}</if>
+			<if test="norDate!=null and norDate!=''">and  NOR_DATE=#{norDate}</if>
+			<if test="norStatus!=null and norStatus!=''">and  NOR_STATUS=#{norStatus}</if>
+			<if test="cod!=null and cod!=''">and  COD=#{cod}</if>
+			<if test="codStatus!=null and codStatus!=''">and  COD_STATUS=#{codStatus}</if>
+			<if test="waterDate!=null and waterDate!=''">and  WATER_DATE=#{waterDate}</if>
+			<if test="exArrive!=null and exArrive!=''">and  EX_ARRIVE=#{exArrive}</if>
+			<if test="atripDate!=null and atripDate!=''">and  ATRIP_DATE=#{atripDate}</if>
+			<if test="berthDate!=null and berthDate!=''">and  BERTH_DATE=#{berthDate}</if>
+			<if test="acStart!=null and acStart!=''">and  AC_START=#{acStart}</if>
+			<if test="acFinish!=null and acFinish!=''">and  AC_FINISH=#{acFinish}</if>
+			<if test="remTubeDate!=null and remTubeDate!=''">and  REM_TUBE_DATE=#{remTubeDate}</if>
+			<if test="exLeave!=null and exLeave!=''">and  EX_LEAVE=#{exLeave}</if>
+			<if test="acLeave!=null and acLeave!=''">and  AC_LEAVE=#{acLeave}</if>
+			<if test="inspection!=null and inspection!=''">and  INSPECTION=#{inspection}</if>
+			<if test="inspectionMemberid!=null and inspectionMemberid!=''">and  INSPECTION_MEMBERID=#{inspectionMemberid}</if>
+			<if test="inspectionTerminal!=null and inspectionTerminal!=''">and  INSPECTION_TERMINAL=#{inspectionTerminal}</if>
+			<if test="inspectionContact!=null and inspectionContact!=''">and  INSPECTION_CONTACT=#{inspectionContact}</if>
+			<if test="inspectionEmail!=null and inspectionEmail!=''">and  INSPECTION_EMAIL=#{inspectionEmail}</if>
+			<if test="inspectionTel!=null and inspectionTel!=''">and  INSPECTION_TEL=#{inspectionTel}</if>
+			<if test="inspectionContent!=null and inspectionContent!=''">and  INSPECTION_CONTENT=#{inspectionContent}</if>
+			<if test="monitor!=null and monitor!=''">and  MONITOR=#{monitor}</if>
+			<if test="monitorTel!=null and monitorTel!=''">and  MONITOR_TEL=#{monitorTel}</if>
+			<if test="agency!=null and agency!=''">and  AGENCY=#{agency}</if>
+			<if test="agencyTel!=null and agencyTel!=''">and  AGENCY_TEL=#{agencyTel}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="shipHairBar!=null and shipHairBar!=''">and  SHIP_HAIR_BAR=#{shipHairBar}</if>
+			<if test="shipHairTon!=null and shipHairTon!=''">and  SHIP_HAIR_TON=#{shipHairTon}</if>
+			<if test="shipHairBarVef!=null and shipHairBarVef!=''">and  SHIP_HAIR_BAR_VEF=#{shipHairBarVef}</if>
+			<if test="shipHairTonVef!=null and shipHairTonVef!=''">and  SHIP_HAIR_TON_VEF=#{shipHairTonVef}</if>
+			<if test="api!=null and api!=''">and  API=#{api}</if>
+			<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+			<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+			<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+			<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+			<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+			<if test="commHairBar!=null and commHairBar!=''">and  COMM_HAIR_BAR=#{commHairBar}</if>
+			<if test="commHairTon!=null and commHairTon!=''">and  COMM_HAIR_TON=#{commHairTon}</if>
+			<if test="commCleanBar!=null and commCleanBar!=''">and  COMM_CLEAN_BAR=#{commCleanBar}</if>
+			<if test="commCleanTon!=null and commCleanTon!=''">and  COMM_CLEAN_TON=#{commCleanTon}</if>
+			<if test="counCleanBar!=null and counCleanBar!=''">and  COUN_CLEAN_BAR=#{counCleanBar}</if>
+			<if test="counCleanTon!=null and counCleanTon!=''">and  COUN_CLEAN_TON=#{counCleanTon}</if>
+			<if test="potHairBar!=null and potHairBar!=''">and  POT_HAIR_BAR=#{potHairBar}</if>
+			<if test="potHairTon!=null and potHairTon!=''">and  POT_HAIR_TON=#{potHairTon}</if>
+			<if test="blHairBarRate!=null and blHairBarRate!=''">and  BL_HAIR_BAR_RATE=#{blHairBarRate}</if>
+			<if test="blHairTonRate!=null and blHairTonRate!=''">and  BL_HAIR_TON_RATE=#{blHairTonRate}</if>
+			<if test="counCleanBarRate!=null and counCleanBarRate!=''">and  COUN_CLEAN_BAR_RATE=#{counCleanBarRate}</if>
+			<if test="counCleanTonRate!=null and counCleanTonRate!=''">and  COUN_CLEAN_TON_RATE=#{counCleanTonRate}</if>
+			<if test="robQuanatity!=null and robQuanatity!=''">and  ROB_QUANATITY=#{robQuanatity}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+		<update id="updateRecordFromShip" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderShipUnloadinginfo">
+		update t_order_ship_unloadinginfo
+		<set>
+			<trim prefixOverrides=",">
+				<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+				<if test="shipHairBar!=null">,SHIP_HAIR_BAR = #{shipHairBar}</if>
+				<if test="shipHairTon!=null">,SHIP_HAIR_TON = #{shipHairTon}</if>
+				<if test="commHairBar!=null">,COMM_HAIR_BAR = #{commHairBar}</if>
+				<if test="commHairTon!=null">,COMM_HAIR_TON = #{commHairTon}</if>
+				<if test="commCleanBar!=null">,COMM_CLEAN_BAR = #{commCleanBar}</if>
+				<if test="commCleanTon!=null">,COMM_CLEAN_TON = #{commCleanTon}</if>
+				<if test="counCleanBar!=null">,COUN_CLEAN_BAR = #{counCleanBar}</if>
+				<if test="counCleanTon!=null">,COUN_CLEAN_TON = #{counCleanTon}</if>
+				<if test="potHairBar!=null">,POT_HAIR_BAR = #{potHairBar}</if>
+				<if test="potHairTon!=null">,POT_HAIR_TON = #{potHairTon}</if>
+				<if test="blHairBarRate!=null">,BL_HAIR_BAR_RATE = #{blHairBarRate}</if>
+				<if test="blHairTonRate!=null">,BL_HAIR_TON_RATE = #{blHairTonRate}</if>
+				<if test="counCleanBarRate!=null">,COUN_CLEAN_BAR_RATE = #{counCleanBarRate}</if>
+				<if test="counCleanTonRate!=null">,COUN_CLEAN_TON_RATE = #{counCleanTonRate}</if>
+				<if test="robQuanatity!=null">,ROB_QUANATITY = #{robQuanatity}</if>
+				<if test="remark!=null">,REMARK = #{remark}</if>
+				<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+				<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+				<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			</trim>
+		</set>
+		where
+       	 ORDER_NO=#{orderNo}
+       	<if test="waybillUuid!=null">and WAYBILL_UUID=#{waybillUuid}</if>
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<select id="findbyOrderNo" resultMap="OrderShipUnloadinginfo">
+		select
+		* from t_order_ship_unloadinginfo
+		where
+	    ORDER_NO=#{orderNo} 
+		and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByOrderId" resultMap="OrderShipUnloadinginfo">
+		select
+		t.* from t_order_ship_unloadinginfo t
+		join t_order f
+		on t.order_no = f.order_no
+		where
+	    f.id=#{orderId} 
+		and t.ALIVE_FLAG='1'
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

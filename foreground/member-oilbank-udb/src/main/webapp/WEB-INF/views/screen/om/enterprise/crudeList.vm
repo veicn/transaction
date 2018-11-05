@@ -1,0 +1,125 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+        
+    </div>
+
+    <!--搜索条件-->
+    <div  class="ry-banner">
+        <form class="layui-form" action="$appServer.get('om/enterprise/crudeList.htm')" method="post">
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">企业名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nameLike"  class="layui-input" value="$!enterprise.nameLike"/>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">企业资质</label>
+                    <div class="layui-input-inline">
+                        <select name="credentialsCode">
+                            <option value="">请选择</option>
+                            #foreach($credentials in $credentials)
+                                #if($credentials.code==$!enterprise.credentialsCode)
+                                    <option value="$credentials.code" selected>$credentials.name</option>
+                                    #else
+                                        <option value="$credentials.code">$credentials.name</option>
+                                #end
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email"  class="layui-input" value="$!enterprise.email"/>
+                    </div>
+                </div>
+
+                <button class="layui-btn" type="submit" >查询</button>
+                <a class="layui-btn" type="button" id="add">新增</a>
+##                <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+
+            </div>
+        </form>
+    </div>
+
+
+    #*<a href="$appServer.get('om/enterprise/addCrude.htm')" class="layui-btn layui-btn-xs">添加</a>*#
+<table class="layui-table"  lay-filter="demo">
+    <thead>
+    <tr>
+        <th lay-data="{field:'userName', width:80}">账号</th>
+        <th lay-data="{field:'name', width:80}">中文全称</th>
+        <th lay-data="{field:'fullName', width:80, sort: true}">中文简称</th>
+        <th lay-data="{field:'englishName', width:80}">英文全称</th>
+        <th lay-data="{field:'epType', width:80, sort: true}">注册地址</th>
+        <th lay-data="{field:'crude.email', width:80}">邮箱</th>
+        <th style="width: 23%" lay-data="{field:'wealth', width:135, sort: true}">操作</th>
+    </tr>
+    </thead>
+    #foreach($item in $page.list)
+        <tr>
+            <td>$!item.userName</td>
+            <td>$!item.fullName</td>
+            <td>$!item.name</td>
+            <td>$!item.englishName</td>
+            <td>#if($!item.epType==0)境内#elseif($!item.epType==1)境外
+            #end</td>
+            <td>$!item.email</td>
+            <td>
+                <a class="layui-btn layui-btn-mini showMember" data-id="$!item.memberId">查看</a>
+                <a class="layui-btn layui-btn-mini showSubAccount" data-id="$!item.memberId">查看子账号</a>
+                <a class="layui-btn layui-btn-mini" href="$appServer.get('om/enterprise/updateCrude.htm')?id=$!{item.id}&memberId=$!{item.memberId}">完善资料</a>
+##              <a href="$appServer.get('om/enterprise/updateCrudeInit.htm')?id=${item.id}" class="layui-btn layui-btn-xs">补充信息</a>
+##                <a class="layui-btn layui-btn-danger layui-btn-mini" id="del" data-id="$!item.id">删除</a>
+             </td>
+        </tr>
+    #end
+</table>
+    $contain.get('/page/page.htm').put('pageInfo',$!{page})
+</div>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+        $(function(){
+            $(".showSubAccount").click(function () {
+                var id = $(this).data('id');
+                layer.open({
+                    type: 2,
+                    title: "子账户列表",
+                    area: ['860px', '500px'],
+                    maxmin: true,
+                    shadeClose: true,
+                    content: ['$systemServer.get("om/account/list.htm")?mMemberId=' + id]
+                });
+            });
+
+            $(".showMember").click(function () {
+                var id = $(this).data('id');
+                  layer.open({
+                        type: 2,
+                        title: "账户信息",
+                        area: ['500px', '500px'],
+                        maxmin: true,
+                        shadeClose: true,
+                    content: ['$systemServer.get("om/member/show_member.htm")?id=' + id]
+                    });
+            });
+
+            $("#add").click(function () {
+                  layer.open({
+                        type: 2,
+                        title: "账户信息",
+                        area: ['800px', '500px'],
+                        maxmin: true,
+                        shadeClose: true,
+                    content: ['$systemServer.get('om/member/add.htm?type=1')']
+                    });
+            });
+
+
+        });
+</script>

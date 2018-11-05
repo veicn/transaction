@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBlockchainEventRecordMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBlockchainEventRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="deal_no" jdbcType="VARCHAR" property="dealNo" />
+    <result column="busi_id" jdbcType="BIGINT" property="busiId" />
+    <result column="post_data" jdbcType="VARCHAR" property="postData" />
+    <result column="event_code" jdbcType="VARCHAR" property="eventCode" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="blockchain_id" jdbcType="VARCHAR" property="blockchainId" />
+    <result column="blockchain_txid" jdbcType="VARCHAR" property="blockchainTxid" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deal_no, busi_id, post_data, event_code, description, blockchain_id, blockchain_txid,
+    create_date, create_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_blockchain_event_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_blockchain_event_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBlockchainEventRecord">
+    insert into `product-trade-blockchain`.t_blockchain_event_record (id, deal_no, busi_id,
+      post_data, event_code, description,
+      blockchain_id, blockchain_txid, CREATE_DATE, 
+      CREATE_USER)
+    values (#{id,jdbcType=BIGINT}, #{dealNo,jdbcType=VARCHAR}, #{busiId,jdbcType=BIGINT}, 
+      #{postData,jdbcType=VARCHAR}, #{eventCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{blockchainId,jdbcType=VARCHAR}, #{blockchainTxid,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBlockchainEventRecord">
+    insert into `product-trade-blockchain`.t_blockchain_event_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dealNo != null">
+        deal_no,
+      </if>
+      <if test="busiId != null">
+        busi_id,
+      </if>
+      <if test="postData != null">
+        post_data,
+      </if>
+      <if test="eventCode != null">
+        event_code,
+      </if>
+      <if test="description != null">
+          description,
+      </if>
+      <if test="blockchainId != null">
+        blockchain_id,
+      </if>
+      <if test="blockchainTxid != null">
+        blockchain_txid,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dealNo != null">
+        #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="busiId != null">
+        #{busiId,jdbcType=BIGINT},
+      </if>
+      <if test="postData != null">
+        #{postData,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCode != null">
+        #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainId != null">
+        #{blockchainId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainTxid != null">
+        #{blockchainTxid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBlockchainEventRecord">
+    update `product-trade-blockchain`.t_blockchain_event_record
+    <set>
+      <if test="dealNo != null">
+        deal_no = #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="busiId != null">
+        busi_id = #{busiId,jdbcType=BIGINT},
+      </if>
+      <if test="postData != null">
+        post_data = #{postData,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCode != null">
+        event_code = #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+          description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainId != null">
+        blockchain_id = #{blockchainId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockchainTxid != null">
+        blockchain_txid = #{blockchainTxid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBlockchainEventRecord">
+    update `product-trade-blockchain`.t_blockchain_event_record
+    set deal_no = #{dealNo,jdbcType=VARCHAR},
+      busi_id = #{busiId,jdbcType=BIGINT},
+      post_data = #{postData,jdbcType=VARCHAR},
+      event_code = #{eventCode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      blockchain_id = #{blockchainId,jdbcType=VARCHAR},
+      blockchain_txid = #{blockchainTxid,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+    <!--扩展-->
+    <select id="selectByBusiId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        * from `product-trade-blockchain`.t_blockchain_event_record
+        where busi_id=#{busiId,jdbcType=VARCHAR}
+          and event_code in ('1001','1002','2001','2002','3001','3002','3005','3006')
+    </select>
+
+
+  <!-- //**************************以下方法为开发者补充*********************************/ -->
+
+  <select id="queryBlockchainInfoList" resultType="java.util.HashMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_blockchain_event_record
+    where
+    <if test="dealNo!=null and dealNo!=''">DEAL_NO=#{dealNo}</if>
+    <if test="busiId!=null and busiId!=''">and BUSI_ID=#{busiId}</if>
+    <if test="postData!=null and postData!=''">and POST_DATA=#{postData}</if>
+    <if test="eventCode!=null and eventCode!=''">and EVENT_CODE=#{eventCode}</if>
+    <if test="description!=null and description!=''">and DESCRIPTION=#{description}</if>
+    <if test="blockchainId!=null and blockchainId!=''">and BLOCKCHAIN_ID=#{blockchainId}</if>
+    <if test="blockchainTxid!=null and blockchainTxid!=''">and BLOCKCHAIN_TXID=#{blockchainTxid}</if>
+    <if test="createDate!=null and createDate!=''">and CREATE_DATE = #{createDate}</if>
+    <if test="createUser!=null and createUser!=''">and CREATE_USER = #{createUser}</if>
+      order by CREATE_DATE DESC
+  </select>
+
+
+  <select id="queryInfoList" resultType="java.util.HashMap" parameterType="hashmap">
+    SELECT
+    a.purchase_contract_no,
+    b.deal_uuid,
+    b.enterprise_name as freightagent,
+    c.STATUS demurrage_rate,
+    d.enterprise_name as inspector,
+    e.enterprise_name as  shipagent,
+    f.agency_agreement_no as protocol,
+    a.deal_no as deal_no
+    FROM
+    `product-trade-blockchain`.t_trans_extend a
+    LEFT JOIN `product-trade-blockchain`.t_broker_appoint b ON a.deal_no = b.deal_no and b.ALIVE_FLAG = '1'
+    LEFT JOIN `product-trade-blockchain`.t_inspector_appoint d ON a.deal_no = d.deal_no and d.ALIVE_FLAG = '1'
+    LEFT JOIN `product-trade-blockchain`.t_shipagent_appoint e ON a.deal_no = e.deal_no and e.ALIVE_FLAG = '1'
+    LEFT JOIN `product-trade-blockchain`.t_broker_declaration c ON a.purchase_contract_no = c.purchase_contract_no
+    LEFT JOIN `product-trade-blockchain`.t_trans_extend f ON f.deal_no = a.deal_no and f.ALIVE_FLAG = '1'
+    where
+    a.ALIVE_FLAG='1'
+    <if test="customs_declaration_state!=null and customs_declaration_state!=''">and c.status = #{customs_declaration_state}</if>
+    <if test="deal_no!=null and deal_no!=''">and a.deal_no = #{deal_no}</if>
+      ORDER  BY  a.CREATE_DATE DESC
+  </select>
+
+  <select id="queryInfo" resultType="java.util.HashMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_blockchain_event_record
+    where deal_no = #{deal_no,jdbcType=VARCHAR  }
+    and (event_code  = #{event_code1,jdbcType=VARCHAR} OR event_code  = #{event_code2,jdbcType=VARCHAR} )
+    order by CREATE_DATE desc limit 1
+  </select>
+
+  <select id="queryDeleteInfo" resultType="java.util.HashMap" parameterType="hashmap">
+    select
+    *
+    from `product-trade-blockchain`.t_blockchain_event_record
+    where event_code  = #{event_code,jdbcType=VARCHAR}
+    and busi_id = #{busi_id,jdbcType=VARCHAR  }
+    order by CREATE_DATE desc
+  </select>
+
+  <select id="querySFHInfo" resultType="java.util.HashMap" parameterType="hashmap">
+    select
+    *
+    from `product-trade-blockchain`.t_collect_details
+    where purchase_contract_no = #{deal_no,jdbcType=VARCHAR  }
+    order by CREATE_DATE desc
+  </select>
+
+</mapper>

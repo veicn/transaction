@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<div class="layui-form" style="padding:15px" id="layerDemo">
+		<!--搜索条件-->
+	<div  class="ry-banner">
+		<table class="layui-table table-style" lay-skin="nob">
+		<div class="layui-form-item" style="margin-top:20px">
+			<label class="layui-form-label">角色</label>
+		    <div class="layui-input-inline iw300" >
+		     <select id="roleName" name="roleName" class="layui-input" type="text">
+		     	<option value="">请选择</option>
+			     #foreach($role in $roles)
+			     	#if($role.code == $query.roleName)
+			     		<option value="$role.code" selected>$role.name</option>
+		      		#else
+		      			<option value="$role.code">$role.name</option>
+		      		#end
+			     #end
+		     </select>
+		    </div>
+		    <button class="layui-btn searchBtn">查询</button>
+		    <button class="layui-btn layui-btn-normal addFn">新增</button>
+		</div>
+		</table>
+	</div>
+		
+		<!--列表-->
+		<table class="layui-table table-style" lay-skin="nob">
+		  <thead>
+		    <tr>
+		      <th class="table-style-th">序号</th>
+		      <th class="table-style-th">角色</th>
+			  <th class="table-style-th">频道</th>
+			  <th class="table-style-th">当日可发布次数</th>
+			  <th class="table-style-th">是否可发布</th>
+			  <th class="table-style-th">审核类型</th>
+		      <th class="table-style-th">操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		  #foreach($data in $datas)
+		    <tr>
+			  <td>${velocityCount}</td>
+			  <td>$data.roleName</td>
+			  <td>$data.channelName</td>
+			  #if($data.isRelease == 1)
+				  #if($data.isLimitCount == 0)
+				  	<td>不限</td>
+				  #else
+				  	<td>$!data.releaseCount</td>
+				  #end
+			  #else
+			  	<td>0</td>
+			  #end
+			  #if($data.isRelease == 0)
+			  	<td>否</td>
+			  #else
+			  	<td>是</td>
+			  #end
+			  #if($data.auditType == 1)
+			  	<td>人工审核</td>
+			  #else
+			  	<td>自动审核</td>
+			  #end
+		      <td>
+		      	<button class="layui-btn layui-btn-normal layui-btn-small editFn" attr-data='{"uuid":"$data.uuid","roleName":"$data.roleName","roleId":"$data.roleId","roleCode":"$data.roleCode","channelName":"$data.channelName","channelId":"$data.channelId","channelCode":"$data.channelCode","isRelease":"$data.isRelease","isLimitCount":"$data.isLimitCount","releaseCount":"$data.releaseCount","auditType":"$data.auditType"}'>
+		      		<i class="layui-icon">&#xe642;</i>
+					编辑
+		      	</button>
+		      	<button class="layui-btn layui-btn-danger layui-btn-small del" attr-data="$data.uuid">
+		      		<i class="layui-icon">&#xe640;</i>
+		      		删除
+		      	</button>
+		      </td>
+		    </tr>
+		  #end
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+			$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/rule/rule.htm").put('slider_path','/contain/formPagingPageSlider')
+		</div>
+	 
+		<script src="../../info/js/rule/rule.js"></script>
+</div>

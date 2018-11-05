@@ -1,0 +1,11 @@
+$contain.get('/common/title.htm').put('title', '个人欢迎页')
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/myResouces.css'))
+#css($appServer.get('/product/css/work/shipping.css'))
+#css($appServer.get('/product/css/work/account.css'))
+<div class="aw-content fl ">
+    <img src="$appServer.get('/product/images/linkAddress.png')" alt="">
+    <span>Please link to your company</span>
+</div>

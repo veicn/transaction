@@ -1,0 +1,24 @@
+
+.c-ful li.c-fcos2{
+   /* height:50px;*/
+}
+.c-fcos2{
+    position: relative;
+}
+.c-fcos2 .my-error{
+    position: absolute;
+    left:28%;
+    top:25px;
+    color:red;
+}
+.c-fcos1 .my-error{
+    position: absolute;
+    left:14%;
+    top:25px;
+    color:red;
+}
+
+.notice-required {
+    color: red;
+    line-height: 30px;
+}

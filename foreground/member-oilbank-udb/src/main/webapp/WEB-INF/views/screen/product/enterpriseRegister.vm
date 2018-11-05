@@ -1,0 +1,61 @@
+$contain.get('common/title.htm').put('title', '企业注册')
+#css($appServer.get('/product/css/work/personalRegister.css'))
+<div class="w1180 clearfix rpp-con">
+    <div class="main-tit rpp-tit">
+        <h3>Company Registration</h3>
+    </div>
+    <div class="main-prompt">
+        <div class="warm">
+            <h4>WARM REMINDER:</h4>
+            <p>Required documents for Foreign Companies:<br/>
+                1.Certificate of Incorporation, Bank account opening documents or Bank statements showing the customer's company name and account number.<br/>
+                2.Authorization letter of the application for the registration on the platform is hereby approved, confirmed and ratified.<br/>
+                <a href="#">Download for Platform authorization letter. </a>
+            </p>
+        </div>
+        <div class="notice">
+            <h4>NOTICE TO CLIENTS:</h4>
+            <p>Please kindly call us at 010-59568888 when you have any enquires.<br/>
+                1. We will process your application within 3 working days, and will  postpone to next working days automatically in case of holidays.<br/>
+                2. Please call us at 010-59568888 if you have any enquires.<br/>
+                3. Please read <a href="">< Company User Agreement ></a>before register
+            </p>
+        </div>
+    </div>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+            <span>
+                <div class="email">
+                  *<span class="eml-z">Legal Business name : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the Business name</span>
+    </div>
+    <div class="form-group-reminder clearfix">
+        <span></span>
+        <span class="form-reminder fl">Try to use the company name English </span>
+    </div>
+    </br>
+    <div class="form-group clearfix rpp-group1">
+            <span>
+                <div class="email">
+                  *<span class="eml-z"> Email address :</span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the Email address</span>
+    </div>
+    <div class="form-group-reminder clearfix">
+        <span></span>
+        <span class="form-reminder fl">Reminder : email address will be used for activation of accounts.  </span>
+    </div>
+    </br>
+    <div class="form-group-check">
+        <span></span>
+        <em class="button-check rpp-button">
+            <a href="javascript:;" class="br">Continue</a>
+        </em>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+#set($layout='')
+#set($enterpriseRegister='true')
+
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>注册-成品油网</title>
+    <link rel="stylesheet" href="$imageServer.get('css/f_common.css')">
+    <link rel="stylesheet" href="$imageServer.get('css/f_base.css')">
+#if(!$enterpriseRegister)
+    <script>
+        document.location="$appServer.get('center/member/personFill.htm')";
+    </script>
+
+#end
+</head>
+<body>
+<div class="fornt-user">
+    <ul class="fro-box clearfix">
+        <li class="sele-gr "><a href="$appServer.get('center/member/personFill.htm')"><i class="sel-ico sel-gr"></i><span>我是个人</span></a></li>
+        #if($enterpriseRegister)
+       <li class="sele-qy"><a href="$appServer.get('center/member/enterpriseFill.htm')"><i class="sel-ico sel-qy"></i><span>我是企业</span></a></li>
+
+        #end
+    </ul>
+
+</div>
+
+    $contain.get('/contain/stat.htm')
+</body></html>

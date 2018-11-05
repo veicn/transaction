@@ -1,0 +1,45 @@
+##所需参数
+## contractSheetVO
+
+#set($contractSheetStatusCode = $!{contractSheetVO.contractSheetStatusVO.code})
+
+<ul class="stowage-steps clearfix order-steps">
+    #if($!{contractSheetStatusCode} == 1 || $!{contractSheetStatusCode} == 2)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Confirmed</span><br>
+                <em>$!{contractSheetVO.confirmedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Undelivered</span><br>
+                <em></em>
+            </div>
+        </li>
+        <li class="steps completed fl">
+            <div class="steps-infor">
+                <span>Completed</span><br>
+            </div>
+        </li>
+    #elseif($!{biddingSheetStatusCode} == 3)
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Confirmed</span><br>
+                <em>$!{contractSheetVO.confirmedDateAsString}</em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Undelivered</span><br>
+                <em></em>
+            </div>
+        </li>
+        <li class="steps done fl">
+            <div class="steps-infor">
+                <span>Completed</span><br>
+                <em>$!{contractSheetVO.completedDateAsString}</em>
+            </div>
+        </li>
+    #end
+</ul>

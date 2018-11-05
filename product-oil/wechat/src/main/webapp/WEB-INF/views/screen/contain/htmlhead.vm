@@ -1,0 +1,26 @@
+
+
+    <title>$!{a}</title>
+
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta dom>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css?css_version=03280827')"  media="all">
+
+    <link rel="stylesheet" href="$appServer.get('/css/common.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/f_center.css?css_version=03280827')">
+
+    <script src="$imageServer.get('script/lib/jquery-1.9.1.min.js?js_version=03280827')"></script>
+    <script src="$appServer.get('script/lib/jquery-migrate-1.2.0.min.js?js_version=03280827')"></script>
+    <script src="$imageServer.get('script/lib/jquery.validate.min.js?js_version=03280827')"></script>
+    <script src="$appServer.get('script/common/jquery.validate.extends.js?js_version=03280827')"></script>
+    <script src="$appServer.get('script/common/jquery.validate.message.cn.js?js_version=03280827')"></script>
+    <script src="$imageServer.get('/layui/layui.js?js_version=03280827')"></script>
+    <script src="$imageServer.get('script/common/layout_common.js?js_version=03280827')"></script>
+    <link rel="stylesheet" href="$appServer.get('/css/crudeoil_layer.css?css_version=03280827')">
+    <script src="$imageServer.get('/script/crudeOilLayer.js?js_version=03280827')"></script>
+    <script src="$appServer.get('script/check.js?js_version=03280827')"></script>
+

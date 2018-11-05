@@ -1,0 +1,21 @@
+<div class="c-mod" id="cgxx">
+    ##<h3><em class="cw-ico ico-h3"></em><span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            $!{productInfoVO.productVarietyVO.enName}&nbsp;
+            <span>
+                #if($!{productInfoVO.productSpecificationVO.enName})
+                    ($!{productInfoVO.productSpecificationVO.enName})
+                #end
+            </span>
+            <li class="c-fcos2"><span class="c-fn">Deadline：</span><span class="c-int qx-conte"> $!{productInfoVO.deadlineAsString}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Bid Valid To：</span><span class="c-int qx-conte"> $!{productInfoVO.bidOpeningDateAsString}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Quantity (MT)：</span><span class="c-int qx-conte"> $!{productInfoVO.quantityAsString}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Export Type：</span><span class="c-int qx-conte"> $!{productInfoVO.exportTypeVO.enName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Trade Terms：</span><span class="c-int qx-conte"> $!{productInfoVO.tradeTermVO.enName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Tolerance：</span><span class="c-int qx-conte"> $!{productInfoVO.tolerance}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Quality Standard：</span><span class="c-int qx-conte"> View Quality Standard</span></li>
+
+        </ul>
+    </div>
+</div>

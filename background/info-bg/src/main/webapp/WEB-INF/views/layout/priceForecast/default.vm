@@ -1,0 +1,16 @@
+##$contain.get("/contain/htmlhead.htm")
+##$screen_content
+##<!-- $contain.get("/contain/footer.htm") -->
+##$contain.get("/contain/htmlend.htm")
+#js("$priceServer.get('/js/jquery-3.3.1.min.js')")
+#css("$priceServer.get('layui/css/layui.css')")
+
+#css("$priceServer.get('/css/f_common.css')")
+#css("$priceServer.get('/css/f_base.css')")
+#css("$priceServer.get('/css/f_caigou.css')")
+#css("$priceServer.get('/js/jquery-1.8.3.min.js')")
+#css("$priceServer.get('/layui/layui.js')")
+#css("$priceServer.get('/layui/layui.all.js')")
+$contain.get("/commonContain/headline.htm").setParam('order','9').setHost("$portalServer.get('')")
+$screen_content
+$contain.get("/commonContain/foot.htm").setHost("$portalServer.get('')")

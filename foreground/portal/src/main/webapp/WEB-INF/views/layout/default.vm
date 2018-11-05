@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    $contain.get('/commonContain/htmlhead.htm').put('a',$!a)
+</head>
+<body>
+<style>#cnzz_stat_icon_1272857056{display:none}</style>
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<div class="header">
+    $contain.get('/commonContain/headline.htm').put('order',$order)
+</div>
+
+$screen_content
+
+    $contain.get('/collection/rc_drift.htm')
+    $contain.get('/commonContain/foot.htm')
+<div class="toolbar">
+    <ul class="tool">
+        <li><a href=""><i class="c-ico ico-kf"></i></a></li>
+        <li><a href=""><i class="c-ico ico-top"></i></a></li>
+    </ul>
+</div>
+</body>
+</html>

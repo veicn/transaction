@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/product/register/htmlhead.htm")
+
+    $screen_content
+
+    ##$contain.get("/product/register/htmllead.htm")
+</html>

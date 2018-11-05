@@ -1,0 +1,3 @@
+$contain.get("/mosken/findpwd/htmlhead.htm")
+$screen_content
+$contain.get("/mosken/findpwd/htmlend.htm")

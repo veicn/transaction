@@ -1,0 +1,167 @@
+#set($sheetFlagVOList = $!datas.sheetFlagVOList)
+#set($saleTypeVOList = $!datas.saleTypeVOList)
+#set($productCategoryVOList = $!datas.productCategoryVOList)
+#set($productSpecificationVOList = $!datas.productSpecificationVOList)
+#set($exportTypeVOList = $!datas.exportTypeVOList)
+<style>
+#header .header-line{height:0;}
+.line-cate .select {
+    color: #F36523;
+}
+</style>
+
+
+<div class="w1180 classification-b">
+    <!--筛选条件 star-->
+    <ul>
+        <li class="cxtj-nr clearfix">
+            <div class="cxtj-nr-text jyfs sale-pur-kind">
+                #*<a class="br " href="javascript:void(0)" onclick="sendQueryData('sheetFlag', '1')">SALE</a>
+                <a class="br " href="javascript:void(0)" onclick="sendQueryData('sheetFlag', '2')">PURCHASE</a>*#
+
+                #foreach($sheetFlagVO in $sheetFlagVOList)
+                    <a class="br saleName #if($sheetFlagVO.code == $!sheetFlag ) active #end"
+                       href="javascript:void(0)"
+                       onclick="sendQueryData('sheetFlag', '$sheetFlagVO.code',event)">$sheetFlagVO.enName</a>
+                #end
+            </div>
+        </li>
+
+       #* <li class="cxtj-nr clearfix">
+            <div class="cxtj-nr-bt firstword">Range</div>
+            <div class="cxtj-nr-text jyfs">
+                #foreach($saleTypeVO in $saleTypeVOList)
+                    <a class="br #if($saleTypeVO.code == ${saleSheetQueryVO.saleTypeCode}) active #end"
+                       href="javascript:void(0)"
+                       onclick="sendQueryData('saleTypeCode', '$saleTypeVO.code')">$saleTypeVO.enName</a>
+                #end
+            </div>
+        </li>*#
+        <li class="cxtj-nr clearfix">
+            <div class="cxtj-nr-bt">Range</div>
+            <div class="cxtj-nr-text">
+                #foreach($saleTypeVO in $saleTypeVOList)
+                    <div class="line-cate">
+                        <a href="javascript:void(0)"
+                           class="c-elect cateName"
+                           onclick="sendQueryData('saleTypeCode', '$!{saleTypeVO.code}',this)">$!{saleTypeVO.enName}</a>
+                        <a onclick="sendCancelData('saleTypeCode',this)">
+                            <i class="del-cate "
+                                #if(${saleSheetQueryVO.saleTypeCode} == $!{saleTypeVO.code})
+                               style="opacity: 1"
+                                #end
+                            ></i>
+                        </a>
+                    </div>
+                #end
+            </div>
+
+        </li>
+
+        <li class="cxtj-nr clearfix">
+            <div class="cxtj-nr-bt">Category</div>
+            <div class="cxtj-nr-text">
+                #foreach($productCategoryVO in $productCategoryVOList)
+                    <div class="line-cate">
+                        <a href="javascript:void(0)"
+                           class="c-elect cateName categoryShow"
+                           onclick="sendQueryData('productCategoryCode', '$!{productCategoryVO.code}',event)">$!{productCategoryVO.enName}</a>
+                        <a onclick="sendCancelData('productCategoryCode',this)">
+                            <i class="del-cate category-del"
+                                #if(${saleSheetQueryVO.productCategoryCode} == $!{productCategoryVO.code})
+                                    style="opacity: 1"
+                                #end
+                            ></i>
+                        </a>
+                    </div>
+                #end
+            </div>
+
+        </li>
+        <li class="cxtj-nr clearfix  qcxx">
+            <div class="cxtj-nr-bt">Specification</div>
+            <div class="cxtj-nr-text  SpecificationList">
+                <input type="hidden" value="$!productCategoryCode" id="productCategoryCode">
+                #if($!productCategoryCode)
+
+                #else
+                    #foreach($productSpecificationVO in $productSpecificationVOList)
+                        <div class="line-cate ">
+                            <a href="javascript:void(0)"
+                               class="c-elect"
+                               onclick="sendQueryData('productSpecificationCode', '$!{productSpecificationVO.code}',event)">$!{productSpecificationVO.enName}</a>
+                            <a onclick="sendCancelData('productSpecificationCode',this)">
+                                <i class="del-cate category-del"
+                                    #if(${saleSheetQueryVO.productSpecificationCode} == $!{productSpecificationVO.code})
+                                   style="opacity: 1"
+                                    #end
+                                ></i>
+                                <input type="hidden" value="">
+                            </a>
+                        </div>
+                    #end
+                #end
+
+            </div>
+        </li>
+    </ul>
+    <!--筛选条件 end-->
+</div>
+<script>
+    $(document).ready(function(){
+        var categoryCode = $("#productCategoryCode").val();
+        if(categoryCode){
+            var url = appServer + 'pages/front/publish_product/get_specification_list.json?categoryCode=' + categoryCode;
+            $.get(url, function(result) {
+                if (result.status == 0) {
+                    var specificationList = result.datas;
+                    if (specificationList) {
+                        $('.SpecificationList').empty();
+                        for (var i = 0; i < specificationList.length; i++) {
+                            var specification = specificationList[i];
+                            var div="<div class='line-cate line-specif'>"+
+                                    "<a href='javascript:void(0)' class='c-elect' onclick=sendQueryData('productSpecificationCode','"+specification.code+"',event)>"+specification.enName+"</a>"+
+                                    "<a onclick=sendCancelData('productSpecificationCode',this)>"
+                                    +"<i class='del-cate' ></i>"
+                                    +"</a>"+
+                                    "</div>"
+                            $('.SpecificationList').append(div);
+                            var result1 = localStorage.getItem('indexMsg');
+                            var result2 = localStorage.getItem('indexsb');
+                            if(result1!=-1&&result2!=2){
+                                var s=result2
+                                localStorage.setItem('indexs', s);
+                            }
+                            if(result1==-1){
+                                var s1=localStorage.getItem('indexs');
+                                if(s1!=null){
+                                    $('.qcxx').find('.cxtj-nr-text').find('.line-specif').eq(s1).find('i').css('opacity', '1');
+                                }
+                            }else if(result2=='c'){
+//                                var s1=localStorage.getItem('indexs')
+                                $('.line-specif').find('i').css('opacity',0)
+                                if(s1!=null){
+                                    $('.qcxx').find('.cxtj-nr-text').find('.line-specif').eq(s1).find('i').css('opacity', '1');
+                                }
+                            }else if(result2=='f'){
+                                var s1=localStorage.getItem('indexs');
+                                if(s1!=null){
+                                    $('.qcxx').find('.cxtj-nr-text').find('.line-specif').eq(s1).find('i').css('opacity', '1');
+                                }
+                            }else{
+                                $('.qcxx').find('.cxtj-nr-text').find('.line-specif').eq(result1).find('i').css('opacity', '1');
+                            }
+                        }
+                    }
+                }
+            });
+
+        }
+//
+
+//
+    });
+
+
+</script>
+

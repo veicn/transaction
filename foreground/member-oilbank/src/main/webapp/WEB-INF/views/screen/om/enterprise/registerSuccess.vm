@@ -1,0 +1,35 @@
+<div class="layui-fluid">
+	<div style="text-align: center; padding-top: 30px;">
+		<fieldset class="layui-elem-field">
+			<legend>企业信息提交成功</legend>
+			
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label"></label>
+						<label class="layui-form-label"></label>
+					</div>
+				</div>
+			
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">用户名：</label>
+						<label class="layui-form-label" style="text-align: center;">$!{userName}</label>
+					</div>
+				</div>
+				
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">密码：</label>
+						<label class="layui-form-label" style="text-align: center;">$!{password}</label>
+					</div>
+				</div>
+				
+				<div class="layui-field-box">
+					<div class="layui-form-item">
+						<a href="$appServer.get('om/enterprise/crudeList.htm')" return:false
+							class="layui-btn layui-btn-xs">返回</a>
+					</div>
+				</div>	
+		</fieldset>
+	</div>
+</div>

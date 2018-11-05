@@ -1,0 +1,166 @@
+#css($appServer.get('/css/work/myResouces.css'))
+#css($appServer.get('/css/work/addAgreement.css'))
+#css($appServer.get('/css/common/pikaday.css'))
+#css($appServer.get('/css/work/shipping.css'))
+<div class="m-nav fl">
+<form  id="agreementAddForm">
+    <div class="m-box m-sls cleafix borderNone">
+        <div class="tit" id=" tit1">
+        
+			Charter Party Modification
+			
+        </div>
+        <ul class="m-nav-info">
+            <li>
+                <span>Charter Party Date :</span>
+                <span class="time">$!{agreement.charterPartyDate}</span>
+                <input type="hidden"  name="charterPartyDate" value="$!{agreement.charterPartyDate}">
+                <input type="hidden"  name="uuid" value="$!{agreement.uuid}">
+                <input type="hidden"  name="aliveFlag" value="$!{agreement.aliveFlag}">
+            </li>
+            <li>
+                <span>Consignor :</span>
+                <span>$!{agreement.consignor}</span>
+                <input type="hidden"  name="consignor" value="$!{agreement.consignor}">
+            </li>
+            <li>
+                <span>Disponent Owner :</span>
+                <span>$!{agreement.charteringAgentNm}</span>
+                <input type="hidden"  name="charteringAgentNm" value="$!{agreement.charteringAgentNm}">
+            </li>
+            <li>
+                        <span>Vessel's Name :</span>
+                        <div class="my-select cpy-select h-select vo-select clearfix Vessel-sele w400 br">
+                            <div class="select s-b select-ajax">
+                                <div class="select-box">
+                                    <div class="select-content none w363">
+                                        <div class="select-show-text Vessel-sele-text"id="vesselNameDiv" >
+
+                                        	#foreach($start in $!sysList)
+                                               	 #if($!{start.vesselName} == $!{agreement.vesselName})
+                                               		 $!{agreement.vesselName}
+                                               	 #end
+                                 		 	#end
+
+                                        </div>
+                                        <input autocomplete="off" name="vesselName" class = "vname" type="text" value="$!{vo.vesselName}"data-rules="required" >
+                                        <input autocomplete="off" name="sysShipId" class = "vcode" type="hidden" fun="findImoByShipId" value="$!{vo.sysShipId}"data-rules="required" >
+                                    </div>
+                                </div>
+                                <ul class="select-options">
+                                    #foreach($start in $!sysList)
+                                        <li data-value="$!start.vesselName"  class="select-option ">$!start.vesselName</li>
+                                    #end
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </li>
+	            <li>
+                <span>IMO :</span>
+                <input autocomplete="off" type="text" placeholder=" "  class="br input310 input-name" name="imo" value="$!{agreement.imo}"  data-rules="required" >
+            </li>
+            <span class="m-nav-line"></span>
+
+            <li>
+                <span>Product :</span>
+                <span>$!{agreement.productNm}</span>
+                <input type="hidden"  name="productNm" value="$!{agreement.productNm}">
+            </li>
+            <li>
+                <span>Quantity (Tons) :</span>
+                <span> 
+                	#if(${agreement.quantity}!=""&&${agreement.rangeOfError}!="")
+                          $!{agreement.quantity} ± $!{agreement.rangeOfError}%
+                    #end
+                 </span>
+                <input type="hidden"  name="quantity" value="$!{agreement.quantity}">
+                <input type="hidden"  name="rangeOfError" value="$!{agreement.rangeOfError}">
+            </li>
+            <li>
+                <span>Port of Loading :</span>
+                <span>$!{agreement.portOfLoading}</span>
+                <input type="hidden"  name="portOfLoading" value="$!{agreement.portOfLoading}">
+            </li>
+            <li>
+                <span>Port of Discharge :</span>
+                <span>$!{agreement.portOfDischarge}</span>
+                <input type="hidden"  name="portOfDischarge" value="$!{agreement.portOfDischarge}">
+            </li>
+            <span class="m-nav-line"></span>
+
+            <li>
+                        <span class="time-l" style="    display: block;height: 36px; float: left;line-height: 36px;">Laycan :</span>
+                        <span class="a-time a-time-Add">
+                            <ul>
+                                <li>
+                                    <div class="datetime-wrap" style="float:  left;">
+                                        <input autocomplete="off" name="laycanStrat" id="LaycanD" value="$!{agreement.laycanStrat}" class="DeadlineMonth datetime" type="text">
+                                        <div class="datetime-view ">$!{agreement.laycanStrat}</div>
+                                    </div>
+                                    <div class=Add-time-line  style="float:  left; width: 10px;height:1px;background: #D9D9D9 ;margin: 18px 10px 0"></div>
+                                    <div class="datetime-wrap"  style="float:  left;" >
+                                        <input autocomplete="off" name="laycanEnd" id="LaycanS" value="$!{agreement.laycanEnd}" class="DeadlineMonth datetime" type="text">
+                                        <div class="datetime-view ">$!{agreement.laycanEnd}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+
+            <li class="input_Upload">
+                <span>Upload Q88 :</span>
+                <input autocomplete="off" type="text" id = "uploadQ88FileNm" value="$!{agreement.uploadQ88FileNm}" class="br input310 input-name" readonly = "readonly" name="uploadQ88FileNm">
+                <input type="hidden" id = "uploadQ88" path = "" name="uploadQ88">
+                <i><a href="" class="file" type="button" id="btnQ88">Upload</a></i>
+                <input type="hidden" name="uploadQ88" />
+                
+                <i id ="Q88Deleted" class="s-icon fs-close delDoucument" documentFileId="" 
+					#if($!agreement.uploadQ88FileNm)
+						
+					#else
+						style="display: none;"
+					#end
+                >Deleted</i>
+                
+            </li>
+				
+##            <li class="input_Upload">
+##                <span>Upload CP :</span>
+##                <input type="text" id = "uploadCpFileNm" value="$!{agreement.uploadCpFileNm}" class="br input310 input-name" readonly = "readonly" name="uploadCpFileNm" placeholder="Non mandatory">
+##                <input type="hidden" id = "uploadCp" path = "" name="uploadCp">
+##                <i><a href="javascript:void(0)" class="file" type="button" id="btnCP">Upload</a></i>
+##                <input type="hidden" name="uploadCp"/>
+##
+##                <i id ="CpDeleted" class="s-icon fs-close delDoucument2" documentFileId=""
+##                	#if($!agreement.uploadCpFileNm)
+##
+##						#else
+##							style="display: none;"
+##					#end
+##				>Deleted</i>
+##            </li>
+            <span class="m-nav-line"></span>
+            <div class="m-nav-btn" >
+                <em class="check-b1 button-b">
+                    <a class="br btn-sub" id="agreementUpdateForm2">Submit</a>
+                    <a class="br btn-sub" href="javascript:history.go(-1)">Back</a>
+                </em>
+            </div>
+        </ul>
+    </div>
+  </form>
+</div>
+
+<script>
+    // 时间组件综合调用
+    (function () {
+        window.commonCPY.datePicker(['LaycanS','LaycanD'],function(value, date, endDate){
+            var value=value[0].split(' ').join('/')
+            console.log(value)
+        });
+        window.commonCPY.select()
+    })();
+</script>
+#js($appServer.get('script/pages/back/agreement/index.js'))

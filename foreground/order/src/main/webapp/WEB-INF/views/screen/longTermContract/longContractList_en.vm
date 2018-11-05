@@ -1,0 +1,73 @@
+<div class="c-ms">
+    <div class="c-mr">
+        <div class="c-mod">
+            <div class="c-mod">
+                <h3><i class="cw-ico ico-h3"></i>Long-term Contract List<span class="cxtj-nr-an"><a href="$appServer.get('/longTermContract/longContractAdd.htm')" class="btn-more">+ Long-term Contract</a></span></h3>
+                <div class="c-tabdiv">
+                    <table>
+                        <tr>
+                            <th>Deal No.</th>
+                            <th>Grade</th>
+                            <th>Creation Date</th>
+
+                            <th>Qty</th>
+                            <th>Incoterm</th>
+
+
+
+                            <th>Pricing Period</th>
+
+
+                            <th>Status</th>
+                            <th>Operate</th>
+                        </tr>
+
+                        #foreach($item in $crudeOilLongTermContracts.list)
+                            <tr class="c-tabcos1">
+                                <td><a href="#" class="c-tablink">$!{item.orderNo}</a></td>
+                                <td>$!{item.name} </td>
+                                <td>$dateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",$!{item.createTime})</td>
+
+                                <td>$!{item.sumStr}</td>
+                                #if($!{item.tradeItem}=="1")
+                                    <td>FOB</td>
+                                #elseif($!{item.tradeItem}=="2")
+                                    <td>CFR</td>
+                                #elseif($!{item.tradeItem}=="3")
+                                    <td>CIF</td>
+                                #elseif($!{item.tradeItem}=="4")
+                                    <td>CIP</td>
+                                #elseif($!{item.tradeItem}=="5")
+                                    <td>DES</td>
+                                #end
+
+
+
+                                <td>$!{item.payTime}</td>
+
+
+
+                                #if($!{item.doubleSign}=="00")
+                                    <td id="sign">unconfirmed</td>
+                                #elseif($!{item.doubleSign}=="10")
+                                    <td id="sign">Passed unconfirmed</td>
+                                #elseif($!{item.doubleSign}=="01")
+                                    <td id="sign">Confirmation failed</td>
+                                #elseif($!{item.doubleSign}=="11")
+                                    <td id="sign">Confirmation passed</td>
+                                #end
+                                <td><a href="$appServer.get('/longTermContract/longContractDetail.htm').put("id",$!{item.uuid})">Check order</a></td></tr>
+                        #end
+
+                        $!{item.createTime}
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+$contain.get('/common/page.htm').put("pageInfo",$crudeOilLongTermContracts)
+
+

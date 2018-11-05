@@ -1,0 +1,396 @@
+#set($a = "发布原油采购需求_原油大厅_原油需求大厅_原油采购大厅_买原油网")
+#set($ujs = $imageServer.get('js/upload.js'))
+#js($ujs)
+<form id="purchasingDemandForm"  action="$appServer.get('oilSaleResources/saveDemand.htm')" method="post">
+    <input type="hidden" name="demand.uuid" value="$!{demandForm.demand.uuid}" />
+    <div class="fabucaigou-con-right">
+
+        <div class="con-right-cont">
+            $contain.get("/crudeoilhallform/selloiltypedetail.htm").put("crudeOilInfoList1",$!{demandForm.crudeOilFormList}).put("crudeOilInfoList2",$!{demandForm.crudeOils}).put("originMap",$!{demandForm.originMap}).put("publishType",$!{demandForm.demand.publishType}).put("demandId",$!demandId)
+            #*　指定企业信息　*#
+            $contain.get("/crudeoilhallform/specifyEnterprise.htm").setParam("demandId","$!demandId").put("demand",$!{demandForm.demand}).put("specifyEnterpriseList", $!{demandForm.specifyEnterpriseList})
+
+            $contain.get("/crudeoilhallform/sellremain.htm").put("demand",$!{demandForm.demand})
+            $contain.get("/crudeoilhallform/sellpricelist.htm").setParam("demandId","$!demandId").put("demand",$!{demandForm.demand}).put("demandShip",$!{demandForm.demandShip}).put("contractKindMap",$!{contractKindMap})
+            $contain.get("/crudeoilhallform/sellerdetail.htm").setParam("demandId","$!demandId").put("demandRelevanter1",$!demandForm.buyerRelevanter)
+        </div>
+
+        <div class="butt-zh c-clear">
+            <input type="hidden" name="demand.status" value="1"/>
+            <button class="btn-bc btn-fb"  id="putawayCrudeOilInfo">Post</button>
+            <button class="btn-bc btn-tj"  id="saveCrudeOilInfo">Save</button>
+            <button class="btn-bc btn-qx" type="button" onclick="window.history.back(-1);">Back</button>
+
+        </div>
+    </div>
+</form>
+
+<link rel="stylesheet" href="$appServer.get('css/verify.css')">
+<style>
+    .img_box .del_btn {position: absolute;font-size: 16px;cursor: pointer;}
+</style>
+
+#set($vjs = $imageServer.get('validate/jquery.validate.min.js'))
+#js($vjs)
+
+<script>
+	// 校验企业名称
+	function checkEnterpriseName(){
+        return false;
+    }
+    
+    // Save
+    $("#saveCrudeOilInfo").on("click", function () {
+        if(checkEnterpriseName() || chkSpecifyRange()) return false;
+        // 油种错误
+        $('#oil-error').css('display','none');
+        // 设置差异变量  Status
+        $("input[name='demand.status']").val("1");
+		
+		// 提交校验
+        formValiate();
+
+    });
+
+    // Post
+    $("#putawayCrudeOilInfo").on("click", function () {
+    	if(checkEnterpriseName() || chkSpecifyRange()) return false;
+        // 油种错误
+        $('#oil-error').css('display','none');
+        // 设置差异变量  Status
+        $("input[name='demand.status']").val("2");
+        
+        // 提交校验
+        formValiate();
+    });
+
+    function chkSpecifyRange() {
+        var specifiedType = $("input[name='demand.specified']:checked").val();
+        if (specifiedType == 1) {
+            var lines = $("#specifyEnterpriseList").find("tr.c-tabcos2").length;
+            if(lines == 0) {
+                layui.layer.alert("The target enterprise cannot be empty!", {title:"Notice", btn: "OK"});
+                return true;
+            }
+        }
+        return false;
+    }
+
+	//校验时间
+	function checkDateInput (d1Obj,d2Obj,err,errMessage){
+		if (d1Obj.val() && d2Obj.val()) {
+			if(d1Obj.val() > d2Obj.val()){
+				err.css('display','block'); 
+				var html = '<div style="color:red">'+errMessage+'</div>';
+				err.html(html);
+				return false;
+			} else {
+				err.css('display','none'); 
+			}
+		}
+		
+		return true;
+	}
+	
+    $('.con-left-content').click(function () {
+        var index=$(this).index();
+        $(this).addClass('gou').siblings().removeClass('gou')
+    })
+    var cmod=$('.c-mod')
+    var otop=cmod[0].offsetTop
+    $('.fabucaigou-con-left').css({'position':'fixed','top':otop})
+    function scroll( fn) {
+        var beforeScrollTop = getScrollTop(),
+                fn = fn || function() {};
+        window.addEventListener("scroll", function() {
+            var afterScrollTop = getScrollTop();
+            var delta=0;
+            var ot1=cmod[0].offsetTop;
+            var ht=$('.fabucaigou-con-right').height();
+            if(afterScrollTop+10>=ht){
+                delta =0;
+                var otop=cmod[cmod.length-1].offsetTop
+                $('.con-left-content').eq($('.con-left-content').length-1).addClass('gou').siblings().removeClass('gou')
+                $('.fabucaigou-con-left').css({'position':'absolute','top':ht})
+            }else if(afterScrollTop<=cmod[0].offsetTop){
+                delta =0;
+                var otop2=cmod[0].offsetTop;
+                $('.con-left-content').eq(0).addClass('gou').siblings().removeClass('gou')
+                $('.fabucaigou-con-left').css({'position':'absolute','top':otop2})
+            }else{
+                delta =afterScrollTop - beforeScrollTop;
+                $('.fabucaigou-con-left').css({'position':'fixed','top':'0%'})
+            }
+
+            if( delta === 0 ) return false;
+            fn( delta > 0 ? delta: delta );
+            beforeScrollTop = afterScrollTop;
+        }, false);
+    }
+
+    scroll(function(direction) {
+        var afterScrollTop = getScrollTop() + 10;
+        if(afterScrollTop<=cmod[1].offsetTop){
+            $('.con-left-content').eq(0).addClass('gou').siblings().removeClass('gou')
+        }else
+        if(cmod[1].offsetTop<=afterScrollTop&&afterScrollTop<=cmod[2].offsetTop){
+            $('.con-left-content').eq(1).addClass('gou').siblings().removeClass('gou')
+        }else
+        if(cmod[2].offsetTop<=afterScrollTop&&afterScrollTop<=cmod[3].offsetTop){
+            $('.con-left-content').eq(2).addClass('gou').siblings().removeClass('gou')
+        }else
+        if(cmod[4].offsetTop<=afterScrollTop&&afterScrollTop<=cmod[5].offsetTop){
+            $('.con-left-content').eq(3).addClass('gou').siblings().removeClass('gou')
+        }else
+        if(cmod[5].offsetTop<=afterScrollTop){
+            $('.con-left-content').eq(4).addClass('gou').siblings().removeClass('gou')
+        }/*else
+        if(cmod[6].offsetTop<=afterScrollTop&&afterScrollTop<=cmod[7].offsetTop){
+            $('.con-left-content').eq(4).addClass('gou').siblings().removeClass('gou')
+        }else
+        if(cmod[7].offsetTop<=afterScrollTop+100){
+            $('.con-left-content').eq(5).addClass('gou').siblings().removeClass('gou')
+        }*/
+
+
+    });
+    
+    function getScrollTop() {
+    	var scrollTop = 0;
+    	if(document.body.scrollTop != 0) {
+    		scrollTop = document.body.scrollTop;
+    	}
+    	if(document.documentElement.scrollTop != 0) {
+    		scrollTop = document.documentElement.scrollTop;
+    	}
+    	
+    	return scrollTop;
+    }
+    
+    jQuery.validator.addMethod("isFloatEqZero", function(value, element) { 
+	    value=parseFloat(value);      
+	    return this.optional(element) || value>0;
+	}, "浮点数必须大于0");	
+
+    // 保存中的不能再次提交
+    var saving = 0;
+    
+	function formValiate() {
+		$("#purchasingDemandForm").validate({
+            rules:{
+                "demand.stopBidTime":{
+                	required:true,
+                	min : getNowFormatDate()
+                },
+                "demand.numStr" : {
+            		required:true,
+            		isFloatEqZero:true
+            	},
+                "demand.numfloat": "required",
+                //"demand.agioStr": "required",
+                "demandShip.dischargePort":"required",
+                "demand.otherDate":{
+                    required: function(){return $("#typeEvent").val()=="DATE";}
+                },
+                "demand.eventDays":{
+                    required: function(){return $("#typeEvent").val()!="DATE";}
+                },
+                //"demand.loadAndDischargePermittedTimespan":"required",
+                "demand.valuationProidStart":{
+                    required: function(){return $("select[name='demand.valuationProidType']").val()==4;}
+                },
+                "demand.valuationProidEnd":{
+                    required:
+                        $("select[name='demand.valuationProidType']").val()==4
+                            && $("#valuationProidStart").val() != null
+                            && $("#valuationProidStart").val() != undefined
+                            && $("#valuationProidStart").val() != ''
+                },
+                "demand.contractKind":{
+                    required: function(){return $("select[name='demand.valuationProidType']").val()==5;}
+                },
+                "buyerRelevanter.eMemberId":"required",
+                "buyerRelevanter.contacter":"required",
+                "buyerRelevanter.famil":"required",
+                "buyerRelevanter.phoneNo":"required",
+//                "buyerRelevanter.fax":"required",
+                "demand.tenderOutTime":{
+                	min : $('#stopBidTime').val()
+                },
+                "demandShip.shipmentEndTime":{
+                	min : $('#shipmentStartTime').val()
+                },
+                "demandShip.dischargeEndTime":{
+                	min : $('#dischargeStartTime').val()
+                },
+            },
+            messages:{
+                "demand.stopBidTime":{
+                	required:"The deadline cannot be empty!",
+               		min : "The deadline for submission of bids cannot be less than current time!"
+                },
+                "demand.numStr" : {
+            		required:"The Qty cannot be empty!",
+            		isFloatEqZero:"Please enter the Qty in a figure larger than 0!"
+            	},
+                "demand.numfloat":"The overshipment or short shipment cannot be empty!",
+                //"demand.agioStr":"The premium or discount cannot be empty!",
+                "demandShip.dischargePort":"The port of unloading cannot be empty!",
+                "demand.otherDate":"The date entered cannot be empty!",
+                "demand.eventDays":"The days entered cannot be empty!",
+                //"demand.loadAndDischargePermittedTimespan":"The permissible handling time cannot be empty!",
+                "demand.valuationProidStart":"The beginning time of pricing period cannot be empty!",
+                "demand.valuationProidEnd":"The end time of pricing period cannot be empty!",
+                "demand.contractKind":"The contract kind cannot be empty!",
+                "buyerRelevanter.eMemberId":"Please select the enterprise anew!",
+                "buyerRelevanter.contacter":"Please enter the contact person!",
+                "buyerRelevanter.famil":"Please enter the E-mail address!",
+                "buyerRelevanter.phoneNo":"Please enter the telephone number!",
+//                "buyerRelevanter.fax":"Please enter the fax number!",
+                "demand.tenderOutTime":{
+               		min : "The opening date must be later than the expire date!"
+                },
+                "demandShip.shipmentEndTime":{
+               		min : "The end of loading period cannot be earlier than the beginning thereof!"
+                },
+                "demandShip.dischargeEndTime":{
+               		min : "The end of delivery period cannot be earlier than the beginning thereof!"
+                },
+            },
+            submitHandler:function(form){
+            	if(valiateData()) {
+            		setValue();
+            		
+                    if(saving == 1) {
+                    	return;
+                    } else {
+                        saving = 1;
+                    }
+            		
+                    form.submit();
+            	}
+            }
+        })
+	}
+    //获取当前时间，格式yyyy-MM-dd
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+    
+	// 校验原油
+	function checkOilInfo(){
+		var oilArray =  ["API","SG@60°F","Sulphur/ m%","Acid/ (mgKOH/g)","Carbon Residue/%","Van+Ni/ ppm",">350°C mass yield/%","Remark"];
+		var err = $('#oil-error');
+		var flag = true;
+		
+		$('.trMode2').each(function(index,element){
+			var inputObjs = $(this).find('input');
+			
+			// 备注不需要校验
+			if (index == 6) {
+				return false;
+			}
+			
+			var min = $(inputObjs[0]).val();
+			var max = $(inputObjs[1]).val();
+			
+			var fg0 = checklegalOil(min);
+			var fg2 = checklegalOil(max);
+			if(fg0 == false || fg2 == false){
+					tip(err,'block',"【" + oilArray[index]+ "】" + 'Number item!');
+					flag = false;
+					return false;
+			}else{
+				tip(err,'none',''); 
+			}
+			
+			//验证必填项
+			if(index == 0 || index == 1){
+				if ((min == "" || min == 0) && (max == "" || max == 0)) {
+					tip(err,'block',"【" + oilArray[index]+ "】" + 'Mandatory item!');
+					flag = false;
+					return false;
+				}
+			}
+			
+			if (min != "" && max != "" && min != 0 && max != 0) {
+				if(parseInt(min) > parseInt(max)){
+					tip(err,'block',"【" + oilArray[index]+ "】" + "The maximum value【"+ max +"】 should be more than the minimum value【"+ min +"】!");
+					flag = false;
+					return false;
+				}else{
+					tip(err,'none','');
+				}
+			}
+			
+			err.css('display','none'); 
+		});
+		
+		return flag;
+	}
+	
+	function tip(err,display, msg){
+		err.css('display',display); 
+		var html = '<div style="color:red">'+msg+'</div>';
+		err.html(html);
+	}
+	
+    function valiateData() {
+    	var retFlag = true;
+    	// Tender closing date、Tender Opening Date
+        var flag1 = checkDateInput($('#stopBidTime'), $('#tenderDateId'),$('#tenderDateId-error'),"The opening date must be later than the expire date!");
+        // Laycan
+        //var flag2 = checkDateInput($('#shipmentStartTime'), $('#shipmentEndTime'),$('#shipmentEndTime-error'),"The end of loading period cannot be earlier than the beginning thereof!");
+        // DDR
+        //var flag3 = checkDateInput($('#dischargeStartTime'), $('#dischargeEndTime'),$('#dischargeEndTime-error'),"The end of delivery period cannot be earlier than the beginning thereof!！");
+        // Laycan、到货期大小比较
+        var flag = checkDateInput($('#shipmentEndTime'), $('#dischargeStartTime'),$('#dischargeEndTime-error'),"DDR must be later than the laycan!");
+
+        if (!(flag1==true) || !(flag==true)) {
+        	retFlag = false;
+        }
+    	
+    	// Grade
+    	if ($("#publishType").val()==2) {
+			var flag = checkOilInfo();
+	    	if(flag == false){
+	    		retFlag = false;
+	    	}
+		}
+		
+		return retFlag;
+    	
+	}
+	
+	function checklegalOil(data){
+		var reg = /^\d+(\.\d+)?$/;
+		var fg = reg.exec(data);
+		if(data && !fg) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+
+
+
+
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+
+
+
+

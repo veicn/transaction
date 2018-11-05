@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.PersonMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.Person" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="birth" property="birth" jdbcType="TIMESTAMP" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+    <result column="card_img" property="cardImg" jdbcType="VARCHAR"></result>
+    <result column="head_img" property="headImg" jdbcType="VARCHAR"></result>
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+  </resultMap>
+
+  <resultMap id="personQueryMap" extends="BaseResultMap" type="com.sinochem.crude.trade.member.domain.query.PersonQuery">
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="m_mobile" property="mMobile" jdbcType="VARCHAR" />
+    <result column="m_email" property="mEmail" jdbcType="VARCHAR" />
+    <result column="mid" property="mid" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, code, name, email, memo, create_time, create_user, update_time, update_user,
+    card_no, card_type, card_img, head_img, member_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT
+    id,
+    CODE,
+    NAME,
+    address_detail,
+    birth,
+    gender,
+    email,
+    memo,
+    create_time,
+    create_user,
+    update_time,
+    update_user,
+    card_no,
+    card_type,
+    card_img,
+    head_img,
+    member_id
+    FROM
+    persons
+    WHERE
+
+    id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from persons
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.Person" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into persons (
+
+    name,
+    address_detail,
+    birth,
+    gender,
+    memo,
+    card_type,
+    card_no,
+    create_user,
+    create_time,
+    update_time,
+    card_img,
+    head_img,
+    member_id
+    )
+    values (
+
+    #{name,jdbcType=VARCHAR},
+    #{addressDetail,jdbcType=VARCHAR},
+    #{birth,jdbcType=TIMESTAMP},
+    #{gender,jdbcType=VARCHAR},
+    #{memo,jdbcType=VARCHAR},
+    #{cardType,jdbcType=VARCHAR},
+    #{cardNo,jdbcType=VARCHAR},
+    #{createUser,jdbcType=VARCHAR},
+    now(),
+    now(),
+    #{cardImg,jdbcType=VARCHAR},
+    #{headImg,jdbcType=VARCHAR},
+    #{memberId,jdbcType=BIGINT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.Person" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into persons
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardImg != null" >
+        card_img,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImg != null" >
+        #{cardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.Person" >
+    update persons
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImg != null" >
+        card_img = #{cardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        birth = #{birth,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.Person" >
+    update persons
+    set
+    code = #{code,jdbcType=VARCHAR},
+    address_detail = #{addressDetail},
+    birth = #{birth},
+    gender = #{gender},
+    `name` = #{name,jdbcType=VARCHAR},
+    memo = #{memo,jdbcType=VARCHAR},
+    card_type= #{cardType,jdbcType=VARCHAR},
+    card_no = #{cardNo,jdbcType=VARCHAR},
+    update_user = #{updateUser,jdbcType=VARCHAR},
+    update_time=now(),
+    card_img = #{cardImg,jdbcType=VARCHAR},
+    head_img = #{headImg,jdbcType=VARCHAR},
+    member_id = #{memberId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--前台个人详情查询 -->
+  <select id="personDetail" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT
+    id,
+    CODE,
+    NAME,
+    memo,
+    card_type,
+    card_no,
+    create_time,
+    create_user,
+    update_time,
+    update_user,
+    card_img,
+    head_img,
+    member_id
+    FROM
+    persons
+    WHERE
+    member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+  <resultMap id="personQueryResultMap" extends="BaseResultMap" type="com.sinochem.crude.trade.member.domain.query.PersonQuery">
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="m_user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="english_name" property="englishName" jdbcType="VARCHAR" />
+    <result column="fid" property="fid" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getByMemberId" resultMap="personQueryResultMap" parameterType="java.lang.Long" >
+    SELECT
+    p.id,
+    p.code,
+    p.name,
+    p.memo,
+    p.card_type,
+    p.card_no,
+    p.create_user,
+    p.create_time,
+    p.update_time,
+    p.card_img,
+    p.head_img,
+    p.member_id,
+    m.user_name,
+    m.email,
+    m.mobile
+    FROM persons p
+    LEFT JOIN members m ON p.member_id = m.id
+    WHERE p.member_id = #{memberId,jdbcType=BIGINT}
+    ORDER BY p.create_time DESC limit 0, 1
+  </select>
+
+  <select id="getPersonById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT
+    p.id,
+    p.code,
+    p.name,
+    p.memo,
+    p.card_type,
+    p.card_no,
+    p.create_user,
+    p.create_time,
+    p.update_time,
+    p.card_img,
+    p.head_img,
+    p.member_id
+    FROM persons p
+    WHERE p.id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByNameOrEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+
+    p.name,
+    p.memo,
+    p.card_type,
+    p.card_no,
+    p.create_user,
+    p.create_time,
+    p.update_time,
+    p.card_img,
+    p.head_img,
+    p.member_id
+    FROM
+    persons p,members m
+    WHERE p.member_id = m.id
+    <if test="keyword != null and keyword != ''" >
+      AND name = #{keyword,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <sql id="dynamicWhere">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="idNot != null">
+        and id != #{idNot,jdbcType=BIGINT}
+      </if>
+      <if test="code != null">
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and `name` = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="memo != null">
+        and memo = #{memo,jdbcType=BIGINT}
+      </if>
+      <if test="cardType != null">
+        and card_type= #{cardType,jdbcType=VARCHAR}
+      </if>
+      <if test="cardNo != null">
+        and card_no = #{cardNo,jdbcType=VARCHAR}
+      </if>
+      <if test="createUser != null">
+        and create_user = #{createUser,jdbcType=BIGINT}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null">
+        and update_user = #{updateUser,jdbcType=BIGINT}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="cardImg != null" >
+        and card_img = #{cardImg,jdbcType=VARCHAR}
+      </if>
+      <if test="headImg != null" >
+        and head_img = #{headImg,jdbcType=VARCHAR}
+      </if>
+      <if test="memberId != null">
+        and member_id = #{memberId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </sql>
+
+  <select id="count" resultType="int" parameterType="com.sinochem.crude.trade.member.domain.query.PersonQuery">
+    select count(id) from persons
+    <include refid="dynamicWhere"></include>
+  </select>
+
+  <!--后台人员列表查询  0-个人，1-企业-->
+  <select id="selectQueryByPrimary" resultMap="personQueryMap" >
+    SELECT p.id,p.name,p.code,p.memo,p.address_detail,p.memo,p.birth,p.gender,p.card_no,p.card_type,m.id as member_id,m.user_name,m.mobile m_mobile,m.email m_email,m.id mid
+    from members m
+      LEFT JOIN persons p on p.member_id = m.id
+    <if test="roleCode != '' and roleCode != null">
+      LEFT JOIN accounts a on a.s_member_id = m.id AND a.m_member_id != a.s_member_id
+      LEFT JOIN accounts_roles ar on ar.account_id = a.id
+    </if>
+    where 1=1 AND EXISTS (SELECT * FROM `member_tags` t WHERE m.id = t.`member_id` AND t.`owner` = 'reg' AND t.`code` = 0)
+    <if test="nameLike">
+      AND  (
+        m.user_name like concat('%', #{nameLike}, '%') or p.name like concat('%', #{nameLike}, '%')
+        )
+    </if>
+    <if test="email != '' and email != null">
+      AND  m.`email` like concat('%', #{email}, '%')
+    </if>
+    <if test="roleCode != '' and roleCode != null">
+      AND ar.role = #{roleCode}
+    </if>
+    order by m.create_time DESC
+  </select>
+
+  <select id="getRoles" resultType="com.sinochem.crude.trade.member.domain.query.RolesQuery" >
+        SELECT * from roles order by module_no
+  </select>
+  <select id="selectByPrimary" resultMap="BaseResultMap" >
+    SELECT p.id,p.name,p.code,p.memo,p.address_detail,p.memo,p.birth,p.gender,p.card_no,p.card_type
+    from persons p,members m
+    where m.id = p.member_id
+    <if test="nameLike">
+      AND  p.`name` like concat('%', #{nameLike}, '%')
+    </if>
+    order by p.create_time DESC
+  </select>
+
+  <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        SELECT
+            id,
+            CODE,
+            NAME,
+            address_detail,
+            birth,
+            gender,
+            email,
+            memo,
+            create_time,
+            create_user,
+            update_time,
+            update_user,
+            card_no,
+            card_type,
+            card_img,
+            head_img,
+            member_id
+        FROM
+            persons
+        WHERE
+        member_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="queryMList" resultMap="personQueryResultMap">
+    SELECT
+    B.user_name m_user_name, B.email m_email, B.mobile m_mobile,B.create_time,
+    F.name enterpriseName,F.english_name,F.full_name,F.member_id fid
+    FROM accounts A
+    LEFT JOIN members B ON B.id=A.m_member_id
+    LEFT JOIN enterprises F on B.id = F.member_id
+      where
+       A.s_member_id = #{mMemberId:BIGINT}
+    AND A.m_member_id != A.s_member_id
+    <trim prefix="ORDER BY">
+      A.create_time DESC
+    </trim>
+  </select>
+
+  <select id="queryMListByEpMemberRoles" resultMap="personQueryResultMap" parameterType="com.sinochem.crude.trade.member.domain.query.PersonQuery">
+      SELECT
+      P.ID,
+      P.CODE,
+      P.NAME,
+      P.MEMO,
+      P.CARD_TYPE,
+      P.CARD_NO,
+      P.CREATE_USER,
+      P.CREATE_TIME,
+      P.UPDATE_TIME,
+      P.CARD_IMG,
+      P.HEAD_IMG,
+      P.MEMBER_ID,
+      M.USER_NAME,
+      M.EMAIL,
+      M.MOBILE
+      FROM ACCOUNTS A
+      LEFT JOIN MEMBERS M ON M.ID = A.S_MEMBER_ID
+      LEFT JOIN PERSONS P ON M.ID = P.MEMBER_ID
+      WHERE
+      A.m_member_id = #{memberId:BIGINT}
+      AND A.m_member_id != A.s_member_id
+      AND EXISTS (SELECT * FROM ACCOUNTS_ROLES R WHERE A.ID = R.ACCOUNT_ID AND R.ROLE = #{roleCode})
+    <trim prefix="ORDER BY">
+      A.create_time DESC
+    </trim>
+  </select>
+<!--udb方法-->
+  <select id="selectUdbUUidByPersonId" resultType="java.lang.String" parameterType="java.lang.Long" >
+    SELECT m.udb_uuid
+    from persons p,members m
+    where m.id = p.member_id and p.id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

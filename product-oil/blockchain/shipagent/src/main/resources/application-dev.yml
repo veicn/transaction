@@ -1,0 +1,16 @@
+
+#feignUrl: http://www.sinochem.com:8080/transaction
+feignUrl: http://localhost:80/transaction
+hystrix.command.default.execution.timeout.enabled: false
+parter: shipagent
+apikey: 670ae10a2c87dcd1be94c68602463d0d
+userDomin: http://www.sinochem.com
+
+
+#log
+logging:
+config: classpath:logback.xml
+
+#aes 加解密
+aeskey: "sinochemOILBANK1"
+useaes: "true1"

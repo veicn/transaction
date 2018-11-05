@@ -1,0 +1,45 @@
+<div class="ship-pop" id="addStaffDiv" style="display:;">
+	<div class="s-trade-pop">
+		<div class="s-trade-ptit">Inspection Worksheet<a class="s-close1">×</a></div>
+			<div class="s-mod-bcont s-mod-trade">
+				<form class="s-form s-form-trade" action="" id="add_staff_form">
+				<ul>
+				<input type="hidden" id="id" name="id" >
+					<li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label">Port :</label>
+						  <div class="s-input-inline">
+							  <select class="s-select" id="port" name="port">
+								<option value="">Choose</option>
+							  </select>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">Pic :</label>
+						  <div class="s-input-inline">
+							  <input type="text"  id="contactName" name="contactName" maxlength="64" placeholder="" class="s-input">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">Office No :</label>
+						  <div class="s-input-inline">
+							 <input type="text"  id="tel" maxlength="20" name="tel" placeholder="" class="s-input">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">Email :</label>
+						  <div class="s-input-inline">
+							  <input type="text" id="email" name="email" maxlength="64" placeholder="" class="s-input">
+						  </div>
+						</div>
+					</li>
+				</ul>
+				</form>
+			</div>
+		<!--<div class="s-trade-btn">
+				 <button class="s-btn s-btn-blue" id="demo1">Submit</button>
+				 <button class="s-btn s-btn-primary" id="btn2">Cancel</button>
+		</div>-->
+	</div>
+</div>
+

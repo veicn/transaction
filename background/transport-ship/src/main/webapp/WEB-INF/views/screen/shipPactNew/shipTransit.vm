@@ -1,0 +1,259 @@
+  <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>录入船务信息</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li><a href="javascript:;" id="start" >船航次开始信息</a></li>
+				<li><a  href="javascript:;" id="load">船装港信息</a></li>
+				<li class="curr"><a  href="javascript:;"  id="transit">船在途信息</a></li>
+				<li><a  href="javascript:;"  id="unload">船卸港信息</a></li>
+			</ul>
+		</div>
+		<div class="s-mod-block">
+		<div class="s-mod-btit"><a href="" title="查看详情">在途信息</a><span><a href="javascript:;" class="addFn">新增</a><a href="javascript:;" class="returnFn">取消</a><!-- <a href="javascript:;" class="export">导出模板</a> --><a href="javascript:;" class="exportData">导出数据</a><!-- <a href="javascript:;" class="import" id="imports">导入数据</a> --></span></div>
+		 #foreach($data in $datas)
+		<div class="s-mod-block s-mod-block4">
+		<div class="s-mod-btit queryBtn"><a href="javascript:void(0);" title="">$!{data.langVer}</a></div>
+		<div class="s-mod-bcont">
+		<form class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item">
+				<div class="s-inline" title="$!{data.langVer}">
+				  <label class="s-form-label">日期：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.langVer}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.version}">
+				  <label class="s-form-label">时间：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.version}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.position}">
+				  <label class="s-form-label">位置：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.position}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.rpm}">
+				  <label class="s-form-label">RPM：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.rpm}转每分</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.speedAll}">
+				  <label class="s-form-label">平均速度(全程):</label>
+				  <div class="s-input-inline">
+					 <p>$!{data.speedAll}海里</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.speedH}">
+				  <label class="s-form-label">平均速度(24H):</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.speedH}海里</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.sea}">
+				  <label class="s-form-label">海况：</label>
+				  <div class="s-input-inline">
+					  <p>$!{data.sea}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.unloadEta}">
+				  <label class="s-form-label">卸港：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.unloadEta}</p>
+				  </div>
+				</div>
+				
+				<div class="s-inline" title="$!{data.ext1}">
+				  <label class="s-form-label">ETA：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.ext1}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.water}">
+				  <label class="s-form-label">明水(桶)：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.water}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.sulfide}">
+				  <label class="s-form-label">气相硫化氢：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.sulfide}</p>
+				  </div>
+				</div>
+				<div class="s-inline" title="$!{data.remark}">
+				  <label class="s-form-label">备注：</label>
+				  <div class="s-input-inline s-input-inline2">
+					<p>$!{data.remark}</p>
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</form>
+		<div class="s-but-all clearfix">
+			<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+			<div class="s-but-ship clearfix">
+				<a href="javascript:;" class="edit s-btn" data-uuid = "$!{data.uuid}">修改</a>
+				<a href="javascript:;" class="delete s-btn" data-uuid = "$!{data.uuid}">删除</a>
+				#if($!{data.accessoryPath})
+				<a href="$!{data.accessoryPath}" class="s-btn" download=""  data-accessoryPath = "$!{data.accessoryPath}">附件下载</a>
+				#end
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	#end
+	</div>
+  $contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/shipPactNew/shipTransit.htm')")
+  </div>
+  </div>
+</div>
+<!--新增弹框-->
+<div class="ship-pop transit2" style="display:none;">
+	<div class="pop_alpha"></div>
+	<div class="ship-pop-box">
+		<a class="s-close1 cancel">×</a>
+		<div class="s-mod-block">
+				<div class="s-mod-btit">在途信息</div>
+				<div class="s-mod-bcont s-mod-bcont4">
+				<form class="s-form s-form-cont s-form-cont2 s-form-contxx form2" action="">
+				<ul>
+					<li class="s-form-item">
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em> 日期：</label>
+						  <div class="s-input-inline">
+							  <input type="text" name="dateNow" placeholder="" class="s-input dateNow">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em> 时间：</label>
+						  <div class="s-input-inline">
+							  <input type="text" name="timeNow" placeholder="" class="s-input timeNow" >
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em> 位置：</label>
+						  <div class="s-input-inline">
+							 <input type="text" name="position" placeholder="" class="s-input position" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>明水(桶)：</label>
+						  <div class="s-input-inline">
+							 <input type="text" name="water" placeholder="" class="s-input water" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>平均速度(24H)：</label>
+						  <div class="s-input-inline">
+							  <input type="text" name="speedH" placeholder="" class="s-input speedH" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>平均速度(全程)：</label>
+						  <div class="s-input-inline">
+							  <input type="text" name="speedAll" placeholder="" class="s-input speedAll" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>RPM( 转/分 )：</label>
+						  <div class="s-input-inline">
+							 <input type="text" name="rpm" placeholder="" class="s-input rpm" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label"><em>*</em>海况：</label>
+						  <div class="s-input-inline">
+							 <input type="text" name="sea" placeholder="" class="s-input sea" maxlength="100">
+						  </div>
+						</div>
+					</li>
+					<div class="all">
+						<li class="s-form-item xiegangList">
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>卸港：</label>
+							  <div class="s-input-inline">
+								 <input type="text" name="unloadPort" placeholder="" class="s-input unloadPort" maxlength="100">
+							  </div>
+							</div>
+							<div class="s-inline">
+							  <label class="s-form-label"><em>*</em>ETA：</label>
+							  <div class="s-input-inline">
+								 <input type="text" name="eta" placeholder="" class="s-input eta time">
+							  </div>
+							</div>
+							<div class="s-but-all clearfix">
+								<div class="s-all-jt"><p><i class="s-icon btnIcon s-icon-plus"></i></p></div>
+							</div>
+						</li>
+					</div>
+					<li class="s-form-item">
+						
+						<div class="s-inline">
+						  <label class="s-form-label"><em></em>气相硫化氢：</label>
+						  <div class="s-input-inline">
+							 <input type="text" name="sulfide" placeholder="" class="s-input sulfide" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">备注：</label>
+						  <div class="s-input-inline">
+							  <input type="text" name="remark" placeholder="" class="s-input remark" maxlength="100">
+						  </div>
+						</div>
+						<div class="s-inline s-inline100">
+						  <label class="s-form-label">上传图片或视频：</label>
+						  <div class="s-input-inline">
+							  <ul class="clearfix imgsAll">
+								<li><a href="javascript:;" id="img1" class="imgClass"><img src="$shipServer.get('transport/mycrudeoil/images/s_zgplus.jpg')"></a></li>
+							 </ul>
+						  </div>
+						</div>
+						<div class="s-inline">
+						  <label class="s-form-label">附件：</label>
+						  <div class="s-input-inline">
+ 							<p>
+							 	<input type="text" readonly="readonly" class="accessory1 s-input" id="file1" >
+								<a href="javascript:;" id="btn1">上传</a>
+								<i class="s-icon fs-close clearFile"></i>
+							 </p>	
+						 </div>
+						</div>	
+					</li>
+				</ul>
+				</form>
+				</div>
+			</div>
+	 <div class="accDivs">
+		 <div id="accessory1"  style="display:none;"></div>	
+		 <div id="imgDiv1"  style="display:none;"></div>	
+	 </div>
+			
+		<div class="s-btn-box"><button class="s-btn s-btn-blue save">提&nbsp;&nbsp;交</button><button class="s-btn s-btn-primary cancel">返&nbsp;&nbsp;回</button></div>
+	</div>
+	
+	<script src="../transport/js/shipPactNew/shipTransit.js"></script>
+<script>
+
+//两位小数数字正则校验
+function clearNoNumTwo(obj)    
+{    
+    //先把非数字的都替换掉，除了数字和.    
+    obj.value = obj.value.replace(/[^\d.]/g,"");    
+    //保证只有出现一个.而没有多个.    
+    obj.value = obj.value.replace(/\.{2,}/g,".");    
+    //必须保证第一个为数字而不是.    
+    obj.value = obj.value.replace(/^\./g,"");    
+    //保证.只出现一次，而不能出现两次以上    
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");    
+    //只能输入两个小数  
+    obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');   
+} 
+
+</script>

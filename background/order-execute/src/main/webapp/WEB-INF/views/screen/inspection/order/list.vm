@@ -1,0 +1,113 @@
+<div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>商检管理</h1></div>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form id="inspectionOrderListForm" class="s-form s-form-cont s-form-cont2" method="get">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline s-inline1">
+					  <label class="s-form-label">Vessel</label>
+					  <div class="s-input-inline s-input-inline11">
+						  <select class="s-select" name="shipName">
+						  	<option value="">Select</option>
+							#foreach($item in $shipList)
+							#if($item == $param.shipName)
+							<option selected="selected" value="$item">$item</option>
+							#else
+							<option value="$item">$item</option>
+							#end
+							#end
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline3">
+					  <label class="s-form-label">Discharge port</label>
+					  <div class="s-input-inline">
+					  	  <select class="s-select" name="portName">
+							<option value="">Select</option>
+							#foreach($item in $portList)
+							#if($item == $param.portName)
+							<option selected="selected" value="$item">$item</option>
+							#else
+							<option value="$item">$item</option>
+							#end
+							#end
+						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline3">
+					  <label class="s-form-label">DDR</label>
+					  <div class="s-input-inline s-input-inline2">
+						<input type="text" name="ddrStart" value="$!{param.ddrStart}" placeholder="" class="s-input dateSelect">
+					  </div>
+					  <div class="s-form-mid">-</div>
+					  <div class="s-input-inline s-input-inline2">
+						<input type="text" name="ddrEnd" value="$!{param.ddrEnd}" placeholder="" class="s-input dateSelect">
+					  </div>
+					</div>
+					<div class="s-inline s-inline0">
+						<a href="javascript:void(0)" onclick="submitform()"><i class="s-icon s-sear-ico"></i></a>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit"><h1>Deal Filing</h1></div>
+			<div class="s-mod-bcont1">
+				<div class="s-table-wrap">
+					<table class="s-table s-table3">
+					  <tbody>
+					  <tr>
+					  	<th>Vessel</th>
+					  	<th>Discharge port</th>
+					  	<th>terminal</th>
+					  	<th>grade</th>
+					  	<th>qty</th>
+					  	<th>DDR</th>
+					  	<th>Action</th>
+					  </tr>
+					  
+					  #foreach($item in $dataList)
+					  <tr>
+					  	<td>$!{item.vessel}</td>
+					  	<td>$!{item.dischargePort}</td>
+					  	<td>$!{item.terminal}</td>
+					  	<td>$!{item.grade}</td>
+					  	<td>$!NumberTool.format($!{item.qty})</td>
+					  	<td>$!dateUtil.convertDateToString($!{item.ddrStart}) to $!dateUtil.convertDateToString($!{item.ddrEnd})</td>
+					  	<td><a href="../dischargeport/detail.htm?id=$!{item.id}&orderNo=$!{item.orderNo}" target="_blank">View</a></td>
+					  </tr>
+					  #end
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="s-page">
+			$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('buyerCenter/order/list.htm')")
+		</div>
+	</div>
+	
+	<script>
+	layui.use(['laydate'], function(){
+		var laydate = layui.laydate;
+		
+		lay('.dateSelect').each(function(){
+		    laydate.render({
+		      elem: this
+		      ,trigger: 'click'
+		      ,lang: 'en'
+		    });
+		});
+		
+	})
+	
+	function submitform(){
+		$("#inspectionOrderListForm").submit();
+	}
+  
+	</script>

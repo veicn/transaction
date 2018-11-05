@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.SymbolPriceMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.info.dao.SymbolPrice" id="SymbolPriceDO" extends="com.sinochem.crude.trade.info.dao.mappers.immutable.${meta.immapperInterfaceClassName}.SymbolPrice">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.info.domain.SymbolPrice" id="SymbolPrice">
+		<result property="id" column="ID" />
+		<result property="uuid" column="UUID" />
+		<result property="symbol" column="SYMBOL" />
+		<result property="symbolName" column="SYMBOL_NAME" />
+		<result property="tradeDate" column="TRADE_DATE" />
+		<result property="strip" column="STRIP" />
+		<result property="openPrice" column="OPEN_PRICE" />
+		<result property="highPrice" column="HIGH_PRICE" />
+		<result property="lowPrice" column="LOW_PRICE" />
+		<result property="closePrice" column="CLOSE_PRICE" />
+		<result property="avgPrice" column="AVG_PRICE" />
+		<result property="openInterest" column="OPEN_INTEREST" />
+		<result property="volume" column="VOLUME" />
+		<result property="settlementPrice" column="SETTLEMENT_PRICE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="extend1" column="EXTEND1" />
+		<result property="extend2" column="EXTEND2" />
+		<result property="extend3" column="EXTEND3" />
+		<result property="extend4" column="EXTEND4" />
+		<result property="extend5" column="EXTEND5" />
+		<result property="extend6" column="EXTEND6" />
+		<result property="extend7" column="EXTEND7" />
+		<result property="extend8" column="EXTEND8" />
+		<result property="extend9" column="EXTEND9" />
+		<result property="extend10" column="EXTEND10" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.info.domain.SymbolPrice"  useGeneratedKeys="true" keyProperty="id" >
+		insert  into t_cms_symbol_price (				ID
+						,UUID
+						,SYMBOL
+						,SYMBOL_NAME
+						,TRADE_DATE
+						,STRIP
+						,OPEN_PRICE
+						,HIGH_PRICE
+						,LOW_PRICE
+						,CLOSE_PRICE
+						,AVG_PRICE
+						,OPEN_INTEREST
+						,VOLUME
+						,SETTLEMENT_PRICE
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,ALIVE_FLAG
+						,EXTEND1
+						,EXTEND2
+						,EXTEND3
+						,EXTEND4
+						,EXTEND5
+						,EXTEND6
+						,EXTEND7
+						,EXTEND8
+						,EXTEND9
+						,EXTEND10
+						)
+		values(		#{id}
+						,#{uuid}
+						,#{symbol}
+						,#{symbolName}
+						,#{tradeDate}
+						,#{strip}
+						,#{openPrice}
+						,#{highPrice}
+						,#{lowPrice}
+						,#{closePrice}
+						,#{avgPrice}
+						,#{openInterest}
+						,#{volume}
+						,#{settlementPrice}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,'1'
+						,#{extend1}
+						,#{extend2}
+						,#{extend3}
+						,#{extend4}
+						,#{extend5}
+						,#{extend6}
+						,#{extend7}
+						,#{extend8}
+						,#{extend9}
+						,#{extend10}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_cms_symbol_price
+              WHERE 1=1 
+                AND ID = #{id}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.info.domain.SymbolPrice">
+        DELETE FROM t_cms_symbol_price
+              WHERE 1=1 
+        <if test="id!=null and id!=''">AND  ID = #{id}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="symbol!=null and symbol!=''">AND  SYMBOL = #{symbol}</if>
+        <if test="tradeDate!=null and tradeDate!=''">AND  TRADE_DATE = #{tradeDate}</if>
+        <if test="strip!=null and strip!=''">AND  STRIP = #{strip}</if>
+        <if test="openPrice!=null and openPrice!=''">AND  OPEN_PRICE = #{openPrice}</if>
+        <if test="highPrice!=null and highPrice!=''">AND  HIGH_PRICE = #{highPrice}</if>
+        <if test="lowPrice!=null and lowPrice!=''">AND  LOW_PRICE = #{lowPrice}</if>
+        <if test="closePrice!=null and closePrice!=''">AND  CLOSE_PRICE = #{closePrice}</if>
+        <if test="avgPrice!=null and avgPrice!=''">AND  AVG_PRICE = #{avgPrice}</if>
+        <if test="openInterest!=null and openInterest!=''">AND  OPEN_INTEREST = #{openInterest}</if>
+        <if test="volume!=null and volume!=''">AND  VOLUME = #{volume}</if>
+        <if test="settlementPrice!=null and settlementPrice!=''">AND  SETTLEMENT_PRICE = #{settlementPrice}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="extend1!=null and extend1!=''">AND  EXTEND1 = #{extend1}</if>
+        <if test="extend2!=null and extend2!=''">AND  EXTEND2 = #{extend2}</if>
+        <if test="extend3!=null and extend3!=''">AND  EXTEND3 = #{extend3}</if>
+        <if test="extend4!=null and extend4!=''">AND  EXTEND4 = #{extend4}</if>
+        <if test="extend5!=null and extend5!=''">AND  EXTEND5 = #{extend5}</if>
+        <if test="extend6!=null and extend6!=''">AND  EXTEND6 = #{extend6}</if>
+        <if test="extend7!=null and extend7!=''">AND  EXTEND7 = #{extend7}</if>
+        <if test="extend8!=null and extend8!=''">AND  EXTEND8 = #{extend8}</if>
+        <if test="extend9!=null and extend9!=''">AND  EXTEND9 = #{extend9}</if>
+        <if test="extend10!=null and extend10!=''">AND  EXTEND10 = #{extend10}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.info.domain.SymbolPrice">
+		update t_cms_symbol_price
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="symbol!=null">,SYMBOL = #{symbol}</if>
+		<if test="tradeDate!=null">,TRADE_DATE = #{tradeDate}</if>
+		<if test="strip!=null">,STRIP = #{strip}</if>
+		<if test="openPrice!=null">,OPEN_PRICE = #{openPrice}</if>
+		<if test="highPrice!=null">,HIGH_PRICE = #{highPrice}</if>
+		<if test="lowPrice!=null">,LOW_PRICE = #{lowPrice}</if>
+		<if test="closePrice!=null">,CLOSE_PRICE = #{closePrice}</if>
+		<if test="avgPrice!=null">,AVG_PRICE = #{avgPrice}</if>
+		<if test="openInterest!=null">,OPEN_INTEREST = #{openInterest}</if>
+		<if test="volume!=null">,VOLUME = #{volume}</if>
+		<if test="settlementPrice!=null">,SETTLEMENT_PRICE = #{settlementPrice}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+       	 ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.info.domain.SymbolPrice">
+		update t_cms_symbol_price
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="symbol!=null">,SYMBOL = #{symbol}</if>
+		<if test="symbolName!=null and symbolName!='' ">,SYMBOL_NAME = #{symbolName}</if>
+		<if test="tradeDate!=null">,TRADE_DATE = #{tradeDate}</if>
+		<if test="strip!=null">,STRIP = #{strip}</if>
+		<if test="openPrice!=null">,OPEN_PRICE = #{openPrice}</if>
+		<if test="highPrice!=null">,HIGH_PRICE = #{highPrice}</if>
+		<if test="lowPrice!=null">,LOW_PRICE = #{lowPrice}</if>
+		<if test="closePrice!=null">,CLOSE_PRICE = #{closePrice}</if>
+		<if test="avgPrice!=null">,AVG_PRICE = #{avgPrice}</if>
+		<if test="openInterest!=null">,OPEN_INTEREST = #{openInterest}</if>
+		<if test="volume!=null">,VOLUME = #{volume}</if>
+		<if test="settlementPrice!=null">,SETTLEMENT_PRICE = #{settlementPrice}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_cms_symbol_price
+		<set>
+         ID=#{id}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="symbol!=null">,SYMBOL = #{symbol}</if>
+		<if test="tradeDate!=null">,TRADE_DATE = #{tradeDate}</if>
+		<if test="strip!=null">,STRIP = #{strip}</if>
+		<if test="openPrice!=null">,OPEN_PRICE = #{openPrice}</if>
+		<if test="highPrice!=null">,HIGH_PRICE = #{highPrice}</if>
+		<if test="lowPrice!=null">,LOW_PRICE = #{lowPrice}</if>
+		<if test="closePrice!=null">,CLOSE_PRICE = #{closePrice}</if>
+		<if test="avgPrice!=null">,AVG_PRICE = #{avgPrice}</if>
+		<if test="openInterest!=null">,OPEN_INTEREST = #{openInterest}</if>
+		<if test="volume!=null">,VOLUME = #{volume}</if>
+		<if test="settlementPrice!=null">,SETTLEMENT_PRICE = #{settlementPrice}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="extend1!=null">,EXTEND1 = #{extend1}</if>
+		<if test="extend2!=null">,EXTEND2 = #{extend2}</if>
+		<if test="extend3!=null">,EXTEND3 = #{extend3}</if>
+		<if test="extend4!=null">,EXTEND4 = #{extend4}</if>
+		<if test="extend5!=null">,EXTEND5 = #{extend5}</if>
+		<if test="extend6!=null">,EXTEND6 = #{extend6}</if>
+		<if test="extend7!=null">,EXTEND7 = #{extend7}</if>
+		<if test="extend8!=null">,EXTEND8 = #{extend8}</if>
+		<if test="extend9!=null">,EXTEND9 = #{extend9}</if>
+		<if test="extend10!=null">,EXTEND10 = #{extend10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="symbol!=null and symbol!=''">and  SYMBOL=#{symbol}</if>
+		<if test="tradeDate!=null and tradeDate!=''">and  TRADE_DATE=#{tradeDate}</if>
+		<if test="strip!=null and strip!=''">and  STRIP=#{strip}</if>
+		<if test="openPrice!=null and openPrice!=''">and  OPEN_PRICE=#{openPrice}</if>
+		<if test="highPrice!=null and highPrice!=''">and  HIGH_PRICE=#{highPrice}</if>
+		<if test="lowPrice!=null and lowPrice!=''">and  LOW_PRICE=#{lowPrice}</if>
+		<if test="closePrice!=null and closePrice!=''">and  CLOSE_PRICE=#{closePrice}</if>
+		<if test="avgPrice!=null and avgPrice!=''">and  AVG_PRICE=#{avgPrice}</if>
+		<if test="openInterest!=null and openInterest!=''">and  OPEN_INTEREST=#{openInterest}</if>
+		<if test="volume!=null and volume!=''">and  VOLUME=#{volume}</if>
+		<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="SymbolPrice">
+			select
+			* from t_cms_symbol_price
+			where
+		    ID=#{id} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="SymbolPrice">
+			select
+			* from t_cms_symbol_price
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="SymbolPrice" parameterType="com.sinochem.crude.trade.info.domain.SymbolPrice">
+		select * from t_cms_symbol_price
+			where
+		 ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and  ID=#{id}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="symbol!=null and symbol!=''">and  SYMBOL=#{symbol}</if>
+		<if test="symbolName!=null and symbolName!=''">and  SYMBOL_NAME=#{symbolName}</if>
+		<if test="tradeDate!=null">and  TRADE_DATE=DATE_FORMAT(#{tradeDate}, '%Y%m%d')</if>
+		<if test="strip!=null and strip!=''">and  STRIP=#{strip}</if>
+		<if test="openPrice!=null and openPrice!=''">and  OPEN_PRICE=#{openPrice}</if>
+		<if test="highPrice!=null and highPrice!=''">and  HIGH_PRICE=#{highPrice}</if>
+		<if test="lowPrice!=null and lowPrice!=''">and  LOW_PRICE=#{lowPrice}</if>
+		<if test="closePrice!=null and closePrice!=''">and  CLOSE_PRICE=#{closePrice}</if>
+		<if test="avgPrice!=null and avgPrice!=''">and  AVG_PRICE=#{avgPrice}</if>
+		<if test="openInterest!=null and openInterest!=''">and  OPEN_INTEREST=#{openInterest}</if>
+		<if test="volume!=null and volume!=''">and  VOLUME=#{volume}</if>
+		<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+		<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+		<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+		<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+		<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+		<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+		<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+		<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+		<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+		<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   UUID as "uuid" 
+						 ,   SYMBOL as "symbol" 
+						 ,   TRADE_DATE as "tradeDate" 
+						 ,   STRIP as "strip" 
+						 ,   OPEN_PRICE as "openPrice" 
+						 ,   HIGH_PRICE as "highPrice" 
+						 ,   LOW_PRICE as "lowPrice" 
+						 ,   CLOSE_PRICE as "closePrice" 
+						 ,   AVG_PRICE as "avgPrice" 
+						 ,   OPEN_INTEREST as "openInterest" 
+						 ,   VOLUME as "volume" 
+						 ,   SETTLEMENT_PRICE as "settlementPrice" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   EXTEND1 as "extend1" 
+						 ,   EXTEND2 as "extend2" 
+						 ,   EXTEND3 as "extend3" 
+						 ,   EXTEND4 as "extend4" 
+						 ,   EXTEND5 as "extend5" 
+						 ,   EXTEND6 as "extend6" 
+						 ,   EXTEND7 as "extend7" 
+						 ,   EXTEND8 as "extend8" 
+						 ,   EXTEND9 as "extend9" 
+						 ,   EXTEND10 as "extend10" 
+						from t_cms_symbol_price
+		where
+			ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="symbol!=null and symbol!=''">and  SYMBOL=#{symbol}</if>
+			<if test="tradeDate!=null and tradeDate!=''">and  TRADE_DATE=#{tradeDate}</if>
+			<if test="strip!=null and strip!=''">and  STRIP=#{strip}</if>
+			<if test="openPrice!=null and openPrice!=''">and  OPEN_PRICE=#{openPrice}</if>
+			<if test="highPrice!=null and highPrice!=''">and  HIGH_PRICE=#{highPrice}</if>
+			<if test="lowPrice!=null and lowPrice!=''">and  LOW_PRICE=#{lowPrice}</if>
+			<if test="closePrice!=null and closePrice!=''">and  CLOSE_PRICE=#{closePrice}</if>
+			<if test="avgPrice!=null and avgPrice!=''">and  AVG_PRICE=#{avgPrice}</if>
+			<if test="openInterest!=null and openInterest!=''">and  OPEN_INTEREST=#{openInterest}</if>
+			<if test="volume!=null and volume!=''">and  VOLUME=#{volume}</if>
+			<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_cms_symbol_price 
+		where
+		 ALIVE_FLAG='1'
+			<if test="id!=null and id!=''">and  ID=#{id}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="symbol!=null and symbol!=''">and  SYMBOL=#{symbol}</if>
+			<if test="tradeDate!=null and tradeDate!=''">and  TRADE_DATE=#{tradeDate}</if>
+			<if test="strip!=null and strip!=''">and  STRIP=#{strip}</if>
+			<if test="openPrice!=null and openPrice!=''">and  OPEN_PRICE=#{openPrice}</if>
+			<if test="highPrice!=null and highPrice!=''">and  HIGH_PRICE=#{highPrice}</if>
+			<if test="lowPrice!=null and lowPrice!=''">and  LOW_PRICE=#{lowPrice}</if>
+			<if test="closePrice!=null and closePrice!=''">and  CLOSE_PRICE=#{closePrice}</if>
+			<if test="avgPrice!=null and avgPrice!=''">and  AVG_PRICE=#{avgPrice}</if>
+			<if test="openInterest!=null and openInterest!=''">and  OPEN_INTEREST=#{openInterest}</if>
+			<if test="volume!=null and volume!=''">and  VOLUME=#{volume}</if>
+			<if test="settlementPrice!=null and settlementPrice!=''">and  SETTLEMENT_PRICE=#{settlementPrice}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="extend1!=null and extend1!=''">and  EXTEND1=#{extend1}</if>
+			<if test="extend2!=null and extend2!=''">and  EXTEND2=#{extend2}</if>
+			<if test="extend3!=null and extend3!=''">and  EXTEND3=#{extend3}</if>
+			<if test="extend4!=null and extend4!=''">and  EXTEND4=#{extend4}</if>
+			<if test="extend5!=null and extend5!=''">and  EXTEND5=#{extend5}</if>
+			<if test="extend6!=null and extend6!=''">and  EXTEND6=#{extend6}</if>
+			<if test="extend7!=null and extend7!=''">and  EXTEND7=#{extend7}</if>
+			<if test="extend8!=null and extend8!=''">and  EXTEND8=#{extend8}</if>
+			<if test="extend9!=null and extend9!=''">and  EXTEND9=#{extend9}</if>
+			<if test="extend10!=null and extend10!=''">and  EXTEND10=#{extend10}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<select id="querySymbolPriceIndex" resultType="java.util.HashMap" parameterType="hashmap">
+		select 
+			t1.id AS "symbolId",
+			t1.UUID AS "symbolUuid",
+			t1.SYMBOL AS "symbol",
+			t2.SYMBOL_NAME AS "symbolName" ,
+			t2.UUID AS "uuid",
+			t2.TRADE_DATE AS "tradeDate",
+			t2.STRIP AS "strip",
+			t2.OPEN_PRICE AS "openPrice",
+			t2.HIGH_PRICE AS "highPrice",
+			t2.LOW_PRICE AS "lowPrice",
+			t2.CLOSE_PRICE AS "closePrice",
+			t2.AVG_PRICE AS "avgPrice",
+			t2.OPEN_INTEREST AS "openInterest",
+			t2.VOLUME AS "volume",
+			t2.SETTLEMENT_PRICE AS "settlementPrice"
+		from t_cms_symbol t1
+		left join 
+		(select * from t_cms_symbol_price i where i.ALIVE_FLAG = '1'
+					and i.TRADE_DATE = DATE_FORMAT(#{tradeDate}, '%Y-%m-%d')) t2
+		on t1.SYMBOL = t2.SYMBOL
+		where t1.ALIVE_FLAG = '1'
+		<if test="symbolName!=null and symbolName!=''"> AND t1.SYMBOL_NAME LIKE "%"#{symbolName}"%" </if>
+	</select>
+	<select id="getSymbolPrice" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.info.model.SymbolPriceVO" >
+		 select
+		 	b.SYMBOL AS symbol,
+		 	b.SYMBOL_NAME AS symbolName,
+		 	a.TRADE_DATE AS tradeDate,
+		 	a.OPEN_PRICE AS openPrice,
+			a.HIGH_PRICE AS highPrice,
+			a.LOW_PRICE AS lowPrice,
+			a.CLOSE_PRICE AS closePrice,
+			a.AVG_PRICE AS avgPrice,
+			a.OPEN_INTEREST AS openInterest,
+			a.VOLUME AS volume,
+			a.SETTLEMENT_PRICE AS settlementPrice
+		 from t_cms_symbol_price a left join t_cms_symbol b on a.`SYMBOL` = b.`SYMBOL`
+		 where	a.ALIVE_FLAG = '1'
+		 		<if test="tradeDate!=null">
+		 			AND DATE_FORMAT(TRADE_DATE, '%Y-%m-%d') = #{tradeDate} 
+		 		</if>
+		 		<if test="symbol !=null and symbol !='' ">
+			 		AND b.SYMBOL = #{symbol}
+		 		</if>
+		 		<if test="symbolName !=null and symbolName !='' ">
+		 			AND b.SYMBOL_NAME = #{symbolName} 
+		 		</if>
+		 		<if test="tradeDateStart!=null">
+		 			AND DATE_FORMAT(TRADE_DATE, '%Y-%m-%d') &gt;= #{tradeDateStart} 
+		 		</if>
+				<if test="tradeDateEnd!=null">
+					AND DATE_FORMAT(TRADE_DATE, '%Y-%m-%d')  &lt;= #{tradeDateEnd}
+				</if>
+		 		
+	</select>
+	<select id="getNewSymbolPrice" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.info.model.SymbolPriceVO">
+		 select
+		 	a.SYMBOL AS symbol,
+		 	a.SYMBOL_NAME AS symbolName,
+		 	a.TRADE_DATE AS tradeDate,
+		 	a.OPEN_PRICE AS openPrice,
+			a.HIGH_PRICE AS highPrice,
+			a.LOW_PRICE AS lowPrice,
+			a.CLOSE_PRICE AS closePrice,
+			a.AVG_PRICE AS avgPrice,
+			a.OPEN_INTEREST AS openInterest,
+			a.VOLUME AS volume,
+			a.SETTLEMENT_PRICE AS settlementPrice
+		 from t_cms_symbol_price a 
+		 where	a.ALIVE_FLAG = '1'
+	 		AND a.SYMBOL = #{symbol}
+ 			AND a.SYMBOL_NAME = #{symbolName} 
+ 			order by TRADE_DATE DESC
+ 			limit 1
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

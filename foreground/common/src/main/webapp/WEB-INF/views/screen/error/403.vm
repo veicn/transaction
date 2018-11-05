@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="$imageServer.get('css/f_common.css')">
+<link rel="stylesheet" href="$imageServer.get('css/f_base.css')">
+<div class="reg-wrap">
+    <div class="inner">
+        <div class="fro-succ">
+            <span class="fro-succ-t"><i class="cw-ico ico-error"></i>缺少权限</span>
+            <span class="fro-succ-c"><em>您无权获取该页面内容</em></span>
+            <p class="fro-succ-b"><a href="$memberServer.get('member/my.htm')">去会员中心开通权限</a></p>
+        </div>
+    </div>
+</div>

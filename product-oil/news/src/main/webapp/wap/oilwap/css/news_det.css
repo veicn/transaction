@@ -1,0 +1,132 @@
+body{
+	width: 10rem;
+	background: #eee;
+	color: #fff;
+	font-family: ArialMT;
+	font-size: 0.426667rem;
+	position: relative;
+	letter-spacing: -0.02rem;
+}
+body,div,p,h3,img,ul,li,span{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+h3{
+	font-family: Arial-BoldMT;
+	/*font-size: 0.506667rem;*/
+	height: 0.56rem;
+	line-height: 0.56rem;
+	text-align: center;
+	/*margin-bottom:0.4rem; */
+}
+a{
+	text-decoration:none;
+}
+a:link{
+	text-decoration:none;
+}
+a:visited{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+}
+a:active{
+	text-decoration:none;
+}
+body>div{
+	width: 10rem;
+	background: #fff;
+	padding-left:0.266667rem;
+	padding-right: 0.266667rem; 
+}
+.nav_w{
+	height: 1.173333rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.nav_w img:first-of-type{
+	width: 0.306667rem;
+	height: 0.586667rem;
+}
+.nav_w img:nth-of-type(2){
+	width: 0.773333rem;
+	height: 0.773333rem;
+}
+.det_con{
+	padding-top: 1.04rem;
+}
+.det_con h3{
+   font-family: Arial-BoldMT;
+   text-align: center;
+   font-size: 0.506667rem;
+   color: #333;
+   font-weight: bold;
+   line-height: 1.2;
+}
+.space{
+	width: 100%;
+	height: 0.266667rem;
+	background: #ddd;
+}
+.det_con p{
+	font-family: ArialMT;
+	color: #333;
+ 	font-size: 0.426667rem;
+ 	line-height:1.2; 
+}
+.det_con h3:nth-of-type(2){
+	margin-bottom:0.933333rem;
+}
+.outer{
+	display: none;
+	z-index: 120;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background:rgba(0,0,0,0.70);
+}
+.pop-hide{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	
+}
+.pop-win{
+	background: #fff;
+	width: 8.0rem;
+	height: 10.666667rem;
+	padding-top:1.88rem;
+}
+.pop-win img{
+	display: block;
+	width: 5.333333rem;
+	height: 5.333333rem;
+	margin-left: 1.333333rem;
+	margin-bottom: 0.4rem;
+}
+.pop-win>p{
+	font-size: 0.453333rem;
+	color: #333333;
+	line-height: 0.586667rem;
+	text-align: center;
+}
+.pop-win>p>span{
+	font-size: 0.453333rem;
+	color:#F36523; 
+}
+.pop-win>p:nth-of-type(2){
+	margin-top: 0.08rem;
+}
+pre{
+	word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    line-height:1.2;
+}

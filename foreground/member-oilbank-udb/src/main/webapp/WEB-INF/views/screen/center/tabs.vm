@@ -1,0 +1,8 @@
+<ul class="c-state">
+##    <li #if($menu=="enterpriseCrudeInfo")class="c-cur"#end ><a href="$appServer.get('center/enterpriseCrude.htm')">补充资料</a></li>
+    <li #if($menu=="potrerillosInfo")class="c-cur"#end ><a href="$appServer.get('center/potrerillosInfo.htm')">开通炼厂资质</a></li>
+    <li #if($menu=="tradingCompanyInfo")class="c-cur"#end><a  href="$appServer.get('center/tradingCompanyInfo.htm')">开通贸易公司资质</a></li>
+    <li #if($menu=="providerInfo")class="c-cur"#end ><a  href="$appServer.get('center/providerInfo.htm')">开通国外供应商资质</a></li>
+    <li #if($menu=="customerInfo")class="c-cur"#end ><a href="$appServer.get('center/customerInfo.htm')">开通国外客户资质</a></li>
+    <li #if($menu=="shipAgencyInfo")class="c-cur"#end ><a href="$appServer.get('center/shipAgencyInfo.htm')">开通服务商（船务）资质</a></li>
+</ul>

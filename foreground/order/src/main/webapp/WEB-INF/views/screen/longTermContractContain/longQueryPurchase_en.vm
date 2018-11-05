@@ -1,0 +1,25 @@
+<!--Basic procurement information-->
+
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Purchase Recap<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos1"><span class="c-fn">Purchase type：</span><span class="c-int qx-conte">Long-term procurement</span></li>
+            
+             <li class="c-fcos2"><span class="c-fn">Grade：</span><span class="c-int qx-conte">$!{oil}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Qty(BBL)：</span><span class="c-int qx-conte">$!{contract.numStr}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">Incoterm：</span><span class="c-int qx-conte">$!{tradeItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Credit term：</span><span class="c-int qx-conte">$!{authItemName}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">Payment Date：</span><span class="c-int qx-conte">$!{payItemName}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Inspection：</span><span class="c-int qx-conte">$!{inspectionFeeSharingTypeName}</span></li>
+            
+            <li class="c-fcos2"><span class="c-fn">Load Port：</span><span class="c-int qx-conte">$!{contractShip.shipmentPort}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Discharge Port：</span><span class="c-int qx-conte">$!{contractShip.dischargePort}</span></li>
+            
+##            <li class="c-fcos1"><span class="c-fn">Price Fomula：</span><span class="c-int qx-conte">$!{contract.valuationFormula}</span></li>
+            <li class="c-fcos1"><span class="c-fn">Remark：</span><span class="c-int qx-conte">$!{contract.remark}</span></li>
+        </ul>
+    </div>
+</div>

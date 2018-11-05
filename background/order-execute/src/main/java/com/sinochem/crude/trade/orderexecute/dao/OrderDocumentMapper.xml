@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.orderexecute.dao.OrderDocumentMapper">
+	<resultMap type="com.sinochem.crude.trade.orderexecute.domain.OrderDocument" id="OrderDocument">
+		<result property="orderDocumentId" column="ORDER_DOCUMENT_ID" />
+		<result property="orderDocumentUuid" column="ORDER_DOCUMENT_UUID" />
+		<result property="orderId" column="ORDER_ID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="contractNo" column="CONTRACT_NO" />
+		<result property="shipName" column="SHIP_NAME" />
+		<result property="documentType" column="DOCUMENT_TYPE" />
+		<result property="billDate" column="BILL_DATE" />
+		<result property="unportDate" column="UNPORT_DATE" />
+		<result property="oil" column="OIL" />
+		<result property="survey" column="SURVEY" />
+		<result property="licence" column="LICENCE" />
+		<result property="licenceType" column="LICENCE_TYPE" />
+		<result property="tradeTerm" column="TRADE_TERM" />
+		<result property="importCustomer" column="IMPORT_CUSTOMER" />
+		<result property="importUser" column="IMPORT_USER" />
+		<result property="licenceCount" column="LICENCE_COUNT" />
+		<result property="declaratPort" column="DECLARAT_PORT" />
+		<result property="countryOrigin" column="COUNTRY_ORIGIN" />
+		<result property="declaratNo" column="DECLARAT_NO" />
+		<result property="importPort" column="IMPORT_PORT" />
+		<result property="extendPort" column="EXTEND_PORT" />
+		<result property="clearanceDate" column="CLEARANCE_DATE" />
+		<result property="projectName" column="PROJECT_NAME" />
+		<result property="amount" column="AMOUNT" />
+		<result property="paymentCompany" column="PAYMENT_COMPANY" />
+		<result property="invoiceNo" column="INVOICE_NO" />
+		<result property="declaratInvoiceType" column="DECLARAT_INVOICE_TYPE" />
+		<result property="settlementInvoiceType" column="SETTLEMENT_INVOICE_TYPE" />
+		<result property="manualNo" column="MANUAL_NO" />
+		<result property="machiningType" column="MACHINING_TYPE" />
+		<result property="ciq" column="CIQ" />
+		<result property="foreignName" column="FOREIGN_NAME" />
+		<result property="issue" column="ISSUE" />
+		<result property="remark" column="REMARK" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument"  useGeneratedKeys="true" keyProperty="orderDocumentId" >
+		insert  into t_order_document (				ORDER_DOCUMENT_ID
+						,ORDER_DOCUMENT_UUID
+						,ORDER_ID
+						,ORDER_NO
+						,CONTRACT_NO
+						,SHIP_NAME
+						,DOCUMENT_TYPE
+						,BILL_DATE
+						,UNPORT_DATE
+						,OIL
+						,SURVEY
+						,LICENCE
+						,LICENCE_TYPE
+						,TRADE_TERM
+						,IMPORT_CUSTOMER
+						,IMPORT_USER
+						,LICENCE_COUNT
+						,DECLARAT_PORT
+						,COUNTRY_ORIGIN
+						,DECLARAT_NO
+						,IMPORT_PORT
+						,EXTEND_PORT
+						,CLEARANCE_DATE
+						,PROJECT_NAME
+						,AMOUNT
+						,PAYMENT_COMPANY
+						,INVOICE_NO
+						,DECLARAT_INVOICE_TYPE
+						,SETTLEMENT_INVOICE_TYPE
+						,MANUAL_NO
+						,MACHINING_TYPE
+						,CIQ
+						,FOREIGN_NAME
+						,ISSUE
+						,REMARK
+						,VERSION
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						)
+		values(		#{orderDocumentId}
+						,#{orderDocumentUuid}
+						,#{orderId}
+						,#{orderNo}
+						,#{contractNo}
+						,#{shipName}
+						,#{documentType}
+						,#{billDate}
+						,#{unportDate}
+						,#{oil}
+						,#{survey}
+						,#{licence}
+						,#{licenceType}
+						,#{tradeTerm}
+						,#{importCustomer}
+						,#{importUser}
+						,#{licenceCount}
+						,#{declaratPort}
+						,#{countryOrigin}
+						,#{declaratNo}
+						,#{importPort}
+						,#{extendPort}
+						,#{clearanceDate}
+						,#{projectName}
+						,#{amount}
+						,#{paymentCompany}
+						,#{invoiceNo}
+						,#{declaratInvoiceType}
+						,#{settlementInvoiceType}
+						,#{manualNo}
+						,#{machiningType}
+						,#{ciq}
+						,#{foreignName}
+						,#{issue}
+						,#{remark}
+						,#{version}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_order_document
+              WHERE 1=1 
+                AND ORDER_DOCUMENT_ID = #{orderDocumentId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument">
+        DELETE FROM t_order_document
+              WHERE 1=1 
+        <if test="orderDocumentId!=null and orderDocumentId!=''">AND  ORDER_DOCUMENT_ID = #{orderDocumentId}</if>
+        <if test="orderDocumentUuid!=null and orderDocumentUuid!=''">AND  ORDER_DOCUMENT_UUID = #{orderDocumentUuid}</if>
+        <if test="orderId!=null and orderId!=''">AND  ORDER_ID = #{orderId}</if>
+        <if test="orderNo!=null and orderNo!=''">AND  ORDER_NO = #{orderNo}</if>
+        <if test="contractNo!=null and contractNo!=''">AND  CONTRACT_NO = #{contractNo}</if>
+        <if test="shipName!=null and shipName!=''">AND  SHIP_NAME = #{shipName}</if>
+        <if test="documentType!=null and documentType!=''">AND  DOCUMENT_TYPE = #{documentType}</if>
+        <if test="billDate!=null and billDate!=''">AND  BILL_DATE = #{billDate}</if>
+        <if test="unportDate!=null and unportDate!=''">AND  UNPORT_DATE = #{unportDate}</if>
+        <if test="oil!=null and oil!=''">AND  OIL = #{oil}</if>
+        <if test="survey!=null and survey!=''">AND  SURVEY = #{survey}</if>
+        <if test="licence!=null and licence!=''">AND  LICENCE = #{licence}</if>
+        <if test="licenceType!=null and licenceType!=''">AND  LICENCE_TYPE = #{licenceType}</if>
+        <if test="tradeTerm!=null and tradeTerm!=''">AND  TRADE_TERM = #{tradeTerm}</if>
+        <if test="importCustomer!=null and importCustomer!=''">AND  IMPORT_CUSTOMER = #{importCustomer}</if>
+        <if test="importUser!=null and importUser!=''">AND  IMPORT_USER = #{importUser}</if>
+        <if test="licenceCount!=null and licenceCount!=''">AND  LICENCE_COUNT = #{licenceCount}</if>
+        <if test="declaratPort!=null and declaratPort!=''">AND  DECLARAT_PORT = #{declaratPort}</if>
+        <if test="countryOrigin!=null and countryOrigin!=''">AND  COUNTRY_ORIGIN = #{countryOrigin}</if>
+        <if test="declaratNo!=null and declaratNo!=''">AND  DECLARAT_NO = #{declaratNo}</if>
+        <if test="importPort!=null and importPort!=''">AND  IMPORT_PORT = #{importPort}</if>
+        <if test="extendPort!=null and extendPort!=''">AND  EXTEND_PORT = #{extendPort}</if>
+        <if test="clearanceDate!=null and clearanceDate!=''">AND  CLEARANCE_DATE = #{clearanceDate}</if>
+        <if test="projectName!=null and projectName!=''">AND  PROJECT_NAME = #{projectName}</if>
+        <if test="amount!=null and amount!=''">AND  AMOUNT = #{amount}</if>
+        <if test="paymentCompany!=null and paymentCompany!=''">AND  PAYMENT_COMPANY = #{paymentCompany}</if>
+        <if test="invoiceNo!=null and invoiceNo!=''">AND  INVOICE_NO = #{invoiceNo}</if>
+        <if test="declaratInvoiceType!=null and declaratInvoiceType!=''">AND  DECLARAT_INVOICE_TYPE = #{declaratInvoiceType}</if>
+        <if test="settlementInvoiceType!=null and settlementInvoiceType!=''">AND  SETTLEMENT_INVOICE_TYPE = #{settlementInvoiceType}</if>
+        <if test="manualNo!=null and manualNo!=''">AND  MANUAL_NO = #{manualNo}</if>
+        <if test="machiningType!=null and machiningType!=''">AND  MACHINING_TYPE = #{machiningType}</if>
+        <if test="ciq!=null and ciq!=''">AND  CIQ = #{ciq}</if>
+        <if test="foreignName!=null and foreignName!=''">AND  FOREIGN_NAME = #{foreignName}</if>
+        <if test="issue!=null and issue!=''">AND  ISSUE = #{issue}</if>
+        <if test="remark!=null and remark!=''">AND  REMARK = #{remark}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="langVer!=null and langVer!=''">AND  LANG_VER = #{langVer}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument">
+		update t_order_document
+		<set>
+         ORDER_DOCUMENT_ID=#{orderDocumentId}
+		<if test="orderDocumentUuid!=null">,ORDER_DOCUMENT_UUID = #{orderDocumentUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="documentType!=null">,DOCUMENT_TYPE = #{documentType}</if>
+		<if test="billDate!=null">,BILL_DATE = #{billDate}</if>
+		<if test="unportDate!=null">,UNPORT_DATE = #{unportDate}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="survey!=null">,SURVEY = #{survey}</if>
+		<if test="licence!=null">,LICENCE = #{licence}</if>
+		<if test="licenceType!=null">,LICENCE_TYPE = #{licenceType}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="importCustomer!=null">,IMPORT_CUSTOMER = #{importCustomer}</if>
+		<if test="importUser!=null">,IMPORT_USER = #{importUser}</if>
+		<if test="licenceCount!=null">,LICENCE_COUNT = #{licenceCount}</if>
+		<if test="declaratPort!=null">,DECLARAT_PORT = #{declaratPort}</if>
+		<if test="countryOrigin!=null">,COUNTRY_ORIGIN = #{countryOrigin}</if>
+		<if test="declaratNo!=null">,DECLARAT_NO = #{declaratNo}</if>
+		<if test="importPort!=null">,IMPORT_PORT = #{importPort}</if>
+		<if test="extendPort!=null">,EXTEND_PORT = #{extendPort}</if>
+		<if test="clearanceDate!=null">,CLEARANCE_DATE = #{clearanceDate}</if>
+		<if test="projectName!=null">,PROJECT_NAME = #{projectName}</if>
+		<if test="amount!=null">,AMOUNT = #{amount}</if>
+		<if test="paymentCompany!=null">,PAYMENT_COMPANY = #{paymentCompany}</if>
+		<if test="invoiceNo!=null">,INVOICE_NO = #{invoiceNo}</if>
+		<if test="declaratInvoiceType!=null">,DECLARAT_INVOICE_TYPE = #{declaratInvoiceType}</if>
+		<if test="settlementInvoiceType!=null">,SETTLEMENT_INVOICE_TYPE = #{settlementInvoiceType}</if>
+		<if test="manualNo!=null">,MANUAL_NO = #{manualNo}</if>
+		<if test="machiningType!=null">,MACHINING_TYPE = #{machiningType}</if>
+		<if test="ciq!=null">,CIQ = #{ciq}</if>
+		<if test="foreignName!=null">,FOREIGN_NAME = #{foreignName}</if>
+		<if test="issue!=null">,ISSUE = #{issue}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+       	 ORDER_DOCUMENT_ID=#{orderDocumentId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_order_document
+		<set>
+         ORDER_DOCUMENT_ID=#{orderDocumentId}
+		<if test="orderDocumentUuid!=null">,ORDER_DOCUMENT_UUID = #{orderDocumentUuid}</if>
+		<if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+		<if test="orderNo!=null">,ORDER_NO = #{orderNo}</if>
+		<if test="contractNo!=null">,CONTRACT_NO = #{contractNo}</if>
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="documentType!=null">,DOCUMENT_TYPE = #{documentType}</if>
+		<if test="billDate!=null">,BILL_DATE = #{billDate}</if>
+		<if test="unportDate!=null">,UNPORT_DATE = #{unportDate}</if>
+		<if test="oil!=null">,OIL = #{oil}</if>
+		<if test="survey!=null">,SURVEY = #{survey}</if>
+		<if test="licence!=null">,LICENCE = #{licence}</if>
+		<if test="licenceType!=null">,LICENCE_TYPE = #{licenceType}</if>
+		<if test="tradeTerm!=null">,TRADE_TERM = #{tradeTerm}</if>
+		<if test="importCustomer!=null">,IMPORT_CUSTOMER = #{importCustomer}</if>
+		<if test="importUser!=null">,IMPORT_USER = #{importUser}</if>
+		<if test="licenceCount!=null">,LICENCE_COUNT = #{licenceCount}</if>
+		<if test="declaratPort!=null">,DECLARAT_PORT = #{declaratPort}</if>
+		<if test="countryOrigin!=null">,COUNTRY_ORIGIN = #{countryOrigin}</if>
+		<if test="declaratNo!=null">,DECLARAT_NO = #{declaratNo}</if>
+		<if test="importPort!=null">,IMPORT_PORT = #{importPort}</if>
+		<if test="extendPort!=null">,EXTEND_PORT = #{extendPort}</if>
+		<if test="clearanceDate!=null">,CLEARANCE_DATE = #{clearanceDate}</if>
+		<if test="projectName!=null">,PROJECT_NAME = #{projectName}</if>
+		<if test="amount!=null">,AMOUNT = #{amount}</if>
+		<if test="paymentCompany!=null">,PAYMENT_COMPANY = #{paymentCompany}</if>
+		<if test="invoiceNo!=null">,INVOICE_NO = #{invoiceNo}</if>
+		<if test="declaratInvoiceType!=null">,DECLARAT_INVOICE_TYPE = #{declaratInvoiceType}</if>
+		<if test="settlementInvoiceType!=null">,SETTLEMENT_INVOICE_TYPE = #{settlementInvoiceType}</if>
+		<if test="manualNo!=null">,MANUAL_NO = #{manualNo}</if>
+		<if test="machiningType!=null">,MACHINING_TYPE = #{machiningType}</if>
+		<if test="ciq!=null">,CIQ = #{ciq}</if>
+		<if test="foreignName!=null">,FOREIGN_NAME = #{foreignName}</if>
+		<if test="issue!=null">,ISSUE = #{issue}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="orderDocumentId!=null and orderDocumentId!=''">and  ORDER_DOCUMENT_ID=#{orderDocumentId}</if>
+		<if test="orderDocumentUuid!=null and orderDocumentUuid!=''">and  ORDER_DOCUMENT_UUID=#{orderDocumentUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+		<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+		<if test="unportDate!=null and unportDate!=''">and  UNPORT_DATE=#{unportDate}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+		<if test="licence!=null and licence!=''">and  LICENCE=#{licence}</if>
+		<if test="licenceType!=null and licenceType!=''">and  LICENCE_TYPE=#{licenceType}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="importCustomer!=null and importCustomer!=''">and  IMPORT_CUSTOMER=#{importCustomer}</if>
+		<if test="importUser!=null and importUser!=''">and  IMPORT_USER=#{importUser}</if>
+		<if test="licenceCount!=null and licenceCount!=''">and  LICENCE_COUNT=#{licenceCount}</if>
+		<if test="declaratPort!=null and declaratPort!=''">and  DECLARAT_PORT=#{declaratPort}</if>
+		<if test="countryOrigin!=null and countryOrigin!=''">and  COUNTRY_ORIGIN=#{countryOrigin}</if>
+		<if test="declaratNo!=null and declaratNo!=''">and  DECLARAT_NO=#{declaratNo}</if>
+		<if test="importPort!=null and importPort!=''">and  IMPORT_PORT=#{importPort}</if>
+		<if test="extendPort!=null and extendPort!=''">and  EXTEND_PORT=#{extendPort}</if>
+		<if test="clearanceDate!=null and clearanceDate!=''">and  CLEARANCE_DATE=#{clearanceDate}</if>
+		<if test="projectName!=null and projectName!=''">and  PROJECT_NAME=#{projectName}</if>
+		<if test="amount!=null and amount!=''">and  AMOUNT=#{amount}</if>
+		<if test="paymentCompany!=null and paymentCompany!=''">and  PAYMENT_COMPANY=#{paymentCompany}</if>
+		<if test="invoiceNo!=null and invoiceNo!=''">and  INVOICE_NO=#{invoiceNo}</if>
+		<if test="declaratInvoiceType!=null and declaratInvoiceType!=''">and  DECLARAT_INVOICE_TYPE=#{declaratInvoiceType}</if>
+		<if test="settlementInvoiceType!=null and settlementInvoiceType!=''">and  SETTLEMENT_INVOICE_TYPE=#{settlementInvoiceType}</if>
+		<if test="manualNo!=null and manualNo!=''">and  MANUAL_NO=#{manualNo}</if>
+		<if test="machiningType!=null and machiningType!=''">and  MACHINING_TYPE=#{machiningType}</if>
+		<if test="ciq!=null and ciq!=''">and  CIQ=#{ciq}</if>
+		<if test="foreignName!=null and foreignName!=''">and  FOREIGN_NAME=#{foreignName}</if>
+		<if test="issue!=null and issue!=''">and  ISSUE=#{issue}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="OrderDocument">
+			select
+			* from t_order_document
+			where
+		    ORDER_DOCUMENT_ID=#{orderDocumentId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="OrderDocument">
+			select
+			* from t_order_document
+			where ORDER_DOCUMENT_UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="OrderDocument" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument">
+		select * from t_order_document
+			where
+		 ALIVE_FLAG='1'
+		<if test="orderDocumentId!=null and orderDocumentId!=''">and  ORDER_DOCUMENT_ID=#{orderDocumentId}</if>
+		<if test="orderDocumentUuid!=null and orderDocumentUuid!=''">and  ORDER_DOCUMENT_UUID=#{orderDocumentUuid}</if>
+		<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+		<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+		<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+		<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+		<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+		<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+		<if test="unportDate!=null and unportDate!=''">and  UNPORT_DATE=#{unportDate}</if>
+		<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+		<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+		<if test="licence!=null and licence!=''">and  LICENCE=#{licence}</if>
+		<if test="licenceType!=null and licenceType!=''">and  LICENCE_TYPE=#{licenceType}</if>
+		<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+		<if test="importCustomer!=null and importCustomer!=''">and  IMPORT_CUSTOMER=#{importCustomer}</if>
+		<if test="importUser!=null and importUser!=''">and  IMPORT_USER=#{importUser}</if>
+		<if test="licenceCount!=null and licenceCount!=''">and  LICENCE_COUNT=#{licenceCount}</if>
+		<if test="declaratPort!=null and declaratPort!=''">and  DECLARAT_PORT=#{declaratPort}</if>
+		<if test="countryOrigin!=null and countryOrigin!=''">and  COUNTRY_ORIGIN=#{countryOrigin}</if>
+		<if test="declaratNo!=null and declaratNo!=''">and  DECLARAT_NO=#{declaratNo}</if>
+		<if test="importPort!=null and importPort!=''">and  IMPORT_PORT=#{importPort}</if>
+		<if test="extendPort!=null and extendPort!=''">and  EXTEND_PORT=#{extendPort}</if>
+		<if test="clearanceDate!=null and clearanceDate!=''">and  CLEARANCE_DATE=#{clearanceDate}</if>
+		<if test="projectName!=null and projectName!=''">and  PROJECT_NAME=#{projectName}</if>
+		<if test="amount!=null and amount!=''">and  AMOUNT=#{amount}</if>
+		<if test="paymentCompany!=null and paymentCompany!=''">and  PAYMENT_COMPANY=#{paymentCompany}</if>
+		<if test="invoiceNo!=null and invoiceNo!=''">and  INVOICE_NO=#{invoiceNo}</if>
+		<if test="declaratInvoiceType!=null and declaratInvoiceType!=''">and  DECLARAT_INVOICE_TYPE=#{declaratInvoiceType}</if>
+		<if test="settlementInvoiceType!=null and settlementInvoiceType!=''">and  SETTLEMENT_INVOICE_TYPE=#{settlementInvoiceType}</if>
+		<if test="manualNo!=null and manualNo!=''">and  MANUAL_NO=#{manualNo}</if>
+		<if test="machiningType!=null and machiningType!=''">and  MACHINING_TYPE=#{machiningType}</if>
+		<if test="ciq!=null and ciq!=''">and  CIQ=#{ciq}</if>
+		<if test="foreignName!=null and foreignName!=''">and  FOREIGN_NAME=#{foreignName}</if>
+		<if test="issue!=null and issue!=''">and  ISSUE=#{issue}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ORDER_DOCUMENT_ID as "orderDocumentId" 
+						 ,   ORDER_DOCUMENT_UUID as "orderDocumentUuid" 
+						 ,   ORDER_ID as "orderId" 
+						 ,   ORDER_NO as "orderNo" 
+						 ,   CONTRACT_NO as "contractNo" 
+						 ,   SHIP_NAME as "shipName" 
+						 ,   DOCUMENT_TYPE as "documentType" 
+						 ,   BILL_DATE as "billDate" 
+						 ,   UNPORT_DATE as "unportDate" 
+						 ,   OIL as "oil" 
+						 ,   SURVEY as "survey" 
+						 ,   LICENCE as "licence" 
+						 ,   LICENCE_TYPE as "licenceType" 
+						 ,   TRADE_TERM as "tradeTerm" 
+						 ,   IMPORT_CUSTOMER as "importCustomer" 
+						 ,   IMPORT_USER as "importUser" 
+						 ,   LICENCE_COUNT as "licenceCount" 
+						 ,   DECLARAT_PORT as "declaratPort" 
+						 ,   COUNTRY_ORIGIN as "countryOrigin" 
+						 ,   DECLARAT_NO as "declaratNo" 
+						 ,   IMPORT_PORT as "importPort" 
+						 ,   EXTEND_PORT as "extendPort" 
+						 ,   CLEARANCE_DATE as "clearanceDate" 
+						 ,   PROJECT_NAME as "projectName" 
+						 ,   AMOUNT as "amount" 
+						 ,   PAYMENT_COMPANY as "paymentCompany" 
+						 ,   INVOICE_NO as "invoiceNo" 
+						 ,   DECLARAT_INVOICE_TYPE as "declaratInvoiceType" 
+						 ,   SETTLEMENT_INVOICE_TYPE as "settlementInvoiceType" 
+						 ,   MANUAL_NO as "manualNo" 
+						 ,   MACHINING_TYPE as "machiningType" 
+						 ,   CIQ as "ciq" 
+						 ,   FOREIGN_NAME as "foreignName" 
+						 ,   ISSUE as "issue" 
+						 ,   REMARK as "remark" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						from t_order_document
+		where
+			ALIVE_FLAG='1'
+			<if test="orderDocumentId!=null and orderDocumentId!=''">and  ORDER_DOCUMENT_ID=#{orderDocumentId}</if>
+			<if test="orderDocumentUuid!=null and orderDocumentUuid!=''">and  ORDER_DOCUMENT_UUID=#{orderDocumentUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="unportDate!=null and unportDate!=''">and  UNPORT_DATE=#{unportDate}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+			<if test="licence!=null and licence!=''">and  LICENCE=#{licence}</if>
+			<if test="licenceType!=null and licenceType!=''">and  LICENCE_TYPE=#{licenceType}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="importCustomer!=null and importCustomer!=''">and  IMPORT_CUSTOMER=#{importCustomer}</if>
+			<if test="importUser!=null and importUser!=''">and  IMPORT_USER=#{importUser}</if>
+			<if test="licenceCount!=null and licenceCount!=''">and  LICENCE_COUNT=#{licenceCount}</if>
+			<if test="declaratPort!=null and declaratPort!=''">and  DECLARAT_PORT=#{declaratPort}</if>
+			<if test="countryOrigin!=null and countryOrigin!=''">and  COUNTRY_ORIGIN=#{countryOrigin}</if>
+			<if test="declaratNo!=null and declaratNo!=''">and  DECLARAT_NO=#{declaratNo}</if>
+			<if test="importPort!=null and importPort!=''">and  IMPORT_PORT=#{importPort}</if>
+			<if test="extendPort!=null and extendPort!=''">and  EXTEND_PORT=#{extendPort}</if>
+			<if test="clearanceDate!=null and clearanceDate!=''">and  CLEARANCE_DATE=#{clearanceDate}</if>
+			<if test="projectName!=null and projectName!=''">and  PROJECT_NAME=#{projectName}</if>
+			<if test="amount!=null and amount!=''">and  AMOUNT=#{amount}</if>
+			<if test="paymentCompany!=null and paymentCompany!=''">and  PAYMENT_COMPANY=#{paymentCompany}</if>
+			<if test="invoiceNo!=null and invoiceNo!=''">and  INVOICE_NO=#{invoiceNo}</if>
+			<if test="declaratInvoiceType!=null and declaratInvoiceType!=''">and  DECLARAT_INVOICE_TYPE=#{declaratInvoiceType}</if>
+			<if test="settlementInvoiceType!=null and settlementInvoiceType!=''">and  SETTLEMENT_INVOICE_TYPE=#{settlementInvoiceType}</if>
+			<if test="manualNo!=null and manualNo!=''">and  MANUAL_NO=#{manualNo}</if>
+			<if test="machiningType!=null and machiningType!=''">and  MACHINING_TYPE=#{machiningType}</if>
+			<if test="ciq!=null and ciq!=''">and  CIQ=#{ciq}</if>
+			<if test="foreignName!=null and foreignName!=''">and  FOREIGN_NAME=#{foreignName}</if>
+			<if test="issue!=null and issue!=''">and  ISSUE=#{issue}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_order_document 
+		where
+		 ALIVE_FLAG='1'
+			<if test="orderDocumentId!=null and orderDocumentId!=''">and  ORDER_DOCUMENT_ID=#{orderDocumentId}</if>
+			<if test="orderDocumentUuid!=null and orderDocumentUuid!=''">and  ORDER_DOCUMENT_UUID=#{orderDocumentUuid}</if>
+			<if test="orderId!=null and orderId!=''">and  ORDER_ID=#{orderId}</if>
+			<if test="orderNo!=null and orderNo!=''">and  ORDER_NO=#{orderNo}</if>
+			<if test="contractNo!=null and contractNo!=''">and  CONTRACT_NO=#{contractNo}</if>
+			<if test="shipName!=null and shipName!=''">and  SHIP_NAME=#{shipName}</if>
+			<if test="documentType!=null and documentType!=''">and  DOCUMENT_TYPE=#{documentType}</if>
+			<if test="billDate!=null and billDate!=''">and  BILL_DATE=#{billDate}</if>
+			<if test="unportDate!=null and unportDate!=''">and  UNPORT_DATE=#{unportDate}</if>
+			<if test="oil!=null and oil!=''">and  OIL=#{oil}</if>
+			<if test="survey!=null and survey!=''">and  SURVEY=#{survey}</if>
+			<if test="licence!=null and licence!=''">and  LICENCE=#{licence}</if>
+			<if test="licenceType!=null and licenceType!=''">and  LICENCE_TYPE=#{licenceType}</if>
+			<if test="tradeTerm!=null and tradeTerm!=''">and  TRADE_TERM=#{tradeTerm}</if>
+			<if test="importCustomer!=null and importCustomer!=''">and  IMPORT_CUSTOMER=#{importCustomer}</if>
+			<if test="importUser!=null and importUser!=''">and  IMPORT_USER=#{importUser}</if>
+			<if test="licenceCount!=null and licenceCount!=''">and  LICENCE_COUNT=#{licenceCount}</if>
+			<if test="declaratPort!=null and declaratPort!=''">and  DECLARAT_PORT=#{declaratPort}</if>
+			<if test="countryOrigin!=null and countryOrigin!=''">and  COUNTRY_ORIGIN=#{countryOrigin}</if>
+			<if test="declaratNo!=null and declaratNo!=''">and  DECLARAT_NO=#{declaratNo}</if>
+			<if test="importPort!=null and importPort!=''">and  IMPORT_PORT=#{importPort}</if>
+			<if test="extendPort!=null and extendPort!=''">and  EXTEND_PORT=#{extendPort}</if>
+			<if test="clearanceDate!=null and clearanceDate!=''">and  CLEARANCE_DATE=#{clearanceDate}</if>
+			<if test="projectName!=null and projectName!=''">and  PROJECT_NAME=#{projectName}</if>
+			<if test="amount!=null and amount!=''">and  AMOUNT=#{amount}</if>
+			<if test="paymentCompany!=null and paymentCompany!=''">and  PAYMENT_COMPANY=#{paymentCompany}</if>
+			<if test="invoiceNo!=null and invoiceNo!=''">and  INVOICE_NO=#{invoiceNo}</if>
+			<if test="declaratInvoiceType!=null and declaratInvoiceType!=''">and  DECLARAT_INVOICE_TYPE=#{declaratInvoiceType}</if>
+			<if test="settlementInvoiceType!=null and settlementInvoiceType!=''">and  SETTLEMENT_INVOICE_TYPE=#{settlementInvoiceType}</if>
+			<if test="manualNo!=null and manualNo!=''">and  MANUAL_NO=#{manualNo}</if>
+			<if test="machiningType!=null and machiningType!=''">and  MACHINING_TYPE=#{machiningType}</if>
+			<if test="ciq!=null and ciq!=''">and  CIQ=#{ciq}</if>
+			<if test="foreignName!=null and foreignName!=''">and  FOREIGN_NAME=#{foreignName}</if>
+			<if test="issue!=null and issue!=''">and  ISSUE=#{issue}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	<select id="queryCustomFileList" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			FILE_CODE AS "fileCode"
+			,FILE_NAME AS "fileName"
+			,DOCUMENT_FILE_ID AS "documentFileId"
+			,FILE_PATH AS "filePath"
+			,ORIGINAL_NAME AS "originalName"
+			,FILE_FORMAT AS "fileFormat"
+		FROM	
+			t_order_document_file
+		WHERE
+			ORDER_DOCUMENT_ID IN(
+		 			SELECT
+		 				tod.ORDER_DOCUMENT_ID
+		 			FROM
+		 				t_order too
+		 			INNER JOIN
+		 				t_order_document tod
+		 					ON tod.ORDER_ID = too.ID
+		 					AND tod.ALIVE_FLAG = '1'
+		 			WHERE
+		 				too.UUID = #{uuid}
+		 				AND too.ALIVE_FLAG = '1'
+		 			)
+			AND FILE_CODE ="T9999"
+			AND ALIVE_FLAG = '1'
+		
+	</select>
+	<select id="queryDocumentFileList" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			todl.DOCUMENT_TYPE AS "documentType"
+			,todl.FILE_CODE AS "fileCode"
+			,todl.FILE_NAME AS "fileName"
+			,todf.DOCUMENT_FILE_ID AS "documentFileId"
+			,todf.FILE_PATH AS "filePath"
+			,todf.ORIGINAL_NAME AS "originalName"
+			,todf.FILE_FORMAT AS "fileFormat"
+		FROM
+			t_order_document_list todl
+		LEFT JOIN
+			t_order_document_file todf 
+				ON todf.FILE_CODE = todl.FILE_CODE
+		 		AND todf.ALIVE_FLAG = '1'
+		 		AND todf.ORDER_DOCUMENT_ID IN(
+		 			SELECT
+		 				tod.ORDER_DOCUMENT_ID
+		 			FROM
+		 				t_order too
+		 			INNER JOIN
+		 				t_order_document tod
+		 					ON tod.ORDER_ID = too.ID
+		 					AND tod.ALIVE_FLAG = '1'
+		 			WHERE
+		 				too.UUID = #{uuid}
+		 				AND too.ALIVE_FLAG = '1'
+		 			)
+		WHERE
+			todl.TRADE_CATEGORY = #{tradeCategory}
+			AND todl.ALIVE_FLAG = '1'
+		ORDER BY
+			todl.DOCUMENT_TYPE ASC
+			,todl.FILE_CODE ASC
+	</select>
+	
+	<select id="queryDocFileCheckList" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			todl.DOCUMENT_TYPE AS "documentType"
+			,todl.FILE_CODE AS "fileCode"
+			,todl.FILE_NAME AS "fileName"
+			,todf.DOCUMENT_FILE_ID AS "documentFileId"
+			,todf.FILE_PATH AS "filePath"
+			,todf.ORIGINAL_NAME AS "originalName"
+		FROM
+			t_order_document_list todl
+		LEFT JOIN
+			t_order_document_file todf 
+				ON todf.FILE_CODE = todl.FILE_CODE
+		 		AND todf.ALIVE_FLAG = '1'
+		 		AND todf.ORDER_DOCUMENT_ID IN(
+		 			SELECT
+		 				tod.ORDER_DOCUMENT_ID
+		 			FROM
+		 				t_order too
+		 			INNER JOIN
+		 				t_order_document tod
+		 					ON tod.ORDER_ID = too.ID
+		 					AND tod.ALIVE_FLAG = '1'
+		 			WHERE
+		 				too.UUID = #{uuid}
+		 				AND too.ALIVE_FLAG = '1'
+		 			)
+		WHERE
+			todl.TRADE_CATEGORY = #{tradeCategory}
+			AND todl.ALIVE_FLAG = '1'
+			AND todf.FILE_PATH is null
+		ORDER BY
+			todl.DOCUMENT_TYPE ASC
+			,todl.FILE_CODE ASC
+	</select>
+	
+	<select id="getDocumentFileList" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			todl.DOCUMENT_TYPE AS "documentType"
+			,todl.FILE_CODE AS "fileCode"
+			,todl.FILE_NAME AS "fileName"
+			,todf.DOCUMENT_FILE_ID AS "documentFileId"
+			,todf.FILE_PATH AS "filePath"
+			,todf.ORIGINAL_NAME AS "originalName"
+		FROM
+			t_order_document_list todl
+		LEFT JOIN
+			t_order_document_file todf 
+				ON todf.FILE_CODE = todl.FILE_CODE
+		 		AND todf.ALIVE_FLAG = '1'
+		 		AND todf.ORDER_DOCUMENT_ID IN(
+		 			SELECT
+		 				tod.ORDER_DOCUMENT_ID
+		 			FROM
+		 				t_order too
+		 			INNER JOIN
+		 				t_order_document tod
+		 					ON tod.ORDER_ID = too.ID
+		 					AND tod.ALIVE_FLAG = '1'
+		 			WHERE
+		 				too.UUID = #{uuid}
+		 				AND too.ALIVE_FLAG = '1'
+		 			)
+		WHERE
+			todl.TRADE_CATEGORY = #{tradeCategory}
+			AND todl.ALIVE_FLAG = '1'
+			<if test="documentType!=null and documentType!=''">
+				AND todl.DOCUMENT_TYPE = #{documentType}
+			</if>
+		ORDER BY
+			todl.DOCUMENT_TYPE ASC
+			,todl.FILE_CODE ASC
+	</select>
+	
+	<select id="getDocumentType" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT DISTINCT
+			todl.DOCUMENT_TYPE AS "documentType"
+			,todl.DOCUMENT_TYPE_DESC AS "documentTypeDesc"
+			,tod.ORDER_DOCUMENT_ID AS "orderDocumentId"
+		FROM
+			t_order_document_list todl
+		LEFT JOIN
+			t_order_document tod 
+				ON tod.DOCUMENT_TYPE = todl.DOCUMENT_TYPE 
+				AND tod.ORDER_ID = (SELECT ID FROM t_order where UUID = #{uuid})
+				AND tod.ALIVE_FLAG = '1'
+		WHERE
+			todl.TRADE_CATEGORY = #{tradeCategory}
+			AND todl.ALIVE_FLAG = '1'
+		ORDER BY
+			todl.DOCUMENT_TYPE ASC
+	</select>
+	
+	<select id="getContractFileList" resultType="String">
+		SELECT
+			tocf.CONTRACT_FILE_NAME AS "contractFileName"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_contract toc
+				ON toc.ORDER_ID = too.ID
+				AND toc.ALIVE_FLAG = '1'
+		INNER JOIN
+			t_order_contract_file tocf 
+				ON tocf.CONTRACT_ID = toc.CONTRACT_ID 
+				AND tocf.ALIVE_FLAG = '1'
+		WHERE
+			too.UUID = #{uuid}
+			AND too.ALIVE_FLAG = '1'
+		ORDER BY 
+			tocf.CREATE_DATE ASC
+	</select>	
+	
+	<select id="getOrderData" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			too.ID AS "orderId"
+			,too.ORDER_NO AS "orderNo"
+			,toc.CONTRACT_NO AS "contractNo"
+			,tos.NAME AS "shipName"
+			,tod.ORDER_DOCUMENT_ID AS "orderDocumentId"
+			,(SELECT DISTINCT 
+					DOCUMENT_TYPE_DESC
+				FROM 
+					t_order_document_list 
+				WHERE 
+					DOCUMENT_TYPE = #{documentType}
+			) AS "documentTypeDesc"
+		FROM
+			t_order too
+		LEFT JOIN
+			t_order_contract toc 
+				ON toc.ORDER_ID = too.ID
+				AND toc.ALIVE_FLAG = '1'
+		LEFT JOIN
+			t_order_ship tos 
+				ON tos.ORDER_ID = too.ID
+				AND tos.ALIVE_FLAG = '1'
+		LEFT JOIN
+			t_order_document tod 
+				ON tod.ORDER_ID = too.ID
+				AND tod.DOCUMENT_TYPE = #{documentType}
+				AND tod.ALIVE_FLAG = '1' 
+		WHERE
+			too.ALIVE_FLAG = '1'
+			<if test="uuid != null and uuid != ''">
+				AND too.UUID = #{uuid}
+			</if>
+		LIMIT 0, 1
+	</select>		
+	
+	<select id="getDocumentData" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			tod.ORDER_ID AS "orderId"
+			,tod.ORDER_NO AS "orderNo"
+			,tod.CONTRACT_NO AS "contractNo"
+			,tod.SHIP_NAME AS "shipName"
+			,DATE_FORMAT(tod.BILL_DATE, '%Y-%m-%d') AS "billDate"
+			,tod.REMARK AS "remark"
+			,(SELECT DISTINCT 
+					DOCUMENT_TYPE_DESC
+				FROM 
+					t_order_document_list 
+				WHERE 
+					DOCUMENT_TYPE = tod.DOCUMENT_TYPE
+			) AS "documentTypeDesc"
+		FROM
+			t_order_document tod
+		WHERE
+			tod.ORDER_DOCUMENT_ID = #{orderDocumentId}
+			AND tod.ALIVE_FLAG = '1'
+	</select>
+	
+	<select id="getDocumentDetail" parameterType="com.sinochem.crude.trade.orderexecute.query.DocumentQuery" resultType="map">
+		SELECT
+			too.TRADE_CATEGORY AS "tradeCategory"
+			,tod.ORDER_NO AS "orderNo"
+			,tod.CONTRACT_NO AS "contractNo"
+			,tod.SHIP_NAME AS "shipName"
+			,DATE_FORMAT(tod.BILL_DATE, '%Y-%m-%d') AS "billDate"
+			,tod.REMARK AS "remark"
+			,(SELECT DISTINCT 
+					DOCUMENT_TYPE_DESC
+				FROM 
+					t_order_document_list 
+				WHERE 
+					DOCUMENT_TYPE = tod.DOCUMENT_TYPE
+			) AS "documentTypeDesc"
+		FROM
+			t_order too
+		INNER JOIN
+			t_order_document tod
+				ON tod.ORDER_ID = too.ID
+				<if test="documentType!=null and documentType!=''">
+				AND tod.DOCUMENT_TYPE = #{documentType}
+				</if>		
+				AND tod.ALIVE_FLAG = '1'
+		WHERE
+			too.UUID = #{uuid}
+			AND too.ALIVE_FLAG = '1'
+		LIMIT
+			0, 1
+	</select>	
+	
+	<insert id="insertFileRecord" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentFile"  useGeneratedKeys="true" keyProperty="documentFileId" >
+		insert  into t_order_document_file (				DOCUMENT_FILE_ID
+						,DOCUMENT_FILE_UUID
+						,ORDER_DOCUMENT_ID
+						,FILE_NAME
+						,FILE_CODE
+						,ORIGINAL_NAME
+						,FILE_PATH
+						,FILE_FORMAT
+						,FILE_SIZE
+						,FILE_STATUS
+						,UPLOAD_TIME
+						,UPLOAD_PERSON
+						,LANG_VER
+						,ALIVE_FLAG
+						,CREATE_USER
+						,CREATE_DATE
+						,UPDATE_USER
+						,UPDATE_DATE
+						,VERSION
+						)
+		values(		#{documentFileId}
+						,#{documentFileUuid}
+						,#{orderDocumentId}
+						,#{fileName}
+						,#{fileCode}
+						,#{originalName}
+						,#{filePath}
+						,#{fileFormat}
+						,#{fileSize}
+						,#{fileStatus}
+						,#{uploadTime}
+						,#{uploadPerson}
+						,#{langVer}
+						,#{aliveFlag}
+						,#{createUser}
+						,#{createDate}
+						,#{updateUser}
+						,#{updateDate}
+						,#{version}
+				)
+	</insert>	
+	
+	<update id="updateFileRecordById" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentFile">
+		update t_order_document_file
+		<set>
+         DOCUMENT_FILE_ID=#{documentFileId}
+		<if test="documentFileUuid!=null">,DOCUMENT_FILE_UUID = #{documentFileUuid}</if>
+		<if test="orderDocumentId!=null">,ORDER_DOCUMENT_ID = #{orderDocumentId}</if>
+		<if test="fileName!=null">,FILE_NAME = #{fileName}</if>
+		<if test="fileCode!=null">,FILE_CODE = #{fileCode}</if>
+		<if test="originalName!=null">,ORIGINAL_NAME = #{originalName}</if>
+		<if test="filePath!=null">,FILE_PATH = #{filePath}</if>
+		<if test="fileFormat!=null">,FILE_FORMAT = #{fileFormat}</if>
+		<if test="fileSize!=null">,FILE_SIZE = #{fileSize}</if>
+		<if test="fileStatus!=null">,FILE_STATUS = #{fileStatus}</if>
+		<if test="uploadTime!=null">,UPLOAD_TIME = #{uploadTime}</if>
+		<if test="uploadPerson!=null">,UPLOAD_PERSON = #{uploadPerson}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		</set>
+		where
+       	 DOCUMENT_FILE_ID=#{documentFileId}
+		and ALIVE_FLAG='1'
+	</update>	
+	
+	<update id="updateFileAliveByCode" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocumentFile">
+		UPDATE
+			t_order_document_file
+		SET
+			ALIVE_FLAG = '0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = #{updateDate}
+		WHERE
+			ORDER_DOCUMENT_ID = #{orderDocumentId}
+			AND FILE_CODE = #{fileCode}
+	</update>
+	
+	<update id="updateDocumentInfo" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument">
+		update t_order_document
+		<set>
+         ORDER_DOCUMENT_ID=#{orderDocumentId}
+		<if test="shipName!=null">,SHIP_NAME = #{shipName}</if>
+		<if test="billDate!=null">,BILL_DATE = #{billDate}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		</set>
+		where
+       	 ORDER_DOCUMENT_ID=#{orderDocumentId}
+		and ALIVE_FLAG='1'
+	</update>	
+	
+	<select id="getDocumentInfo" parameterType="com.sinochem.crude.trade.orderexecute.domain.OrderDocument" resultType="map">
+		SELECT
+			ORDER_DOCUMENT_ID AS "orderDocumentId"
+		FROM
+			t_order_document
+		WHERE
+			ORDER_ID = #{orderId}
+			AND ALIVE_FLAG = '1'
+		LIMIT 0, 1
+	</select>
+	
+</mapper>

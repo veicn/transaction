@@ -1,0 +1,168 @@
+
+<div >
+	<form class="editorForm0" id="statementInfoForm"
+		enctype="multipart/form-data" method="post" onsubmit="return false;">
+		<div class="c-mod c-mod2">
+			<h1>
+				Deal Management<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</h1>
+			<div class="c-form clearfix">
+			<h3>
+				<em class="cw-ico ico-h3 cw-ico2"></em>Deal Recap
+			</h3>
+			##---- Deal detailsbegin ----##
+			$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!stateData.orderId")
+			##---- Deal detailsend ----##
+			</div>
+		</div>
+		<div class="c-mod">
+			<h3>
+				<em class="cw-ico ico-h3"></em>Final Price
+			</h3>
+			<div class="c-form">
+				<input type="text" class="c-int" value="$!stateData.orderId"
+					name="orderId" id="orderId" hidden="hidden" /> 
+				<input type="text" class="c-int" value="$!stateData.orderStatementId"
+					name="orderStatementId" id="orderStatementId" hidden="hidden" /> 
+				<input type="text"
+					value="$!isEdit" id="isEdit" name="isEdit" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderFeeId" id="orderFeeId" name="orderFeeId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.statementType" id="statementType" name="statementType" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.orderNo" id="orderNo" name="orderNo" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.sellerCustomerId" id="sellerCustomerId" name="sellerCustomerId" hidden="hidden" />
+				<input type="text"
+					value="$!stateData.buyerCustomerId" id="buyerCustomerId" name="buyerCustomerId" hidden="hidden" />
+				<ul class="c-ful">
+					<li class="c-fcos2"><span class="c-fn">No.：</span><input
+						type="text" class="c-int" value="$!stateData.orderStatementNo"
+						name="orderStatementNo" id="orderStatementNo" /></li>
+					<li class="c-fcos2"><span class="c-fn">Tel：</span><input
+						type="text" class="c-int" value="$!stateData.tel" name="tel"
+						id="tel" /></li>
+					<li class="c-fcos2"><span class="c-fn">Counterparty：</span><input
+						type="text" class="c-int" value="$!stateData.customerName"
+						name="customerName" id="customerName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Email：</span><input
+						type="text" class="c-int" value="$!stateData.email" name="email"
+						id="email" /></li>
+					<li class="c-fcos2"><span class="c-fn">PIC：</span><input
+						type="text" class="c-int" value="$!stateData.contactName"
+						name="contactName" id="contactName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Time：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!stateData.checkTime)"
+						name="checkTimeDesc" id="checkTime" /></li>
+					<li class="c-fcos2"><span class="c-fn">B/L Qty (MT)：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightT)"
+						name="billWeightT" id="billWeightT" /></li>
+					<li class="c-fcos2"><span class="c-fn">Agreement No.：</span><input
+						type="text" class="c-int" value="$!stateData.agentContract"
+						name="agentContract" id="agentContract" /></li>
+					<li class="c-fcos2"><span class="c-fn">B/L Qty (BBL)：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.billWeightBbl)"
+						name="billWeightBbl" id="billWeightBbl" /></li>
+					<li class="c-fcos2"><span class="c-fn">Grade：</span><input
+						type="text" class="c-int" value="$!stateData.oil" name="oil"
+						id="oil" /></li>
+					<li class="c-fcos2"><span class="c-fn">Price Fomula：</span><input
+						type="text" class="c-int" value="$!stateData.priceFormula"
+						name="priceFormula" id="priceFormula" /></li>
+					<li class="c-fcos2"><span class="c-fn">Vessel Name：</span><input
+						type="text" class="c-int" value="$!stateData.shipName"
+						name="shipName" id="shipName" /></li>
+					<li class="c-fcos2"><span class="c-fn">Contract Qty：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.contractQuantity)"
+						name="contractQuantity" id="contractQuantity" /></li>
+					<li class="c-fcos2"><span class="c-fn">Incoterm：</span><input
+						type="text" class="c-int" value="$!stateData.tradeTerm"
+						name="tradeTerm" id="tradeTerm" /></li>
+					<li class="c-fcos2"><span class="c-fn">Settled price：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.settlementPrice)"
+						name="settlementPrice" id="settlementPrice" /></li>
+					<li class="c-fcos2"><span class="c-fn">Cargo Value：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.goodsAmount)"
+						name="goodsAmount" id="goodsAmount" /></li>
+					<li class="c-fcos2"><span class="c-fn">B/L Date：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.billDate)"
+						name="billDateDesc" id="billDate" /></li>
+					<li class="c-fcos2"><span class="c-fn">Costs Amount：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.totalFee)" name="totalFee"
+						id="totalFee" /></li>
+					<li class="c-fcos2"><span class="c-fn">Payment Due Date：</span><input
+						type="text" class="c-int" value="$!date.format('yyyy-MM-dd',$!stateData.paymentDate)"
+						name="paymentDateDesc" id="paymentDate" /></li>
+						<li class="c-fcos2"><span class="c-fn">Settled Value/Amount：</span><input lay-verify="required|number|title|numberV"
+						type="text" class="c-int" readonly="readonly"
+						value="$!NumberTool.format($!stateData.settledAmount)"
+						name="settledAmount" id="settledAmount" /></li> 
+					<li class="c-fcos2"><span class="c-fn">Total Amount：</span><input
+						type="text" class="c-int"
+						value="$!NumberTool.format($!stateData.totalAmount)"
+						name="totalAmount" id="totalAmount" /></li> #if($stateData.status !=
+					'')
+					<li class="c-fcos2"><span class="c-fn">Status：</span> <span
+						class="c-int qx-conte"> #if($stateData.status == '01') Initial
+							#elseif($stateData.status == '05') to be confirm #elseif($stateData.status
+							== '10') Confirmed #elseif($stateData.status == '20') Rejected
+							#elseif($stateData.status == '30') Settled #end </span></li> #end
+				</ul>
+			</div>
+		</div>
+		<!-- 拆单信息 -->
+		$contain.get("/contain/order/triggerResultDetail.htm").put('orderId',$!stateData.orderId)
+		<div class="c-mod">
+			<h3>
+				<i class="cw-ico ico-h3"></i>Cost breakdown
+			</h3>
+			<div class="c-tabdiv">
+				<table>
+					<tr>
+						<th>Expense Item</th>
+						<th>Unit</th>
+						<th>Quantity</th>
+						<th>Unit Price(USD)</th>
+						<th>Sub Total(USD)</th>
+					</tr>
+					#if($feeData.size() > 0) #foreach($item in $feeData) #set($class =
+					$velocityCount%2+1) #set($count = $velocityCount - 1)
+					<tr class="ct-tabcos$class">
+						<td>$!item.subjectName</td>
+						<td>#if($!item.valuationModel == '1') Barrel #elseif($!item.valuationModel == '2') Deal  #else MT #end</td>
+						<td>$!NumberTool.format($!item.quantity)</td>
+						<td>$!NumberTool.format($!item.feePrice)</td>
+						<td>$!NumberTool.format($!item.totalFee)</td>
+					</tr>
+					#end #end
+				</table>
+			</div>
+		</div>
+		#if($stateData.status != '05')
+			<div class="c-mod">
+				<div class="c-subdiv">
+					<button class="c-btncas" onClick="javascript:history.back(-1);">back </button>
+				</div>
+			</div> 
+		#end
+	</form>
+		#if($stateData.status == '05')
+			<div class="order-bot">
+			$contain.get("/buyerCenter/orderFeeDissent/orderFeeDissent.htm").put('orderId',$!stateData.orderId).put('dissentType','2')
+			</div>
+		#end
+			<div class="order-bot">
+			$contain.get("/sellerCenter/orderFeeDissent/orderFeeDissentReply.htm").put('orderId',$!stateData.orderId).put('dissentType','2')
+			</div>
+		
+	<script>
+	$('#statementInfoForm').find('input').attr('readonly','readonly');
+	</script>
+</div>

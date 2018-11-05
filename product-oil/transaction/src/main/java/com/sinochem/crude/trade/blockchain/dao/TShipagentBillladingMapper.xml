@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentBillladingMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentBillLoading">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="bl_no" jdbcType="VARCHAR" property="blNo" />
+    <result column="consignor" jdbcType="VARCHAR" property="consignor" />
+    <result column="vessel" jdbcType="VARCHAR" property="vessel" />
+    <result column="loading_port" jdbcType="VARCHAR" property="loadingPort" />
+    <result column="captain" jdbcType="VARCHAR" property="captain" />
+    <result column="unloading_port" jdbcType="VARCHAR" property="unloadingPort" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="notify" jdbcType="VARCHAR" property="notify" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="metric_ton" jdbcType="VARCHAR" property="metricTon" />
+    <result column="long_ton" jdbcType="VARCHAR" property="longTon" />
+    <result column="bbls" jdbcType="VARCHAR" property="bbls" />
+    <result column="ltrs" jdbcType="VARCHAR" property="ltrs" />
+    <result column="ltrs_obs_trmp" jdbcType="VARCHAR" property="ltrsObsTrmp" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="cp_date1" jdbcType="VARCHAR" property="cpDate1" />
+    <result column="cp_date2" jdbcType="VARCHAR" property="cpDate2" />
+    <result column="cp_date3" jdbcType="VARCHAR" property="cpDate3" />
+    <result column="cp_date4" jdbcType="VARCHAR" property="cpDate4" />
+    <result column="sign_num" jdbcType="VARCHAR" property="signNum" />
+    <result column="time_zone" jdbcType="VARCHAR" property="timeZone" />
+    <result column="time_day" jdbcType="VARCHAR" property="timeDay" />
+    <result column="time_month" jdbcType="VARCHAR" property="timeMonth" />
+    <result column="time_year" jdbcType="VARCHAR" property="timeYear" />
+    <result column="singed_date" jdbcType="TIMESTAMP" property="singedDate" />
+    <result column="master_name" jdbcType="VARCHAR" property="masterName" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uuid, enterprise_id, bl_no, consignor, vessel, loading_port, captain, unloading_port, 
+    consignee, notify, category, metric_ton, long_ton, bbls, ltrs, ltrs_obs_trmp, remark, 
+    cp_date1, cp_date2, cp_date3, cp_date4, sign_num, time_zone, time_day, time_month, 
+    time_year, singed_date, master_name, create_user, create_date, update_user, update_date, 
+    alive_flag, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+      id,
+      uuid,
+      enterprise_id,
+      bl_no,
+      consignor,
+      vessel,
+      loading_port,
+      captain,
+      unloading_port,
+      consignee,
+      notify,
+      category,
+      IF(metric_ton is NULL, null ,if(metric_ton = '' ,null , format(metric_ton , 4) )) as metric_ton,
+      IF(long_ton is NULL, null ,if(long_ton = '' ,null , format(long_ton , 4) )) as long_ton,
+      IF(bbls is NULL, null ,if(bbls = '' ,null , format(bbls , 4) )) as bbls,
+      IF(ltrs is NULL, null ,if(ltrs = '' ,null , format(ltrs , 4) )) as ltrs,
+      IF(ltrs_obs_trmp is NULL, null ,if(ltrs_obs_trmp = '' ,null , format(ltrs_obs_trmp , 4) )) as ltrs_obs_trmp,
+      remark,
+      cp_date1, cp_date2, cp_date3, cp_date4, sign_num, time_zone, time_day, time_month,
+      time_year, singed_date, master_name, create_user, create_date, update_user, update_date,
+      alive_flag, status
+    from `product-trade-blockchain`.t_shipagent_billloading
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_shipagent_billloading
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentBillLoading">
+    insert into `product-trade-blockchain`.t_shipagent_billloading (id, uuid, enterprise_id,
+      bl_no, consignor, vessel, 
+      loading_port, captain, unloading_port, 
+      consignee, notify, category, 
+      metric_ton, long_ton, bbls, 
+      ltrs, ltrs_obs_trmp, remark, 
+      cp_date1, cp_date2, cp_date3, 
+      cp_date4, sign_num, time_zone, 
+      time_day, time_month, time_year, 
+      singed_date, master_name, create_user, 
+      create_date, update_user, update_date, 
+      alive_flag, status)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=BIGINT}, 
+      #{blNo,jdbcType=VARCHAR}, #{consignor,jdbcType=VARCHAR}, #{vessel,jdbcType=VARCHAR}, 
+      #{loadingPort,jdbcType=VARCHAR}, #{captain,jdbcType=VARCHAR}, #{unloadingPort,jdbcType=VARCHAR}, 
+      #{consignee,jdbcType=VARCHAR}, #{notify,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{metricTon,jdbcType=VARCHAR}, #{longTon,jdbcType=VARCHAR}, #{bbls,jdbcType=VARCHAR}, 
+      #{ltrs,jdbcType=VARCHAR}, #{ltrsObsTrmp,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{cpDate1,jdbcType=VARCHAR}, #{cpDate2,jdbcType=VARCHAR}, #{cpDate3,jdbcType=VARCHAR}, 
+      #{cpDate4,jdbcType=VARCHAR}, #{signNum,jdbcType=VARCHAR}, #{timeZone,jdbcType=VARCHAR}, 
+      #{timeDay,jdbcType=VARCHAR}, #{timeMonth,jdbcType=VARCHAR}, #{timeYear,jdbcType=VARCHAR}, 
+      #{singedDate,jdbcType=TIMESTAMP}, #{masterName,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{aliveFlag,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentBillLoading">
+    insert into `product-trade-blockchain`.t_shipagent_billloading
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="blNo != null">
+        bl_no,
+      </if>
+      <if test="consignor != null">
+        consignor,
+      </if>
+      <if test="vessel != null">
+        vessel,
+      </if>
+      <if test="loadingPort != null">
+        loading_port,
+      </if>
+      <if test="captain != null">
+        captain,
+      </if>
+      <if test="unloadingPort != null">
+        unloading_port,
+      </if>
+      <if test="consignee != null">
+        consignee,
+      </if>
+      <if test="notify != null">
+        notify,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="metricTon != null">
+        metric_ton,
+      </if>
+      <if test="longTon != null">
+        long_ton,
+      </if>
+      <if test="bbls != null">
+        bbls,
+      </if>
+      <if test="ltrs != null">
+        ltrs,
+      </if>
+      <if test="ltrsObsTrmp != null">
+        ltrs_obs_trmp,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="cpDate1 != null">
+        cp_date1,
+      </if>
+      <if test="cpDate2 != null">
+        cp_date2,
+      </if>
+      <if test="cpDate3 != null">
+        cp_date3,
+      </if>
+      <if test="cpDate4 != null">
+        cp_date4,
+      </if>
+      <if test="signNum != null">
+        sign_num,
+      </if>
+      <if test="timeZone != null">
+        time_zone,
+      </if>
+      <if test="timeDay != null">
+        time_day,
+      </if>
+      <if test="timeMonth != null">
+        time_month,
+      </if>
+      <if test="timeYear != null">
+        time_year,
+      </if>
+      <if test="singedDate != null">
+        singed_date,
+      </if>
+      <if test="masterName != null">
+        master_name,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="blNo != null">
+        #{blNo,jdbcType=VARCHAR},
+      </if>
+      <if test="consignor != null">
+        #{consignor,jdbcType=VARCHAR},
+      </if>
+      <if test="vessel != null">
+        #{vessel,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingPort != null">
+        #{loadingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="captain != null">
+        #{captain,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadingPort != null">
+        #{unloadingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="notify != null">
+        #{notify,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="metricTon != null">
+        #{metricTon,jdbcType=VARCHAR},
+      </if>
+      <if test="longTon != null">
+        #{longTon,jdbcType=VARCHAR},
+      </if>
+      <if test="bbls != null">
+        #{bbls,jdbcType=VARCHAR},
+      </if>
+      <if test="ltrs != null">
+        #{ltrs,jdbcType=VARCHAR},
+      </if>
+      <if test="ltrsObsTrmp != null">
+        #{ltrsObsTrmp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate1 != null">
+        #{cpDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate2 != null">
+        #{cpDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate3 != null">
+        #{cpDate3,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate4 != null">
+        #{cpDate4,jdbcType=VARCHAR},
+      </if>
+      <if test="signNum != null">
+        #{signNum,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZone != null">
+        #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="timeDay != null">
+        #{timeDay,jdbcType=VARCHAR},
+      </if>
+      <if test="timeMonth != null">
+        #{timeMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="timeYear != null">
+        #{timeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="singedDate != null">
+        #{singedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="masterName != null">
+        #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentBillLoading">
+    update `product-trade-blockchain`.t_shipagent_billloading
+    <set>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="blNo != null">
+        bl_no = #{blNo,jdbcType=VARCHAR},
+      </if>
+      <if test="consignor != null">
+        consignor = #{consignor,jdbcType=VARCHAR},
+      </if>
+      <if test="vessel != null">
+        vessel = #{vessel,jdbcType=VARCHAR},
+      </if>
+      <if test="loadingPort != null">
+        loading_port = #{loadingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="captain != null">
+        captain = #{captain,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadingPort != null">
+        unloading_port = #{unloadingPort,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="notify != null">
+        notify = #{notify,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="metricTon != null">
+        metric_ton = #{metricTon,jdbcType=VARCHAR},
+      </if>
+      <if test="longTon != null">
+        long_ton = #{longTon,jdbcType=VARCHAR},
+      </if>
+      <if test="bbls != null">
+        bbls = #{bbls,jdbcType=VARCHAR},
+      </if>
+      <if test="ltrs != null">
+        ltrs = #{ltrs,jdbcType=VARCHAR},
+      </if>
+      <if test="ltrsObsTrmp != null">
+        ltrs_obs_trmp = #{ltrsObsTrmp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate1 != null">
+        cp_date1 = #{cpDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate2 != null">
+        cp_date2 = #{cpDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate3 != null">
+        cp_date3 = #{cpDate3,jdbcType=VARCHAR},
+      </if>
+      <if test="cpDate4 != null">
+        cp_date4 = #{cpDate4,jdbcType=VARCHAR},
+      </if>
+      <if test="signNum != null">
+        sign_num = #{signNum,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZone != null">
+        time_zone = #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="timeDay != null">
+        time_day = #{timeDay,jdbcType=VARCHAR},
+      </if>
+      <if test="timeMonth != null">
+        time_month = #{timeMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="timeYear != null">
+        time_year = #{timeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="singedDate != null">
+        singed_date = #{singedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="masterName != null">
+        master_name = #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentBillLoading">
+    update `product-trade-blockchain`.t_shipagent_billloading
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      bl_no = #{blNo,jdbcType=VARCHAR},
+      consignor = #{consignor,jdbcType=VARCHAR},
+      vessel = #{vessel,jdbcType=VARCHAR},
+      loading_port = #{loadingPort,jdbcType=VARCHAR},
+      captain = #{captain,jdbcType=VARCHAR},
+      unloading_port = #{unloadingPort,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      notify = #{notify,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      metric_ton = #{metricTon,jdbcType=VARCHAR},
+      long_ton = #{longTon,jdbcType=VARCHAR},
+      bbls = #{bbls,jdbcType=VARCHAR},
+      ltrs = #{ltrs,jdbcType=VARCHAR},
+      ltrs_obs_trmp = #{ltrsObsTrmp,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      cp_date1 = #{cpDate1,jdbcType=VARCHAR},
+      cp_date2 = #{cpDate2,jdbcType=VARCHAR},
+      cp_date3 = #{cpDate3,jdbcType=VARCHAR},
+      cp_date4 = #{cpDate4,jdbcType=VARCHAR},
+      sign_num = #{signNum,jdbcType=VARCHAR},
+      time_zone = #{timeZone,jdbcType=VARCHAR},
+      time_day = #{timeDay,jdbcType=VARCHAR},
+      time_month = #{timeMonth,jdbcType=VARCHAR},
+      time_year = #{timeYear,jdbcType=VARCHAR},
+      singed_date = #{singedDate,jdbcType=TIMESTAMP},
+      master_name = #{masterName,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_billloading
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,80 @@
+<script>
+	// 最后页删除时的处理
+	$(function () {
+		var prevPage = ${sliderPrev};
+		var tableCnt = "";
+		
+		if ($("tbody").length > 0) {
+			// 平台
+			tableCnt = $("tbody tr").length;
+		} else {
+			// 后台
+			tableCnt = $(".shipp-blo").length;
+		}
+		
+		if (tableCnt == 0) {
+			if (prevPage > 0) {
+				goto$!{sliderRandom}(prevPage);
+			}
+		}
+	});
+
+	function goto$!{sliderRandom}(pg){
+		document.page_slider_$!{sliderRandom}.$!{sliderPage}.value=pg;
+		document.page_slider_$!{sliderRandom}.submit();
+	}
+</script>
+
+#if(${sliderTotal}==0)
+<script>
+	$('.ry-footbar').removeClass('ry-footbar');
+</script>
+<div class="c-mod">
+	<div class="nodataDiv"><i class="cw-ico cw-nodata"></i><span class="nodata">暂无相关记录</span></div>
+</div>
+#else
+<div>
+	#if($slider_borker)
+		#set($s_broker = $slider_borker)
+	#else
+		#set($s_broker = $appServer)	
+	#end
+	<form name="page_slider_$!{sliderRandom}" action="${s_broker.get("$sliderTarget")}" method="get">
+		#foreach($queryParam in $sliderQuery.parameters.entrySet())
+		<input type="hidden" name="$!{queryParam.key}" value="$!{queryParam.value}"/>
+		#end
+	#if($sliderCurrent == '1')
+	<a href="#" onclick="goto$!{sliderRandom}('1')"> 首页 </a>
+	#else
+	<a href="#" onclick="goto$!{sliderRandom}('1')"> 首页 </a>
+	<a href="#" onclick="goto$!{sliderRandom}('${sliderPrev}')"> 上一页 </a>
+	#end
+	#foreach($grid in $grids)
+		#if($grid == 0)
+		<span>...</span>
+		#elseif($grid == $sliderCurrent)
+		<span class="home color">${grid}</span>
+		#else
+		<a href="#" class="home" onclick="goto$!{sliderRandom}('${grid}')">${grid}</a>
+		#end
+	#end
+	#if($sliderCurrent == $sliderTotal )
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')"> 尾页 </a>
+	#else
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderNext}')"> 下一页 </a>
+		<a href="#" onclick="goto$!{sliderRandom}('${sliderTotal}')"> 尾页 </a>
+	#end
+	<input type="number" id="page" min="1" max="${sliderTotal}" onchange="convert0(this)" class="inp inp-border" name="$!{sliderPage}" value="$sliderQuery.currentPage"/>
+	<input type="submit" class="btna" name="sb" value="跳转到"/>
+	</form>
+</div>
+#end
+<script>
+function convert0(e) {
+   if(!e.value){
+	   $('#page').val(1);
+   }else if(e.value == 'e'){
+	   $('#page').val(1);
+   }
+}
+</script>

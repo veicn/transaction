@@ -1,0 +1,799 @@
+<div class="c-mod" id="cgjbxx">
+	 <h3><em class="cw-ico ico-h3"></em>需求信息<span class="cxtj-nr-an"><a id="addOne" href="javascript:;" class="btn-more" appServer="$appServer/">+ 增加一行</a></span></h3>
+		<ul class="cg-fatab">
+            <li><a id="oilKind" href="javascript:;" #if($!publishType ==  1 || !$!publishType) class="cur" #end>按油种发布</a></li>
+            <li><a id="oilNature" href="javascript:;" #if($!publishType ==  2) class="cur" #end>按性质发布</a></li>
+            <input type="hidden" id="publishType" name="demand.publishType" value="$!{publishType}"/>
+        </ul>
+        
+        
+    <!-- publishType 值 为 2 是 需求模式中 的 [性质] -->    
+	<div class="c-tabdiv trMode2V" #if($!publishType ==  2) style="display:''" #end>
+		<table>
+			 <tr>
+                 <th>操作</th>
+                 <th><span class="notice-required">*&nbsp;</span>API度</th>
+                 <th><span class="notice-required">*&nbsp;</span>SG@60°F</th>
+                 <th><span class="notice-required">*&nbsp;</span>硫含量<br/> m%</th>
+                 <th>酸值<br/>(mgKOH/g)</th><th>残炭<br/>%</th><th>镍+钒<br/> ppm</th><th>> 350°C<br/>质量收率/%</th><th class="tabl-line1">备注</th>
+			</tr>                 
+		 #if($crudeOilInfoList1 && $crudeOilInfoList1.size() > 0)
+		 	#foreach($record in $crudeOilInfoList1)
+                #set($serialNum = $velocityCount - 1)
+                #set($Min1 = $!{record.indicator1Min})
+                #set($Min2 = $!{record.indicator2Min})
+                #set($Min3 = $!{record.indicator3Min})
+                #set($Min4 = $!{record.indicator4Min})
+                #set($Min5 = $!{record.indicator5Min})
+                #set($Min7 = $!{record.indicator7Min})
+                #set($Min8 = $!{record.indicator8Min})
+                
+                #set($Max1 = $!{record.indicator1Max})
+                #set($Max2 = $!{record.indicator2Max})
+                #set($Max3 = $!{record.indicator3Max})
+                #set($Max4 = $!{record.indicator4Max})
+                #set($Max5 = $!{record.indicator5Max})
+                #set($Max7 = $!{record.indicator7Max})
+                #set($Max8 = $!{record.indicator8Max})
+                
+			 	<tr class="c-tabcos1 oil_item_nature">
+                    <td>
+                        <a class="btn-more btn-delete" href="javascript:;" onClick="getClearBer(this)">清空</a>
+                    </td>
+					<!-- API度 -->
+					<td class="trMode2">
+						<input onblur="apiToSG('apiMin','sgMax')" type="text" class="c-int qj-text apiMin" name="crudeOilFormList[$serialNum].indicator1Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min1}"/>
+		                <em>-</em>
+		                <input onblur="apiToSG('apiMax','sgMin')" type="text" class="c-int qj-text apiMax" name="crudeOilFormList[$serialNum].indicator1Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max1}"/>
+		                <label class="error my-error"></label>
+					</td>
+					<!-- SG@60°F -->
+					<td class="trMode2">
+						<input onblur="SGToApi('sgMin','apiMax')" type="text" class="c-int sgMin" name="crudeOilFormList[$serialNum].indicator8Min" maxlength="12" onkeypress="return checkNum(event,4,true)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min8}"/>
+						<em>-</em>
+						<input onblur="SGToApi('sgMax','apiMin')" type="text" class="c-int sgMax" name="crudeOilFormList[$serialNum].indicator8Max" maxlength="12" onkeypress="return checkNum(event,4,false)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max8}"/>
+						<label  class="error my-error"></label>
+					</td>
+					<!-- 硫含量 -->
+					<td class="trMode2">
+						<input type="text" class="c-int" name="crudeOilFormList[$serialNum].indicator2Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min2}"/>
+						<em>-</em>
+						<input type="text" class="c-int" name="crudeOilFormList[$serialNum].indicator2Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max2}"/>
+						<label class="error my-error"></label>
+					</td>
+					<!-- 酸值/ (mgKOH/g) -->
+					<td class="trMode2">
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator3Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min3}"/>
+						<em>-</em>
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator3Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max3}"/>
+						<label  class="error my-error"></label>
+					</td>
+					<!-- 残炭/% -->
+					<td class="trMode2">
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator4Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min4}"/>
+						<em>-</em>
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator4Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max4}"/>
+						<label class="error my-error"></label>
+					</td>
+					<!-- 镍/ ppm -->
+					<td class="trMode2">
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator5Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min5}"/>
+						<em>-</em>
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator5Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max5}"/>
+						<label class="error my-error"></label>
+					</td>
+					<!-- > 350°C 质量收率/% -->
+					<td class="trMode2">
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator7Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min7}"/>
+						<em>-</em>
+						<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator7Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max7}"/>
+						<label class="error my-error"></label>
+					</td>
+					<td class="tabl-line1 trMode2">
+						<input class="input-text" type="text" name="crudeOilFormList[$serialNum].desc" id="mode2Remark" maxlength="255" value="$!{record.desc}" />
+					</td>
+				</tr>
+			#break
+			#end
+		 
+		 #elseif($crudeOilInfoList2 && $crudeOilInfoList2.size() > 0)
+		 	#foreach($record in $crudeOilInfoList2)
+                    #set($serialNum = $velocityCount - 1)
+                    #set($Min1 = $!{record.indicator1Min}/100.00)
+                    #set($Min2 = $!{record.indicator2Min}/100.00)
+                    #set($Min3 = $!{record.indicator3Min}/100.00)
+                    #set($Min4 = $!{record.indicator4Min}/100.00)
+                    #set($Min5 = $!{record.indicator5Min}/100.00)
+                    #set($Min7 = $!{record.indicator7Min}/100.00)
+                    #set($Min8 = $!{record.indicator8Min}/10000.00)
+                    
+                    #set($Max1 = $!{record.indicator1Max}/100.00)
+                    #set($Max2 = $!{record.indicator2Max}/100.00)
+                    #set($Max3 = $!{record.indicator3Max}/100.00)
+                    #set($Max4 = $!{record.indicator4Max}/100.00)
+                    #set($Max5 = $!{record.indicator5Max}/100.00)
+                    #set($Max7 = $!{record.indicator7Max}/100.00)
+                    #set($Max8 = $!{record.indicator8Max}/10000.00)
+                    
+              <tr class="c-tabcos1 oil_item_nature">
+                  <td>
+                      <a class="btn-more btn-delete" href="javascript:;" onClick="getClearBer(this)">清空</a>
+                  </td>
+                  <!-- API度 -->
+                  <td class="trMode2">
+                      <input onblur="apiToSG('apiMin','sgMax')" type="text" class="c-int qj-text apiMin" name="crudeOilFormList[$serialNum].indicator1Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min1}"/>
+                      <em>-</em>
+                      <input onblur="apiToSG('apiMax','sgMin')" type="text" class="c-int qj-text apiMax" name="crudeOilFormList[$serialNum].indicator1Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max1}"/>
+                      <label class="error my-error"></label>
+                  </td>
+                  <!-- SG@60°F -->
+                  <td class="trMode2">
+                      <input onblur="SGToApi('sgMin','apiMax')" type="text" class="c-int sgMin" name="crudeOilFormList[$serialNum].indicator8Min" maxlength="12" onkeypress="return checkNum(event,4,true)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min8}"/>
+                      <em>-</em>
+                      <input onblur="SGToApi('sgMax','apiMin')" type="text" class="c-int sgMax" name="crudeOilFormList[$serialNum].indicator8Max" maxlength="12" onkeypress="return checkNum(event,4,false)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max8}"/>
+                      <label  class="error my-error"></label>
+                  </td>
+				<!-- 硫含量 -->
+				<td class="trMode2">
+					 <input type="text" class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator2Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min2}" />
+	                <em>-</em>
+	                <input type="text" class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator2Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max2}"/>
+	                <label class="error my-error"></label>
+				</td>
+				<!-- 酸值/ (mgKOH/g) -->
+				<td class="trMode2">
+					 <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator3Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min3}"/>
+	                <em>-</em>
+	                <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator3Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max3}"/>
+	                <label class="error my-error"></label>
+				</td>
+				<!-- 残炭/% -->
+				<td class="trMode2">
+					 <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator4Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min4}"/>
+	                <em>-</em>
+	                <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator4Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max4}"/>
+	                <label  class="error my-error"></label>
+				</td>
+				<!-- 镍/ ppm -->
+				<td class="trMode2">
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator5Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min5}"/>
+					<em>-</em>
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[$serialNum].indicator5Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max5}"/>
+					<label class="error my-error"></label>
+				</td>
+				<!-- > 350°C 质量收率/% -->
+				<td class="trMode2">
+					 <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator7Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min7}"/>
+	                <em>-</em>
+	                <input type="text" maxlength="12"  class="c-int qj-text" name="crudeOilFormList[$serialNum].indicator7Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max7}"/>
+	                <label  class="error my-error"></label>
+				</td>
+				<td class="tabl-line1 trMode2">
+					<input class="input-text" type="text"name="crudeOilFormList[$serialNum].desc" id="mode2Remark" maxlength="255" value="$!{record.desc}" />
+				</td>
+			</tr>
+            #break
+            #end
+			
+		 #else
+		 	<tr class="c-tabcos1 oil_item_nature">
+                <td>
+                    <a class="btn-more btn-delete" href="javascript:;" onClick="getClearBer(this)">清空</a>
+                </td>
+                <!-- API度 -->
+                <td class="trMode2">
+                    <input onblur="apiToSG('apiMin','sgMax')" type="text" class="c-int qj-text apiMin" name="crudeOilFormList[0].indicator1Min" maxlength="12" onkeypress="return checkNum(event,2,true)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min1}"/>
+                    <em>-</em>
+                    <input onblur="apiToSG('apiMax','sgMin')" type="text" class="c-int qj-text apiMax" name="crudeOilFormList[0].indicator1Max" maxlength="12" onkeypress="return checkNum(event,2,true)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max1}"/>
+                    <label class="error my-error"></label>
+                </td>
+                <!-- SG@60°F -->
+                <td class="trMode2">
+                    <input onblur="SGToApi('sgMin','apiMax')" type="text" class="c-int sgMin" name="crudeOilFormList[0].indicator8Min" maxlength="12" onkeypress="return checkNum(event,4,true)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Min8}"/>
+                    <em>-</em>
+                    <input onblur="SGToApi('sgMax','apiMin')" type="text" class="c-int sgMax" name="crudeOilFormList[0].indicator8Max" maxlength="12" onkeypress="return checkNum(event,4,false)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled" value="$!{Max8}"/>
+                    <label  class="error my-error"></label>
+                </td>
+				<!-- 硫含量 -->
+				<td class="trMode2">
+					<input type="text" class="c-int" name="crudeOilFormList[0].indicator2Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<em>-</em>
+					<input type="text" class="c-int" name="crudeOilFormList[0].indicator2Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<label class="error my-error"></label>
+				</td>
+				<!-- 酸值/ (mgKOH/g) -->
+				<td class="trMode2">
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator3Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<em>-</em>
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator3Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<label  class="error my-error"></label>
+				</td>
+				<!-- 残炭/% -->
+				<td class="trMode2">
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator4Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<em>-</em>
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator4Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<label class="error my-error"></label>
+				</td>
+				<!-- 镍/ ppm -->
+				<td class="trMode2">
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator5Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<em>-</em>
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator5Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<label class="error my-error"></label>
+				</td>
+				<!-- > 350°C 质量收率/% -->
+				<td class="trMode2">
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator7Min" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<em>-</em>
+					<input type="text" maxlength="12"  class="c-int" name="crudeOilFormList[0].indicator7Max" maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+					<label class="error my-error"></label>
+				</td>
+				<td class="tabl-line1 trMode2">
+					<input class="input-text" type="text" name="crudeOilFormList[0].desc" id="mode2Remark" maxlength="255" />
+				</td>
+			</tr>
+
+		 #end
+		</table>
+ 	</div>
+	
+    <!-- 按油种 -->
+    <div class="c-tabdiv trMode1V"  #if($!publishType ==  2) style="display:'none'" #end>
+        <table id="crudeDataArray">
+            <tr class="cruhead">
+				<th style="padding:0 16px;">操作</th>
+	            <th class="tabl-line">原油产地</th>
+	            <th>油种</th>
+	            <th>API度</th>
+	            <th>硫含量<br/>m%</th>
+	            <th>酸值<br/>(mgKOH/g)</th>
+	            <th>残炭<br/>%</th>
+	            <th>镍<br/>ppm</th>
+	            <th>钒<br/>ppm</th>
+	            <th>> 350°C <br/> 质量收率/%</th>
+                <th class="tabl-line1">备注</th>
+            </tr>
+
+		#if($crudeOilInfoList1 && $crudeOilInfoList1.size() > 0)
+			#foreach($record in $crudeOilInfoList1)
+                #set($serialNum = $velocityCount - 1)
+				<tr class="c-tabcos1 c-table-add oil_item trMode1">
+                    <td>
+                        <a class="btn-more btn-delete" href="javascript:;" onClick="getDelber(this)">删除</a>
+                        <a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="1">选择油种</a>
+						<input type="hidden" name="crudeOilFormList[$serialNum].propertyId" value="$!{record.propertyId}">
+                        <span class="c-ero">
+                           <label class="error" style="display: none;"></label>
+                        </span>
+					</td>
+                    <td><span class="origin_name">$!{record.originName}</span>
+                        <input type="hidden" name="crudeOilFormList[$serialNum].origin" value="$!{record.origin}"/>
+                        <input type="hidden" name="crudeOilFormList[$serialNum].originName" value="$!{record.originName}"/>
+						<input type="hidden" name="crudeOilFormList[$serialNum].area" value="$!{record.area}"></td>
+                    <td class="tabl-line">
+                        <input type="hidden" name="crudeOilFormList[$serialNum].cnName" value="$!{record.cnName}">
+                        <input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].name" value="$!{record.name}"
+                        		readonly maxlength="255">
+                       	<span class="name">$!{record.name}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator1Min" value="$!{record.indicator1Min}"
+                    		 readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator1Min">$!{record.indicator1Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator2Min" value="$!{record.indicator2Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator2Min">$!{record.indicator2Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator3Min" value="$!{record.indicator3Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator3Min">$!{record.indicator3Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator4Min" value="$!{record.indicator4Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator4Min">$!{record.indicator4Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator5Min" value="$!{record.indicator5Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator5Min">$!{record.indicator5Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator6Min" value="$!{record.indicator6Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator6Min">$!{record.indicator6Min}</span>
+                    </td>
+                    <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator7Min" value="$!{record.indicator7Min}"
+                    		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                    	<span class="indicator7Min">$!{record.indicator7Min}</span>
+                    </td>
+                    <td><input class="input-text" type="text" name="crudeOilFormList[$serialNum].desc" value="$!{record.desc}"
+                    		maxlength="255">
+                    </td>
+				</tr>
+			#end
+		#elseif($crudeOilInfoList2 && $crudeOilInfoList2.size() > 0)
+				#foreach($record in $crudeOilInfoList2)
+                    #set($serialNum = $velocityCount - 1)
+                    #set($Min1 = $!{record.indicator1Min}/100.00)
+                    #set($Min2 = $!{record.indicator2Min}/100.00)
+                    #set($Min3 = $!{record.indicator3Min}/100.00)
+                    #set($Min4 = $!{record.indicator4Min}/100.00)
+                    #set($Min5 = $!{record.indicator5Min}/100.00)
+                    #set($Min6 = $!{record.indicator6Min}/100.00)
+                    #set($Min7 = $!{record.indicator7Min}/100.00)
+                    #set($Min8 = $!{record.indicator8Min}/10000.00)
+                    #set($Min9 = $!{record.indicator9Min}/100.00)
+                    #set($Min10 = $!{record.indicator10Min}/100.00)
+                    #set($Min11= $!{record.indicator11Min}/100.00)
+                    #set($Min12= $!{record.indicator12Min}/100.00)
+                    <tr class="c-tabcos1 c-table-add oil_item trMode1">
+                        <td>
+                            <a class="btn-more btn-delete" href="javascript:;" onClick="getDelber(this)">删除</a>
+                            <a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="1">选择油种</a>
+                            <input type="hidden" name="crudeOilFormList[$serialNum].propertyId" value="$!{record.propertyId}">
+                            <span class="c-ero">
+                           <label class="error" style="display: none;"></label>
+                        </span>
+                        </td>
+                        <td><span class="origin_name">$!{record.originName}</span>
+                            <input type="hidden" name="crudeOilFormList[$serialNum].origin" value="$!{record.origin}"/>
+                            <input type="hidden" name="crudeOilFormList[$serialNum].originName" value="$!{record.originName}"/>
+                            <input type="hidden" name="crudeOilFormList[$serialNum].area" value="$!{record.area}"></td>
+                        <td class="tabl-line">
+                            <input type="hidden" name="crudeOilFormList[$serialNum].cnName" value="$!{record.cnName}">
+                            <input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].name" value="$!{record.name}"
+                            		readonly maxlength="255">
+                            <span class="name">$!{record.name}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator1Min" value="$!{Min1}" 
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator1Min">$!{record.indicator1Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator2Min" value="$!{Min2}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator2Min">$!{record.indicator2Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator3Min" value="$!{Min3}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator3Min">$!{record.indicator3Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator4Min" value="$!{Min4}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator4Min">$!{record.indicator4Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator5Min" value="$!{Min5}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator5Min">$!{record.indicator5Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator6Min" value="$!{Min6}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator6Min">$!{record.indicator6Min}</span>
+                        </td>
+                        <td><input class="input-text" type="hidden" name="crudeOilFormList[$serialNum].indicator7Min" value="$!{Min7}"
+                        		readonly maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+                        	<span class="indicator7Min">$!{record.indicator7Min}</span>
+                        </td>
+                        <td><input class="input-text" type="text" name="crudeOilFormList[$serialNum].desc" value="$!{record.desc}"
+                        		maxlength="255">
+                        </td>
+                    </tr>
+                #end
+		#else
+			<tr class="c-tabcos1 c-table-add oil_item trMode1">
+				<td>
+                    <a class="btn-more btn-delete" href="javascript:;" onClick="getDelber(this)">删除</a>
+					<a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="1">选择油种</a>
+					<input type="hidden" name="crudeOilFormList[0].propertyId">
+				</td>
+				<td><span class="origin_name"></span>
+                    <input type="hidden" name="crudeOilFormList[0].area">
+                    <input type="hidden" name="crudeOilFormList[0].originName"/>
+                    <input type="hidden" name="crudeOilFormList[0].origin"/></td>
+				<td class="tabl-line">
+                    <input type="hidden" name="crudeOilFormList[0].cnName">
+                    <input class="input-text" type="hidden" name="crudeOilFormList[0].name" maxlength="255" readonly>
+                    <span class="name">$!{record.name}</span>
+                </td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator1Min" readonly
+					maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator1Min">$!{record.indicator1Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator2Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator2Min">$!{record.indicator2Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator3Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator3Min">$!{record.indicator3Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator4Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator4Min">$!{record.indicator4Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator5Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator5Min">$!{record.indicator5Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator6Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator6Min">$!{record.indicator6Min}</span>
+				</td>
+				<td><input class="input-text" type="hidden" name="crudeOilFormList[0].indicator7Min" readonly
+						maxlength="12" onkeypress="return noNumbers(event)" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled">
+					<span class="indicator7Min">$!{record.indicator7Min}</span>
+				</td>
+				<td><input class="input-text" type="text" name="crudeOilFormList[0].desc"
+						maxlength="255">
+				</td>
+			</tr>
+		#end
+		</table>
+	</div>
+	<label id="oil-error" style="display: none; padding-left: 0%"></label>
+    <span class="cg-zy" style="display: #if($!publishType == 2) none #else "" #end">注意：物性表仅供参考</span>
+</div>
+<script>
+	var sgRealVal = 0;
+	//r1：最小值,r2:最大值,t:input元素
+	function checkInputRange(r1,r2,t){
+		var tv = t.val();
+		if(tv == "" || tv == 0){
+            t.val('');
+		    return;
+		}
+		if(tv < r1 || tv > r2){
+            layui.use(['layer'], function () {
+                layui.layer.alert("所输入的值应该在["+r1+","+r2+"]"+"之间");
+            })
+			t.val('');
+		}
+	}
+	//apiId 是需要转换的 input, sgId 是 转换目标
+	function apiToSG(apiId,sgId){
+        sgRealVal = 0; //清空操作
+		var apiObj = $('.'+apiId);
+		checkInputRange(0,100,apiObj);
+		var api = apiObj.val();
+		if(api != "" && api != 0){
+			var res = division(141.5, add(api,131.5)); //js浮点数丢失精度问题
+            sgRealVal = res;
+			res = res.toFixed(4);
+			$('.'+sgId).val(res);
+		}else{
+            $('.'+sgId).val('');
+		}
+	}
+	//sgId 是需要转换的 input,  apiId 是 转换目标
+	function SGToApi(sgId,apiId){
+		var sgObj = $('.'+sgId);
+		checkInputRange(0.6112,1.0760,sgObj);
+		var sg = sgObj.val();
+		if(sg != "" && sg != 0){
+			var res = subduction(division(141.5, sgRealVal == 0 ?sg:sgRealVal.toFixed(5)),131.5);//js浮点数丢失精度问题
+            sgRealVal = 0;
+			res = Number(res).toFixed(2);
+			$('.'+apiId).val(res);
+		}else{
+            $('.'+apiId).val('');
+		}
+	}
+	
+	//初始化
+	#if($!publishType ==  2)
+		//隐藏 mode 1
+		hideMode1();
+		//显示mode 2
+		showMode2();
+	#else
+		//隐藏 mode 2
+		hideMode2();
+		//显示mode 1
+		showMode1();
+	#end
+
+	//显示[需求模式-性质页面]
+	function showMode2(){
+		//隐藏mode1 下的 组件
+		hideMode1Assembly();
+		showMode2Assembly();
+		//显示
+		$('.trMode2').each(function(){
+			$(this).find('input').each(function(){
+				var inputObj = $(this);
+				var id = inputObj.attr('id');
+				//以便 切换时， 表单提交 属性 恢复
+				inputObj.attr('name',id);
+			});
+		});
+		//显示 mode2
+		var remarkObj = $('#mode2Remark');
+		remarkObj.attr('name','crudeOilFormList[0].desc');	
+	}
+	
+	//隐藏 mode 2 下的组件
+	function hideMode2Assembly(){
+		$('.trMode2V').attr('style','display:none');
+	}
+	
+	//显示mode 2下的组件
+	function showMode2Assembly(){
+		$('.trMode2V').attr('style','display:""');
+	}
+	
+	//隐藏 模式 1下的组件
+	function hideMode1Assembly(){
+		$('.trMode1V').attr('style','display:none');
+		$('#addOne').attr('style','display:none');
+	}
+	
+	//显示模式 1下的组件
+	function showMode1Assembly(){
+		$('.trMode1V').attr('style','display:""');
+		$('#addOne').attr('style','display:""');
+	}
+	
+	//隐藏 [需求模式-性质页面]
+	function hideMode2(){
+		//显示 mode 1 下的 组件
+		showMode1Assembly();
+		hideMode2Assembly();
+		//给隐藏的元素 新增 id 属性 以便 模式切换时恢复 表单提交 数据
+		$('.trMode2').each(function(){
+			$(this).find('input').each(function(){
+				var inputObj = $(this);
+				var name = inputObj.attr('name');
+				//以便 切换时， 表单提交 属性 恢复
+				inputObj.attr('id',name);
+				//隐藏 表单提交 name 属性
+				inputObj.attr('name','');
+				
+//				//切换清空
+//				inputObj.attr('value','');
+				
+				
+			});
+		});
+		
+		//隐藏 mode2
+		var remarkObj = $('#mode2Remark');
+		remarkObj.attr('name','');
+	}
+	
+	//显示[需求模式-油种页面]
+	function showMode1(){
+		$('.trMode1V').attr('style','display:""');
+		$('#addOne').attr('style','display:""');
+		
+		//恢复 表单提交 数据
+		$('.trMode1').each(function(){
+			$(this).children('td').each(function(){
+				$(this).children('input').each(function(){
+					var id = $(this).attr('id');
+					//先为 隐藏元素 新增id
+					$(this).attr('name',id);
+				});
+			});
+		
+			//var inputObj = $(this).find('td').find('input');
+			//var id = inputObj.attr('id');
+			//先为 隐藏元素 新增id
+			//inputObj.attr('name',id);
+		});
+	}
+	
+	//隐藏 [需求模式-油种页面]
+	function hideMode1(){
+		//隐藏 整个 油种页面
+		$('.trMode1V').attr('style','display:none');
+		$('#addOne').attr('style','display:none');
+		
+		//给隐藏的元素 新增 id 属性 以便 模式切换时恢复 表单提交 数据
+		$('.trMode1').each(function(){
+			$(this).children('td').each(function(){
+				//切换清空原油产地
+//				$(this).find(".origin_name").html("");
+					
+				$(this).children('input').each(function(){
+					var name = $(this).attr('name');
+					//先为 隐藏元素 新增id
+					$(this).attr('id',name);
+					$(this).attr('name','');
+					
+//					//切换清空
+//					$(this).attr('value','');
+					
+				});
+			});
+			
+			//var inputObj = $(this).find('td').find('input');
+			//var name = inputObj.attr('name');
+			//先为 隐藏元素 新增id
+			//inputObj.attr('id',name);
+			//inputObj.attr('name','');
+		});
+	}
+	//需求模式 :切换至 1
+	$('#oilKind').on('click',function(){
+		// 显示注意提示
+		$('.cg-zy').attr('style','display:""');
+		
+		// 避免多次点击清空id
+		if ($("#publishType").val()==1) {
+			return;
+		}
+		//隐藏 mode 2
+		hideMode2();
+		//显示mode 1
+		showMode1();
+		//加上 cur class
+		$("#oilKind").toggleClass("cur", true);
+		$("#oilNature").toggleClass("cur", false);
+		//按油种发布
+		$("#publishType").val(1);
+	});
+	
+	//需求模式 :切换至 2
+	$('#oilNature').on('click',function(){
+		// 隐藏注意提示
+		$('.cg-zy').attr('style','display:none');
+		
+		// 避免多次点击清空id
+		if ($("#publishType").val()==2) {
+			return;
+		}
+		//隐藏 mode 1
+		hideMode1();
+		//显示mode 2
+		showMode2();
+		//加上 cur class
+		$("#oilNature").toggleClass("cur", true);
+		$("#oilKind").toggleClass("cur", false);
+		//自定义发布
+		$("#publishType").val(2);
+	});
+	
+	
+	function retFunction(data, index){
+		
+		// 判断是否为选过的油种
+		var curId = data.id;
+		var len = $("#crudeDataArray tr").length-1;
+		var flag = true;
+		var dd = $("#crudeDataArray tr").eq(index);
+		$("#crudeDataArray tr").each(function (i,v) {
+			if (i < len) {
+				var name='crudeOilFormList['+ i +'].propertyId';
+				var selId = $("input[name='"+name+"']").val();
+				if (curId == selId) {
+					flag = false;
+					return false;
+				}
+			}
+        });
+        
+        // 如果该油种已经选择过，则提示信息并返回
+        if (flag == false) {
+        	 layui.use("layer",function() {
+                 layui.layer.alert("该油种已选择，请选择其它油种！");
+	        });
+	        return;
+        }
+		
+        var dd = $("#crudeDataArray tr").eq(index);
+        dd.find("input[name$='propertyId']").val(data.id);
+        dd.find(".origin_name").html(data.originNameC);
+        dd.find(".name").html(data.crudeNameE);
+        dd.find(".indicator1Min").html(data.api);
+        dd.find(".indicator2Min").html(data.sulphur);
+        dd.find(".indicator3Min").html(data.acidity);
+        dd.find(".indicator4Min").html(data.carbonResidue);
+        dd.find(".indicator5Min").html(data.nickel);
+        dd.find(".indicator6Min").html(data.vanadium);
+        dd.find(".indicator7Min").html(data.yield);
+        
+        dd.find("input[name$='origin']").val(data.originId);
+        dd.find("input[name$='originName']").val(data.originNameC);
+        dd.find("input[name$='area']").val(data.originAreaId);
+        dd.find("input[name$='cnName']").val(data.crudeNameC);
+        dd.find("input[name$='name']").val(data.crudeNameE);
+        dd.find("input[name$='indicator1Min']").val(data.api);
+        dd.find("input[name$='indicator2Min']").val(data.sulphur);
+        dd.find("input[name$='indicator3Min']").val(data.acidity);
+        dd.find("input[name$='indicator4Min']").val(data.carbonResidue);
+        dd.find("input[name$='indicator5Min']").val(data.nickel);
+        dd.find("input[name$='indicator6Min']").val(data.vanadium);
+        dd.find("input[name$='indicator7Min']").val(data.yield);
+    }
+    function getClearBer(q){
+        var trData = $(q).parent().parent();
+        if (1 < $(".oil_item_nature").length) {
+            trData.nextAll('tr').each(function (i,v) {
+                var next = $(v);
+                var inputHtml = next.find('td:eq(2)').html();
+                var index = inputHtml.substr(inputHtml.indexOf('[')+1,1)-1;
+                next.find('input').each(function (i,v) {
+                    var nameVal = $(v).attr('name');
+                    if(nameVal != undefined && nameVal != ''){
+                        nameVal = 'crudeOilFormList['+index+'].'+nameVal.substr(nameVal.indexOf('.')+1);
+                        $(v).attr('name',nameVal);
+                    }
+                })
+            });
+            trData.remove();
+        } else {
+            trData.find("input[type='text']").val("");
+        }
+    }
+
+    function getDelber(q){
+        var trData = $(q).parent().parent();
+        if (1 < $(".oil_item").length) {
+            trData.nextAll('tr').each(function (i,v) {
+                var next = $(v);
+                var inputHtml = next.find('td:eq(2)').html();
+                var index = inputHtml.substr(inputHtml.indexOf('[')+1,1)-1;
+                next.find('input').each(function (i,v) {
+                    var nameVal = $(v).attr('name');
+                    if(nameVal != undefined && nameVal != ''){
+                        nameVal = 'crudeOilFormList['+index+'].'+nameVal.substr(nameVal.indexOf('.')+1);
+                        $(v).attr('name',nameVal);
+                    }
+                })
+                
+                next.find('.crudeOilLayer').attr('data-index', index+1);
+
+            });
+            trData.remove();
+        } else {
+            trData.find(".origin_name").html("");
+            trData.find(".name").html("");
+            trData.find(".indicator1Min").html("");
+            trData.find(".indicator2Min").html("");
+            trData.find(".indicator3Min").html("");
+            trData.find(".indicator4Min").html("");
+            trData.find(".indicator5Min").html("");
+            trData.find(".indicator6Min").html("");
+            trData.find(".indicator7Min").html("");
+            
+            trData.find("input[type='text']").val("");
+            trData.find("input[type='hidden']").val("");
+        }
+    }
+
+    $(function () {
+        //增加一行
+        $("#addOne").click(function () {
+            var index = $("#crudeDataArray tr").length - 1;
+            var newOne = '<tr class="c-tabcos1 c-table-add oil_item trMode1"><td>' +
+					'<a class="btn-more btn-delete" href="javascript:;" onClick="getDelber(this)">删除</a>' +
+                    '<a class="btn-more crudeOilLayer" href="javascript:;" retFun="retFunction" data-index="'+ (index + 1) +'">选择油种</a>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].propertyId"></td>' +
+                    '<td class="tabl-line"><span class="origin_name"></span></td>' +
+                    '<td class="tabl-line"><span class="name"></span>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].origin"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].area"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].cnName"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].name" readonly maxlength="255"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator1Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator2Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator3Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator4Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator5Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator6Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>' +
+                    '<input type="hidden" name="crudeOilFormList['+ index +'].indicator7Min" readonly maxlength="12" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/></td>' +
+                    '<td class="tabl-line"><span class="indicator1Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator2Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator3Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator4Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator5Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator6Min"></span></td>' +
+                    '<td class="tabl-line"><span class="indicator7Min"></span></td>' +
+                    '<td><input type="text" name="crudeOilFormList['+ index +'].desc" maxlength="255"></td></tr>';
+            $("#crudeDataArray").append(newOne);
+            //刷新监听
+            if(!!crudeOilLayerBindClick){
+                crudeOilLayerBindClick();
+            }
+        });
+    });
+	
+</script>

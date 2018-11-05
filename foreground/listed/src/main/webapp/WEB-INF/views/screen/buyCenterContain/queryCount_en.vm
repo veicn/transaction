@@ -1,0 +1,20 @@
+<div class="cct-blo clearfix">
+    <div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+    #if($authUtils.checkRole("buy_trader"))
+        <div class="cct-blor"><a href="$listedServer.get('purchaseManager/buyingLeadsDemandList.htm')">Crude Demands</a><br><span>$!{crudeOilDemandNum}</span><br></div>
+    #else
+        <div class="cct-blor"><a href="$listedServer.get('oilSaleResources/resourcesList.htm')">Crude Demands</a><br><span>$!{crudeOilDemandNum}</span><br></div>
+    #end
+</div>
+<div class="cct-blo clearfix">
+    <div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+    #if($authUtils.checkRole("buy_trader"))
+        <div class="cct-blor"><a href="$listedServer.get('oilSaleResources/resourcesList.htm')">Crude Oil Resource</a><br><span>$!{crudeOilResourcesNum}</span><br></div>
+    #else
+        <div class="cct-blor"><a href="$listedServer.get('purchaseManager/biddingList.htm')">Crude Oil Resource</a><br><span>$!{crudeOilResourcesNum}</span><br></div>
+    #end
+</div>
+##<div class="cct-blo clearfix">
+##    <div class="cct-blol"><i class="cw-ico ico-yy"></i></div>
+##    <div class="cct-blor"><a href="$listedServer.get('resourceManager/tolist.htm')">Product oil demand</a><br><span>$!{productOilNum}</span><br></div>
+##</div>

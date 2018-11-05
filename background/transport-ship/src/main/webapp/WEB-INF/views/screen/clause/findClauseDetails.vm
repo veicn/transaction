@@ -1,0 +1,120 @@
+
+		<style>
+				table { 
+					width:100%; 
+					text-align: left;
+					border:1px solid #e3e6e8; 
+					border-collapse: collapse; 
+					table-layout: fixed; 
+					display: table;
+				}
+		  </style>
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-mod-block">
+		<div class="s-mod-btit">船盘信息</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table" id="shipPalletTable">
+					  <tr>
+						  <th>船名</th>
+						  <th>船型</th>
+						  <th>船位</th>
+						  <th>OPEN</th>
+						  <th>ETA Fujairah</th>
+						  <th>ETA Cabinda</th>
+						  <th>船东</th>
+						  <th>备注</th>
+					  </tr>
+					 <tr>
+						  <td><div class="name text-overflow">&nbsp;</div></td>
+						  <td><div class="type text-overflow">&nbsp;</div></td>
+						  <td><div class="position text-overflow">&nbsp;</div></td>
+						  <td><div class="open text-overflow">&nbsp;</div></td>
+						  <td><div class="eta text-overflow">&nbsp;</div></td>
+						  <td><div class="etaCabinda text-overflow">&nbsp;</div></td>
+						  <td><div class="shipOwner text-overflow">&nbsp;</div></td>
+						  <td><div class="shipPlateRemark text-overflow">&nbsp;</div></td>
+					 </tr>	
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">船舶资料</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table" id="sysShip">
+					  <tr id="headline">
+						  <th>Vessel Name</th>
+						  <th>IMO</th>
+						  <th>Built</th>
+						  <th>Vessel Type</th>
+						  <th>Vessel Size</th>
+						  <th>Cubic(m³)</th>
+						  <th>SDWT(mt)</th>
+						  <th>LOA(m)</th>
+						  <th>Beam(m)</th>
+						  <th>Draft(m)</th>
+						  <th>Hull Type</th>
+					  </tr>
+					  <tr>
+					 	  <td><div class="VesselName text-overflow">&nbsp;</div></td>
+						  <td><div class="IMO text-overflow">&nbsp;</div></td>
+						  <td><div class="Built text-overflow">&nbsp;</div></td>
+						  <td><div class="VesselType text-overflow">&nbsp;</div></td>
+						  <td><div class="VesselSize text-overflow">&nbsp;</div></td>
+						  <td><div class="Cubic text-overflow">&nbsp;</div></td>
+						  <td><div class="SDWT text-overflow">&nbsp;</div></td>
+						  <td><div class="LOA text-overflow">&nbsp;</div></td>
+						  <td><div class="Beam text-overflow">&nbsp;</div></td>
+						  <td><div class="Draft text-overflow">&nbsp;</div></td>
+						  <td><div class="HullType text-overflow">&nbsp;</div></td>
+					   </tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit epMemberName"></div>
+			<div class="s-mod-bcont2">
+				<div class="cg-ord-box">
+					<div class="clearfix s-info-box"></div>
+					<div class="cg-ord-blo">
+						<div class="cg-ord-cont clearfix">
+							<div class="purchase">
+								<ul>
+									<li class="purc-blo clearfix">
+										<span class="purc-spanl"><em>*</em>意向装期 LAYCAN</span>
+										<span class="purc-span3">
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte" id="pactBeg" ></span>
+												<em class="gang">&nbsp;&nbsp;-&nbsp;&nbsp;</em>
+												<span style='display:block; float:left; text-align:justify;word-break:break-all;' class="c-int qx-conte" id="pactEnd"></span>
+										</span>
+									</li>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向货量 (吨)</span><span class="purc-span3" ><input style="border:none" type="text" readOnly="true" placeholder="" id="minQuantity"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向装货地点要求</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="loadRegion"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl"><em>*</em>意向卸货地点要求</span><span class="purc-span3"><input style="border:none" type="text"  readOnly="true" placeholder="" id="unloadRegion"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl" style="color:#F0F">WS点</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="ws"></span></li>
+								</ul>
+							</div>
+							<div class="purchase">
+								<ul>
+									<li class="purc-blo clearfix"><span class="purc-spanl">滞期费率  (USD/PDPR)</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="demurrage"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl">允许装卸时间 (h)</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true"	 placeholder="" id="dockTime"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl">航速 (kts)</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="pactSpeed"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl">租船代理费</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="commission"></span></li>
+									<li class="purc-blo clearfix"><span class="purc-spanl">备注</span><span class="purc-span3"><input style="border:none" type="text" readOnly="true" placeholder="" id="remark1"></span></li>
+								</ul>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="s-btn-box"></button><!-- <button class="s-btn s-btn-blue">合同管理</button><button class="s-btn s-btn-orange">我要租船</button><button class="s-btn s-btn-blue">录入费用</button> --></div>
+	</div>
+<script src="../transport/js/clause/findClauseDetails.js"></script>
+
+  

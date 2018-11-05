@@ -1,0 +1,144 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')">
+<link rel="stylesheet" href="$imageServer.get('info/css/price/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="demo">
+		<ul class="layui-tab-title">
+			<li>指数模板维护</li>
+			<li class="layui-this">指数维护</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+
+				<div class="inquire">
+					<h3>查询条件</h3>
+				</div>
+				<div class="form-box">
+					<div class="layui-form">
+						<div class="layui-form-item">
+							<div class="layui-inline industry-name">
+								<label class="layui-form-label " style="margin-left:-10px;">指数名称</label>
+								<div class="layui-input-inline wd">
+									<input type="tel" id="indexName" name="indexName" value="$!{query.indexName}" lay-verify="required|phone" autocomplete="off"
+										class="layui-input">
+								</div>
+							</div>
+	
+							<div class="layui-inline industry-name">
+								<label class="layui-form-label">日期</label>
+								<div class="layui-input-inline wd">
+									<input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+										autocomplete="off" class="layui-input" value="$!{query.indexDate}" >
+								</div>
+								<button class="layui-btn layui-btn-normal ml18 selectFn">
+									查询
+								</button>
+								<button id="reset" class="layui-btn layui-btn-normal">
+									重置
+								</button>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							 <div class="llayui-inline industry-name">
+								 	<label class="layui-form-label" style="margin-left:-10px;">附件：</label>
+								 	<div class="layui-inline layui-upload">
+									  <button type="button" style="margin-right:5px; background:none;color:black; width:150px; border: 1px solid #cccccc;" class="layui-btn layui-btn-normal" id="importExcel">选择文件...</button>
+									  <button type="button" class="layui-btn layui-btn-normal" id="ensure">导入</button>
+									  <button type="button" class="layui-btn layui-btn-normal" id="exportExcel">导出</button>
+									</div>
+							 </div>
+						</div>
+					</div>
+
+					<div class="inquire1">
+						<h3>查询结果</h3>
+					</div>
+					<form class="layui-form add" action="" >
+					<div style="overflow-x:auto">
+						<table class="layui-table two lay-even="" lay-skin="nob">
+							<thead style="text-align: center;">
+								<tr>
+									<th> 
+										<input class="checkAll" type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+									</th>
+									<th>序号</th>
+									<th>指数名称</th>
+									<th>指数值 <span style="color:red; font-size: 16px;">*</span></th>
+									<th>涨跌<span style="color:red; font-size: 16px;">*</span></th>
+									<th>涨跌幅</th>
+									<th>开盘</th>
+									<th>最高</th>
+									<th>最低</th>
+									<th>昨收</th>
+									<th>昨收涨跌</th>
+									<th>昨收涨跌率</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($item in $priceIndexs)
+								<tr class="trOwn">
+									<td>
+										<input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+										<input name="uuid" value="$!{item.uuid}" type="hidden" class="w1 uuid" />
+									</td>
+									<input name="tempUuid" value="$!{item.templateUuid}" type="hidden" class="w1 tempUuid" />
+									<td>$!{velocityCount}</td>
+									<!-- <td>$!{item.uuid}</td> -->
+									<td>$!{item.indexName}</td>
+									<td>
+										<input name="smeiValue" min="0.0001" onchange="myNumberic(this)" value="$!{item.smeiValue}"
+											type="number" class="w1 smeiValue" />
+									</td>
+									<td>
+										<input name="riseFall" onchange="myNumberic(this)" value="$!{item.riseFall}"
+											type="number" min="0.0001" class="w1 riseFall" />
+									</td>
+									<td>
+										<input name="riseFallRate" readonly="readonly" value="$!{item.riseFallRate}" type="text"
+											class="w1 result riseFallRate" />
+									</td>
+									<td>
+										<input name="open" value="$!{item.open}" type="text" class="w open" />
+									</td>
+									<td>
+										<input name="high" value="$!{item.high}" type="text" class="w high" />
+									</td>
+									<td>
+										<input name="low" value="$!{item.low}" type="text" class="w low" />
+									</td>
+									<td>
+										<input name="preClose" value="$!{item.preClose}" type="text" class="w preClose" />
+									</td>
+									<td>
+										<input name="preRiseFall" value="$!{item.preRiseFall}" type="text" class="w preRiseFall" />
+									</td>
+									<td>
+										<input name="preRiseFallRate" value="$!{item.preRiseFallRate}" type="text" class="w preRiseFallRate" />
+									</td>
+									<td>
+										<textarea name="remark" class="remark t-m" rows="3" cols="10">$!{item.remark}</textarea>
+									</td>
+								</tr>
+								#end
+							</tbody>
+
+						</table>
+	
+						<div class="foot">
+							<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveOrUpdatePriceIndex">保存</button>
+							<button id="tableReset" type="button" class="layui-btn layui-btn-normal">重置</button>
+						</div>
+					</div>
+					</form>
+					
+					<!--底部分页-->
+                     <!--  <div class="ry-footbar ry-right">
+                          $contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/price/priceMainTain.htm").put('slider_path','/contain/formPagingPageSlider')		
+                      </div> -->
+				</div>
+
+			</div>
+
+		</div>
+
+</div>
+<script src="$imageServer.get('info/js/price/priceMainTain.js')"></script>

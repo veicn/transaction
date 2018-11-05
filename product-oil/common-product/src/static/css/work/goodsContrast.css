@@ -1,0 +1,81 @@
+.center {
+    width: 1180px;
+    height: 100%;
+    margin: 0 auto;
+}
+.g-content>.r-cont-tit{
+    display: inline-block;
+    margin-top: 38px;
+    margin-bottom: 30px;
+    width: 100%;
+    color: #F5650A;
+    font-size: 30px;
+}
+.g-table-lj{
+    margin-bottom: 40px;
+}
+table{
+    border:1px solid #EBEBEB;
+    border-collapse: collapse;
+}
+.table>tbody>tr>td, .table>thead>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+table>tbody>tr>td,.table>thead>tr>th{
+    border:1px solid #EBEBEB;
+}
+
+.table-bordered tr td {
+    text-align: center;
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+.table-bordered tr:nth-of-type(2n){
+    background:#FCFCFC;
+}
+.table>thead>tr>th{
+    background: #F7F7F7 ;
+}
+.g-btn{
+    display: inline-block;
+    width:100%;
+    margin:30px 0 100px 0;
+}
+.g-btn .button-b1{
+    display: block;
+    width:700px;
+    margin: 0 auto;
+}
+.g-btn .button-b1 a {
+    display: inline-block;
+    width: 143px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    font-size: 20px;
+    margin-right: 87px;
+    background: #F36523;
+    border-radius: 2px;
+    color: #FFFFFF;
+}
+.g-btn .button-b1 a:hover{
+    background: #FF9D32 ;
+}
+.brand-box{
+    width:100%;
+    height:180px;
+    background: #E06D38;
+}
+.brand-box>.brand{
+    width:1180px;
+    margin: 30px auto 0;
+}
+.brand-box>.brand>li:not(:last-of-type){
+    float: left;
+    margin-right: 20px;
+}
+/*.brand>li*/

@@ -1,0 +1,25 @@
+<script>
+    $(function(){
+        ##后台验证出错，暂时使用js绑定异常信息
+        #if($errors && $errors.size() > 0)
+            function bindErrorMessage() {
+                #foreach($error in $errors)
+                    #if($!{error.objectName} && "$!{error.objectName}" != "demandForm")
+                        $("input[name='$!{error.objectName}.$!{error.field}']").parent().find("label.error").html("$!{error.defaultMessage}").show();
+                        $("select[name='$!{error.objectName}.$!{error.field}']").parent().find("label.error").html("$!{error.defaultMessage}").show();
+                    #else
+                        $("input[name='$!{error.field}']").parent().find("label.error").html("$!{error.defaultMessage}").show();
+                        $("select[name='$!{error.field}']").parent().find("label.error").html("$!{error.defaultMessage}").show();
+                    #end
+                #end
+            }
+            bindErrorMessage();
+        #end
+        #if($errorMessage && $errorMessage != "")
+            layui.use("layer",function() {
+                //layui.layer.alert("$!{errorMessage}");
+                layui.layer.alert("$!{errorMessage}", {title:"Notice", btn: "OK"});
+            });
+        #end
+    });
+</script>

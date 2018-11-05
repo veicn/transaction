@@ -1,0 +1,23 @@
+<form id="" action="$appServer.get('/resourceManager/tolist.htm')" method="post" >
+        <div class="c-form">
+            <ul class="c-ful">
+                <li class="c-fcos3"><span class="c-fn c-fn2 c-fn3">需求单编号：</span><input type="text" class="c-int c-int3" name="demandCode" value="$!{queryForm.demandCode}"/></li>
+                <li class="c-fcos3 c-tx"><span class="c-fn c-fn2">发布时间：</span><input type="text" class="c-int c-int4" date="true" name="pubDateStart" value="$!{queryForm.pubDateStart}"/>—<input type="text" class="c-int c-int4" date="true" name="pubDateEnd" value="$!{queryForm.pubDateEnd}"/></li>
+                <li class="c-fcos3"><span class="c-fn c-fn2">付款日期：</span>
+                    <select class="sele sele1" name="payItem" value="$!{queryForm.payTerm}">
+                        <option value="">请选择</option>
+                        #foreach($obj in $!payItemMap.entrySet())
+                            <option  #if($!{queryForm.payTerm} == $!{obj.key}) selected #end value="$!obj.key" >$!obj.value</option>
+                        #end
+                    </select>
+                </li>
+                <li class="c-libtn"><button>查询</button></li>
+            </ul>
+        </div>
+    </form>
+    <div class="order-add">
+        <a href="$appServer.get('/resourceManager/toPublishResource.htm')"><i class="oico-plus"></i>增加销售需求</a>
+        <a id="batchAdded">批量上架</a>
+        <a id="batchUnderCharged">批量下架</a>
+        <a id="batchDelete">批量删除</a>
+    </div>

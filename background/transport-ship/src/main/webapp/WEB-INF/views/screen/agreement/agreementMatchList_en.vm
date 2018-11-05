@@ -1,0 +1,53 @@
+	<style>
+		.text-overflow{width:90%; overflow: hidden; white-space:nowrap; text-overflow:ellipsis;}
+		.contain {
+			width:100%;
+		}
+		
+		table { 
+			width:100%; 
+			text-align: left;
+			border:1px solid #e3e6e8; 
+			border-collapse: collapse; 
+			table-layout: fixed; 
+			display: table;
+		}
+	</style>
+	<div class="c-mod">
+		
+		  <style>
+		  .zy tr:nth-of-type(2n+1){ background-color:#f9f9f9;}
+		  </style>
+		  <div class="c-mod">
+			<h3><i class="cw-ico ico-h3"></i>租船协议列表<!-- <span class="cxtj-nr-an"><a href="javascript:;" class="btn-more back">&nbsp;&nbsp;匹配&nbsp;&nbsp; </a></span> --></h3>
+			<div class="c-tabdiv contain">
+			  <table class="zy">                                                                            
+				<tr>
+					<th style="width:5%;"><input type="checkbox" class="checkAll"></th>
+					<th>租船协议编号 </th>
+					<th>租船协议日</th>
+					<th>甲方</th>
+					<th>乙方</th>
+					<th>船名</th>
+					<!-- <th style="width:80px;">操作</th> -->
+				</tr>
+				  #foreach($data in $datas)
+				<tr>
+				  <td style="width:5%;" ><input type="checkbox" class="check" value="$!{data.uuid}"></td>
+				  <td title="$!{data.agreementCode}"><div class="text-overflow">$!{data.agreementCode}</div></td>
+				  <td title="$!{data.ext1}"><div class="text-overflow">$!{data.ext1}</div></td>
+				  <td title="$!{data.firParty}"><div class="text-overflow">$!{data.firParty}</div></td>
+				  <td title="$!{data.secParty}"><div class="text-overflow">$!{data.secParty}</div></td>
+				  <td title="$!{data.shipName}"><div class="text-overflow">$!{data.shipName}</div></td>
+				</tr>
+				#end
+			</table>
+			</div>
+			$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/agreement/agreementMatchList.htm')")
+			 #if($!{datas.size()} > 0)
+			<div class="c-subdiv">
+				<button class="c-btncas" id="match">匹配</button>
+			</div>
+			#end
+	</div>
+	<script src="../transport/js/agreement/agreementMatchList.js"></script>

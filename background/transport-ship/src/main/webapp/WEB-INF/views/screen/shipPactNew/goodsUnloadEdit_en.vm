@@ -1,0 +1,59 @@
+	 <div class="s-mod">
+		<div class="s-order-box">
+			<!-- <div class="clearfix s-order-tit2">
+			<a href="javascript:;"id="load" >货物装港信息</a>
+			<a href="javascript:;" id="unload" class="curr">货物卸港信息</a></div> -->
+			<div class="clearfix s-order-tit"><h1>Cargo Information</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix   s-ship-cla">
+				<li><a  href="javascript:;"  id="load" >Loading port</a></li>
+				<li  class="curr"><a  href="javascript:;" id="unload">Discharging Port</a></li>
+			</ul>
+		</div>
+		<div class="all" hidden="true">
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Discharging Port</div>
+			<div class="s-mod-bcont s-mod-bcont4">
+			<form class="s-form s-form-cont s-form-cont2 s-form-contxx" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Discharging Port：</label>
+					  <div class="s-input-inline">
+						  <p class="unloadPort"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Grade：</label>
+					  <div class="s-input-inline">
+						  <p class="oilType"></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Charter Party No：</label>
+					  <div class="s-input-inline">
+						  <p class="agreementCode"></p>
+					  </div>
+					</div>
+					<div class="s-inline ">
+					  <label class="s-form-label">Attachment：</label>
+					  <div class="s-input-inline">
+						 <p class="accessory">
+						 <input type="text" readonly="readonly" class="s-input accessoryFile" id="accessoryFile1" >
+						 <a href="javascript:;" id="accessoryBtn1">Upload</a>
+						  <i class="s-icon fs-close clearFile"></i>
+						 </p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+			<div class="accAll">
+				 <div class="accessoryAcc" id="accessoryAcc1"  style="display:none;"></div>	
+			</div>
+		</div>
+		</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-blue" id="save">Submit</button><button class="s-btn s-btn-primary returnFn">Back</button></div>
+	</div>
+<script src="../transport/js/shipPactNew/goodsUnloadEdit.js"></script>

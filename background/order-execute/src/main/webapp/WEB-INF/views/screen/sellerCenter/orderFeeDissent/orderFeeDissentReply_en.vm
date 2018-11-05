@@ -1,0 +1,57 @@
+
+	#if($dissentList && $dissentList.size() > 0)
+		
+	
+		<style type="text/css">
+			.pre_font {
+				font: 14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;
+			}
+		</style>
+
+		<div class="c-mod">
+			<h3><em class="cw-ico ico-h3"></em>Checking disputes</h3>
+				<div>
+				
+					#foreach($data in $dissentList)
+						<div class="buy-blo clearfix">
+							<div class="buy-l"><img src="../../orderexecute/images/m1_con_bg.jpg"></div>
+							<div class="buy-r" id="content_$!data.feeDissentId">
+								<div class="buy-r-b">
+									<p class="buy-r-tit"><pre class="pre_font">$!data.dissentContent</pre></p>
+									<p class="buy-r-time">Send Time：$!data.dissentTime</p>
+								</div>
+								<p class="buy-r-line"></p>
+								#if($!data.replyContent && $!data.replyContent != '')
+									<div class="buy-r-b">
+										<p class="buy-r-tit">
+											<div class="buy-r-tit" style="display:inline-block; vertical-align: top;">
+												<pre class="pre_font">[Seller's feedback]</pre>
+											</div>
+											<div style="display:inline-block; vertical-align: top; margin-left: 10px;">
+												<pre class="pre_font">$!data.replyContent</pre>
+											</div>
+										</p>
+										<p class="buy-r-time">Send Time：$!data.updateDate</p>
+									</div>
+								#else
+									#if($!query.canReply == 1)
+										<div class="c-subdiv" style="text-align: left; padding: 0;">
+											<button class="c-btnsub reply" id="reply_$!data.feeDissentId" feeDissentId="$!data.feeDissentId">Reply</button>
+										</div>
+									#end
+								#end
+							</div>
+						</div>
+					#end
+
+				</div>
+			<div id="replyDiv" style="display: none;">
+				<div class="c-subdiv">
+					<input id="orderId" type="hidden" value="$!query.orderId">
+					<input id="dissentType" type="hidden" value="$!query.dissentType">
+					<button class="c-btnsub btn-lj saveReply">Reply in message</button><button class="c-btncas clearContent">Empty</button><button class="c-btncas backPageReply">back</button>
+				</div>
+			</div>
+		</div>
+		<script src="../../orderexecute/js/orderFeeDissent/orderFeeDissentReply.js"></script>
+	#end

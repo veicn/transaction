@@ -1,0 +1,73 @@
+<form class="layui-form" action="" >
+    <div class="layui-form-item" style="margin-top: 15px!important ;">
+        <label class="layui-form-label ">合约名称</label>
+        <div class="layui-input-inline ">
+        <input type="text" name="symbolName" lay-verify="required" placeholder="请输入合约名称" class="layui-input">
+        </div>
+        <label class="layui-form-label ">合约代码</label>
+        <div class="layui-input-inline ">
+        <input type="text" name="symbol"  placeholder="请输入合约代码" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">货币单位</label>
+        <div class="layui-input-inline ">
+        <input type="text" name="currency" lay-verify="required" placeholder="请输入货币单位" class="layui-input">
+        </div>
+    	<label class="layui-form-label ">价格来源</label>
+       <div class="layui-input-inline"  >
+	      <select id="priceSource" name="priceSource"  lay-verify="required" lay-filter="selectChannelM">
+	      	<option value="">请选择</option>
+	      </select>
+	    </div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label ">市场</label>
+       <div class="layui-input-inline"  >
+	      <select id="market" name="market" lay-verify="required" lay-filter="selectChannelM">
+	      	<option value="">请选择</option>
+	      </select>
+	    </div>
+    	<label class="layui-form-label ">频率</label>
+       <div class="layui-input-inline"  >
+	      <select id="frequency" name="frequency" lay-verify="required" lay-filter="selectChannelM">
+	      	<option value="">请选择</option>
+	      </select>
+	    </div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label ">合约类型</label>
+       <div class="layui-input-inline"  >
+	      <select id="symbolType" name="symbolType" lay-verify="required" lay-filter="selectChannelM">
+	      	<option value="">请选择</option>
+	      </select>
+	    </div>
+    	<label class="layui-form-label ">类型</label>
+       <div class="layui-input-inline"  >
+	      <select id="type" name="type" lay-verify="required" lay-filter="selectChannelM">
+	      	<option value="">请选择</option>
+	      </select>
+	    </div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label ">到期日</label>
+       <div class="layui-input-inline"  >
+       		<input type="text" class="layui-input" name="expireDate" id="expireDate" placeholder="yyyy-MM-dd" lay-verify="required">   
+	   </div>
+	    <label class="layui-form-label ">商品标的</label>
+        <div class="layui-input-inline ">
+        <input type="text" name="commodity" lay-verify="required" placeholder="请输入商品标的" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+    	<label class="layui-form-label ">前台显示</label>
+        <div class="layui-input-inline"  >
+       		<input  type="checkBox" name="extend2" id="extend2" value="1" checked="true">
+	    </div>
+    </div>
+     <div class="layui-form-item">
+	    <button id="saveSymbol" class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveSymbol" style="margin-left: 30%;margin-top: 15px;">保存</button>
+	    <button id="ext" type="button" class="layui-btn layui-btn-normal"  style="margin-left: 15%;margin-top:15px;">取消</button>
+     </div>
+</form>
+

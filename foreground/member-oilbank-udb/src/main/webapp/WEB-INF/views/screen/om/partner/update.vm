@@ -1,0 +1,162 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<style>
+    .img_box img{
+        width: 100px;
+        /*height: 200px;*/
+    }
+</style>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<script src="$!imageServer.get('/js/upload.js')" type="application/javascript"></script>
+<form class="layui-form" id="saveForm" style="padding-right: 25px;padding-top: 25px">
+    <input type="hidden" name="id" value="$!{partner.id}" />
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">企业类型</label>
+        <div class="layui-input-inline">
+            <select id="type" name="type" lay-verify="required" style="width: 300px">
+                <option value=""></option>
+                #foreach($c in $!credentials)
+                    <option value="$!{c.code}" #if($!{partner.type} == $!{c.code}) selected #end>$!{c.name}</option>
+                #end
+            </select>
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">企业名称（中文）</label>
+        <div class="layui-input-inline">
+            <input type="text" id="name" name="name" lay-verify="required" class="layui-input" style="padding-right: 30px;width: 300px" value="$!partner.name">
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">企业名称（英文）</label>
+        <div class="layui-input-inline">
+            <input type="text" id="nameEn" name="nameEn" class="layui-input" style="padding-right: 30px;width: 300px" value="$!partner.nameEn">
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">跳转路径</label>
+        <div class="layui-input-inline">
+            <input type="text" id="url" name="url" lay-verify="required" class="layui-input" style="padding-right: 30px;width: 300px" value="$!partner.url">
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">图片路径</label>
+        <div class="layui-input-inline">
+            <input id="logo" type="hidden" name="logo" value="$!{partner.logo}"/>
+            <span class="img_box">
+                #if($!{partner.logo} && $!{partner.logo} != "")
+                    <img id="logoView" src="$!{uploadServer}/img/$!{partner.logo}.img"/>
+                #end
+            </span>
+            <a id="logoBtn" class="layui-btn layui-btn-primary layui-btn-small">点击上传</a>
+            <a href="$!{uploadServer}/img/$!{partner.logo}.img" class="previewBtn layui-btn layui-btn-primary layui-btn-small" target="_blank" doctype="1" style="
+                #if($!{partner.logo} && $!{partner.logo} != "")
+                        visibility: visible;
+                #else
+                        visibility: hidden;
+                #end
+                    " >预览</a>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-inline"><span style="color:red">$!{errorMsg}</span></div>
+    <div style="text-align:center;">
+        <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交">
+    </div>
+
+</form>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+        //默认同步
+        $.ajaxSetup({
+            async: false
+        });
+
+        //logo图片上传
+        $("#logoBtn").fileUpload({
+            uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+            type: 0,//0：图片 1：文档 2：视频 3：音频
+            docType: "GSLOGO",//档案类型
+            objectId: "$!{user.memberId}",//档案目标id（所属人）
+            beforeUpload: function(path) {
+                loadIndex = layer.load(0, {shade: false});
+            },
+            uploadEnd: function(result){
+                if(result.success == true) {
+                    $("#logo").val(result.id);
+
+                    var previewBtn = $("#logoBtn").parent().find(".previewBtn");
+                    previewBtn.css("visibility", "visible");
+                    previewBtn.attr("href", '$!{uploadServer}/img/'+ result.id +'.img');
+                    $("#logoView").attr("src", '$!{uploadServer}/img/'+ result.id +'.img');
+
+                    layer.alert("上传成功！");
+                } else {
+                    layer.alert(result.error);
+                }
+                layer.close(loadIndex);
+            }
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            var type = $("#type").val();
+            var name = $("#name").val();
+            var url = $("#url").val();
+            var logo = $("#logo").val();
+            if (type == '' || name == '' || url == '') {
+                layer.alert("请填写完整信息！")
+                return false;
+            }
+
+            $.ajax({
+                url:'$appServer.get("om/partner/save.json")',
+                type:'POST',
+                data:$("#saveForm").serialize(),
+                success:function(data){
+                    layer.alert(data.message,function(){
+                        if(data && data.status == 0){
+                            parent.layer.closeAll();
+                            parent.location.reload();
+                        }else{
+                            layer.alert(data.message)
+                        }
+                    });
+                },error:function(r,d){
+                    console.log(r)
+                    console.log(d)
+                    layer.alert('保存失败')
+                }
+            });
+
+            return false;
+
+        });
+    });
+</script>
+</body>
+</html>

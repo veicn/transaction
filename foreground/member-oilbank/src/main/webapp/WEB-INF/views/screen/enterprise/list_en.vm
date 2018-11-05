@@ -1,0 +1,81 @@
+<style type="text/css">
+    label.error {
+        color: red;
+        padding: 3px 10px;
+    }
+    span.required {
+        color: red;
+    }
+</style>
+<form id="enterpriseForm" action="$appServer.get('/member/center/register.htm')" method="post">
+    <table>
+        <tr>
+            <th>Corporate name：</th>
+            <td>
+
+                <input type="text" id="name" name="name" value="$!{enterprise.name}" />
+
+            </td>
+        </tr>
+        <tr>
+            <th>region：</th>
+            <td>
+                <input type="text" id="provinceCode" name="provinceCode" value="$!{enterprise.provinceCode}" />
+
+            </td>
+        </tr>
+        <tr>
+            <th>Date of registration：</th>
+            <td>
+
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">Chinese version</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="registerTime" placeholder="yyyy-MM-dd">
+                            </div>
+                        </div>
+                    </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <input type="submit" value="query" />
+            </th>
+        </tr>
+    </table>
+
+    <!-- 3.数据集合 -->
+    <table id="enterpriseGrid" ></table>
+    <table class="layui-table" lay-data="{height:313, url:'/demo/table/findList4Page/'}">
+        <thead>
+        <tr>
+            <th lay-data="{field:'code', width:80, sort: true}">company ID</th>
+            <th lay-data="{field:'name', width:80}">company name</th>
+            <th lay-data="{field:'sex', width:80, sort: true}">Country</th>
+            <th lay-data="{field:'city', width:80}">region</th>
+            <th lay-data="{field:'contactName', width:177}">Associate</th>
+            <th lay-data="{field:'registerTime', width:80, sort: true}">Time of admission</th>
+            <th lay-data="{field:'', width:80, sort: true}">Registration type</th>
+        </tr>
+        </thead>
+    </table>
+
+    </body>
+
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+##        $("#ajaxanswer").blur(function(){
+##            var ajaxanswerValue = "$appServer.get('/checkcode/check.json?token=')" + $("#ajaxanswer").val();
+##
+##            jQuery.getJSON(ajaxanswerValue,
+##                    function(data){
+##                        alert(data);
+##                    });
+##        });
+    })
+</script>

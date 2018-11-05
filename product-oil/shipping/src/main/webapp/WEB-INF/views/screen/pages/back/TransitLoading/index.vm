@@ -1,0 +1,143 @@
+$contain.get('/common/title.htm').put('title', 'TransitLoading')
+<script>
+var object = '$!{loadPortList}'
+var selectSea = '$!{selectSea}'
+</script>
+        <div class="m-nav stowage-steps-content fl clearfix vl-nav-l">
+            <ul class="stowage-steps clearfix constatus" >
+                <li class="steps completed fl  ">
+                    <div class="steps-infor complete fl " >
+                        <span id="oncliOne">VOYAGE TRACKING</span><br>
+                        <em></em>
+                    <input type="hidden" value="$!{confObject.status}" id="constartu">
+                    <input type="hidden" value="$!{tableMaxFlag}" id="tableMaxFlag">
+                    <input type="hidden" value="$!{step}" id="step">
+                    <input type="hidden" value="$!{conuuid}" id="conUuid">
+                    </div>
+                
+                </li>
+                <li class="steps completed fl  ">
+                <input type="hidden" value="$!{confObject}" id="objectAdd">
+                    <div class="steps-infor">
+                        <span>LOADING <br> PORT</span>
+                    </div>
+                </li>
+                <li class="steps completed fl ">
+                    <div class="steps-infor">
+                        <span>END TASK </span>
+                    </div>
+                </li>
+            </ul>
+            <div class=" stowage-steps-info clearfix">
+                <ol class="fl">
+                    <li>
+                        <span class="m-f-span w106">Order Number :</span>
+                        <span class="m-r-span">$!{confObject.orderNumber}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w106">Product :</span>
+                        <span class="m-r-span">$!{confObject.product}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w106">Quantity :</span>
+                        <span class="m-r-span quantity">$!{confObject.quantity}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w106">Vessel’s name :</span>
+                        <span class="m-r-span">$!{confObject.vesselName}</span>
+                    </li>
+                </ol>
+                <ul class="fr">
+                    <li>
+                        <span class="m-f-span w120">Prot Of Loading :</span>
+                        <span class="m-r-span">$!{confObject.portOfLoading}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w120">Port Of Discharge :</span>
+                        <span class="m-r-span">$!{confObject.portOfDischarge}</span>
+                    </li>
+                    <li>
+                        <span class="m-f-span w120">Laycan :</span>
+                        <span class="m-r-span">$!{confObject.laycanStrat}-$!{confObject.laycanEnd}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="split-line"></div>
+            <!--2个的切换 star-->
+            <div id="" class="">
+                <div class="lib_tabox">
+                    <ul class="clearfix">
+                        <li class="tab-title one1 fl active">Voyage Start<span class="tab-line">|</span></li>
+                        <li class="tab-title one2 fl">Loading Port</li>
+                    </ul>
+
+                </div>
+                <div class="lib_voyabox lib_tabborder">
+                    <div class="con_one_1 con_one" style="display: block">
+                        <h2>Voyage Start</h2>
+                        
+                        <table class="table table-bordered table-loading clearfix tableCheck voyage-table"><!--lv-table-one -->
+                           <thead>
+                           <tr>
+                               <th class="active w1 pd0">Date</th>
+                               <th class="active w2 pd0">Loading Port</th>
+                               <th class="active w3 pd0">Eta</th>
+                               <th class="active w4 pd0">ETB(Berthing)</th>
+                               <th class="active w5 pd0">Posn</th>
+                               <th class="active w6 pd0">Sea</th>
+                               <th class="active w7 pd0">Ave Spd 24h(km/h)</th>
+                               <th class="active w8 pd0">Operate</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           
+                            </tbody>
+                        </table>
+
+                        
+                        <div class="fr addBox"><a href="javascript:;" class="br addBtn startAdd">Add</a></div>
+
+                        <div class="split-line split-line-l"></div>
+                        <div class="saveBox"><a href="javascript:;" class="br savebtn">Save</a></div>
+                    </div>
+                    <div class="con_one_2 con_one">
+                        $contain.get("/pages/back/LoadPort/index.htm").setParam("comUuid", $!{confObject.uuid}).put("loadObject",$!{confObject})
+                        <!--4个的切换 end-->
+                     
+                    </div>
+                </div>
+            </div>
+            <!--2个的切换 end-->
+            <!--<div class="split-line"></div>-->
+
+        </div>
+<script>
+
+var aa = $("#constartu").val()
+if(aa<=20){
+	$(".constatus>li:first-of-type").addClass("doing")
+}
+if(aa>20&&aa<30){
+	$(".constatus>li:first-of-type").addClass("done")
+	$(".constatus>li:nth-of-type(2)").addClass("doing")
+}
+if(aa>=30&&aa<40){
+	$(".constatus>li:first-of-type").addClass("done")
+	$(".constatus>li:nth-of-type(2)").addClass("doing")
+}
+if(aa>=40&&aa<50){
+	$(".constatus>li:first-of-type").addClass("done")
+	$(".constatus>li:nth-of-type(2)").addClass("done")
+	$(".constatus>li:nth-of-type(3)").addClass("done")
+}
+if(aa>=50){
+	$(".constatus>li:first-of-type").addClass("done")
+	$(".constatus>li:nth-of-type(2)").addClass("done")
+	$(".constatus>li:nth-of-type(3)").addClass("done")
+}
+</script>
+
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/stowage-plan.css?css_version=03280827'))
+#js($appServer.get('script/pages/back/loadPort/voyageLoading.js?js_version=03280827'))
+#js($appServer.get('script/pages/back/loadPort/index.js?js_version=03280827'))

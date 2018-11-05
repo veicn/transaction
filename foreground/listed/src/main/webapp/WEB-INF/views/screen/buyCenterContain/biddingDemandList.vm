@@ -1,0 +1,63 @@
+<div class="c-mod">
+    <div class="c-tabdiv">
+        <table>
+            <tr>
+                <th>报价单编号</th>
+                <th>供应商</th>
+                <th>油种</th>
+
+                <th>数量（万桶）</th>
+                <th>贸易条款</th>
+                <th>计价公式</th>
+
+                <th>计价期</th>
+                <th>付款日期</th>
+                <th>到货期</th>
+
+                <th>报价类型</th>
+                <th>状态</th>
+                <th>操作</th>
+
+            </tr>
+
+            #foreach($record in $!{pageInfoList.list})
+                <tr>
+                    #*采购需求单编号*#
+                    <td><a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.id})" class="c-tablink">$!{record.uuid}</a></td>
+                    #*供应商*#
+                    <td>$!{record.pEnterpriseName}</td>
+                    #*油种*#
+                    <td>$!{record.crudeOilOptions}</td>
+
+                    #*数量*#
+                    <td>$!record.num</td>
+                    #*贸易条款*#
+                    <td>$!{record.tradeItem}</td>
+                    #*计价公式*#
+                    <td>$!{record.valuationFormula}</td>
+
+                    #*计价期*#
+                    <td>$!record.valuationProidType</td>
+                    #*付款期*#
+                    <td>$!{record.payItem}</td>
+                    #*到货期*#
+                    <td>$!{record.dischargeStartTime} 至 $!{record.dischargeEndTime}</td>
+
+                    #*报价类型*#
+                    <td>#if($!{record.biddingType} == 1) 意向报价 #else 正式报价 #end</td>
+                    #*状态*#
+                    <td>#if($!{record.status} =='10') 已报价 #elseif($!{record.status} =='20') 已中标 #elseif($!{record.status} =='30') 已结束 #end</td>
+                    #*操作*#
+                    <td>
+                    	<a href="$appServer.get('/purchaseManager/biddingDetail.htm').put('demandId', $!{record.id})" class="c-tablink">查看详情</a>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<a href="javascript:void(0)" id="compareC_$!{record.id}_$!{record.id}" sn="$!{record.id}" dealType="B" img="$docServer.get('/img/GSLOGO/')$!{record.creater}.img" name="$!{record.crudeOilOptions}" value="$!{record.id}"
+                           class="detail-bsc cg-jrdb compareC c-tablink">加入对比</a>
+                    </td>
+					
+                </tr>
+            #end
+
+        </table>
+    </div>
+</div>

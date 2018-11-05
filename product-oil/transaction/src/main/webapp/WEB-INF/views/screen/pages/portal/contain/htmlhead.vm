@@ -1,0 +1,13 @@
+<head>
+    <meta charset="UTF-8">
+    <title>OILBANK - Home</title>
+    <link rel="stylesheet" href="$appServer.get('/css/common/idangerous.swiper2.7.6.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/idangerous.swiper.old.css?css_version=03280827')">
+    <!-- 时间控件 -->
+    <link rel="stylesheet" href="$appServer.get('/css/common/pikaday.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/reset.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/public.css?css_version=09280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/work/home.css?css_version=03280827')">
+
+    <script src="$appServer.get('/js/common/edition.js')"></script>
+</head>

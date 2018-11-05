@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TShipagentSofDetailTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="temp_uuid" jdbcType="VARCHAR" property="tempUuid" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="intro_en" jdbcType="VARCHAR" property="introEn" />
+    <result column="intro_zh" jdbcType="VARCHAR" property="introZh" />
+    <result column="alive_flag" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, temp_uuid, enterprise_id, enterprise_name, intro_en, intro_zh, alive_flag, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_shipagent_sof_detail_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_shipagent_sof_detail_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate">
+    insert into t_shipagent_sof_detail_template (id, temp_uuid, enterprise_id, 
+      enterprise_name, intro_en, intro_zh, 
+      alive_flag, create_date)
+    values (#{id,jdbcType=BIGINT}, #{tempUuid,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=BIGINT}, 
+      #{enterpriseName,jdbcType=VARCHAR}, #{introEn,jdbcType=VARCHAR}, #{introZh,jdbcType=VARCHAR}, 
+      #{aliveFlag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate">
+    insert into t_shipagent_sof_detail_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tempUuid != null">
+        temp_uuid,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name,
+      </if>
+      <if test="introEn != null">
+        intro_en,
+      </if>
+      <if test="introZh != null">
+        intro_zh,
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tempUuid != null">
+        #{tempUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introEn != null">
+        #{introEn,jdbcType=VARCHAR},
+      </if>
+      <if test="introZh != null">
+        #{introZh,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate">
+    update t_shipagent_sof_detail_template
+    <set>
+      <if test="tempUuid != null">
+        temp_uuid = #{tempUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseName != null">
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introEn != null">
+        intro_en = #{introEn,jdbcType=VARCHAR},
+      </if>
+      <if test="introZh != null">
+        intro_zh = #{introZh,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate">
+    update t_shipagent_sof_detail_template
+    set temp_uuid = #{tempUuid,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      intro_en = #{introEn,jdbcType=VARCHAR},
+      intro_zh = #{introZh,jdbcType=VARCHAR},
+      alive_flag = #{aliveFlag,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParamter" parameterType="com.sinochem.crude.trade.blockchain.domain.TShipagentSofDetailTemplate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_shipagent_sof_detail_template
+    where
+    enterprise_id = #{enterpriseId}
+    <if test="introZh != null and introZh != ''">
+        and intro_zh like  concat('',#{ introZh, jdbcType=VARCHAR} , '%')
+    </if>
+    <if test="introEn != null and introEn != ''">
+      and intro_en like  concat('',#{ introEn, jdbcType=VARCHAR} , '%')
+    </if>
+  </select>
+</mapper>

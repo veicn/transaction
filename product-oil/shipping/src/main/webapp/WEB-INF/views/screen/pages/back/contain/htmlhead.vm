@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="$appServer.get('/css/common/reset.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/public.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/layui/css/layui.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/bootstrap.min.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/idangerous.swiper2.7.6.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/idangerous.swiper.old.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/bootstrap.min.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/common/pikaday.css?css_version=03280827')">
+    <link rel="stylesheet" href="$appServer.get('/css/fonts/iconfont.css?css_version=03280827')">    
+    
+    <!-- 时间控件 -->
+	<script src="$appServer.get('/js/common/idangerous.swiper2.7.6.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/lib/jquery-1.9.1.min.js?js_version=03280827')"></script>
+    <script type="text/javascript" src="$appServer.get('/js/common/common.js?js_version=03280827')"></script>
+	<script src="$appServer.get('/js/common/pikaday.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/lib/jquery-migrate-1.2.0.min.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/lib/jquery.validate.min.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/common/jquery.validate.extends.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/common/jquery.validate.message.cn.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/layui/layui.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/common/layout_common.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/script/lib/upload/plupload.full.min.js?js_version=03280827')"></script>
+    <script src="$appServer.get('/js/work/jquery.validate.js')"></script>
+    <script src="$appServer.get('/js/common/edition.js')"></script>
+
+</head>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    $contain.get("/common/htmlhead.htm").put("a",$a)
+<body>
+<style>#cnzz_stat_icon_1272857056{display:none}</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1272857056'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1272857056%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    $contain.get('/centercontain/center_head.htm').setHost("$memberServer.get('')")
+    $contain.get('/centercontain/center_left.htm').setHost("$memberServer.get('')")
+    <div class="toolbar" style="right: -280px;width: 316px;">
+        $contain.get("/forecontain/righttool.htm")
+    </div>
+    <div class="c-mr">
+        $screen_content
+    </div>
+
+<!--飘窗-->
+    $contain.get('/collection/rc_drift.htm').setHost("$portalServer.get('')")
+</body>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+
+#js("$appServer.get('layui/layui.all.js')")
+#css("$appServer.get('layui/css/layui.css')")
+#js("$appServer.get('script/tradeMallCompare.js')")
+<script src="$appServer.get('script/lib/effect-productdetail.js')"></script>
+
+<script>
+	//商品对比名称，主要用来区分原油大厅和成品油商城中两个对比，此处为成品油对比
+	window.CompareGoodsName="PRODUCTOILCOMPAREGOODS_BACK";
+	
+	//定义商品比较的回调函数，主要是定义URL地址
+	function compare(idArr){
+		var url = "$appServer.get('purchaseManager/demandCompare.htm')";
+		window.open(url + "?demands="+idArr.toString() + "&bizType=ProductOil");
+	}
+</script>
+
+</html>

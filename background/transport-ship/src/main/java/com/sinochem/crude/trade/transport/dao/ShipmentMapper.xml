@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.ShipmentMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.Shipment" id="ShipmentDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Shipment">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.Shipment" id="Shipment">
+		<result property="shipmentId" column="SHIPMENT_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="loadPortUuid" column="LOAD_PORT_UUID" />
+		<result property="loadPort" column="LOAD_PORT" />
+		<result property="oilType" column="OIL_TYPE" />
+		<result property="agreementCode" column="AGREEMENT_CODE" />
+		<result property="palletId" column="PALLET_ID" />
+		<result property="palletUuid" column="PALLET_UUID" />
+		<result property="waybillUuid" column="WAYBILL_UUID" />
+		<result property="waybillId" column="WAYBILL_ID" />
+		<result property="agreementUuid" column="AGREEMENT_UUID" />
+		<result property="agreementId" column="AGREEMENT_ID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="shipPactUuid" column="SHIP_PACT_UUID" />
+		<result property="shipPactId" column="SHIP_PACT_ID" />
+		<result property="blDate" column="BL_DATE" />
+		<result property="blNightstool" column="BL_NIGHTSTOOL" />
+		<result property="blHairBarrel" column="BL_HAIR_BARREL" />
+		<result property="blNetTonnage" column="BL_NET_TONNAGE" />
+		<result property="blHairTonnage" column="BL_HAIR_TONNAGE" />
+		<result property="api" column="API" />
+		<result property="waterImpCon" column="WATER_IMP_CON" />
+		<result property="waterQuantity" column="WATER_QUANTITY" />
+		<result property="shHairBarrel" column="SH_HAIR_BARREL" />
+		<result property="shHairTonnage" column="SH_HAIR_TONNAGE" />
+		<result property="shNetBarrel" column="SH_NET_BARREL" />
+		<result property="shNetTonnage" column="SH_NET_TONNAGE" />
+		<result property="ratioBarrel" column="RATIO_BARREL" />
+		<result property="ratioTonnage" column="RATIO_TONNAGE" />
+		<result property="quantity" column="QUANTITY" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="shGrossCubicMeter" column="SH_GROSS_CUBIC_METER" />
+		<result property="shNetCubicMeter" column="SH_NET_CUBIC_METER" />
+		<result property="shDensity" column="SH_DENSITY" />
+		<result property="billOfLadingName" column="BILL_OF_LADING_NAME" />
+		<result property="billOfLadingPath" column="BILL_OF_LADING_PATH" />
+		<result property="cerOfQuantityName" column="CER_OF_QUANTITY_NAME" />
+		<result property="cerOfQuantityPath" column="CER_OF_QUANTITY_PATH" />
+		<result property="cerOfQualityName" column="CER_OF_QUALITY_NAME" />
+		<result property="cerOfQualityPath" column="CER_OF_QUALITY_PATH" />
+		<result property="cerOfOriginalName" column="CER_OF_ORIGINAL_NAME" />
+		<result property="cerOfOriginalPath" column="CER_OF_ORIGINAL_PATH" />
+		<result property="manifestName" column="MANIFEST_NAME" />
+		<result property="manifestPath" column="MANIFEST_PATH" />
+		<result property="loadPortEn" column="LOAD_PORT_EN" />
+		<result property="loadPortCode" column="LOAD_PORT_CODE" />
+		<result property="oilTypeEn" column="OIL_TYPE_EN" />
+		<result property="oilTypeCode" column="OIL_TYPE_CODE"/>
+	</resultMap> 
+
+	<select id="queryByEntitys" resultMap="Shipment" parameterType="com.sinochem.crude.trade.transport.domain.Shipment">
+	select * from t_ship_shipment
+	where
+		 ALIVE_FLAG='1'
+		<if test="shipmentId!=null and shipmentId!=''">and  SHIPMENT_ID=#{shipmentId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="loadPortUuid!=null and loadPortUuid!=''">and  LOAD_PORT_UUID=#{loadPortUuid}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+		<if test="waybillId!=null and waybillId!=''">and  WAYBILL_ID=#{waybillId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+		<if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="blDate!=null and blDate!=''">and  BL_DATE=#{blDate}</if>
+		<if test="blNightstool!=null and blNightstool!=''">and  BL_NIGHTSTOOL=#{blNightstool}</if>
+		<if test="blHairBarrel!=null and blHairBarrel!=''">and  BL_HAIR_BARREL=#{blHairBarrel}</if>
+		<if test="blNetTonnage!=null and blNetTonnage!=''">and  BL_NET_TONNAGE=#{blNetTonnage}</if>
+		<if test="blHairTonnage!=null and blHairTonnage!=''">and  BL_HAIR_TONNAGE=#{blHairTonnage}</if>
+		<if test="api!=null and api!=''">and  API=#{api}</if>
+		<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+		<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+		<if test="shHairBarrel!=null and shHairBarrel!=''">and  SH_HAIR_BARREL=#{shHairBarrel}</if>
+		<if test="shHairTonnage!=null and shHairTonnage!=''">and  SH_HAIR_TONNAGE=#{shHairTonnage}</if>
+		<if test="shNetBarrel!=null and shNetBarrel!=''">and  SH_NET_BARREL=#{shNetBarrel}</if>
+		<if test="shNetTonnage!=null and shNetTonnage!=''">and  SH_NET_TONNAGE=#{shNetTonnage}</if>
+		<if test="ratioBarrel!=null and ratioBarrel!=''">and  RATIO_BARREL=#{ratioBarrel}</if>
+		<if test="ratioTonnage!=null and ratioTonnage!=''">and  RATIO_TONNAGE=#{ratioTonnage}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+		<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+		<if test="billOfLadingName!=null and billOfLadingName!=''">and  BILL_OF_LADING_NAME=#{billOfLadingName}</if>
+		<if test="billOfLadingPath!=null and billOfLadingPath!=''">and  BILL_OF_LADING_PATH=#{billOfLadingPath}</if>
+		<if test="cerOfQuantityName!=null and cerOfQuantityName!=''">and  CER_OF_QUANTITY_NAME=#{cerOfQuantityName}</if>
+		<if test="cerOfQuantityPath!=null and cerOfQuantityPath!=''">and  CER_OF_QUANTITY_PATH=#{cerOfQuantityPath}</if>
+		<if test="cerOfQualityName!=null and cerOfQualityName!=''">and  CER_OF_QUALITY_NAME=#{cerOfQualityName}</if>
+		<if test="cerOfQualityPath!=null and cerOfQualityPath!=''">and  CER_OF_QUALITY_PATH=#{cerOfQualityPath}</if>
+		<if test="cerOfOriginalName!=null and cerOfOriginalName!=''">and  CER_OF_ORIGINAL_NAME=#{cerOfOriginalName}</if>
+		<if test="cerOfOriginalPath!=null and cerOfOriginalPath!=''">and  CER_OF_ORIGINAL_PATH=#{cerOfOriginalPath}</if>
+		<if test="manifestName!=null and manifestName!=''">and  MANIFEST_NAME=#{manifestName}</if>
+		<if test="manifestPath!=null and manifestPath!=''">and  MANIFEST_PATH=#{manifestPath}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+		
+	</select>
+	
+	<select id="findByPrimaryKey" resultMap="Shipment">
+			select
+			* from t_ship_shipment
+			where
+		    SHIPMENT_ID=#{shipmentId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="Shipment">
+			select
+			* from t_ship_shipment
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.Shipment">
+		update t_ship_shipment
+		<set>
+         SHIPMENT_ID=#{shipmentId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="loadPortUuid!=null">,LOAD_PORT_UUID = #{loadPortUuid}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="oilType!=null">,OIL_TYPE = #{oilType}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="palletId!=null">,PALLET_ID = #{palletId}</if>
+		<if test="palletUuid!=null">,PALLET_UUID = #{palletUuid}</if>
+		<if test="waybillUuid!=null">,WAYBILL_UUID = #{waybillUuid}</if>
+		<if test="waybillId!=null">,WAYBILL_ID = #{waybillId}</if>
+		<if test="agreementUuid!=null">,AGREEMENT_UUID = #{agreementUuid}</if>
+		<if test="agreementId!=null">,AGREEMENT_ID = #{agreementId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="blDate!=null">,BL_DATE = #{blDate}</if>
+		<if test="blNightstool!=null">,BL_NIGHTSTOOL = #{blNightstool}</if>
+		<if test="blHairBarrel!=null">,BL_HAIR_BARREL = #{blHairBarrel}</if>
+		<if test="blNetTonnage!=null">,BL_NET_TONNAGE = #{blNetTonnage}</if>
+		<if test="blHairTonnage!=null">,BL_HAIR_TONNAGE = #{blHairTonnage}</if>
+		<if test="api!=null">,API = #{api}</if>
+		<if test="waterImpCon!=null">,WATER_IMP_CON = #{waterImpCon}</if>
+		<if test="waterQuantity!=null">,WATER_QUANTITY = #{waterQuantity}</if>
+		<if test="shHairBarrel!=null">,SH_HAIR_BARREL = #{shHairBarrel}</if>
+		<if test="shHairTonnage!=null">,SH_HAIR_TONNAGE = #{shHairTonnage}</if>
+		<if test="shNetBarrel!=null">,SH_NET_BARREL = #{shNetBarrel}</if>
+		<if test="shNetTonnage!=null">,SH_NET_TONNAGE = #{shNetTonnage}</if>
+		<if test="ratioBarrel!=null">,RATIO_BARREL = #{ratioBarrel}</if>
+		<if test="ratioTonnage!=null">,RATIO_TONNAGE = #{ratioTonnage}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="shGrossCubicMeter!=null">,SH_GROSS_CUBIC_METER = #{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null">,SH_NET_CUBIC_METER = #{shNetCubicMeter}</if>
+		<if test="shDensity!=null">,SH_DENSITY = #{shDensity}</if>
+		<if test="billOfLadingName!=null">,BILL_OF_LADING_NAME = #{billOfLadingName}</if>
+		<if test="billOfLadingPath!=null">,BILL_OF_LADING_PATH = #{billOfLadingPath}</if>
+		<if test="cerOfQuantityName!=null">,CER_OF_QUANTITY_NAME = #{cerOfQuantityName}</if>
+		<if test="cerOfQuantityPath!=null">,CER_OF_QUANTITY_PATH = #{cerOfQuantityPath}</if>
+		<if test="cerOfQualityName!=null">,CER_OF_QUALITY_NAME = #{cerOfQualityName}</if>
+		<if test="cerOfQualityPath!=null">,CER_OF_QUALITY_PATH = #{cerOfQualityPath}</if>
+		<if test="cerOfOriginalName!=null">,CER_OF_ORIGINAL_NAME = #{cerOfOriginalName}</if>
+		<if test="cerOfOriginalPath!=null">,CER_OF_ORIGINAL_PATH = #{cerOfOriginalPath}</if>
+		<if test="manifestName!=null">,MANIFEST_NAME = #{manifestName}</if>
+		<if test="manifestPath!=null">,MANIFEST_PATH = #{manifestPath}</if>
+		<if test="loadPortEn!=null">,LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null">,LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null">,OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null">,OIL_TYPE_CODE=#{oilTypeCode}</if>
+		</set>
+		where
+       	 SHIPMENT_ID=#{shipmentId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.Shipment"  useGeneratedKeys="true" keyProperty="shipmentId" >
+		insert  into t_ship_shipment (				SHIPMENT_ID
+						,UUID
+						,LOAD_PORT_UUID
+						,LOAD_PORT
+						,OIL_TYPE
+						,AGREEMENT_CODE
+						,PALLET_ID
+						,PALLET_UUID
+						,WAYBILL_UUID
+						,WAYBILL_ID
+						,AGREEMENT_UUID
+						,AGREEMENT_ID
+						,EP_MEMBER_ID
+						,SHIP_PACT_UUID
+						,SHIP_PACT_ID
+						,BL_DATE
+						,BL_NIGHTSTOOL
+						,BL_HAIR_BARREL
+						,BL_NET_TONNAGE
+						,BL_HAIR_TONNAGE
+						,API
+						,WATER_IMP_CON
+						,WATER_QUANTITY
+						,SH_HAIR_BARREL
+						,SH_HAIR_TONNAGE
+						,SH_NET_BARREL
+						,SH_NET_TONNAGE
+						,RATIO_BARREL
+						,RATIO_TONNAGE
+						,QUANTITY
+						,REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,SH_GROSS_CUBIC_METER
+						,SH_NET_CUBIC_METER
+						,SH_DENSITY
+						,BILL_OF_LADING_NAME
+						,BILL_OF_LADING_PATH
+						,CER_OF_QUANTITY_NAME
+						,CER_OF_QUANTITY_PATH
+						,CER_OF_QUALITY_NAME
+						,CER_OF_QUALITY_PATH
+						,CER_OF_ORIGINAL_NAME
+						,CER_OF_ORIGINAL_PATH
+						,MANIFEST_NAME
+						,MANIFEST_PATH
+						,LOAD_PORT_EN
+						,LOAD_PORT_CODE
+						,OIL_TYPE_EN
+						,OIL_TYPE_CODE
+						)
+		values(		#{shipmentId}
+						,#{uuid}
+						,#{loadPortUuid}
+						,#{loadPort}
+						,#{oilType}
+						,#{agreementCode}
+						,#{palletId}
+						,#{palletUuid}
+						,#{waybillUuid}
+						,#{waybillId}
+						,#{agreementUuid}
+						,#{agreementId}
+						,#{epMemberId}
+						,#{shipPactUuid}
+						,#{shipPactId}
+						,#{blDate}
+						,#{blNightstool}
+						,#{blHairBarrel}
+						,#{blNetTonnage}
+						,#{blHairTonnage}
+						,#{api}
+						,#{waterImpCon}
+						,#{waterQuantity}
+						,#{shHairBarrel}
+						,#{shHairTonnage}
+						,#{shNetBarrel}
+						,#{shNetTonnage}
+						,#{ratioBarrel}
+						,#{ratioTonnage}
+						,#{quantity}
+						,#{remark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{shGrossCubicMeter}
+						,#{shNetCubicMeter}
+						,#{shDensity}
+						,#{billOfLadingName}
+						,#{billOfLadingPath}
+						,#{cerOfQuantityName}
+						,#{cerOfQuantityPath}
+						,#{cerOfQualityName}
+						,#{cerOfQualityPath}
+						,#{cerOfOriginalName}
+						,#{cerOfOriginalPath}
+						,#{manifestName}
+						,#{manifestPath}
+						,#{loadPortEn}
+						,#{loadPortCode}
+						,#{oilTypeEn}
+						,#{oilTypeCode}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_shipment
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			SHIPMENT_ID=#{shipmentId} 
+																																																																																																																																																																																																																																																																										
+	</update>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIPMENT_ID as "shipmentId" 
+						 ,   UUID as "uuid" 
+						 ,   LOAD_PORT_UUID as "loadPortUuid" 
+						 ,   LOAD_PORT as "loadPort" 
+						 ,   OIL_TYPE as "oilType" 
+						 ,   AGREEMENT_CODE as "agreementCode" 
+						 ,   PALLET_ID as "palletId" 
+						 ,   PALLET_UUID as "palletUuid" 
+						 ,   WAYBILL_UUID as "waybillUuid" 
+						 ,   WAYBILL_ID as "waybillId" 
+						 ,   AGREEMENT_UUID as "agreementUuid" 
+						 ,   AGREEMENT_ID as "agreementId" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   SHIP_PACT_UUID as "shipPactUuid" 
+						 ,   SHIP_PACT_ID as "shipPactId" 
+						 ,   BL_DATE as "blDate" 
+						 ,   BL_NIGHTSTOOL as "blNightstool" 
+						 ,   BL_HAIR_BARREL as "blHairBarrel" 
+						 ,   BL_NET_TONNAGE as "blNetTonnage" 
+						 ,   BL_HAIR_TONNAGE as "blHairTonnage" 
+						 ,   API as "api" 
+						 ,   WATER_IMP_CON as "waterImpCon" 
+						 ,   WATER_QUANTITY as "waterQuantity" 
+						 ,   SH_HAIR_BARREL as "shHairBarrel" 
+						 ,   SH_HAIR_TONNAGE as "shHairTonnage" 
+						 ,   SH_NET_BARREL as "shNetBarrel" 
+						 ,   SH_NET_TONNAGE as "shNetTonnage" 
+						 ,   RATIO_BARREL as "ratioBarrel" 
+						 ,   RATIO_TONNAGE as "ratioTonnage" 
+						 ,   QUANTITY as "quantity" 
+						 ,   REMARK as "remark" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   VERSION as "version" 
+						 ,   LANG_VER as "langVer" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   EXT1 as "ext1" 
+						 ,   SH_GROSS_CUBIC_METER as "shGrossCubicMeter" 
+						 ,   SH_NET_CUBIC_METER as "shNetCubicMeter" 
+						 ,   SH_DENSITY as "shDensity" 
+						 ,   BILL_OF_LADING_NAME as "billOfLadingName" 
+						 ,   BILL_OF_LADING_PATH as "billOfLadingPath" 
+						 ,   CER_OF_QUANTITY_NAME as "cerOfQuantityName" 
+						 ,   CER_OF_QUANTITY_PATH as "cerOfQuantityPath" 
+						 ,   CER_OF_QUALITY_NAME as "cerOfQualityName" 
+						 ,   CER_OF_QUALITY_PATH as "cerOfQualityPath" 
+						 ,   CER_OF_ORIGINAL_NAME as "cerOfOriginalName" 
+						 ,   CER_OF_ORIGINAL_PATH as "cerOfOriginalPath" 
+						 ,   MANIFEST_NAME as "manifestName" 
+						 ,   MANIFEST_PATH as "manifestPath" 
+						 ,   LOAD_PORT_EN as "loadPortEn" 
+						 ,   LOAD_PORT_CODE as "loadPortCode" 
+						 ,   OIL_TYPE_EN as "oilTypeEn" 
+						 ,   OIL_TYPE_CODE as "oilTypeCode" 
+						from t_ship_shipment
+		where
+			ALIVE_FLAG='1'
+			<if test="shipmentId!=null and shipmentId!=''">and  SHIPMENT_ID=#{shipmentId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="loadPortUuid!=null and loadPortUuid!=''">and  LOAD_PORT_UUID=#{loadPortUuid}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+			<if test="waybillId!=null and waybillId!=''">and  WAYBILL_ID=#{waybillId}</if>
+			<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+			<if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="blDate!=null and blDate!=''">and  BL_DATE=#{blDate}</if>
+			<if test="blNightstool!=null and blNightstool!=''">and  BL_NIGHTSTOOL=#{blNightstool}</if>
+			<if test="blHairBarrel!=null and blHairBarrel!=''">and  BL_HAIR_BARREL=#{blHairBarrel}</if>
+			<if test="blNetTonnage!=null and blNetTonnage!=''">and  BL_NET_TONNAGE=#{blNetTonnage}</if>
+			<if test="blHairTonnage!=null and blHairTonnage!=''">and  BL_HAIR_TONNAGE=#{blHairTonnage}</if>
+			<if test="api!=null and api!=''">and  API=#{api}</if>
+			<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+			<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+			<if test="shHairBarrel!=null and shHairBarrel!=''">and  SH_HAIR_BARREL=#{shHairBarrel}</if>
+			<if test="shHairTonnage!=null and shHairTonnage!=''">and  SH_HAIR_TONNAGE=#{shHairTonnage}</if>
+			<if test="shNetBarrel!=null and shNetBarrel!=''">and  SH_NET_BARREL=#{shNetBarrel}</if>
+			<if test="shNetTonnage!=null and shNetTonnage!=''">and  SH_NET_TONNAGE=#{shNetTonnage}</if>
+			<if test="ratioBarrel!=null and ratioBarrel!=''">and  RATIO_BARREL=#{ratioBarrel}</if>
+			<if test="ratioTonnage!=null and ratioTonnage!=''">and  RATIO_TONNAGE=#{ratioTonnage}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+			<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+			<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+			<if test="billOfLadingName!=null and billOfLadingName!=''">and  BILL_OF_LADING_NAME=#{billOfLadingName}</if>
+			<if test="billOfLadingPath!=null and billOfLadingPath!=''">and  BILL_OF_LADING_PATH=#{billOfLadingPath}</if>
+			<if test="cerOfQuantityName!=null and cerOfQuantityName!=''">and  CER_OF_QUANTITY_NAME=#{cerOfQuantityName}</if>
+			<if test="cerOfQuantityPath!=null and cerOfQuantityPath!=''">and  CER_OF_QUANTITY_PATH=#{cerOfQuantityPath}</if>
+			<if test="cerOfQualityName!=null and cerOfQualityName!=''">and  CER_OF_QUALITY_NAME=#{cerOfQualityName}</if>
+			<if test="cerOfQualityPath!=null and cerOfQualityPath!=''">and  CER_OF_QUALITY_PATH=#{cerOfQualityPath}</if>
+			<if test="cerOfOriginalName!=null and cerOfOriginalName!=''">and  CER_OF_ORIGINAL_NAME=#{cerOfOriginalName}</if>
+			<if test="cerOfOriginalPath!=null and cerOfOriginalPath!=''">and  CER_OF_ORIGINAL_PATH=#{cerOfOriginalPath}</if>
+			<if test="manifestName!=null and manifestName!=''">and  MANIFEST_NAME=#{manifestName}</if>
+			<if test="manifestPath!=null and manifestPath!=''">and  MANIFEST_PATH=#{manifestPath}</if>
+			<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+			<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+			<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+			<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+		</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_shipment 
+		where
+		 ALIVE_FLAG='1'
+			<if test="shipmentId!=null and shipmentId!=''">and  SHIPMENT_ID=#{shipmentId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="loadPortUuid!=null and loadPortUuid!=''">and  LOAD_PORT_UUID=#{loadPortUuid}</if>
+			<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+			<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+			<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+			<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+			<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+			<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+			<if test="waybillId!=null and waybillId!=''">and  WAYBILL_ID=#{waybillId}</if>
+			<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+			<if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+			<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+			<if test="blDate!=null and blDate!=''">and  BL_DATE=#{blDate}</if>
+			<if test="blNightstool!=null and blNightstool!=''">and  BL_NIGHTSTOOL=#{blNightstool}</if>
+			<if test="blHairBarrel!=null and blHairBarrel!=''">and  BL_HAIR_BARREL=#{blHairBarrel}</if>
+			<if test="blNetTonnage!=null and blNetTonnage!=''">and  BL_NET_TONNAGE=#{blNetTonnage}</if>
+			<if test="blHairTonnage!=null and blHairTonnage!=''">and  BL_HAIR_TONNAGE=#{blHairTonnage}</if>
+			<if test="api!=null and api!=''">and  API=#{api}</if>
+			<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+			<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+			<if test="shHairBarrel!=null and shHairBarrel!=''">and  SH_HAIR_BARREL=#{shHairBarrel}</if>
+			<if test="shHairTonnage!=null and shHairTonnage!=''">and  SH_HAIR_TONNAGE=#{shHairTonnage}</if>
+			<if test="shNetBarrel!=null and shNetBarrel!=''">and  SH_NET_BARREL=#{shNetBarrel}</if>
+			<if test="shNetTonnage!=null and shNetTonnage!=''">and  SH_NET_TONNAGE=#{shNetTonnage}</if>
+			<if test="ratioBarrel!=null and ratioBarrel!=''">and  RATIO_BARREL=#{ratioBarrel}</if>
+			<if test="ratioTonnage!=null and ratioTonnage!=''">and  RATIO_TONNAGE=#{ratioTonnage}</if>
+			<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+			<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+			<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+			<if test="billOfLadingName!=null and billOfLadingName!=''">and  BILL_OF_LADING_NAME=#{billOfLadingName}</if>
+			<if test="billOfLadingPath!=null and billOfLadingPath!=''">and  BILL_OF_LADING_PATH=#{billOfLadingPath}</if>
+			<if test="cerOfQuantityName!=null and cerOfQuantityName!=''">and  CER_OF_QUANTITY_NAME=#{cerOfQuantityName}</if>
+			<if test="cerOfQuantityPath!=null and cerOfQuantityPath!=''">and  CER_OF_QUANTITY_PATH=#{cerOfQuantityPath}</if>
+			<if test="cerOfQualityName!=null and cerOfQualityName!=''">and  CER_OF_QUALITY_NAME=#{cerOfQualityName}</if>
+			<if test="cerOfQualityPath!=null and cerOfQualityPath!=''">and  CER_OF_QUALITY_PATH=#{cerOfQualityPath}</if>
+			<if test="cerOfOriginalName!=null and cerOfOriginalName!=''">and  CER_OF_ORIGINAL_NAME=#{cerOfOriginalName}</if>
+			<if test="cerOfOriginalPath!=null and cerOfOriginalPath!=''">and  CER_OF_ORIGINAL_PATH=#{cerOfOriginalPath}</if>
+			<if test="manifestName!=null and manifestName!=''">and  MANIFEST_NAME=#{manifestName}</if>
+			<if test="manifestPath!=null and manifestPath!=''">and  MANIFEST_PATH=#{manifestPath}</if>
+			<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+			<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+			<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+			<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>		 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_shipment
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="shipmentId!=null and shipmentId!=''">and  SHIPMENT_ID=#{shipmentId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="loadPortUuid!=null and loadPortUuid!=''">and  LOAD_PORT_UUID=#{loadPortUuid}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+		<if test="waybillId!=null and waybillId!=''">and  WAYBILL_ID=#{waybillId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+		<if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="blDate!=null and blDate!=''">and  BL_DATE=#{blDate}</if>
+		<if test="blNightstool!=null and blNightstool!=''">and  BL_NIGHTSTOOL=#{blNightstool}</if>
+		<if test="blHairBarrel!=null and blHairBarrel!=''">and  BL_HAIR_BARREL=#{blHairBarrel}</if>
+		<if test="blNetTonnage!=null and blNetTonnage!=''">and  BL_NET_TONNAGE=#{blNetTonnage}</if>
+		<if test="blHairTonnage!=null and blHairTonnage!=''">and  BL_HAIR_TONNAGE=#{blHairTonnage}</if>
+		<if test="api!=null and api!=''">and  API=#{api}</if>
+		<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+		<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+		<if test="shHairBarrel!=null and shHairBarrel!=''">and  SH_HAIR_BARREL=#{shHairBarrel}</if>
+		<if test="shHairTonnage!=null and shHairTonnage!=''">and  SH_HAIR_TONNAGE=#{shHairTonnage}</if>
+		<if test="shNetBarrel!=null and shNetBarrel!=''">and  SH_NET_BARREL=#{shNetBarrel}</if>
+		<if test="shNetTonnage!=null and shNetTonnage!=''">and  SH_NET_TONNAGE=#{shNetTonnage}</if>
+		<if test="ratioBarrel!=null and ratioBarrel!=''">and  RATIO_BARREL=#{ratioBarrel}</if>
+		<if test="ratioTonnage!=null and ratioTonnage!=''">and  RATIO_TONNAGE=#{ratioTonnage}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+		<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+		<if test="billOfLadingName!=null and billOfLadingName!=''">and  BILL_OF_LADING_NAME=#{billOfLadingName}</if>
+		<if test="billOfLadingPath!=null and billOfLadingPath!=''">and  BILL_OF_LADING_PATH=#{billOfLadingPath}</if>
+		<if test="cerOfQuantityName!=null and cerOfQuantityName!=''">and  CER_OF_QUANTITY_NAME=#{cerOfQuantityName}</if>
+		<if test="cerOfQuantityPath!=null and cerOfQuantityPath!=''">and  CER_OF_QUANTITY_PATH=#{cerOfQuantityPath}</if>
+		<if test="cerOfQualityName!=null and cerOfQualityName!=''">and  CER_OF_QUALITY_NAME=#{cerOfQualityName}</if>
+		<if test="cerOfQualityPath!=null and cerOfQualityPath!=''">and  CER_OF_QUALITY_PATH=#{cerOfQualityPath}</if>
+		<if test="cerOfOriginalName!=null and cerOfOriginalName!=''">and  CER_OF_ORIGINAL_NAME=#{cerOfOriginalName}</if>
+		<if test="cerOfOriginalPath!=null and cerOfOriginalPath!=''">and  CER_OF_ORIGINAL_PATH=#{cerOfOriginalPath}</if>
+		<if test="manifestName!=null and manifestName!=''">and  MANIFEST_NAME=#{manifestName}</if>
+		<if test="manifestPath!=null and manifestPath!=''">and  MANIFEST_PATH=#{manifestPath}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_shipment
+		<set>
+         SHIPMENT_ID=#{shipmentId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="loadPortUuid!=null">,LOAD_PORT_UUID = #{loadPortUuid}</if>
+		<if test="loadPort!=null">,LOAD_PORT = #{loadPort}</if>
+		<if test="oilType!=null">,OIL_TYPE = #{oilType}</if>
+		<if test="agreementCode!=null">,AGREEMENT_CODE = #{agreementCode}</if>
+		<if test="palletId!=null">,PALLET_ID = #{palletId}</if>
+		<if test="palletUuid!=null">,PALLET_UUID = #{palletUuid}</if>
+		<if test="waybillUuid!=null">,WAYBILL_UUID = #{waybillUuid}</if>
+		<if test="waybillId!=null">,WAYBILL_ID = #{waybillId}</if>
+		<if test="agreementUuid!=null">,AGREEMENT_UUID = #{agreementUuid}</if>
+		<if test="agreementId!=null">,AGREEMENT_ID = #{agreementId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="shipPactUuid!=null">,SHIP_PACT_UUID = #{shipPactUuid}</if>
+		<if test="shipPactId!=null">,SHIP_PACT_ID = #{shipPactId}</if>
+		<if test="blDate!=null">,BL_DATE = #{blDate}</if>
+		<if test="blNightstool!=null">,BL_NIGHTSTOOL = #{blNightstool}</if>
+		<if test="blHairBarrel!=null">,BL_HAIR_BARREL = #{blHairBarrel}</if>
+		<if test="blNetTonnage!=null">,BL_NET_TONNAGE = #{blNetTonnage}</if>
+		<if test="blHairTonnage!=null">,BL_HAIR_TONNAGE = #{blHairTonnage}</if>
+		<if test="api!=null">,API = #{api}</if>
+		<if test="waterImpCon!=null">,WATER_IMP_CON = #{waterImpCon}</if>
+		<if test="waterQuantity!=null">,WATER_QUANTITY = #{waterQuantity}</if>
+		<if test="shHairBarrel!=null">,SH_HAIR_BARREL = #{shHairBarrel}</if>
+		<if test="shHairTonnage!=null">,SH_HAIR_TONNAGE = #{shHairTonnage}</if>
+		<if test="shNetBarrel!=null">,SH_NET_BARREL = #{shNetBarrel}</if>
+		<if test="shNetTonnage!=null">,SH_NET_TONNAGE = #{shNetTonnage}</if>
+		<if test="ratioBarrel!=null">,RATIO_BARREL = #{ratioBarrel}</if>
+		<if test="ratioTonnage!=null">,RATIO_TONNAGE = #{ratioTonnage}</if>
+		<if test="quantity!=null">,QUANTITY = #{quantity}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="shGrossCubicMeter!=null">,SH_GROSS_CUBIC_METER = #{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null">,SH_NET_CUBIC_METER = #{shNetCubicMeter}</if>
+		<if test="shDensity!=null">,SH_DENSITY = #{shDensity}</if>
+		<if test="billOfLadingName!=null">,BILL_OF_LADING_NAME = #{billOfLadingName}</if>
+		<if test="billOfLadingPath!=null">,BILL_OF_LADING_PATH = #{billOfLadingPath}</if>
+		<if test="cerOfQuantityName!=null">,CER_OF_QUANTITY_NAME = #{cerOfQuantityName}</if>
+		<if test="cerOfQuantityPath!=null">,CER_OF_QUANTITY_PATH = #{cerOfQuantityPath}</if>
+		<if test="cerOfQualityName!=null">,CER_OF_QUALITY_NAME = #{cerOfQualityName}</if>
+		<if test="cerOfQualityPath!=null">,CER_OF_QUALITY_PATH = #{cerOfQualityPath}</if>
+		<if test="cerOfOriginalName!=null">,CER_OF_ORIGINAL_NAME = #{cerOfOriginalName}</if>
+		<if test="cerOfOriginalPath!=null">,CER_OF_ORIGINAL_PATH = #{cerOfOriginalPath}</if>
+		<if test="manifestName!=null">,MANIFEST_NAME = #{manifestName}</if>
+		<if test="manifestPath!=null">,MANIFEST_PATH = #{manifestPath}</if>
+		<if test="loadPortEn!=null">,LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null">,LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null">,OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null">,OIL_TYPE_CODE=#{oilTypeCode}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="shipmentId!=null and shipmentId!=''">and  SHIPMENT_ID=#{shipmentId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="loadPortUuid!=null and loadPortUuid!=''">and  LOAD_PORT_UUID=#{loadPortUuid}</if>
+		<if test="loadPort!=null and loadPort!=''">and  LOAD_PORT=#{loadPort}</if>
+		<if test="oilType!=null and oilType!=''">and  OIL_TYPE=#{oilType}</if>
+		<if test="agreementCode!=null and agreementCode!=''">and  AGREEMENT_CODE=#{agreementCode}</if>
+		<if test="palletId!=null and palletId!=''">and  PALLET_ID=#{palletId}</if>
+		<if test="palletUuid!=null and palletUuid!=''">and  PALLET_UUID=#{palletUuid}</if>
+		<if test="waybillUuid!=null and waybillUuid!=''">and  WAYBILL_UUID=#{waybillUuid}</if>
+		<if test="waybillId!=null and waybillId!=''">and  WAYBILL_ID=#{waybillId}</if>
+		<if test="agreementUuid!=null and agreementUuid!=''">and  AGREEMENT_UUID=#{agreementUuid}</if>
+		<if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="shipPactUuid!=null and shipPactUuid!=''">and  SHIP_PACT_UUID=#{shipPactUuid}</if>
+		<if test="shipPactId!=null and shipPactId!=''">and  SHIP_PACT_ID=#{shipPactId}</if>
+		<if test="blDate!=null and blDate!=''">and  BL_DATE=#{blDate}</if>
+		<if test="blNightstool!=null and blNightstool!=''">and  BL_NIGHTSTOOL=#{blNightstool}</if>
+		<if test="blHairBarrel!=null and blHairBarrel!=''">and  BL_HAIR_BARREL=#{blHairBarrel}</if>
+		<if test="blNetTonnage!=null and blNetTonnage!=''">and  BL_NET_TONNAGE=#{blNetTonnage}</if>
+		<if test="blHairTonnage!=null and blHairTonnage!=''">and  BL_HAIR_TONNAGE=#{blHairTonnage}</if>
+		<if test="api!=null and api!=''">and  API=#{api}</if>
+		<if test="waterImpCon!=null and waterImpCon!=''">and  WATER_IMP_CON=#{waterImpCon}</if>
+		<if test="waterQuantity!=null and waterQuantity!=''">and  WATER_QUANTITY=#{waterQuantity}</if>
+		<if test="shHairBarrel!=null and shHairBarrel!=''">and  SH_HAIR_BARREL=#{shHairBarrel}</if>
+		<if test="shHairTonnage!=null and shHairTonnage!=''">and  SH_HAIR_TONNAGE=#{shHairTonnage}</if>
+		<if test="shNetBarrel!=null and shNetBarrel!=''">and  SH_NET_BARREL=#{shNetBarrel}</if>
+		<if test="shNetTonnage!=null and shNetTonnage!=''">and  SH_NET_TONNAGE=#{shNetTonnage}</if>
+		<if test="ratioBarrel!=null and ratioBarrel!=''">and  RATIO_BARREL=#{ratioBarrel}</if>
+		<if test="ratioTonnage!=null and ratioTonnage!=''">and  RATIO_TONNAGE=#{ratioTonnage}</if>
+		<if test="quantity!=null and quantity!=''">and  QUANTITY=#{quantity}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="shGrossCubicMeter!=null and shGrossCubicMeter!=''">and  SH_GROSS_CUBIC_METER=#{shGrossCubicMeter}</if>
+		<if test="shNetCubicMeter!=null and shNetCubicMeter!=''">and  SH_NET_CUBIC_METER=#{shNetCubicMeter}</if>
+		<if test="shDensity!=null and shDensity!=''">and  SH_DENSITY=#{shDensity}</if>
+		<if test="billOfLadingName!=null and billOfLadingName!=''">and  BILL_OF_LADING_NAME=#{billOfLadingName}</if>
+		<if test="billOfLadingPath!=null and billOfLadingPath!=''">and  BILL_OF_LADING_PATH=#{billOfLadingPath}</if>
+		<if test="cerOfQuantityName!=null and cerOfQuantityName!=''">and  CER_OF_QUANTITY_NAME=#{cerOfQuantityName}</if>
+		<if test="cerOfQuantityPath!=null and cerOfQuantityPath!=''">and  CER_OF_QUANTITY_PATH=#{cerOfQuantityPath}</if>
+		<if test="cerOfQualityName!=null and cerOfQualityName!=''">and  CER_OF_QUALITY_NAME=#{cerOfQualityName}</if>
+		<if test="cerOfQualityPath!=null and cerOfQualityPath!=''">and  CER_OF_QUALITY_PATH=#{cerOfQualityPath}</if>
+		<if test="cerOfOriginalName!=null and cerOfOriginalName!=''">and  CER_OF_ORIGINAL_NAME=#{cerOfOriginalName}</if>
+		<if test="cerOfOriginalPath!=null and cerOfOriginalPath!=''">and  CER_OF_ORIGINAL_PATH=#{cerOfOriginalPath}</if>
+		<if test="manifestName!=null and manifestName!=''">and  MANIFEST_NAME=#{manifestName}</if>
+		<if test="manifestPath!=null and manifestPath!=''">and  MANIFEST_PATH=#{manifestPath}</if>
+		<if test="loadPortEn!=null and loadPortEn!=''">and  LOAD_PORT_EN=#{loadPortEn}</if>
+		<if test="loadPortCode!=null and loadPortCode!=''">and  LOAD_PORT_CODE=#{loadPortCode}</if>
+		<if test="oilTypeEn!=null and oilTypeEn!=''">and  OIL_TYPE_EN=#{oilTypeEn}</if>
+		<if test="oilTypeCode!=null and oilTypeCode!=''">and  OIL_TYPE_CODE=#{oilTypeCode}</if>
+	</update>
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	
+	
+	<!-- 根据船装港删除多余货物装港信息-->
+	<update id="deletByLoadAndShipPact">
+		update t_ship_shipment
+			<set>
+			ALIVE_FLAG='0'
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			(AGREEMENT_UUID , LOAD_PORT_CODE ,OIL_TYPE_CODE) NOT IN 
+			 <foreach collection="lists" index="index" item="item" open="(" separator="," close=")">
+           (#{item.agreementUuid},#{item.loadPort},#{item.oilType})
+        	</foreach> 
+			AND SHIP_PACT_UUID=#{shipPactUuid}
+	</update>
+	
+	
+</mapper>

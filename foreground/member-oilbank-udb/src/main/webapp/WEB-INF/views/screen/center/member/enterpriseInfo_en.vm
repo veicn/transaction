@@ -1,0 +1,113 @@
+
+#if(${enterprise.id})
+<input type="hidden" name="id" value="$!{enterprise.id}"/>
+#end
+<input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+<input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+<input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+<input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+<input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+<ul class="c-bczl">
+    #springBind("enterprise.fullName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">company name：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the name of the company" maxlength="50">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.name")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Company abbreviation：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the company for short" maxlength="50">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.englishName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">English name of the company：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the company's English name" maxlength="200">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    #springBind("enterprise.abbEnglishName")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Company English abbreviation：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the company's English abbreviation" maxlength="200">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+##<li class="c-b-ts">请认真填写，有submit时可以随时联系您！</li>
+#*<li class="c-bcz clearfix">
+    <span class="c-b-txt">机构类型：</span>
+    <select name="" class="form-inp sel">
+        <option>企业</option>
+    </select>
+</li>*#
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">Uploading organization code certificate：</span>
+        <span class="c-up-box" id="orgCodeCertImgBox"><a id="orgCodeCertBtn" href="">
+            #if($!{enterprise.orgCodeCert} && $!{enterprise.orgCodeCert} != "")
+                          <img src="$!{uploadServer}/img/$!{enterprise.orgCodeCert}.img"/>
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.organizationCode")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Organization code：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the organization code" maxlength="20">
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">The organization code number is consistent with the contents of the attachment<span class="rd">（The new version of three in one business license, please fill in a unified code of social credit）</span></li>
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">Tax registration certificate：</span>
+        <span class="c-up-box" id="taxRegCertImgBox"><a id="taxRegCertBtn" href="">
+            #if($!{enterprise.taxRegCert} && $!{enterprise.taxRegCert} != "")
+                                <img src="$!{uploadServer}/img/$!{enterprise.taxRegCert}.img"/>
+
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.taxNo")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Tax registration number：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the tax registration number" maxlength="20">
+
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">The number of tax registration certificate is consistent with the contents of the annex<span class="rd">（The new version of three in one business license, please fill in a unified code of social credit number: if there is no change please use the original number, and download the certificate template to upload）</span></li>
+
+    <li class="c-bcz clearfix"><span class="c-b-txt">Upload business license：</span>
+        <span class="c-up-box" id="businessLicenseCertImgBox"><a id="businessLicenseCertBtn" href="">
+            #if($!{enterprise.businessLicenseCert} && $!{enterprise.businessLicenseCert} != "")
+                            <img src="$!{uploadServer}/img/$!{enterprise.businessLicenseCert}.img"/>
+
+            #else
+                <img src="../images/up_zm.jpg">
+            #end
+        </a></span>
+
+    </li>
+    #springBind("enterprise.licenseNo")
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Business license registration number：</span>
+        <input type="text" class="form-inp" name="$!{status.expression}" value="$!{status.value}" placeholder="Please enter the registration number of the business license" maxlength="20">
+        <div class="c-qy-tx">#if($status.isError())$!{status.errorMessage}#end</div>
+    </li>
+    #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+    <li class="c-b-ts">The registration number of the business license is consistent with the contents of the annex.<span class="rd">（The new version of three in one business license, please fill in a unified code of social credit）</span></li>
+##<li class="c-bcz clearfix"><span class="c-b-txt">The nature of the company ：</span><select class="form-inp sel"><option>please choose from list</option></select></li>
+    <li class="c-bcz clearfix">
+        <span class="c-b-txt">Company logo：</span>
+        <span class="c-bcz-p" id="epLogoImgBox">
+                        <a id="epLogoBtn" href="javascript:;">
+                            #if($!{enterprise.epLogo} && $!{enterprise.epLogo} != "")
+                                <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprise.epLogo}.img"/>
+                            #else
+                                <i class="cw-ico c-b-ico"></i></a>
+                            #end
+                    </span>
+    </li>
+</ul>
+

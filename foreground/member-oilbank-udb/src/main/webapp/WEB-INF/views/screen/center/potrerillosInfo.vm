@@ -1,0 +1,244 @@
+#set($id = $info.id)
+#set($js_validate = "validate")##需要验证
+
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm').put("menu","potrerillosInfo")
+    #if(!$id)
+        <form action="#" method="post" id="potrerillosForm">
+
+        <ul class="c-bczl enterbox1">
+
+            #springBind("info.id")
+            <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+
+            #springBind("info.totalInvestment")
+            <li class="c-bcz clearfix"><span class="c-b-txt">总投资：</span>
+				<input type="text" class="form-inp"  placeholder="请输入总投资" maxlength="16" name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+           
+           
+            #springBind("info.fixedAssets")
+            <li class="c-bcz clearfix"><span class="c-b-txt">固定资产：</span>
+                <input type="text" class="form-inp" placeholder="请输入固定资产"  maxlength="16"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+            #springBind("info.mainProducts")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要产品：</span>
+				<input type="text" class="form-inp" placeholder="请输入主要产品"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.deviceDescription")
+            <li class="c-bcz clearfix"><span class="c-b-txt">装置说明：</span>
+				<input type="text" class="form-inp" placeholder="请输入装置说明"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.canTrading")
+            <li class="c-bcz clearfix"><span class="c-b-txt">是否有进出口权：</span>
+				<input type="checkbox" class="form-checkbox" id="canTradingCheckbox"  >
+	            <input type="hidden"  id="canTrading" value="0" name="$!{status.expression}"  >
+##                <ul class="gwjs-blo clearfix">
+##                    <li class=""><span>企业管理员</span>
+##                        <input type="checkbox" style="display:none" name="roles" value="enter_admin" title="企业管理员"> <i class="cw-ico ico-che-h"></i>
+##                    </li>
+##
+##                </ul>
+            </li>
+            
+			
+			
+            #springBind("info.mainImportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要进口产品：</span>
+				<input type="text" class="form-inp" placeholder="请输入主要进口产品"  name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+			
+			
+            #springBind("info.mainExportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要出口产品：</span>
+				<input type="text" class="form-inp" placeholder="请输入主要出口产品" name="$!{status.expression}" value="$!{status.value}" >
+            </li>
+            <div class="c-qy-tx"> 
+				#if(!$status.isError()&&  !$!{status.value})
+
+	            #else
+	                ${status.errorMessage}
+	            #end
+			</div>
+        </ul>
+           
+        <div class="c-subdiv c-mod-bc c-mod-bc2"><button  class="c-btnsub">提交</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">返回</button></div>
+
+          
+        </form>
+    #else
+        <form action="#" method="post">
+
+        <ul class="c-bczl">
+            #springBind("info.totalInvestment")
+            <li class="c-bcz clearfix"><span class="c-b-txt">总投资：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.fixedAssets")
+            <li class="c-bcz clearfix"><span class="c-b-txt">固定资产：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.mainProducts")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要产品：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.deviceDescription")
+            <li class="c-bcz clearfix"><span class="c-b-txt">装置说明：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.canTrading")
+            <li class="c-bcz clearfix"><span class="c-b-txt">是否有进出口权：</span>
+                <span class="qx-conte">#if($!{status.value})
+               		是
+               	#else
+               		否
+               	#end</span>
+            </li>
+            #springBind("info.mainImportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要进口产品：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+            #springBind("info.mainExportProduct")
+            <li class="c-bcz clearfix"><span class="c-b-txt">主要出口产品：</span>
+                <span class="qx-conte">$!{status.value}</span>
+            </li>
+        </ul>
+           
+        </form>
+        
+        
+    #end
+
+    </div>
+
+</div>
+
+<script >
+
+  $(function(){
+  
+  		//给是否有进出口权CheckBox绑定事件
+  		$("#canTradingCheckbox").click(function(){
+  			var canTradingInput = $("#canTrading");
+  			if($(this).is(":checked")){
+  				canTradingInput.val(1);
+  			}else{
+  				canTradingInput.val(0);
+  			}
+  		});
+  
+         //表单验证及提交
+        $ ("#potrerillosForm").validate({
+            ignore: ".ignore",
+            debug:false,
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                totalInvestment: {
+                    "required":true,
+                    digits:true ,
+                    maxlength:16
+                   
+                  
+                },
+                fixedAssets: {
+                    required: true,
+                    digits:true ,
+                    maxlength:16
+                },
+                mainProducts: {
+                    required: true
+                },
+                deviceDescription:{required:true},
+                mainImportProduct:{required:true},
+                mainExportProduct:{required:true}
+            },
+            messages: {
+                totalInvestment: {
+                    required:"请输入总投资" 
+                },
+                fixedAssets: {
+                    required:"请输入固定资产" 
+                },
+                mainProducts: {
+                    required:"请输入主要产品"
+                },
+                deviceDescription: {
+                    required:"请输入装置说明"
+                },
+                mainImportProduct: {
+                    required:"请输入主要进口产品"
+                },
+                mainExportProduct: {
+                    required:"请输入主要出口产品"
+                }
+              },  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+
+
+        
+     });
+     
+     
+ </script> 
+

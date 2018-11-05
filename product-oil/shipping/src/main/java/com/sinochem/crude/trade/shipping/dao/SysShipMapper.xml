@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shipping.dao.SysShipMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.SysShip" id="SysShipDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.SysShip">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.shipping.domain.SysShip" id="SysShip">
+		<result property="sysShipId" column="SYS_SHIP_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="vesselName" column="VESSEL_NAME" />
+		<result property="imo" column="IMO" />
+		<result property="built" column="BUILT" />
+		<result property="vesselType" column="VESSEL_TYPE" />
+		<result property="vesselSize" column="VESSEL_SIZE" />
+		<result property="cubic" column="CUBIC" />
+		<result property="sdwt" column="SDWT" />
+		<result property="loa" column="LOA" />
+		<result property="beam" column="BEAM" />
+		<result property="draft" column="DRAFT" />
+		<result property="hullType" column="HULL_TYPE" />
+		<result property="accessoryFileNm" column="ACCESSORY_FILE_NM" />
+		<result property="accessory" column="ACCESSORY" />
+		<result property="ext1" column="EXT1" />
+		<result property="version" column="VERSION" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+			</resultMap> 
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.shipping.domain.SysShip"  useGeneratedKeys="true" keyProperty="sysShipId" >
+		insert  into t_ship_sys_ship (				UUID
+						,VESSEL_NAME
+						,IMO
+						,BUILT
+						,VESSEL_TYPE
+						,VESSEL_SIZE
+						,CUBIC
+						,SDWT
+						,LOA
+						,BEAM
+						,DRAFT
+						,HULL_TYPE
+						,ACCESSORY_FILE_NM
+						,ACCESSORY
+						,EXT1
+						,VERSION
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						)
+		values(		#{uuid}
+						,#{vesselName}
+						,#{imo}
+						,#{built}
+						,#{vesselType}
+						,#{vesselSize}
+						,#{cubic}
+						,#{sdwt}
+						,#{loa}
+						,#{beam}
+						,#{draft}
+						,#{hullType}
+						,#{accessoryFileNm}
+						,#{accessory}
+						,#{ext1}
+						,#{version}
+						,#{aliveFlag}
+						,#{createDate}
+						,#{createUser}
+						,#{updateDate}
+						,#{updateUser}
+				)
+	</insert>
+	
+	<delete id="deleteById">
+        DELETE FROM t_ship_sys_ship
+              WHERE 1=1 
+                AND SYS_SHIP_ID = #{sysShipId}  
+    </delete>
+    
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shipping.domain.SysShip">
+        DELETE FROM t_ship_sys_ship
+              WHERE 1=1 
+        <if test="sysShipId!=null and sysShipId!=''">AND  SYS_SHIP_ID = #{sysShipId}</if>
+        <if test="uuid!=null and uuid!=''">AND  UUID = #{uuid}</if>
+        <if test="vesselName!=null and vesselName!=''">AND  VESSEL_NAME = #{vesselName}</if>
+        <if test="imo!=null and imo!=''">AND  IMO = #{imo}</if>
+        <if test="built!=null and built!=''">AND  BUILT = #{built}</if>
+        <if test="vesselType!=null and vesselType!=''">AND  VESSEL_TYPE = #{vesselType}</if>
+        <if test="vesselSize!=null and vesselSize!=''">AND  VESSEL_SIZE = #{vesselSize}</if>
+        <if test="cubic!=null and cubic!=''">AND  CUBIC = #{cubic}</if>
+        <if test="sdwt!=null and sdwt!=''">AND  SDWT = #{sdwt}</if>
+        <if test="loa!=null and loa!=''">AND  LOA = #{loa}</if>
+        <if test="beam!=null and beam!=''">AND  BEAM = #{beam}</if>
+        <if test="draft!=null and draft!=''">AND  DRAFT = #{draft}</if>
+        <if test="hullType!=null and hullType!=''">AND  HULL_TYPE = #{hullType}</if>
+        <if test="accessoryFileNm!=null and accessoryFileNm!=''">AND  ACCESSORY_FILE_NM = #{accessoryFileNm}</if>
+        <if test="accessory!=null and accessory!=''">AND  ACCESSORY = #{accessory}</if>
+        <if test="ext1!=null and ext1!=''">AND  EXT1 = #{ext1}</if>
+        <if test="version!=null and version!=''">AND  VERSION = #{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND  ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">AND  CREATE_DATE = #{createDate}</if>
+        <if test="createUser!=null and createUser!=''">AND  CREATE_USER = #{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND  UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND  UPDATE_USER = #{updateUser}</if>
+    </delete>
+    
+    
+		
+	<update id="updateRecordById" parameterType="com.sinochem.crude.trade.shipping.domain.SysShip">
+		update t_ship_sys_ship
+		<set>
+         SYS_SHIP_ID=#{sysShipId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="built!=null">,BUILT = #{built}</if>
+		<if test="vesselType!=null">,VESSEL_TYPE = #{vesselType}</if>
+		<if test="vesselSize!=null">,VESSEL_SIZE = #{vesselSize}</if>
+		<if test="cubic!=null">,CUBIC = #{cubic}</if>
+		<if test="sdwt!=null">,SDWT = #{sdwt}</if>
+		<if test="loa!=null">,LOA = #{loa}</if>
+		<if test="beam!=null">,BEAM = #{beam}</if>
+		<if test="draft!=null">,DRAFT = #{draft}</if>
+		<if test="hullType!=null">,HULL_TYPE = #{hullType}</if>
+		<if test="accessoryFileNm!=null">,ACCESSORY_FILE_NM = #{accessoryFileNm}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+       	 SYS_SHIP_ID=#{sysShipId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shipping.domain.SysShip">
+		update t_ship_sys_ship
+		<set>
+		UUID = #{uuid}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="built!=null">,BUILT = #{built}</if>
+		<if test="vesselType!=null">,VESSEL_TYPE = #{vesselType}</if>
+		<if test="vesselSize!=null">,VESSEL_SIZE = #{vesselSize}</if>
+		<if test="cubic!=null">,CUBIC = #{cubic}</if>
+		<if test="sdwt!=null">,SDWT = #{sdwt}</if>
+		<if test="loa!=null">,LOA = #{loa}</if>
+		<if test="beam!=null">,BEAM = #{beam}</if>
+		<if test="draft!=null">,DRAFT = #{draft}</if>
+		<if test="hullType!=null">,HULL_TYPE = #{hullType}</if>
+		<if test="accessoryFileNm!=null">,ACCESSORY_FILE_NM = #{accessoryFileNm}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where  UUID = #{uuid} and ALIVE_FLAG='1'
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_sys_ship
+		<set>
+         SYS_SHIP_ID=#{sysShipId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="built!=null">,BUILT = #{built}</if>
+		<if test="vesselType!=null">,VESSEL_TYPE = #{vesselType}</if>
+		<if test="vesselSize!=null">,VESSEL_SIZE = #{vesselSize}</if>
+		<if test="cubic!=null">,CUBIC = #{cubic}</if>
+		<if test="sdwt!=null">,SDWT = #{sdwt}</if>
+		<if test="loa!=null">,LOA = #{loa}</if>
+		<if test="beam!=null">,BEAM = #{beam}</if>
+		<if test="draft!=null">,DRAFT = #{draft}</if>
+		<if test="hullType!=null">,HULL_TYPE = #{hullType}</if>
+		<if test="accessoryFileNm!=null">,ACCESSORY_FILE_NM = #{accessoryFileNm}</if>
+		<if test="accessory!=null">,ACCESSORY = #{accessory}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="built!=null and built!=''">and  BUILT=#{built}</if>
+		<if test="vesselType!=null and vesselType!=''">and  VESSEL_TYPE=#{vesselType}</if>
+		<if test="vesselSize!=null and vesselSize!=''">and  VESSEL_SIZE=#{vesselSize}</if>
+		<if test="cubic!=null and cubic!=''">and  CUBIC=#{cubic}</if>
+		<if test="sdwt!=null and sdwt!=''">and  SDWT=#{sdwt}</if>
+		<if test="loa!=null and loa!=''">and  LOA=#{loa}</if>
+		<if test="beam!=null and beam!=''">and  BEAM=#{beam}</if>
+		<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+		<if test="hullType!=null and hullType!=''">and  HULL_TYPE=#{hullType}</if>
+		<if test="accessoryFileNm!=null and accessoryFileNm!=''">and  ACCESSORY_FILE_NM=#{accessoryFileNm}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+	</update>
+	
+	
+	<select id="findByPrimaryKey" resultMap="SysShip">
+			select
+			* from t_ship_sys_ship
+			where
+		    SYS_SHIP_ID=#{sysShipId} 
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<select id="findByUuid" resultMap="SysShip">
+			select
+			* from t_ship_sys_ship
+			where UUID=#{uuid} 
+			and ALIVE_FLAG='1'
+	</select>
+
+	<select id="queryByEntitys" resultMap="SysShip" parameterType="com.sinochem.crude.trade.shipping.domain.SysShip">
+		select * from t_ship_sys_ship
+			where
+		 ALIVE_FLAG='1'
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="built!=null and built!=''">and  BUILT=#{built}</if>
+		<if test="vesselType!=null and vesselType!=''">and  VESSEL_TYPE=#{vesselType}</if>
+		<if test="vesselSize!=null and vesselSize!=''">and  VESSEL_SIZE=#{vesselSize}</if>
+		<if test="cubic!=null and cubic!=''">and  CUBIC=#{cubic}</if>
+		<if test="sdwt!=null and sdwt!=''">and  SDWT=#{sdwt}</if>
+		<if test="loa!=null and loa!=''">and  LOA=#{loa}</if>
+		<if test="beam!=null and beam!=''">and  BEAM=#{beam}</if>
+		<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+		<if test="hullType!=null and hullType!=''">and  HULL_TYPE=#{hullType}</if>
+		<if test="accessoryFileNm!=null and accessoryFileNm!=''">and  ACCESSORY_FILE_NM=#{accessoryFileNm}</if>
+		<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			</select>
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SYS_SHIP_ID as "sysShipId" 
+						 ,   UUID as "uuid" 
+						 ,   VESSEL_NAME as "vesselName" 
+						 ,   IMO as "imo" 
+						 ,   BUILT as "built" 
+						 ,   VESSEL_TYPE as "vesselType" 
+						 ,   VESSEL_SIZE as "vesselSize" 
+						 ,   CUBIC as "cubic" 
+						 ,   SDWT as "sdwt" 
+						 ,   LOA as "loa" 
+						 ,   BEAM as "beam" 
+						 ,   DRAFT as "draft" 
+						 ,   HULL_TYPE as "hullType" 
+						 ,   ACCESSORY_FILE_NM as "accessoryFileNm" 
+						 ,   ACCESSORY as "accessory" 
+						 ,   EXT1 as "ext1" 
+						 ,   VERSION as "version" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						from t_ship_sys_ship
+		where
+			ALIVE_FLAG='1'
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="built!=null and built!=''">and  BUILT=#{built}</if>
+			<if test="vesselType!=null and vesselType!=''">and  VESSEL_TYPE=#{vesselType}</if>
+			<if test="vesselSize!=null and vesselSize!=''">and  VESSEL_SIZE=#{vesselSize}</if>
+			<if test="cubic!=null and cubic!=''">and  CUBIC=#{cubic}</if>
+			<if test="sdwt!=null and sdwt!=''">and  SDWT=#{sdwt}</if>
+			<if test="loa!=null and loa!=''">and  LOA=#{loa}</if>
+			<if test="beam!=null and beam!=''">and  BEAM=#{beam}</if>
+			<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+			<if test="hullType!=null and hullType!=''">and  HULL_TYPE=#{hullType}</if>
+			<if test="accessoryFileNm!=null and accessoryFileNm!=''">and  ACCESSORY_FILE_NM=#{accessoryFileNm}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+				</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_sys_ship 
+		where
+		 ALIVE_FLAG='1'
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="vesselName!=null and vesselName!=''">and  VESSEL_NAME=#{vesselName}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="built!=null and built!=''">and  BUILT=#{built}</if>
+			<if test="vesselType!=null and vesselType!=''">and  VESSEL_TYPE=#{vesselType}</if>
+			<if test="vesselSize!=null and vesselSize!=''">and  VESSEL_SIZE=#{vesselSize}</if>
+			<if test="cubic!=null and cubic!=''">and  CUBIC=#{cubic}</if>
+			<if test="sdwt!=null and sdwt!=''">and  SDWT=#{sdwt}</if>
+			<if test="loa!=null and loa!=''">and  LOA=#{loa}</if>
+			<if test="beam!=null and beam!=''">and  BEAM=#{beam}</if>
+			<if test="draft!=null and draft!=''">and  DRAFT=#{draft}</if>
+			<if test="hullType!=null and hullType!=''">and  HULL_TYPE=#{hullType}</if>
+			<if test="accessoryFileNm!=null and accessoryFileNm!=''">and  ACCESSORY_FILE_NM=#{accessoryFileNm}</if>
+			<if test="accessory!=null and accessory!=''">and  ACCESSORY=#{accessory}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+					 
+	</select>
+	
+	
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+			<select id="queryByParamList" resultMap="SysShip" parameterType="com.sinochem.crude.trade.shipping.model.query.SysShipQuery">
+		select
+						  SYS_SHIP_ID as "sysShipId" 
+						 ,   UUID as "uuid" 
+						 ,   VESSEL_NAME as "vesselName" 
+						 ,   IMO as "imo" 
+						 ,   BUILT as "built" 
+						 ,   VESSEL_TYPE as "vesselType" 
+						 ,   VESSEL_SIZE as "vesselSize" 
+						 ,   CUBIC as "cubic" 
+						 ,   SDWT as "sdwt" 
+						 ,   LOA as "loa" 
+						 ,   BEAM as "beam" 
+						 ,   DRAFT as "draft" 
+						 ,   HULL_TYPE as "hullType" 
+						 ,   ACCESSORY_FILE_NM as "accessoryFileNm"
+						 ,   ACCESSORY as "accessory"
+						 ,   EXT1 as "ext1" 
+						 ,   VERSION as "version" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						from t_ship_sys_ship
+		where
+			ALIVE_FLAG='1'
+			<if test="shipNm!=null and shipNm!=''">and  VESSEL_NAME  like "%"#{shipNm}"%" </if>
+			order by CREATE_DATE desc
+		</select>
+		
+	<update id="deleteRecordByKey">
+		update t_ship_sys_ship
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			SYS_SHIP_ID=#{sysShipId} 
+
+	</update>
+	
+	<select id="findAllList" resultMap="SysShip">
+			select
+			* from t_ship_sys_ship
+			where ALIVE_FLAG='1'
+	</select>
+	
+</mapper>

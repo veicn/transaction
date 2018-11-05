@@ -1,0 +1,54 @@
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#date1' //指定元素
+  });
+});
+</script>
+<script src="/transport/js/om/editUnitRate.js"></script>
+<form class="layui-form layui-form-pane" style="margin-top:50px; margin-left:80px" >
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>单位类型</label>
+	    <div class="layui-input-inline iw300">
+	        <select id="type" name="type" lay-filter="province">
+            <option value="">请选择类型（必选）</option>
+        </select>
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>参考单位</label>
+	    <div class="layui-input-inline iw300">
+            <input class="layui-input" id="oneName" type="text" name="oneName" required  lay-verify="required" readonly="readonly" autocomplete="off" >
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>对比单位</label>
+	    <div class="layui-input-inline selectData">
+	        <select id="twoName" name="twoName">
+            <option value="">请选择对比单位（必选）</option>
+            </select>
+	    </div>
+    </div>
+    
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>底数</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="baseName" type="number" name="baseName" required  lay-verify="required" placeholder="请输入底数（必填）" autocomplete="off">
+	    </div>
+    </div>
+    
+    <div class="layui-form-item">
+	    <label class="layui-form-label iw300" style="width:150px"><span style="color:red;padding-right:5px">*</span>指数</label>
+	    <div class="layui-input-inline iw300">
+	        <input class="layui-input" id="power" type="number" name="power" required  lay-verify="required" placeholder="请输入指数（必填）" autocomplete="off">
+	    </div>
+    </div>
+    
+</form>

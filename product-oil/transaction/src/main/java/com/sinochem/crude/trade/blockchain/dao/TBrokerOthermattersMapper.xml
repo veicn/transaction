@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerOthermattersMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerOthermatters">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="declarationuuid" jdbcType="VARCHAR" property="declarationuuid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="value" jdbcType="INTEGER" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, declarationuuid, type, value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_othermatters
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_othermatters
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_othermatters
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_broker_othermatters
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_broker_othermatters ( declarationuuid, type,
+    value)
+    values
+    <foreach collection="list" item="othermatters" separator=",">
+      (#{othermatters.declarationuuid,jdbcType=VARCHAR}, #{othermatters.type,jdbcType=INTEGER},
+      #{othermatters.value,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOthermatters">
+    insert into t_broker_othermatters (id, declarationuuid, type, 
+      value)
+    values (#{id,jdbcType=BIGINT}, #{declarationuuid,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{value,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOthermatters">
+    insert into t_broker_othermatters
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="declarationuuid != null">
+        declarationuuid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null">
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOthermatters">
+    update t_broker_othermatters
+    <set>
+      <if test="declarationuuid != null">
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerOthermatters">
+    update t_broker_othermatters
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      value = #{value,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

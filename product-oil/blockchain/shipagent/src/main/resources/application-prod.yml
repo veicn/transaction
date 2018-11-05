@@ -1,0 +1,10 @@
+
+feignUrl: http://www.sinochem.com
+
+#log
+logging:
+config: classpath:logback.xml
+
+#aes 加解密
+aeskey: "sinochemOILBANK1"
+useaes: "true1"

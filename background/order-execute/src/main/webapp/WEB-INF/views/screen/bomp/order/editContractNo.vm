@@ -1,0 +1,21 @@
+<style>
+.qw-width-style{width:35%;}
+.qw-width-style-45{width:55%;}
+</style>
+<form class="shipForm layui-form" action="" id="contract_no_form">
+	<input type="hidden" id="uuid" name="uuid">	  		
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">卖方合同号 :</label>
+		<div class="controls qw-width-style-45">
+			<input type="text"  id="sellerContractNo" name="sellerContractNo" maxlength="50" placeholder="" class="s-input">
+		</div>
+	</div>
+	<div class="form-row charter-row">
+		<label class="control-label qw-width-style">买方合同号 :</label>
+		<div class="controls qw-width-style-45">
+			<input type="text"  id="buyerContractNo" name="buyerContractNo" maxlength="50" name="tel" placeholder="" class="s-input">
+		</div>
+	</div>
+	
+</from>
+

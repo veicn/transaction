@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')">
+<link rel="stylesheet" href="$imageServer.get('info/css/baseprice/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title">
+			<li>基价模板维护</li>
+			<li class="layui-this">现货基价维护</li>
+		</ul>
+		<div class="layui-tab-content">
+
+			<div class="layui-tab-item  layui-show">
+				
+					<div class="inquire">
+						<h3>查询条件</h3>
+					</div>
+
+					<div class="form-box">
+
+						<div class="layui-form">
+							<div class="layui-inline industry-name">
+								<label class="layui-form-label">地区</label>
+								<div class="layui-input-inline">
+									<!-- <select lay-verify="required" lay-search="">
+									<option value="">请直接选择</option>
+									<option value="">1</option>
+								</select> -->
+									<input type="text" class="layui-input" name="baseArea" value="$!{query.baseArea}" id="baseArea" placeholder="请输入地区" />
+								</div>
+							</div>
+
+							<div class="layui-inline industry-name">
+								<label class="layui-form-label">日期</label>
+								<div class="layui-input-inline wd">
+									<input type="text" name="date" id="date" value="$!{query.baseDate}" lay-verify="date" placeholder="yyyy-MM-dd"
+										autocomplete="off" class="layui-input" value="$!{query.baseDate}" >
+								</div>
+							</div>
+
+							<div class="layui-input-inline mr5">
+								<div class="btn1">
+									<button class="layui-btn layui-btn-normal select">
+										查询
+									</button>
+									<button class="layui-btn layui-btn-normal reset">
+										重置
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="inquire1">
+							<h3>查询结果</h3>
+						</div>
+					<form class="layui-form add" action="">
+						<table class="layui-table two" lay-even="" lay-skin="nob">
+							<thead style="text-align: center;">
+								<tr>
+									<th> 
+										<input class="checkAll" type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+									</th>
+									<th>序号</th>
+									<th>基价名称</th>
+									<th>地区</th>
+									<th>价格</th>
+									<th>涨跌</th>
+									<th>涨跌幅</th>
+									<th>最高价</th>
+									<th>最低价</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($item in $basePrices)
+										<tr class="trOwn" >
+											<td>
+												<input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+												<input name="uuid" value="$!{item.uuid}" type="hidden" class="w1 uuid" />
+											</td>
+											<input type="hidden" name="basePriceTempUuuid" class="basePriceTempUuuid" value="$!{item.basePriceTempUuuid}" />
+											<td>$!{velocityCount}</td>
+											<td>
+												$!{item.baseName}
+											</td>
+											<td>
+												$!{item.baseArea}
+											</td>
+											<td>
+												<input name="avg" value="$!{item.avg}" type="text" class="w avg" />
+											</td>
+											<td>
+												<input name="riseFall" value="$!{item.riseFall}" type="text" class="w riseFall" />
+											</td>
+											<td>
+												<input name="riseFallRate" value="$!{item.riseFallRate}" type="text" class="w riseFallRate" />
+											</td>
+											<td>
+												<input  name="high" value="$!{item.high}" type="text" class="w high" />
+											</td>
+											<td>
+												<input  name="low" value="$!{item.low}" type="text" class="w low" />
+											</td>
+											<td style="padding:9px 14px !important">
+												<textarea name="remark" class="remark t-m remark" rows="3" cols="10">$!{item.remark}</textarea>
+											</td>
+										</tr>
+								#end
+							</tbody>
+
+						</table>
+
+						<div class="foot">
+							<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveOrUpdateBaesPrice">保存</button>
+							<button id="tableReset" type="button" class="layui-btn layui-btn-normal">重置</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+			<!--底部分页-->
+			<!-- <div class="ry-footbar ry-right">
+				$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/baseprice/basePriceTemp.htm").put('slider_path','/contain/formPagingPageSlider')
+			</div> -->
+		</div>
+	</div>
+</div>
+<script src="$imageServer.get('info/js/baseprice/baseprice.js')"></script>

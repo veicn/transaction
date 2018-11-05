@@ -1,0 +1,51 @@
+<style> 
+.layui-unselect dl { max-height:200px; }  
+</style>
+<form class="layui-form" id="editForm" method="post">
+              <div class="layui-form-item mt10">
+                  <label class="layui-form-label iw154">品号：</label>
+                  <input type="hidden" id="id" name="id">
+                  <div class="layui-input-inline">
+                  		<input class="layui-input" type="text" name="productionNumber" id="productionNumber" lay-verify="required" autocomplete="off">
+               	   </div>
+     	           <label class="layui-form-label iw100">数量(吨)：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="quantity" id="quantity" lay-verify="required|number" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">船名：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="shipName" id="shipName" lay-verify="required" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">船运公司：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="pierOrCompany" id="pierOrCompany" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">来源：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="source" id="source" lay-verify="required" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">接货商：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="receiver" id="receiver" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">贸易方式：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="tradingWay" id="tradingWay" lay-verify="required" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">预抵/出时间：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="estimatedArrival" id="estimatedArrival" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                  
+               </div>
+                <button class="btnloc1 btnloc2 layui-btn layui-btn-normal" type="submit" lay-submit lay-filter="btn_edit">确定</button>
+                <button class="btnloc2 layui-btn layui-btn-normal" type="button" id="btn_close">取 消</button>
+</form>

@@ -1,0 +1,14 @@
+/*查看船务信息页面*/
+.view-box{border-bottom: 0;}
+.view-box .r-content div ul.view-box-ul{width: 100%;}
+.view-box-ul li input{ height: 34px;}
+.view-select{height: 36px;border: 1px solid #c1c1c1;}
+.view-select .select{width: 310px;}
+.view-select .select-content{height: 34px;}
+.tiperror{display:none;color: #F5650A;margin-left: 6px;}
+.vs-down{display:inline-block;width: 100px; height: 36px; background: #F36523; line-height: 36px;margin-left: 3px;}
+.vs-backbox{ float: right;}
+.vs-back{background: #323338;}
+/*新增船务页面*/
+.view-box-ul li .n-en-input{width: 198px;}
+.vs-backbox .btn-sub{margin-right: 26px;}

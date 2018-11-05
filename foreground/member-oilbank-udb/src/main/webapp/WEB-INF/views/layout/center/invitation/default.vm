@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+   ## $contain.get("/product/center/invitationCommon/server.htm")
+    $contain.get("/product/center/invitationCommon/htmlhead.htm")
+       $contain.get("/product/contain/nav.htm")
+#* <main id="main">
+     <div class="m-content center clearfix">
+         $contain.get("/pages/back/contain/menu.htm")
+         $screen_content
+     </div>
+ </main>*#
+
+<main id="main">
+    <div class="w1180 welcon clearfix">
+        $contain.get("/product/center/invitationCommon/menu.htm")
+                $screen_content
+    </div>
+</main>
+
+
+    $contain.get("/product/center/invitationCommon/htmlend.htm")
+</html>

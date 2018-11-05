@@ -1,0 +1,68 @@
+$contain.get('/common/title.htm').put('title', '待办信息')
+
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/total.css'))
+
+<div class="f1 content-rgh">
+    <h3 class="con-tit1">Message</h3>
+    <em class="check-b1 button-b1">
+        <a class="br btn-sub">All set to read</a>
+        <a href="javascript:;" class="br a-back">Delete</a>
+    </em>
+    <table class="con-table">
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>Time</td>
+            <td>Subject</td>
+        </tr>
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>2018-03-15  11:38:11</td>
+            <td>There is a seller for your crude oil purchase demand, click to see</td>
+        </tr>
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>2018-03-15  11:38:11</td>
+            <td>There is a seller for your crude oil purchase demand, click to see</td>
+        </tr>
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>2018-03-15  11:38:11</td>
+            <td>There is a seller for your crude oil purchase demand, click to see</td>
+        </tr>
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>2018-03-15  11:38:11</td>
+            <td class="con-grey">There is a seller for your crude oil purchase demand, click to see</td>
+        </tr>
+        <tr>
+            <td><img src="$appServer.get('/product/images/unchecked.png')"></td>
+            <td>2018-03-15  11:38:11</td>
+            <td class="con-grey">There is a seller for your crude oil purchase demand, click to see</td>
+        </tr>
+    </table>
+    <div class="c-page">
+        <span class="c-page-txt">&lt;</span>
+        <a class="c-page-num" href="">1</a>
+        <a class="c-page-num c-cur" href="">2</a>
+        <a class="c-page-num" href="">3</a>
+        <a class="c-page-num" href="">4</a>
+        <span class="c-page-point">...</span>
+        <a class="c-page-num" href="">8</a>
+        <a class="c-page-txt" href="">&gt;</a>
+    </div>
+</div>
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+<script>
+    // 复选框
+    $(".con-table img").on("click",function(){
+        var src=$(this).attr("src");
+        if(src=="../../images/unchecked.png"){
+            $(this).attr("src","$appServer.get('/product/images/checked.png')");
+        }else{
+            $(this).attr("src","$appServer.get('/product/images/unchecked.png')");
+        }
+
+    })
+</script>

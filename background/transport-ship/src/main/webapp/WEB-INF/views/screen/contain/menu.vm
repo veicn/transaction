@@ -1,0 +1,40 @@
+
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+         	<li class="layui-nav-item layui-nav-itemed">
+        		<a class="" href="javascript:;">船舶库管理</a>
+                <dl class="layui-nav-child">
+                    	<dl class="layui-nav-child">
+                    		<dd><a href="$shipServer.get('sysShip/sysShipList.htm')">船舶库管理</a></dd>
+                    	</dl>
+                    </dd>
+                </dl>
+			</li>
+         	<li class="layui-nav-item layui-nav-itemed">
+        		<a class="" href="javascript:;">平台跟踪</a>
+                <dl class="layui-nav-child">
+                    	<dl class="layui-nav-child">
+                    		<!-- <dd><a href="$shipServer.get('om/platform/agreementList.htm')">租船协议管理</a></dd> -->
+                    		<dd><a href="$shipServer.get('om/platform/shipPlateList.htm')">船盘管理</a></dd>
+                    		<dd><a href="$shipServer.get('om/platform/palletList.htm')">租船需求管理</a></dd>
+                    		<dd><a href="$shipServer.get('om/platform/shipPactList.htm')">租船合同管理</a></dd>
+                    	</dl>
+                    </dd>
+                </dl>
+               
+			</li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">常用工具管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$shipServer.get('om/unit/unitList.htm')">单位库管理</a></dd>
+                    <dd><a href="$shipServer.get('om/unit/unitRateList.htm')">单位换算管理</a></dd>
+                    <dd><a href="$shipServer.get('om/basicTariff/basicTariffList.htm')">基础运价管理</a></dd>
+                    <dd><a href="$shipServer.get('om/dealPoints/dealPointsList.htm')">成交点数管理</a></dd>
+                    <dd><a href="$shipServer.get('tide/tideList.htm')">潮汐管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>

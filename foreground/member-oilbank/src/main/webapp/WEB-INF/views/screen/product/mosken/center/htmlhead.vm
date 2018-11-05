@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>成品油-$!{title}</title>
+		<script type="text/javascript" src="$imageServer.get('product/js/bigpipe.js')"></script>
+		<script src="$imageServer.get('product/js/jquery-1.8.3.min.js')"></script>
+        <script src="$imageServer.get('product/layui/layui.all.js')"></script>
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_common.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_table.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_tab.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_form.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_button.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_center.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/s_layout1.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/font-shey/style.css')">
+
+		<link rel="stylesheet" href="$imageServer.get('product/css/common/reset.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/work/total.css')">
+		<link rel="stylesheet" href="$imageServer.get('product/css/common/public.css')">
+
+		#*#css($appServer.get('/product/css/common/reset.css'))
+		#css($appServer.get('/product/css/work/total.css'))
+		#css($appServer.get('/product/css/common/public.css'))*#
+	</head>
+<body>

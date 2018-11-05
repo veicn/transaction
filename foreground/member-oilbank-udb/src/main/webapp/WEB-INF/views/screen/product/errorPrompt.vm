@@ -1,0 +1,50 @@
+$contain.get('common/title.htm').put('title', '错误提示')
+#css($appServer.get('/product/css/work/forgotPwd.css'))
+
+<div class="w1180 clearfix rpp-con">
+    <div class="main-tit rpp-tit">
+        <h3>Forgot Password</h3>
+    </div>
+    <ul class="stowage-steps clearfix rpp-stowage-steps">
+        <li class="steps done fl ">
+            <div class="steps-infor steps-infor-cont">
+                <span>Confirm</span><br/>
+                <span>account</span><br/>
+                <span>number</span>
+            </div>
+        </li>
+        <li class="steps fl doing">
+            <div class="steps-infor ">
+                <span>Security<br/>verification</span>
+            </div>
+        </li>
+        <li class="steps fl willDone">
+            <div class="steps-infor">
+                <span>reset <br/>password</span>
+            </div>
+        </li>
+    </ul>
+    <h2>Verifying it's you   </h2>
+</div>
+<form action="" class="clearfix ">
+    <div class="form-group clearfix rpp-group">
+
+            <span>
+                <!-- <span style="color:red">*</span> -->
+                <div class="email">
+                  *<span class="eml-z">Email : </span>
+                </div>
+            </span>
+        <input type="text" class="form-control" id=" " >
+        <span class="errPrompt">Please enter the email</span>
+    </div>
+    <!-- <em class=" button-check rpp-button">
+        <a href="javascript:;" class="br">Next</a>
+    </em> -->
+    <div class="form-group-check">
+        <span></span>
+        <em class="button-check rpp-button">
+            <a href="javascript:;" class="br">Next</a>
+        </em>
+    </div>
+</form>

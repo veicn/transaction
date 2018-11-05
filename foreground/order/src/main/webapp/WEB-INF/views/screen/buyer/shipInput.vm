@@ -1,0 +1,17 @@
+<div class="c-mod">
+	<h3><i class="cw-ico ico-h3"></i>运输信息</h3>
+	<div class="c-tabdiv">
+		<ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">运输方式：</span><span class="c-int qx-conte">#if(0 == $!{contractShip.transportModes}) 海运
+			#end</span></li>
+            #*报价等其他阶段*#
+            <li class="c-fcos1"><span class="c-fn">装货港：</span><span class="c-int qx-conte">$!{contractShip.shipmentPort}</span></li>
+
+            <li class="c-fcos1"><span class="c-fn">装期：</span><span class="c-int qx-conte">$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentStartTime})} 至 $!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.shipmentEndTime})}</span></li>
+
+##            <li class="c-fcos1"><span class="c-fn">卸货港：</span><span class="c-int qx-conte">$!{contractShip.dischargePort}</span></li>
+
+            <li class="c-fcos1"><span class="c-fn">到货期：</span><span class="c-int qx-conte">$!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeStartTime})} 至 $!{dateUtil.getDateTime("yyyy-MM-dd",$!{contractShip.dischargeEndTime})}</span></li>
+		</ul>
+	</div>
+</div>

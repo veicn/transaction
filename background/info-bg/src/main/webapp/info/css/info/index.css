@@ -1,0 +1,59 @@
+.iw300{ width:300px;}
+.iw400{ width:400px;}
+.iw800{ width:800px;}
+.iw350{ width:350px;}
+.iw70{width:70px !important;}
+.mt20{ margin-top:20px;}
+.ry-banner{ padding:15px; background-color: #eee;}
+.ry-footbar{padding:0 5px;background-color: #eee;}
+.ry-right{ text-align: right;}
+.bombPp{ padding: 25px 0 0;}
+.mb0{ margin-bottom: 0px;}
+.mb20{ margin-left:66px}
+.pl5{ padding-left: 5px;}
+.pr5{ padding-right: 5px;}
+.pp15{ padding:15px;}
+.titleH2{ font-size: 18px; border-bottom: solid 5px #dddfe1; line-height: 45px; height:45px;}
+.formItem{padding:20px 40px 0;}
+.heightAuto{ height :auto!important;}
+.mt15{ margin-top: 15px;}
+.mb15{ margin-bottom: 15px; margin-left:66px}
+.aniuRy{ text-align: center; padding: 60px 0 20px;}
+.ry-left{ float: left;}
+.ry-tagInput{ width:400px; border: solid #000000 1px ; height:40px;  line-height: 40px;}
+.ry-tag{ line-height: 40px; }
+.ry-overflow{ overflow: hidden;}
+.ry-hui-bg{ background-color: #dfdfdf;}
+.ry-red{ color: red;}
+.ml18{margin-left: 18px;}
+.btcol{	color:#0A529C;}
+.layui-form-item td {padding: 5px 10px;border: 1px solid #DDD;}
+.layui-form-item table{width:700px !important;}
+/*�޸�.layui-form-item ����߾�*/
+.layui-form-item{
+	margin-bottom:10px !important;
+}
+/*�޸ĵ�ѡ�������߾�*/
+.layui-form-radio{
+	margin:6px 20px 0 0;
+}
+
+/*�޸ı�ǩ��Ŀ��*/
+.tagsinput{
+	width:800px !important;
+	margin-left:42px !important;
+}
+
+
+
+
+
+/*上传*/
+.ry-upImgList{ padding-left: 113px; overflow: hidden;}
+.ry-upImg{ display: none;}
+.ry-upImg p{padding-left: 113px; line-height: 45px;}
+.ry-upImgList li{ width:160px; height:100px; border-radius:5px; border: solid 2px #dddfe1; float: left; margin-right: 30px; position: relative;}
+.ry-upImgList li.active{width:300px; height:120px;}
+.ry-upImgList li a{ font-size: 50px; width:100%; height:100px; line-height: 100px; text-align: center; display: block;}
+.ry-imgCun{width:100%; height:100%; z-index: -1; position: absolute; left:0;top:0;}
+.ry-imgCun img{ width:100%; height:100%;}

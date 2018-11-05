@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.goods.dao.TCrudeQualityMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.goods.model.TCrudeQuality" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UUID" property="uuid" jdbcType="CHAR" />
+    <result column="CRUDE_ID" property="crudeId" jdbcType="BIGINT" />
+    <result column="SIMPLE_DATE" property="simpleDate" jdbcType="DATE" />
+    <result column="QUALITY_VERSION" property="qualityVersion" jdbcType="VARCHAR" />
+    <result column="API" property="api" jdbcType="DECIMAL" />
+    <result column="SULPHUR" property="sulphur" jdbcType="DECIMAL" />
+    <result column="ACIDITY" property="acidity" jdbcType="DECIMAL" />
+    <result column="FREEZING_POINT" property="freezingPoint" jdbcType="VARCHAR" />
+    <result column="FLASH_POINT" property="flashPoint" jdbcType="VARCHAR" />
+    <result column="VISCOSITY" property="viscosity" jdbcType="VARCHAR" />
+    <result column="CARBON_RESIDUE" property="carbonResidue" jdbcType="VARCHAR" />
+    <result column="NICKEL" property="nickel" jdbcType="VARCHAR" />
+    <result column="VANADIUM" property="vanadium" jdbcType="VARCHAR" />
+    <result column="ALIVE_FLAG" property="aliveFlag" jdbcType="CHAR" />
+    <result column="YIELD" property="yield" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_PERSON" property="modifyPerson" jdbcType="VARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="CHAR" />
+    <result column="INTERFACE_ID" property="interfaceId" jdbcType="BIGINT" />
+    <result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+    <result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+    <result column="EXTEND3" property="extend3" jdbcType="VARCHAR" />
+    <result column="EXTEND4" property="extend4" jdbcType="VARCHAR" />
+    <result column="EXTEND5" property="extend5" jdbcType="VARCHAR" />
+    <result column="EXTEND6" property="extend6" jdbcType="VARCHAR" />
+    <result column="EXTEND7" property="extend7" jdbcType="VARCHAR" />
+    <result column="EXTEND8" property="extend8" jdbcType="VARCHAR" />
+    <result column="EXTEND9" property="extend9" jdbcType="VARCHAR" />
+    <result column="EXTEND10" property="extend10" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    ID, UUID, CRUDE_ID, SIMPLE_DATE, QUALITY_VERSION, API, SULPHUR, ACIDITY, FREEZING_POINT, 
+    FLASH_POINT, VISCOSITY, CARBON_RESIDUE, NICKEL, VANADIUM, ALIVE_FLAG, YIELD, CREATE_DATE, 
+    CREATE_PERSON, MODIFY_DATE, MODIFY_PERSON, SOURCE, INTERFACE_ID, EXTEND1, EXTEND2, 
+    EXTEND3, EXTEND4, EXTEND5, EXTEND6, EXTEND7, EXTEND8, EXTEND9, EXTEND10
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from t_crude_quality
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    delete from t_crude_quality
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sinochem.crude.trade.goods.model.TCrudeQuality" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    insert into t_crude_quality (UUID, CRUDE_ID, 
+      SIMPLE_DATE, QUALITY_VERSION, API, 
+      SULPHUR, ACIDITY, FREEZING_POINT, 
+      FLASH_POINT, VISCOSITY, CARBON_RESIDUE, 
+      NICKEL, VANADIUM, ALIVE_FLAG, 
+      YIELD, CREATE_DATE, CREATE_PERSON, 
+      MODIFY_DATE, MODIFY_PERSON, SOURCE, 
+      INTERFACE_ID, EXTEND1, EXTEND2, 
+      EXTEND3, EXTEND4, EXTEND5, 
+      EXTEND6, EXTEND7, EXTEND8, 
+      EXTEND9, EXTEND10)
+    values (#{uuid,jdbcType=CHAR}, #{crudeId,jdbcType=BIGINT}, 
+      #{simpleDate,jdbcType=DATE}, #{qualityVersion,jdbcType=VARCHAR}, #{api,jdbcType=DECIMAL}, 
+      #{sulphur,jdbcType=DECIMAL}, #{acidity,jdbcType=DECIMAL}, #{freezingPoint,jdbcType=VARCHAR}, 
+      #{flashPoint,jdbcType=VARCHAR}, #{viscosity,jdbcType=VARCHAR}, #{carbonResidue,jdbcType=VARCHAR}, 
+      #{nickel,jdbcType=VARCHAR}, #{vanadium,jdbcType=VARCHAR}, #{aliveFlag,jdbcType=CHAR}, 
+      #{yield,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{modifyPerson,jdbcType=VARCHAR}, #{source,jdbcType=CHAR}, 
+      #{interfaceId,jdbcType=BIGINT}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, 
+      #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}, #{extend5,jdbcType=VARCHAR}, 
+      #{extend6,jdbcType=VARCHAR}, #{extend7,jdbcType=VARCHAR}, #{extend8,jdbcType=VARCHAR}, 
+      #{extend9,jdbcType=VARCHAR}, #{extend10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.goods.model.TCrudeQuality" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    insert into t_crude_quality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="crudeId != null" >
+        CRUDE_ID,
+      </if>
+      <if test="simpleDate != null" >
+        SIMPLE_DATE,
+      </if>
+      <if test="qualityVersion != null" >
+        QUALITY_VERSION,
+      </if>
+      <if test="api != null" >
+        API,
+      </if>
+      <if test="sulphur != null" >
+        SULPHUR,
+      </if>
+      <if test="acidity != null" >
+        ACIDITY,
+      </if>
+      <if test="freezingPoint != null" >
+        FREEZING_POINT,
+      </if>
+      <if test="flashPoint != null" >
+        FLASH_POINT,
+      </if>
+      <if test="viscosity != null" >
+        VISCOSITY,
+      </if>
+      <if test="carbonResidue != null" >
+        CARBON_RESIDUE,
+      </if>
+      <if test="nickel != null" >
+        NICKEL,
+      </if>
+      <if test="vanadium != null" >
+        VANADIUM,
+      </if>
+      <if test="aliveFlag != null" >
+        ALIVE_FLAG,
+      </if>
+      <if test="yield != null" >
+        YIELD,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="modifyPerson != null" >
+        MODIFY_PERSON,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="interfaceId != null" >
+        INTERFACE_ID,
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1,
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2,
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3,
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4,
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5,
+      </if>
+      <if test="extend6 != null" >
+        EXTEND6,
+      </if>
+      <if test="extend7 != null" >
+        EXTEND7,
+      </if>
+      <if test="extend8 != null" >
+        EXTEND8,
+      </if>
+      <if test="extend9 != null" >
+        EXTEND9,
+      </if>
+      <if test="extend10 != null" >
+        EXTEND10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=CHAR},
+      </if>
+      <if test="crudeId != null" >
+        #{crudeId,jdbcType=BIGINT},
+      </if>
+      <if test="simpleDate != null" >
+        #{simpleDate,jdbcType=DATE},
+      </if>
+      <if test="qualityVersion != null" >
+        #{qualityVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null" >
+        #{api,jdbcType=DECIMAL},
+      </if>
+      <if test="sulphur != null" >
+        #{sulphur,jdbcType=DECIMAL},
+      </if>
+      <if test="acidity != null" >
+        #{acidity,jdbcType=DECIMAL},
+      </if>
+      <if test="freezingPoint != null" >
+        #{freezingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="flashPoint != null" >
+        #{flashPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="viscosity != null" >
+        #{viscosity,jdbcType=VARCHAR},
+      </if>
+      <if test="carbonResidue != null" >
+        #{carbonResidue,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="vanadium != null" >
+        #{vanadium,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null" >
+        #{aliveFlag,jdbcType=CHAR},
+      </if>
+      <if test="yield != null" >
+        #{yield,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyPerson != null" >
+        #{modifyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=CHAR},
+      </if>
+      <if test="interfaceId != null" >
+        #{interfaceId,jdbcType=BIGINT},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null" >
+        #{extend6,jdbcType=VARCHAR},
+      </if>
+      <if test="extend7 != null" >
+        #{extend7,jdbcType=VARCHAR},
+      </if>
+      <if test="extend8 != null" >
+        #{extend8,jdbcType=VARCHAR},
+      </if>
+      <if test="extend9 != null" >
+        #{extend9,jdbcType=VARCHAR},
+      </if>
+      <if test="extend10 != null" >
+        #{extend10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.goods.model.TCrudeQuality" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    update t_crude_quality
+    <set >
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=CHAR},
+      </if>
+      <if test="crudeId != null" >
+        CRUDE_ID = #{crudeId,jdbcType=BIGINT},
+      </if>
+      <if test="simpleDate != null" >
+        SIMPLE_DATE = #{simpleDate,jdbcType=DATE},
+      </if>
+      <if test="qualityVersion != null" >
+        QUALITY_VERSION = #{qualityVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null" >
+        API = #{api,jdbcType=DECIMAL},
+      </if>
+      <if test="sulphur != null" >
+        SULPHUR = #{sulphur,jdbcType=DECIMAL},
+      </if>
+      <if test="acidity != null" >
+        ACIDITY = #{acidity,jdbcType=DECIMAL},
+      </if>
+      <if test="freezingPoint != null" >
+        FREEZING_POINT = #{freezingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="flashPoint != null" >
+        FLASH_POINT = #{flashPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="viscosity != null" >
+        VISCOSITY = #{viscosity,jdbcType=VARCHAR},
+      </if>
+      <if test="carbonResidue != null" >
+        CARBON_RESIDUE = #{carbonResidue,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        NICKEL = #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="vanadium != null" >
+        VANADIUM = #{vanadium,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null" >
+        ALIVE_FLAG = #{aliveFlag,jdbcType=CHAR},
+      </if>
+      <if test="yield != null" >
+        YIELD = #{yield,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null" >
+        CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyPerson != null" >
+        MODIFY_PERSON = #{modifyPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=CHAR},
+      </if>
+      <if test="interfaceId != null" >
+        INTERFACE_ID = #{interfaceId,jdbcType=BIGINT},
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null" >
+        EXTEND6 = #{extend6,jdbcType=VARCHAR},
+      </if>
+      <if test="extend7 != null" >
+        EXTEND7 = #{extend7,jdbcType=VARCHAR},
+      </if>
+      <if test="extend8 != null" >
+        EXTEND8 = #{extend8,jdbcType=VARCHAR},
+      </if>
+      <if test="extend9 != null" >
+        EXTEND9 = #{extend9,jdbcType=VARCHAR},
+      </if>
+      <if test="extend10 != null" >
+        EXTEND10 = #{extend10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.goods.model.TCrudeQuality" >
+    <!--
+      警告 - @mbggenerated
+     这个节点自动生成,请勿修改.
+    -->
+    update t_crude_quality
+    set UUID = #{uuid,jdbcType=CHAR},
+      CRUDE_ID = #{crudeId,jdbcType=BIGINT},
+      SIMPLE_DATE = #{simpleDate,jdbcType=DATE},
+      QUALITY_VERSION = #{qualityVersion,jdbcType=VARCHAR},
+      API = #{api,jdbcType=DECIMAL},
+      SULPHUR = #{sulphur,jdbcType=DECIMAL},
+      ACIDITY = #{acidity,jdbcType=DECIMAL},
+      FREEZING_POINT = #{freezingPoint,jdbcType=VARCHAR},
+      FLASH_POINT = #{flashPoint,jdbcType=VARCHAR},
+      VISCOSITY = #{viscosity,jdbcType=VARCHAR},
+      CARBON_RESIDUE = #{carbonResidue,jdbcType=VARCHAR},
+      NICKEL = #{nickel,jdbcType=VARCHAR},
+      VANADIUM = #{vanadium,jdbcType=VARCHAR},
+      ALIVE_FLAG = #{aliveFlag,jdbcType=CHAR},
+      YIELD = #{yield,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      MODIFY_PERSON = #{modifyPerson,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=CHAR},
+      INTERFACE_ID = #{interfaceId,jdbcType=BIGINT},
+      EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      EXTEND6 = #{extend6,jdbcType=VARCHAR},
+      EXTEND7 = #{extend7,jdbcType=VARCHAR},
+      EXTEND8 = #{extend8,jdbcType=VARCHAR},
+      EXTEND9 = #{extend9,jdbcType=VARCHAR},
+      EXTEND10 = #{extend10,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

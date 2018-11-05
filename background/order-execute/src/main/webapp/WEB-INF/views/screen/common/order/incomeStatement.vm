@@ -1,0 +1,259 @@
+<style>
+.ic_table {
+	margin-top:30px;
+}
+
+.ic_table th,td {
+	width:33%
+}
+</style>
+
+<div class="c-mod">
+	<h3><em class="cw-ico ico-h3"></em>航程损益分析</h3>
+	<div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos2">
+				<span class="c-fn">装港：</span>
+				<span class="c-int qx-conte">$!{data.loading}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">卸港：</span>
+				<span class="c-int qx-conte">$!{data.unloading}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">船名：</span>
+				<span class="c-int qx-conte">$!{data.shipName}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">品种：</span>
+				<span class="c-int qx-conte">$!{data.goodsName}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">密度：</span>
+				<span class="c-int qx-conte">$!{data.density}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">船舶经验系数（VEF）：</span>
+				<span class="c-int qx-conte">$!{data.vef}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">提单日期：</span>
+				<span class="c-int qx-conte">$!{data.billDate}</span>
+			</li>
+			<li class="c-fcos2">
+				<span class="c-fn">卸货日期：</span>
+				<span class="c-int qx-conte">$!{data.unloadDate}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="c-tabdiv th-tabdiv">
+	<h3></h3>
+	<div class="charter-cont charter-cont2">
+		<div style="width:70%;margin: auto;" class=" charter-add charter-add2">
+			<table class="">                                                                                                  
+				<tr>
+					<th></th>
+					<th>桶（毛重）</th>
+					<th>吨（毛重）</th>
+				</tr>
+				<tr>
+					<td>提单量</td>
+					<td>$!{count1[0][0]}</td>
+					<td>$!{count1[0][1]}</td>
+				</tr>
+				<tr>
+					<td>OBQ</td>
+					<td>$!{count1[1][0]}</td>
+					<td>$!{count1[1][1]}</td>
+				</tr>
+				<tr>
+					<td>装港船量</td>
+					<td>$!{count1[2][0]}</td>
+					<td>$!{count1[2][1]}</td>
+				</tr>
+				<tr>
+					<td>装港船实际接收量</td>
+					<td>$!{count1[3][0]}</td>
+					<td>$!{count1[3][1]}</td>
+				</tr>
+				<tr>
+					<td>实际接收量/提单量差异</td>
+					<td>$!{count1[4][0]}</td>
+					<td>$!{count1[4][1]}</td>
+				</tr>
+				<tr>
+					<td>差异百分比</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count1[5][0]},10)) >= 5)
+					<td class="c-warning">$!{count1[5][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count1[5][0]},10)) >= 3)
+					<td class="c-remind">$!{count1[5][0]}</td>
+					#else
+					<td>$!{count1[5][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count1[5][1]},10)) >= 5)
+					<td class="c-warning">$!{count1[5][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count1[5][1]},10)) >= 3)
+					<td class="c-remind">$!{count1[5][1]}</td>
+					#else
+					<td>$!{count1[5][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>实际装船量</td>
+					<td>$!{count2[0][0]}</td>
+					<td>$!{count2[0][1]}</td>
+				</tr>
+				<tr>
+					<td>到卸货港船量</td>
+					<td>$!{count2[1][0]}</td>
+					<td>$!{count2[1][1]}</td>
+				</tr>
+				<tr>
+					<td>到卸货港船量/实际装船量</td>
+					<td>$!{count2[2][0]}</td>
+					<td>$!{count2[2][1]}</td>
+				</tr>
+				<tr>
+					<td>差异百分比</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count2[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count2[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count2[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count2[3][0]}</td>
+					#else
+					<td>$!{count2[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count2[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count2[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count2[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count2[3][1]}</td>
+					#else
+					<td>$!{count2[3][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>提单量</td>
+					<td>$!{count3[0][0]}</td>
+					<td>$!{count3[0][1]}</td>
+				</tr>
+				<tr>
+					<td>到卸货港船量</td>
+					<td>$!{count3[1][0]}</td>
+					<td>$!{count3[1][1]}</td>
+				</tr>
+				<tr>
+					<td>到卸货港船量/提单量</td>
+					<td>$!{count3[2][0]}</td>
+					<td>$!{count3[2][1]}</td>
+				</tr>
+				<tr>
+					<td>差异百分比</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count3[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count3[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count3[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count3[3][0]}</td>
+					#else
+					<td>$!{count3[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count3[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count3[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count3[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count3[3][1]}</td>
+					#else
+					<td>$!{count3[3][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>卸港船量</td>
+					<td>$!{count4[0][0]}</td>
+					<td>$!{count4[0][1]}</td>
+				</tr>
+				<tr>
+					<td>卸港船量*VEF</td>
+					<td>$!{count4[1][0]}</td>
+					<td>$!{count4[1][1]}</td>
+				</tr>
+				<tr>
+					<td>卸港岸罐接收量</td>
+					<td>$!{count4[2][0]}</td>
+					<td>$!{count4[2][1]}</td>
+				</tr>
+				<tr>
+					<td>卸港岸罐接收量/卸港船量*VEF</td>
+					<td>$!{count4[3][0]}</td>
+					<td>$!{count4[3][1]}</td>
+				</tr>
+				<tr>
+					<td>差异百分比</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count4[4][0]},10)) >= 5)
+					<td class="c-warning">$!{count4[4][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count4[4][0]},10)) >= 3)
+					<td class="c-remind">$!{count4[4][0]}</td>
+					#else
+					<td>$!{count4[4][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count4[4][1]},10)) >= 5)
+					<td class="c-warning">$!{count4[4][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count4[4][1]},10)) >= 3)
+					<td class="c-remind">$!{count4[4][1]}</td>
+					#else
+					<td>$!{count4[4][1]}</td>
+					#end
+				</tr>
+			</table>
+			
+	<h3></h3>
+			<table class="">                                                                                                  
+				<tr>
+					<td>提单量</td>
+					<td>$!{count5[0][0]}</td>
+					<td>$!{count5[0][1]}</td>
+				</tr>
+				<tr>
+					<td>卸港岸罐接收量</td>
+					<td>$!{count5[1][0]}</td>
+					<td>$!{count5[1][1]}</td>
+				</tr>
+				<tr>
+					<td>卸港岸罐接收量/提单量</td>
+					<td>$!{count5[2][0]}</td>
+					<td>$!{count5[2][1]}</td>
+				</tr>
+				<tr>
+					<td>差异百分比</td>
+					#if($!mathTool.abs($!mathTool.mul($!{count5[3][0]},10)) >= 5)
+					<td class="c-warning">$!{count5[3][0]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count5[3][0]},10)) >= 3)
+					<td class="c-remind">$!{count5[3][0]}</td>
+					#else
+					<td>$!{count5[3][0]}</td>
+					#end
+					
+					#if($!mathTool.abs($!mathTool.mul($!{count5[3][1]},10)) >= 5)
+					<td class="c-warning">$!{count5[3][1]}</td>
+					#elseif($!mathTool.abs($!mathTool.mul($!{count5[3][1]},10)) >= 3)
+					<td class="c-remind">$!{count5[3][1]}</td>
+					#else
+					<td>$!{count5[3][1]}</td>
+					#end
+				</tr>
+			</table>
+		</div>
+		</div>
+	</div>
+</div>

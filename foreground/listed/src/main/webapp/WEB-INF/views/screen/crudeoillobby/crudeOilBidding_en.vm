@@ -1,0 +1,500 @@
+
+#if($demand.crudeOilOptions)
+    #set($a = "${demand.crudeOilOptions}_原油需求大厅_原油采购大厅_原油大厅_买原油网")
+#else
+    #set($a = "原油需求大厅_原油采购大厅_原油大厅_买原油网")
+#end
+
+#set($purchaseType = "Bid")
+#if("$!{demand.purchaseType}" == "2")
+    #set($purchaseType = "Quote")
+#end
+
+<!--suppress ALL -->
+<style>
+    .c-state1.c-tcjj1{height:40px;}
+</style>
+<div class="caigou-content clearfix cg-list">
+    <div class="fabucaigou-con-right c-fabucaigou-con-right">
+        <form method="post" action="" id="quoteForm">
+            <div class="cg-orders">
+                <div class="inner">
+                    #*原油油种信息*#
+                    $contain.get("/crudeoilhallform/crudeoillist.htm").setParam("demandId", "$!{demandId}").put("publishType", $!{demand.publishType}).put("crudeOil", $!{biddingForm.crudeOil})
+                </div>
+            </div>
+            <div class="cg-quote">
+                <div class="inner">
+                    #*需求、报价信息对比*#
+                    $contain.get("/crudeoilhallform/pricelistTwo.htm").setParam("demandId", "$!{demandId}").put("demand", $!{demand}).put("demandShips", $!{demandShips}).put("bidding", $!{biddingForm.bidding}).put("demandShip", $!{biddingForm.demandShip})
+                </div>
+            </div>
+            <div class="cg-information">
+                <div class="inner">
+                    #*供货商信息*#
+                    $contain.get("/crudeoilhallform/supplierDetail.htm").put("demandRelevanter", $!{biddingForm.demandRelevanter})
+                </div>
+            </div>
+
+            <div class="orders-but">
+                <input type="hidden" name="bidding.crudeOilOptions" />
+                <input type="hidden" id="biddingTypeInput" name="bidding.biddingType" />
+
+                <p><input name="agreementCk" type="checkbox" id="agreementCk">Agree<a href="javascript:;"  onclick="openProtocol()">《Crude Oil Trading Rules》</a></p>
+
+
+                <button class="btn-bc btn-yx" type="button" onclick="quote(2)">Formal&nbsp;$!{purchaseType}</button>
+                #if(${demand.purchaseType} == 2)
+                    <button class="btn-bc btn-lj" type="button" onclick="quote(1)">Intention&nbsp;$!{purchaseType}</button>
+                #end
+
+            </div>
+        </form>
+    </div>
+
+</div>
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<style>
+    .purc-span3t .bidding-required-error {
+        border:1px solid red;
+    }
+    .purc-span3 .bidding-required-error {
+        border:1px solid red;
+    }
+</style>
+<script>
+
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: "input[name='bidding.stopBidTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='bidding.stopBidTime']");
+                    // 取得当前时间
+                    var newDate = getNowFormatDate();
+                    // 报价有效期不能小于当前时间
+                    if (compareTwoDate(thisDate, newDate)) {
+                        obj.val("");
+                        obj.hasClass("bidding-required-error") ? "" : obj.addClass("bidding-required-error");
+                        layui.use(['form', 'layedit', 'laydate'], function () {
+                            layui.layer.alert('The period of validity of bid cannot be less than current time!', {title:"Notice", btn: "OK"});
+                        })
+                        return;
+                    }
+                    obj.hasClass("bidding-required-error") ? obj.removeClass("bidding-required-error") : "";
+                }
+            }
+        	,lang: 'en'
+        });
+        laydate.render({
+            elem: "input[name='demandShip.shipmentStartTime']",
+            done: function(value, date){
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='demandShip.shipmentStartTime']");
+                    // 取得装货期结束时间
+                    var shipmentEndTime  = $("input[name='demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, shipmentEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of loading period shall be prior to the end time!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货开始时间
+                    var dischargeStartTime  = $("input[name='demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of loading period shall be prior to the beginning time of discharging!');
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        	,lang: 'en'
+        });
+
+        laydate.render({
+            elem: "input[name='demandShip.shipmentEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='demandShip.shipmentEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime  = $("input[name='demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(compareTwoDate(thisDate, shipmentStartTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of loading period shall be prior to the end time!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime  = $("input[name='demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if(!compareTwoDate(thisDate, dischargeEndTime)){
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The end time of loading period shall be prior to the beginning time of unloading!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        	,lang: 'en'
+        });
+
+        laydate.render({
+            elem: "input[name='demandShip.dischargeStartTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='demandShip.dischargeStartTime']");
+                    // 取得装货期开始时间
+                    var shipmentStartTime = $("input[name='demandShip.shipmentStartTime']").val();
+                    if (shipmentStartTime != null && shipmentStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of loading period shall be prior to the beginning time of delivery period!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeEndTime = $("input[name='demandShip.dischargeEndTime']").val();
+                    if (dischargeEndTime != null && dischargeEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (!compareTwoDate(thisDate, dischargeEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of delivery period shall be prior to the end time of delivery period!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        	,lang: 'en'
+        });
+
+        laydate.render({
+            elem: "input[name='demandShip.dischargeEndTime']",
+            done: function (value, date) {
+                var thisDate = value;
+                if (thisDate != null && thisDate != "") {
+                    var obj = $("input[name='demandShip.dischargeEndTime']");
+                    // 取得装货期开始时间
+                    var shipmentEndTime = $("input[name='demandShip.shipmentEndTime']").val();
+                    if (shipmentEndTime != null && shipmentEndTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, shipmentEndTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The end time of loading period shall be prior to the end time of delivery period!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    // 取得卸货结束时间
+                    var dischargeStartTime = $("input[name='demandShip.dischargeStartTime']").val();
+                    if (dischargeStartTime != null && dischargeStartTime != "") {
+                        // 开始时间大于结束时间， 弹出提示
+                        if (compareTwoDate(thisDate, dischargeStartTime)) {
+                            obj.val("");
+                            obj.hasClass("bidding-required-error")?"":obj.addClass("bidding-required-error");
+                            layui.use(['form', 'layedit', 'laydate'], function () {
+                                layui.layer.alert('The beginning time of delivery period shall be prior to the end time of delivery period!', {title:"Notice", btn: "OK"});
+                            })
+                            return;
+                        }
+                    }
+
+                    obj.hasClass("bidding-required-error")?obj.removeClass("bidding-required-error"):"";
+                }
+            }
+        	,lang: 'en'
+        });
+    });
+
+    $(function () {
+        initDateInput($("input[data='true']"));
+
+        $(".biddingNeeded").each(function () {
+            $(this).attr("onchange", "javascript:textChangeEvent(this)");
+        })
+
+        $(".biddingNeeded").each(function () {
+            var objValue = $(this).val();
+            if (objValue == null || objValue == "") {
+                $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+            } else {
+                $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+            }
+        })
+    })
+
+    // 保存中的不能再次提交
+    var saving = 0;
+    
+    function quote(biddingType) {
+        if ("$!{demand.creater}" != "" && "$!{user.epMemberId}" == "$!{demand.creater}"){
+            layui.use(['layer'], function () {
+                layui.layer.alert('The requirement originator cannot participate in the $!{purchaseType}!', {title:"Notice", btn: "OK"});
+            })
+            return;
+        }
+        if($("input[name='crudeOil.propertyId']").length == 0) {
+        	layui.layer.alert('Please select the oil type!', {title:"Notice", btn: "OK"});
+            return;
+        }
+
+        // 必填项验证
+        if(!requiredChk())
+            return;
+
+        // 数据项长度验证
+        if(!lengthChk())
+            return;
+        
+        //供应商必输校验
+        if(!formValiate())
+            return;
+        
+        if($("#valuationFormula").val().length > 2000) {
+            layui.layer.alert('The Price Fomula length cannot exceed 2000.', {title:"Notice", btn: "OK"});
+            return;
+        }
+        if($("#valuationFormulaJson").val().length > 2000) {
+        	layui.layer.alert('The Price Fomula length cannot exceed 2000.', {title:"Notice", btn: "OK"});
+            return;
+        }
+        
+        var cked = $('input[name=agreementCk]').is(":checked");
+        if(!cked){
+            layui.use(['form', 'layedit', 'laydate'], function () {
+                layui.layer.alert('Please first agree to the Crude Oil Trading Rules!', {title:"Notice", btn: "OK"});
+            })
+            return;
+        }
+
+        if(saving == 1) {
+        	return;
+        } else {
+            saving = 1;
+        }
+        
+     	// 表单提交前给payItem和payItemJSON赋值
+        setValue();
+        $("#biddingTypeInput").val(biddingType);
+        $("#quoteForm").attr("action","$appServer.get('crudeoillobby/quoteType.htm')");
+        $("#quoteForm").submit();
+    }
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        #if(${errorMsg})
+            layui.layer.alert('$!{errorMsg}', {title:"Notice", btn: "OK"});
+        #end
+    })
+
+    /**
+     * 比较两个日期，第一个小，第二个大返回TRUE；否则，返回FALSE
+     */
+    function compareTwoDate(date, targetDate) {
+        var date = new Date(date.replace("-","/").replace("-","/"));
+        var targetDate =new Date(targetDate.replace("-","/").replace("-","/"));
+
+        if(date < targetDate)
+            return true;
+         return false;
+    }
+    //获取当前时间，格式yyyy-MM-dd
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+
+    /**
+     * 必填项验证
+     */
+    function requiredChk() {
+        var requiredChkCount = 0;
+        $(".biddingNeeded").each(function () {
+            var objValue = $(this).val();
+            if (objValue == null || objValue == "") {
+                requiredChkCount += 1;
+                $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+            } else {
+                $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+            }
+        })
+        if (0 < requiredChkCount) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('The data items with red border are mandatory!', {title:"Notice", btn: "OK"});
+            })
+            return false;
+        }
+        if($("#typeEvent option:selected").val() != "DATE"){
+            if($("#eventDays").val()==null || $("#eventDays").val() == ""){
+                layui.use(['layer'], function () {
+                    layui.layer.alert('Payment date must be valid!', {title:"Notice", btn: "OK"});
+                })
+                return false;
+            }
+        }else{
+            if($("#otherDate").val() == null || $("#otherDate").val() == ""){
+                layui.use(['layer'], function () {
+                    layui.layer.alert('Please enter payment date!', {title:"Notice", btn: "OK"});
+                })
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 数据项长度验证
+     */
+    function lengthChk() {
+        var lengthChkCount = 0;
+        $(".biddingNumChk").each(function () {
+            var objValue = $(this).val();
+            var length = objValue.length;
+            if (0 < objValue.indexOf(".")) {
+                if (13 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            } else {
+                if (12 < length) {
+                    lengthChkCount += 1;
+                    $(this).hasClass("bidding-required-error")?"":$(this).addClass("bidding-required-error");
+                } else {
+                    $(this).hasClass("bidding-required-error")?$(this).removeClass("bidding-required-error"):"";
+                }
+            }
+
+        })
+
+        if (0 < lengthChkCount) {
+            layui.use(['layer'], function () {
+                layui.layer.alert('The data item with red border is too long, where the integral cannot exceed 12 digits, and the decimal cannot exceed 13 digits!', {title:"Notice", btn: "OK"});
+            })
+            return false;
+        }
+        return true;
+    }
+
+    function textChangeEvent(obj) {
+        if ($(obj).hasClass("biddingNeeded")) {
+            var objValue = $(obj).val();
+            if (objValue == null || objValue == "") {
+                $(obj).hasClass("bidding-required-error")?"":$(obj).addClass("bidding-required-error");
+                return false;
+            } else {
+                $(obj).hasClass("bidding-required-error")?$(obj).removeClass("bidding-required-error"):"";
+            }
+        }
+
+        if ($(obj).hasClass("biddingNumChk")) {
+            var objValue = $(obj).val();
+            var length = objValue.length;
+            if (0 < objValue.indexOf(".")) {
+                if (13 < length) {
+                    $(obj).hasClass("bidding-required-error")?"":$(obj).addClass("bidding-required-error");
+                    return false;
+                } else {
+                    $(obj).hasClass("bidding-required-error")?$(obj).removeClass("bidding-required-error"):"";
+                }
+            } else {
+                if (12 < length) {
+                    $(obj).hasClass("bidding-required-error")?"":$(obj).addClass("bidding-required-error");
+                    return false;
+                } else {
+                    $(obj).hasClass("bidding-required-error")?$(obj).removeClass("bidding-required-error"):"";
+                }
+            }
+            return true;
+        }
+    }
+
+    function openProtocol(){
+
+        $.ajax({
+            type:"POST",
+            url:'$infoServer.get("/front/infoDetailByTitle.json")',
+            //async:true
+            data:JSON.stringify({"title":"Crude Oil Trading Rules"}),
+            contentType:"application/json; charset=utf-8",
+            dataType: 'JSON',
+            success:function(data){
+                layer.open({
+                    title: 'Crude Oil Trading Rules',
+                    content: data.datas.textHtml //注意，如果str是object，那么需要字符拼接。
+                    ,area:'auto'
+                    ,offset: 'auto'
+                    ,btn: 'Agree'
+                    ,yes: function(index, layero){
+                        //按钮【按钮一】的回调
+                                $("#agreementCk").attr("checked",'true');
+                                layer.close(index);
+                    }
+                    ,btnAlign: 'c'
+                    ,anim: 0
+                    ,maxWidth:800
+                    ,maxHeight:500
+
+                });
+            }
+        });
+    }
+</script>
+
+

@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.transport.dao.ShipPlateMapper">
+	<!-- <resultMap type="com.sinochem.crude.trade.transport.dao.entities.ShipPlate" id="ShipPlateDO" extends="com.sinochem.crude.trade.transport.dao.mappers.immutable.${meta.immapperInterfaceClassName}.ShipPlate">
+		
+	</resultMap>  -->
+	<resultMap type="com.sinochem.crude.trade.transport.domain.ShipPlate" id="ShipPlate">
+		<result property="shipPlateId" column="SHIP_PLATE_ID" />
+		<result property="uuid" column="UUID" />
+		<result property="epMemberId" column="EP_MEMBER_ID" />
+		<result property="imo" column="IMO" />
+		<result property="status" column="STATUS" />
+		<result property="sysShipUuid" column="SYS_SHIP_UUID" />
+		<result property="sysShipId" column="SYS_SHIP_ID" />
+		<result property="name" column="NAME" />
+		<result property="type" column="TYPE" />
+		<result property="completeDate" column="COMPLETE_DATE" />
+		<result property="shipOwner" column="SHIP_OWNER" />
+		<result property="loadQuantity" column="LOAD_QUANTITY" />
+		<result property="position" column="POSITION" />
+		<result property="eta" column="ETA" />
+		<result property="brokerName" column="BROKER_NAME" />
+		<result property="brokerId" column="BROKER_ID" />
+		<result property="remark" column="REMARK" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="version" column="VERSION" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="ext1" column="EXT1" />
+		<result property="etaCabinda" column="ETA_CABINDA" />
+		<result property="epMemberName" column="EP_MEMBER_NAME" />
+		<result property="relType" column="REL_TYPE" />
+		<result property="shipOwnerId" column="SHIP_OWNER_ID" />
+		<result property="email" column="EMAIL" />
+		<result property="leaveFlag" column="LEAVE_FLAG" />
+		<result property="shipAge" column="SHIP_AGE" />
+		<result property="open" column="open" />
+		<result property="publishTime" column="PUBLISH_TIME" />
+		<result property="period" column="PERIOD" />
+		<result property="periodDate" column="PERIOD_DATE" />
+		<result property="epMemberNameEn" column="EP_MEMBER_NAME_EN" />
+		<result property="shipOwnerEn" column="SHIP_OWNER_EN" />
+		<result property="brokerNameEn" column="BROKER_NAME_EN" />
+			</resultMap> 
+
+	<select id="queryByEntitys" resultMap="ShipPlate" parameterType="com.sinochem.crude.trade.transport.domain.ShipPlate">
+	select * from t_ship_ship_plate
+	where
+		 ALIVE_FLAG='1'
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+		<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="open!=null and open!=''">and  open=#{open}</if>
+		<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+		<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+		<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			</select>
+	
+	<select id="findByPrimaryKey" resultMap="ShipPlate">
+			select
+			* from t_ship_ship_plate
+			where
+		    SHIP_PLATE_ID=#{shipPlateId} 
+			and ALIVE_FLAG='1'
+	</select>
+	<select id="findByUuid" resultMap="ShipPlate">
+			select
+			* from t_ship_ship_plate
+			where
+			UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+	
+	<update id="updateRecord" parameterType="com.sinochem.crude.trade.transport.domain.ShipPlate">
+		update t_ship_ship_plate
+		<set>
+         SHIP_PLATE_ID=#{shipPlateId}
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="sysShipUuid!=null">,SYS_SHIP_UUID = #{sysShipUuid}</if>
+		<if test="sysShipId!=null">,SYS_SHIP_ID = #{sysShipId}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="completeDate!=null">,COMPLETE_DATE = #{completeDate}</if>
+		<if test="shipOwner!=null">,SHIP_OWNER = #{shipOwner}</if>
+		<if test="loadQuantity!=null">,LOAD_QUANTITY = #{loadQuantity}</if>
+		<if test="position!=null">,POSITION = #{position}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="brokerName!=null">,BROKER_NAME = #{brokerName}</if>
+		<if test="brokerId!=null">,BROKER_ID = #{brokerId}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="etaCabinda!=null">,ETA_CABINDA = #{etaCabinda}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="relType!=null">,REL_TYPE = #{relType}</if>
+		<if test="shipOwnerId!=null">,SHIP_OWNER_ID = #{shipOwnerId}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="leaveFlag!=null">,LEAVE_FLAG = #{leaveFlag}</if>
+		<if test="shipAge!=null">,SHIP_AGE = #{shipAge}</if>
+		<if test="open!=null">,open = #{open}</if>
+		<if test="publishTime!=null">,PUBLISH_TIME = #{publishTime}</if>
+		<if test="period!=null">,PERIOD = #{period}</if>
+		<if test="periodDate!=null">,PERIOD_DATE = #{periodDate}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null">,SHIP_OWNER_EN = #{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null">,BROKER_NAME_EN = #{brokerNameEn}</if>
+		</set>
+		where
+       	 SHIP_PLATE_ID=#{shipPlateId}
+		and ALIVE_FLAG='1'
+	</update>
+	
+	<insert id="insertRecord" parameterType="com.sinochem.crude.trade.transport.domain.ShipPlate"  useGeneratedKeys="true" keyProperty="shipPlateId" >
+		insert  into t_ship_ship_plate (				SHIP_PLATE_ID
+						,UUID
+						,EP_MEMBER_ID
+						,IMO
+						,STATUS
+						,SYS_SHIP_UUID
+						,SYS_SHIP_ID
+						,NAME
+						,TYPE
+						,COMPLETE_DATE
+						,SHIP_OWNER
+						,LOAD_QUANTITY
+						,POSITION
+						,ETA
+						,BROKER_NAME
+						,BROKER_ID
+						,REMARK
+						,ALIVE_FLAG
+						,VERSION
+						,LANG_VER
+						,CREATE_DATE
+						,UPDATE_DATE
+						,CREATE_USER
+						,UPDATE_USER
+						,EXT1
+						,ETA_CABINDA
+						,EP_MEMBER_NAME
+						,REL_TYPE
+						,SHIP_OWNER_ID
+						,EMAIL
+						,LEAVE_FLAG
+						,SHIP_AGE
+						,open
+						,PUBLISH_TIME
+						,PERIOD
+						,PERIOD_DATE
+						,EP_MEMBER_NAME_EN
+						,SHIP_OWNER_EN
+						,BROKER_NAME_EN
+						)
+		values(		#{shipPlateId}
+						,#{uuid}
+						,#{epMemberId}
+						,#{imo}
+						,#{status}
+						,#{sysShipUuid}
+						,#{sysShipId}
+						,#{name}
+						,#{type}
+						,#{completeDate}
+						,#{shipOwner}
+						,#{loadQuantity}
+						,#{position}
+						,#{eta}
+						,#{brokerName}
+						,#{brokerId}
+						,#{remark}
+						,#{aliveFlag}
+						,#{version}
+						,#{langVer}
+						,#{createDate}
+						,#{updateDate}
+						,#{createUser}
+						,#{updateUser}
+						,#{ext1}
+						,#{etaCabinda}
+						,#{epMemberName}
+						,#{relType}
+						,#{shipOwnerId}
+						,#{email}
+						,#{leaveFlag}
+						,#{shipAge}
+						,#{open}
+						,#{publishTime}
+						,#{period}
+						,#{periodDate}
+						,#{epMemberNameEn}
+						,#{shipOwnerEn}
+						,#{brokerNameEn}
+				)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update t_ship_ship_plate
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+			SHIP_PLATE_ID=#{shipPlateId} 
+	</update>
+	
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,	 (case STATUS when '1' then '已发布'  when '2' then '生成船合同' when '3' then '航次结束' when '4' then '已取消' else '' end) AS "statusText"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   CREATE_DATE AS "createDate" 
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 OPEN as "open"
+						 ,	 PUBLISH_TIME as "publishTime"
+						 ,	 PERIOD_DATE as "periodDate"
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   BROKER_NAME_EN as "brokerNameEn" 
+						from t_ship_ship_plate
+		where
+			ALIVE_FLAG='1'
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="open!=null and open!=''">and  open=#{open}</if>
+			<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+			<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+			<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			order by PUBLISH_TIME Desc
+	</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_ship_plate 
+		where
+		 ALIVE_FLAG='1'
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="open!=null and open!=''">and  open=#{open}</if>
+			<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+			<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+			<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+					 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_ship_ship_plate
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+		ALIVE_FLAG='1'
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+		<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="open!=null and open!=''">and  open=#{open}</if>
+		<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+		<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+		<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+	</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_ship_ship_plate
+		<set>
+		ALIVE_FLAG='1'
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="sysShipUuid!=null">,SYS_SHIP_UUID = #{sysShipUuid}</if>
+		<if test="sysShipId!=null">,SYS_SHIP_ID = #{sysShipId}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="completeDate!=null">,COMPLETE_DATE = #{completeDate}</if>
+		<if test="shipOwner!=null">,SHIP_OWNER = #{shipOwner}</if>
+		<if test="loadQuantity!=null">,LOAD_QUANTITY = #{loadQuantity}</if>
+		<if test="position!=null">,POSITION = #{position}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="brokerName!=null">,BROKER_NAME = #{brokerName}</if>
+		<if test="brokerId!=null">,BROKER_ID = #{brokerId}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="etaCabinda!=null">,ETA_CABINDA= #{etaCabinda}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="relType!=null">,REL_TYPE = #{relType}</if>
+		<if test="shipOwnerId!=null">,SHIP_OWNER_ID = #{shipOwnerId}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="leaveFlag!=null">,LEAVE_FLAG = #{leaveFlag}</if>
+		<if test="shipAge!=null">,SHIP_AGE = #{shipAge}</if>
+		<if test="open!=null">,open = #{open}</if>
+		<if test="publishTime!=null">,PUBLISH_TIME = #{publishTime}</if>
+		<if test="period!=null">,PERIOD = #{period}</if>
+		<if test="periodDate!=null">,PERIOD_DATE = #{periodDate}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null">,SHIP_OWNER_EN = #{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null">,BROKER_NAME_EN = #{brokerNameEn}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+		<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+		<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+		<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+		<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+		<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+		<if test="name!=null and name!=''">and  NAME=#{name}</if>
+		<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+		<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+		<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+		<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+		<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+		<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+		<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+		<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+		<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+		<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+		<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+		<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+		<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+		<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+		<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+		<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+		<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+		<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+		<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+		<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+		<if test="open!=null and open!=''">and  open=#{open}</if>
+		<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+		<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+		<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+		<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+	</update>
+	
+	<!-- //**************************以下方法为开发者补充*********************************/ -->
+	<select id="queryByEntitysForground" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.transport.domain.ShipPlate">
+		select 
+			UUID AS uuid,
+			IMO AS imo,
+			NAME AS name,
+			TYPE AS type,
+			DATE_FORMAT(ETA,"%Y-%m-%d") AS eta,
+			<!-- DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda, -->
+			(case when ETA_CABINDA is not null then DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") else '' end) AS etaCabinda,
+			SHIP_OWNER AS shipOwner,
+			SHIP_OWNER_EN AS shipOwnerEn,
+			LOAD_QUANTITY AS loadQuantity,
+			POSITION AS position,
+			BROKER_NAME AS brokerName,
+			BROKER_NAME_EN AS brokerNameEn,
+			COMPLETE_DATE AS completeDate,
+			<!-- concat((case when (TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()))=0 then '1' else TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()) end),'年') AS age, -->
+			(case when (TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()))=0 then '1' else TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()) end) AS age,
+			(case when open is not null then DATE_FORMAT(open,"%Y-%m-%d") else '' end) AS open,
+			<!-- EP_MEMBER_NAME AS epMemberName, -->
+			EP_MEMBER_ID AS epMemberId,
+			(case when EP_MEMBER_NAME is not null then EP_MEMBER_NAME else '' end) AS epMemberName,
+			(case when EP_MEMBER_NAME_EN is not null then EP_MEMBER_NAME_EN else '' end) AS epMemberNameEn,
+			(case when PUBLISH_TIME is not null then DATE_FORMAT(PUBLISH_TIME,"%Y-%m-%d") else '' end) AS publishTime
+			 
+		from t_ship_ship_plate
+		where
+			 ALIVE_FLAG='1' and STATUS IN ('1','2')
+		order by CREATE_DATE desc
+	</select>
+
+	
+	
+	<!-- 根据uuid修改对象 -->
+	<update id="updateRecordsFn" parameterType="hashmap">
+		update t_ship_ship_plate
+		<set>
+         ALIVE_FLAG = '1'
+		<if test="uuid!=null">,UUID = #{uuid}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="imo!=null">,IMO = #{imo}</if>
+		<if test="status!=null">,STATUS = #{status}</if>
+		<if test="sysShipUuid!=null">,SYS_SHIP_UUID = #{sysShipUuid}</if>
+		<if test="sysShipId!=null">,SYS_SHIP_ID = #{sysShipId}</if>
+		<if test="name!=null">,NAME = #{name}</if>
+		<if test="type!=null">,TYPE = #{type}</if>
+		<if test="completeDate!=null">,COMPLETE_DATE = #{completeDate}</if>
+		<if test="shipOwner!=null">,SHIP_OWNER = #{shipOwner}</if>
+		<if test="loadQuantity!=null">,LOAD_QUANTITY = #{loadQuantity}</if>
+		<if test="position!=null">,POSITION = #{position}</if>
+		<if test="eta!=null">,ETA = #{eta}</if>
+		<if test="brokerName!=null">,BROKER_NAME = #{brokerName}</if>
+		<if test="brokerId!=null">,BROKER_ID = #{brokerId}</if>
+		<if test="remark!=null">,REMARK = #{remark}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="version!=null">,VERSION = #{version}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="etaCabinda!=null">,ETA_CABINDA=#{etaCabinda}</if>
+		<if test="epMemberName!=null">,EP_MEMBER_NAME = #{epMemberName}</if>
+		<if test="relType!=null">,REL_TYPE = #{relType}</if>
+		<if test="shipOwnerId!=null">,SHIP_OWNER_ID = #{shipOwnerId}</if>
+		<if test="email!=null">,EMAIL = #{email}</if>
+		<if test="leaveFlag!=null">,LEAVE_FLAG = #{leaveFlag}</if>
+		<if test="shipAge!=null">,SHIP_AGE = #{shipAge}</if>
+		<if test="open!=null">,open = #{open}</if>
+		<if test="publishTime!=null">,PUBLISH_TIME = #{publishTime}</if>
+		<if test="period!=null">,PERIOD = #{period}</if>
+		<if test="periodDate!=null">,PERIOD_DATE = #{periodDate}</if>
+		<if test="epMemberNameEn!=null">,EP_MEMBER_NAME_EN = #{epMemberNameEn}</if>
+		<if test="shipOwnerEn!=null">,SHIP_OWNER_EN = #{shipOwnerEn}</if>
+		<if test="brokerNameEn!=null">,BROKER_NAME_EN = #{brokerNameEn}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+	</update>
+	
+	
+	<!-- 根据主键查询对象详细信息 -->
+	<select id="queryByPrimaryKeyForground" resultType="java.util.HashMap">
+		select 
+			UUID AS uuid,
+			EP_MEMBER_ID AS epMemberId,
+			IMO AS imo,
+			STATUS AS status,
+			SYS_SHIP_UUID AS sysShipUuid,
+			SYS_SHIP_ID AS sysShipId,
+			NAME AS name,
+			TYPE AS type,
+			DATE_FORMAT(ETA,"%Y-%m-%d") AS eta,
+			<!-- DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda, -->
+			(case when ETA_CABINDA is not null then DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") else '' end) AS etaCabinda,
+			SHIP_OWNER AS shipOwner,
+			SHIP_OWNER_EN AS shipOwnerEn,
+			(case when LOAD_QUANTITY is not null then concat(LOAD_QUANTITY,'mt') else '' end) AS loadQuantity,
+			POSITION AS position,
+			BROKER_NAME AS brokerName,
+			BROKER_NAME_EN AS brokerNameEn,
+			BROKER_ID AS brokerId,
+			REMARK AS remark,
+			CREATE_DATE AS createDate,
+			COMPLETE_DATE AS completeDate,
+			concat((case when (TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()))=0 then '1' else TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()) end)) AS age,
+			(case when open is not null then DATE_FORMAT(open,"%Y-%m-%d") else '' end) AS open,
+			(case when EP_MEMBER_NAME is not null then EP_MEMBER_NAME else '' end) AS epMemberName,
+			(case when EP_MEMBER_NAME_EN is not null then EP_MEMBER_NAME_EN else '' end) AS epMemberNameEn,
+			(case when PUBLISH_TIME is not null then DATE_FORMAT(PUBLISH_TIME,"%Y-%m-%d") else '' end) AS publishTime
+		from t_ship_ship_plate
+		where
+			 ALIVE_FLAG='1' and SHIP_PLATE_ID=#{shipPlateId}
+	</select>
+	
+	
+	
+	<select id="queryShipPlatePageList" resultType="java.util.HashMap" parameterType="com.sinochem.crude.trade.transport.domain.ShipPlate">
+		select 
+			SHIP_PLATE_ID AS shipPlateId,
+			UUID AS uuid,
+			EP_MEMBER_ID AS epMemberId,
+			IMO AS imo,
+			STATUS AS status,
+			SYS_SHIP_UUID AS sysShipUuid,
+			SYS_SHIP_ID AS sysShipId,
+			NAME AS name,
+			TYPE AS type,
+			DATE_FORMAT(ETA,"%Y-%m-%d") AS eta,
+			<!-- DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda, -->
+			(case when ETA_CABINDA is not null then DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") else '' end) AS etaCabinda,
+			LOAD_QUANTITY AS loadQuantity,
+			POSITION AS position,
+			SHIP_OWNER AS shipOwner,
+			SHIP_OWNER_EN AS shipOwnerEn,
+			BROKER_ID AS brokerId,
+			BROKER_NAME AS brokerName,
+			BROKER_NAME_EN AS brokerNameEn,
+			REMARK AS remark,
+			COMPLETE_DATE AS completeDate,
+			(case when (TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()))=0 then '1' else TIMESTAMPDIFF(YEAR,concat(COMPLETE_DATE,'-01-01'),now()) end) AS age,
+			(case when open is not null then DATE_FORMAT(open,"%Y-%m-%d") else '' end) AS open,
+			(case when EP_MEMBER_NAME is not null then EP_MEMBER_NAME else '' end) AS epMemberName,
+			(case when EP_MEMBER_NAME_EN is not null then EP_MEMBER_NAME_EN else '' end) AS epMemberNameEn,
+			(case when PUBLISH_TIME is not null then DATE_FORMAT(PUBLISH_TIME,"%Y-%m-%d") else '' end) AS publishTime,
+			CREATE_DATE AS createDate,
+			UPDATE_DATE AS updateDate,
+			CREATE_USER AS createUser,
+			UPDATE_USER AS updateUser
+		from t_ship_ship_plate
+		where
+			 ALIVE_FLAG='1' and STATUS IN ('1','2')
+			 <if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+		order by CREATE_DATE desc
+	</select>
+	<select id="queryMoreRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,	 (case STATUS when '1' then '已发布'  when '2' then '生成船合同' when '3' then '航次结束' when '4' then '已取消' else '' end) AS "statusText"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   SHIP_OWNER_EN AS "shipOwnerEn" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_NAME_EN AS "brokerNameEn" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   DATE_FORMAT(CREATE_DATE,"%Y-%m-%d") AS createDate
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   EP_MEMBER_NAME_EN AS "epMemberNameEn" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 PERIOD_DATE as "periodDate"
+						 ,   DATE_FORMAT(OPEN,"%Y-%m-%d") as "open"
+						from t_ship_ship_plate
+		where                         
+			 ALIVE_FLAG='1' and STATUS IN ('1','2') 
+			<if test="shipName!=null and shipName!=''">and  NAME LIKE CONCAT ('%',#{shipName},'%')</if>
+			order by 
+				INSTR(#{shipType},TYPE) > 0 DESC,
+				SHIP_AGE &lt;= #{shipAgeEnd} and SHIP_AGE &gt;= #{shipAgeBeg} DESC ,CREATE_DATE DESC
+	</select>
+	<select id="findMapByUuid" resultType="java.util.HashMap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,	 (case STATUS when '1' then '已发布'  when '2' then '生成船合同' when '3' then '航次结束' when '4' then '已取消' else '' end) AS "statusText"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   SHIP_OWNER_EN AS "shipOwnerEn" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_NAME_EN AS "brokerNameEn" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   CREATE_DATE AS "createDate" 
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   EP_MEMBER_NAME_EN AS "epMemberNameEn" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 PERIOD_DATE as "periodDate"
+						 ,	 DATE_FORMAT(OPEN,"%Y-%m-%d") as "open"
+						from t_ship_ship_plate
+		where
+			ALIVE_FLAG='1' and
+			UUID=#{uuid}
+		</select>
+		<select id="recommendShipPlate" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,	 (case STATUS when '1' then '已发布'  when '2' then '生成船合同' when '3' then '航次结束' when '4' then '已取消' else '' end) AS "statusText"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   SHIP_OWNER_EN AS "shipOwnerEn" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_NAME_EN AS "brokerNameEn" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   DATE_FORMAT(CREATE_DATE,"%Y-%m-%d") AS createDate
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   EP_MEMBER_NAME_EN AS "epMemberNameEn" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 PERIOD_DATE as "periodDate"
+						 ,   DATE_FORMAT(OPEN,"%Y-%m-%d") as "open"
+						from t_ship_ship_plate
+		where                         
+			 ALIVE_FLAG='1' and STATUS IN ('1','2')
+			<if test="shipName!=null">and  NAME LIKE CONCAT ('%',#{shipName},'%')</if>
+			<if test="shipType!=null">and  INSTR(#{shipType},TYPE) > 0 </if>
+			<if test="shipAgeEnd!=null and shipAgeBeg!=null">and SHIP_AGE between #{shipAgeBeg} and #{shipAgeEnd}+1 </if>
+			<if test="laycanBeg!=null and regin!=null and regin=='西非'.toString()">and date_add(ETA_CABINDA, interval 1 week) &lt; #{laycanBeg}</if>
+			<if test="laycanBeg!=null and regin!=null and regin='中东'.toString()">and date_add(ETA, interval 1 week) &lt; #{laycanBeg}</if>
+			order by REL_TYPE , SHIP_AGE ASC,PERIOD_DATE-NOW() DESC
+	</select>
+	
+	
+	<!-- 根据条件-查询全部（om平台） -->	
+	<select id="queryRecordsOM" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   SHIP_OWNER_EN AS "shipOwnerEn" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_NAME_EN AS "brokerNameEn" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   CREATE_DATE AS "createDate" 
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   EP_MEMBER_NAME_EN AS "epMemberNameEn" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 OPEN as "open"
+						 ,	 PUBLISH_TIME as "publishTime"
+						 ,	 PERIOD_DATE as "periodDate"
+						from t_ship_ship_plate
+		where
+			ALIVE_FLAG='1'
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="type!=null and type!=''">and  TYPE LIKE CONCAT('%',#{type},'%')</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  (SHIP_OWNER LIKE CONCAT('%',#{shipOwner},'%')</if>
+			<if test="shipOwner!=null and shipOwner!=''">or  SHIP_OWNER_EN LIKE CONCAT('%',#{shipOwner},'%'))</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="brokerName!=null and brokerName!=''">and  (BROKER_NAME LIKE CONCAT('%',#{brokerName},'%')</if>
+			<if test="brokerName!=null and brokerName!=''">or  BROKER_NAME_EN LIKE CONCAT('%',#{brokerName},'%'))</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  (EP_MEMBER_NAME LIKE CONCAT('%',#{epMemberName},'%')</if>
+			<if test="epMemberName!=null and epMemberName!=''">or  EP_MEMBER_NAME_EN LIKE CONCAT('%',#{epMemberName},'%'))</if>
+			<if test="relType!=null and relType!=''">and  REL_TYPE=#{relType}</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="open!=null and open!=''">and  open=#{open}</if>
+			<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+			<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+			<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			
+			<if test="ageBeg!=null and ageBeg!=''">and  SHIP_AGE &gt;=#{ageBeg}</if>
+			<if test="ageEnd!=null and ageEnd!=''">and  SHIP_AGE &lt;=#{ageEnd}</if>
+			<if test="quantityBeg!=null and quantityBeg!=''">and  LOAD_QUANTITY &gt;=#{quantityBeg}</if>
+			<if test="quantityEnd!=null and quantityEnd!=''">and  LOAD_QUANTITY &lt;=#{quantityEnd}</if>
+			<if test="publishBeg!=null and publishBeg!=''">and  DATE_FORMAT(PUBLISH_TIME, '%Y-%m-%d') &gt;=#{publishBeg}</if>
+			<if test="publishEnd!=null and publishEnd!=''">and  DATE_FORMAT(PUBLISH_TIME, '%Y-%m-%d') &lt;=#{publishEnd}</if>
+			<if test="openBeg!=null and openBeg!=''">and  DATE_FORMAT(OPEN, '%Y-%m-%d') &gt;=#{openBeg}</if>
+			<if test="openEnd!=null and openEnd!=''">and  DATE_FORMAT(OPEN, '%Y-%m-%d') &lt;=#{openEnd}</if>
+			<if test="ETABeg!=null and ETABeg!=''">and  DATE_FORMAT(ETA, '%Y-%m-%d') &gt;=#{ETABeg}</if>
+			<if test="ETAEnd!=null and ETAEnd!=''">and  DATE_FORMAT(ETA, '%Y-%m-%d') &lt;=#{ETAEnd}</if>
+			order by CREATE_DATE DESC
+	</select>
+	
+	
+	<!-- 根据条件-分页查询（船东/经纪人，转租船东，查询，包括平台辅助导入） -->
+	<select id="queryRecordsAll" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  SHIP_PLATE_ID AS "shipPlateId" 
+						 ,   UUID AS "uuid" 
+						 ,   EP_MEMBER_ID AS "epMemberId" 
+						 ,   IMO AS "imo"
+						 ,   STATUS AS "status"
+						 ,	 (case STATUS when '1' then '已发布'  when '2' then '生成船合同' when '3' then '航次结束' when '4' then '已取消' else '' end) AS "statusText"
+						 ,   SYS_SHIP_UUID AS "sysShipUuid" 
+						 ,   SYS_SHIP_ID AS "sysShipId" 
+						 ,   NAME AS "name" 
+						 ,   TYPE AS "type" 
+						 ,   COMPLETE_DATE AS "completeDate" 
+						 ,   SHIP_OWNER AS "shipOwner" 
+						 ,   LOAD_QUANTITY AS "loadQuantity" 
+						 ,   POSITION AS "position" 
+						 ,   DATE_FORMAT(ETA,"%Y-%m-%d") AS eta
+						 ,   BROKER_NAME AS "brokerName" 
+						 ,   BROKER_ID AS "brokerId" 
+						 ,   REMARK AS "remark" 
+						 ,   ALIVE_FLAG AS "aliveFlag" 
+						 ,   VERSION AS "version" 
+						 ,   LANG_VER AS "langVer" 
+						 ,   CREATE_DATE AS "createDate" 
+						 ,   UPDATE_DATE AS "updateDate" 
+						 ,   CREATE_USER AS "createUser" 
+						 ,   UPDATE_USER AS "updateUser" 
+						 ,   EXT1 AS "ext1" 
+						 ,   DATE_FORMAT(ETA_CABINDA,"%Y-%m-%d") AS etaCabinda
+						 ,   EP_MEMBER_NAME AS "epMemberName" 
+						 ,   REL_TYPE AS "relType" 
+						 ,   SHIP_OWNER_ID AS "shipOwnerId" 
+						 ,   EMAIL AS "email" 
+						 ,   LEAVE_FLAG AS "leaveFlag" 
+						 ,   SHIP_AGE as "shipAge" 
+						 ,	 OPEN as "open"
+						 ,	 PUBLISH_TIME as "publishTime"
+						 ,	 PERIOD_DATE as "periodDate"
+						 ,   EP_MEMBER_NAME_EN as "epMemberNameEn" 
+						 ,   SHIP_OWNER_EN as "shipOwnerEn" 
+						 ,   BROKER_NAME_EN as "brokerNameEn" 
+						from t_ship_ship_plate
+		where
+			ALIVE_FLAG='1'
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="relType!=null and relType!=''">and  (REL_TYPE=#{relType} or REL_TYPE='3')</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="open!=null and open!=''">and  open=#{open}</if>
+			<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+			<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+			<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+			order by PUBLISH_TIME Desc
+	</select>
+	
+	
+	<!-- 根据条件-查询记录条数（船东/经纪人，转租船东，查询，包括平台辅助导入） -->
+	<select id="countRecordsAll" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_ship_ship_plate 
+		where
+		 ALIVE_FLAG='1'
+			<if test="shipPlateId!=null and shipPlateId!=''">and  SHIP_PLATE_ID=#{shipPlateId}</if>
+			<if test="uuid!=null and uuid!=''">and  UUID=#{uuid}</if>
+			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+			<if test="imo!=null and imo!=''">and  IMO=#{imo}</if>
+			<if test="status!=null and status!=''">and  STATUS=#{status}</if>
+			<if test="sysShipUuid!=null and sysShipUuid!=''">and  SYS_SHIP_UUID=#{sysShipUuid}</if>
+			<if test="sysShipId!=null and sysShipId!=''">and  SYS_SHIP_ID=#{sysShipId}</if>
+			<if test="name!=null and name!=''">and  NAME LIKE CONCAT('%',#{name},'%')</if>
+			<if test="type!=null and type!=''">and  TYPE=#{type}</if>
+			<if test="completeDate!=null and completeDate!=''">and  COMPLETE_DATE=#{completeDate}</if>
+			<if test="shipOwner!=null and shipOwner!=''">and  SHIP_OWNER=#{shipOwner}</if>
+			<if test="loadQuantity!=null and loadQuantity!=''">and  LOAD_QUANTITY=#{loadQuantity}</if>
+			<if test="position!=null and position!=''">and  POSITION=#{position}</if>
+			<if test="eta!=null and eta!=''">and  ETA=#{eta}</if>
+			<if test="brokerName!=null and brokerName!=''">and  BROKER_NAME=#{brokerName}</if>
+			<if test="brokerId!=null and brokerId!=''">and  BROKER_ID=#{brokerId}</if>
+			<if test="remark!=null and remark!=''">and  REMARK=#{remark}</if>
+			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+			<if test="version!=null and version!=''">and  VERSION=#{version}</if>
+			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+			<if test="createDate!=null and createDate!=''">and  CREATE_DATE=#{createDate}</if>
+			<if test="updateDate!=null and updateDate!=''">and  UPDATE_DATE=#{updateDate}</if>
+			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+			<if test="etaCabinda!=null and etaCabinda!=''">and  ETA_CABINDA=#{etaCabinda}</if>
+			<if test="epMemberName!=null and epMemberName!=''">and  EP_MEMBER_NAME=#{epMemberName}</if>
+			<if test="relType!=null and relType!=''">and  (REL_TYPE=#{relType} or REL_TYPE='3')</if>
+			<if test="shipOwnerId!=null and shipOwnerId!=''">and  SHIP_OWNER_ID=#{shipOwnerId}</if>
+			<if test="email!=null and email!=''">and  EMAIL=#{email}</if>
+			<if test="leaveFlag!=null and leaveFlag!=''">and  LEAVE_FLAG=#{leaveFlag}</if>
+			<if test="shipAge!=null and shipAge!=''">and  SHIP_AGE=#{shipAge}</if>
+			<if test="open!=null and open!=''">and  open=#{open}</if>
+			<if test="publishTime!=null and publishTime!=''">and  PUBLISH_TIME=#{publishTime}</if>
+			<if test="period!=null and period!=''">and  PERIOD=#{period}</if>
+			<if test="periodDate!=null and periodDate!=''">and  PERIOD_DATE=#{periodDate}</if>
+			<if test="epMemberNameEn!=null and epMemberNameEn!=''">and  EP_MEMBER_NAME_EN=#{epMemberNameEn}</if>
+			<if test="shipOwnerEn!=null and shipOwnerEn!=''">and  SHIP_OWNER_EN=#{shipOwnerEn}</if>
+			<if test="brokerNameEn!=null and brokerNameEn!=''">and  BROKER_NAME_EN=#{brokerNameEn}</if>
+					 
+	</select>
+	
+	
+	
+</mapper>

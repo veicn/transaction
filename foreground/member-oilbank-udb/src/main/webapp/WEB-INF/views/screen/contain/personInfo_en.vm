@@ -1,0 +1,23 @@
+
+<div class="enter-cont clearfix">
+    <div class="enter-tx">
+        #if(${person.headImg} && $person.headImg!="")
+            <img src='$!{uploadServer}/img/$!{person.headImg}.img_180_180.img'>
+        #else`
+            <img src="../images/enter_tx.png">
+        #end
+    </div>
+    <div class="enter-xx">
+
+        <ul class="enter-list clearfix">
+            #if(!$authUtils.checkRole("enter_admin"))
+                <li>Real name：$!person.name #if(!$person)<a href="$appServer.get('center/member/personFill.htm')"  >To verify</a>#else<a href="javascript:void(0))">Verified</a> #end</li>
+            #end
+            <li>User name：$!member.userName </li>
+            <li>Password：<a href="$systemServer.get('member/password_modify.htm')">modify</a></li>
+            <li class="enter-rz">cell phone：$!member.mobile #*<a href="">Verified</a>*#</li>
+            <li>email：$!member.email #*<a href="">Add to</a>*#</li>
+        ##    <li>Safety grade：<span class="enter-dj"><span class="enter-jd"></span></span></li>
+        </ul>
+    </div>
+</div>

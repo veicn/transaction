@@ -1,0 +1,74 @@
+<div class="c-mod">  
+  <div class="c-form">
+  	<form method="post">
+	<ul class="c-ful">
+		<li class="c-fcos3">
+			<span class="c-fn c-fn2">合同类别：</span>
+			<select name="tradeCategory" class="sele sele1">
+				<option value="">please choose</option>
+				<option value="1" #if($!{param.tradeCategory} == "1")selected="selected"#end>Crude Oil</option>
+				<option value="2" #if($!{param.tradeCategory} == "2")selected="selected"#end>成品油</option>
+			</select>
+		</li>
+		<li class="c-fcos3"><span class="c-fn c-fn2">Deal No.：</span><input type="text" name="orderNo" class="c-int c-int2" value="$!{param.orderNo}"/></li>
+		<li class="c-fcos3"><span class="c-fn c-fn2">合同编号：</span><input type="text" name="contractNo" class="c-int c-int2" value="$!{param.contractNo}"/></li>
+		<!-- <li class="c-fcos3"><span class="c-fn c-fn2">合同名称：</span><input type="text" name="contractNameLike" class="c-int c-int2" value="$!{param.contractNameLike}"/></li> -->
+		<li class="c-libtn"><button type="submit">Find</button></li>
+	</ul>
+	</form>
+  </div>
+  
+   <h3><i class="cw-ico ico-h3"></i>合同列表</h3>
+   <div class="ct-tabdiv">
+    <table>
+	<tr>
+		<th>Deal No.</th>
+		<th>合同编号</th>
+		<th>销售方</th>
+		<th>购买方</th>
+		<th>油种</th>
+		<th>数量（桶）</th>
+		<th>备注</th>
+		<th>操作</th>
+	</tr>
+	#if($dataList.size() > 0)
+		#foreach($item in $dataList)
+		
+		#set($class = $velocityCount%2+1)
+		<tr class="ct-tabcos$class">
+		<td>$!{item.orderNo}</td>
+		<td>$!{item.contractNo}</td>
+		<td>$!{item.sellerCustomer}</td>
+		<td>$!{item.buyerCustomer}</td>
+		<td>$!{item.goodsName}</td>
+		<td>$!NumberTool.format($!{item.quantity})</td>
+		<td>$!{item.remark}</td>
+		<td>
+			<a target="_blank" href="$orderExecuteServer.get('/common/contract/detail.htm')?cuid=${item.contractUuid}">查看</a> 
+			<a href="$orderExecuteServer.get('/common/contract/edit.htm')?cuid=${item.contractUuid}&redirect=buyerCenter/contract/list.htm">Edit</a> 
+			<a href="javascript:void(0);" class="deleteRecord" data="${item.contractUuid}">Delete</a>
+		</td>
+		</tr>
+		#end
+	#end
+</table>
+</div>
+##-------------------- 分页开始 --------------------##
+$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$orderExecuteServer.get('buyerCenter/contract/list.htm')")
+##-------------------- 分页结束 --------------------##
+</div>
+
+<script>
+layui.use(['layer'], function(){
+	var $ = layui.jquery;
+	
+	$('.deleteRecord').on('click', function(){
+		var cuid = $(this).attr("data");
+	
+	    layer.confirm($.i18n("orderexecute.code.00138"),{title:"Prompt",btn:["ok","cancel"]}, function(index){
+			window.location.href="$orderExecuteServer.get('/common/contract/delete.htm')?cuid="+cuid;
+	    });
+	});
+})
+
+</script>

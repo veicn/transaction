@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.PersonLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.PersonLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="person_id" property="personId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="card_img" property="cardImg" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, person_id, code, name, email, memo, create_time, create_user, update_time,
+    update_user, card_no, card_type, card_img, head_img, member_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+   	SELECT id,name,code,memo,card_type,card_no,create_time,create_user,update_time,update_user,
+   	  card_img, head_img, member_id from persons
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from persons
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.PersonLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into persons_logs (
+    person_id,
+     name,
+     memo,
+     card_type,
+     card_no,
+     create_user,
+     create_time,
+     update_time,
+     card_img,
+     head_img,
+     member_id
+     )
+    values (
+     #{personId,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR},
+      #{cardType,jdbcType=VARCHAR},
+       #{cardNo,jdbcType=VARCHAR},
+       #{createUser,jdbcType=VARCHAR},
+       now(),
+       now(),
+      #{cardImg,jdbcType=VARCHAR},
+      #{headImg,jdbcType=VARCHAR},
+      #{memberId,jdbcType=BIGINT}
+ 	)
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.PersonLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into persons_logs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        person_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardImg != null" >
+        card_img,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImg != null" >
+        #{cardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.PersonLog" >
+    update persons_logs
+    <set >
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImg != null" >
+        card_img = #{cardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.PersonLog" >
+    update persons
+    set 
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+     memo = #{memo,jdbcType=VARCHAR},
+     card_type= #{cardType,jdbcType=VARCHAR},
+     card_no = #{cardNo,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+       create_time=now(),
+     update_time=now(),
+      card_img = #{cardImg,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+
+</mapper>

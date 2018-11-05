@@ -1,0 +1,111 @@
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="oiltypedetail">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <table id='tbodyID'>
+                <tr>
+                    <th class="tabl-line">Origin</th>
+                    <th>Grade</th>
+                    <th>API</th>
+                    <th>Sulphur</th>
+                    <th>Acid</th>
+                    <th>Micro Carbon Residue</th>
+                    <th>Vanadium</th>
+                    <th>Ni</th>
+                    <th>Quality yield/%</th>
+                    <th>Quality yield/%</th>
+                    <th>Van</th>
+                    <th>Ni</th>
+                    <th>Carbon Residue</th>
+                    <th>Sulphur</th>
+                </tr>
+                <tr class="c-tabcos2">
+                    <td><input type="checkbox"></td>
+                    <td>中东</td>
+                    <td>Crude Oil</td>
+                    <td>30</td>
+                    <td>1~2.5</td>
+                    <td>30</td>
+                    <td>6.9</td>
+                    <td>3.0</td>
+                    <td>3.4</td>
+                    <td>2.4</td>
+                    <td>88.33</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>30</td>
+                </tr>
+                <tr class="c-tabcos2">
+                    <td><input type="checkbox"></td>
+                    <td>西东</td>
+                    <td>Crude Oil</td>
+                    <td>30</td>
+                    <td>1~2.5</td>
+                    <td>30</td>
+                    <td>6.9</td>
+                    <td>3.0</td>
+                    <td>3.4</td>
+                    <td>2.4</td>
+                    <td>88.33</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>30</td>
+                </tr>
+            </table>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="crudeOilListId">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#crudeOilListId").click(function () {
+            //获取选中的数据组
+            var array = $("table input[type=checkbox]:checked").map(function () {
+                return { "oil1": $.trim($(this).closest("tr").find("td:eq(1)").text()),
+                    "oil2": $.trim($(this).closest("tr").find("td:eq(2)").text()),
+                    "oil3": $.trim($(this).closest("tr").find("td:eq(3)").text()),
+                    "oil4": $.trim($(this).closest("tr").find("td:eq(4)").text()),
+                    "oil5": $.trim($(this).closest("tr").find("td:eq(5)").text()),
+                    "oil6": $.trim($(this).closest("tr").find("td:eq(6)").text()),
+                    "oil7": $.trim($(this).closest("tr").find("td:eq(7)").text()),
+                    "oil8": $.trim($(this).closest("tr").find("td:eq(8)").text()),
+                    "oil9": $.trim($(this).closest("tr").find("td:eq(9)").text()),
+                    "oil10": $.trim($(this).closest("tr").find("td:eq(10)").text()),
+                    "oil11": $.trim($(this).closest("tr").find("td:eq(11)").text()),
+                    "oil12": $.trim($(this).closest("tr").find("td:eq(12)").text()),
+                    "oil13": $.trim($(this).closest("tr").find("td:eq(13)").text()),
+                    "oil14": $.trim($(this).closest("tr").find("td:eq(14)").text()),
+
+                };
+            }).get();
+            var centext ='';
+            $.each(array, function (i, d) {
+                centext += '<tr class="c-tabcos1"><td onClick="getDel(this)"><button class="btn-more">delete</button></td>';
+                centext += '<td class="tabl-line"></td><td><input type="text" name="area" value="'+d.oil1+'" id="area"'+i+'></td>';
+                centext += '<td><input type="text" name="name" value="'+d.oil2+'" id="name"'+i+'></td>';
+                centext += '<td><input type="text" name="indicator1Min" value="'+d.oil3+'" id="indicator1Min"><input type="hidden" name="indicator1Max" value="indicator1Max"></td>';
+                centext += '<td><input type="text" name="indicator2Min" value="'+d.oil4+'" id="indicator2Min"><input type="hidden" name="indicator2Max" value="indicator2Max"></td>';
+                centext += '<td><input type="text" name="indicator3Min" value="'+d.oil5+'" id="indicator3Min"><input type="hidden" name="indicator3Max" value="indicator3Max"></td>';
+                centext += '<td><input type="text" name="indicator4Min" value="'+d.oil6+'" id="indicator4Min"><input type="hidden" name="indicator4Max" value="indicator4Max"></td>';
+                centext += '<td><input type="text" name="indicator5Min" value="'+d.oil7+'" id="indicator5Min"><input type="hidden" name="indicator5Max" value="indicator5Max"></td>';
+                centext += '<td><input type="text" name="indicator6Min" value="'+d.oil8+'" id="indicator6Min"><input type="hidden" name="indicator6Max" value="indicator6Max"></td>';
+                centext += '<td><input type="text" name="indicator7Min" value="'+d.oil9+'" id="indicator7Min"><input type="hidden" name="indicator7Max" value="indicator7Max"></td>';
+                centext += '<td><input type="text" name="indicator8Min" value="'+d.oil10+'" id="indicator8Min"><input type="hidden" name="indicator8Max" value="indicator8Max"></td>';
+                centext += '<td><input type="text" name="indicator9Min" value="'+d.oil11+'" id="indicator9Min"><input type="hidden" name="indicator9Max" value="indicator9Max"></td>';
+                centext += '<td><input type="text" name="indicator10Min" value="'+d.oil12+'" id="indicator10Min"><input type="hidden" name="indicator10Max" value="indicator10Max"></td>';
+                centext += '<td><input type="text" name="indicator11Min" value="'+d.oil13+'" id="indicator11Min"><input type="hidden" name="indicator11Max" value="indicator11Max"></td>';
+                centext += '<td><input type="text" name="indicator12Min" value="'+d.oil14+'" id="indicator12Min"><input type="hidden" name="indicator12Max" value="indicator12Max"></td></tr>';
+            })
+            $("#crudeDataArray").append(centext);
+        })
+    })
+    function getDel(k){
+        $(k).parent().remove();
+    }
+</script>

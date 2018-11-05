@@ -1,0 +1,77 @@
+
+<div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+    	#if($authUtils.checkRole("admin"))
+    	
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">资讯管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$infoServer.get('om/channelM/channelM.htm')">主频道管理</a></dd>
+                    <dd><a href="$infoServer.get('om/channelSub/channelSub.htm')">子频道管理</a></dd>
+                    <dd><a href="$infoServer.get('om/notice/notice.htm')">公告管理</a></dd>
+                    <dd><a href="$infoServer.get('om/audit/audit.htm')">平台资讯</a></dd>
+                    <dd><a href="$infoServer.get('om/oil/oil.htm')">石油百科</a></dd>
+                    
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">价格数据</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$infoServer.get('om/price/priceTemp.htm')">指数维护</a></dd>
+                    <dd><a href="$infoServer.get('om/baseprice/basePriceTemp.htm')">基价维护</a></dd>
+                    <dd><a href="$infoServer.get('om/domesticPrice/domesticPrice.htm')">厂家报价维护</a></dd>
+                    <dd><a href="$infoServer.get('om/symbol/symbolIndex.htm')">价格库维护</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">原油相关</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$infoServer.get('om/crudeOil/crudeOil.htm')">原油品质维护</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a class="" href="javascript:;">平台维护</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="$infoServer.get('om/sysCodeSet/sysCodeSet.htm')">值集维护</a></dd>
+                    <dd><a href="$infoServer.get('om/adImage/adImage.htm')">轮播图管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+    	#end
+    </div>
+</div>
+
+<script>
+		var pMenu=window.localStorage.getItem('pMenu');
+		var cMenu=window.localStorage.getItem('cMenu');
+		if((pMenu + cMenu) == 0){
+			document.title = "买原油网";
+		}else{
+			document.title = pMenu + cMenu + "买原油网";
+		}
+		
+   	 	$(function(){
+   	 		var parentMenu=window.localStorage.getItem('parentMenu');
+   	 		var childenMenu=window.localStorage.getItem('childenMenu');
+   	 		if(parentMenu){
+   	 			$('.layui-nav-tree .layui-nav-child').find('dd').removeClass('layui-this');
+   	 			$('.layui-nav-tree .layui-nav-child').eq(parentMenu).find('dd:eq('+childenMenu+')').addClass('layui-this');
+   	 		}
+	    	$('.layui-nav-tree .layui-nav-child').each(function(){
+	    		var This=this;
+	    		$(this).find('dd').on('click',function(){
+	    			
+	    			window.localStorage.setItem('pMenu',$(this).text() + "_");
+	    			window.localStorage.setItem('cMenu', $(this).parent('dl').prev().text()+"_");
+	    			window.localStorage.setItem('parentMenu',$('.layui-nav-tree .layui-nav-child').index(This));
+	    			window.localStorage.setItem('childenMenu',$(this).parent().find('dd').index(this));
+	    			$('.layui-nav-tree .layui-nav-child').find('dd').removeClass('layui-this');
+	    			$(this).addClass('layui-this');
+	    		});
+	    	})
+	    	
+	    })
+	   
+ </script>

@@ -1,0 +1,33 @@
+<div class="con_one_3 con_one">
+    <div class="loading-port">
+        <h3 class="con_one_h3">VOYAGE TRACKING</h3>
+        <table class="table clearfix con_one_1_table">
+            <tr>
+                <th style="width:120px;">Date&Time</th>
+                <th>Posn</th>
+                <th>Sea</th>
+                <th>Ave Spd (24h)</th>
+                <th>G.Ave Spd</th>
+                <th>Rpm</th>
+                <th>Destination</th>
+                <th style="width:120px;">Eta</th>
+            </tr>
+            #foreach($!{transitUnLoadingVO} in $!{transitUnLoadingVOList})
+                <tr>
+                    <td title="$!{transitUnLoadingVO.datetime}">$!{transitUnLoadingVO.datetime}</td>
+                    <td>$!{transitUnLoadingVO.posn}</td>
+                    <td>$!{transitUnLoadingVO.sea}</td>
+                    <td>$!{transitUnLoadingVO.rpm}</td>
+                    <td>$!{transitUnLoadingVO.gAveSpd}</td>
+                    <td>$!{transitUnLoadingVO.rpm}</td>
+                    <td>$!{transitUnLoadingVO.destination}</td>
+                    <td title="$!{transitUnLoadingVO.eta}">$!{transitUnLoadingVO.eta}</td>
+                </tr>
+
+            #end
+
+
+        </table>
+
+    </div>
+</div>

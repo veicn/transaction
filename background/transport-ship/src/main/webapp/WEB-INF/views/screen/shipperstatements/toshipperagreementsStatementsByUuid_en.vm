@@ -1,0 +1,68 @@
+   	 <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+			<div class="clearfix s-order-tit"><h1>Statement</h1></div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Cost information</div>
+			<div class="s-mod-bcont s-mod-bcont3">
+			<form class="s-form s-form-cont s-form-cont2" action="">
+			<ul>
+				<li class="s-form-item">
+					<div class="s-inline">
+					  <label class="s-form-label">Invoice No：</label>
+					  <div class="s-input-inline">
+						  <p class='receiptCode'></p>
+
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Charter Party No：</label>
+					  <div class="s-input-inline">
+					  	  <p class='pactCode'></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Beneficiary：</label>
+					  <div class="s-input-inline">
+					  	 <p class='payee'></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Payer：</label>
+					  <div class="s-input-inline">
+						  <p class='payer'></p>
+					  </div>
+					</div>
+					<div class="s-inline">
+					  <label class="s-form-label">Attachment：</label>
+					  <div class="s-input-inline">
+						<p class='receiptAccessory s-p-wh'>
+							
+						</p>
+						<span class='s-sp-wh' hidden="true" id="btn">&nbsp;&nbsp;<a href="javascript:;" download="" class="s-bill-down file1">Download</a>
+					  </div>
+					 
+					</div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		<div class="s-mod-block">
+			<div class="s-mod-btit">Cost information</div>
+			<div class="s-mod-bcont2">
+				<div class="s-table-wrap s-table-line">
+					<table class="s-table s-table2">
+					  <tr><th>&nbsp;</th><th>Quantily</th><th>Flatrate</th><th>Rate</th><th>Pct.</th><th>Total</th></tr>
+					  <tr><td>Freight</td><td class='freightQuantily'></td><td class='freightFlatrate'></td><td class='freightRate'></td><td class=''></td><td class='freightTotal'></td></tr>
+					  <tr><td>Freight overage</td><td class="freightOverageQuantily"></td><td class="freightOverageFlatrate"></td><td class="freightOverageRate"></td><td class="freightOveragePct"></td><td class="freightOverageTotal"></td></tr>
+					  <tr><td>Address Commission</td><td class="addressCommissionQuantily"></td><td class=""></td><td  class=""></td><td  class="addressCommissionPct"></td><td class="addressCommissionTotal"></td></tr>
+					  <tr><td>Total Amout</td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class="balance"></td></tr>
+					</table>
+				</div>
+			</div>
+	</div>
+		<div class="s-btn-box"><button class="s-btn s-btn-primary goto">Back</button></div>
+  </div>
+<script src="../transport/js/shipperstatements/toshipperagreementsStatementsByUuid.js"></script>

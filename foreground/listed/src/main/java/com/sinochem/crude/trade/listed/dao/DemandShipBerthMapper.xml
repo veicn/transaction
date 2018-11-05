@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.listed.dao.DemandShipBerthMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.listed.domain.DemandShipBerth" >
+
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="berth_name" property="berthName" jdbcType="VARCHAR" />
+    <result column="berth_grade" property="berthGrade" jdbcType="INTEGER" />
+    <result column="draft_limitation" property="draftLimitation" jdbcType="DECIMAL" />
+    <result column="ship_type" property="shipType" jdbcType="INTEGER" />
+    <result column="carrying_capacity_min" property="carryingCapacityMin" jdbcType="INTEGER" />
+    <result column="carrying_capacity_max" property="carryingCapacityMax" jdbcType="INTEGER" />
+    <result column="demand_id" property="demandId" jdbcType="BIGINT" />
+    <result column="berth_desc" property="berthDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+    id, berth_name, berth_grade, draft_limitation, ship_type, carrying_capacity_min, 
+    carrying_capacity_max, demand_id, berth_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select 
+    <include refid="Base_Column_List" />
+    from demand_ship_berth
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByDemandId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    select
+    <include refid="Base_Column_List" />
+    from demand_ship_berth
+    where demand_id = #{demand_id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+    delete from demand_ship_berth
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <!-- 根据demandId删除 -->
+  <delete id="deleteByDemandId" parameterType="java.lang.Long" >
+
+    delete from demand_ship_berth
+    where demand_id = #{demandId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.listed.domain.DemandShipBerth" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_ship_berth ( berth_name, berth_grade,
+      draft_limitation, ship_type, carrying_capacity_min, 
+      carrying_capacity_max, demand_id, berth_desc)
+    values (#{berthName,jdbcType=VARCHAR}, #{berthGrade,jdbcType=INTEGER},
+      #{draftLimitation,jdbcType=INTEGER}, #{shipType,jdbcType=INTEGER}, #{carryingCapacityMin,jdbcType=INTEGER}, 
+      #{carryingCapacityMax,jdbcType=INTEGER}, #{demandId,jdbcType=BIGINT}, #{berthDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandShipBerth" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into demand_ship_berth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="berthName != null" >
+        berth_name,
+      </if>
+      <if test="berthGrade != null" >
+        berth_grade,
+      </if>
+      <if test="draftLimitation != null" >
+        draft_limitation,
+      </if>
+      <if test="shipType != null" >
+        ship_type,
+      </if>
+      <if test="carryingCapacityMin != null" >
+        carrying_capacity_min,
+      </if>
+      <if test="carryingCapacityMax != null" >
+        carrying_capacity_max,
+      </if>
+      <if test="demandId != null" >
+        demand_id,
+      </if>
+      <if test="berthDesc != null" >
+        berth_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="berthName != null" >
+        #{berthName,jdbcType=VARCHAR},
+      </if>
+      <if test="berthGrade != null" >
+        #{berthGrade,jdbcType=INTEGER},
+      </if>
+      <if test="draftLimitation != null" >
+        #{draftLimitation,jdbcType=INTEGER},
+      </if>
+      <if test="shipType != null" >
+        #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="carryingCapacityMin != null" >
+        #{carryingCapacityMin,jdbcType=INTEGER},
+      </if>
+      <if test="carryingCapacityMax != null" >
+        #{carryingCapacityMax,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null" >
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="berthDesc != null" >
+        #{berthDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.listed.domain.DemandShipBerth" >
+
+    update demand_ship_berth
+    <set >
+      <if test="berthName != null" >
+        berth_name = #{berthName,jdbcType=VARCHAR},
+      </if>
+      <if test="berthGrade != null" >
+        berth_grade = #{berthGrade,jdbcType=INTEGER},
+      </if>
+      <if test="draftLimitation != null" >
+        draft_limitation = #{draftLimitation,jdbcType=INTEGER},
+      </if>
+      <if test="shipType != null" >
+        ship_type = #{shipType,jdbcType=INTEGER},
+      </if>
+      <if test="carryingCapacityMin != null" >
+        carrying_capacity_min = #{carryingCapacityMin,jdbcType=INTEGER},
+      </if>
+      <if test="carryingCapacityMax != null" >
+        carrying_capacity_max = #{carryingCapacityMax,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null" >
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="berthDesc != null" >
+        berth_desc = #{berthDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.listed.domain.DemandShipBerth" >
+
+    update demand_ship_berth
+    set berth_name = #{berthName,jdbcType=VARCHAR},
+      berth_grade = #{berthGrade,jdbcType=INTEGER},
+      draft_limitation = #{draftLimitation,jdbcType=INTEGER},
+      ship_type = #{shipType,jdbcType=INTEGER},
+      carrying_capacity_min = #{carryingCapacityMin,jdbcType=INTEGER},
+      carrying_capacity_max = #{carryingCapacityMax,jdbcType=INTEGER},
+      demand_id = #{demandId,jdbcType=BIGINT},berth_desc = #{berthDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

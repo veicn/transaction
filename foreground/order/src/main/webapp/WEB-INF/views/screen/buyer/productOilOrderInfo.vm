@@ -1,0 +1,91 @@
+#*成品油信息*#
+#set($a = "个人中心-买原油网")
+<div class="layui-fluid">
+    #*订单执行状态*#
+    <div class="c-mod" id="cgxx">
+        <h1>订单管理<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;订单详情</span></h1>
+        $contain.get('/status/list.htm').setParam("orderId","$!{contract.id}")
+    ## 从执行那边来的按钮列表
+        $contain.get("/contain/order/operateButtons.htm").setHost("$order-executeServer.get('')").setParam("ouid","$!{contract.uuid}")
+    </div>
+    #*商品信息*#
+    $contain.get("/buyer/productOilGoodsInfo.htm").setParam("contractId","$!{contract.id}")
+    #*船运信息*#
+    $contain.get("/buyer/shipInput.htm").setParam("contractId","$!{contract.id}")
+    #*价格信息*#
+    $contain.get("/buyer/orderInfoPrice.htm").setParam("contractId","$!{contract.id}")
+    #*客户信息*#
+    $contain.get('/buyer/orderInfoCustomer.htm').setParam("contractId","$!{contract.id}")
+    #if($!{contract.trader} != "" && $!{contract.trader})
+        #*代理商信息*#
+        $contain.get('/buyer/orderInfoAgent.htm').setParam("contractId","$!{contract.id}")
+    #end
+    #*提货商信息*#
+    $contain.get('/buyer/orderInfoSupplier.htm').setParam("contractId","$!{contract.id}")
+    #*其它信息*#
+    $contain.get('/buyer/orderInfoOther.htm').setParam("contractId","$!{contract.id}")
+
+
+    #*操作按钮*#
+    <div class="c-subdiv">
+
+        #if("$!{contract.initiator}" == "$!{user.memberId}" && "$!{contract.doubleSign}" != "11")
+        ## 发起人才可以提交订单、取消订单
+        ## 目前直接允许确认订单
+        ##<button id="checkbtn1" class="c-btnsub btn-lj" onclick="window.location.href='$appServer.get("/confirm_contacrt.htm").put("orderId","$!{contract.id}").put("token","$!{contract.token}").put("bizType","$!{contract.bizType}")'" >确认提交</button>
+        ##<button id="checkbtn2" class="c-btnsub btn-xgdd" onclick="window.location.href='$appServer.get("/update/createCrudeOilInfo.htm").put("uuid",$!{contract.uuid})'" >修改订单</button>
+            #if("$!{contract.cancelFlag}" != "true")##取消
+                <button id="checkbtn1" class="c-btnsub btn-lj" onclick="confirm_contacrt('$!{contract.id}','$!{contract.token}','$!{contract.bizType}')" >确认提交</button>
+                <button id="checkbtn3" class="c-btnsub btn-gbdd" onclick="show_confirm1()">取消订单</button>
+            #end
+        #end
+
+        <button id="checkbtn5" class="c-btncas" onclick="show_confirm3()" >返回</button>
+
+    </div>
+
+
+</div>
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})
+<script>
+    function show_confirm1() {
+        layui.use("layer", function () {
+            layui.layer.confirm("是否要取消订单", function () {
+                window.location.href="$appServer.get('cancel/contacrt.htm').put('orderId',$!{contract.id}).put("bizType","$!{contract.bizType}")";
+            });
+        });
+    }
+    function show_confirm2() {
+        layui.use("layer", function () {
+            layui.layer.confirm("是否要关闭订单", function () {
+                window.location.href="$appServer.get('close/contacrt.htm').put('orderId',$!{contract.id}).put("bizType","$!{contract.bizType}")";
+            });
+        });
+    }
+
+    function show_confirm3() {
+        window.location.href="$appServer.get('/queryProductOilList.htm')";
+        //window.history.go(-1);
+    }
+    
+    function confirm_contacrt(orderId,token,bizType){
+        var confirmUrl = "$appServer.get('/confirm_contacrt.json')";
+        layui.use("layer", function () {
+            var $ = layui.jquery, layer = layui.layer;
+            layer.confirm("是否要提交订单", function () {
+                $ .post(confirmUrl, {orderId: orderId, token: token, bizType: bizType}).always(function(res){
+                    if(res.status == 0){//成功
+                        layer.alert("处理成功");
+                        if(res.message != null && res.message != ""){
+                            window.location.href = '$appServer.get("")' + res.message;
+                        }
+                    }else{//失败
+                        layer.alert(res.message);
+                    }
+                });
+            });
+        });
+	}
+
+</script>

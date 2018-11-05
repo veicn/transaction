@@ -1,0 +1,18 @@
+<form class="layui-form bombPp" action="">
+    <div class="layui-form-item" style="padding:15px !important;border:1px solid #DDDFE1;margin:10px">
+        <div class="layui-form-item">
+        <label class="layui-form-label" style="width:800px; font-size:40px;margin-top:20px;text-align:left" id="title">$!{notice.title}</label>
+        </div>
+        <br></br>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px;text-align:left">来源：平台发布</label>
+            <label class="layui-form-label" style="width:200px;text-align:left" id="releaseId"> 发布人：$!{notice.releaseId}</label>
+            <label class="layui-form-label" style="width:300px;text-align:left" id="releaseDate"> 发布日期 ： $!{notice.releaseDate}</label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:800px" id="contentWithHtml">$!{notice.contentWithHtml}</label>
+        </div>
+    </div>   
+</form>
+<script src="$imageServer.get('info/js/notice/noticeDetail.js')"></script>
+<button class="layui-btn layui-btn-small layui-btn-normal closeBtn" style="width:100px;margin:0 auto;display:block;">关闭</button>

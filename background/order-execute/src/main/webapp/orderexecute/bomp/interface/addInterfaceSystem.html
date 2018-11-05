@@ -1,0 +1,83 @@
+<form id="addInterfaceSystem" class="layui-form"  action="">
+	<div class="layui-form-item" style="margin-top:20px">
+		<div class="layui-inline">
+		    <label class="layui-form-label">系统别名</label>
+		    <div class="layui-input-inline">
+		        <input type="text" name="sysName" lay-verify="required|length64" placeholder="请输入" class="layui-input">
+		    </div>
+	    </div>
+	   <!--  <div class="layui-form-item">
+		    <label class="layui-form-label">系统别名</label>
+		    <div class="layui-input-block" style="width:515px;">
+		      <select name="sysName" id="sysName2" lay-verify="required" lay-search="">
+		        <option value="">请选择</option>
+		        <option value="1">炼厂</option>
+	        	<option value="2">贸易公司</option> 
+		      </select>
+		    </div>
+  		</div> -->
+	    <div class="layui-inline">
+		    <label class="layui-form-label">系统描述</label>
+		    <div class="layui-input-inline">
+		        <input type="text" name="sysDec" lay-verify="required|length100" placeholder="请输入" class="layui-input">
+		    </div>
+	    </div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+		    <label class="layui-form-label">身份标识</label>
+		    <div class="layui-input-inline">
+		        <input type="text" name="loginName" lay-verify="required|length64" placeholder="请输入" class="layui-input">
+		    </div>
+	    </div>
+		<div class="layui-inline">
+		    <label class="layui-form-label">密码</label>
+		    <div class="layui-input-inline">
+		        <input type="text" name="password" lay-verify="required|length64" placeholder="请输入" class="layui-input">
+		    </div>
+	    </div>
+	</div>
+	
+	<div class="layui-form-item">
+	    <label class="layui-form-label">会员资质</label>
+	    <div class="layui-input-block" style="width:515px;">
+	      <select name="memberType" id="memberType" lay-filter="typeCode" lay-verify="required" lay-search="">
+	        <option value="">请选择</option>
+	        <!-- <option value="1">炼厂</option>
+	        <option value="2">贸易公司</option> -->
+	      </select>
+	    </div>
+	    
+  	</div>
+	<!-- <div class="layui-form-item">
+	    
+	    <label class="layui-form-label">会员ID</label>
+	    <div class="layui-input-block" style="width:510px;" >
+	      <select name="memberId" id="memberId" >
+	        <option value="">请选择</option>
+	      </select>
+	    </div>
+	</div> -->
+	<div class="layui-form-item">
+	    <label class="layui-form-label">会员名称</label>
+	    <div class="layui-input-block"  style="width:510px;">
+	      <select name="memberName" id="memberName" lay-search="" lay-verify="required">
+	        <option value="">请选择</option>
+	      </select>
+	    </div>
+	</div>
+	
+	<div class="layui-form-item">
+	    <label class="layui-form-label">对接地址</label>
+		<div class="layui-input-block">
+			<input type="text" name="sysUrl" lay-verify="required" placeholder="请输入" class="layui-input" style="width:514px">
+		</div>
+	</div>
+	<div class="layui-form-item" style="margin-top:40px">
+	    <div class="layui-input-block" align=right style="padding:0 35">
+	    	<button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="demo1" id="submit">保存</button>
+	    	<button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">重置</button>
+	    </div>
+	</div>
+	<input type="text" style="display:none" name="sysId" >
+</form>

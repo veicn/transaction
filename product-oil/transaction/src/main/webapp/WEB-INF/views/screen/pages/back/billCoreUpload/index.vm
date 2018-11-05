@@ -1,0 +1,1202 @@
+#css("$appServer.get('/css/common/reset.css')")
+#css("$appServer.get('/css/common/public.css')")
+#css("$appServer.get('/css/work/shipping.css')")
+#css("$appServer.get('/css/work/upload.css')")
+$contain.get('/common/title.htm').put('title', 'Upload Doc')
+## tradeCode  1 FOB 2 CFR
+
+<div class="m-nav fl">
+    <h3>Upload Doc</h3>
+    <ul class="upload_box ">
+        <li class="clearfix">
+            <input type="hidden" id="contractuuid" value="$!{contractSheet.uuid}">
+            <span class="fl upload_title">Deal Recap</span>
+            <div class="upload_text fl">
+
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "00")
+                    <div class="upload_text_li">
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                            <a href="$appServer.get(
+                                '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})"
+                               id="DealRecapSave">$!{list.fileName}</a>
+                        #end
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                            <a href="javascript:;" class="deleteOSS" typecode="00" uuids="$!{list.documentFileUuid}"
+                               paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                              alt=""></a>
+                        #end
+                        </br>
+                    </div>
+                    #end
+                #end
+
+            </div>
+
+
+            #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                <div class="upload_btn fl" id="DealRecapUpload">
+                    <input name="coqRefinery" id="DealRecaps" type="hidden">
+                    <input name="coqRefineryName" id="DealRecapName" type="hidden">
+                    <span class="file-name" style="display:none" id="DealRecapfinery"></span>
+                    <span class="file-name">+ Upload </span>
+                </div>
+            #end
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Vessel Acceptance</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "01")
+                        <div class="upload_text_li">
+                            <input type="hidden" id="AcceptanceUUid" value="$!{list.documentFileUuid}">
+                            #if($!{tradeCode}==2)
+                                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader",
+                                    "depa_port")||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+                                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader"))
+                                    <a href="javascript:;" class="deleteOSS" typecode="01"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            ##FOB
+                            #elseif($!{tradeCode}==1)
+                                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker",
+                                    "ship_trader")||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "depa_port")||$!{quanzhouId}==$!{userId})
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+                                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader"))
+                                    <a href="javascript:;" class="deleteOSS" typecode="01"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            #end
+                        </div>
+                    #end
+                #end
+
+            </div>
+
+            #if($!{tradeCode}==2)
+                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                    "ship_owner", "ship_broker","ship_trader"))
+                    <div class="upload_btn fl" id="VesselAcceptance">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #elseif($!{tradeCode}==1)
+                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                    "ship_owner", "ship_broker","ship_trader"))
+                    <div class="upload_btn fl" id="VesselAcceptance">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #end
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">DI</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "02")
+                        <input type="hidden" id="DIuuid" value="$!{list.documentFileUuid}">
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole("ship_owner", "ship_broker",
+                                "ship_trader")||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                "depa_port")||$!{quanzhouId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                            #end
+                            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                "ship_owner", "ship_broker","ship_trader"))
+                                <a href="javascript:;" class="deleteOSS" typecode="02" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+            </div>
+
+            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole("ship_owner", "ship_broker","ship_trader"))
+                <div class="upload_btn fl" id="DI">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Stowage Plan</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "03")
+                        <input type="hidden" id="StowagePlanuuid" value="$!{list.documentFileUuid}">
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole("ship_owner", "ship_broker",
+                                "ship_trader")||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                "depa_port")||$!{quanzhouId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                            #end
+                            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                "ship_owner", "ship_broker","ship_trader"))
+                                <a href="javascript:;" class="deleteOSS" typecode="03" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+
+            </div>
+            #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole("ship_owner", "ship_broker","ship_trader"))
+                <div class="upload_btn fl" id="StowagePlan">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Customs Declaration</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "04")
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.salerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                <a href="javascript:;" class="deleteOSS" typecode="04" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+            </div>
+
+            #if($!{contractSheet.salerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                <div class="upload_btn fl" id="CustomsDeclaration">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Inspection Report</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "05")
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.salerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                <a href="javascript:;" class="deleteOSS" typecode="05" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+
+            </div>
+
+            #if($!{contractSheet.salerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                <div class="upload_btn fl" id="InspectionReport">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Bill Of Lading</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "06")
+                        <input type="hidden" id="BillOfLadinguuid" value="$!{list.documentFileUuid}">
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                "ship_owner", "ship_broker","ship_trader",
+                                "depa_port")||$!{quanzhouId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                            #end
+                            #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                "ship_owner", "ship_broker","ship_trader","depa_port"))
+                                <a href="javascript:;" class="deleteOSS" typecode="06" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+            </div>
+
+            #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                "ship_owner", "ship_broker","ship_trader","depa_port"))
+                <div class="upload_btn fl" id="BillOfLading">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Loading Cargo Documents</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "07")
+                        <div class="upload_text_li">
+                            #if($!{contractSheet.buyerId}==$!{userId}||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                "ship_owner", "ship_broker","ship_trader","depa_port")||$!{quanzhouId}==$!{userId})
+                                <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                            #end
+                            #if($!{contractSheet.salerId}==$!{userId})
+                                <a href="javascript:;" class="deleteOSS" typecode="07" uuids="$!{list.documentFileUuid}"
+                                   paths="$!{list.filePath}"><img src="$appServer.get('/images/delete-icon.png')"
+                                                                  alt=""></a>
+                            #end
+                        </div>
+                    #end
+                #end
+            </div>
+            #if($!{contractSheet.salerId}==$!{userId})
+                <div class="upload_btn fl" id="LoadingCargoDocuments">
+
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+            #end
+
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Discharge Cargo Documents</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "08")
+                        <div class="upload_text_li">
+                            #if($!{tradeCode}==2)
+                                #if($!{contractSheet.buyerId}==$!{userId}||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader")||$!{quanzhouId}==$!{userId})
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+                                #if($!{contractSheet.buyerId}==$!{userId}||$!{contractSheet.salerId}==$!{userId})
+                                    <a href="javascript:;" class="deleteOSS" typecode="08"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            #elseif($!{tradeCode}==1)
+                                #if($!{contractSheet.buyerId}==$!{userId}||$!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader"))
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+                                #if($!{contractSheet.buyerId}==$!{userId})
+                                    <a href="javascript:;" class="deleteOSS" typecode="08"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            #end
+                        </div>
+                    #end
+                #end
+            </div>
+
+            #if($!{tradeCode}==2)
+                #if($!{contractSheet.buyerId}==$!{userId}||$!{contractSheet.salerId}==$!{userId})
+                    <div class="upload_btn fl" id="DischargeCargoDocuments">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #elseif($!{tradeCode}==1)
+                #if($!{contractSheet.buyerId}==$!{userId})
+                    <div class="upload_btn fl" id="DischargeCargoDocuments">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #end
+
+
+        </li>
+
+        <li class="clearfix">
+            <span class="fl upload_title">Q88</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "09")
+                        <input type="hidden" id="VesselDocumentsuuid" value="$!{list.documentFileUuid}">
+                        <div class="upload_text_li">
+                            #if($!{tradeCode}==2)
+                                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader",
+                                    "depa_port")||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+
+                                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader"))
+                                    <a href="javascript:;" class="deleteOSS" typecode="09"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            #elseif($!{tradeCode}==1)
+                                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader",
+                                    "depa_port")||$!{contractSheet.salerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                                    <a href="$appServer.get(
+                                        '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                #end
+                                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                                    "ship_owner", "ship_broker","ship_trader"))
+                                    <a href="javascript:;" class="deleteOSS" typecode="09"
+                                       uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                            src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                                #end
+                            #end
+
+                        </div>
+                    #end
+                #end
+            </div>
+
+            #if($!{tradeCode}==2)
+                #if($!{contractSheet.salerId}==$!{userId}||$authUtils.checkRole(
+                    "ship_owner", "ship_broker","ship_trader"))
+                    <div class="upload_btn fl" id="VesselDocuments">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #elseif($!{tradeCode}==1)
+                #if($!{contractSheet.buyerId}==$!{userId}||$authUtils.checkRole(
+                    "ship_owner", "ship_broker","ship_trader"))
+                    <div class="upload_btn fl" id="VesselDocuments">
+                        <input name="coqRefinery" id="Refinery" type="hidden">
+                        <input name="coqRefineryName" id="RefineryName" type="hidden">
+                        <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                        <span class="file-name">+ Upload</span>
+                    </div>
+                #end
+            #end
+
+
+        </li>
+
+
+
+
+
+        <li class="clearfix">
+            <span class="fl upload_title">Provisional Invoice</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "10")
+                    <div class="upload_text_li">
+
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                        <a href="$appServer.get(
+                            '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+#end
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                        <a href="javascript:;" class="deleteOSS" typecode="10"
+                           uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                            #end
+                    </div>
+                    #end
+
+
+                #end
+            </div>
+
+#if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+
+            <div class="upload_btn fl" id="ProvisionalInvoice">
+                <input name="coqRefinery" id="Refinery" type="hidden">
+                <input name="coqRefineryName" id="RefineryName" type="hidden">
+                <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                <span class="file-name">+ Upload</span>
+            </div>
+#end
+
+
+        </li>
+
+
+
+        <li class="clearfix">
+            <span class="fl upload_title">Settlement Invoice</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "11")
+                    <div class="upload_text_li">
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                        <a href="$appServer.get(
+                            '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+#end
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                        <a href="javascript:;" class="deleteOSS" typecode="11"
+                           uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                            #end
+                    </div>
+                    #end
+                #end
+            </div>
+
+#if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+            <div class="upload_btn fl" id="SettlementInvoice">
+                <input name="coqRefinery" id="Refinery" type="hidden">
+                <input name="coqRefineryName" id="RefineryName" type="hidden">
+                <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                <span class="file-name">+ Upload</span>
+            </div>
+
+#end
+
+        </li>
+
+
+
+
+        <li class="clearfix">
+            <span class="fl upload_title">Contract</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "12")
+                    <div class="upload_text_li">
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId}||$!{quanzhouId}==$!{userId})
+                        <a href="$appServer.get(
+                            '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+#end
+                        #if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+                        <a href="javascript:;" class="deleteOSS" typecode="12"
+                           uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                            #end
+                    </div>
+
+                    #end
+
+
+                #end
+            </div>
+
+
+#if($!{contractSheet.salerId}==$!{userId}||$!{contractSheet.buyerId}==$!{userId})
+            <div class="upload_btn fl" id="ContractFile">
+                <input name="coqRefinery" id="Refinery" type="hidden">
+                <input name="coqRefineryName" id="RefineryName" type="hidden">
+                <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                <span class="file-name">+ Upload</span>
+            </div>
+#end
+
+
+        </li>
+
+<!--补录合同号-->
+#*#if( $!{userId} == "100008254" )*#
+        <li class="clearfix">
+            <span class="fl upload_title">Purchase Contract</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "13")
+                        <div class="upload_text_li">
+                            <a href="$appServer.get(
+                                    '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                                <a href="javascript:;" class="deleteOSS" typecode="13"
+                                   uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                        src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                        </div>
+                    #end
+                #end
+            </div>
+                <div class="upload_btn fl" id="PurchaseContractFile">
+                    <input name="coqRefinery" id="Refinery" type="hidden">
+                    <input name="coqRefineryName" id="RefineryName" type="hidden">
+                    <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                    <span class="file-name">+ Upload</span>
+                </div>
+        </li>
+        <li class="clearfix">
+            <span class="fl upload_title">Agency Agreement</span>
+            <div class="upload_text fl">
+                #foreach($list in $!{billList})
+                    #if($!{list.fileTypeCode} == "14")
+                        <div class="upload_text_li">
+                            <a href="$appServer.get(
+                                '/common/doc/download.htm').put("path",$!{list.filePath}).put("fileName",$!{list.fileName})">$!{list.fileName}</a>
+                            <a href="javascript:;" class="deleteOSS" typecode="14"
+                               uuids="$!{list.documentFileUuid}" paths="$!{list.filePath}"><img
+                                    src="$appServer.get('/images/delete-icon.png')" alt=""></a>
+                        </div>
+                    #end
+                #end
+            </div>
+            <div class="upload_btn fl" id="AgencyContractFile">
+                <input name="coqRefinery" id="Refinery" type="hidden">
+                <input name="coqRefineryName" id="RefineryName" type="hidden">
+                <span class="file-name" style="display:none" id="viewspanRefinery"></span>
+                <span class="file-name">+ Upload</span>
+            </div>
+        </li>
+#*#end*#
+
+    </ul>
+</div>
+#js($appServer.get('/js/common/jquery-1.9.1.min.js'))
+#js($appServer.get('/js/common/layui/layui.js'))
+<script>
+    layui.use("upload", function () {
+        var $ = layui.jquery, upload = layui.upload;
+        var contractuuid = $("#contractuuid").val();
+        upload.render({
+            elem: "#DealRecapUpload",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "00";
+                    var fileTypeName = "Deal Recap";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                            data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#VesselAcceptance",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+            ## $('.layui-upload-file').css('display','none')
+                if (res.status === 0) {
+                    var fileTypeCode = "01";
+                    var fileTypeName = "Vessel Acceptance";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var AcceptanceUUid = $("#AcceptanceUUid").val();
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadUpdate.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName,
+                            "documentFileUuid": AcceptanceUUid
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+
+                }
+            }
+        })
+        upload.render({
+            elem: "#DI",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "02";
+                    var fileTypeName = "DI";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var AcceptanceUUid = $("#DIuuid").val();
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadUpdate.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName,
+                            "documentFileUuid": AcceptanceUUid
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#StowagePlan",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "03";
+                    var fileTypeName = "Stowage Plan";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var AcceptanceUUid = $("#StowagePlanuuid").val();
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadUpdate.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName,
+                            "documentFileUuid": AcceptanceUUid
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+
+                }
+            }
+        })
+
+
+        upload.render({
+            elem: "#CustomsDeclaration",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "04";
+                    var fileTypeName = "Customs Declaration";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#InspectionReport",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "05";
+                    var fileTypeName = "Inspection Report";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+
+        upload.render({
+            elem: "#BillOfLading",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "06";
+                    var fileTypeName = "Bill Of Lading";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var AcceptanceUUid = $("#BillOfLadinguuid").val();
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadUpdate.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName,
+                            "documentFileUuid": AcceptanceUUid
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#LoadingCargoDocuments",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "07";
+                    var fileTypeName = "Loading Cargo Documents";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#DischargeCargoDocuments",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "08";
+                    var fileTypeName = "Discharge Cargo Documents";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+
+        upload.render({
+            elem: "#VesselDocuments",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "09";
+                    var fileTypeName = "Vessel Documents";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var AcceptanceUUid = $("#VesselDocumentsuuid").val();
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadUpdate.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName,
+                            "documentFileUuid": AcceptanceUUid
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+
+                }
+            }
+        })
+
+//        临时发票
+        upload.render({
+            elem: "#ProvisionalInvoice",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "10";
+                    var fileTypeName = "Provisional Invoice";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#SettlementInvoice",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "11";
+                    var fileTypeName = "Settlement Invoice";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        upload.render({
+            elem: "#ContractFile",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "12";
+                    var fileTypeName = "Contract";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function () {
+                            location.href = location
+                        },
+                        error: function () {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        $(".deleteOSS").click(function () {
+            var fileuuid = $(this).attr("uuids");
+            var path = $(this).attr("paths");
+            var typecode = $(this).attr("typecode")
+            $.ajax({
+                url: appServer + "pages/back/billCoreUpload/uploadDelete.json",
+                type: "post",
+                async: false,
+                data: {
+                    "documentFileUuid": fileuuid,
+                    "filePath": path,
+                    "contractUUid": contractuuid,
+                    "fileTypeCode": typecode
+                },
+                success: function (msg) {
+                    location.href = location;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                    location.href = location;
+                }
+            })
+        })
+
+
+
+
+        //外贸合同
+        upload.render({
+            elem: "#PurchaseContractFile",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "13";
+                    var fileTypeName = "PurchaseContract";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var fileSize = res.datas.size;
+                    var fileSHA = res.datas.fileSHA;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileSize": fileSize,
+                            "fileSHA": fileSHA,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function (msg) {
+                            if (msg.status == 9999) {
+                                layer.msg(msg.message,{time:1000});
+
+                            }else{
+                                location.href = location
+                            }
+                        },
+                        error: function (msg) {
+                            location.href = location
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+        //代理协议
+        upload.render({
+            elem: "#AgencyContractFile",
+            url: appServer + "common/doc/upload.json",
+            accept: "file",
+            done: function (res, index, upload) {
+                if (res.status === 0) {
+                    var fileTypeCode = "14";
+                    var fileTypeName = "AgencyContract";
+                    var path = res.datas.path;
+                    var fileName = res.datas.originalName;
+                    var fileSize = res.datas.size;
+                    var fileSHA = res.datas.fileSHA;
+                    $.ajax({
+                        async: false,
+                        url: appServer + "pages/back/billCoreUpload/uploadSave.json",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            "contractUUid": contractuuid,
+                            "filePath": path,
+                            "fileName": fileName,
+                            "fileTypeCode": fileTypeCode,
+                            "fileSize": fileSize,
+                            "fileSHA": fileSHA,
+                            "fileTypeName": fileTypeName
+                        },
+                        success: function (msg) {
+                            if (msg.status == 9999) {
+                                layer.msg(msg.message,{time:1000});
+
+                            }else{
+                                location.href = location
+                            }
+
+                        },
+                        error: function (msg) {
+                            layer.tips(msg.message, this.item, {tips: 1});
+                        }
+                    })
+                } else {
+                    layer.tips(res.message, this.item, {tips: 1});
+                    // $("#spanShoreTanksName").off("click");
+                }
+            }
+        })
+
+
+        $('.layui-upload-file').css('display', 'none');
+    })
+
+</script>

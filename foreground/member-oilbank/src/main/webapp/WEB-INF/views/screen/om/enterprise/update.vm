@@ -1,0 +1,104 @@
+<div class="layui-fluid">
+    <div style=" text-align:center; padding-top: 30px;">
+    
+	 <form class="layui-form" action="$appServer.get('om/enterprise/update.htm')" method="post">
+		 <input type="hidden" name="id" value ="${enterprise.id}"  autocomplete="off" class="layui-input">
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">企业名称</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="name" value ="$!{enterprise.name}" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div>
+		       
+		<div class="layui-inline">
+		<label class="layui-form-label">企业编号</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="code" value ="$!{enterprise.code}" lay-verify="number" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		
+		 <div class="layui-inline">
+		  <label class="layui-form-label">企业全称</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="fullName" value ="$!{enterprise.fullName}" lay-verify="required" autocomplete="off" class="layui-input">
+		      </div>
+		  </div>
+		
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">组织结构证件号</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="organizationCode" value ="$!{enterprise.organizationCode}" lay-verify="number" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">工商执照证件号</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="licenseNo" value ="$!{enterprise.licenseNo}" lay-verify="number" autocomplete="off" class="layui-input">
+			  </div>
+		 </div>
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">税号</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="taxCode" value ="$!{enterprise.taxCode}" lay-verify="number" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		 
+		<div class="layui-inline">
+		<label class="layui-form-label">创建人</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="createUser" value ="$!{enterprise.createUser}"  lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div>
+		 
+		  <div class="layui-inline">
+		   <label class="layui-form-label">税务登记证件号</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="taxNo" value ="$!{enterprise.taxNo}" lay-verify="number" autocomplete="off" class="layui-input">
+		      </div>
+		   </div><br/><br/>
+		   
+		 <div class="layui-inline">
+		<label class="layui-form-label">更新人</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="updateUser" value ="$!{enterprise.updateUser}" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div>
+		   
+		 <div class="layui-inline">
+		<label class="layui-form-label">描述</label>
+		      <div class="layui-input-inline">
+		        <input type="text" name="description" value ="$!{enterprise.description}" lay-verify="required" autocomplete="off" class="layui-input">
+			  </div>
+		 </div><br/><br/>
+		   
+		   <input type= "submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交">
+		    <a href="$appServer.get('om/enterprise/list.htm')" return:false class="layui-btn layui-btn-xs">取消</a>
+	</form>
+		
+</div>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    
+  });
+  //监听提交
+  form.on('submit(demo1)', function(data){
+      url:"$appServer.get('om/enterprise/toadd.htm')"
+  });
+});
+</script>

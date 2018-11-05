@@ -1,0 +1,71 @@
+<div style="padding:0px;">
+<div class="layui-table" style="padding:15px" id="">
+		<!--搜索条件-->
+		<div  class="ry-banner">
+			<div class="">
+				<div class="layui-inline">
+			  	<label class="layui-form-label">单位类型</label>
+		      	<div class="layui-input-inline selectData">
+				<form class="layui-form"  >
+			        <select id="untype" name="untype">
+			        	<option value="">请选择</option>
+			        	#foreach($ty in $types)
+			        	<option value="$!{ty}">$!{ty}</option>
+			        	#end
+			        </select>
+				</form>
+		      	</div>
+		      	<div class="layui-input-inline iw300" style="width:10px;"></div>
+		        <button style="margin-top:4px" class="layui-btn layui-btn-normal layui-btn-small cxtype">查询</button>
+		        <button style="margin-top:4px" class="layui-btn layui-btn-normal layui-btn-small searchBtn2">重置</button>
+    			<button style="margin-top:4px" class="layui-btn layui-btn-normal layui-btn-small insertBtns">新增</button>
+	     	</div>
+		  </div>
+		</div>
+	
+		
+		<!--列表-->
+		<table id="unitList" class="layui-table table-style" lay-even lay-size="sm" lay-skin="line">
+		
+		  <thead>
+		    <tr>
+		      <th class="table-style-th">序号</th>
+		      <th class="table-style-th">单位类型</th>
+		      <th class="table-style-th">单位名称</th>
+		      <th class="table-style-th">单位（English）</th>
+		      <th class="table-style-th">是否为参考单位</th>
+		      <th class="table-style-th">操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		  #foreach($data in $datas)
+		    <tr>
+		      <td>${velocityCount}</td>
+		      <td>$!data.type</td>
+		      <td>$!data.chName</td>
+		      <td>$!data.usName</td>
+		      #if($!{data.isDefaultUnit} == '1') <td>是</td>   #end
+			  #if($!{data.isDefaultUnit} == '0') <td>否</td>	  #end
+		      <td>
+		      	<i class="layui-icon">&#xe642;</i>
+		      	<a href="javascript:;" class="dialog-link btcol editFn"  attr-data="$data.uuid">
+					修改
+		      	</a>
+		      	<i class="layui-icon" style="color:red;margin-left:5px;">&#xe640;</i>
+		      	<a href="javascript:;" class="dialog-link btcol delFn"  attr-data="$data.uuid">
+		      		删除
+		      	</a>
+		      </td>
+		    </tr>
+		    #end
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/unit/unitList.htm").put('slider_path','/contain/formPagingPageSlider')
+	    </div>
+</div>
+	 
+	 
+		<script src="/transport/js/om/unitList.js"></script>

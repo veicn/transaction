@@ -1,0 +1,40 @@
+#*采购详情页面 *#
+#set($crudeOilStr = $!{demand.crudeOilOptions})
+#if($!crudeOilStr)
+    #set($strlen = $crudeOilStr.length() - 2)
+    #set($crudeOilStr = $crudeOilStr.substring(0, $strlen))
+#end
+#set($a = "$!{crudeOilStr}_原油需求大厅_原油采购大厅_原油大厅_买原油网")
+<div class="fabucaigou-con-right" #if(!$personal) style="float: none;margin: 0 auto;width: 100%;max-width: calc(1600px + 10%);box-sizing: border-box;margin: 0 auto;padding:0 5%;" #end>
+    <div class="con-right-cont">
+	    <div class="inner c-padding0">
+            #if(!$personal)
+		    <div class="crumb">
+		        <a href="$!indexUrl/#page1">Home</a><em>&gt;</em><a href="$appServer.get('crudeoillobby/index.htm')">Mall</a><em>&gt;</em><span>Requirement Details</span>
+		    </div>
+            #end
+		</div>
+        <div class="caigou-content clearfix">
+            #if($!personal==1)
+                $contain.get("/buyCenterContain/demandStatus.htm").put("demandType", "demandDetail").put('demand', $!{demand})
+                #else
+                $contain.get("/crudeoilhallform/sketchlist.htm").setParam("demandId", "$!{demand.id}").put("ev",$ev)
+            #end
+            $contain.get("/crudeoilhallform/oiltypeList.htm").setParam("demandId", "$!{demand.id}").put("publishType",$!{demand.publishType})
+            #if($!personal)
+                #if($!{demand.specified} == 1)
+                    #*　指定企业信息　*#
+                    $contain.get("/crudeoilhallform/specifyEnterpriseShow.htm").setParam("demandId", "$!{demand.id}")
+                #end
+            #end
+            $contain.get("/crudeoilhallform/pricedetail.htm").setParam("demandId", "$!{demand.id}")
+            $contain.get("/crudeoilhallform/buyerlist.htm").setParam("demandId", "$!{demand.id}")
+
+        </div>
+        <div class="butt-zh c-clear">
+
+        </div>
+    </div>
+</div>
+
+

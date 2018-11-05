@@ -1,0 +1,75 @@
+<style> 
+.layui-unselect dl { max-height:200px; }  
+</style>
+<form class="layui-form" id="editForm" method="post">
+              <div class="layui-form-item mt10">
+                  <label class="layui-form-label iw154">排序：</label>
+                  <input type="hidden" id="menuId" name="menuId">
+                  <div class="layui-input-inline">
+                  		<input class="layui-input" type="text" name="sort" id="sort" lay-verify="required|number" autocomplete="off">
+               	   </div>
+     	          <label class="layui-form-label iw100">菜单类型：</label>
+                  <div class="layui-input-inline">
+                  		<select id="menuType" name="menuType" lay-verify="required">
+	              	   		<option  value="">== 请选择类型  ==</option>
+	              	   		<option  value="10">普通</option>
+	              	   		<option  value="20" selected>热门推荐</option>
+	               		</select>
+               	   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">菜单描述：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="menuDes" id="menuDes" lay-verify="required" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">菜单代码：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="menuUrl" id="menuUrl" lay-verify="required" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw154">推荐层级：</label>
+                   <div class="layui-input-inline">
+                       <input  type="checkBox" name="tradeLevel" id="tradeLevel" value="1" checked="">优先推荐
+                   </div>
+               </div>
+              <!--  <div class="layui-form-item">
+                   <label class="layui-form-label iw100">菜单图标地址：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="menuIcon" id="menuIcon"  autocomplete="off">
+                   </div> 
+                   <label class="layui-form-label iw100">菜单参数：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="menuArgu" id="menuArgu"  autocomplete="off">
+                   </div>
+               </div> -->
+              <!--  <div class="layui-form-item">
+               	   <label class="layui-form-label iw154">语言类型：</label>
+                   <div class="layui-input-inline">
+	               		<input class="layui-input" type="text" name="langVer" id="langVer" autocomplete="off">
+                   </div>
+                   <label class="layui-form-label iw100">行业推荐大类id：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="tradeId" id="tradeId" autocomplete="off">
+                   </div>
+               </div> -->
+               <!-- <div class="layui-form-item">
+                   <label class="layui-form-label iw154">是否个人：</label>
+                   <div class="layui-input-inline">
+                       <select id="isPersonal" name="isPersonal" >
+	              	   		<option  value="">== 请选择是否个人  ==</option>
+	              	   		<option  value="0">企业</option>
+	              	   		<option  value="1">个人</option>
+	               		</select>
+                   </div>
+                   <label class="layui-form-label iw100">市场编号：</label>
+                   <div class="layui-input-inline">
+                       <input class="layui-input" type="text" name="marketId" id="marketId"  autocomplete="off">
+                   </div>
+               </div> -->
+               <div class="layui-form-item">
+                  
+               </div>
+                <button class="btnloc1 btnloc2 layui-btn layui-btn-normal" type="submit" lay-submit lay-filter="btn_edit">确定</button>
+                <button class="btnloc2 layui-btn layui-btn-normal" type="button" id="btn_close">取 消</button>
+</form>

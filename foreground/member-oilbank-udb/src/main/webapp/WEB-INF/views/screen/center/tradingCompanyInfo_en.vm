@@ -1,0 +1,240 @@
+#set($js_validate = "validate")##需要验证
+#set($id = $info.id)
+<style>
+    .c-qy-tx {
+        width: 100%;
+        margin: 5px 155px 18px;
+        color: #c7a1a1;
+    }
+    .c-qywb {
+        width: calc(60% - 12px);
+        /* color: #999; */
+        font-size: 14px;
+        padding-left: 12px;
+    }
+</style>
+
+<div class="c-mr">
+    <div class="c-mod">
+        $contain.get('tabs.htm').put("menu","tradingCompanyInfo")
+        <form action="#" method="post" id="tradingCompanyInfoForm">
+
+        <ul class="c-bczl enterbox1">
+            #springBind("info.id")
+            <input type="hidden" name="$!{status.expression}" value="$!{status.value}" >
+
+            #springBind("info.canTrading")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">do you have the rights to import and export ：</span>
+            	#if(!$id)
+                    <input type="checkbox" class="form-checkbox" id="canTradingCheckbox"  >
+
+	            	<input type="hidden"  id="canTrading" value="0" name="$!{status.expression}"  >
+                #else
+                <span class="qx-conte">#if($!{status.value})
+                		是
+                	#else
+                		否
+                	#end
+                </span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+                
+                
+            #springBind("info.tradingComplayCode")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Import and export company code：</span>
+            	#if(!$id)
+	            	<input type="text" id="tradingComplayCode" placeholder="Please enter import and export enterprise code." class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+
+                
+            #springBind("info.mainImportProduct")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Main import products：</span>
+            	#if(!$id)
+	            	<input type="text" id="mainImportP	roduct" placeholder="请输入进出口产品" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+                
+                
+            #springBind("info.mainExportProduct")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Main export products：</span>
+            	#if(!$id)
+	            	<input type="text" id="mainExportProduct" placeholder="请输入出口产品" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+			
+
+            #springBind("info.lastYearOperationRevenue")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">last year business revenue ：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearOperationRevenue" placeholder="please enter last year's busness revenue" maxlength="16" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+			 
+                
+                
+            #springBind("info.lastYearTradeVolume")
+            <li class="c-bcz clearfix">
+            	<span class="c-b-txt">Last year's trade volume：</span>
+            	#if(!$id)
+	            	<input type="text" id="lastYearTradeVolume" placeholder="Please enter the last year's trade volume" maxlength="16" class="form-inp" name="$!{status.expression}" value="$!{status.value}">
+                #else
+                    <span class="qx-conte">$!{status.value}</span>
+                #end
+            </li>
+            #if(!$id)
+			 	<div class="c-qy-tx"> 
+					#if(!$status.isError()&&  !$!{status.value})
+
+	                #else
+	                    ${status.errorMessage}
+	                #end
+                </div>
+           	#end
+            
+        </ul>
+        #if(!$id)
+	        <div class="c-subdiv c-mod-bc c-mod-bc2"><button class="c-btnsub">submit</button><button onclick="window.location.href='$appServer.get('/center/my.htm')'" class="c-btncas">return </button></div>
+        #end
+        </form>
+    </div>
+</div>
+
+<script >
+  $(function(){
+  
+  		//给do you have the rights to import and export CheckBox绑定事件
+  		$("#canTradingCheckbox").click(function(){
+  			var canTradingInput = $("#canTrading");
+  			if($(this).is(":checked")){
+  				canTradingInput.val(1);
+  			}else{
+  				canTradingInput.val(0);
+  			}
+  		});
+  
+         //表单验证及submit
+        $ ("#tradingCompanyInfoForm").validate({
+            ignore: ".ignore",
+            onfocusout: function(element){
+		        $(element).valid();
+		    },
+            rules: {
+                 
+                tradingComplayCode: {
+                    "required":true 
+                  
+                },
+                mainImportProduct: {
+                    "required":true 
+                  
+                },
+                mainExportProduct: {
+                    "required":true 
+                  
+                },
+                
+                
+                lastYearOperationRevenue: {
+                    "required":true,
+                    number:true  ,
+                    maxlength:16
+                  
+                },
+                lastYearTradeVolume: {
+                    required: true,
+                    number:true ,
+                    maxlength:16
+                } 
+               
+                 
+            },
+            messages: {
+                 
+                tradingComplayCode: {
+                    required:"Please enter import and export enterprise code."
+                },
+                mainImportProduct: {
+                    required:"Please enter the main import products",
+                },
+                mainExportProduct: {
+                    required:"Please enter the main export products",
+                },
+                
+                
+                lastYearOperationRevenue: {
+                    required:"please enter last year's busness revenue ",
+                    number:"please enter a valid number "
+                },
+                lastYearTradeVolume: {
+                    required:"Please enter the last year's trade volume",
+                    number:"please enter a valid number "
+                },
+               
+              },  
+            errorPlacement: function(error, element) {
+                var span = element.parent().next();
+                span.html("");
+                span.append(error)
+            }
+        });
+     });
+ </script> 

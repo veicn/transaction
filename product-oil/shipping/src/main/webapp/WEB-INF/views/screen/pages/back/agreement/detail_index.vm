@@ -1,0 +1,110 @@
+$contain.get('/common/title.htm').put('title', 'Charter Party Detail')
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/work/addAgreement.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+
+<div class="m-nav fl">
+    <form>
+        <div class="m-box m-sls cleafix borderNone">
+            <div class="tit" id=" tit1">
+
+                Create Charter Party Details
+
+            </div>
+            <ul class="m-nav-info">
+                <li>
+                    <span>Charter Party Date :</span>
+                    <span class="time">2018-02-22</span>
+                </li>
+                <li>
+                    <span>Consignor :</span>
+                    <span>$!{objectVo.consignor}</span>
+                </li>
+                <li>
+                    <span>Disponent Owner :</span>
+                    <span>$!{objectVo.charteringAgentNm}</span>
+                </li>
+                <li>
+                    <span>Vesse's Name :</span>
+                    <span>$!{objectVo.vesselName}</span>
+                </li>
+                <li>
+                    <span>IMO :</span>
+                    <span>$!{objectVo.imo}</span>
+                </li>
+                <span class="m-nav-line"></span>
+
+                <li>
+                    <span>Product :</span>
+                    <span>$!{objectVo.productNm}</span>
+                </li>
+                <li>
+                    <span>Quantity (Tons) :</span>
+                    <span>
+                        #if(${objectVo.quantity}!=""&&${objectVo.rangeOfError}!="")
+                            $!{objectVo.quantity} ± $!{objectVo.rangeOfError}%
+                        #end
+                 </span>
+                </li>
+                <li>
+                    <span>Port Of Loading :</span>
+                    <span>$!{objectVo.portOfLoading}</span>
+                </li>
+                <li>
+                    <span>Port Of Discharge :</span>
+                    <span>$!{objectVo.portOfDischarge}</span>
+                </li>
+                <span class="m-nav-line"></span>
+
+                <li>
+                    <span class="time-l">Laycan :</span>
+                    <span>$!{objectVo.laycanStrat} --- $!{objectVo.laycanEnd}</span>
+                </li>
+
+                <li class="input_Upload">
+                    <span>Upload Q88 :</span>
+                    #if($!objectVo.uploadQ88FileNm && $!objectVo.uploadQ88FileNm!="" )
+                        <i id="Q88Download" class="down-load-file">
+                            <a href="$appServer.get(
+                                '/common/doc/download.htm')?path=$!{objectVo.uploadQ88}&fileName=$!{objectVo.uploadQ88FileNm}"
+                               class="upload_file" target="_blank">Download</a>
+                        </i>
+                        <i id="Q88Preview" class="lookFileDoc" id="look_$subData.fileCode"
+                           style="display: inline-block;"
+                           fileUrl="$appServer.get(
+                               '/common/doc/file.htm')?path=$!{objectVo.uploadQ88}&fileName=$!{objectVo.uploadQ88FileNm}"
+                           fileFormat="$!{objectVo.fileFormat1}">Preview
+                        </i>
+                    #end
+                </li>
+            ##            <li class="input_Upload">
+            ##                <span>Upload CP :</span>
+            ##                <i id="CpDownload" class="down-load-file"
+            ##					#if($!objectVo.uploadCpFileNm)
+            ##
+            ##					#else
+            ##						style="display: none;"
+            ##					#end
+            ##					>
+            ##					<a href="$appServer.get('/common/doc/download.htm')?path=$!{objectVo.uploadCp}&fileName=$!{objectVo.uploadCpFileNm}"
+            ##					class="upload_file" target="_blank">Download</a>
+            ##				</i>
+            ##				#if($!objectVo.uploadCpFileNm)
+            ##					<i  id="CpPreview" class="lookFileDoc" id="look_$subData.fileCode" style="display: inline-block;"
+            ##						fileUrl="$appServer.get('/common/doc/file.htm')?path=$!{objectVo.uploadCp}&fileName=$!{objectVo.uploadCpFileNm}"
+            ##						fileFormat="$!{objectVo.fileFormat2}">Preview
+            ##					</i>
+            ##				#end
+            ##            </li>
+                <span class="m-nav-line"></span>
+                <div class="m-nav-btn">
+                    <em class="check-b1 button-b">
+                        <a href="javascript:history.go(-1)" class="br a-back">Return</a>
+                    </em>
+                </div>
+            </ul>
+        </div>
+    </form>
+</div>
+#js($appServer.get('script/pages/back/agreement/index.js?js_version=03280827'))

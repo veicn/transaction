@@ -1,0 +1,198 @@
+<script src="http://www.sinochem.com/listed/script/lib/jquery.autocomplete.min.js"></script>
+<link rel="stylesheet" href="$appServer.get('css/verify.css')">
+#set($a = "我发出的报价单-买原油")
+
+<form id="biddingEditForm" action="$appServer.get('/purchaseManager/sellBiddingSave.htm')" method="post">
+	<input type="hidden" name="oilSaleFlag" value="$!{oilSaleFlag}" />
+	<input type="hidden" name="bizType" value="$!{demandForm.bizType}" />
+
+	#if($!demandForm.bizType == "CrudeOil")
+    	$contain.get("/buyerCenter/biddingEdit/biddingOil.htm").put('crudeOil', $!{demandForm.crudeOil})
+    #else
+    	$contain.get("/buyerCenter/biddingEdit/biddingProductInfo.htm").put('demand', $!{demandForm.demand}).put('ship', $!{demandForm.ship})
+    #end
+    
+    #if($!demandForm.bizType == "ProductOil")
+    	$contain.get("/buyerCenter/biddingEdit/biddingShipBerth.htm").put('demandShipBerthList', $!{demandForm.demandShipBerthList}).put('dictMap', $!{dictMap})
+    #end
+    
+    #if($!demandForm.bizType == "CrudeOil")
+    	$contain.get("/buyerCenter/biddingEdit/biddingDemandCrude.htm").put('demand', $!{demandForm.demand}).put('ship', $!{demandForm.ship}).put('dictMap', $!{dictMap})
+    #else
+    	$contain.get("/buyerCenter/biddingEdit/biddingDemandProduct.htm").put('demand', $!{demandForm.demand}).put('ship', $!{demandForm.ship}).put('dictMap', $!{dictMap})
+    #end
+    
+	#*买方*#
+	$contain.get("/crudeoilhallform/buyerlist.htm").setParam("demandId","$!{demandForm.demand.id}")
+	#*卖方*#
+	$contain.get("/crudeoilhallform/supplierList.htm").setParam("demandId","$!{demandForm.demand.id}")
+    
+    $contain.get("/buyerCenter/biddingEdit/biddingHistory.htm").put('biddingHistory', $!{demandForm.biddingHistory})
+    
+    <div class="c-subdiv">
+    	#if($!{demandForm.stopBid} == 0)
+        	<button class="c-btnrel" id="saveInfo">保存</button>
+        #end
+        <button class="c-btncas" id="editBack">返回</button>
+    </div>
+</form>
+
+
+
+<script>
+	$(function () {
+        // 保存
+        $("#saveInfo").on("click", function () {
+            formValiate();
+        });
+
+        // 取消
+        $("#editBack").on("click", function () {
+            window.history.back(-1);
+            return false;
+        });
+        
+        #if($!{demandForm.stopBid} == 1)
+            layui.use("layer",function() {
+                layer.alert("投标已截止的报价单不能修改！");
+            });
+        #end
+    });
+
+    jQuery.validator.addMethod("isFloatEqZero", function(value, element) {
+        value=parseFloat(value);
+        return this.optional(element) || value>0;
+    }, "浮点数必须大于0");
+
+    jQuery.validator.addMethod("isFloat", function(value, element) {
+        value=parseFloat(value);
+        return this.optional(element) || value;
+    }, "浮点数");
+    
+    jQuery.validator.addMethod("isInt", function(value, element) {
+        value=parseInt(value);
+        return this.optional(element) || value;
+    }, "整数");
+    
+	function formValiate() {
+        $("#biddingEditForm").validate({
+
+            rules:{
+                "demand.numStr" : {
+            		required:true,
+            		isFloatEqZero:true
+            	},
+                "demand.numfloat" : {
+            		required:true,
+            		isFloat:true
+            	},            	
+                "demand.agio" : {
+            		required:true,
+            		isInt:true
+            	},
+                "demand.otherDate":{
+                    required: function(){return $("#typeEvent").val()=="DATE";}
+                },
+                "demand.eventDays":{
+                    required: function(){return $("#typeEvent").val()!="DATE";}
+                },
+            	"demand.valuationFormula":"required",
+                "demand.stopBidTime":"required"
+            },
+            messages:{
+                "demand.numStr" : {
+            		required:"商品数量不能为空！",
+            		isFloatEqZero:"商品数量请输入大于0的数字！"
+            	},            	
+                "demand.numfloat" : {
+            		required:"溢短装不能为空！",
+            		isFloat:"溢短装请输入数字！"
+            	},               	
+                "demand.agio" : {
+            		required:"升贴水不能为空！",
+            		isInt:"升贴水请输入数字！"
+            	},
+                "demand.otherDate":"输入日期不能为空!",
+                "demand.eventDays":"输入天数不能为空!",
+            	"demand.valuationFormula":"计价公式不能为空！",
+                "demand.stopBidTime":"报价有效期不能为空！"
+            },
+            submitHandler:function(form){
+            	if(valiateData()) {
+//					biddingDemandCrude给payItem和payItemJSON赋值
+                    setValue();
+                    form.submit();
+            	}
+            }
+        });
+    }
+    
+	
+	var errorObj;
+	
+	function valiateData() {
+		errorObj = "";
+		
+		if($("#valuationProidType").val() == 4) {
+			if($("#valuationPeriodStart").val() == "") {
+				$("input[name='demand.valuationProidStart']").parent().find("label.error").html("计价开始日期不能为空！").show();
+				errorObj = $("#valuationPeriodStart");
+			}
+			if($("#valuationProidEnd").val() == "") {
+				$("input[name='demand.valuationProidEnd']").parent().find("label.error").html("计价结束日期不能为空！").show();
+				errorObj = $("#valuationProidEnd");
+			}			
+		}
+		
+		//var tradeItem = $("#tradeItem").val();
+        //if(tradeItem == '1'){
+        //	checkShipmentPort();
+        //}else if(tradeItem == '4' || tradeItem == '5'
+        //        || tradeItem == '6' || tradeItem == '7'){
+        //	checkDischargePort();
+        //}else if(tradeItem == '2' || tradeItem == '3'){
+        //	checkShipmentPort();
+        //	checkDischargePort();
+        //}
+		
+        if(errorObj) {
+        	errorObj.focus();
+			return false;
+        }
+        
+		return true;
+	}
+	
+	function checkShipmentPort() {
+    	if($("#shipmentPort").val() == "") {
+			$("input[name='ship.shipmentPort']").parent().find("label.error").html("装货港不能为空！").show();
+			errorObj = $("#shipmentPort");
+    	}
+    	if($("#shipmentStartTime").val() == "") {
+			$("input[name='ship.shipmentEndTime']").parent().find("label.error").html("装期不能为空！").show();
+			errorObj = $("#shipmentEndTime");
+    	}
+    	if($("#shipmentEndTime").val() == "") {
+			$("input[name='ship.shipmentEndTime']").parent().find("label.error").html("装期不能为空！").show();
+			errorObj = $("#shipmentEndTime");
+    	}
+	}
+	
+	function checkDischargePort() {
+    	if($("#dischargePort").val() == "") {
+			$("input[name='ship.dischargePort']").parent().find("label.error").html("卸货港不能为空！").show();
+			errorObj = $("#dischargePort");
+    	}
+    	if($("#dischargeStartTime").val() == "") {
+			$("input[name='ship.dischargeEndTime']").parent().find("label.error").html("卸货期不能为空！").show();
+			errorObj = $("#dischargeEndTime");
+    	}
+    	if($("#dischargeEndTime").val() == "") {
+			$("input[name='ship.dischargeEndTime']").parent().find("label.error").html("卸货期不能为空！").show();
+			errorObj = $("#dischargeEndTime");
+    	}
+	}	
+</script>
+
+##表单验证异常信息绑定
+$contain.get("/contain/bindError.htm").put("errors", $!{errors}).put("errorMessage", $!{errorMessage})

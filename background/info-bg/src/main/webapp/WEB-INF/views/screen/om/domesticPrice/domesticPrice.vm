@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/domesticPrice/domesticPrice.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<script src="$imageServer.get('info/js/domesticPrice/domesticPrice.js')"></script>
+<script src="$imageServer.get('info/js/domesticPrice/plupload.full.min.js')"></script>
+	<div class="pp15" id="layerDemo">	
+		<!--搜索条件-->
+		<div class="ry-banner">
+            <div class="layui-form-item layui-container">
+                <form class="layui-form" id="selForm" action="domesticPrice.htm" method="post">
+                    <label class="layui-form-label">产品名称：</label>
+                    <div class="layui-input-inline iw200">
+                        <input type="text" id="selProductName" name="selProductName" value="$!{query.selProductName}" class="layui-input">   
+                    </div>
+                    <div class="layui-input-inline">
+                    <button type="sumbit" class="layui-btn layui-btn-normal ml18 searchBtn">查询</button>
+                    <button type="button" class="layui-btn layui-btn-normal addFn">新增</button>
+                    </div>
+                    <div class="layui-input-inline iw320">
+	                    <label class="layui-form-label">附件：</label>
+	                    <div class="layui-input-inline iw200">
+	                        <input type="text" id="file-list" class="layui-input" placeholder="请选择文件..." readonly="true">   
+	                    </div>
+                    </div>	
+                	<button type="button" class="layui-btn layui-btn-normal" id="upload">导入</button>
+                	<button type="button" class="layui-btn layui-btn-normal" id="export">导出</button>
+					
+                   <!-- <button type="button" class="layui-btn layui-btn-normal" id="exportEx">示例</button> -->
+                 </form>
+            </div>
+		</div>
+		
+		<table class="layui-table table-style tb-top" id="crudeOil">
+		  <thead>
+		    <tr>
+		      <th class="table-style-th">产品名称</th>
+		      <th class="table-style-th">牌号</th>
+		      <th class="table-style-th">价格</th>
+			  <th class="table-style-th">价格单位</th>
+			  <th class="table-style-th">价格日期</th>
+			  <th class="table-style-th">区域名称</th>
+              <th class="table-style-th">价格来源</th>
+              <th class="table-style-th">价格趋势</th>
+              <th class="table-style-th">价格变动</th>
+		      <th class="table-style-th">操作</th>
+		    </tr> 
+		  </thead>
+		  <tbody id="crudeOil">
+		  #foreach($mestic in $!mestics)
+			    <tr>
+				  <td>$!{mestic.productName}</td>
+				  <td>$!{mestic.extend1}</td>
+				  <td>$!{mestic.lowPrice}~$!{mestic.highPrice}</td>
+				  <td>$!{mestic.priceUnit}</td>
+				  <td>$!{mestic.priceDate}</td>
+				  <td>$!{mestic.areaName}</td>
+	              <td>$!{mestic.priceSource}</td>
+	              #if($!{mestic.priceTrend} == "1")
+	              	<td>上涨</td>
+	              #elseif($!{mestic.priceTrend} == "0")
+	              	<td>持平</td>
+	              #elseif($!{mestic.priceTrend} == "-1")
+	              	<td>下跌</td>
+	              #else
+	              <td></td>
+	              #end
+	              <td>$!{mestic.lowPriceChange}~$!{mestic.highPriceChange}</td>
+			      <td class="acss-color">
+			      	<a href="javascript:;" class="btcol editFn" attr-data='{"uuid":"$!{mestic.uuid}","productName":"$!{mestic.productName}","highPrice":"$!{mestic.highPrice}","lowPrice":"$!{mestic.lowPrice}","priceUnit":"$!{mestic.priceUnit}","priceDate":"$!{mestic.priceDate}","areaName":"$!{mestic.areaName}","priceSource":"$!{mestic.priceSource}","priceTrend":"$!{mestic.priceTrend}","highPriceChange":"$!{mestic.highPriceChange}","lowPriceChange":"$!{mestic.lowPriceChange}"}'>
+			      		<i class="layui-icon">&#xe642;</i>
+						编辑
+			      	</a>
+			      	<a href="javascript:;" class="mr btcol delFn" attr-data='{"uuid":"$!{mestic.uuid}"}'>
+			      		<i class="layui-icon" style="color:red;">&#xe640;</i>
+			      		删除
+			      	</a>
+			      </td>
+			    </tr>
+			   #end 
+		  </tbody>
+		</table>
+		
+	    <!--底部分页-->
+	    <div class="ry-footbar ry-right">
+	    	<!-- <div id="ry-page" class="ry-right"></div> -->
+	    	$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/domesticPrice/domesticPrice.htm?selProductName=$!{query.selProductName}").put('slider_path','/contain/formPagingPageSlider')
+	    </div>
+
+	 
+	 
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	    <!--底部-->
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>	
+    </div>

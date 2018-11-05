@@ -1,0 +1,278 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<form class="layui-form" id="saveForm" style="padding-right: 25px;padding-top: 25px">
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">发送方式</label>
+        <div class="layui-input-inline">
+            <select id="type" name="type" style="width: 300px" lay-verify="required" lay-filter="type">
+                #foreach($t in $!types)
+                    <option value="$!{t.code}">$!{t.desc}</option>
+                #end
+            </select>
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">接收人</label>
+        <div class="layui-input-inline">
+            <select name="toId1" lay-filter="toId1">
+                <option value="-1">全部账号</option>
+                <option value="1">企业</option>
+                <option value="2">个人</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" id="credentialsSelectDiv" style="display: none">
+            <select name="credentials" lay-filter="credentials" lay-search>
+                <option value="-1">请选择企业资质</option>
+                #foreach($c in $!credentials)
+                    <option value="$!c.code">$!c.name</option>
+                #end
+            </select>
+        </div>
+        <div class="layui-input-inline" id="rolesSelectDiv" style="display: none">
+            <select name="roles" lay-filter="roles" lay-search>
+                <option value="-1">请选择角色</option>
+                #foreach($r in $!roles)
+                    <option value="$!r.code">$!r.description</option>
+                #end
+            </select>
+        </div>
+        <div class="layui-input-inline" id="memberSelectDiv" style="display: none">
+            <select name="memberId" lay-filter="member" lay-search lay-verify="required">
+                <option value="-1">全部账号</option>
+            </select>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">发送时间</label>
+        <div class="layui-input-inline">
+            <select name="method" lay-filter="method" lay-search lay-verify="required">
+                <option value="1">立即发送</option>
+                <option value="2">定时发送</option>
+                <option value="3">周期发送</option>
+            </select>
+        </div>
+
+        <div class="layui-input-inline" id="delayTimeDiv" style="display: none;">
+            <input type="text" id="delayTime" name="delayTime" class="layui-input">
+        </div>
+
+        <div class="layui-input-inline" id="periodTimeDiv" style="display: none;">
+            <select name="periodTime" lay-search lay-verify="required">
+                <option value="0 0 6 * * ?">每天</option>
+                <option value="0 15 6 ? * 2">每周一</option>
+                <option value="0 15 6 ? * 3">每周二</option>
+                <option value="0 15 6 ? * 4">每周三</option>
+                <option value="0 15 6 ? * 5">每周四</option>
+                <option value="0 15 6 ? * 6">每周五</option>
+                <option value="0 0 6 1 * ?">每月第一天</option>
+                <option value="0 0 6 15 * ?">每月15号</option>
+                <option value="0 0 6 l * ?">每月最后一天</option>
+            </select>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">标题</label>
+        <div class="layui-input-inline">
+            <input type="text" id="title" name="title" class="layui-input" style="padding-right: 30px;width: 300px">
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="layui-inline" style="width: 100%;">
+        <label class="layui-form-label" style="width: 200px">内容</label>
+        <div class="layui-input-inline" style="width: 700px">
+##            <textarea name="contentEditor" id="contentEditor"></textarea>
+            <textarea name="content" id="content"></textarea>
+##            <input type="hidden" name="content" />
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-inline"><span style="color:red">$!{errorMsg}</span></div>
+    <div style="text-align:center;">
+        <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交">
+    </div>
+
+</form>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+        layedit.set({
+            uploadImage: {
+                 url: '$!{appServer.get("/om/messageLog/img_upload.json")}', //接口url
+                ## url: '$!{uploadServer.get("/upload/file.htm")}', //接口url
+                type:'post'
+            }
+        });
+
+        //时间选择器
+        laydate.render({
+            elem: '#delayTime'
+            ,type: 'datetime'
+        });
+
+        var editor = layedit.build('content', {
+            tool: [
+                'strong' //加粗
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+
+                , '|' //分割线
+
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , 'link' //超链接
+                , 'unlink' //清除链接
+                // ,'face' //表情
+                ,'image' //插入图片
+                // ,'help' //帮助
+            ]
+        }); //建立编辑器
+
+        //默认同步
+        $.ajaxSetup({
+            async: false
+        });
+
+        /**
+         * 推送时间 选择
+         */
+        form.on('select(method)', function (data) {
+            $('#delayTimeDiv').hide();
+            $('#periodTimeDiv').hide();
+            var val = data.value;
+            if (val == 2) {
+                $('#delayTimeDiv').show();
+            }else if(val == 3){
+                $('#periodTimeDiv').show();
+            }
+        });
+
+        /**
+         * 推送方式 选择
+         */
+        form.on('select(type)', function (data) {
+            var val = data.value;
+            var titleDiv = $('#title').parent().parent();
+            titleDiv.show();
+            if (val == 2) {
+                titleDiv.hide();
+            }
+        });
+        /**
+         * 企业/个人 选择
+         */
+        form.on('select(toId1)', function (data) {
+            var val = data.value;
+            $('#memberSelectDiv').hide();
+
+            $('select[name=memberId]').empty();
+            $('select[name=memberId]').append('<option value="-1">全部账号</option>');
+            $('select[name=credentials]').val('-1');
+            $('select[name=roles]').val('-1');
+            layui.form.render();
+            if (val == 0) {
+                $('#rolesSelectDiv').hide();
+                $('#credentialsSelectDiv').hide();
+            } else if (val == 1) {
+                $('#rolesSelectDiv').hide();
+                $('#credentialsSelectDiv').show();
+            }
+            else if (val == 2) {
+                $('#credentialsSelectDiv').hide();
+                $('#rolesSelectDiv').show();
+            }
+        });
+
+        /**
+         * 企业资质会员筛选 选择
+         */
+        form.on('select(credentials)', function (data) {
+            var val = data.value;
+            $('#memberSelectDiv').show();
+            filterMember({code: val});
+        });
+        /**
+         * 角色会员筛选 选择
+         */
+        form.on('select(roles)', function (data) {
+            var val = data.value;
+            $('#memberSelectDiv').show();
+            filterMember({role: val});
+        });
+
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+             var msgAlert = layer.alert("如果选择批量推送，推送结果请稍后查看。", function () {
+                 layer.close(msgAlert);
+                 layedit.sync(editor);
+                 // $('input[name=content]').val(layedit.getText(editor));
+                 $.ajax({
+                     url: '$appServer.get('om/messageLog/save.json')',
+                     type: 'POST',
+                     data: $("#saveForm").serialize(),
+                     success: function (data) {
+                         var index = layer.alert(data.message, function () {
+                             if (data && data.status == 0) {
+                                 parent.layer.closeAll();
+                                 parent.location.reload();
+                             } else {
+                                 layer.close(index);
+                             }
+                         });
+                     },
+                     error: function (r, d) {
+                         layer.alert('保存失败')
+                     }
+                 });
+             });
+            return false;
+        });
+    });
+
+    function filterMember(param) {
+        $.ajax({
+            url: '$appServer.get("om/messageLog/member_filter.json")',
+            type: 'GET',
+            data: param
+            , success: function (data) {
+                if (data.status == 0 && data.datas) {
+                    var memberArr = data.datas;
+                    $('select[name=memberId]').empty();
+                    $('select[name=memberId]').append('<option value="-1">全部账号</option>');
+                    for (var i = 0; i < memberArr.length; i++) {
+                        $('select[name=memberId]').append('<option value="' + memberArr[i].id + '">' + memberArr[i].userName + '</option>');
+                    }
+                    layui.form.render();
+                }
+            }
+            , error: function () {
+
+            }
+        });
+    }
+</script>
+</body>
+</html>

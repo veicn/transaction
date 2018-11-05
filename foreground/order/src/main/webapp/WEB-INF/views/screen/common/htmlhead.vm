@@ -1,0 +1,15 @@
+    $contain.get("/contain/html_head.htm").put('title',$a).setHost("$memberServer")
+
+    <link rel="stylesheet" href="$appServer.get('css/verify.css')">
+    <link rel="stylesheet" href="$imageServer.get('layui/css/layui.css')"  media="all">
+    <script src="$imageServer.get('/layui/layui.all.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.min.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.extends.js')"></script>
+    <script src="$imageServer.get('/validate/jquery.validate.message.cn.js')"></script>
+
+    <link rel="stylesheet" href="$imageServer.get('/css/f_crudeoil_layer.css')">
+    <script src="$appServer.get('/script/crudeOilLayer.js')"></script>
+    <script src="$appServer.get('script/check.js')"></script>
+    <script src="$imageServer.get('lib/plupload-2.1.2/plupload.full.min.js')"></script>
+    <script src="$imageServer.get('/layui/layui.js')"></script>
+	

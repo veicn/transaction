@@ -1,0 +1,29 @@
+##采购单比较
+#js("$imageServer.get('js/search-box.js')")
+#js("$imageServer.get('layui/layui.all.js')")
+#css("$imageServer.get('layui/css/layui.css')")
+
+#set($a = "原油需求大厅_原油销售大厅_原油大厅_买原油网")
+$contain.get("/crudeoilhallform/electSell.htm").put("crudeOilDemandQuery",$!crudeOilDemandQuery).put("searchOptionsList",$!searchOptionsList).put("total",$!total)
+
+<div class="caigou-content clearfix cg-list">
+    <div class="inner">
+        $contain.get('/crudeoilhallform/index_list_sell.htm').put("pageInfoResult",$pageInfoResult).put("crudeOilDemandQuery", $crudeOilDemandQuery).put("user",$user)
+    </div>
+</div>
+
+<script>
+    //定义商品比较的回调函数，主要是定义URL地址
+    function compare(idArr){
+        var url = "$appServer.get('crudeoillobby/contrast.htm')";
+        window.open(url+"?demands="+idArr.toString());
+    }
+</script>
+
+
+
+
+
+
+
+

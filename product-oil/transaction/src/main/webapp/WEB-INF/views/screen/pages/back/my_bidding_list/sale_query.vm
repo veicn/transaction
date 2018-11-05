@@ -1,0 +1,18 @@
+<form id="" action="$appServer.get('resourceManager/myBiddinglist.htm')" method="post" >
+        <div class="c-form">
+            <ul class="c-ful">
+                <li class="c-fcos3"><span class="c-fn c-fn2 c-fn3">报价单编号：</span><input type="text" class="c-int c-int3" name="demandCode" value="$!{queryForm.demandCode}"/></li>
+                <li class="c-fcos3 c-tx"><span class="c-fn c-fn2">报价时间：</span><input type="text" class="c-int c-int4" date="true" name="createTimeStart" value="$!{queryForm.createTimeStart}"/>—<input type="text" class="c-int c-int4" date="true" name="createTimeEnd" value="$!{queryForm.createTimeEnd}"/></li>
+                <li class="c-fcos3">
+                    <span class="c-fn c-fn2">付款日期：</span>
+                    <select class="sele sele1" name="payItem" value="$!{queryForm.payItem}">
+                        <option value="">请选择</option>
+                        #foreach($obj in $!payItemMap.entrySet())
+                            <option #if($!{queryForm.payItem} == $!{obj.key}) selected #end value="$!obj.key">$!obj.value</option>
+                        #end
+                    </select>
+                </li>
+                <li class="c-libtn"><button>查询</button></li>
+            </ul>
+        </div>
+    </form>

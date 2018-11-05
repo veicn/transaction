@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.BusinessCardApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.BusinessCardApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="apply_member_id" property="applyMemberId" jdbcType="BIGINT" />
+    <result column="apply_status" property="applyStatus" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, apply_member_id, apply_status, remark, del_flg, create_time, creater, 
+    update_time, updater
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_card_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from business_card_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.BusinessCardApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_card_apply (member_id, apply_member_id, apply_status, 
+      remark, del_flg, create_time, 
+      creater, update_time, updater
+      )
+    values (#{memberId,jdbcType=BIGINT}, #{applyMemberId,jdbcType=BIGINT}, #{applyStatus,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creater,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.BusinessCardApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_card_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="applyMemberId != null" >
+        apply_member_id,
+      </if>
+      <if test="applyStatus != null" >
+        apply_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="applyMemberId != null" >
+        #{applyMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="applyStatus != null" >
+        #{applyStatus,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.BusinessCardApply" >
+    update business_card_apply
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="applyMemberId != null" >
+        apply_member_id = #{applyMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="applyStatus != null" >
+        apply_status = #{applyStatus,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.BusinessCardApply" >
+    update business_card_apply
+    set member_id = #{memberId,jdbcType=BIGINT},
+      apply_member_id = #{applyMemberId,jdbcType=BIGINT},
+      apply_status = #{applyStatus,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByEntity" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM business_card_apply where 1=1
+    <if test="memberId != null" >
+     and member_id = #{memberId,jdbcType=BIGINT}
+    </if>
+    <if test="applyMemberId != null" >
+      and apply_member_id = #{applyMemberId,jdbcType=BIGINT}
+    </if>
+    <if test="applyStatus != null" >
+      and apply_status = #{applyStatus,jdbcType=CHAR}
+    </if>
+    <if test="remark != null" >
+      and remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlg != null" >
+      and del_flg = #{delFlg,jdbcType=CHAR}
+    </if>
+    <if test="createTime != null" >
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="creater != null" >
+      and creater = #{creater,jdbcType=BIGINT}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updater != null" >
+      and updater = #{updater,jdbcType=BIGINT}
+    </if>
+  </select>
+
+  <resultMap id="BusinessCardApplyQueryResultMap" extends="BaseResultMap" type="com.sinochem.crude.trade.member.domain.query.BusinessCardApplyQuery">
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="professional_name" property="professionalName" jdbcType="VARCHAR" />
+    <result column="nick_name_en" property="nickNameEn" jdbcType="VARCHAR" />
+    <result column="org_name_en" property="orgNameEn" jdbcType="VARCHAR" />
+    <result column="professional_name_en" property="professionalNameEn" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Column_List_query" >
+    bca.id, bca.member_id, bca.apply_member_id, bca.apply_status, bca.remark, bca.del_flg, bca.create_time, bca.creater,
+    bca.update_time, bca.updater
+  </sql>
+
+  <select id="getBusinessCardApplyByMemberId" resultMap="BusinessCardApplyQueryResultMap" parameterType="java.lang.Long" >
+    SELECT  <include refid="Column_List_query" />,
+    bc.nick_name, bc.org_name, bc.professional_name, bc.nick_name_en, bc.org_name_en,
+    bc.professional_name_en, bc.phone, bc.email
+    FROM business_card_apply bca
+    LEFT JOIN business_cards bc ON bca.apply_member_id = bc.member_id
+    where bca.member_id = #{memberId,jdbcType=BIGINT}
+    <if test="applyStatus != null" >
+      and bca.apply_status = #{applyStatus,jdbcType=CHAR}
+    </if>
+  </select>
+
+  <select id="getBusinessCardApplyByApplyMemberId" resultMap="BusinessCardApplyQueryResultMap" parameterType="java.lang.Long" >
+    SELECT <include refid="Column_List_query" />,
+    bc.nick_name, bc.org_name, bc.professional_name, bc.nick_name_en, bc.org_name_en,
+    bc.professional_name_en, bc.phone, bc.email
+    FROM business_card_apply bca
+    LEFT JOIN business_cards bc ON bca.member_id = bc.member_id
+    where bca.apply_member_id = #{applyMemberId,jdbcType=BIGINT}
+    <if test="applyStatus != null" >
+      and bca.apply_status = #{applyStatus,jdbcType=CHAR}
+    </if>
+  </select>
+</mapper>

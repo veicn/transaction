@@ -1,0 +1,48 @@
+
+<div class="c-mr">
+    <div class="c-mod">
+        <div class="c-ind clearfix">
+            <div class="c-indl c-tjqy">
+                <div class="c-indl-t clearfix">
+                    <div class="c-indl-tl"><a href="$appServer.get('center/member/enterpriseFill.htm')"><img src="$imageServer.get('/images/com_logo.png')"></a></div>
+                    <div class="c-indl-tr">
+                        <h1>Corporate name<a href=""><i class="cw-ico ico-gsm"></i></a></h1>
+                        #if($enterprise)
+                            <ul class="enter-qy clearfix">
+                                <li>Corporate name：$!enterprise.fullName</li>
+                                <li>Company abbreviation：$!enterprise.name</li>
+                                <li>English name：</li>
+                                <li>Organization code：$!enterprise.organizationCode</li>
+                                <li>Business license：$!enterprise.licenseNo</li>
+                                <li>Tax registration number：$!enterprise.taxNo</li>
+                            </ul>
+                        #end
+                    </div>
+                </div>
+                <div class="c-indl-b clearfix">
+                    <p class="c-ind-ktqy">Opening company qualification</p>
+                    <ul class="c-indl-blo1 clearfix">
+                        <li class="c-yyxu"><a href="$appServer.get('center/potrerillosInfo.htm')"><i class="cw-ico c-ico-cpyqy"></i></a></li>
+                        <li class="c-xutit"><a href="$appServer.get('center/potrerillosInfo.htm')">Refinery</a></li>
+                    </ul>
+                    <ul class="c-indl-blo1 clearfix">
+                        <li class="c-yydd"><a href="$appServer.get('center/tradingCompanyInfo.htm')"><i class="cw-ico c-ico-cpyqy"></i></a></li>
+                        <li class="c-xutit"><a href="$appServer.get('center/tradingCompanyInfo.htm')">Trading Company</a></li>
+                    </ul>
+                    <ul class="c-indl-blo1 clearfix">
+                        <li class="c-cpyxu"><a href="$appServer.get('center/providerInfo.htm')"><i class="cw-ico c-ico-cpyqy"></i></a></li>
+                        <li class="c-xutit"><a href="$appServer.get('center/providerInfo.htm')">Supplier</a></li>
+                    </ul>
+                    <ul class="c-indl-blo1 clearfix">
+                        <li class="c-cpydd"><a href="$appServer.get('center/customerInfo.htm')"><i class="cw-ico c-ico-cpyqy"></i></a></li>
+                        <li class="c-xutit"><a href="$appServer.get('center/customerInfo.htm')">Customer</a></li>
+                    </ul>
+                    <ul class="c-indl-blo1 clearfix">
+                        <li class="c-cpydl"><a href="$appServer.get('center/shipAgencyInfo.htm')"><i class="cw-ico c-ico-cpyqy"></i></a></li>
+                        <li class="c-xutit"><a href="$appServer.get('center/shipAgencyInfo.htm')">Charterer agent</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

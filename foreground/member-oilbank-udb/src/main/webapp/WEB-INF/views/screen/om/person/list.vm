@@ -1,0 +1,123 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+     
+##    <a href="$appServer.get('om/person/add.htm')" class="layui-btn layui-btn-xs">添加</a>
+
+    <!--搜索条件-->
+    <div  class="ry-banner">
+        <form class="layui-form" action="$appServer.get('om/person/list.htm')" type="post">
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nameLike"  class="layui-input" value="$!person.nameLike"/>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户角色</label>
+                    <div class="layui-input-inline">
+                        <select name="roleCode">
+                            <option value="">请选择</option>
+                            #foreach($role in $roles)
+                                #if($role.code==$!person.roleCode)
+                                    <option value="$role.code" selected>$role.description</option>
+                                #else
+                                    <option value="$role.code">$role.description</option>
+                                #end
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email"  class="layui-input" value="$!person.email"/>
+                    </div>
+                </div>
+
+
+                <button class="layui-btn" type="submit" >查询</button>
+                <a class="layui-btn" type="button" id="add">新增</a>
+            ##                <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+
+            </div>
+        </form>
+    </div>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th lay-data="{field:'userName', width:80}">账号</th>
+            <th lay-data="{field:'name', width:80}">姓名</th>
+            <th lay-data="{field:'mobile', width:80}">电话</th>
+            <th lay-data="{field:'email', width:80, sort: true}">邮箱</th>
+            <th lay-data="{field:'wealth', width:135, sort: true}">操作</th>
+        </tr>
+        </thead>
+        #foreach($item in $page.list)
+            <tr>
+                <td>$!item.userName</td>
+                <td>$!item.name</td>
+                <td>$!item.mMobile</td>
+                <td>$!item.mEmail</td>
+                <td>
+                    <a class="layui-btn layui-btn-mini showMember" data-id="$!item.mid">查看</a>
+                    #if(${item.id})
+                        <a class="layui-btn layui-btn-mini showSubAccount" data-id="$!item.mid">查看主账号</a>
+                        <a class="layui-btn layui-btn-mini" href="$appServer.get('om/person/toupdate.htm')?id=${item.id}&memberId=${item.mid}">完善资料</a>
+                    #else
+                        <a class="layui-btn layui-btn-mini showSubAccount" data-id="$!item.mid">查看主账号</a>
+                        <a class="layui-btn layui-btn-mini" href="$appServer.get('om/person/toupdate.htm')?memberId=${item.mid}">完善资料</a>
+                    #end
+##                	<a href="$appServer.get('om/person/deleteperson.htm')?id=${item.id}" class="layui-btn layui-btn-xs">删除</a>
+                </td>
+                
+            </tr>
+        #end
+    </table>
+    $contain.get('/page/page.htm').put('pageInfo',$!{page})
+</div>
+    <script>
+        layui.use('table', function(){
+            var table = layui.table;
+        });
+
+        $(function(){
+            $(".showSubAccount").click(function () {
+                var id = $(this).data('id');
+                layer.open({
+                    type: 2,
+                    title: "主账户列表",
+                    area: ['800px', '500px'],
+                    maxmin: true,
+                    shadeClose: true,
+                    content: ['$appServer.get("om/person/main_list.htm")?memberId=' + id]
+                });
+            });
+
+            $(".showMember").click(function () {
+                var id = $(this).data('id');
+                layer.open({
+                    type: 2,
+                    title: "查看",
+                    area: ['500px', '500px'],
+                    maxmin: true,
+                    shadeClose: true,
+                    content: ['$systemServer.get("om/member/show_member.htm")?id=' + id]
+                });
+            });
+
+            $("#add").click(function () {
+                layer.open({
+                    type: 2,
+                    title: "账户信息",
+                    area: ['800px', '500px'],
+                    maxmin: true,
+                    shadeClose: true,
+                    content: ['$systemServer.get('om/member/add.htm?type=2')']
+                });
+            });
+
+        });
+    </script>

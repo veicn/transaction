@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TTransExtendMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TTransExtend">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="deal_no" jdbcType="VARCHAR" property="dealNo" />
+    <result column="purchase_contract_no" jdbcType="VARCHAR" property="purchaseContractNo" />
+    <result column="agency_agreement_no" jdbcType="VARCHAR" property="agencyAgreementNo" />
+    <result column="buyer_enterprise_id" jdbcType="BIGINT" property="buyerEnterpriseId" />
+    <result column="buyer_enterprise_name" jdbcType="VARCHAR" property="buyerEnterpriseName" />
+    <result column="seller_enterprise_id" jdbcType="BIGINT" property="sellerEnterpriseId" />
+    <result column="seller_enterprise_name" jdbcType="VARCHAR" property="sellerEnterpriseName" />
+    <result column="ALIVE_FLAG" jdbcType="VARCHAR" property="aliveFlag" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="CREATE_USER" jdbcType="BIGINT" property="createUser" />
+    <result column="UPDATE_USER" jdbcType="BIGINT" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, deal_no, purchase_contract_no, agency_agreement_no, buyer_enterprise_id, buyer_enterprise_name, 
+    seller_enterprise_id, seller_enterprise_name, ALIVE_FLAG, CREATE_DATE, UPDATE_DATE, 
+    CREATE_USER, UPDATE_USER
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_trans_extend
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `product-trade-blockchain`.t_trans_extend
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TTransExtend" >
+    insert into `product-trade-blockchain`.t_trans_extend (ID, deal_no, purchase_contract_no,
+      agency_agreement_no, buyer_enterprise_id, buyer_enterprise_name, 
+      seller_enterprise_id, seller_enterprise_name, 
+      ALIVE_FLAG, CREATE_DATE, UPDATE_DATE, 
+      CREATE_USER, UPDATE_USER)
+    values (#{id,jdbcType=BIGINT}, #{dealNo,jdbcType=VARCHAR}, #{purchaseContractNo,jdbcType=VARCHAR}, 
+      #{agencyAgreementNo,jdbcType=VARCHAR}, #{buyerEnterpriseId,jdbcType=BIGINT}, #{buyerEnterpriseName,jdbcType=VARCHAR}, 
+      #{sellerEnterpriseId,jdbcType=BIGINT}, #{sellerEnterpriseName,jdbcType=VARCHAR}, 
+      #{aliveFlag,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TTransExtend">
+    insert into `product-trade-blockchain`.t_trans_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dealNo != null">
+        deal_no,
+      </if>
+      <if test="purchaseContractNo != null">
+        purchase_contract_no,
+      </if>
+      <if test="agencyAgreementNo != null">
+        agency_agreement_no,
+      </if>
+      <if test="buyerEnterpriseId != null">
+        buyer_enterprise_id,
+      </if>
+      <if test="buyerEnterpriseName != null">
+        buyer_enterprise_name,
+      </if>
+      <if test="sellerEnterpriseId != null">
+        seller_enterprise_id,
+      </if>
+      <if test="sellerEnterpriseName != null">
+        seller_enterprise_name,
+      </if>
+      <if test="aliveFlag != null">
+        ALIVE_FLAG,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dealNo != null">
+        #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContractNo != null">
+        #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyAgreementNo != null">
+        #{agencyAgreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEnterpriseId != null">
+        #{buyerEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="buyerEnterpriseName != null">
+        #{buyerEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerEnterpriseId != null">
+        #{sellerEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerEnterpriseName != null">
+        #{sellerEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TTransExtend">
+    update `product-trade-blockchain`.t_trans_extend
+    <set>
+      <if test="dealNo != null">
+        deal_no = #{dealNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContractNo != null">
+        purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyAgreementNo != null">
+        agency_agreement_no = #{agencyAgreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerEnterpriseId != null">
+        buyer_enterprise_id = #{buyerEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="buyerEnterpriseName != null">
+        buyer_enterprise_name = #{buyerEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerEnterpriseId != null">
+        seller_enterprise_id = #{sellerEnterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerEnterpriseName != null">
+        seller_enterprise_name = #{sellerEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveFlag != null">
+        ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER = #{updateUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TTransExtend">
+    update `product-trade-blockchain`.t_trans_extend
+    set deal_no = #{dealNo,jdbcType=VARCHAR},
+      purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+      agency_agreement_no = #{agencyAgreementNo,jdbcType=VARCHAR},
+      buyer_enterprise_id = #{buyerEnterpriseId,jdbcType=BIGINT},
+      buyer_enterprise_name = #{buyerEnterpriseName,jdbcType=VARCHAR},
+      seller_enterprise_id = #{sellerEnterpriseId,jdbcType=BIGINT},
+      seller_enterprise_name = #{sellerEnterpriseName,jdbcType=VARCHAR},
+      ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=BIGINT},
+      UPDATE_USER = #{updateUser,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--扩展定义-->
+
+    <update id="updateBySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TTransExtend">
+        update `product-trade-blockchain`.t_trans_extend
+        <set>
+            <if test="purchaseContractNo != null">
+                purchase_contract_no = #{purchaseContractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyAgreementNo != null">
+                agency_agreement_no = #{agencyAgreementNo,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerEnterpriseId != null">
+                buyer_enterprise_id = #{buyerEnterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="buyerEnterpriseName != null">
+                buyer_enterprise_name = #{buyerEnterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerEnterpriseId != null">
+                seller_enterprise_id = #{sellerEnterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="sellerEnterpriseName != null">
+                seller_enterprise_name = #{sellerEnterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="aliveFlag != null">
+                ALIVE_FLAG = #{aliveFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null">
+                UPDATE_USER = #{updateUser,jdbcType=BIGINT},
+            </if>
+        </set>
+        where deal_no = #{dealNo,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectByDealNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM `product-trade-blockchain`.t_trans_extend
+        WHERE deal_no = #{dealNo, jdbcType=VARCHAR}
+        AND alive_flag = 1
+        order by id desc limit 1
+    </select>
+
+  <select id="selectByPurchaseContractNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM `product-trade-blockchain`.t_trans_extend
+    WHERE purchase_contract_no = #{purchaseContractNo, jdbcType=VARCHAR}
+    AND alive_flag = 1  LIMIT 0,1
+  </select>
+
+    <select id="selectAllList" resultMap="BaseResultMap" >
+        SELECT * FROM `product-trade-blockchain`.t_trans_extend
+    </select>
+</mapper>

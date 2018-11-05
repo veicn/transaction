@@ -1,0 +1,16 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>商品详细信息</h3>
+    <div class="c-form clearfix">
+        <ul class="c-ful pro-d-l">
+            <li class="c-fcos1"><span class="c-fn"><h1>汽油</h1></span><span class="c-int qx-conte qx-nub">$!{contractProduct.resourceId}<a href="">查看商品质检报告</a></span></li>
+            <li class="c-fcos1"><span class="c-fn">装船港：</span><span class="c-int qx-conte">$!{contractProduct.shipmentPort}</span></li>
+            <li class="c-fcos1"><span class="c-fn">港口说明：</span><span class="c-int qx-conte">可靠外轮、可航行10万吨货轮、吃水深20米</span></li>
+            <li class="c-fcos2"><span class="c-fn">数量：</span><span class="c-int qx-conte">$!{contractProduct.numStr}</span></li>
+            <li class="c-fcos2"><span class="c-fn">溢短装：</span><span class="c-int qx-conte">+/- $!{contractProduct.numFloat}%</span></li>
+            <li class="c-fcos2"><span class="c-fn">价格公式：</span><span class="c-int qx-conte">$!{contractProduct.valuationFormula}</span></li>
+            <li class="c-fcos2"><span class="c-fn">贴水：</span><span class="c-int qx-conte">$!{contractProduct.agioStr}</span></li>
+            <li class="c-fcos1"><span class="c-fn">付款日期：</span><span class="c-int qx-conte">$!{contractProduct.payItem}</span></li>
+            <li class="c-fcos1"><span class="c-fn">装期：</span><span class="c-int qx-conte">$dateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",$!{contractProduct.shipmentStart})至 $dateUtil.getDateTime("yyyy-MM-dd HH:mm:ss",$!{contractProduct.shipmentEnd})</span></li>
+        </ul>
+    </div>
+</div>

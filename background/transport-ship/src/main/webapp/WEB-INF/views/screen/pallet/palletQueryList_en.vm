@@ -1,0 +1,156 @@
+    <!-- 内容主体区域 -->
+    <div class="s-mod">
+		<div class="s-order-box">
+		<div class="clearfix s-order-tit"><h1>Chartering Demand</h1></div>
+			<p class="s-order-jbx"></p>
+			<ul class="clearfix  s-ship-cla">
+				<li class="curr"><a href="javascript:;">Chartering (With Cargo Order)</a></li>
+				<li ><a class="curr" href="palletList.htm" >Chartering (No Cargo Order)</a></li>
+			</ul>
+			<p class="s-order-jbx"></p>
+			<div class="s-order-sear">
+			<form class="s-form s-form-cont s-form-cont2" action="" onkeydown="if(event.keyCode==13)return false;">
+			<ul>
+				<li class="s-form-item">
+					<!-- <div class="s-inline s-inline4">
+					  <label class="s-form-label">油合同号:</label>
+					  <div class="s-input-inline">
+						  <input type="text" name="searchOrderPact" id="searchOrderPact" value="$!{searchOrderPact}"  placeholder="" class="s-input">
+					  </div>
+					</div> -->
+					<div class="s-inline s-inline4">
+					  <label class="s-form-label">Grade:</label>
+					  <div class="s-input-inline">
+						   <input type="text" name="searchOilName" id="searchOilName" value="$!{searchOilName}"  placeholder="" class="s-input">
+					  </div>
+					</div>
+					<div class="s-inline s-inline4">
+					  <label class="s-form-label">Status:</label>
+					  <div class="s-input-inline">
+						  <select class="s-select" id="searchStatus" name="searchStatus">
+							<option value="">Please select</option>
+							<option value="1">Pending for proceed</option>
+							<option value="2">In process</option>
+							<option value="3">Offered</option>
+							<option value="4">On Sub</option>
+							<option value="5">Closed</option>
+							<option value="6">completed</option>
+ 						  </select>
+					  </div>
+					</div>
+					<div class="s-inline s-inline0"><a><i class="s-icon s-sear-ico searchBtn"></i></a></div>
+					<div class="s-inline s-inline-btn"><a href="javascript:;" class="s-btn" id="insert">Apply Chartering</a></div>
+				</li>
+			</ul>
+			</form>
+			</div>
+		</div>
+		#foreach($data in $datas)
+		<div class="s-mod-block">
+		<div class="s-mod-btit"><a href="javascript:;" title="More Details"  class="queryBtn" attr-data="$!data.uuid">Deal No：$!{data.orderCode}Application No：$!{data.palletCode}</a>
+			<span>
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '1') Pending for Disponent Owner proceed #end
+				#if($!{data.status} == '1'&& $!{data.traderSel} == '0') Pending for proceed #end
+				#if($!{data.status} == '2') In process#end
+				#if($!{data.status} == '3') Offered#end
+				#if($!{data.status} == '4') On Sub#end
+				#if($!{data.status} == '5') Closed#end
+				#if($!{data.status} == '6') completed#end
+			</span>
+		</div>
+		<div class="s-mod-bcont">
+		<form class="s-form s-form-cont s-form-cont2" action="">
+		<ul>
+			<li class="s-form-item">
+				<div class="s-inline">
+				  <label class="s-form-label">Grade：</label>
+				  <div class="s-input-inline" title="$!{data.oilType}">
+					  <p>$!{data.oilType}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Loading Port/Area：</label>
+				  <div class="s-input-inline" title="$!{data.loadPort} $!{data.loadPortRegion}">
+					  <p>$!{data.loadPort} $!{data.loadPortRegion}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Discharge Port/Area：</label>
+				  <div class="s-input-inline" title="$!{data.unloadPort} $!{data.unloadPortRegion}">
+					  <p>$!{data.unloadPort} $!{data.unloadPortRegion}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Laycan：</label>
+				  <div class="s-input-inline s-input-inline2" title="$!{data.laycanBeg}--$!{data.laycanEnd}">
+					<p>$!{data.laycanBeg}--$!{data.laycanEnd}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Quantity（MT)：</label>
+				  <div class="s-input-inline" title="$!{data.quantity}">
+					 <p>$!{data.quantity}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Vessel Type：</label>
+				  <div class="s-input-inline" title="$!{data.shipType}">
+					  <p>$!{data.shipType}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Vessel Age：</label>
+				  <div class="s-input-inline" title="$!{data.shipAge}">
+					  <p>$!{data.shipAge}</p>
+				  </div>
+				</div>
+				<div class="s-inline">
+				  <label class="s-form-label">Company：</label>
+				  <div class="s-input-inline s-input-inline2" title="$!{data.companyName} / $!{data.contacts} / $!{data.email} / $!{data.tel}">
+					<p>$!{data.companyName}</p>
+				  </div>
+				</div>
+			</li>
+		</ul>
+		</form>
+		<div class="s-but-all clearfix">
+			<div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+			<div class="s-but-ship clearfix">
+						<a href="javascript:;" class="queryBtn s-btn" attr-data="$!data.uuid">Requirement Details</a>
+				#if($!{data.traderSel} == '1')		
+					#if($!{data.status} == '4')	
+			  			<a href="javascript:;" class="confirmsDetails s-btn" attr-data="$!data.uuid">Chartering Details</a>
+					#end
+					#if($!{data.status} == '3')
+						<a href="javascript:;" class="queryClause s-btn" attr-data="$!data.uuid">Offer Details</a>
+					#end
+					#if($!{data.status} == '1')
+						<!-- <a href="javascript:;" class="editBtn s-btn" attr-data="$!data.uuid">Modify</a> -->
+						<a href="javascript:;" class="delBtn s-btn" attr-data="$!data.uuid">cancel</a>
+			      	#end
+	      		#else  
+	      			#if($!{data.status} == '4')	
+		  				<a href="javascript:;" class="confirmsDetails s-btn" attr-data="$!data.uuid">Chartering Details</a>
+					#end
+					#if($!{data.status} == '2')
+						<a href="javascript:;" class="chooseAsk s-btn" attr-data="$!data.uuid">Continue to choose available vessel</a>
+						<a href="javascript:;" class="queryAsk s-btn" attr-data="$!data.uuid">Inquiry List</a>
+					#end
+					#if($!{data.status} == '1')
+						<a href="javascript:;" class="delBtn s-btn" attr-data="$!data.uuid">cancel</a>
+						<a href="javascript:;" class="chooseAsk s-btn" attr-data="$!data.uuid">Continue to choose available vessel</a>
+						<a href="javascript:;" class="editBtn s-btn" attr-data="$!data.uuid">Modify</a>
+		      		#end
+	      		#end
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	#end
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/pallet/palletQueryList.htm')")
+	</div>
+  <script src="../transport/js/pallet/palletQueryList.js"></script>
+<script type="text/javascript">
+ $('#searchStatus').val($!{searchStatus});
+</script>

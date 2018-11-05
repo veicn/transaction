@@ -1,0 +1,10 @@
+<div class="c-mod" id="cgxx">
+    <h3><em class="cw-ico ico-h3"></em>Other Info<span class="cxtj-nr-an"></span></h3>
+    <div class="c-form">
+        <ul class="c-ful">
+            <li class="c-fcos2"><span class="c-fn">Other Terms :</span><span class="c-int qx-conte"> $!{otherInfoVO.otherTerm}</span></li>
+            <li class="c-fcos2"><span class="c-fn">Export Quote :</span><span class="c-int qx-conte"><a>View Export Quota</a></span></li>
+
+        </ul>
+    </div>
+</div>

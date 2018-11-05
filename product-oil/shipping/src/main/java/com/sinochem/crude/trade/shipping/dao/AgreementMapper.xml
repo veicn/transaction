@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.shipping.dao.AgreementMapper">
+    <!-- <resultMap type="com.sinochem.crude.trade.shipping.dao.Agreement" id="AgreementDO" extends="com.sinochem.crude.trade.shipping.dao.mappers.immutable.${meta.immapperInterfaceClassName}.Agreement">
+
+    </resultMap>  -->
+    <resultMap type="com.sinochem.crude.trade.shipping.domain.Agreement" id="Agreement">
+        <result property="agreementId" column="AGREEMENT_ID"/>
+        <result property="uuid" column="UUID"/>
+        <result property="buyerId" column="BUYER_ID"/>
+        <result property="sellerId" column="SELLER_ID"/>
+        <result property="demandsId" column="DEMANDS_ID"/>
+        <result property="agreementCd" column="AGREEMENT_CD"/>
+        <result property="charteringAgentNm" column="CHARTERING_AGENT_NM"/>
+        <result property="orderId" column="ORDER_ID"/>
+        <result property="charterPartyDate" column="CHARTER_PARTY_DATE"/>
+        <result property="consignor" column="CONSIGNOR"/>
+        <result property="charterParty" column="CHARTER_PARTY"/>
+        <result property="vesselName" column="VESSEL_NAME"/>
+        <result property="productNm" column="PRODUCT_NM"/>
+        <result property="quantity" column="QUANTITY"/>
+        <result property="rangeOfError" column="RANGE_OF_ERROR"/>
+        <result property="portOfLoading" column="PORT_OF_LOADING"/>
+        <result property="portOfDischarge" column="PORT_OF_DISCHARGE"/>
+        <result property="laycanStrat" column="LAYCAN_STRAT"/>
+        <result property="laycanEnd" column="LAYCAN_END"/>
+        <result property="imo" column="IMO"/>
+        <result property="epMemberId" column="EP_MEMBER_ID"/>
+        <result property="uploadQ88" column="UPLOAD_Q88"/>
+        <result property="uploadQ88FileNm" column="UPLOAD_Q88_FILE_NM"/>
+        <result property="uploadCp" column="UPLOAD_CP"/>
+        <result property="uploadCpFileNm" column="UPLOAD_CP_FILE_NM"/>
+        <result property="status" column="STATUS"/>
+        <result property="ext1" column="EXT1"/>
+        <result property="version" column="VERSION"/>
+        <result property="aliveFlag" column="ALIVE_FLAG"/>
+        <result property="createDate" column="CREATE_DATE"/>
+        <result property="createUser" column="CREATE_USER"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="updateUser" column="UPDATE_USER"/>
+        <result property="productSourceCode" column="PRODUCT_SOURCE_CODE"/>
+    </resultMap>
+
+    <insert id="insertRecord" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement" useGeneratedKeys="true"
+            keyProperty="agreementId">
+		insert  into t_ship_agreement (
+						 UUID
+						,BUYER_ID
+						,SELLER_ID
+						,DEMANDS_ID
+						,AGREEMENT_CD
+						,CHARTERING_AGENT_NM
+						,ORDER_ID
+						,CHARTER_PARTY_DATE
+						,CONSIGNOR
+						,CHARTER_PARTY
+						,VESSEL_NAME
+						,PRODUCT_NM
+						,QUANTITY
+						,RANGE_OF_ERROR
+						,PORT_OF_LOADING
+						,PORT_OF_DISCHARGE
+						,LAYCAN_STRAT
+						,LAYCAN_END
+						,IMO
+						,EP_MEMBER_ID
+						,UPLOAD_Q88
+						,UPLOAD_Q88_FILE_NM
+						,UPLOAD_CP
+						,UPLOAD_CP_FILE_NM
+						,STATUS
+						,EXT1
+						,VERSION
+						,ALIVE_FLAG
+						,CREATE_DATE
+						,CREATE_USER
+						,UPDATE_DATE
+						,UPDATE_USER
+						,PRODUCT_SOURCE_CODE
+						)
+		values(		
+						 #{uuid}
+						,#{buyerId}
+						,#{sellerId}
+						,#{demandsId}
+						,#{agreementCd}
+						,#{charteringAgentNm}
+						,#{orderId}
+						,#{charterPartyDate}
+						,#{consignor}
+						,#{charterParty}
+						,#{vesselName}
+						,#{productNm}
+						,#{quantity}
+						,#{rangeOfError}
+						,#{portOfLoading}
+						,#{portOfDischarge}
+						,#{laycanStrat}
+						,#{laycanEnd}
+						,#{imo}
+						,#{epMemberId}
+						,#{uploadQ88}
+						,#{uploadQ88FileNm}
+						,#{uploadCp}
+						,#{uploadCpFileNm}
+						,#{status}
+						,#{ext1}
+						,#{version}
+						,#{aliveFlag}
+						,#{createDate}
+						,#{createUser}
+						,#{updateDate}
+						,#{updateUser}
+						,#{productSourceCode}
+				)
+	</insert>
+
+    <delete id="deleteById">
+        DELETE FROM t_ship_agreement
+              WHERE 1=1 
+                AND AGREEMENT_ID = #{agreementId}  
+    </delete>
+
+    <delete id="deleteRecords" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        DELETE FROM t_ship_agreement
+        WHERE 1=1
+        <if test="agreementId!=null and agreementId!=''">AND AGREEMENT_ID = #{agreementId}</if>
+        <if test="uuid!=null and uuid!=''">AND UUID = #{uuid}</if>
+        <if test="buyerId!=null and buyerId!=''">AND BUYER_ID = #{buyerId}</if>
+        <if test="sellerId!=null and sellerId!=''">AND SELLER_ID = #{sellerId}</if>
+        <if test="demandsId!=null and demandsId!=''">AND DEMANDS_ID = #{demandsId}</if>
+        <if test="agreementCd!=null and agreementCd!=''">AND AGREEMENT_CD = #{agreementCd}</if>
+        <if test="charteringAgentNm!=null and charteringAgentNm!=''">AND CHARTERING_AGENT_NM = #{charteringAgentNm}</if>
+        <if test="orderId!=null and orderId!=''">AND ORDER_ID = #{orderId}</if>
+        <if test="charterPartyDate!=null and charterPartyDate!=''">AND CHARTER_PARTY_DATE = #{charterPartyDate}</if>
+        <if test="consignor!=null and consignor!=''">AND CONSIGNOR = #{consignor}</if>
+        <if test="charterParty!=null and charterParty!=''">AND CHARTER_PARTY = #{charterParty}</if>
+        <if test="vesselName!=null and vesselName!=''">AND VESSEL_NAME = #{vesselName}</if>
+        <if test="productNm!=null and productNm!=''">AND PRODUCT_NM = #{productNm}</if>
+        <if test="quantity!=null and quantity!=''">AND QUANTITY = #{quantity}</if>
+        <if test="rangeOfError!=null and rangeOfError!=''">AND RANGE_OF_ERROR = #{rangeOfError}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">AND PORT_OF_LOADING = #{portOfLoading}</if>
+        <if test="portOfDischarge!=null and portOfDischarge!=''">AND PORT_OF_DISCHARGE = #{portOfDischarge}</if>
+        <if test="laycanStrat!=null and laycanStrat!=''">AND LAYCAN_STRAT = #{laycanStrat}</if>
+        <if test="laycanEnd!=null and laycanEnd!=''">AND LAYCAN_END = #{laycanEnd}</if>
+        <if test="imo!=null and imo!=''">AND IMO = #{imo}</if>
+        <if test="epMemberId!=null and epMemberId!=''">AND EP_MEMBER_ID = #{epMemberId}</if>
+        <if test="uploadQ88!=null and uploadQ88!=''">AND UPLOAD_Q88 = #{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null and uploadQ88FileNm!=''">AND UPLOAD_Q88_FILE_NM = #{uploadQ88FileNm}</if>
+        <if test="uploadCp!=null and uploadCp!=''">AND UPLOAD_CP = #{uploadCp}</if>
+        <if test="uploadCpFileNm!=null and uploadCpFileNm!=''">AND UPLOAD_CP_FILE_NM = #{uploadCpFileNm}</if>
+        <if test="status!=null and status!=''">AND STATUS = #{status}</if>
+        <if test="ext1!=null and ext1!=''">AND EXT1 = #{ext1}</if>
+        <if test="version!=null and version!=''">AND VERSION = #{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">AND ALIVE_FLAG = #{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">AND CREATE_DATE = #{createDate}</if>
+        <if test="createUser!=null and createUser!=''">AND CREATE_USER = #{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">AND UPDATE_DATE = #{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">AND UPDATE_USER = #{updateUser}</if>
+    </delete>
+
+
+    <update id="updateRecordById" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        update t_ship_agreement
+        <set>
+            AGREEMENT_ID=#{agreementId}
+            <if test="uuid!=null">,UUID = #{uuid}</if>
+            <if test="buyerId!=null">,BUYER_ID = #{buyerId}</if>
+            <if test="sellerId!=null">,SELLER_ID = #{sellerId}</if>
+            <if test="demandsId!=null">,DEMANDS_ID = #{demandsId}</if>
+            <if test="agreementCd!=null">,AGREEMENT_CD = #{agreementCd}</if>
+            <if test="charteringAgentNm!=null">,CHARTERING_AGENT_NM = #{charteringAgentNm}</if>
+            <if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+            <if test="charterPartyDate!=null">,CHARTER_PARTY_DATE = #{charterPartyDate}</if>
+            <if test="consignor!=null">,CONSIGNOR = #{consignor}</if>
+            <if test="charterParty!=null">,CHARTER_PARTY = #{charterParty}</if>
+            <if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+            <if test="productNm!=null">,PRODUCT_NM = #{productNm}</if>
+            <if test="quantity!=null">,QUANTITY = #{quantity}</if>
+            <if test="rangeOfError!=null">,RANGE_OF_ERROR = #{rangeOfError}</if>
+            <if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+            <if test="portOfDischarge!=null">,PORT_OF_DISCHARGE = #{portOfDischarge}</if>
+            <if test="laycanStrat!=null">,LAYCAN_STRAT = #{laycanStrat}</if>
+            <if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+            <if test="imo!=null">,IMO = #{imo}</if>
+            <if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+            <if test="uploadQ88!=null">,UPLOAD_Q88 = #{uploadQ88}</if>
+            <if test="uploadQ88FileNm!=null">,UPLOAD_Q88_FILE_NM = #{uploadQ88FileNm}</if>
+            <if test="uploadCp!=null">,UPLOAD_CP = #{uploadCp}</if>
+            <if test="uploadCpFileNm!=null">,UPLOAD_CP_FILE_NM = #{uploadCpFileNm}</if>
+            <if test="status!=null">,STATUS = #{status}</if>
+            <if test="ext1!=null">,EXT1 = #{ext1}</if>
+            <if test="version!=null">,VERSION = #{version}</if>
+            <if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+            <if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+            <if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+            <if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+            <if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+        </set>
+        where
+        AGREEMENT_ID=#{agreementId}
+        and ALIVE_FLAG='1'
+    </update>
+
+    <update id="updateRecordByUuid" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        update t_ship_agreement
+        <set>
+            UUID = #{uuid}
+            <if test="uuid!=null">,UUID = #{uuid}</if>
+            <if test="buyerId!=null">,BUYER_ID = #{buyerId}</if>
+            <if test="sellerId!=null">,SELLER_ID = #{sellerId}</if>
+            <if test="demandsId!=null">,DEMANDS_ID = #{demandsId}</if>
+            <if test="agreementCd!=null">,AGREEMENT_CD = #{agreementCd}</if>
+            <if test="charteringAgentNm!=null">,CHARTERING_AGENT_NM = #{charteringAgentNm}</if>
+            <if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+            <if test="charterPartyDate!=null">,CHARTER_PARTY_DATE = #{charterPartyDate}</if>
+            <if test="consignor!=null">,CONSIGNOR = #{consignor}</if>
+            <if test="charterParty!=null">,CHARTER_PARTY = #{charterParty}</if>
+            <if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+            <if test="productNm!=null">,PRODUCT_NM = #{productNm}</if>
+            <if test="quantity!=null">,QUANTITY = #{quantity}</if>
+            <if test="rangeOfError!=null">,RANGE_OF_ERROR = #{rangeOfError}</if>
+            <if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+            <if test="portOfDischarge!=null">,PORT_OF_DISCHARGE = #{portOfDischarge}</if>
+            <if test="laycanStrat!=null">,LAYCAN_STRAT = #{laycanStrat}</if>
+            <if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+            <if test="imo!=null">,IMO = #{imo}</if>
+            <if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+            <if test="uploadQ88!=null">,UPLOAD_Q88 = #{uploadQ88}</if>
+            <if test="uploadQ88FileNm!=null">,UPLOAD_Q88_FILE_NM = #{uploadQ88FileNm}</if>
+            <if test="uploadCp!=null">,UPLOAD_CP = #{uploadCp}</if>
+            <if test="uploadCpFileNm!=null">,UPLOAD_CP_FILE_NM = #{uploadCpFileNm}</if>
+            <if test="status!=null">,STATUS = #{status}</if>
+            <if test="ext1!=null">,EXT1 = #{ext1}</if>
+            <if test="version!=null">,VERSION = #{version}</if>
+            <if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+            <if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+            <if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+            <if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+            <if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+        </set>
+        where UUID = #{uuid} and ALIVE_FLAG='1'
+    </update>
+
+    <update id="updateRecords" parameterType="hashmap">
+        update t_ship_agreement
+        <set>
+            <if test="uuid!=null">UUID = #{uuid}</if>
+            <if test="buyerId!=null">,BUYER_ID = #{buyerId}</if>
+            <if test="sellerId!=null">,SELLER_ID = #{sellerId}</if>
+            <if test="demandsId!=null">,DEMANDS_ID = #{demandsId}</if>
+            <if test="agreementCd!=null">,AGREEMENT_CD = #{agreementCd}</if>
+            <if test="charteringAgentNm!=null">,CHARTERING_AGENT_NM = #{charteringAgentNm}</if>
+            <if test="orderId!=null">,ORDER_ID = #{orderId}</if>
+            <if test="charterPartyDate!=null">,CHARTER_PARTY_DATE = #{charterPartyDate}</if>
+            <if test="consignor!=null">,CONSIGNOR = #{consignor}</if>
+            <if test="charterParty!=null">,CHARTER_PARTY = #{charterParty}</if>
+            <if test="vesselName!=null">,VESSEL_NAME = #{vesselName}</if>
+            <if test="productNm!=null">,PRODUCT_NM = #{productNm}</if>
+            <if test="quantity!=null">,QUANTITY = #{quantity}</if>
+            <if test="rangeOfError!=null">,RANGE_OF_ERROR = #{rangeOfError}</if>
+            <if test="portOfLoading!=null">,PORT_OF_LOADING = #{portOfLoading}</if>
+            <if test="portOfDischarge!=null">,PORT_OF_DISCHARGE = #{portOfDischarge}</if>
+            <if test="laycanStrat!=null">,LAYCAN_STRAT = #{laycanStrat}</if>
+            <if test="laycanEnd!=null">,LAYCAN_END = #{laycanEnd}</if>
+            <if test="imo!=null">,IMO = #{imo}</if>
+            <if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+            <if test="uploadQ88!=null">,UPLOAD_Q88 = #{uploadQ88}</if>
+            <if test="uploadQ88FileNm!=null">,UPLOAD_Q88_FILE_NM = #{uploadQ88FileNm}</if>
+            <if test="uploadCp!=null">,UPLOAD_CP = #{uploadCp}</if>
+            <if test="uploadCpFileNm!=null">,UPLOAD_CP_FILE_NM = #{uploadCpFileNm}</if>
+            <if test="status!=null">,STATUS = #{status}</if>
+            <if test="ext1!=null">,EXT1 = #{ext1}</if>
+            <if test="version!=null">,VERSION = #{version}</if>
+            <if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+            <if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+            <if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+            <if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+            <if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+        </set>
+        where
+        ALIVE_FLAG='1'
+        <!-- <if test="agreementId!=null and agreementId!=''">and  AGREEMENT_ID=#{agreementId}</if> -->
+        <if test="uuid!=null and uuid!=''">and UUID=#{uuid}</if>
+        <if test="buyerId!=null and buyerId!=''">and BUYER_ID=#{buyerId}</if>
+        <if test="sellerId!=null and sellerId!=''">and SELLER_ID=#{sellerId}</if>
+        <if test="demandsId!=null and demandsId!=''">and DEMANDS_ID=#{demandsId}</if>
+        <if test="agreementCd!=null and agreementCd!=''">and AGREEMENT_CD=#{agreementCd}</if>
+        <if test="charteringAgentNm!=null and charteringAgentNm!=''">and CHARTERING_AGENT_NM=#{charteringAgentNm}</if>
+        <if test="orderId!=null and orderId!=''">and ORDER_ID=#{orderId}</if>
+        <if test="charterPartyDate!=null">and CHARTER_PARTY_DATE=#{charterPartyDate}</if>
+        <if test="consignor!=null and consignor!=''">and CONSIGNOR=#{consignor}</if>
+        <if test="charterParty!=null and charterParty!=''">and CHARTER_PARTY=#{charterParty}</if>
+        <if test="vesselName!=null and vesselName!=''">and VESSEL_NAME=#{vesselName}</if>
+        <if test="productNm!=null and productNm!=''">and PRODUCT_NM=#{productNm}</if>
+        <if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+        <if test="rangeOfError!=null and rangeOfError!=''">and RANGE_OF_ERROR=#{rangeOfError}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">and PORT_OF_LOADING=#{portOfLoading}</if>
+        <if test="portOfDischarge!=null and portOfDischarge!=''">and PORT_OF_DISCHARGE=#{portOfDischarge}</if>
+        <if test="laycanStrat!=null">and LAYCAN_STRAT=#{laycanStrat}</if>
+        <if test="laycanEnd!=null">and LAYCAN_END=#{laycanEnd}</if>
+        <if test="imo!=null and imo!=''">and IMO=#{imo}</if>
+        <if test="epMemberId!=null and epMemberId!=''">and EP_MEMBER_ID=#{epMemberId}</if>
+        <if test="uploadQ88!=null and uploadQ88!=''">and UPLOAD_Q88=#{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null and uploadQ88FileNm!=''">and UPLOAD_Q88_FILE_NM=#{uploadQ88FileNm}</if>
+        <if test="uploadCp!=null and uploadCp!=''">and UPLOAD_CP=#{uploadCp}</if>
+        <if test="uploadCpFileNm!=null and uploadCpFileNm!=''">and UPLOAD_CP_FILE_NM=#{uploadCpFileNm}</if>
+        <if test="status!=null and status!=''">and STATUS=#{status}</if>
+        <if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+        <if test="version!=null and version!=''">and VERSION=#{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+        <if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+    </update>
+
+
+    <select id="findByPrimaryKey" resultMap="Agreement">
+			select
+			* from t_ship_agreement
+			where
+		    AGREEMENT_ID=#{agreementId} 
+			and ALIVE_FLAG='1'
+	</select>
+
+    <select id="findByUuid" resultMap="Agreement">
+			select * from
+			  t_ship_agreement
+			where UUID=#{uuid}
+			and ALIVE_FLAG='1'
+	</select>
+
+    <select id="queryByEntitys" resultMap="Agreement"
+            parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        select * from t_ship_agreement
+        where
+        ALIVE_FLAG='1'
+        <if test="agreementId!=null and agreementId!=''">and AGREEMENT_ID=#{agreementId}</if>
+        <if test="uuid!=null and uuid!=''">and UUID=#{uuid}</if>
+        <if test="buyerId!=null and buyerId!=''">and BUYER_ID=#{buyerId}</if>
+        <if test="sellerId!=null and sellerId!=''">and SELLER_ID=#{sellerId}</if>
+        <if test="demandsId!=null and demandsId!=''">and DEMANDS_ID=#{demandsId}</if>
+        <if test="agreementCd!=null and agreementCd!=''">and AGREEMENT_CD=#{agreementCd}</if>
+        <if test="charteringAgentNm!=null and charteringAgentNm!=''">and CHARTERING_AGENT_NM=#{charteringAgentNm}</if>
+        <if test="orderId!=null and orderId!=''">and ORDER_ID=#{orderId}</if>
+        <if test="charterPartyDate!=null and charterPartyDate!=''">and CHARTER_PARTY_DATE=#{charterPartyDate}</if>
+        <if test="consignor!=null and consignor!=''">and CONSIGNOR=#{consignor}</if>
+        <if test="charterParty!=null and charterParty!=''">and CHARTER_PARTY=#{charterParty}</if>
+        <if test="vesselName!=null and vesselName!=''">and VESSEL_NAME=#{vesselName}</if>
+        <if test="productNm!=null and productNm!=''">and PRODUCT_NM=#{productNm}</if>
+        <if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+        <if test="rangeOfError!=null and rangeOfError!=''">and RANGE_OF_ERROR=#{rangeOfError}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">and PORT_OF_LOADING=#{portOfLoading}</if>
+        <if test="portOfDischarge!=null and portOfDischarge!=''">and PORT_OF_DISCHARGE=#{portOfDischarge}</if>
+        <if test="laycanStrat!=null and laycanStrat!=''">and LAYCAN_STRAT=#{laycanStrat}</if>
+        <if test="laycanEnd!=null and laycanEnd!=''">and LAYCAN_END=#{laycanEnd}</if>
+        <if test="imo!=null and imo!=''">and IMO=#{imo}</if>
+        <if test="epMemberId!=null and epMemberId!=''">and EP_MEMBER_ID=#{epMemberId}</if>
+        <if test="uploadQ88!=null and uploadQ88!=''">and UPLOAD_Q88=#{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null and uploadQ88FileNm!=''">and UPLOAD_Q88_FILE_NM=#{uploadQ88FileNm}</if>
+        <if test="uploadCp!=null and uploadCp!=''">and UPLOAD_CP=#{uploadCp}</if>
+        <if test="uploadCpFileNm!=null and uploadCpFileNm!=''">and UPLOAD_CP_FILE_NM=#{uploadCpFileNm}</if>
+        <if test="status!=null and status!=''">and STATUS=#{status}</if>
+        <if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+        <if test="version!=null and version!=''">and VERSION=#{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+        <if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+    </select>
+
+    <select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+        select
+        AGREEMENT_ID as "agreementId"
+        , UUID as "uuid"
+        , BUYER_ID as "buyerId"
+        , SELLER_ID as "sellerId"
+        , DEMANDS_ID as "demandsId"
+        , AGREEMENT_CD as "agreementCd"
+        , CHARTERING_AGENT_NM as "charteringAgentNm"
+        , ORDER_ID as "orderId"
+        , CHARTER_PARTY_DATE as "charterPartyDate"
+        , CONSIGNOR as "consignor"
+        , CHARTER_PARTY as "charterParty"
+        , VESSEL_NAME as "vesselName"
+        , PRODUCT_NM as "productNm"
+        , QUANTITY as "quantity"
+        , RANGE_OF_ERROR as "rangeOfError"
+        , PORT_OF_LOADING as "portOfLoading"
+        , PORT_OF_DISCHARGE as "portOfDischarge"
+        , LAYCAN_STRAT as "laycanStrat"
+        , LAYCAN_END as "laycanEnd"
+        , IMO as "imo"
+        , EP_MEMBER_ID as "epMemberId"
+        , UPLOAD_Q88 as "uploadQ88"
+        , UPLOAD_Q88_FILE_NM as "uploadQ88FileNm"
+        , UPLOAD_CP as "uploadCp"
+        , UPLOAD_CP_FILE_NM as "uploadCpFileNm"
+        , STATUS as "status"
+        , EXT1 as "ext1"
+        , VERSION as "version"
+        , ALIVE_FLAG as "aliveFlag"
+        , CREATE_DATE as "createDate"
+        , CREATE_USER as "createUser"
+        , UPDATE_DATE as "updateDate"
+        , UPDATE_USER as "updateUser"
+        from t_ship_agreement
+        where
+        ALIVE_FLAG='1'
+        <if test="agreementId!=null and agreementId!=''">and AGREEMENT_ID=#{agreementId}</if>
+        <if test="uuid!=null and uuid!=''">and UUID=#{uuid}</if>
+        <if test="buyerId!=null and buyerId!=''">and BUYER_ID=#{buyerId}</if>
+        <if test="sellerId!=null and sellerId!=''">and SELLER_ID=#{sellerId}</if>
+        <if test="demandsId!=null and demandsId!=''">and DEMANDS_ID=#{demandsId}</if>
+        <if test="agreementCd!=null and agreementCd!=''">and AGREEMENT_CD=#{agreementCd}</if>
+        <if test="charteringAgentNm!=null and charteringAgentNm!=''">and CHARTERING_AGENT_NM=#{charteringAgentNm}</if>
+        <if test="orderId!=null and orderId!=''">and ORDER_ID=#{orderId}</if>
+        <if test="charterPartyDate!=null and charterPartyDate!=''">and CHARTER_PARTY_DATE=#{charterPartyDate}</if>
+        <if test="consignor!=null and consignor!=''">and CONSIGNOR=#{consignor}</if>
+        <if test="charterParty!=null and charterParty!=''">and CHARTER_PARTY=#{charterParty}</if>
+        <if test="vesselName!=null and vesselName!=''">and VESSEL_NAME=#{vesselName}</if>
+        <if test="productNm!=null and productNm!=''">and PRODUCT_NM=#{productNm}</if>
+        <if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+        <if test="rangeOfError!=null and rangeOfError!=''">and RANGE_OF_ERROR=#{rangeOfError}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">and PORT_OF_LOADING=#{portOfLoading}</if>
+        <if test="portOfDischarge!=null and portOfDischarge!=''">and PORT_OF_DISCHARGE=#{portOfDischarge}</if>
+        <if test="laycanStrat!=null and laycanStrat!=''">and LAYCAN_STRAT=#{laycanStrat}</if>
+        <if test="laycanEnd!=null and laycanEnd!=''">and LAYCAN_END=#{laycanEnd}</if>
+        <if test="imo!=null and imo!=''">and IMO=#{imo}</if>
+        <if test="epMemberId!=null and epMemberId!=''">and EP_MEMBER_ID=#{epMemberId}</if>
+        <if test="uploadQ88!=null and uploadQ88!=''">and UPLOAD_Q88=#{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null and uploadQ88FileNm!=''">and UPLOAD_Q88_FILE_NM=#{uploadQ88FileNm}</if>
+        <if test="uploadCp!=null and uploadCp!=''">and UPLOAD_CP=#{uploadCp}</if>
+        <if test="uploadCpFileNm!=null and uploadCpFileNm!=''">and UPLOAD_CP_FILE_NM=#{uploadCpFileNm}</if>
+        <if test="status!=null and status!=''">and STATUS=#{status}</if>
+        <if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+        <if test="version!=null and version!=''">and VERSION=#{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+        <if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+    </select>
+
+    <select id="countRecords" resultType="int" parameterType="hashmap">
+        select
+        count(*) from t_ship_agreement
+        where
+        ALIVE_FLAG='1'
+        <if test="agreementId!=null and agreementId!=''">and AGREEMENT_ID=#{agreementId}</if>
+        <if test="uuid!=null and uuid!=''">and UUID=#{uuid}</if>
+        <if test="buyerId!=null and buyerId!=''">and BUYER_ID=#{buyerId}</if>
+        <if test="sellerId!=null and sellerId!=''">and SELLER_ID=#{sellerId}</if>
+        <if test="demandsId!=null and demandsId!=''">and DEMANDS_ID=#{demandsId}</if>
+        <if test="agreementCd!=null and agreementCd!=''">and AGREEMENT_CD=#{agreementCd}</if>
+        <if test="charteringAgentNm!=null and charteringAgentNm!=''">and CHARTERING_AGENT_NM=#{charteringAgentNm}</if>
+        <if test="orderId!=null and orderId!=''">and ORDER_ID=#{orderId}</if>
+        <if test="charterPartyDate!=null and charterPartyDate!=''">and CHARTER_PARTY_DATE=#{charterPartyDate}</if>
+        <if test="consignor!=null and consignor!=''">and CONSIGNOR=#{consignor}</if>
+        <if test="charterParty!=null and charterParty!=''">and CHARTER_PARTY=#{charterParty}</if>
+        <if test="vesselName!=null and vesselName!=''">and VESSEL_NAME=#{vesselName}</if>
+        <if test="productNm!=null and productNm!=''">and PRODUCT_NM=#{productNm}</if>
+        <if test="quantity!=null and quantity!=''">and QUANTITY=#{quantity}</if>
+        <if test="rangeOfError!=null and rangeOfError!=''">and RANGE_OF_ERROR=#{rangeOfError}</if>
+        <if test="portOfLoading!=null and portOfLoading!=''">and PORT_OF_LOADING=#{portOfLoading}</if>
+        <if test="portOfDischarge!=null and portOfDischarge!=''">and PORT_OF_DISCHARGE=#{portOfDischarge}</if>
+        <if test="laycanStrat!=null and laycanStrat!=''">and LAYCAN_STRAT=#{laycanStrat}</if>
+        <if test="laycanEnd!=null and laycanEnd!=''">and LAYCAN_END=#{laycanEnd}</if>
+        <if test="imo!=null and imo!=''">and IMO=#{imo}</if>
+        <if test="epMemberId!=null and epMemberId!=''">and EP_MEMBER_ID=#{epMemberId}</if>
+        <if test="uploadQ88!=null and uploadQ88!=''">and UPLOAD_Q88=#{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null and uploadQ88FileNm!=''">and UPLOAD_Q88_FILE_NM=#{uploadQ88FileNm}</if>
+        <if test="uploadCp!=null and uploadCp!=''">and UPLOAD_CP=#{uploadCp}</if>
+        <if test="uploadCpFileNm!=null and uploadCpFileNm!=''">and UPLOAD_CP_FILE_NM=#{uploadCpFileNm}</if>
+        <if test="status!=null and status!=''">and STATUS=#{status}</if>
+        <if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+        <if test="version!=null and version!=''">and VERSION=#{version}</if>
+        <if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+        <if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+        <if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+        <if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+        <if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+
+    </select>
+
+
+    <!-- //**************************以下方法为开发者补充*********************************/ -->
+
+    <select id="queryAgreemenrByEntitys" resultMap="Agreement"
+            parameterType="com.sinochem.crude.trade.shipping.model.query.AgreementQuery">
+        select * from t_ship_agreement
+        where
+        ALIVE_FLAG='1'
+        <if test="charterPartyNumber != null and charterPartyNumber!=''">and AGREEMENT_CD like
+            CONCAT('%',#{charterPartyNumber},'%')
+        </if>
+        <if test="queryStart != null and queryStart!=''">and DATE_FORMAT(CHARTER_PARTY_DATE, '%d-%m-%Y') &gt;=
+            #{queryStart}
+        </if>
+        <if test="queryEnd != null and queryEnd!=''">and DATE_FORMAT(CHARTER_PARTY_DATE, '%d-%m-%Y') &lt;= #{queryEnd}
+        </if>
+        <if test="productNm != null and productNm!=''">and PRODUCT_NM like CONCAT('%',#{productNm},'%')</if>
+        <if test="status != null and status!=''">and STATUS = #{status}</if>
+        <if test="roleId != null and roleId!=''">and EP_MEMBER_ID = #{roleId}</if>
+        ORDER BY CREATE_DATE DESC
+    </select>
+
+    <select id="queryDemandsByEntitys" resultMap="Agreement"
+            parameterType="com.sinochem.crude.trade.shipping.model.query.AgreementQuery">
+        select tsa.* from t_ship_agreement tsa inner join t_ship_demands tsd on
+        tsa.DEMANDS_ID = tsd.DEMANDS_ID and tsd.ALIVE_FLAG='1'
+        where
+        tsa.ALIVE_FLAG='1'
+        <if test="charterPartyNumber != null and charterPartyNumber!=''">and tsa.AGREEMENT_CD like
+            CONCAT('%',#{charterPartyNumber},'%')
+        </if>
+        <if test="queryStart != null and queryStart!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &gt;=
+            #{queryStart}
+        </if>
+        <if test="queryEnd != null and queryEnd!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &lt;=
+            #{queryEnd}
+        </if>
+        <if test="productNm != null and productNm!=''">and tsa.PRODUCT_NM like CONCAT('%',#{productNm},'%')</if>
+        <if test="status != null and status!=''">and tsa.STATUS = #{status}</if>
+        <if test="roleId != null and roleId!=''">and tsd.SELLER_ID = #{roleId}</if>
+        ORDER BY tsa.CREATE_DATE DESC
+    </select>
+    <select id="queryDemandsQuanlianByEntitys" resultMap="Agreement"
+            parameterType="com.sinochem.crude.trade.shipping.model.query.AgreementQuery">
+        select tsa.* from t_ship_agreement tsa inner join t_ship_demands tsd on
+        tsa.DEMANDS_ID = tsd.DEMANDS_ID and tsd.ALIVE_FLAG='1'
+        where
+        tsa.ALIVE_FLAG='1'
+        <if test="charterPartyNumber != null and charterPartyNumber!=''">and tsa.AGREEMENT_CD like
+            CONCAT('%',#{charterPartyNumber},'%')
+        </if>
+        <if test="queryStart != null and queryStart!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &gt;=
+            #{queryStart}
+        </if>
+        <if test="queryEnd != null and queryEnd!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &lt;=
+            #{queryEnd}
+        </if>
+        <if test="productNm != null and productNm!=''">and tsa.PRODUCT_NM like CONCAT('%',#{productNm},'%')</if>
+        <if test="status != null and status!=''">and tsa.STATUS = #{status}</if>
+        <if test="roleId != null and roleId!=''">and (tsd.SELLER_ID = #{roleId} OR (tsd.SELLER_ID = #{singaporeId} AND
+            tsd.PRODUCT_SOURCE_CODE in ('1','2')))
+        </if>
+        ORDER BY tsa.CREATE_DATE DESC
+    </select>
+
+    <select id="queryDemandsQuanlianByEntityswx" resultMap="Agreement"
+            parameterType="com.sinochem.crude.trade.shipping.model.query.AgreementQuery">
+        select tsa.* from t_ship_agreement tsa inner join t_ship_demands tsd on
+        tsa.DEMANDS_ID = tsd.DEMANDS_ID and tsd.ALIVE_FLAG='1'
+        where
+        tsa.ALIVE_FLAG='1'
+        <if test="charterPartyNumber != null and charterPartyNumber!=''">and tsa.AGREEMENT_CD like
+            CONCAT('%',#{charterPartyNumber},'%')
+        </if>
+        <if test="queryStart != null and queryStart!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &gt;=
+            #{queryStart}
+        </if>
+        <if test="queryEnd != null and queryEnd!=''">and DATE_FORMAT(tsa.CHARTER_PARTY_DATE, '%d-%m-%Y') &lt;=
+            #{queryEnd}
+        </if>
+        <if test="productNm != null and productNm!=''">and tsa.PRODUCT_NM like CONCAT('%',#{productNm},'%')</if>
+        <if test="status != null and status!=''">and tsa.STATUS = #{status}</if>
+        <if test="roleId != null and roleId!=''">and (tsd.SELLER_ID = #{roleId} OR (tsd.SELLER_ID = #{singaporeId} AND
+            tsd.PRODUCT_SOURCE_CODE in ('1','2')))
+        </if>
+        <if test="productLoadingAndDischarge!=null and productLoadingAndDischarge!=''">
+            and
+            (tsa.PRODUCT_NM like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or tsa.PORT_OF_LOADING like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or tsa.PORT_OF_DISCHARGE like CONCAT('%',#{productLoadingAndDischarge},'%')
+            )
+        </if>
+        ORDER BY tsa.CREATE_DATE DESC
+    </select>
+    <!-- queryAgreementList -->
+    <select id="queryAgreementList" parameterType="com.sinochem.crude.trade.shipping.model.query.WechatAgreementQuery"
+            resultType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        select
+        AGREEMENT_ID as "agreementId"
+        , UUID as "uuid"
+        , DEMANDS_ID as "demandsId"
+        , ORDER_ID as "orderId"
+        , CHARTER_PARTY_DATE as "charterPartyDate"
+        , CONSIGNOR as "consignor"
+        , CHARTER_PARTY as "charterParty"
+        , VESSEL_NAME as "vesselName"
+        , PRODUCT_NM as "productNm"
+        , QUANTITY as "quantity"
+        , PORT_OF_LOADING as "portOfLoading"
+        , PORT_OF_DISCHARGE as "portOfDischarge"
+        , LAYCAN_STRAT as "laycanStrat"
+        , LAYCAN_END as "laycanEnd"
+        , IMO as "imo"
+        , EP_MEMBER_ID as "epMemberId"
+        , UPLOAD_Q88 as "uploadQ88"
+        , UPLOAD_Q88_FILE_NM as "uploadQ88FileNm"
+        , UPLOAD_CP as "uploadCp"
+        , UPLOAD_CP_FILE_NM as "uploadCpFileNm"
+        , STATUS as "status"
+        , EXT1 as "ext1"
+        , RANGE_OF_ERROR as "rangeOfError"
+        , VERSION as "version"
+        , ALIVE_FLAG as "aliveFlag"
+        , CREATE_DATE as "createDate"
+        , CREATE_USER as "createUser"
+        , UPDATE_DATE as "updateDate"
+        , UPDATE_USER as "updateUser"
+        , CHARTERING_AGENT_NM as "charteringAgentNm"
+        from t_ship_agreement
+        where
+        ALIVE_FLAG='1'
+        <if test="productLoadingAndDischarge!=null and productLoadingAndDischarge!=''">
+            and
+            (PRODUCT_NM like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or PORT_OF_LOADING like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or PORT_OF_DISCHARGE like CONCAT('%',#{productLoadingAndDischarge},'%')
+            )
+        </if>
+        <if test="epMemberId!=null and epMemberId!=''">and EP_MEMBER_ID = #{epMemberId}</if>
+        ORDER BY CREATE_DATE DESC
+    </select>
+    <!--贸易商-租船协议-->
+    <select id="queryAgreementListtrader"
+            parameterType="com.sinochem.crude.trade.shipping.model.query.WechatAgreementQuery"
+            resultType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        select
+        b.AGREEMENT_ID as "agreementId"
+        , b.UUID as "uuid"
+        , b.DEMANDS_ID as "demandsId"
+        , b.ORDER_ID as "orderId"
+        , b.CHARTER_PARTY_DATE as "charterPartyDate"
+        , b.CONSIGNOR as "consignor"
+        , b.CHARTER_PARTY as "charterParty"
+        , b.VESSEL_NAME as "vesselName"
+        , b.PRODUCT_NM as "productNm"
+        , b.QUANTITY as "quantity"
+        , b.PORT_OF_LOADING as "portOfLoading"
+        , b.PORT_OF_DISCHARGE as "portOfDischarge"
+        , b.LAYCAN_STRAT as "laycanStrat"
+        , b.LAYCAN_END as "laycanEnd"
+        , b.IMO as "imo"
+        , b.EP_MEMBER_ID as "epMemberId"
+        , b.UPLOAD_Q88 as "uploadQ88"
+        , b.UPLOAD_Q88_FILE_NM as "uploadQ88FileNm"
+        , b.UPLOAD_CP as "uploadCp"
+        , b.UPLOAD_CP_FILE_NM as "uploadCpFileNm"
+        , b.STATUS as "status"
+        , b.EXT1 as "ext1"
+        , b.RANGE_OF_ERROR as "rangeOfError"
+        , b.VERSION as "version"
+        , b.ALIVE_FLAG as "aliveFlag"
+        , b.CREATE_DATE as "createDate"
+        , b.CREATE_USER as "createUser"
+        , b.UPDATE_DATE as "updateDate"
+        , b.UPDATE_USER as "updateUser"
+        , b.CHARTERING_AGENT_NM as "charteringAgentNm"
+        from t_ship_demands a,t_ship_agreement b where a.DEMANDS_ID=b.DEMANDS_ID
+        AND b.ALIVE_FLAG='1'
+        <if test="productLoadingAndDischarge!=null and productLoadingAndDischarge!=''">
+            and
+            (b.PRODUCT_NM like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or b.PORT_OF_LOADING like CONCAT('%',#{productLoadingAndDischarge},'%')
+            or b.PORT_OF_DISCHARGE like CONCAT('%',#{productLoadingAndDischarge},'%')
+            )
+        </if>
+        <if test="epMemberId!=null and epMemberId!=''">and a.EP_MEMBER_ID = #{epMemberId}</if>
+        ORDER BY b.CREATE_DATE DESC
+    </select>
+
+    <!--更新协议的状态 -武刚鹏 -2018年3月21日16:01:07-->
+    <update id="updateStatusByAgreementId" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        update t_ship_agreement
+        <set>
+            <if test="status!=null">STATUS = #{status}</if>
+            <if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+            ,UPDATE_DATE = SYSDATE()
+        </set>
+        where
+        <if test="agreementId !=null">AGREEMENT_ID = #{agreementId} and</if>
+        ALIVE_FLAG='1'
+    </update>
+
+    <!--根据订单ID更新文件-武刚鹏-2018年5月5日10:24:17-->
+    <update id="updateFileByOrderId" parameterType="com.sinochem.crude.trade.shipping.domain.Agreement">
+        UPDATE t_ship_agreement
+        <set>
+        <if test="uploadQ88!=null"> UPLOAD_Q88=#{uploadQ88}</if>
+        <if test="uploadQ88FileNm!=null">,UPLOAD_Q88_FILE_NM=#{uploadQ88FileNm}</if>
+        </set>
+        WHERE  ALIVE_FLAG='1' and  ORDER_ID = #{orderId}
+    </update>
+</mapper>

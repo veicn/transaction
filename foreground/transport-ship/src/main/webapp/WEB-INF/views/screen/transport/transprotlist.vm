@@ -1,0 +1,56 @@
+<style type="text/css">
+    label.error {
+        color: red;
+        padding: 3px 10px;
+    }
+    span.required {
+        color: red;
+    }
+</style>
+
+
+    <table>
+            <tr>
+                <th><span class="required">*</span>运输方式:</th>
+                <td>
+                    <select id="" name="${}">
+                        <option value="">选择运输方式</option>
+                        #if()
+                            #foreach($tsItem in $transportList)
+                                <option value="" #if() selected="selected" #end>$!{}</option>
+                            #end
+                        #end
+                    </select>
+                </td>
+            </tr>
+        <tr>
+            <th><span class="required">*</span>装期日期 : </th>
+            <td>
+                <input type="datetime-local" name="" id="">---------<input type="datetime-local" name=""/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="required">*</span>装货港 : </th>
+            <td>
+                <input type="text" name="" id="">
+            </td>
+        </tr>
+        <tr>
+            <th><span class="required">*</span>卸货日期 : </th>
+            <td>
+                <input type="datetime-local" name="" id="" />---------<input type="datetime-local" name="" id=""/>
+            </td>
+        </tr>
+        <tr>
+            <th><span class="required">*</span>卸货时间 : </th>
+            <td>
+                <input type="text" name="" id="" />
+            </td>
+        </tr>
+        <tr>
+            <th><span class="required">*</span>卸货港 : </th>
+            <td>
+                <input type="text" name="" id="" />&nbsp;&nbsp;&nbsp;&nbsp;小时
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.member.dao.VersionBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.member.domain.VersionBean" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="version_code" property="versionCode" jdbcType="BIGINT" />
+    <result column="version_name" property="versionName" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="version_language" property="versionLanguage" jdbcType="VARCHAR" />
+    <result column="is_forced_update" property="isForcedUpdate" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version_code, version_name, content, url, create_time, create_user, update_time, 
+    update_user, file_name,version_language,is_forced_update
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_version
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_app_version
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sinochem.crude.trade.member.domain.VersionBean" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_app_version (version_code, version_name, content, 
+      url, create_time, create_user, 
+      update_time, update_user, file_name,version_language,is_forced_update
+      )
+    values (#{versionCode,jdbcType=BIGINT}, #{versionName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR},#{isForcedUpdate,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.member.domain.VersionBean" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_app_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="versionCode != null" >
+        version_code,
+      </if>
+      <if test="versionName != null" >
+        version_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="versionLanguage != null" >
+        version_language,
+      </if>
+      <if test="isForcedUpdate != null" >
+        is_Forced_Update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="versionCode != null" >
+        #{versionCode,jdbcType=BIGINT},
+      </if>
+      <if test="versionName != null" >
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="versionLanguage != null" >
+        #{versionLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="isForcedUpdate != null" >
+        #{isForcedUpdate,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.member.domain.VersionBean" >
+    update t_app_version
+    <set >
+      <if test="versionCode != null" >
+        version_code = #{versionCode,jdbcType=BIGINT},
+      </if>
+      <if test="versionName != null" >
+        version_name = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="versionLanguage != null" >
+        version_language = #{versionLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="isForcedUpdate != null" >
+        is_forced_update = #{isForcedUpdate,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.member.domain.VersionBean" >
+    update t_app_version
+    set version_code = #{versionCode,jdbcType=BIGINT},
+      version_name = #{versionName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=BIGINT},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      version_language = #{versionLanguage,jdbcType=VARCHAR},
+      is_forced_update = #{isForcedUpdate,jdbcType=BIGINT},
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_app_version
+    ORDER BY  create_time DESC
+  </select>
+
+  <select id="selectByVersionLanguage" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from t_app_version
+    WHERE version_language = #{versionLanguage,jdbcType=VARCHAR}
+    ORDER BY  create_time DESC
+  </select>
+</mapper>

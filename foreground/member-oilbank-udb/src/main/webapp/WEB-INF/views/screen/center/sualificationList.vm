@@ -1,0 +1,375 @@
+<script>
+        #if($sualification.audited("99") ==1) window.enterpriseAudited()  #end
+</script>
+
+<div class="wel-box enterprise-box">
+    <h3>企业资质</h3>
+    <ul class="enterprise-ul clearfix checdleng">
+        <h3>生产贸易商</h3>
+        <ul class="enterprise-ul clearfix">
+            #foreach($cred in $credentials)
+                #set($audited = $sualification.audited($cred.code))
+                <li #if( $audited ==1) title="审核中" #end >
+                    <a href="javascript:;"  #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end #if( $audited ==2 && $flag) onclick="deleteCredential($cred.code,'$cred.name')"#end>
+                        #if($cred.code)
+                            #if($cred.code==14)
+
+                                    #if( $audited ==1)
+                                            <img   src="$imageServer.get('/product/images/refinery.png')" />
+                                        <input type="hidden">
+                                    #elseif( $audited ==0)
+                                            <img  src="$imageServer.get('/product/images/productOilfalse/Group37.png')" />
+                                    #elseif( $audited ==2)
+                                            <img  src="$imageServer.get('/product/images/Group44Copy.png')" />
+                                        <input type="hidden">
+                                    #end
+
+                            #end
+                            #if($cred.code==15)
+
+                                    #if( $audited ==1)
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"  />
+                                        <input type="hidden">
+                                    #elseif( $audited ==0)
+                                            <img src="$imageServer.get('/product/images/productOilfalse/Group36.png')"  />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img src="$imageServer.get('/product/images/Group10.png')"  />
+                                    #end
+
+
+                            #end
+                            #if($cred.code==16)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img     src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==0)
+                                            <img  src="$imageServer.get('/product/images/productOilfalse/Group35.png')" />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img  src="$imageServer.get('/product/images/Group11.png')" />
+                                    #end
+
+
+                            #end
+
+
+                        #end
+
+                    </a>
+                    <p>
+                        <a href="javascript:;" #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end>
+
+
+
+                                     #if($cred.code==14)
+                            $cred.name
+                        #end
+
+                                     #if($cred.code==15)
+                            $cred.name
+                        #end
+
+                                     #if($cred.code==16)
+                            $cred.name
+                        #end
+
+                        </a>
+                    </p>
+                </li>
+            #end
+        </ul>
+        <h3>船舶供油商</h3>
+        <ul class="enterprise-ul clearfix">
+            #foreach($cred in $credentials)
+                #set($audited = $sualification.audited($cred.code))
+                <li #if( $audited ==1) title="审核中" #end >
+                    <a href="javascript:;"  #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end #if( $audited ==2 && $flag) onclick="deleteCredential($cred.code,'$cred.name')"#end>
+                        #if($cred.code)
+                            #if($cred.code==17)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==0)
+                                            <img  src="$imageServer.get('/product/images/productOilfalse/Group40.png')" />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img src="$imageServer.get('/product/images/Group21.png')" />
+                                    #end
+
+
+                            #end
+                            #if($cred.code==18)
+
+                                #if( $audited ==1)<input type="hidden">
+                                        <img   src="$imageServer.get('/product/images/refinery.png')" />
+                                #elseif( $audited ==0)
+                                        <img  src="$imageServer.get('/product/images/productOilfalse/Group41.png')" />
+                                #elseif( $audited ==2)<input type="hidden">
+                                        <img  src="$imageServer.get('/product/images/Group9.png')" />
+                                #end
+
+
+                            #end
+
+                        #end
+
+                    </a>
+                    <p>
+                        <a href="javascript:;" #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end>
+
+                                    #if($cred.code==17)
+                            $cred.name
+                        #end
+                                        #if($cred.code==18)
+                            $cred.name
+                        #end
+
+                        </a>
+                    </p>
+                </li>
+            #end
+        </ul>
+        <h3>船东</h3>
+        <ul class="enterprise-ul clearfix">
+            #foreach($cred in $credentials)
+                #set($audited = $sualification.audited($cred.code))
+                <li #if( $audited ==1) title="审核中" #end >
+                    <a href="javascript:;"  #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end #if( $audited ==2 && $flag) onclick="deleteCredential($cred.code,'$cred.name')"#end>
+                        #if($cred.code)
+                            #if($cred.code==19)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/productOilfalse/Group28.png')" />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/Group22.png')" />
+                                    #end
+
+
+                            #end
+                            #if($cred.code==20)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img   src="$imageServer.get('/product/images/productOilfalse/Group29.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img  src="$imageServer.get('/product/images/Group23.png')"/>
+                                    #end
+
+
+                            #end
+
+
+                        #end
+
+                    </a>
+                    <p>
+                        <a href="javascript:;" #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end>
+
+                                        #if($cred.code==19)
+                            $cred.name
+                        #end
+                                      #if($cred.code==20)
+                            $cred.name
+                        #end
+
+                        </a>
+                    </p>
+                </li>
+            #end
+        </ul>
+        <h3>其他</h3>
+        <ul class="enterprise-ul clearfix">
+            #foreach($cred in $credentials)
+                #set($audited = $sualification.audited($cred.code))
+                <li #if( $audited ==1) title="审核中" #end >
+                    <a href="javascript:;"  #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end #if( $audited ==2 && $flag) onclick="deleteCredential($cred.code,'$cred.name')"#end>
+                            #if($cred.code==21)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/productOilfalse/Group18.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/Group29.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==22)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img      src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img     src="$imageServer.get('/product/images/productOilfalse/Group19.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/Group24.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==23)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img     src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img     src="$imageServer.get('/product/images/productOilfalse/Group11.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/Group25.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==24)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/productOilfalse/Group12.png')" />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/Group26.png')" />
+                                    #end
+
+
+                            #end
+                            #if($cred.code==25)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img   src="$imageServer.get('/product/images/productOilfalse/Group22.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                        <img  src="$imageServer.get('/product/images/Group27.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==26)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img   src="$imageServer.get('/product/images/productOilfalse/Group13.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/Group28.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==27)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/productOilfalse/Group20.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/Group31.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==28)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/refinery.png')"/>
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/productOilfalse/Group21.png')"/>
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img    src="$imageServer.get('/product/images/Group32.png')"/>
+                                    #end
+
+
+                            #end
+                            #if($cred.code==29)
+
+                                    #if( $audited ==1)<input type="hidden">
+                                            <img     src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==0)
+                                            <img    src="$imageServer.get('/product/images/refinery.png')" />
+                                    #elseif( $audited ==2)<input type="hidden">
+                                            <img   src="$imageServer.get('/product/images/refinery-sel.png')" />
+                                    #end
+
+
+                            #end
+
+
+                    </a>
+                    <p>
+                        <a href="javascript:;" #if( $audited ==0) onclick="requestSualification($cred.code,'$cred.name',this)"#end>
+
+                                        #if($cred.code==21)
+                            $cred.name
+                        #end
+                                        #if($cred.code==22)
+                            $cred.name
+                        #end
+                                        #if($cred.code==23)
+                            $cred.name
+                        #end
+                                        #if($cred.code==24)
+                            $cred.name
+                        #end
+                                        #if($cred.code==25)
+                            $cred.name
+                        #end
+                                        #if($cred.code==26)
+                            $cred.name
+                        #end
+                                        #if($cred.code==27)
+                            $cred.name
+                        #end
+                                        #if($cred.code==28)
+                            $cred.name
+                        #end
+                                        #if($cred.code==29)
+                            $cred.name
+                        #end
+
+                        </a>
+                    </p>
+                </li>
+            #end
+        </ul>
+</div>
+
+<script>
+
+    layui.use("layer");
+    function requestSualification(code,name,e){
+
+        var aaa = $(".checdleng").find("input").length;
+        var lengts = $(e).parent().parent().find("input").length;
+        if (lengts>0||aaa==0) {
+            layer.confirm("确认申请"+ name + "资质?",function(){
+                $.post("$appServer.get("center/request_sualification.json")",{code:code},function (data) {
+                    if(data.status == 9999){
+                        layer.alert(data.message);
+                    }else{
+                        layer.alert("申请资质已提交,请等待审核",function(){
+
+                            window.location.reload();
+                        })
+                    }
+                });
+            });
+        } else {
+            layer.alert('只能申请同类资质');
+        }
+
+    }
+    function deleteCredential(code,name) {
+        layer.confirm("确认删除"+ name + "资质?",function(){
+            $.post("$appServer.get("center/credentials/delete.json")",{code:code},function (data) {
+                if(data.status == 9999){
+                    layer.alert(data.message);
+                }else{
+                    layer.alert("资质已删除",function(){
+
+                        window.location.reload();
+                    })
+                }
+            });
+        });
+    }
+</script>

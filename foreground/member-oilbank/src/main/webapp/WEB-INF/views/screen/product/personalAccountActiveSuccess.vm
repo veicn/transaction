@@ -1,0 +1,41 @@
+$contain.get('common/title.htm').put('title', '个人账户激活成功')
+#css($appServer.get('/product/css/work/emailSendSuccess.css'))
+<div class="w1180 indReg-con clearfix">
+    <div class="rps-box">
+        <div class="rps-l">
+            <img src="images/suc_bg.png" alt="">
+        </div>
+        <div class="rps-r">
+            <h2>Congratulations! </h2>
+            <h2>Your account number is: <span>123</span></h2>
+            <p class="arrd">
+                Please kindly complete all the required information before you start.<br/>
+                Return to former page in
+                <span class="prompt-num">3</span> s.
+            </p>
+            <div class="com-btn-b clearfix">
+                <a href="javascript:;" class=" fl br btn-c com-btn com-btn-sign">Complete information</a>
+                <a href="javascript:;" class="fl com-btn-not">Not Now</a>
+            </div>
+            <!-- <div class="com-btn-not">
+                <a href="javascript:;" class="fr">Not Now</a>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+#js($appServer.get('/product/js/common/jquery-1.9.1.min.js'))
+<script>
+    var num = $('.prompt-num').text();
+    var int=self.setInterval("clock(num)",1000)
+    function clock(){
+        num--;
+        if(num<=0){
+            alert('跳转')
+            // window.location.href='http://www.baidu.com';
+            clearInterval(int);
+        }
+        $('.prompt-num').text(num);
+    }
+
+</script>

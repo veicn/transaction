@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OILBANK</title>
+    #css($appServer.get('/wap/oilwap/css/news_det.css'))
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+</head>
+<body>
+    <div class="nav_w"><img class="go-back" src="$appServer.get('/wap/oilwap/images/back.png')"><img class="second-code" src="$appServer.get('/wap/oilwap/images/icon-code.png')"></div>
+    <div class="space"></div>
+    <div class="det_con">
+        <h3 class="tim"></h3>
+        <h3 class="tit"></h3>
+        <p class="con"></p>
+        <p></p>
+    </div>
+    <div class="outer">
+        <div class="pop-hide my-pop">
+          <div class="pop-win">
+            <img src="$appServer.get('/wap/oilwap/images/pop-code.png')">
+            <p>Scan QR code to follow
+                <span>OILBANK</span></p>
+            <p>wechat account</p>
+         </div>
+       </div>
+    </div>
+#js($appServer.get('/wap/oilwap/js/jquery-1.9.1.min.js'))
+#js($appServer.get('/wap/oilwap/js/news_det.js'))
+</body>
+</html>

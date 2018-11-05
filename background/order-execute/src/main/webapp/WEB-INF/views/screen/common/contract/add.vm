@@ -1,0 +1,232 @@
+<form method="post">
+<div class="c-mod">
+  <h3><em class="cw-ico ico-h3"></em>添加合同</h3>
+  
+  <div class="charter-cont charter-cont2">
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">订单编号：</span>
+				#springBind("contract.orderNo")
+				<input type="text" name="${status.expression}" readonly="readonly" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">合同编号：</span>
+				#springBind("contract.contractNo")
+				<input type="text" name="${status.expression}" required class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">销售方：</span>
+				#springBind("contract.sellerCustomer")
+				<input type="text" name="${status.expression}" readonly="readonly" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">购买方：</span>
+				#springBind("contract.buyerCustomer")
+				<input type="text" name="${status.expression}" readonly="readonly" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">油种：</span>
+				#springBind("contract.goodsName")
+				<input type="text" name="${status.expression}" readonly="readonly" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">数量（桶）：</span>
+				#springBind("contract.quantity")
+				<input type="text" name="${status.expression}" required class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">装期：</span>
+				#springBind("contract.layTime")
+				<input type="text" name="${status.expression}" required class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">船名：</span>
+				#springBind("contract.shipName")
+				<input type="text" name="${status.expression}"  class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">价格公式：</span>
+				#springBind("contract.priceFormula")
+				<input type="text" name="${status.expression}" required class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">计价期：</span>
+				#springBind("contract.pricingDesc")
+				<input type="text" name="${status.expression}" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">精确度：</span>
+				#springBind("contract.priceRounding")
+				<input type="text" name="${status.expression}" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">付款日期：</span>
+				#springBind("contract.paymentTerm")
+				<input type="text" name="${status.expression}" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">装/卸货允许时间：</span>
+				#springBind("contract.demurrage")
+				<input type="text" name="${status.expression}" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">商检费分担方式：</span>
+				#springBind("contract.inspection")
+				<input type="text" name="${status.expression}" class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">贸易条款：</span>
+				#springBind("contract.tradeTerm")
+				<input type="text" name="${status.expression}" required class="c-int" value="$!{status.value}">
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3">
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">GTC：</span>
+				#springBind("contract.gtc")
+				<input type="text" id="gtc" name="${status.expression}" class="c-int" value="$!{status.value}" >
+				<span class="c-fn c-err">$!{status.errorMessage}</span>
+			</li>
+		</ul>
+	</div>
+	<div class="form-row charter-row charter-row3" >	
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">英文合同：</span>
+				<input type="hidden" name="contractFileList[0].contractFileName" value="英文合同">
+				<input type="hidden" id="file0_url" name="contractFileList[0].filePath">
+				<input type="text" id="file0_name" name="contractFileList[0].originalName" class="c-int" readonly="readonly">
+			</li>
+		</ul>
+		<div class="controls charter-controls s-file s-file2 c-wunai">
+			<a href="javascript:void(0);" id="file0" class="file fileUpload">上传</a>
+		</div>
+		<div class="controls charter-controls s-file s-file2 c-wunai" style="display:none">
+			<a href="" id="file0_download" class="file">下载</a>
+		</div>
+		
+	</div>
+	<div class="form-row charter-row charter-row3">	
+		<ul class="c-ful">
+			<li class="c-fcos1 c-errli">
+				<span class="c-fn">代理协议：</span>
+				<input type="hidden" name="contractFileList[1].contractFileName" value="代理协议">
+				<input type="hidden" id="file1_url" name="contractFileList[1].filePath">
+				<input type="text" id="file1_name" name="contractFileList[1].originalName" class="c-int" readonly="readonly">
+				
+			</li>
+		</ul>
+		<div class="controls charter-controls s-file s-file2 c-wunai">
+			<a href="javascript:void(0);" id="file1" class="file fileUpload">上传</a>
+		</div>
+		<div class="controls charter-controls s-file s-file2 c-wunai" style="display:none">
+			<a href="" id="file1_download" class="file">下载</a>
+		</div>
+	</div>
+  </div>
+</div>
+<div class="c-subdiv">
+	<button type="submit" class="c-btnsub">提交</button>
+	<button type="button" class="c-btncas" onclick="window.location.href='$orderExecuteServer/${contract.redirect}'">取消</button>
+</div>
+</form>
+
+<script>
+	layui.use("ossUpload", function(){
+		var $ = layui.jquery,upload = layui.ossUpload;
+		
+		upload.render({
+		    elem: ".fileUpload",
+		    done: function(res, em){
+			    if(res.status === 0){
+			    	$("#"+em.id+"_name").val(res.datas.originalName);
+		      		$("#"+em.id+"_url").val(res.datas.path);
+		      		
+		      		var downloadPath = "$orderExecuteServer.get('/common/doc/download.htm')?path="+res.datas.path+"&fileName="+res.datas.originalName;
+		      		var obj = $("#"+em.id+"_download");//下载按钮
+		      		obj.attr("href",downloadPath);
+		      		obj.parent().show();
+			    }else{
+			    	layer.tips(res.message, em, {tips: 1});
+			    }
+		    }
+		})
+	})
+	
+	
+</script>

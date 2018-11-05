@@ -1,0 +1,88 @@
+	<div class="c-mod">
+			<div>
+			  <ul class="c-state">
+				<li><a href="orderList.htm">有订单租船列表<span>($!task)</span></a></li>
+				<li class="c-cur"><a href="javascript:;">无订单租船列表<span>($!untask)</span></a></li>
+			  </ul>
+			</div>
+			 <form action="unOrderList.htm" method="get">
+				 <div class="c-form">
+					<ul class="c-ful">
+						<li class="c-fcos3"><span class="c-fn c-fn">装港/区域：</span><input id="searchLoadPort" name="loadPort" value='$!query.loadPort' type="text" class="c-int c-int2" /></li>
+						<li class="c-fcos3"><span class="c-fn c-fn">卸港/区域：</span><input id="searchUnLoadPort" name="unloadPort" value='$!query.unloadPort' type="text" class="c-int c-int2" /></li>
+						<li class="c-fcos3"><span class="c-fn c-fn">状态：</span>
+							<select class="sele sele1" id="searchStatus" name="status">
+							<option value="">请选择</option>
+							<option value="1">待处理</option>
+							<option value="2">处理中</option>
+							<option value="2">已生成租船协议</option>
+							<option value="5">已关闭</option>
+						</select>
+						</li>
+						<li class="c-libtn"><button type="submit" >查询</button></li>
+					</ul>
+				  </div>
+			  </form>
+		  <div class="c-mod">
+		  <style>
+			.omit{width:90%; overflow: hidden; white-space:nowrap; text-overflow:ellipsis;}
+			.sh-zt-pq {
+			    width: 140px;
+			    line-height: 48px;
+			}
+		  </style>
+		  <h3><i class="cw-ico ico-h3"></i>租船申请列表</h3>
+		    #foreach($data in $datas)
+			<div class="shipp-blo clearfix">
+				<ul class="sh-list sh-list-pal2 clearfix">
+					<li class="sh-imo">申请单编号：<span>$!data.palletCode</span></li>
+					<li title="$!{data.loadPort} $!{data.loadPortRegion}"><div class="omit">装港/装港区域：$!{data.loadPort} $!{data.loadPortRegion}</div></li>
+					<li title="$!{data.unloadPort}  $!{data.unloadPortRegion}"><div class="omit">卸港/卸港区域：$!{data.unloadPort}  $!{data.unloadPortRegion}</div></li>
+					<li title="$!data.quantity" class="title3"><div class="omit">数量：<span class="num3">$!data.quantity</span></div></li>
+					<li title="$!{data.laycanBeg}--$!{data.laycanEnd}"><div class="omit">装期：$!{data.laycanBeg}--$!{data.laycanEnd}</div></li>
+					<li title="$!data.shipType"><div class="omit">船型：$!data.shipType</div></li>
+					<li title="$!data.shipAge"><div class="omit">船龄：$!data.shipAge</div></li>
+					<li title="$!data.companyName / $!data.contacts / $!data.email /$!data.tel"><div class="omit">公司：$!data.companyName</div></li>
+					<li title="$!{data.traderName}"><div	 class="text-overflow">代理人：$!{data.traderName}</div></li>
+				</ul>
+				#if($!{data.status} == '1') <p class="sh-zt sh-zt-pal" style="line-height:8">状态：待处理</p>   #end
+		 		#if($!{data.status} == '2') <p class="sh-zt sh-zt-pal" style="line-height:8">状态：处理中</p>	#end
+	 	 		#if($!{data.status} == '3') <p class="sh-zt sh-zt-pal" style="line-height:8">状态：已确认</p>	#end
+		 		#if($!{data.status} == '4') <p class="sh-zt sh-zt-pal" style="line-height:8">状态：已生成租船协议</p>	#end
+				#if($!{data.status} == '5') <p class="sh-zt sh-zt-pal" style="line-height:8">状态：已关闭</p>	#end
+				<div class="sh-but sh-but-pal" style="width:">
+					<a href="javascript:;" class="queryBtn" attr-data="$!data.uuid">查看详情</a>
+					<span class="ship-pop">
+						  	<i class="cw-ico ico-pop"></i>
+								<span class="order-blor order-blor1 clearfix gengduo">
+					#if($!{data.status} == '4')
+		  			<a href="javascript:;" class="queryAsk" attr-data="$!data.uuid">查看询盘信息</a>
+		  			<a href="javascript:;" class="queryAgreement" attr-data="$!data.uuid">查看租船协议</a>
+					#end
+					#if($!{data.status} == '3')
+					<a href="javascript:;" class="queryAsk" attr-data="$!data.uuid">查看询盘信息</a>
+					#end
+					#if($!{data.status} == '2')
+					<a href="javascript:;" class="queryAsk" attr-data="$!data.uuid">查看询盘信息</a>
+					<a href="javascript:;" class="chooseAsk" attr-data="$!data.uuid">选择船盘</a>
+					<a href="javascript:;" class="jointShip" attr-data="$!data.uuid">拼船</a>
+					<a href="javascript:;" class="delBtn" attr-data="$!data.uuid">撤销</a>
+					#end
+					#if($!{data.status} == '1')
+					<a href="javascript:;" class="chooseAsk" attr-data="$!data.uuid">选择船盘</a>
+					<a href="javascript:;" class="jointShip" attr-data="$!data.uuid">拼船</a>
+					<a href="javascript:;" class="delBtn" attr-data="$!data.uuid">撤销</a>
+		      		#end
+		      			<p class="ico-sj"></p>
+					</span>
+				</div>
+		</div>
+		#end
+		</div>
+		$contain.get('/contain/tablePageSlider.htm').put('slider_query',$query).put('slider_target',"$shipServer.get('/agreement/unOrderList.htm')")
+		
+	</div>
+<script src="../transport/js/agreement/unOrderList.js"></script>
+<script type="text/javascript">
+ $('#searchStatus').val($!{query.status});
+</script>

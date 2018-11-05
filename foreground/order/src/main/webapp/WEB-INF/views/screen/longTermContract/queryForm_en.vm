@@ -1,0 +1,16 @@
+<form  id="orderHeadForm" action="$!appServer.get('/longTermContract/longContract.htm')" style="margin-top: 80px;" method="post">
+    <div class="c-ms">
+            <div class="c-mr">
+                <div class="c-mod">
+                    <div class="c-form">
+                        <ul class="c-ful">
+                            <li class="c-fcos3"><span class="c-fn">Deal No.：</span><input type="text" name="contractId" /></li>
+                            <li class="c-fcos3"><span class="c-fn">Seller’s name：</span><input type="text" name="contacter" /></li>
+                            <li class="c-fcos3"><span class="c-fn">PIC：</span><input type="text" name="cupplier" /></li>
+                            <li class="c-fcos4 c-libtn"><button onclick="function(){$('#orderHeadForm').submit()}">Search</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+       default-lazy-init="false">
+
+    <!-- !!! 小提示: 可以按照业务功能分为不同的配置文件, 并按照如下命名xxx-dubbo-config.xml !!! -->
+
+    <!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+    <dubbo:application name="order_execute_provider"/>
+
+    <!-- 使用zookeeper注册中心暴露服务地址, 请修改为自己的zookeeper地址 -->
+ 	<dubbo:registry id="OrderClient" address="${zookeeper.url}"/>
+ 	<dubbo:protocol host="${zookeeper.host}" name="dubbo" port="${zookeeper.port}" payload="10485760"/>
+ 	
+    <!-- 服务端:要暴露的服务接口 -->
+    <dubbo:service delay="-1"  version="${aliyun.edas.version}" group="${aliyun.edas.group}" timeout="${aliyun.edas.timeout}" interface="com.sinochem.crude.trade.order.remote.OrderInfoService" ref="orderInfoService"/>
+    <dubbo:service delay="-1"  version="${aliyun.edas.version}" group="${aliyun.edas.group}" timeout="${aliyun.edas.timeout}" interface="com.sinochem.crude.trade.orderexecute.remote.IFindShipService" ref="iFindShipService"/>
+    <dubbo:service delay="-1"  version="${aliyun.edas.version}" group="${aliyun.edas.group}" timeout="${aliyun.edas.timeout}" interface="com.sinochem.crude.trade.orderexecute.remote.IShipTransportService" ref="iShipTransportService"/>
+    
+    <!-- 客户端:需要调用的服务接口
+    <dubbo:reference id="testService" interface="com.runyi.test.services.TestService" />
+    -->
+    <dubbo:reference check="false" registry="OrderClient" version="${aliyun.edas.version}" timeout="${aliyun.edas.timeout}" group="${aliyun.edas.group}" id="docUploadRemoteService"  interface="com.sinochem.it.b2b.doc.api.remote.DocUploadRemoteService" />
+    <dubbo:reference check="false" registry="OrderClient" version="${aliyun.edas.version}"  group="${aliyun.edas.group}" id="enterpriseService"  interface="com.sinochem.crude.trade.member.remote.service.EnterpriseService" />
+    <dubbo:reference check="false" registry="OrderClient" version="${aliyun.edas.version}" timeout="${aliyun.edas.timeout}"  group="${aliyun.edas.group}" id="orderStatusService"  interface="com.sinochem.crude.trade.order.remote.OrderStatusService" />
+   
+    <dubbo:reference check="false" registry="OrderClient" version="${aliyun.edas.version}" timeout="${aliyun.edas.timeout}"  group="${aliyun.edas.group}" id="iShipGoodsService"  interface="com.sinochem.crude.trade.transport.remote.IShipGoodsService" />
+    <dubbo:reference check="false" registry="OrderClient" version="${aliyun.edas.version}" timeout="${aliyun.edas.timeout}"  group="${aliyun.edas.group}" id="iShipService"  interface="com.sinochem.crude.trade.transport.remote.IShipService" />
+    
+</beans>

@@ -1,0 +1,95 @@
+#set($layout="")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<script src="$!imageServer.get('/layui/layui.js')" charset="utf-8"></script>
+<link href="$imageServer.get('/layui/css/layui.css')" rel="stylesheet" type="text/css">
+<script src="$!imageServer.get('/js/jquery-1.8.3.min.js')" type="application/javascript"></script>
+<form class="layui-form" id="saveForm" style="padding-right: 25px;padding-top: 25px">
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">关联系统编码</label>
+        <div class="layui-input-inline" >
+            <select name="sysCode" id="type" lay-verify="required" value="$!memberAccount.sysCode" style="width: 300px">
+                <option value=""></option>
+                <option value="GROMS">GROMS</option>
+            </select>
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">平台用户名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="userName" id="userName" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" value="$!memberAccount.userName">
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">平台用户邮箱</label>
+        <div class="layui-input-inline">
+            <input type="text" name="email" id="email" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" value="$!memberAccount.email">
+        </div>
+    </div><br/><br/>
+
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width: 200px">关联系统账号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="account" lay-verify="required" autocomplete="off" class="layui-input" style="padding-right: 30px;width: 300px" value="$!memberAccount.account">
+        </div>
+    </div><br/><br/>
+
+    <div style="text-align:center;">
+        <input type= "submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交" >
+    </div>
+
+</form>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+
+        //默认同步
+        $.ajaxSetup({
+            async : false
+        });
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var roleCode = $("#roleCode").val();
+            var userName = $("#userName").val();
+            var email = $("#email").val();
+            if((userName == '' || userName == null) && (email == null || email == '')){
+                layer.alert("用户名与邮箱必须输入一个！")
+                return false;
+            }
+            $.ajax({
+                url:'$appServer.get("om/exosystemAcc/save.json")',
+                method:'POST',
+                data:$("#saveForm").serializeArray(),
+                success:function(data){
+                    layer.alert(data.message,function(){
+                        if(data && data.status == 0){
+                            parent.layer.closeAll();
+                            parent.location.reload();
+                        }else{
+                            layer.alert(data.message)
+                        }
+                    });
+                },error:function(r,d){
+                    layer.alert('保存失败')
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

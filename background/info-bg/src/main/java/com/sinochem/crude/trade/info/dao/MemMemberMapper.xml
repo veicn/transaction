@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.info.dao.MemMemberMapper">
+	<resultMap type="com.sinochem.crude.trade.info.domain.MemMember" id="MemMemberDO" 
+	extends="com.sinochem.crude.trade.info.dao.immt.MemMemberImmtMapper.MemMember">
+		
+	</resultMap> 
+	
+	<select id="queryRecords" resultType="java.util.HashMap" parameterType="hashmap">
+		select
+						  ID as "id" 
+						 ,   MEMBER_ID as "memberId" 
+						 ,   EP_MEMBER_ID as "epMemberId" 
+						 ,   MEMBER_NAME as "memberName" 
+						 ,   MEMBER_NAME_SHORT as "memberNameShort" 
+						 ,   MEMBER_NAME_EN as "memberNameEn" 
+						 ,   LOGIN_NAME as "loginName" 
+						 ,   NICK_NAME as "nickName" 
+						 ,   IMGURL as "imgurl" 
+						 ,   PERSONAL_NOTE as "personalNote" 
+						 ,   CREATE_USER as "createUser" 
+						 ,   CREATE_DATE as "createDate" 
+						 ,   UPDATE_USER as "updateUser" 
+						 ,   UPDATE_DATE as "updateDate" 
+						 ,   ALIVE_FLAG as "aliveFlag" 
+						 ,   MARKET_ID as "marketId" 
+						 ,   LANG_VER as "langVer" 
+						 ,   EXT1 as "ext1" 
+						 ,   EXT2 as "ext2" 
+						 ,   EXT3 as "ext3" 
+						 ,   EXT4 as "ext4" 
+						 ,   EXT5 as "ext5" 
+						 ,   EXT6 as "ext6" 
+						 ,   EXT7 as "ext7" 
+						 ,   EXT8 as "ext8" 
+						 ,   EXT9 as "ext9" 
+						 ,   EXT10 as "ext10" 
+						from t_mem_member
+		where
+			ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+															<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+															<if test="memberName!=null and memberName!=''">and  MEMBER_NAME=#{memberName}</if>
+															<if test="memberNameShort!=null and memberNameShort!=''">and  MEMBER_NAME_SHORT=#{memberNameShort}</if>
+															<if test="memberNameEn!=null and memberNameEn!=''">and  MEMBER_NAME_EN=#{memberNameEn}</if>
+															<if test="loginName!=null and loginName!=''">and  LOGIN_NAME=#{loginName}</if>
+															<if test="nickName!=null and nickName!=''">and  NICK_NAME=#{nickName}</if>
+															<if test="imgurl!=null and imgurl!=''">and  IMGURL=#{imgurl}</if>
+															<if test="personalNote!=null and personalNote!=''">and  PERSONAL_NOTE=#{personalNote}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+								</select>
+	
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from t_mem_member 
+		where
+		 ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+															<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+															<if test="memberName!=null and memberName!=''">and  MEMBER_NAME=#{memberName}</if>
+															<if test="memberNameShort!=null and memberNameShort!=''">and  MEMBER_NAME_SHORT=#{memberNameShort}</if>
+															<if test="memberNameEn!=null and memberNameEn!=''">and  MEMBER_NAME_EN=#{memberNameEn}</if>
+															<if test="loginName!=null and loginName!=''">and  LOGIN_NAME=#{loginName}</if>
+															<if test="nickName!=null and nickName!=''">and  NICK_NAME=#{nickName}</if>
+															<if test="imgurl!=null and imgurl!=''">and  IMGURL=#{imgurl}</if>
+															<if test="personalNote!=null and personalNote!=''">and  PERSONAL_NOTE=#{personalNote}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+									 
+	</select>
+	
+	<update id="deleteRecords" parameterType="hashmap">
+		update t_mem_member
+			<set>
+			ALIVE_FLAG='0'
+	 		,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+			</set> 
+		where
+				ALIVE_FLAG='1'
+														<if test="id!=null and id!=''">and  ID=#{id}</if>
+																			<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+																			<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+																			<if test="memberName!=null and memberName!=''">and  MEMBER_NAME=#{memberName}</if>
+																			<if test="memberNameShort!=null and memberNameShort!=''">and  MEMBER_NAME_SHORT=#{memberNameShort}</if>
+																			<if test="memberNameEn!=null and memberNameEn!=''">and  MEMBER_NAME_EN=#{memberNameEn}</if>
+																			<if test="loginName!=null and loginName!=''">and  LOGIN_NAME=#{loginName}</if>
+																			<if test="nickName!=null and nickName!=''">and  NICK_NAME=#{nickName}</if>
+																			<if test="imgurl!=null and imgurl!=''">and  IMGURL=#{imgurl}</if>
+																			<if test="personalNote!=null and personalNote!=''">and  PERSONAL_NOTE=#{personalNote}</if>
+																			<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+																			<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+																			<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+																			<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+																			<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+																			<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+																			<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+																			<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+																			<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+																			<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+																			<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+																			<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+																			<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+																			<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+																			<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+																			<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+																			<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+										</update>
+	
+	<update id="updateRecords" parameterType="hashmap">
+		update t_mem_member
+		<set>
+         ID=#{id}
+		<if test="memberId!=null">,MEMBER_ID = #{memberId}</if>
+		<if test="epMemberId!=null">,EP_MEMBER_ID = #{epMemberId}</if>
+		<if test="memberName!=null">,MEMBER_NAME = #{memberName}</if>
+		<if test="memberNameShort!=null">,MEMBER_NAME_SHORT = #{memberNameShort}</if>
+		<if test="memberNameEn!=null">,MEMBER_NAME_EN = #{memberNameEn}</if>
+		<if test="loginName!=null">,LOGIN_NAME = #{loginName}</if>
+		<if test="nickName!=null">,NICK_NAME = #{nickName}</if>
+		<if test="imgurl!=null">,IMGURL = #{imgurl}</if>
+		<if test="personalNote!=null">,PERSONAL_NOTE = #{personalNote}</if>
+		<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+		<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+		<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+		<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+		<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+		<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+		<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+		<if test="ext1!=null">,EXT1 = #{ext1}</if>
+		<if test="ext2!=null">,EXT2 = #{ext2}</if>
+		<if test="ext3!=null">,EXT3 = #{ext3}</if>
+		<if test="ext4!=null">,EXT4 = #{ext4}</if>
+		<if test="ext5!=null">,EXT5 = #{ext5}</if>
+		<if test="ext6!=null">,EXT6 = #{ext6}</if>
+		<if test="ext7!=null">,EXT7 = #{ext7}</if>
+		<if test="ext8!=null">,EXT8 = #{ext8}</if>
+		<if test="ext9!=null">,EXT9 = #{ext9}</if>
+		<if test="ext10!=null">,EXT10 = #{ext10}</if>
+		</set>
+		where
+			ALIVE_FLAG='1'
+											<if test="id!=null and id!=''">and  ID=#{id}</if>
+															<if test="memberId!=null and memberId!=''">and  MEMBER_ID=#{memberId}</if>
+															<if test="epMemberId!=null and epMemberId!=''">and  EP_MEMBER_ID=#{epMemberId}</if>
+															<if test="memberName!=null and memberName!=''">and  MEMBER_NAME=#{memberName}</if>
+															<if test="memberNameShort!=null and memberNameShort!=''">and  MEMBER_NAME_SHORT=#{memberNameShort}</if>
+															<if test="memberNameEn!=null and memberNameEn!=''">and  MEMBER_NAME_EN=#{memberNameEn}</if>
+															<if test="loginName!=null and loginName!=''">and  LOGIN_NAME=#{loginName}</if>
+															<if test="nickName!=null and nickName!=''">and  NICK_NAME=#{nickName}</if>
+															<if test="imgurl!=null and imgurl!=''">and  IMGURL=#{imgurl}</if>
+															<if test="personalNote!=null and personalNote!=''">and  PERSONAL_NOTE=#{personalNote}</if>
+															<if test="createUser!=null and createUser!=''">and  CREATE_USER=#{createUser}</if>
+															<if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+															<if test="updateUser!=null and updateUser!=''">and  UPDATE_USER=#{updateUser}</if>
+															<if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+															<if test="aliveFlag!=null and aliveFlag!=''">and  ALIVE_FLAG=#{aliveFlag}</if>
+															<if test="marketId!=null and marketId!=''">and  MARKET_ID=#{marketId}</if>
+															<if test="langVer!=null and langVer!=''">and  LANG_VER=#{langVer}</if>
+															<if test="ext1!=null and ext1!=''">and  EXT1=#{ext1}</if>
+															<if test="ext2!=null and ext2!=''">and  EXT2=#{ext2}</if>
+															<if test="ext3!=null and ext3!=''">and  EXT3=#{ext3}</if>
+															<if test="ext4!=null and ext4!=''">and  EXT4=#{ext4}</if>
+															<if test="ext5!=null and ext5!=''">and  EXT5=#{ext5}</if>
+															<if test="ext6!=null and ext6!=''">and  EXT6=#{ext6}</if>
+															<if test="ext7!=null and ext7!=''">and  EXT7=#{ext7}</if>
+															<if test="ext8!=null and ext8!=''">and  EXT8=#{ext8}</if>
+															<if test="ext9!=null and ext9!=''">and  EXT9=#{ext9}</if>
+															<if test="ext10!=null and ext10!=''">and  EXT10=#{ext10}</if>
+								</update>
+								
+		<select id="findMemberByMemberId" resultMap="MemMemberDO" parameterType="String">
+			select
+				*
+			from t_mem_member
+			where
+		    MEMBER_ID=#{memberId} 
+			and ALIVE_FLAG='1'
+		</select>
+	
+</mapper>

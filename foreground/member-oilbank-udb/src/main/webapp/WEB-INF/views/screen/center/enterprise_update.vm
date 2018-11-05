@@ -1,0 +1,1022 @@
+
+<div class="s-reg-wrap">
+    <div class="s-inner">
+        <div class="s-reg-bbox">
+            <div class="s-pass-regsett">
+                <h6 class="s-regi-title">公司信息</h6>
+                <form id="saveForm" class="s-form s-form-improve"  method="post" action="$appServer.get('/center/enterprise_update.htm')" onsubmit="return checkBox()">
+
+                    <ul>
+                        <li class="s-form-item">
+                            <label class="s-form-label"><em>*</em>注册地址：</label>
+                            <div class="s-input-block" id="epType">
+                                <input type="radio" name="epType" value="0" title="境内"  #if((!$enterprise.epType) || $enterprise.epType==1)checked#end>
+
+                                <div class="s-unradio s-form-radio s-form-radioed">
+                                    <i class="fs-circle-select"></i><i class="fs-circle"></i><div>境内</div>
+                                </div>
+                                <input type="radio" name="epType" value="1" title="境外" #if($enterprise.epType==0)checked#end>
+
+                                <div class="s-unradio s-form-radio">
+                                    <i class="fs-circle-select"></i><i class="fs-circle"></i><div>境外</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--~~~~~~~~境内~~~~~~~~-->
+                    <div style="display:;">
+                        <ul>
+                            #if(${enterprise.id})
+                                <input type="hidden" name="id" value="$!{enterprise.id}"/>
+                            #end
+                            <input id="socialCreditCert" type="hidden" name="socialCreditCert" value="$!{enterprise.socialCreditCert}"/>
+
+                            #springBind("enterprise.fullName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em  class="in">*</em>公司名称：</label>
+                                <div class="s-input-block">
+
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入企业名称" maxlength="50">
+
+                                </div>
+                            </li>
+                            #if($status.isError())<li class="c-b-ts"><span class="rd">$!{status.errorMessage}</span></li>#end
+                            #springBind("enterprise.name")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em class="in">*</em>公司简称：</label>
+                                <div class="s-input-block">
+
+                                    <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司简称" maxlength="50">
+
+                                </div>
+                            </li>
+                            #springBind("enterprise.englishName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em class="forgin" style="display: none">*</em>公司英文名称：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文名称" class="s-input" maxlength="100">
+                                </div>
+                            </li>
+                            #springBind("enterprise.abbEnglishName")
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em  class="forgin" style="display: none">*</em>公司英文简称：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入公司英文简称" class="s-input" maxlength="100">
+                                </div>
+                            </li>
+##                            <li class="s-form-item">
+##                                <label class="s-form-label"><em>*</em>企业/机构类型：</label>
+##                                <div class="s-input-block s-input-reg">
+##                                    #foreach($cred in $allCredentials)
+##                                        #foreach($c in $credentials)
+##                                            #if($!c == $!cred.code )
+##                                                <input type="checkbox" name="types" value="$!cred.code" title="$!cred.name" disabled checked  />
+##                                                <div class="s-uncheckbox s-form-checkbox" lay-skin="">
+##                                                    <span>$!cred.name</span><i class="fs-checkbox-check"></i>
+##                                                </div>
+##                                            #end
+##                                        #end
+##                                    #end
+##                                </div>
+##                            </li>
+
+                            <div class="in">
+                                <li class="s-form-item">
+                                    #springBind("enterprise.useSocialCreditCert")
+                                    <label class="s-form-label"><em>*</em>是否三证合一：</label>
+                                    <div id="certdiv" class="s-input-block">
+                                        <input type="radio" name="$!{status.expression}" value="1" title="是"
+                                               #if($enterprise.useSocialCreditCert!=false)checked#end>
+                                        <div class="s-unradio s-form-radio s-form-radioed">
+
+                                            <i class="fs-circle-select"></i><i class="fs-circle"></i>
+                                            <div>是</div>
+                                        </div>
+                                        <input type="radio" name="$!{status.expression}" value="0" title="否"
+                                               #if($enterprise.useSocialCreditCert==false)checked#end>
+                                        <div class="s-unradio s-form-radio">
+
+                                            <i class="fs-circle-select"></i><i class="fs-circle"></i>
+                                            <div>否</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div class="certdiv" id="cert1" >
+                                    #springBind("enterprise.socialCreditCode")
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em>*</em>统一社会信用代码：</label>
+                                        <div class="s-input-block">
+                                            <input type="text" id="$!{status.expression}" name="$!{status.expression}" value="$!{status.value}"
+                                                   placeholder="请输入统一社会信用代码" class="s-input">
+                                            <label id="contact.name-error" class="s-erro" >$!{status.errorMessage}</label>
+
+                                        </div>
+                                    </li>
+                                </div>
+                                <div class="certdiv" id="cert0" style="display: none">
+                                    #springBind("enterprise.organizationCode")
+
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em>*</em>组织机构代码：</label>
+                                        <div class="s-input-block">
+                                            <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入组织机构代码" class="s-input">
+                                            <label class="s-erro" >$!{status.errorMessage}</label>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em>*</em>组织机构代码证：</label>
+                                        <div class="s-input-block">
+                                            <div class="s-upload-list" id="orgCodeCertImgBox">
+                                                <a id="orgCodeCertBtn" href="javascript:;">
+                                                    #if($!{enterprise.orgCodeCert} && $!{enterprise.orgCodeCert} != "")
+                                                        <img src="$!{uploadServer}/img/$!{enterprise.orgCodeCert}.img_200_112.img"/>
+                                                    #else
+                                                        <img src="$imageServer.get('images/up_zm.jpg')">
+                                                    #end
+                                                </a>
+                                                <input id="orgCodeCert" type="hidden" name="orgCodeCert" value="$!{enterprise.orgCodeCert}"/>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    #springBind("enterprise.taxNo")
+
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em>*</em>税务登记证号：</label>
+                                        <div class="s-input-block">
+                                            <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入税务登记号" maxlength="20">
+                                            <label class="s-erro" >$!{status.errorMessage}</label>
+                                        </div>
+                                    </li>
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em >*</em>税务登记证：</label>
+                                        <div class="s-input-block">
+                                            <div class="s-upload-list" id="taxRegCertImgBox">
+                                                <a id="taxRegCertBtn" href="javascript:;">
+                                                    #if($!{enterprise.taxRegCert} && $!{enterprise.taxRegCert} != "")
+                                                        <img src="$!{uploadServer}/img/$!{enterprise.taxRegCert}.img_200_112.img"/>
+                                                    #else
+                                                        <img src="$imageServer.get('images/up_zm.jpg')">
+                                                    #end
+                                                </a>
+                                                <input id="taxRegCert" type="hidden" name="taxRegCert" value="$!{enterprise.taxRegCert}"/>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    #springBind("enterprise.licenseNo")
+
+                                    <li class="s-form-item">
+                                        <label class="s-form-label"><em>*</em>营业执照注册号：</label>
+                                        <div class="s-input-block">
+                                            <input type="text" class="s-input" name="$!{status.expression}" value="$!{status.value}" placeholder="请输入营业执照注册号" maxlength="20">
+                                            <label class="s-erro" >$!{status.errorMessage}</label>
+                                        </div>
+                                    </li>
+
+                                </div>
+
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>营业执照：</label>
+                                    <div class="s-input-block">
+                                        <div class="s-upload-list" id="businessLicenseCertImgBox">
+                                            <a id="businessLicenseCertBtn" href="javascript:;">
+                                                #if($!{enterprise.businessLicenseCert} && $!{enterprise.businessLicenseCert} != "")
+                                                    <img src="$!{uploadServer}/img/$!{enterprise.businessLicenseCert}.img_200_112.img"/>
+
+                                                #else
+                                                    <img src="$imageServer.get('images/up_zm.jpg')">
+                                                #end
+                                            </a>
+                                            <input id="businessLicenseCert" type="hidden" name="businessLicenseCert" value="$!{enterprise.businessLicenseCert}"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="forgin" style="display: none;">
+
+                                #springBind("enterprise.countryCode")
+                                #springBind("enterprise.country")
+
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>国家：</label>
+                                    <div class="s-input-block">
+                                        <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入国家" class="s-input">
+                                    </div>
+                                </li>
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>注册证明/登记证：</label>
+                                    <div class="s-input-block">
+
+                                        #springBind("enterprise.registerCert")
+                                        <input type="hidden" id="regCertInput" name="$!{status.expression}" value="$!{status.value}" readonly placeholder="注册证明/登记证" id="fileName" class="s-input s-input1">
+                                        <a href="javascript:;" class="s-btn s-btn-up" id="regCert" data-type="1"
+                                           data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                           data-docType="ZCZM">上传文件</a>
+                                        <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="注册证明/登记证" id="regCertCon">
+                                            #if($status.value && $status.value.trim() != "")
+                                                下载查看
+                                            #end
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="s-form-item">
+                                    <label class="s-form-label"><em>*</em>银行证明材料：</label>
+                                    <div class="s-input-block" id="bankCertTypeDiv">
+                                        <input type="radio" name="bankCertType" value="0" title="银行开户证明" checked=""><div class="s-unradio s-form-radio s-form-radioed"><i class="fs-circle-select"></i><i class="fs-circle"></i><div>银行开户证明</div></div>
+                                        <input type="radio" name="bankCertType" value="1" title="银行资信证明"><div class="s-unradio s-form-radio"><i class="fs-circle-select"></i><i class="fs-circle"></i><div>银行资信证明</div></div><br><br>
+
+                                        #springBind("enterprise.bankCert")
+                                        <a href="javascript:;" class="s-btn s-btn-up" id="bankCert" data-type="1"
+                                           data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                           data-docType="YXZMCL">上传文件</a>
+                                        <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="银行证明材料" id="bankCertCon">
+                                            #if($status.value && $status.value.trim() != "")
+                                                下载查看
+                                            #end
+                                        </a>
+                                        <input  type="hidden" id="bankCertInput"  name="$!{status.expression}" value="$!{status.value}" readonly placeholder="银行证明材料" id="fileName" class="s-input s-input1">
+                                    </div>
+                                </li>
+                            </div>
+
+                            <li class="s-form-item">
+                                <label class="s-form-label"><em>*</em>公司logo：</label>
+                                <div class="s-input-block">
+                                    <div class="s-upload-list" id="businessLicenseCertImgBox">
+                                        <a id="epLogoBtn" href="javascript:;">
+                                            #if($!{enterprise.epLogo} && $!{enterprise.epLogo} != "")
+                                                <img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/$!{enterprise.epLogo}.img_165_124.img"/>
+                                            #else
+                                                <img src="$imageServer.get('images/up_zm.jpg')">
+                                            #end
+                                        </a>
+                                        <input id="epLogo" type="hidden" name="epLogo" value="$!{enterprise.epLogo}"/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.defaultLanguage")
+                                <label class="s-form-label"><em>*</em>企业默认语言：</label>
+                                <div class="s-input-block" id="defaultLanguageDiv">
+                                    <input type="radio" name="$!{status.expression}" value="zh" title="中文"
+                                           #if((!$enterprise.defaultLanguage) || $enterprise.defaultLanguage=='zh')checked#end>
+                                    <div class="s-unradio s-form-radio s-form-radioed">
+                                        <i class="fs-circle-select"></i><i class="fs-circle"></i>
+                                        <div>中文</div>
+                                    </div>
+                                    <input type="radio" name="$!{status.expression}" value="en" title="英文"
+                                           #if($enterprise.defaultLanguage=="en")checked#end>
+                                    <div class="s-unradio s-form-radio">
+                                        <i class="fs-circle-select"></i><i class="fs-circle"></i>
+                                        <div>英文</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.scope")
+                                <label class="s-form-label">经营范围：</label>
+                                <div class="s-input-block">
+                                    <textarea name="$!{status.expression}" maxlength="255" value="$!{status.value}" placeholder="请输入内容" class="s-textarea">$!{status.value}</textarea>
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.description")
+
+                                <label class="s-form-label">公司简介：</label>
+                                <div class="s-input-block">
+                                    <textarea name="$!{status.expression}" maxlength="255" value="$!{status.value}" placeholder="请输入内容" class="s-textarea">$!{status.value}</textarea>
+                                </div>
+                            </li>
+                            <li class="s-regi-title s-regi-title2">企业联系人信息</li>
+                            <li class="s-form-item">
+
+                                #springBind("enterprise.contact.id")
+                                <input type="hidden"  name="$!{status.expression}" value="$!{status.value}">
+                                #springBind("enterprise.contact.name")
+                                <label class="s-form-label"><em>*</em>姓名：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入姓名" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.mobile")
+                                <label class="s-form-label"><em>*</em>手机：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}" placeholder="请输入手机号" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.phone")
+                                <label class="s-form-label"><em>*</em>办公电话：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="请输入办公电话" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.mail")
+                                <label class="s-form-label"><em>*</em>邮箱：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="请输入邮箱" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.address")
+                                <label class="s-form-label"><em>*</em>通讯地址：</label>
+                                <div class="s-input-block">
+                                    <input type="text"  name="$!{status.expression}" value="$!{status.value}"  placeholder="请输入通讯地址" class="s-input">
+                                </div>
+                            </li>
+                            <li class="s-form-item">
+                                #springBind("enterprise.contact.accountCert")
+                                <label class="s-form-label"><em>*</em>企业账户注册授权委托书：</label>
+                                <div class="s-input-block">
+                                    <input  type="hidden" id="regProxyInput" name="$!{status.expression}" value="$!{status.value}"  readonly placeholder="企业账户注册授权委托书" id="fileName" class="s-input s-input1">
+                                    <a href="javascript:;" class="s-btn s-btn-up" id="regProxy" data-type="1"
+                                       data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                       data-docType="QYZHZCSQWTS">上传文件</a>
+                                    <a href="$!{uploadServer}/fs/$!{status.value}.img"  class="s-btn-down" title="授权委托书模板下载" id="regProxyCon">
+                                        #if($status.value && $status.value.trim() != "")
+                                            下载查看
+                                        #end
+                                    </a>
+                                    <a class="in" href="$appServer.get('member/180205JTN.docx')" class="s-btn-down" title="授权委托书模板下载" >模板下载</a>
+
+                                    <a class="forgin" style="display: none" href="$appServer.get('member/180309JTN.docx')" class="s-btn-down" title="授权委托书模板下载" >模板下载</a>
+                                </div>
+                            </li>
+                            <li class="s-form-item" id="adminCertLi">
+                                #springBind("enterprise.contact.adminCert")
+                                <label class="s-form-label"><em>*</em>平台联系人证明：</label>
+                                <div class="s-input-block">
+                                    <input  type="hidden" id="adminCertInput"   name="$!{status.expression}" value="$!{status.value}" readonly placeholder="企业联系人/管理员身份证件复印件，加盖公章" id="fileName" class="s-input s-input1">
+                                    <a href="javascript:;" class="s-btn s-btn-up" id="adminCert"  data-type="1"
+                                       data-uploadUrl="$!{uploadServer}/upload/file.htm"
+                                       data-docType="PTGLYZM"
+                                    >上传文件</a>
+
+                                    <a href="$!{uploadServer}/fs/$!{status.value}.img" class="s-btn-down" title="查看" id="adminCertCon">
+                                        #if($status.value && $status.value.trim() != "")
+                                            下载查看
+                                        #end
+                                    </a>
+
+                                    <!--<p class="s-up-prompt">提示：企业联系人/管理员身份证件复印件，加盖企业公章</p>-->
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="s-reg-submit">
+                            <button href="#" class="s-btn s-submit">提交</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+</div>
+
+
+#js("$!imageServer.get('js/jquery-1.8.3.min.js').toString()" )
+#js("$!imageServer.get('js/s_tab.js').toString()" )
+#js("$!imageServer.get('js/upload.js').toString()" )
+#js("$!imageServer.get('layui/layui.js').toString()" )
+#js("$!imageServer.get('js/lib/jquery.validate.min.js').toString()" )
+
+<script>
+    ;(function(window){
+        var Checkbox = function(dom){
+            this.init(dom);
+        };
+        $.extend(Checkbox.prototype,{
+            li:null,
+            checkbox:null,
+            el:null,
+            init:function(dom){
+                this.el = $(dom);
+                this.li = $(dom);
+                this.checkbox = $(dom).prev();
+                this.bindEvents();
+                this.isChecked()?
+                        this.check():this.unCheck();
+            },
+            bindEvents:function () {
+                var _this = this;
+                _this.li.click(function () {
+                    _this.toogleCheck();
+                });
+            },
+            toogleCheck:function(){
+                if(!this.isChecked()){
+                    this.check();
+                }else{
+                    this.unCheck();
+                }
+            },
+            isChecked : function(){
+                return !!this.checkbox.get(0).checked;
+            },
+            check : function () {
+                this.checkbox.get(0).checked = true;
+                this.li.addClass("s-form-checked");
+                this.el.trigger("check");
+            },
+            unCheck : function () {
+                this.checkbox.get(0).checked=false;
+                this.li.removeClass("s-form-checked")
+                this.el.trigger("unCheck");
+            }
+        });
+
+        jQuery.fn.Checkbox = function(method){
+            var args = [].slice.call(arguments,1);
+            this.each(function(){
+                if(!this.comp) {
+                    var comp = this.comp = new Checkbox(this);
+                }
+                method && this.comp[method].apply(this.comp,args);
+            });
+
+        }
+        $(function(){
+            $('.s-form-checkbox').Checkbox();
+        });
+    })(window);
+</script>
+
+
+<script>
+    ;(function(window){
+        var Radio = function(dom){
+            this.init(dom);
+        };
+        $.extend(Radio.prototype,{
+            li:null,
+            checkbox:null,
+            el:null,
+            init:function(dom){
+                this.el = $(dom);
+                this.li = $(dom);
+                this.checkbox = $(dom).prev();
+                this.group = $(dom).parentsUntil("form").find("[name="+this.checkbox.attr("name")+"]").next();
+                this.bindEvents();
+                this.isChecked()?
+                        this.check(true):this.unCheck(true);
+            },
+            bindEvents:function () {
+                var _this = this;
+                _this.li.click(function () {
+                    _this.check();
+                });
+            },
+            on:function(event,callback){
+                this.el.on(event,callback);
+            },
+            toogleCheck:function(){
+                if(!this.isChecked()){
+                    this.check();
+                }else{
+                    this.unCheck();
+                }
+            },
+            isChecked : function(){
+                return !!this.checkbox.get(0).checked;
+            },
+            check : function (nodeep) {
+                if(!nodeep){
+                    this.group.not(this.el).Radio("unCheck",true);
+                }
+                this.checkbox.get(0).checked = true;
+                this.li.addClass("s-form-radioed");
+                this.el.trigger("check");
+            },
+            unCheck : function (nodeep) {
+                this.checkbox.get(0).checked=false;
+                this.li.removeClass("s-form-radioed")
+                this.el.trigger("uncheck");
+            }
+        });
+
+        jQuery.fn.Radio = function(method){
+            var args = [].slice.call(arguments,1);
+            this.each(function(){
+                if(!this.comp) {
+                    var comp = this.comp = new Radio(this);
+                }
+                method && this.comp[method].apply(this.comp,args);
+
+            });
+            if (!method){
+                return this.get(0).comp;
+            }
+        }
+        $(function(){
+            $('.s-form-radio').Radio();
+        });
+    })(window);
+</script>
+
+<script>
+    $(function () {
+        #if($errorMessage && $errorMessage != "")
+            layui.use("layer",function() {
+                layui.layer.alert("$!{errorMessage}");
+            });
+
+        #end
+
+        $("#showFile").click(function(){
+            $(".xyxx-pop").show();
+        });
+        $(".xyxx-pop a").click(function(){
+            $(".xyxx-pop").hide();
+        });
+        $(".xyxx-pop button").click(function(){
+            $("#fileCheckbox").attr("checked","checked")
+            $(".xyxx-pop").hide();
+        });
+
+        $("#saveForm [name=is_social_credit_cert]").click(function () {
+            var val = $(this);
+            $("#cert"+val).show()
+        })
+
+
+
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+            //预览图片实现
+            $(".previewBtn").click(function () {
+                var imgBox = $(this).parent().find(".img_box");
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    title: false,
+                    content: imgBox
+                });
+            });
+
+            //组织机构代码证图片上传，通过设置参数获取上传情况
+            var loadIndex;
+            $("#orgCodeCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "ZZJGDMZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#orgCodeCert").val(result.id);
+                        $("#orgCodeCert-error").remove();
+
+                        $("#orgCodeCertBtn").children().remove();
+                        $("#orgCodeCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#orgCodeCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#orgCodeCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //税务登记证图片上传
+            $("#taxRegCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "SWDJZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#taxRegCert").val(result.id);
+                        $("#taxRegCert-error").remove();
+                        $("#taxRegCertBtn").children().remove();
+                        $("#taxRegCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#taxRegCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#taxRegCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //营业执照图片上传
+            $("#businessLicenseCertBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "YYZZ",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#businessLicenseCert").val(result.id);
+                        $("#businessLicenseCert-error").remove();
+
+
+                        $("#businessLicenseCertBtn").children().remove();
+                        $("#businessLicenseCertBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#businessLicenseCertBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_200_112.img');
+                    ## $("#businessLicenseCertImgBox").html('<img src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        //$("#showBox").showImg('$!{uploadServer}/img/'+ result.id +'.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+            //公司logo图片上传
+            $("#epLogoBtn").fileUpload({
+                uploadUrl: "$!{uploadServer}/upload/file.htm",//上传路径
+                type: 0,//0：图片 1：文档 2：视频 3：音频
+                docType: "GSLOGO",//档案类型
+                objectId: "$!{user.memberId}",//档案目标id（所属人）
+                beforeUpload: function(path) {
+                    loadIndex = layer.load(0, {shade: false});
+                },
+                uploadEnd: function(result){
+                    if(result.success == true) {
+                        $("#epLogo").val(result.id);
+                        $("#epLogo-error").remove();
+                        $("#epLogoBtn").children().remove();
+                        $("#epLogoBtn").text('');
+                    ## $("#epLogoImgBox").html('<img style="width: 165px;height: 124px;" src="$!{uploadServer}/img/'+ result.id +'.img"');
+                        $("#epLogoBtn").showImg('$!{uploadServer}/img/'+ result.id +'.img_165_134.img');
+                    } else {
+                        layer.alert(result.error);
+                    }
+                    layer.close(loadIndex);
+                }
+            });
+        });
+
+        jQuery.validator.addMethod("englishName", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9 \\\/]*$/.test(value);
+        }, jQuery.validator.format("编码仅可以输入字母或数字"));
+
+        jQuery.validator.addMethod("charactor", function(value, element, params) {
+            return this.optional(element) || /^[a-zA-Z0-9\-\_]*$/.test(value);
+        }, jQuery.validator.format("编码仅可以输入字母或数字"));
+
+        //自定义正则表达示验证方法
+        jQuery.validator.addMethod("checkPhone",function(value,element,params){
+            var checkPhone = /(\+)?\d+(\((\d)+\))?(-)?\d+(\((\d)+\))?$/;
+            // var checkPhone = /^\s*\+?\s*(\(\s*\d+\s*\)|\d+)(\s*-?\s*(\(\s*\d+\s*\)|\s*\d+\s*))*\s*$/;
+            // var checkPhone = /^((?:\d{9})|(?:\d{3}-\d{4})|(?:\d{3}-\d{3}-\d{4}))$/;
+            return this.optional(element)||(checkPhone.test(value));
+        },"*请输入正确的电话号码！");
+
+        /*****************第二种方式*****************/
+        //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""方式设置
+        $("#regCert").fileUpload();
+        //通过监听事件获取上传情况
+        $("#regCert").on("beforeUpload", function(e, path){
+            loadIndex = layer.load(0, {shade: false});
+        });
+        $("#regCert").on("uploadEnd", function(e, result){
+            if(result.success == true){
+                $("#regCertInput").val(result.id);
+                $("#regCertInput-error").remove();
+                $("#regCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>已上传,查看</a>");
+            }else{
+                layer.alert(result.error);
+            }
+            layer.close(loadIndex);
+        });
+
+        /*****************第二种方式*****************/
+        //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""方式设置
+        $("#bankCert").fileUpload();
+        //通过监听事件获取上传情况
+        $("#bankCert").on("beforeUpload", function(e, path){
+            loadIndex = layer.load(0, {shade: false});
+        });
+        $("#bankCert").on("uploadEnd", function(e, result){
+            if(result.success == true){
+                $("#bankCertInput").val(result.id);
+                $("#bankCertInput-error").remove();
+                $("#bankCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>已上传,查看</a>");
+            }else{
+                layer.alert(result.error);
+            }
+            layer.close(loadIndex);
+        });
+        /*****************第二种方式*****************/
+        //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""方式设置
+        $("#regProxy").fileUpload();
+        //通过监听事件获取上传情况
+        $("#regProxy").on("beforeUpload", function(e, path){
+            loadIndex = layer.load(0, {shade: false});
+        });
+        $("#regProxy").on("uploadEnd", function(e, result){
+            if(result.success == true){
+                $("#regProxyInput").val(result.id);
+                $("#regProxyInput-erroe").remove();
+                $("#regProxyCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>已上传,查看</a>");
+            }else{
+                layer.alert(result.error);
+            }
+            layer.close(loadIndex);
+        });
+        /*****************第二种方式*****************/
+        //文件上传 //data-type="0"，表示文件上传，其他属性也可以data-params=""方式设置
+        $("#adminCert").fileUpload();
+        //通过监听事件获取上传情况
+        $("#adminCert").on("beforeUpload", function(e, path){
+            loadIndex = layer.load(0, {shade: false});
+        });
+        $("#adminCert").on("uploadEnd", function(e, result){
+            if(result.success == true){
+                $("#adminCertInput").val(result.id);
+                $("#adminCertInput-error").remove();
+
+                $("#adminCertCon").html("<a href='$!{uploadServer}/fs/"+ result.id + ".img'>已上传,查看</a>");
+            }else{
+                layer.alert(result.error);
+            }
+            layer.close(loadIndex);
+        });
+
+
+
+        var baseRule = {
+            ignore: ".ignore",
+            rules: {
+                fullName: "required",
+                name: "required",
+                englishName: {
+                    required: true/*,
+                    englishName: true*/
+                },
+                abbEnglishName: {
+                    required: true/*,
+                    englishName: true*/
+                },
+                organizationCode:"required",
+                taxNo:"required",
+                licenseNo:"required",
+                socialCreditCode:"required",
+                country:"required",
+                registerCert:"required",
+                bankCert:"required",
+                businessLicenseCert: "required",
+                "contact.name":{
+                    "required":true
+                },
+                "contact.mobile":{
+                    "required":true,
+                    maxlength:20,
+                    checkPhone:true
+                },
+                "contact.phone":{
+                    "required":true,
+                    maxlength:40,
+                    checkPhone:true
+                },
+                "contact.mail":{
+                    "required":true,
+                    "email":true
+                },
+                "contact.address":"required",
+                "contact.accountCert":"required",
+                "contact.adminCert":"required"
+
+            },
+            messages: {
+                fullName: "请输入完整企业名称",
+                name: "请输入企业简称",
+                englishName: {
+                    required: "请输入企业英文名称"/*,
+                    englishName: "企业英文名称仅可以输入字母或数字"*/
+                },
+                abbEnglishName: {
+                    required: "请输入企业英文名称"
+                },
+                socialCreditCode:{
+                    required:"请输入统一社会信用代码"
+                },
+                country:{
+                    required:"请输入国家"
+                },
+                registerCert:{
+                    required:"请上传注册证明/登记证"
+                },
+                bankCert:{
+                    required:"请选择银行证明材料"
+                },
+                organizationCode: {
+                    required: "请输入组织机构代码",
+                    charactor: "组织机构代码仅可以输入字母或数字",
+                    maxlength: "组织机构代码最多12位"
+                },
+                taxNo: {
+                    required: "请输入税务登记号",
+                    charactor: "税务登记号仅可以输入字母或数字",
+                    minlength: "税务登记号最少15位",
+                    maxlength: "税务登记号最多20位"
+                },
+                licenseNo: {
+                    required: "请输入营业执照注册号",
+                    charactor: "营业执照注册号仅可以输入字母或数字",
+                    minlength: "营业执照注册号最少15位",
+                    maxlength: "营业执照注册号最多18位"
+                },
+                orgCodeCert:"请上传组织机构代码证",
+                taxRegCert:"请上传税务登记证",
+                businessLicenseCert: {
+                    required: "请上传营业执照图片"
+                },
+                "contact.name":{"required":"请输入姓名"},
+                "contact.mobile":{
+                    "required":"请输入手机",
+                    maxlength:"长度最多20位",
+                    checkPhone:'请输入正确的电话号码'
+                },
+                "contact.phone":{
+                    "required":"请输入办公电话",
+                    maxlength:"长度最多40位",
+                    checkPhone:'请输入正确的电话号码'
+                },
+                "contact.mail":{"required":"请输入邮箱",
+                    "email":"邮箱格式不正确"},
+                "contact.address":{"required":"请输入通讯地址"},
+                "contact.accountCert":{"required":"请上传企业账户注册授权委托书"},
+                "contact.adminCert":{"required":"请上传平台管理员证明"}
+            },
+            errorPlacement: function(error, element) {
+                debugger
+                error.addClass("s-erro");
+                element.after(error);
+            },
+            submitHandler: function(form) {
+                // var cked = $('input[name=agreementCk]').is(":checked");
+                // if(!cked){
+                //     layui.use(['form', 'layedit', 'laydate'], function () {
+                //         layui.layer.alert('请先同意《企业入驻协议》');
+                //     })
+                //     return;
+                // }
+                form.submit();
+            }
+        };
+        //境内三证合一
+        var in_one = $.extend(true, {}, baseRule);
+        delete in_one.rules.organizationCode;
+        delete in_one.rules.taxNo;
+        delete in_one.rules.licenseNo;
+        delete in_one.rules.country;
+        delete in_one.rules.registerCert;
+        delete in_one.rules.bankCert;
+        delete in_one.rules.orgCodeCert;
+        delete in_one.rules.taxRegCert;
+
+
+        delete in_one.rules.englishName;
+        delete in_one.rules.abbEnglishName;
+        //境内非三证合一
+        var in_not_one = $.extend(true, {}, baseRule);
+        delete in_not_one.rules.socialCreditCode;
+        delete in_not_one.rules.country;
+        delete in_not_one.rules.registerCert;
+        delete in_not_one.rules.bankCert;
+        delete in_not_one.rules.englishName;
+        delete in_not_one.rules.abbEnglishName;
+
+        //境外
+        var out = $.extend(true,{},baseRule);
+        delete out.rules.organizationCode;
+        delete out.rules.taxNo;
+        delete out.rules.licenseNo;
+        delete out.rules.socialCreditCode;
+        delete out.rules.adminCert;
+        delete out.rules.fullName;
+        delete out.rules.name;
+        delete out.rules.orgCodeCert;
+        delete out.rules.taxRegCert;
+        delete out.rules.businessLicenseCert;
+        delete out.rules["contact.adminCert"];
+
+        //验证器
+        var validater = $ ("#saveForm").validate(in_one)
+
+        //当三证合一的按钮点击的时候
+        $("#certdiv .s-form-radio").on("check",function(){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            validater.destroy();
+            if(val == 1){
+                $("#cert1").show()
+                $("#cert0").hide()
+                $ ("#saveForm").validate(in_one);
+            }else{
+                $("#cert0").show()
+                $("#cert1").hide()
+                $ ("#saveForm").validate(in_not_one);
+            }
+        });
+        //当境内境外按钮点击的时候
+        $("#epType .s-form-radio").on("check",function(){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            validater.destroy();
+            if(val == 1){
+                $(".forgin").show()
+                $(".in").hide()
+                $ ("#saveForm").validate(out);
+                $("#adminCertLi").hide();
+                $("#jtn").hide()
+            }else{
+                $(".forgin").hide()
+                $(".in").show()
+                $ ("#saveForm").validate(in_one);
+                $("#certdiv input[value=1]").next().Radio("check");
+                $("#adminCertLi").show();
+
+                $("#jtn").show()
+            }
+        });
+
+##        var epType = #if((!$enterprise.epType) || $enterprise.epType==0) 0 #else 1 #end;
+##        var epTypeRadio = $("#epType .s-form-radio");
+##        epTypeRadio.each(function(i,v){
+##            var radio = $(this).Radio();
+##            var val = radio.checkbox.val();
+##            if(val == epType){
+##                $(this).Radio().check();
+##            }
+##        });
+##
+##        var useSocialCreditCert = $!{enterprise.useSocialCreditCert}?1:0;
+##        var useSocialCreditCertRadio = $("#certdiv .s-form-radio");
+##        useSocialCreditCertRadio.each(function(i,v){
+##            var radio = $(this).Radio();
+##            var val = radio.checkbox.val();
+##            if(useSocialCreditCert == val){
+##                $(this).Radio().check();
+##            }
+##        });
+
+        //epType : 0 境内 1 境外 $enterprise.useSocialCreditCert
+        #if(!$enterprise.epType||$enterprise.epType==1)
+            $("#epType .s-form-radio").eq(1).click();
+        #else
+            $("#epType .s-form-radio:eq(0)").Radio("check");
+            #if($enterprise.useSocialCreditCert&&$enterprise.useSocialCreditCert==true)
+                $("#certdiv .s-form-radio").eq(0).click();
+            #else
+                $("#certdiv .s-form-radio").eq(1).click();
+            #end
+        #end
+
+        var defaultLanguage = "$!{enterprise.defaultLanguageDiv}";
+        var defaultLanguageDivRadio = $("#defaultLanguageDiv .s-form-radio");
+        defaultLanguageDivRadio.each(function(i,v){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            if(defaultLanguage == val){
+                $(this).Radio().check();
+            }
+        });
+
+        var bankCertType = "$!{enterprise.bankCertType}";
+        var defaultLanguageDivRadio = $("#bankCertTypeDiv .s-form-radio");
+        defaultLanguageDivRadio.each(function(i,v){
+            var radio = $(this).Radio();
+            var val = radio.checkbox.val();
+            if(bankCertType == val){
+                $(this).Radio().check();
+            }
+        });
+    });
+
+    function checkBox() {
+        return false;
+
+        // if($("input[type='checkbox']").is(':checked')) {
+        //     return true;
+        // } else {
+        //     layer.alert("企业/机构类型  请至少勾选一个");
+        //     return false;
+        // }
+    }
+</script>
+
+

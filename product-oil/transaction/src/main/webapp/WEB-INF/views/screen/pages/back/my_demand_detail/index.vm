@@ -1,0 +1,268 @@
+## 所需参数
+## SaleSheetCombineVO saleSheetCombineVO
+
+#set($demandSheetVO = $!{demandSheetCombineVO.demandSheetVO})
+#set($productInfoVO = $!{demandSheetCombineVO.productInfoVO})
+#set($pricingInfoVO = $!{demandSheetCombineVO.pricingInfoVO})
+#set($transportInfoVO = $!{demandSheetCombineVO.transportInfoVO})
+#set($buyerInfoVO = $!{demandSheetCombineVO.buyerInfoVO})
+#set($otherInfoVO = $!{demandSheetCombineVO.otherInfoVO})
+
+
+<style>
+    .r-content .benchmark-txt span {
+        width: 121px !important;
+    }
+</style>
+$contain.get('/common/title.htm').put('title', 'My Demand Detail')
+
+
+#js($appServer.get('/js/common/jquery-1.9.1.min.js?js_version=03280827'))
+#js($appServer.get('/js/common/layui/layui.js?js_version=03280827'))
+#js($appServer.get('/js/common/common.js?js_version=03280827'))
+
+#css($appServer.get('/css/common/reset.css?css_version=03280827'))
+#css($appServer.get('/css/common/public.css?css_version=03280827'))
+#css($appServer.get('/css/common/bootstrap.min.css?css_version=03280827'))
+#css($appServer.get('/css/work/addAgreement.css?css_version=03280827'))
+#css($appServer.get('/css/work/shipping.css?css_version=03280827'))
+#css($appServer.get('/css/work/myResouces.css?css_version=03280827'))
+#css($appServer.get('/css/fonts/iconfont.css?css_version=03280827'))
+#css($appServer.get('/css/work/resDetails.css?css_version=03280827'))
+
+<div class="m-nav fl r-nav" >
+    <div class="m-sls cleafix">
+        <div class="r-tit">
+            <a href="$appServer.get('/pages/back/my_demand_list/index.htm')">My Demands ></a>
+            <span>Demand Details</span>
+        </div>
+        <div class="r-tab">
+            <ul class="r-tab-left">
+                <li>
+                    <span>Demand No:  </span>
+                    <span> $!{demandSheetVO.serialNumber} </span>
+                </li>
+                <li>
+                    <span>$!{demandSheetVO.demnadTypeVO.enName} </span>&nbsp;&nbsp;
+                    <span>  $!{demandSheetVO.demandSheetStatusVO.enName} </span>
+                </li>
+
+                <li class="m-nav-btn" >
+                    <em class="check-b1 button-b1">
+                        #if($!{demandSheetVO.demandSheetStatusVO.code} == '2' || $!{demandSheetVO.demandSheetStatusVO.code} == '4' || $!{saleSheetVO.saleSheetStatusVO.code} == '5')
+                            <a href="$appServer.get('pages/back/my_demand_list/demand_bidding_inventory.htm').put('demandUuid',$!{demandSheetVO.uuid})" class="br btn-sub">
+                                View Offers
+                            </a>
+                        #end
+                        <a href="javascript:history.back(-1)" class="br a-back">Back</a>
+                    </em>
+                </li>
+            </ul>
+
+            <div class="r-tab-right">
+                $contain.get('/pages/back/my_demand_detail/demand_sheet_status.htm').put('demandSheetVO', $!{demandSheetVO})
+            </div>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Demand Details</span><br/>
+            &nbsp;&nbsp;<span class="r-cont-tab">$!{productInfoVO.productCategoryVO.enName}&nbsp;&nbsp;($!{productInfoVO.productSpecificationVO.enName})</span>
+                #if($!{demandSheetVO.demandTypeVO.code} == '2')
+                    <table class="table myProductDetail_lj">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Company</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            #foreach( $enterprise in $!{enterpriseList})
+                            <tr>
+                                <td>$!{velocityCount}</td>
+                                <td>$!{enterprise.englishName}</td>
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+                #end
+            <ul>
+                <li>
+                    <span>Quantity :</span>
+                    <span>$!{productInfoVO.quantityAsString} $!{productInfoVO.quantityUnitVO.enName}</span>
+                </li>
+                <li>
+                    <span>Incoterms :</span>
+                    <span>$!{productInfoVO.tradeTermVO.enName}</span>
+                </li>
+                <li>
+                    <span>Tolerance :</span>
+                    <span>+/- $!{productInfoVO.tolerance}% at OT</span>
+                </li>
+                <li>
+                    <span>Expired Time :</span>
+                    <span>$!{productInfoVO.deadlineAsString}</span>
+                </li>
+                <li style="width:600px">
+                    <span>Quality Standard :</span>
+                    <span class="file-name" style="display:none" id="qualityStandard">$!{productInfoVO.qualityStandard}</span>
+                    <span id="r-content1-active" style="width:auto;margin-left:1px;text-decoration: underline;cursor: pointer">$!{productInfoVO.qualityStandardName}</span>
+                </li>
+            </ul>
+
+            <p class="benchmark-txt" style="margin-top: -15px"><span>Benchmark :</span>
+                <em>
+                    Mean of $!{pricingInfoVO.priceSourceVO.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO.enName} under $!{pricingInfoVO.priceRegionVO.enName}
+                </em>
+            </p>
+            #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                <p class="benchmark-txt"><span>Benchmark2 :</span>
+                    <em>
+                        Mean of $!{pricingInfoVO.priceSourceVO2.enName} Quotations for $!{pricingInfoVO.pricingBenchmarkVO2.enName} under $!{pricingInfoVO.priceRegionVO2.enName}
+                    </em>
+                </p>
+            #end
+            <ul>
+                <li>
+                    <span>Premium :</span>
+                    <span>$!{pricingInfoVO.premiumsAndDiscountsAsString} $!{pricingInfoVO.currencyVO.enName}/$!{pricingInfoVO.pricingUnitVO.enName}</span>
+                </li>
+                #*<li>
+                    <span>Currency :</span>
+                    <span>$!{pricingInfoVO.currencyVO.enName}</span>
+                </li>
+                <li>
+                    <span>Unit :</span>
+                    <span>$!{pricingInfoVO.pricingUnitVO.enName}</span>
+                </li>*#
+                <li>
+                    <span>Pricing Period :</span>
+                    <span>$!{pricingInfoVO.pricingPeriod}</span>
+                </li>
+                <li>
+                    <span>Payment Terms :</span>
+                    <span>$!{pricingInfoVO.paymentTerm}</span>
+                </li>
+                <li>
+                    <span>Quantity DTER :</span>
+                    <span>$!{pricingInfoVO.settlementQuantity}</span>
+                </li>
+                #*<li>
+                    <span></span>
+                    <span></span>
+                </li>*#
+                <li>
+                    <span>Inspection :</span>
+                    <span>$!{pricingInfoVO.inspectionVO.enName}</span>
+                </li>
+                <li>
+                    <span>law :</span>
+                    <span>$!{pricingInfoVO.law}</span>
+                </li>
+                <li class="formuli">
+                    <span>Pricing Formula :</span>
+                    <span class="formulspan">
+                        #if($!{pricingInfoVO.pricingBenchmarkVO2})
+                            <td class="active">(Benchmark+Benchmark2)/2+ Premium/Discount Currency/Unit</td>
+                        #else
+                            <td class="active">Benchmark+ Premium/Discount Currency/Unit</td>
+                        #end
+                    </span>
+                </li>
+
+                <li class="term-txtbox">
+                    <span class="ntma">Other Terms :</span>
+                    ##<input type="hidden" class="text-data"  value="$!{otherInfoVO.otherTerm}">
+                    <textarea class="terms-text" readonly style="border: none; font-size: 14px; color: #333;resize:none;">$!{otherInfoVO.otherTerm}</textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Transportation</span>
+            <ul>
+                <li>
+                    <span>Transport Mode :</span>
+                    <span>$!{transportInfoVO.transportModeVO.enName}</span>
+                </li>
+                <li>
+                    <span>Laycan :</span>
+                    <span>$!{transportInfoVO.laycanStartDateAsString} - $!{transportInfoVO.laycanEndDateAsString}</span>
+                </li>
+                <li>
+                    <span>Laytime :</span>
+                    <span>$!{transportInfoVO.laytimeAsString} H+6</span>
+                </li>
+                <li>
+                    <span>Demurrage Rate :</span>
+                    <span> #if($!transportInfoVO.demurrageRateVO.code=='1')  $!{transportInfoVO.demurrageRateNumAsString} $!transportInfoVO.demurrageRateVO.enName  #end
+                           #if($!transportInfoVO.demurrageRateVO.code=='2')  $!{transportInfoVO.demurrageRateVO.enName}  #end
+
+                    </span>
+                </li>
+                #if($!{productInfoVO.tradeTermVO.enName} == 'FOB')
+                    <li>
+                        <span>Load Port :</span>
+                        <span>$!{transportInfoVO.loadingPort}, $!{transportInfoVO.loadingCountry} </span>
+                    </li>
+                #end
+                #if($!{productInfoVO.tradeTermVO.enName} == 'CFR' || $!{productInfoVO.tradeTermVO.enName} == 'CIF')
+                    <li>
+                        <span>Discharge Port :</span>
+                        <span>$!{transportInfoVO.dischargePort}, $!{transportInfoVO.dischargeCountry} </span>
+                    </li>
+                #end
+
+            </ul>
+        </div>
+        <div class="r-content">
+            <span class="r-cont-tit">Buyer</span>
+            <div class="company-txt" >
+                <label style="width: 121px">Company :</label>
+                <em>$!{buyerInfoVO.enterpriseName}</em>
+            </div>
+            <div class="company-txt">
+                <label style="width: 121px">Address :</label>
+                <em> $!{buyerInfoVO.address}</em>
+            </div>
+            <ul>
+                <li>
+                    <span>Contact Person :</span>
+                    <span>$!{buyerInfoVO.traderName}</span>
+                </li>
+                <li>
+                    <span>Email Address :</span>
+                    <span>$!{buyerInfoVO.email}</span>
+                </li>
+                <li>
+                    <span>Tel : </span>
+                    <span>$!{buyerInfoVO.telephone}</span>
+                </li>
+                <li>
+                    <span>Fax :</span>
+                    <span>$!{buyerInfoVO.fax}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+var path= $("#qualityStandard").html();
+var fileName=$("#r-content1-active").html();
+$("#r-content1-active").on("click",function(){
+	window.location.href = appServer +"common/doc/download.htm?"+"path="+path+"&fileName="+fileName;
+});
+
+
+var Epath= $("#exportQuota").html();
+var EfileName=$(".ExportQuotaName").html();
+$(".ExportQuotaName").on("click",function(){
+	window.location.href = appServer +"common/doc/download.htm?"+"path="+Epath+"&fileName="+EfileName;
+});
+
+
+</script>
+
+
+

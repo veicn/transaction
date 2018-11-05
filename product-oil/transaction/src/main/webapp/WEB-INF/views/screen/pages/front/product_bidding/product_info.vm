@@ -1,0 +1,33 @@
+#*商品详细信息*#
+#*目前demand和demandShip的设计关系是一对多关系，但当前实际使用到的是一对一关系，所以此处取集合的第一条数据*#
+#if($demandShips.size()>0)
+	#set($ship = $demandShips[0]) 
+#end
+
+#if($shipBerthList.size()>0)
+	#set($shipBerth = $shipBerthList[0]) 
+#end
+
+<ul class="left-lb clearfix left-lbh">
+     <li class="left-cont clearfix line-none">
+      <a href="cg_cgxqxq.html" class="left-cont-pic left-contp"><img src="../images/cg_pic1.jpg"></a>
+      <dl class="left-cont-txtt">
+        <dt class="left-cont-txtt-p"><a href="$appServer.get('trademall/productOilDetail.htm')?demand=$!demand.id">$!{demand.productOilKindContent}</a><span>（$!{demand.productOilSpecsContent}）</span></dt>
+        <dd class="left-cont-txtt-n "><span>装船港：</span>$!ship.loadingPortVO.enName</dd>
+        <dd class="left-cont-txtt-n "><span>贸易条款：</span>$!{demand.tradeTermVO.enName}</dd>
+        <dd class="left-cont-txtt-n "><span>数量：</span>$!{demand.quantityAsString}</dd>
+        <dd class="left-cont-txtt-n "><span>付款日期：</span>${demand.gmtCreated}</dd>
+        <dd class="left-cont-txtt-n "><span>装期：</span>
+        	$!ship.laycanStartDateAsString至
+            $!ship.laycanEndDateAsString
+         </dd>
+    #if("$!demand.purchaseType" != "2")
+        <dd class="left-cont-txtt-n "><span>投标截止日期：</span>$!demand.deadlineAsString </dd>
+        <dd class="left-cont-txtt-n "><span>公布中标日期：</span>$!demand.bidOpeningDateAsString</dd>
+    #end
+      </dl>
+     </li>
+</ul>
+
+
+

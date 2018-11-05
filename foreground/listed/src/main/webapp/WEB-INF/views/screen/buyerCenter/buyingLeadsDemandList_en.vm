@@ -1,0 +1,447 @@
+#set($a = "个人中心-买原油网")
+
+<div class="c-mod">
+    <ul class="c-state" style="clear:both">
+        #if($authUtils.checkRole("buy_trader"))
+            <li class="c-cur"><a href="$appServer.get('purchaseManager/buyingLeadsDemandList.htm')">Demands</a></li>
+            <li><a href="$appServer.get('oilSaleBidding/biddingList.htm')">Bids</a></li>
+        #end
+    </ul>
+    <form id="form1"  >
+        <div class="c-form">
+            <ul class="c-ful">
+                <li class="c-fcos3"><span class="c-fn c-fn2 c-fn3">Demand No.：</span><input type="text" class="c-int c-int3" name="demandCode" value="$!{queryForm.demandCode}"/></li>
+                <li class="c-fcos3 c-tx"><span class="c-fn c-fn2">Post Date：</span><input type="text" class="c-int c-int4" date="true" name="pubDateStart" value="$!{queryForm.pubDateStart}"/>—<input type="text" class="c-int c-int4" date="true" name="pubDateEnd" value="$!{queryForm.pubDateEnd}"/></li>
+
+
+
+##                <li class="c-fcos3">
+##                    <span class="c-fn c-fn2">Payment Date：</span>
+##                    <select class="c-fcsel" id="typeEvent" class="sele" >
+##                        <option value="" >Select</option>
+##                        #foreach($!typeEvent in $payItemMap.entrySet())
+##                            <option value="$!typeEvent.value" >$!typeEvent.value</option>
+##                        #end
+##                    </select>
+##
+##                    <input id="otherDate"   placeholder="Input Date" style="display: none" type="text"  date="true" />
+##                    <select class="c-fcsel" id="eventInclusion" >
+##                        <option value="">Select</option>
+##                        <option value="after">After</option>
+##                        <option value="from">From</option>
+##                    </select>
+##                    <em id="typeEvent2" class="c-fcem" >B/L</em>
+##                    <input id="eventDays"   type="text"  placeholder="Input Number of Days" onkeyup="this.value=this.value.replace(/[\u4e00-\u9fa5]/g,'')" onkeypress="return noNumbers(event)" onpaste="return false" ondragenter="return false"  style="ime-mode:disabled"/>
+##                    <em id="eventDays2" class="c-fcem">Days</em>
+##
+##                    <input id="payItem" name="payItem" style="display: none" value="$!{queryForm.payItem}" />
+##                    <input id="payItemJSON" name="payItemJSON" style="display: none" value='$!{queryForm.payItemJSON}' />
+##                </li>
+
+
+                <li class="c-libtn"><button id="button1">Search</button></li>
+            </ul>
+        </div>
+    </form>
+    <div class="order-add">
+        <a href="$appServer.get('/purchaseManager/newBuyingLeads.htm')"><i class="oico-plus"></i>Post Demand</a>
+        <a id="batchAdded">Batch Post</a>
+        <a id="batchUnderCharged">Batch Withdraw</a>
+        <a id="batchDelete">Batch Remove</a>
+    </div>
+
+    #if($!{pageInfoList.list.total} == 0)
+        $contain.get('/contain/nodata_en.htm')
+    #else
+        #foreach($record in $!{pageInfoList.list})
+            <div class="zzyy-box s-mod-block">
+                #if($!{record.overdue})
+                    <p class="cw-ico ord-status">Overdue</p>
+                #elseif($!{record.status} == '1')
+                    <p class="cw-ico ord-status">Saved</p>
+                #elseif($!{record.status} == '2')
+                    <p class="cw-ico ord-status">Published</p>
+                #else
+                    <p class="cw-ico ord-status">Completed</p>
+                #end
+                <div class="zzyy-title clearfix">
+                    <div class="yy-ddh"><input type="checkbox" name="ckbox" value="$!{record.id}">$!{record.createTime}<span>No.：<em>$!{record.uuid}</em></span><span class="yy-gs">$!{record.pEnterpriseName}</span></div>
+                </div>
+                <div class="s-mod-bcont clearfix">
+                        <div class="orde-pic">
+                            <a href="$appServer.get('/purchaseManager/demandDetail.htm').put('demandId', $!{record.id})">
+                                <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{user.epMemberId}.img"
+                                     onerror="this.src='$imageServer.get('images/cg_pic1_en.jpg')'">
+                            </a>
+                        </div>
+                        <dl class="orderl-txt">
+                            <dt ><a href="$appServer.get('/purchaseManager/demandDetail.htm').put('demandId', $!{record.id})"> $!{record.crudeOilOptions}</a><span></span></dt>
+
+                            <dd>Qty(BBL)：$!record.numBBL</dd>
+                            <dd>Pricing Basis：$!record.valuationBase</dd>
+                            <dd>Payment Date：$!record.payItem</dd>
+                            <dd>Incoterm：$!{record.tradeItem}</dd>
+                            #if($!{record.tradeItem} == 'FOB')
+                                <dd>Load Port：$!{record.shipmentPort}</dd>
+                                <dd>Laycan：$!{record.shipmentStartTime}to$!{record.shipmentEndTime}</dd>
+                            #else
+                                <dd>Discharge Port：$!{record.dischargePort}</dd>
+                                <dd>DDR： $!{record.dischargeStartTime}to$!{record.dischargeEndTime} </dd>
+                            #end
+                            <dd id="$!{record.id}">Expire Date：$!{record.stopBidTime}</dd>
+                            #if($!{record.pubDate} != "")
+                                <dd>Publish Date：$!{record.pubDate}</dd>
+                            #end
+                        </dl>
+                    <div class="s-but-all clearfix">
+                        <div class="s-all-jt"><p><i class="s-icon s-all-zk"></i></p>
+                            <div class="s-but-blo s-but-blo1 clearfix">
+                                <a href="$appServer.get('/purchaseManager/demandDetail.htm').put('demandId', $!{record.id})" class="s-btn">View</a>
+                                <a href="$appServer.get('/purchaseManager/newBuyingLeads.htm').put('demandId', $!{record.id}).put('isCopy', "1")" class="s-btn">Re-purchase</a>
+                                #if($!{record.status} == '1')
+                                    <a href="$appServer.get('/purchaseManager/newBuyingLeads.htm').put('demandId', $!{record.id})" class="s-btn">Edit</a>
+                                #end
+                                #if($!{record.status} == '2')
+                                    <a href="javascript:resourceUnderCharged('$!{record.id}')" class="s-btn">Withdraw</a>
+                                    #if(!$!{record.overdue})
+                                        <a href="javascript:void(0)" onclick="postponePopEdit(this, '$!{record.id}', '$!{record.purchaseType}')" data-stopBidTime="$!{record.stopBidTime}" class="s-btn">Extend</a>
+                                    #end
+                                #end
+                                #if($!{record.status} == '1')
+                                    <a href="javascript:resourceAdded('$!{record.id}')" class="s-btn">Post</a>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        #end
+        $contain.get('/common/page.htm').put("pageInfo",$!{pageInfoList})
+    #end
+</div>
+<script>
+    $(function () {
+        // 初始化日期
+        initDateInput($("input[date='true']"));
+
+        $("#batchAdded").on("click", function () {
+            var ids = '';
+            $("input[name='ckbox']:checked").each(function(){
+                ids += $(this).val()+","
+            });
+            if (ids != '' && ids != null) {
+                ids = ids.substring(0, ids.length-1);
+                layui.use('layer', function() {
+                    layer.open({
+                    	title:"Notice",
+                        content: "Are you sure to post selected demands?",
+                        btn: ['Confirm', 'Cancel'],
+                        yes: function (index, layer) {
+                            commbatchOpts('$appServer.get("/purchaseManager/batchAdded.json")' + '?ids=' + ids,index);
+                        },
+                        cancel: function(index) {
+                            layer.close(index);
+                        }
+                    });
+                });
+
+            } else {
+                layui.use('layer', function() {
+                    layer.alert("Please operate after selecting the requirement!", {title:"Notice", btn: "OK"});
+                });
+                return false;
+            }
+        })
+
+        $("#batchUnderCharged").on("click", function () {
+            var ids = '';
+            $("input[name='ckbox']:checked").each(function(){
+                ids += $(this).val()+","
+            });
+            if (ids != '' && ids != null) {
+                ids = ids.substring(0, ids.length-1);
+
+                layui.use('layer', function() {
+                    layer.open({
+                    	title:"Notice",
+                        content: "Are you sure to withdraw selected demands?",
+                        btn: ['Confirm', 'Cancel'],
+                        yes: function (index, layer) {
+                            commbatchOpts('$appServer.get("/purchaseManager/batchUnderCharged.json")' + '?ids=' + ids,index);
+                        },
+                        cancel: function(index) {
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else {
+                layui.use('layer', function() {
+                    layer.alert("Please operate after selecting the requirement!", {title:"Notice", btn: "OK"});
+                });
+                return false;
+            }
+        })
+
+        $("#batchDelete").on("click", function () {
+            var ids = '';
+            $("input[name='ckbox']:checked").each(function(){
+                ids += $(this).val()+","
+            });
+            if (ids != '' && ids != null) {
+                ids = ids.substring(0, ids.length-1);
+
+                layui.use('layer', function() {
+                    layer.open({
+                    	title:"Notice",
+                        content: "Are you sure to delete selected demands?",
+                        btn: ['Confirm', 'Cancel'],
+                        yes: function (index, layer) {
+                            window.location.href = '$appServer.get("/purchaseManager/batchDelete.htm")' + '?ids=' + ids;
+                            //如果设定了yes回调，需进行手工关闭
+                            layer.close(index);
+                        },
+                        cancel: function(index) {
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else {
+                layui.use('layer', function() {
+                    layer.alert("Please operate after selecting the requirement!", {title:"Notice", btn: "OK"});
+                });
+                return false;
+            }
+        })
+    })
+
+    function resourceAdded(ids) {
+        layui.use('layer', function() {
+            layer.open({
+            	title:"Notice",
+                content: "Are you sure to post this demand?",
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    commbatchOpts('$appServer.get("/purchaseManager/batchAdded.json")' + '?ids=' + ids,index);
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+    function resourceUnderCharged(ids) {
+        layui.use('layer', function() {
+            layer.open({
+            	title:"Notice",
+                content: "Are you sure to cancel the selected requirement list?",
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    commbatchOpts('$appServer.get("/purchaseManager/batchUnderCharged.json")' + '?ids=' + ids,index);
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+    function commbatchOpts(url,index){
+        layer.closeAll();
+        $.ajax({
+            url:url,
+            type:'get',
+            success:function(res){
+                if(res && res.status == 9999){
+                    layui.layer.alert(res.message, {title:"Notice", btn: "OK"});
+                    layui.layer.close(index);
+                }else if(res && res.status == 0){
+                    layui.layer.confirm("successfully!",{title:"Notice",closeBtn: 0, btn: 'OK'},function(){
+                        window.location.reload();
+                    });
+                }
+            }
+        });
+    }
+
+
+
+    /**
+     * 弹出
+     * @param demandId
+     * @param biddingType
+     */
+    function postponePopEdit(obj, demandId, biddingType) {
+        var stopBiddingTime = $(obj).attr("data-stopBidTime");
+        var contentHtml = getContentHtml(demandId, biddingType, stopBiddingTime)
+        layui.use('layer', function() {
+            layer.open({
+                title : 'Extend',
+                content: $(contentHtml).html(),
+                area : ['500', '300'],
+                shade: false,
+                btn: ['Confirm', 'Cancel'],
+                yes: function (index, layer) {
+                    var stopBidTime = $("#stopBiddingTime").val();
+                    if (stopBidTime != null && stopBidTime != undefined && stopBidTime != "") {
+                        postpone(obj, demandId, stopBidTime, index);
+                    } else {
+                        console.log("The date cannot be empty!");
+                        alert("The date cannot be empty!")
+                    }
+
+                },
+                cancel: function(index) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+    function getContentHtml(demandId, biddingType, stopBiddingTime) {
+        var contentHtml = "";
+        if (biddingType == '1') {
+            contentHtml += "<div style='display:none'>" +
+                    "<span>Tender Closing Date</span>"  +
+                    "<input type='hidden' id='demandId' value='"+demandId+"' />" +
+                    "<input type='text' id='stopBiddingTime' date='true' value='"+stopBiddingTime+"' onmouseover='javascript:drawingDate(this)'/>" +
+                    "<span class='cg-zy'>Remark: Bidding expire date can only postpone</span>" +
+                    "</div>";
+        } else {
+            contentHtml += "<div style='display:none'>" +
+                    "<span>Expire Date</span>"  +
+                    "<input type='hidden' id='demandId' value='"+demandId+"' />" +
+                    "<input type='text' id='stopBiddingTime' date='true' value='"+stopBiddingTime+"'onmouseover='javascript:drawingDate(this)'/>" +
+                    "<span class='cg-zy'>Remark: Inquiry expire date can only postpone</span>" +
+                    "</div>";
+        }
+
+        return contentHtml;
+    }
+
+    function drawingDate(obj) {
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: obj //指定元素
+                ,lang: 'en'
+            });
+
+        });
+    }
+
+    function postpone(obj, demandId, stopBidTime, index) {
+        var url = "$appServer.get('purchaseManager/postpone.json')";
+
+        $.ajax({
+            type: "POST",
+            async : false,
+            url: url,
+            data: {demandId:demandId, stopBidTime:stopBidTime},
+            success: function (data) {
+                if (data.code == "SUCCESS") {
+                    //如果设定了yes回调，需进行手工关闭
+                    layer.close(index);
+                    $(".orderDetail").find("dd[id="+demandId+"]").html("Expire Date：" + stopBidTime);
+                    $(obj).attr("data-stopBidTime", stopBidTime);
+                    layui.use('layer', function() {
+                        layer.alert("The operation is successful!", {title:"Notice", btn: "OK"});
+                    });
+                } else {
+                    console.log(data.message);
+                    alert(data.message);
+                }
+            },
+            dataType: "json"
+        });
+    }
+    $(function () {
+//      如果payItem和payItemJSON有值就给其他输入框渲染上
+//        getValue();
+//        监听表单提交
+        $("#button1").on("click", function () {
+            //            提交表单前校验
+//            if(valiateData()){
+//            提交表单前赋值
+//                setValue();
+                $.ajax({
+                    url:'$appServer.get('purchaseManager/buyingLeadsDemandList.htm')',
+                    method:'POST',
+                    data:$("#form1").serializeArray(),
+                });
+//            }
+        })
+//        监听付款日期函数
+        $("#typeEvent").on("change",function () {
+            if($("#typeEvent option:selected").val() == "DATE"){
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            if($("#typeEvent option:selected").val() != "DATE"){
+                $("#otherDate").hide();
+                $("#eventInclusion").show();
+                $("#typeEvent2").show();
+                $("#eventDays").show();
+                $("#eventDays2").show();
+                $("#typeEvent2").html($("#typeEvent option:selected").val());
+            }
+        })
+    })
+
+    // 提交表单前给payItem 和 payItemJSON赋值
+    function setValue(){
+        var pay_item="",pay_item_json={};
+        if($("#typeEvent option:selected").val()=="DATE"){
+            pay_item="DATE("+$("#otherDate").val()+")";
+            pay_item_json.typeEvent="DATE";
+            pay_item_json.eventInclusion="";
+            pay_item_json.eventDays="";
+            pay_item_json.date=$("#otherDate").val();
+        }else{
+            pay_item_json.typeEvent= $("#typeEvent option:selected").val();
+            pay_item_json.eventInclusion=$("#eventInclusion option:selected").val();
+            pay_item_json.eventDays=$("#eventDays").val();
+            pay_item_json.date="";
+            if(pay_item_json.eventInclusion=="after"){
+                pay_item="After "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=0";
+            }
+            else if(pay_item_json.eventInclusion=="from"){
+                pay_item="From "+$("#typeEvent option:selected").val()+" "+$("#eventDays").val()+" Days,"+$("#typeEvent option:selected").val()+"=1";
+            }
+        }
+        $("#payItem").val(pay_item);
+        $("#payItemJSON").val(JSON.stringify(pay_item_json));
+    }
+
+    //当 input输入框 payItem和payItemJSON有值的时候 将其他输入框渲染上
+    function getValue(){
+        if($("#payItemJSON").val() != null && $("#payItemJSON").val() != ""){
+            var pay_item_json=JSON.parse($("#payItemJSON").val());
+            $("#typeEvent option").each(function(){
+                if($(this).val() == pay_item_json.typeEvent){
+                    $(this).attr("selected","selected");
+                }
+            })
+            if(pay_item_json.typeEvent=="DATE"){
+                $("#otherDate").val(pay_item_json.date);
+                $("#otherDate").show();
+                $("#eventInclusion").hide();
+                $("#typeEvent2").hide();
+                $("#eventDays").hide();
+                $("#eventDays2").hide();
+            }
+            else{
+                $("#eventDays").val(pay_item_json.eventDays);
+                $("#typeEvent2").html(pay_item_json.typeEvent);
+                $("#eventInclusion").val(pay_item_json.eventInclusion);
+            }
+        }
+
+    }
+
+
+</script>

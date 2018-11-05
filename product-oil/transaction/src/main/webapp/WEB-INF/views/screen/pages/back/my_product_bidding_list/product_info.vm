@@ -1,0 +1,58 @@
+<div class="c-mod" id="cgxx">
+    <h1>Trading<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Resource&nbsp;&nbsp;&gt&nbsp;&nbsp;Quote List</span></h1>
+    <h3><em class="cw-ico ico-h3"></em>Resource INfo<span class="cxtj-nr-an"></span></h3>
+    <div class="zzyy-box">
+        #if($!{record.saleSheetVO.saleSheetStatusVO.code} == "1")
+            Saved
+        #elseif($!{record.saleSheetVO.saleSheetStatusVO.code} == "2")
+            Released
+        #elseif($!{record.saleSheetVO.saleSheetStatusVO.code} == "3")
+            Cancelled
+        #elseif($!{record.saleSheetVO.saleSheetStatusVO.code} == "4")
+            Completed
+        #end
+        <div class="zzyy-title clearfix">
+            <div class="yy-ddh">Create Time：$!{record.saleSheetVO.gmtCreated}<span>Resource No.<em>$!{record.saleSheetVO.uuid}</em></span></div>
+        </div>
+        <div class="orderl-cont clearfix">
+            <div class="order-blol clearfix">
+                #*<div class="orde-pic">
+                    <a href="$appServer.get('/purchaseManager/demandDetail.htm').put('demandId', $!{record.id})">
+                        <img class="ep_logo" src="$docServer.get('/img/GSLOGO/')$!{user.epMemberId}.img"
+                             onerror="this.src='$imageServer.get('images/cg_pic1.jpg')'">
+                    </a>
+                    ##$contain.get("/pages/front/product_detail/product_images.htm")
+                </div>*#
+
+                <dl class="orderl-txt">
+                    <dd>Sales Type：$!{record.saleSheetVO.saleTypeVO.enName}</dd>
+                    <dd>Variety：$!{record.productInfoVO.productVarietyVO.enName}</dd>
+                    <dd>Quantity(MT)：$!record.productInfoVO.quantityAsString</dd>
+                    <dd>Load Port：$!{record.transportInfoVO.loadingPortVO.enName}</dd>
+                    <dd>Discharge Port：$!{record.transportInfoVO.dischargePortVO.enName}</dd>
+                    <dd>Deadline：$!{record.productInfoVO.deadlineAsString}</dd>
+                    <dd>Posting Date：$!{record.saleSheetVO.releasedDateAsString}</dd>
+                    <dd>Category：$!{record.productInfoVO.productCategoryVO.enName}</dd>
+                    <dd>Specification：$!{record.productInfoVO.productSpecificationVO}</dd>
+                    <dd>Trade Terms：$!{record.productInfoVO.tradeTermVO.enName}</dd>
+                    <dd>Laycan：$!{record.transportInfoVO.laycanStartDateAsString}~$!{record.transportInfoVO.laycanEndDateAsString}</dd>
+                    <dd>Payment Terms：$!{record.pricingVO.paymentTermVO.enName}</dd>
+                    <dd>Bid Opening Date：$!{record.productInfoVO.bidOpeningDateAsString}</dd>
+                </dl>
+
+            </div>
+            <div class="order-blor clearfix">
+                <div class="mysteve" style="position:relative;left:142px;top:-30px;" >
+                    <div class="order-blor order-blor1 clearfix showButton" style="display:none;left: -172px; top: 60px; ">
+                        <a href="$appServer.get('/resourceManager/biddingDetail.htm').put('demandId', $!{demand.id})">Details</a>
+                        <a href="$appServer.get('/resourceManager/biddingDetail.htm').put('demandId', $!{demand.id})">Cancel</a>
+                        <a href="$appServer.get('/resourceManager/biddingDetail.htm').put('demandId', $!{demand.id})">Back</a>
+                        <p class="ico-sj"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seal-blo"></div>
+    </div>
+
+

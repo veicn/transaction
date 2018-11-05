@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinochem.crude.trade.blockchain.dao.TBrokerDocumentsMapper">
+  <resultMap id="BaseResultMap" type="com.sinochem.crude.trade.blockchain.domain.TBrokerDocuments">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="declarationuuid" jdbcType="VARCHAR" property="declarationuuid" />
+    <result column="accompanying_documentscode" jdbcType="VARCHAR" property="accompanyingDocumentscode" />
+    <result column="accompanying_documentsno" jdbcType="VARCHAR" property="accompanyingDocumentsno" />
+    <result column="documentscode" jdbcType="VARCHAR" property="documentscode" />
+    <result column="documentsno" jdbcType="VARCHAR" property="documentsno" />
+    <result column="relevancydeclaration" property="relevancydeclaration" jdbcType="VARCHAR" />
+    <result column="relevancyrecords" property="relevancyrecords" jdbcType="VARCHAR" />
+    <result column="supervisesite" property="supervisesite" jdbcType="VARCHAR" />
+    <result column="sitecode" property="sitecode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, declarationuuid, accompanying_documentscode, accompanying_documentsno, documentscode, 
+    documentsno, relevancydeclaration, relevancyrecords, supervisesite, sitecode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_broker_documents
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `product-trade-blockchain`.t_broker_documents
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByUuid" parameterType="java.lang.String">
+    delete from `product-trade-blockchain`.t_broker_documents
+    where declarationuuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_broker_documents
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into `product-trade-blockchain`.t_broker_documents (declarationuuid, accompanying_documentscode,
+    accompanying_documentsno, documentscode,documentsno,relevancydeclaration, relevancyrecords, supervisesite, sitecode)
+    values
+    <foreach collection="list" item="document" separator=",">
+      (#{document.declarationuuid,jdbcType=VARCHAR}, #{document.accompanyingDocumentscode,jdbcType=VARCHAR},
+      #{document.accompanyingDocumentsno,jdbcType=VARCHAR}, #{document.documentscode,jdbcType=VARCHAR},
+      #{document.documentsno,jdbcType=VARCHAR},#{document.relevancydeclaration,jdbcType=VARCHAR},#{document.relevancyrecords,jdbcType=VARCHAR},
+      #{document.supervisesite,jdbcType=VARCHAR},#{document.sitecode,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDocuments">
+    insert into t_broker_documents (id, declarationuuid, accompanying_documentscode, 
+      accompanying_documentsno, documentscode, 
+      documentsno)
+    values (#{id,jdbcType=BIGINT}, #{declarationuuid,jdbcType=VARCHAR}, #{accompanyingDocumentscode,jdbcType=VARCHAR}, 
+      #{accompanyingDocumentsno,jdbcType=VARCHAR}, #{documentscode,jdbcType=VARCHAR}, 
+      #{documentsno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDocuments">
+    insert into t_broker_documents
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="declarationuuid != null">
+        declarationuuid,
+      </if>
+      <if test="accompanyingDocumentscode != null">
+        accompanying_documentscode,
+      </if>
+      <if test="accompanyingDocumentsno != null">
+        accompanying_documentsno,
+      </if>
+      <if test="documentscode != null">
+        documentscode,
+      </if>
+      <if test="documentsno != null">
+        documentsno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="declarationuuid != null">
+        #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingDocumentscode != null">
+        #{accompanyingDocumentscode,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingDocumentsno != null">
+        #{accompanyingDocumentsno,jdbcType=VARCHAR},
+      </if>
+      <if test="documentscode != null">
+        #{documentscode,jdbcType=VARCHAR},
+      </if>
+      <if test="documentsno != null">
+        #{documentsno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDocuments">
+    update t_broker_documents
+    <set>
+      <if test="declarationuuid != null">
+        declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingDocumentscode != null">
+        accompanying_documentscode = #{accompanyingDocumentscode,jdbcType=VARCHAR},
+      </if>
+      <if test="accompanyingDocumentsno != null">
+        accompanying_documentsno = #{accompanyingDocumentsno,jdbcType=VARCHAR},
+      </if>
+      <if test="documentscode != null">
+        documentscode = #{documentscode,jdbcType=VARCHAR},
+      </if>
+      <if test="documentsno != null">
+        documentsno = #{documentsno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.blockchain.domain.TBrokerDocuments">
+    update t_broker_documents
+    set declarationuuid = #{declarationuuid,jdbcType=VARCHAR},
+      accompanying_documentscode = #{accompanyingDocumentscode,jdbcType=VARCHAR},
+      accompanying_documentsno = #{accompanyingDocumentsno,jdbcType=VARCHAR},
+      documentscode = #{documentscode,jdbcType=VARCHAR},
+      documentsno = #{documentsno,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<link rel="stylesheet" href="$imageServer.get('info/css/price/index.css')">
+	<div class="layui-tab layui-tab-brief" lay-filter="demo">
+		<ul class="layui-tab-title">
+			<li class="layui-this">合约维护</li>
+			<li>合约价格维护</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<!--开始 查询条件-->
+				<div class="inquire">
+					<h3>查询条件</h3>
+				</div>
+
+				<!--选择框-->
+				<div class="form-box">
+
+					<div class="layui-form">
+						<div class="layui-form-item">
+							<div class="layui-inline index-name">
+								<label class="layui-form-label">合约名称</label>
+								<div class="layui-input-inline">
+									<input type="tel" id="symbolName" name="symbolName" value="$!{query.symbolName}"
+										autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<button class="layui-btn layui-btn-normal mt16 selectFn">
+								查询
+							</button>
+							<button class="layui-btn layui-btn-normal mt16 addFn">
+								新增
+							</button>
+						</div>
+					</div>
+
+					<!--table标题-->
+					<div class="inquire1">
+						<h3>查询结果</h3>
+					</div>
+
+					<!--table-->
+					<table class="layui-table one" lay-even="" lay-skin="nob">
+						<thead style="text-align: center;">
+							<tr>
+								<th>序号</th>
+								<th>合约名称</th>
+								<th>合约代码</th>
+								<th>商品标的</th>
+								<th>价格来源</th>
+								<th>市场</th>
+								<th>频率</th>
+								<th>货币单位</th>
+								<th>合约类型</th>
+								<th>类型</th>
+								<th>到期日</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							#foreach($item in $symbolDates)
+							<tr>
+								<td>$!{velocityCount}</td>
+								<td>$!{item.symbolName}</td>
+								<td>$!{item.symbol}</td>
+								<td>$!{item.commodity}</td>
+								<td>$!{item.priceSource}</td>
+								<td>$!{item.market}</td>
+								<td>$!{item.frequency}</td>
+								<td>$!{item.currency}</td>
+								<td>$!{item.symbolType}</td>
+								<td>$!{item.type}</td>
+								<td>$!{item.expireDate}</td>
+								<td>
+									<a href="#" class="mr5 editFn"
+										attr-data='{"uuid":"$!{item.uuid}","symbolName":"$!{item.symbolName}","symbol":"$!{item.symbol}","commodity":"$!{item.commodity}","priceSource":"$!{item.priceSource}"
+												,"market":"$!{item.market}","frequency":"$!{item.frequency}","currency":"$!{item.currency}","symbolType":"$!{item.symbolType}","type":"$!{item.type}","expireDate":"$!{item.expireDate}","extend2":"$!{item.extend2}"}'> <i class="layui-icon">&#xe642;</i> 修改</a>
+								</td>
+							</tr>
+							#end
+						</tbody>
+					</table>
+					 <div class="ry-footbar ry-right">
+						$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"om/symbol/symbolIndex.htm").put('slider_path','/contain/formPagingPageSlider')	
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="$imageServer.get('info/js/symbol/symbol.js')"></script>

@@ -1,0 +1,144 @@
+<link rel="stylesheet" href="$imageServer.get('info/css/index.css')" >
+<div class="layui-layout layui-layout-admin">
+	   <div class="layui-tab layui-tab-brief" lay-filter="demo">
+					<ul class="layui-tab-title">
+					  <li>未发布</li>
+					  <li class="layui-this">已发布</li>
+					</ul>
+					<div class="layui-tab-content">
+					  	<div class="layui-tab-item layui-show">
+							<div  class="ry-banner">
+							    <form class="layui-form" >
+								<div class="layui-form-item">
+									<div class="layui-inline">
+										<label class="layui-form-label">频道栏目</label>
+										<div class="layui-input-inline">
+										  <select name="channelM" id="channelM" lay-filter="channelM">
+											<option value="">请选择</option>
+											#foreach($cm in $cms)
+												#if($cm.uuid==$!query.channelM)
+													<option value="$cm.uuid" selected>$cm.channelMName</option>
+												#else
+													<option value="$cm.uuid">$cm.channelMName</option>
+												#end
+											#end
+										</select>
+										</div>
+										<div class="layui-input-inline">
+										<select name="channel" id="channel">
+											<option value="">请选择</option>
+											#foreach($sub in $!subList)
+												#if($sub.uuid==$!query.channel)
+													<option value="$sub.uuid" selected>$sub.channelName</option>
+												#else
+													<option value="$sub.uuid">$sub.channelName</option>
+												#end
+											#end
+										</select>
+										</div>
+									  </div>
+								    <div class="layui-inline">
+								      <label class="layui-form-label">关键词</label>
+								      <div class="layui-input-inline">
+								        <input type="text" id="keyWords" name="keyWords" class="layui-input" value="$!{query.keyWords}">
+								      </div>
+									</div>
+									<div class="layui-inline inmt">
+										<label class="layui-form-label">发布时间</label>
+										<div class="layui-input-inline">
+										  <input name="pubBeginTime"  type="text" class="layui-input" id="test1" value="$!{query.pubBeginTime}">
+										</div>
+										<div class="layui-input-inline">
+										  <input name="pubEndTime" type="text" class="layui-input" id="test2" value="$!{query.pubEndTime}">
+										</div>
+									   </div>
+									  <div class="layui-inline inmt" style="margin-left: 50px;">
+										<!--  <label class="layui-form-label">资讯状态</label>
+										<div class="layui-input-inline">
+										  <select name="status" id="status">
+											  <option value="30">已发布</option>
+											  <option value="29">审核不通过</option>
+											  <option value="00">已撤销</option>
+										  </select> 
+										</div>  -->
+										<button class="layui-btn layui-btn-normal" lay-submit lay-filter="formId" >查询</button>
+										<button class="layui-btn layui-btn-primary resetFn" type="reset">重置</button>
+										<button class="layui-btn layui-btn-normal addFn">新增</button>
+									   </div> 
+								 	 </div>
+								 	 
+								   <!-- <div class="layui-form-item btn-right" style="text-align:right; margin-right:100px">
+									<button class="layui-btn" lay-submit lay-filter="formId" >查询</button>
+									<button class="layui-btn layui-btn-primary" type="reset">重置</button>
+									<button class="layui-btn layui-btn-normal addFn">新增</button>
+								  </div>   -->
+							</form>
+						</div>
+						  <!-- 列表 -->
+						  <table class="layui-table" lay-skin="nob">
+								<thead>
+								  <tr>
+									<th width="12%">发布日期</th>
+									<th width="12%">标题</th>
+									<th width="12%">频道</th>
+									<th width="12%">分类</th>
+									<th width="12%">发布者</th>
+									##<th>审核人</th>
+									##<th>审核时间</th>
+									<th width="12%">标签</th>
+									<th width="12%">状态</th>
+									<th width="12%">操作</th>
+								  </tr> 
+								</thead>
+								<tbody>
+								#foreach($data in $datas)
+								  <tr>
+									<td>$!data.releaseDate</td>
+									<td>$!data.title</td>
+									<td>$!data.channelMName</td> ##主频道名称
+									<td>$!data.channelName</td> ##频道名称
+									<td>$!data.createUser</td> ## 发布者名称
+									##<td>$!data.reviewer</td>
+									##<td>$!data.auditTime</td>
+									<td>$!data.tagList</td>  ##标签
+									#if($data.status == '00')
+										<td>已撤销</td>
+									#elseif($data.status == '10')
+										<td>草稿</td>
+									#elseif($data.status == '20')
+										<td>待审核</td>
+									#elseif($data.status == '29')
+										<td>审核驳回</td>
+									#elseif($data.status == '30')
+										<td>已发布</td>
+									#end
+									<td class="acss-color">
+										 <p>
+										 	 #if("$!data.informationType" == "" || $!data.informationType == '10')
+										 	 <a href="javascript:;" class="selected" style="margin-left:10px;color: #2760AD;" attr-data='{"uuid":"$!{data.uuid}"}'> 精选 </a>
+										 	 #else
+										 	 <a href="javascript:;" class="selected" style="margin-left:10px;color: #2760AD;" attr-data='{"uuid":"$!{data.uuid}"}'> 取消精选 </a>
+										 	 #end
+										 	 #if("$!data.stick" == "" || $!data.stick == '0')
+										 	 <a href="javascript:;" class="topLink" style="margin-left:10px;color: #2760AD;" attr-data='{"uuid":"$!{data.uuid}"}'> 置顶 </a>
+										 	 #else
+										 	 <a href="javascript:;" class="topLink" style="margin-left:10px;color: #2760AD;" attr-data='{"uuid":"$!{data.uuid}"}'> 取消置顶 </a>
+										 	 #end
+											 ## <a href="javascript:;" class="editLink" style="margin-left:10px;color: #2760AD;" attr-data="$data.uuid"> 编辑 </a>
+											 <a href="javascript:;" class="detailLink" style="margin-left:10px;color: #2760AD;" attr-data='{"uuid":"$data.uuid","type":"detail"}'>详情</a>
+											 <a href="javascript:;" class="revokeLink" style="margin-left:10px;color: #2760AD;" attr-data="$data.uuid"> 撤销 </a>
+										 </p>
+								    </td>
+								  </tr>
+								 #end
+								</tbody>
+							  </table>
+							</div>
+				</div>
+	<script src="../../info/js/statement/StatementPublish.js"></script>
+	
+	<!--底部分页-->
+	<div class="ry-footbar ry-right">
+		$contain.get('/contain/formPageSlider.htm').put('slider_query',$query).put('slider_target',"/om/statement/StatementPublish.htm").put('slider_path','/contain/formPagingPageSlider')
+	</div>
+</div>

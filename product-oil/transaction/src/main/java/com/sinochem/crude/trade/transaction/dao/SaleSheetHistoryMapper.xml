@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinochem.crude.trade.transaction.dao.SaleSheetHistoryMapper" >
+    <resultMap id="saleSheetHistory" type="com.sinochem.crude.trade.transaction.domain.po.SaleSheet" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="gmt_created" property="gmtCreated" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="user_created" property="userCreated" jdbcType="BIGINT" />
+        <result column="user_modified" property="userModified" jdbcType="BIGINT" />
+        <result column="alive_flag" property="aliveFlag" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+        <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
+        <result column="sale_sheet_status_code" property="saleSheetStatusCode" jdbcType="VARCHAR" />
+        <result column="saved_date" property="savedDate" jdbcType="TIMESTAMP" />
+        <result column="released_date" property="releasedDate" jdbcType="TIMESTAMP" />
+        <result column="cancelled_date" property="cancelledDate" jdbcType="TIMESTAMP" />
+        <result column="completed_date" property="completedDate" jdbcType="TIMESTAMP" />
+        <result column="sale_type_code" property="saleTypeCode" jdbcType="VARCHAR" />
+        <result column="product_source_code" property="productSourceCode" jdbcType="VARCHAR" />
+        <result column="specified_enterprise_id_list" property="specifiedEnterpriseIdList" jdbcType="VARCHAR" />
+        <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
+        <result column="product_info_id" property="productInfoId" jdbcType="BIGINT" />
+        <result column="pricing_info_id" property="pricingInfoId" jdbcType="BIGINT" />
+        <result column="transport_info_id" property="transportInfoId" jdbcType="BIGINT" />
+        <result column="ship_berth_code" property="shipBerthCode" jdbcType="VARCHAR" />
+        <result column="stakeholder_info_id" property="stakeholderInfoId" jdbcType="BIGINT" />
+        <result column="other_info_id" property="otherInfoId" jdbcType="BIGINT" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sinochem.crude.trade.transaction.domain.po.SaleSheet"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_sale_sheet_history (
+            uuid,
+            gmt_created,
+            gmt_modified,
+            user_created,
+            user_modified,
+            alive_flag,
+            version,
+            serial_number,
+            sale_sheet_status_code,
+            saved_date,
+            released_date,
+            cancelled_date,
+            completed_date,
+            sale_type_code,
+            product_source_code,
+            specified_enterprise_id_list,
+            enterprise_id,
+            product_info_id,
+            pricing_info_id,
+            transport_info_id,
+            ship_berth_code,
+            stakeholder_info_id,
+            other_info_id)
+        VALUES (
+            #{uuid, jdbcType=VARCHAR},
+            #{gmtCreated, jdbcType=TIMESTAMP},
+            #{gmtModified, jdbcType=TIMESTAMP},
+            #{userCreated, jdbcType=BIGINT},
+            #{userModified, jdbcType=BIGINT},
+            #{aliveFlag, jdbcType=INTEGER},
+            #{version, jdbcType=BIGINT},
+            #{serialNumber, jdbcType=VARCHAR},
+            #{saleSheetStatusCode, jdbcType=VARCHAR},
+            #{savedDate, jdbcType=TIMESTAMP},
+            #{releasedDate, jdbcType=TIMESTAMP},
+            #{cancelledDate, jdbcType=TIMESTAMP},
+            #{completedDate, jdbcType=TIMESTAMP},
+            #{saleTypeCode, jdbcType=VARCHAR},
+            #{productSourceCode, jdbcType=VARCHAR},
+            #{specifiedEnterpriseIdList, jdbcType=VARCHAR},
+            #{enterpriseId, jdbcType=BIGINT},
+            #{productInfoId, jdbcType=BIGINT},
+            #{pricingInfoId, jdbcType=BIGINT},
+            #{transportInfoId, jdbcType=BIGINT},
+            #{shipBerthCode, jdbcType=VARCHAR},
+            #{stakeholderInfoId, jdbcType=BIGINT},
+            #{otherInfoId, jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        DELETE FROM t_sale_sheet_history
+        WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sinochem.crude.trade.transaction.domain.po.SaleSheet" >
+        UPDATE t_sale_sheet_history
+        <set >
+            <if test="uuid != null" >
+                uuid = #{uuid, jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreated != null" >
+                gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCreated != null" >
+                user_created = #{userCreated, jdbcType=BIGINT},
+            </if>
+            <if test="userModified != null" >
+                user_modified = #{userModified, jdbcType=BIGINT},
+            </if>
+            <if test="aliveFlag != null" >
+                alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            </if>
+            <if test="version != null" >
+                version = #{version, jdbcType=BIGINT},
+            </if>
+            <if test="serialNumber != null" >
+                serial_number = #{serialNumber, jdbcType=VARCHAR},
+            </if>
+            <if test="saleSheetStatusCode != null" >
+                sale_sheet_status_code = #{saleSheetStatusCode, jdbcType=VARCHAR},
+            </if>
+            <if test="savedDate != null">
+                saved_date = #{savedDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="releasedDate != null">
+                released_date = #{releasedDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelledDate != null">
+                cancelled_date = #{cancelledDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="completedDate != null">
+                completed_date = #{completedDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleTypeCode != null" >
+                sale_type_code = #{saleTypeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="productSourceCode != null">
+                product_source_code = #{productSourceCode, jdbcType=VARCHAR},
+            </if>
+            <if test="specifiedEnterpriseIdList != null" >
+                specified_enterprise_id_list = #{specifiedEnterpriseIdList, jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseId != null" >
+                enterprise_id = #{enterpriseId, jdbcType=BIGINT},
+            </if>
+            <if test="productInfoId != null" >
+                product_info_id = #{productInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="pricingInfoId != null" >
+                pricing_info_id = #{pricingInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="transportInfoId != null" >
+                transport_info_id = #{transportInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="shipBerthCode != null" >
+                ship_berth_code = #{shipBerthCode, jdbcType=VARCHAR},
+            </if>
+            <if test="stakeholderInfoId != null" >
+                stakeholder_info_id = #{stakeholderInfoId, jdbcType=BIGINT},
+            </if>
+            <if test="otherInfoId != null" >
+                other_info_id = #{otherInfoId, jdbcType=BIGINT}
+            </if>
+        </set>
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.sinochem.crude.trade.transaction.domain.po.SaleSheet" >
+        UPDATE t_sale_sheet_history
+        SET
+            uuid = #{uuid, jdbcType=VARCHAR},
+            gmt_created = #{gmtCreated, jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            user_created = #{userCreated, jdbcType=BIGINT},
+            user_modified = #{userModified, jdbcType=BIGINT},
+            alive_flag = #{aliveFlag, jdbcType=INTEGER},
+            version = #{version, jdbcType=BIGINT},
+            serial_number = #{serialNumber, jdbcType=VARCHAR},
+            sale_sheet_status_code = #{saleSheetStatusCode, jdbcType=VARCHAR},
+            saved_date = #{savedDate, jdbcType=TIMESTAMP},
+            released_date = #{releasedDate, jdbcType=TIMESTAMP},
+            cancelled_date = #{cancelledDate, jdbcType=TIMESTAMP},
+            completed_date = #{completedDate, jdbcType=TIMESTAMP},
+            sale_type_code = #{saleTypeCode, jdbcType=VARCHAR},
+            product_source_code = #{productSourceCode, jdbcType=VARCHAR},
+            specified_enterprise_id_list = #{specifiedEnterpriseIdList, jdbcType=VARCHAR},
+            enterprise_id = #{enterpriseId, jdbcType=BIGINT},
+            product_info_id = #{productInfoId, jdbcType=BIGINT},
+            pricing_info_id = #{pricingInfoId, jdbcType=BIGINT},
+            transport_info_id = #{transportInfoId, jdbcType=BIGINT},
+            ship_berth_code = #{shipBerthCode, jdbcType=VARCHAR},
+            stakeholder_info_id = #{stakeholderInfoId, jdbcType=BIGINT},
+            other_info_id = #{otherInfoId, jdbcType=BIGINT}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="saleSheetHistory" parameterType="java.lang.Long" >
+        SELECT * FROM t_sale_sheet_history
+        WHERE id = #{id, jdbcType=BIGINT}
+        AND alive_flag = 1
+    </select>
+
+    <select id="selectByUuid" resultMap="saleSheetHistory" parameterType="java.lang.String">
+        SELECT * FROM t_sale_sheet_history
+        WHERE uuid = #{uuid, jdbcType=VARCHAR}
+        AND alive_flag = 1
+    </select>
+</mapper>

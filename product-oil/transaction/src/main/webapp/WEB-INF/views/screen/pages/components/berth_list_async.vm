@@ -1,0 +1,18 @@
+
+<table class="table table-bordered" id="berthListAsync">
+    <thead>
+        <tr>
+            <td class="active">No.</td>
+            <td class="active">Berth</td>
+            <td class="active">Tonnage</td>
+            <td class="active">Draft</td>
+            <td class="active">Vessel Size</td>
+            <td class="active">Remark</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+#js($appServer.get('/script/pages/components/berth_list_async.js?js_version=03280827'))

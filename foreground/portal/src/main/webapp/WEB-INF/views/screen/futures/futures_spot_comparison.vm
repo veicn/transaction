@@ -1,0 +1,462 @@
+
+<div class="inner">
+    <div class="qh-bc clearfix">
+        <h1><em></em>期现比价</h1>
+        <ul class="qh-bc-cont">
+            <li>
+                <div class="qh-bc-cont-t">
+                    <span>期货实时价格</span>
+                    <p id="realTimeINEPrice">
+                        ¥<em>元/桶</em>
+                    </p>
+                </div>
+                <ul class="qh-bc-cont-b clearfix">
+                    <li><span>交易所：</span><p>上海国际能源交易中心</p></li>
+                    <li><span>交易品种：</span><p>中质含硫原油</p></li>
+                    <li><span>合约：</span>
+                        <select class="qh-bc-sel" id="ineSymbols" name="futuresSymbol" value="$!{spotEstimationVO.futuresSymbol}">
+                            #foreach($ineSymbol in $!{ineSymbolList})
+                                <option value="$!{ineSymbol.symbol}"
+                                    #if($!{ineSymbol.symbol} == $!{spotEstimationVO.futuresSymbol})
+                                        selected
+                                    #end>
+                                    $!{ineSymbol.symbolName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <input type="hidden" name="futuresYearMonthPair" id="futuresYearMonthPair" value="$!{spotEstimationVO.futuresYearMonthPair}"/>
+                    <span class="qh-ann1"><button type="button" onclick="openTradeAddress()">期货交易</button></span>
+                </ul>
+            </li>
+            <li class="qh-bc-cont-li">
+                <span class="">VS</span>
+                <button type="button" id="compareButton" onclick="compare()">对比</button>
+            </li>
+            <li>
+                <div class="qh-bc-cont-t">
+                    <span>实货实时价格</span>
+                    <p>
+                        #if($!{spotEstimationVO.currencyCode} == '1')
+                            $
+                        #elseif($!{spotEstimationVO.currencyCode} == '2')
+                            ¥
+                        #else
+                            ¥
+                        #end
+                        $!{spotEstimationVO.spotPriceResult}
+                        #if($!{spotEstimationVO.currencyCode} == '1')
+                            <em>美元/桶</em>
+                        #elseif($!{spotEstimationVO.spotPriceResult} == '2')
+                            <em>元/桶</em>
+                        #else
+                            <em>元/桶</em>
+                        #end
+
+                    </p>
+                </div>
+                <ul class="qh-bc-cont-b clearfix">
+                    <li><span>币种：</span>
+                        #foreach($currency in $currencyList)
+                            <input class="qh-bc-rad currencySelect" type="radio" name="radio" value="$!{currency.code}"
+                                #if($!{currency.code} == $!{spotEstimationVO.currencyCode})
+                                    checked
+                                #end>
+                            $!{currency.zhName}
+                        #end
+
+                        <input type="hidden" id="currencyCode" name="currencyCode" value="$!{spotEstimationVO.currencyCode}"/>
+                    </li>
+                    <li>
+                        <span>油种：</span>
+                        <select class="qh-bc-sel" name="oilTypeCode" value="$!{spotEstimationVO.oilTypeCode}">
+                            #foreach($oilType in $oilTypeList)
+                                <option value="$!{oilType.code}"
+                                    #if($!{oilType.code} ==  $!{spotEstimationVO.oilTypeCode})
+                                        selected
+                                    #end>
+                                    $!{oilType.zhName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>到港月份：</span>
+                        <select class="qh-bc-sel" id="arrivalYearMonthPair" name="arrivalYearMonthPair" value="$!{spotEstimationVO.arrivalYearMonthPair}">
+                            #foreach($availableArrivalMonth in $availableArrivalMonthList)
+                                <option value="$!{availableArrivalMonth.code}"
+                                    #if($!{availableArrivalMonth.code} == $!{spotEstimationVO.arrivalYearMonthPair})
+                                        selected
+                                    #end>
+                                    $!{availableArrivalMonth.zhName}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>卸货港：</span>
+                        <select class="qh-bc-sel" name="shipPortCode" value="$!{spotEstimationVO.shipPortCode}">
+                            #foreach($availableDischargePort in $availableDischargePortList)
+                                <option value="$!{availableDischargePort.code}"
+                                    #if($!{availableDischargePort.code} == $!{spotEstimationVO.shipPortCode})
+                                        selected
+                                    #end>
+                                    $!{availableDischargePort.value}
+                                </option>
+                            #end
+                        </select>
+                    </li>
+                    <li><span>仓储成本：</span>
+                        <input class="qh-bc-inp" name="storageCost" value="$!{spotEstimationVO.storageCost}"/>元
+                        <em><i class="c-ico inf-zy" id="openDetailTip"></i><a href="javascript:void(0)" id="openSpotEstimationDetail">数据明细</a></em>
+
+                        <!-- 数据明细弹出框 -->
+                        <div class="qh-cccb" id="detailTip" style="display: none">
+                            最低仓储成本：4元每桶<br/>
+                            仓储时间：期货所选时间 - 实货到港时间
+                        </div>
+                    </li>
+                    <span class="qh-ann"><button type="button" onclick="submitForm()">确认</button></span>
+                    <span class="qh-ann1"><button type="button" onclick='redirectToCrudeOilLobby()'>现货交易</button></span>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--数据明细弹出框-->
+<div class="qh-sjmx" id="spotEstimation" style="display: none">
+    <ul class="qh-sjmx-con clearfix">
+        <li><span>FOB现货成本：</span><input type="text" name="spotCostFOB" value="$!{spotEstimationVO.spotCostFOB}"/><em>美元／桶</em></li>
+        <li><span>运费：</span><input type="text" name="abroadTransportationFee" value="$!{spotEstimationVO.abroadTransportationFee}"/><em>美元／桶</em></li>
+        <li><span id="openDemurrageChargeTip">滞期费：
+            <a href=""><i class="c-ico inf-sjmx"></i></a></span>
+            <input type="text" name="demurrageCharge" value="$!{spotEstimationVO.demurrageCharge}"/><em>美元／桶</em>
+        </li>
+        <li><span>货物保险费：</span>
+            <input type="text" name="cargoPremium" value="$!{spotEstimationVO.cargoPremium}"/><em>美元／桶</em>
+        </li>
+        <li><span id="openCapitalCostTip">资金成本：<a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="capitalCost" value="$!{spotEstimationVO.capitalCost}"/><em>元／桶</em>
+        </li>
+        <li><span id="openFixedCostTip">固定费用：<a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="fixedCost" value="$!{spotEstimationVO.fixedCost}"/><em>元／桶</em>
+        </li>
+        <li><span id="openEstimationTip">其他费用：
+            <a href=""><i class="c-ico inf-sjmx1"></i></a></span>
+            <input type="text" name="otherCost" value="$!{spotEstimationVO.otherCost}"/><em>元／桶</em>
+        </li>
+        <li><span>货损：</span><p>0.005</p></li>
+        <li><span>人民币远期汇率：</span><p>$!{spotEstimationVO.exchangeRate}</p></li>
+        <li><span>入库损耗系数：</span><p>0.006</p></li>
+    </ul>
+    <div class="qh-sjmx-butt"><button type="button" id="closeSpotEstimationDetail">确定</button></div>
+</div>
+
+<!--滞期费弹出框-->
+<div class="qh-sjmx-dau" id="demurrageChargeTip" style="display: none">滞期费按照7天计算</div>
+
+<!--资金成本弹出框-->
+<div class="qh-sjmx-zj" id="capitalCostTip" style="display: none">融资成本：年化利率7%</div>
+
+<!--固定费用弹出框-->
+<div class="qh-sjmx-gd" id="fixedCostTip" style="display: none">交割手续费：0.05元/桶 <br>交割升贴水：0元/桶</div>
+
+<!--成本费用弹出框-->
+<div class="qh-sjmx-tab" id="estimationTip" style="display: none">
+    <table>
+        <tr>
+            <th>商检费</th>
+            <td>$!{estimationTipVO.commodityInspectionFee}</td>
+            <td>元／桶</td>
+        </tr>
+        <tr>
+            <th>货代代理费</th>
+            <td>$!{estimationTipVO.forwarderAgencyFee}</td>
+            <td>元／桶</td>
+        </tr>
+        <tr>
+            <th>装卸费</th>
+            <td>$!{estimationTipVO.handlingCharges}</td>
+            <td>元／桶</td>
+        </tr>
+        <tr>
+            <th>油污损害赔偿基金</th>
+            <td>$!{estimationTipVO.oilPollutionCompensation}</td>
+            <td>元／桶</td>
+        </tr>
+        <tr>
+            <th>代收安保费</th>
+            <td>$!{estimationTipVO.proxySecurityCharge}</td>
+            <td>元／桶</td>
+        </tr>
+        <tr>
+            <th>代收进油港务费</th>
+            <td>$!{estimationTipVO.proxyOilInHarbourCharge}</td>
+            <td>元／桶</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    var comparing = false;
+
+    var futuresPrice = "";
+    var spotPrice = "$!{spotEstimationVO.spotPriceResult}";
+
+    var selectedSymbolName;
+    var selectedSymbol;
+    var selectedIndex;
+    var firstRequest = true;
+
+    $(function() {
+        if (!spotPrice) {
+            layer.alert("获取实货价格失败", {
+                btn: false
+            });
+        }
+
+        $('.closeResult').click(function() {
+            layer.closeAll();
+        });
+
+        $('.currencySelect').click(function() {
+            var value = $(this).val();
+            $('#currencyCode').val(value);
+        });
+
+        $('#ineSymbols').change(function() {
+            setSelected();
+        });
+
+        $('#openSpotEstimationDetail').click(function() {
+            $('#spotEstimation').css("display", "block");
+        });
+
+        $('#closeSpotEstimationDetail').click(function() {
+            $('#spotEstimation').css("display", "none");
+        });
+
+        $('#openDemurrageChargeTip').mouseenter(function() {
+            $('#demurrageChargeTip').css("display", "block");
+        });
+
+        $('#openDemurrageChargeTip').mouseout(function() {
+            $('#demurrageChargeTip').css("display", "none");
+        });
+
+        $('#openCapitalCostTip').mouseenter(function() {
+            $('#capitalCostTip').css("display", "block");
+        });
+
+        $('#openCapitalCostTip').mouseout(function() {
+            $('#capitalCostTip').css("display", "none");
+        });
+
+        $('#openFixedCostTip').mouseenter(function() {
+            $('#fixedCostTip').css("display", "block");
+        });
+
+        $('#openFixedCostTip').mouseout(function() {
+            $('#fixedCostTip').css("display", "none");
+        });
+
+        $('#openEstimationTip').mouseenter(function() {
+            $('#estimationTip').css("display", "block");
+        });
+
+        $('#openEstimationTip').mouseout(function() {
+            $('#estimationTip').css("display", "none");
+        });
+
+        $('#openDetailTip').mouseenter(function() {
+            $('#detailTip').css("display", "block");
+        });
+
+        $('#openDetailTip').mouseleave(function() {
+            $('#detailTip').css("display", "none");
+        });
+
+        setSelected();
+        setInterval("querySymbolPrice()", 10000);
+    })
+
+    function setSelected() {
+        selectedSymbol = $("#ineSymbols").find("option:selected").val();
+        $("#ineSymbols").val(selectedSymbol);
+
+        selectedSymbolName = $("#ineSymbols").find("option:selected").text();
+        selectedSymbolName = $.trim(selectedSymbolName);
+
+        selectedIndex = $('#ineSymbols').prop('selectedIndex');
+
+        var futuresYearMonthPair = selectedSymbolName.substring(selectedSymbolName.length - 4);
+        $('#futuresYearMonthPair').val(futuresYearMonthPair);
+
+        firstRequest = true;
+        querySymbolPrice();
+    }
+
+    function submitForm() {
+        $('#spotPriceForm').submit();
+    }
+
+    function querySymbolPrice() {
+        if (!selectedSymbolName || !selectedSymbol) {
+            return;
+        }
+
+        var symbolPriceUrl = "$appServer.get('/getIneSymbolPriceRealtime.json').toString()";
+        symbolPriceUrl = symbolPriceUrl + "?symbolName=" + selectedSymbolName;
+
+        $.ajax({
+            type: "GET",
+            url: symbolPriceUrl,
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(result) {
+                console.log(result);
+
+                var data = result.symbolPriceRealTime;
+                if (!data) {
+                    var symbolPriceUrlLastDay = "$infoServer.get('/query/newSymbolPrice.json').toString()";
+
+                    $.ajax({
+                        type: "POST",
+                        url: symbolPriceUrlLastDay,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            symbol: selectedSymbol,
+                            symbolName: selectedSymbolName
+                        }),
+                        success: function(result) {
+                            console.log(result);
+
+                            var dataLastDay = result.dataList.settlementPrice;
+                            if (!dataLastDay) {
+                                console.log('获取合约数据失败');
+
+
+                                if (firstRequest) {
+                                    firstRequest = false;
+                                    layer.alert('获取合约数据失败', {
+                                        btn: false
+                                    });
+                                }
+
+                                return;
+                            }
+
+                            futuresPrice = "" + dataLastDay;
+                            $('#realTimeINEPrice').html("¥" + dataLastDay + "<em>元/桶</em>");
+                            return;
+                        }
+                    });
+
+                    return;
+                }
+
+                futuresPrice = "" + data;
+                $('#realTimeINEPrice').html("¥" + data + "<em>元/桶</em>");
+            }
+        });
+    }
+
+    function compare() {
+        if (!futuresPrice || !spotPrice) {
+            return;
+        }
+
+        var futuresYearMonth = $('#futuresYearMonthPair').val();
+        if (!futuresYearMonth) {
+            return;
+        }
+
+        var compareUrl = "$appServer.get('/priceCompare.json').toString()";
+        var currencyCode = "$!{spotEstimationVO.currencyCode}";
+
+        $.ajax({
+            type: "POST",
+            url: compareUrl,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({
+                currencyCode: currencyCode,
+                futuresYearMonthPair: futuresYearMonth,
+                futuresPrice: futuresPrice,
+                spotPrice: spotPrice
+            }),
+            success: function(result) {
+                var error = result.error;
+                if (error) {
+                    layer.alert('获取对比结果失败', {
+                        btn: false
+                    });
+                    return;
+                }
+
+                var type = result.type;
+                if (type == '1') {
+                    layer.open({
+                        type: 0,
+                        id:'unableToEarnProfit',
+                        title: '对比结果',
+                        shade: false,
+                        scrollbar : false,
+                        content: "<p>当前价格无套利空间</p>",
+                        btn: false
+                    });
+
+                    return
+                } else {
+                    var compareResult = result.result;
+                    var unit = result.currencyCode == '1' ? '美元' : '元';
+
+                    if (type == '2') {
+                        layer.open({
+                            type: 0,
+                            id:'sellerPrefer',
+                            title: '对比结果',
+                            shade: false,
+                            scrollbar : false,
+                            content: "<p>实货价值低估<em>" + compareResult + "</em>" + unit + "</p>",
+                            btn: false
+                        });
+
+                        return
+                    }
+
+                    if (type == '3') {
+                        layer.open({
+                            type: 0,
+                            id:'buyerPrefer',
+                            title: '对比结果',
+                            shade: false,
+                            scrollbar : false,
+                            content: "<p>实货价值高估<em>" + compareResult + "</em>" + unit + "</p>",
+                            btn: false
+                        });
+
+                        return;
+                    }
+                }
+            }
+        });
+    }
+
+    function openTradeAddress() {
+        layer.open({
+            type: 0,
+            id: 'refirectToTrade',
+            title: '期货交易',
+            shade: false,
+            scrollbar: false,
+            content: '<p>进行期货交易需要开立期货账户，点击立即开户，表示您\n' +
+                            '同意授权在冠通期货开立账户，后续相关期货服务由冠通期货提供。</p> \n' +
+                        '<span class="qh-ann1"><button type="button" onclick="window.location.href=\'http://www.gtfutures.com.cn/MainPage.aspx?code=901048747\'">立即开户</button></span>'
+        });
+    }
+
+    function redirectToCrudeOilLobby() {
+        window.location.href = '$listedServer.get("/crudeoillobby/crudeoilsupmlist.htm?order=2")';
+    }
+</script>

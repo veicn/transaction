@@ -1,0 +1,16 @@
+<body >
+<div class="zcxx-wrap2">
+    <div class="s-register ">
+        <ul class="clearfix s-regis-title">
+            <li class="curr"><a href="?t=0">Individual</a></li>
+            <li><a href="?t=1">Company</a></li>
+        </ul>
+        <div class="s-tab s-tab-brief">
+            <ul class="s-tab-title s-tab-regtitle">
+
+                <li #if($t == "mail")class="s-this" #end data-onshow="mail">Email</li>
+            </ul>
+            <div class="s-tab-content s-reg-top">
+                <div class="clearfix  s-show">
+                    <div class="s-rleft  s-tab-item  s-rtab-item ">
+                        <h6 class="s-regi-title">Welcome to Product Oil.com</h6>

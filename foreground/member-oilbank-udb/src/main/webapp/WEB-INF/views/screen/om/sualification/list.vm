@@ -1,0 +1,117 @@
+<div class="layui-fluid">
+    <div style="padding-top: 25px;">
+
+    </div>
+    <center>
+        <form action="$appServer.get('om/sualification/list.htm')" method="post">
+            <input name="name" value="$!{name}">
+            <input type="submit" value="搜索">
+        </form>
+    </center>
+##    <a href="#" class="layui-btn layui-btn-xs">添加</a>
+    <table class="layui-table"  lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id', width:80, sort: true}">序号</th>
+            <th lay-data="{field:'userName', width:80}">企业帐号</th>
+            <th lay-data="{field:'name', width:80}">企业名</th>
+            <th lay-data="{field:'email', width:80}">企业邮箱</th>
+            <th lay-data="{field:'email', width:80}">资质类型</th>
+            <th lay-data="{field:'description', width:80}">审核状态</th>
+            <th lay-data="{field:'wealth', width:135, sort: true}">操作</th>
+        </tr>
+        </thead>
+        #foreach($item in $page.list)
+            <tr>
+                <td>$velocityCount</td>
+                <td>$!item.userName</td>
+                <td>$!item.name</td>
+                <td>$!item.mail</td>
+                <td>
+                    #foreach($credentials in $credentials)
+                        #if($credentials.code == $item.credentialsCode)
+                            $credentials.name
+                            #break
+                        #end
+                    #end
+                </td>
+                <td >
+                    #if($item.audit==0)
+                        未审批
+                    #elseif($item.audit==1)
+                        已审批
+                    #elseif($item.audit==2)
+                        已驳回
+                    #end
+                </td>
+                <td >
+                    #if($item.audit==0)
+                        <a id="audit"  data-method="setTop" data-id="${item.id}" data-mid="${item.memberId}" class="layui-btn layui-btn-xs" data-type="$item.credentialsCode">审批</a>
+                    #else
+                        <a id="audit"  data-method="setTop" data-id="${item.id}" data-mid="${item.memberId}" class="layui-btn layui-btn-xs" data-type="$item.credentialsCode">查看</a>
+                    #end
+                </td>
+            </tr>
+        #end
+    </table>
+    $contain.get('/page/page.htm').put('pageInfo',$!{page})
+</div>
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+    });
+
+    $(function(){
+        var title;
+        var url;
+        var active = {
+            setTop: function () {
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: title
+                    , area: ['500px', '500px']
+                    , shade: 0
+                    , maxmin: true
+                    , id:1
+                    , content: url
+                   ## , btn: ['关闭'] //只是为了演示
+                    , yes: function () {
+                        layer.closeAll();
+                    }
+                    , zIndex: layer.zIndex //重点1
+                    , success: function (layero) {
+                        layer.setTop(layero); //重点2
+                    }
+                });
+            }
+        }
+
+        $("[id=audit]").click(function () {
+            var type = $(this).attr('data-type');
+            var id = $(this).attr('data-id');
+            var mid = $(this).attr('data-mid');
+            var othis = $(this), method = othis.data('method');
+            title = '审核';
+            url = "$appServer.get('om/sualification/auditShow.htm')?type="+type+"&id="+id+"&memberId="+mid;
+            active[method] ? active[method].call(this, othis) : '';
+##            layer.alert('确认要审核吗？',function(){
+##                $.post("$appServer.get('om/sualification/audit.htm')", {id: id}, function (data) {
+##                    if(data=='success'){
+##                        layer.alert('审核成功',function(){
+##                            window.location.href = '$appServer.get('om/sualification/list.htm')';
+##                        })
+##                    }else{
+##                        layer.alert('审核失败，请重试',function(){
+##                            window.location.href = '$appServer.get('om/sualification/list.htm')';
+##                        })
+##                    }
+##                })
+##            })
+        })
+
+
+    })
+</script>

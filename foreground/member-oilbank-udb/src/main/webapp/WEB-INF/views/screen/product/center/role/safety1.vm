@@ -1,0 +1,31 @@
+$contain.get('/common/title.htm').put('title', '修改密码验证（个人中心）')
+#css($appServer.get('/product/css/common/reset.css'))
+#css($appServer.get('/product/css/common/public.css'))
+#css($appServer.get('/product/css/work/myResouces.css'))
+#css($appServer.get('/product/css/work/shipping.css'))
+#css($appServer.get('/product/css/work/account.css'))
+
+<div class="ep-content fl clearfix">
+    <div class="main-tit">
+        <h3>Forgot Password</h3>
+    </div>
+    <ul class="stowage-steps clearfix">
+        <li class="steps done fl">
+            <div class="steps-infor complete">
+                <span>Security</span><br/>
+                <span>Verification</span>
+            </div>
+        </li>
+        <li class="steps fl doing">
+            <div class="steps-infor">
+                <span>Password<br/> Reset</span>
+            </div>
+        </li>
+    </ul>
+    <p class="">Please fill in the account you need to find. </p><br/>
+    <p class="fl"> Verification:</p>
+    <h2 class="fl"> Verification via 515**8@qq.com</h2><br/>
+    <em class=" button-b">
+        <a class="br btn-sub">Next</a>
+    </em>
+</div>

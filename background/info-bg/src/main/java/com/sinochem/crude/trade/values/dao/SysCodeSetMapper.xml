@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sinochem.crude.trade.values.dao.SysCodeSetMapper">
+	<resultMap type="com.sinochem.crude.trade.values.domain.SysCodeSet" id="SysCodeSet">
+		<result property="id" column="ID" />
+		<result property="modelCode" column="MODEL_CODE" />
+		<result property="setCode" column="SET_CODE" />
+		<result property="setName" column="SET_NAME" />
+		<result property="itemCode" column="ITEM_CODE" />
+		<result property="itemName" column="ITEM_NAME" />
+		<result property="itemSort" column="ITEM_SORT" />
+		<result property="itemParent" column="ITEM_PARENT" />
+		<result property="itemRelation" column="ITEM_RELATION" />
+		<result property="isEdit" column="IS_EDIT" />
+		<result property="platCode" column="PLAT_CODE" />
+		<result property="itemDesc" column="ITEM_DESC" />
+		<result property="itemLevel" column="ITEM_LEVEL" />
+		<result property="remark" column="REMARK" />
+		<result property="status" column="STATUS" />
+		<result property="createUser" column="CREATE_USER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateUser" column="UPDATE_USER" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="aliveFlag" column="ALIVE_FLAG" />
+		<result property="marketId" column="MARKET_ID" />
+		<result property="langVer" column="LANG_VER" />
+		<result property="ext1" column="EXT1" />
+		<result property="ext2" column="EXT2" />
+		<result property="ext3" column="EXT3" />
+		<result property="ext4" column="EXT4" />
+		<result property="ext5" column="EXT5" />
+		<result property="ext6" column="EXT6" />
+		<result property="ext7" column="EXT7" />
+		<result property="ext8" column="EXT8" />
+		<result property="ext9" column="EXT9" />
+		<result property="ext10" column="EXT10" />
+	</resultMap>
+
+	<resultMap id="SysCodeSetGroup" type="com.sinochem.crude.trade.values.domain.SysCodeSetOnlyGroup">
+		<result property="module" column="MODEL_CODE" />
+		<result property="setCode" column="SET_CODE" />
+		<result property="setName" column="SET_NAME" />
+		<result property="isEditable" column="IS_EDIT" />
+	</resultMap>
+
+
+	<select id="queryByEntitys" resultMap="SysCodeSet" parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		select * from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE=#{modelCode}</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME=#{setName}</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+	</select>
+
+	<select id="findByPrimaryKey" resultMap="SysCodeSet">
+		select
+		* from T_SYS_CODE_SET
+		where
+		ID=#{id}
+		and ALIVE_FLAG='1'
+	</select>
+
+	<update id="updateRecord"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		update T_SYS_CODE_SET
+		<set>
+			ID=#{id}
+			<if test="modelCode!=null">,MODEL_CODE = #{modelCode}</if>
+			<if test="setCode!=null">,SET_CODE = #{setCode}</if>
+			<if test="setName!=null">,SET_NAME = #{setName}</if>
+			<if test="itemCode!=null">,ITEM_CODE = #{itemCode}</if>
+			<if test="itemName!=null">,ITEM_NAME = #{itemName}</if>
+			<if test="itemSort!=null">,ITEM_SORT = #{itemSort}</if>
+			<if test="itemParent!=null">,ITEM_PARENT = #{itemParent}</if>
+			<if test="itemRelation!=null">,ITEM_RELATION = #{itemRelation}</if>
+			<if test="isEdit!=null">,IS_EDIT = #{isEdit}</if>
+			<if test="platCode!=null">,PLAT_CODE = #{platCode}</if>
+			<if test="itemDesc!=null">,ITEM_DESC = #{itemDesc}</if>
+			<if test="itemLevel!=null">,ITEM_LEVEL = #{itemLevel}</if>
+			<if test="remark!=null">,REMARK = #{remark}</if>
+			<if test="status!=null">,STATUS = #{status}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="ext1!=null">,EXT1 = #{ext1}</if>
+			<if test="ext2!=null">,EXT2 = #{ext2}</if>
+			<if test="ext3!=null">,EXT3 = #{ext3}</if>
+			<if test="ext4!=null">,EXT4 = #{ext4}</if>
+			<if test="ext5!=null">,EXT5 = #{ext5}</if>
+			<if test="ext6!=null">,EXT6 = #{ext6}</if>
+			<if test="ext7!=null">,EXT7 = #{ext7}</if>
+			<if test="ext8!=null">,EXT8 = #{ext8}</if>
+			<if test="ext9!=null">,EXT9 = #{ext9}</if>
+			<if test="ext10!=null">,EXT10 = #{ext10}</if>
+		</set>
+		where
+		ID=#{id}
+		and ALIVE_FLAG='1'
+	</update>
+
+	<insert id="insertRecord"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		insert into T_SYS_CODE_SET ( ID
+		,MODEL_CODE
+		,SET_CODE
+		,SET_NAME
+		,ITEM_CODE
+		,ITEM_NAME
+		,ITEM_SORT
+		,ITEM_PARENT
+		,ITEM_RELATION
+		,IS_EDIT
+		,PLAT_CODE
+		,ITEM_DESC
+		,ITEM_LEVEL
+		,REMARK
+		,STATUS
+		,CREATE_USER
+		,CREATE_DATE
+		,UPDATE_USER
+		,UPDATE_DATE
+		,ALIVE_FLAG
+		,MARKET_ID
+		,LANG_VER
+		,EXT1
+		,EXT2
+		,EXT3
+		,EXT4
+		,EXT5
+		,EXT6
+		,EXT7
+		,EXT8
+		,EXT9
+		,EXT10
+		)
+		values( #{id}
+		,#{modelCode}
+		,#{setCode}
+		,#{setName}
+		,#{itemCode}
+		,#{itemName}
+		,#{itemSort}
+		,#{itemParent}
+		,#{itemRelation}
+		,#{isEdit}
+		,#{platCode}
+		,#{itemDesc}
+		,#{itemLevel}
+		,#{remark}
+		,#{status}
+		,#{createUser}
+		,#{createDate}
+		,#{updateUser}
+		,#{updateDate}
+		,#{aliveFlag}
+		,#{marketId}
+		,#{langVer}
+		,#{ext1}
+		,#{ext2}
+		,#{ext3}
+		,#{ext4}
+		,#{ext5}
+		,#{ext6}
+		,#{ext7}
+		,#{ext8}
+		,#{ext9}
+		,#{ext10}
+		)
+	</insert>
+
+	<update id="deleteRecordByKey">
+		update T_SYS_CODE_SET
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+		</set>
+		where
+		ID=#{id}
+
+	</update>
+
+	<select id="queryRecords" resultType="java.util.HashMap"
+		parameterType="hashmap">
+		select
+		ID as "id"
+		, MODEL_CODE as "modelCode"
+		, SET_CODE as "setCode"
+		, SET_NAME as "setName"
+		, ITEM_CODE as "itemCode"
+		, ITEM_NAME as "itemName"
+		, ITEM_SORT as "itemSort"
+		, ITEM_PARENT as "itemParent"
+		, ITEM_RELATION as "itemRelation"
+		, IS_EDIT as "isEdit"
+		, PLAT_CODE as "platCode"
+		, ITEM_DESC as "itemDesc"
+		, ITEM_LEVEL as "itemLevel"
+		, REMARK as "remark"
+		, STATUS as "status"
+		, CREATE_USER as "createUser"
+		, CREATE_DATE as "createDate"
+		, UPDATE_USER as "updateUser"
+		, UPDATE_DATE as "updateDate"
+		, ALIVE_FLAG as "aliveFlag"
+		, MARKET_ID as "marketId"
+		, LANG_VER as "langVer"
+		, EXT1 as "ext1"
+		, EXT2 as "ext2"
+		, EXT3 as "ext3"
+		, EXT4 as "ext4"
+		, EXT5 as "ext5"
+		, EXT6 as "ext6"
+		, EXT7 as "ext7"
+		, EXT8 as "ext8"
+		, EXT9 as "ext9"
+		, EXT10 as "ext10"
+		from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE=#{modelCode}</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME=#{setName}</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+	</select>
+
+	<select id="countRecords" resultType="int" parameterType="hashmap">
+		select
+		count(*) from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE=#{modelCode}</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME=#{setName}</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+
+	</select>
+
+	<update id="deleteRecords" parameterType="hashmap">
+		update T_SYS_CODE_SET
+		<set>
+			ALIVE_FLAG='0'
+			,UPDATE_USER = #{updateUser}
+			,UPDATE_DATE = SYSDATE()
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE=#{modelCode}</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME=#{setName}</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+	</update>
+
+	<update id="updateRecords" parameterType="hashmap">
+		update T_SYS_CODE_SET
+		<set>
+			ID=#{id}
+			<if test="modelCode!=null">,MODEL_CODE = #{modelCode}</if>
+			<if test="setCode!=null">,SET_CODE = #{setCode}</if>
+			<if test="setName!=null">,SET_NAME = #{setName}</if>
+			<if test="itemCode!=null">,ITEM_CODE = #{itemCode}</if>
+			<if test="itemName!=null">,ITEM_NAME = #{itemName}</if>
+			<if test="itemSort!=null">,ITEM_SORT = #{itemSort}</if>
+			<if test="itemParent!=null">,ITEM_PARENT = #{itemParent}</if>
+			<if test="itemRelation!=null">,ITEM_RELATION = #{itemRelation}</if>
+			<if test="isEdit!=null">,IS_EDIT = #{isEdit}</if>
+			<if test="platCode!=null">,PLAT_CODE = #{platCode}</if>
+			<if test="itemDesc!=null">,ITEM_DESC = #{itemDesc}</if>
+			<if test="itemLevel!=null">,ITEM_LEVEL = #{itemLevel}</if>
+			<if test="remark!=null">,REMARK = #{remark}</if>
+			<if test="status!=null">,STATUS = #{status}</if>
+			<if test="createUser!=null">,CREATE_USER = #{createUser}</if>
+			<if test="createDate!=null">,CREATE_DATE = #{createDate}</if>
+			<if test="updateUser!=null">,UPDATE_USER = #{updateUser}</if>
+			<if test="updateDate!=null">,UPDATE_DATE = #{updateDate}</if>
+			<if test="aliveFlag!=null">,ALIVE_FLAG = #{aliveFlag}</if>
+			<if test="marketId!=null">,MARKET_ID = #{marketId}</if>
+			<if test="langVer!=null">,LANG_VER = #{langVer}</if>
+			<if test="ext1!=null">,EXT1 = #{ext1}</if>
+			<if test="ext2!=null">,EXT2 = #{ext2}</if>
+			<if test="ext3!=null">,EXT3 = #{ext3}</if>
+			<if test="ext4!=null">,EXT4 = #{ext4}</if>
+			<if test="ext5!=null">,EXT5 = #{ext5}</if>
+			<if test="ext6!=null">,EXT6 = #{ext6}</if>
+			<if test="ext7!=null">,EXT7 = #{ext7}</if>
+			<if test="ext8!=null">,EXT8 = #{ext8}</if>
+			<if test="ext9!=null">,EXT9 = #{ext9}</if>
+			<if test="ext10!=null">,EXT10 = #{ext10}</if>
+		</set>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE=#{modelCode}</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME=#{setName}</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+	</update>
+
+	<select id="queryInGroup" resultMap="SysCodeSet"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		select * from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE like concat('%', #{modelCode}, '%')</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME like concat('%', #{setName}, '%')</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+		order by ITEM_SORT asc
+	</select>
+
+	<select id="queryDistinctGroup" resultMap="SysCodeSetGroup"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		select distinct MODEL_CODE, SET_CODE, SET_NAME, MIN(IS_EDIT) as
+		IS_EDIT from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE like concat('%', #{modelCode}, '%')</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME like concat('%', #{setName}, '%')</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+		group by MODEL_CODE, SET_CODE, SET_NAME order by MAX(CREATE_DATE) desc
+	</select>
+
+	<select id="queryEditable" resultType="java.lang.String"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		select MIN(IS_EDIT) as IS_EDIT from T_SYS_CODE_SET
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="modelCode!=null and modelCode!=''">and MODEL_CODE like concat('%', #{modelCode}, '%')</if>
+		<if test="setCode!=null and setCode!=''">and SET_CODE=#{setCode}</if>
+		<if test="setName!=null and setName!=''">and SET_NAME like concat('%', #{setName}, '%')</if>
+		<if test="itemCode!=null and itemCode!=''">and ITEM_CODE=#{itemCode}</if>
+		<if test="itemName!=null and itemName!=''">and ITEM_NAME=#{itemName}</if>
+		<if test="itemSort!=null and itemSort!=''">and ITEM_SORT=#{itemSort}</if>
+		<if test="itemParent!=null and itemParent!=''">and ITEM_PARENT=#{itemParent}</if>
+		<if test="itemRelation!=null and itemRelation!=''">and ITEM_RELATION=#{itemRelation}</if>
+		<if test="isEdit!=null and isEdit!=''">and IS_EDIT=#{isEdit}</if>
+		<if test="platCode!=null and platCode!=''">and PLAT_CODE=#{platCode}</if>
+		<if test="itemDesc!=null and itemDesc!=''">and ITEM_DESC=#{itemDesc}</if>
+		<if test="itemLevel!=null and itemLevel!=''">and ITEM_LEVEL=#{itemLevel}</if>
+		<if test="remark!=null and remark!=''">and REMARK=#{remark}</if>
+		<if test="status!=null and status!=''">and STATUS=#{status}</if>
+		<if test="createUser!=null and createUser!=''">and CREATE_USER=#{createUser}</if>
+		<if test="createDate!=null and createDate!=''">and CREATE_DATE=#{createDate}</if>
+		<if test="updateUser!=null and updateUser!=''">and UPDATE_USER=#{updateUser}</if>
+		<if test="updateDate!=null and updateDate!=''">and UPDATE_DATE=#{updateDate}</if>
+		<if test="aliveFlag!=null and aliveFlag!=''">and ALIVE_FLAG=#{aliveFlag}</if>
+		<if test="marketId!=null and marketId!=''">and MARKET_ID=#{marketId}</if>
+		<if test="langVer!=null and langVer!=''">and LANG_VER=#{langVer}</if>
+		<if test="ext1!=null and ext1!=''">and EXT1=#{ext1}</if>
+		<if test="ext2!=null and ext2!=''">and EXT2=#{ext2}</if>
+		<if test="ext3!=null and ext3!=''">and EXT3=#{ext3}</if>
+		<if test="ext4!=null and ext4!=''">and EXT4=#{ext4}</if>
+		<if test="ext5!=null and ext5!=''">and EXT5=#{ext5}</if>
+		<if test="ext6!=null and ext6!=''">and EXT6=#{ext6}</if>
+		<if test="ext7!=null and ext7!=''">and EXT7=#{ext7}</if>
+		<if test="ext8!=null and ext8!=''">and EXT8=#{ext8}</if>
+		<if test="ext9!=null and ext9!=''">and EXT9=#{ext9}</if>
+		<if test="ext10!=null and ext10!=''">and EXT10=#{ext10}</if>
+	</select>
+
+	<update id="updateSetCode"
+		parameterType="com.sinochem.crude.trade.values.domain.SysCodeSetForUpdate">
+		update T_SYS_CODE_SET
+		<trim prefix="set" suffixOverrides=",">
+			<if test="modelCode!=null">MODEL_CODE = #{modelCode},</if>
+			<if test="setCode!=null">SET_CODE = #{setCode},</if>
+			<if test="setName!=null">SET_NAME = #{setName},</if>
+			<if test="itemCode!=null">ITEM_CODE = #{itemCode},</if>
+			<if test="itemName!=null">ITEM_NAME = #{itemName},</if>
+			<if test="itemSort!=null">ITEM_SORT = #{itemSort},</if>
+			<if test="itemParent!=null">ITEM_PARENT = #{itemParent},</if>
+			<if test="itemRelation!=null">ITEM_RELATION = #{itemRelation},</if>
+			<if test="isEdit!=null">IS_EDIT = #{isEdit},</if>
+			<if test="platCode!=null">PLAT_CODE = #{platCode},</if>
+			<if test="itemDesc!=null">ITEM_DESC = #{itemDesc},</if>
+			<if test="itemLevel!=null">ITEM_LEVEL = #{itemLevel},</if>
+			<if test="remark!=null">REMARK = #{remark},</if>
+			<if test="status!=null">STATUS = #{status},</if>
+			<if test="createUser!=null">CREATE_USER = #{createUser},</if>
+			<if test="createDate!=null">CREATE_DATE = #{createDate},</if>
+			<if test="updateUser!=null">UPDATE_USER = #{updateUser},</if>
+			<if test="updateDate!=null">UPDATE_DATE = #{updateDate},</if>
+			<if test="aliveFlag!=null">ALIVE_FLAG = #{aliveFlag},</if>
+			<if test="marketId!=null">MARKET_ID = #{marketId},</if>
+			<if test="langVer!=null">LANG_VER = #{langVer},</if>
+			<if test="ext1!=null">EXT1 = #{ext1},</if>
+			<if test="ext2!=null">EXT2 = #{ext2},</if>
+			<if test="ext3!=null">EXT3 = #{ext3},</if>
+			<if test="ext4!=null">EXT4 = #{ext4},</if>
+			<if test="ext5!=null">EXT5 = #{ext5},</if>
+			<if test="ext6!=null">EXT6 = #{ext6},</if>
+			<if test="ext7!=null">EXT7 = #{ext7},</if>
+			<if test="ext8!=null">EXT8 = #{ext8},</if>
+			<if test="ext9!=null">EXT9 = #{ext9},</if>
+			<if test="ext10!=null">EXT10 = #{ext10},</if>
+		</trim>
+		where
+		ALIVE_FLAG='1'
+		<if test="id!=null and id!=''">and ID=#{id}</if>
+		<if test="oldModelCode!=null and oldModelCode!=''">and MODEL_CODE=#{oldModelCode}</if>
+		<if test="oldSetCode!=null and oldSetCode!=''">and SET_CODE=#{oldSetCode}</if>
+	</update>
+	<select id="getByCodeSet" resultType="String" parameterType="com.sinochem.crude.trade.values.domain.SysCodeSet">
+		select 
+			ITEM_CODE AS OSP
+		from T_SYS_CODE_SET
+		where 
+			ALIVE_FLAG='1'
+			<if test="setCode!=null and setCode!='' ">and SET_CODE = #{setCode}</if>
+	</select>
+</mapper>

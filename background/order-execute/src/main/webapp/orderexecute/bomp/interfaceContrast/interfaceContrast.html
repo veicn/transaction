@@ -1,0 +1,47 @@
+<form class="layui-form" id="editForm" method="post">
+             <!--  <div class="layui-form-item mt10">
+                  <label class="layui-form-label iw200">系统别名：</label>
+                  <input type="hidden" id="contrastId" name="contrastId">
+                  <div class="layui-input-inline iw150">
+                  		<input class="layui-input" type="text" name="sysName" id="sysName" lay-verify="required|length32" autocomplete="off">
+               	   </div>
+               </div> -->
+               <div class="layui-form-item mt10">
+				    <label class="layui-form-label iw200">系统别名：</label>
+				    <input type="hidden" id="contrastId" name="contrastId">
+				    <div class="layui-input-inline iw150" >
+				      <select  name="sysName" id="sysName2"  lay-filter="typeCode"  lay-verify="required" lay-search="">
+				        <option value="">请选择</option>
+				      </select>
+				    </div>
+		  		</div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw200">参数类型：</label>
+                   <div class="layui-input-inline iw150">
+                       <input class="layui-input" type="text" name="paraType" id="paraType" lay-verify="required|length32" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw200">参数编码：</label>
+                   <div class="layui-input-inline iw150">
+                       <input class="layui-input" type="text" name="paraCode" id="paraCode" lay-verify="required|length64" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw200">参数说明：</label>
+                   <div class="layui-input-inline iw150">
+                       <input class="layui-input" type="text" name="paraDesc" id="paraDesc" lay-verify="required|length32" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-form-item">
+                   <label class="layui-form-label iw200">对端参数编码：</label>
+                   <div class="layui-input-inline iw150">
+                       <input class="layui-input" type="text" name="otherCode" id="otherCode" lay-verify="required|length32" autocomplete="off">
+                   </div>
+               </div>
+               <div class="layui-layer-btn layui-layer-btn-c">
+                <button class="layui-btn layui-btn-normal layui-btn-small" type="submit" lay-submit lay-filter="btn_edit" >确定</button>
+                <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">重置</button>
+            </div>
+            <input type="text" style="display:none" name="contrastId" >
+</form>

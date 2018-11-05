@@ -1,0 +1,219 @@
+<div class="c-mod c-mod-dd" id="specifyEnterpriseInfo">
+    <h3>
+        <em class="cw-ico ico-h3"></em>Range
+    </h3>
+    <div class="c-form c-fbfw">
+        <input type="radio"  class="radi ra-fb" #if($!{demand.specified} ==  0 || !$!{demand.specified}) checked="checked" #end  name="demand.specified" value="0"><em>Public</em>
+        <input type="radio"  class="radi ra-fb" #if($!{demand.specified} ==  1)checked="checked"#end name="demand.specified" value="1"><em>Target</em>
+        <div class="c-ftjqy"><a href="javascript:;" id="addSpecifyEnterprise">＋ company</a></div>
+    </div>
+
+    <div class="c-fbfw-n">
+        <table id="specifyEnterpriseList">
+            <tr><th class="tabl-line">No.</th><th>Company Name</th><th class="tabl-line1">Action</th></tr>
+            #foreach($specify in $!{specifyEnterpriseList})
+                <tr class="c-tabcos2">
+                    <td class="tabl-line">$velocityCount</td>
+                    <td>$!{specify.enterpriseName}
+                        <input type="hidden" name="epMemberIds" value="$!{specify.epMemberId}"/>
+                        <input type="hidden" name="enterpriseNames" value="$!{specify.enterpriseName}"/>
+                    </td>
+                    <td><a href="javascript:;" onclick="deleteSpecifyTag(this)">Delete</a></td>
+                </tr>
+            #end
+        </table>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $("#addSpecifyEnterprise").on("click", function () {
+            specifyLayerOpen();
+        });
+
+        var specified = $("input[name='demand.specified']:checked").val();
+        specifyEnterpriseShow(specified);
+
+        $("input[name='demand.specified']").on("click", function () {
+            if ($(this).is(":checked")) {
+                specifyEnterpriseShow($(this).val());
+            }
+        })
+    })
+
+    function specifyEnterpriseShow(param) {
+
+        if (param == 1) {
+            $(".c-ftjqy").css("display", "");
+            $("#specifyEnterpriseList").css("display", "");
+        } else {
+            $(".c-ftjqy").css("display", "none");
+            $("#specifyEnterpriseList").css("display", "none");
+        }
+
+    }
+
+    function specifyLayerOpen(epName){
+        var datas = $contain.get('/centercontain/enterpriseList.json').setHost("$memberServer.get('')")
+        layContent(datas.datas, epName);
+    }
+
+    function layContent(datas, epName) {
+        var content = getContent(datas, epName);
+        layui.use('layer', function () {
+			// 禁止滚动条
+			$(".s-body").css("overflow-y", "hidden");
+			$(".s-body").css("margin-right", "21px");
+			$(".fabucaigou-con-right").css("margin-right", "10px");
+			
+            var layer = layui.layer;
+            var curIndex = layer.open({
+                title: 'The enterprise information',
+                shade : [0.6, '#393D49'],
+                scrollbar : false,
+                area: ['800px', '510px'],
+                content: $(content).html(),
+                btn: ["Select"],
+                yes: function (index, layero) {
+                    //console.log(layero.html());
+                    var retData = new Array();
+                    layero.find("input:checkbox:checked").each(function () {
+                        var checkSpecifyId = $(this).val();
+                        var tempObj = new Object();
+                        tempObj.memberId = $(this).val();
+                        tempObj.name = $(this).parent("td").parent("tr").find(".enterprise-name").text();
+                        retData.push(tempObj);
+                    });
+
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+
+                    selectedEnterprseArr = new Array();
+
+                    var tbLineNum = $("#specifyEnterpriseList tr").length - 1;
+                    for (var j = 0; j < retData.length; j++) {
+                        tbLineNum += 1;
+                        var tagHtml = "<tr class='c-tabcos2'><td class='tabl-line'>"+tbLineNum+"</td><td>" + retData[j].name +
+                                "<input type='hidden' name='epMemberIds' value='" + retData[j].memberId + "'/>" +
+                                "<input type='hidden' name='enterpriseNames' value='" + retData[j].name + "'/>" +
+                                "</td><td><a href='javascript:;' onclick='deleteSpecifyTag(this)'>Delete</a></td></tr>"
+                        $("#specifyEnterpriseList").append(tagHtml);
+                    }
+                    
+					// 禁止滚动条
+					$(".s-body").css("overflow-y", "auto");
+					$(".s-body").css("margin-right", "0");
+					$(".fabucaigou-con-right").css("margin-right", "0");
+                },
+                cancel: function(index, layero){ 
+					// 禁止滚动条
+					$(".s-body").css("overflow-y", "auto");
+					$(".s-body").css("margin-right", "0");
+					$(".fabucaigou-con-right").css("margin-right", "0");
+					
+                	layer.close(index);
+                	return false; 
+                }
+            });
+
+            $('.searchBtn').unbind("click"); //移除click
+            $(".searchBtn").click(function () {//重新注册点击事件
+                var queryEpName = $("#queryEpName").val();
+                searchSpecify(queryEpName);
+//                var div = $("#specifyTable");
+//                if(div.get(0)){
+//                    div.show();                var trs = div.find("tr").show();
+//                }else{
+//                    specifyLayerOpen(queryEpName);
+//                }
+            });
+            $(document).off('keydown', '#queryEpName'); //keydown
+            $(document).on('keydown', '#queryEpName', function() {
+                if(event.keyCode == 13) {
+                    var queryEpName = $(this).val();
+                    searchSpecify(queryEpName);
+                }
+            });
+
+            $(".layui-layer-btn").css("text-align", "center");
+            $(".layui-layer-btn0").css("padding", "5px 30px");
+            $(".layui-layer-btn0").css("background-color", "#317ee7");
+            $(".layui-layer-btn0").css("font-size", "16px");
+            $(".layui-layer-content").css("overflow-x", "auto");
+            $(".layui-layer-content").css("height", "350px");
+            $(".layui-layer-btn0").css("margin-top", "20px");
+
+        });
+    }
+    function searchSpecify(queryEpName){
+        var div = $("#specifyTable");
+        var trs = div.find("tr");
+        trs.hide();
+        trs.find('td:contains("'+queryEpName+'")').parent().show();
+        trs.find('th').parent().show();
+        trs.find('td input:checked').parent().parent().show();
+    }
+    function getContent(dataList ,queryNm){
+        if(queryNm == undefined){
+            queryNm = "";
+        }
+
+        var content = 		'<div  style="display:none" class="">';
+        //search
+        content = content + 	'<div class="layui-form-item">';
+        content = content + 		'<label class="layui-form-label">Name</label>';
+        content = content + 		'<div class="layui-input-block">';
+        content = content + 			'<input type="text" id="queryEpName" placeholder="Search" value="' + queryNm + '" class="layui-input" style="width:250px;display:inline;"/>';
+        content = content + 			'<a class="searchBtn"><i class="c-ico cg-sous1" style="position:relative;right:20px;top:0px"></i></a>';
+        content = content + 		'</div>';
+        content = content + 	'</div>';
+
+        //table
+        content = content + 	'<div class="lay-tabdiv"><table id="specifyTable" class="lay-tctab">';
+        //表头
+        content = content + 		'<tr>';
+        content = content + 			'<th class="tabl-line">Choose</th>';
+        content = content + 			'<th>Company Name</th>';
+        content = content + 		'</tr>';
+        //表体数据展示
+        var tcos = 1;
+        var selectedEnterpriseIds = $!{user.epMemberId} + ",";
+        $("input[name='epMemberIds']").each(function () {
+            selectedEnterpriseIds +=  $(this).val() + "," ;
+        })
+
+        for(var i in dataList){
+
+            if (selectedEnterpriseIds != null && selectedEnterpriseIds != "" && selectedEnterpriseIds != undefined) {
+                if (0 <= selectedEnterpriseIds.indexOf(dataList[i].memberId)) {
+                    continue;
+                }
+            }
+
+            if(tcos==1){
+                tcos=2
+            }else{
+                tcos=1
+            }
+            content = content + 	'<tr class="trdata lay-tabcos' + tcos +'">';
+            content = content + 		'<td class="tabl-line"><input name="oilCheck" onclick="selectEnterprise(this)" type="checkbox" value="' + dataList[i].memberId +'" /></td>';
+            content = content + 		'<td class="enterprise-name">' + dataList[i].name + '</td>';
+            content = content + 	'</tr>';
+
+        }
+        content = content + 	'</table></div>';
+
+        content = content + '</div>';
+
+        return content;
+    }
+
+    function deleteSpecifyTag(obj) {
+        $(obj).parent("td").parent("tr").remove();
+        // 序号重排
+        $("#specifyEnterpriseList").find(".c-tabcos2").each(function (index, elem) {
+            var serialNo = index + 1
+            $(elem).find(".tabl-line").text(serialNo)
+        })
+    }
+</script>

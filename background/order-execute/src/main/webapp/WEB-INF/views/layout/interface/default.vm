@@ -1,0 +1,25 @@
+<html>
+    $contain.get("/contain/htmlhead.htm")
+<body>
+
+<div class="layui-layout layui-layout-admin">
+
+$contain.get("/contain/nav.htm")
+$contain.get("/contain/menu.htm")
+<div class="layui-body">
+    $screen_content
+</div>
+$contain.get("/contain/htmlend.htm")
+
+
+</div>
+</body>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</html>

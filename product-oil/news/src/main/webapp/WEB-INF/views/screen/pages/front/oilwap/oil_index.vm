@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OILBANK</title>
+    <meta name="description" content="Your best oil product international trade E-platform." />
+    <link rel="shortcut icon" href="//mat1.gtimg.com/www/icon/favicon2.ico"/>
+    #css($appServer.get('/wap/oilwap/css/oil_index.css'))
+    #css($appServer.get('/wap/oilwap/css/swiper.min.css'))
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+</head>
+<body>
+<div style="width:0px;height:0px;overflow:hidden;"><img src="$appServer.get('/wap/oilwap/images/share_logo.jpg')"></div>
+<div class="header-w">
+    <img src="$appServer.get('/wap/oilwap/images/logo.png')">
+    <img src="$appServer.get('/wap/oilwap/images/icon-code.png')" class="sec-code">
+</div>
+<div class="nav-title">
+    <ul>
+        <li class="active"><a href="#plat-w">PLATFORM</a></li>
+        <li><a href="#inf-w">INFORMATION</a></li>
+        <li><a href="#tra-w">TRADING</a></li>
+        <li><a href="#shp-w">SHIPPING</a></li>
+        <li><a href="#com-w">COMPANY</a></li>
+        <li><a href="#grow-w">GROWTH PROCESS</a></li>
+        <li><a href="#vis-w">VISION</a></li>
+    </ul>
+</div>    
+<div class="platform-w" id="plat-w">
+    <div class="pwarp">
+    <img class="bannerimg" src="$appServer.get('/wap/oilwap/images/image-one.png')">
+    <div class="plat-txt">
+        <h3>PLATFORM</h3>
+        <p id='shareInfo'>We provide companies in oil product international trade industrial chain with online service, including
+            online transaction, supply chain financing, hedging, logistics service, market news, block chain and other
+            value-added services and offers real-time visual voyage and port operation tracking as well.</p>
+        <img src="$appServer.get('/wap/oilwap/images/button-bottom.png')" class="arrow">
+    </div>
+    </div>
+     
+</div>
+<div class="infor-w" id="inf-w">
+    <div class="pwarp"> 
+        <h3>INFORMATION</h3>
+        <a class="lit-ite" href="news_det.htm">
+            <div>
+                <img src="$appServer.get('/wap/oilwap/images/lit.png')">
+                <p></p>
+            </div>
+            <p></p>
+        </a>   
+        <a class="lit-ite" href="news_det.htm">
+            <div>
+                <img src="$appServer.get('/wap/oilwap/images/lit.png')">
+                <p></p>
+            </div>
+            <p></p>
+        </a>   
+       <a class="lit-ite" href="news_det.htm">
+            <div>
+                <img src="$appServer.get('/wap/oilwap/images/image-six.png')">
+                <p></p>
+            </div>
+            <p></p>
+        </a> 
+        <a class="lit-ite" href="news_det.htm">
+            <div>
+                <img src="$appServer.get('/wap/oilwap/images/image-four.png')">
+                <p></p>
+            </div>
+            <p></p>
+        </a>   
+       <a class="lit-ite" href="news_det.htm">
+            <div>
+                <img src="$appServer.get('/wap/oilwap/images/image-five.png')">
+                <p></p>
+            </div>
+            <p></p>
+        </a> 
+ </div>       
+</div>
+<div class="trading-w" id="tra-w">
+     <div class="pwarp">
+    <h3>TRADING</h3>
+    <!-- 此处应有轮播图 -->
+    <div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-active">
+                <img src="$appServer.get('/wap/oilwap/images/image-two.png')">
+                <div class="sli-pos">
+                    <p>
+                        Making A Deal Is
+                        <br> Much Easier Through<br> Oilbank!
+                    </p>
+                    <p>
+                        You may send your offer and inquiry online. We have many active and qualified buyers and sellers
+                        in Oilbank. It will help you to make deal faster and easier.
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide swiper-slide-next" >
+                <img src="$appServer.get('/wap/oilwap/images/second.png')">
+                <div class="sli-pos">
+                    <p>
+                        Oilbank is a boon to<br>you!
+                    </p>
+                    <p>
+                        We have many useful tools
+                        and calculators which may help
+                        you to calculate your cost,
+                        avoid risks and reduce the
+                        workload of operations.
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide" >
+                <img src="$appServer.get('/wap/oilwap/images/third.png')">
+                <div class="sli-pos">
+                    <p>
+                        Saving money through<br>Oilbank!
+                    </p>
+                    <p>
+                        We are going to serve you more
+                        discount on insurance, credit 
+                        reports, finincing and other high 
+                        class services which may lower 
+                        your costs.
+                    </p>
+                </div>
+            </div>
+            <div class="swiper-slide" >
+                <img src="$appServer.get('/wap/oilwap/images/forth.png')">
+                <div class="sli-pos">
+                    <p>
+                        Worry-free operation<br>service!
+                    </p>
+                    <p>
+                        One-stop efficient execution service 
+                        which is worry-free and saves strength 
+                        and time lets the complicated
+                        execution and communication be 
+                        efficient and transparen.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span
+                class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button"
+                                                        aria-label="Go to slide 2"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 6"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 7"></span><span
+                class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 8"></span></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+</div>
+</div>
+<div class="shipping-w" id="shp-w">
+    <div class="pwarp">
+    <h3>SHIPPING</h3>
+    <div class="ship-ban">
+        <img src="$appServer.get('/wap/oilwap/images/index-ship.png')">
+        <p>Simple Chartering And <br>Voyage Tracking <br>Through Oilbank!</p>
+    </div>
+    <div class="ship-txt">
+        <p>We have an international shipping platform which dedicated to serve the supply chain of oil product. The
+            all-in-one combination of tools and services supports your tanker chartering business, includes online
+            chartering, vessel management, live AIS position, voyage intelligence, market overview and other value-added
+            services.</p>
+    </div>
+</div>
+</div>
+<div class="company-w" id="com-w">
+    <div class="pwarp">
+    <h3>COMPANY</h3>
+    <p>Sinochem Energy Technology Co., Ltd. is affiliated to the Energy SBU of Sinochem Group. Sinochem Energy
+        Technology supports the innovative platform by means of new technology and industrial application, with
+        cutting-edge technology of the “ABCDT” as the main task for R&D and service. We provide the integrated cloud
+        service platform for segments such as enterprises, consumers, supply chain, and finance, empowering the
+        professional service and business system with the characteristics of energy sector.</p>
+</div>
+</div>
+<div class="growth-w" id="grow-w">
+    <div class="pwarp"> 
+        <h3>GROWTH PROCESS</h3>
+        <ul>
+            <li>
+                <div>
+                    <p>Aug</p>
+                    <p>2017</p>
+                </div>
+                <p>A special team of Energy Internet Program was set up under Sinochem Group Energy SBU</p>
+
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <li>
+                <div>
+                    <p>Jan</p>
+                    <p>2018</p>
+                </div>
+                <p>A comprehensive Internet 
+Platforms with B2B, B2C, Supply 
+Chain and finance officially went 
+online.</p>
+
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <li>
+                <div>
+                    <p>Feb</p>
+                    <p>2018</p>
+                </div>
+                <p>Sinochem Energy Technology Co.,
+Ltd. was established in Qingdao.</p>
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <li>
+                <div>
+                    <p>Mar</p>
+                    <p>2018</p>
+                </div>
+                <p>Oilbank, our oil product 
+international trade E-platform 
+established.</p>
+
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <li>
+                <div>
+                    <p>Mar</p>
+                    <P>2018</P>
+                </div>
+                <p>First inner trial trading of Oilbank 
+between Sinochem Quanzhou 
+and Sinochem Singapore 
+applying blockchain technology.</p>
+
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <li>
+                <div>
+                    <p>Apr</p>
+                    <P>2018</P>
+                </div>
+                <p>First trial trading between 
+Sinochem Singapore and 
+Freepoint Singapore succeeded.</p>
+
+                <!-- 此处是定位的点 -->
+                <div></div>
+            </li>
+            <!-- 闪烁的点 -->
+           <!--  <li>
+                <div></div>
+                <div class="sansuo"></div>
+            </li> -->
+        </ul>
+    </div>
+</div>
+<div class="vision-w" id="vis-w">
+    <div class="pwarp">
+    <h3>VISION</h3>
+    <p>“Revitalization of Industry, Serving the Motherland with Science and Technology”, Sinochem Energy Technology
+        stays true to its mission, aims to help Chinese energy and chemical enterprises to complete the transformation
+        of improving corporate operating efficiency in a more rapid, intelligent, and prompt manner.</p>
+    <p>Sinochem Energy Technology, your online one-stop expert in energy and petrochemical industry.</p>
+    <p>For more information, please visit the PC side</p>
+    <p>myoilbank.com</p>
+    <p>Beyond your expectation!</p>
+</div>
+</div>
+<div id="my-top">
+    <img src="$appServer.get('/wap/oilwap/images/button-top.png')">
+</div>
+<div class="outer">
+    <div class="pop-hide my-pop">
+        <div class="pop-win">
+            <img src="$appServer.get('/wap/oilwap/images/pop-code.png')">
+            <p>Scan QR code to follow
+                <span>OILBANK</span></p>
+            <p>wechat account</p>
+        </div>
+    </div>
+</div>
+    #js($appServer.get('/wap/oilwap/js/jquery-1.9.1.min.js'))
+    #js($appServer.get('/wap/oilwap/js/swiper.min.js'))
+    #js($appServer.get('/wap/oilwap/js/oil_index.js'))
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+    var shareTitle = 'OILBANK'
+    var shareDesc = 'Your best oil product international trade E-platform.'
+    var shareImg = window.location.origin + '/wap/oilwap/images/share_logo.jpg'
+    $.ajax({
+        type:"get",
+        dateType:'jsonp',
+        data:{
+            url:window.location.href.split('#')[0]
+        },
+        url:'//wechat.test.mycrudeoil.com/getsha1.json',
+        success:function(data){
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: data.datas.appId, // 必填，公众号的唯一标识
+                timestamp: data.datas.timestamp, // 必填，生成签名的时间戳
+                nonceStr: data.datas.nonceStr, // 必填，生成签名的随机串
+                signature: data.datas.signature,// 必填，签名
+                jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareWeibo'] // 必填，需要使用的JS接口列表
+            });
+            wx.ready(function(){
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wx.onMenuShareTimeline({
+                    title: shareTitle, // 分享标题
+                    desc: shareDesc, // 分享描述
+                    link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareImg, // 分享图标
+                    success: function () {
+                    // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: shareTitle, // 分享标题
+                    desc: shareDesc, // 分享描述
+                    link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareImg, // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                    // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    }
+                });
+                 wx.onMenuShareWeibo({
+                    title: shareTitle, // 分享标题
+                    desc: shareDesc, // 分享描述
+                    link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareImg, // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                    // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+            wx.error(function(res){
+                console.log(res)
+            }); 
+        }
+    })
+    
+
+</script>
+</body>
+</html>

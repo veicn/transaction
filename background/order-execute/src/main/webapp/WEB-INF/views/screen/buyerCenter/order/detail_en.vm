@@ -1,0 +1,669 @@
+<style>
+	.ship-info-style{float:right;margin-top:-15px;}
+	.ship-name-style{margin-top:30px;}
+	.ship-vessel-name{margin-left:60px;}
+	.ship-vef-style{margin-left:250px;}
+	.ship-loading-d{float:right;margin-top:-15px;}
+	.ship-table-qw{
+			border:1px solid #eee;} 
+</style>
+	<div class="c-mod" id="cgxx">
+		<h1>Deal Management<span>&nbsp;&nbsp;&gt&nbsp;&nbsp;Deal details</span></h1>
+		
+		##---- 订单状态begin ----##
+		$contain.get("status/list.htm").setHost("$orderServer.get('')").setParam("orderId","$!{order.tradeId}")
+		##---- 订单状态end ----##
+		
+		##---- 订单操作按钮begin ----##
+		$contain.get("/contain/order/operateButtons.htm").setParam("ouid","$!{order.uuid}")
+		##---- 订单操作按钮end ----##
+	</div>
+	<div class="c-mod" id="cgxx">
+		<h3><em class="cw-ico ico-h3"></em>Deal Recap</h3>
+		<div class="c-form clearfix">
+		##---- 商品详情begin ----##
+		$contain.get('/contain/order/goodsDetail.htm').setParam("oid","$!{order.id}")
+		##---- 商品详情end ----##
+		</div>
+    </div>
+    
+    
+    ##---- 泊位信息begin ----##
+	##$contain.get('/buyer/crudeOilBerthListInfo.htm').setHost("$orderServer.get('')").setParam("contractId","$!{order.tradeId}")
+	##---- 泊位信息end ----##
+    
+	##-----------------------------船信息--------------------------------------------##
+	#if("$!{order.orderShipInfo}" != "" && $!order.status != '00')
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>Vessel Details
+		</h3>
+		<div class="ship-name-style">
+			<span class="c-fn ship-vessel-name" >Vessel Name：</span>
+			<span class="c-int qx-conte" >$!{order.orderShipInfo.name}</span>
+			<span class="c-fn ship-vef-style" >VEF：</span>
+			<span class="c-int qx-conte">$!NumberTool.format('#.#####',$!{order.orderShipInfo.vef})</span>
+			<span class="c-fn ship-vef-style">OBQ：</span>
+			<span class="c-int qx-conte">$!NumberTool.format($!{order.orderShipInfo.obq})</span>
+		</div>
+	</div>
+	#end
+	##-----------------------------装船信息--------------------------------------------##
+	#if($order.loadinginfoList.size() > 0)
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>Load port info
+		</h3>	
+		<div class="c-tabdiv" >
+		  <table border="1px solid #eee" >	
+		  	<tr class="ship-table-qw" > 
+				<th rowspan="2">Port of loading</th>
+				<th rowspan="2">B/L</th>
+				<th rowspan="2">laycan</th>
+				<th colspan="2">US Barrels @60 ︒F</th>
+				<th colspan="2">MT (in Air)</th>
+				<th colspan="2">Cubic meters @15︒C</th>
+				<th rowspan="2">Density@15︒C<br>（Kg/L）:</th>
+				<th rowspan="2">API <br>@60︒F</th>
+				<th rowspan="2">BS&W</th>
+				<th rowspan="2">Free Water</th>
+				<th rowspan="2">Others</th>
+				<th colspan="2">ship figure after loading</th>
+			</tr>
+			<tr class="ship-table-qw"> 
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+			</tr>
+			#foreach($loadinginfo in ${order.loadinginfoList})
+			<tr class="c-tabcos1 ship-table-qw">
+				<td>$!codeConvert.getValueByCode("LOAD_PORT","$!{loadinginfo.loadPort}")</td>
+				<td>$!dateUtil.convertDateToString($!{loadinginfo.blDate})</td>
+				<td>$!dateUtil.convertDateToString($!{loadinginfo.acStart}) to $!dateUtil.convertDateToString($!{loadinginfo.acFinish})</td>
+				
+				<td>$!NumberTool.format($!{loadinginfo.blHairBarrel})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blNightstool})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blHairTonnage})</td>
+				<td>$!NumberTool.format($!{loadinginfo.blNetTonnage})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shGrossCubicMeter})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shNetCubicMeter})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shDensity})</td>
+				<td>$!NumberTool.format($!{loadinginfo.api})</td>
+				<td>$!NumberTool.format($!{loadinginfo.waterImpCon})</td>
+				<td>$!NumberTool.format($!{loadinginfo.waterQuantity})</td>
+				<td>$!NumberTool.format($!{loadinginfo.remark})</th>
+				<td>$!NumberTool.format($!{loadinginfo.shHairBarrel})</td>
+				<td>$!NumberTool.format($!{loadinginfo.shHairTonnage})</td>
+			</tr>
+			#end
+		</table>
+	</div> 	
+			
+	</div>
+	#end
+	##-----------------------------卸货信息---------------------------------------------##
+	#if($order.unloadinginfoList.size() > 0)
+	<div class="c-mod" id="cgjbxx">
+		<h3><i class="cw-ico ico-h3"></i>Discharge port info
+		</h3>
+		<div class="c-tabdiv"> 
+		  <table  border="1" table-layout="fixed">
+			<tr  class="ship-table-qw"> 
+				<th rowspan="2">Port of discharge</th>
+				<th rowspan="2">NOR</th>
+				<th rowspan="2">COD</th>
+				<th rowspan="2">DDR</th>
+				<th colspan="2">US Barrels @60 ︒F</th>
+				<th colspan="2">MT (in Air)</th>
+				<th colspan="2">Cubic meters @15︒C</th>
+				<th rowspan="2">Density@15︒C<br>（Kg/L）</th>
+				<th rowspan="2">API<br>@60︒F</th>
+				<th rowspan="2">BS&W</th>
+				<th rowspan="2">Free Water</th>
+				<th rowspan="2">Others</th>
+				<th rowspan="2">ROB</th>
+				<th colspan="2">Ship figure on arrival</th>
+				<th colspan="2">Ship figure on arrival(VEF applied)</th>
+				<th colspan="2">Shore received figure</th>
+				<th rowspan="2" class="is-position is-position-top">Option</th>
+			</tr>
+			<tr  class="ship-table-qw"> 
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				<th>Gross</th>
+				<th>Net</th>
+				
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+				<th>Bbl. (Gross)</th>
+				<th>MT in air (Gross)</th>
+			</tr>
+			#foreach($unloadinginfo in ${order.unloadinginfoList})
+			<tr class="c-tabcos1 ship-table-qw">
+				<td>$!codeConvert.getValueByCode("UN_LOAD_PORT","$!{unloadinginfo.unloadPort}")</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.norDate})</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.cod})</td>
+				<td>$!dateUtil.convertDateToString($!{unloadinginfo.acStart}) to $!dateUtil.convertDateToString($!{unloadinginfo.acFinish})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commCleanBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commHairTon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.commCleanTon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shGrossCubicMeter})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shNetCubicMeter})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shDensity})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.api})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.waterImpCon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.waterQuantity})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.remark})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.robQuanatity})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairTon})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairBarVef})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.shipHairTonVef})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.potHairBar})</td>
+				<td>$!NumberTool.format($!{unloadinginfo.potHairTon})</td>
+				<td>
+				#if("$!{unloadinginfo.inspectionContent}" != "")
+				<a class="inspection_detail" href="$orderExecuteServer.get('inspection/dischargeport/detail.htm')?id=$!{unloadinginfo.id}&orderNo=$!{unloadinginfo.orderNo}" target="_blank">Inspection Report</a>
+				#end
+				</td>
+			</tr>
+			#end
+		</table>
+		</div>
+	</div>
+	#end 
+	
+	
+	
+	
+	##--------------------------------------------------##
+    #if("$!{statementInfo}" != "")
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>Payment Status</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos2"><span class="c-fn">Settlement：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{statementInfo.createDate})</span></li>
+			<li class="c-fcos2"><span class="c-fn">Payment date：</span><span class="c-int qx-conte">$!dateUtil.convertDateToString($!{statementInfo.paymentDate})</span></li>
+			<li class="c-fcos2"><span class="c-fn">Settled quantity (BBL)：</span><span class="c-int qx-conte">$!NumberTool.format('#.#',$!{statementInfo.settlementQuantityBbl})</span></li>
+			<li class="c-fcos2"><span class="c-fn">Amount：</span><span class="c-int qx-conte">$!NumberTool.format('#.###',$!{order.receiveAcount})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Settled price：</span><span class="c-int qx-conte">$!NumberTool.format('#.###',$!{statementInfo.settlementPrice})$!{order.priceInfo.currency}/$!{order.goodsInfo.quantityUnit}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Cargo Amount：</span><span class="c-int qx-conte">$!NumberTool.format('#.###',$!{statementInfo.goodsAmount})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Costs Amount：</span><span class="c-int qx-conte">$!NumberTool.format('#.###',$!{statementInfo.totalFee})$!{order.priceInfo.currency}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Total Amount：</span><span class="c-int qx-conte">$!NumberTool.format('#.###',$!{statementTotal})$!{order.priceInfo.currency}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+  
+    
+
+  
+    ##------------------------- 合约信息 -------------------------##
+    #if($!{order.priceInfo.priceType} == 'Trigger')
+    <div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>Contract Information</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>Contract</th>
+				<th>Contract Qty（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Expire Date</th>
+				<th>Triggered（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Balance（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Rolled（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Option</th>
+			</tr>
+				#set($count1 = 0)
+				#set($count2 = 0)
+			#foreach($triggerContract in ${order.triggerContractList})
+			
+				#set($count1 = $count1 + $!{triggerContract.doneQuantity})
+				#set($count2 = $count2 + $!{triggerContract.surplusQuantity})
+			<tr class="c-tabcos1">
+				<td>$!{triggerContract.month}</td>
+				<td>$!NumberTool.format($!{triggerContract.quantity})</td>
+				<td>$!dateUtil.convertDateToString($!{triggerContract.endTime})</td>
+				<td>$!NumberTool.format($!{triggerContract.doneQuantity})</td>
+				<td>$!NumberTool.format($!{triggerContract.surplusQuantity})</td>
+				<td>$!NumberTool.format($!{triggerContract.transferQuantity})</td>
+				<td>
+					#if($!{order.status} != '00')
+						#if($!{triggerContract.surplusQuantity} > 0)
+							#if($!{triggerContract.status} != '40')
+							<a href="javascript:void(0)"   data="{triggerContractId:'$!{triggerContract.id}'}" class="zhuanyue">Roll Over</a>
+							<a href="javascript:void(0)" data="{triggerContractId:'$!{triggerContract.id}',name:'$!{triggerContract.name}',month:'$!{triggerContract.month}'}" class="dianjia">Trigger</a>
+							#end
+						#end
+						
+						#if($velocityCount == 1)
+							#if($!{triggerContract.quantityStatus} != '1')
+							<a href="javascript:void(0)" data="{triggerContractId:'$!{triggerContract.id}',quantity:'$!{triggerContract.quantity}',quantityStatus:'$!{triggerContract.quantityStatus}'}" id="editQuantity">Edit</a>
+							#end
+						#end
+					#end	
+				</td>
+			</tr>
+			#end
+				<tr>
+					<td>Total Amount</td>
+					<td></td>
+					<td></td>
+					<td>$!NumberTool.format($count1)</td>
+					<td>$!NumberTool.format($count2)</td>
+					<td></td>
+					<td></td>
+				</tr>
+		</table>
+		</div>
+	</div>
+	
+	#if(${order.triggerTransferList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>Roll Over Information</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>From</th>
+				<th>to</th>
+				<th>Filled Time</th>
+				<th>Rolled（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Spread（USD）</th>
+				<th>Amount（$!{order.priceInfo.currency}）</th>
+			</tr>
+			#foreach($triggerTransfer in ${order.triggerTransferList})
+			<tr class="c-tabcos1">
+				<td>$!{triggerTransfer.oldMonth}</td>
+				<td>$!{triggerTransfer.month}</td>
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerTransfer.transferTime})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.transferQuantity})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.differPrice})</td>
+				<td>$!NumberTool.format($!{triggerTransfer.differAmount})</td>
+			</tr>
+			#end
+		</table>
+		</div>
+	</div>
+	#end
+	
+	#if(${order.triggerApplyList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>Trigger Log</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>Time</th>
+				<th>Contract</th>
+				<th>Request Qty（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Request Price（$!{order.priceInfo.currency}）</th>
+				<th>Trigger time</th>
+				<th>Filled Qty（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Filled Price（$!{order.priceInfo.currency}）</th>
+				<th>Status</th>
+				<th>Option</th>
+			</tr>
+			#foreach($triggerApply in ${order.triggerApplyList})
+			<tr class="c-tabcos1">
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerApply.applyTime})</td>
+				<td>$!{triggerApply.month}</td>
+				<td>$!NumberTool.format($!{triggerApply.applyQuantity})</td>
+				<td>$!NumberTool.format($!{triggerApply.applyPrice})</td>
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerApply.lockTime})</td>
+				<td>$!NumberTool.format($!{triggerApply.lockQuantity})</td>
+				<td>$!NumberTool.format($!{triggerApply.lockPrice})</td>
+				<td>$!{triggerApply.statusDesc}</td>
+				<td>
+					#if($!{triggerApply.canCancel} == '1' && $!{order.status} != '00')
+					<a href="javascript:void(0)" data="{triggerApplyId:'$!{triggerApply.id}'}" class="cancelApply">Cancel</a>
+					#end
+				</td>
+			</tr>
+			#end
+		</table>
+		</div>
+	</div>
+	#end
+	
+	#if(${order.triggerResultList.size()} > 0)
+	<div class="c-mod">
+		<h3><i class="cw-ico ico-h3"></i>Settlement</h3>
+		<div class="c-tabdiv">
+		  <table>
+			<tr>
+				<th>Time</th>
+				<th>Contract</th>
+				<th>Quantity（$!{order.goodsInfo.quantityUnit}）</th>
+				<th>Filled Price（$!{order.priceInfo.currency}）</th>
+				<th>Premium/Discount</th>
+				<th>Unit Price（$!{order.priceInfo.currency}）</th>
+				<th>Amount（$!{order.priceInfo.currency}）</th>
+				<th>Spread（USD）</th>
+			</tr>
+				#set($count3 = 0)
+				#set($count4 = 0)
+				#foreach($triggerResult in ${order.triggerResultList})
+				#set($count3 = $count3 + $!{triggerResult.lockQuantity})
+				#set($count4 = $count4 + $!{triggerResult.totalAmount})
+			<tr class="c-tabcos1">
+				<td>$!dateUtil.convertDateToString("yyyy-MM-dd HH:mm:ss", $!{triggerResult.lockTime})</td>
+				<td>$!{triggerResult.contractName}</td>
+				<td>$!NumberTool.format($!{triggerResult.lockQuantity})</td>
+				<td>$!NumberTool.format($!{triggerResult.lockPrice})</td>
+				<td>$!NumberTool.format($!{triggerResult.agio})</td>
+				<td>$!NumberTool.format($!{triggerResult.unitPrice})</td>
+				<td>$!NumberTool.format($!{triggerResult.totalAmount})</td>
+				<td>$!{triggerResult.differDesc}</td>
+			</tr>
+			#end
+				<tr>
+					<td>Total Amount</td>
+					<td></td>
+					<td>$!NumberTool.format($count3)</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>$!NumberTool.format($count4)</td>
+					<td></td>
+				</tr>
+		</table>
+		</div>
+	</div>
+	#end
+
+	#end
+    #if("$!{order.seller.customerName}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>Seller info.</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">Company Name：</span><span class="c-int qx-conte">$!{order.seller.customerName}</span></li>
+			<li class="c-fcos1"><span class="c-fn">Company Address：</span><span class="c-int qx-conte">$!{order.seller.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Trader：</span><span class="c-int qx-conte">$!{order.seller.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Email：</span><span class="c-int qx-conte">$!{order.seller.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Contact info：</span><span class="c-int qx-conte">$!{order.seller.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Fax：</span><span class="c-int qx-conte">$!{order.seller.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+    
+    #if("$!{order.buyer.customerName}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>Buyer info.</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">Company Name：</span><span class="c-int qx-conte">$!{order.buyer.customerName}</span></li>
+			<li class="c-fcos1"><span class="c-fn">Company Address：</span><span class="c-int qx-conte">$!{order.buyer.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">PIC：</span><span class="c-int qx-conte">$!{order.buyer.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Email：</span><span class="c-int qx-conte">$!{order.buyer.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Contact info：</span><span class="c-int qx-conte">$!{order.buyer.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Fax：</span><span class="c-int qx-conte">$!{order.buyer.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+    #if("$!{order.agent}" != '')
+	<div class="c-mod" id="cgxx">
+	  <h3><em class="cw-ico ico-h3"></em>Agent Info</h3>
+	  <div class="c-form">
+		<ul class="c-ful">
+			<li class="c-fcos1"><span class="c-fn">Agent Name：</span><span class="c-int qx-conte">$contain.get("enterprise/name.json").setHost("$memberServer.get('')").setParam("epMemberId","$!{order.agent.customerId}")</span></li>
+			<li class="c-fcos1"><span class="c-fn">Agent Address：</span><span class="c-int qx-conte">$!{order.agent.address}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Trader：</span><span class="c-int qx-conte">$!{order.agent.contactName}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Email：</span><span class="c-int qx-conte">$!{order.agent.email}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Contact info：</span><span class="c-int qx-conte">$!{order.agent.tel}</span></li>
+			<li class="c-fcos2"><span class="c-fn">Fax：</span><span class="c-int qx-conte">$!{order.agent.fax}</span></li>
+		</ul>
+	  </div>
+    </div>
+    #end
+
+	<div class="c-subdiv">
+		<button type="button" class="c-btncas" onclick="location.href='list.htm'">back</button>
+	</div>
+	
+	<script>
+	layui.use(['layer','laydate'], function(){
+		
+		$('#editQuantity').on('click', function(){
+			var data = $(this).attr("data");
+			data = eval("("+data+")");
+			
+			layer.open({
+			  title: 'Modify the Contract Qty',
+		      type: 1,
+		      btn: [' Submit', 'back '],
+			  btnAlign: 'c',
+			  yes: function(){
+				editquantity_yes_callback(data);
+			  },
+		      area: ['540px', '265px'],
+		      shadeClose: true, 
+		      content: '<div style="padding:20px">' +
+						'<ul class="c-ful">' +
+							'<li class="c-fcos1">' +
+								'<span>Contract Qty：</span>' +  
+							'<input type="text" id="editquantity-quantity-input" value="'+data.quantity+'" onkeyup="clearNoNumThree(this)">' +
+								'&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radio" value="0" checked="checked" />' +
+								'<span>Provisional Inv Qty</span>' +
+								'&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="radio" value="1"/>' +
+								'<span>Final Qty</span>' +
+							'</li>' +
+							
+						'</ul>' +
+		      		   '</div>'
+		    });
+		   	 document.getElementsByName("radio")[0].checked="checked";	
+		     var quantityStatus = $("input[type=radio][name=radio][value='"+data.quantityStatus+"']").attr("checked",true);
+		})
+		
+		function editquantity_yes_callback(data){
+			var contractId = data.triggerContractId;
+			var quantity = $("#editquantity-quantity-input").val();
+			var quantityStatus = $('input:radio:checked').val();
+			
+			$.ajax({
+	      		url:orderServer+"/triggerContractr/updateQuantity.json",
+	      		data:{contractId:contractId, quantity:quantity ,quantityStatus:quantityStatus},
+	      		type:"post",
+	      		
+	      		success:function(result){
+	      			if(result.status != 0){
+	      				if(result.message == null){
+	      					layer.alert("System error",{title:'Prompt',btn:'ok'});
+	      				}else{
+	      					layer.alert($.i18n(result.code,result.params),{title:'Prompt',btn:'ok'});
+	      				}
+	      			}else{
+	      				layer.alert("Operation succeeded!",{title:'Prompt',btn:'ok'}, function(index){
+	      					layer.closeAll();
+	      					location.reload();
+	      				});
+	      			}
+	      		},
+	      		error:function(){
+	      			layer.alert("Request exception",{title:'Prompt',btn:'ok'});
+	      		}
+	      	})
+		}
+		
+		$('.zhuanyue').on('click', function(){
+			var data = $(this).attr("data");
+			data = eval("("+data+")");
+			
+			$.get(orderServer+'/bomp/triggerTransfer/add.htm', {triggerContractId:data.triggerContractId}, function(str){
+				layer.open({
+					title: 'Roll Over',
+					type: 1,
+					btn: ['  Submit', 'back '],
+					btnAlign: 'c',
+					yes: function(){
+						zhuanyue_yes_callback(data);
+					},
+					area: ['800px', '360px'],
+					shadeClose: true, 
+					content: '\<div style="padding:20px">'+str+'<\/div>'
+				});
+			});
+		});
+		
+		function zhuanyue_yes_callback(data){
+			var quantity = $("#zy-quantity-input").val();
+	      	var endDate = $("#zy-enddate-input").val();
+	      	var yuecha = $("#zy-yuecha-input").val();
+	      	var month = $("#zy-month-select").val();
+	      	
+	      	$.ajax({
+	      		url:orderServer+"/triggerTransfer/save.json",
+	      		data:{contractId:data.triggerContractId, month:month, transferQuantity:quantity, transferEndDateStr:endDate, differPrice:yuecha},
+	      		type:"post",
+	      		success:function(result){
+	      			if(result.status != 0){
+	      				if(result.message == null){
+	      					layer.alert("System error",{title:'Prompt',btn:'ok'});
+	      				}else{
+	      					layer.alert($.i18n(result.code,result.params),{title:'Prompt',btn:'ok'});
+	      				}
+	      			}else{
+	      				layer.alert("Operation succeeded!",{title:'Prompt',btn:'ok'}, function(index){
+	      					layer.closeAll();
+	      					location.reload();
+	      				});
+	      			}
+	      		},
+	      		error:function(){
+	      			layer.alert("Request exception",{title:'Prompt',btn:'ok'});
+	      		}
+	      	})
+		}
+		
+		$('.dianjia').on('click', function(){
+			var data = $(this).attr("data");
+			data = eval("("+data+")");
+			
+			layer.open({
+			  title: 'Trigger Log',
+		      type: 1,
+		      btn: ['Submit', 'back'],
+			  btnAlign: 'c',
+			  yes: function(){
+				dianjia_yes_callback(data);
+			  },
+		      area: ['750px', '330px'],
+		      shadeClose: true, 
+		      content: '<div style="padding:20px">' +
+		      			'<div style="color:red;text-align:center;">Remark: the buyer must declare the trigger option in minimum of  $!{order.priceInfo.lockQuantityMin} （$!{order.goodsInfo.quantityUnit}）</div>' +
+						'<ul class="c-ful">' +
+							'<li class="c-fcos1">' +
+								'<span class="c-fn">Contract：</span>' +
+								data.name+' '+data.month +
+							'</li>' +
+							'<li class="c-fcos2">' +
+								'<span class="c-fn">Quantity（$!{order.goodsInfo.quantityUnit}）：</span>' +
+								'<input type="text" id="dj-quantity-input" onkeyup="clearNoNumThree(this)">' +
+							'</li>' +
+							'<li class="c-fcos2">' +
+								'<span class="c-fn"> Price：</span>' +
+								'<input type="text" id="dj-price-input" onkeyup="clearNoNumThreeFu(this)">' + 
+							'</li>' +
+						'</ul>' +
+		      		   '</div>'
+		    });
+		});
+		
+		function dianjia_yes_callback(data){
+			var quantity = $("#dj-quantity-input").val();
+			var price = $("#dj-price-input").val();
+		
+			$.ajax({
+	      		url:orderServer+"/bomp/triggerApply/save.json",
+	      		data:{contractId:data.triggerContractId,applyQuantity:quantity,applyPrice:price},
+	      		type:"post",
+	      		success:function(result){
+	      			if(result.status != 0){
+	      				layer.alert($.i18n(result.code,result.params),{title:'Prompt',btn:'ok'});
+	      			}else{
+	      				layer.alert("Operation succeeded!",{title:'Prompt',btn:'ok'}, function(index){
+	      					layer.closeAll();
+	      					location.reload();
+	      				});
+	      			}
+	      		},
+	      		error:function(){
+	      			layer.alert("Request exception",{title:'Prompt',btn:'ok'});
+	      		}
+	      	})
+		}
+		
+		$('.cancelApply').on('click', function(){
+			var data = $(this).attr("data");
+			data = eval("("+data+")");
+			var applyId = data.triggerApplyId;
+			
+			layer.confirm('Confirm the operation? ', {title:'Prompt',btn:["ok","cancel"]}, function(index){
+			  $.ajax({
+		      		url:orderServer+"/triggerApply/cancelApply.json",
+		      		data:{applyId:applyId},
+		      		type:"post",
+		      		success:function(result){
+		      			if(result.status != 0){
+		      				if(result.message == null){
+		      					layer.alert("System error",{title:'Prompt',btn:'ok'});
+		      				}else{
+		      					layer.alert($.i18n(result.code,result.params),{title:'Prompt',btn:'ok'});
+		      				}
+		      			}else{
+		      				layer.alert("Operation succeeded!",{title:'Prompt',btn:'ok'}, function(index){
+		      					layer.closeAll();
+		      					location.reload();
+		      				});
+		      			}
+		      		},
+		      		error:function(){
+		      			layer.alert("Request exception",{title:'Prompt',btn:'ok'});
+		      		}
+		      	})
+			});
+			
+		})
+	})
+	
+	//三位小数数字正则校验
+	function clearNoNumThree(obj)    
+	{    
+		//先把非数字的都替换掉，除了数字和.    
+	    $(obj).val( $(obj).val().replace(/[^\d.]/g,""));    
+	    //保证只有出现一个.而没有多个.    
+	     $(obj).val($(obj).val().replace(/\.{2,}/g,"."));    
+	    //必须保证第一个为数字而不是.    
+	     $(obj).val( $(obj).val().replace(/^\./g,""));  
+	    //保证.只出现一次，而不能出现两次以上    
+	    $(obj).val( $(obj).val().replace(".","$#$").replace(/\./g,"").replace("$#$","."));    
+	   // $(obj).val( $(obj).val().replace(/^\-/g,"$#$").replace(/\-/g,"").replace("$#$","-"));    
+	    //只能输入两个小数  
+	    $(obj).val( $(obj).val().replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3')); 
+	} 
+	
+	function clearNoNumThreeFu(obj)    
+	{    
+		//先把非数字的都替换掉，除了数字和.    
+	    $(obj).val( $(obj).val().replace(/[^\d.-]/g,""));    
+	    //保证只有出现一个.而没有多个.    
+	     $(obj).val($(obj).val().replace(/\.{2,}/g,"."));    
+	    //必须保证第一个为数字而不是.    
+	     $(obj).val( $(obj).val().replace(/^\./g,""));  
+	    //保证.只出现一次，而不能出现两次以上    
+	    $(obj).val( $(obj).val().replace(".","$#$").replace(/\./g,"").replace("$#$","."));    
+	    $(obj).val( $(obj).val().replace(/^\-/g,"$#$").replace(/\-/g,"").replace("$#$","-"));    
+	    //只能输入两个小数  
+	    $(obj).val( $(obj).val().replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3')); 
+	} 
+	
+	</script>

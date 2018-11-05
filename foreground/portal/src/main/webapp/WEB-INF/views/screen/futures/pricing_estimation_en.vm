@@ -1,0 +1,109 @@
+<div class="inner">
+    <div class="qh-tc clearfix">
+        <div class="qh-tc-l">
+            <span class="qh-tc-l-contlin"></span>
+            <h1><em></em>Pricing Forecast</h1>
+            <div class="qh-tc-l-con">
+                <div class="qh-tc-l-cont">
+                    <div class="qh-tc-l-contl" id="lowerA"></div>
+                    <div class="qh-tc-l-contl qh-myt" id="lowerB"></div>
+                    <div class="qh-tc-l-contl qh-myt1" id="upperB"></div>
+                    <div class="qh-tc-l-contl qh-myt2" id="upperA"></div>
+                    <div class="qh-tc-qj"><em></em><lable>85%</lable>Confidence</div>
+                    <div class="qh-tc-qj1"><em></em><lable>95%</lable>Confidence Interval</div>
+                </div>
+                <span><p>Daily Settlement Price</p><em class="latestICESymbolName"></em></span>
+                <span class="qh-tc-lsp">
+                    <p>Monthly Settlement Price<i class="c-ico inf-zy1" id="openSettlementPriceTip" style="right: -15px;"></i></p>
+                    <em class="latestICESymbolName"></em>
+                    <em id="estimationRange"></em>
+
+                    <!-- 月结算弹出框 -->
+                    <div class="qh-yycjs" id="settlementPriceTip" style="display: none">
+                        95% Confidence interval
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="qh-tc-r">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        getLatestICESymbol();
+        getPricingEstimation();
+
+        $('#openSettlementPriceTip').mouseenter(function() {
+            $('#settlementPriceTip').css('display', "block");
+        });
+
+        $('#openSettlementPriceTip').mouseleave(function() {
+            $('#settlementPriceTip').css('display', "none");
+        });
+    })
+
+    function getLatestICESymbol() {
+        var symbolUrl = "$infoServer.get('/query/symbol.json').toString()";
+
+        var commodity = 'Brent';
+        var priceSource = 'EXCHANGE';
+        var market = 'ICE';
+
+        var data = {
+            "commodity": commodity,
+            "priceSource": priceSource,
+            "market": market
+        };
+
+        $.ajax({
+            type: "POST",
+            url: symbolUrl,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'JSON',
+            success: function (result) {
+                var datas = result.dataList;
+                if (!datas) {
+                    layer.alert('Fail to load symbol data', {
+                        btn: false
+                    });
+                    return;
+                }
+
+                var latestICESymbolName = 'ICE' + datas[0].symbolName;
+                $('.latestICESymbolName').html(latestICESymbolName);
+            }
+        });
+    }
+
+    function getPricingEstimation() {
+        var estimationUrl = "$infoServer.get('/prophet/api/1/brent/day.json').toString()";
+
+        $.get(estimationUrl, null, function(result) {
+            var datas = result.data;
+            if (!datas) {
+                layer.alert('Fail to load forecast data', {
+                    btn: false
+                });
+                return;
+            }
+
+            var data = datas[datas.length - 1];
+
+            var lowerA = data['lowerA'];
+            var lowerB = data['lowerB'];
+            var upperB = data['upperB'];
+            var upperA = data['upperA'];
+
+            $('#lowerA').html('$' + lowerA + '/BBL<em></em>');
+            $('#lowerB').html('<em></em>$' + lowerB + "/BBL");
+            $('#upperB').html('$' + upperB + '/BBL<em></em>');
+            $('#upperA').html('<em></em>$' + upperA + '/BBL');
+
+            $('#estimationRange').html('$' + lowerA + ' - $' + upperA);
+        });
+    }
+</script>
